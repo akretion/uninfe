@@ -642,8 +642,8 @@ namespace NFe.ConvertTxt
                 Arma armaInfo = new Arma();
 
                 armaInfo.descr = this.readValue(nodedetArma, TpcnResources.descr);
-                armaInfo.nCano = this.readInt32(nodedetArma, TpcnResources.nCano);
-                armaInfo.nSerie = this.readInt32(nodedetArma, TpcnResources.nSerie);
+                armaInfo.nCano = this.readValue(nodedetArma, TpcnResources.nCano);
+                armaInfo.nSerie = this.readValue(nodedetArma, TpcnResources.nSerie);
                 armaInfo.tpArma = (TpcnTipoArma)this.readInt32(nodedetArma, TpcnResources.tpArma);
 
                 detInfo.Prod.arma.Add(armaInfo);

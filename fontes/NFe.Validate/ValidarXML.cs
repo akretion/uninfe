@@ -1,18 +1,12 @@
-﻿using System;
-using System.IO;
-using System.Text;
-using System.Linq;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Linq;
-using System.Threading;
-using System.Windows.Forms;
-using System.Collections.Generic;
-
+﻿using NFe.Certificado;
 using NFe.Components;
-using NFe.Settings;
-using NFe.Certificado;
 using NFe.Components.QRCode;
+using NFe.Settings;
+using System;
+using System.IO;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Schema;
 
 namespace NFe.Validate
 {
@@ -22,16 +16,24 @@ namespace NFe.Validate
     public class ValidarXML
     {
         #region Construtores
+
         public ValidarXML(string arquivoXML, int UFCod, bool soValidar)
         {
             TipoArqXml = new TipoArquivoXML(arquivoXML, UFCod, soValidar);
         }
-        #endregion
+
+        public ValidarXML(XmlDocument conteudoXML, int UFCod, bool soValidar)
+        {
+            TipoArqXml = new TipoArquivoXML("", conteudoXML, UFCod, soValidar);
+        }
+
+        #endregion Construtores
 
         public TipoArquivoXML TipoArqXml = null;
 
         public int Retorno { get; private set; }
         public string RetornoString { get; private set; }
+
         /// <summary>
         /// Pasta dos schemas para validação do XML
         /// </summary>
@@ -125,33 +127,51 @@ namespace NFe.Validate
                 }
             }
         }
-        #endregion
+
+        #endregion EncryptAssinatura()
 
         /// <summary>
         /// Método responsável por validar a estrutura do XML de acordo com o schema passado por parâmetro
         /// </summary>
-        /// <param name="cRotaArqXML">XML a ser validado</param>
+        /// <param name="rotaArqXML">XML a ser validado</param>
         /// <param name="cRotaArqSchema">Schema a ser utilizado na validação</param>
         /// <param name="nsSchema">Namespace contendo a URL do schema</param>
-        private void Validar(string cRotaArqXML)
+        private void Validar(string rotaArqXML)
         {
-            bool lArqXML = File.Exists(cRotaArqXML);
-            //var caminhoDoSchema = this.PastaSchema + "\\" + TipoArqXml.cArquivoSchema;
-            //if (NFe.Components.Propriedade.TipoExecucao == TipoExecucao.teAll)
-            //string caminhoDoSchema = Propriedade.PastaExecutavel + "\\" + TipoArqXml.cArquivoSchema;
-            bool lArqXSD = File.Exists(TipoArqXml.cArquivoSchema);
-            bool temXSD = !string.IsNullOrEmpty(TipoArqXml.cArquivoSchema);
+            bool lArqXML = File.Exists(rotaArqXML);
 
+            if (File.Exists(rotaArqXML))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(rotaArqXML);
+                Validar(doc, rotaArqXML);
+            }
+            else
+            {
+                Retorno = 2;
+                RetornoString = "Arquivo XML não foi encontrato";
+            }
+        }
+
+        /// <summary>
+        /// Método responsável por validar a estrutura do XML de acordo com o schema passado por parâmetro
+        /// </summary>
+        /// <param name="rotaArqXML">Nome do arquivo XML</param>
+        /// <param name="conteudoXML">Conteúdo do XML a ser validado</param>
+        private void Validar(XmlDocument conteudoXML, string rotaArqXML)
+        {
             Retorno = 0;
             RetornoString = "";
 
-            if (lArqXML && lArqXSD)
+            bool temXSD = !string.IsNullOrEmpty(TipoArqXml.cArquivoSchema);
+
+            if (File.Exists(TipoArqXml.cArquivoSchema))
             {
                 XmlReader xmlReader = null;
 
                 try
                 {
-                    this.EncryptAssinatura(cRotaArqXML);    //danasa: 12/2013
+                    EncryptAssinatura(rotaArqXML);    //danasa: 12/2013
 
                     XmlReaderSettings settings = new XmlReaderSettings();
                     settings.ValidationType = ValidationType.Schema;
@@ -159,11 +179,11 @@ namespace NFe.Validate
                     XmlSchemaSet schemas = new XmlSchemaSet();
                     settings.Schemas = schemas;
 
-                    /* Se dentro do XSD houver referência a outros XSDs externos, pode ser necessário ter certas permissões para localizá-lo. 
+                    /* Se dentro do XSD houver referência a outros XSDs externos, pode ser necessário ter certas permissões para localizá-lo.
                      * Usa um "Resolver" com as credencias-padrão para obter esse recurso externo. */
                     XmlUrlResolver resolver = new XmlUrlResolver();
                     resolver.Credentials = System.Net.CredentialCache.DefaultCredentials;
-                    /* Informa à configuração de leitura do XML que deve usar o "Resolver" criado acima e que a validação deve respeitar 
+                    /* Informa à configuração de leitura do XML que deve usar o "Resolver" criado acima e que a validação deve respeitar
                      * o esquema informado no início. */
                     settings.XmlResolver = resolver;
 
@@ -174,16 +194,16 @@ namespace NFe.Validate
 
                     settings.ValidationEventHandler += new ValidationEventHandler(reader_ValidationEventHandler);
 
-                    xmlReader = XmlReader.Create(cRotaArqXML, settings);
+                    xmlReader = XmlReader.Create(new StringReader(conteudoXML.OuterXml), settings);
 
-                    this.cErro = "";
+                    cErro = "";
                     try
                     {
                         while (xmlReader.Read()) { }
                     }
                     catch (Exception ex)
                     {
-                        this.cErro = ex.Message;
+                        cErro = ex.Message;
                     }
 
                     xmlReader.Close();
@@ -196,46 +216,36 @@ namespace NFe.Validate
                     cErro = ex.Message + "\r\n";
                 }
 
-                this.Retorno = 0;
-                this.RetornoString = "";
                 if (cErro != "")
                 {
-                    this.Retorno = 1;
-                    this.RetornoString = "Início da validação...\r\n\r\n";
-                    this.RetornoString += "Arquivo XML: " + cRotaArqXML + "\r\n";
-                    this.RetornoString += "Arquivo SCHEMA: " + TipoArqXml.cArquivoSchema + "\r\n\r\n";
-                    this.RetornoString += this.cErro;
-                    this.RetornoString += "\r\n...Final da validação";
+                    Retorno = 1;
+                    RetornoString = "Início da validação...\r\n\r\n";
+                    RetornoString += "Arquivo XML: " + rotaArqXML + "\r\n";
+                    RetornoString += "Arquivo SCHEMA: " + TipoArqXml.cArquivoSchema + "\r\n\r\n";
+                    RetornoString += cErro;
+                    RetornoString += "\r\n...Final da validação";
                 }
             }
-            else
+            else if (temXSD)
             {
-                if (lArqXML == false)
-                {
-                    this.Retorno = 2;
-                    this.RetornoString = "Arquivo XML não foi encontrato";
-                }
-                else if (lArqXSD == false && temXSD)
-                {
-                    this.Retorno = 3;
-                    this.RetornoString = "Arquivo XSD (schema) não foi encontrado em " + TipoArqXml.cArquivoSchema;
-                }
+                Retorno = 3;
+                RetornoString = "Arquivo XSD (schema) não foi encontrado em " + TipoArqXml.cArquivoSchema;
             }
         }
 
         private void reader_ValidationEventHandler(object sender, ValidationEventArgs e)
         {
-            this.cErro += "Linha: " + e.Exception.LineNumber + " Coluna: " + e.Exception.LinePosition + " Erro: " + e.Exception.Message + "\r\n";
+            cErro += "Linha: " + e.Exception.LineNumber + " Coluna: " + e.Exception.LinePosition + " Erro: " + e.Exception.Message + "\r\n";
         }
 
         #region ValidarArqXML()
+
         /// <summary>
-        /// Valida o arquivo XML 
+        /// Valida o arquivo XML
         /// </summary>
         /// <param name="arquivo">Nome do arquivo XML a ser validado</param>
-        /// <param name="cUFCod">Código da UF/Municipio</param>
         /// <returns>
-        /// Se retornar uma string em branco, significa que o XML foi 
+        /// Se retornar uma string em branco, significa que o XML foi
         /// validado com sucesso, ou seja, não tem nenhum erro. Se o retorno
         /// tiver algo, algum erro ocorreu na validação.
         /// </returns>
@@ -258,9 +268,46 @@ namespace NFe.Validate
 
             return cRetorna;
         }
-        #endregion
+
+        #endregion ValidarArqXML()
+
+        #region ValidarArqXML()
+
+        /// <summary>
+        /// Valida o arquivo XML
+        /// </summary>
+        /// <param name="conteudoXML">Conteudo do XML a ser validado</param>
+        /// <param name="arquivo">Nome do arquivo XML que será validado</param>
+        /// <returns>
+        /// Se retornar uma string em branco, significa que o XML foi
+        /// validado com sucesso, ou seja, não tem nenhum erro. Se o retorno
+        /// tiver algo, algum erro ocorreu na validação.
+        /// </returns>
+        public string ValidarArqXML(XmlDocument conteudoXML, string arquivo)
+        {
+            string cRetorna = "";
+
+            if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
+            {
+                Validar(conteudoXML, arquivo);
+
+                if (Retorno != 0)
+                {
+                    cRetorna = "XML INCONSISTENTE!\r\n\r\n" + RetornoString;
+                }
+            }
+            else
+            {
+                cRetorna = "XML INCONSISTENTE!\r\n\r\n" + TipoArqXml.cRetornoTipoArq;
+            }
+
+            return cRetorna;
+        }
+
+        #endregion ValidarArqXML()
 
         #region ValidarAssinarXML()
+
         /// <summary>
         /// Efetua a validação de qualquer XML, NFE, Cancelamento, Inutilização, etc..., e retorna se está ok ou não
         /// </summary>
@@ -284,7 +331,7 @@ namespace NFe.Validate
             {
                 if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
                 {
-                    this.EncryptAssinatura(Arquivo);    //danasa: 12/2013
+                    EncryptAssinatura(Arquivo);
 
                     oAD.Assinar(Arquivo, emp, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
 
@@ -309,22 +356,25 @@ namespace NFe.Validate
             if (Assinou)
             {
                 #region Adicionar a tag do qrCode na NFCe
+
                 if (Arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML, StringComparison.InvariantCultureIgnoreCase))
                 {
                     if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IdentificadorCSC))
                     {
-                        QRCode qrCode = new QRCode(Empresas.Configuracoes[emp].IdentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, Arquivo);
+                        XmlDocument conteudoXML = new XmlDocument();
+                        conteudoXML.Load(Arquivo);
 
-                        if (qrCode.CalcularLink())
-                        {
-                            string url = Empresas.Configuracoes[emp].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCe;
+                        QRCode qrCode = new QRCode(conteudoXML);
+                        string url = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCe;
+                        qrCode.GerarLinkConsulta(url, Empresas.Configuracoes[emp].IdentificadorCSC, Empresas.Configuracoes[emp].TokenCSC);
 
-                            qrCode.GerarLinkConsulta(url);
-                            qrCode.AddLinkQRCode();
-                        }
+                        StreamWriter sw = File.CreateText(Arquivo);
+                        sw.Write(conteudoXML.OuterXml);
+                        sw.Close();
                     }
                 }
-                #endregion
+
+                #endregion Adicionar a tag do qrCode na NFCe
 
                 // Validar o Arquivo XML
                 if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
@@ -334,7 +384,7 @@ namespace NFe.Validate
                         Validar(Arquivo);
                         if (Retorno != 0)
                         {
-                            this.GravarXMLRetornoValidacao(Arquivo, "3", "Ocorreu um erro ao validar o XML: " + RetornoString);
+                            GravarXMLRetornoValidacao(Arquivo, "3", "Ocorreu um erro ao validar o XML: " + RetornoString);
                             new Auxiliar().MoveArqErro(Arquivo);
                         }
                         else
@@ -344,7 +394,7 @@ namespace NFe.Validate
                                 Directory.CreateDirectory(Empresas.Configuracoes[emp].PastaValidado);
                             }
 
-                            string ArquivoNovo = Empresas.Configuracoes[emp].PastaValidado + "\\" + Path.GetFileName(Arquivo);// Functions.ExtrairNomeArq(Arquivo, ".xml") + ".xml";
+                            string ArquivoNovo = Empresas.Configuracoes[emp].PastaValidado + "\\" + Path.GetFileName(Arquivo);
 
                             Functions.Move(Arquivo, ArquivoNovo);
 
@@ -371,7 +421,7 @@ namespace NFe.Validate
                     {
                         ///
                         /// OPS!!! Arquivo de NFS-e enviado p/ a pasta de validação, mas não existe definicao de schemas p/ sua validacao
-                        /// 
+                        ///
                         this.GravarXMLRetornoValidacao(Arquivo, "1", "XML não validado contra o schema da prefeitura. XML: " + TipoArqXml.cRetornoTipoArq);
                         new Auxiliar().MoveArqErro(Arquivo);
                     }
@@ -391,9 +441,11 @@ namespace NFe.Validate
                 }
             }
         }
-        #endregion
+
+        #endregion ValidarAssinarXML()
 
         #region GravarXMLRetornoValidacao()
+
         /// <summary>
         /// Na tentativa de somente validar ou assinar o XML se encontrar um erro vai ser retornado um XML para o ERP
         /// </summary>
@@ -411,11 +463,12 @@ namespace NFe.Validate
             string ArquivoRetorno = Functions.ExtrairNomeArq(Arquivo, ".xml") + "-ret.xml";
 
             var xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
-                                    new XElement("Validacao",
-                                        new XElement(NFe.Components.TpcnResources.cStat.ToString(), cStat),
-                                        new XElement(NFe.Components.TpcnResources.xMotivo.ToString(), xMotivo)));
+                new XElement("Validacao",
+                new XElement(TpcnResources.cStat.ToString(), cStat),
+                new XElement(TpcnResources.xMotivo.ToString(), xMotivo)));
             xml.Save(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + ArquivoRetorno);
         }
-        #endregion
+
+        #endregion GravarXMLRetornoValidacao()
     }
 }

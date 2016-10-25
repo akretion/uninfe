@@ -8,9 +8,7 @@ using System.Xml.Linq;
 using System.Threading;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
-
 using NFe.Components;
-using System.Collections;
 
 namespace NFe.Settings
 {

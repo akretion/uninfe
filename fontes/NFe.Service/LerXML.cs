@@ -50,15 +50,12 @@ namespace NFe.Service
         /// <summary>
         /// Faz a leitura do XML da nota fiscal eletrônica e disponibiliza os valores de algumas tag´s
         /// </summary>
-        /// <param name="arquivoXML">Caminho e nome do arquivo XML da NFe a ser lido</param>
-        public void Nfe(string arquivoXML)
+        /// <param name="conteudoXML">Conteúdo do XML para ser lido</param>
+        public void Nfe(XmlDocument conteudoXML)
         {
             ClearDados();
 
-            XmlDocument doc = new XmlDocument();
-            doc.Load(arquivoXML);
-
-            XmlNodeList infNFeList = doc.GetElementsByTagName("infNFe");
+            XmlNodeList infNFeList = conteudoXML.GetElementsByTagName("infNFe");
 
             foreach (XmlNode infNFeNode in infNFeList)
             {
@@ -67,8 +64,8 @@ namespace NFe.Service
                 //Pegar a chave da NF-e
                 if (infNFeElemento.HasAttributes)
                 {
-                    this.oDadosNfe.chavenfe = infNFeElemento.Attributes[TpcnResources.Id.ToString()].InnerText;
-                    oDadosNfe.versao = infNFeElemento.Attributes[NFe.Components.TpcnResources.versao.ToString()].InnerText;
+                    oDadosNfe.chavenfe = infNFeElemento.Attributes[TpcnResources.Id.ToString()].InnerText;
+                    oDadosNfe.versao = infNFeElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
                 }
 
                 //Montar lista de tag´s da tag <ide>
@@ -78,16 +75,13 @@ namespace NFe.Service
                 {
                     XmlElement ideElemento = (XmlElement)ideNode;
 
-                    if (oDadosNfe.versao == "2.00")
-                        oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, NFe.Components.TpcnResources.dEmi.ToString(), false));
-                    else
-                        oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, TpcnResources.dhEmi.ToString(), false));
+                    oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, TpcnResources.dhEmi.ToString(), false));
                     oDadosNfe.cNF = Functions.LerTag(ideElemento, TpcnResources.cNF.ToString(), false);
                     oDadosNfe.nNF = Functions.LerTag(ideElemento, TpcnResources.nNF.ToString(), false);
-                    oDadosNfe.tpEmis = Functions.LerTag(ideElemento, NFe.Components.TpcnResources.tpEmis.ToString(), false);
+                    oDadosNfe.tpEmis = Functions.LerTag(ideElemento, TpcnResources.tpEmis.ToString(), false);
                     oDadosNfe.tpAmb = Functions.LerTag(ideElemento, TpcnResources.tpAmb.ToString(), false);
                     oDadosNfe.serie = Functions.LerTag(ideElemento, TpcnResources.serie.ToString(), false);
-                    oDadosNfe.cUF = Functions.LerTag(ideElemento, NFe.Components.TpcnResources.cUF.ToString(), false);
+                    oDadosNfe.cUF = Functions.LerTag(ideElemento, TpcnResources.cUF.ToString(), false);
                     oDadosNfe.mod = Functions.LerTag(ideElemento, TpcnResources.mod.ToString(), false);
                     oDadosNfe.cDV = Functions.LerTag(ideElemento, TpcnResources.cDV.ToString(), false);
                 }
@@ -99,12 +93,12 @@ namespace NFe.Service
                 {
                     XmlElement emitElemento = (XmlElement)emitNode;
 
-                    this.oDadosNfe.CNPJ = Functions.LerTag(emitElemento, NFe.Components.TpcnResources.CNPJ.ToString(), false);
+                    oDadosNfe.CNPJ = Functions.LerTag(emitElemento, TpcnResources.CNPJ.ToString(), false);
                 }
             }
 
             //Tentar detectar a tag de lote, se tiver vai atualizar o atributo do lote que a nota faz parte
-            XmlNodeList enviNFeList = doc.GetElementsByTagName("enviNFe");
+            XmlNodeList enviNFeList = conteudoXML.GetElementsByTagName("enviNFe");
 
             foreach (XmlNode enviNFeNode in enviNFeList)
             {
@@ -130,15 +124,12 @@ namespace NFe.Service
         /// <summary>
         /// Faz a leitura do XML da nota fiscal eletrônica e disponibiliza os valores de algumas tag´s
         /// </summary>
-        /// <param name="arquivoXML">Caminho e nome do arquivo XML da NFe a ser lido</param>
-        public void Cte(string arquivoXML)
+        /// <param name="conteudoXML">Conteúdo do XML para ser lido</param>
+        public void Cte(XmlDocument conteudoXML)
         {
             ClearDados();
 
-            XmlDocument doc = new XmlDocument();
-            doc.Load(arquivoXML);
-
-            XmlNodeList infNFeList = doc.GetElementsByTagName("infCte");
+            XmlNodeList infNFeList = conteudoXML.GetElementsByTagName("infCte");
 
             foreach (XmlNode infNFeNode in infNFeList)
             {
@@ -180,7 +171,7 @@ namespace NFe.Service
             }
 
             //Tentar detectar a tag de lote, se tiver vai atualizar o atributo do lote que a nota faz parte
-            XmlNodeList enviNFeList = doc.GetElementsByTagName("enviCTe");
+            XmlNodeList enviNFeList = conteudoXML.GetElementsByTagName("enviCTe");
 
             foreach (XmlNode enviNFeNode in enviNFeList)
             {
@@ -194,15 +185,12 @@ namespace NFe.Service
         /// <summary>
         /// Faz a leitura do XML da nota fiscal eletrônica e disponibiliza os valores de algumas tag´s
         /// </summary>
-        /// <param name="arquivoXML">Caminho e nome do arquivo XML da NFe a ser lido</param>
-        public void Mdfe(string arquivoXML)
+        /// <param name="conteudoXML">Conteúdo do XML para ser lido</param>
+        public void Mdfe(XmlDocument conteudoXML)
         {
             ClearDados();
 
-            XmlDocument doc = new XmlDocument();
-            doc.Load(arquivoXML);
-
-            XmlNodeList infNFeList = doc.GetElementsByTagName("infMDFe");
+            XmlNodeList infNFeList = conteudoXML.GetElementsByTagName("infMDFe");
 
             foreach (XmlNode infNFeNode in infNFeList)
             {
@@ -244,7 +232,7 @@ namespace NFe.Service
             }
 
             //Tentar detectar a tag de lote, se tiver vai atualizar o atributo do lote que a nota faz parte
-            XmlNodeList enviNFeList = doc.GetElementsByTagName("enviMDFe");
+            XmlNodeList enviNFeList = conteudoXML.GetElementsByTagName("enviMDFe");
 
             foreach (XmlNode enviNFeNode in enviNFeList)
             {
@@ -260,17 +248,17 @@ namespace NFe.Service
         /// </summary>
         private void ClearDados()
         {
-            oDadosNfe.chavenfe = string.Empty;
-            oDadosNfe.idLote = string.Empty;
-            oDadosNfe.tpAmb = string.Empty;
-            oDadosNfe.tpEmis = string.Empty;
-            oDadosNfe.serie = string.Empty;
-            oDadosNfe.cUF = string.Empty;
-            oDadosNfe.cNF = string.Empty;
-            oDadosNfe.mod = string.Empty;
-            oDadosNfe.nNF = string.Empty;
-            oDadosNfe.cDV = string.Empty;
-            oDadosNfe.CNPJ = string.Empty;
+            oDadosNfe.chavenfe =
+            oDadosNfe.idLote =
+            oDadosNfe.tpAmb =
+            oDadosNfe.tpEmis =
+            oDadosNfe.serie =
+            oDadosNfe.cUF =
+            oDadosNfe.cNF =
+            oDadosNfe.mod =
+            oDadosNfe.nNF =
+            oDadosNfe.cDV =
+            oDadosNfe.CNPJ =
             oDadosNfe.versao = string.Empty;
         }
         #endregion

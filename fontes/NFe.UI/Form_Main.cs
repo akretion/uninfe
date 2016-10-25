@@ -1,24 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Reflection;
-using System.Diagnostics;
-using System.IO;
-using System.Xml;
-using System.Xml.Linq;
-
-using MetroFramework;
-using MetroFramework.Components;
-using MetroFramework.Forms;
-
-using NFe.Settings;
+﻿using MetroFramework.Forms;
 using NFe.Components;
+using NFe.Settings;
 using NFe.Threadings;
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace NFe.UI
 {
@@ -181,27 +170,35 @@ namespace NFe.UI
                                 case "RecepcionarLoteRps":
                                     servico = NFe.Components.Servicos.RecepcionarLoteRps;
                                     break;
+
                                 case "ConsultarSituacaoLoteRps":
                                     servico = NFe.Components.Servicos.ConsultarSituacaoLoteRps;
                                     break;
+
                                 case "ConsultarNfsePorRps":
                                     servico = NFe.Components.Servicos.ConsultarNfsePorRps;
                                     break;
+
                                 case "ConsultarNfse":
                                     servico = NFe.Components.Servicos.ConsultarNfse;
                                     break;
+
                                 case "ConsultarLoteRps":
                                     servico = NFe.Components.Servicos.ConsultarLoteRps;
                                     break;
+
                                 case "CancelarNfse":
                                     servico = NFe.Components.Servicos.CancelarNfse;
                                     break;
+
                                 case "ConsultarURLNfseSerie":
                                     servico = Servicos.ConsultarURLNfseSerie;
                                     break;
+
                                 case "ConsultarURLNfse":
                                     servico = Servicos.ConsultarURLNfse;
                                     break;
+
                                 default:
                                     Console.WriteLine("====>(" + xa.Name.ToString()+")");
                                     break;
@@ -268,24 +265,30 @@ namespace NFe.UI
                                     servico = Servicos.RecepcaoEventoCTe;
                                     versao = NFe.ConvertTxt.versoes.VersaoXMLCTeEvento;
                                     break;
+
                                 case "CTeRecepcao":
                                     servico = Servicos.EnviarLoteCTe;
                                     versao = NFe.ConvertTxt.versoes.VersaoXMLCTe;
                                     break;
+
                                 case "CTeRetRecepcao":
                                     servico = Servicos.PedidoSituacaoLoteCTe;
                                     break;
+
                                 case "CTeInutilizacao":
                                     servico = Servicos.InutilizarNumerosCTe;
                                     versao = NFe.ConvertTxt.versoes.VersaoXMLCTeInut;
                                     break;
+
                                 case "CTeConsulta":
                                     servico = Servicos.PedidoConsultaSituacaoCTe;
                                     break;
+
                                 case "CTeStatusServico":
                                     servico = Servicos.ConsultaStatusServicoCTe;
                                     versao = NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico;
                                     break;
+
                                 case "CTeConsultaCadastro": break;
 
                                 case "NFeRecepcao":
@@ -299,41 +302,45 @@ namespace NFe.UI
                                     servico = Servicos.ConsultaStatusServicoNFe;
                                     versao = NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
                                     break;
+
                                 case "NFeConsultaCadastro":
                                     servico = Servicos.ConsultaCadastroContribuinte;
                                     versao = NFe.ConvertTxt.versoes.VersaoXMLConsCad;
                                     break;
+
                                 case "NFeRecepcaoEvento":
                                     servico = Servicos.RecepcaoEvento;
                                     versao = NFe.ConvertTxt.versoes.VersaoXMLEvento;
                                     break;
-                                case "NFeConsultaNFeDest":
-                                    versao = NFe.ConvertTxt.versoes.VersaoXMLEnvConsultaNFeDest;
-                                    servico = Servicos.ConsultaNFDest;
-                                    break;
+
                                 case "NFeDownload": servico = Servicos.DownloadNFe; break;
                                 case "NFeManifDest":
                                     servico = Servicos.EnviarManifDest;
                                     versao = NFe.ConvertTxt.versoes.VersaoXMLEvento;
                                     break;
+
                                 case "NFeAutorizacao": servico = Servicos.EnviarLoteNfeZip2; break;
                                 case "NFeRetAutorizacao": servico = Servicos.PedidoSituacaoLoteNFe2; break;
 
                                 case "MDFeRecepcao": servico = Servicos.EnviarLoteMDFe;
                                     versao = NFe.ConvertTxt.versoes.VersaoXMLMDFe;
                                     break;
+
                                 case "MDFeRetRecepcao":
                                     servico = Servicos.PedidoSituacaoLoteMDFe;
                                     versao = NFe.ConvertTxt.versoes.VersaoXMLMDFe;
                                     break;
+
                                 case "MDFeConsulta":
                                     servico = Servicos.PedidoConsultaSituacaoMDFe;
                                     versao = NFe.ConvertTxt.versoes.VersaoXMLMDFe;
                                     break;
+
                                 case "MDFeStatusServico":
                                     servico = Servicos.ConsultaStatusServicoMDFe;
                                     versao = NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico;
                                     break;
+
                                 case "MDFeRecepcaoEvento":
                                     servico = Servicos.RecepcaoEventoMDFe;
                                     versao = NFe.ConvertTxt.versoes.VersaoXMLMDFeEvento;
@@ -426,9 +433,9 @@ namespace NFe.UI
         {
             PararServicos(false);
 
-            /* 
+            /*
                 * Excluir os arquivos de ".lock"
-                * 
+                *
                 * 05/06/2013
                 * Marcelo
                 */
@@ -456,7 +463,7 @@ namespace NFe.UI
                 e.Cancel = true;
                 ///
                 /// verifica se o processo de manutencao de empresas está ativo
-                /// 
+                ///
                 foreach (var uc in this.Controls)
                 {
                     if (uc.GetType().Equals(typeof(userConfiguracoes)))
@@ -536,7 +543,7 @@ namespace NFe.UI
         }
         */
 
-        void updateSettings()
+        private void updateSettings()
         {
             //uninfeDummy.xmlParams.WriteValue(this.Name, "Theme", this.metroStyleManager1.Theme.ToString());
             //uninfeDummy.xmlParams.WriteValue(this.Name, "Style", this.metroStyleManager1.Style.ToString());
@@ -559,6 +566,7 @@ namespace NFe.UI
         }
 
         #region ExecutaServicos()
+
         /// <summary>
         /// Metodo responsável por iniciar os serviços do UniNFe em threads diferentes
         /// </summary>
@@ -573,6 +581,7 @@ namespace NFe.UI
                     case System.ServiceProcess.ServiceControllerStatus.Stopped:
                         ServiceProcess.StartService(srvName, 40000);
                         break;
+
                     case System.ServiceProcess.ServiceControllerStatus.Paused:
                         ServiceProcess.RestartService(srvName, 40000);
                         break;
@@ -585,9 +594,11 @@ namespace NFe.UI
                 ThreadService.Start();
             }
         }
-        #endregion
+
+        #endregion ExecutaServicos()
 
         #region PararServicos()
+
         public void PararServicos(bool fechaServico)
         {
             if (servicoInstaladoErodando)
@@ -602,9 +613,10 @@ namespace NFe.UI
                 ThreadService.Stop();
             }
         }
-        #endregion
 
-        #endregion
+        #endregion PararServicos()
+
+        #endregion Métodos gerais
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -642,7 +654,7 @@ namespace NFe.UI
                     }
                     catch { }
             }
-            // Faz a aplicação aparecer na barra de tarefas.            
+            // Faz a aplicação aparecer na barra de tarefas.
             this.ShowInTaskbar = true;
             this._formloaded = true;
             this._maximized = false;
@@ -710,9 +722,7 @@ namespace NFe.UI
 
         private void cmDANFE_Click(object sender, EventArgs e)
         {
-            if (!MainVisible)
-                uninfeDummy.printDanfe();
-            else
+            if (MainVisible)
                 this._menu.Show(uninfeOpcoes.opDanfe);
         }
 
@@ -815,9 +825,9 @@ namespace NFe.UI
         {
             this.cmValidarXML.Enabled = (NFe.Settings.Empresas.Configuracoes.Count > 0);
 
-            this.cmDANFE.Visible =
-                this.cmSituacaoServicos.Visible =
-                this.cmConsultaCadastro.Visible = (NFe.Settings.Empresas.CountEmpresasNFe > 0);
+            //            this.cmDANFE.Visible =
+            this.cmSituacaoServicos.Visible =
+            this.cmConsultaCadastro.Visible = (NFe.Settings.Empresas.CountEmpresasNFe > 0);
 
             this.cmMunicipios.Visible = Empresas.CountEmpresasNFse > 0;
         }

@@ -17,6 +17,7 @@ using NFe.Components.MGM;
 using NFe.Components.Consist;
 using NFe.Components.Memory;
 using NFe.Components.Metropolis;
+using NFe.Components.Pronin;
 
 namespace NFe.Service.NFSe
 {
@@ -251,6 +252,15 @@ namespace NFe.Service.NFSe
                         govdig.CancelarNfse(NomeArquivoXML);
                         break;
 
+                    case PadroesNFSe.BSITBR:
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        if (oDadosPedCanNfse.tpAmb == 1)
+                            pedCanNfse = new Components.PJaraguaGO.nfseWS();
+                        else
+                            throw new Exception("Município de Jaraguá-GO não dispõe de ambiente de homologação para envio de NFS-e em teste.");
+                        break;
+
                     case PadroesNFSe.EQUIPLANO:
                         cabecMsg = "1";
                         break;
@@ -339,6 +349,24 @@ namespace NFe.Service.NFSe
                         else
                             pedCanNfse = new Components.HCorumbaMS.NfseWSService();
 
+                        break;
+
+                    case PadroesNFSe.PRONIN:
+                        if (oDadosPedCanNfse.cMunicipio == 4109401)
+                        {
+                            Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                oDadosPedCanNfse.cMunicipio,
+                                ConfiguracaoApp.ProxyUsuario,
+                                ConfiguracaoApp.ProxySenha,
+                                ConfiguracaoApp.ProxyServidor,
+                                Empresas.Configuracoes[emp].X509Certificado);
+
+                            AssinaturaDigital assPronin = new AssinaturaDigital();
+                            assPronin.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
+
+                            pronin.EmiteNF(NomeArquivoXML);
+                        }
                         break;
                 }
 

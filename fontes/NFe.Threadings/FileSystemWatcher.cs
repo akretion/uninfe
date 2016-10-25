@@ -1,23 +1,21 @@
-﻿using System;
+﻿using NFe.Components;
+using NFe.Settings;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Collections;
-
-using NFe.Components;
-using NFe.Settings;
-using NFe.Service;
+using System.Threading;
 
 namespace NFe.Threadings
 {
     public class FileSystemWatcher : IDisposable    //<<<danasa 1-5-2011
     {
         #region Propriedades
+
         public delegate void FileChangedHandler(FileInfo fi);
+
         public event FileChangedHandler OnFileChanged;
+
         private List<string> Directorys = new List<string>();
         public string Directory { get; set; }
         public string Filter { get; set; }
@@ -28,9 +26,11 @@ namespace NFe.Threadings
 
         public static System.Threading.Semaphore _pool;
         public static int _padding;
-        #endregion
+
+        #endregion Propriedades
 
         #region Destrutores
+
         ~FileSystemWatcher()
         {
             Dispose(false);
@@ -50,9 +50,11 @@ namespace NFe.Threadings
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        #endregion
+
+        #endregion Destrutores
 
         #region Construtores
+
         public FileSystemWatcher(string directory, string filter)
         {
             Directorys.Clear();
@@ -70,33 +72,31 @@ namespace NFe.Threadings
 
             Filter = filter;
         }
-        #endregion
+
+        #endregion Construtores
 
         public void StartWatch()
         {
-            Thread t = new Thread(
-                      new ThreadStart(ProcessFiles));
+            Thread t = new Thread(new ThreadStart(ProcessFiles));
             t.IsBackground = true;
             t.Start();
         }
 
         #region Metodos
-        void ProcessFiles()
+
+        private void ProcessFiles()
         {
             int emp = Empresas.FindEmpresaByThread();
-            Hashtable OldFiles = new Hashtable();
             string arqTemp = "";
 
             CancelProcess = false;
-/*            if (String.IsNullOrEmpty(Directory) || (!String.IsNullOrEmpty(Directory) && !System.IO.Directory.Exists(Directory)))
-                CancelProcess = true;*/
 
             // Create a semaphore that can satisfy up to three
             // concurrent requests. Use an initial count of zero,
             // so that the entire semaphore count is initially
             // owned by the main program thread.
             //
-            _pool = new System.Threading.Semaphore(10, 10);
+            _pool = new System.Threading.Semaphore(10, 20);
 
             while (!CancelProcess)
             {
@@ -108,7 +108,7 @@ namespace NFe.Threadings
 
                         if (!String.IsNullOrEmpty(Directory) && System.IO.Directory.Exists(Directory))
                         {
-                            DirectoryInfo dirInfo = new DirectoryInfo(Directory);                            
+                            DirectoryInfo dirInfo = new DirectoryInfo(Directory);
                             FileInfo[] files = dirInfo.GetFiles("*.*", SearchOption.TopDirectoryOnly)
                                                                 .Where(s => Filter.Contains(s.Extension.ToLower()))
                                                                 .OrderBy(o => o.CreationTime)
@@ -116,89 +116,27 @@ namespace NFe.Threadings
 
                             if (files != null)
                             {
-                                Hashtable NewFiles = new Hashtable();
-
-                                //cria todos os fileinfos
-                                foreach (FileInfo fi in files)
+                                if (files.Length > 0)
                                 {
-                                    if (File.Exists(fi.FullName))
-                                        if (!Functions.FileInUse(fi.FullName))
-                                        {
-                                            //Definir o nome do arquivo na pasta temp
-                                            arqTemp = fi.DirectoryName + "\\Temp\\" + fi.Name;
-
-                                            //Remove atributo somente Leitura para evitar erros de permissão com o Arquivo - Renan Borges
-                                            NFe.Service.TFunctions.RemoveSomenteLeitura(fi.FullName);
-
-                                            //Mover o arquivo para pasta temp e disparar o serviço a ser executado
-                                            Functions.Move(fi.FullName, arqTemp);
-
-                                            FileInfo fi2 = new FileInfo(arqTemp);
-                                            NewFiles.Add(fi2.Name, fi2);
-                                        }
-                                }
-
-                                foreach (FileInfo fi in NewFiles.Values)
-                                {
-                                    if (CancelProcess)
+                                    //cria todos os fileinfos
+                                    foreach (FileInfo fi in files)
                                     {
-                                        break;
-                                    }
-
-                                    if (OldFiles.Contains(fi.Name))
-                                    {
-                                        FileInfo oldFi = OldFiles[fi.Name] as FileInfo;
-
-#if DEBUG
-                                    Debug.WriteLine(String.Format("FileSystem: Lendo arquivo '{0}'.", fi.FullName));
-#endif
-
-                                        if (oldFi.CreationTime != fi.CreationTime || oldFi.Length != fi.Length)
+                                        if (CancelProcess)
                                         {
-                                            RaiseFileChanged(fi);
+                                            break;
                                         }
-                                        else
+
+                                        if (File.Exists(fi.FullName))
                                         {
-                                            #region Bug Fix #14522
-                                            if (!fi.FullName.ToLower().Contains("\\contingencia"))
+                                            if (!Functions.FileInUse(fi.FullName))
                                             {
-                                                //-------------------------------------------------------------------------
-                                                // Se caiu aqui, é o mesmo arquivo, logo iremos mover para a pasta erro
-                                                //-------------------------------------------------------------------------
-                                                int index = Empresas.FindEmpresaByThread();
-                                                string errorPath = String.Format("{0}\\{1}",
-                                                    Settings.Empresas.Configuracoes[index].PastaXmlErro,
-                                                    oldFi.Name);
-
-#if DEBUG
-                                            Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
-#endif
-
-                                                Functions.Move(oldFi.FullName, errorPath);
+                                                arqTemp = fi.DirectoryName + "\\Temp\\" + fi.Name;
+                                                Functions.Move(fi.FullName, arqTemp);
+                                                RaiseFileChanged(new FileInfo(arqTemp), emp);
                                             }
-                                            #endregion
                                         }
-
-#if DEBUG
-                                    Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
-#endif
-                                    }
-                                    else
-                                    {
-#if DEBUG
-                                    Debug.WriteLine(String.Format("FileSystem: Lendo arquivo '{0}'.", fi.FullName));
-#endif
-
-                                        RaiseFileChanged(fi);
-                                        OldFiles.Add(fi.Name, fi);
-#if DEBUG
-                                    Debug.WriteLine(String.Format("FileSystem: Fim lendo arquivo '{0}'.", fi.FullName));
-#endif
                                     }
                                 }
-
-                                OldFiles = NewFiles.Clone() as Hashtable;
-
                             }
                         }
                     }
@@ -212,12 +150,12 @@ namespace NFe.Threadings
                 finally
                 {
                     if (!CancelProcess)
-                        Thread.Sleep(2000);
+                        Thread.Sleep(1000);
                 }
             }
         }
 
-        private void RaiseFileChanged(FileInfo fi)
+        private void RaiseFileChanged(FileInfo fi, int emp)
         {
             string msgError = null;
 
@@ -226,11 +164,11 @@ namespace NFe.Threadings
                 ///
                 /// TODO!!!
                 /// entre este processo e o RaiseEvent está tendo uma demora considerável
-                /// 
-                if (fi.Length > 0 || (  fi.Name.ToLower().EndsWith(NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.sair_XML).EnvioTXT) ||
-                                        fi.Name.ToLower().EndsWith(NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.pedUpdatewsdl).EnvioTXT) ||
-                                        fi.Name.ToLower().EndsWith(NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.pedLayouts).EnvioTXT) ||
-                                        fi.Name.ToLower().EndsWith(NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.pedRestart).EnvioTXT)))
+                ///
+                if (fi.Length > 0 || (fi.Name.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.sair_XML).EnvioTXT) ||
+                                      fi.Name.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.pedUpdatewsdl).EnvioTXT) ||
+                                      fi.Name.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.pedLayouts).EnvioTXT) ||
+                                      fi.Name.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.pedRestart).EnvioTXT)))
                 {
                     Thread tworker = new Thread(
                         new ThreadStart(
@@ -251,7 +189,11 @@ namespace NFe.Threadings
                         ));
                     tworker.IsBackground = true;
                     tworker.Start();
+
+                    //                  if (Empresas.Configuracoes[emp].X509Certificado.IsA3())
+                    //                  {
                     tworker.Join();
+                    //                  }
                 }
                 else
                 {
@@ -264,7 +206,7 @@ namespace NFe.Threadings
             }
             if (msgError != null)
                 if (fi.Directory.Name.ToLower().EndsWith("geral\\temp"))
-                    NFe.Components.Functions.WriteLog(msgError, false, true, "");
+                    Functions.WriteLog(msgError, false, true, "");
                 else
                     Auxiliar.WriteLog(msgError, true);
         }
@@ -277,6 +219,7 @@ namespace NFe.Threadings
             get { return CancelProcess; }
             set { CancelProcess = value; }
         }
-        #endregion
+
+        #endregion Metodos
     }
 }

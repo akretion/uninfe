@@ -214,23 +214,14 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                                 srv = Servicos.NFePedidoConsultaSituacao; break;
                             case "nfeconsultacadastro":
                                 srv = Servicos.ConsultaCadastroContribuinte; break;
-                            case "nfeconsultanfedest":
-                                srv = Servicos.NFeConsultaNFDest; break;
                             case "nfedownload":
                                 srv = Servicos.NFeDownload; break;
                             case "nfeinutilizacao":
                                 srv = Servicos.NFeInutilizarNumeros; break;
                             case "nfemanifestacao":
                                 srv = Servicos.EventoManifestacaoDest; break;
-                            case "nferetrecepcao":
-                            case "nferecepcao":
-                                srv = Servicos.NFeEnviarLote; break;
                             case "dferecepcao":
                                 srv = Servicos.DFeEnviar; break;
-                            //case "nferegistrodesaida":
-                                //srv = Servicos.RegistroDeSaida; break;
-                            //case "nferegistrodesaidacancelamento":
-                                //srv = Servicos.RegistroDeSaidaCancelamento; break;
                             case "nfestatusservico":
                                 srv = Servicos.NFeConsultaStatusServico; break;
                         }

@@ -1,33 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Xml;
-using System.IO;
-
+﻿using NFe.Certificado;
 using NFe.Components;
 using NFe.Settings;
-using NFe.Certificado;
-using NFe.Exceptions;
+using System;
+using System.IO;
 
 namespace NFe.Service
 {
     public class TaskNFeConsultaStatus : TaskAbst
     {
-        public TaskNFeConsultaStatus()
+        public TaskNFeConsultaStatus(string arquivo)
         {
             Servico = Servicos.NFeConsultaStatusServico;
+            NomeArquivoXML = arquivo;
+            if (vXmlNfeDadosMsgEhXML)
+            {
+                ConteudoXML.PreserveWhitespace = false;
+                ConteudoXML.Load(arquivo);
+            }
         }
 
         #region Classe com os dados do XML da consulta do status do serviço da NFe
+
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do status do serviço
         /// </summary>
         private DadosPedSta dadosPedSta;
-        #endregion
+
+        #endregion Classe com os dados do XML da consulta do status do serviço da NFe
 
         #region Execute
+
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
@@ -36,20 +38,21 @@ namespace NFe.Service
             {
                 dadosPedSta = new DadosPedSta();
                 //Ler o XML para pegar parâmetros de envio
-                PedSta(emp, dadosPedSta);//NomeArquivoXML);
+                PedSta(emp, dadosPedSta);
 
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy =
                         ConfiguracaoApp.DefinirWS(Servico,
-                                                    emp,
-                                                    dadosPedSta.cUF,
-                                                    dadosPedSta.tpAmb,
-                                                    dadosPedSta.tpEmis,
-                                                    dadosPedSta.versao,
-                                                    dadosPedSta.mod,
-                                                    0);
+                        emp,
+                        dadosPedSta.cUF,
+                        dadosPedSta.tpAmb,
+                        dadosPedSta.tpEmis,
+                        dadosPedSta.versao,
+                        dadosPedSta.mod,
+                        0);
+
                     System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, PadroesNFSe.NaoIdentificado, Servico);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
@@ -63,11 +66,11 @@ namespace NFe.Service
                     new AssinaturaDigital().CarregarPIN(emp, NomeArquivoXML, Servico);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy, 
-                                        oStatusServico, 
-                                        wsProxy.NomeMetodoWS[0], 
-                                        oCabecMsg, this, 
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML, 
+                    oInvocarObj.Invocar(wsProxy,
+                                        oStatusServico,
+                                        wsProxy.NomeMetodoWS[0],
+                                        oCabecMsg, this,
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML,
                                         true,
                                         securityProtocolType);
@@ -86,7 +89,7 @@ namespace NFe.Service
             }
             catch (Exception ex)
             {
-                var extRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML : 
+                var extRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML :
                                                     Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioTXT;
 
                 try
@@ -109,22 +112,24 @@ namespace NFe.Service
                 }
                 catch
                 {
-                    //Se falhou algo na hora de deletar o XML de solicitação do serviço, 
-                    //infelizmente não posso fazer mais nada, o UniNFe vai tentar mandar 
+                    //Se falhou algo na hora de deletar o XML de solicitação do serviço,
+                    //infelizmente não posso fazer mais nada, o UniNFe vai tentar mandar
                     //o arquivo novamente para o webservice
                     //Wandrey 09/03/2010
                 }
             }
         }
-        #endregion
+
+        #endregion Execute
 
         #region PedSta()
+
         /// <summary>
         /// Faz a leitura do XML de pedido do status de serviço
         /// </summary>
         /// <param name="cArquivoXml">Nome do XML a ser lido</param>
         /// <by>Wandrey Mundin Ferreira</by>
-        /// 
+        ///
         protected override void PedSta(int emp, DadosPedSta dadosPedSta)
         {
             base.PedSta(emp, dadosPedSta);
@@ -132,6 +137,7 @@ namespace NFe.Service
             if (string.IsNullOrEmpty(dadosPedSta.versao))
                 throw new Exception(NFeStrConstants.versaoError);
         }
+
 #if f
         private void PedSta(int emp, string cArquivoXML)
         {
@@ -142,12 +148,12 @@ namespace NFe.Service
             ///
             /// danasa 9-2009
             /// Assume o que está na configuracao
-            /// 
+            ///
             dadosPedSta.tpEmis = Empresas.Configuracoes[emp].tpEmis;
 
             ///
             /// danasa 12-9-2009
-            /// 
+            ///
             if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
             {
                 // tpEmis|1						<<< opcional >>>
@@ -203,6 +209,7 @@ namespace NFe.Service
                 throw new Exception(NFeStrConstants.versaoError);
         }
 #endif
-        #endregion
+
+        #endregion PedSta()
     }
 }

@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.ComponentModel;
+﻿using NFe.Service;
 using NFe.Settings;
-using NFe.Components;
-using NFe.Service;
+using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace NFe.Threadings
 {
     #region Semaphore
+
     /// <summary>
     /// controla a posição em que thread está no momento
     /// </summary>
@@ -36,7 +33,8 @@ namespace NFe.Threadings
         /// </summary>
         Released
     }
-    #endregion
+
+    #endregion Semaphore
 
     #region #21040
 
@@ -44,11 +42,12 @@ namespace NFe.Threadings
     /// Método que será executado ao processar o timer
     /// </summary>
     /// <param name="item"></param>
-    delegate void ProcessarHandler(ThreadItem item);
+    internal delegate void ProcessarHandler(ThreadItem item);
 
-    class BufferItem : IDisposable
+    internal class BufferItem : IDisposable
     {
         #region propriedades
+
         /// <summary>
         /// Quando uma empresa usa um certificado do tipo A3, é executado por este Buffer
         /// </summary>
@@ -57,11 +56,12 @@ namespace NFe.Threadings
         /// <summary>
         /// Este timer é executado sempre que o buffer possuir itens que deverão ser enviados
         /// </summary>
-        System.Timers.Timer timer = null;
+        private System.Timers.Timer timer = null;
 
-        #endregion
+        #endregion propriedades
 
         #region construtores
+
         /// <summary>
         /// Inicia uma nova instancia e define o método de processamento
         /// </summary>
@@ -117,14 +117,15 @@ namespace NFe.Threadings
             }
 
             timer.Start();
-
         }
-        #endregion
+
+        #endregion construtores
 
         #region IDisposable members
+
         /// <summary>
         /// Retorna true se este objeto foi descarregado
-        /// </summary>	
+        /// </summary>
         public bool Disposed { get; private set; }
 
         ~BufferItem()
@@ -149,23 +150,28 @@ namespace NFe.Threadings
         {
             Dispose(true);
         }
-        #endregion
+
+        #endregion IDisposable members
     }
-    #endregion
+
+    #endregion #21040
 
     #region ThreadItem
+
     /// <summary>
     /// classe de item da thread
     /// </summary>
     public class ThreadItem : IDisposable
     {
         #region #21040
-        static Dictionary<int, BufferItem> _buffer = null;
+
+        private static Dictionary<int, BufferItem> _buffer = null;
+
         /// <summary>
         /// Quando uma empresa usa um certificado do tipo A3, é executado por este Buffer
         /// É utilizado apenas os primeiros 8 dígitos do CNPJ como chave.
         /// </summary>
-        static IDictionary<int, BufferItem> Buffer
+        private static IDictionary<int, BufferItem> Buffer
         {
             get
             {
@@ -173,24 +179,30 @@ namespace NFe.Threadings
                     _buffer = new Dictionary<int, BufferItem>();
 
                 return _buffer;
-
             }
         }
-        #endregion
+
+        #endregion #21040
 
         #region delegates
+
         public delegate void ThreadStartHandler(ThreadItem item);
+
         public delegate void ThreadEndedHandler(ThreadItem item);
+
         public delegate void ThreadReleasedHandler(ThreadItem item);
-        #endregion
+
+        #endregion delegates
 
         #region Eventos
+
         /// <summary>
         /// acontece quando a thread começou a leitura do arquivo
         /// </summary>
         public static event ThreadStartHandler OnStarted;
+
         /// <summary>
-        /// acontece quando a thread finalizou a leitura do arquivo 
+        /// acontece quando a thread finalizou a leitura do arquivo
         /// </summary>
         public static event ThreadEndedHandler OnEnded;
 
@@ -199,7 +211,7 @@ namespace NFe.Threadings
         /// </summary>
         public static event ThreadReleasedHandler OnReleased;
 
-        #endregion
+        #endregion Eventos
 
         public ThreadItem(System.IO.FileInfo fi, int empresa)
         {
@@ -207,6 +219,7 @@ namespace NFe.Threadings
             Empresa = empresa;
 
             #region #21040
+
             if (_buffer == null)
             {
                 //criar um buffer para cada empresa que o certificado é A3
@@ -223,7 +236,8 @@ namespace NFe.Threadings
                     }
                 }
             }
-            #endregion
+
+            #endregion #21040
         }
 
         /// <summary>
@@ -239,22 +253,24 @@ namespace NFe.Threadings
         public int Empresa { get; private set; }
 
         /*<#8084>
-         * Com a morte da classe ThreadControl, este método passou a ser responsável 
+         * Com a morte da classe ThreadControl, este método passou a ser responsável
          * pela execução dos eventos que antes eram feitos pela ThreadControl
-         * 
+         *
          */
+
         /// <summary>
         /// Método responsável por executar os eventos de forma síncrona em uma thread separada
         /// </summary>
         public void Run()
         {
             #region #21040
+
             if (Empresas.Configuracoes.Count != 0)
             {
                 Empresa empresa = Empresas.Configuracoes[Empresa];
                 /*
                  * Se o certificado for A3, então vai para o Buffer controlado, pois deverá ser executado um de cada vez
-                 * 
+                 *
                  */
                 if (empresa.UsaCertificado && empresa.X509Certificado.IsA3())
                 {
@@ -269,7 +285,8 @@ namespace NFe.Threadings
                     return;
                 }
             }
-            #endregion
+
+            #endregion #21040
 
             Processar(this);
         }
@@ -295,7 +312,7 @@ namespace NFe.Threadings
             {
                 try
                 {
-                    //remove o item                   
+                    //remove o item
                     //avisa que removeu o item
                     if (OnReleased != null) OnReleased(item);
                 }
@@ -310,6 +327,7 @@ namespace NFe.Threadings
         }
 
         #region IDisposable members
+
         public void Dispose()
         {
             Dispose(true);
@@ -336,18 +354,22 @@ namespace NFe.Threadings
 
             Dispose(false);
         }
-        #endregion
+
+        #endregion IDisposable members
+
         //</#8084>
     }
-    #endregion
+
+    #endregion ThreadItem
 
     /*<#8084>
-     * A classe ThreadControl deixou de existir por não ser mais utilizada dentro do aplicação, 
+     * A classe ThreadControl deixou de existir por não ser mais utilizada dentro do aplicação,
      * foi substituída pelo método ThreadItem.Run()_
      *</#8084>
      */
 
-    #region  ThreadService
+    #region ThreadService
+
     /// <summary>
     /// Classe responsável por executar as thread´s base de verificação dos serviços a serem executados
     /// </summary>
@@ -383,13 +405,15 @@ namespace NFe.Threadings
 
         public static void Start()
         {
-            NFe.Service.TFunctions.CriarArquivosParaServico();
+            TFunctions.CriarArquivosParaServico();
 
             Empresas.CarregaConfiguracao();
 
             #region Ticket #110
+
             Empresas.CreateLockFile(true);
-            #endregion
+
+            #endregion Ticket #110
 
             //Executar o monitoramento de pastas das empresas cadastradas
             MonitoraPasta e = new MonitoraPasta();
@@ -412,9 +436,10 @@ namespace NFe.Threadings
             Processar srv = new Processar();
             Thread t3 = new Thread(srv.GerarXMLPedRec);
             t3.IsBackground = true;
-            t3.Start(new NFe.Service.TaskNFeGerarXMLPedRec());
+            t3.Start(new TaskNFeGerarXMLPedRec());
             Threads.Add(t3);
         }
     }
-    #endregion
+
+    #endregion ThreadService
 }

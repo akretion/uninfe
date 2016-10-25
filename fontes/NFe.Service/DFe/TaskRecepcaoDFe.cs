@@ -1,25 +1,30 @@
-﻿using System;
+﻿using NFe.Components;
+using NFe.Settings;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Xml;
-
-using NFe.Components;
-using NFe.Settings;
-using NFe.Certificado;
-using NFe.Exceptions;
 
 namespace NFe.Service
 {
     public class TaskDFeRecepcao : TaskAbst
     {
+        public TaskDFeRecepcao(string arquivo)
+        {
+            Servico = Servicos.DFeEnviar;
+            NomeArquivoXML = arquivo;
+            if (vXmlNfeDadosMsgEhXML)
+            {
+                ConteudoXML.PreserveWhitespace = false;
+                ConteudoXML.Load(arquivo);
+            }
+        }
+
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
             distDFeInt _distDFeInt = new distDFeInt();
 
-            Servico = Servicos.DFeEnviar;
             try
             {
                 if (!this.vXmlNfeDadosMsgEhXML)
@@ -33,10 +38,10 @@ namespace NFe.Service
                     ///ultNSU|123456789012345
                     /// ou
                     ///NSU|123456789012345
-                    List<string> cLinhas = Functions.LerArquivo(this.NomeArquivoXML);
+                    List<string> cLinhas = Functions.LerArquivo(NomeArquivoXML);
                     Functions.PopulateClasse(_distDFeInt, cLinhas);
 
-                    string f = System.IO.Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml";
+                    string f = Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml";
 
                     if (NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
                     {
@@ -47,10 +52,7 @@ namespace NFe.Service
                 }
                 else
                 {
-                    XmlDocument doc = new XmlDocument();
-                    doc.Load(this.NomeArquivoXML);
-
-                    XmlNodeList consdistDFeIntList = doc.GetElementsByTagName("distDFeInt");
+                    XmlNodeList consdistDFeIntList = ConteudoXML.GetElementsByTagName("distDFeInt");
 
                     foreach (XmlNode consdistDFeIntNode in consdistDFeIntList)
                     {
@@ -59,11 +61,11 @@ namespace NFe.Service
                     }
 
                     //Definir o objeto do WebService
-                    WebServiceProxy wsProxy =
-                        ConfiguracaoApp.DefinirWS(Servico,
-                                                    emp,
-                                                    991,
-                                                    _distDFeInt.tpAmb, 0);
+                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico,
+                        emp,
+                        991,
+                        _distDFeInt.tpAmb, 0);
+
                     System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(991, _distDFeInt.tpAmb, 1, PadroesNFSe.NaoIdentificado, Servico);
 
                     object oConsNFDestEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -79,7 +81,7 @@ namespace NFe.Service
                                         true,
                                         securityProtocolType);
 
-                    LeRetornoDFe(emp, doc);
+                    LeRetornoDFe(emp, ConteudoXML);
                 }
             }
             catch (Exception ex)
@@ -101,26 +103,15 @@ namespace NFe.Service
 
         private void LeRetornoDFe(int emp, XmlDocument doc)
         {
-            /*
-            if (string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaDownloadNFeDest))
-            {
-                ///
-                /// nao interpreto como erro, já que o ERP pode não querer descompactar os arquivos
-                /// 
-                Auxiliar.WriteLog("LeRetornoNFe: Pasta de DownloadNFeDest nao definida");
-                return;
-            }
-            */
-
             try
             {
                 ///
                 /// pega o nome base dos arquivos a serem gravados
-                /// 
-                string fileRetorno2 = Functions.ExtrairNomeArq(this.NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML);
+                ///
+                string fileRetorno2 = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML);
                 ///
                 /// pega o nome do arquivo de retorno
-                /// 
+                ///
                 string fileRetorno = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                   fileRetorno2 + Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).RetornoXML);
 
@@ -130,14 +121,14 @@ namespace NFe.Service
                 }
                 ///
                 /// cria a pasta para comportar as notas e eventos retornados já descompactados
-                /// 
+                ///
                 string folderTerceiros = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, "dfe");
                 if (!Directory.Exists(folderTerceiros))
                     Directory.CreateDirectory(folderTerceiros);
 
                 ///
                 /// exclui todos os arquivos que foram envolvidos no retorno
-                /// 
+                ///
                 foreach (var item in Directory.GetFiles(folderTerceiros, fileRetorno2 + "-*.xml", SearchOption.TopDirectoryOnly))
                     if (!Functions.FileInUse(item))
                         File.Delete(item);
@@ -160,7 +151,7 @@ namespace NFe.Service
 
                                 ///
                                 /// descompacta o conteudo
-                                /// 
+                                ///
                                 string xmlRes = TFunctions.Decompress(ret.ChildNodes[n].InnerText);
                                 if (string.IsNullOrEmpty(xmlRes))
                                 {
@@ -220,14 +211,14 @@ namespace NFe.Service
                 /// Wandrey.
                 /// Foi tudo processado mas houve algum erro na descompactacao dos retornos
                 /// Se gravar o arquivo com extensao .err, o ERP pode ignorar o XML de retorno, que está correto
-                /// 
+                ///
                 //WriteLogError(ex);
             }
         }
 
         private void WriteLogError(Exception ex)
         {
-            var extRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML : 
+            var extRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML :
                                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioTXT;
 
             try

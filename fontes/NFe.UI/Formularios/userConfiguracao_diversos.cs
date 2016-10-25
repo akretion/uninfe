@@ -122,7 +122,10 @@ namespace NFe.UI.Formularios
                     checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible =
                     checkBoxCompactaNFe.Visible =
                     udTempoConsulta.Visible = lbl_udTempoConsulta.Visible =
-                    cbIndSinc.Visible = !(empresa.Servico == TipoAplicativo.Nfse);
+                    cbIndSinc.Visible = !(empresa.Servico == TipoAplicativo.Nfse || empresa.Servico == TipoAplicativo.SAT);
+
+                metroLabel10.Visible = 
+                    comboBox_Ambiente.Visible = !(empresa.Servico == TipoAplicativo.SAT);
 
                 /*
 
@@ -310,24 +313,28 @@ namespace NFe.UI.Formularios
                            ufCod == 4104303 /*Campo Mourão*/||
                            ufCod == 4104204 /*Campo Largo*/||
                            ufCod == 3537305 /*Penapolis*/||
-                           ufCod == 4309209 /*Gravatai*/||
-                           ufCod == 3551702 /*Sertaozinho*/||
+                           ufCod == 4309209 /*Gravataí*/||
+                           ufCod == 3551702 /*Sertãozinho*/||
                            ufCod == 3201308 /*Cariacica*/||
                            ufCod == 3538709 /*Piracicaba*/||
-                           ufCod == 2930709 /*Simoes Filho*/||
-                           ufCod == 3553807 /*Taquaritua*/||
+                           ufCod == 2930709 /*Simões Filho*/||
+                           ufCod == 3553807 /*Taquarituba*/||
                            ufCod == 3512902 /*Cosmorama*/||
                            ufCod == 3515004 /*Embu das Artes*/||
                            ufCod == 3148004 /*Patos de Minas*/||
                            ufCod == 3506508 /*Birigui*/||
                            ufCod == 3201506 /*Colatina*/||
-                           ufCod == 4118204 /*Paranagua*/||
+                           ufCod == 4118204 /*Paranaguá*/||
                            ufCod == 3130309 /*Iguatama*/||
                            ufCod == 3504503 /*Avaré*/||
                            ufCod == 3541406 /*Presidente Prudente-SP*/||
                            ufCod == 4217808 /*Taió-SC*/||
                            ufCod == 4101101 /*Andirá-PR*/||
-                           ufCod == 3306305 /*Volta Redonda-RJ*/;
+                           ufCod == 3306305 /*Volta Redonda-RJ*/||
+                           ufCod == 3522802 /*Itaporanga-SP*/||
+                           ufCod == 4201307 /*Araquari-SC*/||
+                           ufCod == 3205002 /*Serra-ES*/||
+                           ufCod == 3504008 /*Assis-SP*/;
 
             bool visiblepass = ufCod == 3152105 || visible; /*Ponte nova*/
 

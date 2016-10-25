@@ -1421,8 +1421,8 @@ namespace NFe.ConvertTxt
                     Arma armaItem = new Arma();
 
                     armaItem.tpArma = (TpcnTipoArma)this.LerInt32(TpcnResources.tpArma, ObOp.Obrigatorio, 1, 1);
-                    armaItem.nSerie = LerInt32(TpcnResources.nSerie, ObOp.Obrigatorio, 1, (double)NFe.infNFe.Versao >= 3.10 ? 15 : 9);
-                    armaItem.nCano = LerInt32(TpcnResources.nCano, ObOp.Obrigatorio, 1, (double)NFe.infNFe.Versao >= 3.10 ? 15 : 9);
+                    armaItem.nSerie = LerString(TpcnResources.nSerie, ObOp.Obrigatorio, 1, (double)NFe.infNFe.Versao >= 3.10 ? 15 : 9);
+                    armaItem.nCano = LerString(TpcnResources.nCano, ObOp.Obrigatorio, 1, (double)NFe.infNFe.Versao >= 3.10 ? 15 : 9);
                     armaItem.descr = LerString(TpcnResources.descr, ObOp.Obrigatorio, 1, 256);
 
                     NFe.det[nProd].Prod.arma.Add(armaItem);

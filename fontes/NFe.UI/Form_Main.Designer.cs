@@ -42,7 +42,7 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.cmSituacaoServicos = new System.Windows.Forms.ToolStripMenuItem();
             this.cmConsultaCadastro = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmDANFE = new System.Windows.Forms.ToolStripMenuItem();
+//            this.cmDANFE = new System.Windows.Forms.ToolStripMenuItem();
             this.cmValidarXML = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cmLogs = new System.Windows.Forms.ToolStripMenuItem();
@@ -132,13 +132,6 @@
             this.cmConsultaCadastro.Text = "Consultar cadastro de contribuinte";
             this.cmConsultaCadastro.Click += new System.EventHandler(this.cmConsultaCadastro_Click);
             // 
-            // cmDANFE
-            // 
-            this.cmDANFE.Name = "cmDANFE";
-            this.cmDANFE.Size = new System.Drawing.Size(273, 22);
-            this.cmDANFE.Text = "Imprimir DANFE/DAMFe/DACTe/CCe";
-            this.cmDANFE.Click += new System.EventHandler(this.cmDANFE_Click);
-            // 
             // cmValidarXML
             // 
             this.cmValidarXML.Name = "cmValidarXML";
@@ -203,7 +196,6 @@
             this.toolStripSeparator4,
             this.cmSituacaoServicos,
             this.cmConsultaCadastro,
-            this.cmDANFE,
             this.cmValidarXML,
             this.toolStripSeparator3,
             this.cmLogs,
@@ -266,7 +258,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem cmFechar;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
-        private System.Windows.Forms.ToolStripMenuItem cmDANFE;
+//        private System.Windows.Forms.ToolStripMenuItem cmDANFE;
         private System.Windows.Forms.ToolStripMenuItem cmSituacaoServicos;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem cmMunicipios;

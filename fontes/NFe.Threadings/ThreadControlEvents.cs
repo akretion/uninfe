@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NFe.Settings;
 using NFe.Service;
 using NFe.Components;
@@ -31,13 +28,6 @@ namespace NFe.Threadings
 #if DEBUG
             Debug.WriteLine(String.Format("Contagem em processamento: '{0}'.", FileSystemWatcher._pool.GetLifetimeService()));
 #endif
-            if (Empresas.Configuracoes.Count != 0)
-            {
-                Empresa empresa = Empresas.Configuracoes[item.Empresa];
-            }
-
-            //danasa 12/8/2011
-            //mudei de posição e inclui o FullName
             Auxiliar.WriteLog("O arquivo " + item.FileInfo.FullName + " iniciou o processamento (Data criação: " + item.FileInfo.LastWriteTime + ")", false);
             Processar(item);
         }

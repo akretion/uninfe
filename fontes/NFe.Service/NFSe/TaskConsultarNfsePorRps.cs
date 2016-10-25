@@ -12,6 +12,7 @@ using NFe.Components.GovDigital;
 using NFe.Components.FISSLEX;
 using NFe.Components.Memory;
 using NFe.Components.Metropolis;
+using NFe.Components.Pronin;
 
 namespace NFe.Service.NFSe
 {
@@ -255,6 +256,33 @@ namespace NFe.Service.NFSe
                         else
                             pedLoteRps = new Components.HCorumbaMS.NfseWSService();
 
+                        break;
+
+                    case PadroesNFSe.BSITBR:
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        if (ler.oDadosPedSitNfseRps.tpAmb == 1)
+                            pedLoteRps = new Components.PJaraguaGO.nfseWS();
+                        else
+                            throw new Exception("Município de Jaraguá-GO não dispõe de ambiente de homologação para envio de NFS-e em teste.");
+                        break;
+
+                    case PadroesNFSe.PRONIN:
+                        if (ler.oDadosPedSitNfseRps.cMunicipio == 4109401)
+                        {
+                            Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                ler.oDadosPedSitNfseRps.cMunicipio,
+                                ConfiguracaoApp.ProxyUsuario,
+                                ConfiguracaoApp.ProxySenha,
+                                ConfiguracaoApp.ProxyServidor,
+                                Empresas.Configuracoes[emp].X509Certificado);
+
+                            AssinaturaDigital assPronin = new AssinaturaDigital();
+                            assPronin.Assinar(NomeArquivoXML, emp, ler.oDadosPedSitNfseRps.cMunicipio);
+
+                            pronin.EmiteNF(NomeArquivoXML);
+                        }
                         break;
                 }
 

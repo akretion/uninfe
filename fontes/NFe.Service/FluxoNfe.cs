@@ -72,7 +72,7 @@ namespace NFe.Service
             /// <summary>
             /// Modelo do documento fiscal
             /// </summary>
-            mod            
+            mod
         }
         #endregion
 
@@ -323,7 +323,8 @@ namespace NFe.Service
                             throw;
                         }
                     }
-                    Thread.Sleep(1000);
+
+                    Thread.Sleep(100);
                 }
             }
         }
@@ -414,7 +415,7 @@ namespace NFe.Service
                     }
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
         }
         #endregion
@@ -497,7 +498,7 @@ namespace NFe.Service
                     }
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
         }
         #endregion
@@ -507,11 +508,11 @@ namespace NFe.Service
         /// Verifica se a NFe já existe no arquivo XML de controle do fluxo.
         /// </summary>
         /// <returns>true = Existe</returns>
-        public Boolean NfeExiste(string strChaveNFe)
+        public bool NfeExiste(string strChaveNFe)
         {
             CriarXml();
 
-            Boolean booExiste = false;
+            bool booExiste = false;
 
             DateTime startTime;
             DateTime stopTime;
@@ -531,7 +532,6 @@ namespace NFe.Service
                 {
                     lock (Smf.Fluxo)
                     {
-
                         XmlDocument xdXml = new XmlDocument(); //Criar instância do XmlDocument Class
                         fsArquivo = OpenFileFluxo(false);
                         xdXml.Load(fsArquivo); //Carregar o arquivo aberto no XmlDocument
@@ -541,10 +541,9 @@ namespace NFe.Service
                         {
                             XmlElement cl = (XmlElement)xdXml.GetElementsByTagName(ElementoFixo.Documento.ToString())[i]; //Recuperar o conteúdo da tag Documento
                             if (cl.GetAttribute(ElementoFixo.ChaveNFe.ToString()) == strChaveNFe)
-                            {
                                 booExiste = true;
-                            }
                         }
+
                         fsArquivo.Close(); //Fecha o arquivo XML
 
                         break;
@@ -553,17 +552,13 @@ namespace NFe.Service
                 catch
                 {
                     if (fsArquivo != null)
-                    {
                         fsArquivo.Close();
-                    }
 
                     if (elapsedMillieconds >= 120000) //120.000 ms que corresponde Ã¡ 120 segundos que corresponde a 2 minuto
-                    {
                         throw;
-                    }
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
 
             return booExiste;
@@ -578,9 +573,9 @@ namespace NFe.Service
         /// <returns>true = Já está em um lote</returns>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>20/04/2009</date>
-        public Boolean NFeComLote(string strChaveNFe)
+        public bool NFeComLote(string strChaveNFe)
         {
-            Boolean booComLote = false;
+            bool booComLote = false;
 
             DateTime startTime;
             DateTime stopTime;
@@ -635,7 +630,7 @@ namespace NFe.Service
                     }
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
 
             return booComLote;
@@ -712,7 +707,7 @@ namespace NFe.Service
                     }
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
         }
         #endregion
@@ -791,7 +786,7 @@ namespace NFe.Service
                     }
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
         }
         #endregion
@@ -868,7 +863,7 @@ namespace NFe.Service
                     }
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
 
             return strConteudo;
@@ -965,7 +960,7 @@ namespace NFe.Service
                                 DateTime dPedRec = DateTime.Now.AddMinutes(-60);
 
                                 tMed = Convert.ToInt32(Functions.LerTag(documentoElemento, ElementoEditavel.tMed.ToString(), tMed.ToString()));
-                                dPedRec = Convert.ToDateTime(Functions.LerTag(documentoElemento, ElementoEditavel.dPedRec.ToString(), dPedRec.ToString("yyyy-MM-dd HH:mm:ss")));                                
+                                dPedRec = Convert.ToDateTime(Functions.LerTag(documentoElemento, ElementoEditavel.dPedRec.ToString(), dPedRec.ToString("yyyy-MM-dd HH:mm:ss")));
 
                                 //Se tiver mais de 2 dias no fluxo, vou excluir a nota dele.
                                 //Não faz sentido uma nota ficar no fluxo todo este tempo, então vou fazer uma limpeza
@@ -990,7 +985,7 @@ namespace NFe.Service
                                     }
                                 }
                             }
-                            else if (! File.Exists(NomeArquivoAssinado) && ! File.Exists(NomeArquivoAssinadoLote))
+                            else if (!File.Exists(NomeArquivoAssinado) && !File.Exists(NomeArquivoAssinadoLote))
                                 excluiNota = true;
 
                             if (excluiNota)
@@ -1019,7 +1014,7 @@ namespace NFe.Service
                     }
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
 
             return lstRecibo;
@@ -1100,7 +1095,7 @@ namespace NFe.Service
                     }
                 }
 
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
             }
         }
         #endregion
