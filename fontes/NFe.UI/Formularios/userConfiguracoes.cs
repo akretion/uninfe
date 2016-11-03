@@ -320,7 +320,7 @@ namespace NFe.UI
         {
             bool _modificado = false;
             bool _nova = string.IsNullOrEmpty(oempresa.PastaXmlEnvio);
-            
+
             stopChangedEvent = true;
             try
             {
@@ -394,7 +394,7 @@ namespace NFe.UI
                 uce_divs.Populate(oempresa, _nova);
                 uce_pastas.Populate(oempresa);
                 uce_ftp.Populate(oempresa);
-                uce_cert.Populate(oempresa);                
+                uce_cert.Populate(oempresa);
 
                 if (oempresa.Servico != TipoAplicativo.Nfse)
                 {
@@ -500,7 +500,7 @@ namespace NFe.UI
             {
                 if (DadosMudaramDaEmpresa(false) || uc_geral.Modificado || !EmpresaValidada)
                     return MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                        constAbandono, "", 
+                        constAbandono, "",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
             }
             BackFuncao();
@@ -529,7 +529,8 @@ namespace NFe.UI
                     return false;
                 }
                 uce_pastas.Validar();
-                uce_cert.Validar();
+                if (currentEmpresa.Servico != TipoAplicativo.SAT)
+                    uce_cert.Validar();
                 if (currentEmpresa.Servico != TipoAplicativo.Nfse)
                     uce_danfe.Validar();
                 uce_ftp.Validar();
@@ -639,7 +640,7 @@ namespace NFe.UI
                         /// salva a configuracao da empresa
                         /// 
 
-                        currentEmpresa.SalvarConfiguracao(true, true);
+                        currentEmpresa.SalvarConfiguracao((currentEmpresa.Servico == TipoAplicativo.SAT ? false : true), true);
 
 
                         var app = new ConfiguracaoApp();
@@ -763,7 +764,7 @@ namespace NFe.UI
                         if (pergunta)
                         {
                             pergunta = !(MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                                constAbandono, "", 
+                                                constAbandono, "",
                                                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes);
                         }
                         if (!pergunta)

@@ -37,6 +37,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+    <Reference Include="Unimake.SAT">
+      <HintPath>..\packages\Unimake.SAT.20161103.9\lib\net451\Unimake.SAT.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -56,16 +59,11 @@
     <Compile Include="Service\CFe\ConsultaSATTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Unimake.Framework\Unimake.Framework.svn\trunk\C#\source\Unimake.SAT\Unimake.SAT.csproj">
-      <Project>{6c5d1db6-5bab-46bb-b1ac-cd0ceba69aaf}</Project>
-      <Name>Unimake.SAT</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NFe.ConvertCFe\NFe.SAT.csproj">
       <Project>{5632878d-c7e7-4cff-9fe1-06e7222532af}</Project>
       <Name>NFe.SAT</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

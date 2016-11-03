@@ -154,9 +154,8 @@ namespace NFe.Service
             // Envio da NFe Compactada - Renan
             if (servico == Servicos.NFeEnviarLoteZip)
             {
-                XmlNfeDadosMsg = XmlNfeDadosMsg + ".gz";
-                FileInfo XMLNfeZip = new FileInfo(XmlNfeDadosMsg);
-                string encodedData = StreamExtensions.ToBase64(XMLNfeZip);
+                string encodedData = TFunctions.CompressXML(docXML);
+
                 XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[] { encodedData });
             }
             else

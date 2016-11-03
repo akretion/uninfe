@@ -1358,7 +1358,7 @@ namespace NFe.Service
 
         #endregion RemoveSomenteLeitura()
 
-        #region Compacta XML
+        #region CompressXML()
 
         public static void CompressXML(FileInfo fileToCompress)
         {
@@ -1377,7 +1377,21 @@ namespace NFe.Service
             }
         }
 
-        #endregion Compacta XML
+        public static string CompressXML(XmlDocument conteudoXML)
+        {
+            string value = conteudoXML.InnerXml;
+
+            byte[] buffer = Encoding.UTF8.GetBytes(value);
+            MemoryStream ms = new MemoryStream();
+            using (GZipStream zip = new GZipStream(ms, CompressionMode.Compress))
+            {
+                zip.Write(buffer, 0, buffer.Length);
+            }
+
+            return Convert.ToBase64String(ms.GetBuffer());
+        }
+
+        #endregion CompressXML()
 
         #region Decompress
 

@@ -109,7 +109,7 @@ namespace NFe.Components
                             }
                         }
                     }
-                    else if (versao.Equals("3.10"))
+                    else if (conteudoXML.DocumentElement.Name.Equals("distDFeInt") && versao.Equals("1.01"))
                         versaoXML = "-" + versao;
 
                     InfSchema schema = null;
@@ -173,7 +173,7 @@ namespace NFe.Components
                         }
 
                         if (!nfse)
-                            chave = TipoAplicativo.Nfe.ToString().ToUpper() + "-" + nome;
+                            chave = TipoAplicativo.Nfe.ToString().ToUpper() + versaoXML + "-" + nome;
                         else
                             chave = TipoAplicativo.Nfse.ToString().ToUpper() + versaoXML + "-" + padraoNFSe + nome;
 

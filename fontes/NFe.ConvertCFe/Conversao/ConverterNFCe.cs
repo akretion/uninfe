@@ -479,23 +479,30 @@ namespace NFe.SAT.Conversao
         /// <returns></returns>
         private string GetValueXML(string groupTag, string nameTag)
         {
-            string value = "";
-            XmlNodeList nodes = Document.GetElementsByTagName(groupTag);
-            XmlNode node = nodes[0];
-
-            foreach (XmlNode n in node)
+            try
             {
-                if (n.NodeType == XmlNodeType.Element)
+                string value = "";
+                XmlNodeList nodes = Document.GetElementsByTagName(groupTag);
+                XmlNode node = nodes[0];
+
+                foreach (XmlNode n in node)
                 {
-                    if (n.Name.Equals(nameTag))
+                    if (n.NodeType == XmlNodeType.Element)
                     {
-                        value = n.InnerText;
-                        break;
+                        if (n.Name.Equals(nameTag))
+                        {
+                            value = n.InnerText;
+                            break;
+                        }
                     }
                 }
-            }
 
-            return value;
+                return value;
+            }
+            catch (Exception)
+            {
+                return String.Empty;
+            }
         }
 
         /// <summary>

@@ -94,6 +94,14 @@ namespace NFe.SAT
                             _Dispatch = new AtivarSAT(Arquivo, DadosEmpresa);
                             break;
 
+                        case Servicos.SATBloquear:
+                            _Dispatch = new BloquearSAT(Arquivo, DadosEmpresa);
+                            break;
+
+                        case Servicos.SATDesbloquear:
+                            _Dispatch = new DesbloquearSAT(Arquivo, DadosEmpresa);
+                            break;
+
                         default:
                             throw new NotImplementedException();
                     }
@@ -158,6 +166,14 @@ namespace NFe.SAT
                             _Response = new AtivarSATResponse();
                             break;
 
+                        case Servicos.SATBloquear:
+                            _Response = new BloquearSATResponse();
+                            break;
+
+                        case Servicos.SATDesbloquear:
+                            _Response = new DesbloquearSATResponse();
+                            break;
+
                         default:
                             throw new NotImplementedException();
                     }
@@ -188,7 +204,14 @@ namespace NFe.SAT
         /// <returns></returns>
         public string Enviar()
         {
-            return Dispatch.Enviar();
+            try
+            {
+                return Dispatch.Enviar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }            
         }
 
         /// <summary>
@@ -196,7 +219,14 @@ namespace NFe.SAT
         /// </summary>
         public string SaveResponse()
         {
-            return Dispatch.SaveResponse();
+            try
+            {
+                return Dispatch.SaveResponse();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }            
         }
 
     }
