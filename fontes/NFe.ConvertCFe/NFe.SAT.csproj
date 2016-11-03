@@ -41,6 +41,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Unimake.SAT">
+      <HintPath>..\packages\Unimake.SAT.20161103.9\lib\net451\Unimake.SAT.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conversao\ConverterNFCe.cs" />
@@ -48,7 +51,9 @@
     <Compile Include="SATProxy.cs" />
     <Compile Include="Servico\Envio\AtivarSAT.cs" />
     <Compile Include="Servico\Envio\AssociarAssinatura.cs" />
+    <Compile Include="Servico\Envio\DesbloquearSAT.cs" />
     <Compile Include="Servico\Envio\ConfigurarInterfaceDeRede.cs" />
+    <Compile Include="Servico\Envio\BloquearSAT.cs" />
     <Compile Include="Servico\Envio\ConverterSAT.cs" />
     <Compile Include="Servico\Envio\CancelarUltimaVenda.cs" />
     <Compile Include="Servico\Envio\EnviarDadosVenda.cs" />
@@ -62,10 +67,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\unimake.framework\unimake.framework.svn\trunk\C#\source\Unimake.SAT\Unimake.SAT.csproj">
-      <Project>{6c5d1db6-5bab-46bb-b1ac-cd0ceba69aaf}</Project>
-      <Name>Unimake.SAT</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NFe.Components\NFe.Components.csproj">
       <Project>{C199D582-6DA4-4D00-8963-89BA04777872}</Project>
       <Name>NFe.Components</Name>
@@ -78,6 +79,9 @@
       <Project>{4a0d1e87-2994-4678-9af1-eebd093b7b44}</Project>
       <Name>NFe.Validate</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -17,12 +17,7 @@
      </s:sequence>
     </s:complexType>
    </s:element>
-   <s:element name='nfeDadosMsgZip'>
-    <s:complexType mixed='true'>
-     <s:sequence>
-      <s:any/>
-     </s:sequence>
-    </s:complexType>
+   <s:element name='nfeDadosMsgZip' type='s:string'>
    </s:element>
    <s:element name='nfeAutorizacaoLoteZipResult'>
     <s:complexType mixed='true'>

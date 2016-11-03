@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniNFeServico", "UniNFeServico\UniNFeServico.csproj", "{E808B9BD-C6F6-467E-BA52-E5681C55AFFF}"
 EndProject
@@ -44,8 +44,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFe.Test", "NFe.Test\NFe.Test.csproj", "{6D4EF144-5C9F-4BE3-8131-00E3C32350E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFe.SAT", "NFe.ConvertCFe\NFe.SAT.csproj", "{5632878D-C7E7-4CFF-9FE1-06E7222532AF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unimake.SAT", "..\..\..\Unimake.Framework\Unimake.Framework.svn\trunk\C#\source\Unimake.SAT\Unimake.SAT.csproj", "{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}"
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
@@ -289,18 +287,6 @@ Global
 		{5632878D-C7E7-4CFF-9FE1-06E7222532AF}.Release35_AnyCPU|Any CPU.Build.0 = Release|Any CPU
 		{5632878D-C7E7-4CFF-9FE1-06E7222532AF}.Release35_AnyCPU|x64.ActiveCfg = Release|Any CPU
 		{5632878D-C7E7-4CFF-9FE1-06E7222532AF}.Release35_AnyCPU|x64.Build.0 = Release|Any CPU
-		{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}.Debug|x64.Build.0 = Debug|Any CPU
-		{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}.Release|x64.ActiveCfg = Release|Any CPU
-		{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}.Release|x64.Build.0 = Release|Any CPU
-		{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}.Release35_AnyCPU|Any CPU.ActiveCfg = Release|Any CPU
-		{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}.Release35_AnyCPU|Any CPU.Build.0 = Release|Any CPU
-		{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}.Release35_AnyCPU|x64.ActiveCfg = Release|Any CPU
-		{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}.Release35_AnyCPU|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

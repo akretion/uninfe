@@ -170,6 +170,19 @@ namespace NFe.Service
                             ativa.Enviar();
                             ativa.SaveResponse();
                             break;
+
+                        case Servicos.SATBloquear:
+                            SATProxy bloquear = new SATProxy(Servicos.SATBloquear, Empresas.Configuracoes[emp], arquivo);
+                            bloquear.Enviar();
+                            bloquear.SaveResponse();
+                            break;
+
+                        case Servicos.SATDesbloquear:
+                            SATProxy desbloquear = new SATProxy(Servicos.SATDesbloquear, Empresas.Configuracoes[emp], arquivo);
+                            desbloquear.Enviar();
+                            desbloquear.SaveResponse();
+                            break;
+
                         #endregion
 #endif
 
@@ -379,7 +392,7 @@ namespace NFe.Service
                 }
                 catch (Exception ex)
                 {
-                    if (servico == Servicos.Nulo || servico == Servicos.NFeConsultaStatusServico)
+                    if (servico == Servicos.Nulo || servico == Servicos.NFeConsultaStatusServico || servico == Servicos.SATConverterNFCe)
                     {
                         /// 7/2012 <<< danasa
                         ///o erp nao precisa esperar pelo tempo excedido, então retornamos um arquivo .err
@@ -799,9 +812,13 @@ namespace NFe.Service
                                     tipoServico = Servicos.SATConfigurarInterfaceDeRede;
                                 else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.AssociarAssinaturaSAT).EnvioXML) >= 0)
                                     tipoServico = Servicos.SATAssociarAssinatura;
-
+                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.BloquearSAT).EnvioXML) >= 0)
+                                    tipoServico = Servicos.SATBloquear;
                                 else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.AtivarSAT).EnvioXML) >= 0)
                                     tipoServico = Servicos.SATAtivar;
+                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.DesbloquearSAT).EnvioXML) >= 0)
+                                    tipoServico = Servicos.SATDesbloquear;
+
                                 #endregion
 
                                 break;

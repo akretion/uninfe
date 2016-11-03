@@ -274,6 +274,8 @@ namespace NFe.Components
         SATConfigurarInterfaceDeRede,
         SATAssociarAssinatura,
         SATAtivar,
+        SATBloquear,
+        SATDesbloquear,
         #endregion
 
         #region Serviços em comum NFe, CTe, MDFe e NFSe

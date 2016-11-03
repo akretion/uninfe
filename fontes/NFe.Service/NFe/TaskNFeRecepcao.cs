@@ -78,12 +78,6 @@ namespace NFe.Service
                 wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), oLer.oDadosNfe.versao);
 
                 // Envio de NFe Compactada - Renan 29/04/2014
-                if (Servico == Servicos.NFeEnviarLoteZip)
-                {
-                    FileInfo dadosArquivo = new FileInfo(NomeArquivoXML);
-                    TFunctions.CompressXML(dadosArquivo);
-                }
-
                 string nOperacao = wsProxy.NomeMetodoWS[(Servico == Servicos.NFeEnviarLoteZip) ? 1 : 0];
 
                 //Invocar o método que envia o XML para o SEFAZ

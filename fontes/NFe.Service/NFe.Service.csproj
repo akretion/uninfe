@@ -147,10 +147,6 @@
     <Compile Include="TFunctions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Unimake.Framework\Unimake.Framework.svn\trunk\C#\source\Unimake.SAT\Unimake.SAT.csproj">
-      <Project>{6C5D1DB6-5BAB-46BB-B1AC-CD0CEBA69AAF}</Project>
-      <Name>Unimake.SAT</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NFe.Certificado\NFe.Certificado.csproj">
       <Project>{C045A27F-415B-4F7D-8B9B-2956589932C8}</Project>
       <Name>NFe.Certificado</Name>

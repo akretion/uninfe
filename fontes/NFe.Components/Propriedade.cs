@@ -271,6 +271,8 @@ namespace NFe.Components
             ConfigurarInterfaceDeRedeSAT,
             AssociarAssinaturaSAT,
             AtivarSAT,
+            BloquearSAT,
+            DesbloquearSAT,
             /// <summary>
             /// Extensões em comum entre NFe, CTe e MDF-e
             /// </summary>
@@ -418,6 +420,16 @@ namespace NFe.Components
                     "-sat-atv.xml", "-sat-atv.txt",
                     "-sat-atv-ret.xml", "-sat-atv-ret.txt",
                     "Ativar SAT"));
+
+                ListaExtensoes.Add(TipoEnvio.BloquearSAT, new ExtensaoClass(
+                    "-sat-bloq.xml", "-sat-bloq.txt",
+                    "-sat-bloq-ret.xml", "-sat-bloq-ret.txt",
+                    "Bloquear SAT"));
+
+                ListaExtensoes.Add(TipoEnvio.DesbloquearSAT, new ExtensaoClass(
+                    "-sat-desbloq.xml", "-sat-desbloq.txt",
+                    "-sat-desbloq-ret.xml", "-sat-desbloq-ret.txt",
+                    "Bloquear SAT"));
                 #endregion
 
                 #region Extensões do CTe
