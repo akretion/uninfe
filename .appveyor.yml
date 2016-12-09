@@ -1,5 +1,5 @@
 before_build:
-  - nuget spec '*.csproj'
+  - nuget spec fontes/NFe.ConvertTxt/NFe.ConvertTxt.csproj
 
 after_build:
   - nuget pack '*.nuspec'
