@@ -1,8 +1,8 @@
 before_build:
-  - nuget spec fontes/NFe.ConvertTxt/NFe.ConvertTxt.csproj
+  - nuget spec fontes/NFe.ConvertTxt/NFe.ConvertTxt.csproj package
 
 after_build:
-  - nuget pack fontes/NFe.ConvertTxt/NFe.ConvertTxt.csproj.nuspec
+  - nuget pack package/NFe.ConvertTxt.csproj.nuspec
 
 artifacts:
   - path: '*.nupkg'
