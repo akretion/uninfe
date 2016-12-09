@@ -1,9 +1,8 @@
 before_build:
-  - nuget restore fontes/uninfe.sln
-  - nuget spec fontes/uninfe.sln
+  - nuget spec '*.csproj'
 
 after_build:
-  - nuget pack fontes/uninfe.nuspec
+  - nuget pack '*.nuspec'
 
 artifacts:
   - path: '*.nupkg'
