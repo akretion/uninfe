@@ -1,5 +1,6 @@
 before_build:
   - nuget restore fontes/uninfe.sln
+  - nuget spec fontes/uninfe.sln
 
 after_build:
   - nuget pack fontes/uninfe.nuspec
