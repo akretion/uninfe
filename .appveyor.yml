@@ -1,2 +1,6 @@
 build:
   project: fontes/uninfe.sln
+
+nuget:
+  account_feed: true
+  project_feed: true
