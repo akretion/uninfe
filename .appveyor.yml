@@ -14,9 +14,3 @@ build:
 nuget:
   account_feed: true
   project_feed: true
-
-deploy:
-  - provider: NuGet
-    api_key:
-      secure: c531b238-e827-431a-bb50-04a7c7543833
-    artifact:  /.*\.nupkg/
