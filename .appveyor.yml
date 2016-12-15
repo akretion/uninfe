@@ -1,0 +1,16 @@
+before_build:
+  - nuget spec fontes/NFe.ConvertTxt
+
+after_build:
+  - nuget pack fontes/NFe.ConvertTxt/NFe.ConvertTxt.csproj
+
+artifacts:
+  - path: '*.nupkg'
+
+build:
+  project: fontes/uninfe.sln
+  publish_nuget: true
+
+nuget:
+  account_feed: true
+  project_feed: true

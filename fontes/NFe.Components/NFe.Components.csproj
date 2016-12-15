@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NFe.Components</RootNamespace>
     <AssemblyName>NFe.Components</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -446,9 +446,7 @@
     <Compile Include="Municipio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxy.cs" />
-    <Compile Include="WebServiceProxy.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="WebServiceProxy.cs" />
     <Compile Include="XMLIniFile.cs" />
   </ItemGroup>
   <ItemGroup>

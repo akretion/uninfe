@@ -1803,7 +1803,7 @@ namespace NFe.ConvertTxt
                     /// Grupo da TAG <det><imposto><IPI>
                     /// 
                     #region <det><imposto><IPI>
-                    NFe.det[nProd].Imposto.IPI.clEnq    = this.LerString(TpcnResources.clEnq, ObOp.Opcional, 5, 5);
+                    NFe.det[nProd].Imposto.IPI.clEnq    = this.LerString(TpcnResources.clEnq, ObOp.Opcional, 1, 5);
                     NFe.det[nProd].Imposto.IPI.CNPJProd = this.LerString(TpcnResources.CNPJProd, ObOp.Opcional, 14, 14);
                     NFe.det[nProd].Imposto.IPI.cSelo    = this.LerString(TpcnResources.cSelo, ObOp.Opcional, 1, 60);
                     NFe.det[nProd].Imposto.IPI.qSelo    = this.LerInt32(TpcnResources.qSelo, ObOp.Opcional, 1, 12);
@@ -2142,8 +2142,8 @@ namespace NFe.ConvertTxt
 
                 case "W02":
                     layout = (NFe.infNFe.Versao >= 3 ?
-                                "§W02|vBC|vICMS|vICMSDeson|vBCST|vST|vProd|vFrete|vSeg|vDesc|vII|vIPI|vPIS|vCOFINS|vOutro|vNF|vTotTrib" :
-                                "§W02|VBC|VICMS|VBCST|VST|VProd|VFrete|VSeg|VDesc|VII|VIPI|VPIS|VCOFINS|VOutro|VNF|vTotTrib|vICMSDeson"); //ok
+                                "§W02|VBC|VICMS|VBCST|VST|VProd|VFrete|VSeg|VDesc|VII|VIPI|VPIS|VCOFINS|VOutro|VNF|vTotTrib|vICMSDeson" :
+                                "§W02|vBC|vICMS|vICMSDeson|vBCST|vST|vProd|vFrete|vSeg|vDesc|vII|vIPI|vPIS|vCOFINS|vOutro|vNF|vTotTrib");
                     ///
                     /// Grupo da TAG <total><ICMSTot>
                     /// 
@@ -2318,7 +2318,7 @@ namespace NFe.ConvertTxt
                     /// 
                     #region <transp><vol>
                     NFe.Transp.Vol.Add(new Vol());
-                    NFe.Transp.Vol[NFe.Transp.Vol.Count - 1].qVol = this.LerInt32(TpcnResources.qVol, ObOp.Obrigatorio, 1, 15);
+                    NFe.Transp.Vol[NFe.Transp.Vol.Count - 1].qVol = this.LerInt32(TpcnResources.qVol, ObOp.Opcional, 1, 15);
                     NFe.Transp.Vol[NFe.Transp.Vol.Count - 1].esp = this.LerString(TpcnResources.esp, ObOp.Opcional, 1, 60);
                     NFe.Transp.Vol[NFe.Transp.Vol.Count - 1].marca = this.LerString(TpcnResources.marca, ObOp.Opcional, 1, 60);
                     NFe.Transp.Vol[NFe.Transp.Vol.Count - 1].nVol = this.LerString(TpcnResources.nVol, ObOp.Opcional, 1, 60);
