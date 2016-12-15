@@ -1803,7 +1803,7 @@ namespace NFe.ConvertTxt
                     /// Grupo da TAG <det><imposto><IPI>
                     /// 
                     #region <det><imposto><IPI>
-                    NFe.det[nProd].Imposto.IPI.clEnq    = this.LerString(TpcnResources.clEnq, ObOp.Opcional, 5, 5);
+                    NFe.det[nProd].Imposto.IPI.clEnq    = this.LerString(TpcnResources.clEnq, ObOp.Opcional, 1, 5);
                     NFe.det[nProd].Imposto.IPI.CNPJProd = this.LerString(TpcnResources.CNPJProd, ObOp.Opcional, 14, 14);
                     NFe.det[nProd].Imposto.IPI.cSelo    = this.LerString(TpcnResources.cSelo, ObOp.Opcional, 1, 60);
                     NFe.det[nProd].Imposto.IPI.qSelo    = this.LerInt32(TpcnResources.qSelo, ObOp.Opcional, 1, 12);
