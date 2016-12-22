@@ -82,7 +82,7 @@ namespace NFe.Service
 
                 #region Parte que trata o retorno do lote, ou seja, o número do recibo
 
-                Recibo(vStrXmlRetorno);
+                Recibo(vStrXmlRetorno, emp);
 
                 if (dadosRec.cStat == "103") //Lote recebido com sucesso
                 {
@@ -90,7 +90,7 @@ namespace NFe.Service
                         Thread.Sleep(dadosRec.tMed * 1000);
 
                     //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
-                    fluxoNfe.AtualizarTag(lerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, (dadosRec.tMed + 1).ToString());
+                    fluxoNfe.AtualizarTag(lerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, (dadosRec.tMed + 2).ToString());
                     fluxoNfe.AtualizarTagRec(idLote, dadosRec.nRec);
                     XmlDocument xmlPedRec = oGerarXML.XmlPedRecMDFe(emp, dadosRec.nRec);
                     TaskMDFeRetRecepcao mdfeRetRecepcao = new TaskMDFeRetRecepcao(xmlPedRec);
@@ -118,8 +118,6 @@ namespace NFe.Service
                 //Ocorreu algum erro no exato momento em que tentou enviar o XML para o SEFAZ, vou ter que tratar
                 //para ver se o XML chegou lá ou não, se eu consegui pegar o número do recibo de volta ou não, etc.
                 //E ver se vamos tirar o XML do Fluxo ou finalizar ele com a consulta situação da NFe
-
-                //TODO: V3.0 - Tratar o problema de não conseguir pegar o recibo exatamente neste ponto
 
                 try
                 {
@@ -180,7 +178,7 @@ namespace NFe.Service
         /// </remarks>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>20/04/2009</date>
-        private void Recibo(string strXml)
+        private void Recibo(string strXml, int emp)
         {
             dadosRec.cStat =
                 dadosRec.nRec = string.Empty;
@@ -207,6 +205,12 @@ namespace NFe.Service
 
                     dadosRec.nRec = infRecElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
                     dadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName(TpcnResources.tMed.ToString())[0].InnerText);
+
+                    if (dadosRec.tMed > 15)
+                        dadosRec.tMed = 15;
+
+                    if (dadosRec.tMed <= 0)
+                        dadosRec.tMed = Empresas.Configuracoes[emp].TempoConsulta;
                 }
             }
         }

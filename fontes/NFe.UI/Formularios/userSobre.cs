@@ -22,16 +22,6 @@ namespace NFe.UI
         {
             base.UpdateControles();
 
-            switch (NFe.Components.Propriedade.TipoAplicativo)
-            {
-                //case NFe.Components.TipoAplicativo.Nfe:
-                default:
-                    break;
-
-                case NFe.Components.TipoAplicativo.Nfse:
-                    this.pictureBox2.Image = NFe.UI.Properties.Resources.uninfse128;
-                    break;
-            }
             this.textBox_versao.Text = Propriedade.Versao;
             this.textBox_versaofw.Text = "4.5";
 #if _fw35

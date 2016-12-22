@@ -38,7 +38,7 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="Unimake.SAT">
-      <HintPath>..\packages\Unimake.SAT.20161103.9\lib\net451\Unimake.SAT.dll</HintPath>
+      <HintPath>..\packages\Unimake.SAT.20161124.1045\lib\net451\Unimake.SAT.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>

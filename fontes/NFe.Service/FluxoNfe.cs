@@ -950,8 +950,8 @@ namespace NFe.Service
                             string ChaveNFe = documentoElemento.GetAttribute(ElementoFixo.ChaveNFe.ToString());
                             string NomeArquivo = Functions.LerTag(documentoElemento, ElementoFixo.ArqNFe.ToString(), "");
                             string NomeArquivoEmProcessamento = Empresas.Configuracoes[empresa].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + NomeArquivo;
-                            string NomeArquivoAssinado = Empresas.Configuracoes[empresa].PastaXmlEnvio + "\\" + Propriedade.NomePastaXMLAssinado + "\\" + NomeArquivo;
-                            string NomeArquivoAssinadoLote = Empresas.Configuracoes[empresa].PastaXmlEmLote + "\\" + Propriedade.NomePastaXMLAssinado + "\\" + NomeArquivo;
+                            string NomeArquivoAssinado = Empresas.Configuracoes[empresa].PastaXmlEnvio + "\\temp\\" + NomeArquivo;
+                            string NomeArquivoAssinadoLote = Empresas.Configuracoes[empresa].PastaXmlEmLote + "\\temp\\" + NomeArquivo;
                             string mod = Functions.LerTag(documentoElemento, ElementoEditavel.mod.ToString(), "");
                             bool excluiNota = false;
                             if (File.Exists(NomeArquivoEmProcessamento))

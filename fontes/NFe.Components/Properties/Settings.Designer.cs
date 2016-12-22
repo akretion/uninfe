@@ -893,5 +893,15 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_com_dyndnsserver_pmassis2_p_IssWebWS"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://wsbalneariocamboriu.simplissweb.com.br/nfseservice.svc")]
+        public string NFe_Components_br_com_simplissweb_wsbalneariocamboriu_p_NfseService {
+            get {
+                return ((string)(this["NFe_Components_br_com_simplissweb_wsbalneariocamboriu_p_NfseService"]));
+            }
+        }
     }
 }

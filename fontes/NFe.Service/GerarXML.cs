@@ -982,8 +982,7 @@ namespace NFe.Service
             int emp = Empresas.FindEmpresaByThread();
             try
             {
-                //Deletar o arquivo XML da pasta de temporários de XML´s com erros se
-                //o mesmo existir
+                //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir
                 Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(NomeXMLDadosMsg, ".xml") + ".xml");
 
                 //Gravar o arquivo XML de retorno
@@ -1769,6 +1768,21 @@ namespace NFe.Service
                     break;
             }
 
+            #region Gravar arquivo na pasta
+
+            //TODO: WANDREY - De futuro não quero mais gravar o recibo na pasta para melhorar desempenho, mas por conta do código da empresa agora não é possível, tem muita coisa para ajustar.
+            string nomeArqPedRec = Empresas.Configuracoes[EmpIndex].PastaXmlEnvio + "\\" + recibo + Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML;
+            string nomeArqPedRecTemp = Empresas.Configuracoes[EmpIndex].PastaXmlEnvio + "\\Temp\\" + recibo + Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML;
+
+            FileInfo fiTemp = new FileInfo(nomeArqPedRecTemp);
+
+            if (!File.Exists(nomeArqPedRec) && (!File.Exists(nomeArqPedRecTemp) || fiTemp.CreationTime <= DateTime.Now.AddMinutes(-1)))
+            {
+                GravarArquivoParaEnvio(nomeArqPedRec, dadosXML.OuterXml);
+            }
+
+            #endregion Gravar arquivo na pasta
+
             return dadosXML;
         }
 
@@ -2524,14 +2538,18 @@ namespace NFe.Service
                 else
                     vePasta = Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
 
+                string subPastaBackup = "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + Path.GetFileName(filenameToWrite);
+
                 if (vePasta)
                 {
                     string folderNFe = OndeNFeEstaGravada(emp, ChaveNFe, Propriedade.ExtRetorno.ProcNFe);
                     if (!string.IsNullOrEmpty(folderNFe))
                         filenameBackup += "\\" + PastaEnviados.Autorizados.ToString() + "\\" + new DirectoryInfo(folderNFe).Name + "\\" + Path.GetFileName(filenameToWrite);
+                    else
+                        filenameBackup += subPastaBackup;
                 }
                 else
-                    filenameBackup += "\\" + PastaEnviados.Autorizados.ToString() + "\\" + Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(dhRegEvento) + Path.GetFileName(filenameToWrite);
+                    filenameBackup += subPastaBackup;
 
                 if (!Directory.Exists(Path.GetDirectoryName(filenameBackup)))
                     Directory.CreateDirectory(Path.GetDirectoryName(filenameBackup));

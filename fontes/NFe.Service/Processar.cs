@@ -32,9 +32,15 @@ namespace NFe.Service
                 Servicos servico = Servicos.Nulo;
                 try
                 {
-                    // Só vou validar a extensão em homologação, pois depois que o desenvolvedor fez toda a integração, acredito que ele não vá mais gerar extensões erradas, com isso evito ficar validando todas as vezes arquivos corretos. Wandrey 17/09/2016
-                    if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
+                    if (emp == -1)
+                    {
                         ValidarExtensao(arquivo);
+                    }
+                    // Só vou validar a extensão em homologação, pois depois que o desenvolvedor fez toda a integração, acredito que ele não vá mais gerar extensões erradas, com isso evito ficar validando todas as vezes arquivos corretos. Wandrey 17/09/2016
+                    else if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
+                    {
+                        ValidarExtensao(arquivo);
+                    }
 
                     servico = DefinirTipoServico(emp, arquivo);
 
@@ -181,6 +187,12 @@ namespace NFe.Service
                             SATProxy desbloquear = new SATProxy(Servicos.SATDesbloquear, Empresas.Configuracoes[emp], arquivo);
                             desbloquear.Enviar();
                             desbloquear.SaveResponse();
+                            break;
+
+                        case Servicos.SATConsultarNumeroSessao:
+                            SATProxy consultaSessao = new SATProxy(Servicos.SATConsultarNumeroSessao, Empresas.Configuracoes[emp], arquivo);
+                            consultaSessao.Enviar();
+                            consultaSessao.SaveResponse();
                             break;
 
                         #endregion
@@ -818,6 +830,8 @@ namespace NFe.Service
                                     tipoServico = Servicos.SATAtivar;
                                 else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.DesbloquearSAT).EnvioXML) >= 0)
                                     tipoServico = Servicos.SATDesbloquear;
+                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarNumeroSessaoSAT).EnvioXML) >= 0)
+                                    tipoServico = Servicos.SATConsultarNumeroSessao;
 
                                 #endregion
 
@@ -1375,21 +1389,24 @@ namespace NFe.Service
 
                     XmlDocument dadosXMLRec = (XmlDocument)tipoServico.InvokeMember("XmlPedRec", BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec, reciboCons.versao, reciboCons.mod });
 
+                    //TODO: WANDREY - não apague o código abaixo, de futuro eu vou tentar utilizar ele, pois não quero mais gravar o XML de consulta do recibo na pasta e processar direto, por hora não consigo por conta do código da empresa no nome da thread.
+                    /*
                     switch (reciboCons.mod)
                     {
                         case "65": //NFC-e
                         case "55": //NF-e
-                            new TaskNFeRetRecepcao(dadosXMLRec).Execute();
+                            new TaskNFeRetRecepcao(dadosXMLRec, empresa).Execute(empresa);
                             break;
 
                         case "57": //CT-e
-                            new TaskCTeRetRecepcao(dadosXMLRec).Execute();
+                            new TaskCTeRetRecepcao(dadosXMLRec, empresa).Execute(empresa);
                             break;
 
                         case "58": //MDF-e
-                            new TaskMDFeRetRecepcao(dadosXMLRec).Execute();
+                            new TaskMDFeRetRecepcao(dadosXMLRec, empresa).Execute(empresa);
                             break;
                     }
+                    */
                 }
             }
         }

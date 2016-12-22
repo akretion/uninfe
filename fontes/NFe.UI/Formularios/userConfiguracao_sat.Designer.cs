@@ -37,6 +37,12 @@
             this.txtCNPJSw = new MetroFramework.Controls.MetroTextBox();
             this.lblSignAC = new MetroFramework.Controls.MetroLabel();
             this.lblCNPJSw = new MetroFramework.Controls.MetroLabel();
+            this.cbRegTribISSQN = new MetroFramework.Controls.MetroComboBox();
+            this.cbindRatISSQN = new MetroFramework.Controls.MetroComboBox();
+            this.lblRegTribISSQN = new MetroFramework.Controls.MetroLabel();
+            this.lblIndRatISSQN = new MetroFramework.Controls.MetroLabel();
+            this.lblNumeroCaixa = new MetroFramework.Controls.MetroLabel();
+            this.txtNumeroCaixa = new MetroFramework.Controls.MetroTextBox();
             this.SuspendLayout();
             // 
             // metroLabel39
@@ -69,7 +75,9 @@
             this.cbMacarSAT.Items.AddRange(new object[] {
             "TANCA",
             "BEMATECH",
-            "DARUMA"});
+            "DARUMA",
+            "DIMEP",
+            "ELGIN"});
             this.cbMacarSAT.Location = new System.Drawing.Point(0, 19);
             this.cbMacarSAT.Name = "cbMacarSAT";
             this.cbMacarSAT.Size = new System.Drawing.Size(310, 25);
@@ -114,6 +122,7 @@
             this.txtSignAC.Size = new System.Drawing.Size(310, 23);
             this.txtSignAC.TabIndex = 55;
             this.txtSignAC.UseSelectable = true;
+            this.txtSignAC.TextChanged += new System.EventHandler(this.txtSignAC_TextChanged);
             // 
             // txtCNPJSw
             // 
@@ -127,6 +136,7 @@
             this.txtCNPJSw.Size = new System.Drawing.Size(310, 23);
             this.txtCNPJSw.TabIndex = 56;
             this.txtCNPJSw.UseSelectable = true;
+            this.txtCNPJSw.TextChanged += new System.EventHandler(this.txtCNPJSw_TextChanged);
             // 
             // lblSignAC
             // 
@@ -148,11 +158,85 @@
             this.lblCNPJSw.TabIndex = 58;
             this.lblCNPJSw.Text = "CNPJ da Software House";
             // 
+            // cbRegTribISSQN
+            // 
+            this.cbRegTribISSQN.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.cbRegTribISSQN.FormattingEnabled = true;
+            this.cbRegTribISSQN.ItemHeight = 19;
+            this.cbRegTribISSQN.Location = new System.Drawing.Point(329, 157);
+            this.cbRegTribISSQN.Name = "cbRegTribISSQN";
+            this.cbRegTribISSQN.Size = new System.Drawing.Size(288, 25);
+            this.cbRegTribISSQN.TabIndex = 59;
+            this.cbRegTribISSQN.UseSelectable = true;
+            this.cbRegTribISSQN.SelectedIndexChanged += new System.EventHandler(this.cbRegTribISSQN_SelectedIndexChanged);
+            // 
+            // cbindRatISSQN
+            // 
+            this.cbindRatISSQN.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.cbindRatISSQN.FormattingEnabled = true;
+            this.cbindRatISSQN.ItemHeight = 19;
+            this.cbindRatISSQN.Location = new System.Drawing.Point(329, 205);
+            this.cbindRatISSQN.Name = "cbindRatISSQN";
+            this.cbindRatISSQN.Size = new System.Drawing.Size(288, 25);
+            this.cbindRatISSQN.TabIndex = 60;
+            this.cbindRatISSQN.UseSelectable = true;
+            this.cbindRatISSQN.SelectedIndexChanged += new System.EventHandler(this.cbindRatISSQN_SelectedIndexChanged);
+            // 
+            // lblRegTribISSQN
+            // 
+            this.lblRegTribISSQN.AutoSize = true;
+            this.lblRegTribISSQN.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblRegTribISSQN.Location = new System.Drawing.Point(327, 135);
+            this.lblRegTribISSQN.Name = "lblRegTribISSQN";
+            this.lblRegTribISSQN.Size = new System.Drawing.Size(135, 15);
+            this.lblRegTribISSQN.TabIndex = 61;
+            this.lblRegTribISSQN.Text = "Regime tributação ISSQN";
+            // 
+            // lblIndRatISSQN
+            // 
+            this.lblIndRatISSQN.AutoSize = true;
+            this.lblIndRatISSQN.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblIndRatISSQN.Location = new System.Drawing.Point(327, 187);
+            this.lblIndRatISSQN.Name = "lblIndRatISSQN";
+            this.lblIndRatISSQN.Size = new System.Drawing.Size(264, 15);
+            this.lblIndRatISSQN.TabIndex = 62;
+            this.lblIndRatISSQN.Text = " Desconto subtotal rateado entre itens com ISSQN:";
+            // 
+            // lblNumeroCaixa
+            // 
+            this.lblNumeroCaixa.AutoSize = true;
+            this.lblNumeroCaixa.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblNumeroCaixa.Location = new System.Drawing.Point(0, 240);
+            this.lblNumeroCaixa.Name = "lblNumeroCaixa";
+            this.lblNumeroCaixa.Size = new System.Drawing.Size(98, 15);
+            this.lblNumeroCaixa.TabIndex = 64;
+            this.lblNumeroCaixa.Text = "Numero do Caixa:";
+            // 
+            // txtNumeroCaixa
+            // 
+            this.txtNumeroCaixa.Lines = new string[0];
+            this.txtNumeroCaixa.Location = new System.Drawing.Point(0, 258);
+            this.txtNumeroCaixa.MaxLength = 3;
+            this.txtNumeroCaixa.Name = "txtNumeroCaixa";
+            this.txtNumeroCaixa.PasswordChar = '\0';
+            this.txtNumeroCaixa.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.txtNumeroCaixa.SelectedText = "";
+            this.txtNumeroCaixa.Size = new System.Drawing.Size(310, 23);
+            this.txtNumeroCaixa.TabIndex = 63;
+            this.txtNumeroCaixa.UseSelectable = true;
+            this.txtNumeroCaixa.TextChanged += new System.EventHandler(this.txtNumeroCaixa_TextChanged);
+            // 
             // userConfiguracao_sat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.lblNumeroCaixa);
+            this.Controls.Add(this.txtNumeroCaixa);
+            this.Controls.Add(this.lblIndRatISSQN);
+            this.Controls.Add(this.lblRegTribISSQN);
+            this.Controls.Add(this.cbindRatISSQN);
+            this.Controls.Add(this.cbRegTribISSQN);
             this.Controls.Add(this.lblCNPJSw);
             this.Controls.Add(this.lblSignAC);
             this.Controls.Add(this.txtCNPJSw);
@@ -179,5 +263,11 @@
         private MetroFramework.Controls.MetroTextBox txtCNPJSw;
         private MetroFramework.Controls.MetroLabel lblSignAC;
         private MetroFramework.Controls.MetroLabel lblCNPJSw;
+        private MetroFramework.Controls.MetroComboBox cbRegTribISSQN;
+        private MetroFramework.Controls.MetroComboBox cbindRatISSQN;
+        private MetroFramework.Controls.MetroLabel lblRegTribISSQN;
+        private MetroFramework.Controls.MetroLabel lblIndRatISSQN;
+        private MetroFramework.Controls.MetroLabel lblNumeroCaixa;
+        private MetroFramework.Controls.MetroTextBox txtNumeroCaixa;
     }
 }

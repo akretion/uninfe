@@ -85,7 +85,7 @@ namespace NFe.SAT.Conversao
         /// </summary>
         /// <returns>Lote da CFe</returns>
         private envCFeCFe GerarLoteCFe()
-        {
+         {
             return new envCFeCFe
             {
                 infCFe = new envCFeCFeInfCFe
@@ -95,14 +95,15 @@ namespace NFe.SAT.Conversao
                     {
                         CNPJ = DadosEmpresa.CNPJSoftwareHouse,
                         signAC = DadosEmpresa.SignACSAT,
-                        numeroCaixa = "001" //TODO: SAT ver de onde vai pegar isso
+                        numeroCaixa = DadosEmpresa.NumeroCaixa.Substring(0, 3)
                     },
                     emit = new envCFeCFeInfCFeEmit
                     {
                         CNPJ = GetValueXML("emit", "CNPJ"),
                         IE = GetValueXML("emit", "IE"),
                         IM = GetValueXML("emit", "IM"),
-                        indRatISSQN = GetValueXML("emit", "indRatISSQN"),
+                        cRegTribISSQN = ((int)DadosEmpresa.RegTribISSQNSAT).ToString(),
+                        indRatISSQN = DadosEmpresa.IndRatISSQNSAT.ToString(),
                     },
                     dest = new envCFeCFeInfCFeDest
                     {
@@ -235,7 +236,7 @@ namespace NFe.SAT.Conversao
         private T ImpostoProduto<T>(XmlNodeList childs)
             where T : new()
         {
-            T result = new T();
+            T result = new T();            
 
             foreach (XmlNode tag in childs)
             {
@@ -245,7 +246,7 @@ namespace NFe.SAT.Conversao
                     case "ICMS00":
                         envCFeCFeInfCFeDetImpostoICMSICMS00 ICMS00 = new envCFeCFeInfCFeDetImpostoICMSICMS00
                         {
-                            Orig = GetXML(tag.ChildNodes, "Orig"),
+                            Orig = GetXML(tag.ChildNodes, "orig"),
                             CST = GetXML(tag.ChildNodes, "CST"),
                             pICMS = GetXML(tag.ChildNodes, "pICMS"),
                         };
@@ -259,7 +260,7 @@ namespace NFe.SAT.Conversao
                         envCFeCFeInfCFeDetImpostoICMSICMS40 ICMS40 = new envCFeCFeInfCFeDetImpostoICMSICMS40
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
-                            Orig = GetXML(tag.ChildNodes, "Orig"),
+                            Orig = GetXML(tag.ChildNodes, "orig"),
                         };
 
                         SetProperrty(result, "Item", ICMS40);
@@ -283,7 +284,8 @@ namespace NFe.SAT.Conversao
                         envCFeCFeInfCFeDetImpostoICMSICMSSN900 ICMSSN900 = new envCFeCFeInfCFeDetImpostoICMSICMSSN900
                         {
                             CSOSN = GetXML(tag.ChildNodes, "CSOSN"),
-                            Orig = GetXML(tag.ChildNodes, "orig")
+                            Orig = GetXML(tag.ChildNodes, "orig"),
+                            pICMS = GetXML(tag.ChildNodes,"pICMS")
                         };
 
                         SetProperrty(result, "Item", ICMSSN900);
@@ -297,7 +299,6 @@ namespace NFe.SAT.Conversao
                             CST = GetXML(tag.ChildNodes, "CST"),
                             pPIS = GetXML(tag.ChildNodes, "pPIS"),
                             vBC = GetXML(tag.ChildNodes, "vBC"),
-                            vPIS = GetXML(tag.ChildNodes, "vPIS")
                         };
 
                         SetProperrty(result, "Item", PISAliq);
@@ -320,9 +321,18 @@ namespace NFe.SAT.Conversao
                         envCFeCFeInfCFeDetImpostoPISPISOutr PISOutr = new envCFeCFeInfCFeDetImpostoPISPISOutr
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
-                            vPIS = GetXML(tag.ChildNodes, "vPIS")
+                            Items = new string[]
+                            {
+                                GetXML(tag.ChildNodes, "vBC"),
+                                GetXML(tag.ChildNodes, "pPIS"),
+                            },
+                            ItemsElementName = new ItemsChoiceType[]
+                            {
+                                ItemsChoiceType.vBC,
+                                ItemsChoiceType.pPIS
+                            }
                         };
-
+                        
                         SetProperrty(result, "Item", PISOutr);
                         break;
                     #endregion
@@ -334,7 +344,6 @@ namespace NFe.SAT.Conversao
                             CST = GetXML(tag.ChildNodes, "CST"),
                             qBCProd = GetXML(tag.ChildNodes, "qBCProd"),
                             vAliqProd = GetXML(tag.ChildNodes, "vAliqProd"),
-                            vPIS = GetXML(tag.ChildNodes, "vPIS")
                         };
 
                         SetProperrty(result, "Item", PISQtde);
@@ -357,7 +366,6 @@ namespace NFe.SAT.Conversao
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
                             pCOFINS = GetXML(tag.ChildNodes, "pCOFINS"),
-                            vCOFINS = GetXML(tag.ChildNodes, "vCOFINS"),
                             vBC = GetXML(tag.ChildNodes, "vBC")
                         };
                         SetProperrty(result, "Item", COFINSAliq);
@@ -374,12 +382,21 @@ namespace NFe.SAT.Conversao
                         break;
                     #endregion
 
-                    #region COFINSNT
+                    #region COFINSOutr
                     case "COFINSOutr":
                         envCFeCFeInfCFeDetImpostoCOFINSCOFINSOutr COFINSOutr = new envCFeCFeInfCFeDetImpostoCOFINSCOFINSOutr
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
-                            vCOFINS = GetXML(tag.ChildNodes, "vCOFINS")
+                            Items = new string[]
+                            {
+                                GetXML(tag.ChildNodes, "vBC"),
+                                GetXML(tag.ChildNodes, "pCOFINS")
+                            },
+                            ItemsElementName = new ItemsChoiceType2[]
+                            {
+                                ItemsChoiceType2.vBC,
+                                ItemsChoiceType2.pCOFINS
+                            }
                         };
                         SetProperrty(result, "Item", COFINSOutr);
                         break;
@@ -391,7 +408,6 @@ namespace NFe.SAT.Conversao
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
                             qBCProd = GetXML(tag.ChildNodes, "qBCProd"),
-                            vCOFINS = GetXML(tag.ChildNodes, "vCOFINS"),
                             vAliqProd = GetXML(tag.ChildNodes, "vAliqProd")
                         };
                         SetProperrty(result, "Item", COFINSQtde);

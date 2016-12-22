@@ -821,10 +821,11 @@ namespace NFe.Service
         private void LerRetornoEvento(int emp)
         {
             XmlDocument docEventoOriginal = ConteudoXML;
+            bool autorizou = false;
 
             // <<<UTF8 -> tem acentuacao no retorno
             XmlDocument doc = new XmlDocument();
-            doc.Load(Functions.StringXmlToStreamUTF8(this.vStrXmlRetorno));
+            doc.Load(Functions.StringXmlToStreamUTF8(vStrXmlRetorno));
             //doc.Load(@"C:\Users\wandrey\Downloads\51160417625687000153550010001224661001224662-ret-env-canc (1).xml");
 
             XmlNodeList retEnvRetornoList = doc.GetElementsByTagName("retEnvEvento");
@@ -862,6 +863,8 @@ namespace NFe.Service
                                         string Idd = env.Attributes.GetNamedItem(TpcnResources.Id.ToString()).Value;
                                         if (Idd == Id)
                                         {
+                                            autorizou = true;
+
                                             DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName(TpcnResources.dhRegEvento.ToString())[0].InnerText);
 
                                             ///
@@ -909,6 +912,9 @@ namespace NFe.Service
                         break;
                 }
             }
+
+            if (!autorizou)
+                oAux.MoveArqErro(NomeArquivoXML);
         }
 
         #endregion LerRetornoEvento

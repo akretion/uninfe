@@ -31,7 +31,7 @@ namespace NFe.UI
             if (cbArquivos.Items.Count > 0)
             {
                 cbArquivos.Enabled = true;
-                string fileName = (NFe.Components.Propriedade.TipoAplicativo == NFe.Components.TipoAplicativo.Nfse ? "uninfse_" : "uninfe_") + DateTime.Now.ToString("yyyy-MMM-dd") + ".log";
+                string fileName = "uninfe_" + DateTime.Now.ToString("yyyy-MMM-dd") + ".log";
                 int pos;
                 if ((pos = this.cbArquivos.Items.IndexOf(fileName)) >= 0)
                     cbArquivos.SelectedIndex = pos;

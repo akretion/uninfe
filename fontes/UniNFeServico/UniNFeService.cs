@@ -69,7 +69,7 @@ namespace UniNFeServico
             string filenameWS3 = Propriedade.NomeArqXMLWebService_NFe;
             string msg = "";
             bool error = false;
-            NFe.Components.Propriedade.VerificaArquivos(out error, out msg);
+            Propriedade.VerificaArquivos(out error, out msg);
             if (error)
             {
                 this.WriteLog(msg);

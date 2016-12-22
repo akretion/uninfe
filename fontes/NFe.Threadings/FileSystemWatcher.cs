@@ -86,7 +86,15 @@ namespace NFe.Threadings
 
         private void ProcessFiles()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            bool pastaGeral = false;
+            foreach (var item in Directorys)
+            {
+                string directory = item;
+                if (directory.ToLower().EndsWith("\\geral"))
+                    pastaGeral = true;
+            }
+            int emp = (pastaGeral ? -1 : Empresas.FindEmpresaByThread());
+
             string arqTemp = "";
 
             CancelProcess = false;
@@ -190,10 +198,17 @@ namespace NFe.Threadings
                     tworker.IsBackground = true;
                     tworker.Start();
 
-                    //                  if (Empresas.Configuracoes[emp].X509Certificado.IsA3())
-                    //                  {
-                    tworker.Join();
-                    //                  }
+                    if (emp >= 0)
+                    {
+                        if (Empresas.Configuracoes[emp].X509Certificado.IsA3())
+                        {
+                            tworker.Join();
+                        }
+                    }
+                    else
+                    {
+                        tworker.Join();
+                    }
                 }
                 else
                 {

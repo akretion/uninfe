@@ -48,6 +48,7 @@
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.metroPanel1 = new MetroFramework.Controls.MetroPanel();
             this.chkConfProxyAuto = new MetroFramework.Controls.MetroCheckBox();
+            this.chkConfirmaSaida = new MetroFramework.Controls.MetroCheckBox();
             this.metroPanel2.SuspendLayout();
             this.metroPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -162,7 +163,7 @@
             // chkGravarLogOperacao
             // 
             this.chkGravarLogOperacao.AutoSize = true;
-            this.chkGravarLogOperacao.Location = new System.Drawing.Point(6, 165);
+            this.chkGravarLogOperacao.Location = new System.Drawing.Point(6, 162);
             this.chkGravarLogOperacao.Name = "chkGravarLogOperacao";
             this.chkGravarLogOperacao.Size = new System.Drawing.Size(209, 15);
             this.chkGravarLogOperacao.TabIndex = 2;
@@ -190,7 +191,7 @@
             this.lblServidor.Location = new System.Drawing.Point(281, 85);
             this.lblServidor.Margin = new System.Windows.Forms.Padding(3);
             this.lblServidor.Name = "lblServidor";
-            this.lblServidor.Size = new System.Drawing.Size(48, 15);
+            this.lblServidor.Size = new System.Drawing.Size(49, 15);
             this.lblServidor.TabIndex = 7;
             this.lblServidor.Text = "Servidor";
             // 
@@ -348,10 +349,23 @@
             this.chkConfProxyAuto.UseSelectable = true;
             this.chkConfProxyAuto.CheckedChanged += new System.EventHandler(this.chkConfProxyAuto_CheckedChanged);
             // 
+            // chkConfirmaSaida
+            // 
+            this.chkConfirmaSaida.AutoSize = true;
+            this.chkConfirmaSaida.Location = new System.Drawing.Point(6, 181);
+            this.chkConfirmaSaida.Name = "chkConfirmaSaida";
+            this.chkConfirmaSaida.Size = new System.Drawing.Size(340, 15);
+            this.chkConfirmaSaida.TabIndex = 6;
+            this.chkConfirmaSaida.Text = "Exibir tela de confirmação ao fechar manualmente o UniNFe";
+            this.chkConfirmaSaida.UseSelectable = true;
+            this.chkConfirmaSaida.CheckedChanged += new System.EventHandler(this.tbUsuario_TextChanged);
+            this.chkConfirmaSaida.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbUsuario_KeyDown);
+            // 
             // userConfiguracao_geral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.chkConfirmaSaida);
             this.Controls.Add(this.metroPanel1);
             this.Controls.Add(this.metroLabel16);
             this.Controls.Add(this.metroPanel2);
@@ -391,5 +405,6 @@
         private MetroFramework.Controls.MetroButton metroButton1;
         private MetroFramework.Controls.MetroPanel metroPanel1;
         private MetroFramework.Controls.MetroCheckBox chkConfProxyAuto;
+        private MetroFramework.Controls.MetroCheckBox chkConfirmaSaida;
     }
 }

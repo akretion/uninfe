@@ -276,6 +276,7 @@ namespace NFe.Components
         SATAtivar,
         SATBloquear,
         SATDesbloquear,
+        SATConsultarNumeroSessao,
         #endregion
 
         #region Serviços em comum NFe, CTe, MDFe e NFSe
@@ -717,6 +718,40 @@ namespace NFe.Components
         taHomologacao = 2
     }
     #endregion
+
+    /// <summary>
+    /// Regime tributação ISSQN
+    /// </summary>
+    public enum RegTribISSQN
+    {
+        [Description("1 - Micro Empresa Municipal")]
+        MicroEmpresaMunicipal = 1,
+
+        [Description("2 - Estimativa")]
+        Estimativa = 2,
+
+        [Description("3 - Sociedade de Profissionais")]
+        SociedadeDeProfissionais = 3,
+
+        [Description("4 - Cooperativa")]
+        Cooperativa = 4,
+
+        [Description("5 - Micro Empresário Individual (MEI)")]
+        MicroEmpresarioIndividual = 5
+    }
+    /// <summary>
+    /// Informa se o Desconto sobre 
+    /// subtotal deve ser rateado entre
+    /// os itens sujeitos à tributação pelo ISSQN.
+    /// </summary>
+    public enum IndRatISSQN
+    {
+        [Description("Sim")]
+        S,
+
+        [Description("Não")]
+        N
+    }
 
     #region TipoEmissao
     /// <summary>

@@ -2962,6 +2962,25 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PSerraES-SMARAPDWSSaida.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSerraES-SMARAPDWSUtil.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HItaporangaSP-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCandeiasBA-WEBISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCandeiasBA-WEBISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBarraMansaRJ-TIPLAN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSalvadorDoSulRS-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSalvadorDoSulRS-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSalvadorDoSulRS-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSalvadorDoSulRS-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSalvadorDoSulRS-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSalvadorDoSulRS-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSalvadorDoSulRS-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSalvadorDoSulRS-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSalvadorDoSulRS-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSalvadorDoSulRS-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSalvadorDoSulRS-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSalvadorDoSulRS-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HBalneario-SIMPLISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBalneario-SIMPLISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPrudenteMorais-WebISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPrudenteMorais-WebISS.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

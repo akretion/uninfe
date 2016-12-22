@@ -30,6 +30,16 @@ namespace NFe.Service
                 conteudoXML.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText + Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML;
         }
 
+        public TaskNFeRetRecepcao(XmlDocument conteudoXML, int emp)
+        {
+            Servico = Servicos.NFePedidoSituacaoLote;
+            ConteudoXML = conteudoXML;
+            ConteudoXML.PreserveWhitespace = false;
+            NomeArquivoXML = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\temp\\" +
+                conteudoXML.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText + Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML;
+        }
+
+
         #region Classe com os dados do XML do pedido de consulta do recibo do lote de nfe enviado
 
         /// <summary>
@@ -40,11 +50,15 @@ namespace NFe.Service
         #endregion Classe com os dados do XML do pedido de consulta do recibo do lote de nfe enviado
 
         #region Execute
-
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
 
+            Execute(emp);
+        }
+
+        public void Execute(int emp)
+        {
             try
             {
                 #region Parte do código que envia o XML de pedido de consulta do recibo
@@ -88,7 +102,7 @@ namespace NFe.Service
                 #region Parte do código que trata o XML de retorno da consulta do recibo
 
                 //Efetuar a leituras das notas do lote para ver se foi autorizada ou não
-                LerRetornoLoteNFe();
+                LerRetornoLoteNFe(emp);
 
                 //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
                 //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
@@ -174,7 +188,7 @@ namespace NFe.Service
         /// </summary>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>20/04/2009</date>
-        private void LerRetornoLoteNFe()
+        private void LerRetornoLoteNFe(int emp)
         {
             /*
             vStrXmlRetorno = "<?xml version=\"1.0\" encoding=\"windows-1250\"?>" +
@@ -200,7 +214,6 @@ namespace NFe.Service
                 "</retConsReciNFe>";
             */
 
-            int emp = Empresas.FindEmpresaByThread();
             var fluxoNFe = new FluxoNfe();
 
             var doc = new XmlDocument();
@@ -496,7 +509,7 @@ namespace NFe.Service
                         case "301":
                         case "302":
                         case "303":
-                            ProcessaNFeDenegada(emp, oLerXml, strArquivoNFe, protNFeElemento.OuterXml, versao);
+                            ProcessaNFeDenegada(emp, oLerXml, strArquivoNFe, conteudoXMLLote, protNFeElemento.OuterXml, versao);
                             break;
 
                         default: //NFe foi rejeitada
