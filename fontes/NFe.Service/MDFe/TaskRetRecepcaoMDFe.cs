@@ -25,6 +25,16 @@ namespace NFe.Service
                 conteudoXML.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText + Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML;
         }
 
+        public TaskMDFeRetRecepcao(XmlDocument conteudoXML, int emp)
+        {
+            Servico = Servicos.MDFePedidoSituacaoLote;
+            ConteudoXML = conteudoXML;
+            ConteudoXML.PreserveWhitespace = false;
+            NomeArquivoXML = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\temp\\" +
+                conteudoXML.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText + Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML;
+        }
+
+
         #region Classe com os dados do XML do pedido de consulta do recibo do lote de nfe enviado
 
         /// <summary>
@@ -40,6 +50,11 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
+            Execute(emp);
+        }
+
+        public void Execute(int emp)
+        {
             try
             {
                 #region Parte do código que envia o XML de pedido de consulta do recibo
@@ -75,7 +90,7 @@ namespace NFe.Service
                 #region Parte do código que trata o XML de retorno da consulta do recibo
 
                 //Efetuar a leituras das notas do lote para ver se foi autorizada ou não
-                LerRetornoLoteMDFe();
+                LerRetornoLoteMDFe(emp);
 
                 //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
                 //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
@@ -154,9 +169,8 @@ namespace NFe.Service
         /// </summary>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>20/04/2009</date>
-        private void LerRetornoLoteMDFe()
+        private void LerRetornoLoteMDFe(int emp)
         {
-            int emp = Empresas.FindEmpresaByThread();
             var oLerXml = new LerXML();
             var fluxoNFe = new FluxoNfe();
 

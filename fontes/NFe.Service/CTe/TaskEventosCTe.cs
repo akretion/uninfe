@@ -117,6 +117,7 @@ namespace NFe.Service
         private void LerRetornoEvento(int emp)
         {
             XmlDocument docEventoOriginal = ConteudoXML;
+            bool autorizou = false;
 
             /*
             vStrXmlRetorno = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
@@ -167,6 +168,8 @@ namespace NFe.Service
                             string Idd = env.Attributes.GetNamedItem(TpcnResources.Id.ToString()).Value;
                             if (Idd == Id)
                             {
+                                autorizou = true;
+
                                 DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName(TpcnResources.dhRegEvento.ToString())[0].InnerText);
 
                                 //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
@@ -194,6 +197,9 @@ namespace NFe.Service
                     }
                 }
             }
+
+            if (!autorizou)
+                oAux.MoveArqErro(NomeArquivoXML);
         }
 
         #endregion LerRetornoEvento

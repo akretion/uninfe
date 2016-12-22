@@ -1,12 +1,9 @@
-﻿using System;
+﻿using NFe.Settings;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
 using System.IO;
-using System.Xml;
+using System.Threading;
 using System.Xml.Linq;
-
-using NFe.Settings;
 
 namespace NFe.Threadings
 {
@@ -20,23 +17,28 @@ namespace NFe.Threadings
     public class MonitoraPasta
     {
         #region Construtores
+
         /// <summary>
         /// Construtor
         /// </summary>
         public MonitoraPasta()
-        { 
+        {
             MonitorarPasta();
         }
-        #endregion
+
+        #endregion Construtores
 
         #region Propriedades
+
         /// <summary>
         /// Tipos de arquivos a serem monitorados pelo UniNFe
         /// </summary>
         public static List<FileSystemWatcher> fsw = new List<FileSystemWatcher>();
-        #endregion
+
+        #endregion Propriedades
 
         #region MonitorarPastas()
+
         /// <summary>
         /// Executa as thread´s de monitoração de pastas
         /// </summary>
@@ -59,28 +61,33 @@ namespace NFe.Threadings
                 pastas.Add(Empresas.Configuracoes[i].PastaValidar);
 
                 #region Pasta impressão dfe em contingência
+
                 if (Directory.Exists(Empresas.Configuracoes[i].PastaContingencia) &&
-                    Empresas.Configuracoes[i].tpEmis != (int)NFe.Components.TipoEmissao.teNormal)
+                    Empresas.Configuracoes[i].tpEmis != (int)Components.TipoEmissao.teNormal)
                 {
                     pastas.Add(Empresas.Configuracoes[i].PastaContingencia);
                 }
-                #endregion
-                
+
+                #endregion Pasta impressão dfe em contingência
+
                 fsw.Add(new FileSystemWatcher(pastas, "*.xml,*.txt"));
                 fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
                 fsw[fsw.Count - 1].StartWatch();
             }
-            /*
+
             #region Pasta Geral
+
             fsw.Add(new FileSystemWatcher(Path.Combine(System.Windows.Forms.Application.StartupPath, "Geral"), "*.xml,*.txt"));
             fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
             fsw[fsw.Count - 1].StartWatch();
-            #endregion
-            */
+
+            #endregion Pasta Geral
         }
-        #endregion
+
+        #endregion MonitorarPastas()
 
         #region LocalizaEmpresa()
+
         /// <summary>
         /// Localiza a empresa da qual o arquivo faz parte para processar com as configurações corretas
         /// </summary>
@@ -123,9 +130,11 @@ namespace NFe.Threadings
 
             return empresa;
         }
-        #endregion
+
+        #endregion LocalizaEmpresa()
 
         #region Eventos
+
         /// <summary>
         /// Evento que executa thread´s para processar os arquivos que são colocados nas pastas que estão sendo monitoradas pela FileSystemWatcher
         /// </summary>
@@ -141,7 +150,7 @@ namespace NFe.Threadings
                 {
                     ///
                     /// encerra o UniNFe no arquivo -sair.xml
-                    /// 
+                    ///
                     var sext = Components.Propriedade.Extensao(Components.Propriedade.TipoEnvio.sair_XML);
                     if (arq.EndsWith(sext.EnvioTXT) || arq.EndsWith(sext.EnvioXML))
                     {
@@ -149,8 +158,8 @@ namespace NFe.Threadings
                         Empresas.ClearLockFiles(false);
                         if (!Components.Propriedade.ExecutandoPeloUniNFe)
                         {
-                            if (Components.ServiceProcess.StatusService(NFe.Components.Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Running)
-                                Components.ServiceProcess.StopService(NFe.Components.Propriedade.ServiceName, 40000);
+                            if (Components.ServiceProcess.StatusService(Components.Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Running)
+                                Components.ServiceProcess.StopService(Components.Propriedade.ServiceName, 40000);
                         }
                         else
                             ThreadService.Stop();
@@ -164,14 +173,15 @@ namespace NFe.Threadings
 
                     ///
                     /// Atualiza WSDL / Schemas
-                    /// 
+                    ///
                     var ext = Components.Propriedade.Extensao(Components.Propriedade.TipoEnvio.pedUpdatewsdl);
                     if (arq.EndsWith(ext.EnvioTXT) || arq.EndsWith(ext.EnvioXML))
                     {
                         #region ---Atualiza WSDL e Schemas
+
                         File.Delete(fi.FullName);
 
-                        Components.Functions.DeletarArquivo(NFe.Settings.ConfiguracaoApp.XMLVersoesWSDL);
+                        Components.Functions.DeletarArquivo(Components.Propriedade.XMLVersaoWSDLXSD);
 
                         string cerros = "";
                         try
@@ -187,8 +197,8 @@ namespace NFe.Threadings
                             if (arq.EndsWith(".xml"))
                             {
                                 var xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
-                                                        new XElement("UPDT",
-                                                            new XElement("Result", rst)));
+                                    new XElement("UPDT",
+                                    new XElement("Result", rst)));
                                 xml.Save(arqRetorno);
                             }
                             else
@@ -201,16 +211,18 @@ namespace NFe.Threadings
                             finalArqErro = ext.EnvioXML.Replace(".xml", ".err");
                             exx = ex;
                         }
-                        #endregion
+
+                        #endregion ---Atualiza WSDL e Schemas
                     }
 
                     ///
                     /// restart o UniNFe
-                    /// 
+                    ///
                     var uext = Components.Propriedade.Extensao(Components.Propriedade.TipoEnvio.pedRestart);
                     if (arq.EndsWith(uext.EnvioTXT) || arq.EndsWith(uext.EnvioXML))
                     {
                         #region ---Reinicia o UniNFe
+
                         File.Delete(fi.FullName);
                         try
                         {
@@ -235,13 +247,14 @@ namespace NFe.Threadings
 
                             return;
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             ExtRetorno = (arq.EndsWith(".xml") ? uext.EnvioXML : uext.EnvioTXT);
                             finalArqErro = uext.EnvioXML.Replace(".xml", ".err");
                             exx = ex;
                         }
-                        #endregion
+
+                        #endregion ---Reinicia o UniNFe
                     }
 
                     if (ExtRetorno != null)
@@ -256,7 +269,7 @@ namespace NFe.Threadings
 
                     ///
                     /// solicitacao de layouts
-                    /// 
+                    ///
                     var lext = Components.Propriedade.Extensao(Components.Propriedade.TipoEnvio.pedLayouts);
                     if (arq.EndsWith(lext.EnvioTXT) || arq.EndsWith(lext.EnvioXML))
                     {
@@ -272,13 +285,12 @@ namespace NFe.Threadings
                     empresa = LocalizaEmpresa(fi);
                 }
 
-
                 if (empresa >= 0)
                 {
                     /*<#8084>
                      * Aqui foi modificado porque a ThreadControl deixou de existir.
                      * E todo o processamento que antes existia na thread control foi deixado apenas no método Run(), que é chamado abaixo
-                     * 
+                     *
                      * Marcelo
                      */
                     new ThreadItem(fi, empresa).Run();
@@ -298,6 +310,6 @@ namespace NFe.Threadings
             }
         }
 
-        #endregion
+        #endregion Eventos
     }
 }

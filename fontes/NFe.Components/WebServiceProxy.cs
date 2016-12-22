@@ -689,9 +689,8 @@ namespace NFe.Components
         /// <summary>
         /// Carrega a lista de webservices definidos no arquivo WebService.XML
         /// </summary>
-        public static bool CarregaWebServicesList()
+        public static void CarregaWebServicesList()
         {
-            bool atualizaWSDL = false;
             if (webServicesList == null)
             {
                 webServicesList = new List<webServices>();
@@ -703,7 +702,7 @@ namespace NFe.Components
                 if (File.Exists(Propriedade.NomeArqXMLMunicipios))
                 {
                     doc.Load(Propriedade.NomeArqXMLMunicipios);
-                    XmlNodeList estadoList = doc.GetElementsByTagName(NFe.Components.NFeStrConstants.Registro);
+                    XmlNodeList estadoList = doc.GetElementsByTagName(NFeStrConstants.Registro);
                     foreach (XmlNode registroNode in estadoList)
                     {
                         XmlElement registroElemento = (XmlElement)registroNode;
@@ -714,14 +713,6 @@ namespace NFe.Components
                             string Padrao = registroElemento.Attributes[NFeStrConstants.Padrao].Value;
                             string UF = Functions.CodigoParaUF(Convert.ToInt32(IDmunicipio.ToString().Substring(0, 2)));
 
-                            ///
-                            /// danasa 9-2013
-                            /// verifica se o 'novo' padrao existe, nao existindo retorna para atualizar os wsdl's dele
-                            string dirSchemas = Path.Combine(Propriedade.PastaExecutavel, "NFse\\schemas\\NFSe\\" + Padrao);
-                            if (!Directory.Exists(dirSchemas))
-                            {
-                                atualizaWSDL = true;
-                            }
                             PadroesNFSe pdr = WebServiceNFSe.GetPadraoFromString(Padrao);
 
                             string urlsH = WebServiceNFSe.WebServicesHomologacao(ref pdr, IDmunicipio);
@@ -765,7 +756,6 @@ namespace NFe.Components
                     WebServiceNFSe.SalvarXMLMunicipios(null, null, 0, null, false);
                 }
             }
-            return atualizaWSDL;
         }
 
         private static bool LoadArqXMLWebService(string filenameWS, string subfolder)
@@ -865,10 +855,10 @@ namespace NFe.Components
         /// Recarrega a lista de webservices
         /// usado pelo projeto da NFes quando da manutencao
         /// </summary>
-        public static bool reloadWebServicesList()
+        public static void reloadWebServicesList()
         {
             webServicesList = null;
-            return CarregaWebServicesList();
+            CarregaWebServicesList();
         }
 
         #endregion reloadWebServicesList()
@@ -919,33 +909,9 @@ namespace NFe.Components
 
                     if (appPath == "" && !string.IsNullOrEmpty(urlList[i].ChildNodes[j].InnerText))
                     {
-                        bool wlog = false;
-                        switch (Propriedade.TipoAplicativo)
-                        {
-                            case TipoAplicativo.Cte:
-                                wlog = urlList[i].ChildNodes[j].Name.StartsWith("CTe");
-                                break;
-
-                            case TipoAplicativo.MDFe:
-                                wlog = urlList[i].ChildNodes[j].Name.StartsWith("MDFe");
-                                break;
-
-                            case TipoAplicativo.NFCe:
-                            case TipoAplicativo.Nfe:
-                                wlog = urlList[i].ChildNodes[j].Name.StartsWith("NFe") || urlList[i].ChildNodes[j].Name.StartsWith("DFe");
-                                break;
-
-                            default:
-                                wlog = true;
-                                break;
-                        }
-                        if (wlog)
-                        {
-                            string msg = "";
-                            Console.WriteLine(msg = "wsItem <" + urlList[i].ChildNodes[j].InnerText + "> nao encontrada na classe URLws em <" + urlList[i].ChildNodes[j].Name + ">");
-
-                            Functions.WriteLog(msg, false, true, "");
-                        }
+                        string msg = "";
+                        Console.WriteLine(msg = "wsItem <" + urlList[i].ChildNodes[j].InnerText + "> nao encontrada na classe URLws em <" + urlList[i].ChildNodes[j].Name + ">");
+                        Functions.WriteLog(msg, false, true, "");
                     }
                 }
             }

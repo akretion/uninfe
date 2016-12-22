@@ -36,6 +36,7 @@ namespace NFe.UI.Formularios
             cbChecaConexaoInternet.Checked = ConfiguracaoApp.ChecarConexaoInternet;
             chkGravarLogOperacao.Checked = ConfiguracaoApp.GravarLogOperacoesRealizadas;
             chkConfProxyAuto.Checked = ConfiguracaoApp.DetectarConfiguracaoProxyAuto;
+            chkConfirmaSaida.Checked = ConfiguracaoApp.ConfirmaSaida;
             cbProxy_CheckedChanged(null, null);
 
             this.tbUsuario.Focus();
@@ -70,6 +71,7 @@ namespace NFe.UI.Formularios
             ConfiguracaoApp.SenhaConfig = tbSenhaConfig2.Text;
             ConfiguracaoApp.ChecarConexaoInternet = cbChecaConexaoInternet.Checked;
             ConfiguracaoApp.GravarLogOperacoesRealizadas = chkGravarLogOperacao.Checked;
+            ConfiguracaoApp.ConfirmaSaida = chkConfirmaSaida.Checked;
         }
 
         public void FocusFirstControl()

@@ -312,6 +312,9 @@ namespace NFe.UI
             oempresa.UtilizaConversaoCFe = empresa.UtilizaConversaoCFe;
             oempresa.CNPJSoftwareHouse = empresa.CNPJSoftwareHouse;
             oempresa.SignACSAT = empresa.SignACSAT;
+            oempresa.NumeroCaixa = empresa.NumeroCaixa;
+            oempresa.IndRatISSQNSAT = empresa.IndRatISSQNSAT;
+            oempresa.RegTribISSQNSAT = empresa.RegTribISSQNSAT;
 
             oempresa.CriaPastasAutomaticamente = true;
         }
@@ -618,7 +621,7 @@ namespace NFe.UI
                 {
                     ///
                     /// compara o que foi mudado
-                    /// 
+                    ///
                     bool grava = DadosMudaramDaEmpresa(true);
 
                     if (!EmpresaValidada)
@@ -666,7 +669,7 @@ namespace NFe.UI
                         /// 
                         for (int item = 0; item < cbEmpresas.Items.Count; ++item)
                         {
-                            NFe.Components.ComboElem empr = cbEmpresas.Items[item] as NFe.Components.ComboElem;
+                            ComboElem empr = cbEmpresas.Items[item] as ComboElem;
                             if (empr.Key.Equals(_key))
                             {
                                 cbEmpresas.SelectedIndex = item;

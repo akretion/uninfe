@@ -48,7 +48,6 @@ namespace uninfe
             Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
 
             bool silencioso = false;
-            ConfiguracaoApp.AtualizaWSDL = false;
             
             //Começar a contar o tempo de execução do aplicativo - Renan 24/06/2015
             ConfiguracaoApp.ExecutionTime = new System.Diagnostics.Stopwatch();
@@ -64,7 +63,6 @@ namespace uninfe
                     }
                     if (param.ToLower().Equals("/updatewsdl"))
                     {
-                        ConfiguracaoApp.AtualizaWSDL = true;
                         continue;
                     }
                     if (param.ToLower().Equals("/quit") || param.ToLower().Equals("/restart"))

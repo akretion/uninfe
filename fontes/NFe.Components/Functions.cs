@@ -62,7 +62,7 @@ namespace NFe.Components
             else if (File.Exists(arquivoDestino))
                 File.Delete(arquivoDestino);
 
-            File.Move(arquivoOrigem, arquivoDestino);            
+            File.Move(arquivoOrigem, arquivoDestino);
         }
         #endregion
 
@@ -564,16 +564,7 @@ namespace NFe.Components
         public static ArrayList CarregaUF()
         {
             ArrayList UF = new ArrayList();
-
-            /// danasa 1-2012
-            if (Propriedade.TipoAplicativo == TipoAplicativo.Nfse)
-            {
-                UF = CarregaMunicipios();
-            }
-            else
-            {
-                UF = CarregaEstados();
-            }
+            UF = CarregaEstados();
             return UF;
         }
 
@@ -855,10 +846,9 @@ namespace NFe.Components
                 if (!string.IsNullOrEmpty(CNPJEmpresa))
                     CNPJEmpresa += "_";
 
-                string fileName = Propriedade.PastaLog +
-                                (Propriedade.TipoAplicativo == TipoAplicativo.Nfse ? "\\uninfse_" : "\\uninfe_") +
-                                (string.IsNullOrEmpty(CNPJEmpresa) ? "" : CNPJEmpresa) +
-                                DateTime.Now.ToString("yyyy-MMM-dd") + ".log";
+                string fileName = Propriedade.PastaLog + "\\uninfe_" +
+                    (string.IsNullOrEmpty(CNPJEmpresa) ? "" : CNPJEmpresa) +
+                    DateTime.Now.ToString("yyyy-MMM-dd") + ".log";
 
                 DateTime startTime;
                 DateTime stopTime;

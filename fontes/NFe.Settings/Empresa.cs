@@ -393,6 +393,45 @@ namespace NFe.Settings
         [AttributeTipoAplicacao(TipoAplicativo.SAT)]
         public string SignACSAT { get; set; }
 
+        private string numeroCaixa;
+
+        [AttributeTipoAplicacao(TipoAplicativo.SAT)]
+        public string NumeroCaixa
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(numeroCaixa))
+                    numeroCaixa = "001";
+
+                return numeroCaixa;
+            }
+            set
+            {
+                numeroCaixa = value;
+            }
+        }
+
+        RegTribISSQN regTribISSQNSAT;
+
+        [AttributeTipoAplicacao(TipoAplicativo.SAT)]
+        public RegTribISSQN RegTribISSQNSAT
+        {
+            get
+            {
+                if (regTribISSQNSAT == 0)
+                    regTribISSQNSAT = RegTribISSQN.MicroEmpresaMunicipal;
+
+                return regTribISSQNSAT;
+            }
+            set
+            {
+                regTribISSQNSAT = value;
+            }
+        }
+
+        [AttributeTipoAplicacao(TipoAplicativo.SAT)]
+        public IndRatISSQN IndRatISSQNSAT { get; set; }
+
         #endregion
 
         #endregion
@@ -871,8 +910,7 @@ namespace NFe.Settings
 
             empresa.AmbienteCodigo = (int)NFe.Components.TipoAmbiente.taHomologacao; //2
             empresa.tpEmis = (int)NFe.Components.TipoEmissao.teNormal; //1
-            if (Propriedade.TipoAplicativo != TipoAplicativo.Nfse)
-                empresa.UnidadeFederativaCodigo = 41;
+            empresa.UnidadeFederativaCodigo = 41;
 
             empresa.GravarRetornoTXTNFe =
                 empresa.GravarEventosNaPastaEnviadosNFe =
@@ -932,7 +970,7 @@ namespace NFe.Settings
 
                 this.CriarPastasDaEmpresa();
 
-                Empresa dados = new Empresa();  
+                Empresa dados = new Empresa();
                 this.CopyObjectTo(dados);
                 if (dados.UsaCertificado)
                     dados.CertificadoSenha = Criptografia.criptografaSenha(dados.CertificadoSenha);

@@ -102,6 +102,10 @@ namespace NFe.SAT
                             _Dispatch = new DesbloquearSAT(Arquivo, DadosEmpresa);
                             break;
 
+                        case Servicos.SATConsultarNumeroSessao:
+                            _Dispatch = new ConsultarNumeroSessao(Arquivo, DadosEmpresa);
+                            break;
+
                         default:
                             throw new NotImplementedException();
                     }
@@ -174,6 +178,10 @@ namespace NFe.SAT
                             _Response = new DesbloquearSATResponse();
                             break;
 
+                        case Servicos.SATConsultarNumeroSessao:
+                            _Response = new ConsultarNumeroSessaoResponse();
+                            break;
+
                         default:
                             throw new NotImplementedException();
                     }
@@ -211,7 +219,7 @@ namespace NFe.SAT
             catch (Exception ex)
             {
                 throw ex;
-            }            
+            }
         }
 
         /// <summary>
@@ -226,7 +234,7 @@ namespace NFe.SAT
             catch (Exception ex)
             {
                 throw ex;
-            }            
+            }
         }
 
     }

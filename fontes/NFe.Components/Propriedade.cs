@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using System.Reflection;
 using System.IO;
 using System.Linq;
-using System.Xml;
+using System.Reflection;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace NFe.Components
@@ -25,35 +23,44 @@ namespace NFe.Components
         /// Nome para a pasta dos XML assinados
         /// </summary>
         public const string NomePastaXMLAssinado = "\\Assinado";
+
         public const string NomeArqERRUniNFe = "UniNFeErro_{0}.err";
+
         /// <summary>
         /// Nome do arquivo XML de configurações
         /// </summary>
         public const string NomeArqConfig = "UniNfeConfig.xml";
+
         /// <summary>
         /// Nome do arquivo XML de configurações da tela de sobre
         /// </summary>
         public const string NomeArqConfigSobre = "UniNfeSobre.xml";
+
         /// <summary>
         /// Nome do arquivo XML que é gravado as empresas cadastradas
         /// </summary>
         public static string NomeArqEmpresas { get { return Propriedade.PastaExecutavel + "\\UniNfeEmpresa.xml"; } }
-        /// <summary>     
+
+        /// <summary>
         /// Nome do arquivo para controle da numeração sequencial do lote.
         /// </summary>
         public const string NomeArqXmlLote = "UniNfeLote.xml";
+
         /// <summary>
         /// Nome do arquivo 1 de backup de segurança do arquivo de controle da numeração sequencial do lote
         /// </summary>
         public const string NomeArqXmlLoteBkp1 = "Bkp1_UniNfeLote.xml";
+
         /// <summary>
         /// Nome do arquivo 2 de backup de segurança do arquivo de controle da numeração sequencial do lote
         /// </summary>
         public const string NomeArqXmlLoteBkp2 = "Bkp2_UniNfeLote.xml";
+
         /// <summary>
         /// Nome do arquivo 3 de backup de segurança do arquivo de controle da numeração sequencial do lote
         /// </summary>
         public const string NomeArqXmlLoteBkp3 = "Bkp3_UniNfeLote.xml";
+
         /// <summary>
         /// Nome do arquivo que grava as notas fiscais em fluxo de envio
         /// </summary>
@@ -72,6 +79,7 @@ namespace NFe.Components
         /// </summary>
         /// <returns>Retorna a pasta onde está o executável</returns>
         private static string _PastaExecutavel = string.Empty;
+
         public static string PastaExecutavel
         {
             get
@@ -88,6 +96,7 @@ namespace NFe.Components
         }
 
         #region Pastas de comunicação geral do ERP com o UniNFe
+
         /// <summary>
         /// Pasta de comunicação geral do ERP com o UniNFe (Envio)
         /// </summary>
@@ -111,12 +120,14 @@ namespace NFe.Components
         {
             get { return Propriedade.PastaGeral + "\\Retorno"; }
         }
-        #endregion
+
+        #endregion Pastas de comunicação geral do ERP com o UniNFe
 
         /// <summary>
         /// Retorna o XML contendos as definicoes dos webservices
         /// </summary>
         private static string _NomeArqXMLWebService_NFe = "";
+
         public static string NomeArqXMLWebService_NFe
         {
             get
@@ -131,6 +142,9 @@ namespace NFe.Components
                 _NomeArqXMLWebService_NFe = value;
             }
         }
+
+        public static string XMLVersaoWSDLXSD = Propriedade.PastaExecutavel + "\\VersaoWSDLXSD.xml";
+
         public static string NomeArqXMLWebService_NFSe
         {
             get
@@ -144,6 +158,7 @@ namespace NFe.Components
         public static List<Municipio> Municipios { get; set; }
 
         private static List<Municipio> _Estados = null;
+
         public static List<Municipio> Estados
         {
             get
@@ -224,28 +239,35 @@ namespace NFe.Components
             ConsCertificado,
             ConsInf,
             GerarChaveNFe,
+
             /// <summary>
             /// NFe
             /// </summary>
             NFe,
+
             ConsNFeDest,
             EnvCancelamento,
             EnvCCe,
             EnvDownload,
             EnvManifestacao,
+
             /// <summary>
             /// CTe
             /// </summary>
             CTe,
+
             /// <summary>
             /// MDFe
             /// </summary>
             MDFe,
+
             MDFeConsNaoEncerrados,
+
             /// <summary>
             /// NFSe
             /// </summary>
             EnvLoteRps,
+
             PedCanNFSe,
             PedInuNFSe,
             PedLoteRps,
@@ -257,10 +279,12 @@ namespace NFe.Components
             PedSitNFSeRps,
             PedURLNFSe,
             PedURLNFSeSerie,
+
             /// <summary>
             /// Extensões para SAT/CFe
             /// </summary>
             ConsultarSAT,
+
             ExtrairLogsSAT,
             ConsultarStatusOperacionalSAT,
             TesteFimAFimSAT,
@@ -273,10 +297,13 @@ namespace NFe.Components
             AtivarSAT,
             BloquearSAT,
             DesbloquearSAT,
+            ConsultarNumeroSessaoSAT,
+
             /// <summary>
             /// Extensões em comum entre NFe, CTe e MDF-e
             /// </summary>
             ConsCad,
+
             EnvDFe,
             EnvDanfeReport,
             EnvImpressaoDanfe,
@@ -289,10 +316,12 @@ namespace NFe.Components
             PedRec,
             PedSit,
             PedSta,
+
             ///
             /// Exporadicos
-            /// 
+            ///
             cce_XML,
+
             cancel_XML,
             sair_XML,
             pedLayouts,
@@ -307,6 +336,7 @@ namespace NFe.Components
             if (ListaExtensoes.Count == 0)
             {
                 #region Extensões gerais
+
                 ListaExtensoes.Add(TipoEnvio.AltCon, new ExtensaoClass(
                     "-alt-con.xml", "-alt-con.txt",
                     "-ret-alt-con.xml", "-ret-alt-con.txt",
@@ -321,9 +351,11 @@ namespace NFe.Components
                     "-cons-inf.xml", "-cons-inf.txt",
                     "-ret-cons-inf.xml", "-ret-cons-inf.txt",
                     "Consulta as configurações do UniNFe"));
-                #endregion
+
+                #endregion Extensões gerais
 
                 #region Extensões da NFe
+
                 ListaExtensoes.Add(TipoEnvio.ConsNFeDest, new ExtensaoClass(
                     "-cons-nfe-dest.xml",
                     "-cons-nfe-dest.txt",
@@ -363,13 +395,19 @@ namespace NFe.Components
                     "Pedido de envio de NFe/NFCe"
                 ));
 
-                #endregion
+                #endregion Extensões da NFe
 
                 #region Extensões SAT/CFe
+
                 ListaExtensoes.Add(TipoEnvio.ConsultarSAT, new ExtensaoClass(
                     "-sat-cons.xml", "-sat-cons.txt",
                     "-sat-cons-ret.xml", "-sat-cons-ret.txt",
                     "Consulta SAT"));
+
+                ListaExtensoes.Add(TipoEnvio.ConsultarNumeroSessaoSAT, new ExtensaoClass(
+                    "-sat-sescons.xml", "-sat-sescons.txt",
+                    "-sat-sescons-ret.xml", "-sat-sescons-ret.txt",
+                    "Consulta Numero Sessão SAT"));
 
                 ListaExtensoes.Add(TipoEnvio.ExtrairLogsSAT, new ExtensaoClass(
                     "-sat-extlog.xml", "-sat-extlog.txt",
@@ -430,16 +468,20 @@ namespace NFe.Components
                     "-sat-desbloq.xml", "-sat-desbloq.txt",
                     "-sat-desbloq-ret.xml", "-sat-desbloq-ret.txt",
                     "Bloquear SAT"));
-                #endregion
+
+                #endregion Extensões SAT/CFe
 
                 #region Extensões do CTe
+
                 ListaExtensoes.Add(TipoEnvio.CTe, new ExtensaoClass(
                     "-cte.xml", "",
                     "", "",
                     "Pedido de emissão de CTe"));
-                #endregion
+
+                #endregion Extensões do CTe
 
                 #region Extensões do MDFe
+
                 ListaExtensoes.Add(TipoEnvio.MDFe, new ExtensaoClass(
                     "-mdfe.xml", "",
                     "", "",
@@ -449,9 +491,11 @@ namespace NFe.Components
                     "-ped-cons-mdfe-naoenc.xml", "",
                     "-ret-cons-mdfe-naoenc.xml", "",
                     "Consulta de MDFe não encerrados"));
-                #endregion
+
+                #endregion Extensões do MDFe
 
                 #region Extensoes da NFSe
+
                 ListaExtensoes.Add(TipoEnvio.EnvLoteRps, new ExtensaoClass(
                     "-env-loterps.xml", "",
                     "-ret-loterps.xml", "",
@@ -512,9 +556,11 @@ namespace NFe.Components
                     "-ped-inunfse.xml", "",
                     "-inunfse.xml", "",
                     "Inutilização de NFSe"));
-                #endregion
+
+                #endregion Extensoes da NFSe
 
                 #region Extensões em comum entre NFe, CTe e MDF-e
+
                 ListaExtensoes.Add(TipoEnvio.ConsCad, new ExtensaoClass(
                     "-cons-cad.xml",
                     "-cons-cad.txt",
@@ -593,7 +639,8 @@ namespace NFe.Components
                     "-dist-dfe.xml",
                     "-dist-dfe.txt",
                     "Consulta de DFe"));
-                #endregion
+
+                #endregion Extensões em comum entre NFe, CTe e MDF-e
 
                 #region Exporadicos
 
@@ -603,13 +650,15 @@ namespace NFe.Components
                 ListaExtensoes.Add(TipoEnvio.cce_XML, new ExtensaoClass("-cce.xml", "", "", "", "Uso específico, não usar"));
                 ListaExtensoes.Add(TipoEnvio.cancel_XML, new ExtensaoClass("-cancel.xml", "", "", "", "Uso específico, não usar"));
                 ListaExtensoes.Add(TipoEnvio.pedLayouts, new ExtensaoClass("-layouts.xml", "-layouts.txt", "-ret-layouts.pdf", "", "Gerar um PDF com o layout da NFe em TXT e extensões usadas no UniNFe."));
-                #endregion
+
+                #endregion Exporadicos
             }
 
             return ListaExtensoes[value];
         }
 
         #region Propriedades com as extensões dos XML ou TXT de envio
+
         /// <summary>
         /// Classe com as propriedades com as extensões dos XML ou TXT de envio
         /// </summary>
@@ -618,23 +667,30 @@ namespace NFe.Components
             #region Extensoes que so estao aqui para quem utiliza o codigo em seus projetos
 
             #region Extensões gerais
+
             /// <summary>
             /// -cons-certificado.xml
             /// </summary>
             public static string ConsCertificado = Extensao(TipoEnvio.ConsCertificado).EnvioXML;
+
             ///// <summary>
             ///// -alt-con.xml | -alt-con.txt
             ///// </summary>
             public static string AltCon_XML = Extensao(TipoEnvio.AltCon).EnvioXML;
+
             public static string AltCon_TXT = Extensao(TipoEnvio.AltCon).EnvioTXT;
+
             /// <summary>
             /// -cons-inf.xml | -cons-nf.txt
             /// </summary>
             public static string ConsInf_XML = Extensao(TipoEnvio.ConsInf).EnvioXML;
+
             public static string ConsInf_TXT = Extensao(TipoEnvio.ConsInf).EnvioTXT;
-            #endregion
+
+            #endregion Extensões gerais
 
             #region Extensões da NFe
+
             /// <summary>
             /// -nfe.xml
             /// </summary>
@@ -704,16 +760,20 @@ namespace NFe.Components
             /// -cons-nfe-dest.txt
             /// </summary>
             public static string ConsNFeDest_TXT = Extensao(TipoEnvio.ConsNFeDest).EnvioTXT;
-            #endregion
+
+            #endregion Extensões da NFe
 
             #region Extensões do CTe
+
             /// <summary>
             /// -cte.xml
             /// </summary>
             public static string CTe = Extensao(TipoEnvio.CTe).EnvioXML;
-            #endregion
+
+            #endregion Extensões do CTe
 
             #region Extensões da NFS-e
+
             /// <summary>
             /// -env-loterps.xml X -ret-loterps.xml
             /// </summary>
@@ -768,9 +828,11 @@ namespace NFe.Components
             /// -ped-nfsepdf.xml x -nfsepdf.xml
             /// </summary>
             public static string PedNfsePDF = Extensao(TipoEnvio.PedNFSePDF).EnvioXML;
-            #endregion
+
+            #endregion Extensões da NFS-e
 
             #region Extensões MDF-e
+
             /// <summary>
             /// -mdfe.xml
             /// </summary>
@@ -780,7 +842,8 @@ namespace NFe.Components
             /// -ped-cons-mdfe-naoenc.xml
             /// </summary>
             public static string MDFeConsNaoEncerrados = Extensao(TipoEnvio.MDFeConsNaoEncerrados).EnvioXML;
-            #endregion
+
+            #endregion Extensões MDF-e
 
             #region Extensões em comum entre NFe, CTe e MDF-e
 
@@ -853,46 +916,60 @@ namespace NFe.Components
             /// -ped-sta.txt
             /// </summary>
             public static string PedSta_TXT = Extensao(TipoEnvio.PedSta).EnvioTXT;
-            #endregion
+
+            #endregion Extensões em comum entre NFe, CTe e MDF-e
 
             #region Extensões usadas na pesquisa de se um serviço existe para um determinado estado (Producao/Homologacao)
+
             public static string EnvWSExiste = Extensao(TipoEnvio.EnvWSExiste).EnvioXML;
             public static string EnvWSExiste_TXT = Extensao(TipoEnvio.EnvWSExiste).EnvioTXT;
-            #endregion
+
+            #endregion Extensões usadas na pesquisa de se um serviço existe para um determinado estado (Producao/Homologacao)
 
             #region DANFE
+
             public static string EnvImpressaoDanfe = Extensao(TipoEnvio.EnvImpressaoDanfe).EnvioXML;
             public static string EnvImpressaoDanfe_TXT = Extensao(TipoEnvio.EnvImpressaoDanfe).EnvioTXT;
 
             public static string EnvDanfeReport = Extensao(TipoEnvio.EnvDanfeReport).EnvioXML;
             public static string EnvDanfeReport_TXT = Extensao(TipoEnvio.EnvDanfeReport).EnvioTXT;
-            #endregion
+
+            #endregion DANFE
 
             #region Extensoes de DFe
+
             public static string EnvDFe = Extensao(TipoEnvio.EnvDFe).EnvioXML;
             public static string EnvDFe_TXT = Extensao(TipoEnvio.EnvDFe).EnvioTXT;
-            #endregion
+
+            #endregion Extensoes de DFe
 
             #region Extensões LMC
+
             public static string LMC = Extensao(TipoEnvio.LMC).EnvioXML;
-            #endregion
+
+            #endregion Extensões LMC
 
             #region Extensões só para resolver um problema de compatibilidade de um usuário, com o tempo poderemos excluir. Wandrey 10/12/2014
+
             public static string cce_XML = Extensao(TipoEnvio.cce_XML).EnvioXML;
             public static string cancel_XML = Extensao(TipoEnvio.cancel_XML).EnvioXML;
-            #endregion
 
-            #endregion
+            #endregion Extensões só para resolver um problema de compatibilidade de um usuário, com o tempo poderemos excluir. Wandrey 10/12/2014
+
+            #endregion Extensoes que so estao aqui para quem utiliza o codigo em seus projetos
         }
-        #endregion
+
+        #endregion Propriedades com as extensões dos XML ou TXT de envio
 
         #region Propriedades com as extensões dos XML ou TXT de retorno
+
         /// <summary>
         /// Classe com as propriedades com as extensões dos XML ou TXT de retorno
         /// </summary>
         public class ExtRetorno
         {
             #region Extensoes que so estao aqui para quem utiliza o codigo em seus projetos
+
             public static string RetAltCon_XML = Extensao(TipoEnvio.AltCon).RetornoXML;
             public static string RetAltCon_TXT = Extensao(TipoEnvio.AltCon).RetornoTXT;
             public static string RetGerarChaveNFe_XML = Extensao(TipoEnvio.GerarChaveNFe).RetornoXML;
@@ -930,13 +1007,13 @@ namespace NFe.Components
             public static string retEnvDFe_XML = Extensao(TipoEnvio.EnvDFe).RetornoXML;
             public static string retEnvDFe_TXT = Extensao(TipoEnvio.EnvDFe).RetornoTXT;
             public static string LMCRet = Extensao(TipoEnvio.LMC).RetornoXML;
-            #endregion
 
-            #region Extensões gerais
+            #endregion Extensoes que so estao aqui para quem utiliza o codigo em seus projetos
 
-            #endregion
+
 
             #region Extensões NFe
+
             /// <summary>
             /// -procnfe.xml
             /// </summary>
@@ -986,7 +1063,8 @@ namespace NFe.Components
             /// -ret-manif.err
             /// </summary>
             public const string retManifestacao_ERR = "-ret-env-manif.err";
-            #endregion
+
+            #endregion Extensões NFe
 
             #region Extensões CTe
 
@@ -1009,9 +1087,11 @@ namespace NFe.Components
             /// -cte.err
             /// </summary>
             public static string Cte_ERR = "-cte.err";
-            #endregion
+
+            #endregion Extensões CTe
 
             #region Extensões MDFe
+
             /// <summary>
             /// -procMDFe.xml
             /// </summary>
@@ -1031,9 +1111,11 @@ namespace NFe.Components
             /// -ret-consmdfenaoenc.err
             /// </summary>
             public static string MDFeConsNaoEnc_ERR = "-ret-cons-mdfe-naoenc.err";
-            #endregion
+
+            #endregion Extensões MDFe
 
             #region Extensões em comum entre NFe, CTe e MDF-e
+
             /// <summary>
             /// -eve.err
             /// </summary>
@@ -1078,7 +1160,8 @@ namespace NFe.Components
             /// -rec.err
             /// </summary>
             public const string Rec_ERR = "-rec.err";
-            #endregion
+
+            #endregion Extensões em comum entre NFe, CTe e MDF-e
 
             #region Extensões NFSe
 
@@ -1116,12 +1199,14 @@ namespace NFe.Components
             /// -urlnfse.xml x -ped-urlnfse.xml x -urlnfse.err
             /// </summary>
             public const string Urlnfse_ERR = "-urlnfse.err";
+
             public const string UrlnfseSerie_ERR = "-urlnfserie.err";
 
             /// <summary>
             /// nfsepng.err
             /// </summary>
             public const string NFSePNG_ERR = "-nfsepng.err";
+
             public const string NFSePDF_ERR = "-nfsepdf.err";
             public const string NFSeXML_ERR = "-nfsexml.err";
 
@@ -1129,28 +1214,36 @@ namespace NFe.Components
             /// -inunfse.err
             /// </summary>
             public const string InuNfse_ERR = "-inunfse.err";
-            #endregion
+
+            #endregion Extensões NFSe
 
             #region Extensoes de DFe
+
             public const string retEnvDFe_ERR = "-con-dist-dfe.err";
-            #endregion
+
+            #endregion Extensoes de DFe
 
             #region Extensões do LMC
+
             /// <summary>
             /// -ret-lmc.err
             /// </summary>
             public static string LMCRet_ERR = "-ret-lmc.err";
+
             /// <summary>
             /// -procLMC.xml
             /// </summary>
             public static string ProcLMC = "-procLMC.xml";
-            #endregion
+
+            #endregion Extensões do LMC
         }
-        #endregion
+
+        #endregion Propriedades com as extensões dos XML ou TXT de retorno
 
         #region NomeAplicacao
+
         /// <summary>
-        /// Retorna o nome do aplicativo 
+        /// Retorna o nome do aplicativo
         /// </summary>
         /// <param name="oAssembly">Passar sempre: Assembly.GetExecutingAssembly() pois ele vai pegar o Assembly do EXE ou DLL de onde está sendo chamado o método</param>
         /// <returns>string contendo o nome do Aplicativo</returns>
@@ -1175,11 +1268,13 @@ namespace NFe.Components
                 return Produto;
             }
         }
-        #endregion
+
+        #endregion NomeAplicacao
 
         #region Versao
+
         /// <summary>
-        /// Retorna a versão do aplicativo 
+        /// Retorna a versão do aplicativo
         /// </summary>
         public static string Versao
         {
@@ -1210,7 +1305,8 @@ namespace NFe.Components
                 return versao;
             }
         }
-        #endregion
+
+        #endregion Versao
 
         public static bool ServicoRodando   //danasa 22/7/2011
         {
@@ -1242,13 +1338,16 @@ namespace NFe.Components
         }
 
         #region Atributos
+
         /// <summary>
         /// Se pode encerrar a aplicação ou não
         /// </summary>
         public static bool EncerrarApp = false;
-        #endregion
+
+        #endregion Atributos
 
         #region DescricaoAplicacao
+
         /// <summary>
         /// Retorna a descrição da aplicação
         /// </summary>
@@ -1272,28 +1371,13 @@ namespace NFe.Components
                 return descricao;
             }
         }
-        #endregion
+
+        #endregion DescricaoAplicacao
 
         public static void VerificaArquivos(out bool error, out string msg)
         {
-            switch (NFe.Components.Propriedade.TipoAplicativo)
-            {
-                case TipoAplicativo.MDFe:
-                case TipoAplicativo.Cte:
-                case TipoAplicativo.NFCe:
-                case TipoAplicativo.Nfe:
-                    error = !System.IO.File.Exists(Propriedade.NomeArqXMLWebService_NFe);
-                    msg = "Arquivo '" + Propriedade.NomeArqXMLWebService_NFe + "' não encontrado";
-                    break;
-                case TipoAplicativo.Nfse:
-                    error = !System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios) || !System.IO.File.Exists(Propriedade.NomeArqXMLWebService_NFSe);
-                    msg = "Arquivos '" + Propriedade.NomeArqXMLMunicipios + "' e/ou '" + Propriedade.NomeArqXMLWebService_NFSe + "' não encontrados";
-                    break;
-                default:
-                    error = !System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios) || !System.IO.File.Exists(Propriedade.NomeArqXMLWebService_NFSe) || !System.IO.File.Exists(Propriedade.NomeArqXMLWebService_NFe);
-                    msg = "Arquivos '" + Propriedade.NomeArqXMLMunicipios + "', '" + Propriedade.NomeArqXMLWebService_NFSe + "' e/ou '" + Propriedade.NomeArqXMLWebService_NFe + "' não encontrados";
-                    break;
-            }
+            error = !File.Exists(NomeArqXMLMunicipios) || !File.Exists(NomeArqXMLWebService_NFSe) || !File.Exists(Propriedade.NomeArqXMLWebService_NFe);
+            msg = "Arquivos '" + NomeArqXMLMunicipios + "', '" + NomeArqXMLWebService_NFSe + "' e/ou '" + NomeArqXMLWebService_NFe + "' não encontrados";
         }
     }
 }

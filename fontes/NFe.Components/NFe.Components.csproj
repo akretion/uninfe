@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -225,6 +225,8 @@
     <Compile Include="SimplISS\PiracicabaSP\p\SimplISSP.cs" />
     <Compile Include="SimplISS\PresidentePrudenteSP\h\SimplISSH.cs" />
     <Compile Include="SimplISS\PresidentePrudenteSP\p\SimplISSP.cs" />
+    <Compile Include="SimplISS\BalnearioCamboriu\h\SimplISSH.cs" />
+    <Compile Include="SimplISS\BalnearioCamboriu\p\SimplISSP.cs" />
     <Compile Include="SimplISS\VoltaRedondaRJ\h\SimplISSH.cs" />
     <Compile Include="SimplISS\VoltaRedondaRJ\p\SimplISSP.cs" />
     <Compile Include="SimplISS\SimplISS.cs" />
@@ -547,6 +549,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\br.com.simplissweb.wsandira.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1483,6 +1490,45 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Web References\br.com.simplissweb.wsandira.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\ConsultarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\ConsultarSituacaoLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\GerarNovaNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\nfseservice.wsdl" />
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\nfseservice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\NfseService0.wsdl" />
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\nfseservice0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\nfseservice1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\nfseservice2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.com.simplissweb.wsbalneariocamboriu.p\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -2587,6 +2633,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_simplissweb_wsandira_p_NfseService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://wsbalneariocamboriu.simplissweb.com.br/nfseservice.svc%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.simplissweb.wsbalneariocamboriu.p\</RelPath>
+      <UpdateFromURL>http://wsbalneariocamboriu.simplissweb.com.br/nfseservice.svc%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_simplissweb_wsbalneariocamboriu_p_NfseService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://wshomologacao.simplissweb.com.br/nfseservice.svc%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

@@ -80,7 +80,8 @@ namespace NFSe.Components
             {
                 Tag = "EnviarLoteRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\BHISS\\nfse.xsd",
+                //                ArquivoXSD = "NFSe\\BHISS\\nfse.xsd",
+                ArquivoXSD = "",
                 Descricao = "XML de Lote RPS (Assincrono)",
                 TagAssinatura = "Rps",
                 TagAtributoId = "InfRps",
@@ -95,7 +96,8 @@ namespace NFSe.Components
             {
                 Tag = "GerarNfseEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\BHISS\\nfse.xsd",
+                //                ArquivoXSD = "NFSe\\BHISS\\nfse.xsd",
+                ArquivoXSD = "",
                 Descricao = "XML de Lote RPS",
                 TagAssinatura = "Rps",
                 TagAtributoId = "InfRps",

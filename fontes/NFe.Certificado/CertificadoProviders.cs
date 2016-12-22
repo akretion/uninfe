@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NFe.Settings;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -38,12 +40,12 @@ namespace NFe.Certificado
                                     int codEmp,
                                     string pin)
         {
-            this.Certificado = certificado;
-            this.TempFile = folderTemp + "\\Temp\\Simulacao.xml";
-            this.CodEmp = codEmp;
-            this.PIN = pin;
-            this.IsA3 = Certificado.IsA3();
-            this.ProviderIdentificado = false;
+            Certificado = certificado;
+            TempFile = folderTemp + "\\Temp\\Simulacao.xml";
+            CodEmp = codEmp;
+            PIN = pin;
+            IsA3 = Certificado.IsA3();
+            ProviderIdentificado = false;
         }
         #endregion
 
@@ -57,9 +59,10 @@ namespace NFe.Certificado
 
             if (this.IsA3 && !String.IsNullOrEmpty(this.PIN))
             {
-                this.GetProviders();
-                this.GetProvidersType();
-                this.GetProviderValido();
+                GetProviders();
+                GetProvidersType();
+                GetProviderValido();
+
                 result = true;
             }
             return result;
@@ -74,8 +77,8 @@ namespace NFe.Certificado
             {
                 if (TestarProvider(ProvidersIdentificados[i]))
                 {
-                    this.ProviderValido = ProvidersIdentificados[i];
-                    this.ProviderIdentificado = true;
+                    ProviderValido = ProvidersIdentificados[i];
+                    ProviderIdentificado = true;
                     break;
                 }
             }
@@ -112,8 +115,8 @@ namespace NFe.Certificado
         /// </summary>
         private void ApagarXMLTeste()
         {
-            if (System.IO.File.Exists(TempFile))
-                System.IO.File.Delete(TempFile);
+            if (File.Exists(TempFile))
+                File.Delete(TempFile);
         }
 
         /// <summary>
@@ -123,8 +126,9 @@ namespace NFe.Certificado
         /// <author>Renan Borges</author>
         private void SimularXML(CertProviders provider)
         {
-            if (System.IO.File.Exists(TempFile))
-                System.IO.File.Delete(TempFile);
+            Empresas.CriarPasta(true);
+
+            ApagarXMLTeste();
 
             XElement docElement = new XElement("SimulacaoProvider");
             XElement eProvider = new XElement("Provider");

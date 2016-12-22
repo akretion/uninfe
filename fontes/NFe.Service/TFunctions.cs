@@ -1453,47 +1453,44 @@ namespace NFe.Service
 
         public static void CriarArquivosParaServico()
         {
-            if (NFe.Components.Propriedade.TipoAplicativo == TipoAplicativo.Todos)
+            if (!File.Exists(Path.Combine(Propriedade.PastaExecutavel, "servico_iniciar.bat")))
             {
-                if (!File.Exists(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, "servico_iniciar.bat")))
+                try
                 {
-                    try
+                    string windir = Environment.GetEnvironmentVariable("windir");
+#if x64
+                    string path = Path.Combine(windir, @"Microsoft.NET\Framework64\v2.0.50727\installutil");
+#else
+                    string path = Path.Combine(windir, @"Microsoft.NET\Framework\v2.0.50727\installutil");
+#endif
+                    Microsoft.Win32.RegistryKey ndpKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\", false);
+                    foreach (string versionKeyName in ndpKey.GetSubKeyNames())
                     {
-                        string windir = Environment.GetEnvironmentVariable("windir");
-#if x64
-                        string path = Path.Combine(windir, @"Microsoft.NET\Framework64\v2.0.50727\installutil");
-#else
-                        string path = Path.Combine(windir, @"Microsoft.NET\Framework\v2.0.50727\installutil");
-#endif
-                        Microsoft.Win32.RegistryKey ndpKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\", false);
-                        foreach (string versionKeyName in ndpKey.GetSubKeyNames())
+                        if (versionKeyName.StartsWith("v4"))
                         {
-                            if (versionKeyName.StartsWith("v4"))
+                            Microsoft.Win32.RegistryKey ndpKey4 = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\.NETFramework\v4.0.30319\", false);
+                            foreach (var v in ndpKey4.GetSubKeyNames())
                             {
-                                Microsoft.Win32.RegistryKey ndpKey4 = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\.NETFramework\v4.0.30319\", false);
-                                foreach (var v in ndpKey4.GetSubKeyNames())
-                                {
 #if x64
-                                    path = Path.Combine(windir, @"Microsoft.NET\Framework64\v4.0.30319\installutil");
+                                path = Path.Combine(windir, @"Microsoft.NET\Framework64\v4.0.30319\installutil");
 #else
-                                    path = Path.Combine(windir, @"Microsoft.NET\Framework\v4.0.30319\installutil");
+                                path = Path.Combine(windir, @"Microsoft.NET\Framework\v4.0.30319\installutil");
 #endif
-                                    break;
-                                }
+                                break;
                             }
                         }
-                        File.WriteAllText(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, "servico_iniciar.bat"), "net start UniNFeServico\r\npause");
-                        File.WriteAllText(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, "servico_parar.bat"), "net stop UniNFeServico\r\npause");
-                        File.WriteAllText(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, "servico_remover.bat"), path + " /u UniNFeServico.exe\r\npause");
-                        File.WriteAllText(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, "servico_instalar.bat"), path + " /i UniNFeServico.exe\r\npause");
-                        File.WriteAllText(Path.Combine(NFe.Components.Propriedade.PastaExecutavel, "servico_testar.bat"),
-                            "call servico_instalar\r\n" +
-                            "call servico_iniciar\r\n" +
-                            "call servico_parar\r\n" +
-                            "call servico_remover\r\n");
                     }
-                    catch { }
+                    File.WriteAllText(Path.Combine(Propriedade.PastaExecutavel, "servico_iniciar.bat"), "net start UniNFeServico\r\npause");
+                    File.WriteAllText(Path.Combine(Propriedade.PastaExecutavel, "servico_parar.bat"), "net stop UniNFeServico\r\npause");
+                    File.WriteAllText(Path.Combine(Propriedade.PastaExecutavel, "servico_remover.bat"), path + " /u UniNFeServico.exe\r\npause");
+                    File.WriteAllText(Path.Combine(Propriedade.PastaExecutavel, "servico_instalar.bat"), path + " /i UniNFeServico.exe\r\npause");
+                    File.WriteAllText(Path.Combine(Propriedade.PastaExecutavel, "servico_testar.bat"),
+                        "call servico_instalar\r\n" +
+                        "call servico_iniciar\r\n" +
+                        "call servico_parar\r\n" +
+                        "call servico_remover\r\n");
                 }
+                catch { }
             }
         }
 

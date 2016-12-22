@@ -19,6 +19,7 @@
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Threadings.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.UI.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Validate.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.SAT.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\uninfe.exe
 
    call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\MetroFramework.dll

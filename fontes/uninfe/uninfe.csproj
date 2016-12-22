@@ -61,8 +61,8 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Unimake.SAT, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unimake.SAT.20161103.9\lib\net451\Unimake.SAT.dll</HintPath>
+    <Reference Include="Unimake.SAT, Version=1.0.6172.19206, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unimake.SAT.20161124.1045\lib\net451\Unimake.SAT.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

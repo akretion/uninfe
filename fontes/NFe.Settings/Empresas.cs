@@ -136,16 +136,16 @@ namespace NFe.Settings
                 try
                 {
                     XElement axml = XElement.Load(Propriedade.NomeArqEmpresas);
-                    var b1 = axml.Descendants(NFe.Components.NFeStrConstants.Registro);
+                    var b1 = axml.Descendants(NFeStrConstants.Registro);
                     foreach (var item in b1)
                     {
                         Empresa empresa = new Empresa();
 
-                        empresa.CNPJ = item.Attribute(NFe.Components.TpcnResources.CNPJ.ToString()).Value;
-                        empresa.Nome = item.Element(NFe.Components.NFeStrConstants.Nome).Value.Trim();
+                        empresa.CNPJ = item.Attribute(TpcnResources.CNPJ.ToString()).Value;
+                        empresa.Nome = item.Element(NFeStrConstants.Nome).Value.Trim();
                         empresa.Servico = Propriedade.TipoAplicativo;
-                        if (item.Attribute(NFe.Components.NFeStrConstants.Servico) != null)
-                            empresa.Servico = (TipoAplicativo)Convert.ToInt16(item.Attribute(NFe.Components.NFeStrConstants.Servico).Value.Trim());
+                        if (item.Attribute(NFeStrConstants.Servico) != null)
+                            empresa.Servico = (TipoAplicativo)Convert.ToInt16(item.Attribute(NFeStrConstants.Servico).Value.Trim());
 
                         string cArqErro = null;
                         bool erro = false;

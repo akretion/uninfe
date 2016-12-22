@@ -108,7 +108,7 @@ namespace NFe.Service
                                         true,
                                         securityProtocolType);
 
-                    Recibo(vStrXmlRetorno);
+                    Recibo(vStrXmlRetorno, emp);
                 }
 
                 if (dadosRec.cStat == "104") //Lote processado - Processo da NFe Síncrono - Wandrey 13/03/2014
@@ -123,7 +123,7 @@ namespace NFe.Service
                         Thread.Sleep(dadosRec.tMed * 1000);
 
                     //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
-                    oFluxoNfe.AtualizarTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, (dadosRec.tMed + 1).ToString());
+                    oFluxoNfe.AtualizarTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, (dadosRec.tMed + 2).ToString());
                     oFluxoNfe.AtualizarTagRec(idLote, dadosRec.nRec);
 
                     XmlDocument xmlPedRec = oGerarXML.XmlPedRecNFe(dadosRec.nRec, oLer.oDadosNfe.versao, oLer.oDadosNfe.mod, emp);
@@ -211,7 +211,7 @@ namespace NFe.Service
         /// de algumas tag´s
         /// </summary>
         /// <param name="strXml">String contendo o XML</param>
-        private void Recibo(string strXml)
+        private void Recibo(string strXml, int emp)
         {
             dadosRec.cStat =
                 dadosRec.nRec = string.Empty;
@@ -236,6 +236,12 @@ namespace NFe.Service
 
                     dadosRec.nRec = infRecElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
                     dadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName(TpcnResources.tMed.ToString())[0].InnerText);
+
+                    if (dadosRec.tMed > 15)
+                        dadosRec.tMed = 15;
+
+                    if (dadosRec.tMed <= 0)
+                        dadosRec.tMed = Empresas.Configuracoes[emp].TempoConsulta;
                 }
             }
         }

@@ -105,18 +105,7 @@ namespace NFe.UI
             //this.StyleManager = uninfeDummy.mainForm.StyleManager;
 
             uninfeDummy.xmlParams.LoadForm(this, "\\" + opcao.ToString(), true);
-
-            switch (NFe.Components.Propriedade.TipoAplicativo)
-            {
-                //case NFe.Components.TipoAplicativo.Nfe:
-                default:
-                    this.Icon = NFe.UI.Properties.Resources.uninfe_icon;
-                    break;
-
-                case NFe.Components.TipoAplicativo.Nfse:
-                    this.Icon = NFe.UI.Properties.Resources.uninfse_icon;
-                    break;
-            }
+            Icon = Properties.Resources.uninfe_icon;
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)

@@ -294,7 +294,14 @@ namespace NFe.Threadings
         private void Processar(ThreadItem item)
         {
             if (String.IsNullOrEmpty(Thread.CurrentThread.Name))
+            {
+                if (item.FileInfo.DirectoryName.ToLower().EndsWith("geral\\temp"))
+                {
+                    item.Empresa = -1;
+                }
+
                 Thread.CurrentThread.Name = item.Empresa.ToString();
+            }
 
             try
             {

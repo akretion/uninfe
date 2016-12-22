@@ -198,7 +198,7 @@ namespace NFe.UI
             {
                 try
                 {
-                    Functions.DeletarArquivo(ConfiguracaoApp.XMLVersoesWSDL);
+                    Functions.DeletarArquivo(Propriedade.XMLVersaoWSDLXSD);
 
                     string cerros = "";
                     ConfiguracaoApp.ForceUpdateWSDL(false, ref cerros);

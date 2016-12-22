@@ -205,10 +205,10 @@ namespace NFe.Components
                 var r = (from ss in Propriedade.Municipios orderby ss.Nome select ss);
                 foreach (Municipio item in r)//Propriedade.Municipios)
                 {
-                    elementos.Add(new XElement(NFe.Components.NFeStrConstants.Registro,
-                                    new XAttribute(NFe.Components.TpcnResources.ID.ToString(), item.CodigoMunicipio.ToString()),
-                                    new XAttribute(NFe.Components.NFeStrConstants.Nome, item.Nome.Trim()),
-                                    new XAttribute(NFe.Components.NFeStrConstants.Padrao, item.PadraoStr)));
+                    elementos.Add(new XElement(NFeStrConstants.Registro,
+                                    new XAttribute(TpcnResources.ID.ToString(), item.CodigoMunicipio.ToString()),
+                                    new XAttribute(NFeStrConstants.Nome, item.Nome.Trim()),
+                                    new XAttribute(NFeStrConstants.Padrao, item.PadraoStr)));
                 }
                 xml.Add(elementos);
                 xml.Save(Propriedade.NomeArqXMLMunicipios);
@@ -236,24 +236,24 @@ namespace NFe.Components
                 XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService_NFSe);
                 var s = (from p in axml.Descendants(NFeStrConstants.Estado)
                          where (string)p.Attribute(TpcnResources.UF.ToString()) != "XX"
-                         orderby p.Attribute(NFe.Components.NFeStrConstants.Nome).Value
+                         orderby p.Attribute(NFeStrConstants.Nome).Value
                          select p);
                 foreach (var item in s)
                 {
                     string padrao = PadroesNFSe.NaoIdentificado.ToString();
-                    if (item.Attribute(NFe.Components.NFeStrConstants.Padrao) != null)
-                        padrao = item.Attribute(NFe.Components.NFeStrConstants.Padrao).Value;
+                    if (item.Attribute(NFeStrConstants.Padrao) != null)
+                        padrao = item.Attribute(NFeStrConstants.Padrao).Value;
 
                     if (padrao != PadroesNFSe.NaoIdentificado.ToString())
                     {
-                        string ID = item.Attribute(NFe.Components.TpcnResources.ID.ToString()).Value;
-                        string Nome = item.Attribute(NFe.Components.NFeStrConstants.Nome).Value;
+                        string ID = item.Attribute(TpcnResources.ID.ToString()).Value;
+                        string Nome = item.Attribute(NFeStrConstants.Nome).Value;
                         string UF = item.Attribute(TpcnResources.UF.ToString()).Value;
 
-                        elementos.Add(new XElement(NFe.Components.NFeStrConstants.Registro,
-                                        new XAttribute(NFe.Components.TpcnResources.ID.ToString(), ID),
-                                        new XAttribute(NFe.Components.NFeStrConstants.Nome, Nome.Trim()),
-                                        new XAttribute(NFe.Components.NFeStrConstants.Padrao, padrao)));
+                        elementos.Add(new XElement(NFeStrConstants.Registro,
+                                        new XAttribute(TpcnResources.ID.ToString(), ID),
+                                        new XAttribute(NFeStrConstants.Nome, Nome.Trim()),
+                                        new XAttribute(NFeStrConstants.Padrao, padrao)));
                     }
                 }
                 if (!elementos.IsEmpty)
