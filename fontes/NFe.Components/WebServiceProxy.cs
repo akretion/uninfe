@@ -502,6 +502,7 @@ namespace NFe.Components
                                         case PadroesNFSe.EQUIPLANO:
                                         case PadroesNFSe.ABACO:
                                         case PadroesNFSe.GIF:
+                                        case PadroesNFSe.ABASE:
                                             securityProtocolType = SecurityProtocolType.Tls;
                                             break;
 

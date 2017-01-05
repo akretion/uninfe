@@ -257,7 +257,7 @@ namespace NFe.Service
                                             //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
                                             XmlDocument conteudoXML = new XmlDocument();
                                             conteudoXML.Load(strArquivoNFe);
-                                            oLerXml.Cte(conteudoXML);
+                                            oLerXml.Mdfe(conteudoXML);
 
                                             //Verificar se a -nfe.xml existe na pasta de autorizados
                                             bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML);

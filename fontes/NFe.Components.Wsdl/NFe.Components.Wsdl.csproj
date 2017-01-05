@@ -2953,6 +2953,12 @@
     <EmbeddedResource Include="NFe\schemas\DFe\tiposDistDFe_v1.01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\ABASE\nfse.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\ABASE\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="NFse\schemas\NFSe\BSITBR\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2981,6 +2987,8 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PBalneario-SIMPLISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPrudenteMorais-WebISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPrudenteMorais-WebISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HABASE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PABASE.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

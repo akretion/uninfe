@@ -699,7 +699,12 @@ namespace NFe.Components
         /// Padrão BSIT-BR
         /// </summary>
         [Description("BSIT-BR")]
-        BSITBR
+        BSITBR,
+        /// <summary>
+        /// Padrão ABASE Sistemas
+        /// </summary>
+        [Description("ABASE")]
+        ABASE
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

@@ -1,36 +1,39 @@
-﻿using System;
-using System.IO;
+﻿using NFe.Certificado;
 using NFe.Components;
-using NFe.Settings;
-using NFe.Certificado;
-using NFSe.Components;
-using NFe.Components.SystemPro;
-using NFe.Components.SigCorp;
-using NFe.Components.Fiorilli;
-using NFe.Components.SimplISS;
 using NFe.Components.Conam;
+using NFe.Components.Consist;
 using NFe.Components.EGoverne;
 using NFe.Components.EL;
-using NFe.Components.GovDigital;
 using NFe.Components.EloTech;
-using NFe.Components.MGM;
-using NFe.Components.Consist;
+using NFe.Components.Fiorilli;
+using NFe.Components.GovDigital;
 using NFe.Components.Memory;
 using NFe.Components.Metropolis;
+using NFe.Components.MGM;
 using NFe.Components.Pronin;
+using NFe.Components.SigCorp;
+using NFe.Components.SimplISS;
+using NFe.Components.SystemPro;
+using NFe.Settings;
+using NFSe.Components;
+using System;
+using System.IO;
 
 namespace NFe.Service.NFSe
 {
     public class TaskNFSeCancelar : TaskAbst
     {
         #region Objeto com os dados do XML de cancelamento de NFS-e
+
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do pedido de cancelamento
         /// </summary>
         private DadosPedCanNfse oDadosPedCanNfse;
-        #endregion
+
+        #endregion Objeto com os dados do XML de cancelamento de NFS-e
 
         #region Execute
+
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
@@ -75,6 +78,10 @@ namespace NFe.Service.NFSe
 
                         break;
 
+                    case PadroesNFSe.ABASE:
+                        cabecMsg = "<cabecalho xmlns=\"http://nfse.abase.com.br/nfse.xsd\" versao =\"1.00\"><versaoDados>1.00</versaoDados></cabecalho>";
+                        break;
+
                     case PadroesNFSe.GINFES:
                         cabecMsg = ""; //Cancelamento ainda tá na versão 2.0 então não tem o cabecMsg
                         break;
@@ -116,7 +123,6 @@ namespace NFe.Service.NFSe
                         EncryptAssinatura();
                         break;
 
-
                     case PadroesNFSe.DSF:
                         EncryptAssinatura();
                         break;
@@ -146,7 +152,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.METROPOLIS:
+
                         #region METROPOLIS
+
                         Metropolis metropolis = new Metropolis((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                       Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                       oDadosPedCanNfse.cMunicipio,
@@ -160,7 +168,8 @@ namespace NFe.Service.NFSe
 
                         metropolis.CancelarNfse(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion METROPOLIS
 
                     case PadroesNFSe.FIORILLI:
                         Fiorilli fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
@@ -206,7 +215,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.EGOVERNE:
+
                         #region E-Governe
+
                         EGoverne egoverne = new EGoverne((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosPedCanNfse.cMunicipio,
@@ -219,11 +230,15 @@ namespace NFe.Service.NFSe
                         assegov.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
 
                         egoverne.CancelarNfse(NomeArquivoXML);
-                        #endregion
+
+                        #endregion E-Governe
+
                         break;
 
                     case PadroesNFSe.EL:
+
                         #region E&L
+
                         EL el = new EL((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                         oDadosPedCanNfse.cMunicipio,
@@ -234,7 +249,9 @@ namespace NFe.Service.NFSe
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyServidor : ""));
 
                         el.CancelarNfse(NomeArquivoXML);
-                        #endregion
+
+                        #endregion E&L
+
                         break;
 
                     case PadroesNFSe.GOVDIGITAL:
@@ -271,7 +288,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.ELOTECH:
+
                         #region EloTech
+
                         EloTech elotech = new EloTech((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                       Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                       oDadosPedCanNfse.cMunicipio,
@@ -284,10 +303,13 @@ namespace NFe.Service.NFSe
 
                         elotech.CancelarNfse(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion EloTech
 
                     case PadroesNFSe.MGM:
+
                         #region MGM
+
                         MGM mgm = new MGM((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                            Empresas.Configuracoes[emp].PastaXmlRetorno,
                                            oDadosPedCanNfse.cMunicipio,
@@ -295,7 +317,8 @@ namespace NFe.Service.NFSe
                                            Empresas.Configuracoes[emp].SenhaWS);
                         mgm.CancelarNfse(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion MGM
 
                     case PadroesNFSe.NATALENSE:
                         cabecMsg = @"
@@ -304,7 +327,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.CONSIST:
+
                         #region Consist
+
                         Consist consist = new Consist((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosPedCanNfse.cMunicipio,
@@ -316,14 +341,17 @@ namespace NFe.Service.NFSe
 
                         consist.CancelarNfse(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion Consist
 
                     case PadroesNFSe.FREIRE_INFORMATICA:
                         cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.MEMORY:
+
                         #region Memory
+
                         Memory memory = new Memory((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosPedCanNfse.cMunicipio,
@@ -335,7 +363,8 @@ namespace NFe.Service.NFSe
 
                         memory.CancelarNfse(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion Memory
 
                     case PadroesNFSe.CAMACARI_BA:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados><versao>2.01</versao></cabecalho>";
@@ -378,8 +407,8 @@ namespace NFe.Service.NFSe
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.InvocarNFSe(wsProxy, pedCanNfse, NomeMetodoWS(Servico, oDadosPedCanNfse.cMunicipio), cabecMsg, this,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,   //"-ped-cannfse", 
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML,   //"-cannfse", 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,   //"-ped-cannfse",
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML,   //"-cannfse",
                                             padraoNFSe, Servico, securityProtocolType);
 
                     ///
@@ -417,9 +446,11 @@ namespace NFe.Service.NFSe
                 }
             }
         }
-        #endregion
+
+        #endregion Execute
 
         #region PedCanNfse()
+
         /// <summary>
         /// Fazer a leitura do conteúdo do XML de cancelamento de NFS-e e disponibilizar conteúdo em um objeto para analise
         /// </summary>
@@ -438,9 +469,11 @@ namespace NFe.Service.NFSe
             //    XmlElement infCancElemento = (XmlElement)infCancNode;
             //}
         }
-        #endregion
+
+        #endregion PedCanNfse()
 
         #region EncryptAssinatura()
+
         /// <summary>
         /// Encriptar a tag Assinatura quando for município de Blumenau - SC
         /// </summary>
@@ -450,6 +483,7 @@ namespace NFe.Service.NFSe
             NFe.Validate.ValidarXML val = new Validate.ValidarXML(NomeArquivoXML, oDadosPedCanNfse.cMunicipio, false);
             val.EncryptAssinatura(NomeArquivoXML);
         }
-        #endregion
+
+        #endregion EncryptAssinatura()
     }
 }

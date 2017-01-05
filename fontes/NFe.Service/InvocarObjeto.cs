@@ -563,6 +563,20 @@ namespace NFe.Service
 
                 #endregion NA_INFORMATICA
 
+                #region ABASE
+
+                case PadroesNFSe.ABASE:
+                    if (servicoNFSe == Servicos.NFSeConsultarPorRps)
+                        goto default;
+                    else
+                    {
+                        XmlNode xmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
+                        strRetorno = xmlRetorno.OuterXml;
+                    }
+                    break;
+
+                #endregion ABASE
+
                 #region Demais padrões
 
                 default:

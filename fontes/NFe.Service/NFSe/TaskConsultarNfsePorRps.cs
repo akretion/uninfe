@@ -60,6 +60,10 @@ namespace NFe.Service.NFSe
                             cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                         break;
 
+                    case PadroesNFSe.ABASE:
+                        cabecMsg = "<cabecalho xmlns=\"http://nfse.abase.com.br/nfse.xsd\" versao =\"1.00\"><versaoDados>1.00</versaoDados></cabecalho>";
+                        break;
+
                     case PadroesNFSe.BETHA:
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
                         wsProxy.Betha = new Betha();
