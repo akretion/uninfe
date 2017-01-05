@@ -50,7 +50,7 @@ namespace NFe.Service
 
                             for (int d = 0; d < QtdeArquivo; d++)
                             {
-                                string arquivoNFe = Empresas.Configuracoes[emp].PastaXmlEmLote + Propriedade.NomePastaXMLAssinado + "\\" + documentoElemento.GetElementsByTagName("ArquivoCTe")[d].InnerText;
+                                string arquivoNFe = Empresas.Configuracoes[emp].PastaXmlEmLote + "\\temp\\" + documentoElemento.GetElementsByTagName("ArquivoCTe")[d].InnerText;
 
                                 if (File.Exists(arquivoNFe))
                                 {

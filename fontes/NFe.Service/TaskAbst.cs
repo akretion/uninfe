@@ -1562,7 +1562,32 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion BSIT-BR
+                #endregion BSIT-BR
+
+                #region ABASE
+
+                case PadroesNFSe.ABASE:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultaLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultaNfseRps";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelaNfse";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                    }
+                    break;
+
+                    #endregion ABASE
             }
 
             return retorna;

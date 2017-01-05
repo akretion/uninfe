@@ -145,6 +145,7 @@
     <Compile Include="Schemas\SchemaXMLNFSe_METROPOLIS.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_ACTCON.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_PUBLICA.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_ABASE.cs" />
     <Compile Include="Schemas\SchemaXML_CFE.cs" />
     <Compile Include="Schemas\SchemaXML_NFe.cs" />
     <Compile Include="Schemas\SchemaXML_MDFe.cs" />
