@@ -206,6 +206,7 @@ namespace NFe.Components.Info
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "CTeConsultaCadastro", (!string.IsNullOrEmpty(item.CTeConsultaCadastro)).ToString());
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "CTeInutilizacao", (!string.IsNullOrEmpty(item.CTeInutilizacao)).ToString());
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "CTeStatusServico", (!string.IsNullOrEmpty(item.CTeStatusServico)).ToString());
+                                    Functions.GravaTxtXml(oXmlGravar, tipo + "CTeDistribuicaoDFe", (!string.IsNullOrEmpty(item.CTeDistribuicaoDFe)).ToString());
                                 }
 
                                 break;

@@ -19,6 +19,8 @@ namespace NFe.Components
 
         public static string ServiceName = "UniNFeServico";
 
+        public const string UrlManualUniNFe = "http://wiki.unimake.com.br/index.php/Manuais:UniNFe";
+
         /// <summary>
         /// Nome para a pasta dos XML assinados
         /// </summary>
@@ -245,7 +247,6 @@ namespace NFe.Components
             /// </summary>
             NFe,
 
-            ConsNFeDest,
             EnvCancelamento,
             EnvCCe,
             EnvDownload,
@@ -305,6 +306,7 @@ namespace NFe.Components
             ConsCad,
 
             EnvDFe,
+            EnvDFeCTe,
             EnvDanfeReport,
             EnvImpressaoDanfe,
             EnvLot,
@@ -355,13 +357,6 @@ namespace NFe.Components
                 #endregion Extensões gerais
 
                 #region Extensões da NFe
-
-                ListaExtensoes.Add(TipoEnvio.ConsNFeDest, new ExtensaoClass(
-                    "-cons-nfe-dest.xml",
-                    "-cons-nfe-dest.txt",
-                    "-ret-cons-nfe-dest.xml",
-                    "",
-                    "Consulta de notas destinadas"));
 
                 ListaExtensoes.Add(TipoEnvio.EnvCancelamento, new ExtensaoClass(
                     "-env-canc.xml", "-env-canc.txt",
@@ -638,7 +633,14 @@ namespace NFe.Components
                     "-con-dist-dfe.txt",
                     "-dist-dfe.xml",
                     "-dist-dfe.txt",
-                    "Consulta de DFe"));
+                    "Consulta de DFe (NFe)"));
+
+                ListaExtensoes.Add(TipoEnvio.EnvDFeCTe, new ExtensaoClass(
+                    "-con-dist-dfecte.xml",
+                    "-con-dist-dfecte.txt",
+                    "-dist-dfecte.xml",
+                    "-dist-dfecte.txt",
+                    "Consulta de DFe (CTe)"));
 
                 #endregion Extensões em comum entre NFe, CTe e MDF-e
 
@@ -750,16 +752,6 @@ namespace NFe.Components
             /// -down-nfe.txt
             /// </summary>
             public static string EnvDownload_TXT = Extensao(TipoEnvio.EnvDownload).EnvioTXT;
-
-            /// <summary>
-            /// -cons-nfe-dest.xml
-            /// </summary>
-            public static string ConsNFeDest_XML = Extensao(TipoEnvio.ConsNFeDest).EnvioXML;
-
-            /// <summary>
-            /// -cons-nfe-dest.txt
-            /// </summary>
-            public static string ConsNFeDest_TXT = Extensao(TipoEnvio.ConsNFeDest).EnvioTXT;
 
             #endregion Extensões da NFe
 
@@ -940,6 +932,8 @@ namespace NFe.Components
 
             public static string EnvDFe = Extensao(TipoEnvio.EnvDFe).EnvioXML;
             public static string EnvDFe_TXT = Extensao(TipoEnvio.EnvDFe).EnvioTXT;
+            public static string EnvDFeCTe = Extensao(TipoEnvio.EnvDFeCTe).EnvioXML;
+            public static string EnvDFeCTe_TXT = Extensao(TipoEnvio.EnvDFeCTe).EnvioTXT;
 
             #endregion Extensoes de DFe
 
@@ -979,7 +973,6 @@ namespace NFe.Components
             public static string retEnvCCe_XML = Extensao(TipoEnvio.EnvCCe).RetornoXML;
             public static string retCancelamento_XML = Extensao(TipoEnvio.EnvCancelamento).RetornoXML;
             public static string retDownload_XML = Extensao(TipoEnvio.EnvDownload).RetornoXML;
-            public static string retConsNFeDest_XML = Extensao(TipoEnvio.ConsNFeDest).RetornoXML;
             public static string retManifestacao_XML = Extensao(TipoEnvio.EnvManifestacao).RetornoXML;
             public static string MDFeConsNaoEnc = Extensao(TipoEnvio.MDFeConsNaoEncerrados).RetornoXML;
             public static string Eve = Extensao(TipoEnvio.PedEve).RetornoXML;
@@ -1006,6 +999,8 @@ namespace NFe.Components
             public static string RetDanfeReport_TXT = Extensao(TipoEnvio.EnvDanfeReport).RetornoTXT;
             public static string retEnvDFe_XML = Extensao(TipoEnvio.EnvDFe).RetornoXML;
             public static string retEnvDFe_TXT = Extensao(TipoEnvio.EnvDFe).RetornoTXT;
+            public static string retEnvDFeCTe_XML = Extensao(TipoEnvio.EnvDFeCTe).RetornoXML;
+            public static string retEnvDFeCTe_TXT = Extensao(TipoEnvio.EnvDFeCTe).RetornoTXT;
             public static string LMCRet = Extensao(TipoEnvio.LMC).RetornoXML;
 
             #endregion Extensoes que so estao aqui para quem utiliza o codigo em seus projetos
@@ -1220,6 +1215,7 @@ namespace NFe.Components
             #region Extensoes de DFe
 
             public const string retEnvDFe_ERR = "-con-dist-dfe.err";
+            public const string retEnvDFeCTe_ERR = "-con-dist-dfecte.err";
 
             #endregion Extensoes de DFe
 

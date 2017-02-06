@@ -26,9 +26,6 @@ namespace NFe.UI
             uninfeDummy.mainForm.Text = Propriedade.NomeAplicacao + " - Monitor DF-e";
             metroTile_update.Text = "Atualizar o " + Propriedade.NomeAplicacao;
 
-            metroTile_doc.Enabled =
-                System.IO.File.Exists(System.IO.Path.Combine(Propriedade.PastaExecutavel, Propriedade.NomeAplicacao + ".pdf"));
-
             var Components = Controls.Cast<object>()
                                                    .Where(obj => !ReferenceEquals(obj, this))
                                                    .OfType<MetroFramework.Controls.MetroTile>();
@@ -257,28 +254,6 @@ namespace NFe.UI
             StartPage("http://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx?versao=3.100");
         }
 
-        /*
-        private void metroTile_visual_Click(object sender, EventArgs e)
-        {
-            using (NFe.UI.Formularios.FormVisual v = new Formularios.FormVisual())
-            {
-                v.ShowDialog();
-            }
-        }
-        */
-
-        private void metroTile_doc_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Functions.ExibeDocumentacao();
-            }
-            catch (Exception ex)
-            {
-                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
-            }
-        }
-
         private void StartPage(string url)
         {
             try
@@ -331,6 +306,11 @@ namespace NFe.UI
         private void metroTile1_Click(object sender, EventArgs e)
         {
             StartPage("https://mdfe-portal.sefaz.rs.gov.br/Site/Servicos");
+        }
+
+        private void metroTile_Manual_Click(object sender, EventArgs e)
+        {
+            StartPage(Propriedade.UrlManualUniNFe);
         }
     }
 }

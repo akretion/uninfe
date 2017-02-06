@@ -161,7 +161,17 @@ namespace NFe.UI.Formularios
                 checkBoxGravarEventosNaPastaEnviadosNFe.Checked = this.empresa.GravarEventosNaPastaEnviadosNFe;
                 checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Checked = this.empresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
                 checkBoxCompactaNFe.Checked = this.empresa.CompactarNfe;
-                cbIndSinc.Checked = this.empresa.IndSinc;
+
+                // São Paulo não possui processo síncrono
+                if (this.empresa.UnidadeFederativaCodigo == 35)
+                    cbIndSinc.Checked =
+                    cbIndSinc.Enabled = false;
+                else
+                {
+                    cbIndSinc.Enabled = true;
+                    cbIndSinc.Checked = this.empresa.IndSinc;
+                }
+
                 edtIdentificadorCSC.Text = this.empresa.IdentificadorCSC;
                 edtTokenCSC.Text = this.empresa.TokenCSC;
 

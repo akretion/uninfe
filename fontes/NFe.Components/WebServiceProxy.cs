@@ -464,6 +464,7 @@ namespace NFe.Components
             {
                 case Servicos.EventoManifestacaoDest:
                 case Servicos.DFeEnviar:
+                case Servicos.CTeDistribuicaoDFe:
                 case Servicos.NFeDownload:
                     securityProtocolType = SecurityProtocolType.Tls;
                     break;
@@ -1004,6 +1005,7 @@ namespace NFe.Components
             CTeStatusServico =
             CTeRecepcaoEvento =
             CTeConsultaCadastro =
+            CTeDistribuicaoDFe =
             ///
             /// LMC
             LMCAutorizacao = string.Empty;
@@ -1033,6 +1035,11 @@ namespace NFe.Components
 
         public string NFeDownload { get; set; }
         public string NFeManifDest { get; set; }
+
+        /// <summary>
+        /// Distribuição de DFe de interesses de autores (NFe)
+        /// </summary>
+        public string DFeRecepcao { get; set; }
 
         #endregion NFe
 
@@ -1171,13 +1178,12 @@ namespace NFe.Components
         /// </summary>
         public string CTeRecepcaoEvento { get; set; }
 
+        /// <summary>
+        /// Distribuição de DFe de interesses de autores (CTe)
+        /// </summary>
+        public string CTeDistribuicaoDFe { get; set; }
+
         #endregion CTe
-
-        #region DF-e
-
-        public string DFeRecepcao { get; set; }
-
-        #endregion DF-e
 
         #endregion Propriedades referente as tags do webservice.xml
     }

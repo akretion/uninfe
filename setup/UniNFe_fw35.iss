@@ -33,6 +33,7 @@ VersionInfoCopyright=Unimake Softwares
 VersionInfoProductName=UniNFe
 VersionInfoProductVersion=5.0
 OutputDir=\projetos\instaladores
+DisableDirPage=false
 
 [Languages]
 Name: brazilianportuguese; MessagesFile: compiler:Languages\BrazilianPortuguese.isl
@@ -53,7 +54,6 @@ Source: ..\fontes\uninfe\bin\Release35_AnyCPU\uninfe.exe; DestDir: {app}; Flags:
 Source: ..\fontes\uninfe\bin\Release35_AnyCPU\uninfeservico.exe; DestDir: {app}; Flags: ignoreversion
 Source: \projetos\dv\trunk\fontes\includes\sefaz.inc; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\UniNfeSobre.xml; DestDir: {app}; Flags: ignoreversion
-Source: ..\doc\usuario\uninfe.pdf; DestDir: {app}; Flags: ignoreversion
 Source: ..\doc\usuario\uninfe.url; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\NFe.Components.Wsdl\NFe\WSDL\*.*; DestDir: {app}\nfe\wsdl; Flags: ignoreversion recursesubdirs
 Source: ..\fontes\NFe.Components.Wsdl\NFe\schemas\*.*; DestDir: {app}\nfe\schemas; Flags: ignoreversion recursesubdirs

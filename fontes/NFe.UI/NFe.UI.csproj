@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NFe.UI</RootNamespace>
     <AssemblyName>NFe.UI</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -578,6 +578,7 @@
     <Content Include="Resources\log.png" />
     <None Include="Resources\log1.png" />
     <None Include="Resources\lupa_25x25.jpg" />
+    <None Include="Resources\Manuals.png" />
     <Content Include="Resources\munucipios.png" />
     <None Include="Resources\munucipios1.png" />
     <Content Include="Resources\sefaz.png" />

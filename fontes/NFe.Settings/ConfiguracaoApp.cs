@@ -269,10 +269,9 @@ namespace NFe.Settings
                         retorna = true;
                     }
 
-
                     if (retorna)
                     {
-                        XmlWriter xtw = null; // criar instância para xmltextwriter. 
+                        XmlWriter xtw = null; // criar instância para xmltextwriter.
 
                         try
                         {
@@ -285,8 +284,8 @@ namespace NFe.Settings
                             settings.NewLineOnAttributes = false;
                             settings.OmitXmlDeclaration = false;
 
-                            xtw = XmlWriter.Create(Propriedade.XMLVersaoWSDLXSD, settings); //atribuir arquivo, caminho e codificação 
-                            xtw.WriteStartDocument(); //comaçar a escrever o documento 
+                            xtw = XmlWriter.Create(Propriedade.XMLVersaoWSDLXSD, settings); //atribuir arquivo, caminho e codificação
+                            xtw.WriteStartDocument(); //comaçar a escrever o documento
                             xtw.WriteStartElement("VersaoWSDLXSD"); //Criar elemento raiz
                             xtw.WriteElementString("dVersao", fi.LastWriteTimeUtc.ToString());
                             xtw.WriteEndElement(); //encerrar tag DocumentosNFe
@@ -575,7 +574,6 @@ namespace NFe.Settings
                             ConfiguracaoApp.ConfirmaSaida = Convert.ToBoolean(elementConfig[NfeConfiguracoes.ConfirmaSaida.ToString()].InnerText);
                         else
                             ConfiguracaoApp.ConfirmaSaida = true;
-
                     }
                 }
                 catch (Exception ex)
@@ -982,6 +980,10 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeRecepcaoEvento : list.LocalProducao.CTeRecepcaoEvento);
                             break;
 
+                        case Servicos.CTeDistribuicaoDFe:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeDistribuicaoDFe : list.LocalProducao.CTeDistribuicaoDFe);
+                            break;
+
                         #endregion CT-e
 
                         #region NFS-e
@@ -1324,6 +1326,12 @@ namespace NFe.Settings
                                         if ((erro = this.AddEmpresaNaLista(emp.PastaXmlEmLote)) == "")
                                             if ((erro = this.AddEmpresaNaLista(emp.PastaBackup)) == "")
                                                 erro = this.AddEmpresaNaLista(emp.PastaDownloadNFeDest);
+
+                if ((emp.Servico == TipoAplicativo.Nfe ||
+                    emp.Servico == TipoAplicativo.NFCe ||
+                    emp.Servico == TipoAplicativo.Todos)
+                    && emp.UnidadeFederativaCodigo == 35 && emp.IndSinc == true)
+                    erro = "Estado de São Paulo não dispõe do serviço síncrono para emissão de NFe.";
 
                 if (erro != "")
                 {

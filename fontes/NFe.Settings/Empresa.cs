@@ -523,6 +523,9 @@ namespace NFe.Settings
 
                     t.CopyObjectTo(this);
 
+                    if (t.UnidadeFederativaCodigo == 35)
+                        t.IndSinc = false;
+                                            
                     CriarPastasDaEmpresa();
 
                     X509Certificado = BuscaConfiguracaoCertificado();

@@ -39,6 +39,11 @@ namespace NFe.Components.Pronin.GuarapuavaPR.h
             ServiceGeracao.Credentials = new NetworkCredential(senhaProxy, senhaProxy);
             ServiceGeracao.ClientCertificates.Add(certificado);
 
+            ServiceConsultas.Proxy = WebRequest.DefaultWebProxy;
+            ServiceConsultas.Proxy.Credentials = new NetworkCredential(usuarioProxy, senhaProxy);
+            ServiceConsultas.Credentials = new NetworkCredential(senhaProxy, senhaProxy);
+            ServiceConsultas.ClientCertificates.Add(certificado);
+
             Cabecalho cabecMsg = new Cabecalho();
             cabecMsg.versao = "2.02";
             cabecMsg.versaoDados = "2.02";

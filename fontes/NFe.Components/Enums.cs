@@ -139,6 +139,10 @@ namespace NFe.Components
         /// Enviar XML Evento CTe
         /// </summary>
         CTeRecepcaoEvento,
+        /// <summary>
+        /// Enviar XML de distribuição de DFe de interesses de autores (CTe)
+        /// </summary>
+        CTeDistribuicaoDFe,
         #endregion
 
         #region NFSe
@@ -704,7 +708,12 @@ namespace NFe.Components
         /// Padrão ABASE Sistemas
         /// </summary>
         [Description("ABASE")]
-        ABASE
+        ABASE,
+        /// <summary>
+        /// Lexsom
+        /// </summary>
+        [Description("LEXSOM")]
+        LEXSOM
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

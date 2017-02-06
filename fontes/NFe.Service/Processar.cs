@@ -195,7 +195,8 @@ namespace NFe.Service
                             consultaSessao.SaveResponse();
                             break;
 
-                        #endregion
+                        #endregion SAT/CF-e
+
 #endif
 
                         #region NFe
@@ -343,6 +344,10 @@ namespace NFe.Service
                             DirecionarArquivo(emp, false, true, arquivo, new TaskDFeRecepcao(arquivo));
                             break;
 
+                        case Servicos.CTeDistribuicaoDFe:
+                            DirecionarArquivo(emp, false, true, arquivo, new TaskDFeRecepcaoCTe(arquivo));
+                            break;
+
                         #endregion DFe
 
                         #region LMC
@@ -404,12 +409,21 @@ namespace NFe.Service
                 }
                 catch (Exception ex)
                 {
-                    if (servico == Servicos.Nulo || servico == Servicos.NFeConsultaStatusServico || servico == Servicos.SATConverterNFCe)
+                    switch (servico)
                     {
-                        /// 7/2012 <<< danasa
-                        ///o erp nao precisa esperar pelo tempo excedido, então retornamos um arquivo .err
-                        ///
-                        GravaErroERP(arquivo, servico, ex, ErroPadrao.ErroNaoDetectado);
+                        case Servicos.SATConsultar:
+                        case Servicos.SATEnviarDadosVenda:
+                        case Servicos.SATConverterNFCe:
+                        case Servicos.NFeConsultaStatusServico:
+                        case Servicos.Nulo:
+                            /// 7/2012 <<< danasa
+                            ///o erp nao precisa esperar pelo tempo excedido, então retornamos um arquivo .err
+                            ///
+                            GravaErroERP(arquivo, servico, ex, ErroPadrao.ErroNaoDetectado);
+                            break;
+
+                        default:
+                            break;
                     }
                 }
             }
@@ -564,6 +578,10 @@ namespace NFe.Service
                         {
                             tipoServico = Servicos.DFeEnviar;
                         }
+                        else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioTXT) >= 0)
+                        {
+                            tipoServico = Servicos.CTeDistribuicaoDFe;
+                        }
                         else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioTXT) >= 0)
                         {
                             if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
@@ -589,6 +607,11 @@ namespace NFe.Service
 
                             case "distDFeInt":
                                 tipoServico = Servicos.DFeEnviar;
+
+                                if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioXML) >= 0)
+                                {
+                                    tipoServico = Servicos.CTeDistribuicaoDFe;
+                                }
                                 break;
 
                             #endregion DFe
@@ -833,7 +856,7 @@ namespace NFe.Service
                                 else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarNumeroSessaoSAT).EnvioXML) >= 0)
                                     tipoServico = Servicos.SATConsultarNumeroSessao;
 
-                                #endregion
+                                #endregion SAT/CFe
 
                                 break;
                         }
@@ -938,6 +961,18 @@ namespace NFe.Service
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, temp + Propriedade.ExtRetorno.retEnvDFe_ERR));
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, temp + Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML));
                         DirecionarArquivo(emp, false, false, arquivo, new TaskDFeRecepcao(arquivo));
+
+                        #endregion DFe
+                    }
+
+                    if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        #region DFe
+
+                        var temp = Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioTXT);
+                        Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, temp + Propriedade.ExtRetorno.retEnvDFeCTe_ERR));
+                        Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, temp + Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioXML));
+                        DirecionarArquivo(emp, false, false, arquivo, new TaskDFeRecepcaoCTe(arquivo));
 
                         #endregion DFe
                     }

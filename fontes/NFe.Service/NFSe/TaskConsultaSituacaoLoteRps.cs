@@ -52,7 +52,7 @@ namespace NFe.Service.NFSe
                 WebServiceProxy wsProxy = null;
                 object pedSitLoteRps = null;
 
-                if (IsUtilizaCompilacaoWs(padraoNFSe))
+                if (IsUtilizaCompilacaoWs(padraoNFSe, Servico, oDadosPedSitLoteRps.cMunicipio))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe, 0);
                     if (wsProxy != null) pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -64,10 +64,20 @@ namespace NFe.Service.NFSe
                 switch (padraoNFSe)
                 {
                     case PadroesNFSe.GINFES:
-                        if (oDadosPedSitLoteRps.cMunicipio == 4125506) //São José dos Pinhais - PR  
-                            cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://nfe.sjp.pr.gov.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
-                        else
-                            cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                        switch (oDadosPedSitLoteRps.cMunicipio)
+                        {
+                            case 2304400: //Fortaleza - CE
+                                cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                                break;
+
+                            case 4125506: //São José dos Pinhais - PR  
+                                cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://nfe.sjp.pr.gov.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                                break;
+
+                            default:
+                                cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                                break;
+                        }
                         break;
 
                     case PadroesNFSe.BETHA:
@@ -229,12 +239,12 @@ namespace NFe.Service.NFSe
                             AssinaturaDigital assPronin = new AssinaturaDigital();
                             assPronin.Assinar(NomeArquivoXML, emp, oDadosPedSitLoteRps.cMunicipio);
 
-                            pronin.EmiteNF(NomeArquivoXML);
+                            pronin.ConsultarSituacaoLoteRps(NomeArquivoXML);
                         }
                         break;
                 }
 
-                if (IsInvocar(padraoNFSe, Servico))
+                if (IsInvocar(padraoNFSe, Servico, oDadosPedSitLoteRps.cMunicipio))
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

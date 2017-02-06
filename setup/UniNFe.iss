@@ -33,6 +33,7 @@ VersionInfoCopyright=Unimake Softwares
 VersionInfoProductName=UniNFe
 VersionInfoProductVersion=5.0
 OutputDir=\projetos\instaladores
+DisableDirPage=false
 
 [Languages]
 Name: brazilianportuguese; MessagesFile: compiler:Languages\BrazilianPortuguese.isl
@@ -55,14 +56,11 @@ Source: ..\fontes\uninfe\bin\release\uninfe.exe; DestDir: {app}; Flags: ignoreve
 Source: ..\fontes\uninfe\bin\release\uninfeservico.exe; DestDir: {app}; Flags: ignoreversion
 Source: \projetos\dv\trunk\fontes\includes\sefaz.inc; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\UniNfeSobre.xml; DestDir: {app}; Flags: ignoreversion
-Source: ..\doc\usuario\uninfe.pdf; DestDir: {app}; Flags: ignoreversion
 Source: ..\doc\usuario\uninfe.url; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\NFe.Components.Wsdl\NFe\WSDL\*.*; DestDir: {app}\nfe\wsdl; Flags: ignoreversion recursesubdirs
 Source: ..\fontes\NFe.Components.Wsdl\NFe\schemas\*.*; DestDir: {app}\nfe\schemas; Flags: ignoreversion recursesubdirs
 Source: ..\fontes\NFe.Components.Wsdl\NFse\WSDL\*.*; DestDir: {app}\nfse\wsdl; Flags: ignoreversion recursesubdirs
 Source: ..\fontes\NFe.Components.Wsdl\NFse\schemas\*.*; DestDir: {app}\nfse\schemas; Flags: ignoreversion recursesubdirs
-Source: ..\references\SAT\tanca.dll; DestDir: {sys}; Flags: sharedfile
-Source: ..\references\SAT\tanca.dll; DestDir: {syswow64}; Flags: sharedfile
 
 [Icons]
 Name: {group}\UniNFe - Monitor DF-e; Filename: {app}\uninfe.exe; WorkingDir: {app}; IconFilename: {app}\uninfe.exe; IconIndex: 0; Languages: ; Comment: Aplicativo responsável por monitorar os arquivos de documentos fiscais eletrônicos (NF-e, NFC-e, CT-e, MDF-e, NFS-e, etc.) para assinar, validar e enviar ao SEFAZ.
@@ -85,37 +83,35 @@ var
     filename  : string;
     regresult : cardinal;
 begin
-    // verifica se o framework 4.5 sp1 está instalado.
+    // verifica se o framework 4.6.2 sp1 está instalado.
     // mais detalhes para outros frameworks: https://msdn.microsoft.com/pt-br/library/Hh925568(v=VS.110).aspx
     RegQueryDWordValue(HKLM, 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\full', 'Release', regresult);
 
     // se o resultado for um. Então o SP1 está instalado
     // Este resultado é o valor da chave
-    // 378389 = .NET Framework 4.5
-    // 378675 = .NET framework 4.5.1 instalado com Windows 8.1 ou Windows Server 2012 R2
-    // 378758 = .NET framework 4.5.1 instalado no Windows 8, Windows 7 SP1 ou Windows Vista SP2
-    // 379893 = .NET framework 4.5.2
     // 393295 = .NET Framework 4.6 - Windows 10
     // 393297 = .NET Framework 4.6 - Demais windows
     // 394254 = .NET Framework 4.6.1 - Windows 10
     // 394271 = .NET Framework 4.6.1 - Demais windows
-    if regresult < 378675 then begin
+    // 394802 = .NET Framawork 4.6.2 - Windows 10
+    // 394806 = .NET Framawork 4.6.2 - Demais windows
+    if regresult < 393295 then begin
       // definir o caminho do arquivo
       filename := expandconstant('{tmp}\fx451.exe');
 
       // não está instalado. Exibir a mensagem para o usuário se deseja instalar o fw
-      if MsgBox('Para continuar a instalação é necessário fazer o download do Framework 4.5.1. Deseja continuar?', mbInformation, mb_YesNo) = idYes then begin
+      if MsgBox('Para continuar a instalação é necessário fazer o download do Framework 4.6.2. Deseja continuar?', mbInformation, mb_YesNo) = idYes then begin
           //iniciar o itd
           itd_init;
 
           //adiciona um arquivo na fila de downloads. (pode se adicionar quantos forem necessários)
-          itd_addfile('http://download.microsoft.com/download/7/4/0/74078A56-A3A1-492D-BBA9-865684B83C1B/NDP451-KB2859818-Web.exe', filename);
+          itd_addfile('http://download.microsoft.com/download/F/9/4/F942F07D-F26F-4F30-B4E3-EBD54FABA377/NDP462-KB3151800-x86-x64-AllOS-ENU.exe', filename);
 
           //aqui dizemos ao itd que é para fazer o download após o inno exibir a tela de preparação do setup
           itd_downloadafter(2);
         end else begin
           // o usuário optou por não fazer o download do fw, então avisamos de onde ele pode baixar
-          MsgBox('O link para download manual do framework é http://download.microsoft.com/download/7/4/0/74078A56-A3A1-492D-BBA9-865684B83C1B/NDP451-KB2859818-Web.exe', mbInformation, mb_Ok);
+          MsgBox('O link para download manual do framework é http://download.microsoft.com/download/F/9/4/F942F07D-F26F-4F30-B4E3-EBD54FABA377/NDP462-KB3151800-x86-x64-AllOS-ENU.exe', mbInformation, mb_Ok);
       end
     end
 end;

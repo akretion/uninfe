@@ -40,6 +40,9 @@ namespace NFe.Components.Pronin
                         switch (CodigoMun)
                         {
                             case 4109401: //Guarapuava-PR
+                                proninService = new GuarapuavaPR.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

@@ -23,7 +23,7 @@ namespace NFe.UI
             base.UpdateControles();
 
             this.textBox_versao.Text = Propriedade.Versao;
-            this.textBox_versaofw.Text = "4.5";
+            this.textBox_versaofw.Text = "4.6.2";
 #if _fw35
             this.textBox_versaofw.Text = "3.5";
 #endif
@@ -44,11 +44,9 @@ namespace NFe.UI
             lblEmpresa.Text = ConfiguracaoApp.NomeEmpresa;
             linkLabelSite.Visible = !string.IsNullOrEmpty(ConfiguracaoApp.Site);
             linkLabelSiteProduto.Visible = !string.IsNullOrEmpty(ConfiguracaoApp.SiteProduto);
-            linkLabelEmail.Visible = !string.IsNullOrEmpty(ConfiguracaoApp.Email);
 
             linkLabelSite.Text = ConfiguracaoApp.Site;
             linkLabelSiteProduto.Text = ConfiguracaoApp.SiteProduto;
-            linkLabelEmail.Text = ConfiguracaoApp.Email;
 
             string elapsedDays = ConfiguracaoApp.ExecutionTime.Elapsed.Days + " dias ininterruptos.";
 
@@ -82,11 +80,11 @@ namespace NFe.UI
         {
             try
             {
-                NFe.Components.Functions.ExibeDocumentacao();
+                System.Diagnostics.Process.Start(Propriedade.UrlManualUniNFe);
             }
             catch (Exception ex)
             {
-                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
+                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

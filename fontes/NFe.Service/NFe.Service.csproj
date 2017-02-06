@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NFe.Service</RootNamespace>
     <AssemblyName>NFe.Service</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -96,6 +96,7 @@
     <Compile Include="CTe\TaskConsultaSituacaoCTe.cs" />
     <Compile Include="CTe\TaskMontarLoteVariosCTe.cs" />
     <Compile Include="CTe\TaskRetRecepcaoCTe.cs" />
+    <Compile Include="DFe\TaskRecepcaoDFeCTe.cs" />
     <Compile Include="DFe\TaskRecepcaoDFe.cs" />
     <Compile Include="LMC\LMCAutorizacao.cs" />
     <Compile Include="MDFe\TaskAssinarValidarMDFe.cs" />

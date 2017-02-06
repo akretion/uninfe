@@ -90,7 +90,7 @@ namespace NFe.SAT.Servico.Envio
             using (StreamWriter writer = new StreamWriter(result))
                 writer.Write(CancelarUltimaVendaRetorno.ToXML());
 
-            if (CancelarUltimaVendaRetorno.CodigoMensagem.Equals("06000"))
+            if (CancelarUltimaVendaRetorno.CodigoMensagem.Equals("07000"))
             {
                 xml = Path.Combine(DadosEmpresa.PastaXmlRetorno, Path.GetFileName(ArquivoXML));
                 using (StreamWriter writer = new StreamWriter(xml))

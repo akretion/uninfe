@@ -56,7 +56,7 @@ namespace NFe.Service.NFSe
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedSitNfse.cMunicipio);
                 WebServiceProxy wsProxy = null;
                 object pedLoteRps = null;
-                if (IsUtilizaCompilacaoWs(padraoNFSe))
+                if (IsUtilizaCompilacaoWs(padraoNFSe, Servico, oDadosPedSitNfse.cMunicipio))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitNfse.cMunicipio, oDadosPedSitNfse.tpAmb, oDadosPedSitNfse.tpEmis, padraoNFSe, oDadosPedSitNfse.cMunicipio);
                     if (wsProxy != null) pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
@@ -67,11 +67,21 @@ namespace NFe.Service.NFSe
                 string cabecMsg = "";
                 switch (padraoNFSe)
                 {
-                    case PadroesNFSe.GINFES:
-                        if (oDadosPedSitNfse.cMunicipio == 4125506) //São José dos Pinhais - PR  
-                            cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://nfe.sjp.pr.gov.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
-                        else
-                            cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                    case PadroesNFSe.GINFES:                    
+                        switch (oDadosPedSitNfse.cMunicipio)
+                        {
+                            case 2304400: //Fortaleza - CE
+                                cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                                break;
+
+                            case 4125506: //São José dos Pinhais - PR  
+                                cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://nfe.sjp.pr.gov.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                                break;
+
+                            default:
+                                cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
+                                break;
+                        }
                         break;
 
                     case PadroesNFSe.BETHA:
@@ -341,12 +351,12 @@ namespace NFe.Service.NFSe
                             AssinaturaDigital assPronin = new AssinaturaDigital();
                             assPronin.Assinar(NomeArquivoXML, emp, oDadosPedSitNfse.cMunicipio);
 
-                            pronin.EmiteNF(NomeArquivoXML);
+                            pronin.ConsultarNfse(NomeArquivoXML);
                         }
                         break;
                 }
 
-                if (IsInvocar(padraoNFSe, Servico))
+                if (IsInvocar(padraoNFSe, Servico, oDadosPedSitNfse.cMunicipio))
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

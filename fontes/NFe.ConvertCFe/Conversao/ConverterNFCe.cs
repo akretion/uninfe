@@ -128,6 +128,10 @@ namespace NFe.SAT.Conversao
                     pgto = new envCFeCFeInfCFePgto
                     {
                         MP = PopularMeioPagamento()
+                    },
+                    infAdic = new envCFeCFeInfCFeInfAdic
+                    {
+                        infCpl = GetValueXML("infAdic", "infCpl")
                     }
                 }
             };
