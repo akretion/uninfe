@@ -118,6 +118,114 @@ namespace NFSe.Components
 
             #endregion
 
+            #region Schemas GIF - Específico município de Sapucaia do Sul - RS
+
+            #region XML de Consulta de NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-NFSE", new InfSchema()
+            {
+                Tag = "NFSE",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-SapucaiaDoSul_RS_v1.xsd",
+                Descricao = "XML de Consulta de NFSe por Data",
+                TagAssinatura = "pedidoLoteNFSe",
+                TagAtributoId = "pedidoLoteNFSe",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion
+
+            #region XML de Consulta de NFSe por Data
+            SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedidoLoteNFSe", new InfSchema()
+            {
+                Tag = "pedidoLoteNFSe",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-SapucaiaDoSul_RS_v1.xsd",
+                Descricao = "XML de NFSe padrão GIF",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+            #endregion
+
+            #region XML de Consulta de NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedConsultaTrans", new InfSchema()
+            {
+                Tag = "pedConsultaTrans",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-SapucaiaDoSul_RS_v1.xsd",
+                Descricao = "XML de Consulta de NFSe por Rps",
+                TagAssinatura = "pedConsultaTrans",
+                TagAtributoId = "CNPJ",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion
+
+            #region XML de Consulta de Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedidoNFSe", new InfSchema()
+            {
+                Tag = "pedidoNFSe",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-SapucaiaDoSul_RS_v1.xsd",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "pedidoNFSe",
+                TagAtributoId = "pedidoNFSe",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion
+
+            #region XML de Cancelamento de NFS-e
+            SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedidoCancelamentoLote", new InfSchema()
+            {
+                Tag = "pedidoCancelamentoLote",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-SapucaiaDoSul_RS_v1.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "pedidoCancelamentoLote",
+                TagAtributoId = "CNPJ",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion
+
+            #region XML de Consulta Situação do Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedidoStatusLote", new InfSchema()
+            {
+                Tag = "pedidoStatusLote",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-SapucaiaDoSul_RS_v1.xsd",
+                Descricao = "XML de Consulta da Situacao do Lote RPS",
+                TagAssinatura = "pedidoStatusLote",
+                TagAtributoId = "CNPJ",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-envioLote", new InfSchema()
+            {
+                Tag = "envioLote",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-SapucaiaDoSul_RS_v1.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "envioLote",
+                TagAtributoId = "NFS-e",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion
+
+            #region XML de consulta URL NFSe
+            SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedidoNFSePNG", new InfSchema()
+            {
+                Tag = "pedidoNFSePNG",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-SapucaiaDoSul_RS_v1.xsd",
+                Descricao = "XML de consulta URL NFe padrão GIF",
+                TagAssinatura = "pedidoLoteNFSePNG",
+                TagAtributoId = "CNPJ",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+            #endregion
+
+            #endregion
+
             #region Schemas GIF - Demais municípios
 
             #region XML de Consulta de NFSe por Rps

@@ -72,8 +72,16 @@ namespace NFe.Components
                             padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4314050-";
                             break;
 
+                        case 4320008: //Sapucaia do Sul - RS
+                            padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4320008-";
+                            break;
+
                         case 4125506: //São José dos Pinhais-PR (GINFES)
                             padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4125506-";
+                            break;
+
+                        case 2304400: //Fortaleza - CE
+                            padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-2304400-";
                             break;
 
                         case 4113700: //Londrina-PR (SIGCORP_SIGISS)
@@ -168,6 +176,13 @@ namespace NFe.Components
                                 if (cl != null)
                                 {
                                     nome = "eventoMDFe" + cl.InnerText;
+                                }
+                            }
+                            else if (nome.Equals("distDFeInt"))
+                            {
+                                if (conteudoXML.DocumentElement.NamespaceURI.ToLower().Equals("http://www.portalfiscal.inf.br/cte"))
+                                {
+                                    nome = nome + "CTe";
                                 }
                             }
                         }

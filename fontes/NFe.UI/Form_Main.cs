@@ -404,11 +404,11 @@ namespace NFe.UI
         {
             try
             {
-                NFe.Components.Functions.ExibeDocumentacao();
+                System.Diagnostics.Process.Start(Propriedade.UrlManualUniNFe);
             }
             catch (Exception ex)
             {
-                MetroFramework.MetroMessageBox.Show(this, ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

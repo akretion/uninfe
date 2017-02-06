@@ -184,6 +184,88 @@ namespace NFSe.Components
             #endregion
 
             #endregion
+
+            #region GINFES - Fortaleza - CE (2304400)
+
+            #region XML de Consulta de NFSe por Data
+            SchemaXML.InfSchemas.Add("NFSE-GINFES-2304400-ConsultarNfseEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GINFES_V03\\servico_consultar_nfse_envio_v03.xsd",
+                Descricao = "XML de Consulta de NFSe por Data",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.ginfes.com.br/servico_consultar_nfse_envio_v03.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta de NFSe por Rps
+            SchemaXML.InfSchemas.Add("NFSE-GINFES-2304400-ConsultarNfseRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfsePorRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GINFES_V03\\servico_consultar_nfse_rps_envio_v03.xsd",
+                Descricao = "XML de Consulta de NFSe por Rps",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                //TargetNameSpace = "http://www.ginfes.com.br/servico_consultar_nfse_rps_envio_v03.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta de Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-GINFES-2304400-ConsultarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GINFES_V03\\servico_consultar_lote_rps_envio_v03.xsd",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.ginfes.com.br/servico_consultar_lote_rps_envio_v03.xsd"
+            });
+            #endregion
+
+            #region XML de Cancelamento de NFS-e
+            SchemaXML.InfSchemas.Add("NFSE-GINFES-2304400-CancelarNfseEnvio", new InfSchema()
+            {
+                Tag = "CancelarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GINFES_V03\\servico_cancelar_nfse_envio_v03.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "CancelarNfseEnvio",
+                TagAtributoId = "Pedido",
+                TargetNameSpace = "http://www.ginfes.com.br/servico_cancelar_nfse_envio_v03.xsd"
+            });
+            #endregion
+
+            #region XML de Consulta Situação do Lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-GINFES-2304400-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarSituacaoLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GINFES_V03\\servico_consultar_situacao_lote_rps_envio_v03.xsd",
+                Descricao = "XML de Consulta da Situação do Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.ginfes.com.br/servico_consultar_situacao_lote_rps_envio_v03.xsd"
+            });
+            #endregion
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-GINFES-2304400-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GINFES_V03\\servico_enviar_lote_rps_envio_v03.xsd",
+                Descricao = "XML de Lote RPS",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.ginfes.com.br/servico_enviar_lote_rps_envio_v03.xsd"
+            });
+            #endregion
+
+            #endregion
         }
     }
 }

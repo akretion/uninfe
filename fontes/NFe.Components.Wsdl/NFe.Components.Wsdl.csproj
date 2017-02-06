@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NFe.Components.Wsdl</RootNamespace>
     <AssemblyName>NFe.Components.Wsdl</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -2959,6 +2959,20 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\ABASE\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\HANCTeDistribuicaoDFe.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AN\PANCTeDistribuicaoDFe.wsdl" />
+    <EmbeddedResource Include="NFe\schemas\DFeCTe\distDFeInt_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\DFeCTe\retDistDFeInt_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\DFeCTe\tiposDistDFe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\DFeCTe\xmldsig-core-schema_v1.01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="NFse\schemas\NFSe\BSITBR\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2989,6 +3003,64 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PPrudenteMorais-WebISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HABASE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PABASE.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\GIF\NFSe-Infisc-SapucaiaDoSul_RS_v1.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFortaleza-Ginfes.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PFortaleza-Ginfes.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\cabecalho_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\servico_cancelar_nfse_envio_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\servico_cancelar_nfse_resposta_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\servico_consultar_lote_rps_envio_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\servico_consultar_lote_rps_resposta_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\servico_consultar_nfse_envio_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\servico_consultar_nfse_resposta_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\servico_consultar_nfse_rps_envio_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\servico_consultar_nfse_rps_resposta_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\servico_consultar_situacao_lote_rps_envio_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\servico_consultar_situacao_lote_rps_resposta_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\servico_enviar_lote_rps_envio_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\servico_enviar_lote_rps_resposta_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\tipos_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\GINFES_V03\xmldsig-core-schema20020212_v03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFozDoIguacuLEXSOM.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PFozDoIguacuLEXSOM.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\LEXSOM\NFSE.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\LEXSOM\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

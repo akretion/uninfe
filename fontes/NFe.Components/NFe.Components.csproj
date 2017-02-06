@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NFe.Components</RootNamespace>
     <AssemblyName>NFe.Components</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -138,6 +138,7 @@
     <Compile Include="NFeStrConstants.cs" />
     <Compile Include="RLZ_INFORMATICA\SantaFeDoSulSP\p\Rlz_InformaticaP.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_BSITBR.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_LEXSOM.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_NOTAINTELIGENTE.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_FREIRE_INFORMATICA.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_CAMACARI_BA.cs" />
@@ -514,12 +515,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\br.com.sigiss.testebauru.h\Reference.cs">
+    <Compile Include="Web References\br.com.sigiss.testebarretos\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\br.com.sigiss.testebarretos\Reference.cs">
+    <Compile Include="Web References\br.com.sigiss.testebauru.h\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>

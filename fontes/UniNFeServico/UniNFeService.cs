@@ -24,8 +24,10 @@ namespace UniNFeServico
 
         protected override void OnStart(string[] args)
         {
-            base.OnStart(args);
-
+#if DEBUG
+            System.Diagnostics.Debugger.Launch();
+#endif
+            base.OnStart(args);           
             WriteLog("Serviço iniciado na pasta: " + NFe.Components.Propriedade.PastaExecutavel);
             this.iniciarServicosUniNFe();
         }
@@ -63,6 +65,8 @@ namespace UniNFeServico
         {
             Propriedade.TipoAplicativo = TipoAplicativo.Todos;
             ConfiguracaoApp.StartVersoes();
+
+            Empresas.CarregaConfiguracao();
 
             string filenameWS1 = Propriedade.NomeArqXMLMunicipios;
             string filenameWS2 = Propriedade.NomeArqXMLWebService_NFSe;

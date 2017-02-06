@@ -1587,7 +1587,43 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion ABASE
+                #endregion ABASE
+
+                #region LEXSOM
+
+                case PadroesNFSe.LEXSOM:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRPS";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNFSEPorRPS";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelamentoNFSE";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultaNFSE";
+                            break;
+
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRPS";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecebeLoteRPS";
+                            break;
+
+                    }
+                    break;
+
+                    #endregion BSIT-BR
+
+
             }
 
             return retorna;

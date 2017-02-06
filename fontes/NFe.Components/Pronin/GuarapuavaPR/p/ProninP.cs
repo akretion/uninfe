@@ -16,7 +16,7 @@ using NFe.Components.br.gov.pr.guarapuava.nfse.p;
 
 namespace NFe.Components.Pronin.GuarapuavaPR.p
 {
-    public class ProninH : EmiteNFSeBase
+    public class ProninP : EmiteNFSeBase
     {
         BasicHttpBinding_INFSEGeracao ServiceGeracao = new BasicHttpBinding_INFSEGeracao();
         BasicHttpBinding_INFSEConsultas ServiceConsultas = new BasicHttpBinding_INFSEConsultas();
@@ -30,14 +30,18 @@ namespace NFe.Components.Pronin.GuarapuavaPR.p
         }
 
         #region construtores
-        public ProninH(TipoAmbiente tpAmb, string pastaRetorno, string usuarioProxy, string senhaProxy, string domainProxy, X509Certificate certificado)
+        public ProninP(TipoAmbiente tpAmb, string pastaRetorno, string usuarioProxy, string senhaProxy, string domainProxy, X509Certificate certificado)
             : base(tpAmb, pastaRetorno)
         {
-            ServicePointManager.ServerCertificateValidationCallback = MyCertHandler;
             ServiceGeracao.Proxy = WebRequest.DefaultWebProxy;
             ServiceGeracao.Proxy.Credentials = new NetworkCredential(usuarioProxy, senhaProxy);
             ServiceGeracao.Credentials = new NetworkCredential(senhaProxy, senhaProxy);
             ServiceGeracao.ClientCertificates.Add(certificado);
+
+            ServiceConsultas.Proxy = WebRequest.DefaultWebProxy;
+            ServiceConsultas.Proxy.Credentials = new NetworkCredential(usuarioProxy, senhaProxy);
+            ServiceConsultas.Credentials = new NetworkCredential(senhaProxy, senhaProxy);
+            ServiceConsultas.ClientCertificates.Add(certificado);
 
             Cabecalho cabecMsg = new Cabecalho();
             cabecMsg.versao = "2.02";
@@ -64,6 +68,8 @@ namespace NFe.Components.Pronin.GuarapuavaPR.p
         #region Métodos
         public override void EmiteNF(string file)
         {
+            ServicePointManager.ServerCertificateValidationCallback = MyCertHandler;
+
             XmlDocument doc = new XmlDocument();
             doc.Load(file);
 

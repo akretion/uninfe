@@ -35,7 +35,6 @@
             this.lblEmpresa = new MetroFramework.Controls.MetroLabel();
             this.linkLabelSite = new MetroFramework.Controls.MetroLink();
             this.linkLabelSiteProduto = new MetroFramework.Controls.MetroLink();
-            this.linkLabelEmail = new MetroFramework.Controls.MetroLink();
             this.metroLabel15 = new MetroFramework.Controls.MetroLabel();
             this.textBox_DataUltimaModificacao = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
@@ -122,19 +121,6 @@
             this.linkLabelSiteProduto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.linkLabelSiteProduto.UseSelectable = true;
             this.linkLabelSiteProduto.Click += new System.EventHandler(this.linkLabelSite_Click);
-            // 
-            // linkLabelEmail
-            // 
-            this.linkLabelEmail.AutoSize = true;
-            this.linkLabelEmail.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.linkLabelEmail.Location = new System.Drawing.Point(194, 231);
-            this.linkLabelEmail.Name = "linkLabelEmail";
-            this.linkLabelEmail.Size = new System.Drawing.Size(151, 23);
-            this.linkLabelEmail.TabIndex = 20;
-            this.linkLabelEmail.Text = "nfe@unimake.com.br";
-            this.linkLabelEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabelEmail.UseSelectable = true;
-            this.linkLabelEmail.Click += new System.EventHandler(this.linkLabelSite_Click);
             // 
             // metroLabel15
             // 
@@ -223,10 +209,11 @@
             // pictureBox3
             // 
             this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox3.Image = global::NFe.UI.Properties.Resources.pdf2;
-            this.pictureBox3.Location = new System.Drawing.Point(532, 202);
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox3.Image = global::NFe.UI.Properties.Resources.Manuals;
+            this.pictureBox3.Location = new System.Drawing.Point(494, 173);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(55, 52);
+            this.pictureBox3.Size = new System.Drawing.Size(79, 81);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 27;
             this.pictureBox3.TabStop = false;
@@ -300,7 +287,6 @@
             this.Controls.Add(this.textBox_versao);
             this.Controls.Add(this.metroLabel15);
             this.Controls.Add(this.textBox_DataUltimaModificacao);
-            this.Controls.Add(this.linkLabelEmail);
             this.Controls.Add(this.linkLabelSiteProduto);
             this.Controls.Add(this.linkLabelSite);
             this.Controls.Add(this.lblEmpresa);
@@ -319,7 +305,6 @@
             this.Controls.SetChildIndex(this.lblEmpresa, 0);
             this.Controls.SetChildIndex(this.linkLabelSite, 0);
             this.Controls.SetChildIndex(this.linkLabelSiteProduto, 0);
-            this.Controls.SetChildIndex(this.linkLabelEmail, 0);
             this.Controls.SetChildIndex(this.textBox_DataUltimaModificacao, 0);
             this.Controls.SetChildIndex(this.metroLabel15, 0);
             this.Controls.SetChildIndex(this.textBox_versao, 0);
@@ -347,7 +332,6 @@
         private MetroFramework.Controls.MetroLabel lblEmpresa;
         private MetroFramework.Controls.MetroLink linkLabelSite;
         private MetroFramework.Controls.MetroLink linkLabelSiteProduto;
-        private MetroFramework.Controls.MetroLink linkLabelEmail;
         private MetroFramework.Controls.MetroLabel metroLabel15;
         private MetroFramework.Controls.MetroTextBox textBox_DataUltimaModificacao;
         private MetroFramework.Controls.MetroLabel metroLabel3;

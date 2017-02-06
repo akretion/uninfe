@@ -137,6 +137,7 @@ namespace NFe.Service
                     }
                     break;
 
+                case Servicos.CTeDistribuicaoDFe:
                 case Servicos.DFeEnviar:
                     break;
 
@@ -576,6 +577,11 @@ namespace NFe.Service
                     break;
 
                 #endregion ABASE
+
+                case PadroesNFSe.LEXSOM:                    
+                    XmlNode result = wsProxy.InvokeXML(servicoWS, metodo, new object[] { docXML });
+                    strRetorno = result.OuterXml;
+                    break;
 
                 #region Demais padrões
 

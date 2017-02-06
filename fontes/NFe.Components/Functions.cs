@@ -806,19 +806,6 @@ namespace NFe.Components
             return lEncontrou;
         }
 
-        public static void ExibeDocumentacao()
-        {
-            string docname = Path.Combine(Application.StartupPath, NFe.Components.Propriedade.NomeAplicacao + ".pdf");
-            if (System.IO.File.Exists(docname))
-            {
-                System.Diagnostics.Process.Start(docname);
-            }
-            else
-            {
-                throw new Exception("Não foi possível localizar o arquivo de manual do " + NFe.Components.Propriedade.NomeAplicacao + ".");
-            }
-        }
-
         public static void GravaTxtXml(object w, string fieldname, string content)
         {
             MethodInfo method = w.GetType().GetMethod("WriteElementString", new Type[] { typeof(System.String), typeof(System.String) });

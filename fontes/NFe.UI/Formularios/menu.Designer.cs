@@ -49,7 +49,7 @@
             this.vermelhoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroTile_sefaz_cte = new MetroFramework.Controls.MetroTile();
             this.metroTile_municipios = new MetroFramework.Controls.MetroTile();
-            this.metroTile_doc = new MetroFramework.Controls.MetroTile();
+            this.metroTile_Manual = new MetroFramework.Controls.MetroTile();
             this.metroTile_update = new MetroFramework.Controls.MetroTile();
             this.metroTile_log = new MetroFramework.Controls.MetroTile();
             this.metroTile_wsdl = new MetroFramework.Controls.MetroTile();
@@ -59,6 +59,7 @@
             this.metroTile_Servicos = new MetroFramework.Controls.MetroTile();
             this.metroTile_Configuracoes = new MetroFramework.Controls.MetroTile();
             this.metroTile_sefaz_mdfe = new MetroFramework.Controls.MetroTile();
+            this.metroTile_manualapp = new MetroFramework.Controls.MetroTile();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -81,6 +82,7 @@
             this.metroTile_sefaz_nfe.ActiveControl = null;
             this.metroTile_sefaz_nfe.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_sefaz_nfe.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_sefaz_nfe.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroTile_sefaz_nfe.Location = new System.Drawing.Point(344, 182);
             this.metroTile_sefaz_nfe.Name = "metroTile_sefaz_nfe";
             this.metroTile_sefaz_nfe.Size = new System.Drawing.Size(298, 120);
@@ -220,6 +222,7 @@
             this.metroTile_sefaz_cte.ActiveControl = null;
             this.metroTile_sefaz_cte.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_sefaz_cte.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_sefaz_cte.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroTile_sefaz_cte.Location = new System.Drawing.Point(344, 308);
             this.metroTile_sefaz_cte.Name = "metroTile_sefaz_cte";
             this.metroTile_sefaz_cte.Size = new System.Drawing.Size(143, 120);
@@ -239,6 +242,7 @@
             this.metroTile_municipios.ActiveControl = null;
             this.metroTile_municipios.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_municipios.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_municipios.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroTile_municipios.Location = new System.Drawing.Point(648, 308);
             this.metroTile_municipios.MaximumSize = new System.Drawing.Size(248, 120);
             this.metroTile_municipios.Name = "metroTile_municipios";
@@ -254,30 +258,32 @@
             this.metroTile_municipios.Click += new System.EventHandler(this.metroTile_municipios_Click);
             this.metroTile_municipios.MouseDown += new System.Windows.Forms.MouseEventHandler(this.metroTile_Configuracoes_MouseDown);
             // 
-            // metroTile_doc
+            // metroTile_manual
             // 
-            this.metroTile_doc.ActiveControl = null;
-            this.metroTile_doc.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.metroTile_doc.ContextMenuStrip = this.contextMenuStrip1;
-            this.metroTile_doc.Location = new System.Drawing.Point(344, 56);
-            this.metroTile_doc.Name = "metroTile_doc";
-            this.metroTile_doc.Size = new System.Drawing.Size(298, 120);
-            this.metroTile_doc.Style = MetroFramework.MetroColorStyle.Green;
-            this.metroTile_doc.TabIndex = 47;
-            this.metroTile_doc.Text = "Documentação";
-            this.metroTile_doc.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.metroTile_doc.TileImage = global::NFe.UI.Properties.Resources.documentacao;
-            this.metroTile_doc.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.metroTile_doc.UseSelectable = true;
-            this.metroTile_doc.UseTileImage = true;
-            this.metroTile_doc.Click += new System.EventHandler(this.metroTile_doc_Click);
-            this.metroTile_doc.MouseDown += new System.Windows.Forms.MouseEventHandler(this.metroTile_Configuracoes_MouseDown);
+            this.metroTile_Manual.ActiveControl = null;
+            this.metroTile_Manual.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.metroTile_Manual.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_Manual.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroTile_Manual.Location = new System.Drawing.Point(344, 56);
+            this.metroTile_Manual.Name = "metroTile_manual";
+            this.metroTile_Manual.Size = new System.Drawing.Size(298, 120);
+            this.metroTile_Manual.Style = MetroFramework.MetroColorStyle.Green;
+            this.metroTile_Manual.TabIndex = 47;
+            this.metroTile_Manual.Text = "Manual de integração";
+            this.metroTile_Manual.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.metroTile_Manual.TileImage = global::NFe.UI.Properties.Resources.documentacao;
+            this.metroTile_Manual.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.metroTile_Manual.UseSelectable = true;
+            this.metroTile_Manual.UseTileImage = true;
+            this.metroTile_Manual.Click += new System.EventHandler(this.metroTile_Manual_Click);
+            this.metroTile_Manual.MouseDown += new System.Windows.Forms.MouseEventHandler(this.metroTile_Configuracoes_MouseDown);
             // 
             // metroTile_update
             // 
             this.metroTile_update.ActiveControl = null;
             this.metroTile_update.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_update.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_update.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroTile_update.Location = new System.Drawing.Point(648, 56);
             this.metroTile_update.Name = "metroTile_update";
             this.metroTile_update.Size = new System.Drawing.Size(145, 120);
@@ -297,6 +303,7 @@
             this.metroTile_log.ActiveControl = null;
             this.metroTile_log.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_log.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_log.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroTile_log.Location = new System.Drawing.Point(165, 308);
             this.metroTile_log.Name = "metroTile_log";
             this.metroTile_log.Size = new System.Drawing.Size(173, 120);
@@ -316,6 +323,7 @@
             this.metroTile_wsdl.ActiveControl = null;
             this.metroTile_wsdl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_wsdl.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_wsdl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroTile_wsdl.Location = new System.Drawing.Point(648, 182);
             this.metroTile_wsdl.Name = "metroTile_wsdl";
             this.metroTile_wsdl.Size = new System.Drawing.Size(145, 120);
@@ -335,6 +343,7 @@
             this.metroTile_sobre.ActiveControl = null;
             this.metroTile_sobre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.metroTile_sobre.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_sobre.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroTile_sobre.Location = new System.Drawing.Point(746, 3);
             this.metroTile_sobre.Name = "metroTile_sobre";
             this.metroTile_sobre.Size = new System.Drawing.Size(48, 47);
@@ -354,6 +363,7 @@
             this.metroTile_ValidaXml.ActiveControl = null;
             this.metroTile_ValidaXml.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_ValidaXml.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_ValidaXml.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroTile_ValidaXml.Location = new System.Drawing.Point(10, 308);
             this.metroTile_ValidaXml.MaximumSize = new System.Drawing.Size(170, 120);
             this.metroTile_ValidaXml.Name = "metroTile_ValidaXml";
@@ -374,6 +384,7 @@
             this.metroTile_CadastroContrib.ActiveControl = null;
             this.metroTile_CadastroContrib.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_CadastroContrib.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_CadastroContrib.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroTile_CadastroContrib.Location = new System.Drawing.Point(165, 182);
             this.metroTile_CadastroContrib.Name = "metroTile_CadastroContrib";
             this.metroTile_CadastroContrib.Size = new System.Drawing.Size(173, 120);
@@ -393,6 +404,7 @@
             this.metroTile_Servicos.ActiveControl = null;
             this.metroTile_Servicos.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_Servicos.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_Servicos.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroTile_Servicos.Location = new System.Drawing.Point(10, 182);
             this.metroTile_Servicos.Name = "metroTile_Servicos";
             this.metroTile_Servicos.Size = new System.Drawing.Size(149, 120);
@@ -412,6 +424,7 @@
             this.metroTile_Configuracoes.ActiveControl = null;
             this.metroTile_Configuracoes.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_Configuracoes.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_Configuracoes.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroTile_Configuracoes.Location = new System.Drawing.Point(10, 56);
             this.metroTile_Configuracoes.Name = "metroTile_Configuracoes";
             this.metroTile_Configuracoes.Size = new System.Drawing.Size(328, 120);
@@ -431,6 +444,7 @@
             this.metroTile_sefaz_mdfe.ActiveControl = null;
             this.metroTile_sefaz_mdfe.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_sefaz_mdfe.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_sefaz_mdfe.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroTile_sefaz_mdfe.Location = new System.Drawing.Point(494, 308);
             this.metroTile_sefaz_mdfe.Name = "metroTile_sefaz_mdfe";
             this.metroTile_sefaz_mdfe.Size = new System.Drawing.Size(148, 120);
@@ -451,7 +465,7 @@
             this.AutoScroll = true;
             this.Controls.Add(this.metroTile_sefaz_mdfe);
             this.Controls.Add(this.metroTile_municipios);
-            this.Controls.Add(this.metroTile_doc);
+            this.Controls.Add(this.metroTile_Manual);
             this.Controls.Add(this.metroTile_sefaz_nfe);
             this.Controls.Add(this.metroTile_sefaz_cte);
             this.Controls.Add(this.metroLink_unimake);
@@ -501,5 +515,7 @@
         private System.Windows.Forms.ToolStripMenuItem amareloToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restaurarPadrãoToolStripMenuItem;
         private MetroFramework.Controls.MetroTile metroTile_sefaz_mdfe;
+        private MetroFramework.Controls.MetroTile metroTile_Manual;
+        private MetroFramework.Controls.MetroTile metroTile_manualapp;
     }
 }
