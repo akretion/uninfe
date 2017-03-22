@@ -47,7 +47,7 @@ namespace NFe.Components
 
         private void DefinirTipoArq(string fullPathXML, XmlDocument conteudoXML, int UFCod, bool soValidar)
         {
-            bool nfse = (UFCod.ToString().Length == 7);
+            bool nfse = (UFCod.ToString().Length == 7) || (UFCod == 202);
 
             nRetornoTipoArq = 0;
 
@@ -64,6 +64,8 @@ namespace NFe.Components
 
             try
             {
+                #region Definir padrão NFSe
+
                 if (nfse)
                 {
                     switch (UFCod)
@@ -92,11 +94,17 @@ namespace NFe.Components
                             padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4109401-";
                             break;
 
+                        case 202: //BETHA 2.02
+                            padraoNFSe = PadroesNFSe.BETHA.ToString() + "-202-";
+                            break;
+
                         default:
                             padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                             break;
                     }
                 }
+
+                #endregion Definir padrão NFSe
 
                 try
                 {
@@ -106,6 +114,8 @@ namespace NFe.Components
                         versao = ((XmlElement)conteudoXML.GetElementsByTagName(conteudoXML.DocumentElement.Name)[0]).Attributes[TpcnResources.versao.ToString()].Value;
                     else if (((XmlElement)conteudoXML.GetElementsByTagName(conteudoXML.DocumentElement.FirstChild.Name)[0]).Attributes[TpcnResources.versao.ToString()] != null)
                         versao = ((XmlElement)conteudoXML.GetElementsByTagName(conteudoXML.DocumentElement.FirstChild.Name)[0]).Attributes[TpcnResources.versao.ToString()].Value;
+                    else if (((XmlElement)conteudoXML.GetElementsByTagName(conteudoXML.DocumentElement.Name)[0]).Attributes["versaoModal"] != null)
+                        versao = ((XmlElement)conteudoXML.GetElementsByTagName(conteudoXML.DocumentElement.Name)[0]).Attributes["versaoModal"].Value;
 
                     if (nfse)
                     {
@@ -183,6 +193,17 @@ namespace NFe.Components
                                 if (conteudoXML.DocumentElement.NamespaceURI.ToLower().Equals("http://www.portalfiscal.inf.br/cte"))
                                 {
                                     nome = nome + "CTe";
+                                }
+                            }
+                            else if (nome.Equals("infModal"))
+                            {
+                                if (conteudoXML.DocumentElement.NamespaceURI.ToLower().Equals("http://www.portalfiscal.inf.br/cte"))
+                                {
+                                    nome = conteudoXML.FirstChild.FirstChild.Name + "-CTe";
+                                }
+                                if (conteudoXML.DocumentElement.NamespaceURI.ToLower().Equals("http://www.portalfiscal.inf.br/mdfe"))
+                                {
+                                    nome = conteudoXML.FirstChild.FirstChild.Name + "-MDFe";                                    
                                 }
                             }
                         }

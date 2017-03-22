@@ -194,8 +194,8 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\GINFES_V03\\servico_consultar_nfse_envio_v03.xsd",
                 Descricao = "XML de Consulta de NFSe por Data",
-                TagAssinatura = "",
-                TagAtributoId = "",
+                TagAssinatura = "ConsultarNfseEnvio",
+                TagAtributoId = "NumeroNfse",
                 TargetNameSpace = "http://www.ginfes.com.br/servico_consultar_nfse_envio_v03.xsd"
             });
             #endregion
@@ -207,9 +207,9 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\GINFES_V03\\servico_consultar_nfse_rps_envio_v03.xsd",
                 Descricao = "XML de Consulta de NFSe por Rps",
-                TagAssinatura = "",
-                TagAtributoId = "",
-                //TargetNameSpace = "http://www.ginfes.com.br/servico_consultar_nfse_rps_envio_v03.xsd"
+                TagAssinatura = "ConsultarNfseRpsEnvio",
+                TagAtributoId = "Prestador",
+                TargetNameSpace = "http://www.ginfes.com.br/servico_consultar_nfse_rps_envio_v03.xsd"
             });
             #endregion
 
@@ -220,21 +220,23 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\GINFES_V03\\servico_consultar_lote_rps_envio_v03.xsd",
                 Descricao = "XML de Consulta de Lote RPS",
-                TagAssinatura = "",
-                TagAtributoId = "",
+                TagAssinatura = "ConsultarLoteRpsEnvio",
+                TagAtributoId = "Protocolo",
                 TargetNameSpace = "http://www.ginfes.com.br/servico_consultar_lote_rps_envio_v03.xsd"
             });
             #endregion
 
             #region XML de Cancelamento de NFS-e
-            SchemaXML.InfSchemas.Add("NFSE-GINFES-2304400-CancelarNfseEnvio", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFSE-3-GINFES-2304400-e:CancelarNfseEnvio", new InfSchema()
             {
-                Tag = "CancelarNfseEnvio",
+                Tag = "e:CancelarNfseEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\GINFES_V03\\servico_cancelar_nfse_envio_v03.xsd",
                 Descricao = "XML de Cancelamento da NFS-e",
-                TagAssinatura = "CancelarNfseEnvio",
+                TagAssinatura = "e:CancelarNfseEnvio",
                 TagAtributoId = "Pedido",
+                TagLoteAssinatura = "Pedido",
+                TagLoteAtributoId = "tipos:InfPedidoCancelamento",
                 TargetNameSpace = "http://www.ginfes.com.br/servico_cancelar_nfse_envio_v03.xsd"
             });
             #endregion
@@ -246,8 +248,8 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\GINFES_V03\\servico_consultar_situacao_lote_rps_envio_v03.xsd",
                 Descricao = "XML de Consulta da Situação do Lote RPS",
-                TagAssinatura = "",
-                TagAtributoId = "",
+                TagAssinatura = "ConsultarSituacaoLoteRpsEnvio",
+                TagAtributoId = "Protocolo",
                 TargetNameSpace = "http://www.ginfes.com.br/servico_consultar_situacao_lote_rps_envio_v03.xsd"
             });
             #endregion

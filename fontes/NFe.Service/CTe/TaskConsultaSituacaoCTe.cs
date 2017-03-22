@@ -51,7 +51,7 @@ namespace NFe.Service
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedSit.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLCTePedSit);
+                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedSit.versao);
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy,
@@ -250,7 +250,7 @@ namespace NFe.Service
                                             //Se o XML de distribuição não estiver na pasta em processamento
                                             if (!procNFeJaNaAutorizada && !File.Exists(strArquivoNFeProc))
                                             {
-                                                oGerarXML.XmlDistCTe(strArquivoCTe, strProtNfe);
+                                                oGerarXML.XmlDistCTe(strArquivoCTe, strProtNfe, oLerXml.oDadosNfe.versao);
                                             }
 
                                             //Se o XML de distribuição não estiver ainda na pasta de autorizados

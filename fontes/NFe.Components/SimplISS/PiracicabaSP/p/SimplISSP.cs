@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Remoting;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
-using NFe.Components.Abstract;
+﻿using NFe.Components.Abstract;
 using NFe.Components.br.gov.sp.piracicaba.sistemas.www.p;
+using System;
 using System.Net;
+using System.Xml;
 
 namespace NFe.Components.SimplISS.PiracicabaSP.p
 {
     public class SimplISSP : EmiteNFSeBase
     {
         #region Propriedades
+
         /// <summary>
         /// Objeto de conexão com o Webservice
         /// </summary>
@@ -37,9 +30,11 @@ namespace NFe.Components.SimplISS.PiracicabaSP.p
                 return "http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd";
             }
         }
-        #endregion
+
+        #endregion Propriedades
 
         #region Construtores
+
         public SimplISSP(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver)
             : base(tpAmb, pastaRetorno)
         {
@@ -56,17 +51,31 @@ namespace NFe.Components.SimplISS.PiracicabaSP.p
             DadosConexao.P1 = usuario;
             DadosConexao.P2 = senhaWs;
         }
-        #endregion
+
+        #endregion Construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
-            GerarNovaNfseEnvio envio = DeserializarObjeto<GerarNovaNfseEnvio>(file);              
-            string strResult = SerializarObjeto(Service.GerarNfse(envio, DadosConexao));
+            XmlDocument doc = new XmlDocument();
+            doc.Load(file);
+            string strResult = string.Empty;
+            switch (doc.DocumentElement.Name)
+            {
+                case "GerarNovaNfseEnvio":
+                    GerarNovaNfseEnvio envio = DeserializarObjeto<GerarNovaNfseEnvio>(file);
+                    strResult = SerializarObjeto(Service.GerarNfse(envio, DadosConexao));
+                    break;
+
+                case "EnviarLoteRpsEnvio":
+                    EnviarLoteRpsEnvio envioLote = DeserializarObjeto<EnviarLoteRpsEnvio>(file);
+                    strResult = SerializarObjeto(Service.RecepcionarLoteRps(envioLote, DadosConexao));
+                    break;
+            }
 
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
                                           Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
-
         }
 
         public override void CancelarNfse(string file)
@@ -109,6 +118,7 @@ namespace NFe.Components.SimplISS.PiracicabaSP.p
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
                                           Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
-        #endregion
+
+        #endregion Métodos
     }
 }

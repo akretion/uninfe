@@ -55,7 +55,7 @@ namespace NFe.Service
                 object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
 
                 wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), cOrgao.ToString());
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLMDFeEvento);
+                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosEnvEvento.versao);
 
                 //Criar objeto da classe de assinatura digital
                 AssinaturaDigital oAD = new AssinaturaDigital();
@@ -106,6 +106,15 @@ namespace NFe.Service
 
         #endregion Execute
 
+        protected override void EnvEvento(int emp, DadosenvEvento dadosEnvEvento)
+        {
+            XmlNodeList eventoMDFeList = ConteudoXML.GetElementsByTagName("eventoMDFe");
+            XmlElement eventoCTeElemento = (XmlElement)eventoMDFeList[0];
+            dadosEnvEvento.versao = eventoCTeElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
+
+            base.EnvEvento(emp, dadosEnvEvento);
+        }
+
         #region LerRetornoEvento
 
         private void LerRetornoEvento(int emp)
@@ -115,7 +124,7 @@ namespace NFe.Service
 
             /*
             vStrXmlRetorno = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-                "<retEventoMDFe xmlns=\"http://www.portalfiscal.inf.br/mdfe\" versao=\"2.00\">" +
+                "<retEventoMDFe xmlns=\"http://www.portalfiscal.inf.br/mdfe\" versao=\"3.00\">" +
                 "<infEvento Id=\"ID342130000096132\">" +
                 "<tpAmb>2</tpAmb>" +
                 "<verAplic>RS20130820221405</verAplic>" +
@@ -130,7 +139,7 @@ namespace NFe.Service
                 "<nProt>342130000096132</nProt>" +
                 "</infEvento>" +
                 "</retEventoMDFe>";
-                */
+            */
 
             XmlDocument doc = new XmlDocument();
             doc.Load(Functions.StringXmlToStreamUTF8(vStrXmlRetorno));
@@ -140,6 +149,7 @@ namespace NFe.Service
             foreach (XmlNode retConsSitNode in retEnvRetornoList)
             {
                 XmlElement retConsSitElemento = (XmlElement)retConsSitNode;
+                string versao = retConsSitElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
 
                 XmlNodeList envEventosList = doc.GetElementsByTagName("infEvento");
                 for (int i = 0; i < envEventosList.Count; ++i)
@@ -167,7 +177,7 @@ namespace NFe.Service
                                 DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName(TpcnResources.dhRegEvento.ToString())[0].InnerText);
 
                                 //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
-                                oGerarXML.XmlDistEventoMDFe(emp, chMDFe, nSeqEvento, Convert.ToInt32(tpEvento), env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento, true);
+                                oGerarXML.XmlDistEventoMDFe(emp, chMDFe, nSeqEvento, Convert.ToInt32(tpEvento), env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento, true, versao);
 
                                 switch (Convert.ToInt32(tpEvento))
                                 {

@@ -223,6 +223,11 @@ namespace NFe.UI.Formularios
                     throw new Exception("Não pode mudar para esse tipo de serviço (NFSe)");
                 }
 
+                if ((TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.SAT)
+                {
+                    throw new Exception("Não pode mudar para esse tipo de serviço (SAT)");
+                }
+
                 var e = Empresas.FindConfEmpresa(cnpj, (TipoAplicativo)this.cbServico.SelectedValue);
                 if (e != null)
                     throw new Exception("A empresa '" + e.Nome + "' já está monitorando esse tipo de serviço");

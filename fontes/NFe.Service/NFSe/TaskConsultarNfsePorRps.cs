@@ -75,9 +75,31 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.BETHA:
-                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
-                        wsProxy.Betha = new Betha();
+                        #region Betha
+                        ConteudoXML.PreserveWhitespace = false;
+                        ConteudoXML.Load(NomeArquivoXML);
+
+                        if (!ConteudoXML.DocumentElement.Name.Contains("e:"))
+                        {
+                            padraoNFSe = PadroesNFSe.BETHA202;
+                            Components.Betha.NewVersion.Betha betha = new Components.Betha.NewVersion.Betha((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                ler.oDadosPedSitNfseRps.cMunicipio,
+                                Empresas.Configuracoes[emp].UsuarioWS,
+                                Empresas.Configuracoes[emp].SenhaWS,
+                                ConfiguracaoApp.ProxyUsuario,
+                                ConfiguracaoApp.ProxySenha,
+                                ConfiguracaoApp.ProxyServidor);
+
+                            betha.ConsultarNfsePorRps(NomeArquivoXML);
+                        }
+                        else
+                        {
+                            wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+                            wsProxy.Betha = new Betha();
+                        }
                         break;
+                    #endregion
 
                     case PadroesNFSe.ABACO:
                     case PadroesNFSe.CANOAS_RS:
@@ -237,7 +259,7 @@ namespace NFe.Service.NFSe
 
                         metropolis.ConsultarNfsePorRps(NomeArquivoXML);
                         break;
-                        #endregion
+                    #endregion
 
                     case PadroesNFSe.FREIRE_INFORMATICA:
                         cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";

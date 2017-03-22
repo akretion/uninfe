@@ -63,7 +63,7 @@ namespace NFe.Service
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), lerXml.oDadosNfe.cUF);
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), ConvertTxt.versoes.VersaoXMLMDFe);
+                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), lerXml.oDadosNfe.versao);
 
                 //
                 //XML neste ponto o MDFe já está assinado, pois foi assinado, validado e montado o lote para envio por outro serviço.
@@ -92,7 +92,7 @@ namespace NFe.Service
                     //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
                     fluxoNfe.AtualizarTag(lerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, (dadosRec.tMed + 2).ToString());
                     fluxoNfe.AtualizarTagRec(idLote, dadosRec.nRec);
-                    XmlDocument xmlPedRec = oGerarXML.XmlPedRecMDFe(emp, dadosRec.nRec);
+                    XmlDocument xmlPedRec = oGerarXML.XmlPedRecMDFe(dadosRec.nRec, dadosRec.versao, emp);
                     TaskMDFeRetRecepcao mdfeRetRecepcao = new TaskMDFeRetRecepcao(xmlPedRec);
                     mdfeRetRecepcao.Execute();
                 }
@@ -196,6 +196,7 @@ namespace NFe.Service
                 XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeNode;
 
                 dadosRec.cStat = retEnviNFeElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
+                dadosRec.versao = retEnviNFeElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
 
                 XmlNodeList infRecList = xml.GetElementsByTagName("infRec");
 

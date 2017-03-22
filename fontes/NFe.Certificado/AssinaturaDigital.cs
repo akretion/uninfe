@@ -1,4 +1,4 @@
-﻿using NFe.Components;
+using NFe.Components;
 using NFe.Settings;
 using System;
 using System.IO;
@@ -144,7 +144,7 @@ namespace NFe.Certificado
                             // Create a SignedXml object.
                             SignedXml signedXml = new SignedXml(conteudoXML);
 
-#if _fw45
+#if _fw46
                             //A3
                             if (!String.IsNullOrEmpty(Empresas.Configuracoes[empresa].CertificadoPIN) &&
                                 clsX509Certificate2Extension.IsA3(x509Cert) &&

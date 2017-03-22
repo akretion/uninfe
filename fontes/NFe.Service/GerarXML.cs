@@ -249,26 +249,20 @@ namespace NFe.Service
             {
                 case Servicos.MDFeMontarLoteVarios:
                 case Servicos.MDFeMontarLoteUm:
-                    XMLLoteDFe += "<enviMDFe xmlns=\"" + NFeStrConstants.NAME_SPACE_MDFE + "\" versao=\"" + "1.00" + "\">";
+                    XMLLoteDFe += "<enviMDFe xmlns=\"" + NFeStrConstants.NAME_SPACE_MDFE + "\" versao=\"" + versaoXml + "\">";
                     break;
 
                 case Servicos.CTeMontarLoteVarios:
                 case Servicos.CTeMontarLoteUm:
-                    XMLLoteDFe += "<enviCTe xmlns=\"" + NFeStrConstants.NAME_SPACE_CTE + "\" versao=\"" + "2.00" + "\">";
+                    XMLLoteDFe += "<enviCTe xmlns=\"" + NFeStrConstants.NAME_SPACE_CTE + "\" versao=\"" + versaoXml + "\">";
                     break;
 
                 default:
-                    if (versaoXml == "2.00" || string.IsNullOrEmpty(versaoXml))
-                        XMLLoteDFe += "<enviNFe xmlns=\"" + NFeStrConstants.NAME_SPACE_NFE + "\" versao=\"" + "2.00" + "\">";
-                    else
-                    {
-                        // Só vai poder ser sincrono se o lote for com uma nota,
-                        // Se for mais de uma o SEFAZ so valida a primeira - Renan 20/05/2015
-                        string indsinc = (Empresas.Configuracoes[EmpIndex].IndSinc && nfesCount == 1 ? "1" : "0");
-
-                        XMLLoteDFe += "<enviNFe xmlns=\"" + NFeStrConstants.NAME_SPACE_NFE + "\" versao=\"" + versaoXml + "\">";
-                        indSinc = "<indSinc>" + indsinc + "</indSinc>";
-                    }
+                    // Só vai poder ser sincrono se o lote for com uma nota,
+                    // Se for mais de uma o SEFAZ so valida a primeira - Renan 20/05/2015
+                    string indsinc = (Empresas.Configuracoes[EmpIndex].IndSinc && nfesCount == 1 ? "1" : "0");
+                    XMLLoteDFe += "<enviNFe xmlns=\"" + NFeStrConstants.NAME_SPACE_NFE + "\" versao=\"" + versaoXml + "\">";
+                    indSinc = "<indSinc>" + indsinc + "</indSinc>";
                     break;
             }
 
@@ -630,7 +624,7 @@ namespace NFe.Service
             switch (tipoAplicativo)
             {
                 case TipoAplicativo.Cte:
-                    xmlDados = ConsultaCTe(tpAmb, tpEmis, chNFe);
+                    xmlDados = ConsultaCTe(tpAmb, tpEmis, chNFe, versao);
                     break;
 
                 case TipoAplicativo.NFCe:
@@ -639,7 +633,7 @@ namespace NFe.Service
                     break;
 
                 case TipoAplicativo.MDFe:
-                    xmlDados = ConsultaMDFe(tpAmb, tpEmis, chNFe);
+                    xmlDados = ConsultaMDFe(tpAmb, tpEmis, chNFe, versao);
                     break;
             }
 
@@ -680,12 +674,13 @@ namespace NFe.Service
         /// <param name="tpAmb">Tipo de ambiente</param>
         /// <param name="tpEmis">Tipo de emissão</param>
         /// <param name="chCTe">Chave da CTe</param>
+        /// <param name="versao">Versão do schema do XML</param>
         /// <returns>Retorna uma sting com o XML de consulta situação da CTe (-ped-sit.xml)</returns>
-        private string ConsultaCTe(int tpAmb, int tpEmis, string chCTe)
+        private string ConsultaCTe(int tpAmb, int tpEmis, string chCTe, string versao)
         {
             StringBuilder aXML = new StringBuilder();
             aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            aXML.Append("<consSitCTe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLCTePedSit + "\" xmlns=\"" + NFeStrConstants.NAME_SPACE_CTE + "\">");
+            aXML.Append("<consSitCTe versao=\"" + versao + "\" xmlns=\"" + NFeStrConstants.NAME_SPACE_CTE + "\">");
             aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
             aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
             aXML.Append("<xServ>CONSULTAR</xServ>");
@@ -705,12 +700,13 @@ namespace NFe.Service
         /// <param name="tpAmb">Tipo de ambiente</param>
         /// <param name="tpEmis">Tipo de emissão</param>
         /// <param name="chMDFe">Chave da MDFe</param>
+        /// <param name="versao">Versão do schema do XML</param>
         /// <returns>Retorna uma sting com o XML de consulta situação da MDFe (-ped-sit.xml)</returns>
-        private string ConsultaMDFe(int tpAmb, int tpEmis, string chMDFe)
+        private string ConsultaMDFe(int tpAmb, int tpEmis, string chMDFe, string versao)
         {
             StringBuilder aXML = new StringBuilder();
             aXML.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-            aXML.Append("<consSitMDFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico + "\" xmlns=\"" + NFeStrConstants.NAME_SPACE_MDFE + "\">");
+            aXML.Append("<consSitMDFe versao=\"" + versao + "\" xmlns=\"" + NFeStrConstants.NAME_SPACE_MDFE + "\">");
             aXML.AppendFormat("<tpAmb>{0}</tpAmb>", tpAmb);
             aXML.AppendFormat("<tpEmis>{0}</tpEmis>", tpEmis);
             aXML.Append("<xServ>CONSULTAR</xServ>");
@@ -852,7 +848,7 @@ namespace NFe.Service
             switch (servico)
             {
                 case TipoAplicativo.Cte:
-                    StatusServicoCTe(arquivoSaida, amb, tpEmis, cUF);
+                    StatusServicoCTe(arquivoSaida, amb, tpEmis, cUF, versao);
                     break;
 
                 case TipoAplicativo.NFCe:
@@ -861,7 +857,7 @@ namespace NFe.Service
                     break;
 
                 case TipoAplicativo.MDFe:
-                    StatusServicoMDFe(arquivoSaida, amb, tpEmis, cUF);
+                    StatusServicoMDFe(arquivoSaida, amb, tpEmis, cUF, versao);
                     break;
             }
 
@@ -910,9 +906,10 @@ namespace NFe.Service
         /// <param name="tpAmb">Ambiente da consulta</param>
         /// <param name="tpEmis">Tipo de emissão da consulta</param>
         /// <param name="cUF">Estado para a consulta</param>
-        public void StatusServicoCTe(string pArquivo, int tpAmb, int tpEmis, int cUF)
+        /// <param name="versao">Versão do schema do XML</param>
+        public void StatusServicoCTe(string pArquivo, int tpAmb, int tpEmis, int cUF, string versao)
         {
-            StatusServico(pArquivo, tpAmb, tpEmis, cUF, NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico, "consStatServCte", NFeStrConstants.NAME_SPACE_CTE);
+            StatusServico(pArquivo, tpAmb, tpEmis, cUF, versao, "consStatServCte", NFeStrConstants.NAME_SPACE_CTE);
         }
 
         #endregion StatusServicoCTe()
@@ -926,9 +923,10 @@ namespace NFe.Service
         /// <param name="tpAmb">Ambiente da consulta</param>
         /// <param name="tpEmis">Tipo de emissão da consulta</param>
         /// <param name="cUF">Estado para a consulta</param>
-        public void StatusServicoMDFe(string pArquivo, int tpAmb, int tpEmis, int cUF)
+        /// <param name="versao">Versão do schema do XML</param>
+        public void StatusServicoMDFe(string pArquivo, int tpAmb, int tpEmis, int cUF, string versao)
         {
-            StatusServico(pArquivo, tpAmb, tpEmis, cUF, NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico, "consStatServMDFe", NFeStrConstants.NAME_SPACE_MDFE);
+            StatusServico(pArquivo, tpAmb, tpEmis, cUF, versao, "consStatServMDFe", NFeStrConstants.NAME_SPACE_MDFE);
         }
 
         #endregion StatusServicoMDFe()
@@ -1700,7 +1698,8 @@ namespace NFe.Service
         /// <param name="nomeArqInut">Nome arquivo XML de Inutilização</param>
         /// <param name="strRetInut">Conteúdo retornado pela SEFAZ com o protocolo da inutilização</param>
         /// <param name="conteudoXML">Conteúdo do XML de inutilização já assinado</param>
-        public void XmlDistInutCTe(XmlDocument conteudoXML, string strRetInut, string nomeArqInut)
+        /// <param name="versao">Versão do schema do XML</param>
+        public void XmlDistInutCTe(XmlDocument conteudoXML, string strRetInut, string nomeArqInut, string versao)
         {
             int emp = EmpIndex;
             StreamWriter swProc = null;
@@ -1713,7 +1712,7 @@ namespace NFe.Service
 
                 //Montar o XML -procCancCTe.xml
                 string strXmlProcInutNfe = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                    "<procInutCTe xmlns=\"" + NFeStrConstants.NAME_SPACE_CTE + "\" versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLCTeInut + "\">" +
+                    "<procInutCTe xmlns=\"" + NFeStrConstants.NAME_SPACE_CTE + "\" versao=\"" + versao + "\">" +
                     strInutNFe +
                     strRetInut +
                     "</procInutCTe>";
@@ -1760,11 +1759,11 @@ namespace NFe.Service
                     break;
 
                 case "57": //CT-e
-                    dadosXML = XmlPedRecCTe(EmpIndex, recibo);
+                    dadosXML = XmlPedRecCTe(recibo, versao, EmpIndex);
                     break;
 
                 case "58": //MDF-e
-                    dadosXML = XmlPedRecMDFe(EmpIndex, recibo);
+                    dadosXML = XmlPedRecMDFe(recibo, versao, EmpIndex);
                     break;
             }
 
@@ -1822,13 +1821,14 @@ namespace NFe.Service
         /// </summary>
         /// <param name="emp">Código da empresa</param>
         /// <param name="recibo">Número do recibo a ser consultado o lote</param>
+        /// <param name="versao">Versão do schema do XML</param>
         /// <returns>Retorna a string do XML a ser gravado</returns>
-        public XmlDocument XmlPedRecCTe(int emp, string recibo)
+        public XmlDocument XmlPedRecCTe(string recibo, string versao, int emp)
         {
             XmlDocument doc = new XmlDocument();
             doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
             XmlNode node = doc.CreateElement("consReciCTe");
-            node.Attributes.Append(criaAttribute(doc, TpcnResources.versao.ToString(), NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico));
+            node.Attributes.Append(criaAttribute(doc, TpcnResources.versao.ToString(), versao));
             node.Attributes.Append(criaAttribute(doc, TpcnResources.xmlns.ToString(), NFeStrConstants.NAME_SPACE_CTE));
             node.AppendChild(criaElemento(doc, TpcnResources.tpAmb.ToString(), Empresas.Configuracoes[emp].AmbienteCodigo.ToString()));
             node.AppendChild(criaElemento(doc, TpcnResources.nRec.ToString(), recibo));
@@ -1846,13 +1846,14 @@ namespace NFe.Service
         /// </summary>
         /// <param name="emp">Código da empresa</param>
         /// <param name="recibo">Número do recibo a ser consultado o lote</param>
+        /// <param name="versao">Versão do schema do XML</param>
         /// <returns>Retorna a string do XML a ser gravado</returns>
-        public XmlDocument XmlPedRecMDFe(int emp, string recibo)
+        public XmlDocument XmlPedRecMDFe(string recibo, string versao, int emp)
         {
             XmlDocument doc = new XmlDocument();
             doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
             XmlNode node = doc.CreateElement("consReciMDFe");
-            node.Attributes.Append(criaAttribute(doc, TpcnResources.versao.ToString(), NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico));
+            node.Attributes.Append(criaAttribute(doc, TpcnResources.versao.ToString(), versao));
             node.Attributes.Append(criaAttribute(doc, TpcnResources.xmlns.ToString(), NFeStrConstants.NAME_SPACE_MDFE));
             node.AppendChild(criaElemento(doc, TpcnResources.tpAmb.ToString(), Empresas.Configuracoes[emp].AmbienteCodigo.ToString()));
             node.AppendChild(criaElemento(doc, TpcnResources.nRec.ToString(), recibo));
@@ -1934,9 +1935,8 @@ namespace NFe.Service
         /// </summary>
         /// <param name="arqCTe">Nome arquivo XML da CTe</param>
         /// <param name="protCTe">String contendo a parte do XML do protocolo a ser anexado</param>
-        /// <by>Wandrey Mundin Ferreira</by>
-        /// <date>20/04/2009</date>
-        public string XmlDistCTe(string arqCTe, string protCTe)  //danasa 11-4-2012
+        /// <param name="versao">Versão do XML da NFe</param>
+        public string XmlDistCTe(string arqCTe, string protCTe, string versao)  //danasa 11-4-2012
         {
             string nomeArqProcCTe = string.Empty;
             int emp = EmpIndex;
@@ -1965,7 +1965,7 @@ namespace NFe.Service
 
                     //Montar a string contendo o XML -proc-CTe.xml
                     string xmlProcCTe = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                        "<" + tipo + "eProc xmlns=\"" + NFeStrConstants.NAME_SPACE_CTE + "\" versao=\"2.00\">" +
+                        "<" + tipo + "eProc xmlns=\"" + NFeStrConstants.NAME_SPACE_CTE + "\" versao=\"" + versao + "\">" +
                         conteudoCTe +
                         protCTe +
                         "</" + tipo + "eProc>";
@@ -1996,9 +1996,10 @@ namespace NFe.Service
         /// </summary>
         /// <param name="arqMDFe">Nome arquivo XML da MDFe</param>
         /// <param name="protMDFe">String contendo a parte do XML do protocolo a ser anexado</param>
+        /// <param name="versao">Versão do schema do XML</param>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>20/04/2009</date>
-        public string XmlDistMDFe(string arqMDFe, string protMDFe, string extensao)  //danasa 11-4-2012
+        public string XmlDistMDFe(string arqMDFe, string protMDFe, string extensao, string versao)  //danasa 11-4-2012
         {
             string nomeArqProcMDFe = string.Empty;
             int emp = EmpIndex;
@@ -2021,7 +2022,7 @@ namespace NFe.Service
 
                     //Montar a string contendo o XML -proc-MDFe.xml
                     string xmlProcMDFe = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
-                        "<" + tipo + "eProc xmlns=\"" + NFeStrConstants.NAME_SPACE_MDFE + "\" versao=\"1.00\">" +
+                        "<" + tipo + "eProc xmlns=\"" + NFeStrConstants.NAME_SPACE_MDFE + "\" versao=\"" + versao + "\">" +
                         conteudoMDFe +
                         protMDFe +
                         "</" + tipo + "eProc>";
@@ -2600,8 +2601,9 @@ namespace NFe.Service
                         Int32 nSeqEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName(TpcnResources.nSeqEvento.ToString())[0].InnerText);
                         Int32 tpEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName(TpcnResources.tpEvento.ToString())[0].InnerText);
                         DateTime dhRegEvento = Functions.GetDateTime(((XmlElement)retConsSitNode1).GetElementsByTagName(TpcnResources.dhRegEvento.ToString())[0].InnerText);
+                        string versao = ((XmlElement)retConsSitNode1).Attributes[TpcnResources.versao.ToString()].InnerText;
 
-                        XmlDistEventoCTe(emp, chNFe, nSeqEvento, tpEvento, retConsSitNode1.OuterXml, string.Empty, dhRegEvento, false);
+                        XmlDistEventoCTe(emp, chNFe, nSeqEvento, tpEvento, retConsSitNode1.OuterXml, string.Empty, dhRegEvento, false, versao);
                     }
                 }
             }
@@ -2616,7 +2618,7 @@ namespace NFe.Service
         /// Criar o arquivo XML de distribuição dos Eventos CTe
         /// </summary>
         public void XmlDistEventoCTe(int emp, string ChaveNFe, int nSeqEvento, int tpEvento, string xmlEventoEnvio, string xmlRetornoEnvio,
-            DateTime dhRegEvento, bool FromTaskEventos)
+            DateTime dhRegEvento, bool FromTaskEventos, string versao)
         {
             string tempXmlFile =
                     PastaEnviados.Autorizados.ToString() + "\\" +
@@ -2663,7 +2665,7 @@ namespace NFe.Service
             if (xmlEventoEnvio.IndexOf("<procEventoCTe") >= 0)
                 protEnvioEvento = xmlEventoEnvio;
             else
-                protEnvioEvento = "<procEventoCTe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLCTeEvento + "\" xmlns=\"" + NFeStrConstants.NAME_SPACE_CTE + "\">" +
+                protEnvioEvento = "<procEventoCTe versao=\"" + versao + "\" xmlns=\"" + NFeStrConstants.NAME_SPACE_CTE + "\">" +
                                   xmlEventoEnvio +
                                   xmlRetornoEnvio +
                                   "</procEventoCTe>";
@@ -2726,8 +2728,9 @@ namespace NFe.Service
                         Int32 nSeqEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName(NFe.Components.TpcnResources.nSeqEvento.ToString())[0].InnerText);
                         Int32 tpEvento = Convert.ToInt32("0" + ((XmlElement)retConsSitNode1).GetElementsByTagName(NFe.Components.TpcnResources.tpEvento.ToString())[0].InnerText);
                         DateTime dhRegEvento = Functions.GetDateTime/*Convert.ToDateTime*/(((XmlElement)retConsSitNode1).GetElementsByTagName(NFe.Components.TpcnResources.dhRegEvento.ToString())[0].InnerText);
+                        string versao = ((XmlElement)retConsSitNode1).Attributes[TpcnResources.versao.ToString()].InnerText;
 
-                        XmlDistEventoMDFe(emp, chNFe, nSeqEvento, tpEvento, retConsSitNode1.OuterXml, string.Empty, dhRegEvento, false);
+                        XmlDistEventoMDFe(emp, chNFe, nSeqEvento, tpEvento, retConsSitNode1.OuterXml, string.Empty, dhRegEvento, false, versao);
                     }
                 }
             }
@@ -2741,7 +2744,7 @@ namespace NFe.Service
         /// XMLDistEvento
         /// Criar o arquivo XML de distribuição dos Eventos MDFe
         /// </summary>
-        public void XmlDistEventoMDFe(int emp, string ChaveNFe, int nSeqEvento, int tpEvento, string xmlEventoEnvio, string xmlRetornoEnvio, DateTime dhRegEvento, bool FromTaskEventos)
+        public void XmlDistEventoMDFe(int emp, string ChaveNFe, int nSeqEvento, int tpEvento, string xmlEventoEnvio, string xmlRetornoEnvio, DateTime dhRegEvento, bool FromTaskEventos, string versao)
         {
             // grava o xml de distribuicao como: chave + "_" +  nSeqEvento
             // ja que a nSeqEvento deve ser unico para cada chave
@@ -2792,7 +2795,7 @@ namespace NFe.Service
             if (xmlEventoEnvio.IndexOf("<procEventoMDFe") >= 0)
                 protEnvioEvento = xmlEventoEnvio;
             else
-                protEnvioEvento = "<procEventoMDFe versao=\"" + NFe.ConvertTxt.versoes.VersaoXMLMDFeEvento + "\" xmlns=\"" + NFeStrConstants.NAME_SPACE_MDFE + "\">" +
+                protEnvioEvento = "<procEventoMDFe versao=\"" + versao + "\" xmlns=\"" + NFeStrConstants.NAME_SPACE_MDFE + "\">" +
                                   xmlEventoEnvio +
                                   xmlRetornoEnvio +
                                   "</procEventoMDFe>";

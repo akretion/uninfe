@@ -1,4 +1,4 @@
-﻿using NFe.Certificado;
+using NFe.Certificado;
 using NFe.Components;
 using NFe.Components.Info;
 using NFe.ConvertTxt;
@@ -13,7 +13,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 
-#if _fw45
+#if _fw46
 
 using NFe.SAT;
 
@@ -99,9 +99,13 @@ namespace NFe.Service
                             DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskObterNotaFiscal());
                             break;
 
+                        case Servicos.NFSeConsultaSequenciaLoteNotaRPS:
+                            DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskConsultaSequenciaLoteNotaRPS(arquivo));
+                            break;
+
                         #endregion NFS-e
 
-#if _fw45
+#if _fw46
 
                         #region SAT/CF-e
 
@@ -821,6 +825,10 @@ namespace NFe.Service
                                 else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeObterNotaFiscal;
+                                }
+                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSeqLoteNotaRPS).EnvioXML) >= 0)
+                                {
+                                    tipoServico = Servicos.NFSeConsultaSequenciaLoteNotaRPS;
                                 }
 
                                 #endregion NFS-e

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -23,10 +23,12 @@ namespace NFe.UI
             base.UpdateControles();
 
             this.textBox_versao.Text = Propriedade.Versao;
-            this.textBox_versaofw.Text = "4.6.2";
+            this.textbox_Compilacao.Text = "4.6.2";
 #if _fw35
-            this.textBox_versaofw.Text = "3.5";
+            this.textbox_Compilacao.Text = "3.5";
 #endif
+            this.textBox_versaofw.Text = Environment.Version.ToString();
+
             lblDescricaoAplicacao.Text = Propriedade.DescricaoAplicacao;
             lblNomeAplicacao.Text = Propriedade.NomeAplicacao;
             this.labelTitle.Text = "Sobre o " + Propriedade.NomeAplicacao;

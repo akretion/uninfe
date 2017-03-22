@@ -122,6 +122,7 @@
             this.cbVersao.ItemHeight = 19;
             this.cbVersao.Items.AddRange(new object[] {
             "3.10",
+            "3.00",
             "2.00"});
             this.cbVersao.Location = new System.Drawing.Point(185, 128);
             this.cbVersao.MaxDropDownItems = 15;

@@ -9,7 +9,7 @@ using NFe.Components;
 
 namespace NFSe.Components
 {
-    public class Betha: IBetha
+    public class Betha : IBetha
     {
         public IWebProxy Proxy { get; set; }
 

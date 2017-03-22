@@ -115,11 +115,13 @@ namespace NFe.Components
         #region PadraoNFe()
         public static PadroesNFSe PadraoNFSe(int municipio)
         {
+            PadroesNFSe result = PadroesNFSe.NaoIdentificado;
+
             foreach (Municipio mun in Propriedade.Municipios)
                 if (mun.CodigoMunicipio == municipio)
-                    return mun.Padrao;
+                    result = mun.Padrao;
 
-            return PadroesNFSe.NaoIdentificado;
+            return result;
         }
         #endregion
 
@@ -371,6 +373,18 @@ namespace NFe.Components
         {
             if (string.IsNullOrEmpty(value)) return "";
             return (value.IndexOf('.') >= 0 ? Path.ChangeExtension(("X" + value), "").Substring(1).Replace(".", "") : value);
+        }
+
+        public static string GetAttributeXML(string node, string attribute, string file)
+        {
+            string result = "";
+            XmlDocument conteudoXML = new XmlDocument();
+            conteudoXML.Load(file);
+
+            XmlElement elementos = (XmlElement)conteudoXML.GetElementsByTagName(node)[0];
+            result = elementos.GetAttribute(attribute);
+
+            return result;
         }
 
         #region FileInUse()

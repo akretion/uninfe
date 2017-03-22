@@ -21,6 +21,7 @@
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Validate.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.SAT.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\uninfe.exe
+   call assina_udf.bat ..\fontes\uninfe\bin\release\uninfeservico.exe
 
    call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\MetroFramework.dll
    call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Certificado.dll
@@ -34,7 +35,22 @@
    call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.UI.dll
    call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Validate.dll
    call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\uninfe.exe
+   call assina_udf.bat ..\fontes\uninfe\bin\release35_AnyCPU\uninfeservico.exe
 
+   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\MetroFramework.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Certificado.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Components.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Components.Info.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Components.Wsdl.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.ConvertTxt.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Service.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Settings.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Threadings.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.UI.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Validate.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\uninfe.exe
+   call assina_udf.bat ..\fontes\uninfe\bin\release46_x86\NFe.SAT.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\release46_x86\uninfeservico.exe
   
    Goto Fim
 
@@ -45,6 +61,7 @@
 :setup
    call assina_udf.bat \projetos\instaladores\iuninfe5.exe
    call assina_udf.bat \projetos\instaladores\iuninfe5_fw35.exe
+   call assina_udf.bat \projetos\instaladores\iuninfe5_fw46_x86.exe
    
    Goto Fim
 

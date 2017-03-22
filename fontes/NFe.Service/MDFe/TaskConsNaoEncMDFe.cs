@@ -23,10 +23,12 @@ namespace NFe.Service
             {
                 Int32 tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
                 Int32 cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
+                string versao = string.Empty;
 
                 foreach (XmlNode consSitNFeNode in ConteudoXML.GetElementsByTagName("consMDFeNaoEnc"))
                 {
                     XmlElement consSitNFeElemento = (XmlElement)consSitNFeNode;
+                    versao = consSitNFeElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
 
                     tpAmb = Convert.ToInt32("0" + Functions.LerTag(consSitNFeElemento, TpcnResources.tpAmb.ToString(), false));
                 }
@@ -41,7 +43,7 @@ namespace NFe.Service
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(cabecMsg, TpcnResources.cUF.ToString(), cUF.ToString());
-                wsProxy.SetProp(cabecMsg, TpcnResources.versaoDados.ToString(), ConvertTxt.versoes.VersaoXMLMDFeConsNaoEnc);
+                wsProxy.SetProp(cabecMsg, TpcnResources.versaoDados.ToString(), versao);
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy,

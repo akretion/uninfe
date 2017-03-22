@@ -61,7 +61,7 @@ namespace NFe.Service
                 object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
 
                 wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), cOrgao.ToString());
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), ConvertTxt.versoes.VersaoXMLCTeEvento);
+                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosEnvEvento.versao);
 
                 //Criar objeto da classe de assinatura digital
                 AssinaturaDigital oAD = new AssinaturaDigital();
@@ -112,6 +112,19 @@ namespace NFe.Service
 
         #endregion Execute
 
+        #region EnvEvento
+
+        protected override void EnvEvento(int emp, DadosenvEvento dadosEnvEvento)
+        {
+            XmlNodeList eventoCTeList = ConteudoXML.GetElementsByTagName("eventoCTe");
+            XmlElement eventoCTeElemento = (XmlElement)eventoCTeList[0];
+            dadosEnvEvento.versao = eventoCTeElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
+
+            base.EnvEvento(emp, dadosEnvEvento);
+        }
+
+        #endregion EnvEvento
+
         #region LerRetornoEvento
 
         private void LerRetornoEvento(int emp)
@@ -120,23 +133,23 @@ namespace NFe.Service
             bool autorizou = false;
 
             /*
-            vStrXmlRetorno = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-                "<retEventoCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"2.00\">" +
-                "  <infEvento Id=\"ID342130000096132\">" +
-                "    <tpAmb>2</tpAmb>" +
-                "    <verAplic>RS20130820221405</verAplic>" +
-                "    <cOrgao>42</cOrgao>" +
-                "    <cStat>136</cStat>" +
-                "    <xMotivo>Evento registrado e vinculado a CT-e</xMotivo>" +
-                "    <chCTe>41120178408960000182570010000000044000000047</chCTe>" +
-                "    <tpEvento>110140</tpEvento>" +
-                "    <xEvento>Cancelamento</xEvento>" +
-                "    <nSeqEvento>1</nSeqEvento>" +
-                "    <dhRegEvento>2013-11-13T15:27:12</dhRegEvento>" +
-                "    <nProt>342130000096132</nProt>" +
-                "</infEvento>" +
-                "</retEventoCTe>";
-                */
+                        vStrXmlRetorno = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                            "<retEventoCTe xmlns=\"http://www.portalfiscal.inf.br/cte\" versao=\"3.00\">" +
+                            "  <infEvento Id=\"ID342130000096132\">" +
+                            "    <tpAmb>2</tpAmb>" +
+                            "    <verAplic>RS20130820221405</verAplic>" +
+                            "    <cOrgao>43</cOrgao>" +
+                            "    <cStat>136</cStat>" +
+                            "    <xMotivo>Evento registrado e vinculado a CT-e</xMotivo>" +
+                            "    <chCTe>43120178408960000182570010000000041000000047</chCTe>" +
+                            "    <tpEvento>110140</tpEvento>" +
+                            "    <xEvento>Cancelamento</xEvento>" +
+                            "    <nSeqEvento>1</nSeqEvento>" +
+                            "    <dhRegEvento>2013-11-13T15:27:12</dhRegEvento>" +
+                            "    <nProt>342130000096132</nProt>" +
+                            "</infEvento>" +
+                            "</retEventoCTe>";
+            */
 
             XmlDocument doc = new XmlDocument();
             doc.Load(Functions.StringXmlToStreamUTF8(vStrXmlRetorno));
@@ -146,6 +159,8 @@ namespace NFe.Service
             foreach (XmlNode retConsSitNode in retEnvRetornoList)
             {
                 XmlElement retConsSitElemento = (XmlElement)retConsSitNode;
+
+                string versao = retConsSitElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
 
                 XmlNodeList envEventosList = doc.GetElementsByTagName("infEvento");
                 for (int i = 0; i < envEventosList.Count; ++i)
@@ -173,7 +188,7 @@ namespace NFe.Service
                                 DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName(TpcnResources.dhRegEvento.ToString())[0].InnerText);
 
                                 //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
-                                oGerarXML.XmlDistEventoCTe(emp, chCTe, nSeqEvento, Convert.ToInt32(tpEvento), env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento, true);
+                                oGerarXML.XmlDistEventoCTe(emp, chCTe, nSeqEvento, Convert.ToInt32(tpEvento), env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento, true, versao);
 
                                 switch ((ConvertTxt.tpEventos)Convert.ToInt32(tpEvento))
                                 {
