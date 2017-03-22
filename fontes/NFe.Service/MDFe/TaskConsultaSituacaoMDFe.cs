@@ -51,7 +51,7 @@ namespace NFe.Service
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedSit.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLMDFePedSit);
+                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedSit.versao);
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy,
@@ -270,7 +270,7 @@ namespace NFe.Service
                                             {
                                                 if (!File.Exists(strArquivoNFeProc))
                                                 {
-                                                    oGerarXML.XmlDistMDFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcMDFe);
+                                                    oGerarXML.XmlDistMDFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcMDFe, oLerXml.oDadosNfe.versao);
                                                 }
                                             }
 
@@ -309,10 +309,10 @@ namespace NFe.Service
                                             //Disparar a geração/impressão do UniDanfe. 03/02/2010 - Wandrey
                                             if (procNFeJaNaAutorizada)
                                             {
-                                                string strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + 
-                                                    PastaEnviados.Autorizados.ToString() + "\\" + 
-                                                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + 
-                                                    Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML) + 
+                                                string strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                                    PastaEnviados.Autorizados.ToString() + "\\" +
+                                                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) +
+                                                    Functions.ExtrairNomeArq(strArquivoNFe, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML) +
                                                     Propriedade.ExtRetorno.ProcMDFe;
                                                 try
                                                 {

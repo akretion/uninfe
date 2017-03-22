@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.IO;
-using System.Threading;
-using System.Xml;
-
-using NFe.Components;
-using NFe.Settings;
+﻿using NFe.Components;
 using NFe.Service;
+using NFe.Settings;
+using System;
+using System.IO;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace NFe.UI
 {
@@ -49,7 +43,7 @@ namespace NFe.UI
 
                 this.cbEmpresa.DataSource = Auxiliar.CarregaEmpresa(true);
                 this.cbEmpresa.ValueMember = "Key";
-                this.cbEmpresa.DisplayMember = NFe.Components.NFeStrConstants.Nome;
+                this.cbEmpresa.DisplayMember = NFeStrConstants.Nome;
 
                 this.comboUf.DisplayMember = "nome";
                 this.comboUf.ValueMember = "valor";
@@ -68,6 +62,7 @@ namespace NFe.UI
                 this.cbEmpresa.SelectedIndexChanged += cbEmpresa_SelectedIndexChanged;
 
                 cbEmpresa_SelectedIndexChanged(null, null);
+                ChangeVersao((TipoAplicativo)cbServico.SelectedValue);
             }
         }
 
@@ -122,7 +117,7 @@ namespace NFe.UI
             finally
             {
                 this.cbServico.SelectedIndexChanged += cbServico_SelectedIndexChanged;
-                this.buttonPesquisa.Enabled = 
+                this.buttonPesquisa.Enabled =
                     this.cbAmbiente.Enabled =
                     this.cbEmissao.Enabled =
                     this.comboUf.Enabled =
@@ -135,32 +130,42 @@ namespace NFe.UI
             switch (Servico)
             {
                 case TipoAplicativo.Todos:
-                    this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
-                    this.cbVersao.Enabled = this.cbServico.Enabled = true;
+                    cbVersao.Enabled = cbServico.Enabled = true;
+                    cbVersao.Items.Clear();
+                    cbVersao.Items.AddRange(new object[] { "3.10", "3.00", "2.00" });
+                    cbVersao.SelectedItem = "3.10";
                     break;
 
                 case TipoAplicativo.Nfe:
-                    this.cbVersao.Enabled = true;
-                    this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
-                    //this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    cbVersao.Enabled = false;
+                    cbVersao.Items.Clear();
+                    cbVersao.Items.AddRange(new object[] { "3.10" });
+                    cbVersao.SelectedItem = "3.10";
                     break;
 
                 case TipoAplicativo.NFCe:
-                    this.cbVersao.Enabled = true;
-                    this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
-                    //this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    cbVersao.Enabled = false;
+                    cbVersao.Items.Clear();
+                    cbVersao.Items.AddRange(new object[] { "3.10" });
+                    cbVersao.SelectedItem = "3.10";
                     break;
 
                 case TipoAplicativo.Cte:
-                    this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLCTeStatusServico;
-                    this.cbVersao.Enabled = false;
-                    //this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    cbVersao.Enabled = true;
+                    cbVersao.Items.Clear();
+                    cbVersao.Items.AddRange(new object[] { "3.00", "2.00" });
+                    cbVersao.SelectedItem = "3.00";
                     break;
 
                 case TipoAplicativo.MDFe:
-                    this.cbVersao.SelectedItem = NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico;
-                    this.cbVersao.Enabled = false;
-                    //this.cbServico.Enabled = (Empresas.Configuracoes[Emp].Servico == TipoAplicativo.Todos);
+                    cbVersao.Enabled = true;
+                    cbVersao.Items.Clear();
+                    cbVersao.Items.AddRange(new object[] { "3.00", "1.00" });
+                    cbVersao.SelectedItem = "3.00";
+                    break;
+
+                case TipoAplicativo.SAT:
+                    cbVersao.Enabled = false;
                     break;
             }
         }
@@ -303,7 +308,7 @@ namespace NFe.UI
         }
 
         /// <summary>
-        /// Envia um arquivo para o webservice da NFE e recebe a resposta. 
+        /// Envia um arquivo para o webservice da NFE e recebe a resposta.
         /// </summary>
         /// <returns>Retorna uma string com a mensagem obtida do webservice de status do serviço da NFe</returns>
         /// <example>string vPastaArq = this.CriaArqXMLStatusServico();</example>
@@ -346,7 +351,7 @@ namespace NFe.UI
                             {
                                 vStatus = ex.Message;
                                 break;
-                                //Se não conseguir ler o arquivo vai somente retornar ao loop para tentar novamente, pois 
+                                //Se não conseguir ler o arquivo vai somente retornar ao loop para tentar novamente, pois
                                 //pode ser que o arquivo esteja em uso ainda.
                             }
 
@@ -389,7 +394,7 @@ namespace NFe.UI
             //Retornar o status do serviço
             return vStatus;
         }
-        #endregion
 
+        #endregion VerStatusServico()
     }
 }

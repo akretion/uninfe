@@ -87,7 +87,24 @@ namespace NFe.Components
 
             if (System.IO.File.Exists(Propriedade.NomeArqXMLWebService_NFSe))
             {
-                XElement axml = XElement.Load(Propriedade.NomeArqXMLWebService_NFSe);
+                XElement axml = null;
+
+                try
+                {
+                    axml = XElement.Load(Propriedade.NomeArqXMLWebService_NFSe);
+                }
+                catch (Exception ex)
+                {
+                    Functions.WriteLog("Ocorreu um erro na tentativa de carregamento do arquivo " + Propriedade.NomeArqXMLWebService_NFSe + ".\r\n" +
+                        "Acesse novamente o sistema para que se recupere automaticamente do erro.\r\n\r\n" +
+                        "Erro:\r\n\r\n" + ex.Message, true, true, "");
+
+                    if (System.IO.File.Exists(Propriedade.XMLVersaoWSDLXSD))
+                        System.IO.File.Delete(Propriedade.XMLVersaoWSDLXSD);
+
+                    Environment.Exit(0);
+                }
+
                 ///
                 /// primeiro, pesquisa pelo ID
                 ///
@@ -124,6 +141,16 @@ namespace NFe.Components
                         return local.Equals(NFeStrConstants.LocalHomologacao) ?
                             item.FirstNode.ToString() : item.LastNode.ToString();
                 }
+            }
+            else
+            {
+                Functions.WriteLog("Ocorreu um erro na tentativa de carregamento do arquivo " + Propriedade.NomeArqXMLWebService_NFSe + ".\r\n" +
+                    "Acesse novamente o sistema para que se recupere automaticamente do erro.", true, true, "");
+
+                if (System.IO.File.Exists(Propriedade.XMLVersaoWSDLXSD))
+                    System.IO.File.Delete(Propriedade.XMLVersaoWSDLXSD);
+
+                Environment.Exit(0);
             }
 
             return "";

@@ -1036,6 +1036,10 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ObterNotaFiscal : list.LocalProducao.ObterNotaFiscal);
                             break;
 
+                        case Servicos.NFSeConsultaSequenciaLoteNotaRPS:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultaSequenciaLoteNotaRPS : list.LocalProducao.ConsultaSequenciaLoteNotaRPS);
+                            break;
+
                         #endregion NFS-e
 
                         #region LMC
@@ -1790,179 +1794,190 @@ namespace NFe.Settings
 
             try
             {
-                ///
-                /// inclui o processo de inclusao de empresa pelo 'txt'
-                emp = CadastrarEmpresa(cArquivoXml, emp);
-
-                if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
+                if (ExcluirEmpresa(cArquivoXml))
                 {
-                    #region Formato TXT
+                    cStat = "1";
+                    xMotivo = "Empresa excluída com sucesso";
+                    lErro = false;
 
-                    List<string> cLinhas = Functions.LerArquivo(cArquivoXml);
+                    ConfiguracaoApp.CarregarDados();
+                    ConfiguracaoApp.CarregarDadosSobre();
+                    Empresas.CarregaConfiguracao();
+                }
+                else
+                {
+                    emp = CadastrarEmpresa(cArquivoXml, emp);
 
-                    lEncontrouTag = Functions.PopulateClasse(Empresas.Configuracoes[emp], cLinhas);
-
-                    foreach (string texto in cLinhas)
+                    if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
                     {
-                        string[] dados = texto.Split('|');
-                        int nElementos = dados.GetLength(0);
-                        if (nElementos <= 1)
-                            continue;
+                        #region Formato TXT
 
-                        switch (dados[0].ToLower())
+                        List<string> cLinhas = Functions.LerArquivo(cArquivoXml);
+
+                        lEncontrouTag = Functions.PopulateClasse(Empresas.Configuracoes[emp], cLinhas);
+
+                        foreach (string texto in cLinhas)
                         {
-                            case "proxy": //Se a tag <Proxy> existir ele pega o novo conteúdo
-                                ConfiguracaoApp.Proxy = (nElementos == 2 ? Convert.ToBoolean(dados[1].Trim()) : false);
-                                lEncontrouTag = true;
-                                break;
+                            string[] dados = texto.Split('|');
+                            int nElementos = dados.GetLength(0);
+                            if (nElementos <= 1)
+                                continue;
 
-                            case "proxyservidor": //Se a tag <ProxyServidor> existir ele pega o novo conteúdo
-                                ConfiguracaoApp.ProxyServidor = (nElementos == 2 ? dados[1].Trim() : "");
-                                lEncontrouTag = true;
-                                break;
+                            switch (dados[0].ToLower())
+                            {
+                                case "proxy": //Se a tag <Proxy> existir ele pega o novo conteúdo
+                                    ConfiguracaoApp.Proxy = (nElementos == 2 ? Convert.ToBoolean(dados[1].Trim()) : false);
+                                    lEncontrouTag = true;
+                                    break;
 
-                            case "proxyusuario": //Se a tag <ProxyUsuario> existir ele pega o novo conteúdo
-                                ConfiguracaoApp.ProxyUsuario = (nElementos == 2 ? dados[1].Trim() : "");
-                                lEncontrouTag = true;
-                                break;
+                                case "proxyservidor": //Se a tag <ProxyServidor> existir ele pega o novo conteúdo
+                                    ConfiguracaoApp.ProxyServidor = (nElementos == 2 ? dados[1].Trim() : "");
+                                    lEncontrouTag = true;
+                                    break;
 
-                            case "proxysenha": //Se a tag <ProxySenha> existir ele pega o novo conteúdo
-                                ConfiguracaoApp.ProxySenha = (nElementos == 2 ? dados[1].Trim() : "");
-                                lEncontrouTag = true;
-                                break;
+                                case "proxyusuario": //Se a tag <ProxyUsuario> existir ele pega o novo conteúdo
+                                    ConfiguracaoApp.ProxyUsuario = (nElementos == 2 ? dados[1].Trim() : "");
+                                    lEncontrouTag = true;
+                                    break;
 
-                            case "proxyporta": //Se a tag <ProxyPorta> existir ele pega o novo conteúdo
-                                ConfiguracaoApp.ProxyPorta = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
-                                lEncontrouTag = true;
-                                break;
+                                case "proxysenha": //Se a tag <ProxySenha> existir ele pega o novo conteúdo
+                                    ConfiguracaoApp.ProxySenha = (nElementos == 2 ? dados[1].Trim() : "");
+                                    lEncontrouTag = true;
+                                    break;
 
-                            case "checarconexaointernet": //Se a tag <ChecarConexaoInternet> existir ele pega o novo conteúdo
-                                ConfiguracaoApp.ChecarConexaoInternet = (nElementos == 2 ? Convert.ToBoolean(dados[1].Trim()) : true);
-                                lEncontrouTag = true;
-                                break;
+                                case "proxyporta": //Se a tag <ProxyPorta> existir ele pega o novo conteúdo
+                                    ConfiguracaoApp.ProxyPorta = (nElementos == 2 ? Convert.ToInt32("0" + dados[1].Trim()) : 0);
+                                    lEncontrouTag = true;
+                                    break;
 
-                            case "gravarlogoperacaorealizada":
-                                ConfiguracaoApp.GravarLogOperacoesRealizadas = (nElementos == 2 ? Convert.ToBoolean(dados[1].Trim()) : true);
-                                lEncontrouTag = true;
-                                break;
+                                case "checarconexaointernet": //Se a tag <ChecarConexaoInternet> existir ele pega o novo conteúdo
+                                    ConfiguracaoApp.ChecarConexaoInternet = (nElementos == 2 ? Convert.ToBoolean(dados[1].Trim()) : true);
+                                    lEncontrouTag = true;
+                                    break;
 
-                            case "senhaconfig": //Se a tag <senhaconfig> existir ele pega o novo conteúdo
-                                ConfiguracaoApp.SenhaConfig = (nElementos == 2 ? dados[1].Trim() : "");
+                                case "gravarlogoperacaorealizada":
+                                    ConfiguracaoApp.GravarLogOperacoesRealizadas = (nElementos == 2 ? Convert.ToBoolean(dados[1].Trim()) : true);
+                                    lEncontrouTag = true;
+                                    break;
+
+                                case "senhaconfig": //Se a tag <senhaconfig> existir ele pega o novo conteúdo
+                                    ConfiguracaoApp.SenhaConfig = (nElementos == 2 ? dados[1].Trim() : "");
+                                    ConfiguracaoApp.mSenhaConfigAlterada = false;
+                                    lEncontrouTag = true;
+                                    break;
+                            }
+                        }
+
+                        #endregion Formato TXT
+                    }
+                    else
+                    {
+                        #region Formato XML
+
+                        XmlDocument doc = new XmlDocument();
+                        doc.Load(cArquivoXml);
+
+                        XmlNodeList ConfUniNfeList = doc.GetElementsByTagName("altConfUniNFe");
+
+                        foreach (XmlNode ConfUniNfeNode in ConfUniNfeList)
+                        {
+                            XmlElement ConfUniNfeElemento = (XmlElement)ConfUniNfeNode;
+                            lEncontrouTag = Functions.PopulateClasse(Empresas.Configuracoes[emp], ConfUniNfeElemento);
+
+                            //Se a tag <Proxy> existir ele pega o novo conteúdo
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.Proxy.ToString()).Count != 0)
+                            {
+                                ConfiguracaoApp.Proxy = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.Proxy.ToString())[0].InnerText);
+                                lEncontrouTag = true;
+                            }
+                            //Se a tag <ProxyServidor> existir ele pega o novo conteúdo
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyServidor.ToString()).Count != 0)
+                            {
+                                ConfiguracaoApp.ProxyServidor = ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyServidor.ToString())[0].InnerText;
+                                lEncontrouTag = true;
+                            }
+                            //Se a tag <ProxyUsuario> existir ele pega o novo conteúdo
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyUsuario.ToString()).Count != 0)
+                            {
+                                ConfiguracaoApp.ProxyUsuario = ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyUsuario.ToString())[0].InnerText;
+                                lEncontrouTag = true;
+                            }
+                            //Se a tag <ProxySenha> existir ele pega o novo conteúdo
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxySenha.ToString()).Count != 0)
+                            {
+                                ConfiguracaoApp.ProxySenha = ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxySenha.ToString())[0].InnerText;
+                                lEncontrouTag = true;
+                            }
+                            //Se a tag <ProxyPorta> existir ele pega o novo conteúdo
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyPorta.ToString()).Count != 0)
+                            {
+                                ConfiguracaoApp.ProxyPorta = Convert.ToInt32("0" + ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyPorta.ToString())[0].InnerText);
+                                lEncontrouTag = true;
+                            }
+                            //Se a tag <ChecarConexaoInternet> existir ele pega o novo conteúdo
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ChecarConexaoInternet.ToString()).Count != 0)
+                            {
+                                ConfiguracaoApp.ChecarConexaoInternet = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ChecarConexaoInternet.ToString())[0].InnerText);
+                                lEncontrouTag = true;
+                            }
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.GravarLogOperacaoRealizada.ToString()).Count != 0)
+                            {
+                                ConfiguracaoApp.GravarLogOperacoesRealizadas = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.GravarLogOperacaoRealizada.ToString())[0].InnerText);
+                                lEncontrouTag = true;
+                            }
+                            //Se a tag <SenhaConfig> existir ele pega no novo conteúdo
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.SenhaConfig.ToString()).Count != 0)
+                            {
+                                ConfiguracaoApp.SenhaConfig = ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.SenhaConfig.ToString())[0].InnerText;
                                 ConfiguracaoApp.mSenhaConfigAlterada = false;
                                 lEncontrouTag = true;
-                                break;
+                            }
+                            //Se a tag <ConfirmaSaida> existir ele pega novo conteúdo
+                            if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ConfirmaSaida.ToString()).Count != 0)
+                            {
+                                ConfiguracaoApp.ConfirmaSaida = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ConfirmaSaida.ToString())[0].InnerText);
+                                lEncontrouTag = true;
+                            }
                         }
+
+                        #endregion Formato XML
                     }
-
-                    #endregion Formato TXT
-                }
-                else
-                {
-                    #region Formato XML
-
-                    XmlDocument doc = new XmlDocument();
-                    doc.Load(cArquivoXml);
-
-                    XmlNodeList ConfUniNfeList = doc.GetElementsByTagName("altConfUniNFe");
-
-                    foreach (XmlNode ConfUniNfeNode in ConfUniNfeList)
+                    if (lEncontrouTag)
                     {
-                        XmlElement ConfUniNfeElemento = (XmlElement)ConfUniNfeNode;
-                        lEncontrouTag = Functions.PopulateClasse(Empresas.Configuracoes[emp], ConfUniNfeElemento);
+                        if (ConfiguracaoApp.Proxy &&
+                            (ConfiguracaoApp.ProxyPorta == 0 ||
+                            string.IsNullOrEmpty(ConfiguracaoApp.ProxyServidor) ||
+                            string.IsNullOrEmpty(ConfiguracaoApp.ProxyUsuario) ||
+                            string.IsNullOrEmpty(ConfiguracaoApp.ProxySenha)))
+                        {
+                            throw new Exception(NFeStrConstants.proxyError);
+                        }
+                        Empresas.Configuracoes[emp].RemoveEndSlash();
+                        Empresas.CriarPasta(false);
 
-                        //Se a tag <Proxy> existir ele pega o novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.Proxy.ToString()).Count != 0)
-                        {
-                            ConfiguracaoApp.Proxy = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.Proxy.ToString())[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <ProxyServidor> existir ele pega o novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyServidor.ToString()).Count != 0)
-                        {
-                            ConfiguracaoApp.ProxyServidor = ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyServidor.ToString())[0].InnerText;
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <ProxyUsuario> existir ele pega o novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyUsuario.ToString()).Count != 0)
-                        {
-                            ConfiguracaoApp.ProxyUsuario = ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyUsuario.ToString())[0].InnerText;
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <ProxySenha> existir ele pega o novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxySenha.ToString()).Count != 0)
-                        {
-                            ConfiguracaoApp.ProxySenha = ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxySenha.ToString())[0].InnerText;
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <ProxyPorta> existir ele pega o novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyPorta.ToString()).Count != 0)
-                        {
-                            ConfiguracaoApp.ProxyPorta = Convert.ToInt32("0" + ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ProxyPorta.ToString())[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <ChecarConexaoInternet> existir ele pega o novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ChecarConexaoInternet.ToString()).Count != 0)
-                        {
-                            ConfiguracaoApp.ChecarConexaoInternet = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ChecarConexaoInternet.ToString())[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.GravarLogOperacaoRealizada.ToString()).Count != 0)
-                        {
-                            ConfiguracaoApp.GravarLogOperacoesRealizadas = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.GravarLogOperacaoRealizada.ToString())[0].InnerText);
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <SenhaConfig> existir ele pega no novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.SenhaConfig.ToString()).Count != 0)
-                        {
-                            ConfiguracaoApp.SenhaConfig = ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.SenhaConfig.ToString())[0].InnerText;
-                            ConfiguracaoApp.mSenhaConfigAlterada = false;
-                            lEncontrouTag = true;
-                        }
-                        //Se a tag <ConfirmaSaida> existir ele pega novo conteúdo
-                        if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ConfirmaSaida.ToString()).Count != 0)
-                        {
-                            ConfiguracaoApp.ConfirmaSaida = Convert.ToBoolean(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.ConfirmaSaida.ToString())[0].InnerText);
-                            lEncontrouTag = true;
-                        }
+                        ///
+                        /// salva a configuracao da empresa
+                        ///
+
+                        //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
+                        Empresas.Configuracoes[emp].SalvarConfiguracao(false, true);
+
+                        /// salva o arquivo da lista de empresas
+                        this.GravarArqEmpresas();
+
+                        /// salva as configuracoes gerais
+                        this.GravarConfigGeral();
+
+                        cStat = "1";
+                        xMotivo = "Configuração do " + Propriedade.NomeAplicacao + " alterada com sucesso";
+                        lErro = false;
                     }
-
-                    #endregion Formato XML
-                }
-                if (lEncontrouTag)
-                {
-                    if (ConfiguracaoApp.Proxy &&
-                        (ConfiguracaoApp.ProxyPorta == 0 ||
-                        string.IsNullOrEmpty(ConfiguracaoApp.ProxyServidor) ||
-                        string.IsNullOrEmpty(ConfiguracaoApp.ProxyUsuario) ||
-                        string.IsNullOrEmpty(ConfiguracaoApp.ProxySenha)))
+                    else
                     {
-                        throw new Exception(NFeStrConstants.proxyError);
+                        cStat = "2";
+                        xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do " + Propriedade.NomeAplicacao + ": Nenhuma tag padrão de configuração foi localizada no XML";
+                        lErro = true;
                     }
-                    Empresas.Configuracoes[emp].RemoveEndSlash();
-                    Empresas.CriarPasta(false);
-
-                    ///
-                    /// salva a configuracao da empresa
-                    ///
-
-                    //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
-                    Empresas.Configuracoes[emp].SalvarConfiguracao(false, true);
-
-                    /// salva o arquivo da lista de empresas
-                    this.GravarArqEmpresas();
-
-                    /// salva as configuracoes gerais
-                    this.GravarConfigGeral();
-
-                    cStat = "1";
-                    xMotivo = "Configuração do " + Propriedade.NomeAplicacao + " alterada com sucesso";
-                    lErro = false;
-                }
-                else
-                {
-                    cStat = "2";
-                    xMotivo = "Ocorreu uma falha ao tentar alterar a configuracao do " + Propriedade.NomeAplicacao + ": Nenhuma tag padrão de configuração foi localizada no XML";
-                    lErro = true;
                 }
             }
             catch (Exception ex)
@@ -2064,6 +2079,75 @@ namespace NFe.Settings
         }
 
         #endregion ReconfigurarUniNFe()
+
+        #region ExcluirEmpresa
+
+        /// <summary>
+        /// Excluir a empresa e suas configurações
+        /// </summary>
+        /// <param name="arquivoXml">Nome e pasta do arquivo de configurações gerado pelo ERP para atualização das configurações do uninfe</param>
+        /// <returns>
+        /// S - Excluido com sucesso.
+        /// E - Erro durante a exclusão.
+        /// N - Não teve solicitação de exclusão no XML.
+        /// </returns>
+        private bool ExcluirEmpresa(string arquivoXml)
+        {
+            bool retorna = false;
+
+            try
+            {
+                XmlDocument doc2 = new XmlDocument();
+                doc2.Load(arquivoXml);
+
+                XmlNodeList altConfUniNFeList = doc2.GetElementsByTagName("altConfUniNFe");
+                if (altConfUniNFeList.Count > 0)
+                {
+                    XmlElement altConfUniNFeElement = (XmlElement)altConfUniNFeList[0];
+
+                    if (altConfUniNFeElement.GetElementsByTagName("DadosEmpresa").Count > 0)
+                    {
+                        XmlElement dadosEmpresaElement = (XmlElement)altConfUniNFeElement.GetElementsByTagName("DadosEmpresa")[0];
+                        if (dadosEmpresaElement.GetElementsByTagName("ExcluirEmpresa").Count > 0)
+                        {
+                            bool excluir = Convert.ToBoolean(dadosEmpresaElement.GetElementsByTagName("ExcluirEmpresa")[0].InnerText);
+                            if (excluir)
+                            {
+                                try
+                                {
+                                    string cnpj = dadosEmpresaElement.GetAttribute("CNPJ");
+                                    string servico = dadosEmpresaElement.GetAttribute("Servico");
+                                    var _empresa = Empresas.FindConfEmpresa(cnpj, EnumHelper.StringToEnum<TipoAplicativo>(servico));
+                                    if (_empresa != null)
+                                    {
+                                        Empresas.Configuracoes.Remove(_empresa);
+                                        new ConfiguracaoApp().GravarArqEmpresas();
+
+                                        retorna = true;
+                                    }
+                                    else
+                                    {
+                                        throw new Exception("Empresa não localizada (" + cnpj + "). Exclusão não foi efetuada.");
+                                    }
+                                }
+                                catch
+                                {
+                                    throw;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
+            return retorna;
+        }
+
+        #endregion ExcluirEmpresa
 
         #region RemoveEndSlash
 

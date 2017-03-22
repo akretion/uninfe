@@ -85,9 +85,31 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.BETHA:
-                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
-                        wsProxy.Betha = new Betha();
+                        #region Betha
+                        ConteudoXML.PreserveWhitespace = false;
+                        ConteudoXML.Load(NomeArquivoXML);
+
+                        if (!ConteudoXML.DocumentElement.Name.Contains("e:"))
+                        {
+                            padraoNFSe = PadroesNFSe.BETHA202;
+                            Components.Betha.NewVersion.Betha betha = new Components.Betha.NewVersion.Betha((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                oDadosPedSitNfse.cMunicipio,
+                                Empresas.Configuracoes[emp].UsuarioWS,
+                                Empresas.Configuracoes[emp].SenhaWS,
+                                ConfiguracaoApp.ProxyUsuario,
+                                ConfiguracaoApp.ProxySenha,
+                                ConfiguracaoApp.ProxyServidor);
+
+                            betha.ConsultarNfse(NomeArquivoXML);
+                        }
+                        else
+                        {
+                            wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+                            wsProxy.Betha = new Betha();
+                        }
                         break;
+                        #endregion
 
                     case PadroesNFSe.ABACO:
                     case PadroesNFSe.CANOAS_RS:

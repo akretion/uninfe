@@ -36,7 +36,7 @@
       <Value Profile="(Default)">http://localhost:8080/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
     <Setting Name="NFe_Components_br_gov_sp_piracicaba_sistemas_www_p_NfseService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.sistemas.piracicaba.sp.gov.br/semfi/simpliss/ws_nfse/nfseservice.svc</Value>
+      <Value Profile="(Default)">http://www.sistemas.pmp.sp.gov.br/semfi/simpliss/ws_nfse/nfseservice.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_br_gov_sp_piracicaba_sistemas_www_h_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://187.45.245.217/ws_nfse/nfseservice.svc</Value>
@@ -262,6 +262,12 @@
     </Setting>
     <Setting Name="NFe_Components_br_com_simplissweb_wsbalneariocamboriu_p_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://wsbalneariocamboriu.simplissweb.com.br/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_betha_egov_h_NfseWSService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://e-gov.betha.com.br/e-nota-contribuinte-test-ws/nfseWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_betha_egov_p_NfseWSService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://e-gov.betha.com.br/e-nota-contribuinte-ws/nfseWS</Value>
     </Setting>
   </Settings>
 </SettingsFile>

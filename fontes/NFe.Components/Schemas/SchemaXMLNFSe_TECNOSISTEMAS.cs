@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using NFe.Components;
+﻿using NFe.Components;
 
 namespace NFSe.Components
 {
@@ -11,6 +7,7 @@ namespace NFSe.Components
         public static void CriarListaIDXML()
         {
             #region Consulta NFSe
+
             SchemaXML.InfSchemas.Add("NFSE-TECNOSISTEMAS-ConsultarNfseServicoPrestadoEnvio", new InfSchema()
             {
                 Tag = "ConsultarNfseServicoPrestadoEnvio",
@@ -21,9 +18,11 @@ namespace NFSe.Components
                 TagAtributoId = "",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
-            #endregion
+
+            #endregion Consulta NFSe
 
             #region XML de Cancelamento de NFS-e
+
             SchemaXML.InfSchemas.Add("NFSE-TECNOSISTEMAS-CancelarNfseEnvio", new InfSchema()
             {
                 Tag = "CancelarNfseEnvio",
@@ -34,9 +33,11 @@ namespace NFSe.Components
                 TagAtributoId = "InfPedidoCancelamento",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
-            #endregion
+
+            #endregion XML de Cancelamento de NFS-e
 
             #region XML de Consulta de Lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-TECNOSISTEMAS-ConsultarLoteRpsEnvio", new InfSchema()
             {
                 Tag = "ConsultarLoteRpsEnvio",
@@ -47,9 +48,11 @@ namespace NFSe.Components
                 TagAtributoId = "",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
-            #endregion
+
+            #endregion XML de Consulta de Lote RPS
 
             #region Consulta NFSe por Faixa
+
             SchemaXML.InfSchemas.Add("NFSE-TECNOSISTEMAS-ConsultarNfseRpsEnvio", new InfSchema()
             {
                 Tag = "ConsultarNfseRpsEnvio",
@@ -60,9 +63,11 @@ namespace NFSe.Components
                 TagAtributoId = "",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
-            #endregion
+
+            #endregion Consulta NFSe por Faixa
 
             #region XML de Consulta Situação do Lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-TECNOSISTEMAS-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
             {
                 Tag = "ConsultarSituacaoLoteRpsEnvio",
@@ -72,9 +77,11 @@ namespace NFSe.Components
                 TagAssinatura = "",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
-            #endregion
+
+            #endregion XML de Consulta Situação do Lote RPS
 
             #region XML de lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-TECNOSISTEMAS-EnviarLoteRpsSincronoEnvio", new InfSchema()
             {
                 Tag = "EnviarLoteRpsSincronoEnvio",
@@ -85,7 +92,23 @@ namespace NFSe.Components
                 TagLoteAssinatura = "EnviarLoteRpsSincronoEnvio",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
-            #endregion
+
+            #endregion XML de lote RPS
+
+            #region Consulta Sequencia Lote Nota RPS
+
+            SchemaXML.InfSchemas.Add("NFSE-TECNOSISTEMAS-ConsultarSequenciaLoteNotaRPSEnvio", new InfSchema()
+            {
+                Tag = "ConsultarSequenciaLoteNotaRPSEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "XML de Consulta Sequencia do Lote da Nota RPS",
+                TagLoteAtributoId = "",
+                TagLoteAssinatura = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+
+            #endregion Consulta Sequencia Lote Nota RPS
         }
     }
 }

@@ -46,6 +46,8 @@
             this.lblExecucao = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.textBox_versaofw = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.textbox_Compilacao = new MetroFramework.Controls.MetroTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
@@ -272,10 +274,37 @@
             this.textBox_versaofw.Text = "Styled Textbox";
             this.textBox_versaofw.UseSelectable = true;
             // 
+            // metroLabel5
+            // 
+            this.metroLabel5.AutoSize = true;
+            this.metroLabel5.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.metroLabel5.Location = new System.Drawing.Point(195, 308);
+            this.metroLabel5.Name = "metroLabel5";
+            this.metroLabel5.Size = new System.Drawing.Size(126, 15);
+            this.metroLabel5.TabIndex = 32;
+            this.metroLabel5.Text = "Compilação do UniNFe:";
+            // 
+            // textbox_Compilacao
+            // 
+            this.textbox_Compilacao.Lines = new string[] {
+        "metroTextBox1"};
+            this.textbox_Compilacao.Location = new System.Drawing.Point(195, 328);
+            this.textbox_Compilacao.MaxLength = 32767;
+            this.textbox_Compilacao.Name = "textbox_Compilacao";
+            this.textbox_Compilacao.PasswordChar = '\0';
+            this.textbox_Compilacao.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.textbox_Compilacao.SelectedText = "";
+            this.textbox_Compilacao.Size = new System.Drawing.Size(170, 23);
+            this.textbox_Compilacao.TabIndex = 33;
+            this.textbox_Compilacao.Text = "metroTextBox1";
+            this.textbox_Compilacao.UseSelectable = true;
+            // 
             // userSobre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.textbox_Compilacao);
+            this.Controls.Add(this.metroLabel5);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.textBox_versaofw);
             this.Controls.Add(this.lblExecucao);
@@ -316,6 +345,8 @@
             this.Controls.SetChildIndex(this.lblExecucao, 0);
             this.Controls.SetChildIndex(this.textBox_versaofw, 0);
             this.Controls.SetChildIndex(this.metroLabel2, 0);
+            this.Controls.SetChildIndex(this.metroLabel5, 0);
+            this.Controls.SetChildIndex(this.textbox_Compilacao, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
@@ -343,5 +374,7 @@
         private MetroFramework.Controls.MetroLabel lblExecucao;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroTextBox textBox_versaofw;
+        private MetroFramework.Controls.MetroLabel metroLabel5;
+        private MetroFramework.Controls.MetroTextBox textbox_Compilacao;
     }
 }

@@ -24,7 +24,6 @@ namespace NFe.ConvertTxt
         public static string VersaoXMLMDFeStatusServico = "1.00";
         public static string VersaoXMLMDFe = "1.00";
         public static string VersaoXMLMDFePedRec = "1.00";
-        public static string VersaoXMLMDFePedSit = "1.00";
         public static string VersaoXMLMDFeEvento = "1.00";
         public static string VersaoXMLMDFeConsNaoEnc = "1.00";
         #endregion
@@ -34,7 +33,6 @@ namespace NFe.ConvertTxt
         public static string VersaoXMLCTeStatusServico = "2.00";
         public static string VersaoXMLCTe = "2.00";
         public static string VersaoXMLCTePedRec = "2.00";
-        public static string VersaoXMLCTePedSit = "2.00";
         public static string VersaoXMLCTeInut = "2.00";
         public static string VersaoXMLCTeEvento = "2.00";
         #endregion
@@ -107,7 +105,8 @@ namespace NFe.ConvertTxt
         dbisListaPositiva = 2, 
         dbisListaNeutra = 3, 
         dbisMargemValorAgregado = 4, 
-        dbisPauta = 5
+        dbisPauta = 5,
+        NaoInserirTagNoXML = 100 //Quando a tag não é obrigatórioa, vamos retornar este valor para termos controle sobre a situação.
     }
     public enum TpcnOrigemMercadoria
     {

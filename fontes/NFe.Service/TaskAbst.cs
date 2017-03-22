@@ -986,6 +986,10 @@ namespace NFe.Service
                             retorna = "mConsultaNFSePorFaixa";
                             break;
 
+                        case Servicos.NFSeConsultaSequenciaLoteNotaRPS:
+                            retorna = "mConsultaSequenciaLoteNotaRPS";
+                            break;
+
                         case Servicos.NFSeCancelar:
                             retorna = "mCancelamentoNFSe";
                             break;
@@ -1621,7 +1625,44 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion BSIT-BR
+                #endregion BSIT-BR
+
+                #region SH3
+
+                case PadroesNFSe.SH3:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfseFaixa";
+                            break;
+                    }
+                    break;
+
+                    #endregion FINTEL
 
 
             }
@@ -1752,6 +1793,27 @@ namespace NFe.Service
                 {
                     //Registrar o erro da validação do schema para o sistema ERP
                     throw new Exception(cResultadoValidacao);
+                }
+
+                //Validações de modal
+                if (conteudoXML.DocumentElement.Name.Equals("CTe") ||
+                    conteudoXML.DocumentElement.Name.Equals("MDFe"))
+                {
+                    string resultValidacao = "";
+                    XmlDocument infModal = new XmlDocument();
+                    XmlDocument modal = new XmlDocument();
+
+                    foreach (XmlElement item in conteudoXML.GetElementsByTagName("infModal"))
+                    {
+                        infModal.LoadXml(item.OuterXml);
+                        modal.LoadXml(item.InnerXml);
+                    }
+
+                    ValidarXML validarModal = new ValidarXML(infModal, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
+                    resultValidacao += validarModal.ValidarArqXML(modal, NomeArquivoXML);
+
+                    if (resultValidacao != "")
+                        throw new Exception(resultValidacao);
                 }
 
                 //Validações gerais
@@ -2212,6 +2274,7 @@ namespace NFe.Service
                         retorno = false;
                     break;
 
+                case PadroesNFSe.BETHA202:
                 case PadroesNFSe.MEMORY:
                 case PadroesNFSe.CONSIST:
                 case PadroesNFSe.MGM:
@@ -2466,6 +2529,26 @@ namespace NFe.Service
                         }
                     }
                     break;
+
+                case PadroesNFSe.BETHA202:
+                case PadroesNFSe.SH3:
+                    if (servico == Servicos.NFSeRecepcionarLoteRps)
+                    {
+                        switch (doc.DocumentElement.Name)
+                        {
+                            case "EnviarLoteRpsSincronoEnvio":
+                                result = Servicos.NFSeRecepcionarLoteRpsSincrono;
+                                break;
+
+                            case "EnviarLoteRpsEnvio":
+                                result = Servicos.NFSeRecepcionarLoteRps;
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+                    break;
             }
 
             return result;
@@ -2626,6 +2709,7 @@ namespace NFe.Service
             {
                 XmlElement consSitNFeElemento = (XmlElement)consSitNFeNode;
 
+                dadosPedSit.versao = consSitNFeElemento.Attributes[TpcnResources.versao.ToString()].Value;
                 dadosPedSit.tpAmb = Convert.ToInt32("0" + consSitNFeElemento.GetElementsByTagName(TpcnResources.tpAmb.ToString())[0].InnerText);
                 dadosPedSit.chNFe = Functions.LerTag(consSitNFeElemento, TpcnResources.chCTe.ToString(), "") +
                                     Functions.LerTag(consSitNFeElemento, TpcnResources.chMDFe.ToString(), "");

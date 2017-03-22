@@ -51,7 +51,7 @@ namespace NFe.Service
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(cabecMsg, TpcnResources.cUF.ToString(), dadosPedSta.cUF.ToString());
-                wsProxy.SetProp(cabecMsg, TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLMDFeStatusServico);
+                wsProxy.SetProp(cabecMsg, TpcnResources.versaoDados.ToString(), dadosPedSta.versao);
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy, statusServico, wsProxy.NomeMetodoWS[0], cabecMsg, this,

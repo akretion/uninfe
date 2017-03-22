@@ -72,7 +72,7 @@ namespace NFe.Service
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedRec.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLCTePedRec);
+                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedRec.versao);
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy,
@@ -142,6 +142,7 @@ namespace NFe.Service
                 dadosPedRec.tpAmb = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName(TpcnResources.tpAmb.ToString())[0].InnerText);
                 dadosPedRec.nRec = consReciNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
                 dadosPedRec.cUF = Convert.ToInt32(dadosPedRec.nRec.Substring(0, 2));
+                dadosPedRec.versao = consReciNFeElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
 
                 if (consReciNFeElemento.GetElementsByTagName(TpcnResources.cUF.ToString()).Count != 0)
                 {
@@ -305,13 +306,13 @@ namespace NFe.Service
                                     case "100": //NFe Autorizada
                                         if (File.Exists(strArquivoNFe))
                                         {
-                                            //Juntar o protocolo com a NFE já copiando para a pasta em processamento
-                                            var strArquivoNFeProc = oGerarXML.XmlDistCTe(strArquivoNFe, strProtNfe);
-
                                             //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
                                             XmlDocument conteudoXMLCTe = new XmlDocument();
                                             conteudoXMLCTe.Load(strArquivoNFe);
                                             oLerXml.Cte(conteudoXMLCTe);
+
+                                            //Juntar o protocolo com a NFE já copiando para a pasta em processamento
+                                            var strArquivoNFeProc = oGerarXML.XmlDistCTe(strArquivoNFe, strProtNfe, oLerXml.oDadosNfe.versao);
 
                                             //Mover a cteProc da pasta de CTe em processamento para a NFe Autorizada
                                             //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procCTe.xml) para

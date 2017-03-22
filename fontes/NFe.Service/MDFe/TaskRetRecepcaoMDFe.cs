@@ -34,7 +34,6 @@ namespace NFe.Service
                 conteudoXML.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText + Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML;
         }
 
-
         #region Classe com os dados do XML do pedido de consulta do recibo do lote de nfe enviado
 
         /// <summary>
@@ -72,7 +71,7 @@ namespace NFe.Service
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedRec.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), ConvertTxt.versoes.VersaoXMLMDFePedRec);
+                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedRec.versao);
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy,
@@ -132,7 +131,8 @@ namespace NFe.Service
             dadosPedRec.tpAmb = 0;
             dadosPedRec.tpEmis = Empresas.Configuracoes[emp].tpEmis;
             dadosPedRec.cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
-            dadosPedRec.nRec = string.Empty;
+            dadosPedRec.nRec =
+                dadosPedRec.versao = string.Empty; ;
 
             XmlNodeList consReciNFeList = ConteudoXML.GetElementsByTagName("consReciMDFe");
 
@@ -143,6 +143,7 @@ namespace NFe.Service
                 dadosPedRec.tpAmb = Convert.ToInt32("0" + consReciNFeElemento.GetElementsByTagName(TpcnResources.tpAmb.ToString())[0].InnerText);
                 dadosPedRec.nRec = consReciNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
                 dadosPedRec.cUF = Convert.ToInt32(dadosPedRec.nRec.Substring(0, 2));
+                dadosPedRec.versao = consReciNFeElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
 
                 if (consReciNFeElemento.GetElementsByTagName(TpcnResources.cUF.ToString()).Count != 0)
                 {
@@ -348,7 +349,7 @@ namespace NFe.Service
                                             {
                                                 if (!File.Exists(strArquivoNFeProc))
                                                 {
-                                                    oGerarXML.XmlDistMDFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcMDFe);
+                                                    oGerarXML.XmlDistMDFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcMDFe, oLerXml.oDadosNfe.versao);
                                                 }
                                             }
 

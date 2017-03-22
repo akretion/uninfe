@@ -221,6 +221,11 @@ namespace NFe.Components
         /// </summary>
         [Description("Obter o XML da NFS-e")]
         NFSeObterNotaFiscal,
+        /// <summary>
+        /// Consulta Sequencia do Lote da Nota RPS
+        /// </summary>
+        [Description("Consulta Sequencia do Lote da Nota RPS")]
+        NFSeConsultaSequenciaLoteNotaRPS,
 
         #endregion
 
@@ -412,6 +417,11 @@ namespace NFe.Components
         /// </summary>        
         [Description("BETHA")]
         BETHA,
+        /// <summary>
+        /// Padrão da BETHA versão 2.02
+        /// </summary>        
+        [Description("BETHA 2.02")]
+        BETHA202,
         /// <summary>
         /// Padrão da THEMA Informática
         /// </summary>
@@ -713,7 +723,12 @@ namespace NFe.Components
         /// Lexsom
         /// </summary>
         [Description("LEXSOM")]
-        LEXSOM
+        LEXSOM,
+        /// <summary>
+        /// SH3
+        /// </summary>
+        [Description("SH3")]
+        SH3
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

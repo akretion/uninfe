@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using NFe.Settings;
 using NFe.Components;
 using NFe.Certificado;
+using System.Xml;
 
 namespace NFe.UI
 {
@@ -81,7 +82,7 @@ namespace NFe.UI
                                 ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedInuNFSe).EnvioXML +
                                 ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePNG).EnvioXML +
                                 ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML +
-                                ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML; 
+                                ";*" + Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML;
                         }
                         else
                         {
@@ -107,7 +108,7 @@ namespace NFe.UI
                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioXML,
                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML);
                         }
-                        
+
                         if (!string.IsNullOrEmpty(path))
                             dlg.InitialDirectory = path;
 
@@ -194,7 +195,26 @@ namespace NFe.UI
                 val.Execute();
 
                 //Detectar o tipo do arquivo
-                NFe.Validate.ValidarXML validarXML = new NFe.Validate.ValidarXML(cArquivo, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo, false);
+                Validate.ValidarXML validarXML = new Validate.ValidarXML(cArquivo, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo, false);
+                XmlDocument conteudoXML = new XmlDocument();
+                string resultValidacao = "";
+                conteudoXML.Load(cArquivo);
+                if (conteudoXML.DocumentElement.Name.Equals("CTe") ||
+                    conteudoXML.DocumentElement.Name.Equals("MDFe"))
+                {
+                    XmlDocument infModal = new XmlDocument();
+                    XmlDocument modal = new XmlDocument();
+
+                    foreach (XmlElement item in conteudoXML.GetElementsByTagName("infModal"))
+                    {
+                        infModal.LoadXml(item.OuterXml);
+                        modal.LoadXml(item.InnerXml);
+                    }
+
+                    Validate.ValidarXML validarModal = new Validate.ValidarXML(infModal, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo, false);
+                    resultValidacao += validarModal.ValidarArqXML(modal, cArquivo);
+                }
+
 
                 this.textBox_resultado.Text = validarXML.TipoArqXml.cRetornoTipoArq;
 
@@ -229,9 +249,13 @@ namespace NFe.UI
                             {
                                 this.textBox_resultado.Text = "XML não possui schema de validação, sendo assim não é possível validar XML";
                             }
-                            else if (validarXML.Retorno == 0)
+                            else if (validarXML.Retorno == 0 && string.IsNullOrEmpty(resultValidacao))
                             {
                                 this.textBox_resultado.Text = "Arquivo validado com sucesso!";
+                            }
+                            else if (!string.IsNullOrEmpty(resultValidacao))
+                            {
+                                this.textBox_resultado.Text = resultValidacao;
                             }
                             else
                             {
@@ -257,8 +281,9 @@ namespace NFe.UI
                     }
                     wb.Navigate(cArquivo);
                 }
-                catch { 
-                    webBrowser1_DocumentCompleted(null,null); 
+                catch
+                {
+                    webBrowser1_DocumentCompleted(null, null);
                 }
             }
             catch (Exception ex)

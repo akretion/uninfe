@@ -497,7 +497,6 @@
         private MetroFramework.Controls.MetroLink metroLink_unimake;
         private MetroFramework.Controls.MetroTile metroTile_sefaz_cte;
         private MetroFramework.Controls.MetroTile metroTile_sefaz_nfe;
-        private MetroFramework.Controls.MetroTile metroTile_doc;
         private MetroFramework.Controls.MetroTile metroTile_municipios;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem prêtoToolStripMenuItem;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -265,7 +265,7 @@ namespace NFe.UI.Formularios
         {
             bool isA3 = false;
 
-#if _fw45
+#if _fw46
             if (this.ckbUsarCertificadoInstalado.Checked && ckbUsaCertificado.Checked)
                isA3 = clsX509Certificate2Extension.IsA3(empresa.X509Certificado);
 #endif

@@ -73,11 +73,14 @@
             this.cbMacarSAT.FormattingEnabled = true;
             this.cbMacarSAT.ItemHeight = 19;
             this.cbMacarSAT.Items.AddRange(new object[] {
-            "TANCA",
             "BEMATECH",
             "DARUMA",
             "DIMEP",
-            "ELGIN"});
+            "ELGIN",
+            "EMULADOR",
+            "NITERE",
+            "SWEDA",
+            "TANCA"});
             this.cbMacarSAT.Location = new System.Drawing.Point(0, 19);
             this.cbMacarSAT.Name = "cbMacarSAT";
             this.cbMacarSAT.Size = new System.Drawing.Size(310, 25);

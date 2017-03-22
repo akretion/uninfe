@@ -2055,6 +2055,8 @@ namespace NFe.Components.br.gov.sp.piracicaba.sistemas.www.p {
         
         private tcDadosConstrucaoCivil contrucaoCivilField;
         
+        private string motivoCancelamentoField;
+        
         private string idField;
         
         /// <remarks/>
@@ -2186,6 +2188,16 @@ namespace NFe.Components.br.gov.sp.piracicaba.sistemas.www.p {
             }
             set {
                 this.contrucaoCivilField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string MotivoCancelamento {
+            get {
+                return this.motivoCancelamentoField;
+            }
+            set {
+                this.motivoCancelamentoField = value;
             }
         }
         
@@ -3671,6 +3683,8 @@ namespace NFe.Components.br.gov.sp.piracicaba.sistemas.www.p {
         
         private tcDadosConstrucaoCivil contrucaoCivilField;
         
+        private string motivoCancelamentoField;
+        
         private string idField;
         
         /// <remarks/>
@@ -3896,6 +3910,16 @@ namespace NFe.Components.br.gov.sp.piracicaba.sistemas.www.p {
             }
             set {
                 this.contrucaoCivilField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string MotivoCancelamento {
+            get {
+                return this.motivoCancelamentoField;
+            }
+            set {
+                this.motivoCancelamentoField = value;
             }
         }
         

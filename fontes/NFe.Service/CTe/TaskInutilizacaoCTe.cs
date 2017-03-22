@@ -50,7 +50,7 @@ namespace NFe.Service
 
                 //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedInut.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLCTeInut);
+                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedInut.versao);
 
                 //Criar objeto da classe de assinatura digita
                 AssinaturaDigital oAD = new AssinaturaDigital();
@@ -108,6 +108,7 @@ namespace NFe.Service
                 XmlElement InutNFeElemento = (XmlElement)InutNFeNode;
 
                 XmlNodeList infInutList = InutNFeElemento.GetElementsByTagName("infInut");
+                dadosPedInut.versao = InutNFeElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
 
                 foreach (XmlNode infInutNode in infInutList)
                 {
@@ -160,7 +161,10 @@ namespace NFe.Service
                     {
                         string strRetInutNFe = retInutNFeNode.OuterXml;
 
-                        oGerarXML.XmlDistInutCTe(ConteudoXML, strRetInutNFe, NomeArquivoXML);
+                        dadosPedInut = new DadosPedInut(emp);
+                        PedInut(emp);
+
+                        oGerarXML.XmlDistInutCTe(ConteudoXML, strRetInutNFe, NomeArquivoXML, dadosPedInut.versao);
 
                         //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
                         StreamWriter sw = File.CreateText(NomeArquivoXML);

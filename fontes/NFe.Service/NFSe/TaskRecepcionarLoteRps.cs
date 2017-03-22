@@ -30,7 +30,7 @@ namespace NFe.Service.NFSe
         /// </summary>
         private DadosEnvLoteRps oDadosEnvLoteRps;
         #endregion
-    
+
         public TaskNFSeRecepcionarLoteRps(string arquivo)
         {
             Servico = Servicos.NFSeRecepcionarLoteRps;
@@ -108,9 +108,35 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.BETHA:
-                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
-                        wsProxy.Betha = new Betha();
+                        #region Betha
+                        string versao = Functions.GetAttributeXML("LoteRps", "versao", NomeArquivoXML);
+                        if (versao.Equals("2.02"))
+                        {
+                            padraoNFSe = PadroesNFSe.BETHA202;
+                            Components.Betha.NewVersion.Betha betha = new Components.Betha.NewVersion.Betha((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                oDadosEnvLoteRps.cMunicipio,
+                                Empresas.Configuracoes[emp].UsuarioWS,
+                                Empresas.Configuracoes[emp].SenhaWS,
+                                ConfiguracaoApp.ProxyUsuario,
+                                ConfiguracaoApp.ProxySenha,
+                                ConfiguracaoApp.ProxyServidor);
+
+                            AssinaturaDigital signbetha = new AssinaturaDigital();
+                            signbetha.Assinar(NomeArquivoXML, emp, 202);
+
+                            if (GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.BETHA202) == Servicos.NFSeRecepcionarLoteRpsSincrono)
+                                betha.EmiteNFSincrono(NomeArquivoXML);
+                            else
+                                betha.EmiteNF(NomeArquivoXML);
+                        }
+                        else
+                        {
+                            wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+                            wsProxy.Betha = new Betha();
+                        }
                         break;
+                        #endregion
 
                     case PadroesNFSe.ABACO:
                     case PadroesNFSe.CANOAS_RS:
@@ -124,6 +150,11 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.BHISS:
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.BHISS);
+                        break;
+
+                    case PadroesNFSe.SH3:
+                        cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.SH3);
                         break;
 
                     case PadroesNFSe.WEBISS:

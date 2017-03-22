@@ -703,7 +703,28 @@ namespace NFe.Components
                 /// danasa 1-2012
                 if (File.Exists(Propriedade.NomeArqXMLMunicipios))
                 {
-                    doc.Load(Propriedade.NomeArqXMLMunicipios);
+                    int contaTentativa = 0;
+                    while (contaTentativa <= 2)
+                    {
+                        try
+                        {
+                            contaTentativa++;
+                            doc.Load(Propriedade.NomeArqXMLMunicipios);
+                        }
+                        catch (Exception ex)
+                        {
+                            Functions.WriteLog("Ocorreu um erro na tentativa de carregamento do arquivo " + Propriedade.NomeArqXMLMunicipios + ".\r\n\r\n" +
+                                "Erro:\r\n\r\n" + ex.Message, true, true, "");
+
+                            //Forçar recriar o arquivo
+                            File.Delete(Propriedade.NomeArqXMLMunicipios);
+                            WebServiceNFSe.SalvarXMLMunicipios();
+                            continue;
+                        }
+
+                        break;
+                    }
+
                     XmlNodeList estadoList = doc.GetElementsByTagName(NFeStrConstants.Registro);
                     foreach (XmlNode registroNode in estadoList)
                     {
@@ -767,7 +788,23 @@ namespace NFe.Components
             if (File.Exists(filenameWS))
             {
                 XmlDocument doc = new XmlDocument();
-                doc.Load(filenameWS);
+
+                try
+                {
+                    doc.Load(filenameWS);
+                }
+                catch (Exception ex)
+                {
+                    Functions.WriteLog("Ocorreu um erro na tentativa de carregamento do arquivo " + filenameWS + ".\r\n" +
+                        "Acesse novamente o sistema para que se recupere automaticamente do erro.\r\n\r\n" +
+                        "Erro:\r\n\r\n" + ex.Message, true, true, "");
+
+                    if (File.Exists(Propriedade.XMLVersaoWSDLXSD))
+                        File.Delete(Propriedade.XMLVersaoWSDLXSD);
+
+                    Environment.Exit(0);
+                }
+
                 XmlNodeList estadoList = doc.GetElementsByTagName(NFeStrConstants.Estado);
                 foreach (XmlNode estadoNode in estadoList)
                 {
@@ -846,6 +883,17 @@ namespace NFe.Components
                     }
                 }
             }
+            else
+            {
+                Functions.WriteLog("Ocorreu um erro na tentativa de carregamento do arquivo " + filenameWS + ".\r\n" +
+                    "Acesse novamente o sistema para que se recupere automaticamente do erro.", true, true, "");
+
+                if (File.Exists(Propriedade.XMLVersaoWSDLXSD))
+                    File.Delete(Propriedade.XMLVersaoWSDLXSD);
+
+                Environment.Exit(0);
+            }
+
             return salvaXmlLocal;
         }
 
@@ -974,6 +1022,7 @@ namespace NFe.Components
             ConsultarNFSePDF =
             InutilizarNFSe =
             RecepcionarLoteRps =
+            ConsultaSequenciaLoteNotaRPS =
             ///
             /// NF-e
             NFeRecepcaoEvento =
@@ -1099,6 +1148,11 @@ namespace NFe.Components
         /// Obter o XML da NFSe
         /// </summary>
         public string ObterNotaFiscal { get; set; }
+
+        /// <summary>
+        /// Consulta Sequencia Lote Nota RPS
+        /// </summary>
+        public string ConsultaSequenciaLoteNotaRPS { get; set; }
 
         #endregion NFS-e
 
