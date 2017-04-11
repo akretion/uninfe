@@ -19,7 +19,22 @@
                 TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
 
-            #endregion XML Distribuição NFe
+            #endregion XML Distribuição CTe
+
+            #region XML Distribuição CTe
+
+            SchemaXML.InfSchemas.Add("NFE-cteOSProc", new InfSchema()
+            {
+                Tag = "cteOSProc",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "CTe\\procCTeOS_v{0}.xsd",
+                Descricao = "XML de distribuição do CTeOS com protocolo de autorização anexado",
+                TagAssinatura = string.Empty,
+                TagAtributoId = string.Empty,
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
+            });
+
+            #endregion XML Distribuição CTe
 
             #region XML Distribuição Cancelamento
 
@@ -64,7 +79,7 @@
                 TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
 
-            #endregion XML NFe
+            #endregion XML CTe
 
             #region XML Envio Lote
 
@@ -124,7 +139,7 @@
                 TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
 
-            #endregion XML Consulta Situação NFe
+            #endregion XML Consulta Situação CTe
 
             #region XML Consulta Recibo Lote
 
@@ -216,9 +231,25 @@
 
             #endregion XML de Envio do evento de Registro Multimodal
 
+            #region XML de CT-e OS, modelo 67
+
+            SchemaXML.InfSchemas.Add("NFE-CTeOS", new InfSchema()
+            {
+                Tag = "CTeOS",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "CTe\\cteOS_v{0}.xsd",
+                Descricao = "XML de CT-e OS, modelo 67",
+                TagAssinatura = "CTeOS",
+                TagAtributoId = "infCte",
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
+            });
+
+            #endregion XML de CT-e OS, modelo 67
+
             #region Schemas Modal
 
             #region Rodoviário
+
             SchemaXML.InfSchemas.Add("NFE-rodo-CTe", new InfSchema()
             {
                 Tag = "rodo",
@@ -229,9 +260,11 @@
                 TagAtributoId = "",
                 TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
-            #endregion
+
+            #endregion Rodoviário
 
             #region Ferroviário
+
             SchemaXML.InfSchemas.Add("NFE-ferrov-CTe", new InfSchema()
             {
                 Tag = "ferrov",
@@ -242,9 +275,11 @@
                 TagAtributoId = "",
                 TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
-            #endregion
+
+            #endregion Ferroviário
 
             #region Dutoviário
+
             SchemaXML.InfSchemas.Add("NFE-duto-CTe", new InfSchema()
             {
                 Tag = "duto",
@@ -255,9 +290,11 @@
                 TagAtributoId = "",
                 TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
-            #endregion
+
+            #endregion Dutoviário
 
             #region Aeroviário
+
             SchemaXML.InfSchemas.Add("NFE-aereo-CTe", new InfSchema()
             {
                 Tag = "aereo",
@@ -268,9 +305,11 @@
                 TagAtributoId = "",
                 TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
-            #endregion
+
+            #endregion Aeroviário
 
             #region Aquaviário
+
             SchemaXML.InfSchemas.Add("NFE-aquav-CTe", new InfSchema()
             {
                 Tag = "aquav",
@@ -281,7 +320,8 @@
                 TagAtributoId = "",
                 TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
             });
-            #endregion
+
+            #endregion Aquaviário
 
             #endregion Schemas Modal
 

@@ -1055,6 +1055,7 @@ namespace NFe.Components
             CTeRecepcaoEvento =
             CTeConsultaCadastro =
             CTeDistribuicaoDFe =
+            CteRecepcaoOS =
             ///
             /// LMC
             LMCAutorizacao = string.Empty;
@@ -1237,6 +1238,10 @@ namespace NFe.Components
         /// </summary>
         public string CTeDistribuicaoDFe { get; set; }
 
+        /// <summary>
+        /// Recepção do CTe modelo 67
+        /// </summary>
+        public string CteRecepcaoOS { get; set; }
         #endregion CTe
 
         #endregion Propriedades referente as tags do webservice.xml

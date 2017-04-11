@@ -143,6 +143,10 @@ namespace NFe.Components
         /// Enviar XML de distribuição de DFe de interesses de autores (CTe)
         /// </summary>
         CTeDistribuicaoDFe,
+        /// <summary>
+        /// Enviar XML de CTe modelo 67
+        /// </summary>
+        CteRecepcaoOS,
         #endregion
 
         #region NFSe
@@ -728,7 +732,12 @@ namespace NFe.Components
         /// SH3
         /// </summary>
         [Description("SH3")]
-        SH3
+        SH3,
+        /// <summary>
+        /// Coplan
+        /// </summary>
+        [Description("Coplan")]
+        COPLAN
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

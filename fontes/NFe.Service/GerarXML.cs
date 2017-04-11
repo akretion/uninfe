@@ -364,6 +364,19 @@ namespace NFe.Service
 
         #endregion PopulateNomeArqLote()
 
+        /// <summary>
+        /// Somente gera o Número do lote no caso de CTeOS para manter compatibilidade com o processo do ERP, facilitando integração.
+        /// </summary>
+        /// <returns>Número do lote</returns>
+        public Int32 GerarLoteCTeOS(string nomeArquivoXML)
+        {
+            Int32 numeroLote = ProximoNumeroLote();
+
+            GravarXMLLoteRetERP(numeroLote, nomeArquivoXML);
+
+            return numeroLote;
+        }
+
         #region ProximoNumeroLote()
 
         /// <summary>
@@ -977,15 +990,40 @@ namespace NFe.Service
         /// </remarks>
         public void XmlRetorno(string finalArqEnvio, string finalArqRetorno, string conteudoXMLRetorno, string pastaGravar)
         {
+            XmlRetorno(finalArqEnvio, finalArqRetorno, conteudoXMLRetorno, pastaGravar, NomeXMLDadosMsg);
+        }
+
+        #endregion XmlRetorno()
+
+        #region XmlRetorno()
+
+        /// <summary>
+        /// Grava o XML com os dados do retorno dos webservices e deleta o XML de solicitação do serviço.
+        /// </summary>
+        /// <param name="finalArqEnvio">Final do nome do arquivo de solicitação do serviço.</param>
+        /// <param name="finalArqRetorno">Final do nome do arquivo que é para ser gravado o retorno.</param>
+        /// <param name="conteudoXMLRetorno">Conteúdo do XML a ser gerado</param>
+        /// <param name="pastaGravar">Pasta onde é para ser gravado o XML de Retorno</param>
+        /// <example>
+        /// // Arquivo de envio: 20080619T19113320-ped-sta.xml
+        /// // Arquivo de retorno que vai ser gravado: 20080619T19113320-sta.xml
+        /// this.GravarXmlRetorno("-ped-sta.xml", "-sta.xml");
+        /// </example>
+        /// <remarks>
+        /// Autor: Wandrey Mundin Ferreira
+        /// Data: 25/11/2010
+        /// </remarks>
+        public void XmlRetorno(string finalArqEnvio, string finalArqRetorno, string conteudoXMLRetorno, string pastaGravar, string nomeXMLDadosMsg)
+        {
             int emp = Empresas.FindEmpresaByThread();
             try
             {
                 //Deletar o arquivo XML da pasta de temporários de XML´s com erros se o mesmo existir
-                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(NomeXMLDadosMsg, ".xml") + ".xml");
+                Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlErro + "\\" + Functions.ExtrairNomeArq(nomeXMLDadosMsg, ".xml") + ".xml");
 
                 //Gravar o arquivo XML de retorno
                 string ArqXMLRetorno = pastaGravar + "\\" +
-                                       Functions.ExtrairNomeArq(NomeXMLDadosMsg, finalArqEnvio) +
+                                       Functions.ExtrairNomeArq(nomeXMLDadosMsg, finalArqEnvio) +
                                        finalArqRetorno;
 
                 File.WriteAllText(ArqXMLRetorno, conteudoXMLRetorno);
@@ -1969,6 +2007,63 @@ namespace NFe.Service
                         conteudoCTe +
                         protCTe +
                         "</" + tipo + "eProc>";
+
+                    //Gravar o XML em uma linha só (sem quebrar as tag´s linha a linha) ou dá erro na hora de
+                    //validar o XML pelos Schemas. Wandrey 13/05/2009
+                    swProc = File.CreateText(nomeArqProcCTe);
+                    swProc.Write(xmlProcCTe);
+                }
+            }
+            finally
+            {
+                if (swProc != null)
+                {
+                    swProc.Close();
+                }
+            }
+
+            return nomeArqProcCTe;
+        }
+
+        /// <summary>
+        /// Criar o arquivo XML de distribuição dos CTE com o protocolo de autorização anexado
+        /// </summary>
+        /// <param name="arqCTe">Nome arquivo XML da CTe</param>
+        /// <param name="protCTe">String contendo a parte do XML do protocolo a ser anexado</param>
+        /// <param name="versao">Versão do XML da NFe</param>
+        public string XmlDistCTeOS(string arqCTe, string protCTe, string versao)  //danasa 11-4-2012
+        {
+            string nomeArqProcCTe = string.Empty;
+            int emp = EmpIndex;
+            StreamWriter swProc = null;
+
+            try
+            {
+                //Montar o nome do arquivo -proc-CTe.xml
+                nomeArqProcCTe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                 PastaEnviados.EmProcessamento.ToString() + "\\" +
+                                 Functions.ExtrairNomeArq(arqCTe, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML) +
+                                 Propriedade.ExtRetorno.ProcCTe;
+
+                if (File.Exists(arqCTe))
+                {
+                    string tipo = "ct";
+
+                    //Separar as tag´s da CTe que interessa <CTe> até </CTe>
+                    XmlDocument doc = new XmlDocument();
+
+                    doc.Load(arqCTe);
+
+                    XmlNodeList CTeList = doc.GetElementsByTagName(tipo.ToUpper() + "eOS");
+                    XmlNode CTeNode = CTeList[0];
+                    string conteudoCTe = CTeNode.OuterXml;
+
+                    //Montar a string contendo o XML -proc-CTe.xml
+                    string xmlProcCTe = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>" +
+                        "<" + tipo + "eOSProc xmlns=\"" + NFeStrConstants.NAME_SPACE_CTE + "\" versao=\"" + versao + "\">" +
+                        conteudoCTe +
+                        protCTe +
+                        "</" + tipo + "eOSProc>";
 
                     //Gravar o XML em uma linha só (sem quebrar as tag´s linha a linha) ou dá erro na hora de
                     //validar o XML pelos Schemas. Wandrey 13/05/2009

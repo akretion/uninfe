@@ -37,20 +37,20 @@
    call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\uninfe.exe
    call assina_udf.bat ..\fontes\uninfe\bin\release35_AnyCPU\uninfeservico.exe
 
-   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\MetroFramework.dll
-   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Certificado.dll
-   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Components.dll
-   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Components.Info.dll
-   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Components.Wsdl.dll
-   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.ConvertTxt.dll
-   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Service.dll
-   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Settings.dll
-   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Threadings.dll
-   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.UI.dll
-   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\NFe.Validate.dll
-   call assina_udf.bat ..\fontes\uninfe\bin\Release46_x86\uninfe.exe
-   call assina_udf.bat ..\fontes\uninfe\bin\release46_x86\NFe.SAT.dll
-   call assina_udf.bat ..\fontes\uninfe\bin\release46_x86\uninfeservico.exe
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\MetroFramework.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.Certificado.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.Components.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.Components.Info.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.Components.Wsdl.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.ConvertTxt.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.Service.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.Settings.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.Threadings.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.UI.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.Validate.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\uninfe.exe
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\release46_x86\NFe.SAT.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\release46_x86\uninfeservico.exe
   
    Goto Fim
 

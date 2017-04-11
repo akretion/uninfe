@@ -138,6 +138,7 @@
     <Compile Include="Classes.cs" />
     <Compile Include="CTe\TaskAssinarValidarCTe.cs" />
     <Compile Include="CTe\TaskConsultaStatusCTe.cs" />
+    <Compile Include="CTe\TaskCTeRecepcaoOS.cs" />
     <Compile Include="CTe\TaskCTeRecepcao.cs" />
     <Compile Include="CTe\TaskEventosCTe.cs" />
     <Compile Include="CTe\TaskInutilizacaoCTe.cs" />

@@ -73,12 +73,13 @@ namespace NFe.Components.Betha.NewVersion.Ambiente
         #region Métodos
         public override void EmiteNF(string file)
         {
-            ReadXML(file);
+            XmlDocument xml = new XmlDocument();
+            xml.Load(file);
 
             RecepcionarLoteRps envio = new RecepcionarLoteRps
             {
                 nfseCabecMsg = CabecMsg,
-                nfseDadosMsg = XmlString
+                nfseDadosMsg = xml.InnerXml
             };
 
             string result = Service.RecepcionarLoteRps(envio).@return;
@@ -88,20 +89,19 @@ namespace NFe.Components.Betha.NewVersion.Ambiente
 
         public void EmiteNFSincrono(string file)
         {
-            ReadXML(file);
+            XmlDocument xml = new XmlDocument();
+            xml.Load(file);
 
             RecepcionarLoteRpsSincrono envio = new RecepcionarLoteRpsSincrono
             {
                 nfseCabecMsg = CabecMsg,
-                nfseDadosMsg = XmlString
+                nfseDadosMsg = xml.InnerXml
             };
 
             string result = Service.RecepcionarLoteRpsSincrono(envio).@return;
             GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
                                        Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
-
-
 
         public override void CancelarNfse(string file)
         {

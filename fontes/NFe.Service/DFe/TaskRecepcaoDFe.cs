@@ -166,20 +166,20 @@ namespace NFe.Service
                     XmlNodeList ret1List = ret1Elemento.GetElementsByTagName("loteDistDFeInt");
                     foreach (XmlNode ret in ret1List)
                     {
-                        if (Servico == Servicos.CTeDistribuicaoDFe)
-                        {
-                            XmlElement listaDFeElemento = (XmlElement)ret1Node;
-
-                            XmlNodeList listaDFeList = ret1Elemento.GetElementsByTagName("ListaDFe");
-                            foreach (XmlNode listaDFeNode in listaDFeList)
-                            {
-                                ExtraiDFe(listaDFeNode, "DocZip", folderTerceiros, fileRetorno2, emp, fileRetorno);
-                            }
-                        }
-                        else
-                        {
-                            ExtraiDFe(ret, "docZip", folderTerceiros, fileRetorno2, emp, fileRetorno);
-                        }
+                        //                        if (Servico == Servicos.CTeDistribuicaoDFe)
+                        //                        {
+                        //                            XmlElement listaDFeElemento = (XmlElement)ret1Node;
+                        //
+                        //                            XmlNodeList listaDFeList = ret1Elemento.GetElementsByTagName("ListaDFe");
+                        //                            foreach (XmlNode listaDFeNode in listaDFeList)
+                        //                            {
+                        //                                ExtraiDFe(listaDFeNode, "DocZip", folderTerceiros, fileRetorno2, emp, fileRetorno);
+                        //                            }
+                        //                        }
+                        //                        else
+                        //                        {
+                        ExtraiDFe(ret, "docZip", folderTerceiros, fileRetorno2, emp, fileRetorno);
+                        //                        }
                     }
                 }
             }

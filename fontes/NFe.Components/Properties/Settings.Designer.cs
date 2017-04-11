@@ -544,6 +544,26 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.govdigital.com.br:443/ws/pelotas")]
+        public string NFe_Components_br_com_govdigital_ws_pelotas_p_NfseServiceImplPelotasService {
+            get {
+                return ((string)(this["NFe_Components_br_com_govdigital_ws_pelotas_p_NfseServiceImplPelotasService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.govdigital.com.br:443/ws/pelotas")]
+        public string NFe_Components_br_com_govdigital_homolog_pelotas_h_NfseServiceImplPelotasService {
+            get {
+                return ((string)(this["NFe_Components_br_com_govdigital_homolog_pelotas_h_NfseServiceImplPelotasService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://www.mgmtributacao.com.br/issqn/wservice/wsnfe_teste_homologacao.php")]
         public string NFe_Components_br_com_mgmtributacao_www_penapolis_h_webservice {
             get {
@@ -921,6 +941,48 @@ namespace NFe.Components.Properties {
         public string NFe_Components_br_com_betha_egov_p_NfseWSService {
             get {
                 return ((string)(this["NFe_Components_br_com_betha_egov_p_NfseWSService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.gp.srv.br/tributario_camponovodoparecis/servlet/anfse_web_service")]
+        public string NFe_Components_br_srv_gp_www_coplan_camponovodoparecis_p_nfse_web_service {
+            get {
+                return ((string)(this["NFe_Components_br_srv_gp_www_coplan_camponovodoparecis_p_nfse_web_service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://homologacao.municipioweb.com.br/tributario_homologacao/servlet/anfse_web_s" +
+            "ervice")]
+        public string NFe_Components_br_srv_gp_www_coplan_camponovodoparecis_h_nfse_web_service {
+            get {
+                return ((string)(this["NFe_Components_br_srv_gp_www_coplan_camponovodoparecis_h_nfse_web_service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homologacao.municipioweb.com.br/tributario_homologacao/servlet/anfse_web_" +
+            "service")]
+        public string NFe_Components_br_srv_gp_www_coplan_camponovodoparecis2_h_nfse_web_service {
+            get {
+                return ((string)(this["NFe_Components_br_srv_gp_www_coplan_camponovodoparecis2_h_nfse_web_service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://186.225.155.34:8080/IssWeb-ejb/IssWebWS/IssWebWS")]
+        public string NFe_Components_br_com_fiorilli_jacisp_p_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_br_com_fiorilli_jacisp_p_IssWebWS"]));
             }
         }
     }

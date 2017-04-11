@@ -15,8 +15,8 @@ namespace NFSe.Components
             {
                 Tag = "CancelarNfseEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "",
-                Descricao = "XML de Cancelamento de NFSe",
+                ArquivoXSD = "NFSe\\ISSONLINE4R\\nfsev20.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
                 TagAssinatura = "Pedido",
                 TagAtributoId = "InfPedidoCancelamento",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
@@ -28,7 +28,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarNfseRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "",
+                ArquivoXSD = "NFSe\\ISSONLINE4R\\nfsev20.xsd",
                 Descricao = "XML de Consulta de NFSe por Rps",
                 TagAssinatura = "",
                 TagAtributoId = "",
@@ -41,12 +41,12 @@ namespace NFSe.Components
             {
                 Tag = "EnviarLoteRpsSincronoEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "",
+                ArquivoXSD = "NFSe\\ISSONLINE4R\\nfsev20.xsd",
                 Descricao = "XML de Lote RPS",
                 TagLoteAssinatura = "EnviarLoteRpsSincronoEnvio",
                 TagLoteAtributoId = "LoteRps",
                 TagAssinatura = "Rps",
-                TagAtributoId = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
             #endregion

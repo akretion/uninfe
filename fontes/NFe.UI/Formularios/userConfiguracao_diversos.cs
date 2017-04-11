@@ -341,7 +341,8 @@ namespace NFe.UI.Formularios
                            ufCod == 4201307 /*Araquari-SC*/||
                            ufCod == 3205002 /*Serra-ES*/||
                            ufCod == 3504008 /*Assis-SP*/||
-                           ufCod == 4202008 /*Balneário Camboriú-SC*/;
+                           ufCod == 4202008 /*Balneário Camboriú-SC*/||
+                           ufCod == 3524501 /*Jaci-SP*/;
 
             bool visiblepass = ufCod == 3152105 || visible; /*Ponte nova*/
 

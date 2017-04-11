@@ -146,7 +146,13 @@
     <Compile Include="Betha\Betha.cs" />
     <Compile Include="CNPJ.cs" />
     <Compile Include="ComboElemen.cs" />
+    <Compile Include="Coplan\CampoNovoParecisMT\h\CoplanH.cs" />
+    <Compile Include="Coplan\CampoNovoParecisMT\p\CoplanP.cs" />
+    <Compile Include="Coplan\Coplan.cs" />
+    <Compile Include="Coplan\CoplanBase.cs" />
     <Compile Include="Fiorilli\AssisSP\p\FiorilliP.cs" />
+    <Compile Include="Fiorilli\JaciSP\h\FiorilliH.cs" />
+    <Compile Include="Fiorilli\JaciSP\p\FiorilliP.cs" />
     <Compile Include="Pronin\GuarapuavaPR\h\ProninH.cs" />
     <Compile Include="Pronin\GuarapuavaPR\p\ProninP.cs" />
     <Compile Include="Pronin\Pronin.cs" />
@@ -191,6 +197,7 @@
     <Compile Include="CONAM\VarginhaMG\p\ConamP.cs" />
     <Compile Include="NFeStrConstants.cs" />
     <Compile Include="RLZ_INFORMATICA\SantaFeDoSulSP\p\Rlz_InformaticaP.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_COPLAN.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_SH3.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_BSITBR.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_LEXSOM.cs" />
@@ -390,6 +397,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\br.com.fiorilli.jacisp.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\br.com.fisslex.demo.aws_consultaloterps.h\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -445,6 +457,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\br.com.govdigital.homolog.pelotas.h\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\br.com.govdigital.homolog.pocos.h\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -476,6 +493,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\br.com.govdigital.ws.pedroleopoldo.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.govdigital.ws.pelotas.p\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -731,6 +753,21 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\br.net.taquarituba.fiorilli.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.srv.gp.www.coplan.camponovodoparecis.h\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.srv.gp.www.coplan.camponovodoparecis.p\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.srv.gp.www.coplan.camponovodoparecis2.h\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1133,6 +1170,41 @@
     <None Include="Web References\br.com.fiorilli.avaresp.p\SubstituirNfseResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\br.com.fiorilli.jacisp.p\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.jacisp.p\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.jacisp.p\ConsultarNfseFaixaResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.jacisp.p\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.jacisp.p\ConsultarNfseServicoPrestadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.jacisp.p\ConsultarNfseServicoTomadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.jacisp.p\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.jacisp.p\EnviarLoteRpsSincronoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.jacisp.p\GerarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.jacisp.p\IssWebWS.wsdl" />
+    <None Include="Web References\br.com.fiorilli.jacisp.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.fiorilli.jacisp.p\SubstituirNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\br.com.fisslex.demo.aws_consultaloterps.h\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -1221,6 +1293,14 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\br.com.govdigital.homolog.pelotas.h\NfseServiceImplPelotasService.wsdl" />
+    <None Include="Web References\br.com.govdigital.homolog.pelotas.h\pelotas.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.com.govdigital.homolog.pelotas.h\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\br.com.govdigital.homolog.pocos.h\NfseServiceImplPocosService.wsdl" />
     <None Include="Web References\br.com.govdigital.homolog.pocos.h\pocos.xsd">
       <SubType>Designer</SubType>
@@ -1274,6 +1354,14 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Web References\br.com.govdigital.ws.pedroleopoldo.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.govdigital.ws.pelotas.p\NfseServiceImplPelotasService.wsdl" />
+    <None Include="Web References\br.com.govdigital.ws.pelotas.p\pelotas.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\br.com.govdigital.ws.pelotas.p\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -2312,6 +2400,30 @@
     <None Include="Web References\br.net.taquarituba.fiorilli.p\SubstituirNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\br.srv.gp.www.coplan.camponovodoparecis.h\nfse_web_service.wsdl" />
+    <None Include="Web References\br.srv.gp.www.coplan.camponovodoparecis.h\output.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.srv.gp.www.coplan.camponovodoparecis.h\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.srv.gp.www.coplan.camponovodoparecis.p\nfse_web_service.wsdl" />
+    <None Include="Web References\br.srv.gp.www.coplan.camponovodoparecis.p\output.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.srv.gp.www.coplan.camponovodoparecis.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.srv.gp.www.coplan.camponovodoparecis2.h\nfse_web_service.wsdl" />
+    <None Include="Web References\br.srv.gp.www.coplan.camponovodoparecis2.h\output.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.srv.gp.www.coplan.camponovodoparecis2.h\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\com.dyndnsserver.pmassis2.p\CancelarNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -2463,6 +2575,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PCorumbaMS_NfseWSService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaciSP-FIORILLI.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.fiorilli.jacisp.p\</RelPath>
+      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaciSP-FIORILLI.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_fiorilli_jacisp_p_IssWebWS</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSaoPauloSP-PAULISTANA.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\PSaoPauloSP\</RelPath>
@@ -2484,6 +2607,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_gov_sp_avare_fiorilli_h_IssWebWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Users\renan\Desktop\campo novo do parecis\HCampoNovoParecis-COPLAN.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.srv.gp.www.coplan.camponovodoparecis2.h\</RelPath>
+      <UpdateFromURL>C:\Users\renan\Desktop\campo novo do parecis\HCampoNovoParecis-COPLAN.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_srv_gp_www_coplan_camponovodoparecis2_h_nfse_web_service</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="C:\Users\renan\Desktop\Itaporanga\PItaporanga-SIMPLISS.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -3035,6 +3169,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_govdigital_homolog_pedroleopoldo_h_NfseServiceImplPlService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homolog.govdigital.com.br/ws/pelotas%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.govdigital.homolog.pelotas.h\</RelPath>
+      <UpdateFromURL>https://homolog.govdigital.com.br/ws/pelotas%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_govdigital_homolog_pelotas_h_NfseServiceImplPelotasService</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://homolog.govdigital.com.br/ws/pocos%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.com.govdigital.homolog.pocos.h\</RelPath>
@@ -3067,6 +3212,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_govdigital_homolog_saojosedalapa_h_NfseServiceImplSjlService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homologacao.municipioweb.com.br/tributario_homologacao/servlet/anfse_web_service%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.srv.gp.www.coplan.camponovodoparecis.h\</RelPath>
+      <UpdateFromURL>https://homologacao.municipioweb.com.br/tributario_homologacao/servlet/anfse_web_service%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_srv_gp_www_coplan_camponovodoparecis_h_nfse_web_service</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://igarape.sigiss.com.br/igarape/ws/sigiss_ws.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -3332,6 +3488,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_govdigital_ws_pedroleopoldo_p_NfseServiceImplPlService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="https://ws.govdigital.com.br/ws/pelotas%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.govdigital.ws.pelotas.p\</RelPath>
+      <UpdateFromURL>https://ws.govdigital.com.br/ws/pelotas%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_govdigital_ws_pelotas_p_NfseServiceImplPelotasService</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://ws.govdigital.com.br/ws/pocos%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.com.govdigital.ws.pocos.p\</RelPath>
@@ -3364,6 +3531,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_govdigital_ws_saojosedalapa_p_NfseServiceImplSjlService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://www.gp.srv.br/tributario_camponovodoparecis/servlet/anfse_web_service%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.srv.gp.www.coplan.camponovodoparecis.p\</RelPath>
+      <UpdateFromURL>https://www.gp.srv.br/tributario_camponovodoparecis/servlet/anfse_web_service%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_srv_gp_www_coplan_camponovodoparecis_p_nfse_web_service</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://www.nfse.erechim.rs.gov.br:8182/NfseService/NfseService%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

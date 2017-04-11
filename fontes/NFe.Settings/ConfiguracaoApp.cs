@@ -797,11 +797,8 @@ namespace NFe.Settings
                 {
                     Thread.Sleep(1000); //1 segundo
 
-                    //Definir se é uma configurações específica para NFC-e
-                    bool ehNFCe = (mod == "65");
-
                     //Definir a URI para conexão com o Webservice
-                    string Url = ConfiguracaoApp.DefLocalWSDL(cUF, tpAmb, tpEmis, versao, servico, ehNFCe);
+                    string Url = ConfiguracaoApp.DefLocalWSDL(cUF, tpAmb, tpEmis, versao, servico, mod);
 
                     wsProxy = new WebServiceProxy(cUF,
                                                   Url,
@@ -832,9 +829,11 @@ namespace NFe.Settings
         /// <param name="versao">Versão do XML</param>
         /// <param name="ehNFCe">Se é NFCe (Nota Fiscal de Consumidor Eletrônica)</param>
         /// <returns>Retorna a URL</returns>
-        private static string DefLocalWSDL(int CodigoUF, int tipoAmbiente, int tipoEmissao, string versao, Servicos servico, bool ehNFCe)
+        private static string DefLocalWSDL(int CodigoUF, int tipoAmbiente, int tipoEmissao, string versao, Servicos servico, string modelo)
         {
+            bool ehNFCe = (modelo == "65");
             string WSDL = string.Empty;
+
             switch ((NFe.Components.TipoEmissao)tipoEmissao)
             {
                 case NFe.Components.TipoEmissao.teSVCRS:
@@ -982,6 +981,10 @@ namespace NFe.Settings
 
                         case Servicos.CTeDistribuicaoDFe:
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.CTeDistribuicaoDFe : list.LocalProducao.CTeDistribuicaoDFe);
+                            break;
+
+                        case Servicos.CteRecepcaoOS:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.CteRecepcaoOS : list.LocalProducao.CteRecepcaoOS);
                             break;
 
                         #endregion CT-e

@@ -258,6 +258,11 @@ namespace NFe.Components
             CTe,
 
             /// <summary>
+            /// CTe modelo 67
+            /// </summary>
+            CTeOS,
+
+            /// <summary>
             /// MDFe
             /// </summary>
             MDFe,
@@ -475,6 +480,11 @@ namespace NFe.Components
                         "-cte.xml", "",
                         "", "",
                         "Pedido de emissão de CTe"));
+
+                    ListaExtensoes.Add(TipoEnvio.CTeOS, new ExtensaoClass(
+                        "-cte.xml", "",
+                        "", "",
+                        "Pedido de emissão de CTeOS (modelo 67)"));
 
                     #endregion Extensões do CTe
 
