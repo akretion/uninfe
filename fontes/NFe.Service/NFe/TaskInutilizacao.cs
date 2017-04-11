@@ -208,6 +208,8 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
+            //vStrXmlRetorno = "<retInutNFe versao=\"3.10\" xmlns=\"http://www.portalfiscal.inf.br/nfe\"><infInut><tpAmb>1</tpAmb><verAplic>SP_NFE_PL_008i2</verAplic><cStat>102</cStat><xMotivo>Inutilização de número homologado</xMotivo><cUF>35</cUF><ano>17</ano><CNPJ>48221139000191</CNPJ><mod>55</mod><serie>1</serie><nNFIni>46066</nNFIni><nNFFin>46066</nNFFin><dhRecbto>2017-03-27T09:58:07-03:00</dhRecbto><nProt>135170189046750</nProt></infInut></retInutNFe>";
+
             XmlDocument doc = new XmlDocument();
             doc.Load(Functions.StringXmlToStream(vStrXmlRetorno));
 

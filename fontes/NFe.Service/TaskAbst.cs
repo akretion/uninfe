@@ -134,6 +134,7 @@ namespace NFe.Service
                 case Servicos.CTePedidoSituacaoLote:
                 case Servicos.CTeEnviarLote:
                 case Servicos.CTeConsultaStatusServico:
+                case Servicos.CteRecepcaoOS:
                 case Servicos.CTeRecepcaoEvento:
                     retorna = "cteCabecMsg";
 
@@ -1803,17 +1804,20 @@ namespace NFe.Service
                     XmlDocument infModal = new XmlDocument();
                     XmlDocument modal = new XmlDocument();
 
-                    foreach (XmlElement item in conteudoXML.GetElementsByTagName("infModal"))
+                    if (conteudoXML.GetElementsByTagName("infModal")[0] != null)
                     {
-                        infModal.LoadXml(item.OuterXml);
-                        modal.LoadXml(item.InnerXml);
+                        foreach (XmlElement item in conteudoXML.GetElementsByTagName("infModal"))
+                        {
+                            infModal.LoadXml(item.OuterXml);
+                            modal.LoadXml(item.InnerXml);
+                        }
+
+                        ValidarXML validarModal = new ValidarXML(infModal, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
+                        resultValidacao += validarModal.ValidarArqXML(modal, NomeArquivoXML);
+
+                        if (resultValidacao != "")
+                            throw new Exception(resultValidacao);
                     }
-
-                    ValidarXML validarModal = new ValidarXML(infModal, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
-                    resultValidacao += validarModal.ValidarArqXML(modal, NomeArquivoXML);
-
-                    if (resultValidacao != "")
-                        throw new Exception(resultValidacao);
                 }
 
                 //Validações gerais
@@ -2274,6 +2278,7 @@ namespace NFe.Service
                         retorno = false;
                     break;
 
+                case PadroesNFSe.COPLAN:
                 case PadroesNFSe.BETHA202:
                 case PadroesNFSe.MEMORY:
                 case PadroesNFSe.CONSIST:
@@ -2530,6 +2535,7 @@ namespace NFe.Service
                     }
                     break;
 
+                case PadroesNFSe.COPLAN:
                 case PadroesNFSe.BETHA202:
                 case PadroesNFSe.SH3:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)

@@ -155,6 +155,12 @@
     <Setting Name="NFe_Components_br_com_govdigital_homolog_pedroleopoldo_h_NfseServiceImplPlService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/pl</Value>
     </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_ws_pelotas_p_NfseServiceImplPelotasService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/pelotas</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_govdigital_homolog_pelotas_h_NfseServiceImplPelotasService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/pelotas</Value>
+    </Setting>
     <Setting Name="NFe_Components_br_com_mgmtributacao_www_penapolis_h_webservice" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://www.mgmtributacao.com.br/issqn/wservice/wsnfe_teste_homologacao.php</Value>
     </Setting>
@@ -268,6 +274,18 @@
     </Setting>
     <Setting Name="NFe_Components_br_com_betha_egov_p_NfseWSService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://e-gov.betha.com.br/e-nota-contribuinte-ws/nfseWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_srv_gp_www_coplan_camponovodoparecis_p_nfse_web_service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.gp.srv.br/tributario_camponovodoparecis/servlet/anfse_web_service</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_srv_gp_www_coplan_camponovodoparecis_h_nfse_web_service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://homologacao.municipioweb.com.br/tributario_homologacao/servlet/anfse_web_service</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_srv_gp_www_coplan_camponovodoparecis2_h_nfse_web_service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://homologacao.municipioweb.com.br/tributario_homologacao/servlet/anfse_web_service</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fiorilli_jacisp_p_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://186.225.155.34:8080/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -120,6 +120,7 @@ namespace NFe.Service
                 case Servicos.CTeEnviarLote:
                 case Servicos.CTeRecepcaoEvento:
                 case Servicos.CTeConsultaStatusServico:
+                case Servicos.CteRecepcaoOS:
                     if (wsProxy.GetProp(cabecMsg, TpcnResources.cUF.ToString()).ToString() == "50") //Mato Grosso do Sul fugiu o padrão nacional
                     {
                         try
@@ -226,9 +227,6 @@ namespace NFe.Service
             {
                 switch (padraoNFSe)
                 {
-                    case PadroesNFSe.ISSONLINE4R:
-                        break;
-
                     case PadroesNFSe.SMARAPD:
                         break;
 

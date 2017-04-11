@@ -340,6 +340,10 @@ namespace NFe.Service
                             DirecionarArquivo(emp, true, true, arquivo, new TaskCTeEventos(arquivo));
                             break;
 
+                        case Servicos.CteRecepcaoOS:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskCTeRecepcaoOS(arquivo));
+                            break;
+
                         #endregion CTe
 
                         #region DFe
@@ -700,6 +704,10 @@ namespace NFe.Service
                                 {
                                     tipoServico = Servicos.CTeMontarLoteVarios;
                                 }
+                                break;
+
+                            case "CTeOS":
+                                tipoServico = Servicos.CteRecepcaoOS;
                                 break;
 
                             #endregion CTe
@@ -1293,6 +1301,7 @@ namespace NFe.Service
                         nfe is TaskCTeRetRecepcao ||
                         nfe is TaskCTeConsultaStatus ||
                         nfe is TaskCTeConsultaSituacao ||
+                        nfe is TaskCTeRecepcaoOS ||
                         nfe is TaskMDFeRetRecepcao ||
                         nfe is TaskMDFeConsultaStatus ||
                         nfe is TaskMDFeConsultaSituacao ||

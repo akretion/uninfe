@@ -2,6 +2,7 @@
 using NFe.Components;
 using NFe.Components.Conam;
 using NFe.Components.Consist;
+using NFe.Components.Coplan;
 using NFe.Components.EGoverne;
 using NFe.Components.EL;
 using NFe.Components.EloTech;
@@ -259,6 +260,23 @@ namespace NFe.Service.NFSe
                         #endregion E-Governe
 
                         break;
+
+                    case PadroesNFSe.COPLAN:
+                        #region Coplan
+                        Coplan coplan = new Coplan((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            oDadosPedCanNfse.cMunicipio,
+                            ConfiguracaoApp.ProxyUsuario,
+                            ConfiguracaoApp.ProxySenha,
+                            ConfiguracaoApp.ProxyServidor,
+                            Empresas.Configuracoes[emp].X509Certificado);
+
+                        AssinaturaDigital assCoplan = new AssinaturaDigital();
+                        assCoplan.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
+
+                        coplan.CancelarNfse(NomeArquivoXML);
+                        break;
+                    #endregion
 
                     case PadroesNFSe.EL:
 

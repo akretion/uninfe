@@ -31,6 +31,7 @@ namespace NFe.Components.Fiorilli
                                 break;
 
                             case 3504503: //Avaré-SP
+                            case 3524501: //Jaci-SP
                                 fiorilliService = new AvareSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
@@ -58,6 +59,10 @@ namespace NFe.Components.Fiorilli
 
                             case 3522802: //Itaporanga-SP
                                 fiorilliService = new ItaporangaSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 3524501: //Jaci-SP
+                                fiorilliService = new JaciSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             default:

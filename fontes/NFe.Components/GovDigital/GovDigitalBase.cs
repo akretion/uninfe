@@ -1,25 +1,21 @@
 ﻿using NFe.Components.Abstract;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Web.Services.Protocols;
 
 namespace NFe.Components.GovDigital
 {
     public abstract class GovDigitalBase : EmiteNFSeBase
     {
         #region locais/ protegidos
-        object govDigitalService;
+
+        private object govDigitalService;
         private int CodigoMun = 0;
         private string ProxyUser = null;
         private string ProxyPass = null;
         private string ProxyServer = null;
-
 
         protected object GovDigitalService
         {
@@ -59,11 +55,14 @@ namespace NFe.Components.GovDigital
                                 govDigitalService = new br.com.govdigital.homolog.pedroleopoldo.h.NfseServiceImplPlService();
                                 break;
 
+                            case 4314407: //Pelotas-SC
+                                govDigitalService = new br.com.govdigital.homolog.pelotas.h.NfseServiceImplPelotasService();
+                                break;
+
                             default:
                                 break;
                         }
                     }
-
                     else
                     {
                         switch (CodigoMun)
@@ -94,6 +93,10 @@ namespace NFe.Components.GovDigital
 
                             case 3149309: //Pedro Leopoldo-MG
                                 govDigitalService = new br.com.govdigital.ws.pedroleopoldo.p.NfseServiceImplPlService();
+                                break;
+
+                            case 4314407: //Pelotas-SC
+                                govDigitalService = new br.com.govdigital.ws.pelotas.p.NfseServiceImplPelotasService();
                                 break;
 
                             default:
@@ -129,14 +132,18 @@ namespace NFe.Components.GovDigital
                 wsp.SetProp(govDigitalService, "Proxy", Proxy.DefinirProxy(ProxyServer, ProxyUser, ProxyPass, 8080));
             }
         }
-        #endregion
+
+        #endregion locais/ protegidos
 
         #region propriedades
+
         public X509Certificate Certificate { get; private set; }
         private string NfseCabecMsg = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><ns2:cabecalho xmlns=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:ns2=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.00\"><ns2:versaoDados>2.00</ns2:versaoDados></ns2:cabecalho>";
-        #endregion
+
+        #endregion propriedades
 
         #region Construtores
+
         public GovDigitalBase(TipoAmbiente tpAmb, string pastaRetorno, X509Certificate certificate, int codMun, string proxyUser, string proxyPass, string proxyServer)
             : base(tpAmb, pastaRetorno)
         {
@@ -145,29 +152,30 @@ namespace NFe.Components.GovDigital
             ProxyUser = proxyUser;
             ProxyPass = proxyPass;
             ProxyServer = proxyServer;
-
         }
-        #endregion
+
+        #endregion Construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
             string strResult = Invoke("GerarNfse", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
         {
             string strResult = Invoke("CancelarNfse", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, 
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
         {
             string strResult = Invoke("ConsultarLoteRps", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML, 
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
@@ -179,20 +187,22 @@ namespace NFe.Components.GovDigital
         public override void ConsultarNfse(string file)
         {
             string strResult = Invoke("ConsultarNfseServicoPrestado", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML, 
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)
         {
             string strResult = Invoke("ConsultarNfsePorRps", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML, 
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
-        #endregion
+
+        #endregion Métodos
 
         #region invoke
-        string Invoke(string methodName, params object[] _params)
+
+        private string Invoke(string methodName, params object[] _params)
         {
             object result = "";
             ServicePointManager.Expect100Continue = false;
@@ -201,9 +211,11 @@ namespace NFe.Components.GovDigital
             result = mi.Invoke(GovDigitalService, _params);
             return result.ToString();
         }
-        #endregion
+
+        #endregion invoke
 
         #region ReaderXML
+
         private string ReaderXML(string file)
         {
             string result = "";
@@ -218,7 +230,7 @@ namespace NFe.Components.GovDigital
             }
             return result;
         }
-        #endregion
+
+        #endregion ReaderXML
     }
-    
 }

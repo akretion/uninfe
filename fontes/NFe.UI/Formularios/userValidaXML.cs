@@ -193,9 +193,16 @@ namespace NFe.UI
                 NFe.Service.TaskValidar val = new Service.TaskValidar();
                 val.NomeArquivoXML = oArqDestino.FullName;
                 val.Execute();
-
-                //Detectar o tipo do arquivo
-                Validate.ValidarXML validarXML = new Validate.ValidarXML(cArquivo, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo, false);
+                int codUF = Empresas.Configuracoes[Emp].UnidadeFederativaCodigo;
+                //Detectar o tipo do arquivo                
+                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(Empresas.Configuracoes[Emp].UnidadeFederativaCodigo);
+                if (padraoNFSe == PadroesNFSe.BETHA)
+                {
+                    string versao = Functions.GetAttributeXML("LoteRps", "versao", cArquivo);
+                    if (versao.Equals("2.02"))
+                        codUF = 202;
+                }
+                Validate.ValidarXML validarXML = new Validate.ValidarXML(cArquivo, codUF, false);
                 XmlDocument conteudoXML = new XmlDocument();
                 string resultValidacao = "";
                 conteudoXML.Load(cArquivo);
@@ -205,16 +212,18 @@ namespace NFe.UI
                     XmlDocument infModal = new XmlDocument();
                     XmlDocument modal = new XmlDocument();
 
-                    foreach (XmlElement item in conteudoXML.GetElementsByTagName("infModal"))
+                    if (conteudoXML.GetElementsByTagName("infModal")[0] != null)
                     {
-                        infModal.LoadXml(item.OuterXml);
-                        modal.LoadXml(item.InnerXml);
+                        foreach (XmlElement item in conteudoXML.GetElementsByTagName("infModal"))
+                        {
+                            infModal.LoadXml(item.OuterXml);
+                            modal.LoadXml(item.InnerXml);
+                        }
+
+                        Validate.ValidarXML validarModal = new Validate.ValidarXML(infModal, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo, false);
+                        resultValidacao += validarModal.ValidarArqXML(modal, cArquivo);
                     }
-
-                    Validate.ValidarXML validarModal = new Validate.ValidarXML(infModal, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo, false);
-                    resultValidacao += validarModal.ValidarArqXML(modal, cArquivo);
                 }
-
 
                 this.textBox_resultado.Text = validarXML.TipoArqXml.cRetornoTipoArq;
 
