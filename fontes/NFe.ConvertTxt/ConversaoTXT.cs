@@ -2125,45 +2125,66 @@ namespace NFe.ConvertTxt
                     NFe.det[nProd].impostoDevol.vIPIDevol = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vIPIDevol, ObOp.Opcional, 5);
                     break;
 
-                    /*
-                     * 
+                /*
+                 * 
 
-                case "U51": //So Uninfe -> Segmento UA
-                    layout = "§U51|pDevol"; //ok
-                    NFe.det[nProd].impostoDevol.pDevol = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.pDevol, ObOp.Opcional, 5);
-                    break;
+            case "U51": //So Uninfe -> Segmento UA
+                layout = "§U51|pDevol"; //ok
+                NFe.det[nProd].impostoDevol.pDevol = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.pDevol, ObOp.Opcional, 5);
+                break;
 
-                case "U61": //So Uninfe -> Segmento UA
-                    layout = "§U61|vIPIDevol"; //ok
-                    NFe.det[nProd].impostoDevol.vIPIDevol = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vIPIDevol, ObOp.Opcional, 5);
-                    break;
-                     * 
-                     * */
+            case "U61": //So Uninfe -> Segmento UA
+                layout = "§U61|vIPIDevol"; //ok
+                NFe.det[nProd].impostoDevol.vIPIDevol = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vIPIDevol, ObOp.Opcional, 5);
+                break;
+                 * 
+                 * */
 
                 case "W02":
                     layout = (NFe.infNFe.Versao >= 3 ?
-                                "§W02|VBC|VICMS|VBCST|VST|VProd|VFrete|VSeg|VDesc|VII|VIPI|VPIS|VCOFINS|VOutro|VNF|vTotTrib|vICMSDeson" :
-                                "§W02|vBC|vICMS|vICMSDeson|vBCST|vST|vProd|vFrete|vSeg|vDesc|vII|vIPI|vPIS|vCOFINS|vOutro|vNF|vTotTrib");
+                                "§W02|vBC|vICMS|vICMSDeson|vBCST|vST|vProd|vFrete|vSeg|vDesc|vII|vIPI|vPIS|vCOFINS|vOutro|vNF|vTotTrib" :
+                                "§W02|VBC|VICMS|VBCST|VST|VProd|VFrete|VSeg|VDesc|VII|VIPI|VPIS|VCOFINS|VOutro|VNF|vTotTrib|vICMSDeson"); //ok
                     ///
                     /// Grupo da TAG <total><ICMSTot>
                     /// 
                     #region <total><ICMSTot>
                     NFe.Total.ICMSTot.vBC = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vBC, ObOp.Obrigatorio, 15);
                     NFe.Total.ICMSTot.vICMS = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMS, ObOp.Obrigatorio, 15);
-                    NFe.Total.ICMSTot.vBCST = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vBCST, ObOp.Obrigatorio, 15);
-                    NFe.Total.ICMSTot.vST = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vST, ObOp.Obrigatorio, 15);
-                    NFe.Total.ICMSTot.vProd = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vProd, ObOp.Obrigatorio, 15);
-                    NFe.Total.ICMSTot.vFrete = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vFrete, ObOp.Obrigatorio, 15);
-                    NFe.Total.ICMSTot.vSeg = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vSeg, ObOp.Obrigatorio, 15);
-                    NFe.Total.ICMSTot.vDesc = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vDesc, ObOp.Obrigatorio, 15);
-                    NFe.Total.ICMSTot.vII = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vII, ObOp.Obrigatorio, 15);
-                    NFe.Total.ICMSTot.vIPI = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vIPI, ObOp.Obrigatorio, 15);
-                    NFe.Total.ICMSTot.vPIS = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vPIS, ObOp.Obrigatorio, 15);
-                    NFe.Total.ICMSTot.vCOFINS = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vCOFINS, ObOp.Obrigatorio, 15);
-                    NFe.Total.ICMSTot.vOutro = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vOutro, ObOp.Obrigatorio, 15);
-                    NFe.Total.ICMSTot.vNF = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vNF, ObOp.Obrigatorio, 15);
-                    NFe.Total.ICMSTot.vTotTrib = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vTotTrib, ObOp.Opcional, 15);
-                    NFe.Total.ICMSTot.vICMSDeson = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson, ObOp.Opcional, 15);
+
+                    if (NFe.infNFe.Versao >= 3)
+                    {
+                        NFe.Total.ICMSTot.vICMSDeson = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vBCST = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vBCST, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vST = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vST, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vProd = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vProd, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vFrete = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vFrete, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vSeg = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vSeg, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vDesc = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vDesc, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vII = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vII, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vIPI = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vIPI, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vPIS = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vPIS, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vCOFINS = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vCOFINS, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vOutro = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vOutro, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vNF = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vNF, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vTotTrib = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vTotTrib, ObOp.Opcional, 15);                    }
+                    else
+                    {
+                        NFe.Total.ICMSTot.vBCST = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vBCST, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vST = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vST, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vProd = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vProd, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vFrete = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vFrete, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vSeg = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vSeg, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vDesc = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vDesc, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vII = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vII, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vIPI = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vIPI, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vPIS = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vPIS, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vCOFINS = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vCOFINS, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vOutro = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vOutro, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vNF = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vNF, ObOp.Obrigatorio, 15);
+                        NFe.Total.ICMSTot.vTotTrib = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vTotTrib, ObOp.Opcional, 15);
+                        NFe.Total.ICMSTot.vICMSDeson = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson, ObOp.Opcional, 15);
+                    }
+
                     #endregion
                     break;
 
