@@ -20,6 +20,9 @@ using NFe.Components.Memory;
 using NFe.Components.Metropolis;
 using NFe.Components.Pronin;
 using NFe.Components.Coplan;
+using NFe.Components.EGoverneISS;
+using NFe.Validate;
+using NFe.Components.BAURU_SP;
 
 namespace NFe.Service.NFSe
 {
@@ -209,13 +212,18 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.FINTEL:
-                        cabecMsg = "<cabecalho xmlns=\"http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://iss.irati.pr.gov.br/Arquivos/nfseV202.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.FINTEL);
                         break;
 
-                    case PadroesNFSe.ACTCON:
+                    case PadroesNFSe.PORTALFACIL_ACTCON:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
-                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.ACTCON);
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.PORTALFACIL_ACTCON);
+                        break;
+
+                    case PadroesNFSe.PORTALFACIL_ACTCON_202:
+                        cabecMsg = "<cabecalho><versaoDados>2.02</versaoDados></cabecalho>";
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.PORTALFACIL_ACTCON_202);
                         break;
 
                     case PadroesNFSe.SYSTEMPRO:
@@ -251,6 +259,14 @@ namespace NFe.Service.NFSe
 
                         AssinaturaDigital ass = new AssinaturaDigital();
                         ass.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
+
+                        // Validar o Arquivo XML
+                        ValidarXML validar = new ValidarXML(NomeArquivoXML, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
+                        string resValidacao = validar.ValidarArqXML(NomeArquivoXML);
+                        if (resValidacao != "")
+                        {
+                            throw new Exception(resValidacao);
+                        }
 
                         fiorilli.EmiteNF(NomeArquivoXML);
                         break;
@@ -503,6 +519,37 @@ namespace NFe.Service.NFSe
                         }
                         break;
 
+                    case PadroesNFSe.EGOVERNEISS:
+                        #region EGoverne ISS
+                        EGoverneISS egoverneiss = new EGoverneISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        oDadosEnvLoteRps.cMunicipio,
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor);
+
+                        egoverneiss.EmiteNF(NomeArquivoXML);
+                        break;
+                    #endregion
+
+                    case PadroesNFSe.SUPERNOVA:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.SUPERNOVA);
+                        break;
+
+                    case PadroesNFSe.MARINGA_PR:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.MARINGA_PR);
+                        break;
+
+                    case PadroesNFSe.BAURU_SP:
+                        #region BAURU_SP
+                        Bauru_SP bauru_SP = new Bauru_SP((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            oDadosEnvLoteRps.cMunicipio);
+                        bauru_SP.EmiteNF(NomeArquivoXML);
+                        break;
+                        #endregion BAURU_SP
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))
@@ -520,7 +567,7 @@ namespace NFe.Service.NFSe
                     ///
                     /// grava o arquivo no FTP
                     string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                      Functions.ExtrairNomeArq(NomeArquivoXML, 
+                                                      Functions.ExtrairNomeArq(NomeArquivoXML,
                                                       Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML) + "\\" + Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
                     if (File.Exists(filenameFTP))
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);

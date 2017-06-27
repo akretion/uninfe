@@ -105,6 +105,26 @@ namespace NFe.Service
 
                         #endregion NFS-e
 
+                        #region CFS-e
+
+                        case Servicos.RecepcionarLoteCfse:
+                            DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskRecepcionarLoteCfse(arquivo));
+                            break;
+
+                        case Servicos.CancelarCfse:
+                            DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskCancelarCfse(arquivo));
+                            break;
+
+                        case Servicos.ConsultarLoteCfse:
+                            DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskConsultarLoteCfse(arquivo));
+                            break;
+
+                        case Servicos.ConsultarCfse:
+                            DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskConsultarCfse(arquivo));
+                            break;
+
+                        #endregion CFS-e
+
 #if _fw46
 
                         #region SAT/CF-e
@@ -143,9 +163,19 @@ namespace NFe.Service
                             SATProxy enviaVenda = new SATProxy(Servicos.SATEnviarDadosVenda, Empresas.Configuracoes[emp], arquivo);
                             enviaVenda.Enviar();
                             string xmlVenda = enviaVenda.SaveResponse();
-
                             if (!string.IsNullOrEmpty(xmlVenda))
+                            {
+                                string strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                    PastaEnviados.Autorizados.ToString() + "\\" +
+                                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(DateTime.Now) +
+                                    Path.GetFileName(xmlVenda);
+
                                 TFunctions.MoverArquivo(xmlVenda, PastaEnviados.Autorizados);
+
+                                if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaExeUniDanfe))
+                                    TFunctions.ExecutaUniDanfe(strArquivoDist, DateTime.Now, Empresas.Configuracoes[emp]);
+                            }
+
                             break;
 
                         case Servicos.SATConverterNFCe:
@@ -719,6 +749,11 @@ namespace NFe.Service
                                 break;
 
                             case "NFe":
+                                if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConverterSAT).EnvioXML) >= 0)
+                                {
+                                    goto default;
+                                }
+
                                 if (pastaArq == pastaLote)
                                     tipoServico = Servicos.NFeAssinarValidarEnvioEmLote;
                                 else if (pastaArq == pastaEnvio)
@@ -840,6 +875,27 @@ namespace NFe.Service
                                 }
 
                                 #endregion NFS-e
+
+                                #region CFS-e
+
+                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteCFSe).EnvioXML) >= 0)
+                                {
+                                    tipoServico = Servicos.RecepcionarLoteCfse;
+                                }
+                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedCanCFSe).EnvioXML) >= 0)
+                                {
+                                    tipoServico = Servicos.CancelarCfse;
+                                }
+                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteCFSe).EnvioXML) >= 0)
+                                {
+                                    tipoServico = Servicos.ConsultarLoteCfse;
+                                }
+                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitCFSe).EnvioXML) >= 0)
+                                {
+                                    tipoServico = Servicos.ConsultarCfse;
+                                }
+
+                                #endregion CFS-e
 
                                 #region SAT/CFe
 

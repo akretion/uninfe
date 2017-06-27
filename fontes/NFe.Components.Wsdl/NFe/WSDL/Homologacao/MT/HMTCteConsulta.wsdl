@@ -115,7 +115,7 @@
 
       <wsdl:port binding="tns:CteConsultaSoap12" name="CteConsulta">
 
-         <soap12:address location="https://homologacao.sefaz.mt.gov.br:80/ctews/services/CteConsulta"/>
+         <soap12:address location="https://homologacao.sefaz.mt.gov.br/ctews/services/CteConsulta"/>
 
       </wsdl:port>
 

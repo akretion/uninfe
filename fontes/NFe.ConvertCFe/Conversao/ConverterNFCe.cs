@@ -3,12 +3,8 @@ using NFe.Validate;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Serialization;
 using Unimake.SAT.Servico.Envio;
 
 namespace NFe.SAT.Conversao
@@ -85,7 +81,7 @@ namespace NFe.SAT.Conversao
         /// </summary>
         /// <returns>Lote da CFe</returns>
         private envCFeCFe GerarLoteCFe()
-         {
+        {
             return new envCFeCFe
             {
                 infCFe = new envCFeCFeInfCFe
@@ -93,7 +89,7 @@ namespace NFe.SAT.Conversao
                     versaoDadosEnt = "0.07",
                     ide = new envCFeCFeInfCFeIde
                     {
-                        CNPJ = DadosEmpresa.CNPJSoftwareHouse,
+                        CNPJ = DadosEmpresa.CNPJSoftwareHouse.Replace(".", "").Replace("/", ""),
                         signAC = DadosEmpresa.SignACSAT,
                         numeroCaixa = DadosEmpresa.NumeroCaixa.Substring(0, 3)
                     },
@@ -166,6 +162,7 @@ namespace NFe.SAT.Conversao
                                 uCom = GetXML(itensDet.ChildNodes, "uCom"),
                                 qCom = GetXML(itensDet.ChildNodes, "qCom"),
                                 vUnCom = GetXML(itensDet.ChildNodes, "vUnCom"),
+                                vDesc = GetXML(itensDet.ChildNodes, "vDesc"),
 
                                 indRegra = "A",
                             };
@@ -201,7 +198,6 @@ namespace NFe.SAT.Conversao
                             break;
                     }
                 }
-
 
                 result.Add(det);
             }
@@ -240,13 +236,14 @@ namespace NFe.SAT.Conversao
         private T ImpostoProduto<T>(XmlNodeList childs)
             where T : new()
         {
-            T result = new T();            
+            T result = new T();
 
             foreach (XmlNode tag in childs)
             {
                 switch (tag.Name)
                 {
                     #region ICMS00
+
                     case "ICMS00":
                         envCFeCFeInfCFeDetImpostoICMSICMS00 ICMS00 = new envCFeCFeInfCFeDetImpostoICMSICMS00
                         {
@@ -257,9 +254,11 @@ namespace NFe.SAT.Conversao
 
                         SetProperrty(result, "Item", ICMS00);
                         break;
-                    #endregion
+
+                    #endregion ICMS00
 
                     #region ICMS40
+
                     case "ICMS40":
                         envCFeCFeInfCFeDetImpostoICMSICMS40 ICMS40 = new envCFeCFeInfCFeDetImpostoICMSICMS40
                         {
@@ -269,9 +268,11 @@ namespace NFe.SAT.Conversao
 
                         SetProperrty(result, "Item", ICMS40);
                         break;
-                    #endregion
+
+                    #endregion ICMS40
 
                     #region ICMSSN102
+
                     case "ICMSSN102":
                         envCFeCFeInfCFeDetImpostoICMSICMSSN102 ICMSSN102 = new envCFeCFeInfCFeDetImpostoICMSICMSSN102
                         {
@@ -281,22 +282,26 @@ namespace NFe.SAT.Conversao
 
                         SetProperrty(result, "Item", ICMSSN102);
                         break;
-                    #endregion
+
+                    #endregion ICMSSN102
 
                     #region ICMSSN900
+
                     case "ICMSSN900":
                         envCFeCFeInfCFeDetImpostoICMSICMSSN900 ICMSSN900 = new envCFeCFeInfCFeDetImpostoICMSICMSSN900
                         {
                             CSOSN = GetXML(tag.ChildNodes, "CSOSN"),
                             Orig = GetXML(tag.ChildNodes, "orig"),
-                            pICMS = GetXML(tag.ChildNodes,"pICMS")
+                            pICMS = GetXML(tag.ChildNodes, "pICMS")
                         };
 
                         SetProperrty(result, "Item", ICMSSN900);
                         break;
-                    #endregion
+
+                    #endregion ICMSSN900
 
                     #region PISAliq
+
                     case "PISAliq":
                         envCFeCFeInfCFeDetImpostoPISPISAliq PISAliq = new envCFeCFeInfCFeDetImpostoPISPISAliq
                         {
@@ -307,9 +312,11 @@ namespace NFe.SAT.Conversao
 
                         SetProperrty(result, "Item", PISAliq);
                         break;
-                    #endregion
+
+                    #endregion PISAliq
 
                     #region PISNT
+
                     case "PISNT":
                         envCFeCFeInfCFeDetImpostoPISPISNT PISPISNT = new envCFeCFeInfCFeDetImpostoPISPISNT
                         {
@@ -318,9 +325,11 @@ namespace NFe.SAT.Conversao
 
                         SetProperrty(result, "Item", PISPISNT);
                         break;
-                    #endregion
+
+                    #endregion PISNT
 
                     #region PISOutr
+
                     case "PISOutr":
                         envCFeCFeInfCFeDetImpostoPISPISOutr PISOutr = new envCFeCFeInfCFeDetImpostoPISPISOutr
                         {
@@ -329,19 +338,26 @@ namespace NFe.SAT.Conversao
                             {
                                 GetXML(tag.ChildNodes, "vBC"),
                                 GetXML(tag.ChildNodes, "pPIS"),
+                                GetXML(tag.ChildNodes, "qBCProd"),
+                                GetXML(tag.ChildNodes, "vAliqProd"),
                             },
                             ItemsElementName = new ItemsChoiceType[]
                             {
                                 ItemsChoiceType.vBC,
-                                ItemsChoiceType.pPIS
-                            }
+                                ItemsChoiceType.pPIS,
+                                ItemsChoiceType.qBCProd,
+                                ItemsChoiceType.vAliqProd
+                            },
+                            vPIS = GetXMLZero(tag.ChildNodes, "vPIS")
                         };
-                        
+
                         SetProperrty(result, "Item", PISOutr);
                         break;
-                    #endregion
+
+                    #endregion PISOutr
 
                     #region PISQtde
+
                     case "PISQtde":
                         envCFeCFeInfCFeDetImpostoPISPISQtde PISQtde = new envCFeCFeInfCFeDetImpostoPISPISQtde
                         {
@@ -352,9 +368,11 @@ namespace NFe.SAT.Conversao
 
                         SetProperrty(result, "Item", PISQtde);
                         break;
-                    #endregion
+
+                    #endregion PISQtde
 
                     #region PISSN
+
                     case "PISSN":
                         envCFeCFeInfCFeDetImpostoPISPISSN PISSN = new envCFeCFeInfCFeDetImpostoPISPISSN
                         {
@@ -362,9 +380,11 @@ namespace NFe.SAT.Conversao
                         };
                         SetProperrty(result, "Item", PISSN);
                         break;
-                    #endregion
+
+                    #endregion PISSN
 
                     #region COFINSAliq
+
                     case "COFINSAliq":
                         envCFeCFeInfCFeDetImpostoCOFINSCOFINSAliq COFINSAliq = new envCFeCFeInfCFeDetImpostoCOFINSCOFINSAliq
                         {
@@ -374,9 +394,11 @@ namespace NFe.SAT.Conversao
                         };
                         SetProperrty(result, "Item", COFINSAliq);
                         break;
-                    #endregion
+
+                    #endregion COFINSAliq
 
                     #region COFINSNT
+
                     case "COFINSNT":
                         envCFeCFeInfCFeDetImpostoCOFINSCOFINSNT COFINSNT = new envCFeCFeInfCFeDetImpostoCOFINSCOFINSNT
                         {
@@ -384,9 +406,11 @@ namespace NFe.SAT.Conversao
                         };
                         SetProperrty(result, "Item", COFINSNT);
                         break;
-                    #endregion
+
+                    #endregion COFINSNT
 
                     #region COFINSOutr
+
                     case "COFINSOutr":
                         envCFeCFeInfCFeDetImpostoCOFINSCOFINSOutr COFINSOutr = new envCFeCFeInfCFeDetImpostoCOFINSCOFINSOutr
                         {
@@ -394,19 +418,26 @@ namespace NFe.SAT.Conversao
                             Items = new string[]
                             {
                                 GetXML(tag.ChildNodes, "vBC"),
-                                GetXML(tag.ChildNodes, "pCOFINS")
+                                GetXML(tag.ChildNodes, "pCOFINS"),
+                                GetXML(tag.ChildNodes, "qBCProd"),
+                                GetXML(tag.ChildNodes, "vAliqProd"),
                             },
                             ItemsElementName = new ItemsChoiceType2[]
                             {
                                 ItemsChoiceType2.vBC,
-                                ItemsChoiceType2.pCOFINS
-                            }
+                                ItemsChoiceType2.pCOFINS,
+                                ItemsChoiceType2.qBCProd,
+                                ItemsChoiceType2.vAliqProd
+                            },
+                            vCOFINS = GetXMLZero(tag.ChildNodes, "vCOFINS")
                         };
                         SetProperrty(result, "Item", COFINSOutr);
                         break;
-                    #endregion
+
+                    #endregion COFINSOutr
 
                     #region COFINSNT
+
                     case "COFINSQtde":
                         envCFeCFeInfCFeDetImpostoCOFINSCOFINSQtde COFINSQtde = new envCFeCFeInfCFeDetImpostoCOFINSCOFINSQtde
                         {
@@ -416,9 +447,11 @@ namespace NFe.SAT.Conversao
                         };
                         SetProperrty(result, "Item", COFINSQtde);
                         break;
-                    #endregion
+
+                    #endregion COFINSNT
 
                     #region COFINSSN
+
                     case "COFINSSN":
                         envCFeCFeInfCFeDetImpostoCOFINSCOFINSSN COFINSSN = new envCFeCFeInfCFeDetImpostoCOFINSCOFINSSN
                         {
@@ -426,7 +459,8 @@ namespace NFe.SAT.Conversao
                         };
                         SetProperrty(result, "Item", COFINSSN);
                         break;
-                    #endregion
+
+                    #endregion COFINSSN
 
                     default:
                         break;
@@ -473,7 +507,25 @@ namespace NFe.SAT.Conversao
                 }
             }
 
-            return value;
+            return String.IsNullOrEmpty(value) ? null : value;
+        }
+
+        /// <summary>
+        /// Busca valor de uma tag a partir de um nó
+        /// </summary>
+        /// <param name="nodes">nó onde vai ser procurado a tag</param>
+        /// <param name="nameTag">nome da tag</param>
+        /// <returns></returns>
+        private string GetXMLZero(XmlNodeList nodes, string nameTag)
+        {
+            string retorna = GetXML(nodes, nameTag);
+
+            if (Convert.ToDecimal(retorna) <= 0)
+            {
+                retorna = null;
+            }
+
+            return retorna;
         }
 
         /// <summary>
@@ -570,6 +622,5 @@ namespace NFe.SAT.Conversao
                 throw new Exception(cResultadoValidacao);
             }
         }
-
     }
 }

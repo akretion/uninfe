@@ -570,9 +570,6 @@ namespace NFe.ConvertTxt
                 nodeCurrent = oldNode;
                 #endregion
 
-                wCampo(det.Prod.xPed, TpcnTipoCampo.tcStr, TpcnResources.xPed, ObOp.Opcional);
-                wCampo(det.Prod.nItemPed, TpcnTipoCampo.tcInt, TpcnResources.nItemPed, ObOp.Opcional);
-
                 #region -- GerarDetProddetExport
                 if (det.Prod.detExport.Count > 500)
                     this.cMensagemErro += "Número máximo de itens em 'prod->detExport' excedeu o máximo permitido" + Environment.NewLine;
@@ -597,6 +594,9 @@ namespace NFe.ConvertTxt
                 }
                 nodeCurrent = oldNode;
                 #endregion
+
+                wCampo(det.Prod.xPed, TpcnTipoCampo.tcStr, TpcnResources.xPed, ObOp.Opcional);
+                wCampo(det.Prod.nItemPed, TpcnTipoCampo.tcInt, TpcnResources.nItemPed, ObOp.Opcional);
 
                 wCampo(det.Prod.nFCI, TpcnTipoCampo.tcStr, TpcnResources.nFCI, ObOp.Opcional);
 

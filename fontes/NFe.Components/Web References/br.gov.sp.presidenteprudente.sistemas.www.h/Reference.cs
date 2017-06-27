@@ -49,7 +49,7 @@ namespace NFe.Components.br.gov.sp.presidenteprudente.sistemas.www.h {
         
         /// <remarks/>
         public NfseService() {
-            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_br_gov_sp_piracicaba_sistemas_www_h_NfseService;
+            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_br_gov_sp_presidenteprudente_sistemas_www_h_NfseService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

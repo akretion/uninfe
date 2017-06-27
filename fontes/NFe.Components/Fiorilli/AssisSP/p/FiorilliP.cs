@@ -1,19 +1,18 @@
-﻿using System;
-using NFe.Components.Abstract;
+﻿using NFe.Components.Abstract;
 using NFe.Components.com.dyndnsserver.pmassis2.p;
+using System;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
-using System.Xml.Serialization;
-using System.IO;
 using System.Xml;
 
 namespace NFe.Components.Fiorilli.AssisSP.p
 {
     public class FiorilliP : EmiteNFSeBase
     {
-        IssWebWS Service = new IssWebWS();
-        string UsuarioWs = "";
-        string SenhaWs = "";
+        private IssWebWS Service = new IssWebWS();
+        private string UsuarioWs = "";
+        private string SenhaWs = "";
+
         public override string NameSpaces
         {
             get
@@ -23,6 +22,7 @@ namespace NFe.Components.Fiorilli.AssisSP.p
         }
 
         #region construtores
+
         public FiorilliP(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver, X509Certificate2 certificado)
             : base(tpAmb, pastaRetorno)
         {
@@ -42,9 +42,11 @@ namespace NFe.Components.Fiorilli.AssisSP.p
                 Service.Credentials = new NetworkCredential(proxyuser, proxypass);
             }
         }
-        #endregion
+
+        #endregion construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
             XmlDocument doc = new XmlDocument();
@@ -55,6 +57,7 @@ namespace NFe.Components.Fiorilli.AssisSP.p
                 case "GerarNfseEnvio":
                     strResult = EnvioSincrono(file);
                     break;
+
                 case "EnviarLoteRpsSincronoEnvio":
                     strResult = EnvioSincronoEmLote(file);
                     break;
@@ -62,7 +65,6 @@ namespace NFe.Components.Fiorilli.AssisSP.p
 
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
                               Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
-
         }
 
         private string EnvioSincrono(string file)
@@ -117,6 +119,7 @@ namespace NFe.Components.Fiorilli.AssisSP.p
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
                                           Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
-        #endregion
+
+        #endregion Métodos
     }
 }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace NFe.Service
@@ -479,11 +480,11 @@ namespace NFe.Service
                 case PadroesNFSe.GOIANIA:
                     switch (servico)
                     {
-                        case Servicos.NFSeConsultar:
+                        case Servicos.NFSeConsultarPorRps:
                             retorna = "ConsultarNfseRps";
                             break;
 
-                        case Servicos.NFSeGerarNfse:
+                        case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "GerarNfse";
                             break;
                     }
@@ -568,7 +569,7 @@ namespace NFe.Service
 
                 #region ISSONLINE
 
-                case PadroesNFSe.ISSONLINE:
+                case PadroesNFSe.ISSONLINE_ASSESSORPUBLICO:
                     retorna = "Execute";
                     break;
 
@@ -1009,7 +1010,7 @@ namespace NFe.Service
                     switch (servico)
                     {
                         case Servicos.NFSeConsultarLoteRps:
-                            if (cMunicipio.Equals(3304201) || cMunicipio.Equals(3301702) || cMunicipio.Equals(3300407))
+                            if (cMunicipio.Equals(3304201) || cMunicipio.Equals(3301702) || cMunicipio.Equals(3300407) || cMunicipio.Equals(3304003))
                                 retorna = "ConsultarLoteRps";
                             else
                                 retorna = "ConsultarLoteRPS";
@@ -1020,7 +1021,7 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultarPorRps:
-                            if (cMunicipio.Equals(3304201) || cMunicipio.Equals(3301702) || cMunicipio.Equals(3300407))
+                            if (cMunicipio.Equals(3304201) || cMunicipio.Equals(3301702) || cMunicipio.Equals(3300407) || cMunicipio.Equals(3304003))
                                 retorna = "ConsultarNfsePorRps";
                             else
                                 retorna = "ConsultarNfseRPS";
@@ -1028,7 +1029,7 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultarSituacaoLoteRps:
-                            if (cMunicipio.Equals(3304201) || cMunicipio.Equals(3301702) || cMunicipio.Equals(3300407))
+                            if (cMunicipio.Equals(3304201) || cMunicipio.Equals(3301702) || cMunicipio.Equals(3300407) || cMunicipio.Equals(3304003))
                                 retorna = "ConsultarSituacaoLoteRps";
                             else
                                 retorna = "ConsultarSituacaoLoteRPS";
@@ -1176,15 +1177,27 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultarSituacaoLoteRps:
-                            retorna = "ConsultarLoteNotasFiscais";
+                            retorna = "ConsultarSituacaoLoteRps";
                             break;
 
-                        case Servicos.NFSeConsultarURL:
-                            retorna = "";
+                        case Servicos.RecepcionarLoteCfse:
+                            retorna = "RecepcionarLoteCfse";
                             break;
 
-                        case Servicos.NFSeConsultarURLSerie:
-                            retorna = "";
+                        case Servicos.RecepcionarLoteCfseSincrono:
+                            retorna = "RecepcionarLoteCfseSincrono";
+                            break;
+
+                        case Servicos.CancelarCfse:
+                            retorna = "CancelarCupom";
+                            break;
+
+                        case Servicos.ConsultarLoteCfse:
+                            retorna = "ConsultarLoteCupom";
+                            break;
+
+                        case Servicos.ConsultarCfse:
+                            retorna = "ConsultarCfse";
                             break;
                     }
                     break;
@@ -1452,7 +1465,8 @@ namespace NFe.Service
 
                 #region ACTCON
 
-                case PadroesNFSe.ACTCON:
+                case PadroesNFSe.PORTALFACIL_ACTCON_202:
+                case PadroesNFSe.PORTALFACIL_ACTCON:
                     switch (servico)
                     {
                         case Servicos.NFSeRecepcionarLoteRps:
@@ -1622,11 +1636,10 @@ namespace NFe.Service
                         case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecebeLoteRPS";
                             break;
-
                     }
                     break;
 
-                #endregion BSIT-BR
+                #endregion LEXSOM
 
                 #region SH3
 
@@ -1663,9 +1676,102 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion FINTEL
+                #endregion SH3
 
+                #region SUPERNOVA
 
+                case PadroesNFSe.SUPERNOVA:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfseFaixa";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                    }
+                    break;
+
+                #endregion SUPERNOVA
+
+                #region DBSELLER
+
+                case PadroesNFSe.DBSELLER:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRps";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+                    }
+                    break;
+
+                #endregion DBSELLER
+
+                #region MARINGA_PR
+
+                case PadroesNFSe.MARINGA_PR:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfseRps";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "EnviarLoteRps";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "EnviarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfseFaixa";
+                            break;
+                    }
+                    break;
+
+                    #endregion MARINGA_PR
             }
 
             return retorna;
@@ -1782,8 +1888,15 @@ namespace NFe.Service
                 //Adicionar a tag do QRCode
                 if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IdentificadorCSC) && dadosNFe.mod == "65")
                 {
+                    if (Empresas.Configuracoes[emp].URLConsultaDFe == null)
+                        if (!File.Exists(Path.Combine(Application.StartupPath,"sefaz.inc")))
+                            throw new Exception("Não foi possível localizar o arquivo SEFAZ.INC na pasta de execução do UniNFe, por favor, reinstale o aplicativo.");
+                        else
+                            throw new Exception("Não foi possível localizar o link do QRCode no arquivo SEFAZ.INC.");
+
                     QRCode qrCode = new QRCode(conteudoXML);
                     string url = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCe;
+
                     qrCode.GerarLinkConsulta(url, Empresas.Configuracoes[emp].IdentificadorCSC, Empresas.Configuracoes[emp].TokenCSC);
                 }
 
@@ -2278,6 +2391,7 @@ namespace NFe.Service
                         retorno = false;
                     break;
 
+                case PadroesNFSe.EGOVERNEISS:
                 case PadroesNFSe.COPLAN:
                 case PadroesNFSe.BETHA202:
                 case PadroesNFSe.MEMORY:
@@ -2299,6 +2413,7 @@ namespace NFe.Service
                 case PadroesNFSe.NA_INFORMATICA:
                 case PadroesNFSe.BSITBR:
                 case PadroesNFSe.METROPOLIS:
+                case PadroesNFSe.BAURU_SP:
                     retorno = false;
                     break;
 
@@ -2377,10 +2492,14 @@ namespace NFe.Service
             switch (padrao)
             {
                 case PadroesNFSe.FINTEL:
-                    if (servico == Servicos.NFSeRecepcionarLoteRps)
+                    if (servico == Servicos.NFSeRecepcionarLoteRps || servico == Servicos.RecepcionarLoteCfse)
                     {
                         switch (doc.DocumentElement.Name)
                         {
+                            case "EnviarLoteRpsEnvio":
+                                result = Servicos.NFSeRecepcionarLoteRps;
+                                break;
+
                             case "EnviarLoteRpsSincronoEnvio":
                                 result = Servicos.NFSeRecepcionarLoteRpsSincrono;
                                 break;
@@ -2389,7 +2508,12 @@ namespace NFe.Service
                                 result = Servicos.NFSeGerarNfse;
                                 break;
 
-                            default:
+                            case "EnviarLoteCupomEnvio":
+                                result = Servicos.RecepcionarLoteCfse;
+                                break;
+
+                            case "EnviarLoteCupomSincronoEnvio":
+                                result = Servicos.RecepcionarLoteCfseSincrono;
                                 break;
                         }
                     }
@@ -2478,7 +2602,10 @@ namespace NFe.Service
                     }
                     break;
 
-                case PadroesNFSe.ACTCON:
+                case PadroesNFSe.SUPERNOVA:
+                case PadroesNFSe.PORTALFACIL_ACTCON_202:
+                case PadroesNFSe.PORTALFACIL_ACTCON:
+                case PadroesNFSe.MARINGA_PR:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
                     {
                         switch (doc.DocumentElement.Name)

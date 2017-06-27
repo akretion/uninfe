@@ -1,44 +1,49 @@
-﻿using System;
-using System.IO;
+﻿using NFe.Certificado;
 using NFe.Components;
-using NFe.Settings;
-using NFe.Certificado;
-using NFSe.Components;
-using NFe.Components.SystemPro;
-using NFe.Components.SigCorp;
-using NFe.Components.SimplISS;
+using NFe.Components.BAURU_SP;
 using NFe.Components.Conam;
-using NFe.Components.RLZ_INFORMATICA;
+using NFe.Components.Consist;
+using NFe.Components.Coplan;
 using NFe.Components.EGoverne;
 using NFe.Components.EL;
-using NFe.Components.GovDigital;
+using NFe.Components.Fiorilli;
 using NFe.Components.FISSLEX;
-using NFe.Components.MGM;
-using NFe.Components.Consist;
+using NFe.Components.GovDigital;
 using NFe.Components.Memory;
 using NFe.Components.Metropolis;
-using NFe.Components.Fiorilli;
+using NFe.Components.MGM;
 using NFe.Components.Pronin;
+using NFe.Components.RLZ_INFORMATICA;
+using NFe.Components.SigCorp;
+using NFe.Components.SimplISS;
+using NFe.Components.SystemPro;
+using NFe.Settings;
+using NFSe.Components;
+using System;
+using System.IO;
 
 namespace NFe.Service.NFSe
 {
     public class TaskNFSeConsultar : TaskAbst
     {
         #region Objeto com os dados do XML da consulta nfse
+
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s da consulta nfse
         /// </summary>
         private DadosPedSitNfse oDadosPedSitNfse;
-        #endregion
+
+        #endregion Objeto com os dados do XML da consulta nfse
 
         #region Execute
+
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
 
             ///
             /// extensao permitida:  PedSitNfse = "-ped-sitnfse.xml"
-            /// 
+            ///
             /// Definir o serviço que será executado para a classe
             Servico = Servicos.NFSeConsultar;
 
@@ -67,14 +72,14 @@ namespace NFe.Service.NFSe
                 string cabecMsg = "";
                 switch (padraoNFSe)
                 {
-                    case PadroesNFSe.GINFES:                    
+                    case PadroesNFSe.GINFES:
                         switch (oDadosPedSitNfse.cMunicipio)
                         {
                             case 2304400: //Fortaleza - CE
                                 cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                                 break;
 
-                            case 4125506: //São José dos Pinhais - PR  
+                            case 4125506: //São José dos Pinhais - PR
                                 cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://nfe.sjp.pr.gov.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                                 break;
 
@@ -85,7 +90,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.BETHA:
+
                         #region Betha
+
                         ConteudoXML.PreserveWhitespace = false;
                         ConteudoXML.Load(NomeArquivoXML);
 
@@ -109,7 +116,8 @@ namespace NFe.Service.NFSe
                             wsProxy.Betha = new Betha();
                         }
                         break;
-                        #endregion
+
+                    #endregion Betha
 
                     case PadroesNFSe.ABACO:
                     case PadroesNFSe.CANOAS_RS:
@@ -133,7 +141,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.FINTEL:
-                        cabecMsg = "<cabecalho xmlns=\"http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://iss.irati.pr.gov.br/Arquivos/nfseV202.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.SYSTEMPRO:
@@ -183,7 +191,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.EGOVERNE:
+
                         #region E-Governe
+
                         EGoverne egoverne = new EGoverne((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosPedSitNfse.cMunicipio,
@@ -196,11 +206,15 @@ namespace NFe.Service.NFSe
                         assegov.Assinar(NomeArquivoXML, emp, oDadosPedSitNfse.cMunicipio);
 
                         egoverne.ConsultarNfse(NomeArquivoXML);
-                        #endregion
+
+                        #endregion E-Governe
+
                         break;
 
                     case PadroesNFSe.EL:
+
                         #region E&L
+
                         EL el = new EL((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                         oDadosPedSitNfse.cMunicipio,
@@ -209,14 +223,15 @@ namespace NFe.Service.NFSe
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyUsuario : ""),
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxySenha : ""),
                                         (ConfiguracaoApp.Proxy ? ConfiguracaoApp.ProxyServidor : ""));
-                        
+
                         el.ConsultarNfse(NomeArquivoXML);
                         break;
-                        #endregion 
+
+                    #endregion E&L
 
                     case PadroesNFSe.GOVDIGITAL:
                         GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                                                            Empresas.Configuracoes[emp].PastaXmlRetorno, 
+                                                            Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                             Empresas.Configuracoes[emp].X509Certificado,
                                                             oDadosPedSitNfse.cMunicipio,
                                                             ConfiguracaoApp.ProxyUsuario,
@@ -233,7 +248,11 @@ namespace NFe.Service.NFSe
                         cabecMsg = "1";
                         break;
 
-                    case PadroesNFSe.ACTCON:
+                    case PadroesNFSe.PORTALFACIL_ACTCON_202:
+                        cabecMsg = "<cabecalho><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.PORTALFACIL_ACTCON:
                     case PadroesNFSe.PRODATA:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
@@ -247,12 +266,14 @@ namespace NFe.Service.NFSe
                                                         ConfiguracaoApp.ProxyUsuario,
                                                         ConfiguracaoApp.ProxySenha,
                                                         ConfiguracaoApp.ProxyServidor);
-                        
+
                         fisslex.ConsultarNfse(NomeArquivoXML);
                         break;
 
                     case PadroesNFSe.MGM:
+
                         #region MGM
+
                         MGM mgm = new MGM((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                            Empresas.Configuracoes[emp].PastaXmlRetorno,
                                            oDadosPedSitNfse.cMunicipio,
@@ -260,14 +281,17 @@ namespace NFe.Service.NFSe
                                            Empresas.Configuracoes[emp].SenhaWS);
                         mgm.ConsultarNfse(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion MGM
 
                     case PadroesNFSe.NATALENSE:
                         cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"1\" xmlns=\"http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd\"><versaoDados>1</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.CONSIST:
+
                         #region Consist
+
                         Consist consist = new Consist((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosPedSitNfse.cMunicipio,
@@ -279,10 +303,13 @@ namespace NFe.Service.NFSe
 
                         consist.ConsultarNfse(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion Consist
 
                     case PadroesNFSe.METROPOLIS:
+
                         #region METROPOLIS
+
                         Metropolis metropolis = new Metropolis((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                       Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                       oDadosPedSitNfse.cMunicipio,
@@ -296,7 +323,8 @@ namespace NFe.Service.NFSe
 
                         metropolis.ConsultarNfse(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion METROPOLIS
 
                     case PadroesNFSe.PAULISTANA:
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
@@ -317,7 +345,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.MEMORY:
+
                         #region Memory
+
                         Memory memory = new Memory((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosPedSitNfse.cMunicipio,
@@ -329,7 +359,8 @@ namespace NFe.Service.NFSe
 
                         memory.ConsultarNfse(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion Memory
 
                     case PadroesNFSe.CAMACARI_BA:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados><versao>2.01</versao></cabecalho>";
@@ -376,6 +407,28 @@ namespace NFe.Service.NFSe
                             pronin.ConsultarNfse(NomeArquivoXML);
                         }
                         break;
+
+                    case PadroesNFSe.BAURU_SP:
+                        Bauru_SP bauru_SP = new Bauru_SP((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            oDadosPedSitNfse.cMunicipio);
+                        bauru_SP.ConsultarNfse(NomeArquivoXML);
+                        break;
+
+                    case PadroesNFSe.COPLAN:
+                        Coplan coplan = new Coplan((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            oDadosPedSitNfse.cMunicipio,
+                            ConfiguracaoApp.ProxyUsuario,
+                            ConfiguracaoApp.ProxySenha,
+                            ConfiguracaoApp.ProxyServidor,
+                            Empresas.Configuracoes[emp].X509Certificado);
+
+                        AssinaturaDigital assCoplan = new AssinaturaDigital();
+                        assCoplan.Assinar(NomeArquivoXML, emp, oDadosPedSitNfse.cMunicipio);
+
+                        coplan.ConsultarNfse(NomeArquivoXML);
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, oDadosPedSitNfse.cMunicipio))
@@ -385,10 +438,10 @@ namespace NFe.Service.NFSe
                     ad.Assinar(NomeArquivoXML, emp, oDadosPedSitNfse.cMunicipio);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.InvocarNFSe(wsProxy, pedLoteRps, NomeMetodoWS(Servico, oDadosPedSitNfse.cMunicipio), 
+                    oInvocarObj.InvocarNFSe(wsProxy, pedLoteRps, NomeMetodoWS(Servico, oDadosPedSitNfse.cMunicipio),
                                             cabecMsg, this,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,    //"-ped-sitnfse",
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML,     //"-sitnfse", 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML,     //"-sitnfse",
                                             padraoNFSe, Servico, securityProtocolType);
 
                     ///
@@ -426,9 +479,11 @@ namespace NFe.Service.NFSe
                 }
             }
         }
-        #endregion
+
+        #endregion Execute
 
         #region PedSitNfse()
+
         /// <summary>
         /// Fazer a leitura do conteúdo do XML de consulta nfse por numero e disponibiliza conteúdo em um objeto para analise
         /// </summary>
@@ -437,6 +492,7 @@ namespace NFe.Service.NFSe
         {
             int emp = Empresas.FindEmpresaByThread();
         }
-        #endregion
+
+        #endregion PedSitNfse()
     }
 }

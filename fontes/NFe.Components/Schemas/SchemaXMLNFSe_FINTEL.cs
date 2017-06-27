@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using NFe.Components;
+﻿using NFe.Components;
 
 namespace NFSe.Components
 {
@@ -10,7 +6,10 @@ namespace NFSe.Components
     {
         public static void CriarListaIDXML()
         {
+            #region NFSe
+
             #region XML de lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-FINTEL-GerarNfseEnvio", new InfSchema()
             {
                 Tag = "GerarNfseEnvio",
@@ -19,9 +18,7 @@ namespace NFSe.Components
                 Descricao = "XML de Lote RPS",
                 TagAssinatura = "Rps",
                 TagAtributoId = "InfDeclaracaoPrestacaoServico",
-                //TagLoteAssinatura = "GerarNfseEnvio",
-                //TagLoteAtributoId = "Rps",
-                TargetNameSpace = "http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd"
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/nfse.xsd"
             });
 
             SchemaXML.InfSchemas.Add("NFSE-FINTEL-EnviarLoteRpsSincronoEnvio", new InfSchema()
@@ -30,11 +27,9 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\FINTEL\\nfse.xsd",
                 Descricao = "XML de Lote RPS",
-                //TagAssinatura = "Rps",
-                //TagAtributoId = "InfDeclaracaoPrestacaoServico",
                 TagLoteAssinatura = "EnviarLoteRpsSincronoEnvio",
                 TagLoteAtributoId = "LoteRps",
-                TargetNameSpace = "http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd"
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/nfse.xsd"
             });
 
             SchemaXML.InfSchemas.Add("NFSE-FINTEL-EnviarLoteRpsEnvio", new InfSchema()
@@ -43,15 +38,17 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\FINTEL\\nfse.xsd",
                 Descricao = "XML de Lote RPS",
-                //TagAssinatura = "Rps",
-                //TagAtributoId = "InfDeclaracaoPrestacaoServico",
                 TagLoteAssinatura = "EnviarLoteRpsEnvio",
                 TagLoteAtributoId = "LoteRps",
-                TargetNameSpace = "http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd"
+                //TagAssinatura = "InfDeclaracaoPrestacaoServico",
+                //TagAtributoId = "Rps",
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/nfse.xsd"
             });
-            #endregion
+
+            #endregion XML de lote RPS
 
             #region XML de Cancelamento de NFS-e
+
             SchemaXML.InfSchemas.Add("NFSE-FINTEL-CancelarNfseEnvio", new InfSchema()
             {
                 Tag = "CancelarNfseEnvio",
@@ -60,11 +57,13 @@ namespace NFSe.Components
                 Descricao = "XML de Cancelamento da NFS-e",
                 TagAssinatura = "Pedido",
                 TagAtributoId = "InfPedidoCancelamento",
-                TargetNameSpace = "http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd"
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/nfse.xsd"
             });
-            #endregion
+
+            #endregion XML de Cancelamento de NFS-e
 
             #region XML de Consulta de Lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-FINTEL-ConsultarLoteRpsEnvio", new InfSchema()
             {
                 Tag = "ConsultarLoteRpsEnvio",
@@ -73,11 +72,13 @@ namespace NFSe.Components
                 Descricao = "XML de Consulta de Lote RPS",
                 TagAssinatura = "",
                 TagAtributoId = "",
-                TargetNameSpace = "http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd"
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/nfse.xsd"
             });
-            #endregion
+
+            #endregion XML de Consulta de Lote RPS
 
             #region XML de Consulta de NFSe por Faixa
+
             SchemaXML.InfSchemas.Add("NFSE-FINTEL-ConsultarNfseFaixaEnvio", new InfSchema()
             {
                 Tag = "ConsultarNfseFaixaEnvio",
@@ -86,12 +87,13 @@ namespace NFSe.Components
                 Descricao = "XML de Consulta de NFSe por Faixa",
                 TagAssinatura = "",
                 TagAtributoId = "",
-                TargetNameSpace = "http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd"
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/nfse.xsd"
             });
-            
-            #endregion
+
+            #endregion XML de Consulta de NFSe por Faixa
 
             #region XML de Consulta de NFSe por RPS
+
             SchemaXML.InfSchemas.Add("NFSE-FINTEL-ConsultarNfseRpsEnvio", new InfSchema()
             {
                 Tag = "ConsultarNfseRpsEnvio",
@@ -100,9 +102,106 @@ namespace NFSe.Components
                 Descricao = "XML de Consulta de NFSe por Rps",
                 TagAssinatura = "",
                 TagAtributoId = "",
-                TargetNameSpace = "http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd"
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/nfse.xsd"
             });
-            #endregion                       
+
+            #endregion XML de Consulta de NFSe por RPS
+
+            #region XML de Consulta da Situação do Lote RPS
+
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarSituacaoLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\nfse.xsd",
+                Descricao = "XML de Consulta Situação do Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/nfse.xsd"
+            });
+
+            #endregion XML de Consulta da Situação do Lote RPS
+
+            #endregion NFSe
+
+            #region CFSe
+
+            #region XML de lote do CFSe
+
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-EnviarLoteCupomSincronoEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteCupomSincronoEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\cfse.xsd",
+                Descricao = "XML de Lote CFSe",
+                TagLoteAssinatura = "EnviarLoteCupomSincronoEnvio",
+                TagLoteAtributoId = "LoteCupom",
+                TagAssinatura = "InfDeclaracaoPrestacaoServico",
+                TagAtributoId = "Cupom",
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/cfse.xsd"
+            });
+
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-EnviarLoteCupomEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteCupomEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\cfse.xsd",
+                Descricao = "XML de Lote CFSe",
+                TagLoteAssinatura = "EnviarLoteCupomEnvio",
+                TagLoteAtributoId = "LoteCupom",
+                TagAssinatura = "InfDeclaracaoPrestacaoServico",
+                TagAtributoId = "Cupom",
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/cfse.xsd"
+            });
+
+            #endregion XML de lote do CFSe
+
+            #region XML de Cancelamento do CFSe
+
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-CancelarCupomEnvio", new InfSchema()
+            {
+                Tag = "CancelarCupomEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\cfse.xsd",
+                Descricao = "XML de Cancelamento do CFS-e",
+                TagAssinatura = "Pedido",
+                TagAtributoId = "InfPedidoCancelamento",
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/cfse.xsd"
+            });
+
+            #endregion XML de Cancelamento do CFSe
+
+            #region XML de Consulta de Lote CFSe
+
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-ConsultarLoteCupomEnvio", new InfSchema()
+            {
+                Tag = "ConsultarLoteCupomEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\cfse.xsd",
+                Descricao = "XML de Consulta de Lote CFSe",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/cfse.xsd"
+            });
+
+            #endregion XML de Consulta de Lote CFSe
+
+            #region XML de Consulta CFSe
+
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-ConsultarCfseEnvio", new InfSchema()
+            {
+                Tag = "ConsultarCfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\cfse.xsd",
+                Descricao = "XML de Consulta do CFSe",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/cfse.xsd"
+            });
+
+            #endregion XML de Consulta CFSe
+
+            #endregion CFSe
         }
     }
 }

@@ -87,6 +87,19 @@ namespace NFSe.Components
                 TargetNameSpace = ""
             });
             #endregion
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-SMARAPD-nfd", new InfSchema()
+            {
+                Tag = "nfd",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "nfd",
+                TagAtributoId = "inscricaomunicipalemissor",
+                TargetNameSpace = ""
+            });
+            #endregion
             /*
             #region XML de consulta da URL para impressão da NFSe
             SchemaXML.InfSchemas.Add("NFSE-ISSNET-ConsultarUrlVisualizacaoNfseEnvio", new InfSchema()

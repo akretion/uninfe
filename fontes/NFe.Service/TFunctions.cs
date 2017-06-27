@@ -680,6 +680,11 @@ namespace NFe.Service
                         }
                         break;
 
+                    case "CFe":
+                        tipo = "cfe";
+                        arqProcNFe = nomeArquivoRecebido;
+                        break;
+
                     case "procEventoNFe":
                     case "procEventoCTe":
                     case "procEventoMDFe":

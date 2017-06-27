@@ -95,7 +95,7 @@ begin
     // 394271 = .NET Framework 4.6.1 - Demais windows
     // 394802 = .NET Framawork 4.6.2 - Windows 10
     // 394806 = .NET Framawork 4.6.2 - Demais windows
-    if regresult < 393295 then begin
+    if regresult < 394802 then begin
       // definir o caminho do arquivo
       filename := expandconstant('{tmp}\fx451.exe');
 

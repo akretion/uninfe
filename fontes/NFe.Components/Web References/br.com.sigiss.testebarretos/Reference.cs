@@ -44,7 +44,7 @@ namespace NFe.Components.br.com.sigiss.testebarretos {
         
         /// <remarks/>
         public WebServiceSigISS() {
-            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_br_com_sigiss_testebauru_h_WebService_SigISS;
+            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_br_com_sigiss_testebarretos_WebService_SigISS;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

@@ -179,6 +179,13 @@ namespace NFe.Components
 
                     #endregion BSIT-BR
 
+                    #region FINTEL
+
+                    case PadroesNFSe.FINTEL:
+                        return "WebService";
+
+                    #endregion FINTEL
+
                     default:
                         return _NomeClasseWS;
                 }
@@ -504,6 +511,7 @@ namespace NFe.Components
                                         case PadroesNFSe.ABACO:
                                         case PadroesNFSe.GIF:
                                         case PadroesNFSe.ABASE:
+                                        case PadroesNFSe.BLUMENAU_SC:
                                             securityProtocolType = SecurityProtocolType.Tls;
                                             break;
 
@@ -1024,6 +1032,12 @@ namespace NFe.Components
             RecepcionarLoteRps =
             ConsultaSequenciaLoteNotaRPS =
             ///
+            /// CFS-e
+            RecepcionarLoteCfse =
+            CancelarCfse =
+            ConsultarLoteCfse =
+            ConsultarLoteCfse = 
+            ///
             /// NF-e
             NFeRecepcaoEvento =
             NFeConsulta =
@@ -1157,6 +1171,30 @@ namespace NFe.Components
 
         #endregion NFS-e
 
+        #region CFS-e
+
+        /// <summary>
+        /// Enviar lote CFS-e
+        /// </summary>
+        public string RecepcionarLoteCfse { get; set; }
+
+        /// <summary>
+        /// Cancelar CFS-e
+        /// </summary>
+        public string CancelarCfse { get; set; }
+
+        /// <summary>
+        /// Consultar Lote CFS-e
+        /// </summary>
+        public string ConsultarLoteCfse { get; set; }
+
+        /// <summary>
+        /// Consultar Lote CFS-e
+        /// </summary>
+        public string ConsultarCfse { get; set; }
+
+        #endregion CFS-e
+
         #region MDF-e
 
         /// <summary>
@@ -1242,6 +1280,7 @@ namespace NFe.Components
         /// Recepção do CTe modelo 67
         /// </summary>
         public string CteRecepcaoOS { get; set; }
+
         #endregion CTe
 
         #endregion Propriedades referente as tags do webservice.xml

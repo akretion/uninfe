@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using NFe.Components;
+﻿using NFe.Components;
 
 namespace NFSe.Components
 {
@@ -13,6 +9,7 @@ namespace NFSe.Components
             #region Schemas GIF - Específico município de Parobé
 
             #region XML de Consulta de NFSe por Rps
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4314050-NFSE", new InfSchema()
             {
                 Tag = "NFSE",
@@ -23,9 +20,11 @@ namespace NFSe.Components
                 TagAtributoId = "pedidoLoteNFSe",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Consulta de NFSe por Rps
 
             #region XML de Consulta de NFSe por Data
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4314050-pedidoLoteNFSe", new InfSchema()
             {
                 Tag = "pedidoLoteNFSe",
@@ -36,9 +35,11 @@ namespace NFSe.Components
                 TagAtributoId = "",
                 TargetNameSpace = ""
             });
-            #endregion
+
+            #endregion XML de Consulta de NFSe por Data
 
             #region XML de Consulta de NFSe por Rps
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4314050-pedConsultaTrans", new InfSchema()
             {
                 Tag = "pedConsultaTrans",
@@ -49,9 +50,11 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Consulta de NFSe por Rps
 
             #region XML de Consulta de Lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4314050-pedidoNFSe", new InfSchema()
             {
                 Tag = "pedidoNFSe",
@@ -62,9 +65,11 @@ namespace NFSe.Components
                 TagAtributoId = "pedidoNFSe",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Consulta de Lote RPS
 
             #region XML de Cancelamento de NFS-e
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4314050-pedidoCancelamentoLote", new InfSchema()
             {
                 Tag = "pedidoCancelamentoLote",
@@ -75,9 +80,11 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Cancelamento de NFS-e
 
             #region XML de Consulta Situação do Lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4314050-pedidoStatusLote", new InfSchema()
             {
                 Tag = "pedidoStatusLote",
@@ -88,9 +95,11 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Consulta Situação do Lote RPS
 
             #region XML de lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4314050-envioLote", new InfSchema()
             {
                 Tag = "envioLote",
@@ -101,9 +110,11 @@ namespace NFSe.Components
                 TagAtributoId = "NFS-e",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de lote RPS
 
             #region XML de consulta URL NFSe
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4314050-pedidoNFSePNG", new InfSchema()
             {
                 Tag = "pedidoNFSePNG",
@@ -114,13 +125,15 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
 
-            #endregion
+            #endregion XML de consulta URL NFSe
+
+            #endregion Schemas GIF - Específico município de Parobé
 
             #region Schemas GIF - Específico município de Sapucaia do Sul - RS
 
             #region XML de Consulta de NFSe por Rps
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-NFSE", new InfSchema()
             {
                 Tag = "NFSE",
@@ -131,9 +144,11 @@ namespace NFSe.Components
                 TagAtributoId = "pedidoLoteNFSe",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Consulta de NFSe por Rps
 
             #region XML de Consulta de NFSe por Data
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedidoLoteNFSe", new InfSchema()
             {
                 Tag = "pedidoLoteNFSe",
@@ -144,9 +159,11 @@ namespace NFSe.Components
                 TagAtributoId = "",
                 TargetNameSpace = ""
             });
-            #endregion
+
+            #endregion XML de Consulta de NFSe por Data
 
             #region XML de Consulta de NFSe por Rps
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedConsultaTrans", new InfSchema()
             {
                 Tag = "pedConsultaTrans",
@@ -157,9 +174,11 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Consulta de NFSe por Rps
 
             #region XML de Consulta de Lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedidoNFSe", new InfSchema()
             {
                 Tag = "pedidoNFSe",
@@ -170,9 +189,11 @@ namespace NFSe.Components
                 TagAtributoId = "pedidoNFSe",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Consulta de Lote RPS
 
             #region XML de Cancelamento de NFS-e
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedidoCancelamentoLote", new InfSchema()
             {
                 Tag = "pedidoCancelamentoLote",
@@ -183,9 +204,11 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Cancelamento de NFS-e
 
             #region XML de Consulta Situação do Lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedidoStatusLote", new InfSchema()
             {
                 Tag = "pedidoStatusLote",
@@ -196,9 +219,11 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Consulta Situação do Lote RPS
 
             #region XML de lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-envioLote", new InfSchema()
             {
                 Tag = "envioLote",
@@ -209,9 +234,11 @@ namespace NFSe.Components
                 TagAtributoId = "NFS-e",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de lote RPS
 
             #region XML de consulta URL NFSe
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedidoNFSePNG", new InfSchema()
             {
                 Tag = "pedidoNFSePNG",
@@ -222,13 +249,30 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
 
-            #endregion
+            #endregion XML de consulta URL NFSe
+
+            #region XML de consulta NFSe em PDF
+
+            SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedidoNFSePDF", new InfSchema()
+            {
+                Tag = "pedidoNFSePDF",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-SapucaiaDoSul_RS_v1.xsd",
+                Descricao = "XML de consulta da NFSe em PDF padrão GIF",
+                TagAssinatura = "pedidoNFSePDF",
+                TagAtributoId = "CNPJ",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+
+            #endregion XML de consulta NFSe em PDF
+
+            #endregion Schemas GIF - Específico município de Sapucaia do Sul - RS
 
             #region Schemas GIF - Demais municípios
 
             #region XML de Consulta de NFSe por Rps
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-NFSE", new InfSchema()
             {
                 Tag = "NFSE",
@@ -239,9 +283,11 @@ namespace NFSe.Components
                 TagAtributoId = "pedidoLoteNFSe",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Consulta de NFSe por Rps
 
             #region XML de Consulta de NFSe por Data
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoLoteNFSe", new InfSchema()
             {
                 Tag = "pedidoLoteNFSe",
@@ -252,9 +298,11 @@ namespace NFSe.Components
                 TagAtributoId = "",
                 TargetNameSpace = ""
             });
-            #endregion
+
+            #endregion XML de Consulta de NFSe por Data
 
             #region XML de Consulta de NFSe por Rps
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-pedConsultaTrans", new InfSchema()
             {
                 Tag = "pedConsultaTrans",
@@ -265,9 +313,11 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Consulta de NFSe por Rps
 
             #region XML de Consulta de Lote RPS / Obter XML da NFSe para o padrão GIF
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoNFSe", new InfSchema()
             {
                 Tag = "pedidoNFSe",
@@ -278,9 +328,11 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Consulta de Lote RPS / Obter XML da NFSe para o padrão GIF
 
             #region XML de Cancelamento de NFS-e
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-pedAnulaNFSe", new InfSchema()
             {
                 Tag = "pedAnulaNFSe",
@@ -302,9 +354,11 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Cancelamento de NFS-e
 
             #region XML de Consulta Situação do Lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoStatusLote", new InfSchema()
             {
                 Tag = "pedidoStatusLote",
@@ -315,9 +369,11 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Consulta Situação do Lote RPS
 
             #region XML de lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-envioLote", new InfSchema()
             {
                 Tag = "envioLote",
@@ -328,9 +384,11 @@ namespace NFSe.Components
                 TagAtributoId = "NFS-e",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de lote RPS
 
             #region XML de consulta NFSe em PNG
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoNFSePNG", new InfSchema()
             {
                 Tag = "pedidoNFSePNG",
@@ -341,9 +399,11 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de consulta NFSe em PNG
 
             #region XML de Inutilização da NFSe
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-solicitacaoInutilizacao", new InfSchema()
             {
                 Tag = "solicitacaoInutilizacao",
@@ -354,9 +414,11 @@ namespace NFSe.Components
                 TagAtributoId = "numerosInutilizados",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion
+
+            #endregion XML de Inutilização da NFSe
 
             #region XML de consulta NFSe em PDF
+
             SchemaXML.InfSchemas.Add("NFSE-GIF-pedidoNFSePDF", new InfSchema()
             {
                 Tag = "pedidoNFSePDF",
@@ -367,9 +429,10 @@ namespace NFSe.Components
                 TagAtributoId = "CNPJ",
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
-            #endregion            
-            
-            #endregion
+
+            #endregion XML de consulta NFSe em PDF
+
+            #endregion Schemas GIF - Demais municípios
         }
     }
 }

@@ -8,12 +8,6 @@
     <Setting Name="NFe_Components_br_gov_rs_erechim_nfse_www_p_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://www.nfse.erechim.rs.gov.br:8182/NfseService/NfseService</Value>
     </Setting>
-    <Setting Name="NFe_Components_br_com_sigiss_testebauru_h_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://testebauru.sigiss.com.br:443/testebauru/ws/sigiss_ws.php</Value>
-    </Setting>
-    <Setting Name="NFe_Components_br_com_sigiss_bauru_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://bauru.sigiss.com.br:443/bauru/ws/sigiss_ws.php</Value>
-    </Setting>
     <Setting Name="NFe_Components_br_com_sigiss_botucatu_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://botucatu.sigiss.com.br:443/botucatu/ws/sigiss_ws.php</Value>
     </Setting>
@@ -69,10 +63,10 @@
       <Value Profile="(Default)">http://201.49.29.18:8081/el-nfse/RpsService</Value>
     </Setting>
     <Setting Name="NFe_Components_br_gov_sp_presidenteprudente_sistemas_www_h_NfseService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://187.45.245.217/ws_nfse/nfseservice.svc</Value>
+      <Value Profile="(Default)">http://wshomologacao.simplissweb.com.br/nfseservice.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_br_gov_sp_presidenteprudente_sistemas_www_p_NfseService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://187.45.245.217/ws_nfse_presidente_prudente/nfseservice.svc</Value>
+      <Value Profile="(Default)">http://issprudente.sp.gov.br/ws_nfse/nfseservice.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_br_com_govdigital_ws_NfseServiceImplDivService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/div</Value>
@@ -276,16 +270,31 @@
       <Value Profile="(Default)">http://e-gov.betha.com.br/e-nota-contribuinte-ws/nfseWS</Value>
     </Setting>
     <Setting Name="NFe_Components_br_srv_gp_www_coplan_camponovodoparecis_p_nfse_web_service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.gp.srv.br/tributario_camponovodoparecis/servlet/anfse_web_service</Value>
+      <Value Profile="(Default)">https://www.gp.srv.br/tributario_camponovodoparecis/servlet/anfse_web_service</Value>
     </Setting>
     <Setting Name="NFe_Components_br_srv_gp_www_coplan_camponovodoparecis_h_nfse_web_service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://homologacao.municipioweb.com.br/tributario_homologacao/servlet/anfse_web_service</Value>
-    </Setting>
-    <Setting Name="NFe_Components_br_srv_gp_www_coplan_camponovodoparecis2_h_nfse_web_service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://homologacao.municipioweb.com.br/tributario_homologacao/servlet/anfse_web_service</Value>
+      <Value Profile="(Default)">https://www.gp.srv.br/tributario_homologacao/servlet/anfse_web_service</Value>
     </Setting>
     <Setting Name="NFe_Components_br_com_fiorilli_jacisp_p_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://186.225.155.34:8080/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_nfeosasco_www_p_NotaFiscalEletronicaServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_simplissweb_wspatrociniomg_p_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://wspatrocinio.simplissweb.com.br/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fiorilli_mirassolandiasp_h_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_fiorilli_mirassolandiasp_p_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sppmmirassolandia.dcfiorilli.com.br:8080/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_bauru_sp_baurusp_p_WebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://webservice.bauru.sp.gov.br/nfe/Default.asmx</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_bauru_sp_baurusp_h_WebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://homologacao.bauru.sp.gov.br/nfe_ws/Default.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

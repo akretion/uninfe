@@ -63,9 +63,9 @@
             this.metroLabel38.Location = new System.Drawing.Point(0, 1);
             this.metroLabel38.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel38.Name = "metroLabel38";
-            this.metroLabel38.Size = new System.Drawing.Size(38, 15);
+            this.metroLabel38.Size = new System.Drawing.Size(87, 15);
             this.metroLabel38.TabIndex = 41;
-            this.metroLabel38.Text = "Marca";
+            this.metroLabel38.Text = "Marca / Modelo";
             // 
             // cbMacarSAT
             // 
@@ -77,6 +77,7 @@
             "DARUMA",
             "DIMEP",
             "ELGIN",
+            "ELGIN_II",
             "EMULADOR",
             "NITERE",
             "SWEDA",

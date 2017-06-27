@@ -1,9 +1,11 @@
 ﻿using NFe.Certificado;
 using NFe.Components;
+using NFe.Components.BAURU_SP;
 using NFe.Components.Conam;
 using NFe.Components.Consist;
 using NFe.Components.Coplan;
 using NFe.Components.EGoverne;
+using NFe.Components.EGoverneISS;
 using NFe.Components.EL;
 using NFe.Components.EloTech;
 using NFe.Components.Fiorilli;
@@ -88,7 +90,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.BETHA:
+
                         #region Betha
+
                         ConteudoXML.PreserveWhitespace = false;
                         ConteudoXML.Load(NomeArquivoXML);
 
@@ -115,7 +119,8 @@ namespace NFe.Service.NFSe
                             wsProxy.Betha = new Betha();
                         }
                         break;
-                    #endregion
+
+                    #endregion Betha
 
                     case PadroesNFSe.ABACO:
                     case PadroesNFSe.CANOAS_RS:
@@ -158,7 +163,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.FINTEL:
-                        cabecMsg = "<cabecalho xmlns=\"http://iss.pontagrossa.pr.gov.br/Arquivos/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://iss.irati.pr.gov.br/Arquivos/nfseV202.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.SYSTEMPRO:
@@ -262,7 +267,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.COPLAN:
+
                         #region Coplan
+
                         Coplan coplan = new Coplan((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosPedCanNfse.cMunicipio,
@@ -276,7 +283,8 @@ namespace NFe.Service.NFSe
 
                         coplan.CancelarNfse(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion Coplan
 
                     case PadroesNFSe.EL:
 
@@ -325,7 +333,11 @@ namespace NFe.Service.NFSe
                         cabecMsg = "1";
                         break;
 
-                    case PadroesNFSe.ACTCON:
+                    case PadroesNFSe.PORTALFACIL_ACTCON_202:
+                        cabecMsg = "<cabecalho><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.PORTALFACIL_ACTCON:
                     case PadroesNFSe.PRODATA:
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
@@ -439,6 +451,31 @@ namespace NFe.Service.NFSe
 
                             pronin.EmiteNF(NomeArquivoXML);
                         }
+                        break;
+
+                    case PadroesNFSe.EGOVERNEISS:
+
+                        #region EGoverne ISS
+
+                        EGoverneISS egoverneiss = new EGoverneISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        oDadosPedCanNfse.cMunicipio,
+                        Empresas.Configuracoes[emp].UsuarioWS,
+                        Empresas.Configuracoes[emp].SenhaWS,
+                        ConfiguracaoApp.ProxyUsuario,
+                        ConfiguracaoApp.ProxySenha,
+                        ConfiguracaoApp.ProxyServidor);
+
+                        egoverneiss.CancelarNfse(NomeArquivoXML);
+                        break;
+
+                    #endregion EGoverne ISS
+
+                    case PadroesNFSe.BAURU_SP:
+                        Bauru_SP bauru_SP = new Bauru_SP((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                        oDadosPedCanNfse.cMunicipio);
+                        bauru_SP.CancelarNfse(NomeArquivoXML);
                         break;
                 }
 

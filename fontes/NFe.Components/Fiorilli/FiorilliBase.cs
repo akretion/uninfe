@@ -23,7 +23,6 @@ namespace NFe.Components.Fiorilli
                     if (tpAmb == TipoAmbiente.taHomologacao)
                         switch (CodigoMun)
                         {
-                            case 3504008: //Assis-SP
                             case 3522802: //Itaporanga-SP
                             case 3512902: //Cosmorama-SP 
                             case 3553807: //Taquarituba-SP
@@ -35,6 +34,11 @@ namespace NFe.Components.Fiorilli
                                 fiorilliService = new AvareSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
+                            case 3504008: //Assis-SP
+                            case 3530409: //Mirassolândia-SP
+                                fiorilliService = new MirassolandiaSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -42,7 +46,7 @@ namespace NFe.Components.Fiorilli
                         switch (CodigoMun)
                         {
                             case 3504008: //Assis-SP
-                                fiorilliService =  new AssisSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                fiorilliService = new AssisSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             case 3553807: //Taquarituba-SP
@@ -63,6 +67,10 @@ namespace NFe.Components.Fiorilli
 
                             case 3524501: //Jaci-SP
                                 fiorilliService = new JaciSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 3530409: //Mirassolândia-SP
+                                fiorilliService = new MirassolandiaSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             default:

@@ -1,14 +1,13 @@
-﻿using System;
+﻿using NFe.Components;
+using NFe.Settings;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Linq;
 using System.IO;
-using System.Windows.Forms;
+using System.Linq;
 using System.Reflection;
-
-using NFe.Settings;
-using NFe.Components;
+using System.Windows.Forms;
 
 namespace NFe.UI
 {
@@ -23,13 +22,15 @@ namespace NFe.UI
         }
 
         #region local
+
         /// <summary>
         /// Controla se o evento changed_Modificado deve ser executado, se true, não executa o evento
         /// </summary>
-        bool stopChangedEvent = false;
-        #endregion
+        private bool stopChangedEvent = false;
 
-        MetroFramework.Controls.MetroTabPage _tpEmpresa_divs,
+        #endregion local
+
+        private MetroFramework.Controls.MetroTabPage _tpEmpresa_divs,
             _tpEmpresa_danfe,
             _tpEmpresa_pastas,
             _tpEmpresa_cert,
@@ -68,6 +69,7 @@ namespace NFe.UI
                     uce_divs.changeEvent += changed_Modificado;
                     tpage.Controls.Add(uce_divs);
                     break;
+
                 case 1:
                     tpage.Text = "Pastas";
                     //tpage.AutoScroll = (Propriedade.TipoAplicativo == TipoAplicativo.Nfe || Propriedade.TipoExecucao == TipoExecucao.teAll);
@@ -75,6 +77,7 @@ namespace NFe.UI
                     uce_pastas.ChangeEvent += changed_Modificado;
                     tpage.Controls.Add(uce_pastas);
                     break;
+
                 case 2:
                     tpage.Text = "Certificado digital";
                     uce_cert = new Formularios.userConfiguracao_certificado();
@@ -82,12 +85,14 @@ namespace NFe.UI
                     uce_cert.ucPastas = uce_pastas;
                     tpage.Controls.Add(uce_cert);
                     break;
+
                 case 3:
                     tpage.Text = "FTP";
                     uce_ftp = new Formularios.userConfiguracao_ftp();
                     uce_ftp.changeEvent += changed_Modificado;
                     tpage.Controls.Add(uce_ftp);
                     break;
+
                 case 4:
                     tpage.Text = "DANFE";
                     tpage.AutoScroll = true;
@@ -95,6 +100,7 @@ namespace NFe.UI
                     uce_danfe.changeEvent += changed_Modificado;
                     tpage.Controls.Add(uce_danfe);
                     break;
+
                 case 5:
                     tpage.Text = "SAT";
                     uce_sat = new Formularios.userConfiguracao_sat();
@@ -106,7 +112,7 @@ namespace NFe.UI
 
             return tpage;
 
-            #endregion
+            #endregion --createtpage
         }
 
         public override void UpdateControles()
@@ -154,7 +160,7 @@ namespace NFe.UI
             }
             first = false;
 
-            #endregion
+            #endregion --UpdateControles
         }
 
         private void CreateControles()
@@ -202,7 +208,7 @@ namespace NFe.UI
             else
                 CopiaDadosDaEmpresaParaControls(new Empresa(), true);
 
-            #endregion
+            #endregion --CreateControles
         }
 
         private void userConfiguracoes_Resize(object sender, EventArgs e)
@@ -236,7 +242,7 @@ namespace NFe.UI
             /// origemPasta: C:\uninfe\CNPJ_antigo\envio
             /// origemCNPJ:  CNPJ_novo
             /// newPasta:    C:\uninfe\CNPJ_novo\envio
-            /// 
+            ///
             string newPasta = origemPasta.Replace(origemCNPJ.Trim(), destino.CNPJ.Trim());
 
             if (origemPasta.Equals(newPasta, StringComparison.InvariantCultureIgnoreCase))
@@ -319,7 +325,7 @@ namespace NFe.UI
             oempresa.CriaPastasAutomaticamente = true;
         }
 
-        void CopiaDadosDaEmpresaParaControls(Empresa oempresa, bool empty)
+        private void CopiaDadosDaEmpresaParaControls(Empresa oempresa, bool empty)
         {
             bool _modificado = false;
             bool _nova = string.IsNullOrEmpty(oempresa.PastaXmlEnvio);
@@ -337,7 +343,7 @@ namespace NFe.UI
 
                     ///
                     /// tenta definir as pastas na mesma arvore do CNPJ
-                    /// 
+                    ///
                     foreach (Empresa rr in (from x in Empresas.Configuracoes
                                             where x.CNPJ.Equals(oempresa.CNPJ)
                                             select x))
@@ -353,7 +359,7 @@ namespace NFe.UI
                     {
                         ///
                         /// acha uma configuracao valida
-                        /// 
+                        ///
                         foreach (Empresa rr in (from x in Empresas.Configuracoes
                                                 where !x.CNPJ.Equals(oempresa.CNPJ)
                                                 select x))
@@ -370,7 +376,7 @@ namespace NFe.UI
                     {
                         ///
                         /// se mesmo assim não encontrou nenhuma configuracao valida, assume a pasta do UniNFe
-                        /// 
+                        ///
                         string subpasta = oempresa.CNPJ;
                         switch (oempresa.Servico)
                         {
@@ -425,7 +431,6 @@ namespace NFe.UI
 
                     _tpEmpresa_cert.Parent = tc_empresa;
                     uce_cert.Populate(oempresa);
-
                 }
             }
             finally
@@ -436,7 +441,9 @@ namespace NFe.UI
                 Modificado = _modificado;
             }
         }
+
         private bool _Modificado;
+
         private bool Modificado
         {
             get
@@ -493,7 +500,7 @@ namespace NFe.UI
             #endregion
         }
 
-        const string constAbandono = "Dados da configuração foram alterados, abandona mesmo assim?";
+        private const string constAbandono = "Dados da configuração foram alterados, abandona mesmo assim?";
 
         public bool VerificaSeAbandona()
         {
@@ -641,15 +648,16 @@ namespace NFe.UI
                         string _key = currentEmpresa.CNPJ + currentEmpresa.Servico.ToString();
                         ///
                         /// salva a configuracao da empresa
-                        /// 
+                        ///
 
                         currentEmpresa.SalvarConfiguracao((currentEmpresa.Servico == TipoAplicativo.SAT ? false : true), true);
 
+                        ValidarPastaBackup();
 
                         var app = new ConfiguracaoApp();
                         ///
                         /// salva o arquivo da lista de empresas
-                        ///                         
+                        ///
                         app.GravarArqEmpresas();
 
                         if (uc_geral.Modificado)
@@ -666,7 +674,7 @@ namespace NFe.UI
                         CreateControles();
                         ///
                         /// reposiciona a empresa no combobox
-                        /// 
+                        ///
                         for (int item = 0; item < cbEmpresas.Items.Count; ++item)
                         {
                             ComboElem empr = cbEmpresas.Items[item] as ComboElem;
@@ -700,7 +708,7 @@ namespace NFe.UI
                     {
                         ///
                         /// exclui as pastas criadas na inclusao
-                        /// 
+                        ///
                         try
                         {
                             currentEmpresa.ExcluiPastas();
@@ -711,6 +719,28 @@ namespace NFe.UI
                 }
             }
         }
+
+        #region ValidarPastaBackup()
+
+        /// <summary>
+        /// Verifica se tem alguma empresa sem informar a pasta de backup.
+        /// Esta verificação só ocorre quando configurado manualmente no uninfe, quando é configurado pelo ERP, a pasta é opcional.
+        /// </summary>
+        private void ValidarPastaBackup()
+        {
+            for (int i = 0; i < Empresas.Configuracoes.Count; i++)
+            {
+                if (Empresas.Configuracoes[i].Servico != TipoAplicativo.Nfse)
+                {
+                    if (string.IsNullOrEmpty(Empresas.Configuracoes[i].PastaBackup))
+                    {
+                        throw new Exception("Não foi informado a pasta de backup dos XML autorizados da empresa " + Empresas.Configuracoes[i].Nome.Trim() + ".");
+                    }
+                }
+            }
+        }
+
+        #endregion
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
@@ -729,19 +759,19 @@ namespace NFe.UI
                             CreateControles();
 
                             Auxiliar.WriteLog("Empresa '" + _Empresa.CNPJ + "' - Serviço: '" + _Empresa.Servico.ToString() + "' excluída", false);
-/*
-                            if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Deseja excluir as pastas desta empresa?\r\n\r\nExcluindo-as, serão eliminadas todos os XML's autorizados/denegados/eventos", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            {
-                                ///
-                                /// exclui as pastas criadas
-                                /// 
-                                try
-                                {
-                                    _Empresa.ExcluiPastas();
-                                }
-                                catch { }
-                            }
-*/
+                            /*
+                                                        if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Deseja excluir as pastas desta empresa?\r\n\r\nExcluindo-as, serão eliminadas todos os XML's autorizados/denegados/eventos", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                                        {
+                                                            ///
+                                                            /// exclui as pastas criadas
+                                                            ///
+                                                            try
+                                                            {
+                                                                _Empresa.ExcluiPastas();
+                                                            }
+                                                            catch { }
+                                                        }
+                            */
                         }
                         else
                         {
@@ -758,7 +788,7 @@ namespace NFe.UI
             {
                 ///
                 /// compara o que foi mudado
-                /// 
+                ///
                 try
                 {
                     bool pergunta = DadosMudaramDaEmpresa(false);

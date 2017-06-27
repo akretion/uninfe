@@ -29,10 +29,6 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new MariliaSP.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
-                            case 3506003: //Bauru-SP
-                                sigCorpService = new BauruSP.h.SigCorpH(tpAmb, PastaRetorno);
-                                break;
-
                             case 4113700: //Londrina-PR
                                 sigCorpService = new LondrinaPR.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
@@ -73,10 +69,6 @@ namespace NFe.Components.SigCorp
 
                             case 3507506: //Botucatu-SP
                                 sigCorpService = new BotucatuSP.p.SigCorpP(tpAmb, PastaRetorno);
-                                break;
-
-                            case 3506003: //Bauru-SP
-                                sigCorpService = new BauruSP.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             case 4113700: //Londrina-PR 

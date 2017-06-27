@@ -288,6 +288,15 @@ namespace NFe.Components
             PedSeqLoteNotaRPS,
 
             /// <summary>
+            /// CFSe
+            /// </summary>
+            EnvLoteCFSe,
+
+            PedCanCFSe,
+            PedLoteCFSe,
+            PedSitCFSe,
+
+            /// <summary>
             /// Extensões para SAT/CFe
             /// </summary>
             ConsultarSAT,
@@ -569,7 +578,32 @@ namespace NFe.Components
                         "-ped-seqlotenotarps.xml", "",
                         "-seqlotenotarps.xml", "",
                         "Consulta sequência do lote da nota RPS"));
+
                     #endregion Extensoes da NFSe
+
+                    #region Extensões CFSe
+
+                    ListaExtensoes.Add(TipoEnvio.EnvLoteCFSe, new ExtensaoClass(
+                        "-env-lotecfse.xml", "",
+                        "-ret-lotecfse.xml", "",
+                        "Envio de lote do CFSe"));
+
+                    ListaExtensoes.Add(TipoEnvio.PedCanCFSe, new ExtensaoClass(
+                        "-ped-cancfse.xml", "",
+                        "-cancfse.xml", "",
+                        "Pedido de cancelamento (CFSe)"));
+
+                    ListaExtensoes.Add(TipoEnvio.PedLoteCFSe, new ExtensaoClass(
+                        "-ped-lotecfse.xml", "",
+                        "-lotecfse.xml", "",
+                        "Envio de consulta de lote (CFSe)"));
+
+                    ListaExtensoes.Add(TipoEnvio.PedSitCFSe, new ExtensaoClass(
+                        "-ped-sitcfse.xml", "",
+                        "-sitcfse.xml", "",
+                        "Pedido de situação do cupom (CFSe)"));
+
+                    #endregion Extensões CFSe
 
                     #region Extensões em comum entre NFe, CTe e MDF-e
 
@@ -1024,8 +1058,6 @@ namespace NFe.Components
             public static string LMCRet = Extensao(TipoEnvio.LMC).RetornoXML;
 
             #endregion Extensoes que so estao aqui para quem utiliza o codigo em seus projetos
-
-
 
             #region Extensões NFe
 

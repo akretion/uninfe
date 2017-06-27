@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using Servicos = Unimake.SAT.Servico;
-using EnunsSAT = Unimake.SAT.Enuns;
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.SAT.Abstract.Servico;
-using Unimake.SAT;
 using NFe.Settings;
+using System;
+using System.IO;
+using System.Xml;
+using Unimake.SAT.Utility;
+using EnunsSAT = Unimake.SAT.Enuns;
+using Servicos = Unimake.SAT.Servico;
 
-namespace NFe.SAT.Servico.Envio 
+namespace NFe.SAT.Servico.Envio
 {
     /// <summary>
     /// Classe responsável pela comunicação com o SAT
@@ -22,22 +18,22 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Dados da empresa
         /// </summary>
-        Empresa DadosEmpresa = null;
+        private Empresa DadosEmpresa = null;
 
         /// <summary>
         /// Dados do envio do XML
         /// </summary>
-        string ConsultarNumeroSessaoEnvio = null;
+        private string ConsultarNumeroSessaoEnvio = null;
 
         /// <summary>
         /// Numero da sessão que será consultada
         /// </summary>
-        int NumeroSessao = 0;
+        private int NumeroSessao = 0;
 
         /// <summary>
         /// Resposta do equipamento sat
         /// </summary>
-        Servicos.Retorno.ConsultarNumeroSessaoResponse ConsultarRetorno = null;
+        private Servicos.Retorno.ConsultarNumeroSessaoResponse ConsultarRetorno = null;
 
         /// <summary>
         /// Nome do arquivo XML que esta sendo manipulado
@@ -61,7 +57,7 @@ namespace NFe.SAT.Servico.Envio
             ArquivoXML = arquivoXML;
             ConsultarNumeroSessaoEnvio = doc.InnerXml;
             NumeroSessao = Convert.ToInt32(GetValueXML(doc, "ConsultarNumeroSessao", "NumeroSessao"));
-            Marca = Utils.ToEnum<EnunsSAT.Fabricante>(DadosEmpresa.MarcaSAT);
+            Marca = UConvert.ToEnum<EnunsSAT.Fabricante>(DadosEmpresa.MarcaSAT);
             CodigoAtivacao = DadosEmpresa.CodigoAtivacaoSAT;
         }
 
@@ -81,9 +77,9 @@ namespace NFe.SAT.Servico.Envio
         /// </summary>
         public override string SaveResponse()
         {
-            string result = Path.Combine(DadosEmpresa.PastaXmlRetorno, 
-                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarNumeroSessaoSAT).EnvioXML) + 
-                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarNumeroSessaoSAT).RetornoXML);                        
+            string result = Path.Combine(DadosEmpresa.PastaXmlRetorno,
+                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarNumeroSessaoSAT).EnvioXML) +
+                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarNumeroSessaoSAT).RetornoXML);
 
             using (StreamWriter writer = new StreamWriter(result))
                 writer.Write(ConsultarRetorno.ToXML());
@@ -91,6 +87,6 @@ namespace NFe.SAT.Servico.Envio
             File.Delete(ArquivoXML);
 
             return result;
-        }       
+        }
     }
 }

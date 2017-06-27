@@ -1,4 +1,4 @@
-@Echo Off   
+@Echo Off
 
    if "%1"=="setup"  goto setup
    if "%1"=="SETUP"  goto setup
@@ -20,6 +20,7 @@
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.UI.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Validate.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.SAT.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\release\Unimake.SAT.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\uninfe.exe
    call assina_udf.bat ..\fontes\uninfe\bin\release\uninfeservico.exe
 
@@ -50,8 +51,25 @@
    call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.Validate.dll
    call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\uninfe.exe
    call assina_udf.bat ..\fontes\uninfe\bin\x86\release46_x86\NFe.SAT.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\release46_x86\Unimake.SAT.dll
    call assina_udf.bat ..\fontes\uninfe\bin\x86\release46_x86\uninfeservico.exe
-  
+
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\MetroFramework.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\NFe.Certificado.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\NFe.Components.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\NFe.Components.Info.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\NFe.Components.Wsdl.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\NFe.ConvertTxt.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\NFe.Service.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\NFe.Settings.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\NFe.Threadings.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\NFe.UI.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\NFe.Validate.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\uninfe.exe
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\release46_x64\NFe.SAT.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\release46_x64\Unimake.SAT.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\release46_x64\uninfeservico.exe
+
    Goto Fim
 
 :nao_existe
@@ -62,8 +80,8 @@
    call assina_udf.bat \projetos\instaladores\iuninfe5.exe
    call assina_udf.bat \projetos\instaladores\iuninfe5_fw35.exe
    call assina_udf.bat \projetos\instaladores\iuninfe5_fw46_x86.exe
-   
+   call assina_udf.bat \projetos\instaladores\iuninfe5_fw46_x64.exe
+
    Goto Fim
 
 :fim
-   

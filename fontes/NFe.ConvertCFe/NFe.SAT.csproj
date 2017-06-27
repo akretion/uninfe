@@ -73,6 +73,16 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release46_x64|x64'">
+    <OutputPath>bin\x64\Release46_x64\</OutputPath>
+    <DefineConstants>TRACE;_fw46;x64</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -82,11 +92,31 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Unimake.SAT, Version=1.0.6277.30333, Culture=neutral, processorArchitecture=x86">
-      <HintPath>..\packages\Unimake.SAT.20170310.08.45\lib\net462\x86\Unimake.SAT.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
+  <Choose>
+    <When Condition="'$(Configuration)|$(Platform)' == 'Release46_x86|x86'">
+      <ItemGroup>
+        <Reference Include="Unimake.SAT">
+          <HintPath>..\packages\Unimake.SAT.20170626.11.07\lib\net462\x86\Unimake.SAT.dll</HintPath>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <When Condition="'$(Configuration)|$(Platform)' == 'Release46_x64|x64'">
+      <ItemGroup>
+        <Reference Include="Unimake.SAT">
+          <HintPath>..\packages\Unimake.SAT.20170626.11.07\lib\net462\x64\Unimake.SAT.dll</HintPath>
+        </Reference>
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <Reference Include="Unimake.SAT">
+          <HintPath>..\packages\Unimake.SAT.20170626.11.07\lib\net462\AnyCPU\Unimake.SAT.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
   <ItemGroup>
     <Compile Include="Conversao\ConverterNFCe.cs" />
     <Compile Include="Abstract\Servico\ServicoBase.cs" />
@@ -124,7 +154,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -329,7 +329,7 @@ namespace NFe.Service
 
                 #region Padrão ISSONLINE
 
-                case PadroesNFSe.ISSONLINE:
+                case PadroesNFSe.ISSONLINE_ASSESSORPUBLICO:
                     int operacao;
                     string senhaWs = Functions.GetMD5Hash(Empresas.Configuracoes[emp].SenhaWS);
 
@@ -381,14 +381,32 @@ namespace NFe.Service
 
                 case PadroesNFSe.SMARAPD:
                     if (metodo == "nfdEntradaCancelar")
+                    {
                         strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { Empresas.Configuracoes[emp].UsuarioWS,
-                        TFunctions.EncryptSHA1(Empresas.Configuracoes[emp].SenhaWS),
-                        docXML.OuterXml });
+                            TFunctions.EncryptSHA1(Empresas.Configuracoes[emp].SenhaWS),
+                            docXML.OuterXml });
+                    }
+                    else if (metodo == "nfdSaida")
+                    {
+                        strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { Empresas.Configuracoes[emp].UsuarioWS,
+                            TFunctions.EncryptSHA1(Empresas.Configuracoes[emp].SenhaWS),
+                            Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString(),
+                            docXML.OuterXml });
+                    }
+                    else if (metodo == "urlNfd")
+                    {
+                        strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { Convert.ToInt32(docXML.GetElementsByTagName("codigoMunicipio")[0].InnerText),
+                            Convert.ToInt32(docXML.GetElementsByTagName("numeroNfd")[0].InnerText),
+                            Convert.ToInt32(docXML.GetElementsByTagName("serieNfd")[0].InnerText),
+                            docXML.GetElementsByTagName("inscricaoMunicipal")[0].InnerText });
+                    }
                     else
+                    {
                         strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { Empresas.Configuracoes[emp].UsuarioWS,
-                        TFunctions.EncryptSHA1(Empresas.Configuracoes[emp].SenhaWS),
-                        Empresas.Configuracoes[emp].UnidadeFederativaCodigo,
-                        docXML.OuterXml });
+                            TFunctions.EncryptSHA1(Empresas.Configuracoes[emp].SenhaWS),
+                            Empresas.Configuracoes[emp].UnidadeFederativaCodigo,
+                            docXML.OuterXml });
+                    }
                     break;
 
                 #endregion SMARAPD

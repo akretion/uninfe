@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using Servicos = Unimake.SAT.Servico;
-using EnunsSAT = Unimake.SAT.Enuns;
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.SAT.Abstract.Servico;
-using Unimake.SAT;
 using NFe.Settings;
+using System.IO;
+using System.Xml;
+using Unimake.SAT.Utility;
+using EnunsSAT = Unimake.SAT.Enuns;
+using Servicos = Unimake.SAT.Servico;
 
 namespace NFe.SAT.Servico.Envio
 {
@@ -22,27 +17,27 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Dados do XML
         /// </summary>
-        XmlDocument Document = new XmlDocument();
+        private XmlDocument Document = new XmlDocument();
 
         /// <summary>
         /// Dados da empresa
         /// </summary>
-        Empresa DadosEmpresa = null;
+        private Empresa DadosEmpresa = null;
 
         /// <summary>
-        /// Assinatura digital conjunto "CNPJ Software House" + "CNPJ do estabelecimento comercial". 
+        /// Assinatura digital conjunto "CNPJ Software House" + "CNPJ do estabelecimento comercial".
         /// </summary>
-        string CNPJValue = null;
+        private string CNPJValue = null;
 
         /// <summary>
-        /// Assinatura digital conjunto "CNPJ Software House" + "CNPJ do estabelecimento comercial". 
+        /// Assinatura digital conjunto "CNPJ Software House" + "CNPJ do estabelecimento comercial".
         /// </summary>
-        string AssinaturaCNPJs = null;
+        private string AssinaturaCNPJs = null;
 
         /// <summary>
         /// Resposta do equipamento sat
         /// </summary>
-        Servicos.Retorno.AssociarAssinaturaResponse AssociarAssinaturaRetorno = new Servicos.Retorno.AssociarAssinaturaResponse();
+        private Servicos.Retorno.AssociarAssinaturaResponse AssociarAssinaturaRetorno = new Servicos.Retorno.AssociarAssinaturaResponse();
 
         /// <summary>
         /// Nome do arquivo XML que esta sendo manipulado
@@ -61,12 +56,12 @@ namespace NFe.SAT.Servico.Envio
             fs.Close();
             fs.Dispose();
 
-            CNPJValue = GetValueXML(Document,"AssociarAssinatura", "CNPJvalue");
+            CNPJValue = GetValueXML(Document, "AssociarAssinatura", "CNPJvalue");
             AssinaturaCNPJs = GetValueXML(Document, "AssociarAssinatura", "assinaturaCNPJs");
 
             DadosEmpresa = dadosEmpresa;
             ArquivoXML = arquivoXML;
-            Marca = Utils.ToEnum<EnunsSAT.Fabricante>(DadosEmpresa.MarcaSAT);
+            Marca = UConvert.ToEnum<EnunsSAT.Fabricante>(DadosEmpresa.MarcaSAT);
             CodigoAtivacao = DadosEmpresa.CodigoAtivacaoSAT;
         }
 

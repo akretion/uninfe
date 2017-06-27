@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Prestador" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Prestador" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Contribuinte" />
+  <xs:complexType name="NotaFiscalDTO">
+    <xs:sequence>
+      <xs:element name="Aliquota" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Atividade" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CEPPrestacaoServico" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChaveAutenticacao" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CidadePrestacaoServico" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EnderecoPrestacaoServico" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EstadoPrestacaoServico" nillable="true" type="xs:string" />
+      <xs:element name="Homologacao" type="xs:boolean" />
+      <xs:element minOccurs="0" name="InformacoesAdicionais" nillable="true" type="xs:string" />
+      <xs:element name="NotificarTomadorPorEmail" type="xs:boolean" />
+      <xs:element name="SubstituicaoTributaria" type="xs:boolean" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Contribuinte" minOccurs="0" name="Tomador" nillable="true" type="q1:PessoaDTO" />
+      <xs:element minOccurs="0" name="TomadorEstrangeiro" type="xs:boolean" />
+      <xs:element name="Valor" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorCSLL" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorCofins" nillable="true" type="xs:decimal" />
+      <xs:element name="ValorDeducao" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorINSS" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorIR" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorOutrosImpostos" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ValorPisPasep" nillable="true" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NotaFiscalDTO" nillable="true" type="tns:NotaFiscalDTO" />
+  <xs:complexType name="NotaFiscalGeradaDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Autenticador" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Link" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Numero" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NotaFiscalGeradaDTO" nillable="true" type="tns:NotaFiscalGeradaDTO" />
+</xs:schema>

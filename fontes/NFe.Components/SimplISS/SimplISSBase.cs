@@ -68,6 +68,10 @@ namespace NFe.Components.SimplISS
                                 simplissService = new BalnearioCamboriu.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
 
+                            case 3148103: // Patrocínio-MG
+                                simplissService = new PatrocinioMG.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

@@ -360,7 +360,7 @@ namespace NFe.Settings
         {
             EstadoURLConsultaDFe estado = new EstadoURLConsultaDFe();
 
-            if (File.Exists(LocalFile)) //if (DownloadArquivoURLConsultaDFe())
+            if (File.Exists(LocalFile))
             {
                 var inifile = new IniFile(LocalFile);
 
@@ -370,6 +370,8 @@ namespace NFe.Settings
                 estado.UrlNFCe = inifile.Read("NFC-e", uf);
                 estado.UrlNFCeH = inifile.Read("NFC-e(h)", uf);
             }
+            else
+                throw new Exception("O arquivo SEFAZ.INC não foi localizado, por favor reinstale o UniNFe.");
 
             return estado;
         }
@@ -1044,6 +1046,26 @@ namespace NFe.Settings
                             break;
 
                         #endregion NFS-e
+
+                        #region CFS-e
+
+                        case Servicos.RecepcionarLoteCfse:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.RecepcionarLoteCfse : list.LocalProducao.RecepcionarLoteCfse);
+                            break;
+
+                        case Servicos.CancelarCfse:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.CancelarCfse : list.LocalProducao.CancelarCfse);
+                            break;
+
+                        case Servicos.ConsultarLoteCfse:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarLoteCfse : list.LocalProducao.ConsultarLoteCfse);
+                            break;
+
+                        case Servicos.ConsultarCfse:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarCfse : list.LocalProducao.ConsultarCfse);
+                            break;
+
+                        #endregion CFS-e
 
                         #region LMC
 

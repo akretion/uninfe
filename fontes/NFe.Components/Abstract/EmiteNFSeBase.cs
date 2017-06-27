@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using System.Net;
+using System.Web.Services.Protocols;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -7,6 +9,9 @@ namespace NFe.Components.Abstract
 {
     public abstract class EmiteNFSeBase : IEmiteNFSe
     {
+        public string ProxyUser { get; set; }
+        public string ProxyPass { get; set; }
+        public string ProxyServer { get; set; }
         public TipoAmbiente tpAmb { get; set; }
         public string PastaRetorno { get; set; }
         public abstract string NameSpaces { get; }
@@ -63,11 +68,7 @@ namespace NFe.Components.Abstract
         {
             string nomearq = Path.Combine(PastaRetorno, Functions.ExtrairNomeArq(file, extEnvio) + extRetorno);
 
-            StreamWriter write = new StreamWriter(nomearq);
-            write.Write(result);
-            write.Flush();
-            write.Close();
-            write.Dispose();
+            File.WriteAllText(nomearq, result, System.Text.Encoding.Default);
         }
 
         public string CreateXML(Object objetoRetorno)
@@ -112,7 +113,7 @@ namespace NFe.Components.Abstract
                 {
                     xmlDoc = xmlDoc2;
                 }
-                
+
             }
 
             return xmlDoc.InnerXml;
@@ -140,6 +141,20 @@ namespace NFe.Components.Abstract
         {
             get;
             protected set;
+        }
+
+        public void DefinirProxy<T>(SoapHttpClientProtocol request)
+        {
+            if (!string.IsNullOrEmpty(ProxyUser))
+            {
+                NetworkCredential credentials = new NetworkCredential(ProxyUser, ProxyPass, ProxyServer);
+                WebRequest.DefaultWebProxy.Credentials = credentials;
+
+                request.Proxy = WebRequest.DefaultWebProxy;
+                request.Proxy.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+                request.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
+            }
+
         }
     }
 }

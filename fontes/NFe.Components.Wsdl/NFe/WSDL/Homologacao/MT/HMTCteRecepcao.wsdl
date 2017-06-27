@@ -115,7 +115,7 @@
 
       <wsdl:port binding="tns:CteRecepcaoSoap12" name="CteRecepcaoSoap12">
 
-         <soap12:address location="https://homologacao.sefaz.mt.gov.br:80/ctews/services/CteRecepcao"/>
+         <soap12:address location="https://homologacao.sefaz.mt.gov.br/ctews/services/CteRecepcao"/>
 
       </wsdl:port>
 

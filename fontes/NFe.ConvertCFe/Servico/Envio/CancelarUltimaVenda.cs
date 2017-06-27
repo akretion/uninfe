@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using Servicos = Unimake.SAT.Servico;
-using EnunsSAT = Unimake.SAT.Enuns;
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.SAT.Abstract.Servico;
-using Unimake.SAT;
 using NFe.Settings;
+using System.IO;
+using System.Xml;
+using Unimake.SAT.Utility;
+using EnunsSAT = Unimake.SAT.Enuns;
+using Servicos = Unimake.SAT.Servico;
 
 namespace NFe.SAT.Servico.Envio
 {
@@ -22,22 +17,22 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Dados da empresa
         /// </summary>
-        Empresa DadosEmpresa = null;
+        private Empresa DadosEmpresa = null;
 
         /// <summary>
         /// Dados do envio do XML
         /// </summary>
-        string CancelarUltimaVendaEnvio = null;
+        private string CancelarUltimaVendaEnvio = null;
 
         /// <summary>
         /// Chave de acesso da venda que esta sendo cancelada
         /// </summary>
-        string ChaveAcessoVenda = null;
+        private string ChaveAcessoVenda = null;
 
         /// <summary>
         /// Resposta do equipamento sat
         /// </summary>
-        Servicos.Retorno.CancelarUltimaVendaResponse CancelarUltimaVendaRetorno = new Servicos.Retorno.CancelarUltimaVendaResponse();
+        private Servicos.Retorno.CancelarUltimaVendaResponse CancelarUltimaVendaRetorno = new Servicos.Retorno.CancelarUltimaVendaResponse();
 
         /// <summary>
         /// Nome do arquivo XML que esta sendo manipulado
@@ -62,7 +57,7 @@ namespace NFe.SAT.Servico.Envio
 
             DadosEmpresa = dadosEmpresa;
             ArquivoXML = arquivoXML;
-            Marca = Utils.ToEnum<EnunsSAT.Fabricante>(DadosEmpresa.MarcaSAT);
+            Marca = UConvert.ToEnum<EnunsSAT.Fabricante>(DadosEmpresa.MarcaSAT);
             CodigoAtivacao = DadosEmpresa.CodigoAtivacaoSAT;
             CancelarUltimaVendaEnvio = doc.InnerXml;
         }

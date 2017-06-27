@@ -559,14 +559,23 @@ namespace NFe.Settings
                 //Certificado instalado no windows
                 if (CertificadoInstalado)
                 {
+                    Auxiliar.WriteLog("1) CERTIFICADO - THUMBPRINT: " + CertificadoDigitalThumbPrint, false);
+
                     X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
                     store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
                     X509Certificate2Collection collection = store.Certificates;
                     X509Certificate2Collection collection1 = null;
                     if (!string.IsNullOrEmpty(CertificadoDigitalThumbPrint))
+                    {
                         collection1 = collection.Find(X509FindType.FindByThumbprint, CertificadoDigitalThumbPrint, false);
+
+                        Auxiliar.WriteLog("2) CERTIFICADO: FindByThumbprint", false);
+                    }
                     else
+                    {
                         collection1 = collection.Find(X509FindType.FindBySubjectDistinguishedName, Certificado, false);
+                        Auxiliar.WriteLog("3) CERTIFICADO: FindBySubjectDistinguishedName", false);
+                    }
 
                     for (int i = 0; i < collection1.Count; i++)
                     {
@@ -574,13 +583,17 @@ namespace NFe.Settings
                         if (DateTime.Compare(DateTime.Now, collection1[i].NotAfter) == -1)
                         {
                             x509Cert = collection1[i];
+                            Auxiliar.WriteLog("4) CERTIFICADO: Achou o certificado com a validade correta.", false);
                             break;
                         }
                     }
 
                     //Se não encontrou nenhum certificado com validade correta, vou pegar o primeiro certificado, porem vai travar na hora de tentar enviar a nota fiscal, por conta da validade. Wandrey 06/04/2011
                     if (x509Cert == null && collection1.Count > 0)
+                    {
                         x509Cert = collection1[0];
+                        Auxiliar.WriteLog("5) CERTIFICADO: Gravou o certificado das configurações para uso.", false);
+                    }
                 }
                 else //Certificado está sendo acessado direto do arquivo .PFX
                 {

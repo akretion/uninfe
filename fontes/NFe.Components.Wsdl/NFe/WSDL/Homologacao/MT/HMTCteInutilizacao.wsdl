@@ -115,7 +115,7 @@
 
       <wsdl:port binding="tns:CteInutilizacaoSoap12" name="CteInutilizacao">
 
-         <soap12:address location="https://homologacao.sefaz.mt.gov.br:80/ctews/services/CteInutilizacao"/>
+         <soap12:address location="https://homologacao.sefaz.mt.gov.br/ctews/services/CteInutilizacao"/>
 
       </wsdl:port>
 
