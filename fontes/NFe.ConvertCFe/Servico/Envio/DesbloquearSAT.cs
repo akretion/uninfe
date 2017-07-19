@@ -65,8 +65,8 @@ namespace NFe.SAT.Servico.Envio
         public override string SaveResponse()
         {
             string result = Path.Combine(DadosEmpresa.PastaXmlRetorno,
-                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarSAT).EnvioXML) +
-                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarSAT).RetornoXML);
+                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.DesbloquearSAT).EnvioXML) +
+                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.DesbloquearSAT).RetornoXML);
 
             using (StreamWriter writer = new StreamWriter(result))
                 writer.Write(DesbloquearSATRetorno.ToXML());

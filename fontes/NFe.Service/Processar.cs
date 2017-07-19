@@ -123,6 +123,18 @@ namespace NFe.Service
                             DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskConsultarCfse(arquivo));
                             break;
 
+                        case Servicos.ConfigurarTerminalCfse:
+                            DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskConfigurarTerminalCfse(arquivo));
+                            break;
+
+                        case Servicos.EnviarInformeManutencaoCfse:
+                            DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskEnviarInformeManutencaoCfse(arquivo));
+                            break;
+
+                        case Servicos.InformeTrasmissaoSemMovimentoCfse:
+                            DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskInformeTrasmissaoSemMovimentoCfse(arquivo));
+                            break;
+
                         #endregion CFS-e
 
 #if _fw46
@@ -190,7 +202,10 @@ namespace NFe.Service
                             string xmlCancelamento = cancela.SaveResponse();
 
                             if (!string.IsNullOrEmpty(xmlCancelamento))
+                            {
+                                TFunctions.ExecutaUniDanfe(xmlCancelamento, DateTime.Today, Empresas.Configuracoes[emp]);
                                 TFunctions.MoverArquivo(xmlCancelamento, PastaEnviados.Autorizados);
+                            }
                             break;
 
                         case Servicos.SATConfigurarInterfaceDeRede:
@@ -893,6 +908,18 @@ namespace NFe.Service
                                 else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitCFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.ConsultarCfse;
+                                }
+                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvConfigTermCFSe).EnvioXML) >= 0)
+                                {
+                                    tipoServico = Servicos.ConfigurarTerminalCfse;
+                                }
+                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvInfManutCFSe).EnvioXML) >= 0)
+                                {
+                                    tipoServico = Servicos.EnviarInformeManutencaoCfse;
+                                }
+                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvInfSemMovCFSe).EnvioXML) >= 0)
+                                {
+                                    tipoServico = Servicos.InformeTrasmissaoSemMovimentoCfse;
                                 }
 
                                 #endregion CFS-e
@@ -1867,5 +1894,38 @@ namespace NFe.Service
         }
 
         #endregion ConsultaGeral()
+
+        #region ConsultaDFe()
+
+        /// <summary>
+        /// Executa o processo de consulta DFe das empresas cadastradas no UniNFe e já deixa tudo disponibilizado para o ERP.
+        /// </summary>
+        public void ConsultaDFe()
+        {
+            bool hasAll = false;
+
+            while (true)
+            {
+                for (int i = 0; i < Empresas.Configuracoes.Count; i++)
+                {
+                    if (Empresas.Configuracoes[i].Servico != TipoAplicativo.Nfe &&
+                        Empresas.Configuracoes[i].Servico != TipoAplicativo.Cte &&
+                        Empresas.Configuracoes[i].Servico != TipoAplicativo.Todos)
+                        continue;
+
+                    string nomeArquivo = Empresas.Configuracoes[i].CNPJ + "_NSU.xml";
+                    GerarXML gerarXML = new GerarXML(i);
+                    gerarXML.XMLDistribuicaoDFe(Servicos.DFeEnviar, Empresas.Configuracoes[i].AmbienteCodigo, Empresas.Configuracoes[i].UnidadeFederativaCodigo, "1.01", Empresas.Configuracoes[i].CNPJ, "000000000000000");
+
+                    hasAll = true;
+                }
+                if (hasAll)
+                    Thread.Sleep(720000); //Dorme por 12 minutos, para atender o problema do consumo indevido da SEFAZ
+                else
+                    break;
+            }
+        }
+
+        #endregion ConsultaDFe()
     }
 }

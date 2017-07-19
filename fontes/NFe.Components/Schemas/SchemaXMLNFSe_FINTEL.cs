@@ -201,6 +201,51 @@ namespace NFSe.Components
 
             #endregion XML de Consulta CFSe
 
+            #region XML para configurar/ativar terminal de CFSe
+
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-ConfigurarAtivarTerminal", new InfSchema()
+            {
+                Tag = "ConfigurarAtivarTerminal",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\cfse.xsd",
+                Descricao = "XML para configurar/ativar terminal de CFSe",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/cfse.xsd"
+            });
+
+            #endregion XML para configurar/ativar terminal de CFSe
+
+            #region XML para informar que terminal CFSe está em manutenção
+
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-EnviarInformeManutencao", new InfSchema()
+            {
+                Tag = "EnviarInformeManutencao",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\cfse.xsd",
+                Descricao = "XML para informar que o terminal de CFSe está em manutenção",
+                TagAssinatura = "EnviarInformeManutencao",
+                TagAtributoId = "Pedido",
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/cfse.xsd"
+            });
+
+            #endregion XML para informar que terminal CFSe está em manutenção
+
+            #region XML para informar dia sem movimento de CFSe
+
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-InformeTrasmissaoSemMovimento", new InfSchema()
+            {
+                Tag = "InformeTrasmissaoSemMovimento",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\cfse.xsd",
+                Descricao = "XML para informar dia sem movimento de CFSe",
+                TagAssinatura = "InformeTrasmissaoSemMovimento",
+                TagAtributoId = "Pedido",
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/cfse.xsd"
+            });
+
+            #endregion XML para informar dia sem movimento de CFSe
+
             #endregion CFSe
         }
     }

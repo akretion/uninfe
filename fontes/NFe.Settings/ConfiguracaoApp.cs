@@ -828,10 +828,10 @@ namespace NFe.Settings
         /// <param name="tipoAmbiente">Tipo de ambiente da NFe</param>
         /// <param name="tipoEmissao">Tipo de Emissao da NFe</param>
         /// <param name="servico">Serviço da NFe que está sendo executado</param>
-        /// <param name="versao">Versão do XML</param>
+        /// <param name="versaoXML">Versão do XML</param>
         /// <param name="ehNFCe">Se é NFCe (Nota Fiscal de Consumidor Eletrônica)</param>
         /// <returns>Retorna a URL</returns>
-        private static string DefLocalWSDL(int CodigoUF, int tipoAmbiente, int tipoEmissao, string versao, Servicos servico, string modelo)
+        private static string DefLocalWSDL(int CodigoUF, int tipoAmbiente, int tipoEmissao, string versaoXML, Servicos servico, string modelo)
         {
             bool ehNFCe = (modelo == "65");
             string WSDL = string.Empty;
@@ -1065,6 +1065,18 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarCfse : list.LocalProducao.ConsultarCfse);
                             break;
 
+                        case Servicos.ConfigurarTerminalCfse:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConfigurarTerminalCfse : list.LocalProducao.ConfigurarTerminalCfse);
+                            break;
+
+                        case Servicos.EnviarInformeManutencaoCfse:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.EnviarInformeManutencaoCfse : list.LocalProducao.EnviarInformeManutencaoCfse);
+                            break;
+
+                        case Servicos.InformeTrasmissaoSemMovimentoCfse:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.InformeTrasmissaoSemMovimentoCfse : list.LocalProducao.InformeTrasmissaoSemMovimentoCfse);
+                            break;
+
                         #endregion CFS-e
 
                         #region LMC
@@ -1093,23 +1105,22 @@ namespace NFe.Settings
                 string temp = Path.Combine(Path.GetDirectoryName(WSDL), Path.GetFileNameWithoutExtension(WSDL) + "_C" + Path.GetExtension(WSDL));
                 if (File.Exists(temp))
                     WSDL = temp;
-                else
-                {
-                    temp = Path.Combine(Path.GetDirectoryName(WSDL), Path.GetFileNameWithoutExtension(WSDL) + "_C" + CodigoUF.ToString() + Path.GetExtension(WSDL));
-                    if (File.Exists(temp))
-                        WSDL = temp;
-                }
             }
 
-            ///
-            /// danasa: 4-2014
-            /// Compatibilidade com a versao 2.00
-            ///
-            if (!string.IsNullOrEmpty(versao) &&
-                (versao.Equals("2.01") || versao.Equals("2.00")) && !string.IsNullOrEmpty(WSDL) && File.Exists(WSDL))
+            if (!string.IsNullOrEmpty(versaoXML) && !string.IsNullOrEmpty(WSDL) && File.Exists(WSDL))
             {
-                string temp = Path.Combine(Path.GetDirectoryName(WSDL), Path.GetFileNameWithoutExtension(WSDL) + "_200" + Path.GetExtension(WSDL));
-                if (File.Exists(temp))
+                string temp = string.Empty;
+
+                if (versaoXML.Equals("4.00"))
+                {
+                    temp = Path.Combine(Path.GetDirectoryName(WSDL), Path.GetFileNameWithoutExtension(WSDL) + "_400" + Path.GetExtension(WSDL));
+                }
+                else if (versaoXML.Equals("2.01") || versaoXML.Equals("2.00"))
+                {
+                    temp = Path.Combine(Path.GetDirectoryName(WSDL), Path.GetFileNameWithoutExtension(WSDL) + "_200" + Path.GetExtension(WSDL));
+                }
+
+                if (! string.IsNullOrEmpty(temp) && File.Exists(temp))
                     WSDL = temp;
             }
 
@@ -1356,11 +1367,11 @@ namespace NFe.Settings
                                             if ((erro = this.AddEmpresaNaLista(emp.PastaBackup)) == "")
                                                 erro = this.AddEmpresaNaLista(emp.PastaDownloadNFeDest);
 
-                if ((emp.Servico == TipoAplicativo.Nfe ||
+                /*if ((emp.Servico == TipoAplicativo.Nfe ||
                     emp.Servico == TipoAplicativo.NFCe ||
                     emp.Servico == TipoAplicativo.Todos)
                     && emp.UnidadeFederativaCodigo == 35 && emp.IndSinc == true)
-                    erro = "Estado de São Paulo não dispõe do serviço síncrono para emissão de NFe.";
+                    erro = "Estado de São Paulo não dispõe do serviço síncrono para emissão de NFe.";*/
 
                 if (erro != "")
                 {

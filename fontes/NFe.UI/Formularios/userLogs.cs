@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -56,7 +51,7 @@ namespace NFe.UI
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Confirma a exclusão deste arquivo de log?","", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Confirma a exclusão deste arquivo de log?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 var fn = System.IO.Path.Combine(NFe.Components.Propriedade.PastaLog, cbArquivos.Text);
                 if (System.IO.File.Exists(fn))

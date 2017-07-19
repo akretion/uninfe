@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcaoOS" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcaoOS">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado à recepção de mensagens do CT-e Outros Serviços</wsdl:documentation>
+    <wsdl:types>
+        <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcaoOS">
+            <s:element name="cteDadosMsg">
+                <s:complexType mixed="true">
+                    <s:sequence>
+                        <s:any/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="cteOSRecepcaoResult">
+                <s:complexType mixed="true">
+                    <s:sequence>
+                        <s:any/>
+                    </s:sequence>
+                </s:complexType>
+            </s:element>
+            <s:element name="cteCabecMsg" type="tns:cteCabecMsg"/>
+            <s:complexType name="cteCabecMsg">
+                <s:sequence>
+                    <s:element minOccurs="0" maxOccurs="1" name="cUF" type="s:string"/>
+                    <s:element minOccurs="0" maxOccurs="1" name="versaoDados" type="s:string"/>
+                </s:sequence>
+                <s:anyAttribute/>
+            </s:complexType>
+        </s:schema>
+    </wsdl:types>
+    <wsdl:message name="cteOSRecepcaoSoap12In">
+        <wsdl:part name="cteDadosMsg" element="tns:cteDadosMsg"/>
+    </wsdl:message>
+    <wsdl:message name="cteOSRecepcaoSoap12Out">
+        <wsdl:part name="cteOSRecepcaoResult" element="tns:cteOSRecepcaoResult"/>
+    </wsdl:message>
+    <wsdl:message name="cteOSRecepcaocteCabecMsg">
+        <wsdl:part name="cteCabecMsg" element="tns:cteCabecMsg"/>
+    </wsdl:message>
+    <wsdl:portType name="CteRecepcaoOSSoap12">
+        <wsdl:operation name="cteOSRecepcao">
+            <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Transmissão do CT-e Outros Serviços</wsdl:documentation>
+            <wsdl:input message="tns:cteOSRecepcaoSoap12In"/>
+            <wsdl:output message="tns:cteOSRecepcaoSoap12Out"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="CteRecepcaoOSSoap12" type="tns:CteRecepcaoOSSoap12">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="cteOSRecepcao">
+            <soap12:operation soapAction="http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcaoOS/cteOSRecepcao" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:cteOSRecepcaocteCabecMsg" part="cteCabecMsg" use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+                <soap12:header message="tns:cteOSRecepcaocteCabecMsg" part="cteCabecMsg" use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="CteRecepcaoOS">
+        <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado à recepção de mensagens do CT-e Outros Serviços</wsdl:documentation>
+        <wsdl:port name="CteRecepcaoOSSoap12" binding="tns:CteRecepcaoOSSoap12">
+            <soap12:address location="https://producao.cte.ms.gov.br:443/ws/CteRecepcaoOS"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace NFe.Components.GovDigital
 {
@@ -162,21 +163,21 @@ namespace NFe.Components.GovDigital
         {
             string strResult = Invoke("GerarNfse", new[] { NfseCabecMsg, ReaderXML(file) });
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML, Encoding.UTF8);
         }
 
         public override void CancelarNfse(string file)
         {
             string strResult = Invoke("CancelarNfse", new[] { NfseCabecMsg, ReaderXML(file) });
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML, Encoding.UTF8);
         }
 
         public override void ConsultarLoteRps(string file)
         {
             string strResult = Invoke("ConsultarLoteRps", new[] { NfseCabecMsg, ReaderXML(file) });
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML, Encoding.UTF8);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -188,14 +189,14 @@ namespace NFe.Components.GovDigital
         {
             string strResult = Invoke("ConsultarNfseServicoPrestado", new[] { NfseCabecMsg, ReaderXML(file) });
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML, Encoding.UTF8);
         }
 
         public override void ConsultarNfsePorRps(string file)
         {
             string strResult = Invoke("ConsultarNfsePorRps", new[] { NfseCabecMsg, ReaderXML(file) });
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML, Encoding.UTF8);
         }
 
         #endregion Métodos

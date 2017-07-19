@@ -139,7 +139,7 @@ namespace NFe.Service
                 case Servicos.CTeRecepcaoEvento:
                     retorna = "cteCabecMsg";
 
-                    if (cUF == 50 && tpEmis == (int)TipoEmissao.teNormal)
+                    if (cUF == 50 && tpEmis == (int)TipoEmissao.teNormal && servico != Servicos.CteRecepcaoOS)
                         retorna = "CTeCabecMsg";
 
                     break;
@@ -744,7 +744,10 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultar:
-                            retorna = "ConsultarNfse";
+                            if (cMunicipio.Equals(3300308))
+                                retorna = "ConsultarNfsePorFaixa";
+                            else
+                                retorna = "ConsultarNfse";
                             break;
 
                         case Servicos.NFSeConsultarPorRps:
@@ -1198,6 +1201,18 @@ namespace NFe.Service
 
                         case Servicos.ConsultarCfse:
                             retorna = "ConsultarCfse";
+                            break;
+
+                        case Servicos.ConfigurarTerminalCfse:
+                            retorna = "ConfigurarTerminal";
+                            break;
+
+                        case Servicos.EnviarInformeManutencaoCfse:
+                            retorna = "InformarManutencaoTerminal";
+                            break;
+
+                        case Servicos.InformeTrasmissaoSemMovimentoCfse:
+                            retorna = "InformeTrasmissaoSemMovimento";
                             break;
                     }
                     break;
@@ -1889,7 +1904,7 @@ namespace NFe.Service
                 if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IdentificadorCSC) && dadosNFe.mod == "65")
                 {
                     if (Empresas.Configuracoes[emp].URLConsultaDFe == null)
-                        if (!File.Exists(Path.Combine(Application.StartupPath,"sefaz.inc")))
+                        if (!File.Exists(Path.Combine(Application.StartupPath, "sefaz.inc")))
                             throw new Exception("Não foi possível localizar o arquivo SEFAZ.INC na pasta de execução do UniNFe, por favor, reinstale o aplicativo.");
                         else
                             throw new Exception("Não foi possível localizar o link do QRCode no arquivo SEFAZ.INC.");

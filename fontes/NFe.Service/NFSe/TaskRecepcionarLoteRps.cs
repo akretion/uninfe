@@ -181,10 +181,10 @@ namespace NFe.Service.NFSe
 
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
-                        if (oDadosEnvLoteRps.tpAmb == 1)
-                            envLoteRps = new Components.PCorumbaMS.NfseWSService();
-                        else
-                            envLoteRps = new Components.HCorumbaMS.NfseWSService();
+                        //if (oDadosEnvLoteRps.tpAmb == 1)
+                        //    envLoteRps = new Components.PCorumbaMS.NfseWSService();
+                        //else
+                        //    envLoteRps = new Components.HCorumbaMS.NfseWSService();
 
                         break;
 

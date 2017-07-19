@@ -3442,6 +3442,67 @@ namespace NFe.Service
         }
 
         #endregion XmlParaFTP
+
+        #region XML para consulta do DFe destinado
+
+        public string XMLDistribuicaoDFe(Servicos servico, int tpAmb, int cUF, string versao, string cnpj, string ultNSU)
+        {
+            /*
+            NFE
+            <distDFeInt versao="1.01">
+               <tpAmb>1</tpAmb>
+               <cUFAutor>35</cUFAutor>
+               <CNPJ>06117723000112</CNPJ>
+               <distNSU>
+                  <ultNSU>123456789012345</ultNSU>
+               </distNSU>
+            </distDFeInt>
+
+            CTE
+            <distDFeInt versao="1.00">
+               <tpAmb>1</tpAmb>
+               <cUFAutor>35</cUFAutor>
+               <CNPJ>11111111111111</CNPJ>
+               <distNSU>
+                  <ultNSU>000000000000000</ultNSU>
+               </distNSU>
+            </distDFeInt>
+            */
+
+            //StatusServico(pArquivo, tpAmb, tpEmis, cUF, versao, "consStatServ", NFeStrConstants.NAME_SPACE_NFE);
+
+            string nodeStr = "distDFeInt";
+            string nsURI = "";
+            switch (servico)
+            {
+                case Servicos.CTeDistribuicaoDFe:
+                    nsURI = (servico == Servicos.CTeDistribuicaoDFe ? NFeStrConstants.NAME_SPACE_CTE : NFeStrConstants.NAME_SPACE_NFE);
+                    break;
+
+                case Servicos.DFeEnviar:
+                    nsURI = (servico == Servicos.CTeDistribuicaoDFe ? NFeStrConstants.NAME_SPACE_CTE : NFeStrConstants.NAME_SPACE_NFE);
+                    break;
+            }
+
+            XmlDocument doc = new XmlDocument();
+            doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
+            XmlNode node = doc.CreateElement(nodeStr);
+            node.Attributes.Append(criaAttribute(doc, TpcnResources.versao.ToString(), versao));
+            node.Attributes.Append(criaAttribute(doc, TpcnResources.xmlns.ToString(), nsURI));
+            node.AppendChild(criaElemento(doc, TpcnResources.tpAmb.ToString(), tpAmb.ToString()));
+            node.AppendChild(criaElemento(doc, TpcnResources.cUFAutor.ToString(), cUF.ToString()));
+            node.AppendChild(criaElemento(doc, TpcnResources.CNPJ.ToString(), cnpj));
+
+            XmlNode nodedistNSU = doc.CreateElement("distNSU");
+            nodedistNSU.AppendChild(criaElemento(doc, TpcnResources.ultNSU.ToString(), ultNSU));
+            node.AppendChild(nodedistNSU);
+
+            doc.AppendChild(node);
+
+            return doc.OuterXml;
+        }
+
+        #endregion XML para consulta do DFe destinado
     }
 
     public class ArquivoXMLDFe

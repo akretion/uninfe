@@ -72,6 +72,10 @@ namespace NFe.Components.SimplISS
                                 simplissService = new PatrocinioMG.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
 
+                            case 3528809: //Macaraí-SP
+                                simplissService = new MacaraiSP.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

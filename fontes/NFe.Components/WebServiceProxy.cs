@@ -465,71 +465,43 @@ namespace NFe.Components
         /// <returns>Protocolo de segurança a ser utilizado</returns>
         public static SecurityProtocolType DefinirProtocoloSeguranca(int cUF, bool taHomologacao, int tpEmis, PadroesNFSe padraoNFSe, Servicos servico)
         {
-            SecurityProtocolType securityProtocolType = SecurityProtocolType.Ssl3;
+            SecurityProtocolType securityProtocolType = SecurityProtocolType.Tls;
 
-            switch (servico)
+            if (padraoNFSe != PadroesNFSe.NaoIdentificado)
             {
-                case Servicos.EventoManifestacaoDest:
-                case Servicos.DFeEnviar:
-                case Servicos.CTeDistribuicaoDFe:
-                case Servicos.NFeDownload:
-                    securityProtocolType = SecurityProtocolType.Tls;
-                    break;
+                switch (padraoNFSe)
+                {
+                    case PadroesNFSe.GINFES:
+                    case PadroesNFSe.BHISS:
+                    case PadroesNFSe.EQUIPLANO:
+                    case PadroesNFSe.ABACO:
+                    case PadroesNFSe.GIF:
+                    case PadroesNFSe.ABASE:
+                    case PadroesNFSe.BLUMENAU_SC:
+                    case PadroesNFSe.PAULISTANA:
+                        securityProtocolType = SecurityProtocolType.Tls;
+                        break;
 
-                default:
-                    switch (tpEmis)
-                    {
-                        case 4: //EPEC
-                        case 6: //SVC-AN
-                            securityProtocolType = SecurityProtocolType.Tls;
-                            break;
-
-                        default:
-                            switch (cUF)
-                            {
-                                case 50: //Mato Grosso do Sul
-                                case 51: //Mato grosso
-                                case 15: //Pará
-                                case 41: //Paraná
-                                case 21: //Maranhão
-                                case 22: //Piauí
-                                case 31: //Minas Gerais
-                                case 29: //Bahia
-                                case 13: //Amazonas
-                                case 35: //São Paulo
-                                case 52: //Goiás
-                                case 3550308: //São Paulo-SP
-                                    securityProtocolType = SecurityProtocolType.Tls;
-                                    break;
-
-                                default:
-                                    switch (padraoNFSe)
-                                    {
-                                        case PadroesNFSe.GINFES:
-                                        case PadroesNFSe.BHISS:
-                                        case PadroesNFSe.EQUIPLANO:
-                                        case PadroesNFSe.ABACO:
-                                        case PadroesNFSe.GIF:
-                                        case PadroesNFSe.ABASE:
-                                        case PadroesNFSe.BLUMENAU_SC:
-                                            securityProtocolType = SecurityProtocolType.Tls;
-                                            break;
-
-                                        default:
-                                            securityProtocolType = SecurityProtocolType.Ssl3;
-                                            break;
-                                    }
-
-                                    break;
-                            }
-
-                            break;
-                    }
-
-                    break;
+                    default:
+                        securityProtocolType = SecurityProtocolType.Ssl3;
+                        break;
+                }
             }
 
             return securityProtocolType;
+        }
+
+        /// <summary>
+        /// Definir o protocolo de segurança a ser utilizado na comunicação com os WebServices
+        /// </summary>
+        /// <param name="cUF"></param>
+        /// <param name="tpAmb"></param>
+        /// <param name="tpEmis"></param>
+        /// <param name="servico"></param>
+        /// <returns>Protocolo de segurança a ser utilizado</returns>
+        public static SecurityProtocolType DefinirProtocoloSeguranca(int cUF, int tpAmb, int tpEmis, Servicos servico)
+        {
+            return DefinirProtocoloSeguranca(cUF, (tpAmb == (int)TipoAmbiente.taHomologacao), tpEmis, PadroesNFSe.NaoIdentificado, servico);
         }
 
         /// <summary>
@@ -1036,7 +1008,10 @@ namespace NFe.Components
             RecepcionarLoteCfse =
             CancelarCfse =
             ConsultarLoteCfse =
-            ConsultarLoteCfse = 
+            ConsultarLoteCfse =
+            ConfigurarTerminalCfse =
+            EnviarInformeManutencaoCfse =
+            InformeTrasmissaoSemMovimentoCfse =
             ///
             /// NF-e
             NFeRecepcaoEvento =
@@ -1192,6 +1167,21 @@ namespace NFe.Components
         /// Consultar Lote CFS-e
         /// </summary>
         public string ConsultarCfse { get; set; }
+
+        /// <summary>
+        /// Configurar/ativar terminal CFS-e
+        /// </summary>
+        public string ConfigurarTerminalCfse { get; set; }
+
+        /// <summary>
+        /// Enviar informe manutenção terminal CFS-e
+        /// </summary>
+        public string EnviarInformeManutencaoCfse { get; set; }
+
+        /// <summary>
+        /// Enviar informe de transmissão sem movimento da CFS-e
+        /// </summary>
+        public string InformeTrasmissaoSemMovimentoCfse { get; set; }
 
         #endregion CFS-e
 

@@ -2,7 +2,6 @@
 using NFe.Exceptions;
 using NFe.Settings;
 using System;
-using System.IO;
 using System.Threading;
 using System.Xml;
 
@@ -10,7 +9,6 @@ namespace NFe.Service
 {
     public class TaskNFeRecepcao : TaskAbst
     {
-
         public TaskNFeRecepcao(string arquivo)
         {
             Servico = Servicos.NFeEnviarLote;
@@ -64,18 +62,21 @@ namespace NFe.Service
                     oLer.oDadosNfe.mod,
                     0);
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb), Convert.ToInt32(oLer.oDadosNfe.tpEmis), PadroesNFSe.NaoIdentificado, Servico);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb), Convert.ToInt32(oLer.oDadosNfe.tpEmis), Servico);
 
                 if (Empresas.Configuracoes[emp].CompactarNfe && wsProxy.NomeMetodoWS.Length == 2)
                     Servico = Servicos.NFeEnviarLoteZip;
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(oLer.oDadosNfe.cUF), Servico));
 
-                //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), oLer.oDadosNfe.cUF);
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), oLer.oDadosNfe.versao);
+                object oCabecMsg = null;
+                if (oLer.oDadosNfe.versao != "4.00")
+                {
+                    oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(oLer.oDadosNfe.cUF), Servico));
+                    wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), oLer.oDadosNfe.cUF);
+                    wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), oLer.oDadosNfe.versao);
+                }
 
                 // Envio de NFe Compactada - Renan 29/04/2014
                 string nOperacao = wsProxy.NomeMetodoWS[(Servico == Servicos.NFeEnviarLoteZip) ? 1 : 0];

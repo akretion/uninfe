@@ -311,6 +311,24 @@ namespace NFe.Components
         [Description("Enviar consulta do CFS-e")]
         ConsultarCfse,
 
+        /// <summary>
+        /// Configurar/Ativar Terminal CFS-e
+        /// </summary>
+        [Description("Enviar XML de configuração/ativação de terminal CFS-e")]
+        ConfigurarTerminalCfse,
+
+        /// <summary>
+        /// Informar terminal CFS-e em manutenção
+        /// </summary>
+        [Description("Enviar XML para informar que o terminal de CFS-e está em manutenção")]
+        EnviarInformeManutencaoCfse,
+
+        /// <summary>
+        /// Informar data sem movimento de CFS-e
+        /// </summary>
+        [Description("Enviar XML para informar que não teve movimento de CFS-e no dia")]
+        InformeTrasmissaoSemMovimentoCfse,
+
         #endregion CFSe
 
         #region MDFe

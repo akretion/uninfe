@@ -102,52 +102,54 @@ namespace NFe.Service
             //Isso talvez evite de não conseguir o número do recibo se o serviço do SEFAZ estiver lento.
             wsProxy.SetProp(servicoWS, "Timeout", 60000);
 
-            //Atribuir conteúdo para uma propriedade da classe NfeStatusServico2
-            switch (servico)
+            if (cabecMsg != null)
             {
-                case Servicos.MDFePedidoConsultaSituacao:
-                case Servicos.MDFePedidoSituacaoLote:
-                case Servicos.MDFeEnviarLote:
-                case Servicos.MDFeConsultaStatusServico:
-                case Servicos.MDFeRecepcaoEvento:
-                case Servicos.MDFeConsultaNaoEncerrado:
-                    wsProxy.SetProp(servicoWS, "mdfeCabecMsgValue", cabecMsg);
-                    break;
+                switch (servico)
+                {
+                    case Servicos.MDFePedidoConsultaSituacao:
+                    case Servicos.MDFePedidoSituacaoLote:
+                    case Servicos.MDFeEnviarLote:
+                    case Servicos.MDFeConsultaStatusServico:
+                    case Servicos.MDFeRecepcaoEvento:
+                    case Servicos.MDFeConsultaNaoEncerrado:
+                        wsProxy.SetProp(servicoWS, "mdfeCabecMsgValue", cabecMsg);
+                        break;
 
-                case Servicos.CTeInutilizarNumeros:
-                case Servicos.CTePedidoConsultaSituacao:
-                case Servicos.CTePedidoSituacaoLote:
-                case Servicos.CTeEnviarLote:
-                case Servicos.CTeRecepcaoEvento:
-                case Servicos.CTeConsultaStatusServico:
-                case Servicos.CteRecepcaoOS:
-                    if (wsProxy.GetProp(cabecMsg, TpcnResources.cUF.ToString()).ToString() == "50") //Mato Grosso do Sul fugiu o padrão nacional
-                    {
-                        try
+                    case Servicos.CTeInutilizarNumeros:
+                    case Servicos.CTePedidoConsultaSituacao:
+                    case Servicos.CTePedidoSituacaoLote:
+                    case Servicos.CTeEnviarLote:
+                    case Servicos.CTeRecepcaoEvento:
+                    case Servicos.CTeConsultaStatusServico:
+                    case Servicos.CteRecepcaoOS:
+                        if (wsProxy.GetProp(cabecMsg, TpcnResources.cUF.ToString()).ToString() == "50") //Mato Grosso do Sul fugiu o padrão nacional
                         {
-                            wsProxy.SetProp(servicoWS, "cteCabecMsg", cabecMsg);
+                            try
+                            {
+                                wsProxy.SetProp(servicoWS, "cteCabecMsg", cabecMsg);
+                            }
+                            catch //Se der erro é pq não está no ambiente normal então tem que ser o nome padrão pois Mato Grosso do Sul fugiu o padrão nacional.
+                            {
+                                wsProxy.SetProp(servicoWS, "cteCabecMsgValue", cabecMsg);
+                            }
                         }
-                        catch //Se der erro é pq não está no ambiente normal então tem que ser o nome padrão pois Mato Grosso do Sul fugiu o padrão nacional.
+                        else
                         {
                             wsProxy.SetProp(servicoWS, "cteCabecMsgValue", cabecMsg);
                         }
-                    }
-                    else
-                    {
-                        wsProxy.SetProp(servicoWS, "cteCabecMsgValue", cabecMsg);
-                    }
-                    break;
+                        break;
 
-                case Servicos.CTeDistribuicaoDFe:
-                case Servicos.DFeEnviar:
-                    break;
+                    case Servicos.CTeDistribuicaoDFe:
+                    case Servicos.DFeEnviar:
+                        break;
 
-                case Servicos.LMCAutorizacao:
-                    break;
+                    case Servicos.LMCAutorizacao:
+                        break;
 
-                default:
-                    wsProxy.SetProp(servicoWS, "nfeCabecMsgValue", cabecMsg);
-                    break;
+                    default:
+                        wsProxy.SetProp(servicoWS, "nfeCabecMsgValue", cabecMsg);
+                        break;
+                }
             }
 
             //Definir novamente o protocolo de segurança, pois é uma propriedade estática e o seu valor pode ser alterado antes do envio. Wandrey 03/05/2016
@@ -429,24 +431,24 @@ namespace NFe.Service
                         #region Recepcionar Lote RPS - Assíncrono
 
                         case Servicos.NFSeRecepcionarLoteRps:
-                            if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
-                            {
-                                ((Components.PCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
-                                Components.PCorumbaMS.RecepcionarLoteRps dadosEnvio = new Components.PCorumbaMS.RecepcionarLoteRps();
-                                Components.PCorumbaMS.RecepcionarLoteRpsResponse dadosRetorno = new Components.PCorumbaMS.RecepcionarLoteRpsResponse();
-                                dadosEnvio.EnviarLoteRpsEnvio = docXML.OuterXml.ToString();
-                                dadosRetorno = ((Components.PCorumbaMS.NfseWSService)servicoWS).RecepcionarLoteRps(dadosEnvio);
-                                strRetorno = dadosRetorno.EnviarLoteRpsResposta;
-                            }
-                            else
-                            {
-                                ((Components.HCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
-                                Components.HCorumbaMS.RecepcionarLoteRps dadosEnvio = new Components.HCorumbaMS.RecepcionarLoteRps();
-                                Components.HCorumbaMS.RecepcionarLoteRpsResponse dadosRetorno = new Components.HCorumbaMS.RecepcionarLoteRpsResponse();
-                                dadosEnvio.EnviarLoteRpsEnvio = docXML.OuterXml.ToString();
-                                dadosRetorno = ((Components.HCorumbaMS.NfseWSService)servicoWS).RecepcionarLoteRps(dadosEnvio);
-                                strRetorno = dadosRetorno.EnviarLoteRpsResposta;
-                            }
+                            //if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
+                            //{
+                            //    ((Components.PCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
+                            //    Components.PCorumbaMS.RecepcionarLoteRps dadosEnvio = new Components.PCorumbaMS.RecepcionarLoteRps();
+                            //    Components.PCorumbaMS.RecepcionarLoteRpsResponse dadosRetorno = new Components.PCorumbaMS.RecepcionarLoteRpsResponse();
+                            //    dadosEnvio.EnviarLoteRpsEnvio = docXML.OuterXml.ToString();
+                            //    dadosRetorno = ((Components.PCorumbaMS.NfseWSService)servicoWS).RecepcionarLoteRps(dadosEnvio);
+                            //    strRetorno = dadosRetorno.EnviarLoteRpsResposta;
+                            //}
+                            //else
+                            //{
+                            //    ((Components.HCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
+                            //    Components.HCorumbaMS.RecepcionarLoteRps dadosEnvio = new Components.HCorumbaMS.RecepcionarLoteRps();
+                            //    Components.HCorumbaMS.RecepcionarLoteRpsResponse dadosRetorno = new Components.HCorumbaMS.RecepcionarLoteRpsResponse();
+                            //    dadosEnvio.EnviarLoteRpsEnvio = docXML.OuterXml.ToString();
+                            //    dadosRetorno = ((Components.HCorumbaMS.NfseWSService)servicoWS).RecepcionarLoteRps(dadosEnvio);
+                            //    strRetorno = dadosRetorno.EnviarLoteRpsResposta;
+                            //}
                             break;
 
                         #endregion Recepcionar Lote RPS - Assíncrono
@@ -454,24 +456,24 @@ namespace NFe.Service
                         #region Recepcionar Lote RPS - Síncrono
 
                         case Servicos.NFSeRecepcionarLoteRpsSincrono:
-                            if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
-                            {
-                                ((Components.PCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
-                                Components.PCorumbaMS.RecepcionarLoteRpsSincrono dadosEnvio = new Components.PCorumbaMS.RecepcionarLoteRpsSincrono();
-                                Components.PCorumbaMS.RecepcionarLoteRpsSincronoResponse dadosRetorno = new Components.PCorumbaMS.RecepcionarLoteRpsSincronoResponse();
-                                dadosEnvio.EnviarLoteRpsSincronoEnvio = docXML.OuterXml.ToString();
-                                dadosRetorno = ((Components.PCorumbaMS.NfseWSService)servicoWS).RecepcionarLoteRpsSincrono(dadosEnvio);
-                                strRetorno = dadosRetorno.EnviarLoteRpsSincronoResposta;
-                            }
-                            else
-                            {
-                                ((Components.HCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
-                                Components.HCorumbaMS.RecepcionarLoteRpsSincrono dadosEnvio = new Components.HCorumbaMS.RecepcionarLoteRpsSincrono();
-                                Components.HCorumbaMS.RecepcionarLoteRpsSincronoResponse dadosRetorno = new Components.HCorumbaMS.RecepcionarLoteRpsSincronoResponse();
-                                dadosEnvio.EnviarLoteRpsSincronoEnvio = docXML.OuterXml.ToString();
-                                dadosRetorno = ((Components.HCorumbaMS.NfseWSService)servicoWS).RecepcionarLoteRpsSincrono(dadosEnvio);
-                                strRetorno = dadosRetorno.EnviarLoteRpsSincronoResposta;
-                            }
+                            //if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
+                            //{
+                            //    ((Components.PCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
+                            //    Components.PCorumbaMS.RecepcionarLoteRpsSincrono dadosEnvio = new Components.PCorumbaMS.RecepcionarLoteRpsSincrono();
+                            //    Components.PCorumbaMS.RecepcionarLoteRpsSincronoResponse dadosRetorno = new Components.PCorumbaMS.RecepcionarLoteRpsSincronoResponse();
+                            //    dadosEnvio.EnviarLoteRpsSincronoEnvio = docXML.OuterXml.ToString();
+                            //    dadosRetorno = ((Components.PCorumbaMS.NfseWSService)servicoWS).RecepcionarLoteRpsSincrono(dadosEnvio);
+                            //    strRetorno = dadosRetorno.EnviarLoteRpsSincronoResposta;
+                            //}
+                            //else
+                            //{
+                            //    ((Components.HCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
+                            //    Components.HCorumbaMS.RecepcionarLoteRpsSincrono dadosEnvio = new Components.HCorumbaMS.RecepcionarLoteRpsSincrono();
+                            //    Components.HCorumbaMS.RecepcionarLoteRpsSincronoResponse dadosRetorno = new Components.HCorumbaMS.RecepcionarLoteRpsSincronoResponse();
+                            //    dadosEnvio.EnviarLoteRpsSincronoEnvio = docXML.OuterXml.ToString();
+                            //    dadosRetorno = ((Components.HCorumbaMS.NfseWSService)servicoWS).RecepcionarLoteRpsSincrono(dadosEnvio);
+                            //    strRetorno = dadosRetorno.EnviarLoteRpsSincronoResposta;
+                            //}
                             break;
 
                         #endregion Recepcionar Lote RPS - Síncrono
@@ -479,24 +481,24 @@ namespace NFe.Service
                         #region Cancelar RPS
 
                         case Servicos.NFSeCancelar:
-                            if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
-                            {
-                                ((Components.PCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
-                                Components.PCorumbaMS.CancelarNfse dadosEnvio = new Components.PCorumbaMS.CancelarNfse();
-                                Components.PCorumbaMS.CancelarNfseResponse dadosRetorno = new Components.PCorumbaMS.CancelarNfseResponse();
-                                dadosEnvio.CancelarNfseEnvio = docXML.OuterXml.ToString();
-                                dadosRetorno = ((Components.PCorumbaMS.NfseWSService)servicoWS).CancelarNfse(dadosEnvio);
-                                strRetorno = dadosRetorno.CancelarNfseResposta;
-                            }
-                            else
-                            {
-                                ((Components.HCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
-                                Components.HCorumbaMS.CancelarNfse dadosEnvio = new Components.HCorumbaMS.CancelarNfse();
-                                Components.HCorumbaMS.CancelarNfseResponse dadosRetorno = new Components.HCorumbaMS.CancelarNfseResponse();
-                                dadosEnvio.CancelarNfseEnvio = docXML.OuterXml.ToString();
-                                dadosRetorno = ((Components.HCorumbaMS.NfseWSService)servicoWS).CancelarNfse(dadosEnvio);
-                                strRetorno = dadosRetorno.CancelarNfseResposta;
-                            }
+                            //if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
+                            //{
+                            //    ((Components.PCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
+                            //    Components.PCorumbaMS.CancelarNfse dadosEnvio = new Components.PCorumbaMS.CancelarNfse();
+                            //    Components.PCorumbaMS.CancelarNfseResponse dadosRetorno = new Components.PCorumbaMS.CancelarNfseResponse();
+                            //    dadosEnvio.CancelarNfseEnvio = docXML.OuterXml.ToString();
+                            //    dadosRetorno = ((Components.PCorumbaMS.NfseWSService)servicoWS).CancelarNfse(dadosEnvio);
+                            //    strRetorno = dadosRetorno.CancelarNfseResposta;
+                            //}
+                            //else
+                            //{
+                            //    ((Components.HCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
+                            //    Components.HCorumbaMS.CancelarNfse dadosEnvio = new Components.HCorumbaMS.CancelarNfse();
+                            //    Components.HCorumbaMS.CancelarNfseResponse dadosRetorno = new Components.HCorumbaMS.CancelarNfseResponse();
+                            //    dadosEnvio.CancelarNfseEnvio = docXML.OuterXml.ToString();
+                            //    dadosRetorno = ((Components.HCorumbaMS.NfseWSService)servicoWS).CancelarNfse(dadosEnvio);
+                            //    strRetorno = dadosRetorno.CancelarNfseResposta;
+                            //}
                             break;
 
                         #endregion Cancelar RPS
@@ -504,24 +506,24 @@ namespace NFe.Service
                         #region Consultar Lote RPS
 
                         case Servicos.NFSeConsultarLoteRps:
-                            if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
-                            {
-                                ((Components.PCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
-                                Components.PCorumbaMS.ConsultarLoteRps dadosEnvio = new Components.PCorumbaMS.ConsultarLoteRps();
-                                Components.PCorumbaMS.ConsultarLoteRpsResponse dadosRetorno = new Components.PCorumbaMS.ConsultarLoteRpsResponse();
-                                dadosEnvio.ConsultarLoteRpsEnvio = docXML.OuterXml.ToString();
-                                dadosRetorno = ((Components.PCorumbaMS.NfseWSService)servicoWS).ConsultarLoteRps(dadosEnvio);
-                                strRetorno = dadosRetorno.ConsultarLoteRpsResposta;
-                            }
-                            else
-                            {
-                                ((Components.HCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
-                                Components.HCorumbaMS.ConsultarLoteRps dadosEnvio = new Components.HCorumbaMS.ConsultarLoteRps();
-                                Components.HCorumbaMS.ConsultarLoteRpsResponse dadosRetorno = new Components.HCorumbaMS.ConsultarLoteRpsResponse();
-                                dadosEnvio.ConsultarLoteRpsEnvio = docXML.OuterXml.ToString();
-                                dadosRetorno = ((Components.HCorumbaMS.NfseWSService)servicoWS).ConsultarLoteRps(dadosEnvio);
-                                strRetorno = dadosRetorno.ConsultarLoteRpsResposta;
-                            }
+                            //if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
+                            //{
+                            //    ((Components.PCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
+                            //    Components.PCorumbaMS.ConsultarLoteRps dadosEnvio = new Components.PCorumbaMS.ConsultarLoteRps();
+                            //    Components.PCorumbaMS.ConsultarLoteRpsResponse dadosRetorno = new Components.PCorumbaMS.ConsultarLoteRpsResponse();
+                            //    dadosEnvio.ConsultarLoteRpsEnvio = docXML.OuterXml.ToString();
+                            //    dadosRetorno = ((Components.PCorumbaMS.NfseWSService)servicoWS).ConsultarLoteRps(dadosEnvio);
+                            //    strRetorno = dadosRetorno.ConsultarLoteRpsResposta;
+                            //}
+                            //else
+                            //{
+                            //    ((Components.HCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
+                            //    Components.HCorumbaMS.ConsultarLoteRps dadosEnvio = new Components.HCorumbaMS.ConsultarLoteRps();
+                            //    Components.HCorumbaMS.ConsultarLoteRpsResponse dadosRetorno = new Components.HCorumbaMS.ConsultarLoteRpsResponse();
+                            //    dadosEnvio.ConsultarLoteRpsEnvio = docXML.OuterXml.ToString();
+                            //    dadosRetorno = ((Components.HCorumbaMS.NfseWSService)servicoWS).ConsultarLoteRps(dadosEnvio);
+                            //    strRetorno = dadosRetorno.ConsultarLoteRpsResposta;
+                            //}
                             break;
 
                         #endregion Consultar Lote RPS
@@ -529,24 +531,24 @@ namespace NFe.Service
                         #region Consulta Situação Nfse
 
                         case Servicos.NFSeConsultar:
-                            if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
-                            {
-                                ((Components.PCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
-                                Components.PCorumbaMS.ConsultarNfsePorFaixa dadosEnvio = new Components.PCorumbaMS.ConsultarNfsePorFaixa();
-                                Components.PCorumbaMS.ConsultarNfsePorFaixaResponse dadosRetorno = new Components.PCorumbaMS.ConsultarNfsePorFaixaResponse();
-                                dadosEnvio.ConsultarNfsePorFaixaEnvio = docXML.OuterXml.ToString();
-                                dadosRetorno = ((Components.PCorumbaMS.NfseWSService)servicoWS).ConsultarNfsePorFaixa(dadosEnvio);
-                                strRetorno = dadosRetorno.ConsultarNfsePorFaixaResposta;
-                            }
-                            else
-                            {
-                                ((Components.HCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
-                                Components.HCorumbaMS.ConsultarNfsePorFaixa dadosEnvio = new Components.HCorumbaMS.ConsultarNfsePorFaixa();
-                                Components.HCorumbaMS.ConsultarNfsePorFaixaResponse dadosRetorno = new Components.HCorumbaMS.ConsultarNfsePorFaixaResponse();
-                                dadosEnvio.ConsultarNfsePorFaixaEnvio = docXML.OuterXml.ToString();
-                                dadosRetorno = ((Components.HCorumbaMS.NfseWSService)servicoWS).ConsultarNfsePorFaixa(dadosEnvio);
-                                strRetorno = dadosRetorno.ConsultarNfsePorFaixaResposta;
-                            }
+                            //if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
+                            //{
+                            //    ((Components.PCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
+                            //    Components.PCorumbaMS.ConsultarNfsePorFaixa dadosEnvio = new Components.PCorumbaMS.ConsultarNfsePorFaixa();
+                            //    Components.PCorumbaMS.ConsultarNfsePorFaixaResponse dadosRetorno = new Components.PCorumbaMS.ConsultarNfsePorFaixaResponse();
+                            //    dadosEnvio.ConsultarNfsePorFaixaEnvio = docXML.OuterXml.ToString();
+                            //    dadosRetorno = ((Components.PCorumbaMS.NfseWSService)servicoWS).ConsultarNfsePorFaixa(dadosEnvio);
+                            //    strRetorno = dadosRetorno.ConsultarNfsePorFaixaResposta;
+                            //}
+                            //else
+                            //{
+                            //    ((Components.HCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
+                            //    Components.HCorumbaMS.ConsultarNfsePorFaixa dadosEnvio = new Components.HCorumbaMS.ConsultarNfsePorFaixa();
+                            //    Components.HCorumbaMS.ConsultarNfsePorFaixaResponse dadosRetorno = new Components.HCorumbaMS.ConsultarNfsePorFaixaResponse();
+                            //    dadosEnvio.ConsultarNfsePorFaixaEnvio = docXML.OuterXml.ToString();
+                            //    dadosRetorno = ((Components.HCorumbaMS.NfseWSService)servicoWS).ConsultarNfsePorFaixa(dadosEnvio);
+                            //    strRetorno = dadosRetorno.ConsultarNfsePorFaixaResposta;
+                            //}
                             break;
 
                         #endregion Consulta Situação Nfse
@@ -554,24 +556,24 @@ namespace NFe.Service
                         #region Consulta Situação Nfse por RPS
 
                         case Servicos.NFSeConsultarPorRps:
-                            if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
-                            {
-                                ((Components.PCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
-                                Components.PCorumbaMS.ConsultarNfsePorRps dadosEnvio = new Components.PCorumbaMS.ConsultarNfsePorRps();
-                                Components.PCorumbaMS.ConsultarNfsePorRpsResponse dadosRetorno = new Components.PCorumbaMS.ConsultarNfsePorRpsResponse();
-                                dadosEnvio.ConsultarNfsePorRpsEnvio = docXML.OuterXml.ToString();
-                                dadosRetorno = ((Components.PCorumbaMS.NfseWSService)servicoWS).ConsultarNfsePorRps(dadosEnvio);
-                                strRetorno = dadosRetorno.ConsultarNfsePorRpsResposta;
-                            }
-                            else
-                            {
-                                ((Components.HCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
-                                Components.HCorumbaMS.ConsultarNfsePorRps dadosEnvio = new Components.HCorumbaMS.ConsultarNfsePorRps();
-                                Components.HCorumbaMS.ConsultarNfsePorRpsResponse dadosRetorno = new Components.HCorumbaMS.ConsultarNfsePorRpsResponse();
-                                dadosEnvio.ConsultarNfsePorRpsEnvio = docXML.OuterXml.ToString();
-                                dadosRetorno = ((Components.HCorumbaMS.NfseWSService)servicoWS).ConsultarNfsePorRps(dadosEnvio);
-                                strRetorno = dadosRetorno.ConsultarNfsePorRpsResposta;
-                            }
+                            //if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
+                            //{
+                            //    ((Components.PCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
+                            //    Components.PCorumbaMS.ConsultarNfsePorRps dadosEnvio = new Components.PCorumbaMS.ConsultarNfsePorRps();
+                            //    Components.PCorumbaMS.ConsultarNfsePorRpsResponse dadosRetorno = new Components.PCorumbaMS.ConsultarNfsePorRpsResponse();
+                            //    dadosEnvio.ConsultarNfsePorRpsEnvio = docXML.OuterXml.ToString();
+                            //    dadosRetorno = ((Components.PCorumbaMS.NfseWSService)servicoWS).ConsultarNfsePorRps(dadosEnvio);
+                            //    strRetorno = dadosRetorno.ConsultarNfsePorRpsResposta;
+                            //}
+                            //else
+                            //{
+                            //    ((Components.HCorumbaMS.NfseWSService)servicoWS).ClientCertificates.Add(Empresas.Configuracoes[emp].X509Certificado);
+                            //    Components.HCorumbaMS.ConsultarNfsePorRps dadosEnvio = new Components.HCorumbaMS.ConsultarNfsePorRps();
+                            //    Components.HCorumbaMS.ConsultarNfsePorRpsResponse dadosRetorno = new Components.HCorumbaMS.ConsultarNfsePorRpsResponse();
+                            //    dadosEnvio.ConsultarNfsePorRpsEnvio = docXML.OuterXml.ToString();
+                            //    dadosRetorno = ((Components.HCorumbaMS.NfseWSService)servicoWS).ConsultarNfsePorRps(dadosEnvio);
+                            //    strRetorno = dadosRetorno.ConsultarNfsePorRpsResposta;
+                            //}
                             break;
 
                             #endregion Consulta Situação Nfse por RPS

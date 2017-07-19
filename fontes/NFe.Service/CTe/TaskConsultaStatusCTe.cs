@@ -40,7 +40,7 @@ namespace NFe.Service
 
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, 0);
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, PadroesNFSe.NaoIdentificado, Servico);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, Servico);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 var oStatusServico = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);

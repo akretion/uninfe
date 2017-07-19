@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Web.Services.Protocols;
 using System.Xml;
 using System.Xml.Serialization;
@@ -61,14 +62,16 @@ namespace NFe.Components.Abstract
             return textWriter.ToString();
         }
 
-        /// WANDREY:
-        ///  nao precisa passar a extensao para excluir, porque podemos varrer a lista de extensoes e exclui-la
-        ///  
         public void GerarRetorno(string file, string result, string extEnvio, string extRetorno)
+        {
+            GerarRetorno(file, result, extEnvio, extRetorno, Encoding.Default);
+        }
+
+        public void GerarRetorno(string file, string result, string extEnvio, string extRetorno, Encoding encoding)
         {
             string nomearq = Path.Combine(PastaRetorno, Functions.ExtrairNomeArq(file, extEnvio) + extRetorno);
 
-            File.WriteAllText(nomearq, result, System.Text.Encoding.Default);
+            File.WriteAllText(nomearq, result, encoding);
         }
 
         public string CreateXML(Object objetoRetorno)
@@ -113,7 +116,6 @@ namespace NFe.Components.Abstract
                 {
                     xmlDoc = xmlDoc2;
                 }
-
             }
 
             return xmlDoc.InnerXml;
@@ -154,7 +156,6 @@ namespace NFe.Components.Abstract
                 request.Proxy.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
                 request.Credentials = new NetworkCredential(ProxyUser, ProxyPass);
             }
-
         }
     }
 }

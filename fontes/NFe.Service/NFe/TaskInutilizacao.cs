@@ -48,15 +48,18 @@ namespace NFe.Service
                 {
                     //Definir o objeto do WebService
                     WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, dadosPedInut.versao, dadosPedInut.mod.ToString(), 0);
-                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, PadroesNFSe.NaoIdentificado, Servico);
+                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, Servico);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     object oInutilizacao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                    object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedInut.cUF, Servico));
 
-                    //Atribuir conteúdo p ara duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedInut.cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedInut.versao);
+                    object oCabecMsg = null;
+                    if (dadosPedInut.versao != "4.00")
+                    {
+                        oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedInut.cUF, Servico));
+                        wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedInut.cUF.ToString());
+                        wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedInut.versao);
+                    }
 
                     //Assinar o XML
                     AssinaturaDigital oAD = new AssinaturaDigital();

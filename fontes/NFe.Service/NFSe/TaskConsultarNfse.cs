@@ -369,10 +369,10 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.NA_INFORMATICA:
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
-                        if (oDadosPedSitNfse.tpAmb == 1)
-                            pedLoteRps = new Components.PCorumbaMS.NfseWSService();
-                        else
-                            pedLoteRps = new Components.HCorumbaMS.NfseWSService();
+                        //if (oDadosPedSitNfse.tpAmb == 1)
+                        //    pedLoteRps = new Components.PCorumbaMS.NfseWSService();
+                        //else
+                        //    pedLoteRps = new Components.HCorumbaMS.NfseWSService();
 
                         break;
 

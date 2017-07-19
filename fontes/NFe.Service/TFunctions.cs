@@ -681,6 +681,7 @@ namespace NFe.Service
                         break;
 
                     case "CFe":
+                    case "CFeCanc":
                         tipo = "cfe";
                         arqProcNFe = nomeArquivoRecebido;
                         break;

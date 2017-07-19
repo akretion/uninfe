@@ -76,15 +76,18 @@ namespace NFe.Service
                                                 dadosPedRec.versao,
                                                 dadosPedRec.mod,
                                                 0);
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis, PadroesNFSe.NaoIdentificado, Servico);
+                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedRec.cUF, dadosPedRec.tpAmb, dadosPedRec.tpEmis, Servico);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                var oRepRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, dadosPedRec.cUF, dadosPedRec.versao));
-                var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedRec.cUF, Servico));
+                var oRepRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
 
-                //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedRec.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedRec.versao);
+                object oCabecMsg = null;
+                if (dadosPedRec.versao != "4.00")
+                {
+                    oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedRec.cUF, Servico));
+                    wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedRec.cUF.ToString());
+                    wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedRec.versao);
+                }
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy,

@@ -132,21 +132,21 @@ namespace NFe.UI
                 case TipoAplicativo.Todos:
                     cbVersao.Enabled = cbServico.Enabled = true;
                     cbVersao.Items.Clear();
-                    cbVersao.Items.AddRange(new object[] { "3.10", "3.00", "2.00" });
+                    cbVersao.Items.AddRange(new object[] { "4.00","3.10", "3.00", "2.00" });
                     cbVersao.SelectedItem = "3.10";
                     break;
 
                 case TipoAplicativo.Nfe:
-                    cbVersao.Enabled = false;
+                    cbVersao.Enabled = true;
                     cbVersao.Items.Clear();
-                    cbVersao.Items.AddRange(new object[] { "3.10" });
+                    cbVersao.Items.AddRange(new object[] { "4.00","3.10" });
                     cbVersao.SelectedItem = "3.10";
                     break;
 
                 case TipoAplicativo.NFCe:
-                    cbVersao.Enabled = false;
+                    cbVersao.Enabled = true;
                     cbVersao.Items.Clear();
-                    cbVersao.Items.AddRange(new object[] { "3.10" });
+                    cbVersao.Items.AddRange(new object[] { "4.00","3.10" });
                     cbVersao.SelectedItem = "3.10";
                     break;
 

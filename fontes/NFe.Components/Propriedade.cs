@@ -223,15 +223,17 @@ namespace NFe.Components
             public string EnvioTXT { get; set; }
             public string RetornoXML { get; set; }
             public string RetornoTXT { get; set; }
+            public string RetornoERR { get; set; }
             public string descricao { get; set; }
 
-            public ExtensaoClass(string exml, string etxt, string rxml, string rtxt, string descr)
+            public ExtensaoClass(string exml, string etxt, string rxml, string rtxt, string rerr, string descr)
             {
-                this.EnvioXML = exml;
-                this.EnvioTXT = etxt;
-                this.descricao = descr;
-                this.RetornoTXT = rtxt;
-                this.RetornoXML = rxml;
+                EnvioXML = exml;
+                EnvioTXT = etxt;
+                RetornoXML = rxml;
+                RetornoTXT = rtxt;
+                RetornoERR = rerr;
+                descricao = descr;
             }
         }
 
@@ -295,6 +297,9 @@ namespace NFe.Components
             PedCanCFSe,
             PedLoteCFSe,
             PedSitCFSe,
+            EnvConfigTermCFSe,
+            EnvInfManutCFSe,
+            EnvInfSemMovCFSe,
 
             /// <summary>
             /// Extensões para SAT/CFe
@@ -359,16 +364,19 @@ namespace NFe.Components
                     ListaExtensoes.Add(TipoEnvio.AltCon, new ExtensaoClass(
                         "-alt-con.xml", "-alt-con.txt",
                         "-ret-alt-con.xml", "-ret-alt-con.txt",
+                        "",
                         "Alteração de configuração de empresas"));
 
                     ListaExtensoes.Add(TipoEnvio.ConsCertificado, new ExtensaoClass(
-                        "-cons-certificado.xml", null,
-                        "uninfe-ret-cons-certificado.xml", null,
+                        "-cons-certificado.xml", "",
+                        "uninfe-ret-cons-certificado.xml", "",
+                        "",
                         "Consulta aos certificados instalados"));
 
                     ListaExtensoes.Add(TipoEnvio.ConsInf, new ExtensaoClass(
                         "-cons-inf.xml", "-cons-inf.txt",
                         "-ret-cons-inf.xml", "-ret-cons-inf.txt",
+                        "",
                         "Consulta as configurações do UniNFe"));
 
                     #endregion Extensões gerais
@@ -378,32 +386,38 @@ namespace NFe.Components
                     ListaExtensoes.Add(TipoEnvio.EnvCancelamento, new ExtensaoClass(
                         "-env-canc.xml", "-env-canc.txt",
                         "-ret-env-canc.xml", "",
+                        "",
                         "Pedido de cancelamento de NFe/NFCe, use a extensão -ped-eve.xml ou -ped-eve.txt"));
 
                     ListaExtensoes.Add(TipoEnvio.EnvCCe, new ExtensaoClass(
                         "-env-cce.xml", "-env-cce.txt",
                         "-ret-env-cce.xml", "",
+                        "",
                         "Carta de correção, use a extensao -ped-eve.xml ou -ped-eve.txt"));
 
                     ListaExtensoes.Add(TipoEnvio.EnvManifestacao, new ExtensaoClass(
                         "-env-manif.xml", "-env-manif.txt",
                         "-ret-env-manif.xml", "",
+                        "",
                         "Pedido de manifestação, use a extensao -ped-eve.xml ou -ped-eve.txt"));
 
                     ListaExtensoes.Add(TipoEnvio.EnvDownload, new ExtensaoClass(
                         "-nfe-down.xml", "-nfe-down.txt",
                         "-ret-nfe-down.xml", "",
+                        "",
                         "Pedido de download de NFe"));
 
                     ListaExtensoes.Add(TipoEnvio.GerarChaveNFe, new ExtensaoClass(
                         "-gerar-chave.xml", "-gerar-chave.txt",
                         "-ret-gerar-chave.xml", "-ret-gerar-chave.txt",
+                        "",
                         "Pedido de geração da chave de acesso da NFe/NFCe/MDFe/CTe"
                     ));
 
                     ListaExtensoes.Add(TipoEnvio.NFe, new ExtensaoClass(
                         "-nfe.xml", "-nfe.txt",
                         "-nfe-ret.xml", "",
+                        "",
                         "Pedido de envio de NFe/NFCe"
                     ));
 
@@ -414,71 +428,85 @@ namespace NFe.Components
                     ListaExtensoes.Add(TipoEnvio.ConsultarSAT, new ExtensaoClass(
                         "-sat-cons.xml", "-sat-cons.txt",
                         "-sat-cons-ret.xml", "-sat-cons-ret.txt",
+                        "",
                         "Consulta SAT"));
 
                     ListaExtensoes.Add(TipoEnvio.ConsultarNumeroSessaoSAT, new ExtensaoClass(
                         "-sat-sescons.xml", "-sat-sescons.txt",
                         "-sat-sescons-ret.xml", "-sat-sescons-ret.txt",
+                        "",
                         "Consulta Numero Sessão SAT"));
 
                     ListaExtensoes.Add(TipoEnvio.ExtrairLogsSAT, new ExtensaoClass(
                         "-sat-extlog.xml", "-sat-extlog.txt",
                         "-sat-extlog-ret.xml", "-sat-extlog-ret.txt",
+                        "",
                         "Extrair Logs do SAT"));
 
                     ListaExtensoes.Add(TipoEnvio.ConsultarStatusOperacionalSAT, new ExtensaoClass(
                         "-sat-statop.xml", "-sat-statop.txt",
                         "-sat-statop-ret.xml", "-sat-statop-ret.txt",
+                        "",
                         "Consultar Status Operacional do SAT"));
 
                     ListaExtensoes.Add(TipoEnvio.TesteFimAFimSAT, new ExtensaoClass(
                         "-testsat-cfe.xml", "-testsat-cfe.txt",
                         "-testsat-cfe-ret.xml", "-testsat-cfe-ret.txt",
+                        "",
                         "Teste Fim a Fim do SAT com XML de CFe"));
 
                     ListaExtensoes.Add(TipoEnvio.TrocarCodigoDeAtivacaoSAT, new ExtensaoClass(
                         "-sat-trocativ.xml", "-sat-trocativ.txt",
                         "-sat-trocativ-ret.xml", "-sat-trocativ-ret.txt",
+                        "",
                         "Troca de código de ativação do SAT"));
 
                     ListaExtensoes.Add(TipoEnvio.EnviarDadosVendaSAT, new ExtensaoClass(
                         "-sat.xml", "-sat.txt",
                         "-sat-ret.xml", "-sat-ret.txt",
+                        "",
                         "Envio da venda do SAT"));
 
                     ListaExtensoes.Add(TipoEnvio.ConverterSAT, new ExtensaoClass(
                         "-sat-conv.xml", "-sat-conv.txt",
                         "-sat-conv-ret.xml", "-sat-conv-ret.txt",
+                        "",
                         "Conversão de NFCe para CFe/SAT"));
 
                     ListaExtensoes.Add(TipoEnvio.CancelarUltimaVendaSAT, new ExtensaoClass(
                         "-sat-canc.xml", "-sat-canc.txt",
                         "-sat-canc-ret.xml", "-sat-canc-ret.txt",
+                        "",
                         "Cancelamento de Ultima Venda do SAT"));
 
                     ListaExtensoes.Add(TipoEnvio.ConfigurarInterfaceDeRedeSAT, new ExtensaoClass(
                         "-sat-confrede.xml", "-sat-confrede.txt",
                         "-sat-confrede-ret.xml", "-sat-confrede-ret.txt",
+                        "",
                         "Configurar Interface de Rede do SAT"));
 
                     ListaExtensoes.Add(TipoEnvio.AssociarAssinaturaSAT, new ExtensaoClass(
                         "-sat-assin.xml", "-sat-assin.txt",
                         "-sat-assin-ret.xml", "-sat-assin-ret.txt",
+                        "",
                         "Associar Assinatura do SAT"));
 
                     ListaExtensoes.Add(TipoEnvio.AtivarSAT, new ExtensaoClass(
                         "-sat-atv.xml", "-sat-atv.txt",
                         "-sat-atv-ret.xml", "-sat-atv-ret.txt",
+                        "",
                         "Ativar SAT"));
 
                     ListaExtensoes.Add(TipoEnvio.BloquearSAT, new ExtensaoClass(
                         "-sat-bloq.xml", "-sat-bloq.txt",
                         "-sat-bloq-ret.xml", "-sat-bloq-ret.txt",
+                        "",
                         "Bloquear SAT"));
 
                     ListaExtensoes.Add(TipoEnvio.DesbloquearSAT, new ExtensaoClass(
                         "-sat-desbloq.xml", "-sat-desbloq.txt",
                         "-sat-desbloq-ret.xml", "-sat-desbloq-ret.txt",
+                        "",
                         "Bloquear SAT"));
 
                     #endregion Extensões SAT/CFe
@@ -488,11 +516,13 @@ namespace NFe.Components
                     ListaExtensoes.Add(TipoEnvio.CTe, new ExtensaoClass(
                         "-cte.xml", "",
                         "", "",
+                        "",
                         "Pedido de emissão de CTe"));
 
                     ListaExtensoes.Add(TipoEnvio.CTeOS, new ExtensaoClass(
                         "-cte.xml", "",
                         "", "",
+                        "",
                         "Pedido de emissão de CTeOS (modelo 67)"));
 
                     #endregion Extensões do CTe
@@ -502,11 +532,13 @@ namespace NFe.Components
                     ListaExtensoes.Add(TipoEnvio.MDFe, new ExtensaoClass(
                         "-mdfe.xml", "",
                         "", "",
+                        "",
                         "Pedido de emissão do MDFe"));
 
                     ListaExtensoes.Add(TipoEnvio.MDFeConsNaoEncerrados, new ExtensaoClass(
                         "-ped-cons-mdfe-naoenc.xml", "",
                         "-ret-cons-mdfe-naoenc.xml", "",
+                        "",
                         "Consulta de MDFe não encerrados"));
 
                     #endregion Extensões do MDFe
@@ -516,67 +548,80 @@ namespace NFe.Components
                     ListaExtensoes.Add(TipoEnvio.EnvLoteRps, new ExtensaoClass(
                         "-env-loterps.xml", "",
                         "-ret-loterps.xml", "",
+                        "",
                         "Envio de lote/rps (NFSe)"));
 
                     ListaExtensoes.Add(TipoEnvio.PedCanNFSe, new ExtensaoClass(
                         "-ped-cannfse.xml", "",
                         "-cannfse.xml", "",
+                        "",
                         "Pedido de cancelamento (NFSe)"));
 
                     ListaExtensoes.Add(TipoEnvio.PedLoteRps, new ExtensaoClass(
                         "-ped-loterps.xml", "",
                         "-loterps.xml", "",
+                        "",
                         "Envio de consulta de lote/rps (NFSe)"));
 
                     ListaExtensoes.Add(TipoEnvio.PedSitLoteRps, new ExtensaoClass(
                         "-ped-sitloterps.xml", "",
                         "-sitloterps.xml", "",
+                        "",
                         "Pedido de situação de lote/rps (NFSe)"));
 
                     ListaExtensoes.Add(TipoEnvio.PedSitNFSeRps, new ExtensaoClass(
                         "-ped-sitnfserps.xml", "",
                         "-sitnfserps.xml", "",
+                        "",
                         "Pedido de situação do rps (NFSe)"));
 
                     ListaExtensoes.Add(TipoEnvio.PedSitNFSe, new ExtensaoClass(
                         "-ped-sitnfse.xml", "",
                         "-sitnfse.xml", "",
+                        "",
                         "Pedido de situação da nota (NFSe)"));
 
                     ListaExtensoes.Add(TipoEnvio.PedURLNFSe, new ExtensaoClass(
                         "-ped-urlnfse.xml", "",
                         "-urlnfse.xml", "",
+                        "",
                         "XML de Consulta da URL de Visualização da NFSe"));
 
                     ListaExtensoes.Add(TipoEnvio.PedURLNFSeSerie, new ExtensaoClass(
                         "-ped-urlnfseserie.xml", "",
                         "-urlnfseserie.xml", "",
+                        "",
                         "XML de Consulta da URL de Visualização da NFSe-Serie"));
 
                     ListaExtensoes.Add(TipoEnvio.PedNFSePDF, new ExtensaoClass(
                         "-ped-nfsepdf.xml", "",
                         "-nfsepdf.xml", "",
+                        "",
                         "Pedido do link da NFSe"));
 
                     ListaExtensoes.Add(TipoEnvio.PedNFSeXML, new ExtensaoClass(
                         "-ped-nfsexml.xml", "",
                         "-nfsexml.xml", "",
+                        "",
                         "Pedido do XML da NFSe"
                         ));
 
                     ListaExtensoes.Add(TipoEnvio.PedNFSePNG, new ExtensaoClass(
                         "-ped-nfsepng.xml", "",
                         "-nfsepng.xml", "",
+                        "",
                         "Pedido do link da NFSe"));
 
                     ListaExtensoes.Add(TipoEnvio.PedInuNFSe, new ExtensaoClass(
                         "-ped-inunfse.xml", "",
                         "-inunfse.xml", "",
+                        "",
                         "Inutilização de NFSe"));
 
                     ListaExtensoes.Add(TipoEnvio.PedSeqLoteNotaRPS, new ExtensaoClass(
                         "-ped-seqlotenotarps.xml", "",
                         "-seqlotenotarps.xml", "",
+                        "",
                         "Consulta sequência do lote da nota RPS"));
 
                     #endregion Extensoes da NFSe
@@ -586,123 +631,172 @@ namespace NFe.Components
                     ListaExtensoes.Add(TipoEnvio.EnvLoteCFSe, new ExtensaoClass(
                         "-env-lotecfse.xml", "",
                         "-ret-lotecfse.xml", "",
+                        "-ret-lotecfse.err",
                         "Envio de lote do CFSe"));
 
                     ListaExtensoes.Add(TipoEnvio.PedCanCFSe, new ExtensaoClass(
                         "-ped-cancfse.xml", "",
                         "-cancfse.xml", "",
+                        "-cancfse.err",
                         "Pedido de cancelamento (CFSe)"));
 
                     ListaExtensoes.Add(TipoEnvio.PedLoteCFSe, new ExtensaoClass(
                         "-ped-lotecfse.xml", "",
                         "-lotecfse.xml", "",
+                        "-lotecfse.err",
                         "Envio de consulta de lote (CFSe)"));
 
                     ListaExtensoes.Add(TipoEnvio.PedSitCFSe, new ExtensaoClass(
                         "-ped-sitcfse.xml", "",
                         "-sitcfse.xml", "",
+                        "-sitcfse.err",
                         "Pedido de situação do cupom (CFSe)"));
+
+                    ListaExtensoes.Add(TipoEnvio.EnvConfigTermCFSe, new ExtensaoClass(
+                        "-env-configtermcfse.xml", "",
+                        "-configtermcfse.xml", "",
+                        "-configtermcfse.err",
+                        "Envio do XML de configuração/ativação de terminal de CFSe"));
+
+                    ListaExtensoes.Add(TipoEnvio.EnvInfManutCFSe, new ExtensaoClass(
+                        "-env-infmanutcfse.xml", "",
+                        "-infmanutcfse.xml", "",
+                        "-infmanutcfse.err",
+                        "Envio do XML para informar que o terminal de CFSe está em manutenção"));
+
+                    ListaExtensoes.Add(TipoEnvio.EnvInfSemMovCFSe, new ExtensaoClass(
+                        "-env-infsemmovcfse.xml", "",
+                        "-infsemmovcfse.xml", "",
+                        "-infsemmovcfse.err",
+                        "Envio do XML para informar que não teve movimento de CFSe no dia"));
 
                     #endregion Extensões CFSe
 
                     #region Extensões em comum entre NFe, CTe e MDF-e
 
                     ListaExtensoes.Add(TipoEnvio.ConsCad, new ExtensaoClass(
-                        "-cons-cad.xml",
-                        "-cons-cad.txt",
-                        "-ret-cons-cad.xml",
+                        "-cons-cad.xml", "-cons-cad.txt",
+                        "-ret-cons-cad.xml", "",
                         "",
                         "Consulta ao cadastro de contribuinte"));
 
                     ListaExtensoes.Add(TipoEnvio.EnvLot, new ExtensaoClass(
                         "-env-lot.xml", "",
                         "", "",
+                        "",
                         "Pedido de envio de lote de NFe/NFCe/MDFe/CTe"));
 
                     ListaExtensoes.Add(TipoEnvio.LMC, new ExtensaoClass(
                         "-lmc.xml", "",
                         "-ret-lmc.xml", "",
+                        "",
                         "Movimentação de Combustíveis (LMC)"));
 
                     ListaExtensoes.Add(TipoEnvio.MontarLote, new ExtensaoClass(
                         "-montar-lote.xml", "-montar-lote.txt",
                         "", "",
+                        "",
                         "Criação de XML contendo várias NFe/NFCe/MDFe/CTe"));
 
                     ListaExtensoes.Add(TipoEnvio.PedEve, new ExtensaoClass(
                         "-ped-eve.xml", "-ped-eve.txt",
                         "-eve.xml", "",
+                        "",
                         "Pedido de eventos associados a NFe/NFCe/MDFe/CTe"));
 
                     ListaExtensoes.Add(TipoEnvio.PedInu, new ExtensaoClass(
                         "-ped-inu.xml", "-ped-inu.txt",
                         "-inu.xml", "",
+                        "",
                         "Pedido de inutilização de NFe/NFCe/CTe"));
 
                     ListaExtensoes.Add(TipoEnvio.PedRec, new ExtensaoClass(
                         "-ped-rec.xml", "",
                         "-pro-rec.xml", "",
+                        "",
                         "Pedido do recibo da NFe/NFCe"));
 
                     ListaExtensoes.Add(TipoEnvio.PedSit, new ExtensaoClass(
-                        "-ped-sit.xml",
-                        "-ped-sit.txt",
-                        "-sit.xml",
+                        "-ped-sit.xml", "-ped-sit.txt",
+                        "-sit.xml", "",
                         "",
                         "Pedido de situação da NFe/NFCe/MDFe/CTe"));
 
                     ListaExtensoes.Add(TipoEnvio.PedSta, new ExtensaoClass(
-                        "-ped-sta.xml",
-                        "-ped-sta.txt",
-                        "-sta.xml",
+                        "-ped-sta.xml", "-ped-sta.txt",
+                        "-sta.xml", "",
                         "",
                         "Pedido de situação de serviços de NFe/NFCe/MDFe/CTe junto a Sefaz"));
 
                     ListaExtensoes.Add(TipoEnvio.EnvWSExiste, new ExtensaoClass(
-                        "-env-ws.xml",
-                        "-env-ws.txt",
-                        "-ret-env-ws.xml",
-                        "-ret-env-ws.txt",
+                        "-env-ws.xml", "-env-ws.txt",
+                        "-ret-env-ws.xml", "-ret-env-ws.txt",
+                        "",
                         "Pesquisa de se um serviço existe para um determinado estado (Producao/Homologacao)"));
 
                     ListaExtensoes.Add(TipoEnvio.EnvDanfeReport, new ExtensaoClass(
-                        "-env-danfe-report.xml",
-                        "-env-danfe-report.txt",
-                        "-ret-env-danfe-report.xml",
-                        "-ret-env-danfe-report.txt",
+                        "-env-danfe-report.xml", "-env-danfe-report.txt",
+                        "-ret-env-danfe-report.xml", "-ret-env-danfe-report.txt",
+                        "",
                         "Pedido de solicitação do relatório de e-mail enviado pelo DAMFe/DACTe/DAMDFe/CCe"));
 
                     ListaExtensoes.Add(TipoEnvio.EnvImpressaoDanfe, new ExtensaoClass(
-                        "-env-danfe.xml",
-                        "-env-danfe.txt",
-                        "-ret-danfe.xml",
-                        "-ret-danfe.txt",
+                        "-env-danfe.xml", "-env-danfe.txt",
+                        "-ret-danfe.xml", "-ret-danfe.txt",
+                        "",
                         "Pedido de impressão do DAMFe/DACTe/DAMDFe/CCe"));
 
                     ListaExtensoes.Add(TipoEnvio.EnvDFe, new ExtensaoClass(
-                        "-con-dist-dfe.xml",
-                        "-con-dist-dfe.txt",
-                        "-dist-dfe.xml",
-                        "-dist-dfe.txt",
+                        "-con-dist-dfe.xml", "-con-dist-dfe.txt",
+                        "-dist-dfe.xml", "-dist-dfe.txt",
+                        "",
                         "Consulta de DFe (NFe)"));
 
                     ListaExtensoes.Add(TipoEnvio.EnvDFeCTe, new ExtensaoClass(
-                        "-con-dist-dfecte.xml",
-                        "-con-dist-dfecte.txt",
-                        "-dist-dfecte.xml",
-                        "-dist-dfecte.txt",
+                        "-con-dist-dfecte.xml", "-con-dist-dfecte.txt",
+                        "-dist-dfecte.xml", "-dist-dfecte.txt",
+                        "",
                         "Consulta de DFe (CTe)"));
 
                     #endregion Extensões em comum entre NFe, CTe e MDF-e
 
                     #region Exporadicos
 
-                    ListaExtensoes.Add(TipoEnvio.pedUpdatewsdl, new ExtensaoClass("-updatewsdl.xml", "-updatewsdl.txt", "-ret-updatewsdl.xml", "-ret-updatewsdl.txt", "Executar a atualização dos WSDL's e Schemas"));
-                    ListaExtensoes.Add(TipoEnvio.pedRestart, new ExtensaoClass("-restart.xml", "-restart.txt", "", "", "Reiniciar o UniNFe."));
-                    ListaExtensoes.Add(TipoEnvio.sair_XML, new ExtensaoClass("-sair.xml", "-sair.txt", "", "", "Fechar o UniNFe"));
-                    ListaExtensoes.Add(TipoEnvio.cce_XML, new ExtensaoClass("-cce.xml", "", "", "", "Uso específico, não usar"));
-                    ListaExtensoes.Add(TipoEnvio.cancel_XML, new ExtensaoClass("-cancel.xml", "", "", "", "Uso específico, não usar"));
-                    ListaExtensoes.Add(TipoEnvio.pedLayouts, new ExtensaoClass("-layouts.xml", "-layouts.txt", "-ret-layouts.pdf", "", "Gerar um PDF com o layout da NFe em TXT e extensões usadas no UniNFe."));
+                    ListaExtensoes.Add(TipoEnvio.pedUpdatewsdl, new ExtensaoClass(
+                        "-updatewsdl.xml", "-updatewsdl.txt",
+                        "-ret-updatewsdl.xml", "-ret-updatewsdl.txt",
+                        "",
+                        "Executar a atualização dos WSDL's e Schemas"));
+
+                    ListaExtensoes.Add(TipoEnvio.pedRestart, new ExtensaoClass(
+                        "-restart.xml", "-restart.txt",
+                        "", "",
+                        "",
+                        "Reiniciar o UniNFe."));
+
+                    ListaExtensoes.Add(TipoEnvio.sair_XML, new ExtensaoClass(
+                        "-sair.xml", "-sair.txt",
+                        "", "",
+                        "",
+                        "Fechar o UniNFe"));
+
+                    ListaExtensoes.Add(TipoEnvio.cce_XML, new ExtensaoClass(
+                        "-cce.xml", "",
+                        "", "",
+                        "",
+                        "Uso específico, não usar"));
+
+                    ListaExtensoes.Add(TipoEnvio.cancel_XML, new ExtensaoClass(
+                        "-cancel.xml", "",
+                        "", "",
+                        "",
+                        "Uso específico, não usar"));
+
+                    ListaExtensoes.Add(TipoEnvio.pedLayouts, new ExtensaoClass(
+                        "-layouts.xml", "-layouts.txt",
+                        "-ret-layouts.pdf", "",
+                        "",
+                        "Gerar um PDF com o layout da NFe em TXT e extensões usadas no UniNFe."));
 
                     #endregion Exporadicos
                 }

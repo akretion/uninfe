@@ -37,7 +37,7 @@
   </wsdl:message>
   <wsdl:portType name="RecepcaoEventoSoap">
     <wsdl:operation name="nfeRecepcaoEvento">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado à recepção de mensagem de Evento da NF-e.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviï¿½o destinado ï¿½ recepï¿½ï¿½o de mensagem de Evento da NF-e.</wsdl:documentation>
       <wsdl:input message="tns:nfeRecepcaoEventoSoapIn" />
       <wsdl:output message="tns:nfeRecepcaoEventoSoapOut" />
     </wsdl:operation>

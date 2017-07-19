@@ -53,15 +53,18 @@ namespace NFe.Service
                         dadosPedSta.mod,
                         0);
 
-                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, PadroesNFSe.NaoIdentificado, Servico);
+                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, Servico);
 
                     //Criar objetos das classes dos serviços dos webservices do SEFAZ
                     var oStatusServico = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                    var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSta.cUF, Servico));
 
-                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.cUF.ToString(), dadosPedSta.cUF.ToString());
-                    wsProxy.SetProp(oCabecMsg, NFe.Components.TpcnResources.versaoDados.ToString(), dadosPedSta.versao);
+                    object oCabecMsg = null;
+                    if (dadosPedSta.versao != "4.00")
+                    {
+                        oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSta.cUF, Servico));
+                        wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedSta.cUF.ToString());
+                        wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedSta.versao);
+                    }
 
                     new AssinaturaDigital().CarregarPIN(emp, NomeArquivoXML, Servico);
 
@@ -77,7 +80,7 @@ namespace NFe.Service
                 }
                 else
                 {
-                    string f = System.IO.Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml";
+                    string f = Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml";
 
                     if (NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
                     {

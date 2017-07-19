@@ -2,10 +2,10 @@
 <Webservice>
   <Estado ID="27" Nome="Alagoas" UF="AL" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -24,7 +24,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -51,15 +51,15 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="16" Nome="Amapa" UF="AP" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -132,7 +132,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -164,10 +164,10 @@
   </Estado>
   <Estado ID="29" Nome="Bahia" UF="BA" SVC="teSVCRS">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\BA\HBANfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\BA\HBANfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\BA\HBANfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\BA\HBACadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\BA\HBANfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\BA\HBANfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\BA\HBANfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\BA\HBACadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\BA\HBARecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -186,7 +186,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -240,7 +240,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -272,10 +272,10 @@
   </Estado>
   <Estado ID="53" Nome="Distrito Federal" UF="DF" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -294,7 +294,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -434,10 +434,10 @@
   </Estado>
   <Estado ID="32" Nome="Espirito Santo" UF="ES" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -456,7 +456,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -488,10 +488,10 @@
   </Estado>
   <Estado ID="52" Nome="Goiás" UF="GO" SVC="teSVCRS">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\GO\HGONfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\GO\HGONfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\GO\HGONfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\GO\HGOCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\GO\HGONfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\GO\HGONfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\GO\HGONfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\GO\HGOCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\GO\HGORecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -510,7 +510,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -542,9 +542,9 @@
   </Estado>
   <Estado ID="21" Nome="Maranhão" UF="MA" SVC="teSVCRS">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVAN\HSVANNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVAN\HSVANNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVAN\HSVANNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeInutilizacao>wsdl\homologacao\SVAN\HSVANNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVAN\HSVANNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVAN\HSVANNfeStatusServico.wsdl</NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVAN\HSVANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
@@ -564,7 +564,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -619,7 +619,7 @@
       <CTeConsulta>wsdl\homologacao\MT\HMTCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\MT\HMTCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\homologacao\MT\HMTNfeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\homologacao\MT\HMTCteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
       <NFeInutilizacao>wsdl\producao\MT\PMTNfeInutilizacao2.wsdl</NFeInutilizacao>
@@ -650,10 +650,10 @@
   </Estado>
   <Estado ID="50" Nome="Mato Grosso do Sul" UF="MS" SVC="teSVCRS">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\MS\HMSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\MS\HMSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\MS\HMSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\MS\HMSNfeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\MS\HMSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\MS\HMSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\MS\HMSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\MS\HMSNfeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\MS\HMSNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -672,7 +672,7 @@
       <CTeInutilizacao>wsdl\homologacao\MS\HMSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\MS\HMSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\MS\HMSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\MS\HMSNfeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\MS\HMSNfeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\MS\HMSCteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -699,7 +699,7 @@
       <CTeConsulta>wsdl\producao\MS\PMSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\MS\PMSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\MS\PMSNfeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\MS\PMSCteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="31" Nome="Minas Gerais" UF="MG" SVC="teSVCAN">
@@ -727,7 +727,7 @@
       <CTeConsulta>wsdl\homologacao\MG\HMGCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\MG\HMGCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\homologacao\MG\HMGNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\homologacao\MG\HMGCteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
       <NFeInutilizacao>wsdl\producao\MG\PMGNfeInutilizacao2.wsdl</NFeInutilizacao>
@@ -753,14 +753,14 @@
       <CTeConsulta>wsdl\producao\MG\PMGCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\MG\PMGCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\MG\PMGNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\MG\PMGCteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="15" Nome="Pará" UF="PA" SVC="teSVCRS">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVAN\HSVANNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVAN\HSVANNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVAN\HSVANNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeInutilizacao>wsdl\homologacao\SVAN\HSVANNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVAN\HSVANNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVAN\HSVANNfeStatusServico.wsdl</NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVAN\HSVANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
@@ -780,7 +780,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -812,10 +812,10 @@
   </Estado>
   <Estado ID="25" Nome="Paraiba" UF="PB" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -834,7 +834,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -866,15 +866,15 @@
   </Estado>
   <Estado ID="41" Nome="Paraná" UF="PR" SVC="teSVCRS">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\PR\HPRNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\PR\HPRNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\PR\HPRNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\PR\HPRNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\PR\HPRNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\PR\HPRNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\PR\HPRNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\PR\HPRNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\PR\HPRNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
-      <NFeAutorizacao>wsdl\homologacao\PR\HPRNFeAutorizacao3.wsdl</NFeAutorizacao>
-      <NFeRetAutorizacao>wsdl\homologacao\PR\HPRNFeRetAutorizacao3.wsdl</NFeRetAutorizacao>
+      <NFeAutorizacao>wsdl\homologacao\PR\HPRNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\PR\HPRNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
@@ -888,7 +888,7 @@
       <CTeInutilizacao>wsdl\homologacao\PR\HPRCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\PR\HPRCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\PR\HPRCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\PR\HPRNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\PR\HPRNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <LMCAutorizacao>wsdl\homologacao\PR\HPRLMCAutorizacao.wsdl</LMCAutorizacao>
       <CteRecepcaoOS>wsdl\homologacao\PR\HPRCteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
@@ -917,15 +917,15 @@
       <CTeStatusServico>wsdl\producao\PR\PPRCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\PR\PPRNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
       <LMCAutorizacao>wsdl\producao\PR\PPRLMCAutorizacao.wsdl</LMCAutorizacao>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\PR\PPRCteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="26" Nome="Pernambuco" UF="PE" SVC="teSVCRS">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\PE\HPENfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\PE\HPENfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\PE\HPENfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\PE\HPECadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\PE\HPENfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\PE\HPENfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\PE\HPENfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\PE\HPECadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\PE\HPERecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -976,10 +976,10 @@
   </Estado>
   <Estado ID="22" Nome="Piaui" UF="PI" SVC="teSVCRS">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -998,7 +998,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -1030,10 +1030,10 @@
   </Estado>
   <Estado ID="33" Nome="Rio de Janeiro" UF="RJ" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1052,7 +1052,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -1084,10 +1084,10 @@
   </Estado>
   <Estado ID="24" Nome="Rio Grande do Norte" UF="RN" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1106,7 +1106,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -1138,10 +1138,10 @@
   </Estado>
   <Estado ID="43" Nome="Rio Grande do Sul" UF="RS" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\RS\HRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\RS\HRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\RS\HRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\RS\HRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\RS\HRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\RS\HRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\RS\HRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\RS\HRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\RS\HRSNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1160,7 +1160,7 @@
       <CTeInutilizacao>wsdl\homologacao\RS\HRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\RS\HRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\RS\HRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\RS\HRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\RS\HRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\RS\HRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -1187,15 +1187,15 @@
       <CTeConsulta>wsdl\producao\RS\PRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\RS\PRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\RS\PRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\RS\PRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="11" Nome="Rondonia" UF="RO" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1214,7 +1214,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -1246,10 +1246,10 @@
   </Estado>
   <Estado ID="14" Nome="Roraima" UF="RR" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1300,10 +1300,10 @@
   </Estado>
   <Estado ID="42" Nome="Santa Catarina" UF="SC" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1322,7 +1322,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -1403,15 +1403,15 @@
       <CTeConsulta>wsdl\producao\SP\PSPCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SP\PSPCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SP\PSPNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SP\PSPcteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="28" Nome="Sergipe" UF="SE" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1430,7 +1430,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -1680,10 +1680,10 @@
   </Estado>
   <Estado ID="17" Nome="Tocantins" UF="TO" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1702,7 +1702,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -1734,10 +1734,10 @@
   </Estado>
   <Estado ID="12" Nome="Acre" UF="AC" SVC="teSVCAN">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
@@ -1754,7 +1754,7 @@
       <CTeInutilizacao>wsdl\homologacao\SVRS\HSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\SVRS\HSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\SVRS\HSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CTeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <DFeRecepcao></DFeRecepcao>
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
