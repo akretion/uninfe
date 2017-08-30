@@ -51,12 +51,10 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Comunicar com o equipamento SAT
         /// </summary>
-        public override string Enviar()
+        public override void Enviar()
         {
             string resposta = Sat.DesbloquearSAT();
             DesbloquearSATRetorno = new Servicos.Retorno.DesbloquearSATResponse(resposta);
-
-            return DesbloquearSATRetorno.ToXML();
         }
 
         /// <summary>
@@ -65,12 +63,10 @@ namespace NFe.SAT.Servico.Envio
         public override string SaveResponse()
         {
             string result = Path.Combine(DadosEmpresa.PastaXmlRetorno,
-                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.DesbloquearSAT).EnvioXML) +
-                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.DesbloquearSAT).RetornoXML);
+                Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.DesbloquearSAT).EnvioXML) +
+                Propriedade.Extensao(Propriedade.TipoEnvio.DesbloquearSAT).RetornoXML);
 
-            using (StreamWriter writer = new StreamWriter(result))
-                writer.Write(DesbloquearSATRetorno.ToXML());
-
+            File.WriteAllText(result, DesbloquearSATRetorno.ToXML());
             File.Delete(ArquivoXML);
 
             return result;

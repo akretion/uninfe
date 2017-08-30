@@ -62,12 +62,10 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Comunicar com o equipamento SAT
         /// </summary>
-        public override string Enviar()
+        public override void Enviar()
         {
             string resposta = Sat.TrocarCodigoDeAtivacao(TrocarCodigoDeAtivacaoEnvio.Opcao ,TrocarCodigoDeAtivacaoEnvio.CodigoAtivacaoNovo, TrocarCodigoDeAtivacaoEnvio.CodigoAtivacaoNovo);
             TrocarCodigoDeAtivacaoRetorno = new Servicos.Retorno.TrocarCodigoDeAtivacaoResponse(resposta);
-
-            return TrocarCodigoDeAtivacaoRetorno.ToXML();
         }
 
         /// <summary>
@@ -76,12 +74,10 @@ namespace NFe.SAT.Servico.Envio
         public override string SaveResponse()
         {
             string result = Path.Combine(DadosEmpresa.PastaXmlRetorno, 
-                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.TrocarCodigoDeAtivacaoSAT).EnvioXML) + 
-                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.TrocarCodigoDeAtivacaoSAT).RetornoXML);                        
+                Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.TrocarCodigoDeAtivacaoSAT).EnvioXML) + 
+                Propriedade.Extensao(Propriedade.TipoEnvio.TrocarCodigoDeAtivacaoSAT).RetornoXML);                        
 
-            using (StreamWriter writer = new StreamWriter(result))
-                writer.Write(TrocarCodigoDeAtivacaoRetorno.ToXML());
-
+            File.WriteAllText(result, TrocarCodigoDeAtivacaoRetorno.ToXML());
             File.Delete(ArquivoXML);
 
             return result;

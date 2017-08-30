@@ -246,6 +246,21 @@ namespace NFSe.Components
 
             #endregion XML para informar dia sem movimento de CFSe
 
+            #region XML para consultar dados cadastro terminal CFSe
+
+            SchemaXML.InfSchemas.Add("NFSE-FINTEL-ConsultarDadosCadastro", new InfSchema()
+            {
+                Tag = "ConsultarDadosCadastro",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\FINTEL\\cfse.xsd",
+                Descricao = "XML para consultar dados cadastro terminal CFSe",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://iss.irati.pr.gov.br/Arquivos/cfse.xsd"
+            });
+
+            #endregion XML para consultar dados cadastro terminal CFSe
+
             #endregion CFSe
         }
     }

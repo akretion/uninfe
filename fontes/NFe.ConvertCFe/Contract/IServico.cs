@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NFe.SAT.Contract
+﻿namespace NFe.SAT.Contract
 {
-    interface IServico
-    {        
-        string ArquivoXML { get; set; }        
-        string Enviar();
+    internal interface IServico
+    {
+        string ArquivoXML { get; set; }
+
+        void Enviar();
+
         string SaveResponse();
     }
 }

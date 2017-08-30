@@ -266,7 +266,7 @@ namespace NFe.Service
         /// <summary>
         /// Ambiente (2-Homologação 1-Produção)
         /// </summary>
-        public int tpAmb { get; private set; }
+        public int tpAmb { get; set; }
 
         /// <summary>
         /// Versao (2.00 ou 3.10)

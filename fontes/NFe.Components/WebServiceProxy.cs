@@ -600,6 +600,7 @@ namespace NFe.Components
                 case PadroesNFSe.SMARAPD:
                 case PadroesNFSe.DUETO:
                 case PadroesNFSe.WEBISS:
+                case PadroesNFSe.WEBISS_202:
                 case PadroesNFSe.SALVADOR_BA:
                 case PadroesNFSe.GIF:
                 case PadroesNFSe.PRONIN:
@@ -1012,6 +1013,7 @@ namespace NFe.Components
             ConfigurarTerminalCfse =
             EnviarInformeManutencaoCfse =
             InformeTrasmissaoSemMovimentoCfse =
+            ConsultarDadosCadastroCfse =
             ///
             /// NF-e
             NFeRecepcaoEvento =
@@ -1182,6 +1184,11 @@ namespace NFe.Components
         /// Enviar informe de transmissão sem movimento da CFS-e
         /// </summary>
         public string InformeTrasmissaoSemMovimentoCfse { get; set; }
+
+        /// <summary>
+        /// Enviar o XML para consultar os dados do cadastro de terminal CFS-e
+        /// </summary>
+        public string ConsultarDadosCadastroCfse { get; set; }
 
         #endregion CFS-e
 

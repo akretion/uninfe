@@ -3,12 +3,7 @@ using NFe.SAT.Abstract.Servico;
 using NFe.SAT.Servico.Envio;
 using NFe.Settings;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Unimake.SAT.Abstract.Servico;
-using Unimake.SAT.Enuns;
 using Unimake.SAT.Servico.Retorno;
 
 namespace NFe.SAT
@@ -19,10 +14,11 @@ namespace NFe.SAT
     public class SATProxy
     {
         #region Propriedades
+
         /// <summary>
         /// Dados da empresa que esta sendo realizado o envio
         /// </summary>
-        Empresa DadosEmpresa;
+        private Empresa DadosEmpresa;
 
         /// <summary>
         /// Serviço que esta sendo executado
@@ -37,7 +33,7 @@ namespace NFe.SAT
         /// <summary>
         /// Objeto de envio do SAT
         /// </summary>
-        ServicoBase _Dispatch = null;
+        private ServicoBase _Dispatch = null;
 
         /// <summary>
         /// Define o objeto de envio
@@ -117,7 +113,7 @@ namespace NFe.SAT
         /// <summary>
         /// Objeto de resposta do SAT
         /// </summary>
-        ResponseBase _Response = null;
+        private ResponseBase _Response = null;
 
         /// <summary>
         /// Define o objeto de resposta
@@ -189,9 +185,11 @@ namespace NFe.SAT
                 return _Response;
             }
         }
-        #endregion
+
+        #endregion Propriedades
 
         #region Construtores
+
         /// <summary>
         /// Construtor
         /// </summary>
@@ -204,17 +202,18 @@ namespace NFe.SAT
             DadosEmpresa = dadosEmpresa;
             Arquivo = arquivo;
         }
-        #endregion
+
+        #endregion Construtores
 
         /// <summary>
         /// Método de troca de código de ativação
         /// </summary>
         /// <returns></returns>
-        public string Enviar()
+        public void Enviar()
         {
             try
             {
-                return Dispatch.Enviar();
+                Dispatch.Enviar();
             }
             catch (Exception ex)
             {
@@ -236,6 +235,5 @@ namespace NFe.SAT
                 throw ex;
             }
         }
-
     }
 }

@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NFe.Components;
+using NFe.SAT.Abstract.Servico;
+using NFe.Settings;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using Servicos = Unimake.SAT.Servico;
-using EnunsSAT = Unimake.SAT.Enuns;
-using NFe.Components;
-using NFe.SAT.Abstract.Servico;
-using Unimake.SAT;
-using NFe.Settings;
 
-namespace NFe.SAT.Servico.Envio 
+namespace NFe.SAT.Servico.Envio
 {
     /// <summary>
     /// Classe responsável pela comunicação com o SAT
@@ -22,17 +15,17 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Dados da empresa
         /// </summary>
-        Empresa DadosEmpresa = null;
+        private Empresa DadosEmpresa = null;
 
         /// <summary>
         /// Dados do envio do XML
         /// </summary>
-        Servicos.Envio.ExtrairLogs ExtrairLogsEnvio = new Servicos.Envio.ExtrairLogs();
+        private Servicos.Envio.ExtrairLogs ExtrairLogsEnvio = new Servicos.Envio.ExtrairLogs();
 
         /// <summary>
         /// Resposta do equipamento sat
         /// </summary>
-        Servicos.Retorno.ExtrairLogsResponse ExtrairLogsRetorno = null;
+        private Servicos.Retorno.ExtrairLogsResponse ExtrairLogsRetorno = null;
 
         /// <summary>
         /// Nome do arquivo XML que esta sendo manipulado
@@ -54,7 +47,7 @@ namespace NFe.SAT.Servico.Envio
 
             DadosEmpresa = dadosEmpresa;
             ArquivoXML = arquivoXML;
-            ExtrairLogsEnvio = DeserializarObjeto<Servicos.Envio.ExtrairLogs>();            
+            ExtrairLogsEnvio = DeserializarObjeto<Servicos.Envio.ExtrairLogs>();
             Marca = ExtrairLogsEnvio.Marca;
             CodigoAtivacao = ExtrairLogsEnvio.CodigoAtivacao;
         }
@@ -62,28 +55,24 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Comunicar com o equipamento SAT
         /// </summary>
-        public override string Enviar()
+        public override void Enviar()
         {
             string resposta = Sat.ExtrairLogs();
             ExtrairLogsRetorno = new Servicos.Retorno.ExtrairLogsResponse(resposta);
-
-            return ExtrairLogsRetorno.ToXML();
         }
 
         /// <summary>
         /// Salva o XML de Retorno
-        /// </summary>        
+        /// </summary>
         public override string SaveResponse()
         {
             string result = Path.Combine(DadosEmpresa.PastaXmlRetorno,
-                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarSAT).EnvioXML) + 
-                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarSAT).RetornoXML);                        
-            using (StreamWriter writer = new StreamWriter(result))
-                writer.Write(ExtrairLogsRetorno.ToXML());
-
+                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarSAT).EnvioXML) +
+                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarSAT).RetornoXML);
+            File.WriteAllText(result, ExtrairLogsRetorno.ToXML());
             File.Delete(ArquivoXML);
 
             return result;
-        }       
+        }
     }
 }

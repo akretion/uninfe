@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NFe.Components.Abstract;
-using System.Reflection;
+﻿using NFe.Components.Abstract;
 using System.Security.Cryptography.X509Certificates;
-using System.IO;
-using System.Xml.Serialization;
-using System.Xml;
 
 namespace NFe.Components.Coplan
 {
     public abstract class CoplanBase : EmiteNFSeBase
     {
         #region Locais/Protegidos
-        int CodigoMun = 0;
-        string UsuarioProxy = "";
-        string SenhaProxy = "";
-        string DomainProxy = "";
-        X509Certificate Certificado = null;
-        EmiteNFSeBase coplanService;
+
+        private int CodigoMun = 0;
+        private string UsuarioProxy = "";
+        private string SenhaProxy = "";
+        private string DomainProxy = "";
+        private X509Certificate Certificado = null;
+        private EmiteNFSeBase coplanService;
 
         protected EmiteNFSeBase CoplanService
         {
@@ -31,8 +24,14 @@ namespace NFe.Components.Coplan
                     {
                         case 5102637: //Campo Novo do Parecis - MT
                             coplanService = tpAmb == TipoAmbiente.taHomologacao ?
-                                new CampoNovoParecisMT.h.CoplanH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase:
+                                new CampoNovoParecisMT.h.CoplanH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase :
                                 new CampoNovoParecisMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
+                            break;
+
+                        case 5106224: //Nova Mutum - MT
+                            coplanService = tpAmb == TipoAmbiente.taHomologacao ?
+                                new NovaMutumMT.h.CoplanH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase :
+                                new NovaMutumMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
                             break;
 
                         default:
@@ -42,9 +41,11 @@ namespace NFe.Components.Coplan
                 return coplanService;
             }
         }
-        #endregion
+
+        #endregion Locais/Protegidos
 
         #region Construtores
+
         public CoplanBase(TipoAmbiente tpAmb, string pastaRetorno, int codMun, string usuarioProxy, string senhaProxy, string domainProxy, X509Certificate certificado)
             : base(tpAmb, pastaRetorno)
         {
@@ -53,11 +54,12 @@ namespace NFe.Components.Coplan
             SenhaProxy = senhaProxy;
             DomainProxy = domainProxy;
             Certificado = certificado;
-
         }
-        #endregion
+
+        #endregion Construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
             CoplanService.EmiteNF(file);
@@ -87,8 +89,7 @@ namespace NFe.Components.Coplan
         {
             CoplanService.ConsultarNfsePorRps(file);
         }
-        #endregion
 
-
+        #endregion Métodos
     }
 }

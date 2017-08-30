@@ -1,39 +1,41 @@
-﻿using System;
-using System.IO;
+﻿using NFe.Certificado;
 using NFe.Components;
-using NFe.Settings;
-using NFe.Certificado;
-using NFSe.Components;
-using NFe.Components.SystemPro;
-using NFe.Components.SigCorp;
-using NFe.Components.Fiorilli;
-using NFe.Components.SimplISS;
+using NFe.Components.BAURU_SP;
 using NFe.Components.Conam;
-using NFe.Components.RLZ_INFORMATICA;
-using NFe.Components.EGoverne;
-using NFe.Components.EL;
-using NFe.Components.GovDigital;
-using NFe.Components.EloTech;
-using NFe.Components.MGM;
 using NFe.Components.Consist;
+using NFe.Components.Coplan;
+using NFe.Components.EGoverne;
+using NFe.Components.EGoverneISS;
+using NFe.Components.EL;
+using NFe.Components.EloTech;
+using NFe.Components.Fiorilli;
+using NFe.Components.GovDigital;
 using NFe.Components.Memory;
 using NFe.Components.Metropolis;
+using NFe.Components.MGM;
 using NFe.Components.Pronin;
-using NFe.Components.Coplan;
-using NFe.Components.EGoverneISS;
+using NFe.Components.RLZ_INFORMATICA;
+using NFe.Components.SigCorp;
+using NFe.Components.SimplISS;
+using NFe.Components.SystemPro;
+using NFe.Settings;
 using NFe.Validate;
-using NFe.Components.BAURU_SP;
+using NFSe.Components;
+using System;
+using System.IO;
 
 namespace NFe.Service.NFSe
 {
     public class TaskNFSeRecepcionarLoteRps : TaskAbst
     {
         #region Objeto com os dados do XML de lote rps
+
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do lote rps
         /// </summary>
         private DadosEnvLoteRps oDadosEnvLoteRps;
-        #endregion
+
+        #endregion Objeto com os dados do XML de lote rps
 
         public TaskNFSeRecepcionarLoteRps(string arquivo)
         {
@@ -97,7 +99,7 @@ namespace NFe.Service.NFSe
                                 cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                                 break;
 
-                            case 4125506: //São José dos Pinhais - PR  
+                            case 4125506: //São José dos Pinhais - PR
                                 cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://nfe.sjp.pr.gov.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                                 break;
 
@@ -112,7 +114,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.BETHA:
+
                         #region Betha
+
                         string versao = Functions.GetAttributeXML("LoteRps", "versao", NomeArquivoXML);
                         if (versao.Equals("2.02"))
                         {
@@ -140,7 +144,8 @@ namespace NFe.Service.NFSe
                             wsProxy.Betha = new Betha();
                         }
                         break;
-                    #endregion
+
+                    #endregion Betha
 
                     case PadroesNFSe.ABACO:
                     case PadroesNFSe.CANOAS_RS:
@@ -163,6 +168,12 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.WEBISS:
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.WEBISS_202:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.WEBISS_202);
+
+                        cabecMsg = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.PAULISTANA:
@@ -227,26 +238,34 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.SYSTEMPRO:
+
                         #region SystemPro
+
                         SystemPro syspro = new SystemPro((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
                         AssinaturaDigital ad = new AssinaturaDigital();
                         ad.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
                         syspro.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion SystemPro
 
                     case PadroesNFSe.SIGCORP_SIGISS:
+
                         #region SigCorp
+
                         SigCorp sigcorp = new SigCorp((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosEnvLoteRps.cMunicipio);
                         sigcorp.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion SigCorp
 
                     case PadroesNFSe.FIORILLI:
+
                         #region Fiorilli
+
                         Fiorilli fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                          Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                          oDadosEnvLoteRps.cMunicipio,
@@ -270,10 +289,13 @@ namespace NFe.Service.NFSe
 
                         fiorilli.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion Fiorilli
 
                     case PadroesNFSe.SIMPLISS:
+
                         #region Simpliss
+
                         SimplISS simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
@@ -288,10 +310,13 @@ namespace NFe.Service.NFSe
 
                         simpliss.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion Simpliss
 
                     case PadroesNFSe.CONAM:
+
                         #region Conam
+
                         Conam conam = new Conam((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
@@ -300,20 +325,26 @@ namespace NFe.Service.NFSe
 
                         conam.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion Conam
 
                     case PadroesNFSe.RLZ_INFORMATICA:
+
                         #region RLZ
+
                         Rlz_Informatica rlz = new Rlz_Informatica((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio);
 
                         rlz.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion RLZ
 
                     case PadroesNFSe.EGOVERNE:
+
                         #region E-Governe
+
                         EGoverne egoverne = new EGoverne((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosEnvLoteRps.cMunicipio,
@@ -327,10 +358,13 @@ namespace NFe.Service.NFSe
 
                         egoverne.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion E-Governe
 
                     case PadroesNFSe.EL:
+
                         #region E&L
+
                         EL el = new EL((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                         oDadosEnvLoteRps.cMunicipio,
@@ -342,10 +376,13 @@ namespace NFe.Service.NFSe
 
                         el.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion E&L
 
                     case PadroesNFSe.GOVDIGITAL:
+
                         #region GOV-Digital
+
                         GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                             Empresas.Configuracoes[emp].X509Certificado,
@@ -359,7 +396,8 @@ namespace NFe.Service.NFSe
 
                         govdig.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion GOV-Digital
 
                     case PadroesNFSe.EQUIPLANO:
                         cabecMsg = "1";
@@ -378,7 +416,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.ELOTECH:
+
                         #region EloTech
+
                         EloTech elotech = new EloTech((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                       Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                       oDadosEnvLoteRps.cMunicipio,
@@ -391,10 +431,13 @@ namespace NFe.Service.NFSe
 
                         elotech.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion EloTech
 
                     case PadroesNFSe.METROPOLIS:
+
                         #region METROPOLIS
+
                         Metropolis metropolis = new Metropolis((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                       Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                       oDadosEnvLoteRps.cMunicipio,
@@ -408,10 +451,13 @@ namespace NFe.Service.NFSe
 
                         metropolis.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion METROPOLIS
 
                     case PadroesNFSe.MGM:
+
                         #region MGM
+
                         MGM mgm = new MGM((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                            Empresas.Configuracoes[emp].PastaXmlRetorno,
                                            oDadosEnvLoteRps.cMunicipio,
@@ -419,11 +465,13 @@ namespace NFe.Service.NFSe
                                            Empresas.Configuracoes[emp].SenhaWS);
                         mgm.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
 
+                    #endregion MGM
 
                     case PadroesNFSe.CONSIST:
+
                         #region Consist
+
                         Consist consist = new Consist((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
@@ -435,10 +483,13 @@ namespace NFe.Service.NFSe
 
                         consist.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion Consist
 
                     case PadroesNFSe.NOTAINTELIGENTE:
+
                         #region Nota Inteligente
+
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
                         if (oDadosEnvLoteRps.tpAmb == 1)
@@ -449,11 +500,15 @@ namespace NFe.Service.NFSe
                         {
                             throw new Exception("Município de São Paulo-SP não dispõe de ambiente de homologação para envio de NFS-e em teste.");
                         }
-                        #endregion
+
+                        #endregion Nota Inteligente
+
                         break;
 
                     case PadroesNFSe.COPLAN:
+
                         #region Coplan
+
                         Coplan coplan = new Coplan((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosEnvLoteRps.cMunicipio,
@@ -467,14 +522,17 @@ namespace NFe.Service.NFSe
 
                         coplan.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion Coplan
 
                     case PadroesNFSe.FREIRE_INFORMATICA:
                         cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.MEMORY:
+
                         #region Memory
+
                         Memory memory = new Memory((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
@@ -489,7 +547,8 @@ namespace NFe.Service.NFSe
 
                         memory.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion Memory
 
                     case PadroesNFSe.CAMACARI_BA:
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.CAMACARI_BA);
@@ -520,7 +579,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.EGOVERNEISS:
+
                         #region EGoverne ISS
+
                         EGoverneISS egoverneiss = new EGoverneISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
@@ -532,7 +593,8 @@ namespace NFe.Service.NFSe
 
                         egoverneiss.EmiteNF(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion EGoverne ISS
 
                     case PadroesNFSe.SUPERNOVA:
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.SUPERNOVA);
@@ -543,12 +605,15 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.BAURU_SP:
+
                         #region BAURU_SP
+
                         Bauru_SP bauru_SP = new Bauru_SP((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosEnvLoteRps.cMunicipio);
                         bauru_SP.EmiteNF(NomeArquivoXML);
                         break;
+
                         #endregion BAURU_SP
                 }
 
@@ -560,8 +625,8 @@ namespace NFe.Service.NFSe
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.InvocarNFSe(wsProxy, envLoteRps, NomeMetodoWS(Servico, oDadosEnvLoteRps.cMunicipio), cabecMsg, this,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,    //"-env-loterps", 
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML,  //"-ret-loterps", 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,   
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML, 
                                             padraoNFSe, Servico, securityProtocolType);
 
                     ///
@@ -602,6 +667,7 @@ namespace NFe.Service.NFSe
         }
 
         #region EncryptAssinatura()
+
         /// <summary>
         /// Encriptar a tag Assinatura quando for município de Blumenau - SC
         /// </summary>
@@ -611,9 +677,11 @@ namespace NFe.Service.NFSe
             Validate.ValidarXML val = new Validate.ValidarXML(NomeArquivoXML, oDadosEnvLoteRps.cMunicipio, false);
             val.EncryptAssinatura(NomeArquivoXML);
         }
-        #endregion
+
+        #endregion EncryptAssinatura()
 
         #region EnvLoteRps()
+
         /// <summary>
         /// Fazer a leitura do conteúdo do XML de lote rps e disponibiliza o conteúdo em um objeto para analise
         /// </summary>
@@ -632,7 +700,7 @@ namespace NFe.Service.NFSe
             //    XmlElement infEnvioElemento = (XmlElement)infEnvioNode;
             //}
         }
-        #endregion
 
+        #endregion EnvLoteRps()
     }
 }

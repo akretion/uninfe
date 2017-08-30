@@ -369,6 +369,14 @@ namespace NFe.Settings
                 estado.UrlCTe = inifile.Read("CT-e", uf);
                 estado.UrlNFCe = inifile.Read("NFC-e", uf);
                 estado.UrlNFCeH = inifile.Read("NFC-e(h)", uf);
+                estado.UrlNFCeM = inifile.Read("NFC-e_ConsultaManual", uf);
+                estado.UrlNFCeMH = inifile.Read("NFC-e_ConsultaManual(h)", uf);
+
+                if (String.IsNullOrEmpty(estado.UrlNFCeM))
+                    estado.UrlNFCeM = estado.UrlNFCe;
+
+                if (String.IsNullOrEmpty(estado.UrlNFCeMH))
+                    estado.UrlNFCeMH = estado.UrlNFCeH;
             }
             else
                 throw new Exception("O arquivo SEFAZ.INC não foi localizado, por favor reinstale o UniNFe.");
@@ -828,10 +836,10 @@ namespace NFe.Settings
         /// <param name="tipoAmbiente">Tipo de ambiente da NFe</param>
         /// <param name="tipoEmissao">Tipo de Emissao da NFe</param>
         /// <param name="servico">Serviço da NFe que está sendo executado</param>
-        /// <param name="versaoXML">Versão do XML</param>
+        /// <param name="versao">Versão do XML</param>
         /// <param name="ehNFCe">Se é NFCe (Nota Fiscal de Consumidor Eletrônica)</param>
         /// <returns>Retorna a URL</returns>
-        private static string DefLocalWSDL(int CodigoUF, int tipoAmbiente, int tipoEmissao, string versaoXML, Servicos servico, string modelo)
+        private static string DefLocalWSDL(int CodigoUF, int tipoAmbiente, int tipoEmissao, string versao, Servicos servico, string modelo)
         {
             bool ehNFCe = (modelo == "65");
             string WSDL = string.Empty;
@@ -1077,6 +1085,10 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.InformeTrasmissaoSemMovimentoCfse : list.LocalProducao.InformeTrasmissaoSemMovimentoCfse);
                             break;
 
+                        case Servicos.ConsultarDadosCadastroCfse:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarDadosCadastroCfse : list.LocalProducao.ConsultarDadosCadastroCfse);
+                            break;
+
                         #endregion CFS-e
 
                         #region LMC
@@ -1107,20 +1119,20 @@ namespace NFe.Settings
                     WSDL = temp;
             }
 
-            if (!string.IsNullOrEmpty(versaoXML) && !string.IsNullOrEmpty(WSDL) && File.Exists(WSDL))
+            if (!string.IsNullOrEmpty(versao) && !string.IsNullOrEmpty(WSDL) && File.Exists(WSDL))
             {
                 string temp = string.Empty;
 
-                if (versaoXML.Equals("4.00"))
+                if (versao.Equals("4.00"))
                 {
                     temp = Path.Combine(Path.GetDirectoryName(WSDL), Path.GetFileNameWithoutExtension(WSDL) + "_400" + Path.GetExtension(WSDL));
                 }
-                else if (versaoXML.Equals("2.01") || versaoXML.Equals("2.00"))
+                else if (versao.Equals("2.01") || versao.Equals("2.00"))
                 {
                     temp = Path.Combine(Path.GetDirectoryName(WSDL), Path.GetFileNameWithoutExtension(WSDL) + "_200" + Path.GetExtension(WSDL));
                 }
 
-                if (! string.IsNullOrEmpty(temp) && File.Exists(temp))
+                if (!string.IsNullOrEmpty(temp) && File.Exists(temp))
                     WSDL = temp;
             }
 
@@ -1367,11 +1379,11 @@ namespace NFe.Settings
                                             if ((erro = this.AddEmpresaNaLista(emp.PastaBackup)) == "")
                                                 erro = this.AddEmpresaNaLista(emp.PastaDownloadNFeDest);
 
-                /*if ((emp.Servico == TipoAplicativo.Nfe ||
+                if ((emp.Servico == TipoAplicativo.Nfe ||
                     emp.Servico == TipoAplicativo.NFCe ||
                     emp.Servico == TipoAplicativo.Todos)
                     && emp.UnidadeFederativaCodigo == 35 && emp.IndSinc == true)
-                    erro = "Estado de São Paulo não dispõe do serviço síncrono para emissão de NFe.";*/
+                    erro = "Estado de São Paulo não dispõe do serviço síncrono para emissão de NFe.";
 
                 if (erro != "")
                 {

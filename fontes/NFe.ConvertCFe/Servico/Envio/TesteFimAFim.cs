@@ -57,12 +57,10 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Comunicar com o equipamento SAT
         /// </summary>
-        public override string Enviar()
+        public override void Enviar()
         {
             string resposta = Sat.TesteFimAFim(TesteFimAFimEnvio);
             TesteFimAFimRetorno = new Servicos.Retorno.TesteFimAFimResponse(resposta);
-
-            return TesteFimAFimRetorno.ToXML();
         }
 
         /// <summary>
@@ -71,11 +69,10 @@ namespace NFe.SAT.Servico.Envio
         public override string SaveResponse()
         {
             string result = Path.Combine(DadosEmpresa.PastaXmlRetorno,
-                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarSAT).EnvioXML) +
-                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarSAT).RetornoXML);
-            using (StreamWriter writer = new StreamWriter(result))
-                writer.Write(TesteFimAFimRetorno.ToXML());
+                Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarSAT).EnvioXML) +
+                Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarSAT).RetornoXML);
 
+            File.WriteAllText(result, TesteFimAFimRetorno.ToXML());
             File.Delete(ArquivoXML);
 
             return result;

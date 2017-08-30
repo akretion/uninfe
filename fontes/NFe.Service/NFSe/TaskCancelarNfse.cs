@@ -139,6 +139,10 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
                         break;
 
+                    case PadroesNFSe.WEBISS_202:
+                        cabecMsg = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
                     case PadroesNFSe.PAULISTANA:
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
@@ -476,6 +480,13 @@ namespace NFe.Service.NFSe
                                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                         oDadosPedCanNfse.cMunicipio);
                         bauru_SP.CancelarNfse(NomeArquivoXML);
+                        break;
+
+                    case PadroesNFSe.SMARAPD:
+                        if (Empresas.Configuracoes[emp].UnidadeFederativaCodigo == 3201308) //Município de Cariacica-ES
+                        {
+                            throw new Exception("Município de Cariacica-ES não permite cancelamento de NFS-e via webservice.");
+                        }
                         break;
                 }
 

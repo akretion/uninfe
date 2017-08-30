@@ -347,7 +347,8 @@ namespace NFe.UI.Formularios
                            ufCod == 3300407 /*Barra Mansa-RJ*/ ||
                            ufCod == 3530409 /*Mirassolândia-SP*/ ||
                            ufCod == 3528809 /*Macaraí-SP*/ ||
-                           ufCod == 5003207 /*Corumba-MS*/;
+                           ufCod == 5003207 /*Corumba-MS*/ ||
+                           ufCod == 1600303 /*Macapá-AP*/;
 
             bool visiblepass = ufCod == 3152105 || visible; /*Ponte nova*/
 

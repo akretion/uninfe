@@ -17,5 +17,7 @@ namespace NFe.Components
         public string UrlCTe { get; set; }
         public string UrlNFCe { get; set; }
         public string UrlNFCeH { get; set; }
+        public string UrlNFCeM { get; set; }
+        public string UrlNFCeMH { get; set; }
     }
 }

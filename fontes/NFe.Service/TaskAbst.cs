@@ -737,6 +737,7 @@ namespace NFe.Service
                 #region WEBISS
 
                 case PadroesNFSe.WEBISS:
+                case PadroesNFSe.WEBISS_202:
                     switch (servico)
                     {
                         case Servicos.NFSeConsultarLoteRps:
@@ -764,6 +765,10 @@ namespace NFe.Service
 
                         case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
                             break;
                     }
                     break;
@@ -1213,6 +1218,10 @@ namespace NFe.Service
 
                         case Servicos.InformeTrasmissaoSemMovimentoCfse:
                             retorna = "InformeTrasmissaoSemMovimento";
+                            break;
+
+                        case Servicos.ConsultarDadosCadastroCfse:
+                            retorna = "ConsultarDadosCadastro";
                             break;
                     }
                     break;
@@ -1911,8 +1920,9 @@ namespace NFe.Service
 
                     QRCode qrCode = new QRCode(conteudoXML);
                     string url = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCe;
+                    string linkUFManual = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeMH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeM;
 
-                    qrCode.GerarLinkConsulta(url, Empresas.Configuracoes[emp].IdentificadorCSC, Empresas.Configuracoes[emp].TokenCSC);
+                    qrCode.GerarLinkConsulta(url, Empresas.Configuracoes[emp].IdentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, linkUFManual);
                 }
 
                 // Validar o Arquivo XML da NFe com os Schemas se estiver assinado
@@ -2506,6 +2516,22 @@ namespace NFe.Service
 
             switch (padrao)
             {
+                case PadroesNFSe.WEBISS_202:
+                    if (servico == Servicos.NFSeRecepcionarLoteRps)
+                    {
+                        switch (doc.DocumentElement.Name)
+                        {
+                            case "EnviarLoteRpsEnvio":
+                                result = Servicos.NFSeRecepcionarLoteRps;
+                                break;
+
+                            case "EnviarLoteRpsSincronoEnvio":
+                                result = Servicos.NFSeRecepcionarLoteRpsSincrono;
+                                break;
+                        }
+                    }
+                    break;
+
                 case PadroesNFSe.FINTEL:
                     if (servico == Servicos.NFSeRecepcionarLoteRps || servico == Servicos.RecepcionarLoteCfse)
                     {

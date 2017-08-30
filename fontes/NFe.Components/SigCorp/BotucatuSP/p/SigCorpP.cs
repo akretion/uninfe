@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using NFe.Components.Abstract;
+using NFe.Components.br.com.sigiss.botucatu.p;
+using System;
 using System.Reflection;
 using System.Text;
 using System.Xml;
-using System.Xml.Serialization;
-using NFe.Components.Abstract;
-using NFe.Components.br.com.sigiss.botucatu.p;
 
 namespace NFe.Components.SigCorp.BotucatuSP.p
 {
     public class SigCorpP : EmiteNFSeBase
     {
-        WebServiceSigISS service = new WebServiceSigISS();
+        private WebServiceSigISS service = new WebServiceSigISS();
+
         public override string NameSpaces
         {
             get
@@ -22,23 +19,27 @@ namespace NFe.Components.SigCorp.BotucatuSP.p
             }
         }
 
-        #region constrututores
+        #region Construtores
+
         public SigCorpP(TipoAmbiente tpAmb, string pastaRetorno)
             : base(tpAmb, pastaRetorno)
         {
-
         }
-        #endregion
+
+        #endregion Construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
             tcDescricaoRps oTcDescricaoRps = ReadXML<tcDescricaoRps>(file);
             tcEstruturaDescricaoErros[] tcErros = null;
             tcRetornoNota result = service.GerarNota(oTcDescricaoRps, out tcErros);
             string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
+            GerarRetorno(file, strResult, 
+                Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML,
+                Encoding.UTF8);
         }
 
         public override void CancelarNfse(string file)
@@ -47,8 +48,10 @@ namespace NFe.Components.SigCorp.BotucatuSP.p
             tcEstruturaDescricaoErros[] tcErros = null;
             tcRetornoNota result = service.CancelarNota(oTcDadosCancela, out tcErros);
             string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
+            GerarRetorno(file, strResult, 
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML,
+                Encoding.UTF8);
         }
 
         public override void ConsultarLoteRps(string file)
@@ -58,8 +61,10 @@ namespace NFe.Components.SigCorp.BotucatuSP.p
 
             tcRetornoNota result = service.ConsultarNotaValida(oTcDadosConsultaNota, out tcErros);
             string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
+            GerarRetorno(file, strResult, 
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML,
+                Encoding.UTF8);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -73,15 +78,16 @@ namespace NFe.Components.SigCorp.BotucatuSP.p
             tcEstruturaDescricaoErros[] tcErros = null;
             tcDadosNota result = service.ConsultarNotaPrestador(oTcDadosPrestador, NumeroNota(file, "urn:ConsultarNotaPrestador"), out tcErros);
             string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
+            GerarRetorno(file, strResult, 
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)
         {
             throw new Exceptions.ServicoInexistenteException();
         }
-        
+
         private T ReadXML<T>(string file)
             where T : new()
         {
@@ -144,6 +150,7 @@ namespace NFe.Components.SigCorp.BotucatuSP.p
                 pi.SetValue(result, value, null);
             }
         }
-        #endregion
+
+        #endregion Métodos
     }
 }

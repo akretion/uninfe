@@ -58,7 +58,9 @@ namespace NFe.Components.QRCode
         /// </summary>
         /// <param name="linkUF">Link de consulta da UF</param>
         /// <param name="identificadorCSC">CSC</param>
-        public void GerarLinkConsulta(string linkUF, string identificadorCSC, string tokenCSC)
+        /// <param name="tokenCSC"></param>
+        /// <param name="linkUFManual">Link de consulta manual da UF, usado na NFCe</param>
+        public void GerarLinkConsulta(string linkUF, string identificadorCSC, string tokenCSC, string linkUFManual)
         {
             if (!CalcularLink())
                 return;
@@ -79,13 +81,13 @@ namespace NFe.Components.QRCode
 
             ParametrosLinkConsulta = linkUF + "?" + ParametrosQR.Trim() + "&cHashQRCode=" + HashQRCode.Trim();
 
-            AddLinkQRCode();
+            AddLinkQRCode(linkUFManual);
         }
 
         /// <summary>
         /// Adicionar link gerado ao XML
         /// </summary>
-        private void AddLinkQRCode()
+        private void AddLinkQRCode(string linkUFManual)
         {
             foreach (var item in ConteudoXML)
             {
@@ -97,6 +99,14 @@ namespace NFe.Components.QRCode
                     XmlNode nd1 = ConteudoXML.CreateElement("qrCode", ConteudoXML.DocumentElement.NamespaceURI);
                     nd1.InnerXml = ("<![CDATA[" + this.ParametrosLinkConsulta.Trim() + "]]>").Trim();
                     nd.AppendChild(nd1);
+
+                    if (((XmlElement)ConteudoXML.GetElementsByTagName("infNFe")[0]).GetAttribute("versao").Equals("4.00"))
+                    {
+                        XmlNode urlChave = ConteudoXML.CreateElement("urlChave", ConteudoXML.DocumentElement.NamespaceURI);
+                        urlChave.InnerXml = linkUFManual;
+                        nd.AppendChild(urlChave);
+                    }
+
                     el.RemoveChild(Signature);
                     el.AppendChild(nd);
                     el.AppendChild(Signature);

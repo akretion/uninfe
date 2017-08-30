@@ -63,7 +63,7 @@
   </wsdl:binding>
   <wsdl:service name="CteRecepcaoOS">
     <wsdl:port binding="tns:CteRecepcaoOSSoap12" name="CteRecepcaoOSSoap12">
-      <soap12:address location="https://cte.fazenda.mg.gov.br/cte/services/CteRecepcaoOS" />
+      <soap12:address location="https://hcte.fazenda.mg.gov.br/cte/services/CteRecepcaoOS" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

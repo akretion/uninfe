@@ -1007,7 +1007,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://swb.corumba.ms.gov.br:8080/IssWeb-ejb/IssWebWS/IssWebWS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://nfse.corumba.ms.gov.br:8080/IssWeb-ejb/IssWebWS/IssWebWS")]
         public string NFe_Components_PCorumbaMS_IssWebWS {
             get {
                 return ((string)(this["NFe_Components_PCorumbaMS_IssWebWS"]));
@@ -1021,6 +1021,46 @@ namespace NFe.Components.Properties {
         public string NFe_Components_HCorumbaMS_IssWebWS {
             get {
                 return ((string)(this["NFe_Components_HCorumbaMS_IssWebWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.gp.srv.br/tributario_novamutum/servlet/anfse_web_service")]
+        public string NFe_Components_PNovaMutumMT_nfse_web_service {
+            get {
+                return ((string)(this["NFe_Components_PNovaMutumMT_nfse_web_service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://testebotucatu.sigiss.com.br:443/botucatu/ws/sigiss_ws.php")]
+        public string NFe_Components_br_com_sigiss_botucatu_h_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_br_com_sigiss_botucatu_h_WebService_SigISS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS")]
+        public string NFe_Components_HMacapaAP_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_HMacapaAP_IssWebWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://ws.macapa.ap.gov.br")]
+        public string NFe_Components_PMacapaAP_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_PMacapaAP_IssWebWS"]));
             }
         }
     }

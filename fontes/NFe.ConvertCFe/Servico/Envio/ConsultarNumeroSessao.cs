@@ -64,12 +64,10 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Comunicar com o equipamento SAT
         /// </summary>
-        public override string Enviar()
+        public override void Enviar()
         {
             string resposta = Sat.ConsultarNumeroSessao(NumeroSessao);
             ConsultarRetorno = new Servicos.Retorno.ConsultarNumeroSessaoResponse(resposta);
-
-            return ConsultarRetorno.ToXML();
         }
 
         /// <summary>
@@ -78,12 +76,10 @@ namespace NFe.SAT.Servico.Envio
         public override string SaveResponse()
         {
             string result = Path.Combine(DadosEmpresa.PastaXmlRetorno,
-                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarNumeroSessaoSAT).EnvioXML) +
-                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarNumeroSessaoSAT).RetornoXML);
+                Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarNumeroSessaoSAT).EnvioXML) +
+                Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarNumeroSessaoSAT).RetornoXML);
 
-            using (StreamWriter writer = new StreamWriter(result))
-                writer.Write(ConsultarRetorno.ToXML());
-
+            File.WriteAllText(result, ConsultarRetorno.ToXML());
             File.Delete(ArquivoXML);
 
             return result;

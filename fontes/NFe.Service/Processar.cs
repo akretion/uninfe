@@ -37,7 +37,7 @@ namespace NFe.Service
                         ValidarExtensao(arquivo);
                     }
                     // Só vou validar a extensão em homologação, pois depois que o desenvolvedor fez toda a integração, acredito que ele não vá mais gerar extensões erradas, com isso evito ficar validando todas as vezes arquivos corretos. Wandrey 17/09/2016
-                    else if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taProducao)
+                    else if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao)
                     {
                         ValidarExtensao(arquivo);
                     }
@@ -133,6 +133,10 @@ namespace NFe.Service
 
                         case Servicos.InformeTrasmissaoSemMovimentoCfse:
                             DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskInformeTrasmissaoSemMovimentoCfse(arquivo));
+                            break;
+
+                        case Servicos.ConsultarDadosCadastroCfse:
+                            DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskConsultarDadosCadastroCfse(arquivo));
                             break;
 
                         #endregion CFS-e
@@ -920,6 +924,10 @@ namespace NFe.Service
                                 else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvInfSemMovCFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.InformeTrasmissaoSemMovimentoCfse;
+                                }
+                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsDadosCadCFSe).EnvioXML) >= 0)
+                                {
+                                    tipoServico = Servicos.ConsultarDadosCadastroCfse;
                                 }
 
                                 #endregion CFS-e

@@ -57,12 +57,10 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Comunicar com o equipamento SAT
         /// </summary>
-        public override string Enviar()
+        public override void Enviar()
         {
             string resposta = Sat.EnviarDadosVenda(DadosVendaEnvio);
             DadosVendaRetorno = new Servicos.Retorno.EnviarDadosVendaResponse(resposta);
-
-            return DadosVendaRetorno.ToXML();
         }
 
         /// <summary>
@@ -70,18 +68,17 @@ namespace NFe.SAT.Servico.Envio
         /// </summary>
         public override string SaveResponse()
         {
-            string xml = "";
+            string xml = string.Empty;
             string result = Path.Combine(DadosEmpresa.PastaXmlRetorno,
-                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnviarDadosVendaSAT).EnvioXML) +
-                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.EnviarDadosVendaSAT).RetornoXML);
-            using (StreamWriter writer = new StreamWriter(result))
-                writer.Write(DadosVendaRetorno.ToXML());
+                Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnviarDadosVendaSAT).EnvioXML) +
+                Propriedade.Extensao(Propriedade.TipoEnvio.EnviarDadosVendaSAT).RetornoXML);
+
+            File.WriteAllText(result, DadosVendaRetorno.ToXML());
 
             if (DadosVendaRetorno.CodigoMensagem.Equals("06000"))
             {
-                xml = Path.Combine(DadosEmpresa.PastaXmlRetorno, Path.GetFileName(ArquivoXML));
-                using (StreamWriter writer = new StreamWriter(xml))
-                    writer.Write(DadosVendaRetorno.ArquivoCFe);
+                xml = Path.Combine(DadosEmpresa.PastaXmlRetorno, DadosVendaRetorno.ChaveConsulta.Substring(3) + Propriedade.Extensao(Propriedade.TipoEnvio.EnviarDadosVendaSAT).EnvioXML);
+                File.WriteAllText(xml, DadosVendaRetorno.ArquivoCFe);
             }
 
             File.Delete(ArquivoXML);

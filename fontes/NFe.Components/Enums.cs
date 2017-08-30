@@ -329,6 +329,12 @@ namespace NFe.Components
         [Description("Enviar XML para informar que não teve movimento de CFS-e no dia")]
         InformeTrasmissaoSemMovimentoCfse,
 
+        /// <summary>
+        /// Consulta dados cadastro terminal CFS-e
+        /// </summary>
+        [Description("Enviar XML para consultar dados cadastros terminal CFS-e")]
+        ConsultarDadosCadastroCfse,
+
         #endregion CFSe
 
         #region MDFe
@@ -640,6 +646,13 @@ namespace NFe.Components
         /// </summary>
         [Description("Web ISS")]
         WEBISS,
+
+        /// <summary>
+        /// Padrão WEB ISS
+        /// Versão do XML 2.02
+        /// </summary>
+        [Description("Web ISS")]
+        WEBISS_202,        
 
         /// <summary>
         /// Padrão Nota Fiscal Eletrônica Paulistana -

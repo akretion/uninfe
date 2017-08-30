@@ -68,12 +68,10 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Comunicar com o equipamento SAT
         /// </summary>
-        public override string Enviar()
+        public override void Enviar()
         {
             string resposta = Sat.CancelarUltimaVenda(CNPJValue, AssinaturaCNPJs);
             AssociarAssinaturaRetorno = new Servicos.Retorno.AssociarAssinaturaResponse(resposta);
-
-            return AssociarAssinaturaRetorno.ToXML();
         }
 
         /// <summary>
@@ -81,16 +79,14 @@ namespace NFe.SAT.Servico.Envio
         /// </summary>
         public override string SaveResponse()
         {
-            string xml = "";
             string result = Path.Combine(DadosEmpresa.PastaXmlRetorno,
-                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.AssociarAssinaturaSAT).EnvioXML) +
-                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.AssociarAssinaturaSAT).RetornoXML);
-            using (StreamWriter writer = new StreamWriter(result))
-                writer.Write(AssociarAssinaturaRetorno.ToXML());
+                Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.AssociarAssinaturaSAT).EnvioXML) +
+                Propriedade.Extensao(Propriedade.TipoEnvio.AssociarAssinaturaSAT).RetornoXML);
 
+            File.WriteAllText(result, AssociarAssinaturaRetorno.ToXML());
             File.Delete(ArquivoXML);
 
-            return xml;
+            return result;
         }
     }
 }

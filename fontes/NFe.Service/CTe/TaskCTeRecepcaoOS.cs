@@ -157,26 +157,12 @@ namespace NFe.Service
         {
             /*
             vStrXmlRetorno = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-                "<retCTeOS versao=\"3.00\" xmlns=\"http://www.portalfiscal.inf.br/cte\">" +
-                "<tpAmb>2</tpAmb>" +
-                "<cUF>41</cUF>" +
-                "<verAplic>PR-v3_0_15</verAplic>" +
-                "<cStat>104</cStat>" +
-                "<xMotivo>CNPJ-Base do Emitente difere do CNPJ-Base do Certificado Digital</xMotivo>" +
-                "<protCTe versao=\"3.00\" xmlns=\"http://www.portalfiscal.inf.br/cte\">" +
-                "<infProt>" +
-                "<tpAmb>1</tpAmb>" +
-                "<verAplic>SP-CTe-22-12-2016</verAplic>" +
-                "<chCTe>35170324058391000163570010000124271905622690</chCTe>" +
-                "<dhRecbto>2017-03-30T10:31:36-03:00</dhRecbto>" +
-                "<nProt>135170934246653</nProt>" +
-                "<digVal>S8THE56EQhvOmAlzzIlLy6fkhXg=</digVal>" +
-                "<cStat>100</cStat>" +
-                "<xMotivo>Autorizado o uso do CT-e</xMotivo>" +
-                "</infProt>" +
-                "</protCTe>" +
-                "</retCTeOS>";
-                */
+                "<retCTeOS versao=\"3.00\" xmlns=\"http://www.portalfiscal.inf.br/cte\"><tpAmb>2</tpAmb><cUF>35</cUF><verAplic>SP-CTe-23-06-2017</verAplic><cStat>100</cStat><xMotivo>Autorizado o uso do CT-e</xMotivo><protCTe versao=\"3.00\"><infProt><tpAmb>2</tpAmb><verAplic>SP-CTe-23-06-2017</verAplic><chCTe>35170746014122000138670000000000061860795141</chCTe><dhRecbto>2017-07-21T09:52:19-03:00</dhRecbto><nProt>135170008578938</nProt><digVal>iYpkun2Ovm+sp+eMkzDtX6gtkzI=</digVal><cStat>100</cStat><xMotivo>Autorizado o uso do CT-e</xMotivo></infProt></protCTe></retCTeOS>";
+            */
+
+            /*
+            vStrXmlRetorno = "<retCTeOS versao=\"3.00\" xmlns=\"http://www.portalfiscal.inf.br/cte\"><tpAmb>2</tpAmb><cUF>35</cUF><verAplic>SP-CTe-23-06-2017</verAplic><cStat>100</cStat><xMotivo>Autorizado o uso do CT-e</xMotivo><protCTe versao=\"3.00\"><infProt><tpAmb>2</tpAmb><verAplic>SP-CTe-23-06-2017</verAplic><chCTe>35170746014122000138670000000000261309301440</chCTe><dhRecbto>2017-07-26T11:47:48-03:00</dhRecbto><nProt>135170008595733</nProt><digVal>XTkEEwjNnoYasDYz/VJ7HuZVUEo=</digVal><cStat>100</cStat><xMotivo>Autorizado o uso do CT-e</xMotivo></infProt></protCTe></retCTeOS>";
+            */
 
             var oLerXml = new LerXML();
 
@@ -247,6 +233,7 @@ namespace NFe.Service
                     #region Lote foi processado, agora tenho que tratar as notas fiscais dele
 
                     case "104": //Lote processado
+                    case "100": //Processo sincrono já retorna como 100
                         var protNFeList = retConsReciNFeElemento.GetElementsByTagName("protCTe");
 
                         foreach (XmlNode protNFeNode in protNFeList)

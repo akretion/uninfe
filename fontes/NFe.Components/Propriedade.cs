@@ -300,6 +300,7 @@ namespace NFe.Components
             EnvConfigTermCFSe,
             EnvInfManutCFSe,
             EnvInfSemMovCFSe,
+            ConsDadosCadCFSe,
 
             /// <summary>
             /// Extensões para SAT/CFe
@@ -669,6 +670,12 @@ namespace NFe.Components
                         "-infsemmovcfse.xml", "",
                         "-infsemmovcfse.err",
                         "Envio do XML para informar que não teve movimento de CFSe no dia"));
+
+                    ListaExtensoes.Add(TipoEnvio.ConsDadosCadCFSe, new ExtensaoClass(
+                        "-cons-dadoscadcfse.xml", "",
+                        "-dadoscadcfse.xml", "",
+                        "-dadoscadcfse.err",
+                        "Envio do XML para consultar dados cadastro terminal CFSe"));
 
                     #endregion Extensões CFSe
 

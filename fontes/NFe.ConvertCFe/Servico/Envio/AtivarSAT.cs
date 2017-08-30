@@ -75,12 +75,10 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Comunicar com o equipamento SAT
         /// </summary>
-        public override string Enviar()
+        public override void Enviar()
         {
             string resposta = Sat.AtivarSAT(SubComando, CNPJ, CodigoUF);
             AtivarSATRetorno = new Servicos.Retorno.AtivarSATResponse(resposta);
-
-            return AtivarSATRetorno.ToXML();
         }
 
         /// <summary>
@@ -88,16 +86,14 @@ namespace NFe.SAT.Servico.Envio
         /// </summary>
         public override string SaveResponse()
         {
-            string xml = "";
             string result = Path.Combine(DadosEmpresa.PastaXmlRetorno,
-                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.AtivarSAT).EnvioXML) +
-                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.AtivarSAT).RetornoXML);
-            using (StreamWriter writer = new StreamWriter(result))
-                writer.Write(AtivarSATRetorno.ToXML());
+                Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.AtivarSAT).EnvioXML) +
+                Propriedade.Extensao(Propriedade.TipoEnvio.AtivarSAT).RetornoXML);
 
+            File.WriteAllText(result, AtivarSATRetorno.ToXML());
             File.Delete(ArquivoXML);
 
-            return xml;
+            return result;
         }
     }
 }

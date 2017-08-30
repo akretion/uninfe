@@ -53,14 +53,13 @@ namespace NFe.SAT.Abstract.Servico
         /// Método responsável em transmitir a comunicação com o SAT
         /// </summary>
         /// <returns></returns>
-        public abstract string Enviar();
+        public abstract void Enviar();
 
         /// <summary>
         /// Método responsável por salvar o retorno do SAT
         /// </summary>
         /// <returns>caminho do arquivo de resposta</returns>
         public abstract string SaveResponse();
-
 
         /// <summary>
         /// Deserializar o objeto para string

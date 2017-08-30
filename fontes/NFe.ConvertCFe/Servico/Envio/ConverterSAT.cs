@@ -57,7 +57,7 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Comunicar com o equipamento SAT
         /// </summary>
-        public override string Enviar()
+        public override void Enviar()
         {
             ArquivoConvertido = Path.Combine(DadosEmpresa.PastaXmlRetorno,
                                              Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConverterSAT).EnvioXML) +
@@ -65,8 +65,6 @@ namespace NFe.SAT.Servico.Envio
 
             ConverterNFCe conversao = new ConverterNFCe(ArquivoXML, DadosEmpresa, ArquivoConvertido);
             conversao.ConverterSAT();
-
-            return ArquivoConvertido;
         }
 
         /// <summary>

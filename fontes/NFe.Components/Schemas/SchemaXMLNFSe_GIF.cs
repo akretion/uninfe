@@ -205,6 +205,17 @@ namespace NFSe.Components
                 TargetNameSpace = "http://ws.pc.gif.com.br/"
             });
 
+            SchemaXML.InfSchemas.Add("NFSE-GIF-4320008-pedCancelaNFSe", new InfSchema()
+            {
+                Tag = "pedCancelaNFSe",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\GIF\\NFSe-Infisc-SapucaiaDoSul_RS_v1.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "pedCancelaNFSe",
+                TagAtributoId = "CNPJ",
+                TargetNameSpace = "http://ws.pc.gif.com.br/"
+            });
+
             #endregion XML de Cancelamento de NFS-e
 
             #region XML de Consulta Situação do Lote RPS

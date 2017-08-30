@@ -87,6 +87,29 @@
         </xs:sequence>
         <xs:attribute name="Algorithm" type="xs:anyURI" use="required" />
       </xs:complexType>
+      <xs:complexType name="DSAKeyValueType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="P" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="Q" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="G" type="xs:base64Binary" />
+          <xs:element name="Y" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="J" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="Seed" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="PgenCounter" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="RSAKeyValueType">
+        <xs:sequence>
+          <xs:element name="Modulus" type="xs:base64Binary" />
+          <xs:element name="Exponent" type="xs:base64Binary" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ManifestType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="Reference" type="tns:ReferenceType" />
+        </xs:sequence>
+        <xs:attribute name="Id" type="xs:ID" />
+      </xs:complexType>
       <xs:complexType name="SignatureMethodType" mixed="true">
         <xs:sequence>
           <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -111,37 +134,6 @@
         </xs:sequence>
         <xs:attribute name="Id" type="xs:ID" />
       </xs:complexType>
-      <xs:complexType name="DSAKeyValueType">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="P" type="xs:base64Binary" />
-          <xs:element minOccurs="0" name="Q" type="xs:base64Binary" />
-          <xs:element minOccurs="0" name="G" type="xs:base64Binary" />
-          <xs:element name="Y" type="xs:base64Binary" />
-          <xs:element minOccurs="0" name="J" type="xs:base64Binary" />
-          <xs:element minOccurs="0" name="Seed" type="xs:base64Binary" />
-          <xs:element minOccurs="0" name="PgenCounter" type="xs:base64Binary" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="ManifestType">
-        <xs:sequence>
-          <xs:element maxOccurs="unbounded" name="Reference" type="tns:ReferenceType" />
-        </xs:sequence>
-        <xs:attribute name="Id" type="xs:ID" />
-      </xs:complexType>
-      <xs:complexType name="RSAKeyValueType">
-        <xs:sequence>
-          <xs:element name="Modulus" type="xs:base64Binary" />
-          <xs:element name="Exponent" type="xs:base64Binary" />
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="SPKIDataType">
-        <xs:sequence>
-          <xs:choice minOccurs="0" maxOccurs="unbounded">
-            <xs:element name="SPKISexp" type="xs:base64Binary" />
-            <xs:any namespace="##other" processContents="lax" />
-          </xs:choice>
-        </xs:sequence>
-      </xs:complexType>
       <xs:complexType name="KeyValueType" mixed="true">
         <xs:sequence>
           <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -150,6 +142,13 @@
             <xs:any namespace="##other" processContents="lax" />
           </xs:choice>
         </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="SignatureValueType">
+        <xs:simpleContent>
+          <xs:extension base="xs:base64Binary">
+            <xs:attribute name="Id" type="xs:ID" />
+          </xs:extension>
+        </xs:simpleContent>
       </xs:complexType>
       <xs:complexType name="X509DataType">
         <xs:sequence>
@@ -163,11 +162,10 @@
           </xs:choice>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="PGPDataType">
+      <xs:complexType name="SPKIDataType">
         <xs:sequence>
           <xs:choice minOccurs="0" maxOccurs="unbounded">
-            <xs:element name="PGPKeyID" type="xs:base64Binary" />
-            <xs:element name="PGPKeyPacket" type="xs:base64Binary" />
+            <xs:element name="SPKISexp" type="xs:base64Binary" />
             <xs:any namespace="##other" processContents="lax" />
           </xs:choice>
         </xs:sequence>
@@ -179,12 +177,14 @@
         <xs:attribute name="URI" type="xs:anyURI" />
         <xs:attribute name="Type" type="xs:anyURI" />
       </xs:complexType>
-      <xs:complexType name="SignatureValueType">
-        <xs:simpleContent>
-          <xs:extension base="xs:base64Binary">
-            <xs:attribute name="Id" type="xs:ID" />
-          </xs:extension>
-        </xs:simpleContent>
+      <xs:complexType name="PGPDataType">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="PGPKeyID" type="xs:base64Binary" />
+            <xs:element name="PGPKeyPacket" type="xs:base64Binary" />
+            <xs:any namespace="##other" processContents="lax" />
+          </xs:choice>
+        </xs:sequence>
       </xs:complexType>
       <xs:complexType name="X509IssuerSerialType">
         <xs:sequence>
@@ -192,17 +192,17 @@
           <xs:element name="X509SerialNumber" type="xs:integer" />
         </xs:sequence>
       </xs:complexType>
+      <xs:complexType name="SignaturePropertiesType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="SignatureProperty" type="tns:SignaturePropertyType" />
+        </xs:sequence>
+        <xs:attribute name="Id" type="xs:ID" />
+      </xs:complexType>
       <xs:complexType name="SignaturePropertyType" mixed="true">
         <xs:sequence>
           <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##other" processContents="lax" />
         </xs:sequence>
         <xs:attribute name="Target" type="xs:anyURI" use="required" />
-        <xs:attribute name="Id" type="xs:ID" />
-      </xs:complexType>
-      <xs:complexType name="SignaturePropertiesType">
-        <xs:sequence>
-          <xs:element maxOccurs="unbounded" name="SignatureProperty" type="tns:SignaturePropertyType" />
-        </xs:sequence>
         <xs:attribute name="Id" type="xs:ID" />
       </xs:complexType>
     </xs:schema>
@@ -1137,7 +1137,7 @@
   </wsdl:binding>
   <wsdl:service name="IssWebWS">
     <wsdl:port name="IssWebWSPort" binding="tns:IssWebWSSoapBinding">
-      <soap:address location="http://swb.corumba.ms.gov.br:8080/IssWeb-ejb/IssWebWS/IssWebWS" />
+      <soap:address location="http://nfse.corumba.ms.gov.br:8080/IssWeb-ejb/IssWebWS/IssWebWS" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

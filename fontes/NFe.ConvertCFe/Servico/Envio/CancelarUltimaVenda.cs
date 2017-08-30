@@ -65,12 +65,10 @@ namespace NFe.SAT.Servico.Envio
         /// <summary>
         /// Comunicar com o equipamento SAT
         /// </summary>
-        public override string Enviar()
+        public override void Enviar()
         {
             string resposta = Sat.CancelarUltimaVenda(ChaveAcessoVenda, CancelarUltimaVendaEnvio);
             CancelarUltimaVendaRetorno = new Servicos.Retorno.CancelarUltimaVendaResponse(resposta);
-
-            return CancelarUltimaVendaRetorno.ToXML();
         }
 
         /// <summary>
@@ -78,18 +76,17 @@ namespace NFe.SAT.Servico.Envio
         /// </summary>
         public override string SaveResponse()
         {
-            string xml = "";
+            string xml = string.Empty;
             string result = Path.Combine(DadosEmpresa.PastaXmlRetorno,
-                                         Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.CancelarUltimaVendaSAT).EnvioXML) +
-                                                                              Propriedade.Extensao(Propriedade.TipoEnvio.CancelarUltimaVendaSAT).RetornoXML);
-            using (StreamWriter writer = new StreamWriter(result))
-                writer.Write(CancelarUltimaVendaRetorno.ToXML());
+                Functions.ExtrairNomeArq(ArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.CancelarUltimaVendaSAT).EnvioXML) +
+                Propriedade.Extensao(Propriedade.TipoEnvio.CancelarUltimaVendaSAT).RetornoXML);
+
+            File.WriteAllText(result, CancelarUltimaVendaRetorno.ToXML());
 
             if (CancelarUltimaVendaRetorno.CodigoMensagem.Equals("07000"))
             {
                 xml = Path.Combine(DadosEmpresa.PastaXmlRetorno, Path.GetFileName(ArquivoXML));
-                using (StreamWriter writer = new StreamWriter(xml))
-                    writer.Write(CancelarUltimaVendaRetorno.ArquivoCFe);
+                File.WriteAllText(xml, CancelarUltimaVendaRetorno.ArquivoCFe);
             }
 
             File.Delete(ArquivoXML);

@@ -53,6 +53,10 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new MogiGuacuSP.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
+                            case 3507506: //Botucatu-SP
+                                sigCorpService = new BotucatuSP.h.SigCorpH(tpAmb, PastaRetorno);
+                                break;
+
                             default:
                                 throw new Exception("Município não possui ambiente de homologação (padrão SIGCORP/SIGISS).");
                         }
