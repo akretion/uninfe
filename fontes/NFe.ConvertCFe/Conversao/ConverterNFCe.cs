@@ -110,7 +110,7 @@ namespace NFe.SAT.Conversao
                     det = PopularProdutos(),
                     total = new envCFeCFeInfCFeTotal
                     {
-                        vCFeLei12741 = GetValueXML("ICMSTot", "vNF")
+                        vCFeLei12741 = GetValueXML("ICMSTot", "vTotTrib")
                     },
                     entrega = new envCFeCFeInfCFeEntrega
                     {

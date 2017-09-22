@@ -1,36 +1,40 @@
-﻿using System;
-using System.IO;
+﻿using NFe.Certificado;
 using NFe.Components;
-using NFe.Settings;
-using NFe.Certificado;
-using NFSe.Components;
-using NFe.Components.SimplISS;
 using NFe.Components.EGoverne;
 using NFe.Components.EL;
 using NFe.Components.FISSLEX;
 using NFe.Components.Memory;
 using NFe.Components.Metropolis;
 using NFe.Components.Pronin;
+using NFe.Components.SimplISS;
+using NFe.Components.Tinus;
+using NFe.Settings;
+using NFSe.Components;
+using System;
+using System.IO;
 
 namespace NFe.Service.NFSe
 {
     public class TaskNFSeConsultaSituacaoLoteRps : TaskAbst
     {
         #region Objeto com os dados do XML de consulta situação do lote rps
+
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s do pedido de consulta da situação do lote rps
         /// </summary>
         private DadosPedSitLoteRps oDadosPedSitLoteRps;
-        #endregion
+
+        #endregion Objeto com os dados do XML de consulta situação do lote rps
 
         #region Execute
+
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
 
             ///
             /// extensao permitida: PedSitLoteRps = "-ped-sitloterps.xml";
-            /// 
+            ///
             /// Definir o serviço que será executado para a classe
             Servico = Servicos.NFSeConsultarSituacaoLoteRps;
 
@@ -70,7 +74,7 @@ namespace NFe.Service.NFSe
                                 cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                                 break;
 
-                            case 4125506: //São José dos Pinhais - PR  
+                            case 4125506: //São José dos Pinhais - PR
                                 cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://nfe.sjp.pr.gov.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                                 break;
 
@@ -81,7 +85,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.BETHA:
+
                         #region Betha
+
                         ConteudoXML.PreserveWhitespace = false;
                         ConteudoXML.Load(NomeArquivoXML);
 
@@ -105,7 +111,8 @@ namespace NFe.Service.NFSe
                             wsProxy.Betha = new Betha();
                         }
                         break;
-                    #endregion
+
+                    #endregion Betha
 
                     case PadroesNFSe.ABACO:
                     case PadroesNFSe.CANOAS_RS:
@@ -146,7 +153,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.EGOVERNE:
+
                         #region E-Governe
+
                         EGoverne egoverne = new EGoverne((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                         oDadosPedSitLoteRps.cMunicipio,
@@ -160,10 +169,13 @@ namespace NFe.Service.NFSe
 
                         egoverne.ConsultarSituacaoLoteRps(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion E-Governe
 
                     case PadroesNFSe.EL:
+
                         #region E&L
+
                         EL el = new EL((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                         oDadosPedSitLoteRps.cMunicipio,
@@ -175,7 +187,8 @@ namespace NFe.Service.NFSe
 
                         el.ConsultarSituacaoLoteRps(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion E&L
 
                     case PadroesNFSe.EQUIPLANO:
                         cabecMsg = "1";
@@ -220,7 +233,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.MEMORY:
+
                         #region Memory
+
                         Memory memory = new Memory((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosPedSitLoteRps.cMunicipio,
@@ -232,10 +247,13 @@ namespace NFe.Service.NFSe
 
                         memory.CancelarNfse(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion Memory
 
                     case PadroesNFSe.METROPOLIS:
+
                         #region METROPOLIS
+
                         Metropolis metropolis = new Metropolis((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                       Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                       oDadosPedSitLoteRps.cMunicipio,
@@ -249,10 +267,13 @@ namespace NFe.Service.NFSe
 
                         metropolis.ConsultarSituacaoLoteRps(NomeArquivoXML);
                         break;
-                    #endregion
+
+                    #endregion METROPOLIS
 
                     case PadroesNFSe.PRONIN:
-                        if (oDadosPedSitLoteRps.cMunicipio == 4109401)
+                        if (oDadosPedSitLoteRps.cMunicipio == 4109401 ||
+                            oDadosPedSitLoteRps.cMunicipio == 3131703 || 
+                            oDadosPedSitLoteRps.cMunicipio == 4303004)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -268,6 +289,23 @@ namespace NFe.Service.NFSe
                             pronin.ConsultarSituacaoLoteRps(NomeArquivoXML);
                         }
                         break;
+
+                    case PadroesNFSe.TINUS:
+
+                        #region Tinus
+
+                        Tinus tinus = new Tinus((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            oDadosPedSitLoteRps.cMunicipio,
+                            ConfiguracaoApp.ProxyUsuario,
+                            ConfiguracaoApp.ProxySenha,
+                            ConfiguracaoApp.ProxyServidor,
+                            Empresas.Configuracoes[emp].X509Certificado);
+
+                        tinus.ConsultarSituacaoLoteRps(NomeArquivoXML);
+                        break;
+
+                        #endregion Tinus
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, oDadosPedSitLoteRps.cMunicipio))
@@ -279,8 +317,8 @@ namespace NFe.Service.NFSe
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.InvocarNFSe(wsProxy, pedSitLoteRps, NomeMetodoWS(Servico, oDadosPedSitLoteRps.cMunicipio),
                                             cabecMsg, this,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML, //"-ped-sitloterps", 
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).RetornoXML,  //"-sitloterps", 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML, //"-ped-sitloterps",
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).RetornoXML,  //"-sitloterps",
                                             padraoNFSe, Servico, securityProtocolType);
 
                     ///
@@ -318,9 +356,11 @@ namespace NFe.Service.NFSe
                 }
             }
         }
-        #endregion
+
+        #endregion Execute
 
         #region PedSitLoteRps()
+
         /// <summary>
         /// Fazer a leitura do conteúdo do XML de consulta situação do lote rps e disponibilizar conteúdo em um objeto para analise
         /// </summary>
@@ -339,7 +379,7 @@ namespace NFe.Service.NFSe
             //    XmlElement infConsElemento = (XmlElement)infConsNode;
             //}
         }
-        #endregion
 
+        #endregion PedSitLoteRps()
     }
 }

@@ -94,6 +94,10 @@ namespace NFe.Components
                             padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4109401-";
                             break;
 
+                        //case 3131703: //Itabira-MG
+                        //    padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3131703-";
+                        //    break;
+
                         case 202: //BETHA 2.02
                             padraoNFSe = PadroesNFSe.BETHA.ToString() + "-202-";
                             break;

@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NFe.Components.Abstract;
-using System.Reflection;
+﻿using NFe.Components.Abstract;
 using System.Security.Cryptography.X509Certificates;
-using System.IO;
-using System.Xml.Serialization;
-using System.Xml;
 
 namespace NFe.Components.Pronin
 {
     public abstract class ProninBase : EmiteNFSeBase
     {
         #region locais/ protegidos
-        int CodigoMun = 0;
-        string UsuarioProxy = "";
-        string SenhaProxy = "";
-        string DomainProxy = "";
-        X509Certificate Certificado = null;
-        EmiteNFSeBase proninService;
+        private int CodigoMun = 0;
+        private string UsuarioProxy = "";
+        private string SenhaProxy = "";
+        private string DomainProxy = "";
+        private X509Certificate Certificado = null;
+        private EmiteNFSeBase proninService;
+
         protected EmiteNFSeBase ProninService
         {
             get
@@ -33,6 +26,13 @@ namespace NFe.Components.Pronin
                                 proninService = new GuarapuavaPR.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
+                            case 3131703: //Itabira-MG
+                                proninService = new ItabiraMG.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+                            case 4303004: //Cachoeira do Sul-RS
+                                proninService = new CachoeiraSulRS.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -43,6 +43,14 @@ namespace NFe.Components.Pronin
                                 proninService = new GuarapuavaPR.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
+                            case 3131703: //Itabira-MG
+                                proninService = new ItabiraMG.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
+                            case 4303004: //Cachoeira do Sul-RS
+                                proninService = new CachoeiraSulRS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -50,9 +58,11 @@ namespace NFe.Components.Pronin
                 return proninService;
             }
         }
-        #endregion
+
+        #endregion locais/ protegidos
 
         #region Construtores
+
         public ProninBase(TipoAmbiente tpAmb, string pastaRetorno, int codMun, string usuarioProxy, string senhaProxy, string domainProxy, X509Certificate certificado)
             : base(tpAmb, pastaRetorno)
         {
@@ -61,11 +71,12 @@ namespace NFe.Components.Pronin
             SenhaProxy = senhaProxy;
             DomainProxy = domainProxy;
             Certificado = certificado;
-            
         }
-        #endregion
+
+        #endregion Construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
             ProninService.EmiteNF(file);
@@ -95,8 +106,7 @@ namespace NFe.Components.Pronin
         {
             ProninService.ConsultarNfsePorRps(file);
         }
-        #endregion
 
-
+        #endregion Métodos
     }
 }

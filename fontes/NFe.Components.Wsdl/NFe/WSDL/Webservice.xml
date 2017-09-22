@@ -110,10 +110,10 @@
   </Estado>
   <Estado ID="13" Nome="Amazonas" UF="AM" SVC="teSVCRS">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\AM\HAMNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\AM\HAMNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\AM\HAMNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\AM\HAMCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\AM\HAMNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\AM\HAMNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\AM\HAMNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\AM\HAMCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\AM\HAMRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>

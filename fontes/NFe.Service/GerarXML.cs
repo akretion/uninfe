@@ -1396,7 +1396,7 @@ namespace NFe.Service
                                 ConteudoRetorno += (string.IsNullOrEmpty(infCadNode.ender.xCpl) ? "" : infCadNode.ender.xCpl.Replace(";", " ")) + ";";
                                 ConteudoRetorno += infCadNode.ender.xBairro.Replace(";", " ") + ";";
                                 ConteudoRetorno += infCadNode.ender.cMun.ToString("0000000") + ";";
-                                ConteudoRetorno += infCadNode.ender.xMun.Replace(";", " ") + ";";
+                                ConteudoRetorno += (string.IsNullOrEmpty(infCadNode.ender.xMun) ? "" : infCadNode.ender.xMun.Replace(";", " ")) + ";";
                                 ConteudoRetorno += infCadNode.ender.CEP.ToString("00000000") + ";";
                                 ConteudoRetorno += "\r\r";
                             }

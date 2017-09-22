@@ -5,6 +5,7 @@ using NFe.Components.Conam;
 using NFe.Components.EGoverne;
 using NFe.Components.EL;
 using NFe.Components.Fiorilli;
+using NFe.Components.Tinus;
 using NFe.Components.FISSLEX;
 using NFe.Components.GovDigital;
 using NFe.Components.Memory;
@@ -346,7 +347,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.PRONIN:
-                        if (ler.oDadosPedSitNfseRps.cMunicipio == 4109401)
+                        if (ler.oDadosPedSitNfseRps.cMunicipio == 4109401 ||
+                            ler.oDadosPedSitNfseRps.cMunicipio == 3131703 ||
+                            ler.oDadosPedSitNfseRps.cMunicipio == 4303004)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -384,6 +387,23 @@ namespace NFe.Service.NFSe
 
                         coplan.ConsultarLoteRps(NomeArquivoXML);
                         break;
+
+                    case PadroesNFSe.TINUS:
+
+                        #region Tinus
+
+                        Tinus tinus = new Tinus((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            ler.oDadosPedSitNfseRps.cMunicipio,
+                            ConfiguracaoApp.ProxyUsuario,
+                            ConfiguracaoApp.ProxySenha,
+                            ConfiguracaoApp.ProxyServidor,
+                            Empresas.Configuracoes[emp].X509Certificado);
+
+                        tinus.ConsultarLoteRps(NomeArquivoXML);
+                        break;
+
+                        #endregion Tinus
                 }
 
                 if (base.IsInvocar(padraoNFSe, Servico, ler.oDadosPedSitNfseRps.cMunicipio))

@@ -145,19 +145,25 @@ namespace NFe.Components
                         switch (servico)
                         {
                             case Servicos.NFSeCancelar:
-                                if (cMunicipio == 4109401)
+                                if (cMunicipio == 4109401 || 
+                                    cMunicipio == 3131703 ||
+                                    cMunicipio == 4303004)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
 
                             case Servicos.NFSeRecepcionarLoteRps:
-                                if (cMunicipio == 4109401)
+                                if (cMunicipio == 4109401 || 
+                                    cMunicipio == 3131703 ||
+                                    cMunicipio == 4303004)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
 
                             default:
-                                if (cMunicipio == 4109401)
+                                if (cMunicipio == 4109401 || 
+                                    cMunicipio == 3131703 ||
+                                    cMunicipio == 4303004)
                                     return "BasicHttpBinding_INFSEConsultas";
                                 else
                                     return "basic_INFSEConsultas";
@@ -185,7 +191,6 @@ namespace NFe.Components
                         return "WebService";
 
                     #endregion FINTEL
-
                     default:
                         return _NomeClasseWS;
                 }

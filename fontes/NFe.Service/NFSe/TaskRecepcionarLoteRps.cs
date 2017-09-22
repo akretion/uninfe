@@ -9,6 +9,7 @@ using NFe.Components.EGoverneISS;
 using NFe.Components.EL;
 using NFe.Components.EloTech;
 using NFe.Components.Fiorilli;
+using NFe.Components.Tinus;
 using NFe.Components.GovDigital;
 using NFe.Components.Memory;
 using NFe.Components.Metropolis;
@@ -561,7 +562,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.PRONIN:
-                        if (oDadosEnvLoteRps.cMunicipio == 4109401)
+                        if (oDadosEnvLoteRps.cMunicipio == 4109401 ||
+                            oDadosEnvLoteRps.cMunicipio == 3131703 ||
+                            oDadosEnvLoteRps.cMunicipio == 4303004)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -614,7 +617,27 @@ namespace NFe.Service.NFSe
                         bauru_SP.EmiteNF(NomeArquivoXML);
                         break;
 
-                        #endregion BAURU_SP
+                    #endregion BAURU_SP
+
+                    case PadroesNFSe.TINUS:
+
+                        #region Tinus
+
+                        Tinus tinus = new Tinus((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            oDadosEnvLoteRps.cMunicipio,
+                            ConfiguracaoApp.ProxyUsuario,
+                            ConfiguracaoApp.ProxySenha,
+                            ConfiguracaoApp.ProxyServidor,
+                            Empresas.Configuracoes[emp].X509Certificado);
+
+                        AssinaturaDigital tinusAss = new AssinaturaDigital();
+                        tinusAss.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
+
+                        tinus.EmiteNF(NomeArquivoXML);
+                        break;
+
+                        #endregion Tinus
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))

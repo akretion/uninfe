@@ -1842,7 +1842,7 @@ namespace NFe.Settings
 
             try
             {
-                if (ExcluirEmpresa(cArquivoXml))
+                if (Path.GetExtension(cArquivoXml).ToLower() != ".txt" && ExcluirEmpresa(cArquivoXml))
                 {
                     cStat = "1";
                     xMotivo = "Empresa excluída com sucesso";

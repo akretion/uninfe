@@ -17,6 +17,7 @@ using NFe.Components.Pronin;
 using NFe.Components.SigCorp;
 using NFe.Components.SimplISS;
 using NFe.Components.SystemPro;
+using NFe.Components.Tinus;
 using NFe.Settings;
 using NFSe.Components;
 using System;
@@ -440,7 +441,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.PRONIN:
-                        if (oDadosPedCanNfse.cMunicipio == 4109401)
+                        if (oDadosPedCanNfse.cMunicipio == 4109401 ||
+                            oDadosPedCanNfse.cMunicipio == 3131703 ||
+                            oDadosPedCanNfse.cMunicipio == 4303004)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -453,7 +456,7 @@ namespace NFe.Service.NFSe
                             AssinaturaDigital assPronin = new AssinaturaDigital();
                             assPronin.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
 
-                            pronin.EmiteNF(NomeArquivoXML);
+                            pronin.CancelarNfse(NomeArquivoXML);
                         }
                         break;
 
@@ -488,6 +491,26 @@ namespace NFe.Service.NFSe
                             throw new Exception("Município de Cariacica-ES não permite cancelamento de NFS-e via webservice.");
                         }
                         break;
+
+                    case PadroesNFSe.TINUS:
+
+                        #region Tinus
+
+                        Tinus tinus = new Tinus((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            oDadosPedCanNfse.cMunicipio,
+                            ConfiguracaoApp.ProxyUsuario,
+                            ConfiguracaoApp.ProxySenha,
+                            ConfiguracaoApp.ProxyServidor,
+                            Empresas.Configuracoes[emp].X509Certificado);
+
+                        AssinaturaDigital tinusAss = new AssinaturaDigital();
+                        tinusAss.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
+
+                        tinus.CancelarNfse(NomeArquivoXML);
+                        break;
+
+                        #endregion Tinus
                 }
 
                 if (IsInvocar(padraoNFSe))

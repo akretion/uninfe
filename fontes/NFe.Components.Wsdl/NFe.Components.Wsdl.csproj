@@ -290,11 +290,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeInutilizacao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRecepcao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetRecepcao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeStatusServico2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeConsulta.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeInutilizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRecepcao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetRecepcao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeStatusServico.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMRecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBACadConsultaCadastro.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeConsulta.wsdl" />
@@ -1048,7 +1048,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\ES\HESNfeCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\ES\PESNfeCadConsultaCadastro2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMCadConsultaCadastro2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMCadConsultaCadastro.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\SALVADOR_BA\DadosComplementares.xsd">
       <SubType>Designer</SubType>
@@ -1819,12 +1819,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeAutorizacao_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeConsulta2_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeInutilizacao2_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRecepcao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeConsulta_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeInutilizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRecepcao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetAutorizacao_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetRecepcao2_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeStatusServico2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetRecepcao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeStatusServico_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMRecepcaoEvento_C.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -3390,6 +3390,12 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeInutilizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeRetAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeStatusServico_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeConsulta_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeInutilizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeStatusServico_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMRecepcaoEvento_400.wsdl" />
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -3595,6 +3601,17 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HItabiraMG-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PItabiraMG-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PRolandiaPR-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_CancelarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_ConsultarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\TINUS\nfsetempuri.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCachoeiraSulRS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCachoeiraSulRS-PRONIN.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

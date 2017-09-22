@@ -2412,7 +2412,9 @@ namespace NFe.Service
             switch (padrao)
             {
                 case PadroesNFSe.PRONIN:
-                    if (cMunicipio == 4109401)
+                    if (cMunicipio == 4109401 ||
+                        cMunicipio == 3131703 ||
+                        cMunicipio == 4303004)
                         retorno = false;
                     break;
 
@@ -2430,6 +2432,7 @@ namespace NFe.Service
                 case PadroesNFSe.SYSTEMPRO:
                 case PadroesNFSe.SIGCORP_SIGISS:
                 case PadroesNFSe.FIORILLI:
+                case PadroesNFSe.TINUS:
                 case PadroesNFSe.CONAM:
                 case PadroesNFSe.SIMPLISS:
                 case PadroesNFSe.RLZ_INFORMATICA:

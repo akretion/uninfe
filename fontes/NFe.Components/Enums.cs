@@ -652,7 +652,7 @@ namespace NFe.Components
         /// Versão do XML 2.02
         /// </summary>
         [Description("Web ISS")]
-        WEBISS_202,        
+        WEBISS_202,
 
         /// <summary>
         /// Padrão Nota Fiscal Eletrônica Paulistana -
@@ -984,7 +984,13 @@ namespace NFe.Components
         /// Padrão utilizado pela prefeitura de Bauru-SP
         /// </summary>
         [Description("BAURU_SP")]
-        BAURU_SP
+        BAURU_SP,
+
+        /// <summary>
+        /// Padrão utilizado pela prefeitura de Jaboatão dos Guararapes-PE
+        /// </summary>
+        [Description("TINUS")]
+        TINUS
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
