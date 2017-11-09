@@ -10,6 +10,8 @@ namespace NFe.Service
 {
     public class TaskCTeRecepcaoOS : TaskAbst
     {
+        private Int32 NumeroLote;
+
         public TaskCTeRecepcaoOS(string arquivo)
         {
             Servico = Servicos.CteRecepcaoOS;
@@ -81,7 +83,7 @@ namespace NFe.Service
                     NomeArquivoXML = arqEmProcessamento;
                 }
 
-                Int32 numeroLote = oGerarXML.GerarLoteCTeOS(NomeArquivoXML);
+                NumeroLote = oGerarXML.GerarLoteCTeOS(NomeArquivoXML);
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy,
@@ -103,7 +105,7 @@ namespace NFe.Service
                               Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML,
                               vStrXmlRetorno,
                               Empresas.Configuracoes[emp].PastaXmlRetorno,
-                              numeroLote.ToString("000000000000000") + Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML);
+                              NumeroLote.ToString("000000000000000") + Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML);
 
                 #endregion Parte que trata o retorno do lote, ou seja, o número do recibo
             }
@@ -115,7 +117,7 @@ namespace NFe.Service
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML, Propriedade.ExtRetorno.ProRec_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML, Propriedade.ExtRetorno.ProRec_ERR, ex, NumeroLote.ToString("000000000000000") + Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML);
                 }
                 catch
                 {
@@ -128,7 +130,7 @@ namespace NFe.Service
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML, Propriedade.ExtRetorno.ProRec_ERR, ex, false);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML, Propriedade.ExtRetorno.ProRec_ERR, ex, NumeroLote.ToString("000000000000000") + Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML);
                 }
                 catch
                 {
@@ -141,7 +143,7 @@ namespace NFe.Service
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML, Propriedade.ExtRetorno.ProRec_ERR, ex);
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML, Propriedade.ExtRetorno.ProRec_ERR, ex, NumeroLote.ToString("000000000000000") + Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML);
                 }
                 catch
                 {

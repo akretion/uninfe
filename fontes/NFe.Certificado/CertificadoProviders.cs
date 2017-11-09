@@ -46,6 +46,9 @@ namespace NFe.Certificado
             PIN = pin;
             IsA3 = Certificado.IsA3();
             ProviderIdentificado = false;
+
+            if (!Directory.Exists(folderTemp + "\\temp"))
+                Directory.CreateDirectory(Path.GetFullPath(folderTemp + "\\temp"));
         }
         #endregion
 

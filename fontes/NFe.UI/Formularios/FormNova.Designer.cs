@@ -47,7 +47,7 @@
             this.lblCNPJ.Location = new System.Drawing.Point(11, 15);
             this.lblCNPJ.Margin = new System.Windows.Forms.Padding(3);
             this.lblCNPJ.Name = "lblCNPJ";
-            this.lblCNPJ.Size = new System.Drawing.Size(34, 15);
+            this.lblCNPJ.Size = new System.Drawing.Size(33, 15);
             this.lblCNPJ.TabIndex = 0;
             this.lblCNPJ.Text = "CNPJ";
             // 
@@ -107,7 +107,7 @@
             this.cbServico.Location = new System.Drawing.Point(11, 130);
             this.cbServico.MaxDropDownItems = 15;
             this.cbServico.Name = "cbServico";
-            this.cbServico.Size = new System.Drawing.Size(174, 25);
+            this.cbServico.Size = new System.Drawing.Size(300, 25);
             this.cbServico.TabIndex = 5;
             this.cbServico.UseSelectable = true;
             // 
@@ -118,7 +118,7 @@
             this.metroLabel19.Location = new System.Drawing.Point(11, 112);
             this.metroLabel19.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel19.Name = "metroLabel19";
-            this.metroLabel19.Size = new System.Drawing.Size(42, 15);
+            this.metroLabel19.Size = new System.Drawing.Size(43, 15);
             this.metroLabel19.TabIndex = 4;
             this.metroLabel19.Text = "Serviço";
             // 

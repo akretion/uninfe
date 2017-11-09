@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace NFe.Components
@@ -14,6 +12,7 @@ namespace NFe.Components
         /// Informações dos schemas para validação dos XML
         /// </summary>
         public static Dictionary<string, InfSchema> InfSchemas = new Dictionary<string, InfSchema>();
+
         /// <summary>
         /// O Maior ID que tem na lista
         /// </summary>
@@ -30,7 +29,7 @@ namespace NFe.Components
 
             ///
             /// le todas as classes no projeto para ler as definicoes dos schemas
-            /// 
+            ///
             System.Reflection.Assembly ass = System.Reflection.Assembly.GetExecutingAssembly();
             var xx = ass.GetTypes().Where(p => p.IsClass && (p.Name.StartsWith("SchemaXML_") || p.Name.StartsWith("SchemaXMLNFSe_")));
             foreach (var h1 in xx)
@@ -47,34 +46,42 @@ namespace NFe.Components
         /// TAG do XML que identifica qual XML é
         /// </summary>
         public string Tag { get; set; }
+
         /// <summary>
-        /// Identificador único numérico do XML 
+        /// Identificador único numérico do XML
         /// </summary>
         public int ID { get; set; }
+
         /// <summary>
         /// Breve descrição do arquivo XML
         /// </summary>
         public string Descricao { get; set; }
+
         /// <summary>
         /// Nome do arquivo de schema para validar o XML
         /// </summary>
         public string ArquivoXSD { get; set; }
+
         /// <summary>
         /// Nome da tag do XML que será assinada
         /// </summary>
         public string TagAssinatura { get; set; }
+
         /// <summary>
         /// Nome da tag que tem o atributo ID
         /// </summary>
         public string TagAtributoId { get; set; }
+
         /// <summary>
         /// Nome da tag de lote do XML que será assinada
         /// </summary>
         public string TagLoteAssinatura { get; set; }
+
         /// <summary>
         /// Nome da tag de lote que tem o atributo ID
         /// </summary>
         public string TagLoteAtributoId { get; set; }
+
         /// <summary>
         /// URL do schema de cada XML
         /// </summary>

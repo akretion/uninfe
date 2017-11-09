@@ -1479,21 +1479,47 @@ namespace NFe.Settings
                     #region Verificar se tem alguma pasta em branco
 
                     List<xValid> _xValids = new List<xValid>();
-                    _xValids.Add(new xValid(empresa.PastaXmlEnvio, "Informe a pasta de envio dos arquivos XML.", "A pasta de envio dos arquivos XML informada não existe.", true));
-                    _xValids.Add(new xValid(empresa.PastaXmlRetorno, "Informe a pasta de envio dos arquivos XML.", "A pasta de retorno dos arquivos XML informada não existe.", true));
-                    _xValids.Add(new xValid(empresa.PastaXmlErro, "Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.", "A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.", true));
-                    _xValids.Add(new xValid(empresa.PastaValidar, "Informe a pasta onde será gravado os arquivos XML somente para ser validado pela aplicação.", "A pasta para validação de XML´s informada não existe.", true));
-                    if (empresa.Servico != TipoAplicativo.Nfse)
-                    {
-                        _xValids.Add(new xValid(empresa.PastaXmlEmLote, "Informe a pasta de envio dos arquivos XML em lote.", "A pasta de envio das notas fiscais eletrônicas em lote informada não existe.", true));
-                        _xValids.Add(new xValid(empresa.PastaXmlEnviado, "Informe a pasta para arquivamento dos arquivos XML enviados.", "A pasta para arquivamento dos arquivos XML enviados informada não existe.", true));
 
-                        _xValids.Add(new xValid(empresa.PastaBackup, "", "A pasta para backup dos XML enviados informada não existe.", false));
-                        _xValids.Add(new xValid(empresa.PastaDownloadNFeDest, "", "A pasta para arquivamento das NFe de destinatários informada não existe.", false));
-                        _xValids.Add(new xValid(empresa.PastaDanfeMon, "", "A pasta informada para gravação do XML da NFe para o DANFeMon não existe.", false));
-                        _xValids.Add(new xValid(empresa.PastaExeUniDanfe, "", "A pasta do executável do UniDANFe informada não existe.", false));
-                        _xValids.Add(new xValid(empresa.PastaConfigUniDanfe, "", "A pasta do arquivo de configurações do UniDANFe informada não existe.", false));
+                    switch (empresa.Servico)
+                    {
+                        case TipoAplicativo.Nfse:
+                            _xValids.Add(new xValid(empresa.PastaXmlEnvio, "Informe a pasta de envio dos arquivos XML.", "A pasta de envio dos arquivos XML informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaXmlRetorno, "Informe a pasta de envio dos arquivos XML.", "A pasta de retorno dos arquivos XML informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaXmlErro, "Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.", "A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaValidar, "Informe a pasta onde será gravado os arquivos XML somente para ser validado pela aplicação.", "A pasta para validação de XML´s informada não existe.", true));
+                            break;
+                        case TipoAplicativo.EFDReinf:
+                        case TipoAplicativo.eSocial:
+                        case TipoAplicativo.EFDReinfeSocial:
+                            _xValids.Add(new xValid(empresa.PastaXmlEnvio, "Informe a pasta de envio dos arquivos XML.", "A pasta de envio dos arquivos XML informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaXmlRetorno, "Informe a pasta de envio dos arquivos XML.", "A pasta de retorno dos arquivos XML informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaXmlErro, "Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.", "A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaValidar, "Informe a pasta onde será gravado os arquivos XML somente para ser validado pela aplicação.", "A pasta para validação de XML´s informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaXmlEnviado, "Informe a pasta para arquivamento dos arquivos XML enviados.", "A pasta para arquivamento dos arquivos XML enviados informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaBackup, "", "A pasta para backup dos XML enviados informada não existe.", false));
+                            break;
+                        case TipoAplicativo.Nfe:
+                        case TipoAplicativo.Cte:
+                        case TipoAplicativo.MDFe:
+                        case TipoAplicativo.NFCe:
+                        case TipoAplicativo.SAT:
+                        case TipoAplicativo.Todos:
+                        case TipoAplicativo.Nulo:
+                        default:
+                            _xValids.Add(new xValid(empresa.PastaXmlEnvio, "Informe a pasta de envio dos arquivos XML.", "A pasta de envio dos arquivos XML informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaXmlRetorno, "Informe a pasta de envio dos arquivos XML.", "A pasta de retorno dos arquivos XML informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaXmlErro, "Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.", "A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaValidar, "Informe a pasta onde será gravado os arquivos XML somente para ser validado pela aplicação.", "A pasta para validação de XML´s informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaXmlEmLote, "Informe a pasta de envio dos arquivos XML em lote.", "A pasta de envio das notas fiscais eletrônicas em lote informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaXmlEnviado, "Informe a pasta para arquivamento dos arquivos XML enviados.", "A pasta para arquivamento dos arquivos XML enviados informada não existe.", true));
+                            _xValids.Add(new xValid(empresa.PastaBackup, "", "A pasta para backup dos XML enviados informada não existe.", false));
+                            _xValids.Add(new xValid(empresa.PastaDownloadNFeDest, "", "A pasta para arquivamento das NFe de destinatários informada não existe.", false));
+                            _xValids.Add(new xValid(empresa.PastaDanfeMon, "", "A pasta informada para gravação do XML da NFe para o DANFeMon não existe.", false));
+                            _xValids.Add(new xValid(empresa.PastaExeUniDanfe, "", "A pasta do executável do UniDANFe informada não existe.", false));
+                            _xValids.Add(new xValid(empresa.PastaConfigUniDanfe, "", "A pasta do arquivo de configurações do UniDANFe informada não existe.", false));
+                            break;
                     }
+
                     foreach (var val in _xValids)
                     {
                         if (val.valid && string.IsNullOrEmpty(val.folder))

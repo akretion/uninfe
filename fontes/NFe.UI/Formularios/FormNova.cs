@@ -33,7 +33,7 @@ namespace NFe.UI.Formularios
 
             this.Text = NFe.Components.Propriedade.NomeAplicacao + " - Nova empresa";
 
-            this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo(true);
+            this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo(false);
             this.cbServico.DisplayMember = "Value";
             this.cbServico.ValueMember = "Key";
             this.cbServico.Enabled = true;

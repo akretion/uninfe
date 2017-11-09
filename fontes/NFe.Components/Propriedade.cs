@@ -349,7 +349,17 @@ namespace NFe.Components
             sair_XML,
             pedLayouts,
             pedUpdatewsdl,
-            pedRestart
+            pedRestart,
+
+            ///
+            /// EFDReinf
+            ///
+            Reinf_evt,
+
+            ///
+            /// eSocial
+            ///
+            eSocial_evt
         }
 
         private static Dictionary<TipoEnvio, ExtensaoClass> ListaExtensoes = new Dictionary<TipoEnvio, ExtensaoClass>();
@@ -678,6 +688,26 @@ namespace NFe.Components
                         "Envio do XML para consultar dados cadastro terminal CFSe"));
 
                     #endregion Extensões CFSe
+
+                    #region Extensões EFDReinf
+
+                    ListaExtensoes.Add(TipoEnvio.Reinf_evt, new ExtensaoClass(
+                        "-reinf-evt.xml", "",
+                        "-ret-reinf-evttotal.xml", "",
+                        "-ret-reinf-evttotal.err",
+                        "XML EFDReinf - Eventos"));
+
+                    #endregion Extensões EFDReinf
+
+                    #region Extensões eSocial
+
+                    ListaExtensoes.Add(TipoEnvio.eSocial_evt, new ExtensaoClass(
+                        "-esocial-evt.xml", "",
+                        "-ret-esocial-evt.xml", "",
+                        "-ret-esocial-evt.err",
+                        "XML eSocial - Eventos"));
+
+                    #endregion Extensões eSocial
 
                     #region Extensões em comum entre NFe, CTe e MDF-e
 

@@ -4024,6 +4024,7 @@ namespace NFe.Components.com.dyndnsserver.pmassis2.p {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
         public SignatureType Signature {
             get {
                 return this.signatureField;
@@ -4518,6 +4519,7 @@ namespace NFe.Components.com.dyndnsserver.pmassis2.p {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
         public SignatureType Signature {
             get {
                 return this.signatureField;
@@ -4846,6 +4848,7 @@ namespace NFe.Components.com.dyndnsserver.pmassis2.p {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
         public SignatureType Signature {
             get {
                 return this.signatureField;

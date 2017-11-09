@@ -37,7 +37,7 @@ namespace NFe.UI
                 this.cbEmissao.DisplayMember = "Value";
                 this.cbEmissao.ValueMember = "Key";
 
-                this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo(false);
+                this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo(true);
                 this.cbServico.DisplayMember = "Value";
                 this.cbServico.ValueMember = "Key";
 

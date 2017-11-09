@@ -513,7 +513,7 @@ namespace NFe.Service.NFSe
                         #endregion Tinus
                 }
 
-                if (IsInvocar(padraoNFSe))
+                if (IsInvocar(padraoNFSe, Servico, Empresas.Configuracoes[emp].UnidadeFederativaCodigo))
                 {
                     //Assinar o XML
                     AssinaturaDigital ad = new AssinaturaDigital();

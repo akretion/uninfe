@@ -1167,5 +1167,68 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_HCachoeiraSulRS_NFSeIntegracao"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tinus.com.br/csp/jaboatao/WSNFSE.CancelarNfse.cls")]
+        public string NFe_Components_PJaboataoDosGuararapesPE_TINUS_CancelarNfse_CancelarNfse {
+            get {
+                return ((string)(this["NFe_Components_PJaboataoDosGuararapesPE_TINUS_CancelarNfse_CancelarNfse"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tinus.com.br/csp/jaboatao/WSNFSE.ConsultarLoteRps.cls")]
+        public string NFe_Components_PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps_ConsultarLoteRps {
+            get {
+                return ((string)(this["NFe_Components_PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps_ConsultarLoteRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tinus.com.br/csp/jaboatao/WSNFSE.ConsultarNfse.cls")]
+        public string NFe_Components_PJaboataoDosGuararapesPE_TINUS_ConsultarNfse_ConsultarNfse {
+            get {
+                return ((string)(this["NFe_Components_PJaboataoDosGuararapesPE_TINUS_ConsultarNfse_ConsultarNfse"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tinus.com.br/csp/jaboatao/WSNFSE.ConsultarNfsePorRps.cls")]
+        public string NFe_Components_PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps {
+            get {
+                return ((string)(this["NFe_Components_PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePo" +
+                    "rRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tinus.com.br/csp/jaboatao/WSNFSE.ConsultarSituacaoLoteRps.cls")]
+        public string NFe_Components_PJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps {
+            get {
+                return ((string)(this["NFe_Components_PJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps_ConsultarS" +
+                    "ituacaoLoteRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tinus.com.br/csp/jaboatao/WSNFSE.RecepcionarLoteRps.cls")]
+        public string NFe_Components_PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps {
+            get {
+                return ((string)(this["NFe_Components_PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps_RecepcionarLoteR" +
+                    "ps"]));
+            }
+        }
     }
 }

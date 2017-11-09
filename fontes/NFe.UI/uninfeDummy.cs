@@ -1,13 +1,8 @@
-﻿using System;
+﻿using NFe.Components;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 using System.Windows.Forms;
-
-using NFe.Components;
-using NFe.Settings;
 
 namespace NFe.UI
 {
@@ -40,12 +35,14 @@ namespace NFe.UI
                 "- Falha nos servidores do SEFAZ\r\n\r\n" +
                 "Afirmamos que a produtora do software não se responsabiliza por decisões tomadas e/ou execuções realizadas com base nas informações acima.\r\n\r\n";
 
-
         public static DateTime UltimoAcessoConfiguracao { get; set; }
+
         public static Form_Main mainForm { get; set; }
+
         public static uninfeOpcoes2 opServicos { get; set; }
 
         private static NFe.Components.XMLIniFile _xml;
+
         public static XMLIniFile xmlParams
         {
             get
@@ -97,12 +94,13 @@ namespace NFe.UI
         /// <summary>
         /// DatasouceTipoAplicativo
         /// </summary>
+        /// <param name="soConsulta">Inserir somente os serviços que tem consulta status</param>
         /// <returns></returns>
-        public static IList DatasouceTipoAplicativo(bool includeservico)
+        public static IList DatasouceTipoAplicativo(bool soConsulta)
         {
             ArrayList list = new ArrayList();
 
-            if (includeservico)
+            if (!soConsulta)
                 list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Todos, EnumHelper.GetDescription(TipoAplicativo.Todos)));
 
             list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Nfe, EnumHelper.GetDescription(TipoAplicativo.Nfe)));
@@ -111,8 +109,13 @@ namespace NFe.UI
             list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.NFCe, EnumHelper.GetDescription(TipoAplicativo.NFCe)));
             list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.SAT, EnumHelper.GetDescription(TipoAplicativo.SAT)));
 
-            if (includeservico)
+            if (!soConsulta)
+            {
                 list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.Nfse, EnumHelper.GetDescription(TipoAplicativo.Nfse)));
+                list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.EFDReinfeSocial, EnumHelper.GetDescription(TipoAplicativo.EFDReinfeSocial)));
+                list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.EFDReinf, EnumHelper.GetDescription(TipoAplicativo.EFDReinf)));
+                list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.eSocial, EnumHelper.GetDescription(TipoAplicativo.eSocial)));
+            }
 
             return list;
         }
@@ -127,12 +130,12 @@ namespace NFe.UI
                 return;
 
             MetroFramework.MetroThemeStyle uTheme = uninfeDummy.mainForm.metroStyleManager1.Theme;//.uTheme;
-            /* */
-            //if (inverteTheme)
-            //{
-                //uTheme = MetroFramework.MetroThemeStyle.Light;
-            //}
-            //return;
+                                                                                                  /* */
+                                                                                                  //if (inverteTheme)
+                                                                                                  //{
+                                                                                                  //uTheme = MetroFramework.MetroThemeStyle.Light;
+                                                                                                  //}
+                                                                                                  //return;
             if (Xcontrol.GetType().IsSubclassOf(typeof(MetroFramework.Controls.MetroUserControl)) ||
                 Xcontrol.GetType().IsSubclassOf(typeof(MetroFramework.Controls.MetroTabPage)) ||
                 Xcontrol.GetType().IsSubclassOf(typeof(MetroFramework.Controls.MetroTabControl)) ||
@@ -176,10 +179,11 @@ namespace NFe.UI
 
                 if (control is MetroFramework.Interfaces.IMetroControl)
                 {
-                    try {
+                    try
+                    {
                         ((MetroFramework.Interfaces.IMetroControl)control).Theme = mainForm.metroStyleManager1.Theme;
                         ((MetroFramework.Interfaces.IMetroControl)control).Style = mainForm.metroStyleManager1.Style;
-                        //((MetroFramework.Interfaces.IMetroControl)control).StyleManager = mainForm.metroStyleManager1; 
+                        //((MetroFramework.Interfaces.IMetroControl)control).StyleManager = mainForm.metroStyleManager1;
                     }
                     catch { }
                 }

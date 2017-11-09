@@ -14,22 +14,29 @@ namespace NFe.Service
     public class TFunctions
     {
         #region GravarArqErroServico()
-
         /// <summary>
-        /// Grava um arquivo texto com um erros ocorridos durante as operações para que o ERP possa tratá-los
+        /// Grava um arquivo texto com os erros ocorridos durante as operações para que o ERP possa tratá-los
         /// </summary>
         /// <param name="arquivo">Nome do arquivo que está sendo processado</param>
-        /// <param name="finalArqEnvio">string final do nome do arquivo que é para ser substituida na gravação do arquivo de Erro</param>
+        /// <param name="finalArqEnvio">string final do nome do arquivo que é para ser substituida na gravação do arquivo de erro</param>
         /// <param name="finalArqErro">string final do nome do arquivo que é para ser utilizado no nome do arquivo de erro</param>
         /// <param name="exception">Exception gerada</param>
-        /// <param name="errorCode">Código do erro</param>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 02/06/2011
-        /// </remarks>
         public static void GravarArqErroServico(string arquivo, string finalArqEnvio, string finalArqErro, Exception exception)
         {
             GravarArqErroServico(arquivo, finalArqEnvio, finalArqErro, exception, ErroPadrao.ErroNaoDetectado, true);
+        }
+
+        /// <summary>
+        /// Grava um arquivo texto com os erros ocorridos durante as operações para que o ERP possa tratá-los
+        /// </summary>
+        /// <param name="arquivo">Nome do arquivo que está sendo processado</param>
+        /// <param name="finalArqEnvio">string final do nome do arquivo que é para ser substituida na gravação do arquivo de erro</param>
+        /// <param name="finalArqErro">string final do nome do arquivo que é para ser utilizado no nome do arquivo de erro</param>
+        /// <param name="exception">Exception gerada</param>
+        /// <param name="nomeArqRetorno">Nome do arquivo de retorno, caso não queira gravar um nome diferente do informado no parametro "arquivo"</param>
+        public static void GravarArqErroServico(string arquivo, string finalArqEnvio, string finalArqErro, Exception exception, string nomeArqRetorno)
+        {
+            GravarArqErroServico(arquivo, finalArqEnvio, finalArqErro, exception, ErroPadrao.ErroNaoDetectado, true, nomeArqRetorno);
         }
 
         #endregion GravarArqErroServico()
@@ -65,13 +72,10 @@ namespace NFe.Service
         /// <param name="finalArqEnvio">string final do nome do arquivo que é para ser substituida na gravação do arquivo de Erro</param>
         /// <param name="finalArqErro">string final do nome do arquivo que é para ser utilizado no nome do arquivo de erro</param>
         /// <param name="exception">Exception gerada</param>
-        /// <param name="errorCode">Código do erro</param>
         /// <param name="moveArqErro">Move o arquivo informado no parametro "arquivo" para a pasta de XML com ERRO</param>
-        /// <remarks>
-        /// Autor: Wandrey Mundin Ferreira
-        /// Data: 02/06/2011
-        /// </remarks>
-        public static void GravarArqErroServico(string arquivo, string finalArqEnvio, string finalArqErro, Exception exception, ErroPadrao erroPadrao, bool moveArqErro)
+        /// <param name="nomeArqRetorno">Nome do arquivo de retorno, caso não queira gravar um nome diferente do informado no parametro "arquivo"</param>
+        /// <param name="erroPadrao">Informe o erro padrão do UniNFe</param>
+        public static void GravarArqErroServico(string arquivo, string finalArqEnvio, string finalArqErro, Exception exception, ErroPadrao erroPadrao, bool moveArqErro, string nomeArqRetorno = "")
         {
             int emp = Empresas.FindEmpresaByThread();
 
@@ -87,7 +91,7 @@ namespace NFe.Service
             if (fi.Directory.FullName.ToLower().EndsWith("geral\\temp"))
                 pastaRetorno = Propriedade.PastaGeralRetorno;
 
-            string arqErro = pastaRetorno + "\\" + Functions.ExtrairNomeArq(arquivo, finalArqEnvio) + finalArqErro;
+            string arqErro = pastaRetorno + "\\" + Functions.ExtrairNomeArq((string.IsNullOrEmpty(nomeArqRetorno) ? arquivo : nomeArqRetorno), finalArqEnvio) + finalArqErro;
 
             string erroMessage = MontaStringErro(exception, erroPadrao);
 
@@ -408,7 +412,10 @@ namespace NFe.Service
                         (arquivoCopiar.ToLower().Contains(Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
                         (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcCTe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
                         (arquivoCopiar.ToLower().Contains(Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonNFe) ||
-                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcMDFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe))
+                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcMDFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcEventoNFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcEventoCTe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe) ||
+                        (arquivoCopiar.ToLower().Contains(Propriedade.ExtRetorno.ProcEventoMDFe.ToLower()) && Empresas.Configuracoes[emp].XMLDanfeMonProcNFe))
                     {
                         //Montar o nome do arquivo de destino
                         string arqDestino = Empresas.Configuracoes[emp].PastaDanfeMon + "\\" + Path.GetFileName(arquivoCopiar);
@@ -628,6 +635,34 @@ namespace NFe.Service
                         arqProcNFe = nomeArquivoRecebido;
                         break;
 
+                    case "cteOSProc":
+                    case "CTeOS":
+                        tipo = "cteos";
+                        arqProcNFe = nomeArquivoRecebido;
+                        ///
+                        /// le o protocolo de autorizacao
+                        ///
+                        if (doc.DocumentElement.Name.Equals("cteOSProc"))
+                        {
+                            foreach (var el3 in doc.GetElementsByTagName("protCTe"))
+                            {
+                                if (((XmlElement)el3).GetElementsByTagName(NFe.Components.TpcnResources.cStat.ToString())[0] != null)
+                                {
+                                    string cStat = ((XmlElement)el3).GetElementsByTagName(NFe.Components.TpcnResources.cStat.ToString())[0].InnerText;
+                                    switch (cStat)
+                                    {
+                                        //denegada
+                                        case "110":
+                                        case "301":
+                                            denegada = true;
+                                            break;
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+
                     case "cteProc":
                     case "CTe":
                         tipo = "cte";
@@ -764,6 +799,7 @@ namespace NFe.Service
                                             break;
 
                                         case "cte":
+                                        case "cteos":
                                         case "ccte":
                                             arqProcNFe = cl.InnerText + Propriedade.ExtRetorno.ProcCTe;
                                             break;
@@ -963,6 +999,7 @@ namespace NFe.Service
                                 break;
 
                             case "cte":
+                            case "cteos":
                                 fExtensao = Propriedade.ExtRetorno.ProcEventoCTe;
                                 break;
 
@@ -1060,7 +1097,7 @@ namespace NFe.Service
                 {
                     string Args = "";
 
-                    if (tipo.Equals("cte"))
+                    if (tipo.Equals("cte") || tipo.Equals("cteos"))
                     {
                         Args += " EE=1";    //EnviarEmail
                         if (!string.IsNullOrEmpty(emp.EmailDanfe) && !emp.AdicionaEmailDanfe)
@@ -1151,6 +1188,12 @@ namespace NFe.Service
                             case "mdfe":
                                 Args += " A=\"" + arqProcNFe + "\"";
                                 Args += " T=damdfe";
+                                configDanfe = emp.ConfiguracaoDanfe;
+                                break;
+
+                            case "cteos":
+                                Args += " A=\"" + arqProcNFe + "\"";
+                                Args += " T=dacteos";
                                 configDanfe = emp.ConfiguracaoDanfe;
                                 break;
 

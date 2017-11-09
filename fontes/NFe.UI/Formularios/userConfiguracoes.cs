@@ -365,6 +365,7 @@ namespace NFe.UI
                                                 select x))
                         {
                             string temp = CopiaPastaDeEmpresa(rr.CNPJ, rr.PastaXmlEnvio, oempresa);
+
                             if (!Directory.Exists(temp))
                             {
                                 CopiaPastaDeEmpresa(rr, oempresa);
@@ -400,38 +401,8 @@ namespace NFe.UI
                         }
                     }
                 }
-                uce_divs.Populate(oempresa, _nova);
-                uce_pastas.Populate(oempresa);
-                uce_ftp.Populate(oempresa);
-                uce_cert.Populate(oempresa);
 
-                if (oempresa.Servico != TipoAplicativo.Nfse)
-                {
-                    _tpEmpresa_danfe.Parent = tc_empresa;
-                    uce_danfe.Populate(oempresa);
-                }
-                else
-                {
-                    if (_tpEmpresa_danfe != null)
-                        _tpEmpresa_danfe.Parent = null;
-                }
-
-                if (oempresa.Servico == TipoAplicativo.SAT)
-                {
-                    _tpEmpresa_sat.Parent = tc_empresa;
-                    uce_sat.Populate(oempresa);
-
-                    if (_tpEmpresa_cert != null)
-                        _tpEmpresa_cert.Parent = null;
-                }
-                else
-                {
-                    if (_tpEmpresa_sat != null)
-                        _tpEmpresa_sat.Parent = null;
-
-                    _tpEmpresa_cert.Parent = tc_empresa;
-                    uce_cert.Populate(oempresa);
-                }
+                ConfigurarAbas(oempresa, _nova);
             }
             finally
             {
@@ -538,14 +509,34 @@ namespace NFe.UI
                     EmpresaValidada = false;
                     return false;
                 }
+
                 uce_pastas.Validar();
-                if (currentEmpresa.Servico != TipoAplicativo.SAT)
-                    uce_cert.Validar();
-                if (currentEmpresa.Servico != TipoAplicativo.Nfse)
-                    uce_danfe.Validar();
-                uce_ftp.Validar();
-                if (currentEmpresa.Servico == TipoAplicativo.SAT)
-                    uce_sat.Validar();
+
+                switch (currentEmpresa.Servico)
+                {
+                    case TipoAplicativo.SAT:
+                        uce_danfe.Validar();
+                        uce_ftp.Validar();
+                        uce_sat.Validar();
+                        break;
+                    case TipoAplicativo.Nfse:
+                    case TipoAplicativo.EFDReinf:
+                    case TipoAplicativo.eSocial:
+                    case TipoAplicativo.EFDReinfeSocial:
+                        uce_cert.Validar();
+                        break;
+                    case TipoAplicativo.Nfe:
+                    case TipoAplicativo.Cte:
+                    case TipoAplicativo.MDFe:
+                    case TipoAplicativo.NFCe:
+                    case TipoAplicativo.Todos:
+                    case TipoAplicativo.Nulo:
+                    default:
+                        uce_cert.Validar();
+                        uce_danfe.Validar();
+                        uce_ftp.Validar();
+                        break;
+                }
             }
             catch (Exception ex)
             {
@@ -832,6 +823,52 @@ namespace NFe.UI
                 {
                     MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
                 }
+            }
+        }
+
+        private void ConfigurarAbas(Empresa empresa, bool novaempresa)
+        {
+            switch (empresa.Servico)
+            {
+                case TipoAplicativo.Nfse:
+                    uce_divs.Populate(empresa, novaempresa);
+                    uce_pastas.Populate(empresa);
+                    uce_ftp.Populate(empresa);
+                    uce_cert.Populate(empresa);
+                    _tpEmpresa_danfe.Parent = null;
+                    _tpEmpresa_sat.Parent = null;
+                    break;
+                case TipoAplicativo.SAT:
+                    uce_divs.Populate(empresa, novaempresa);
+                    uce_pastas.Populate(empresa);
+                    uce_ftp.Populate(empresa);
+                    uce_danfe.Populate(empresa);
+                    _tpEmpresa_sat.Parent = tc_empresa;
+                    uce_sat.Populate(empresa);
+                    _tpEmpresa_cert.Parent = null;
+                    break;
+                case TipoAplicativo.EFDReinf:
+                case TipoAplicativo.eSocial:
+                case TipoAplicativo.EFDReinfeSocial:
+                    uce_divs.Populate(empresa, novaempresa);
+                    uce_pastas.Populate(empresa);
+                    uce_cert.Populate(empresa);
+                    _tpEmpresa_cert.Parent = tc_empresa;
+                    _tpEmpresa_ftp.Parent = null;
+                    _tpEmpresa_sat.Parent = null;
+                    _tpEmpresa_danfe.Parent = null;
+                    break;
+                default:
+                    uce_divs.Populate(empresa, novaempresa);
+                    uce_pastas.Populate(empresa);
+                    uce_ftp.Populate(empresa);
+                    uce_cert.Populate(empresa);
+                    uce_danfe.Populate(empresa);
+                    _tpEmpresa_cert.Parent = tc_empresa;
+                    _tpEmpresa_danfe.Parent = tc_empresa;
+                    _tpEmpresa_ftp.Parent = tc_empresa;
+                    _tpEmpresa_sat.Parent = null;
+                    break;
             }
         }
     }

@@ -1,15 +1,10 @@
-﻿using System;
+﻿using NFe.Components;
+using NFe.Settings;
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.IO;
 using System.Windows.Forms;
-using NFe.Components;
-using NFe.Settings;
 
 namespace NFe.UI.Formularios
 {
@@ -21,7 +16,9 @@ namespace NFe.UI.Formularios
         private TipoAplicativo servicoCurrent;
         private bool loading;
         private string cnpjCurrent = "";
+
         public event EventHandler changeEvent;
+
         public userConfiguracoes uConfiguracoes;
         private ArrayList arrUF, arrMunicipios;
 
@@ -48,25 +45,25 @@ namespace NFe.UI.Formularios
                     MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
                 }
 
-                #endregion
+                #endregion Montar Array DropList da UF
 
                 #region Montar Array DropList do Ambiente
                 comboBox_Ambiente.DataSource = EnumHelper.ToList(typeof(TipoAmbiente), true, true);
                 comboBox_Ambiente.DisplayMember = "Value";
                 comboBox_Ambiente.ValueMember = "Key";
-                #endregion
+                #endregion Montar Array DropList do Ambiente
 
                 #region Montar array DropList dos tipos de serviços
-                this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo(true);
+                this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo(false);
                 this.cbServico.DisplayMember = "Value";
                 this.cbServico.ValueMember = "Key";
-                #endregion
+                #endregion Montar array DropList dos tipos de serviços
 
                 #region Montar Array DropList do Tipo de Emissão da NF-e
                 comboBox_tpEmis.DataSource = EnumHelper.ToList(typeof(TipoEmissao), true, true);
                 comboBox_tpEmis.DisplayMember = "Value";
                 comboBox_tpEmis.ValueMember = "Key";
-                #endregion
+                #endregion Montar Array DropList do Tipo de Emissão da NF-e
 
                 this.cbServico.SelectedIndexChanged += cbServico_SelectedIndexChanged;
 
@@ -77,7 +74,7 @@ namespace NFe.UI.Formularios
 
         private Point loc_1, loc_2;
 
-        public void Populate(NFe.Settings.Empresa empresa, bool novaempresa)
+        public void Populate(Empresa empresa, bool novaempresa)
         {
             this.loading = true;
             try
@@ -86,60 +83,14 @@ namespace NFe.UI.Formularios
 
                 this.empresa = empresa;
 
-                if (empresa.Servico == TipoAplicativo.Nfse)
-                {
-                    labelUF.Text = "Município";
-                    lbl_udDiasLimpeza.Location = new Point(this.lbl_udTempoConsulta.Location.X, this.lbl_udTempoConsulta.Location.Y);
-                    udDiasLimpeza.Location = new Point(this.udTempoConsulta.Location.X, this.udTempoConsulta.Location.Y);
-                }
-                else
-                {
-                    labelUF.Text = "Unidade Federativa (UF)";
-                    lbl_udDiasLimpeza.Location = loc_1;
-                    udDiasLimpeza.Location = loc_2;
-                }
-                this.lbl_CodMun.Visible =
-                    this.edtCodMun.Visible =
-                    this.edtPadrao.Visible =
-                    this.lbl_Padrao.Visible = (empresa.Servico == TipoAplicativo.Nfse);
-
-                cboDiretorioSalvarComo.Visible =
-                    lbl_DiretorioSalvarComo.Visible =
-                    comboBox_tpEmis.Visible =
-                    metroLabel11.Visible =
-                    checkBoxGravarEventosNaPastaEnviadosNFe.Visible =
-                    checkBoxRetornoNFETxt.Visible =
-                    checkBoxGravarEventosDeTerceiros.Visible =
-                    checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible =
-                    checkBoxCompactaNFe.Visible =
-                    udTempoConsulta.Visible = lbl_udTempoConsulta.Visible =
-                    cbIndSinc.Visible = !(empresa.Servico == TipoAplicativo.Nfse || empresa.Servico == TipoAplicativo.SAT);
-
-                metroLabel10.Visible =
-                    comboBox_Ambiente.Visible = !(empresa.Servico == TipoAplicativo.SAT);
-
-                /*
-
-                if (empresa.Servico == TipoAplicativo.Nfe || empresa.Servico == TipoAplicativo.NFCe || empresa.Servico == TipoAplicativo.Todos)
-                {
-                    grpQRCode.Visible =
-                    edtIdentificadorCSC.Visible =
-                    edtTokenCSC.Visible = true;
-                }
-                else
-                {
-                    grpQRCode.Visible =
-                    edtIdentificadorCSC.Visible =
-                    edtTokenCSC.Visible = false;
-                }
-                */
+                Configurar(empresa, novaempresa);
 
                 if (empresa.Servico == TipoAplicativo.Nfse)
                     comboBox_UF.DataSource = arrMunicipios;
                 else
                     comboBox_UF.DataSource = arrUF;
 
-                comboBox_UF.DisplayMember = NFe.Components.NFeStrConstants.Nome;
+                comboBox_UF.DisplayMember = NFeStrConstants.Nome;
                 comboBox_UF.ValueMember = "Codigo";
 
                 cnpjCurrent = this.edtCNPJ.Text = empresa.CNPJ;
@@ -402,7 +353,6 @@ namespace NFe.UI.Formularios
 
         private void edtCNPJ_Enter(object sender, EventArgs e)
         {
-
         }
 
         private void comboBox_UF_DropDownClosed(object sender, EventArgs e)
@@ -427,6 +377,110 @@ namespace NFe.UI.Formularios
         {
             if (this.changeEvent != null)
                 this.changeEvent(sender, e);
+        }
+
+        private void Configurar(Empresa empresa, bool novaempresa)
+        {
+            switch (empresa.Servico)
+            {
+                case TipoAplicativo.Nfse:
+                    labelUF.Visible = true;
+                    labelUF.Text = "Município";
+                    comboBox_UF.Visible = true;
+                    lbl_udDiasLimpeza.Location = new Point(this.lbl_udTempoConsulta.Location.X, this.lbl_udTempoConsulta.Location.Y);
+                    udDiasLimpeza.Location = new Point(this.udTempoConsulta.Location.X, this.udTempoConsulta.Location.Y);
+                    lbl_CodMun.Visible = true;
+                    edtCodMun.Visible = true;
+                    edtPadrao.Visible = true;
+                    lbl_Padrao.Visible = true;
+                    cboDiretorioSalvarComo.Visible = false;
+                    lbl_DiretorioSalvarComo.Visible = false;
+                    comboBox_tpEmis.Visible = false;
+                    metroLabel11.Visible = false;
+                    checkBoxGravarEventosNaPastaEnviadosNFe.Visible = false;
+                    checkBoxRetornoNFETxt.Visible = false;
+                    checkBoxGravarEventosDeTerceiros.Visible = false;
+                    checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible = false;
+                    checkBoxCompactaNFe.Visible = false;
+                    udTempoConsulta.Visible = lbl_udTempoConsulta.Visible = false;
+                    cbIndSinc.Visible = false;
+                    break;
+
+                case TipoAplicativo.SAT:
+                    labelUF.Visible = true;
+                    labelUF.Text = "Unidade Federativa (UF)";
+                    comboBox_UF.Visible = true;
+                    cboDiretorioSalvarComo.Visible = false;
+                    lbl_DiretorioSalvarComo.Visible = false;
+                    comboBox_tpEmis.Visible = false;
+                    metroLabel11.Visible = false;
+                    checkBoxGravarEventosNaPastaEnviadosNFe.Visible = false;
+                    checkBoxRetornoNFETxt.Visible = false;
+                    checkBoxGravarEventosDeTerceiros.Visible = false;
+                    checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible = false;
+                    checkBoxCompactaNFe.Visible = false;
+                    udTempoConsulta.Visible = lbl_udTempoConsulta.Visible = false;
+                    cbIndSinc.Visible = false;
+                    metroLabel10.Visible = false;
+                    comboBox_Ambiente.Visible = false;
+                    lbl_CodMun.Visible = false;
+                    edtCodMun.Visible = false;
+                    edtPadrao.Visible = false;
+                    lbl_Padrao.Visible = false;
+                    break;
+
+                case TipoAplicativo.EFDReinf:
+                case TipoAplicativo.eSocial:
+                case TipoAplicativo.EFDReinfeSocial:
+                    comboBox_UF.Visible = false;
+                    comboBox_tpEmis.Visible = false;
+                    udTempoConsulta.Visible = false;
+                    checkBoxCompactaNFe.Visible = false;
+                    checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible = false;
+                    checkBoxGravarEventosDeTerceiros.Visible = false;
+                    checkBoxGravarEventosNaPastaEnviadosNFe.Visible = false;
+                    checkBoxRetornoNFETxt.Visible = false;
+                    cbIndSinc.Visible = false;
+                    grpQRCode.Visible = false;
+                    metroLabel11.Visible = false;
+                    lbl_udTempoConsulta.Visible = false;
+                    labelUF.Visible = false;
+                    lbl_CodMun.Visible = false;
+                    edtCodMun.Visible = false;
+                    edtPadrao.Visible = false;
+                    lbl_Padrao.Visible = false;
+                    break;
+
+                default:
+                    labelUF.Visible = true;
+                    labelUF.Text = "Unidade Federativa (UF)";
+                    comboBox_UF.Visible = true;
+                    lbl_udDiasLimpeza.Location = loc_1;
+                    udDiasLimpeza.Location = loc_2;
+                    cboDiretorioSalvarComo.Visible = true;
+                    lbl_DiretorioSalvarComo.Visible = true;
+                    comboBox_tpEmis.Visible = true;
+                    metroLabel11.Visible = true;
+                    checkBoxGravarEventosNaPastaEnviadosNFe.Visible = true;
+                    checkBoxRetornoNFETxt.Visible = true;
+                    checkBoxGravarEventosDeTerceiros.Visible = true;
+                    checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible = true;
+                    checkBoxCompactaNFe.Visible = true;
+                    udTempoConsulta.Visible = lbl_udTempoConsulta.Visible = true;
+                    cbIndSinc.Visible = true;
+                    metroLabel10.Visible = true;
+                    comboBox_Ambiente.Visible = true;
+                    lbl_CodMun.Visible = false;
+                    edtCodMun.Visible = false;
+                    edtPadrao.Visible = false;
+                    lbl_Padrao.Visible = false;
+                    grpQRCode.Visible = true;
+                    edtTokenCSC.Visible = true;
+                    edtIdentificadorCSC.Visible = true;
+                    metroLabel2.Visible = true;
+                    metroLabel1.Visible = true;
+                    break;
+            }
         }
     }
 }

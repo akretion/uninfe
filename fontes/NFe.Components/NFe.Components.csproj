@@ -173,6 +173,7 @@
     <Compile Include="Fiorilli\MirassolandiaSP\p\FiorilliP.cs" />
     <Compile Include="Fiorilli\JaciSP\h\FiorilliH.cs" />
     <Compile Include="Fiorilli\JaciSP\p\FiorilliP.cs" />
+    <Compile Include="TraceSOAPMessage.cs" />
     <Compile Include="Pronin\CachoeiraSulRS\h\ProninH.cs" />
     <Compile Include="Pronin\CachoeiraSulRS\p\ProninP.cs" />
     <Compile Include="Pronin\GuarapuavaPR\h\ProninH.cs" />
@@ -241,6 +242,8 @@
     <Compile Include="Schemas\SchemaXMLNFSe_ABASE.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_TINUS.cs" />
     <Compile Include="Schemas\SchemaXML_CFE.cs" />
+    <Compile Include="Schemas\SchemaXML_ESocial.cs" />
+    <Compile Include="Schemas\SchemaXML_EFDReinf.cs" />
     <Compile Include="Schemas\SchemaXML_NFe.cs" />
     <Compile Include="Schemas\SchemaXML_MDFe.cs" />
     <Compile Include="Schemas\SchemaXML_CTE.cs" />
@@ -905,6 +908,36 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\PItabiraMG\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PJaboataoDosGuararapesPE_TINUS_CancelarNfse\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarNfse\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -2968,6 +3001,54 @@
     <None Include="Web References\PItabiraMG\Services0.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_CancelarNfse\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_CancelarNfse\PJaboataoDosGuararapesPE_TINUS_CancelarNfse.wsdl" />
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_CancelarNfse\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps\PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps.wsdl" />
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps\PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps.wsdl" />
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarNfse\ConsultarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarNfse\PJaboataoDosGuararapesPE_TINUS_ConsultarNfse.wsdl" />
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarNfse\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps\ConsultarSituacaoLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps\PJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps.wsdl" />
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps\PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps.wsdl" />
+    <None Include="Web References\PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\PJaraguaGO\nfseWS.wsdl" />
     <None Include="Web References\PJaraguaGO\nfseWS0.wsdl" />
     <None Include="Web References\PJaraguaGO\Reference.map">
@@ -3100,6 +3181,72 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_HJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaboataoDosGuararapesPE_TINUS_CancelarNfse.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PJaboataoDosGuararapesPE_TINUS_CancelarNfse\</RelPath>
+      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaboataoDosGuararapesPE_TINUS_CancelarNfse.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PJaboataoDosGuararapesPE_TINUS_CancelarNfse_CancelarNfse</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps\</RelPath>
+      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps_ConsultarLoteRps</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaboataoDosGuararapesPE_TINUS_ConsultarNfse.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarNfse\</RelPath>
+      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaboataoDosGuararapesPE_TINUS_ConsultarNfse.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PJaboataoDosGuararapesPE_TINUS_ConsultarNfse_ConsultarNfse</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps\</RelPath>
+      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps\</RelPath>
+      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps\</RelPath>
+      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaciSP-FIORILLI.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

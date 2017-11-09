@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Webservice>
   <Estado ID="27" Nome="Alagoas" UF="AL" SVC="teSVCAN">
     <LocalHomologacao>
@@ -159,7 +159,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="29" Nome="Bahia" UF="BA" SVC="teSVCRS">
@@ -213,7 +213,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="23" Nome="Ceará" UF="CE" SVC="teSVCRS">
@@ -267,7 +267,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="53" Nome="Distrito Federal" UF="DF" SVC="teSVCAN">
@@ -321,7 +321,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="905" Nome="EPEC - Evento Prévio de Emissão em Contingência - NFe" UF="EPEC" SVC="teNone">
@@ -483,7 +483,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="52" Nome="Goiás" UF="GO" SVC="teSVCRS">
@@ -537,7 +537,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="21" Nome="Maranhão" UF="MA" SVC="teSVCRS">
@@ -591,7 +591,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="51" Nome="Mato Grosso" UF="MT" SVC="teSVCRS">
@@ -807,7 +807,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="25" Nome="Paraiba" UF="PB" SVC="teSVCAN">
@@ -861,7 +861,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="41" Nome="Paraná" UF="PR" SVC="teSVCRS">
@@ -1025,7 +1025,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="33" Nome="Rio de Janeiro" UF="RJ" SVC="teSVCAN">
@@ -1079,7 +1079,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="24" Nome="Rio Grande do Norte" UF="RN" SVC="teSVCAN">
@@ -1133,7 +1133,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="43" Nome="Rio Grande do Sul" UF="RS" SVC="teSVCAN">
@@ -1241,7 +1241,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="14" Nome="Roraima" UF="RR" SVC="teSVCAN">
@@ -1349,7 +1349,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="35" Nome="São Paulo" UF="SP" SVC="teSVCAN">
@@ -1457,7 +1457,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="903" Nome="Servico Virtual de Contingência de São Paulo (CTe)" UF="SVCSP" SVC="teNone">
@@ -1517,8 +1517,8 @@
   <Estado ID="904" Nome="Servico Virtual de Contingência do Ambiente Nacional (NFe)" UF="SVCAN" SVC="teNone">
     <LocalHomologacao>
       <NFeInutilizacao></NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SCVAN\HSVCANNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SCVAN\HSVCANNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeConsulta>wsdl\homologacao\SCVAN\HSVCANNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SCVAN\HSVCANNfeStatusServico.wsdl</NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SCVAN\HSVCANNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
@@ -1729,7 +1729,7 @@
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="12" Nome="Acre" UF="AC" SVC="teSVCAN">
@@ -1783,7 +1783,7 @@
       <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <DFeRecepcao></DFeRecepcao>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
 </Webservice>

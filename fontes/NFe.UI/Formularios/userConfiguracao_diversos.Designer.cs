@@ -106,7 +106,7 @@
             this.checkBoxCompactaNFe.AutoSize = true;
             this.checkBoxCompactaNFe.Location = new System.Drawing.Point(3, 341);
             this.checkBoxCompactaNFe.Name = "checkBoxCompactaNFe";
-            this.checkBoxCompactaNFe.Size = new System.Drawing.Size(211, 15);
+            this.checkBoxCompactaNFe.Size = new System.Drawing.Size(212, 15);
             this.checkBoxCompactaNFe.TabIndex = 31;
             this.checkBoxCompactaNFe.Text = "Compactar NFe para enviar a SEFAZ";
             this.checkBoxCompactaNFe.UseSelectable = true;
@@ -185,7 +185,7 @@
             "D\\M\\A",
             "D\\M",
             "D\\A"});
-            this.cboDiretorioSalvarComo.Location = new System.Drawing.Point(3, 115);
+            this.cboDiretorioSalvarComo.Location = new System.Drawing.Point(238, 113);
             this.cboDiretorioSalvarComo.MaxDropDownItems = 15;
             this.cboDiretorioSalvarComo.Name = "cboDiretorioSalvarComo";
             this.cboDiretorioSalvarComo.Size = new System.Drawing.Size(174, 25);
@@ -201,10 +201,10 @@
             this.comboBox_tpEmis.FontWeight = MetroFramework.MetroComboBoxWeight.Light;
             this.comboBox_tpEmis.FormattingEnabled = true;
             this.comboBox_tpEmis.ItemHeight = 19;
-            this.comboBox_tpEmis.Location = new System.Drawing.Point(448, 64);
+            this.comboBox_tpEmis.Location = new System.Drawing.Point(3, 113);
             this.comboBox_tpEmis.MaxDropDownItems = 15;
             this.comboBox_tpEmis.Name = "comboBox_tpEmis";
-            this.comboBox_tpEmis.Size = new System.Drawing.Size(250, 25);
+            this.comboBox_tpEmis.Size = new System.Drawing.Size(197, 25);
             this.comboBox_tpEmis.TabIndex = 11;
             this.comboBox_tpEmis.UseSelectable = true;
             this.comboBox_tpEmis.SelectedIndexChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
@@ -213,7 +213,7 @@
             // 
             this.metroLabel11.AutoSize = true;
             this.metroLabel11.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel11.Location = new System.Drawing.Point(448, 46);
+            this.metroLabel11.Location = new System.Drawing.Point(-1, 95);
             this.metroLabel11.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel11.Name = "metroLabel11";
             this.metroLabel11.Size = new System.Drawing.Size(89, 15);
@@ -225,7 +225,7 @@
             this.comboBox_Ambiente.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.comboBox_Ambiente.FormattingEnabled = true;
             this.comboBox_Ambiente.ItemHeight = 19;
-            this.comboBox_Ambiente.Location = new System.Drawing.Point(337, 64);
+            this.comboBox_Ambiente.Location = new System.Drawing.Point(557, 64);
             this.comboBox_Ambiente.MaxDropDownItems = 15;
             this.comboBox_Ambiente.Name = "comboBox_Ambiente";
             this.comboBox_Ambiente.Size = new System.Drawing.Size(105, 25);
@@ -237,7 +237,7 @@
             // 
             this.metroLabel10.AutoSize = true;
             this.metroLabel10.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel10.Location = new System.Drawing.Point(337, 46);
+            this.metroLabel10.Location = new System.Drawing.Point(557, 46);
             this.metroLabel10.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel10.Name = "metroLabel10";
             this.metroLabel10.Size = new System.Drawing.Size(56, 15);
@@ -250,10 +250,10 @@
             this.comboBox_UF.FormattingEnabled = true;
             this.comboBox_UF.IntegralHeight = false;
             this.comboBox_UF.ItemHeight = 19;
-            this.comboBox_UF.Location = new System.Drawing.Point(183, 64);
+            this.comboBox_UF.Location = new System.Drawing.Point(417, 64);
             this.comboBox_UF.MaxDropDownItems = 15;
             this.comboBox_UF.Name = "comboBox_UF";
-            this.comboBox_UF.Size = new System.Drawing.Size(148, 25);
+            this.comboBox_UF.Size = new System.Drawing.Size(134, 25);
             this.comboBox_UF.TabIndex = 7;
             this.comboBox_UF.UseSelectable = true;
             this.comboBox_UF.DropDown += new System.EventHandler(this.comboBox_UF_DropDown);
@@ -264,7 +264,7 @@
             // 
             this.labelUF.AutoSize = true;
             this.labelUF.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.labelUF.Location = new System.Drawing.Point(183, 46);
+            this.labelUF.Location = new System.Drawing.Point(414, 46);
             this.labelUF.Margin = new System.Windows.Forms.Padding(3);
             this.labelUF.Name = "labelUF";
             this.labelUF.Size = new System.Drawing.Size(127, 15);
@@ -280,7 +280,7 @@
             this.cbServico.Location = new System.Drawing.Point(3, 64);
             this.cbServico.MaxDropDownItems = 15;
             this.cbServico.Name = "cbServico";
-            this.cbServico.Size = new System.Drawing.Size(174, 25);
+            this.cbServico.Size = new System.Drawing.Size(408, 25);
             this.cbServico.TabIndex = 5;
             this.cbServico.UseSelectable = true;
             this.cbServico.SelectedIndexChanged += new System.EventHandler(this.cbServico_SelectedIndexChanged);
@@ -290,7 +290,7 @@
             this.checkBoxGravarEventosNaPastaEnviadosNFe.AutoSize = true;
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Location = new System.Drawing.Point(3, 236);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Name = "checkBoxGravarEventosNaPastaEnviadosNFe";
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(542, 15);
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(543, 15);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.TabIndex = 26;
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Text = "Gravar os eventos na mesma pasta dos arquivos de NFe/NFCe/MDFe/CTe autorizados/de" +
     "negados?";
@@ -302,7 +302,7 @@
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.AutoSize = true;
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Location = new System.Drawing.Point(3, 257);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Name = "checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe";
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(636, 15);
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(637, 15);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.TabIndex = 27;
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Text = "Gravar os eventos de cancelamento na mesma pasta dos arquivos da NFe/NFCe/MDFe/CT" +
     "e autorizados/denegados?";
@@ -324,12 +324,12 @@
             // 
             this.lbl_DiretorioSalvarComo.AutoSize = true;
             this.lbl_DiretorioSalvarComo.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lbl_DiretorioSalvarComo.Location = new System.Drawing.Point(3, 96);
+            this.lbl_DiretorioSalvarComo.Location = new System.Drawing.Point(236, 95);
             this.lbl_DiretorioSalvarComo.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_DiretorioSalvarComo.Name = "lbl_DiretorioSalvarComo";
-            this.lbl_DiretorioSalvarComo.Size = new System.Drawing.Size(356, 15);
+            this.lbl_DiretorioSalvarComo.Size = new System.Drawing.Size(104, 15);
             this.lbl_DiretorioSalvarComo.TabIndex = 12;
-            this.lbl_DiretorioSalvarComo.Text = "Como devem ser criados os diretórios baseados na data de emissão?";
+            this.lbl_DiretorioSalvarComo.Text = "Formatação pastas";
             // 
             // metroLabel21
             // 
@@ -394,7 +394,7 @@
             this.checkBoxGravarEventosDeTerceiros.AutoSize = true;
             this.checkBoxGravarEventosDeTerceiros.Location = new System.Drawing.Point(3, 278);
             this.checkBoxGravarEventosDeTerceiros.Name = "checkBoxGravarEventosDeTerceiros";
-            this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(384, 15);
+            this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(385, 15);
             this.checkBoxGravarEventosDeTerceiros.TabIndex = 28;
             this.checkBoxGravarEventosDeTerceiros.Text = "Gravar os eventos na consulta de NFe/NFCe/MDFe/CTe de terceiros?";
             this.checkBoxGravarEventosDeTerceiros.UseSelectable = true;
@@ -404,7 +404,7 @@
             // 
             this.lbl_UsuarioWS.AutoSize = true;
             this.lbl_UsuarioWS.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lbl_UsuarioWS.Location = new System.Drawing.Point(363, 143);
+            this.lbl_UsuarioWS.Location = new System.Drawing.Point(417, 142);
             this.lbl_UsuarioWS.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_UsuarioWS.Name = "lbl_UsuarioWS";
             this.lbl_UsuarioWS.Size = new System.Drawing.Size(67, 15);
@@ -415,7 +415,7 @@
             // 
             this.txtUsuarioWS.Lines = new string[] {
         "Styled Textbox"};
-            this.txtUsuarioWS.Location = new System.Drawing.Point(363, 161);
+            this.txtUsuarioWS.Location = new System.Drawing.Point(417, 160);
             this.txtUsuarioWS.MaxLength = 32767;
             this.txtUsuarioWS.Name = "txtUsuarioWS";
             this.txtUsuarioWS.PasswordChar = '\0';
@@ -432,7 +432,7 @@
             // 
             this.lbl_SenhaWS.AutoSize = true;
             this.lbl_SenhaWS.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lbl_SenhaWS.Location = new System.Drawing.Point(503, 143);
+            this.lbl_SenhaWS.Location = new System.Drawing.Point(557, 142);
             this.lbl_SenhaWS.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_SenhaWS.Name = "lbl_SenhaWS";
             this.lbl_SenhaWS.Size = new System.Drawing.Size(59, 15);
@@ -443,7 +443,7 @@
             // 
             this.txtSenhaWS.Lines = new string[] {
         "Styled Textbox"};
-            this.txtSenhaWS.Location = new System.Drawing.Point(503, 161);
+            this.txtSenhaWS.Location = new System.Drawing.Point(557, 160);
             this.txtSenhaWS.MaxLength = 32767;
             this.txtSenhaWS.Name = "txtSenhaWS";
             this.txtSenhaWS.PasswordChar = '*';
@@ -460,7 +460,7 @@
             // 
             this.lbl_Padrao.AutoSize = true;
             this.lbl_Padrao.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lbl_Padrao.Location = new System.Drawing.Point(503, 97);
+            this.lbl_Padrao.Location = new System.Drawing.Point(557, 96);
             this.lbl_Padrao.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_Padrao.Name = "lbl_Padrao";
             this.lbl_Padrao.Size = new System.Drawing.Size(43, 15);
@@ -471,7 +471,7 @@
             // 
             this.edtPadrao.Lines = new string[] {
         "Styled Textbox"};
-            this.edtPadrao.Location = new System.Drawing.Point(503, 115);
+            this.edtPadrao.Location = new System.Drawing.Point(557, 114);
             this.edtPadrao.MaxLength = 32767;
             this.edtPadrao.Name = "edtPadrao";
             this.edtPadrao.PasswordChar = '\0';
@@ -489,7 +489,7 @@
             // 
             this.lbl_CodMun.AutoSize = true;
             this.lbl_CodMun.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lbl_CodMun.Location = new System.Drawing.Point(363, 97);
+            this.lbl_CodMun.Location = new System.Drawing.Point(417, 96);
             this.lbl_CodMun.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_CodMun.Name = "lbl_CodMun";
             this.lbl_CodMun.Size = new System.Drawing.Size(111, 15);
@@ -500,7 +500,7 @@
             // 
             this.edtCodMun.Lines = new string[] {
         "Styled Textbox"};
-            this.edtCodMun.Location = new System.Drawing.Point(363, 115);
+            this.edtCodMun.Location = new System.Drawing.Point(417, 114);
             this.edtCodMun.MaxLength = 32767;
             this.edtCodMun.Name = "edtCodMun";
             this.edtCodMun.PasswordChar = '\0';

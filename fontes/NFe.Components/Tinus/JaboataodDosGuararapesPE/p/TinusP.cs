@@ -1,22 +1,26 @@
 ﻿using System;
 using NFe.Components.Abstract;
-using NFe.Components.br.com.fiorilli.avaresp.p;
+using NFe.Components.PJaboataoDosGuararapesPE_TINUS_CancelarNfse;
+using NFe.Components.PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps;
+using NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfse;
+using NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps;
+using NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps;
+using NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
-using System.Xml.Serialization;
-using System.IO;
-using System.Xml;
 
 namespace NFe.Components.Tinus.JaboataodDosGuararapesPE.p
 {
     public class TinusP : EmiteNFSeBase
     {
-        IssWebWS Service = new IssWebWS();
+        private System.Web.Services.Protocols.SoapHttpClientProtocol Service;
+        private X509Certificate2 Certificado;
+
         public override string NameSpaces
         {
             get
             {
-                return "http://www.abrasf.org.br/nfse.xsd";
+                return "http://www.tinus.com.br";
             }
         }
 
@@ -25,76 +29,103 @@ namespace NFe.Components.Tinus.JaboataodDosGuararapesPE.p
             : base(tpAmb, pastaRetorno)
         {
             ServicePointManager.Expect100Continue = false;
-
-            Service.ClientCertificates.Add(certificado);
-
-            if (!String.IsNullOrEmpty(proxyuser))
-            {
-                NetworkCredential credentials = new NetworkCredential(proxyuser, proxypass, proxyserver);
-                WebRequest.DefaultWebProxy.Credentials = credentials;
-
-                Service.Proxy = WebRequest.DefaultWebProxy;
-                Service.Proxy.Credentials = new NetworkCredential(proxyuser, proxypass);
-                Service.Credentials = new NetworkCredential(proxyuser, proxypass);
-            }
+            Certificado = certificado;
         }
-        #endregion
+
+        #endregion construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(file);
-            string strResult = string.Empty;
-            switch (doc.DocumentElement.Name)
-            {
-                case "GerarNfseEnvio":
-                    strResult = EnvioSincrono(file);
-                    break;
-                case "EnviarLoteRpsSincronoEnvio":
-                    strResult = EnvioSincronoEmLote(file);
-                    break;
-            }
+            RecepcionarLoteRps Service = new RecepcionarLoteRps();
+            Service.ClientCertificates.Add(Certificado);
+            DefinirProxy<RecepcionarLoteRps>(Service);
 
-            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
-                              Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
+            EnviarLoteRpsEnvio envio = DeserializarObjeto<EnviarLoteRpsEnvio>(file);
+            string strResult = SerializarObjeto(Service.CallRecepcionarLoteRps(envio));
 
-        }
-
-        private string EnvioSincrono(string file)
-        {
-            throw new Exceptions.ServicoInexistenteException();
-        }
-
-        private string EnvioSincronoEmLote(string file)
-        {
-            throw new Exceptions.ServicoInexistenteException();
+            GerarRetorno(file,
+                strResult,
+                Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
         {
-            throw new Exceptions.ServicoInexistenteException();
+            CancelarNfse Service = new CancelarNfse();
+            Service.ClientCertificates.Add(Certificado);
+            DefinirProxy<CancelarNfse>(Service);
+
+            CancelarNfseEnvio envio = DeserializarObjeto<CancelarNfseEnvio>(file);
+            string strResult = SerializarObjeto(Service.CallCancelarNfse(envio));
+
+            GerarRetorno(file,
+                strResult,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
         {
-            throw new Exceptions.ServicoInexistenteException();
+            ConsultarLoteRps Service = new ConsultarLoteRps();
+            Service.ClientCertificates.Add(Certificado);
+            DefinirProxy<ConsultarLoteRps>(Service);
+
+            ConsultarLoteRpsEnvio envio = DeserializarObjeto<ConsultarLoteRpsEnvio>(file);
+            string strResult = SerializarObjeto(Service.CallConsultarLoteRps(envio));
+
+            GerarRetorno(file,
+                strResult,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
         {
-            throw new Exceptions.ServicoInexistenteException();
+            ConsultarSituacaoLoteRps Service = new ConsultarSituacaoLoteRps();
+            Service.ClientCertificates.Add(Certificado);
+            DefinirProxy<ConsultarSituacaoLoteRps>(Service);
+
+            ConsultarSituacaoLoteRpsEnvio envio = DeserializarObjeto<ConsultarSituacaoLoteRpsEnvio>(file);
+            string strResult = SerializarObjeto(Service.CallConsultarSituacaoLoteRps(envio));
+
+            GerarRetorno(file,
+                strResult,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).RetornoXML);
         }
 
         public override void ConsultarNfse(string file)
         {
-            throw new Exceptions.ServicoInexistenteException();
+            ConsultarNfse Service = new ConsultarNfse();
+            Service.ClientCertificates.Add(Certificado);
+            DefinirProxy<ConsultarNfse>(Service);
+
+            ConsultarNfseEnvio envio = DeserializarObjeto<ConsultarNfseEnvio>(file);
+            string strResult = SerializarObjeto(Service.CallConsultarNfse(envio));
+
+            GerarRetorno(file,
+                strResult,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)
         {
-            throw new Exceptions.ServicoInexistenteException();
+            ConsultarNfsePorRps Service = new ConsultarNfsePorRps();
+            Service.ClientCertificates.Add(Certificado);
+            DefinirProxy<ConsultarNfsePorRps>(Service);
+
+            ConsultarNfseRpsEnvio envio = DeserializarObjeto<ConsultarNfseRpsEnvio>(file);
+            string strResult = SerializarObjeto(Service.CallConsultarNfsePorRps(envio));
+
+            GerarRetorno(file,
+                strResult,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
-        #endregion
+
+        #endregion Métodos
     }
 }

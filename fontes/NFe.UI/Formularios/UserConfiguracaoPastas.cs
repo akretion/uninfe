@@ -19,7 +19,7 @@ using System.IO;
 namespace NFe.UI.Formularios
 {
     [ToolboxItem(false)]
-    public partial class UserConfiguracaoPastas: MetroFramework.Controls.MetroUserControl
+    public partial class UserConfiguracaoPastas : MetroFramework.Controls.MetroUserControl
     {
         #region Private Fields
 
@@ -60,15 +60,12 @@ namespace NFe.UI.Formularios
             t.Start();
         }
 
-        public void Populate(NFe.Settings.Empresa empresa)
+        public void Populate(Empresa empresa)
         {
             this.empresa = empresa;
             uninfeDummy.ClearControls(this, true, false);
 
-            textBox_PastaXmlEmLote.Visible = lbl_textBox_PastaLote.Visible =
-                textBox_PastaBackup.Visible = lbl_textBox_PastaBackup.Visible =
-                textBox_PastaXmlEnviado.Visible = lbl_textBox_PastaEnviados.Visible =
-                textBox_PastaDownloadNFeDest.Visible = lbl_textBox_PastaDownload.Visible = (empresa.Servico != TipoAplicativo.Nfse);
+            ConfigurarPastas(empresa);
 
             textBox_PastaXmlEnvio.Text = empresa.PastaXmlEnvio;
             textBox_PastaXmlRetorno.Text = empresa.PastaXmlRetorno;
@@ -82,9 +79,9 @@ namespace NFe.UI.Formularios
 
             var Components = this.Controls.Cast<object>()
                                        .OfType<MetroFramework.Controls.MetroTextBox>();
-            foreach(var c in Components)
+            foreach (var c in Components)
             {
-                if(!__oldvalues.ContainsKey(c))
+                if (!__oldvalues.ContainsKey(c))
                     __oldvalues.Add(c, c.Text);
                 else
                     __oldvalues[c] = c.Text;
@@ -100,19 +97,24 @@ namespace NFe.UI.Formularios
             empresa.PastaXmlRetorno = textBox_PastaXmlRetorno.Text;
             empresa.PastaXmlErro = textBox_PastaXmlErro.Text;
             empresa.PastaValidar = textBox_PastaValidar.Text;
-            if(empresa.Servico != TipoAplicativo.Nfse)
-            {
-                empresa.PastaDownloadNFeDest = textBox_PastaDownloadNFeDest.Text;
-                empresa.PastaXmlEnviado = textBox_PastaXmlEnviado.Text;
-                empresa.PastaBackup = textBox_PastaBackup.Text;
-                empresa.PastaXmlEmLote = textBox_PastaXmlEmLote.Text;
-            }
-            else
+            empresa.PastaDownloadNFeDest = textBox_PastaDownloadNFeDest.Text;
+            empresa.PastaXmlEnviado = textBox_PastaXmlEnviado.Text;
+            empresa.PastaBackup = textBox_PastaBackup.Text;
+            empresa.PastaXmlEmLote = textBox_PastaXmlEmLote.Text;
+
+            if (empresa.Servico.Equals(TipoAplicativo.Nfse))
             {
                 empresa.PastaDownloadNFeDest =
                 empresa.PastaXmlEnviado =
                 empresa.PastaBackup =
                 empresa.PastaXmlEmLote = string.Empty;
+            }
+            else if (empresa.Servico.Equals(TipoAplicativo.EFDReinfeSocial) ||
+                empresa.Servico.Equals(TipoAplicativo.EFDReinf) ||
+                empresa.Servico.Equals(TipoAplicativo.eSocial))
+            {
+                empresa.PastaXmlEmLote =
+                empresa.PastaDownloadNFeDest = string.Empty;
             }
         }
 
@@ -135,7 +137,7 @@ namespace NFe.UI.Formularios
         private void AlinharControles()
         {
             int top = Top - VerticalScroll.Value;
-            foreach(Control control in Controls.Cast<Control>()
+            foreach (Control control in Controls.Cast<Control>()
                                                .Where(control => control.Visible)
                                                .OrderBy(control => control.TabIndex))
             {
@@ -146,7 +148,7 @@ namespace NFe.UI.Formularios
 
         private bool DirNotExists(string path)
         {
-            if(string.IsNullOrEmpty(path)) return false;
+            if (string.IsNullOrEmpty(path)) return false;
             return !System.IO.Directory.Exists(path);
         }
 
@@ -154,10 +156,10 @@ namespace NFe.UI.Formularios
         {
             MetroFramework.Controls.MetroTextBox control = (MetroFramework.Controls.MetroTextBox)sender;
 
-            if(!string.IsNullOrEmpty(control.Text) && Directory.Exists(control.Text))
+            if (!string.IsNullOrEmpty(control.Text) && Directory.Exists(control.Text))
                 this.folderBrowserDialog1.SelectedPath = control.Text;
 
-            if(folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 control.Text = this.folderBrowserDialog1.SelectedPath;
             }
@@ -174,7 +176,7 @@ namespace NFe.UI.Formularios
         private void SetNewDir(MetroFramework.Controls.MetroTextBox textBox, string baseDir, string subfolder)
         {
             string[] dirs = textBox.Text.Split(new char[] { '\\' });
-            if(dirs.Length > 0 && !String.IsNullOrEmpty(textBox.Text))
+            if (dirs.Length > 0 && !String.IsNullOrEmpty(textBox.Text))
             {
                 string dir = dirs[dirs.Length - 1];
                 textBox.Text = String.Format("{0}\\{1}", baseDir, dir);
@@ -186,7 +188,7 @@ namespace NFe.UI.Formularios
 
         private void textBox_PastaEnvioXML_Leave(object sender, EventArgs e)
         {
-            if(this.empresa.Servico == TipoAplicativo.Nfse)
+            if (this.empresa.Servico == TipoAplicativo.Nfse)
                 cbCriaPastas.Checked = DirNotExists(this.textBox_PastaXmlEnvio.Text) ||
                                        DirNotExists(this.textBox_PastaXmlRetorno.Text) ||
                                        DirNotExists(this.textBox_PastaXmlErro.Text) ||
@@ -201,7 +203,7 @@ namespace NFe.UI.Formularios
                                        DirNotExists(this.textBox_PastaXmlEmLote.Text) ||
                                        DirNotExists(this.textBox_PastaDownloadNFeDest.Text);
 
-            if((sender == this.textBox_PastaValidar && this.empresa.Servico == TipoAplicativo.Nfse) ||
+            if ((sender == this.textBox_PastaValidar && this.empresa.Servico == TipoAplicativo.Nfse) ||
                 (sender == this.textBox_PastaDownloadNFeDest && !(empresa.Servico == TipoAplicativo.Nfse)))
             {
                 this.textBox_PastaXmlEnvio.Focus();
@@ -210,18 +212,18 @@ namespace NFe.UI.Formularios
 
         private void textBox_PastaEnvioXML_MouseDown(object sender, MouseEventArgs e)
         {
-            if(e.Button == System.Windows.Forms.MouseButtons.Left)
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 MetroFramework.Controls.MetroTextBox control = (MetroFramework.Controls.MetroTextBox)sender;
                 int x = control.ClientRectangle.Width - control.Icon.Size.Width;
-                if(e.Location.X >= x)  // a imagem foi pressionada?
+                if (e.Location.X >= x)  // a imagem foi pressionada?
                     SelectSenderXML(sender);
             }
         }
 
         private void textBox_PastaXmlEnvio_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.F4)
+            if (e.KeyCode == Keys.F4)
             {
                 SelectSenderXML(sender);
                 e.Handled = true;
@@ -230,7 +232,7 @@ namespace NFe.UI.Formularios
 
         private void textBox_PastaXmlEnvio_TextChanged(object sender, EventArgs e)
         {
-            if(ChangeEvent != null)
+            if (ChangeEvent != null)
                 ChangeEvent(sender, e);
         }
 
@@ -240,34 +242,34 @@ namespace NFe.UI.Formularios
 
             _control.Text = _control.Text.TrimEnd('\\');
 
-            if(__oldvalues[_control].ToString().Equals(_control.Text, StringComparison.InvariantCultureIgnoreCase))
+            if (__oldvalues[_control].ToString().Equals(_control.Text, StringComparison.InvariantCultureIgnoreCase))
             {
                 return;
             }
 
-            if(!string.IsNullOrEmpty(_control.Text))
+            if (!string.IsNullOrEmpty(_control.Text))
             {
-                foreach(var _Empresa in NFe.Settings.Empresas.Configuracoes)
+                foreach (var _Empresa in NFe.Settings.Empresas.Configuracoes)
                 {
                     string pasta = "";
-                    if(sender == this.textBox_PastaBackup)
+                    if (sender == this.textBox_PastaBackup)
                         pasta = _Empresa.PastaBackup;
-                    else if(sender == this.textBox_PastaDownloadNFeDest)
+                    else if (sender == this.textBox_PastaDownloadNFeDest)
                         pasta = _Empresa.PastaDownloadNFeDest;
-                    else if(sender == this.textBox_PastaXmlEnviado)
+                    else if (sender == this.textBox_PastaXmlEnviado)
                         pasta = _Empresa.PastaXmlEnviado;
-                    else if(sender == this.textBox_PastaXmlEnvio)
+                    else if (sender == this.textBox_PastaXmlEnvio)
                         pasta = _Empresa.PastaXmlEnvio;
-                    else if(sender == this.textBox_PastaXmlEmLote)
+                    else if (sender == this.textBox_PastaXmlEmLote)
                         pasta = _Empresa.PastaXmlEmLote;
-                    else if(sender == this.textBox_PastaXmlRetorno)
+                    else if (sender == this.textBox_PastaXmlRetorno)
                         pasta = _Empresa.PastaXmlRetorno;
-                    else if(sender == this.textBox_PastaValidar)
+                    else if (sender == this.textBox_PastaValidar)
                         pasta = _Empresa.PastaValidar;
-                    else if(sender == this.textBox_PastaXmlErro)
+                    else if (sender == this.textBox_PastaXmlErro)
                         pasta = _Empresa.PastaXmlErro;
 
-                    if(!this.empresa.CNPJ.Equals(_Empresa.CNPJ) &&
+                    if (!this.empresa.CNPJ.Equals(_Empresa.CNPJ) &&
                         !this.empresa.Servico.Equals(_Empresa.Servico) &&
                         pasta.Equals(_control.Text, StringComparison.InvariantCultureIgnoreCase))
                     {
@@ -282,24 +284,24 @@ namespace NFe.UI.Formularios
                     }
                 }
 
-                if(sender == textBox_PastaXmlEnvio)
+                if (sender == textBox_PastaXmlEnvio)
                 {
                     string[] dirs = textBox_PastaXmlEnvio.Text.Split(new char[] { '\\' });
                     string baseDir = dirs.Join('\\', dirs.Length - 1);
 
                     dirs = __oldvalues[_control].ToString().Split(new char[] { '\\' });
                     string baseDirOld = "";
-                    if(dirs.Length > 0)
+                    if (dirs.Length > 0)
                         baseDirOld = dirs.Join('\\', dirs.Length - 1);
 
-                    if(!baseDirOld.Equals(baseDir, StringComparison.InvariantCultureIgnoreCase))
+                    if (!baseDirOld.Equals(baseDir, StringComparison.InvariantCultureIgnoreCase))
                     {
-                        if(MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Deseja redefinir os outros diretórios para que tenham a mesma estrutura do diretório de envio?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        if (MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Deseja redefinir os outros diretórios para que tenham a mesma estrutura do diretório de envio?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             SetNewDir(textBox_PastaXmlRetorno, baseDir, "Retorno");
                             SetNewDir(textBox_PastaXmlErro, baseDir, "Erro");
                             SetNewDir(textBox_PastaValidar, baseDir, "Validar");
-                            if(this.empresa.Servico != TipoAplicativo.Nfse)
+                            if (this.empresa.Servico != TipoAplicativo.Nfse)
                             {
                                 SetNewDir(textBox_PastaXmlEnviado, baseDir, "Enviados");
                                 SetNewDir(textBox_PastaBackup, baseDir, "Backup");
@@ -311,6 +313,77 @@ namespace NFe.UI.Formularios
                 }
             }
             __oldvalues[_control] = _control.Text;
+        }
+
+        private void ConfigurarPastas(Empresa empresa)
+        {
+            switch (empresa.Servico)
+            {
+                case TipoAplicativo.Nfse:
+                    textBox_PastaXmlEmLote.Visible = false;
+                    lbl_textBox_PastaLote.Visible = false;
+                    textBox_PastaDownloadNFeDest.Visible = false;
+                    lbl_textBox_PastaDownload.Visible = false;
+                    textBox_PastaBackup.Visible = false;
+                    lbl_textBox_PastaBackup.Visible = false;
+                    textBox_PastaXmlEnviado.Visible = false;
+                    lbl_textBox_PastaEnviados.Visible = false;
+                    textBox_PastaXmlEnvio.Visible = true;
+                    textBox_PastaXmlRetorno.Visible = true;
+                    textBox_PastaXmlErro.Visible = true;
+                    textBox_PastaValidar.Visible = true;
+                    lbl_textBox_PastaEnvioXML.Visible = true;
+                    lbl_textBox_PastaXmlErro.Visible = true;
+                    lbl_textBox_PastaRetornoXML.Visible = true;
+                    lbl_textBox_PastaValidar.Visible = true;
+                    break;
+                case TipoAplicativo.EFDReinf:
+                case TipoAplicativo.eSocial:
+                case TipoAplicativo.EFDReinfeSocial:
+                    textBox_PastaXmlEmLote.Visible = false;
+                    lbl_textBox_PastaLote.Visible = false;
+                    textBox_PastaDownloadNFeDest.Visible = false;
+                    lbl_textBox_PastaDownload.Visible = false;
+                    textBox_PastaBackup.Visible = true;
+                    lbl_textBox_PastaBackup.Visible = true;
+                    textBox_PastaXmlEnviado.Visible = true;
+                    lbl_textBox_PastaEnviados.Visible = true;
+                    textBox_PastaXmlEnvio.Visible = true;
+                    textBox_PastaXmlRetorno.Visible = true;
+                    textBox_PastaXmlErro.Visible = true;
+                    textBox_PastaValidar.Visible = true;
+                    lbl_textBox_PastaEnvioXML.Visible = true;
+                    lbl_textBox_PastaXmlErro.Visible = true;
+                    lbl_textBox_PastaRetornoXML.Visible = true;
+                    lbl_textBox_PastaValidar.Visible = true;
+
+                    break;
+                case TipoAplicativo.Nfe:
+                case TipoAplicativo.Cte:
+                case TipoAplicativo.MDFe:
+                case TipoAplicativo.NFCe:
+                case TipoAplicativo.SAT:
+                case TipoAplicativo.Todos:
+                case TipoAplicativo.Nulo:
+                default:
+                    textBox_PastaXmlEmLote.Visible = true;
+                    lbl_textBox_PastaLote.Visible = true;
+                    textBox_PastaDownloadNFeDest.Visible = true;
+                    lbl_textBox_PastaDownload.Visible = true;
+                    textBox_PastaBackup.Visible = true;
+                    lbl_textBox_PastaBackup.Visible = true;
+                    textBox_PastaXmlEnviado.Visible = true;
+                    lbl_textBox_PastaEnviados.Visible = true;
+                    textBox_PastaXmlEnvio.Visible = true;
+                    textBox_PastaXmlRetorno.Visible = true;
+                    textBox_PastaXmlErro.Visible = true;
+                    textBox_PastaValidar.Visible = true;
+                    lbl_textBox_PastaEnvioXML.Visible = true;
+                    lbl_textBox_PastaXmlErro.Visible = true;
+                    lbl_textBox_PastaRetornoXML.Visible = true;
+                    lbl_textBox_PastaValidar.Visible = true;
+                    break;
+            }
         }
 
         #endregion Private Methods

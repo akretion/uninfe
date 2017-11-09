@@ -538,8 +538,26 @@ namespace NFe.Components
         /// </summary>
         [Description("SAT")]
         SAT = 5,
+        
+        /// <summary>
+        /// Aplicativo ou serviços para processamento dos XMLs do EFD Reinf
+        /// </summary>
+        [Description("EFD Reinf")]
+        EFDReinf = 6,
 
-        [Description("NF-e, NFC-e, CT-e e MDF-e")]
+        /// <summary>
+        /// Aplicativo ou serviços para processamento dos XMLs do eSocial
+        /// </summary>
+        [Description("eSocial")]
+        eSocial = 7,
+
+        /// <summary>
+        /// Aplicativo ou seviços para processamento dos XMLs de EFD Reinf e eSocial
+        /// </summary>
+        [Description("EFD Reinf e eSocial")]
+        EFDReinfeSocial = 8,
+
+        [Description("NF-e, NFC-e, CT-e, MDF-e, EFD Reinf e eSocial")]
         Todos = 10,
 
         [Description("")]
@@ -849,13 +867,6 @@ namespace NFe.Components
         NATALENSE,
 
         /// <summary>
-        /// Padrão ABRASF
-        /// Prefeitura de Recife - PE
-        /// </summary>
-        [Description("ABRASF")]
-        ABRASF,
-
-        /// <summary>
         /// Padrão Consist
         /// Prefeitura de Patos de Minas - MG
         /// </summary>
@@ -1062,13 +1073,13 @@ namespace NFe.Components
         [Description("Normal")]
         teNormal = 1,
 
-        [Description("Contingência com formulário de segurança (FS)")]
+        [Description("Contingência com FS")]
         teFS = 2,
 
         [Description("Contingência com EPEC")]
         teEPEC = 4,
 
-        [Description("Contingência com formulário de segurança (FS-DA)")]
+        [Description("Contingência com FS-DA")]
         teFSDA = 5,
 
         [Description("Contingência com SVC-AN")]
