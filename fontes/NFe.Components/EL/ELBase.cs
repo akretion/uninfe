@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NFe.Components.Abstract;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.IO;
-using System.Xml.Serialization;
-using System.Xml;
+﻿using NFe.Components.Abstract;
 
 namespace NFe.Components.EL
 {
@@ -20,8 +11,10 @@ namespace NFe.Components.EL
         string UsuarioProxy = "";
         string SenhaProxy = "";
         string DomainProxy = "";
+
         //X509Certificate Certificado = null;
         EmiteNFSeBase elService;
+
         protected EmiteNFSeBase EGoverneService
         {
             get
@@ -38,12 +31,16 @@ namespace NFe.Components.EL
                         switch (CodigoMun)
                         {
                             case 2930709: //Simões Filho-BA
-                                elService = new NFe.Components.EL.SimoesFilhoBA.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
+                                elService = new SimoesFilhoBA.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
                                 break;
 
                             case 3201506: //Colatina-ES
-                                elService = new NFe.Components.EL.ColatinaES.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
-                                break;                            
+                                elService = new ColatinaES.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
+                                break;
+
+                            case 3202603: //Iconha-ES
+                                elService = new IconhaES.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
+                                break;
 
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
@@ -52,7 +49,7 @@ namespace NFe.Components.EL
                 return elService;
             }
         }
-        #endregion
+        #endregion locais/ protegidos
 
         #region Construtores
         public ELBase(TipoAmbiente tpAmb, string pastaRetorno, int codMun, string usuarioWs, string senhaWs, string usuarioProxy, string senhaProxy, string domainProxy)
@@ -65,7 +62,7 @@ namespace NFe.Components.EL
             SenhaProxy = senhaProxy;
             DomainProxy = domainProxy;
         }
-        #endregion
+        #endregion Construtores
 
         #region Métodos
         public override void EmiteNF(string file)
@@ -97,8 +94,6 @@ namespace NFe.Components.EL
         {
             EGoverneService.ConsultarNfsePorRps(file);
         }
-        #endregion
-
-
+        #endregion Métodos
     }
 }

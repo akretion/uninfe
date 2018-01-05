@@ -217,13 +217,19 @@ namespace NFe.Service
                             string tpEvento = Functions.LerTag(((XmlElement)((XmlElement)docXML.GetElementsByTagName("evento")[0]).GetElementsByTagName("infEvento")[0]), "tpEvento", false);
                             string nSeqEvento = Functions.LerTag(((XmlElement)((XmlElement)docXML.GetElementsByTagName("evento")[0]).GetElementsByTagName("infEvento")[0]), "nSeqEvento", false);
 
-                            FileToFtp = Path.Combine(folderTerceiros, chNFe + "_" + tpEvento + "_" + nSeqEvento.PadLeft(2, '0') + Propriedade.ExtRetorno.ProcEventoNFe);
+                            if (Empresas.Configuracoes[emp].ArqNSU)
+                                FileToFtp = Path.Combine(folderTerceiros, fileRetorno2 + "-" + NSU + Propriedade.ExtRetorno.ProcEventoNFe);
+                            else
+                                FileToFtp = Path.Combine(folderTerceiros, chNFe + "_" + tpEvento + "_" + nSeqEvento.PadLeft(2, '0') + Propriedade.ExtRetorno.ProcEventoNFe);
                         }
                         else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("procNFe"))
                         {
                             string chave = ((XmlElement)docXML.GetElementsByTagName("infNFe")[0]).GetAttribute("Id").Substring(3, 44);
 
-                            FileToFtp = Path.Combine(folderTerceiros, chave + Propriedade.ExtRetorno.ProcNFe);
+                            if (Empresas.Configuracoes[emp].ArqNSU)
+                                FileToFtp = Path.Combine(folderTerceiros, fileRetorno2 + "-" + NSU + Propriedade.ExtRetorno.ProcNFe);
+                            else
+                                FileToFtp = Path.Combine(folderTerceiros, chave + Propriedade.ExtRetorno.ProcNFe);
                         }
                         else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("resNFe"))
                         {
@@ -240,13 +246,19 @@ namespace NFe.Service
                             string tpEvento = Functions.LerTag(((XmlElement)((XmlElement)docXML.GetElementsByTagName("eventoCTe")[0]).GetElementsByTagName("infEvento")[0]), "tpEvento", false);
                             string nSeqEvento = Functions.LerTag(((XmlElement)((XmlElement)docXML.GetElementsByTagName("eventoCTe")[0]).GetElementsByTagName("infEvento")[0]), "nSeqEvento", false);
 
-                            FileToFtp = Path.Combine(folderTerceiros, chCTe + "_" + tpEvento + "_" + nSeqEvento.PadLeft(2, '0') + Propriedade.ExtRetorno.ProcEventoCTe);
+                            if (Empresas.Configuracoes[emp].ArqNSU)
+                                FileToFtp = Path.Combine(folderTerceiros, fileRetorno2 + "-" + NSU + Propriedade.ExtRetorno.ProcEventoCTe);
+                            else
+                                FileToFtp = Path.Combine(folderTerceiros, chCTe + "_" + tpEvento + "_" + nSeqEvento.PadLeft(2, '0') + Propriedade.ExtRetorno.ProcEventoCTe);
                         }
                         else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("procCTe"))
                         {
                             string chave = ((XmlElement)docXML.GetElementsByTagName("infCte")[0]).GetAttribute("Id").Substring(3, 44);
 
-                            FileToFtp = Path.Combine(folderTerceiros, chave + Propriedade.ExtRetorno.ProcCTe);
+                            if (Empresas.Configuracoes[emp].ArqNSU)
+                                FileToFtp = Path.Combine(folderTerceiros, fileRetorno2 + "-" + NSU + Propriedade.ExtRetorno.ProcCTe);
+                            else
+                                FileToFtp = Path.Combine(folderTerceiros, chave + Propriedade.ExtRetorno.ProcCTe);
                         }
 
                         #endregion CTe

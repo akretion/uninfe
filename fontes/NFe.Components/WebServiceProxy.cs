@@ -147,7 +147,8 @@ namespace NFe.Components
                             case Servicos.NFSeCancelar:
                                 if (cMunicipio == 4109401 ||
                                     cMunicipio == 3131703 ||
-                                    cMunicipio == 4303004)
+                                    cMunicipio == 4303004 ||
+                                    cMunicipio == 4322509)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -155,7 +156,8 @@ namespace NFe.Components
                             case Servicos.NFSeRecepcionarLoteRps:
                                 if (cMunicipio == 4109401 ||
                                     cMunicipio == 3131703 ||
-                                    cMunicipio == 4303004)
+                                    cMunicipio == 4303004 ||
+                                    cMunicipio == 4322509)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -163,7 +165,8 @@ namespace NFe.Components
                             default:
                                 if (cMunicipio == 4109401 ||
                                     cMunicipio == 3131703 ||
-                                    cMunicipio == 4303004)
+                                    cMunicipio == 4303004 ||
+                                    cMunicipio == 4322509)
                                     return "BasicHttpBinding_INFSEConsultas";
                                 else
                                     return "basic_INFSEConsultas";
@@ -476,8 +479,7 @@ namespace NFe.Components
 #if _fw35
             SecurityProtocolType securityProtocolType = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
 #else
-            SecurityProtocolType securityProtocolType = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls;
-//            SecurityProtocolType securityProtocolType = SecurityProtocolType.Tls;
+            SecurityProtocolType securityProtocolType = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
 #endif
             if (padraoNFSe != PadroesNFSe.NaoIdentificado)
             {
@@ -535,38 +537,38 @@ namespace NFe.Components
             return DefinirProtocoloSeguranca(cUF, (tpAmb == (int)TipoAmbiente.taHomologacao), tpEmis, padraoNFSe, servico);
         }
 
-#endregion DefinirProtocoloSeguranca()
+        #endregion DefinirProtocoloSeguranca()
 
-#region Métodos privados
+        #region Métodos privados
 
-#region GerarClasse()
+        #region GerarClasse()
 
         /// <summary>
         /// Gerar o source code do serviço
         /// </summary>
         private void GerarClasse()
         {
-#region Gerar o código da classe
+            #region Gerar o código da classe
 
             StringWriter writer = new StringWriter(CultureInfo.CurrentCulture);
             CSharpCodeProvider provider = new CSharpCodeProvider();
             provider.GenerateCodeFromNamespace(GerarGrafo(), writer, null);
 
-#endregion Gerar o código da classe
+            #endregion Gerar o código da classe
 
             string codigoClasse = writer.ToString();
 
-#region Compilar o código da classe
+            #region Compilar o código da classe
 
             CompilerResults results = provider.CompileAssemblyFromSource(ParametroCompilacao(), codigoClasse);
             serviceAssemby = results.CompiledAssembly;
 
-#endregion Compilar o código da classe
+            #endregion Compilar o código da classe
         }
 
-#endregion GerarClasse()
+        #endregion GerarClasse()
 
-#region ParametroCompilacao
+        #region ParametroCompilacao
 
         /// <summary>
         /// Montar os parâmetros para a compilação da classe
@@ -583,16 +585,16 @@ namespace NFe.Components
             return parameters;
         }
 
-#endregion ParametroCompilacao
+        #endregion ParametroCompilacao
 
-#region GerarGrafo()
+        #region GerarGrafo()
 
         /// <summary>
         /// Gerar a estrutura e o grafo da classe
         /// </summary>
         private CodeNamespace GerarGrafo()
         {
-#region Gerar a estrutura da classe do serviço
+            #region Gerar a estrutura da classe do serviço
 
             //Gerar a estrutura da classe do serviço
             ServiceDescriptionImporter importer = new ServiceDescriptionImporter();
@@ -607,9 +609,9 @@ namespace NFe.Components
             //Tipos deste serviço devem ser gerados como propriedades e não como simples campos
             importer.CodeGenerationOptions = CodeGenerationOptions.GenerateProperties;
 
-#endregion Gerar a estrutura da classe do serviço
+            #endregion Gerar a estrutura da classe do serviço
 
-#region Se a NFSe for padrão DUETO/WEBISS/SALVADOR_BA/PRONIN preciso importar os schemas do WSDL
+            #region Se a NFSe for padrão DUETO/WEBISS/SALVADOR_BA/PRONIN preciso importar os schemas do WSDL
 
             switch (PadraoNFSe)
             {
@@ -621,6 +623,7 @@ namespace NFe.Components
                 case PadroesNFSe.SALVADOR_BA:
                 case PadroesNFSe.GIF:
                 case PadroesNFSe.PRONIN:
+                case PadroesNFSe.INTERSOL:
                     //Tive que utilizar a WebClient para que a OpenRead funcionasse, não foi possível fazer funcionar com a SecureWebClient. Tem que analisar melhor. Wandrey e Renan 10/09/2013
                     WebClient client = new WebClient();
                     Stream stream = client.OpenRead(ArquivoWSDL);
@@ -646,23 +649,23 @@ namespace NFe.Components
                     break;
             }
 
-#endregion Se a NFSe for padrão DUETO/WEBISS/SALVADOR_BA/PRONIN preciso importar os schemas do WSDL
+            #endregion Se a NFSe for padrão DUETO/WEBISS/SALVADOR_BA/PRONIN preciso importar os schemas do WSDL
 
-#region Gerar o o grafo da classe para depois gerar o código
+            #region Gerar o o grafo da classe para depois gerar o código
 
             CodeNamespace @namespace = new CodeNamespace();
             CodeCompileUnit unit = new CodeCompileUnit();
             unit.Namespaces.Add(@namespace);
             ServiceDescriptionImportWarnings warmings = importer.Import(@namespace, unit);
 
-#endregion Gerar o o grafo da classe para depois gerar o código
+            #endregion Gerar o o grafo da classe para depois gerar o código
 
             return @namespace;
         }
 
-#endregion GerarGrafo()
+        #endregion GerarGrafo()
 
-#region RelacCertificado
+        #region RelacCertificado
 
         /// <summary>
         /// Relacionar o certificado digital com o serviço que será consumido do webservice
@@ -674,17 +677,17 @@ namespace NFe.Components
                 ((System.Web.Services.Protocols.SoapHttpClientProtocol)instance).ClientCertificates.Add(this.oCertificado);
         }
 
-#endregion RelacCertificado
+        #endregion RelacCertificado
 
-#endregion Métodos privados
+        #endregion Métodos privados
 
-#region Objeto da BETHA Sistemas para acessar os WebServices da NFSe
+        #region Objeto da BETHA Sistemas para acessar os WebServices da NFSe
 
         public IBetha Betha;
 
-#endregion Objeto da BETHA Sistemas para acessar os WebServices da NFSe
+        #endregion Objeto da BETHA Sistemas para acessar os WebServices da NFSe
 
-#region CarregaWebServicesList()
+        #region CarregaWebServicesList()
 
         /// <summary>
         /// Carrega a lista de webservices definidos no arquivo WebService.XML
@@ -895,9 +898,9 @@ namespace NFe.Components
             return salvaXmlLocal;
         }
 
-#endregion CarregaWebServicesList()
+        #endregion CarregaWebServicesList()
 
-#region reloadWebServicesList()
+        #region reloadWebServicesList()
 
         /// <summary>
         /// Recarrega a lista de webservices
@@ -909,9 +912,9 @@ namespace NFe.Components
             CarregaWebServicesList();
         }
 
-#endregion reloadWebServicesList()
+        #endregion reloadWebServicesList()
 
-#region PreencheURLw
+        #region PreencheURLw
 
         private static void PreencheURLw(URLws wsItem, string tagName, string urls, string uf, string subfolder)
         {
@@ -965,7 +968,7 @@ namespace NFe.Components
             }
         }
 
-#endregion PreencheURLw
+        #endregion PreencheURLw
     }
 
     public class webServices
@@ -1069,13 +1072,13 @@ namespace NFe.Components
             LMCAutorizacao = string.Empty;
         }
 
-#region Propriedades referente as tags do webservice.xml
+        #region Propriedades referente as tags do webservice.xml
 
         // ******** ATENÇÃO *******
         // os nomes das propriedades tem que ser iguais as tags no WebService.xml
         // ******** ATENÇÃO *******
 
-#region NFe
+        #region NFe
 
         public string NFeRecepcao { get; set; }
         public string NFeRetRecepcao { get; set; }
@@ -1099,9 +1102,9 @@ namespace NFe.Components
         /// </summary>
         public string DFeRecepcao { get; set; }
 
-#endregion NFe
+        #endregion NFe
 
-#region NFS-e
+        #region NFS-e
 
         /// <summary>
         /// Enviar Lote RPS NFS-e
@@ -1163,9 +1166,9 @@ namespace NFe.Components
         /// </summary>
         public string ConsultaSequenciaLoteNotaRPS { get; set; }
 
-#endregion NFS-e
+        #endregion NFS-e
 
-#region CFS-e
+        #region CFS-e
 
         /// <summary>
         /// Enviar lote CFS-e
@@ -1207,9 +1210,9 @@ namespace NFe.Components
         /// </summary>
         public string ConsultarDadosCadastroCfse { get; set; }
 
-#endregion CFS-e
+        #endregion CFS-e
 
-#region MDF-e
+        #region MDF-e
 
         /// <summary>
         /// Recepção do MDFe
@@ -1246,9 +1249,9 @@ namespace NFe.Components
         /// </summary>
         public string LMCAutorizacao { get; set; }
 
-#endregion MDF-e
+        #endregion MDF-e
 
-#region CTe
+        #region CTe
 
         /// <summary>
         /// Recepção do CTe
@@ -1295,8 +1298,31 @@ namespace NFe.Components
         /// </summary>
         public string CteRecepcaoOS { get; set; }
 
-#endregion CTe
+        #endregion CTe
 
-#endregion Propriedades referente as tags do webservice.xml
+        #region EFDReinf
+
+        /// <summary>
+        /// Recepção do lote de eventos do EFDReinf
+        /// </summary>
+        public string RecepcaoLoteReinf { get; set; }
+
+        #endregion EFDReinf
+
+        #region eSocial
+
+        /// <summary>
+        /// Recepção do lote de eventos do eSocial
+        /// </summary>
+        public string RecepcaoLoteeSocial { get; set; }
+
+        /// <summary>
+        /// Consulta do lote de eventos do eSocial
+        /// </summary>
+        public string ConsultarLoteeSocial { get; set; }
+
+        #endregion eSocial
+
+        #endregion Propriedades referente as tags do webservice.xml
     }
 }

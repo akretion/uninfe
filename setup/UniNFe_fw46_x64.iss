@@ -52,6 +52,7 @@ Source: ..\fontes\uninfe\bin\x64\Release46_x64\NFe.UI.dll; DestDir: {app}; Flags
 Source: ..\fontes\uninfe\bin\x64\Release46_x64\NFe.Validate.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\x64\Release46_x64\NFe.SAT.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\x64\Release46_x64\Unimake.SAT.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\x64\Release46_x64\Newtonsoft.Json.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\x64\Release46_x64\uninfe.exe; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\x64\Release46_x64\uninfeservico.exe; DestDir: {app}; Flags: ignoreversion
 Source: \projetos\dv\trunk\fontes\includes\sefaz.inc; DestDir: {app}; Flags: ignoreversion

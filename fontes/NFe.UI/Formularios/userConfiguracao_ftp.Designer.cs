@@ -107,7 +107,7 @@
             this.lbl_edtFTP_PastaDestino.Location = new System.Drawing.Point(0, 169);
             this.lbl_edtFTP_PastaDestino.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_edtFTP_PastaDestino.Name = "lbl_edtFTP_PastaDestino";
-            this.lbl_edtFTP_PastaDestino.Size = new System.Drawing.Size(285, 15);
+            this.lbl_edtFTP_PastaDestino.Size = new System.Drawing.Size(284, 15);
             this.lbl_edtFTP_PastaDestino.TabIndex = 47;
             this.lbl_edtFTP_PastaDestino.Text = "Pasta onde serão gravados os arquivos XML´s enviados";
             // 
@@ -156,7 +156,7 @@
             this.edtFTP_Password.Location = new System.Drawing.Point(0, 103);
             this.edtFTP_Password.MaxLength = 32767;
             this.edtFTP_Password.Name = "edtFTP_Password";
-            this.edtFTP_Password.PasswordChar = '\0';
+            this.edtFTP_Password.PasswordChar = '*';
             this.edtFTP_Password.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.edtFTP_Password.SelectedText = "";
             this.edtFTP_Password.Size = new System.Drawing.Size(562, 22);
@@ -203,7 +203,7 @@
             this.metroLabel38.Location = new System.Drawing.Point(0, 1);
             this.metroLabel38.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel38.Name = "metroLabel38";
-            this.metroLabel38.Size = new System.Drawing.Size(98, 15);
+            this.metroLabel38.Size = new System.Drawing.Size(99, 15);
             this.metroLabel38.TabIndex = 41;
             this.metroLabel38.Text = "Nome da servidor";
             // 

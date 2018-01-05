@@ -5,13 +5,16 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Reflection;
+using Newtonsoft.Json;
+using NFe.Components.SOFTPLAN;
+using System.Xml;
 
 namespace NFSe.Components
 {
     /// <summary>
     /// Esta classe utiliza métodos POST para fazer requisições
     /// </summary>
-    public class POSTRequest: IDisposable
+    public class POSTRequest : IDisposable
     {
         /// <summary>
         /// Proxy para ser utilizado na requisição, pode ser nulo
@@ -116,6 +119,101 @@ namespace NFSe.Components
             reader.Dispose();
             return result;
             #endregion
+        }
+
+
+        /// <summary>
+        /// Faz o post e retorna uma string  com o resultado
+        /// </summary>
+        /// <param name="url">url base para utilizar dentro do post</param>
+        /// <param name="postData">dados a serem enviados junto com o post</param>
+        /// <returns></returns>
+        public string PostForm(string url, IDictionary<string, string> postData = null, IList<string> headers = null)
+        {
+            string result = string.Empty;
+            string postParameter = string.Empty;
+            string xmlFile = "";
+
+            foreach(KeyValuePair<string, string> keyValue in postData.Where(w => w.Key != "f1"))
+                postParameter += $"&{keyValue.Key}={keyValue.Value}";
+
+            if(postParameter.Length > 1)
+            {
+                postParameter = postParameter?.Substring(1);
+                url += $"?{postParameter}";
+            }
+            string accept = null;
+            string contentType = accept;
+
+            if(postData.Keys.Contains("f1"))
+            {
+                xmlFile = postData["f1"];
+                XmlDocument doc = new XmlDocument();
+                doc.Load(xmlFile);
+                xmlFile = doc.InnerXml;
+                contentType = "application/xml";
+                accept = "application/xml";
+            }
+
+            byte[] encode = Encoding.UTF8.GetBytes(xmlFile);
+            var request = WebRequest.CreateHttp(url);
+            request.Method = "POST";
+            request.ContentType = contentType;
+            request.ContentLength = encode.Length;
+            request.KeepAlive = true;
+            request.Credentials = CredentialCache.DefaultCredentials;
+            request.Accept = accept;
+
+            foreach(string header in headers)
+                request.Headers.Add(header);
+
+            if(Proxy != null)
+            {
+                request.UseDefaultCredentials = false;
+                request.Proxy = Proxy;
+                request.Proxy.Credentials = Proxy.Credentials;
+                request.Credentials = Proxy.Credentials;
+            }
+
+            //ajustar para permitir o cabeçalho HTTP/1.0
+            SetAllowUnsafeHeaderParsing20();
+            //evitar o erro "The remote server returned an error: (417) Expectation Failed."
+            //para cabeçalhos HTTP/1.0
+            ServicePointManager.Expect100Continue = false;
+
+            if(encode.Length > 0)
+            {
+                var stream = request.GetRequestStream();
+                stream.Write(encode, 0, encode.Length);
+                stream.Close();
+            }
+
+            WebResponse response = default(WebResponse);
+            bool success = true;
+
+            try
+            {
+                response = request.GetResponse();
+
+            }
+            catch(WebException webEx)
+            {
+                response = webEx.Response;
+                success = false;
+            }
+
+            var streamDados = response.GetResponseStream();
+            StreamReader reader = new StreamReader(streamDados);
+            result = reader.ReadToEnd();
+            streamDados.Close();
+            response.Close();
+            response.Dispose();
+
+            if(!success &&
+                result.StartsWith("\n"))
+                result = result.Substring(1);
+
+            return result;
         }
 
         public void Dispose()

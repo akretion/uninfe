@@ -272,8 +272,9 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.PRONIN:
                         if (oDadosPedSitLoteRps.cMunicipio == 4109401 ||
-                            oDadosPedSitLoteRps.cMunicipio == 3131703 || 
-                            oDadosPedSitLoteRps.cMunicipio == 4303004)
+                            oDadosPedSitLoteRps.cMunicipio == 3131703 ||
+                            oDadosPedSitLoteRps.cMunicipio == 4303004 ||
+                            oDadosPedSitLoteRps.cMunicipio == 4322509)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -291,9 +292,6 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.TINUS:
-
-                        #region Tinus
-
                         Tinus tinus = new Tinus((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosPedSitLoteRps.cMunicipio,
@@ -305,7 +303,9 @@ namespace NFe.Service.NFSe
                         tinus.ConsultarSituacaoLoteRps(NomeArquivoXML);
                         break;
 
-                        #endregion Tinus
+                    case PadroesNFSe.INTERSOL:
+                        cabecMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><p:cabecalho versao=\"1\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:p=\"http://ws.speedgov.com.br/cabecalho_v1.xsd\" xmlns:p1=\"http://ws.speedgov.com.br/tipos_v1.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://ws.speedgov.com.br/cabecalho_v1.xsd cabecalho_v1.xsd \"><versaoDados>1</versaoDados></p:cabecalho>";
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, oDadosPedSitLoteRps.cMunicipio))

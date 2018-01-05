@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NFe.Components.Abstract;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.IO;
-using System.Xml.Serialization;
-using System.Xml;
+﻿using NFe.Components.Abstract;
 
 namespace NFe.Components.FISSLEX
 {
@@ -21,6 +12,7 @@ namespace NFe.Components.FISSLEX
         string ProxyPass = "";
         string ProxyServer = "";
         EmiteNFSeBase fisslexService;
+
         protected EmiteNFSeBase FISSLEXService
         {
             get
@@ -28,21 +20,16 @@ namespace NFe.Components.FISSLEX
                 if (fisslexService == null)
                 {
                     if (tpAmb == TipoAmbiente.taHomologacao)
-                        switch (CodigoMun)
-                        {
-                            case 5107909: //Sinop-MT
-                                fisslexService = new NFe.Components.FISSLEX.SinopMT.h.FISSLEXH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
-                                break;
-
-                            default:
-                                throw new Exceptions.ServicoInexistenteException();
-                        }
+                        fisslexService = new h.FISSLEXH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                     else
                         switch (CodigoMun)
                         {
                             case 5107909: //Sinop-MT
-                                fisslexService = new NFe.Components.FISSLEX.SinopMT.p.FISSLEXP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
-                                //fisslexService = new NFe.Components.SimplISS.PiracicabaSP.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                fisslexService = new SinopMT.p.FISSLEXP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                break;
+
+                            case 3530805: //Mogi Mirim-SP
+                                fisslexService = new MogiMirimSP.p.FISSLEXP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
 
                             default:
@@ -98,7 +85,5 @@ namespace NFe.Components.FISSLEX
             FISSLEXService.ConsultarNfsePorRps(file);
         }
         #endregion
-
-
     }
 }

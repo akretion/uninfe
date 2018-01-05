@@ -596,14 +596,15 @@ namespace NFe.Service
 
                 #endregion ABASE
 
-                case PadroesNFSe.LEXSOM:                    
+                case PadroesNFSe.LEXSOM:
                     XmlNode result = wsProxy.InvokeXML(servicoWS, metodo, new object[] { docXML });
                     strRetorno = result.OuterXml;
                     break;
 
-                #region Demais padrões
-
                 default:
+
+                    #region Demais padrões
+
                     if (string.IsNullOrEmpty(cabecMsg))
                         strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { docXML.OuterXml });
                     else

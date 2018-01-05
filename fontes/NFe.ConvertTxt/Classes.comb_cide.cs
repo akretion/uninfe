@@ -11,6 +11,11 @@ namespace NFe.ConvertTxt
     public struct Comb
     {
         public int cProdANP;
+        public string descANP;
+        public double pGLP;
+        public double pGNn;
+        public double pGNi;
+        public double vPart;
         public double pMixGN;
         public string CODIF;
         public double qTemp;

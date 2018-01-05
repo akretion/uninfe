@@ -33,6 +33,10 @@ namespace NFe.Components.Pronin
                                 proninService = new CachoeiraSulRS.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
+                            case 4322509: //Vacari-RS
+                                proninService = new VacariRS.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -49,6 +53,10 @@ namespace NFe.Components.Pronin
 
                             case 4303004: //Cachoeira do Sul-RS
                                 proninService = new CachoeiraSulRS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
+                            case 4322509: //Vacari-RS
+                                proninService = new VacariRS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
                             default:

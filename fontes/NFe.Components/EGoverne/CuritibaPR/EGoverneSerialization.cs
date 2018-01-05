@@ -1,10 +1,7 @@
 ﻿using NFe.Components.Abstract;
 using NFe.Components.br.gov.pr.curitiba.pilotoisscuritiba.h;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Xml;
 
 namespace NFe.Components.EGoverne.CuritibaPR
@@ -90,15 +87,18 @@ namespace NFe.Components.EGoverne.CuritibaPR
             sign.SignedInfo = new SignedInfoType();
 
             sign.SignedInfo.CanonicalizationMethod = new CanonicalizationMethodType();
+
             // <- Elemento foreach
 
             sign.SignedInfo.SignatureMethod = new SignatureMethodType();
+
             // <- Elemento foreach
 
             // Grupo: Signature->SignedInfo->Reference
             sign.SignedInfo.Reference = new ReferenceType[1];
 
             ReferenceType referenceType = new ReferenceType();
+
             // <- Elemento foreach
             referenceType.DigestMethod = new DigestMethodType();
 
@@ -106,16 +106,19 @@ namespace NFe.Components.EGoverne.CuritibaPR
 
             // Grupo: Signature->SignedInfo->Reference->Transforms
             sign.SignedInfo.Reference[0].Transforms = new TransformType[CountElements(nodes, "Transform")];
+
             // <- Elemento foreach
 
             //Tag: Signature->SignatureValue
             sign.SignatureValue = new SignatureValueType();
+
             // <- Elemento foreach
 
             //Grupo: Signature->KeyInfo
             sign.KeyInfo = new KeyInfoType();
             X509DataType x509 = new X509DataType();
             x509.Items = new object[1];
+
             // <- Elemento foreach
             x509.ItemsElementName = new ItemsChoiceType1[1] { ItemsChoiceType1.X509Certificate };
 
@@ -127,7 +130,6 @@ namespace NFe.Components.EGoverne.CuritibaPR
             PopulateSignature(sign, referenceType, x509, nodes);
 
             SetProperty(rps, "Signature", sign);
-
         }
 
         private void PopulateSignature(SignatureType sign, ReferenceType referenceType, X509DataType x509, XmlNode nodes)
@@ -169,7 +171,6 @@ namespace NFe.Components.EGoverne.CuritibaPR
                 {
                     PopulateSignature(sign, referenceType, x509, item);
                 }
-
             }
         }
 
@@ -180,11 +181,9 @@ namespace NFe.Components.EGoverne.CuritibaPR
             {
                 if (item.HasChildNodes)
                     result += CountElements(item, tag);
-
                 else
                     if (item.Name.Equals(tag))
-                        result++;
-
+                    result++;
             }
             return result;
         }
@@ -198,7 +197,6 @@ namespace NFe.Components.EGoverne.CuritibaPR
 
         private object ReadXML(XmlNode node, object value, string tag)
         {
-
             foreach (XmlNode n in node.ChildNodes)
             {
                 if (n.Name == "Signature")
@@ -207,7 +205,7 @@ namespace NFe.Components.EGoverne.CuritibaPR
                         SignObject(n, value);
                     else
                         PSignObject(n, value);
-                    
+
                     continue;
                 }
 
@@ -216,7 +214,7 @@ namespace NFe.Components.EGoverne.CuritibaPR
                     string component = (tpAmb == TipoAmbiente.taHomologacao ? "NFe.Components.br.gov.egoverne.isscuritiba.curitiba.h." : "NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.");
 
                     Object instance =
-                    System.Reflection.Assembly.GetExecutingAssembly().CreateInstance( 
+                    System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(
                         component + this.GetNameObject(n.Name, WsMethod),
                         false,
                         BindingFlags.Default,
@@ -225,7 +223,7 @@ namespace NFe.Components.EGoverne.CuritibaPR
                         null,
                         null
                     );
-                    
+
                     if (tpAmb == TipoAmbiente.taHomologacao)
                         SetProperty(value, n.Name, ReadXML(n, instance, n.Name));
                     else
@@ -255,26 +253,25 @@ namespace NFe.Components.EGoverne.CuritibaPR
             }
             else
                 if (pi != null)
+            {
+                if (!String.IsNullOrEmpty(value.ToString()))
                 {
-                    if (!String.IsNullOrEmpty(value.ToString()))
+                    Type t = Nullable.GetUnderlyingType(pi.PropertyType) ?? pi.PropertyType;
+
+                    /// Melhorar a conversao
+                    if (t.Name.Equals("Rps[]"))
                     {
-                        Type t = Nullable.GetUnderlyingType(pi.PropertyType) ?? pi.PropertyType;
-
-                        /// Melhorar a conversao 
-                        if (t.Name.Equals("Rps[]"))
-                        {
-                            Rps[] obj = new Rps[1];
-                            obj[0] = ((Rps)value);
-                            pi.SetValue(result, obj, null);
-                        }
-                        else
-                        {
-                            object safeValue = (value == null) ? null : Convert.ChangeType(value, t);
-                            pi.SetValue(result, safeValue, null);
-                        }
-
+                        Rps[] obj = new Rps[1];
+                        obj[0] = ((Rps)value);
+                        pi.SetValue(result, obj, null);
+                    }
+                    else
+                    {
+                        object safeValue = (value == null) ? null : Convert.ChangeType(value, t);
+                        pi.SetValue(result, safeValue, null);
                     }
                 }
+            }
         }
 
         private string GetNameObject(string tag, string wsMethod)
@@ -283,7 +280,6 @@ namespace NFe.Components.EGoverne.CuritibaPR
 
             switch (tag)
             {
-
                 case "":
                     nameObject = "unknow";
                     break;
@@ -304,9 +300,9 @@ namespace NFe.Components.EGoverne.CuritibaPR
                     if (wsMethod.Equals("ConsultarNfseEnvio"))
                         nameObject = "tcIdentificacaoTomador";
                     else
-                        nameObject = "tcDadosTomador";                    
+                        nameObject = "tcDadosTomador";
                     break;
-                    
+
                 case "Pedido":
                     nameObject = "tcPedidoCancelamento";
                     break;
@@ -335,26 +331,25 @@ namespace NFe.Components.EGoverne.CuritibaPR
             }
             else
                 if (pi != null)
+            {
+                if (!String.IsNullOrEmpty(value.ToString()))
                 {
-                    if (!String.IsNullOrEmpty(value.ToString()))
+                    Type t = Nullable.GetUnderlyingType(pi.PropertyType) ?? pi.PropertyType;
+
+                    /// Melhorar a conversao
+                    if (t.Name.Equals("Rps[]"))
                     {
-                        Type t = Nullable.GetUnderlyingType(pi.PropertyType) ?? pi.PropertyType;
-
-                        /// Melhorar a conversao 
-                        if (t.Name.Equals("Rps[]"))
-                        {
-                            NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.Rps[] obj = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.Rps[1];
-                            obj[0] = ((NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.Rps)value);
-                            pi.SetValue(result, obj, null);
-                        }
-                        else
-                        {
-                            object safeValue = (value == null) ? null : Convert.ChangeType(value, t);
-                            pi.SetValue(result, safeValue, null);
-                        }
-
+                        NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.Rps[] obj = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.Rps[1];
+                        obj[0] = ((NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.Rps)value);
+                        pi.SetValue(result, obj, null);
+                    }
+                    else
+                    {
+                        object safeValue = (value == null) ? null : Convert.ChangeType(value, t);
+                        pi.SetValue(result, safeValue, null);
                     }
                 }
+            }
         }
 
         private void PSignObject(XmlNode nodes, object rps)
@@ -365,15 +360,18 @@ namespace NFe.Components.EGoverne.CuritibaPR
             sign.SignedInfo = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.SignedInfoType();
 
             sign.SignedInfo.CanonicalizationMethod = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.CanonicalizationMethodType();
+
             // <- Elemento foreach
 
             sign.SignedInfo.SignatureMethod = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.SignatureMethodType();
+
             // <- Elemento foreach
 
             // Grupo: Signature->SignedInfo->Reference
             sign.SignedInfo.Reference = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ReferenceType[1];
 
             NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ReferenceType referenceType = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ReferenceType();
+
             // <- Elemento foreach
             referenceType.DigestMethod = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.DigestMethodType();
 
@@ -381,16 +379,19 @@ namespace NFe.Components.EGoverne.CuritibaPR
 
             // Grupo: Signature->SignedInfo->Reference->Transforms
             sign.SignedInfo.Reference[0].Transforms = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.TransformType[CountElements(nodes, "Transform")];
+
             // <- Elemento foreach
 
             //Tag: Signature->SignatureValue
             sign.SignatureValue = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.SignatureValueType();
+
             // <- Elemento foreach
 
             //Grupo: Signature->KeyInfo
             sign.KeyInfo = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.KeyInfoType();
             NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.X509DataType x509 = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.X509DataType();
             x509.Items = new object[1];
+
             // <- Elemento foreach
             x509.ItemsElementName = new NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ItemsChoiceType[1] { NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ItemsChoiceType.X509Certificate };
 
@@ -402,7 +403,6 @@ namespace NFe.Components.EGoverne.CuritibaPR
             PPopulateSignature(sign, referenceType, x509, nodes);
 
             SetProperty(rps, "Signature", sign);
-
         }
 
         private void PPopulateSignature(NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.SignatureType sign, NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.ReferenceType referenceType, NFe.Components.br.gov.egoverne.isscuritiba.curitiba.p.X509DataType x509, XmlNode nodes)
@@ -444,9 +444,7 @@ namespace NFe.Components.EGoverne.CuritibaPR
                 {
                     PPopulateSignature(sign, referenceType, x509, item);
                 }
-
             }
         }
-
     }
 }

@@ -270,7 +270,7 @@
       <Value Profile="(Default)">https://www.gp.srv.br/tributario_homologacao/servlet/anfse_web_service</Value>
     </Setting>
     <Setting Name="NFe_Components_br_com_fiorilli_jacisp_p_IssWebWS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://186.225.155.34:8080/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+      <Value Profile="(Default)">http://200.95.195.126:8080/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
     <Setting Name="NFe_Components_br_com_nfeosasco_www_p_NotaFiscalEletronicaServico" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc</Value>
@@ -358,6 +358,33 @@
     </Setting>
     <Setting Name="NFe_Components_PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://www.tinus.com.br/csp/jaboatao/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PVacariRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://200.240.233.10:8082/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HVacariRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://200.240.233.10:8082/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PIconhaES_RpsServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nf-iconha-es.el.com.br:443/RpsService</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HPotirendabaSPPotirendabaSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPotirendabaSPPotirendabaSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://191.243.12.90:5661/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PMogiMirimSPConsultaLoteRps_WS_ConsultaLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultaloterps</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PMogiMirimSPConsultaNfse_WS_ConsultaNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://mogimirim.fisslex.com.br/fiss-lex/servlet/aws_consultanfse</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PMogiMirimSPConsultaNfsePorRps_WS_ConsultaNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://mogimirim.fisslex.com.br/fiss-lex/servlet/aws_consultanfseporrps</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PMogiMirimSPConsultarSituacaoLoteRps_WS_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://mogimirim.fisslex.com.br/fiss-lex/servlet/aws_consultarsituacaoloterps</Value>
     </Setting>
   </Settings>
 </SettingsFile>

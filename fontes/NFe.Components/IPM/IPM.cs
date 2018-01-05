@@ -1,11 +1,9 @@
-﻿using System;
+﻿using NFe.Components;
+using NFe.Components.Abstract;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NFe.Components;
-using System.Net;
 using System.IO;
-using System.Xml;
+using System.Text;
 
 namespace NFSe.Components
 {
@@ -29,56 +27,29 @@ namespace NFSe.Components
     /// <summary>
     /// Emite notas fiscais de serviço no padrão IPM
     /// </summary>
-    public class IPM : IEmiteNFSeIPM
+    public class IPM : EmiteNFSeBase
     {
-        #region Propriedades
-        public string Usuario { get; set; }
-        public string Senha { get; set; }
-        public int Cidade { get; set; }
-        public IWebProxy Proxy { get; set; }
-        public string PastaRetorno { get; set; }
-        #endregion
+        public override string NameSpaces
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         #region Construtores
-        public IPM(string usuario, string senha, int cidade, string caminhoRetorno)
+        public IPM(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senha, int cidade)
+            : base(tpAmb, pastaRetorno)
         {
             Usuario = usuario;
             Senha = senha;
             Cidade = CodigoTom(cidade);
-            PastaRetorno = caminhoRetorno;
+            PastaRetorno = pastaRetorno;
         }
 
-        #endregion
+        #endregion Construtores
 
-        public string EmitirNF(string file, TipoAmbiente tpAmb, bool cancelamento = false)
-        {
-            string result = "";
-
-            using (POSTRequest post = new POSTRequest
-            {
-                Proxy = Proxy
-            })
-            {
-                //                                                                                                    informe 1 para retorno em xml
-                result = post.PostForm("http://sync.nfs-e.net/datacenter/include/nfw/importa_nfw/nfw_import_upload.php?eletron=1", new Dictionary<string, string> {
-                     {"login", Usuario  },  //CPF/CNPJ, sem separadores}
-                     {"senha", Senha},      //Senha de acesso ao sistema: www.nfse.
-                     {"cidade", Cidade.ToString()},   //Código da cidade na receita federal (TOM), pesquisei o código em http://www.ekwbrasil.com.br/municipio.php3.
-                     {"f1", file}           //Endereço físico do arquivo
-                });
-            }
-
-            if (!cancelamento)
-                GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
-            else
-                GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
-
-            return result;
-        }
-
-        public void GerarRetorno(string file, string result, string extEnvio, string extRetorno)
+        public override void GerarRetorno(string file, string result, string extEnvio, string extRetorno)
         {
             FileInfo fi = new FileInfo(file);
             string nomearq = PastaRetorno + "\\" + fi.Name.Replace(extEnvio, extRetorno);
@@ -112,11 +83,58 @@ namespace NFSe.Components
 
                 case 4201307: // Araquari - SC
                     return (int)8025;
+
+                case 4215802: // São Bento do Sul-SC
+                    return (int)8311;
             }
 
             return 0;
         }
 
-    }
+        public override void EmiteNF(string file)
+        { }
 
+        public override void CancelarNfse(string file)
+        { }
+
+        public override void ConsultarLoteRps(string file)
+        { }
+
+        public override void ConsultarSituacaoLoteRps(string file)
+        { }
+
+        public override void ConsultarNfse(string file)
+        { }
+
+        public override void ConsultarNfsePorRps(string file)
+        { }
+
+        public override string EmiteNF(string file, bool cancelamento)
+        {
+            string result = "";
+
+            using (POSTRequest post = new POSTRequest
+            {
+                Proxy = Proxy
+            })
+            {
+                //                                                                                                    informe 1 para retorno em xml
+                result = post.PostForm("http://sync.nfs-e.net/datacenter/include/nfw/importa_nfw/nfw_import_upload.php?eletron=1", new Dictionary<string, string> {
+                     {"login", Usuario  },  //CPF/CNPJ, sem separadores}
+                     {"senha", Senha},      //Senha de acesso ao sistema: www.nfse.
+                     {"cidade", Cidade.ToString()},   //Código da cidade na receita federal (TOM), pesquisei o código em http://www.ekwbrasil.com.br/municipio.php3.
+                     {"f1", file}           //Endereço físico do arquivo
+                });
+            }
+
+            if (!cancelamento)
+                GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
+            else
+                GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
+
+            return result;
+        }
+    }
 }

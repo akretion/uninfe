@@ -490,6 +490,20 @@ namespace NFe.Components
 
         DFeEnviar,
 
+        #region EFDReinf
+
+        RecepcaoLoteReinf,
+
+        #endregion EFDReinf
+
+        #region eSocial
+
+        RecepcaoLoteeSocial,
+
+        ConsultarLoteeSocial,
+
+        #endregion eSocial
+
         /// <summary>
         /// Nulo / Nenhum serviço em execução
         /// </summary>
@@ -538,7 +552,7 @@ namespace NFe.Components
         /// </summary>
         [Description("SAT")]
         SAT = 5,
-        
+
         /// <summary>
         /// Aplicativo ou serviços para processamento dos XMLs do EFD Reinf
         /// </summary>
@@ -1001,7 +1015,19 @@ namespace NFe.Components
         /// Padrão utilizado pela prefeitura de Jaboatão dos Guararapes-PE
         /// </summary>
         [Description("TINUS")]
-        TINUS
+        TINUS,
+
+        /// <summary>
+        /// Padrão utilizado pela prefeitura de Eusébio-CE
+        /// </summary>
+        [Description("INTERSOL")]
+        INTERSOL,
+
+        /// <summary>
+        /// Padrão utilizado pela prefeitura de Florianópolis-SC
+        /// </summary>
+        [Description("SOFTPLAN")]
+        SOFTPLAN
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

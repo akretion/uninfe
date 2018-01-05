@@ -2650,11 +2650,11 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps {
         
         private string codigoVerificacaoField;
         
-        private System.DateTime dataEmissaoField;
+        private string dataEmissaoField;
         
         private tcIdentificacaoRps identificacaoRpsField;
         
-        private System.DateTime dataEmissaoRpsField;
+        private string dataEmissaoRpsField;
         
         private bool dataEmissaoRpsFieldSpecified;
         
@@ -2668,7 +2668,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps {
         
         private sbyte incentivadorCulturalField;
         
-        private System.DateTime competenciaField;
+        private string competenciaField;
         
         private string nfseSubstituidaField;
         
@@ -2712,17 +2712,34 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps {
                 this.codigoVerificacaoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public System.DateTime DataEmissao {
-            get {
+        [XmlElement("DataEmissao")]
+        public string DataEmissaoField
+        {
+            get
+            {
                 return this.dataEmissaoField;
             }
-            set {
+            set
+            {
                 this.dataEmissaoField = value;
             }
         }
-        
+
+        [XmlIgnore]
+        public System.DateTime DataEmissao
+        {
+            get
+            {
+                return Convert.ToDateTime(this.DataEmissaoField);
+            }
+            set
+            {
+                this.DataEmissaoField = value.ToString();
+            }
+        }
+
         /// <remarks/>
         public tcIdentificacaoRps IdentificacaoRps {
             get {
@@ -2732,18 +2749,34 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps {
                 this.identificacaoRpsField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime DataEmissaoRps {
-            get {
+        [XmlElement("DataEmissaoRps")]
+        public string DataEmissaoRpsField
+        {
+            get
+            {
                 return this.dataEmissaoRpsField;
             }
-            set {
+            set
+            {
                 this.dataEmissaoRpsField = value;
             }
         }
-        
+
+        [XmlIgnore]
+        public System.DateTime DataEmissaoRps
+        {
+            get
+            {
+                return Convert.ToDateTime(this.DataEmissaoRpsField);
+            }
+            set
+            {
+                this.DataEmissaoRpsField = value.ToString();
+            }
+        }
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool DataEmissaoRpsSpecified {
@@ -2805,17 +2838,34 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps {
                 this.incentivadorCulturalField = value;
             }
         }
-        
+
         /// <remarks/>
-        public System.DateTime Competencia {
-            get {
+        [XmlElement("Competencia")]
+        public string CompetenciaField
+        {
+            get
+            {
                 return this.competenciaField;
             }
-            set {
+            set
+            {
                 this.competenciaField = value;
             }
         }
-        
+
+        [XmlIgnore]
+        public System.DateTime Competencia
+        {
+            get
+            {
+                return Convert.ToDateTime(CompetenciaField);
+            }
+            set
+            {
+                this.CompetenciaField = value.ToString();
+            }
+        }
+
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
         public string NfseSubstituida {
@@ -2953,7 +3003,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Signature", Namespace="http://www.w3.org/2000/09/xmldsig#")]
+        [System.Xml.Serialization.XmlElementAttribute("s01:Signature", Namespace="http://www.w3.org/2000/09/xmldsig#")]
         public SignatureType[] Signature {
             get {
                 return this.signatureField;

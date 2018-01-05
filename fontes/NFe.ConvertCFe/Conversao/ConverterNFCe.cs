@@ -156,6 +156,7 @@ namespace NFe.SAT.Conversao
                             det.prod = new envCFeCFeInfCFeDetProd
                             {
                                 cProd = GetXML(itensDet.ChildNodes, "cProd"),
+                                cEAN = GetXML(itensDet.ChildNodes, "cEAN"),
                                 xProd = GetXML(itensDet.ChildNodes, "xProd"),
                                 NCM = GetXML(itensDet.ChildNodes, "NCM"),
                                 CFOP = GetXML(itensDet.ChildNodes, "CFOP"),
@@ -260,6 +261,9 @@ namespace NFe.SAT.Conversao
                     #region ICMS40
 
                     case "ICMS40":
+                    case "ICMS41":
+                    case "ICMS50":
+                    case "ICMS60":
                         envCFeCFeInfCFeDetImpostoICMSICMS40 ICMS40 = new envCFeCFeInfCFeDetImpostoICMSICMS40
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),

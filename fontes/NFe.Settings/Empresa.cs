@@ -246,6 +246,9 @@ namespace NFe.Settings
         [AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool CompactarNfe { get; set; }
 
+        [AttributeTipoAplicacao(TipoAplicativo.Nfe | TipoAplicativo.Todos)]
+        public bool ArqNSU { get; set; }
+
         /// <summary>
         /// Enviar NFe utilizando o processo síncrono (true or false)
         /// </summary>
@@ -432,6 +435,18 @@ namespace NFe.Settings
         [AttributeTipoAplicacao(TipoAplicativo.SAT)]
         public IndRatISSQN IndRatISSQNSAT { get; set; }
 
+        /// <summary>
+        /// Código da aplicação que está cadastrada para acessar os serviços REST do município de Florianópolis-SC
+        /// </summary>
+        [AttributeTipoAplicacao(TipoAplicativo.Nfse)]
+        public string ClientID { get; set; }
+
+        /// <summary>
+        /// Código secreto da aplicação que está cadastrada para acessar os serviços REST do município de Florianópolis-SC
+        /// </summary>
+        [AttributeTipoAplicacao(TipoAplicativo.Nfse)]
+        public string ClientSecret { get; set; }
+
         #endregion
 
         #endregion
@@ -514,6 +529,9 @@ namespace NFe.Settings
                     }
 
                     t.CertificadoPIN = Criptografia.descriptografaSenha(t.CertificadoPIN);
+                    t.FTPNomeDoServidor = Criptografia.descriptografaSenha(t.FTPNomeDoServidor);
+                    t.FTPNomeDoUsuario = Criptografia.descriptografaSenha(t.FTPNomeDoUsuario);
+                    t.FTPSenha = Criptografia.descriptografaSenha(t.FTPSenha);
 
                     t.Nome = this.Nome;
                     t.CNPJ = this.CNPJ;
@@ -525,7 +543,7 @@ namespace NFe.Settings
 
                     if (t.UnidadeFederativaCodigo == 35)
                         t.IndSinc = false;
-                                            
+
                     CriarPastasDaEmpresa();
 
                     X509Certificado = BuscaConfiguracaoCertificado();
@@ -979,6 +997,9 @@ namespace NFe.Settings
                     dados.CertificadoSenha = Criptografia.criptografaSenha(dados.CertificadoSenha);
 
                 dados.CertificadoPIN = Criptografia.criptografaSenha(dados.CertificadoPIN);
+                dados.FTPNomeDoServidor = Criptografia.criptografaSenha(dados.FTPNomeDoServidor);
+                dados.FTPNomeDoUsuario = Criptografia.criptografaSenha(dados.FTPNomeDoUsuario);
+                dados.FTPSenha = Criptografia.criptografaSenha(dados.FTPSenha);
 
                 ObjectXMLSerializer objObjectXMLSerializer = new ObjectXMLSerializer();
                 objObjectXMLSerializer.Save(dados, dados.NomeArquivoConfig);

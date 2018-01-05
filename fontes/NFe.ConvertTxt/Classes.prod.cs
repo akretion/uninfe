@@ -44,6 +44,10 @@ namespace NFe.ConvertTxt
         public string nRECOPI;
         public List<detExport> detExport;
         public int CEST;
+        public TpcnIndicadorEscala indEscala { get; set; }
+        public string CNPJFab { get; set; }
+        public string cBenef { get; set; }
+        public List<Rastro> rastro { get; set; }
 
         public Prod()
         {
@@ -54,6 +58,7 @@ namespace NFe.ConvertTxt
             med = new List<Med>();
             arma = new List<Arma>();
             detExport = new List<detExport>();
+            rastro = new List<ConvertTxt.Rastro>();
         }
     }
 }

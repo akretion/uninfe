@@ -50,6 +50,7 @@ Source: ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Settings.dll; DestDir: {app}; 
 Source: ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Threadings.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.UI.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Validate.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release35_AnyCPU\Newtonsoft.Json.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release35_AnyCPU\uninfe.exe; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release35_AnyCPU\uninfeservico.exe; DestDir: {app}; Flags: ignoreversion
 Source: \projetos\dv\trunk\fontes\includes\sefaz.inc; DestDir: {app}; Flags: ignoreversion

@@ -31,7 +31,7 @@
 			</element>
 			<element name="SignatureMethod">
 				<complexType>
-					<attribute name="Algorithm" type="anyURI" use="required" fixed="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+					<attribute name="Algorithm" type="anyURI" use="required" fixed="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
 				</complexType>
 			</element>
 			<element name="Reference" type="ds:ReferenceType"/>
@@ -49,19 +49,13 @@
 			</element>
 			<element name="DigestMethod">
 				<complexType>
-					<attribute name="Algorithm" type="anyURI" use="required" fixed="http://www.w3.org/2000/09/xmldsig#sha1"/>
+					<attribute name="Algorithm" type="anyURI" use="required" fixed="http://www.w3.org/2001/04/xmlenc#sha256"/>
 				</complexType>
 			</element>
 			<element name="DigestValue" type="ds:DigestValueType"/>
 		</sequence>
 		<attribute name="Id" type="ID" use="optional"/>
-		<attribute name="URI" use="required">
-			<simpleType>
-				<restriction base="anyURI">
-					<minLength value="2"/>
-				</restriction>
-			</simpleType>
-		</attribute>
+		<attribute name="URI" type="anyURI" use="optional"/>
 		<attribute name="Type" type="anyURI" use="optional"/>
 	</complexType>
 	<complexType name="TransformsType">

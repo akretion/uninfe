@@ -28,10 +28,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -50,7 +50,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -82,10 +82,10 @@
       <CteRecepcaoOS></CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -158,7 +158,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -212,7 +212,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -266,7 +266,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -298,10 +298,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -320,7 +320,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -460,10 +460,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -482,7 +482,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -514,10 +514,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\GO\PGONfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\GO\PGONfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\GO\PGONfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\GO\PGOCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\GO\PGONfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\GO\PGONfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\GO\PGONfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\GO\PGOCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\GO\PGORecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -536,7 +536,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -568,9 +568,9 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVAN\PSVANNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVAN\PSVANNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVAN\PSVANNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeInutilizacao>wsdl\producao\SVAN\PSVANNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVAN\PSVANNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVAN\PSVANNfeStatusServico.wsdl</NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVAN\PSVANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
@@ -590,16 +590,16 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="51" Nome="Mato Grosso" UF="MT" SVC="teSVCRS">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\MT\HMTNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\MT\HMTNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\MT\HMTNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\MT\HMTNfeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\MT\HMTNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\MT\HMTNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\MT\HMTNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\MT\HMTNfeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\MT\HMTNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -618,7 +618,7 @@
       <CTeInutilizacao>wsdl\homologacao\MT\HMTCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\homologacao\MT\HMTCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\homologacao\MT\HMTCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\homologacao\MT\HMTNfeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\homologacao\MT\HMTNfeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\homologacao\MT\HMTCteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
@@ -645,7 +645,7 @@
       <CTeConsulta>wsdl\producao\MT\PMTCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\MT\PMTCteStatusServico.wsdl</CTeStatusServico>
       <CTeConsultaCadastro>wsdl\producao\MT\PMTNfeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
-      <CteRecepcaoOS></CteRecepcaoOS>
+      <CteRecepcaoOS>wsdl\producao\MT\PMTCteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
   <Estado ID="50" Nome="Mato Grosso do Sul" UF="MS" SVC="teSVCRS">
@@ -676,10 +676,10 @@
       <CteRecepcaoOS>wsdl\homologacao\MS\HMSCteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\MS\PMSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\MS\PMSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\MS\PMSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\MS\PMSNfeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\MS\PMSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\MS\PMSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\MS\PMSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\MS\PMSNfeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\MS\PMSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -698,7 +698,7 @@
       <CTeInutilizacao>wsdl\producao\MS\PMSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\MS\PMSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\MS\PMSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\MS\PMSNfeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\MS\PMSNfeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\MS\PMSCteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -784,9 +784,9 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVAN\PSVANNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVAN\PSVANNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVAN\PSVANNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeInutilizacao>wsdl\producao\SVAN\PSVANNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVAN\PSVANNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVAN\PSVANNfeStatusServico.wsdl</NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVAN\PSVANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
@@ -806,7 +806,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -838,10 +838,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -860,7 +860,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -893,15 +893,15 @@
       <CteRecepcaoOS>wsdl\homologacao\PR\HPRCteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\PR\PPRNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\PR\PPRNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\PR\PPRNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\PR\PPRNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\PR\PPRNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\PR\PPRNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\PR\PPRNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\PR\PPRNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\PR\PPRNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
-      <NFeAutorizacao>wsdl\producao\PR\PPRNFeAutorizacao3.wsdl</NFeAutorizacao>
-      <NFeRetAutorizacao>wsdl\producao\PR\PPRNFeRetAutorizacao3.wsdl</NFeRetAutorizacao>
+      <NFeAutorizacao>wsdl\producao\PR\PPRNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\producao\PR\PPRNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
@@ -915,7 +915,7 @@
       <CTeInutilizacao>wsdl\producao\PR\PPRCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\PR\PPRCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\PR\PPRCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\PR\PPRNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\PR\PPRNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <LMCAutorizacao>wsdl\producao\PR\PPRLMCAutorizacao.wsdl</LMCAutorizacao>
       <CteRecepcaoOS>wsdl\producao\PR\PPRCteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalProducao>
@@ -1002,10 +1002,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1024,7 +1024,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -1056,10 +1056,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1078,7 +1078,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -1110,10 +1110,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1132,7 +1132,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -1164,10 +1164,10 @@
       <CteRecepcaoOS>wsdl\homologacao\RS\HRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\RS\PRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\RS\PRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\RS\PRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\RS\PRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\RS\PRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\RS\PRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\RS\PRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\RS\PRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\RS\PRSNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1186,7 +1186,7 @@
       <CTeInutilizacao>wsdl\producao\RS\PRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\RS\PRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\RS\PRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\RS\PRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\RS\PRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\RS\PRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -1218,10 +1218,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1240,7 +1240,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -1272,10 +1272,10 @@
       <CteRecepcaoOS></CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1326,10 +1326,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1348,7 +1348,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -1380,10 +1380,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SP\HSPcteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SP\PSPNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SP\PSPNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SP\PSPNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SP\PSPNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SP\PSPNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SP\PSPNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SP\PSPNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SP\PSPNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SP\PSPNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1402,7 +1402,7 @@
       <CTeInutilizacao>wsdl\producao\SP\PSPCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SP\PSPCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SP\PSPCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SP\PSPNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SP\PSPNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SP\PSPcteRecepcaoOS.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -1434,10 +1434,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1456,7 +1456,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -1543,8 +1543,8 @@
     </LocalHomologacao>
     <LocalProducao>
       <NFeInutilizacao></NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SCVAN\PSVCANNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SCVAN\PSVCANNfeStatusServico2.wsdl</NFeStatusServico>
+      <NFeConsulta>wsdl\producao\SCVAN\PSVCANNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SCVAN\PSVCANNfeStatusServico.wsdl</NFeStatusServico>
       <NFeConsultaCadastro></NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SCVAN\PSVCANNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
@@ -1570,10 +1570,10 @@
   </Estado>
   <Estado ID="902" Nome="Servico Virtual de Contingência do Rio Grande do Sul (CTe e NFe)" UF="SVCRS" SVC="teNone">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SCVRS\HSVCRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SCVRS\HSVCRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SCVRS\HSVCRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\homologacao\SCVRS\HSCVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\homologacao\SCVRS\HSVCRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SCVRS\HSVCRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SCVRS\HSVCRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SCVRS\HSVCRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\homologacao\SCVRS\HSVCRSNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\homologacao\AN\HANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1596,10 +1596,10 @@
       <CteRecepcaoOS></CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SCVRS\PSCVRSNFeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SCVRS\PSVCRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SCVRS\PSVCRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SCVRS\PSCVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SCVRS\PSCVRSNFeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SCVRS\PSVCRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SCVRS\PSVCRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SCVRS\PSCVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SCVRS\PSVCRSNfeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1649,6 +1649,9 @@
       <CTeConsultaCadastro></CTeConsultaCadastro>
       <CTeDistribuicaoDFe>WSDL\Homologacao\AN\HANCTeDistribuicaoDFe.wsdl</CTeDistribuicaoDFe>
       <CteRecepcaoOS></CteRecepcaoOS>
+      <RecepcaoLoteReinf>WSDL\Producao\AN\EFDReinf.wsdl</RecepcaoLoteReinf>
+      <RecepcaoLoteeSocial>WSDL\Homologacao\AN\eSocial_ServicoEnviarLoteEventos.wsdl</RecepcaoLoteeSocial>
+      <ConsultarLoteeSocial>WSDL\Homologacao\AN\eSocial_ServicoConsultarLoteEventos.wsdl</ConsultarLoteeSocial>
     </LocalHomologacao>
     <LocalProducao>
       <NFeInutilizacao></NFeInutilizacao>
@@ -1676,6 +1679,9 @@
       <CTeConsultaCadastro></CTeConsultaCadastro>
       <CTeDistribuicaoDFe>WSDL\Producao\AN\PANCTeDistribuicaoDFe.wsdl</CTeDistribuicaoDFe>
       <CteRecepcaoOS></CteRecepcaoOS>
+      <RecepcaoLoteReinf>WSDL\Producao\AN\EFDReinf.wsdl</RecepcaoLoteReinf>
+      <RecepcaoLoteeSocial>WSDL\Producao\AN\eSocial_ServicoEnviarLoteEventos.wsdl</RecepcaoLoteeSocial>
+      <ConsultarLoteeSocial>WSDL\Producao\AN\eSocial_ServicoConsultarLoteEventos.wsdl</ConsultarLoteeSocial>
     </LocalProducao>
   </Estado>
   <Estado ID="17" Nome="Tocantins" UF="TO" SVC="teSVCAN">
@@ -1706,10 +1712,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeDownload>wsdl\producao\AN\PANNfeDownloadNF.wsdl</NFeDownload>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
@@ -1728,7 +1734,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalProducao>
   </Estado>
@@ -1760,10 +1766,10 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao2.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta2.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico2.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</NFeConsultaCadastro>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
@@ -1780,7 +1786,7 @@
       <CTeInutilizacao>wsdl\producao\SVRS\PSVRSCteInutilizacao.wsdl</CTeInutilizacao>
       <CTeConsulta>wsdl\producao\SVRS\PSVRSCteConsulta.wsdl</CTeConsulta>
       <CTeStatusServico>wsdl\producao\SVRS\PSVRSCteStatusServico.wsdl</CTeStatusServico>
-      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro2.wsdl</CTeConsultaCadastro>
+      <CTeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</CTeConsultaCadastro>
       <CTeRecepcaoEvento>wsdl\producao\SVRS\PSVRSCteRecepcaoEvento.wsdl</CTeRecepcaoEvento>
       <DFeRecepcao></DFeRecepcao>
       <CteRecepcaoOS>wsdl\producao\SVRS\PSVRScterecepcaoos.wsdl</CteRecepcaoOS>

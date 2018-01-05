@@ -349,7 +349,8 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.PRONIN:
                         if (ler.oDadosPedSitNfseRps.cMunicipio == 4109401 ||
                             ler.oDadosPedSitNfseRps.cMunicipio == 3131703 ||
-                            ler.oDadosPedSitNfseRps.cMunicipio == 4303004)
+                            ler.oDadosPedSitNfseRps.cMunicipio == 4303004 ||
+                            ler.oDadosPedSitNfseRps.cMunicipio == 4322509)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -389,9 +390,6 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.TINUS:
-
-                        #region Tinus
-
                         Tinus tinus = new Tinus((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             ler.oDadosPedSitNfseRps.cMunicipio,
@@ -403,7 +401,13 @@ namespace NFe.Service.NFSe
                         tinus.ConsultarLoteRps(NomeArquivoXML);
                         break;
 
-                        #endregion Tinus
+                    case PadroesNFSe.SH3:
+                        cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.INTERSOL:
+                        cabecMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><p:cabecalho versao=\"1\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:p=\"http://ws.speedgov.com.br/cabecalho_v1.xsd\" xmlns:p1=\"http://ws.speedgov.com.br/tipos_v1.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://ws.speedgov.com.br/cabecalho_v1.xsd cabecalho_v1.xsd \"><versaoDados>1</versaoDados></p:cabecalho>";
+                        break;
                 }
 
                 if (base.IsInvocar(padraoNFSe, Servico, ler.oDadosPedSitNfseRps.cMunicipio))

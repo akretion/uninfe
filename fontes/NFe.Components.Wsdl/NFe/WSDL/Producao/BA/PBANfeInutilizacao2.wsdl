@@ -37,7 +37,7 @@
   </wsdl:message>
   <wsdl:portType name="NfeInutilizacaoSoap">
     <wsdl:operation name="nfeInutilizacaoNF">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado à inutilização de números de NF-e.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviï¿½o destinado ï¿½ inutilizaï¿½ï¿½o de nï¿½meros de NF-e.</wsdl:documentation>
       <wsdl:input message="tns:nfeInutilizacaoNFSoapIn" />
       <wsdl:output message="tns:nfeInutilizacaoNFSoapOut" />
     </wsdl:operation>

@@ -207,8 +207,13 @@ namespace NFe.Service
 
                             if (!string.IsNullOrEmpty(xmlCancelamento))
                             {
-                                TFunctions.ExecutaUniDanfe(xmlCancelamento, DateTime.Today, Empresas.Configuracoes[emp]);
+                                string strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                    PastaEnviados.Autorizados.ToString() + "\\" +
+                                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(DateTime.Now) +
+                                    Path.GetFileName(xmlCancelamento);
+
                                 TFunctions.MoverArquivo(xmlCancelamento, PastaEnviados.Autorizados);
+                                TFunctions.ExecutaUniDanfe(strArquivoDist, DateTime.Today, Empresas.Configuracoes[emp]);
                             }
                             break;
 
@@ -413,7 +418,27 @@ namespace NFe.Service
                             DirecionarArquivo(emp, true, true, arquivo, new TaskLMCAutorizacao(arquivo));
                             break;
 
-                            #endregion LMC
+                        #endregion LMC
+
+                        #region EFDReinf
+
+                        case Servicos.RecepcaoLoteReinf:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskRecepcaoLoteReinf(arquivo));
+                            break;
+
+                        #endregion EFDReinf
+
+                        #region eSocial
+
+                        case Servicos.RecepcaoLoteeSocial:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskRecepcaoLoteeSocial(arquivo));
+                            break;
+
+                        case Servicos.ConsultarLoteeSocial:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskConsultarLoteeSocial(arquivo));
+                            break;
+
+                            #endregion eSocial
                     }
 
                     #region Serviços em comum
@@ -827,6 +852,31 @@ namespace NFe.Service
                                 break;
 
                             #endregion LMC
+
+                            #region EFDReinf
+
+                            case "Reinf":
+                                tipoServico = Servicos.RecepcaoLoteReinf;
+                                break;
+
+                            #endregion EFDReinf
+
+                            #region eSocial
+
+                            case "eSocial":
+                                switch (doc.DocumentElement.LastChild.Name)
+                                {
+                                    case "consultaLoteEventos":
+                                        tipoServico = Servicos.ConsultarLoteeSocial;
+                                        break;
+
+                                    case "envioLoteEventos":
+                                        tipoServico = Servicos.RecepcaoLoteeSocial;
+                                        break;
+                                }
+                                break;
+
+                            #endregion eSocial
 
                             #region Geral
 
@@ -1399,7 +1449,10 @@ namespace NFe.Service
                         nfe is TaskMDFeConsNaoEncerrado ||
                         nfe is TaskLMCAutorizacao ||
                         (nfe is TaskNFeEventos && Empresas.Configuracoes[emp].tpEmis == (int)TipoEmissao.teEPEC) ||
-                        (nfe is TaskCTeEventos && Empresas.Configuracoes[emp].tpEmis == (int)TipoEmissao.teEPEC))
+                        (nfe is TaskCTeEventos && Empresas.Configuracoes[emp].tpEmis == (int)TipoEmissao.teEPEC) ||
+                        nfe is TaskRecepcaoLoteReinf ||
+                        nfe is TaskRecepcaoLoteeSocial ||
+                        nfe is TaskConsultarLoteeSocial)
                     {
                         doExecute = true;
                     }

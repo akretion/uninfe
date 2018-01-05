@@ -231,6 +231,21 @@
 
             #endregion XML de Envio do evento de Registro Multimodal
 
+            #region XML de Envio do evento de Prestação do Serviço em Desacordo
+
+            SchemaXML.InfSchemas.Add("NFE-eventoCTe610110", new InfSchema()
+            {
+                Tag = "eventoCTe",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "CTe\\eventoCTe_v{0}.xsd",
+                Descricao = "XML de Envio do evento de Registro Multimodal",
+                TagAssinatura = "eventoCTe",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
+            });
+
+            #endregion XML de Envio do evento de Prestação do Serviço em Desacordo
+
             #region XML de CT-e OS, modelo 67
 
             SchemaXML.InfSchemas.Add("NFE-CTeOS", new InfSchema()

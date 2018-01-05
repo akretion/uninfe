@@ -14,7 +14,7 @@
                 Descricao = "XML EFDReinf - 1000 - Informações do Contribuinte",
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtInfoContri",
-                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtInfoContribuinte/v1_02_00"
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtInfoContribuinte/v{0}"
             });
 
             #endregion R-1000 - Informações do Contribuinte
@@ -29,7 +29,7 @@
                 Descricao = "XML EFDReinf - 1070 - Tabela de Processos Administrativos/Judiciais",
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtTabProcesso",
-                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtTabProcesso/v1_02_00"
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtTabProcesso/v{0}"
             });
 
             #endregion R-1070 - Tabela de Processos Administrativos/Judiciais
@@ -44,7 +44,7 @@
                 Descricao = "XML EFDReinf - 2010 - Retenção Contribuição Previdenciária - Serviços Tomados",
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtServTom",
-                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtTomadorServicos/v1_02_00"
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtTomadorServicos/v{0}"
             });
 
             #endregion R-2010 - Retenção Contribuição Previdenciária - Serviços Tomados
@@ -59,7 +59,7 @@
                 Descricao = "XML EFDReinf - 2020 - Retenção Contribuição Previdenciária - Serviços Prestados",
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtServPrest",
-                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtPrestadorServicos/v1_02_00"
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtPrestadorServicos/v{0}"
             });
 
             #endregion R-2020 - Retenção Contribuição Previdenciária - Serviços Prestados
@@ -74,7 +74,7 @@
                 Descricao = "XML EFDReinf - 2030 - Recursos Recebidos por Associação Desportiva",
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtAssocDespRec",
-                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtRecursoRecebidoAssociacao/v1_02_00"
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtRecursoRecebidoAssociacao/v{0}"
             });
 
             #endregion R-2030 - Recursos Recebidos por Associação Desportiva
@@ -89,7 +89,7 @@
                 Descricao = "XML EFDReinf - 2040 - Recursos Repassados para Associação Desportiva",
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtAssocDespRep",
-                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtRecursoRepassadoAssociacao/v1_02_00"
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtRecursoRepassadoAssociacao/v{0}"
             });
 
             #endregion R-2040 - Recursos Repassados para Associação Desportiva
@@ -104,7 +104,7 @@
                 Descricao = "XML EFDReinf - 2050 - Comercialização da Produção por Produtor Rural PJ/Agroindústria",
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtComProd",
-                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtInfoProdRural/v1_02_00"
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtInfoProdRural/v{0}"
             });
 
             #endregion R-2050 - Comercialização da Produção por Produtor Rural PJ/Agroindústria
@@ -119,7 +119,7 @@
                 Descricao = "XML EFDReinf - 2060 - Contribuição Previdenciária sobre a Receita Bruta - CPRB",
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtCPRB",
-                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtInfoCPRB/v1_02_00"
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtInfoCPRB/v{0}"
             });
 
             #endregion R-2060 - Contribuição Previdenciária sobre a Receita Bruta - CPRB
@@ -134,7 +134,7 @@
                 Descricao = "XML EFDReinf - 2098 - Reabertura dos Eventos Periódicos",
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtReabreEvPer",
-                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtReabreEvPer/v1_02_00"
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtReabreEvPer/v{0}"
             });
 
             #endregion R-2098 - Reabertura dos Eventos Periódicos
@@ -149,7 +149,7 @@
                 Descricao = "XML EFDReinf - 2099 - Fechamento dos Eventos Periódicos",
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtFechaEvPer",
-                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtFechamento/v1_02_00"
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtFechamento/v{0}"
             });
 
             #endregion R-2099 - Fechamento dos Eventos Periódicos
@@ -164,7 +164,7 @@
                 Descricao = "XML EFDReinf - 3010 - Receita de Espetáculo Desportivo",
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtEspDesportivo",
-                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtEspDesportivo/v1_02_00"
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtEspDesportivo/v{0}"
             });
 
             #endregion R-3010 - Receita de Espetáculo Desportivo
@@ -179,7 +179,7 @@
                 Descricao = "XML EFDReinf - 5001 - Informações das bases e dos tributos consolidados por contribuinte",
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtTotal",
-                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtTotal/v1_02_00"
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/retornoTotalizadorContribuinte/v{0}"
             });
 
             #endregion R-5001 - Informações das bases e dos tributos consolidados por contribuinte
@@ -194,10 +194,25 @@
                 Descricao = "XML EFDReinf - 9000 - Exclusão de Eventos",
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtExclusao",
-                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtExclusao/v1_02_00"
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtExclusao/v{0}"
             });
 
             #endregion R-9000 - Exclusão de Eventos
+
+            #region Lote de eventos
+
+            SchemaXML.InfSchemas.Add("Reinf-loteEventos", new InfSchema()
+            {
+                Tag = "loteEventos",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "EFDReinf\\envioLoteEventos-v{0}.xsd",
+                Descricao = "EFDReinf - XML de Envio de Lote de Eventos",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/envioLoteEventos/v{0}"
+            });
+
+            #endregion Lote de eventos
         }
     }
 }

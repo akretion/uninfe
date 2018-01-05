@@ -933,5 +933,16 @@ namespace NFe.Components
             else
                 WriteLog(ex, false, true, "");
         }
+
+        /// <summary>
+        /// Codificar em base 64 um determinado valor
+        /// </summary>
+        /// <param name="value">Valor a ser codificado</param>
+        /// <returns></returns>
+        public static string Base64Encode(string value)
+        {
+            byte[] encode = Encoding.UTF8.GetBytes(value);
+            return Convert.ToBase64String(encode);
+        }
     }
 }

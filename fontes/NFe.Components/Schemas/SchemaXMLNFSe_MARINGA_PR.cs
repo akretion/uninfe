@@ -70,8 +70,8 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\MARINGA_PR\\nfse_v2.01.xsd",
                 Descricao = "XML de Lote RPS - Síncrono",
-                TagAssinatura = "Rps",
-                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+//                TagAssinatura = "Rps",
+//                TagAtributoId = "InfDeclaracaoPrestacaoServico",
                 TagLoteAssinatura = "EnviarLoteRpsSincronoEnvio",
                 TagLoteAtributoId = "LoteRps",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"

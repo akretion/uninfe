@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Windows.Forms;
-using NFe.Settings;
+﻿using Microsoft.Win32;
 using NFe.Components;
 using NFe.Exceptions;
-using System.Security;
-using Microsoft.Win32;
+using NFe.Settings;
+using System;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms;
 
 namespace NFe.Certificado
 {
@@ -23,23 +20,26 @@ namespace NFe.Certificado
         /// Certificado selecionado pelo método SelecionarCertificado()
         /// </summary>
         public X509Certificate2 oCertificado { get; private set; }
+
         /// <summary>
         /// Data inicial da validade do certificado
         /// </summary>
         public DateTime dValidadeInicial { get; private set; }
+
         /// <summary>
         /// Data final da validade do certificado
         /// </summary>
         public DateTime dValidadeFinal { get; private set; }
+
         /// <summary>
         /// Subject do Certificado, Razão Social da Empresa Certificada, CNPJ, etc...
         /// </summary>
         public string sSubject { get; private set; }
 
-        #endregion
+        #endregion Propriedades da classe
 
         /// <summary>
-        /// Método responsável por abrir um browse para selecionar o 
+        /// Método responsável por abrir um browse para selecionar o
         /// certificado digital que será utilizado para autenticação
         /// dos WebServices e gravar ele no atributo oCertificado
         /// </summary>
@@ -129,6 +129,9 @@ namespace NFe.Certificado
 
             if (Empresas.Configuracoes[emp].UsaCertificado)
             {
+                if (Empresas.Configuracoes[emp].X509Certificado == null)
+                    throw new ExceptionCertificadoDigital(ErroPadrao.ErroNaoDetectado);// Certificado inválido");
+
                 if (DateTime.Compare(DateTime.Now, Empresas.Configuracoes[emp].X509Certificado.NotAfter) > 0)
                 {
                     retorna = true;

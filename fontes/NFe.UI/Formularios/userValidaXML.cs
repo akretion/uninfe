@@ -236,8 +236,12 @@ namespace NFe.UI
                     AssinaturaDigital oAD = new AssinaturaDigital();
                     try
                     {
-                        validarXML.EncryptAssinatura(cArquivo); //danasa: 12/2013
-                        oAD.Assinar(cArquivo, Emp, Empresas.Configuracoes[Emp].UnidadeFederativaCodigo);
+                        validarXML.EncryptAssinatura(cArquivo); 
+                        oAD.Assinar(cArquivo, 
+                            Emp, 
+                            Empresas.Configuracoes[Emp].UnidadeFederativaCodigo, 
+                            (conteudoXML.DocumentElement.Name.Equals("Reinf") || conteudoXML.DocumentElement.Name.Equals("eSocial") ? AlgorithmType.Sha256 : AlgorithmType.Sha1));
+
                         lValidar = true;
                     }
                     catch (Exception ex)

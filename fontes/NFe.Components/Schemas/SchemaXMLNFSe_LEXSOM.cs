@@ -11,7 +11,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarLoteRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\ABRASF\\nfse.xsd",
+                ArquivoXSD = "NFSe\\LEXSOM\\nfse.xsd",
                 Descricao = "XML de Consulta de Lote RPS",
                 TagAssinatura = "",
                 TagAtributoId = "",
@@ -24,7 +24,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarSituacaoLoteRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\ABRASF\\nfse.xsd",
+                ArquivoXSD = "NFSe\\LEXSOM\\nfse.xsd",
                 Descricao = "XML de Consulta da Situacao do Lote RPS",
                 TagAssinatura = "",
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
@@ -36,7 +36,7 @@ namespace NFSe.Components
             {
                 Tag = "CancelarNfseEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\ABRASF\\nfse.xsd",
+                ArquivoXSD = "NFSe\\LEXSOM\\nfse.xsd",
                 Descricao = "XML de Cancelamento da NFS-e",
                 TagAssinatura = "CancelarNfseEnvio",
                 TagAtributoId = "Pedido",
@@ -49,7 +49,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarNfseEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\ABRASF\\nfse.xsd",
+                ArquivoXSD = "NFSe\\LEXSOM\\nfse.xsd",
                 Descricao = "XML de Consulta da NFSe por período",
                 TagAssinatura = "",
                 TagAtributoId = "",
@@ -62,7 +62,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarNfseRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\ABRASF\\nfse.xsd",
+                ArquivoXSD = "NFSe\\LEXSOM\\nfse.xsd",
                 Descricao = "XML de Consulta da NFSe por RPS",
                 TagAssinatura = "",
                 TagAtributoId = "",
@@ -75,7 +75,7 @@ namespace NFSe.Components
             {
                 Tag = "EnviarLoteRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\ABRASF\\nfse.xsd",
+                ArquivoXSD = "NFSe\\LEXSOM\\nfse.xsd",
                 Descricao = "XML de Lote RPS",
                 TagAssinatura = "Rps",
                 TagAtributoId = "InfRps",

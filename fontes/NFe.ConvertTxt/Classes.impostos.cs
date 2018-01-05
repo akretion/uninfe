@@ -63,6 +63,16 @@ namespace NFe.ConvertTxt
         public double vICMSDif;
         public double pDif;
         public double vICMSOp;
+        public double pFCP;
+        public double vFCP;
+        public double vBCFCP;
+        public double vBCFCPST;
+        public double pFCPST;
+        public double vFCPST;
+        public double pST;
+        public double vBCFCPSTRet;
+        public double pFCPSTRet;
+        public double vFCPSTRet;
 
         //-- CSON
         public int CSOSN;
@@ -96,6 +106,10 @@ namespace NFe.ConvertTxt
         public double vOutro;
         public double vNF;
         public double vTotTrib;
+        public double vFCP;
+        public double vFCPST;
+        public double vFCPSTRet;
+        public double vIPIDevol;
     }
 
     public struct ICMSUFDest
@@ -108,6 +122,7 @@ namespace NFe.ConvertTxt
         public double vFCPUFDest;
         public double vICMSUFDest;
         public double vICMSUFRemet;
+        public double vBCFCPUFDest;
     }
 
     /// <summary>

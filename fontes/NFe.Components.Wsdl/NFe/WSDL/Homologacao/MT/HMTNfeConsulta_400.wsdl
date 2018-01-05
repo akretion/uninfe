@@ -1,0 +1,35 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4">
+   <wsdl:documentation>NfeConsulta4</wsdl:documentation>
+   <wsdl:types>
+      <s:schema targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4" attributeFormDefault="unqualified" elementFormDefault="qualified">
+         <s:element name="nfeDadosMsg">
+            <s:complexType mixed="true">
+               <s:sequence>
+                  <s:any/>
+               </s:sequence>
+            </s:complexType>
+         </s:element>
+         <s:element name="nfeResultMsg" nillable="true">
+            <s:complexType mixed="true">
+               <s:sequence>
+                  <s:any/>
+               </s:sequence>
+            </s:complexType>
+         </s:element>
+      </s:schema>
+   </wsdl:types>
+   <wsdl:message name="nfeConsultaNFSoapIn">
+      <wsdl:part name="nfeDadosMsg" element="tns:nfeDadosMsg"/>
+   </wsdl:message>
+   <wsdl:message name="nfeConsultaNFSoapOut">
+      <wsdl:part name="nfeConsultaNFResult" element="tns:nfeResultMsg"/>
+   </wsdl:message>
+   <wsdl:portType name="NfeConsulta4PortType">
+      <wsdl:operation name="nfeConsultaNF">
+         <wsdl:input message="tns:nfeConsultaNFSoapIn" wsaw:Action="http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4/nfeConsultaNF"/>
+         <wsdl:output message="tns:nfeConsultaNFSoapOut" wsaw:Action="http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4/NfeConsulta4Soap/nfeConsultaNFResponse"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:service name="NfeConsulta4"/>
+</wsdl:definitions>

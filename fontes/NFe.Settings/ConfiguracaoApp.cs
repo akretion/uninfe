@@ -365,18 +365,24 @@ namespace NFe.Settings
                 var inifile = new IniFile(LocalFile);
 
                 estado.UF = uf;
-                estado.UrlNFe = inifile.Read("NF-e", uf);
-                estado.UrlCTe = inifile.Read("CT-e", uf);
                 estado.UrlNFCe = inifile.Read("NFC-e", uf);
                 estado.UrlNFCeH = inifile.Read("NFC-e(h)", uf);
                 estado.UrlNFCeM = inifile.Read("NFC-e_ConsultaManual", uf);
                 estado.UrlNFCeMH = inifile.Read("NFC-e_ConsultaManual(h)", uf);
+                estado.UrlNFCe_400 = inifile.Read("NFC-e_400", uf);
+                estado.UrlNFCeH_400 = inifile.Read("NFC-e(h)_400", uf);
 
                 if (String.IsNullOrEmpty(estado.UrlNFCeM))
                     estado.UrlNFCeM = estado.UrlNFCe;
 
                 if (String.IsNullOrEmpty(estado.UrlNFCeMH))
                     estado.UrlNFCeMH = estado.UrlNFCeH;
+
+                if (String.IsNullOrEmpty(estado.UrlNFCe_400))
+                    estado.UrlNFCe_400 = estado.UrlNFCe;
+
+                if (String.IsNullOrEmpty(estado.UrlNFCeH_400))
+                    estado.UrlNFCeH_400 = estado.UrlNFCeH;
             }
             else
                 throw new Exception("O arquivo SEFAZ.INC não foi localizado, por favor reinstale o UniNFe.");
@@ -1097,7 +1103,27 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.LMCAutorizacao : list.LocalProducao.LMCAutorizacao);
                             break;
 
-                            #endregion LMC
+                        #endregion LMC
+
+                        #region EFDReinf
+
+                        case Servicos.RecepcaoLoteReinf:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.RecepcaoLoteReinf : list.LocalProducao.RecepcaoLoteReinf);
+                            break;
+
+                        #endregion EFDReinf
+
+                        #region eSocial
+
+                        case Servicos.RecepcaoLoteeSocial:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.RecepcaoLoteeSocial : list.LocalProducao.RecepcaoLoteeSocial);
+                            break;
+
+                        case Servicos.ConsultarLoteeSocial:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarLoteeSocial : list.LocalProducao.ConsultarLoteeSocial);
+                            break;
+
+                            #endregion eSocial
                     }
                     if (tipoEmissao == (int)TipoEmissao.teEPEC)
                         ufNome = "EPEC";
@@ -1488,6 +1514,7 @@ namespace NFe.Settings
                             _xValids.Add(new xValid(empresa.PastaXmlErro, "Informe a pasta para arquivamento temporário dos arquivos XML que apresentaram erros.", "A pasta para arquivamento temporário dos arquivos XML com erro informada não existe.", true));
                             _xValids.Add(new xValid(empresa.PastaValidar, "Informe a pasta onde será gravado os arquivos XML somente para ser validado pela aplicação.", "A pasta para validação de XML´s informada não existe.", true));
                             break;
+
                         case TipoAplicativo.EFDReinf:
                         case TipoAplicativo.eSocial:
                         case TipoAplicativo.EFDReinfeSocial:
@@ -1498,6 +1525,7 @@ namespace NFe.Settings
                             _xValids.Add(new xValid(empresa.PastaXmlEnviado, "Informe a pasta para arquivamento dos arquivos XML enviados.", "A pasta para arquivamento dos arquivos XML enviados informada não existe.", true));
                             _xValids.Add(new xValid(empresa.PastaBackup, "", "A pasta para backup dos XML enviados informada não existe.", false));
                             break;
+
                         case TipoAplicativo.Nfe:
                         case TipoAplicativo.Cte:
                         case TipoAplicativo.MDFe:

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace NFe.ConvertTxt
 {
@@ -14,6 +11,7 @@ namespace NFe.ConvertTxt
         public double qLote;
         public DateTime dFab;
         public DateTime dVal;
+        public string cProdANVISA;
         public double vPMC;
     }
 }

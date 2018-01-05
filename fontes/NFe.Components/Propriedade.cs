@@ -356,10 +356,15 @@ namespace NFe.Components
             ///
             Reinf_evt,
 
+            Reinf_loteevt,
+
             ///
             /// eSocial
             ///
-            eSocial_evt
+            eSocial_evt,
+
+            eSocial_loteevt,
+            eSocial_consloteevt
         }
 
         private static Dictionary<TipoEnvio, ExtensaoClass> ListaExtensoes = new Dictionary<TipoEnvio, ExtensaoClass>();
@@ -693,9 +698,15 @@ namespace NFe.Components
 
                     ListaExtensoes.Add(TipoEnvio.Reinf_evt, new ExtensaoClass(
                         "-reinf-evt.xml", "",
-                        "-ret-reinf-evttotal.xml", "",
-                        "-ret-reinf-evttotal.err",
+                        "-ret-reinf-evt.xml", "",
+                        "-ret-reinf-evt.err",
                         "XML EFDReinf - Eventos"));
+
+                    ListaExtensoes.Add(TipoEnvio.Reinf_loteevt, new ExtensaoClass(
+                        "-reinf-loteevt.xml", "",
+                        "-ret-reinf-loteevt.xml", "",
+                        "-ret-reinf-loteevt.err",
+                        "XML EFDReinf - Lote de Eventos"));
 
                     #endregion Extensões EFDReinf
 
@@ -706,6 +717,18 @@ namespace NFe.Components
                         "-ret-esocial-evt.xml", "",
                         "-ret-esocial-evt.err",
                         "XML eSocial - Eventos"));
+
+                    ListaExtensoes.Add(TipoEnvio.eSocial_loteevt, new ExtensaoClass(
+                        "-esocial-loteevt.xml", "",
+                        "-ret-esocial-loteevt.xml", "",
+                        "-ret-esocial-loteevt.err",
+                        "XML eSocial - Lote de Eventos"));
+
+                    ListaExtensoes.Add(TipoEnvio.eSocial_consloteevt, new ExtensaoClass(
+                        "-esocial-consloteevt.xml", "",
+                        "-ret-esocial-consloteevt.xml", "",
+                        "-ret-esocial-consloteevt.err",
+                        "XML eSocial - Consultar Lote de Eventos"));
 
                     #endregion Extensões eSocial
 

@@ -745,7 +745,8 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultar:
-                            if (cMunicipio.Equals(3300308))
+                            if (cMunicipio.Equals(3300308) ||
+                                cMunicipio.Equals(3303302))
                                 retorna = "ConsultarNfsePorFaixa";
                             else
                                 retorna = "ConsultarNfse";
@@ -959,7 +960,9 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeRecepcionarLoteRps:
-                            if (taHomologacao)
+                            if (taHomologacao && 
+                                cMunicipio.ToString() != "2111300") //São Luiz - MA
+
                                 if (cMunicipio.ToString().Equals("5002704")) // Campo grande - MS não tem web service de teste
                                     throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
                                 else
@@ -1695,7 +1698,7 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultar:
-                            retorna = "ConsultarNfseFaixa";
+                            retorna = "ConsultarNfsePorFaixa";
                             break;
                     }
                     break;
@@ -1795,7 +1798,40 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion MARINGA_PR
+                #endregion MARINGA_PR
+
+                #region INTERSOL
+
+                case PadroesNFSe.INTERSOL:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfse";
+                            break;
+
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRps";
+                            break;
+                    }
+                    break;
+
+                    #endregion INTERSOL
             }
 
             return retorna;
@@ -1919,7 +1955,18 @@ namespace NFe.Service
                             throw new Exception("Não foi possível localizar o link do QRCode no arquivo SEFAZ.INC.");
 
                     QRCode qrCode = new QRCode(conteudoXML);
-                    string url = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCe;
+
+                    string url;
+
+                    if (dadosNFe.versao == "4.00")
+                    {
+                        url = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeH_400 : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCe_400;
+                    }
+                    else
+                    {
+                        url = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCe;
+                    }
+
                     string linkUFManual = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeMH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeM;
 
                     qrCode.GerarLinkConsulta(url, Empresas.Configuracoes[emp].IdentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, linkUFManual);
@@ -2414,7 +2461,8 @@ namespace NFe.Service
                 case PadroesNFSe.PRONIN:
                     if (cMunicipio == 4109401 ||
                         cMunicipio == 3131703 ||
-                        cMunicipio == 4303004)
+                        cMunicipio == 4303004 ||
+                        cMunicipio == 4322509)
                         retorno = false;
                     break;
 
@@ -2442,6 +2490,7 @@ namespace NFe.Service
                 case PadroesNFSe.BSITBR:
                 case PadroesNFSe.METROPOLIS:
                 case PadroesNFSe.BAURU_SP:
+                case PadroesNFSe.SOFTPLAN:
                     retorno = false;
                     break;
 

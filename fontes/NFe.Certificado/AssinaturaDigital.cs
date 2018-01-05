@@ -12,6 +12,12 @@ namespace NFe.Certificado
 {
     public delegate void CryptographicExceptionHandler(object sender, EventArgs args);
 
+    public enum AlgorithmType
+    {
+        Sha1,
+        Sha256
+    }
+
     public class AssinaturaDigital
     {
         public bool AssinaturaValida { get; private set; }
@@ -35,13 +41,14 @@ namespace NFe.Certificado
             string tagAssinatura,
             string tagAtributoId,
             X509Certificate2 x509Cert,
-            int empresa)
+            int empresa,
+            AlgorithmType algorithmType = AlgorithmType.Sha1, bool comURI = true)
         {
             XmlDocument doc = new XmlDocument();
             doc.PreserveWhitespace = false;
             doc.Load(arqXMLAssinar);
 
-            Assinar(doc, tagAssinatura, tagAtributoId, x509Cert, empresa);
+            Assinar(doc, tagAssinatura, tagAtributoId, x509Cert, empresa, algorithmType, comURI);
 
             try
             {
@@ -64,11 +71,12 @@ namespace NFe.Certificado
         /// grava o XML assinado com o mesmo nome, sobreponto o XML informado por parâmetro.
         /// Disponibiliza também uma propriedade com uma string do xml assinado (this.vXmlStringAssinado)
         /// </summary>
-        /// <param name="arqXMLAssinar">Nome do arquivo XML a ser assinado</param>
+        /// <param name="conteudoXML">Conteúdo do XML</param>
         /// <param name="tagAssinatura">Nome da tag onde é para ficar a assinatura</param>
         /// <param name="tagAtributoId">Nome da tag que tem o atributo ID, tag que vai ser assinada</param>
         /// <param name="x509Cert">Certificado a ser utilizado na assinatura</param>
         /// <param name="empresa">Índice da empresa que está solicitando a assinatura</param>
+        /// <param name="algorithmType">Tipo de algoritimo para assinatura do XML.</param>
         /// <remarks>
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 04/06/2008
@@ -77,7 +85,9 @@ namespace NFe.Certificado
             string tagAssinatura,
             string tagAtributoId,
             X509Certificate2 x509Cert,
-            int empresa)
+            int empresa,
+            AlgorithmType algorithmType,
+            bool comURI)
         {
             try
             {
@@ -132,13 +142,17 @@ namespace NFe.Certificado
 
                             // pega o uri que deve ser assinada
                             XmlElement childElemen = (XmlElement)childNodes;
-                            if (childElemen.GetAttributeNode("Id") != null)
+
+                            if (comURI)
                             {
-                                reference.Uri = "#" + childElemen.GetAttributeNode("Id").Value;
-                            }
-                            else if (childElemen.GetAttributeNode("id") != null)
-                            {
-                                reference.Uri = "#" + childElemen.GetAttributeNode("id").Value;
+                                if (childElemen.GetAttributeNode("Id") != null)
+                                {
+                                    reference.Uri = "#" + childElemen.GetAttributeNode("Id").Value;
+                                }
+                                else if (childElemen.GetAttributeNode("id") != null)
+                                {
+                                    reference.Uri = "#" + childElemen.GetAttributeNode("id").Value;
+                                }
                             }
 
                             // Create a SignedXml object.
@@ -154,18 +168,31 @@ namespace NFe.Certificado
                                 Empresas.Configuracoes[empresa].CertificadoPINCarregado = true;
                             }
 
+                            if (algorithmType.Equals(AlgorithmType.Sha256))
+                            {
+                                signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
+                                signedXml.SigningKey = x509Cert.GetRSAPrivateKey();
+                            }
 #endif
-                            signedXml.SigningKey = x509Cert.PrivateKey;
+
+                            if (algorithmType.Equals(AlgorithmType.Sha1))
+                            {
+                                signedXml.SigningKey = x509Cert.PrivateKey;
+                            }
 
                             // Add an enveloped transformation to the reference.
-                            XmlDsigEnvelopedSignatureTransform env = new XmlDsigEnvelopedSignatureTransform();
-                            reference.AddTransform(env);
-
-                            XmlDsigC14NTransform c14 = new XmlDsigC14NTransform();
-                            reference.AddTransform(c14);
+                            reference.AddTransform(new XmlDsigEnvelopedSignatureTransform());
+                            reference.AddTransform(new XmlDsigC14NTransform());
 
                             // Add the reference to the SignedXml object.
                             signedXml.AddReference(reference);
+
+#if _fw46
+                            if (algorithmType.Equals(AlgorithmType.Sha256))
+                            {
+                                reference.DigestMethod = "http://www.w3.org/2001/04/xmlenc#sha256";
+                            }
+#endif
 
                             // Create a new KeyInfo object
                             KeyInfo keyInfo = new KeyInfo();
@@ -259,7 +286,8 @@ namespace NFe.Certificado
         /// <param name="arqXMLAssinar">Nome do arquivo XML a ser assinado</param>
         /// <param name="emp">Código da empresa</param>
         /// <param name="UFCod">Codigo da UF</param>
-        public void Assinar(string arqXMLAssinar, int emp, int UFCod)
+        /// <param name="algorithmType">Tipo de algoritimo para assinatura do XML.</param>
+        public void Assinar(string arqXMLAssinar, int emp, int UFCod, AlgorithmType algorithmType = AlgorithmType.Sha1, bool comURI = true)
         {
             if (Empresas.Configuracoes[emp].UsaCertificado)
             {
@@ -268,13 +296,13 @@ namespace NFe.Certificado
                 if (!string.IsNullOrEmpty(v.TagAssinatura))
                 {
                     if (!Assinado(arqXMLAssinar, v.TagAssinatura))
-                        Assinar(arqXMLAssinar, v.TagAssinatura, v.TagAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp);
+                        Assinar(arqXMLAssinar, v.TagAssinatura, v.TagAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
                 }
 
                 //Assinar o lote
                 if (!string.IsNullOrEmpty(v.TagLoteAssinatura))
                     if (!Assinado(arqXMLAssinar, v.TagLoteAssinatura))
-                        Assinar(arqXMLAssinar, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp);
+                        Assinar(arqXMLAssinar, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
             }
         }
 
@@ -288,7 +316,8 @@ namespace NFe.Certificado
         /// <param name="conteudoXML">Conteúdo do XML</param>
         /// <param name="emp">Código da empresa</param>
         /// <param name="UFCod">Codigo da UF</param>
-        public void Assinar(XmlDocument conteudoXML, int emp, int UFCod)
+        /// <param name="algorithmType">Tipo de algoritimo para assinatura do XML.</param>
+        public void Assinar(XmlDocument conteudoXML, int emp, int UFCod, AlgorithmType algorithmType = AlgorithmType.Sha1, bool comURI = true)
         {
             if (Empresas.Configuracoes[emp].UsaCertificado)
             {
@@ -297,13 +326,13 @@ namespace NFe.Certificado
                 if (!string.IsNullOrEmpty(v.TagAssinatura))
                 {
                     if (!Assinado(conteudoXML, v.TagAssinatura))
-                        Assinar(conteudoXML, v.TagAssinatura, v.TagAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp);
+                        Assinar(conteudoXML, v.TagAssinatura, v.TagAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
                 }
 
                 //Assinar o lote
                 if (!string.IsNullOrEmpty(v.TagLoteAssinatura))
                     if (!Assinado(conteudoXML, v.TagLoteAssinatura))
-                        Assinar(conteudoXML, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp);
+                        Assinar(conteudoXML, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
             }
         }
 

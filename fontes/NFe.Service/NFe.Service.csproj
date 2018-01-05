@@ -171,6 +171,9 @@
     <Compile Include="CTe\TaskRetRecepcaoCTe.cs" />
     <Compile Include="DFe\TaskRecepcaoDFeCTe.cs" />
     <Compile Include="DFe\TaskRecepcaoDFe.cs" />
+    <Compile Include="EFDReinf\TaskRecepcaoLoteReinf.cs" />
+    <Compile Include="eSocial\TaskConsultarLoteeSocial.cs" />
+    <Compile Include="eSocial\TaskRecepcaoLoteeSocial.cs" />
     <Compile Include="LMC\LMCAutorizacao.cs" />
     <Compile Include="MDFe\TaskAssinarValidarMDFe.cs" />
     <Compile Include="MDFe\TaskConsNaoEncMDFe.cs" />

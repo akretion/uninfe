@@ -106,6 +106,10 @@ namespace NFe.Components
                                 padraoNFSe = PadroesNFSe.BETHA.ToString() + "-202-";
                                 break;
 
+                            case 4322509: //Vacari-RS
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4322509-";
+                                break;
+
                             default:
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                                 break;
@@ -191,6 +195,7 @@ namespace NFe.Components
                                             case "411501":  //Evento Fisco Resposta ao Pedido de Prorrogação 2º prazo
                                             case "411502":  //Evento Fisco Resposta ao Cancelamento de Prorrogação 1º prazo
                                             case "411503":  //Evento Fisco Resposta ao Cancelamento de Prorrogação 2º prazo
+                                            case "610110":  //CTe Prestação de Serviços em Desacordo
                                                 nome = nome + evento;
                                                 break;
 
@@ -282,6 +287,12 @@ namespace NFe.Components
                     else
                         cArquivoSchema = Path.Combine(Propriedade.PastaExecutavel, "NFe\\schemas\\" + string.Format(schema.ArquivoXSD, versao));
                 }
+
+                if (!string.IsNullOrEmpty(schema.TargetNameSpace) && reinf)
+                {
+                    TargetNameSpace = string.Format(schema.TargetNameSpace, versao);
+                }
+
             }
             catch (Exception ex)
             {

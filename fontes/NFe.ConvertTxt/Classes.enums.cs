@@ -50,11 +50,20 @@ namespace NFe.ConvertTxt
         cfConsumidorFinal = 1
     }
     public enum TpcnPresencaComprador {
-        pcNao=0, 
-        pcPresencial=1, 
-        pcInternet=2, 
-        pcTeleatendimento=3, 
-        pcOutros=9
+        [Description("0=Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste);")]
+        pcNao = 0, 
+        [Description("Operação presencial")]
+        pcPresencial = 1, 
+        [Description("Operação não presencial, pela Internet")]
+        pcInternet = 2, 
+        [Description("Operação não presencial, Teleatendimento")]
+        pcTeleatendimento = 3, 
+        [Description("NFC-e em operação com entrega a domicílio")]
+        pcEntregaDomicilio = 4,
+        [Description("Operação presencial, fora do estabelecimento")]
+        pcPresencialForaEstabelecimento = 5,
+        [Description("Operação não presencial, outros")]
+        pcOutros = 9
     }
     public enum TpcnFormaPagamento {
         fpDinheiro=1, 
@@ -86,9 +95,17 @@ namespace NFe.ConvertTxt
     }
     public enum TpcnModalidadeFrete 
     { 
+        [Description("0=Contratação do Frete por conta do Remetente (CIF)")]
         mfContaEmitente = 0, 
+        [Description("1=Contratação do Frete por conta do Destinatário (FOB)")]
         mfContaDestinatario = 1, 
+        [Description("2=Contratação do Frete por conta de Terceiros")]
         mfContaTerceiros = 2, 
+        [Description("3=Transporte Próprio por conta do Remetente")]
+        mfTranspProprioContaRemetente = 3,
+        [Description("4=Transporte Próprio por conta do Destinatário")]
+        mfTranspProprioContaDestinatario = 4,
+        [Description("9 = Sem Ocorrência de Transporte")]
         mfSemFrete = 9
     }
     public enum TpcnDeterminacaoBaseIcms 
@@ -137,10 +154,19 @@ namespace NFe.ConvertTxt
         toVendaDireta = 3, 
         toOutros = 0
     }
-    public enum TpcnIndicadorTotal 
+    public enum TpcnIndicadorEscala 
     { 
-        itNaoSomaTotalNFe = 0, 
-        itSomaTotalNFe = 1 
+        [Description("Nenhum")]
+        ieNenhum = ' ',
+        [Description("S - Produzido em Escala Relevante")]
+        ieNaoSomaTotalNFe = 'S', 
+        [Description("N – Produzido em Escala NÃO Relevante")]
+        ieSomaTotalNFe = 'N' 
+    }
+    public enum TpcnIndicadorTotal
+    {
+        itNaoSomaTotalNFe = 0,
+        itSomaTotalNFe = 1
     }
     public enum TpcnCRT 
     { 

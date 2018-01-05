@@ -16,6 +16,10 @@ namespace NFe.Components.Abstract
         public TipoAmbiente tpAmb { get; set; }
         public string PastaRetorno { get; set; }
         public abstract string NameSpaces { get; }
+        public string Usuario { get; set; }
+        public string Senha { get; set; }
+        public int Cidade { get; set; }
+        public IWebProxy Proxy { get; set; }
 
         public EmiteNFSeBase(TipoAmbiente tpAmb, string pastaRetorno)
         {
@@ -62,12 +66,12 @@ namespace NFe.Components.Abstract
             return textWriter.ToString();
         }
 
-        public void GerarRetorno(string file, string result, string extEnvio, string extRetorno)
+        public virtual void GerarRetorno(string file, string result, string extEnvio, string extRetorno)
         {
             GerarRetorno(file, result, extEnvio, extRetorno, Encoding.Default);
         }
 
-        public void GerarRetorno(string file, string result, string extEnvio, string extRetorno, Encoding encoding)
+        public virtual void GerarRetorno(string file, string result, string extEnvio, string extRetorno, Encoding encoding)
         {
             string nomearq = Path.Combine(PastaRetorno, Functions.ExtrairNomeArq(file, extEnvio) + extRetorno);
 
@@ -119,6 +123,11 @@ namespace NFe.Components.Abstract
             }
 
             return xmlDoc.InnerXml;
+        }
+
+        public virtual string EmiteNF(string file, bool cancelamento = false)
+        {
+            return "";
         }
 
         public abstract void EmiteNF(string file);

@@ -678,6 +678,36 @@
             });
 
             #endregion S-5012 - Informações do IRRF consolidadas por contribuinte
+
+            #region Lote de eventos
+
+            SchemaXML.InfSchemas.Add("eSocial-envioLoteEventos", new InfSchema()
+            {
+                Tag = "envioLoteEventos",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\EnvioLoteEventos-v1_1_1.xsd",
+                Descricao = "eSocial - XML de Envio de Lote de Eventos",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/lote/eventos/envio/v1_1_1"
+            });
+
+            #endregion Lote de eventos
+
+            #region Consulta Lote de eventos
+
+            SchemaXML.InfSchemas.Add("eSocial-consultaLoteEventos", new InfSchema()
+            {
+                Tag = "consultaLoteEventos",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\ConsultaLoteEventos-v1_0_0.xsd",
+                Descricao = "eSocial - XML de Consulta de Lote de Eventos",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/lote/eventos/envio/consulta/retornoProcessamento/v1_0_0"
+            });
+
+            #endregion Consulta Lote de eventos
         }
     }
 }

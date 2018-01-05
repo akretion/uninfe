@@ -9,7 +9,6 @@ using NFe.Components.EGoverneISS;
 using NFe.Components.EL;
 using NFe.Components.EloTech;
 using NFe.Components.Fiorilli;
-using NFe.Components.Tinus;
 using NFe.Components.GovDigital;
 using NFe.Components.Memory;
 using NFe.Components.Metropolis;
@@ -18,7 +17,9 @@ using NFe.Components.Pronin;
 using NFe.Components.RLZ_INFORMATICA;
 using NFe.Components.SigCorp;
 using NFe.Components.SimplISS;
+using NFe.Components.SOFTPLAN;
 using NFe.Components.SystemPro;
+using NFe.Components.Tinus;
 using NFe.Settings;
 using NFe.Validate;
 using NFSe.Components;
@@ -83,14 +84,19 @@ namespace NFe.Service.NFSe
                 switch (padraoNFSe)
                 {
                     case PadroesNFSe.IPM:
+
                         //código da cidade da receita federal, este arquivo pode ser encontrado em ~\uninfe\doc\Codigos_Cidades_Receita_Federal.xls</para>
                         //O código da cidade está hardcoded pois ainda está sendo usado apenas para campo mourão
-                        IPM ipm = new IPM(Empresas.Configuracoes[emp].UsuarioWS, Empresas.Configuracoes[emp].SenhaWS, oDadosEnvLoteRps.cMunicipio, Empresas.Configuracoes[emp].PastaXmlRetorno);
+                        IPM ipm = new IPM((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                          Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                          Empresas.Configuracoes[emp].UsuarioWS,
+                                          Empresas.Configuracoes[emp].SenhaWS,
+                                          oDadosEnvLoteRps.cMunicipio);
 
                         if (ConfiguracaoApp.Proxy)
                             ipm.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
 
-                        ipm.EmitirNF(NomeArquivoXML, (TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo);
+                        ipm.EmiteNF(NomeArquivoXML, false);
                         break;
 
                     case PadroesNFSe.GINFES:
@@ -618,11 +624,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     #endregion BAURU_SP
-
-                    case PadroesNFSe.TINUS:
-
+                    
                         #region Tinus
-
+                    case PadroesNFSe.TINUS:
                         Tinus tinus = new Tinus((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosEnvLoteRps.cMunicipio,
@@ -637,7 +641,39 @@ namespace NFe.Service.NFSe
                         tinus.EmiteNF(NomeArquivoXML);
                         break;
 
-                        #endregion Tinus
+                    #endregion Tinus
+
+                    #region SOFTPLAN
+                    case PadroesNFSe.SOFTPLAN:
+                        SOFTPLAN softplan = new SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                        Empresas.Configuracoes[emp].UsuarioWS,
+                                                        Empresas.Configuracoes[emp].SenhaWS,
+                                                        Empresas.Configuracoes[emp].ClientID,
+                                                        Empresas.Configuracoes[emp].ClientSecret);
+
+                        AssinaturaDigital softplanAssinatura = new AssinaturaDigital();
+                        softplanAssinatura.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
+
+                        // Validar o Arquivo XML
+                        ValidarXML softplanValidar = new ValidarXML(NomeArquivoXML, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
+                        string validacao = softplanValidar.ValidarArqXML(NomeArquivoXML);
+                        if (validacao != "")
+                            throw new Exception(validacao);
+
+                        if (ConfiguracaoApp.Proxy)
+                            softplan.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
+
+                        AssinaturaDigital softplanAss = new AssinaturaDigital();
+                        softplanAss.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio, AlgorithmType.Sha256);
+
+                        softplan.EmiteNF(NomeArquivoXML);
+                        break;
+                        #endregion SOFTPLAN
+       
+                    case PadroesNFSe.INTERSOL:
+                        cabecMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><p:cabecalho versao=\"1\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:p=\"http://ws.speedgov.com.br/cabecalho_v1.xsd\" xmlns:p1=\"http://ws.speedgov.com.br/tipos_v1.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://ws.speedgov.com.br/cabecalho_v1.xsd cabecalho_v1.xsd \"><versaoDados>1</versaoDados></p:cabecalho>";
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))
@@ -648,8 +684,8 @@ namespace NFe.Service.NFSe
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.InvocarNFSe(wsProxy, envLoteRps, NomeMetodoWS(Servico, oDadosEnvLoteRps.cMunicipio), cabecMsg, this,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,   
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML, 
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML,
                                             padraoNFSe, Servico, securityProtocolType);
 
                     ///
