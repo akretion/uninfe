@@ -6,6 +6,7 @@ using System.IO;
 using System.Net;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace NFe.Service
 {
@@ -601,6 +602,67 @@ namespace NFe.Service
                     strRetorno = result.OuterXml;
                     break;
 
+                #region Padrão Joinville_SC
+
+                case PadroesNFSe.JOINVILLE_SC:
+                    if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao)
+                    {
+                        switch (metodo)
+                        {
+                            case "EnviarLoteRpsEnvio":
+                                strRetorno = SerializarObjeto((Components.HJoinvilleSC.EnviarLoteRpsResposta)wsProxy.Invoke(servicoWS, metodo, new object[] { docXML, null }));
+                                break;
+
+                            case "CancelarNfseEnvio":
+                                strRetorno = SerializarObjeto((Components.HJoinvilleSC.CancelarNfseResposta)wsProxy.Invoke(servicoWS, metodo, new object[] { docXML }));
+                                break;
+
+                            case "ConsultarLoteRpsEnvio":
+                                strRetorno = SerializarObjeto((Components.HJoinvilleSC.ConsultarLoteRpsResposta)wsProxy.Invoke(
+                                    servicoWS,
+                                    metodo,
+                                    new object[] {
+                                        new Components.HJoinvilleSC.IdentificacaoPessoaEmpresa
+                                        {
+                                            CpfCnpj = new Components.HJoinvilleSC.CpfCnpj
+                                            {
+                                                Cnpj = (docXML.GetElementsByTagName("Cnpj")[0] != null ? docXML.GetElementsByTagName("Cnpj")[0].InnerText : ""),
+                                                Cpf = (docXML.GetElementsByTagName("Cpf")[0] != null ? docXML.GetElementsByTagName("Cpf")[0].InnerText : "")
+                                            },
+                                            InscricaoMunicipal = (docXML.GetElementsByTagName("InscricaoMunicipal")[0] != null ? docXML.GetElementsByTagName("InscricaoMunicipal")[0].InnerText : "")
+                                        },
+                                        docXML.GetElementsByTagName("Protocolo")[0].InnerText }));
+                                break;
+
+                            case "ConsultarNfseRpsEnvio":
+                                strRetorno = SerializarObjeto((Components.HJoinvilleSC.ConsultarNfseRpsResposta)wsProxy.Invoke(
+                                    servicoWS,
+                                    metodo,
+                                    new object[] {
+                                        new Components.HJoinvilleSC.IdentificacaoRps
+                                        {
+                                            Numero = Convert.ToInt32((docXML.GetElementsByTagName("Numero")[0] != null ? docXML.GetElementsByTagName("Numero")[0].InnerText : "0")),
+                                            Serie = (docXML.GetElementsByTagName("Serie")[0] != null ? docXML.GetElementsByTagName("Serie")[0].InnerText : ""),
+                                            Tipo = Convert.ToInt32((docXML.GetElementsByTagName("Tipo")[0] != null ? docXML.GetElementsByTagName("Tipo")[0].InnerText : "0"))
+                                        },
+                                        new Components.HJoinvilleSC.IdentificacaoPessoaEmpresa
+                                        {
+                                            CpfCnpj = new Components.HJoinvilleSC.CpfCnpj
+                                            {
+                                                Cnpj = (docXML.GetElementsByTagName("Cnpj")[0] != null ? docXML.GetElementsByTagName("Cnpj")[0].InnerText : ""),
+                                                Cpf = (docXML.GetElementsByTagName("Cpf")[0] != null ? docXML.GetElementsByTagName("Cpf")[0].InnerText : "")
+                                            },
+                                            InscricaoMunicipal = (docXML.GetElementsByTagName("InscricaoMunicipal")[0] != null ? docXML.GetElementsByTagName("InscricaoMunicipal")[0].InnerText : "")
+                                        }
+                                    }));
+                                break;
+                        }
+                    }
+
+                    break;
+
+                #endregion Padrão Joinville_SC
+
                 default:
 
                     #region Demais padrões
@@ -646,6 +708,22 @@ namespace NFe.Service
         }
 
         #endregion InvocarNFSe()
+
+        /// <summary>
+        /// Serializar o objeto para XML
+        /// </summary>
+        /// <typeparam name="T">Tipo do objeto que será serializado</typeparam>
+        /// <param name="retorno">Objeto de retorno que será convertivo</param>
+        /// <returns></returns>
+        private string SerializarObjeto<T>(T retorno)
+            where T : new()
+        {
+            XmlSerializer serializerResposta = new XmlSerializer(typeof(T));
+            StringWriter textWriter = new StringWriter();
+            serializerResposta.Serialize(textWriter, retorno);
+
+            return textWriter.ToString();
+        }
 
         #endregion Métodos
     }

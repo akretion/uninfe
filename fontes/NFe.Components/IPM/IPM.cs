@@ -86,6 +86,9 @@ namespace NFSe.Components
 
                 case 4215802: // São Bento do Sul-SC
                     return (int)8311;
+
+                case 4307807: // Estrela-RS
+                    return (int)8653;
             }
 
             return 0;

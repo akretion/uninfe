@@ -354,10 +354,10 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeConsulta2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeStatusServico2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBACadConsultaCadastro2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeInutilizacao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeStatusServico2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBACadConsultaCadastro.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeConsulta.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeInutilizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeStatusServico.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBARecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCECadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeConsulta2.wsdl" />
@@ -369,13 +369,13 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeInutilizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeStatusServico.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGORecepcaoEvento.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNFeCadConsultaCadastro2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGCancRegSaida2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeInutilizacao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeStatusServico2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNFeCadConsultaCadastro.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGCancRegSaida.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeConsulta.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeInutilizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeStatusServico.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNFeRecepcaoEvento.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGRegistrarSaida2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGRegistrarSaida.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeInutilizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeStatusServico.wsdl" />
@@ -385,10 +385,10 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeInutilizacao2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeStatusServico2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeRecepcaoEvento.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPECadConsultaCadastro2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeInutilizacao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeStatusServico2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPECadConsultaCadastro.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeConsulta.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeInutilizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeStatusServico.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPERecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PR\PPRNFeInutilizacao.wsdl" />
@@ -2140,10 +2140,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeAutorizacao_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeConsulta2_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeConsulta_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeInutilizacao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeRetAutorizacao_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeStatusServico2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeStatusServico_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBARecepcaoEvento_C.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -3091,10 +3091,10 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeStatusServico_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPERecepcaoEvento_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeAutorizacao_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeConsulta2_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeConsulta_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeInutilizacao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeRetAutorizacao_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeStatusServico2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeStatusServico_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPERecepcaoEvento_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTCteRecepcaoOS.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGCteRecepcaoOS.wsdl" />
@@ -3615,6 +3615,39 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeInutilizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeRetAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeStatusServico_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeConsulta_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeInutilizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeRetAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeStatusServico_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeConsulta_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeInutilizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeRetAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeStatusServico_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeConsulta_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeInutilizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeRetAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeStatusServico_400.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\ABRASF\nfse_v2_04.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeConsulta_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeInutilizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeRetAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\PE\HPENfeStatusServico_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeConsulta_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeInutilizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeRetAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeStatusServico_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeConsulta_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeInutilizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeRetAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeStatusServico_C_400.wsdl" />
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -3912,6 +3945,26 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\FISSLEX\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PManausAM-aconsultarloterps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PManausAM-aconsultarnfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PManausAM-aconsultarnfseporrps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PManausAM-aconsultarsituacaoloterps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PManausAM-arecepcionarloterps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HManausAM-aconsultarloterps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HManausAM-aconsultarnfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HManausAM-aconsultarnfseporrps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HManausAM-aconsultarsituacaoloterps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HManausAM-arecepcionarloterps.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\MANAUS_AM\nfse_v2010.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\MANAUS_AM\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSerafinaCorreaRS-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSerafinaCorreaRS-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HBomDespachoMG-WebISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBomDespachoMG-WebISS.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">
@@ -3924,7 +3977,9 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJoinvilleSC.wsdl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

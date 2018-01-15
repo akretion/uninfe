@@ -1,124 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/RecepcaoEvento" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/RecepcaoEvento" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NFeRecepcaoEvento4" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NFeRecepcaoEvento4" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
 
-   <wsdl:types>
+  <wsdl:documentation>
+Servico destinado a recepcao de mensagens de Evento de NFe </wsdl:documentation>
 
-      <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/RecepcaoEvento">
+  <wsdl:types>
 
-         <s:element name="nfeDadosMsg">
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NFeRecepcaoEvento4">
 
-            <s:complexType mixed="true">
+      <s:element name="nfeDadosMsg">
 
-               <s:sequence>
+        <s:complexType mixed="true">
 
-                  <s:any/>
+          <s:sequence>
 
-               </s:sequence>
+            <s:any/>
 
-            </s:complexType>
+          </s:sequence>
 
-         </s:element>
+        </s:complexType>
 
-         <s:element name="nfeRecepcaoEventoResult">
+      </s:element>
 
-            <s:complexType mixed="true">
+      <s:element name="nfeResultMsg">
 
-               <s:sequence>
+        <s:complexType mixed="true">
 
-                  <s:any/>
+          <s:sequence>
 
-               </s:sequence>
+            <s:any/>
 
-            </s:complexType>
+          </s:sequence>
 
-         </s:element>
+        </s:complexType>
 
-         <s:element name="nfeCabecMsg" type="tns:nfeCabecMsg"/>
+      </s:element>
 
-         <s:complexType name="nfeCabecMsg">
+    </s:schema>
 
-            <s:sequence>
+  </wsdl:types>
 
-               <s:element maxOccurs="1" minOccurs="0" name="cUF" type="s:string"/>
+  <wsdl:message name="nfeRecepcaoEventoSoap12Out">
 
-               <s:element maxOccurs="1" minOccurs="0" name="versaoDados" type="s:string"/>
+    <wsdl:part element="tns:nfeResultMsg" name="nfeResultMsg"/>
 
-            </s:sequence>
+  </wsdl:message>
 
-            <s:anyAttribute/>
+  <wsdl:message name="nfeRecepcaoEventoSoap12In">
 
-         </s:complexType>
+    <wsdl:part element="tns:nfeDadosMsg" name="nfeDadosMsg"/>
 
-      </s:schema>
+  </wsdl:message>
 
-   </wsdl:types>
+  <wsdl:portType name="NFeRecepcaoEvento4Soap12">
 
-   <wsdl:message name="nfeRecepcaoEventoSoap12In">
+    <wsdl:operation name="nfeRecepcaoEvento">
 
-      <wsdl:part element="tns:nfeDadosMsg" name="nfeDadosMsg"/>
+      <wsdl:documentation>
+Recepção de mensagem de Evento da NFe   </wsdl:documentation>
 
-   </wsdl:message>
+      <wsdl:input message="tns:nfeRecepcaoEventoSoap12In"/>
 
-   <wsdl:message name="nfeRecepcaoEventoSoap12Out">
+      <wsdl:output message="tns:nfeRecepcaoEventoSoap12Out"/>
 
-      <wsdl:part element="tns:nfeRecepcaoEventoResult" name="nfeRecepcaoEventoResult"/>
+    </wsdl:operation>
 
-   </wsdl:message>
+  </wsdl:portType>
 
-   <wsdl:message name="nfeRecepcaoEventonfeCabecMsg">
+  <wsdl:binding name="NFeRecepcaoEvento4Soap12" type="tns:NFeRecepcaoEvento4Soap12">
 
-      <wsdl:part element="tns:nfeCabecMsg" name="nfeCabecMsg"/>
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
 
-   </wsdl:message>
+    <wsdl:operation name="nfeRecepcaoEvento">
 
-   <wsdl:portType name="RecepcaoEventoSoap12">
+      <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/NFeRecepcaoEvento4/nfeRecepcaoEvento" style="document"/>
 
-      <wsdl:operation name="nfeRecepcaoEvento">
+      <wsdl:input>
 
-         <wsdl:input message="tns:nfeRecepcaoEventoSoap12In"/>
+        <soap12:body use="literal"/>
 
-         <wsdl:output message="tns:nfeRecepcaoEventoSoap12Out"/>
+      </wsdl:input>
 
-      </wsdl:operation>
+      <wsdl:output>
 
-   </wsdl:portType>
+        <soap12:body use="literal"/>
 
-   <wsdl:binding name="RecepcaoEventoSoap12" type="tns:RecepcaoEventoSoap12">
+      </wsdl:output>
 
-      <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    </wsdl:operation>
 
-      <wsdl:operation name="nfeRecepcaoEvento">
+  </wsdl:binding>
 
-         <soap12:operation soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/RecepcaoEvento/nfeRecepcaoEvento" style="document"/>
+  <wsdl:service name="NFeRecepcaoEvento4">
 
-         <wsdl:input>
+    <wsdl:documentation>
+Servico destinado a recepcao de mensagens de evento de NFe  </wsdl:documentation>
 
-            <soap12:body use="literal"/>
+    <wsdl:port binding="tns:NFeRecepcaoEvento4Soap12" name="NFeRecepcaoEvento4ServicePort">
 
-            <soap12:header message="tns:nfeRecepcaoEventonfeCabecMsg" part="nfeCabecMsg" use="literal"/>
+      <soap12:address location="https://nfe.sefaz.pe.gov.br/nfe-service/services/NFeRecepcaoEvento4"/>
 
-         </wsdl:input>
+    </wsdl:port>
 
-         <wsdl:output>
-
-            <soap12:body use="literal"/>
-
-            <soap12:header message="tns:nfeRecepcaoEventonfeCabecMsg" part="nfeCabecMsg" use="literal"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-   </wsdl:binding>
-
-   <wsdl:service name="RecepcaoEvento">
-
-      <wsdl:port binding="tns:RecepcaoEventoSoap12" name="RecepcaoEvento">
-
-         <soap12:address location="https://nfe.sefaz.pe.gov.br/nfe-service/services/RecepcaoEvento"/>
-
-      </wsdl:port>
-
-   </wsdl:service>
+  </wsdl:service>
 
 </wsdl:definitions>

@@ -130,7 +130,7 @@ namespace NFe.Certificado
             if (Empresas.Configuracoes[emp].UsaCertificado)
             {
                 if (Empresas.Configuracoes[emp].X509Certificado == null)
-                    throw new ExceptionCertificadoDigital(ErroPadrao.ErroNaoDetectado);// Certificado inválido");
+                    throw new ExceptionCertificadoDigital(ErroPadrao.CertificadoNaoEncontrado);
 
                 if (DateTime.Compare(DateTime.Now, Empresas.Configuracoes[emp].X509Certificado.NotAfter) > 0)
                 {

@@ -656,6 +656,7 @@
             this.checkBoxArqNSU.Text = "Gravar o nome dos XML da NFe/CTe retornados na manifestação no formato com o núme" +
     "ro do NSU";
             this.checkBoxArqNSU.UseSelectable = true;
+            this.checkBoxArqNSU.CheckedChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
             // 
             // userConfiguracao_diversos
             // 

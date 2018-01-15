@@ -68,8 +68,8 @@
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WsEnviarLoteEventos" type="tns:ServicoEnviarLoteEventos">
-    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsp:PolicyReference URI="#WsEnviarLoteEventos_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="EnviarLoteEventos">
       <soap:operation soapAction="http://www.esocial.gov.br/servicos/empregador/lote/eventos/envio/v1_1_0/ServicoEnviarLoteEventos/EnviarLoteEventos" style="document" />
       <wsdl:input>
@@ -82,7 +82,7 @@
   </wsdl:binding>
   <wsdl:service name="ServicoEnviarLoteEventos">
     <wsdl:port name="WsEnviarLoteEventos" binding="tns:WsEnviarLoteEventos">
-      <soap:address location="https://webservices.esocial.gov.br/servicos/empregador/enviarloteeventos/WsEnviarLoteEventos.svc" />
+      <soap:address location="https://webservices.envio.esocial.gov.br/servicos/empregador/enviarloteeventos/WsEnviarLoteEventos.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

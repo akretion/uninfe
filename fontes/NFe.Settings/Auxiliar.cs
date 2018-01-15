@@ -219,52 +219,59 @@ namespace NFe.Settings
 
         #region CarregaEmpresa()
         /// <summary>
-        /// Carrega as Emoresas que foram cadastradas e estão gravadas no XML
+        /// Carrega as Empresas que foram cadastradas e estão gravadas no XML
         /// </summary>
+        /// <param name="sonfe"></param>
+        /// <param name="pedidoSituacao">Se verdadeiro, está sendo chamado pela tela de pedido de situação</param>
         /// <returns>Retorna uma ArrayList das empresas cadastradas</returns>
         /// <remarks>
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 28/07/2010
         /// </remarks>
-        public static ArrayList CarregaEmpresa(bool sonfe)
+        public static ArrayList CarregaEmpresa(bool sonfe, bool pedidoSituacao = false)
         {
             ArrayList empresa = new ArrayList();
 
             string arqXML = Propriedade.NomeArqEmpresas;
+            int codEmp = 0;
 
             if (File.Exists(arqXML))
             {
                 //Carregar os dados do arquivo XML de configurações da Aplicação
-                int codEmp = 0;
                 XElement axml = XElement.Load(arqXML);
-                var b1 = axml.Descendants(NFe.Components.NFeStrConstants.Registro);
+                var b1 = axml.Descendants(NFeStrConstants.Registro);
                 foreach (var item in b1)
                 {
-                    string cnpj = item.Attribute(NFe.Components.TpcnResources.CNPJ.ToString()).Value;
-                    string nome = item.Element(NFe.Components.NFeStrConstants.Nome).Value;
+                    string cnpj = item.Attribute(TpcnResources.CNPJ.ToString()).Value;
+                    string nome = item.Element(NFeStrConstants.Nome).Value;
                     string servico = "";
-                    if (item.Attribute(NFe.Components.NFeStrConstants.Servico) != null)
+                    if (item.Attribute(NFeStrConstants.Servico) != null)
                     {
-                        servico = item.Attribute(NFe.Components.NFeStrConstants.Servico).Value;
+                        servico = item.Attribute(NFeStrConstants.Servico).Value;
                         if (!string.IsNullOrEmpty(servico))
                             servico = ((TipoAplicativo)Convert.ToInt16(servico)).ToString();
                     }
                     if (string.IsNullOrEmpty(servico))
                         servico = Propriedade.TipoAplicativo.ToString();
 
-                    Empresa emp = new Empresa() { 
-                        Nome = nome, 
-                        CNPJ = cnpj, 
-                        Servico =  (NFe.Components.TipoAplicativo)Enum.Parse(typeof(NFe.Components.TipoAplicativo), servico, true)
+                    Empresa emp = new Empresa()
+                    {
+                        Nome = nome,
+                        CNPJ = cnpj,
+                        Servico = (TipoAplicativo)Enum.Parse(typeof(TipoAplicativo), servico, true)
                     };
 
                     if (File.Exists(emp.NomeArquivoConfig))
                     {
-                        if (sonfe && servico.Equals(TipoAplicativo.Nfse.ToString()))
+                        if (sonfe && (servico.Equals(TipoAplicativo.Nfse.ToString()) ||
+                                      servico.Equals(TipoAplicativo.eSocial.ToString()) ||
+                                      servico.Equals(TipoAplicativo.EFDReinf.ToString()) ||
+                                      servico.Equals(TipoAplicativo.EFDReinfeSocial.ToString())))
                         {
                             codEmp++;
                             continue;
                         }
+
                         empresa.Add(new ComboElem
                         {
                             Valor = cnpj,
@@ -272,10 +279,23 @@ namespace NFe.Settings
                             Nome = nome + "  <" + servico + ">",
                             Servico = servico
                         });
+
                         codEmp++;
                     }
                 }
             }
+
+            if (pedidoSituacao)
+            {
+                empresa.Add(new ComboElem
+                {
+                    Valor = string.Empty,
+                    Codigo = codEmp,
+                    Nome = "Todas as empresas",
+                    Servico = TipoAplicativo.Todos.ToString()
+                });
+            }
+
             empresa.Sort(new OrdenacaoPorNome());
 
             return empresa;

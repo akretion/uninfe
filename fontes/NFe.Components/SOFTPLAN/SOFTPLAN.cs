@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿#if _fw46
+using Newtonsoft.Json;
 using NFe.Components.Abstract;
 using NFSe.Components;
 using System;
@@ -11,7 +12,7 @@ namespace NFe.Components.SOFTPLAN
 {
     public class SOFTPLAN : EmiteNFSeBase, IEmiteNFSeSOFTPLAN
     {
-        #region Public Properties
+#region Public Properties
 
         public override string NameSpaces
         {
@@ -41,9 +42,9 @@ namespace NFe.Components.SOFTPLAN
             }
         }
 
-        #endregion Public Properties
+#endregion Public Properties
 
-        #region Public Construstor
+#region Public Construstor
         public SOFTPLAN(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senha, string clientID, string clientSecret)
             : base(tpAmb, pastaRetorno)
         {
@@ -53,9 +54,9 @@ namespace NFe.Components.SOFTPLAN
             ClientSecret = clientSecret;
         }
 
-        #endregion Public Construstor
+#endregion Public Construstor
 
-        #region Public Methods
+#region Public Methods
 
         public override void CancelarNfse(string file)
         {
@@ -165,6 +166,7 @@ namespace NFe.Components.SOFTPLAN
             return result;
         }
 
-        #endregion Public Methods
+#endregion Public Methods
     }
 }
+#endif

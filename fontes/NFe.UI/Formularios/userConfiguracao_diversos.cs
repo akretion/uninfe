@@ -309,7 +309,9 @@ namespace NFe.UI.Formularios
                            ufCod == 3202603 /*Iconha-ES*/ ||
                            ufCod == 4205407 /*Florianópolis-SC*/ ||
                            ufCod == 4215802 /*São Bento do Sul-SC*/ ||
-                           ufCod == 3540804 /*Potirendaba-SP*/ ;
+                           ufCod == 3540804 /*Potirendaba-SP*/ ||
+                           ufCod == 4320404 /*Serafina Corrêa-RS*/ ||
+                           ufCod == 4307807 /*Estrela-RS*/;
 
             bool visiblepass = ufCod == 3152105 || visible; /*Ponte nova*/
 

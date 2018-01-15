@@ -153,6 +153,17 @@ namespace NFe.SAT.Conversao
                     switch (itensDet.Name)
                     {
                         case "prod":
+                            string CEST = GetXML(itensDet.ChildNodes, "CEST");
+                            List<envCFeCFeInfCFeDetProdObsFiscoDet> listObsFisco = new List<envCFeCFeInfCFeDetProdObsFiscoDet>();
+                            if (!string.IsNullOrEmpty(CEST))
+                            {
+                                envCFeCFeInfCFeDetProdObsFiscoDet obsFisco = new envCFeCFeInfCFeDetProdObsFiscoDet();
+                                obsFisco.xCampoDet = "Cod. CEST";
+                                obsFisco.xTextoDet = CEST;
+
+                                listObsFisco.Add(obsFisco);
+                            }
+
                             det.prod = new envCFeCFeInfCFeDetProd
                             {
                                 cProd = GetXML(itensDet.ChildNodes, "cProd"),
@@ -164,8 +175,8 @@ namespace NFe.SAT.Conversao
                                 qCom = GetXML(itensDet.ChildNodes, "qCom"),
                                 vUnCom = GetXML(itensDet.ChildNodes, "vUnCom"),
                                 vDesc = GetXML(itensDet.ChildNodes, "vDesc"),
-
                                 indRegra = "A",
+                                obsFiscoDet = listObsFisco,
                             };
                             ValorDoItem = GetXML(itensDet.ChildNodes, "vProd");
                             break;

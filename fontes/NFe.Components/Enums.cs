@@ -1027,7 +1027,18 @@ namespace NFe.Components
         /// Padrão utilizado pela prefeitura de Florianópolis-SC
         /// </summary>
         [Description("SOFTPLAN")]
-        SOFTPLAN
+        SOFTPLAN,
+
+        /// <summary>
+        /// Padrão utilizado pela prefeitura de Manaus-AM
+        /// </summary>
+        [Description("MANAUS_AM")]
+        MANAUS_AM,
+
+        /// <summary>
+        /// Padrão utilizado pela prefeitura de Joinville-SC
+        /// </summary>
+        JOINVILLE_SC
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
@@ -1131,7 +1142,8 @@ namespace NFe.Components
         FalhaInternet = 1,
         FalhaEnvioXmlWS = 2,
         CertificadoVencido = 3,
-        FalhaEnvioXmlNFeWS = 5
+        FalhaEnvioXmlNFeWS = 5,
+        CertificadoNaoEncontrado = 6
     }
 
     #endregion Erros Padrões

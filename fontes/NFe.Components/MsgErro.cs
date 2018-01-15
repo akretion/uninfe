@@ -39,6 +39,10 @@ namespace NFe.Components
                     Mensagem = "Validade do certificado digital está vencida.";
                     break;
 
+                case ErroPadrao.CertificadoNaoEncontrado:
+                    Mensagem = "Certificado digital não localizado! Ou não foi informado nas configurações do UniNfe ou o mesmo está com falha.";
+                    break;
+
                 default:
                     Mensagem = "Não foi possível identificar o erro.";
                     break;

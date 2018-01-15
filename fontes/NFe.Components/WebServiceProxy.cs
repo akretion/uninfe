@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Security;
 using System.Reflection;
+using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Web.Services.Description;
 using System.Xml;
@@ -19,6 +20,17 @@ namespace NFe.Components
 {
     public class WebServiceProxy
     {
+#if _fw35
+
+        #region Criar protocolo de comunicação TLS12 para .NET 3.5
+
+        private const SslProtocols _Tls12 = (SslProtocols)0x00000C00;
+        private const SecurityProtocolType Tls12 = (SecurityProtocolType)_Tls12;
+
+        #endregion Criar protocolo de comunicação TLS12 para .NET 3.5
+
+#endif
+
         #region Propriedades
 
         /// <summary>
@@ -477,36 +489,10 @@ namespace NFe.Components
         public static SecurityProtocolType DefinirProtocoloSeguranca(int cUF, bool taHomologacao, int tpEmis, PadroesNFSe padraoNFSe, Servicos servico)
         {
 #if _fw35
-            SecurityProtocolType securityProtocolType = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
+            SecurityProtocolType securityProtocolType = Tls12 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
 #else
             SecurityProtocolType securityProtocolType = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
 #endif
-            if (padraoNFSe != PadroesNFSe.NaoIdentificado)
-            {
-                switch (padraoNFSe)
-                {
-                    case PadroesNFSe.GINFES:
-                    case PadroesNFSe.BHISS:
-                    case PadroesNFSe.EQUIPLANO:
-                    case PadroesNFSe.ABACO:
-                    case PadroesNFSe.GIF:
-                    case PadroesNFSe.ABASE:
-                    case PadroesNFSe.BLUMENAU_SC:
-                    case PadroesNFSe.PAULISTANA:
-                    case PadroesNFSe.MARINGA_PR:
-                        //Manter o valor que já foi definido acima. Wandrey
-                        break;
-
-                    default:
-#if _fw35
-                        securityProtocolType = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
-#else
-                        securityProtocolType = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
-#endif
-                        break;
-                }
-            }
-
             return securityProtocolType;
         }
 

@@ -16,7 +16,6 @@ using NFe.Components.Pronin;
 using NFe.Components.RLZ_INFORMATICA;
 using NFe.Components.SigCorp;
 using NFe.Components.SimplISS;
-using NFe.Components.SOFTPLAN;
 using NFe.Components.SystemPro;
 using NFe.Components.Tinus;
 using NFe.Settings;
@@ -460,8 +459,9 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><p:cabecalho versao=\"1\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:p=\"http://ws.speedgov.com.br/cabecalho_v1.xsd\" xmlns:p1=\"http://ws.speedgov.com.br/tipos_v1.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://ws.speedgov.com.br/cabecalho_v1.xsd cabecalho_v1.xsd \"><versaoDados>1</versaoDados></p:cabecalho>";
                         break;
 
+#if _fw46
                     case PadroesNFSe.SOFTPLAN:
-                        SOFTPLAN softplan = new SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Components.SOFTPLAN.SOFTPLAN softplan = new Components.SOFTPLAN.SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                         Empresas.Configuracoes[emp].UsuarioWS,
                                                         Empresas.Configuracoes[emp].SenhaWS,
@@ -472,6 +472,11 @@ namespace NFe.Service.NFSe
                             softplan.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
 
                         softplan.ConsultarNfse(NomeArquivoXML);
+                        break;
+#endif
+
+                    case PadroesNFSe.MANAUS_AM:
+                        cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
                         break;
                 }
 

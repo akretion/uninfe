@@ -960,7 +960,7 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeRecepcionarLoteRps:
-                            if (taHomologacao && 
+                            if (taHomologacao &&
                                 cMunicipio.ToString() != "2111300") //São Luiz - MA
 
                                 if (cMunicipio.ToString().Equals("5002704")) // Campo grande - MS não tem web service de teste
@@ -1831,7 +1831,40 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion INTERSOL
+                #endregion INTERSOL
+
+                #region MANAUS_AM
+
+                case PadroesNFSe.MANAUS_AM:
+                    retorna = "Execute";
+                    break;
+
+                #endregion MANAUS_AM
+
+                #region JOINVILLE_SC
+
+                case PadroesNFSe.JOINVILLE_SC:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "EnviarLoteRpsEnvio";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfseEnvio";
+                            break;
+
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRpsEnvio";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfseRpsEnvio";
+                            break;
+                    }
+                    break;
+
+                    #endregion JOINVILLE_SC
             }
 
             return retorna;
@@ -2491,6 +2524,7 @@ namespace NFe.Service
                 case PadroesNFSe.METROPOLIS:
                 case PadroesNFSe.BAURU_SP:
                 case PadroesNFSe.SOFTPLAN:
+                case PadroesNFSe.JOINVILLE_SC:
                     retorno = false;
                     break;
 
@@ -2532,6 +2566,7 @@ namespace NFe.Service
                 case PadroesNFSe.PAULISTANA:
                 case PadroesNFSe.NA_INFORMATICA:
                 case PadroesNFSe.BSITBR:
+                case PadroesNFSe.JOINVILLE_SC:
                     invocar = true;
                     break;
             }

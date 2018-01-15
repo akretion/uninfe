@@ -1,4 +1,5 @@
 using NFe.Components;
+using NFe.Exceptions;
 using NFe.Settings;
 using System;
 using System.IO;
@@ -91,6 +92,9 @@ namespace NFe.Certificado
         {
             try
             {
+                if (x509Cert == null)
+                    throw new ExceptionCertificadoDigital(ErroPadrao.CertificadoNaoEncontrado);
+
                 if (conteudoXML.GetElementsByTagName(tagAssinatura).Count == 0)
                 {
                     throw new Exception("A tag de assinatura " + tagAssinatura.Trim() + " não existe no XML. (Código do Erro: 5)");

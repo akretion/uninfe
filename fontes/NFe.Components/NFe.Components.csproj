@@ -180,11 +180,15 @@
     <Compile Include="Fiorilli\JaciSP\p\FiorilliP.cs" />
     <Compile Include="Fiorilli\PotirendabaSP\h\FiorilliH.cs" />
     <Compile Include="Fiorilli\PotirendabaSP\p\FiorilliP.cs" />
+    <Compile Include="Fiorilli\SerafinaCorreaRS\h\FiorilliH.cs" />
+    <Compile Include="Fiorilli\SerafinaCorreaRS\p\FiorilliP.cs" />
     <Compile Include="FISSLEX\MogiMirimSP\p\FISSLEXP.cs" />
     <Compile Include="Interface\IEmiteNF.cs" />
     <Compile Include="Interface\IEmiteNFSeSOFTPLAN.cs" />
     <Compile Include="Pronin\VacariRS\h\ProninH.cs" />
     <Compile Include="Pronin\VacariRS\p\ProninP.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_JOINVILLE_SC.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_MANAUS_AM.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_SOFTPLAN.cs" />
     <Compile Include="SOFTPLAN\SOFTPLAN.cs" />
     <Compile Include="SOFTPLAN\Token.cs" />
@@ -898,12 +902,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\HJoinvilleSC\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\HMacapaAP\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\HPotirendabaSP\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\HSerafinaCorreaRS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1014,6 +1028,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\PSaoPauloSP\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PSerafinaCorreaRS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -2928,6 +2947,23 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\HJoinvilleSC\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HJoinvilleSC\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HJoinvilleSC\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HJoinvilleSC\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HJoinvilleSC\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\HJoinvilleSC\Servicos.wsdl" />
     <None Include="Web References\HMacapaAP\CancelarNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -2996,6 +3032,41 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\HPotirendabaSP\SubstituirNfseResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HSerafinaCorreaRS\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HSerafinaCorreaRS\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HSerafinaCorreaRS\ConsultarNfseFaixaResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HSerafinaCorreaRS\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HSerafinaCorreaRS\ConsultarNfseServicoPrestadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HSerafinaCorreaRS\ConsultarNfseServicoTomadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HSerafinaCorreaRS\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HSerafinaCorreaRS\EnviarLoteRpsSincronoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HSerafinaCorreaRS\GerarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HSerafinaCorreaRS\IssWebWS.wsdl" />
+    <None Include="Web References\HSerafinaCorreaRS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\HSerafinaCorreaRS\SubstituirNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\HVacariRS\NFSeIntegracao.wsdl" />
@@ -3313,6 +3384,41 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\PSerafinaCorreaRS\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSerafinaCorreaRS\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSerafinaCorreaRS\ConsultarNfseFaixaResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSerafinaCorreaRS\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSerafinaCorreaRS\ConsultarNfseServicoPrestadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSerafinaCorreaRS\ConsultarNfseServicoTomadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSerafinaCorreaRS\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSerafinaCorreaRS\EnviarLoteRpsSincronoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSerafinaCorreaRS\GerarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSerafinaCorreaRS\IssWebWS.wsdl" />
+    <None Include="Web References\PSerafinaCorreaRS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PSerafinaCorreaRS\SubstituirNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\PVacariRS\NFSeIntegracao.wsdl" />
     <None Include="Web References\PVacariRS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -3480,6 +3586,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Projetos\UniNFe\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HSerafinaCorreaRS-FIORILLI.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HSerafinaCorreaRS\</RelPath>
+      <UpdateFromURL>C:\Projetos\UniNFe\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HSerafinaCorreaRS-FIORILLI.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_HSerafinaCorreaRS_IssWebWS</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="C:\projetos\uninfe\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJaciSP-FIORILLI.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.com.fiorilli.jacisp.p\</RelPath>
@@ -3622,6 +3739,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_fiorilli_mirassolandiasp_p_IssWebWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Projetos\UniNFe\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSerafinaCorreaRS-FIORILLI.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PSerafinaCorreaRS\</RelPath>
+      <UpdateFromURL>C:\Projetos\UniNFe\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSerafinaCorreaRS-FIORILLI.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PSerafinaCorreaRS_IssWebWS</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="C:\Users\renan\Desktop\Itaporanga\PItaporanga-SIMPLISS.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -3941,6 +4069,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_metropolisweb_lftributos_p_Nfse</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://nfewshomologacao.joinville.sc.gov.br/NotaFiscal/Servicos.asmx%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HJoinvilleSC\</RelPath>
+      <UpdateFromURL>https://nfewshomologacao.joinville.sc.gov.br/NotaFiscal/Servicos.asmx%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_HJoinvilleSC_Servicos</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://nfse00.el.com.br:19080/nfse_es_colatina/RpsServiceService%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

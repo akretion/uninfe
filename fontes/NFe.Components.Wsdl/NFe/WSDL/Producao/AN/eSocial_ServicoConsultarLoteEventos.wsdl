@@ -82,7 +82,7 @@
   </wsdl:binding>
   <wsdl:service name="ServicoConsultarLoteEventos">
     <wsdl:port name="Servicos.Empregador_ServicoConsultarLoteEventos" binding="tns:Servicos.Empregador_ServicoConsultarLoteEventos">
-      <soap:address location="https://webservices.esocial.gov.br/servicos/empregador/consultarloteeventos/WsConsultarLoteEventos.svc" />
+      <soap:address location="https://webservices.consulta.esocial.gov.br/servicos/empregador/consultarloteeventos/WsConsultarLoteEventos.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

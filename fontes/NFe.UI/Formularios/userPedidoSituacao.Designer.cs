@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.metroLabel17 = new MetroFramework.Controls.MetroLabel();
             this.cbEmpresa = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
@@ -40,11 +43,16 @@
             this.cbEmissao = new MetroFramework.Controls.MetroComboBox();
             this.lblServico = new MetroFramework.Controls.MetroLabel();
             this.cbServico = new MetroFramework.Controls.MetroComboBox();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.textResultado = new MetroFramework.Controls.MetroTextBox();
             this.buttonPesquisa = new MetroFramework.Controls.MetroButton();
             this.lblCNPJ = new MetroFramework.Controls.MetroLabel();
             this.txtCNPJ = new MetroFramework.Controls.MetroTextBox();
+            this.metroGridSituacao = new MetroFramework.Controls.MetroGrid();
+            this.txtMensagem = new MetroFramework.Controls.MetroTextBox();
+            this.columnEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnUF = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnTipoServico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnSitucao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.metroGridSituacao)).BeginInit();
             this.SuspendLayout();
             // 
             // labelTitle
@@ -204,35 +212,6 @@
             this.cbServico.UseSelectable = true;
             this.cbServico.SelectedIndexChanged += new System.EventHandler(this.cbServico_SelectedIndexChanged);
             // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel3.Location = new System.Drawing.Point(0, 225);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(49, 15);
-            this.metroLabel3.TabIndex = 27;
-            this.metroLabel3.Text = "Situação";
-            // 
-            // textResultado
-            // 
-            this.textResultado.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textResultado.Lines = new string[0];
-            this.textResultado.Location = new System.Drawing.Point(0, 245);
-            this.textResultado.MaxLength = 32767;
-            this.textResultado.Multiline = true;
-            this.textResultado.Name = "textResultado";
-            this.textResultado.PasswordChar = '\0';
-            this.textResultado.ReadOnly = true;
-            this.textResultado.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textResultado.SelectedText = "";
-            this.textResultado.Size = new System.Drawing.Size(780, 236);
-            this.textResultado.TabIndex = 28;
-            this.textResultado.UseSelectable = true;
-            this.textResultado.UseStyleColors = true;
-            // 
             // buttonPesquisa
             // 
             this.buttonPesquisa.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -269,15 +248,106 @@
             this.txtCNPJ.TabIndex = 31;
             this.txtCNPJ.UseSelectable = true;
             // 
+            // metroGridSituacao
+            // 
+            this.metroGridSituacao.AllowUserToAddRows = false;
+            this.metroGridSituacao.AllowUserToDeleteRows = false;
+            this.metroGridSituacao.AllowUserToResizeColumns = false;
+            this.metroGridSituacao.AllowUserToResizeRows = false;
+            this.metroGridSituacao.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metroGridSituacao.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(181)))), ((int)(((byte)(181)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(181)))), ((int)(((byte)(181)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGridSituacao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.metroGridSituacao.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.columnEmpresa,
+            this.columnUF,
+            this.columnTipoServico,
+            this.columnSitucao});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metroGridSituacao.DefaultCellStyle = dataGridViewCellStyle2;
+            this.metroGridSituacao.EnableHeadersVisualStyles = false;
+            this.metroGridSituacao.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.metroGridSituacao.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metroGridSituacao.Location = new System.Drawing.Point(0, 212);
+            this.metroGridSituacao.MultiSelect = false;
+            this.metroGridSituacao.Name = "metroGridSituacao";
+            this.metroGridSituacao.ReadOnly = true;
+            this.metroGridSituacao.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(181)))), ((int)(((byte)(181)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGridSituacao.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.metroGridSituacao.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.metroGridSituacao.Size = new System.Drawing.Size(775, 204);
+            this.metroGridSituacao.TabIndex = 32;
+            this.metroGridSituacao.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.metroGridSituacao_CellClick);
+            // 
+            // txtMensagem
+            // 
+            this.txtMensagem.Lines = new string[0];
+            this.txtMensagem.Location = new System.Drawing.Point(0, 427);
+            this.txtMensagem.MaxLength = 32767;
+            this.txtMensagem.Multiline = true;
+            this.txtMensagem.Name = "txtMensagem";
+            this.txtMensagem.PasswordChar = '\0';
+            this.txtMensagem.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtMensagem.SelectedText = "";
+            this.txtMensagem.Size = new System.Drawing.Size(772, 100);
+            this.txtMensagem.TabIndex = 33;
+            this.txtMensagem.UseSelectable = true;
+            // 
+            // columnEmpresa
+            // 
+            this.columnEmpresa.HeaderText = "Empresa";
+            this.columnEmpresa.Name = "columnEmpresa";
+            this.columnEmpresa.ReadOnly = true;
+            this.columnEmpresa.Width = 250;
+            // 
+            // columnUF
+            // 
+            this.columnUF.HeaderText = "UF";
+            this.columnUF.Name = "columnUF";
+            this.columnUF.ReadOnly = true;
+            this.columnUF.Width = 50;
+            // 
+            // columnTipoServico
+            // 
+            this.columnTipoServico.HeaderText = "Tipo de Serviço";
+            this.columnTipoServico.Name = "columnTipoServico";
+            this.columnTipoServico.ReadOnly = true;
+            // 
+            // columnSitucao
+            // 
+            this.columnSitucao.HeaderText = "Situação do Serviço";
+            this.columnSitucao.Name = "columnSitucao";
+            this.columnSitucao.ReadOnly = true;
+            this.columnSitucao.Width = 330;
+            // 
             // userPedidoSituacao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txtMensagem);
+            this.Controls.Add(this.metroGridSituacao);
             this.Controls.Add(this.txtCNPJ);
             this.Controls.Add(this.lblCNPJ);
             this.Controls.Add(this.buttonPesquisa);
-            this.Controls.Add(this.textResultado);
-            this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.lblServico);
             this.Controls.Add(this.cbServico);
             this.Controls.Add(this.metroLabel4);
@@ -291,7 +361,7 @@
             this.Controls.Add(this.metroLabel17);
             this.Controls.Add(this.cbEmpresa);
             this.Name = "userPedidoSituacao";
-            this.Size = new System.Drawing.Size(783, 484);
+            this.Size = new System.Drawing.Size(783, 532);
             this.Controls.SetChildIndex(this.labelTitle, 0);
             this.Controls.SetChildIndex(this.cbEmpresa, 0);
             this.Controls.SetChildIndex(this.metroLabel17, 0);
@@ -305,11 +375,12 @@
             this.Controls.SetChildIndex(this.metroLabel4, 0);
             this.Controls.SetChildIndex(this.cbServico, 0);
             this.Controls.SetChildIndex(this.lblServico, 0);
-            this.Controls.SetChildIndex(this.metroLabel3, 0);
-            this.Controls.SetChildIndex(this.textResultado, 0);
             this.Controls.SetChildIndex(this.buttonPesquisa, 0);
             this.Controls.SetChildIndex(this.lblCNPJ, 0);
             this.Controls.SetChildIndex(this.txtCNPJ, 0);
+            this.Controls.SetChildIndex(this.metroGridSituacao, 0);
+            this.Controls.SetChildIndex(this.txtMensagem, 0);
+            ((System.ComponentModel.ISupportInitialize)(this.metroGridSituacao)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -329,10 +400,14 @@
         private MetroFramework.Controls.MetroComboBox cbEmissao;
         private MetroFramework.Controls.MetroLabel lblServico;
         private MetroFramework.Controls.MetroComboBox cbServico;
-        private MetroFramework.Controls.MetroLabel metroLabel3;
-        private MetroFramework.Controls.MetroTextBox textResultado;
         private MetroFramework.Controls.MetroButton buttonPesquisa;
         private MetroFramework.Controls.MetroLabel lblCNPJ;
         private MetroFramework.Controls.MetroTextBox txtCNPJ;
+        private MetroFramework.Controls.MetroGrid metroGridSituacao;
+        private MetroFramework.Controls.MetroTextBox txtMensagem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnEmpresa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnUF;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnTipoServico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnSitucao;
     }
 }

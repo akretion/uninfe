@@ -2,6 +2,8 @@
 using NFe.Service;
 using NFe.Settings;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -41,7 +43,7 @@ namespace NFe.UI
                 this.cbServico.DisplayMember = "Value";
                 this.cbServico.ValueMember = "Key";
 
-                this.cbEmpresa.DataSource = Auxiliar.CarregaEmpresa(true);
+                this.cbEmpresa.DataSource = Auxiliar.CarregaEmpresa(true, true);
                 this.cbEmpresa.ValueMember = "Key";
                 this.cbEmpresa.DisplayMember = NFeStrConstants.Nome;
 
@@ -70,14 +72,14 @@ namespace NFe.UI
         {
             this.Emp = -1;
             this.cbServico.SelectedIndexChanged -= cbServico_SelectedIndexChanged;
-            this.cbServico.Enabled = false;
+            this.cbServico.Enabled = true;
 
             try
             {
-                if (this.cbEmpresa.SelectedValue != null)
+                if (!this.cbEmpresa.SelectedValue.Equals("Todos"))
                 {
-                    var list = (this.cbEmpresa.DataSource as System.Collections.ArrayList)[this.cbEmpresa.SelectedIndex] as NFe.Components.ComboElem;
-                    this.Emp = Empresas.FindConfEmpresaIndex(list.Valor, NFe.Components.EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
+                    var list = (this.cbEmpresa.DataSource as System.Collections.ArrayList)[this.cbEmpresa.SelectedIndex] as ComboElem;
+                    this.Emp = Empresas.FindConfEmpresaIndex(list.Valor, EnumHelper.StringToEnum<TipoAplicativo>(list.Servico));
                     if (this.Emp >= 0)
                     {
                         uninfeDummy.xmlParams.WriteValue(this.GetType().Name, "last_empresa", this.cbEmpresa.SelectedIndex);
@@ -108,6 +110,12 @@ namespace NFe.UI
                         }
                     }
                 }
+                else
+                {
+                    comboUf.SelectedValue = string.Empty;
+                    txtCNPJ.Text = string.Empty;
+                    cbServico.SelectedValue = string.Empty;
+                }
             }
             catch (Exception ex)
             {
@@ -120,8 +128,18 @@ namespace NFe.UI
                 this.buttonPesquisa.Enabled =
                     this.cbAmbiente.Enabled =
                     this.cbEmissao.Enabled =
-                    this.comboUf.Enabled =
-                    this.cbVersao.Enabled = this.Emp >= 0;
+                    this.cbVersao.Enabled =
+                    this.cbServico.Enabled =
+                    this.comboUf.Enabled = Emp >= 0;
+
+                if (cbEmpresa.SelectedValue.Equals("Todos"))
+                {
+                    this.cbAmbiente.Enabled = true;
+                    this.buttonPesquisa.Enabled = true;
+                }
+                else
+                {
+                }
             }
         }
 
@@ -132,35 +150,35 @@ namespace NFe.UI
                 case TipoAplicativo.Todos:
                     cbVersao.Enabled = cbServico.Enabled = true;
                     cbVersao.Items.Clear();
-                    cbVersao.Items.AddRange(new object[] { "4.00","3.10", "3.00", "2.00" });
+                    cbVersao.Items.AddRange(new object[] { "4.00", "3.10", "3.00" });
                     cbVersao.SelectedItem = "3.10";
                     break;
 
                 case TipoAplicativo.Nfe:
                     cbVersao.Enabled = true;
                     cbVersao.Items.Clear();
-                    cbVersao.Items.AddRange(new object[] { "4.00","3.10" });
+                    cbVersao.Items.AddRange(new object[] { "4.00", "3.10" });
                     cbVersao.SelectedItem = "3.10";
                     break;
 
                 case TipoAplicativo.NFCe:
                     cbVersao.Enabled = true;
                     cbVersao.Items.Clear();
-                    cbVersao.Items.AddRange(new object[] { "4.00","3.10" });
+                    cbVersao.Items.AddRange(new object[] { "4.00", "3.10" });
                     cbVersao.SelectedItem = "3.10";
                     break;
 
                 case TipoAplicativo.Cte:
                     cbVersao.Enabled = true;
                     cbVersao.Items.Clear();
-                    cbVersao.Items.AddRange(new object[] { "3.00", "2.00" });
+                    cbVersao.Items.AddRange(new object[] { "3.00" });
                     cbVersao.SelectedItem = "3.00";
                     break;
 
                 case TipoAplicativo.MDFe:
                     cbVersao.Enabled = true;
                     cbVersao.Items.Clear();
-                    cbVersao.Items.AddRange(new object[] { "3.00", "1.00" });
+                    cbVersao.Items.AddRange(new object[] { "3.00" });
                     cbVersao.SelectedItem = "3.00";
                     break;
 
@@ -181,59 +199,118 @@ namespace NFe.UI
 
         private void buttonPesquisa_Click(object sender, EventArgs e)
         {
-            this.textResultado.Clear();
             this.Refresh();
+            txtMensagem.Clear();
+            metroGridSituacao.Rows.Clear();
+
+            bool todasEmpresas = cbEmpresa.SelectedValue.Equals("Todos");
 
             try
             {
-                TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
                 TipoEmissao tpEmis = (TipoEmissao)this.cbEmissao.SelectedValue;
-
-                switch (servico)
-                {
-                    case TipoAplicativo.Cte:
-                        if (tpEmis == TipoEmissao.teSVCAN)// this.cbEmissao.SelectedIndex == 4)
-                            throw new Exception("CT-e não dispõe do tipo de contingência SVCAN.");
-                        break;
-
-                    case TipoAplicativo.Nfe:
-                        if (tpEmis == TipoEmissao.teSVCSP)// this.cbEmissao.SelectedIndex == 3)
-                            throw new Exception("NF-e não dispõe do tipo de contingência SCVSP.");
-                        break;
-
-                    case TipoAplicativo.MDFe:
-                        if (tpEmis != TipoEmissao.teNormal)
-                            throw new Exception("MDF-e só dispõe do tipo de emissão Normal.");
-                        break;
-
-                    case TipoAplicativo.NFCe:
-                        if (tpEmis != TipoEmissao.teNormal)
-                            throw new Exception("NFC-e só dispõe do tipo de emissão Normal.");
-                        break;
-                }
-
-                this.textResultado.Text = "Consultando o servidor. Aguarde....";
-                this.textResultado.Update();
-
-                GerarXML oGerar = new GerarXML(Emp);
-
-                int cUF = NFe.Components.Functions.UFParaCodigo(this.comboUf.SelectedValue.ToString());
                 int amb = (int)cbAmbiente.SelectedValue;
                 string versao = this.cbVersao.SelectedItem.ToString();
+                TipoAplicativo servico = TipoAplicativo.Nulo;
+                int cUF = 0;
 
-                NFe.UI.Formularios.Wait.Show("Consulta a situação do serviço...");
+                if (!todasEmpresas)
+                {
+                    servico = (TipoAplicativo)cbServico.SelectedValue;
+                    cUF = Functions.UFParaCodigo(this.comboUf.SelectedValue.ToString());
 
-                string XmlNfeDadosMsg = Empresas.Configuracoes[Emp].PastaXmlEnvio + "\\" +
-                    oGerar.StatusServico(servico, (int)tpEmis, cUF, amb, versao);
+                    switch (servico)
+                    {
+                        case TipoAplicativo.Cte:
+                            if (tpEmis == TipoEmissao.teSVCAN)// this.cbEmissao.SelectedIndex == 4)
+                                throw new Exception("CT-e não dispõe do tipo de contingência SVCAN.");
+                            break;
+
+                        case TipoAplicativo.Nfe:
+                            if (tpEmis == TipoEmissao.teSVCSP)// this.cbEmissao.SelectedIndex == 3)
+                                throw new Exception("NF-e não dispõe do tipo de contingência SVCSP.");
+                            break;
+
+                        case TipoAplicativo.MDFe:
+                            if (tpEmis != TipoEmissao.teNormal)
+                                throw new Exception("MDF-e só dispõe do tipo de emissão Normal.");
+                            break;
+
+                        case TipoAplicativo.NFCe:
+                            if (tpEmis != TipoEmissao.teNormal)
+                                throw new Exception("NFC-e só dispõe do tipo de emissão Normal.");
+                            break;
+                    }
+                }
+
+                Formularios.Wait.Show("Consulta a situação do serviço...");
+
+                List<ConsultaRealizada> consultasRealizadas = new List<ConsultaRealizada>();
+
+                if (todasEmpresas)
+                {
+                    tpEmis = TipoEmissao.teNormal;
+
+                    for (int i = 0; i < Empresas.Configuracoes.Count; i++)
+                    {
+                        int emp = Empresas.FindConfEmpresaIndex(Empresas.Configuracoes[i].CNPJ, Empresas.Configuracoes[i].Servico);
+                        cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
+
+                        switch (Empresas.Configuracoes[emp].Servico)
+                        {
+                            case TipoAplicativo.Todos:
+                                GerarConsulta(emp, TipoAplicativo.Nfe, (int)tpEmis, cUF, amb, "4.00", consultasRealizadas);
+                                GerarConsulta(emp, TipoAplicativo.NFCe, (int)tpEmis, cUF, amb, "4.00", consultasRealizadas);
+                                GerarConsulta(emp, TipoAplicativo.MDFe, (int)tpEmis, cUF, amb, "3.00", consultasRealizadas);
+                                GerarConsulta(emp, TipoAplicativo.Cte, (int)tpEmis, cUF, amb, "3.00", consultasRealizadas);
+                                break;
+
+                            case TipoAplicativo.Nfe:
+                                GerarConsulta(emp, TipoAplicativo.Nfe, (int)tpEmis, cUF, amb, "4.00", consultasRealizadas);
+                                break;
+
+                            case TipoAplicativo.Cte:
+                                GerarConsulta(emp, TipoAplicativo.Cte, (int)tpEmis, cUF, amb, "3.00", consultasRealizadas);
+                                break;
+
+                            case TipoAplicativo.MDFe:
+                                GerarConsulta(emp, TipoAplicativo.MDFe, (int)tpEmis, cUF, amb, "3.00", consultasRealizadas);
+                                break;
+
+                            case TipoAplicativo.NFCe:
+                                GerarConsulta(emp, TipoAplicativo.NFCe, (int)tpEmis, cUF, amb, "4.00", consultasRealizadas);
+                                break;
+                        }
+                    }
+                }
+                else
+                {
+                    GerarConsulta(Emp, servico, (int)tpEmis, cUF, amb, versao, consultasRealizadas);
+                }
 
                 //Demonstrar o status do serviço
-                this.textResultado.Text = VerStatusServico(XmlNfeDadosMsg);
+                for (int i = 0; i < consultasRealizadas.Count; i++)
+                {
+                    string nomeEmpresa = consultasRealizadas[i].Empresa.Nome;
+                    string tipoServico = consultasRealizadas[i].Servico.ToString();
+                    string uf = Functions.CodigoParaUF(consultasRealizadas[i].Empresa.UnidadeFederativaCodigo);
+                    string result = VerStatusServico(consultasRealizadas[i].ArquivoRetorno, consultasRealizadas[i].Emp);
+
+                    metroGridSituacao.Rows.Add(new object[] { nomeEmpresa, uf, tipoServico, result });
+                }
             }
             catch (Exception ex)
             {
-                NFe.UI.Formularios.Wait.Close();
-                this.textResultado.Text = ex.Message;
+                Formularios.Wait.Close();
+                txtMensagem.Text = ex.Message;
             }
+        }
+
+        private void metroGridSituacao_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            txtMensagem.Text = metroGridSituacao.SelectedRows[0].Cells[columnSitucao.Index].Value.ToString();
         }
 
         #region VerStatusServico()
@@ -247,15 +324,15 @@ namespace NFe.UI
         /// <example>string vPastaArq = this.CriaArqXMLStatusServico();</example>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>17/06/2008</date>
-        public string VerStatusServico(string XmlNfeDadosMsg)
+        private string VerStatusServico(string XmlNfeDadosMsg, int emp)
         {
             string result = string.Empty;
 
-            string ArqXMLRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
+            string ArqXMLRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML) +
                       Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML;//.ExtRetorno.Sta_XML;
 
-            string ArqERRRetorno = Empresas.Configuracoes[Emp].PastaXmlRetorno + "\\" +
+            string ArqERRRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
                       Functions.ExtrairNomeArq(XmlNfeDadosMsg, Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML) +
                       Propriedade.ExtRetorno.Sta_ERR;
 
@@ -268,7 +345,7 @@ namespace NFe.UI
                 Functions.DeletarArquivo(ArqERRRetorno);
                 Functions.DeletarArquivo(ArqXMLRetorno);
 
-                NFe.UI.Formularios.Wait.Close();
+                Formularios.Wait.Close();
             }
             return result;
         }
@@ -290,7 +367,7 @@ namespace NFe.UI
                 {
                     if (elem.NodeType == XmlNodeType.Element)
                     {
-                        if (elem.Name == NFe.Components.TpcnResources.xMotivo.ToString())
+                        if (elem.Name == TpcnResources.xMotivo.ToString())
                         {
                             elem.Read();
                             rst = elem.Value;
@@ -380,8 +457,8 @@ namespace NFe.UI
                     //Detetar o arquivo de retorno
                     try
                     {
-                        vStatus += System.IO.File.ReadAllText(arqERRRetorno, Encoding.Default);
-                        System.IO.File.Delete(arqERRRetorno);
+                        vStatus += File.ReadAllText(arqERRRetorno, Encoding.Default);
+                        File.Delete(arqERRRetorno);
                         break;
                     }
                     catch
@@ -396,5 +473,30 @@ namespace NFe.UI
         }
 
         #endregion VerStatusServico()
+
+        private void GerarConsulta(int emp, TipoAplicativo servico, int tpEmis, int cUF, int amb, string versao, List<ConsultaRealizada> consultasRealizadas)
+        {
+            GerarXML oGerar = new GerarXML(emp);
+
+            string XmlNfeDadosMsg = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\" + oGerar.StatusServico(servico, tpEmis, cUF, amb, versao);
+
+            consultasRealizadas.Add(new ConsultaRealizada
+            {
+                ArquivoRetorno = XmlNfeDadosMsg,
+                Empresa = Empresas.Configuracoes[emp],
+                Emp = emp,
+                Servico = servico
+            });
+
+            Thread.Sleep(1000);
+        }
+    }
+
+    public class ConsultaRealizada
+    {
+        public string ArquivoRetorno { get; set; }
+        public Empresa Empresa { get; set; }
+        public int Emp { get; set; }
+        public TipoAplicativo Servico { get; set; }
     }
 }

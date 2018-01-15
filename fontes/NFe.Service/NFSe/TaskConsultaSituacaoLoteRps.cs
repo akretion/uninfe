@@ -306,6 +306,10 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.INTERSOL:
                         cabecMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><p:cabecalho versao=\"1\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:p=\"http://ws.speedgov.com.br/cabecalho_v1.xsd\" xmlns:p1=\"http://ws.speedgov.com.br/tipos_v1.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://ws.speedgov.com.br/cabecalho_v1.xsd cabecalho_v1.xsd \"><versaoDados>1</versaoDados></p:cabecalho>";
                         break;
+
+                    case PadroesNFSe.MANAUS_AM:
+                        cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, oDadosPedSitLoteRps.cMunicipio))

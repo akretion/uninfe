@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿#if _fw46
+using Newtonsoft.Json;
 
 namespace NFe.Components.SOFTPLAN
 {
@@ -16,3 +17,4 @@ namespace NFe.Components.SOFTPLAN
         public string Scope { get; set; }
     }
 }
+#endif

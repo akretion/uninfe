@@ -17,7 +17,6 @@ using NFe.Components.Pronin;
 using NFe.Components.RLZ_INFORMATICA;
 using NFe.Components.SigCorp;
 using NFe.Components.SimplISS;
-using NFe.Components.SOFTPLAN;
 using NFe.Components.SystemPro;
 using NFe.Components.Tinus;
 using NFe.Settings;
@@ -624,8 +623,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     #endregion BAURU_SP
-                    
-                        #region Tinus
+
+                    #region Tinus
+
                     case PadroesNFSe.TINUS:
                         Tinus tinus = new Tinus((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -643,9 +643,12 @@ namespace NFe.Service.NFSe
 
                     #endregion Tinus
 
+#if _fw46
+
                     #region SOFTPLAN
+
                     case PadroesNFSe.SOFTPLAN:
-                        SOFTPLAN softplan = new SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        Components.SOFTPLAN.SOFTPLAN softplan = new Components.SOFTPLAN.SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                         Empresas.Configuracoes[emp].UsuarioWS,
                                                         Empresas.Configuracoes[emp].SenhaWS,
@@ -669,10 +672,26 @@ namespace NFe.Service.NFSe
 
                         softplan.EmiteNF(NomeArquivoXML);
                         break;
-                        #endregion SOFTPLAN
-       
+
+                    #endregion SOFTPLAN
+
+#endif
+
                     case PadroesNFSe.INTERSOL:
                         cabecMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><p:cabecalho versao=\"1\" xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns:p=\"http://ws.speedgov.com.br/cabecalho_v1.xsd\" xmlns:p1=\"http://ws.speedgov.com.br/tipos_v1.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://ws.speedgov.com.br/cabecalho_v1.xsd cabecalho_v1.xsd \"><versaoDados>1</versaoDados></p:cabecalho>";
+                        break;
+
+                    case PadroesNFSe.MANAUS_AM:
+                        cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.JOINVILLE_SC:
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        if (oDadosEnvLoteRps.tpAmb == 2)
+                            envLoteRps = new Components.HJoinvilleSC.Servicos();                        
+                        else
+                            throw new Exception("Ambiente de produção de Joinville-SC ainda não foi implementado no UniNFe.");
                         break;
                 }
 
