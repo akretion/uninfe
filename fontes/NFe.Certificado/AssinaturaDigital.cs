@@ -297,6 +297,12 @@ namespace NFe.Certificado
             {
                 TipoArquivoXML v = new TipoArquivoXML(arqXMLAssinar, UFCod, false);
 
+                if (!string.IsNullOrEmpty(v.TagAssinatura0))
+                {
+                    if (!Assinado(arqXMLAssinar, v.TagAssinatura0))
+                        Assinar(arqXMLAssinar, v.TagAssinatura0, v.TagAtributoId0, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
+                }
+
                 if (!string.IsNullOrEmpty(v.TagAssinatura))
                 {
                     if (!Assinado(arqXMLAssinar, v.TagAssinatura))
@@ -387,9 +393,7 @@ namespace NFe.Certificado
             string tagAtributo,
             X509Certificate2 certificado,
             int codEmp,
-            string pin,
-            string provider,
-            string type)
+            string pin)
         {
             string _pin = Empresas.Configuracoes[codEmp].CertificadoPIN;
 

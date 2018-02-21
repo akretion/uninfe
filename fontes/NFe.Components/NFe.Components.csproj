@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\EmiteNFSeBase.cs" />
+    <Compile Include="Abstract\RequestBase.cs" />
     <Compile Include="BAURU_SP\Bauru_SP.cs" />
     <Compile Include="BAURU_SP\Bauru_SPBase.cs" />
     <Compile Include="Betha\NewVersion\Ambiente\Producao.cs" />
@@ -183,12 +184,16 @@
     <Compile Include="Fiorilli\SerafinaCorreaRS\h\FiorilliH.cs" />
     <Compile Include="Fiorilli\SerafinaCorreaRS\p\FiorilliP.cs" />
     <Compile Include="FISSLEX\MogiMirimSP\p\FISSLEXP.cs" />
-    <Compile Include="Interface\IEmiteNF.cs" />
+    <Compile Include="GetRequest.cs" />
     <Compile Include="Interface\IEmiteNFSeSOFTPLAN.cs" />
+    <Compile Include="Interface\IGetRequest.cs" />
+    <Compile Include="Interface\IPostRequest.cs" />
+    <Compile Include="Interface\IRequest.cs" />
     <Compile Include="Pronin\VacariRS\h\ProninH.cs" />
     <Compile Include="Pronin\VacariRS\p\ProninP.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_JOINVILLE_SC.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_MANAUS_AM.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_AVMB_ASTEN.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_SOFTPLAN.cs" />
     <Compile Include="SOFTPLAN\SOFTPLAN.cs" />
     <Compile Include="SOFTPLAN\Token.cs" />
@@ -325,9 +330,6 @@
     <Compile Include="FISSLEX\FISSLEXH.cs" />
     <Compile Include="FISSLEX\FISSLEX.cs" />
     <Compile Include="FISSLEX\FISSLEXBase.cs" />
-    <Compile Include="EloTech\QuatroBarrasPR\EloTechHP.cs" />
-    <Compile Include="EloTech\EloTech.cs" />
-    <Compile Include="EloTech\EloTechBase.cs" />
     <Compile Include="Consist\PatosdeMinasMG\h\ConsistH.cs" />
     <Compile Include="Consist\PatosdeMinasMG\p\ConsistP.cs" />
     <Compile Include="Consist\Consist.cs" />
@@ -370,7 +372,6 @@
     <Compile Include="Fiorilli\TaquaraSP\p\FiorilliP.cs" />
     <Compile Include="FolderCompare.cs" />
     <Compile Include="ftplib.cs" />
-    <Compile Include="Interface\IEmiteNfIPM.cs" />
     <Compile Include="Interface\IEmiteNFSe.cs" />
     <Compile Include="Interface\IEmiteNFSeIPM.cs" />
     <Compile Include="NativeMethods.cs" />
@@ -433,11 +434,6 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\br.com.elnfse.simoesfilho.p\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\br.com.elotech.quatrobarras.hp\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -912,6 +908,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\HPelotasRS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\HPotirendabaSP\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1018,6 +1019,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\PNovaMutumMT\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PPelotasRS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1326,38 +1332,6 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.com.elnfse.simoesfilho.p\situacaoLoteRps.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.elotech.quatrobarras.hp\CancelarNfseResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.elotech.quatrobarras.hp\ConsultarLoteRpsResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.elotech.quatrobarras.hp\ConsultarNfseFaixaResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.elotech.quatrobarras.hp\ConsultarNfseRpsResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.elotech.quatrobarras.hp\ConsultarNfseServicoPrestadoResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.elotech.quatrobarras.hp\ConsultarNfseServicoTomadoResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.elotech.quatrobarras.hp\EnviarLoteRpsResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.elotech.quatrobarras.hp\EnviarLoteRpsSincronoResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.elotech.quatrobarras.hp\nfse_v1_2.wsdl" />
-    <None Include="Web References\br.com.elotech.quatrobarras.hp\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\br.com.elotech.quatrobarras.hp\SubstituirNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.com.etransparencia.nfehomologacao.h\Reference.map">
@@ -2999,6 +2973,14 @@
     <None Include="Web References\HMacapaAP\SubstituirNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\HPelotasRS\INfseservice.wsdl" />
+    <None Include="Web References\HPelotasRS\output.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HPelotasRS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\HPotirendabaSP\CancelarNfseResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -3344,6 +3326,14 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\PPelotasRS\INfseservice.wsdl" />
+    <None Include="Web References\PPelotasRS\output.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PPelotasRS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\PPotirendabaSP\CancelarNfseResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -3509,6 +3499,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_HJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HPelotas_RS.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HPelotasRS\</RelPath>
+      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HPelotas_RS.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_HPelotasRS_INfseservice</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HPotirendabaSP-FIORILLI.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\HPotirendabaSP\</RelPath>
@@ -3585,6 +3586,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PPelotas_RS.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PPelotasRS\</RelPath>
+      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PPelotas_RS.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PPelotasRS_INfseservice</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="C:\Projetos\UniNFe\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HSerafinaCorreaRS-FIORILLI.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -3882,17 +3894,6 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_net_cosmorama_fiorilli_p_IssWebWS</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://200.150.67.99:32777/WebEloWS/wsdl/nfse_v1_2.wsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\br.com.elotech.quatrobarras.hp\</RelPath>
-      <UpdateFromURL>http://200.150.67.99:32777/WebEloWS/wsdl/nfse_v1_2.wsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>NFe_Components_br_com_elotech_quatrobarras_hp_NfsePortService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://200.162.29.193:8080/axis2/services/eISSWService%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -4853,6 +4854,7 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="EloTech\" />
     <Folder Include="EL\ColatinaES\h\" />
     <Folder Include="EL\SimoesFilhoBA\h\" />
   </ItemGroup>

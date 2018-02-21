@@ -123,7 +123,7 @@ namespace NFe.ConvertTxt
             GerarautXML(NFe, infNfe);
             GerarDet(NFe, infNfe);
             GerarTotal(NFe, infNfe);
-            GerarTransp(NFe.Transp, infNfe);
+            GerarTransp(NFe, infNfe);
             GerarCobr(NFe.Cobr, infNfe);
 
             if ((NFe.infNFe.Versao >= 3 && NFe.ide.mod == TpcnMod.modNFCe) ||
@@ -248,11 +248,16 @@ namespace NFe.ConvertTxt
         /// <param name="root"></param>
         private void GerarPag(NFe nfe, XmlElement root)
         {
+            XmlElement nodePag = null;
+
             foreach (pag pagItem in nfe.pag)
             {
-                XmlElement nodePag = doc.CreateElement("pag"); //YA01
+                if (nodePag == null)
+                {
+                    nodePag = doc.CreateElement("pag"); //YA01
+                    root.AppendChild(nodePag);
+                }
                 nodeCurrent = nodePag;
-                root.AppendChild(nodePag);
 
                 if (nfe.infNFe.Versao >= 4)
                 {
@@ -278,16 +283,19 @@ namespace NFe.ConvertTxt
                 {
                     wCampo((int)pagItem.tPag, TpcnTipoCampo.tcInt, TpcnResources.tPag, ObOp.Obrigatorio, 2);    //YA02
                     wCampo(pagItem.vPag, TpcnTipoCampo.tcDec2, TpcnResources.vPag, ObOp.Obrigatorio);           //YA03
-                    if (!string.IsNullOrEmpty(pagItem.CNPJ))
+                    
+                    //Modificado Samuel 24/01/2018
+                    if ((int)pagItem.tpIntegra > 0 || !string.IsNullOrEmpty(pagItem.CNPJ) || (int)pagItem.tBand > 0 || !string.IsNullOrEmpty(pagItem.cAut))
                     {
                         XmlElement xnodePag = doc.CreateElement("card"); //YA04
                         nodeCurrent = xnodePag;
                         nodePag.AppendChild(xnodePag);
 
-                        wCampo((int)pagItem.tpIntegra, TpcnTipoCampo.tcInt, TpcnResources.tpIntegra, ObOp.Opcional);
-                        wCampo(pagItem.CNPJ, TpcnTipoCampo.tcStr, TpcnResources.CNPJ, ObOp.Obrigatorio); //YA05
-                        wCampo((int)pagItem.tBand, TpcnTipoCampo.tcInt, TpcnResources.tBand, ObOp.Obrigatorio, 2);          //YA06
-                        wCampo(pagItem.cAut, TpcnTipoCampo.tcStr, TpcnResources.cAut, ObOp.Obrigatorio);                    //YA07
+                        //Modificado Samuel 24/01/2018
+                        wCampo((int)pagItem.tpIntegra, TpcnTipoCampo.tcInt, TpcnResources.tpIntegra, ObOp.Obrigatorio, 1);
+                        wCampo(pagItem.CNPJ, TpcnTipoCampo.tcStr, TpcnResources.CNPJ, ObOp.Opcional); //YA05
+                        wCampo((int)pagItem.tBand, TpcnTipoCampo.tcInt, TpcnResources.tBand, ObOp.Opcional, 2);          //YA06
+                        wCampo(pagItem.cAut, TpcnTipoCampo.tcStr, TpcnResources.cAut, ObOp.Opcional);                    //YA07
                     }
                 }
 
@@ -518,6 +526,11 @@ namespace NFe.ConvertTxt
 
                 wCampo(det.Prod.cProd, TpcnTipoCampo.tcStr, TpcnResources.cProd);
                 wCampo(det.Prod.cEAN, TpcnTipoCampo.tcStr, TpcnResources.cEAN);
+                if (NFe.ide.tpAmb == TipoAmbiente.taHomologacao &&
+                    NFe.ide.mod == TpcnMod.modNFCe &&
+                    det.Prod.nItem == 1)
+                    wCampo("NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL", TpcnTipoCampo.tcStr, TpcnResources.xProd);
+                else
                 wCampo(det.Prod.xProd, TpcnTipoCampo.tcStr, TpcnResources.xProd);
                 this.convertToOem = true;
                 wCampo(det.Prod.NCM, TpcnTipoCampo.tcStr, TpcnResources.NCM);
@@ -2127,8 +2140,10 @@ namespace NFe.ConvertTxt
         /// </summary>
         /// <param name="Transp"></param>
         /// <param name="root"></param>
-        private void GerarTransp(Transp Transp, XmlElement root)
+        private void GerarTransp(NFe NFe, XmlElement root)
         {
+            Transp Transp = NFe.Transp;
+
             XmlElement nodeTransp = doc.CreateElement("transp");
             root.AppendChild(nodeTransp);
             nodeCurrent = nodeTransp;
@@ -2199,8 +2214,9 @@ namespace NFe.ConvertTxt
             //
             //(**)GerarTranspReboque;
             //
-            if (Transp.Reboque.Count > 2)
-                this.cMensagemErro += "Transp.reboque: Excedeu o máximo permitido de 2" + Environment.NewLine;
+            int mr = ((double)NFe.infNFe.Versao <= 3.10) ? 2 : 5;
+            if (Transp.Reboque.Count > mr)
+                this.cMensagemErro += $"Transp.reboque: Excedeu o máximo permitido de {mr}" + Environment.NewLine;
 
             foreach (Reboque Reboque in Transp.Reboque)
             {

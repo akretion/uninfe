@@ -83,6 +83,15 @@ namespace NFe.Components
         public string TagLoteAtributoId { get; set; }
 
         /// <summary>
+        /// Nome da tag do XML que será assinada (uma segunda tag que tem que ser assinada ex. SubstituirNfse Pelotas-RS)
+        /// </summary>
+        public string TagAssinatura0 { get; set; }
+        /// <summary>
+        /// Nome da tag que tem o atributo ID que será assinada, faz consunto com a TagAssinatura0
+        /// </summary>
+        public string TagAtributoId0 { get; set; }
+
+        /// <summary>
         /// URL do schema de cada XML
         /// </summary>
         public string TargetNameSpace { get; set; }

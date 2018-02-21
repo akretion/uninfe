@@ -393,6 +393,16 @@ namespace NFe.Service.NFSe
                         else
                             throw new Exception("Ambiente de produção de Joinville-SC ainda não foi implementado no UniNFe.");
                         break;
+
+                    case PadroesNFSe.AVMB_ASTEN:
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        if (ler.oDadosPedSitNfseRps.tpAmb == 2)
+                            pedLoteRps = new Components.HPelotasRS.INfseservice();
+                        else
+                            pedLoteRps = new Components.PPelotasRS.INfseservice();
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, ler.oDadosPedSitNfseRps.cMunicipio))

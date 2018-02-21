@@ -24,5 +24,6 @@ namespace NFe.ConvertTxt
         public string digVal { get; set; }
         public string cIdToken { get; set; }
         public string cHashQRCode { get; set; }
+        public string Link { get; set; }
     }
 }

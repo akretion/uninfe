@@ -7,7 +7,6 @@ using NFe.Components.Coplan;
 using NFe.Components.EGoverne;
 using NFe.Components.EGoverneISS;
 using NFe.Components.EL;
-using NFe.Components.EloTech;
 using NFe.Components.Fiorilli;
 using NFe.Components.GovDigital;
 using NFe.Components.Memory;
@@ -19,6 +18,7 @@ using NFe.Components.SimplISS;
 using NFe.Components.SystemPro;
 using NFe.Components.Tinus;
 using NFe.Settings;
+using NFe.Validate;
 using NFSe.Components;
 using System;
 using System.IO;
@@ -353,25 +353,6 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
 
-                    case PadroesNFSe.ELOTECH:
-
-                        #region EloTech
-
-                        EloTech elotech = new EloTech((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                                                      Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                      oDadosPedCanNfse.cMunicipio,
-                                                      Empresas.Configuracoes[emp].UsuarioWS,
-                                                      Empresas.Configuracoes[emp].SenhaWS,
-                                                      ConfiguracaoApp.ProxyUsuario,
-                                                      ConfiguracaoApp.ProxySenha,
-                                                      ConfiguracaoApp.ProxyServidor,
-                                                      Empresas.Configuracoes[emp].X509Certificado);
-
-                        elotech.CancelarNfse(NomeArquivoXML);
-                        break;
-
-                    #endregion EloTech
-
                     case PadroesNFSe.MGM:
 
                         #region MGM
@@ -537,8 +518,20 @@ namespace NFe.Service.NFSe
                                           Empresas.Configuracoes[emp].ClientID,
                                           Empresas.Configuracoes[emp].ClientSecret);
 
+                        AssinaturaDigital softplanAssinatura = new AssinaturaDigital();
+                        softplanAssinatura.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
+
+                        // Validar o Arquivo XML
+                        ValidarXML softplanValidar = new ValidarXML(NomeArquivoXML, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
+                        string validacao = softplanValidar.ValidarArqXML(NomeArquivoXML);
+                        if (validacao != "")
+                            throw new Exception(validacao);
+
                         if (ConfiguracaoApp.Proxy)
                             softplan.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
+
+                        AssinaturaDigital softplanAss = new AssinaturaDigital();
+                        softplanAss.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio, AlgorithmType.Sha256);
 
                         softplan.CancelarNfse(NomeArquivoXML);
                         break;
@@ -558,6 +551,16 @@ namespace NFe.Service.NFSe
                             pedCanNfse = new Components.HJoinvilleSC.Servicos();
                         else
                             throw new Exception("Ambiente de produção de Joinville-SC ainda não foi implementado no UniNFe.");
+                        break;
+
+                    case PadroesNFSe.AVMB_ASTEN:
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        if (oDadosPedCanNfse.tpAmb == 2)
+                            pedCanNfse = new Components.HPelotasRS.INfseservice();
+                        else
+                            pedCanNfse = new Components.PPelotasRS.INfseservice();
                         break;
                 }
 

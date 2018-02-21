@@ -52,8 +52,8 @@ namespace NFe.Validate
                 TipoArqXml.cArquivoSchema.Contains("BLUMENAU") ||
                 TipoArqXml.cArquivoSchema.Contains("DSF"))
             {
-                if (arquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML) ||
-                    arquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML))
+                if (arquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, StringComparison.InvariantCultureIgnoreCase) ||
+                    arquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, StringComparison.InvariantCultureIgnoreCase))
                 {
                     bool found = false;
                     bool bSave = false;
@@ -61,7 +61,7 @@ namespace NFe.Validate
                     XmlDocument doc = new XmlDocument();
                     doc.Load(arquivoXML);
 
-                    if (arquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML))
+                    if (arquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, StringComparison.InvariantCultureIgnoreCase))
                     {
                         const string Assinatura = "Assinatura";
 
@@ -84,6 +84,9 @@ namespace NFe.Validate
                                     }
                                     else
                                     {
+                                        if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado == null)
+                                            throw new Exceptions.ExceptionCertificadoDigital(ErroPadrao.CertificadoNaoEncontrado);
+
                                         sh1 = Criptografia.SignWithRSASHA1(Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado,
                                                 rpsElement.GetElementsByTagName(Assinatura)[0].InnerText);
                                     }
@@ -94,7 +97,7 @@ namespace NFe.Validate
                         if (!found)
                             throw new Exception("Não foi possivel encontrar a tag <RPS><" + Assinatura + ">");
                     }
-                    else if (arquivoXML.EndsWith(NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML) &&
+                    else if (arquivoXML.EndsWith(NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, StringComparison.InvariantCultureIgnoreCase) &&
                             !TipoArqXml.cArquivoSchema.Contains("DSF"))
                     {
                         const string AssinaturaCancelamento = "AssinaturaCancelamento";
@@ -109,6 +112,9 @@ namespace NFe.Validate
                                 found = true;
                                 if (detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText.Length == 20)
                                 {
+                                    if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado == null)
+                                        throw new Exceptions.ExceptionCertificadoDigital(ErroPadrao.CertificadoNaoEncontrado);
+
                                     bSave = true;
                                     //Encryptar a tag Assinatura
                                     sh1 = Criptografia.SignWithRSASHA1(Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado,

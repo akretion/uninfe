@@ -499,7 +499,7 @@ namespace NFe.ConvertTxt
         /// <summary>
         /// RetornarConteudoTag
         /// </summary>
-        private string RetornarConteudoTag(string TAG, bool trim)
+        private string RetornarConteudoTag(string TAG, bool trim, ObOp optional)
         {
             ///
             /// "§B14|cUF|AAMM|CNPJ|Mod|serie|nNF"); //ok
@@ -513,7 +513,10 @@ namespace NFe.ConvertTxt
             if (!layout.EndsWith("|")) layout += "|";
             string fValue = layout.Substring(0, layout.ToUpper().IndexOf("|" + TAG.ToUpper().Trim() + "|") + 1);
             if (fValue == "")
+                if (optional == ObOp.Obrigatorio)
                 throw new Exception("Segmento: " + this.FSegmento + " - Tag: " + TAG + " não encontrada");
+                else
+                    return "";
 
             string[] pipes = fValue.Split(new char[] { '|' });
             int j = pipes.GetLength(0) - 1;
@@ -596,7 +599,7 @@ namespace NFe.ConvertTxt
             string ConteudoTag = "";
             try
             {
-                ConteudoTag = RetornarConteudoTag(tag.ToString(), trim);
+                ConteudoTag = RetornarConteudoTag(tag.ToString(), trim, optional);
 
                 if (ConteudoTag != "")
                     if (ConteudoTag.StartsWith(prefix))
@@ -2009,6 +2012,7 @@ namespace NFe.ConvertTxt
                     /// Grupo da TAG <det><imposto><IPI>
                     /// 
                     #region <det><imposto><IPI>
+                    if (NFe.infNFe.Versao < 4)
                     NFe.det[nProd].Imposto.IPI.clEnq = this.LerString(TpcnResources.clEnq, ObOp.Opcional, 5, 5);
                     NFe.det[nProd].Imposto.IPI.CNPJProd = this.LerString(TpcnResources.CNPJProd, ObOp.Opcional, 14, 14);
                     NFe.det[nProd].Imposto.IPI.cSelo = this.LerString(TpcnResources.cSelo, ObOp.Opcional, 1, 60);

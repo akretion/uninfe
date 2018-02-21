@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtTabEstab/v02_04_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtTabEstab/v02_04_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtTabEstab/v02_04_01" targetNamespace="http://www.esocial.gov.br/schema/evt/evtTabEstab/v02_04_01" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -359,7 +359,7 @@
       </xs:element>
       <xs:element name="infoObra" minOccurs="0">
         <xs:annotation>
-          <xs:documentation>Registro preenchido exclusivamente por empresa construtora enquadrada nos  Arts. 7 a 9 da Lei 12.546/2011, relacionando os estabelecimentos inscritos no CNO, para indicar a substituição ou não da contribuição patronal incidente sobre a remuneração dos trabalhadores de obra de construção civil.   </xs:documentation>
+          <xs:documentation>Registro preenchido exclusivamente por empresa construtora, relacionando os estabelecimentos inscritos no CNO, para indicar a substituição ou não da contribuição patronal incidente sobre a remuneração dos trabalhadores de obra de construção civil.</xs:documentation>
         </xs:annotation>
         <xs:complexType>
           <xs:sequence>

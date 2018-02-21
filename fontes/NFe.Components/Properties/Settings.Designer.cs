@@ -422,16 +422,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://200.150.67.99:32777/WebEloWS/nfseService")]
-        public string NFe_Components_br_com_elotech_quatrobarras_hp_NfsePortService {
-            get {
-                return ((string)(this["NFe_Components_br_com_elotech_quatrobarras_hp_NfsePortService"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://187.45.245.217/ws_nfse_embu_artes/nfseservice.svc")]
         public string NFe_Components_br_gov_sp_embudasartes_sistemas_www_p_NfseService {
             get {
@@ -1348,6 +1338,26 @@ namespace NFe.Components.Properties {
         public string NFe_Components_HSerafinaCorreaRS_IssWebWS {
             get {
                 return ((string)(this["NFe_Components_HSerafinaCorreaRS_IssWebWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://wshomo.pelotas.rs.gov.br/wsnfse/NfseWSISAPI.dll/soap/INfse")]
+        public string NFe_Components_HPelotasRS_INfseservice {
+            get {
+                return ((string)(this["NFe_Components_HPelotasRS_INfseservice"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://ws.pelotas.rs.gov.br/wsnfse/NfseWSISAPI.dll/soap/INfse")]
+        public string NFe_Components_PPelotasRS_INfseservice {
+            get {
+                return ((string)(this["NFe_Components_PPelotasRS_INfseservice"]));
             }
         }
     }

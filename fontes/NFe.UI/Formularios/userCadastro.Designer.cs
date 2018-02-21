@@ -66,12 +66,13 @@
             this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel2.Location = new System.Drawing.Point(230, 109);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(42, 15);
+            this.metroLabel2.Size = new System.Drawing.Size(41, 15);
             this.metroLabel2.TabIndex = 35;
             this.metroLabel2.Text = "Versão";
             // 
             // cbVersao
             // 
+            this.cbVersao.Enabled = false;
             this.cbVersao.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cbVersao.FormattingEnabled = true;
             this.cbVersao.ItemHeight = 19;
@@ -145,7 +146,7 @@
             this.metroLabel17.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel17.Location = new System.Drawing.Point(0, 58);
             this.metroLabel17.Name = "metroLabel17";
-            this.metroLabel17.Size = new System.Drawing.Size(241, 15);
+            this.metroLabel17.Size = new System.Drawing.Size(242, 15);
             this.metroLabel17.TabIndex = 31;
             this.metroLabel17.Text = "Utilizar para consulta o certificado da empresa:";
             // 
@@ -198,7 +199,7 @@
             this.rbCNPJ.Checked = true;
             this.rbCNPJ.Location = new System.Drawing.Point(0, 180);
             this.rbCNPJ.Name = "rbCNPJ";
-            this.rbCNPJ.Size = new System.Drawing.Size(51, 15);
+            this.rbCNPJ.Size = new System.Drawing.Size(50, 15);
             this.rbCNPJ.TabIndex = 39;
             this.rbCNPJ.TabStop = true;
             this.rbCNPJ.Text = "CNPJ";

@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://nfse.abrasf.org.br" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://nfse.abrasf.org.br/" name="INfseservice" targetNamespace="http://nfse.abrasf.org.br" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nfse.abrasf.org.br/">
+      <xs:complexType name="input">
+        <xs:sequence>
+          <xs:element name="nfseCabecMsg" type="xs:string" />
+          <xs:element name="nfseDadosMsg" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ConsultarNfsePorFaixaRequest">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:input">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="RecepcionarLoteRpsRequest">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:input">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ConsultarNfsePorRpsRequest">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:input">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="GerarNfseRequest">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:input">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="RecepcionarLoteRpsSincronoRequest">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:input">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="SubstituirNfseRequest">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:input">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="CancelarNfseRequest">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:input">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ConsultarLoteRpsRequest">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:input">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ConsultarNfseServicoTomadoRequest">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:input">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ConsultarNfseServicoPrestadoRequest">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:input">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="output">
+        <xs:sequence>
+          <xs:element name="outputXML" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ConsultarNfsePorFaixaResponse">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:output">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="RecepcionarLoteRpsResponse">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:output">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ConsultarNfsePorRpsResponse">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:output">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="GerarNfseResponse">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:output">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="RecepcionarLoteRpsSincronoResponse">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:output">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="SubstituirNfseResponse">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:output">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="CancelarNfseResponse">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:output">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ConsultarLoteRpsResponse">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:output">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ConsultarNfseServicoTomadoResponse">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:output">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="ConsultarNfseServicoPrestadoResponse">
+        <xs:complexContent mixed="false">
+          <xs:extension base="ns1:output">
+            <xs:sequence />
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="CancelarNfse0Request">
+    <part name="parameters" type="ns1:input" />
+  </message>
+  <message name="CancelarNfse0Response">
+    <part name="return" type="ns1:output" />
+  </message>
+  <message name="ConsultarLoteRps1Request">
+    <part name="parameters" type="ns1:input" />
+  </message>
+  <message name="ConsultarLoteRps1Response">
+    <part name="return" type="ns1:output" />
+  </message>
+  <message name="ConsultarNfseServicoPrestado2Request">
+    <part name="parameters" type="ns1:input" />
+  </message>
+  <message name="ConsultarNfseServicoPrestado2Response">
+    <part name="return" type="ns1:output" />
+  </message>
+  <message name="ConsultarNfseServicoTomado3Request">
+    <part name="parameters" type="ns1:input" />
+  </message>
+  <message name="ConsultarNfseServicoTomado3Response">
+    <part name="return" type="ns1:output" />
+  </message>
+  <message name="ConsultarNfsePorFaixa4Request">
+    <part name="parameters" type="ns1:input" />
+  </message>
+  <message name="ConsultarNfsePorFaixa4Response">
+    <part name="return" type="ns1:output" />
+  </message>
+  <message name="ConsultarNfsePorRps5Request">
+    <part name="parameters" type="ns1:input" />
+  </message>
+  <message name="ConsultarNfsePorRps5Response">
+    <part name="return" type="ns1:output" />
+  </message>
+  <message name="RecepcionarLoteRps6Request">
+    <part name="parameters" type="ns1:input" />
+  </message>
+  <message name="RecepcionarLoteRps6Response">
+    <part name="return" type="ns1:output" />
+  </message>
+  <message name="GerarNfse7Request">
+    <part name="parameters" type="ns1:input" />
+  </message>
+  <message name="GerarNfse7Response">
+    <part name="return" type="ns1:output" />
+  </message>
+  <message name="SubstituirNfse8Request">
+    <part name="parameters" type="ns1:input" />
+  </message>
+  <message name="SubstituirNfse8Response">
+    <part name="return" type="ns1:output" />
+  </message>
+  <message name="RecepcionarLoteRpsSincrono9Request">
+    <part name="parameters" type="ns1:input" />
+  </message>
+  <message name="RecepcionarLoteRpsSincrono9Response">
+    <part name="return" type="ns1:output" />
+  </message>
+  <portType name="INfse">
+    <operation name="CancelarNfse">
+      <input message="tns:CancelarNfse0Request" />
+      <output message="tns:CancelarNfse0Response" />
+    </operation>
+    <operation name="ConsultarLoteRps">
+      <input message="tns:ConsultarLoteRps1Request" />
+      <output message="tns:ConsultarLoteRps1Response" />
+    </operation>
+    <operation name="ConsultarNfseServicoPrestado">
+      <input message="tns:ConsultarNfseServicoPrestado2Request" />
+      <output message="tns:ConsultarNfseServicoPrestado2Response" />
+    </operation>
+    <operation name="ConsultarNfseServicoTomado">
+      <input message="tns:ConsultarNfseServicoTomado3Request" />
+      <output message="tns:ConsultarNfseServicoTomado3Response" />
+    </operation>
+    <operation name="ConsultarNfsePorFaixa">
+      <input message="tns:ConsultarNfsePorFaixa4Request" />
+      <output message="tns:ConsultarNfsePorFaixa4Response" />
+    </operation>
+    <operation name="ConsultarNfsePorRps">
+      <input message="tns:ConsultarNfsePorRps5Request" />
+      <output message="tns:ConsultarNfsePorRps5Response" />
+    </operation>
+    <operation name="RecepcionarLoteRps">
+      <input message="tns:RecepcionarLoteRps6Request" />
+      <output message="tns:RecepcionarLoteRps6Response" />
+    </operation>
+    <operation name="GerarNfse">
+      <input message="tns:GerarNfse7Request" />
+      <output message="tns:GerarNfse7Response" />
+    </operation>
+    <operation name="SubstituirNfse">
+      <input message="tns:SubstituirNfse8Request" />
+      <output message="tns:SubstituirNfse8Response" />
+    </operation>
+    <operation name="RecepcionarLoteRpsSincrono">
+      <input message="tns:RecepcionarLoteRpsSincrono9Request" />
+      <output message="tns:RecepcionarLoteRpsSincrono9Response" />
+    </operation>
+  </portType>
+  <binding name="INfsebinding" type="tns:INfse">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="CancelarNfse">
+      <soap:operation soapAction="http://nfse.abrasf.org.br/CancelarNfse" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="ConsultarLoteRps">
+      <soap:operation soapAction="http://nfse.abrasf.org.br/ConsultarLoteRps" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="ConsultarNfseServicoPrestado">
+      <soap:operation soapAction="http://nfse.abrasf.org.br/ConsultarNfseServicoPrestado" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="ConsultarNfseServicoTomado">
+      <soap:operation soapAction="http://nfse.abrasf.org.br/ConsultarNfseServicoTomado" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="ConsultarNfsePorFaixa">
+      <soap:operation soapAction="http://nfse.abrasf.org.br/ConsultarNfsePorFaixa" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="ConsultarNfsePorRps">
+      <soap:operation soapAction="http://nfse.abrasf.org.br/ConsultarNfsePorRps" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="RecepcionarLoteRps">
+      <soap:operation soapAction="http://nfse.abrasf.org.br/RecepcionarLoteRps" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="GerarNfse">
+      <soap:operation soapAction="http://nfse.abrasf.org.br/GerarNfse" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="SubstituirNfse">
+      <soap:operation soapAction="http://nfse.abrasf.org.br/SubstituirNfse" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+    <operation name="RecepcionarLoteRpsSincrono">
+      <soap:operation soapAction="http://nfse.abrasf.org.br/RecepcionarLoteRpsSincrono" style="rpc" />
+      <input>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://nfse.abrasf.org.br/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="INfseservice">
+    <port name="INfsePort" binding="tns:INfsebinding">
+      <soap:address location="http://ws.pelotas.rs.gov.br/wsnfse/NfseWSISAPI.dll/soap/INfse" />
+    </port>
+  </service>
+</definitions>

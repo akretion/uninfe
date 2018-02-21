@@ -66,23 +66,53 @@ namespace NFe.ConvertTxt
         pcOutros = 9
     }
     public enum TpcnFormaPagamento {
+        [Description("01=Dinheiro")]
         fpDinheiro=1, 
+        [Description("02=Cheque")]
         fpCheque=2, 
+        [Description("03=Cartão de Crédito")]
         fpCartaoCredito=3, 
+        [Description("04=Cartão de Débito")]
         fpCartaoDebito=4, 
+        [Description("05=Crédito Loja")]
         fpCreditoLoja=5,
+        [Description("10=Vale Alimentação")]
         fpValeAlimentacao=10, 
+        [Description("11=Vale Refeição")]
         fpValeRefeicao=11, 
+        [Description("12=Vale Presente")]
         fpValePresente=12, 
+        [Description("13=Vale Combustível")]
         fpValeCombustivel=13,
-        fpOutro=99
+        [Description("14=Duplicata Mercantil")]
+        fpDulicataMercantil = 14,
+        [Description("15=Boleto Bancário")]
+        fpBoletoBancario = 15,
+        [Description("90=Sem pagamento")]
+        fpSemPagamento=90,
+        [Description("99 =Outros")]        fpOutro=99
     }
     public enum TpcnBandeiraCartao
     {
+        [Description("01 - VISA")]
         bcVisa=1, 
+        [Description("02 - MasterCard")]
         bcMasterCard=2, 
+        [Description("03 - American Express")]
         bcAmericanExpress=3, 
+        [Description("04 - Sorocred")]
         bcSorocred=4, 
+        [Description("05 - Diners Club")]
+        bcDinersClub = 5,
+        [Description("06 - Elo")]
+        bcElo = 6,
+        [Description("07 - Hipercard")]
+        bcHipercard = 7,
+        [Description("08 - Aura")]
+        bcAura = 8,
+        [Description("09 - Cabal")]
+        bcCabal = 9,
+        [Description("09 - Outros")]
         bcOutros=99
     }
 

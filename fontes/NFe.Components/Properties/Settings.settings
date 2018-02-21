@@ -119,9 +119,6 @@
     <Setting Name="NFe_Components_br_com_govdigital_homolog_paracatu_h_NfseServiceImplPctuService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/pctu</Value>
     </Setting>
-    <Setting Name="NFe_Components_br_com_elotech_quatrobarras_hp_NfsePortService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://200.150.67.99:32777/WebEloWS/nfseService</Value>
-    </Setting>
     <Setting Name="NFe_Components_br_gov_sp_embudasartes_sistemas_www_p_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://187.45.245.217/ws_nfse_embu_artes/nfseservice.svc</Value>
     </Setting>
@@ -394,6 +391,12 @@
     </Setting>
     <Setting Name="NFe_Components_HSerafinaCorreaRS_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HPelotasRS_INfseservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://wshomo.pelotas.rs.gov.br/wsnfse/NfseWSISAPI.dll/soap/INfse</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPelotasRS_INfseservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://ws.pelotas.rs.gov.br/wsnfse/NfseWSISAPI.dll/soap/INfse</Value>
     </Setting>
   </Settings>
 </SettingsFile>

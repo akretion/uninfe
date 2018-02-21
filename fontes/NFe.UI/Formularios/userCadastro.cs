@@ -49,6 +49,7 @@ namespace NFe.UI
 
                 this.cbEmpresa.SelectedIndex = posicao;
                 this.cbVersao.SelectedIndex = 0;
+                this.cbVersao.Enabled = false;
 
                 this.cbEmpresa.SelectedIndexChanged += cbEmpresa_SelectedIndexChanged;
 
@@ -161,8 +162,7 @@ namespace NFe.UI
         {
             try
             {
-                this.comboUf.Enabled =
-                    this.cbVersao.Enabled = this.cbEmpresa.SelectedValue != null;
+                this.comboUf.Enabled = this.cbEmpresa.SelectedValue != null;
 
                 this.buttonPesquisa.Enabled = false;
 

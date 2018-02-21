@@ -7,7 +7,6 @@ using NFe.Components.Coplan;
 using NFe.Components.EGoverne;
 using NFe.Components.EGoverneISS;
 using NFe.Components.EL;
-using NFe.Components.EloTech;
 using NFe.Components.Fiorilli;
 using NFe.Components.GovDigital;
 using NFe.Components.Memory;
@@ -421,25 +420,6 @@ namespace NFe.Service.NFSe
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.VVISS);
                         break;
 
-                    case PadroesNFSe.ELOTECH:
-
-                        #region EloTech
-
-                        EloTech elotech = new EloTech((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                                                      Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                      oDadosEnvLoteRps.cMunicipio,
-                                                      Empresas.Configuracoes[emp].UsuarioWS,
-                                                      Empresas.Configuracoes[emp].SenhaWS,
-                                                      ConfiguracaoApp.ProxyUsuario,
-                                                      ConfiguracaoApp.ProxySenha,
-                                                      ConfiguracaoApp.ProxyServidor,
-                                                      Empresas.Configuracoes[emp].X509Certificado);
-
-                        elotech.EmiteNF(NomeArquivoXML);
-                        break;
-
-                    #endregion EloTech
-
                     case PadroesNFSe.METROPOLIS:
 
                         #region METROPOLIS
@@ -692,6 +672,18 @@ namespace NFe.Service.NFSe
                             envLoteRps = new Components.HJoinvilleSC.Servicos();                        
                         else
                             throw new Exception("Ambiente de produção de Joinville-SC ainda não foi implementado no UniNFe.");
+                        break;
+
+                    case PadroesNFSe.AVMB_ASTEN:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.AVMB_ASTEN);
+
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        if (oDadosEnvLoteRps.tpAmb == 2)
+                            envLoteRps = new Components.HPelotasRS.INfseservice();                        
+                        else
+                            envLoteRps = new Components.PPelotasRS.INfseservice();
                         break;
                 }
 

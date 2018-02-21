@@ -1,8 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4">
-      <s:element name="nfeDadosMsg" type="s:string" />
+      <s:element name="nfeDadosMsg">
+        <s:complexType mixed="true">
+          <s:sequence>
+            <s:any />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="nfeConsultaNFResult">
         <s:complexType mixed="true">
           <s:sequence>
@@ -51,10 +57,10 @@
   </wsdl:binding>
   <wsdl:service name="NFeConsultaProtocolo4">
     <wsdl:port name="NFeConsultaProtocolo4Soap" binding="tns:NFeConsultaProtocolo4Soap">
-      <soap:address location="https://www.svc.fazenda.gov.br/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx" />
+      <soap:address location="https://hom.svc.fazenda.gov.br/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx" />
     </wsdl:port>
     <wsdl:port name="NFeConsultaProtocolo4Soap12" binding="tns:NFeConsultaProtocolo4Soap12">
-      <soap12:address location="https://www.svc.fazenda.gov.br/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx" />
+      <soap12:address location="https://hom.svc.fazenda.gov.br/NFeConsultaProtocolo4/NFeConsultaProtocolo4.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

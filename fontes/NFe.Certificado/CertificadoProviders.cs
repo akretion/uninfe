@@ -54,24 +54,6 @@ namespace NFe.Certificado
 
         #region Metodos
         /// <summary>
-        /// Executa a busca dos providers
-        /// </summary>
-        public bool Run()
-        {
-            bool result = false;
-
-            if (this.IsA3 && !String.IsNullOrEmpty(this.PIN))
-            {
-                GetProviders();
-                GetProvidersType();
-                GetProviderValido();
-
-                result = true;
-            }
-            return result;
-        }
-
-        /// <summary>
         /// Define a propriedade com o provider que deverá ser sugerida ao usuario
         /// </summary>
         private void GetProviderValido()
@@ -104,9 +86,7 @@ namespace NFe.Certificado
                 "Provider",
                 Certificado,
                 CodEmp,
-                PIN,
-                provider.NameKey,
-                provider.Type);
+                PIN);
 
             ApagarXMLTeste();
 
@@ -164,19 +144,6 @@ namespace NFe.Certificado
                 ProvidersIdentificados[i].Type = oCertificado.GetInfoProvider(ProvidersIdentificados[i].NameKey.ToString()).Type;
             }
         }
-
-        /// <summary>
-        /// Busca o type de um unico provider 
-        /// </summary>
-        /// <param name="provider">Nome do provider</param>
-        /// <returns></returns>
-        public string GetProviderType(string provider)
-        {
-            string result = oCertificado.GetInfoProvider(provider).Type;
-
-            return result;
-        }
         #endregion
-
     }
 }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using NFe.Components.Abstract;
+using NFe.Components.Interface;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
-using System.Reflection;
-using System.Text;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Xml;
 
 namespace NFSe.Components
@@ -12,13 +13,8 @@ namespace NFSe.Components
     /// <summary>
     /// Esta classe utiliza métodos POST para fazer requisições
     /// </summary>
-    public class POSTRequest : IDisposable
+    public class POSTRequest : RequestBase, IPostRequest
     {
-        /// <summary>
-        /// Proxy para ser utilizado na requisição, pode ser nulo
-        /// </summary>
-        public IWebProxy Proxy { get; set; }
-
         /// <summary>
         /// Faz o post e retorna uma string  com o resultado
         /// </summary>
@@ -40,6 +36,7 @@ namespace NFSe.Components
 
             //ajustar para permitir o cabeçalho HTTP/1.0
             SetAllowUnsafeHeaderParsing20();
+
             //evitar o erro "The remote server returned an error: (417) Expectation Failed."
             //para caeçalhos HTTP/1.0
             System.Net.ServicePointManager.Expect100Continue = false;
@@ -128,6 +125,7 @@ namespace NFSe.Components
         }
 
 #if _fw46
+
         /// <summary>
         /// Faz o post e retorna uma string  com o resultado
         /// </summary>
@@ -183,6 +181,7 @@ namespace NFSe.Components
 
             //ajustar para permitir o cabeçalho HTTP/1.0
             SetAllowUnsafeHeaderParsing20();
+
             //evitar o erro "The remote server returned an error: (417) Expectation Failed."
             //para cabeçalhos HTTP/1.0
             ServicePointManager.Expect100Continue = false;
@@ -220,37 +219,11 @@ namespace NFSe.Components
 
             return result;
         }
+#else
+        public string PostForm(string url, IDictionary<string, string> postData = null, IList<string> headers = null)
+        {
+            throw new NotImplementedException("Município não funciona com .NET 3.5");
+        }
 #endif
-
-        public void Dispose()
-        {
-            Proxy = null;
-        }
-
-        /// <summary>
-        /// Evita o erro de servidor cometeu uma violação de protocolo.
-        /// </summary>
-        /// <seealso cref="https://msdn.microsoft.com/pt-br/library/system.net.configuration.httpwebrequestelement.useunsafeheaderparsing%28v=vs.110%29.aspx"/>
-        private void SetAllowUnsafeHeaderParsing20()
-        {
-            Assembly aNetAssembly = Assembly.GetAssembly(typeof(System.Net.Configuration.SettingsSection));
-            if (aNetAssembly != null)
-            {
-                Type aSettingsType = aNetAssembly.GetType("System.Net.Configuration.SettingsSectionInternal");
-                if (aSettingsType != null)
-                {
-                    object anInstance = aSettingsType.InvokeMember("Section",
-                    BindingFlags.Static | BindingFlags.GetProperty | BindingFlags.NonPublic, null, null, new object[] { });
-                    if (anInstance != null)
-                    {
-                        FieldInfo aUseUnsafeHeaderParsing = aSettingsType.GetField("useUnsafeHeaderParsing", BindingFlags.NonPublic | BindingFlags.Instance);
-                        if (aUseUnsafeHeaderParsing != null)
-                        {
-                            aUseUnsafeHeaderParsing.SetValue(anInstance, true);
-                        }
-                    }
-                }
-            }
-        }
     }
 }

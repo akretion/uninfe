@@ -663,6 +663,31 @@ namespace NFe.Service
 
                 #endregion Padrão Joinville_SC
 
+                #region AVMB_ASTEN
+                case PadroesNFSe.AVMB_ASTEN:
+                    if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao)
+                    {
+                        Components.HPelotasRS.output pelotasOutput = new Components.HPelotasRS.output();
+                        Components.HPelotasRS.input pelotasInput = new Components.HPelotasRS.input();
+                        pelotasInput.nfseCabecMsg = cabecMsg;
+                        pelotasInput.nfseDadosMsg = docXML.OuterXml;
+
+                        pelotasOutput = (Components.HPelotasRS.output)wsProxy.Invoke(servicoWS, metodo, new object[] { pelotasInput });
+                        strRetorno = pelotasOutput.outputXML;
+                    }
+                    else
+                    {
+                        Components.PPelotasRS.output pelotasOutput = new Components.PPelotasRS.output();
+                        Components.PPelotasRS.input pelotasInput = new Components.PPelotasRS.input();
+                        pelotasInput.nfseCabecMsg = cabecMsg;
+                        pelotasInput.nfseDadosMsg = docXML.OuterXml;
+
+                        pelotasOutput = (Components.PPelotasRS.output)wsProxy.Invoke(servicoWS, metodo, new object[] { pelotasInput });
+                        strRetorno = pelotasOutput.outputXML;
+                    }
+                    break;
+                #endregion
+
                 default:
 
                     #region Demais padrões

@@ -64,7 +64,14 @@ namespace NFe.UI
                 this.cbEmpresa.SelectedIndexChanged += cbEmpresa_SelectedIndexChanged;
 
                 cbEmpresa_SelectedIndexChanged(null, null);
-                ChangeVersao((TipoAplicativo)cbServico.SelectedValue);
+                if (cbServico.SelectedValue == null)
+                {                    
+                    ChangeVersao(Empresas.Configuracoes[0].Servico);
+                }
+                else
+                {
+                    ChangeVersao((TipoAplicativo)cbServico.SelectedValue);
+                }
             }
         }
 

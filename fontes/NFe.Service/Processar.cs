@@ -103,6 +103,10 @@ namespace NFe.Service
                             DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskConsultaSequenciaLoteNotaRPS(arquivo));
                             break;
 
+                        case Servicos.NFSeSubstituirNfse:
+                            DirecionarArquivo(emp, true, true, arquivo, new NFSe.TaskSubstituirNfse(arquivo));
+                            break;
+
                         #endregion NFS-e
 
                         #region CFS-e
@@ -946,6 +950,10 @@ namespace NFe.Service
                                 else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSeqLoteNotaRPS).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeConsultaSequenciaLoteNotaRPS;
+                                }
+                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSubstNfse).EnvioXML) >= 0)
+                                {
+                                    tipoServico = Servicos.NFSeSubstituirNfse;
                                 }
 
                                 #endregion NFS-e

@@ -8,6 +8,8 @@ namespace NFe.Service
 {
     public class TaskNFeRetRecepcao : TaskAbst
     {
+        public string chNFe { private get; set; } = null;
+
         public TaskNFeRetRecepcao()
         {
             Servico = Servicos.NFePedidoSituacaoLote;

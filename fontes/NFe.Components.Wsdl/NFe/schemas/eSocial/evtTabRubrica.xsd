@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtTabRubrica/v02_04_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtTabRubrica/v02_04_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtTabRubrica/v02_04_01" targetNamespace="http://www.esocial.gov.br/schema/evt/evtTabRubrica/v02_04_01" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -281,50 +281,6 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="repDSR">
-        <xs:simpleType>
-          <xs:annotation>
-            <xs:documentation>Indicativo de repercussão no DSR: "S" ou "N"</xs:documentation>
-          </xs:annotation>
-          <xs:restriction base="xs:string">
-            <xs:length value="1"/>
-            <xs:pattern value="[N|S]"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
-      <xs:element name="rep13">
-        <xs:simpleType>
-          <xs:annotation>
-            <xs:documentation>Indicativo de repercussão no 13º Salário: "S" ou "N"</xs:documentation>
-          </xs:annotation>
-          <xs:restriction base="xs:string">
-            <xs:length value="1"/>
-            <xs:pattern value="[N|S]"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
-      <xs:element name="repFerias">
-        <xs:simpleType>
-          <xs:annotation>
-            <xs:documentation>Indicativo de repercussão nas Férias: "S" ou "N"</xs:documentation>
-          </xs:annotation>
-          <xs:restriction base="xs:string">
-            <xs:length value="1"/>
-            <xs:pattern value="[N|S]"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
-      <xs:element name="repAviso">
-        <xs:simpleType>
-          <xs:annotation>
-            <xs:documentation>Indicativo de repercussão no Aviso Prévio: "S" ou "N"</xs:documentation>
-          </xs:annotation>
-          <xs:restriction base="xs:string">
-            <xs:length value="1"/>
-            <xs:pattern value="[N|S]"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
       <xs:element name="observacao" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
@@ -434,16 +390,6 @@
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
-            <xs:element name="codSusp">
-              <xs:simpleType>
-                <xs:annotation>
-                  <xs:documentation>Código do Indicativo da Suspensão</xs:documentation>
-                </xs:annotation>
-                <xs:restriction base="xs:integer">
-                  <xs:pattern value="\d{1,14}"/>
-                </xs:restriction>
-              </xs:simpleType>
-            </xs:element>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -461,16 +407,6 @@
                 <xs:restriction base="xs:string">
                   <xs:minLength value="1"/>
                   <xs:maxLength value="20"/>
-                </xs:restriction>
-              </xs:simpleType>
-            </xs:element>
-            <xs:element name="codSusp">
-              <xs:simpleType>
-                <xs:annotation>
-                  <xs:documentation>Código do Indicativo da Suspensão</xs:documentation>
-                </xs:annotation>
-                <xs:restriction base="xs:integer">
-                  <xs:pattern value="\d{1,14}"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>

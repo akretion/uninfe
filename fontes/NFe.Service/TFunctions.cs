@@ -104,7 +104,7 @@ namespace NFe.Service
             {
             }
 
-            File.WriteAllText(arqErro, erroMessage);
+            File.WriteAllText(arqErro, erroMessage, Encoding.UTF8);
 
             // grava o arquivo de erro no FTP
             new GerarXML(emp).XmlParaFTP(emp, arqErro);

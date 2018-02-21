@@ -140,6 +140,7 @@ namespace NFe.ConvertTxt
                             minhaCultura.NumberFormat.NumberDecimalSeparator = ".";
 
                             var data = nodeinfNFe.InnerText.Replace("<![CDATA[", "").Replace("]]>", "");
+                            nfe.qrCode.Link = data;
                             var split = data.Split(new char[] { '&' });
                             foreach (var s in split)
                             {

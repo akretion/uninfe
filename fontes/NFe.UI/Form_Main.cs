@@ -88,6 +88,16 @@ namespace NFe.UI
                 //Executar os serviços do UniNFe em novas threads
                 //Tem que ser carregado depois que o formulário da MainForm estiver totalmente carregado para evitar Erros. Wandrey 19/10/2010
                 this.ExecutaServicos();
+
+                Functions.WriteLog("Quantidade de empresas configuradas: " + Empresas.Configuracoes.Count, false, true, "");
+                Functions.WriteLog("----------------------------------- ", false, true, "");
+                Functions.WriteLog("Certificados digitais configurados:", false, true, "");
+                Functions.WriteLog("----------------------------------- ", false, true, "");
+
+                for (int i = 0; i < Empresas.Configuracoes.Count; i++)
+                {
+                    Functions.WriteLog(Empresas.Configuracoes[i].X509Certificado.SubjectName.Name, false, true, "");
+                }
             }
             finally
             {

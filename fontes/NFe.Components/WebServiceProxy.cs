@@ -1152,6 +1152,11 @@ namespace NFe.Components
         /// </summary>
         public string ConsultaSequenciaLoteNotaRPS { get; set; }
 
+        /// <summary>
+        /// Substituir Nfse
+        /// </summary>
+        public string SubstituirNfse { get; set; }
+
         #endregion NFS-e
 
         #region CFS-e

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4">
@@ -94,10 +94,10 @@
   </wsdl:binding>
   <wsdl:service name="NFeAutorizacao4">
     <wsdl:port name="NFeAutorizacao4Soap" binding="tns:NFeAutorizacao4Soap">
-      <soap:address location="https://www.svc.fazenda.gov.br/NFeAutorizacao4/NFeAutorizacao4.asmx" />
+      <soap:address location="https://hom.svc.fazenda.gov.br/NFeAutorizacao4/NFeAutorizacao4.asmx" />
     </wsdl:port>
     <wsdl:port name="NFeAutorizacao4Soap12" binding="tns:NFeAutorizacao4Soap12">
-      <soap12:address location="https://www.svc.fazenda.gov.br/NFeAutorizacao4/NFeAutorizacao4.asmx" />
+      <soap12:address location="https://hom.svc.fazenda.gov.br/NFeAutorizacao4/NFeAutorizacao4.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

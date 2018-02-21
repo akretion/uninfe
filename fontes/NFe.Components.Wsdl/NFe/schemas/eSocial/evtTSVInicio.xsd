@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtTSVInicio/v02_04_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtTSVInicio/v02_04_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtTSVInicio/v02_04_01" targetNamespace="http://www.esocial.gov.br/schema/evt/evtTSVInicio/v02_04_01" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -383,6 +383,16 @@
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
+                    <xs:element name="cadIni">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>Indicativo de cadastramento inicial</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                          <xs:pattern value="[N|S]"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
                     <xs:element name="codCateg">
                       <xs:simpleType>
                         <xs:annotation>
@@ -876,6 +886,54 @@
                                 </xs:element>
                               </xs:sequence>
                             </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="afastamento" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Informações de afastamento do TSVE. Preenchimento exclusivo em caso de trabalhador que permaneça afastado na data de início da obrigatoriedade dos eventos não periódicos para o empregador no eSocial.</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="dtIniAfast">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Data de início do afastamento</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:date">
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="codMotAfast">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Código do motivo de afastamento</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:length value="2"/>
+                                <xs:pattern value="\d{2}"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="termino" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Informações de término do TSVE.
+Registro preenchido exclusivamente caso seja necessário enviar cadastramento inicial referente a trabalhador com data de término anterior ao início dos eventos não periódicos para o empregador no eSocial (ex: envio para pagamento de retiradas em meses posteriores à data de término e sob vigência dos eventos periódicos para o empregador no eSocial).</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="dtTerm">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Data do Término</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:date">
+                              </xs:restriction>
+                            </xs:simpleType>
                           </xs:element>
                         </xs:sequence>
                       </xs:complexType>

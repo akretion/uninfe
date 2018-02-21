@@ -1059,6 +1059,10 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultaSequenciaLoteNotaRPS : list.LocalProducao.ConsultaSequenciaLoteNotaRPS);
                             break;
 
+                        case Servicos.NFSeSubstituirNfse:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.SubstituirNfse : list.LocalProducao.SubstituirNfse);
+                            break;
+
                         #endregion NFS-e
 
                         #region CFS-e

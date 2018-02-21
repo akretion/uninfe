@@ -20,6 +20,16 @@ namespace NFe.Components
         public string TagAtributoId { get; private set; }
 
         /// <summary>
+        /// Nome da tag do XML que será assinada (uma segunda tag que tem que ser assinada ex. SubstituirNfse Pelotas-RS)
+        /// </summary>
+        public string TagAssinatura0 { get; private set; }
+
+        /// <summary>
+        /// Nome da tag que tem o atributo ID que será assinada, faz consunto com a TagAssinatura0
+        /// </summary>
+        public string TagAtributoId0 { get; private set; }
+
+        /// <summary>
         /// Tag que deve ser assinada no XML, se o conteúdo estiver em branco é por que o XML não deve ser assinado
         /// </summary>
         public string TagLoteAssinatura { get; private set; }
@@ -276,6 +286,8 @@ namespace NFe.Components
                 cRetornoTipoArq = schema.Descricao;
                 TagAssinatura = schema.TagAssinatura;
                 TagAtributoId = schema.TagAtributoId;
+                TagAssinatura0 = schema.TagAssinatura0;
+                TagAtributoId0 = schema.TagAtributoId0;
                 TagLoteAssinatura = schema.TagLoteAssinatura;
                 TagLoteAtributoId = schema.TagLoteAtributoId;
                 TargetNameSpace = schema.TargetNameSpace;

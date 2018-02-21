@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtPgtos/v02_04_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtPgtos/v02_04_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtPgtos/v02_04_01" targetNamespace="http://www.esocial.gov.br/schema/evt/evtPgtos/v02_04_01" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -435,8 +435,7 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
                           </xs:element>
                           <xs:element name="detPgtoAnt" minOccurs="0" maxOccurs="99">
                             <xs:annotation>
-                              <xs:documentation>Pagamento relativo a competências anteriores ao início de obrigatoriedade do eSocial.
-O somatório de cada uma das rubricas cujo {codIncIRRF} = [31, 32, 33, 34, 35] não pode ser negativo.</xs:documentation>
+                              <xs:documentation>Pagamento relativo a competências anteriores ao início de obrigatoriedade dos eventos periódicos para o contribuinte.</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>

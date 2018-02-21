@@ -27,7 +27,7 @@ namespace NFSe.Components
     /// <summary>
     /// Emite notas fiscais de serviço no padrão IPM
     /// </summary>
-    public class IPM : EmiteNFSeBase
+    public class IPM : EmiteNFSeBase, IEmiteNFSeIPM
     {
         public override string NameSpaces
         {
@@ -89,6 +89,9 @@ namespace NFSe.Components
 
                 case 4307807: // Estrela-RS
                     return (int)8653;
+
+                case 4211900: // Palhoça-SC
+                    return (int)8233;
             }
 
             return 0;

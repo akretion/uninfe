@@ -461,7 +461,7 @@ namespace NFe.Service.NFSe
 
 #if _fw46
                     case PadroesNFSe.SOFTPLAN:
-                        Components.SOFTPLAN.SOFTPLAN softplan = new Components.SOFTPLAN.SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        NFe.Components.SOFTPLAN.SOFTPLAN softplan = new NFe.Components.SOFTPLAN.SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                         Empresas.Configuracoes[emp].UsuarioWS,
                                                         Empresas.Configuracoes[emp].SenhaWS,
@@ -477,6 +477,16 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.MANAUS_AM:
                         cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.AVMB_ASTEN:
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        if (oDadosPedSitNfse.tpAmb == 2)
+                            pedLoteRps = new Components.HPelotasRS.INfseservice();
+                        else
+                            pedLoteRps = new Components.PPelotasRS.INfseservice();
                         break;
                 }
 

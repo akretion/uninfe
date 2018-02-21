@@ -351,9 +351,9 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeInutilizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNfeStatusServico.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeInutilizacao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeStatusServico2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeConsulta.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeInutilizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeStatusServico.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBACadConsultaCadastro.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeInutilizacao.wsdl" />
@@ -997,7 +997,7 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\ES\HESNfeCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\ES\PESNfeCadConsultaCadastro2.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMCadConsultaCadastro.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMCadConsultaCadastro2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMCadConsultaCadastro.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\SALVADOR_BA\DadosComplementares.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -1626,9 +1626,9 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\PR\HPRNFeRetAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeRetAutorizacao.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeConsulta2_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeInutilizacao2_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeStatusServico2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeConsulta_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeInutilizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeStatusServico_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMRecepcaoEvento_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetAutorizacao.wsdl" />
@@ -1992,9 +1992,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PFarroupilhaRS-GIFServicos.wsdl">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PRezendeRJTIPLAN-nfse.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PSaoGoncaloRJ-sigiss_ws.wsdl" />
@@ -3254,7 +3251,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeInutilizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeRetAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeStatusServico_400.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMRecepcaoEvento_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeConsulta_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeRetAutorizacao_400.wsdl" />
@@ -3283,7 +3279,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\HANRecepcaoEvento_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVAN\HSVCANNfeAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVAN\HSVCANNfeConsulta_400.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVAN\HSVCANNfeRecepcaoEvento_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVAN\HSVCANNfeRetAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVAN\HSVCANNfeStatusServico_400.wsdl" />
     <EmbeddedResource Include="NFe\schemas\EFDReinf\evtEspDesportivo-v1_02_00.xsd">
@@ -3648,6 +3643,22 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeInutilizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeRetAutorizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeStatusServico_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeConsulta_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeInutilizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeRetAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeStatusServico_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeConsulta_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeInutilizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeRetAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeStatusServico_C_400.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\AVMB_ASTEN\nfse.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\AVMB_ASTEN\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -3769,8 +3780,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PDoisIrmaos-EnvioLoteRPSSincrono.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HCampoNovoParecis-COPLAN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCampoNovoParecis-COPLAN.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PPelotasRS_GOVDIGITAL.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPelotasRS_GOVDIGITAL.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaciSP-FIORILLI.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PJaciSP-FIORILLI.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HBoituvaSP-cancelarnfse.wsdl" />
@@ -3965,6 +3974,8 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PSerafinaCorreaRS-FIORILLI.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HBomDespachoMG-WebISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PBomDespachoMG-WebISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPelotas_RS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPelotas_RS.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

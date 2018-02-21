@@ -42,11 +42,12 @@ namespace NFe.Service
         {
             int emp = Empresas.FindEmpresaByThread();
 
+            FluxoNfe oFluxoNfe = new FluxoNfe();
+            LerXML oLer = new LerXML();
+
             try
             {
                 dadosRec = new DadosRecClass();
-                FluxoNfe oFluxoNfe = new FluxoNfe();
-                LerXML oLer = new LerXML();
 
                 //Ler o XML de Lote para pegar o número do lote que está sendo enviado
                 oLer.Nfe(ConteudoXML);
@@ -114,7 +115,7 @@ namespace NFe.Service
 
                 if (dadosRec.cStat == "104") //Lote processado - Processo da NFe Síncrono - Wandrey 13/03/2014
                 {
-                    FinalizarNFeSincrono(vStrXmlRetorno, emp);
+                    FinalizarNFeSincrono(vStrXmlRetorno, emp, oLer.oDadosNfe.chavenfe);
 
                     oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML, vStrXmlRetorno);
                 }
@@ -129,6 +130,7 @@ namespace NFe.Service
 
                     XmlDocument xmlPedRec = oGerarXML.XmlPedRecNFe(dadosRec.nRec, oLer.oDadosNfe.versao, oLer.oDadosNfe.mod, emp);
                     TaskNFeRetRecepcao nfeRetRecepcao = new TaskNFeRetRecepcao(xmlPedRec);
+                    nfeRetRecepcao.chNFe = oLer.oDadosNfe.chavenfe;
                     nfeRetRecepcao.Execute();
                 }
                 else if (Convert.ToInt32(dadosRec.cStat) > 200 ||
@@ -157,15 +159,15 @@ namespace NFe.Service
             }
             catch (ExceptionEnvioXML ex)
             {
-                TrataException(emp, ex);
+                TrataException(emp, ex, oLer.oDadosNfe.chavenfe);
             }
             catch (ExceptionSemInternet ex)
             {
-                TrataException(emp, ex);
+                TrataException(emp, ex, oLer.oDadosNfe.chavenfe);
             }
             catch (Exception ex)
             {
-                TrataException(emp, ex);
+                TrataException(emp, ex, oLer.oDadosNfe.chavenfe);
             }
         }
 
@@ -176,10 +178,12 @@ namespace NFe.Service
         /// </summary>
         /// <param name="emp">Código da empresa</param>
         /// <param name="ex">Objeto com a exception</param>
-        private void TrataException(int emp, Exception ex)
+        private void TrataException(int emp, Exception ex, string chavenfe)
         {
             try
             {
+                new FluxoNfe().ExcluirNfeFluxo(chavenfe);
+
                 //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
                 switch (Empresas.Configuracoes[emp].IndSinc)
                 {
@@ -286,7 +290,7 @@ namespace NFe.Service
         /// </summary>
         /// <param name="xmlRetorno">Conteúdo do XML retornado da SEFAZ</param>
         /// <param name="emp">Código da empresa para buscar as configurações</param>
-        private void FinalizarNFeSincrono(string xmlRetorno, int emp)
+        private void FinalizarNFeSincrono(string xmlRetorno, int emp, string chNFe)
         {
             XmlDocument xml = new XmlDocument();
             xml.Load(Functions.StringXmlToStream(xmlRetorno));
@@ -296,6 +300,7 @@ namespace NFe.Service
             FluxoNfe fluxoNFe = new FluxoNfe();
 
             TaskNFeRetRecepcao retRecepcao = new TaskNFeRetRecepcao();
+            retRecepcao.chNFe = chNFe;
             retRecepcao.FinalizarNFe(protNFe, fluxoNFe, emp, ConteudoXML);
         }
 

@@ -12,7 +12,7 @@ namespace NFe.Components.SOFTPLAN
 {
     public class SOFTPLAN : EmiteNFSeBase, IEmiteNFSeSOFTPLAN
     {
-#region Public Properties
+        #region Public Properties
 
         public override string NameSpaces
         {
@@ -28,7 +28,13 @@ namespace NFe.Components.SOFTPLAN
 
         public string URLAPIBase
         {
-            get { return @"https://nfps-e-hml.pmf.sc.gov.br/api/v1/"; }
+            get
+            {
+                if (tpAmb.Equals(TipoAmbiente.taHomologacao))
+                    return @"https://nfps-e-hml.pmf.sc.gov.br/api/v1/";
+                else
+                    return @"https://nfps-e.pmf.sc.gov.br/api/v1/";
+            }
         }
         private string _token;
         public string Token
@@ -42,9 +48,9 @@ namespace NFe.Components.SOFTPLAN
             }
         }
 
-#endregion Public Properties
+        #endregion Public Properties
 
-#region Public Construstor
+        #region Public Construstor
         public SOFTPLAN(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senha, string clientID, string clientSecret)
             : base(tpAmb, pastaRetorno)
         {
@@ -54,9 +60,9 @@ namespace NFe.Components.SOFTPLAN
             ClientSecret = clientSecret;
         }
 
-#endregion Public Construstor
+        #endregion Public Construstor
 
-#region Public Methods
+        #region Public Methods
 
         public override void CancelarNfse(string file)
         {
@@ -72,11 +78,11 @@ namespace NFe.Components.SOFTPLAN
                     $"Authorization: bearer {Token}"
                 };
 
-                result = post.PostForm(Path.Combine(URLAPIBase, "cancelamento/notas/cancela"), 
+                result = post.PostForm(Path.Combine(URLAPIBase, "cancelamento/notas/cancela"),
                     new Dictionary<string, string>
                     {
                         {"f1", file}
-                    }, 
+                    },
                     autorizations);
             }
 
@@ -88,7 +94,34 @@ namespace NFe.Components.SOFTPLAN
         { }
 
         public override void ConsultarNfse(string file)
-        { }
+        {
+            string result = "";
+            string codigoVerificacao = "";
+            string cmc = "";
+
+            XmlDocument xmlConsulta = new XmlDocument();
+            xmlConsulta.Load(file);
+
+            XmlNode consultaNFSe = xmlConsulta?.GetElementsByTagName("ConsultarNfseEnvio")[0];
+            codigoVerificacao = consultaNFSe?.FirstChild?.InnerText;
+            cmc = consultaNFSe?.LastChild?.InnerText;
+
+            using (GetRequest get = new GetRequest
+            {
+                Proxy = Proxy
+            })
+            {
+                result = get.GetForm($"{Path.Combine(URLAPIBase, $"consultas/notas/codigo/{codigoVerificacao}/{cmc}")}");
+            }
+
+            result = result?.Replace("{", "");
+            result = "{" + "\"nota\":{" + result + "}";
+
+            XmlDocument consultaResult = JsonConvert.DeserializeXmlNode(result);
+
+            GerarRetorno(file, consultaResult.InnerXml, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+                                       Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
+        }
 
         public override void ConsultarNfsePorRps(string file)
         { }
@@ -110,11 +143,11 @@ namespace NFe.Components.SOFTPLAN
                     $"Authorization: bearer {Token}"
                 };
 
-                result = post.PostForm(Path.Combine(URLAPIBase, "processamento/notas/processa"), 
+                result = post.PostForm(Path.Combine(URLAPIBase, "processamento/notas/processa"),
                     new Dictionary<string, string>
                     {
                         { "f1", file}
-                    }, 
+                    },
                     autorizations);
             }
 
@@ -166,7 +199,8 @@ namespace NFe.Components.SOFTPLAN
             return result;
         }
 
-#endregion Public Methods
+        #endregion Public Methods
     }
 }
+
 #endif
