@@ -42,7 +42,6 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.cmSituacaoServicos = new System.Windows.Forms.ToolStripMenuItem();
             this.cmConsultaCadastro = new System.Windows.Forms.ToolStripMenuItem();
-//            this.cmDANFE = new System.Windows.Forms.ToolStripMenuItem();
             this.cmValidarXML = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cmLogs = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,109 +70,109 @@
             // tbPararServico
             // 
             this.tbPararServico.Name = "tbPararServico";
-            this.tbPararServico.Size = new System.Drawing.Size(273, 22);
+            this.tbPararServico.Size = new System.Drawing.Size(257, 22);
             this.tbPararServico.Text = "Parar o serviço";
             this.tbPararServico.Click += new System.EventHandler(this.tbPararServico_Click);
             // 
             // tbRestartServico
             // 
             this.tbRestartServico.Name = "tbRestartServico";
-            this.tbRestartServico.Size = new System.Drawing.Size(273, 22);
+            this.tbRestartServico.Size = new System.Drawing.Size(257, 22);
             this.tbRestartServico.Text = "Reiniciar o serviço";
             this.tbRestartServico.Click += new System.EventHandler(this.tbRestartServico_Click);
             // 
             // tbSeparator1
             // 
             this.tbSeparator1.Name = "tbSeparator1";
-            this.tbSeparator1.Size = new System.Drawing.Size(270, 6);
+            this.tbSeparator1.Size = new System.Drawing.Size(254, 6);
             // 
             // cmAbrir
             // 
             this.cmAbrir.Name = "cmAbrir";
-            this.cmAbrir.Size = new System.Drawing.Size(273, 22);
+            this.cmAbrir.Size = new System.Drawing.Size(257, 22);
             this.cmAbrir.Text = "Abrir UniNFe";
             this.cmAbrir.Click += new System.EventHandler(this.cmAbrir_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(270, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(254, 6);
             // 
             // cmConfiguracoes
             // 
             this.cmConfiguracoes.Name = "cmConfiguracoes";
-            this.cmConfiguracoes.Size = new System.Drawing.Size(273, 22);
+            this.cmConfiguracoes.Size = new System.Drawing.Size(257, 22);
             this.cmConfiguracoes.Text = "Configurações";
             this.cmConfiguracoes.Click += new System.EventHandler(this.cmConfiguracoes_Click);
             // 
             // cmMunicipios
             // 
             this.cmMunicipios.Name = "cmMunicipios";
-            this.cmMunicipios.Size = new System.Drawing.Size(273, 22);
+            this.cmMunicipios.Size = new System.Drawing.Size(257, 22);
             this.cmMunicipios.Text = "Municipios";
             this.cmMunicipios.Click += new System.EventHandler(this.cmMunicipios_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(270, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(254, 6);
             // 
             // cmSituacaoServicos
             // 
             this.cmSituacaoServicos.Name = "cmSituacaoServicos";
-            this.cmSituacaoServicos.Size = new System.Drawing.Size(273, 22);
+            this.cmSituacaoServicos.Size = new System.Drawing.Size(257, 22);
             this.cmSituacaoServicos.Text = "Consultar situação dos serviços";
             this.cmSituacaoServicos.Click += new System.EventHandler(this.cmSituacaoServicos_Click);
             // 
             // cmConsultaCadastro
             // 
             this.cmConsultaCadastro.Name = "cmConsultaCadastro";
-            this.cmConsultaCadastro.Size = new System.Drawing.Size(273, 22);
+            this.cmConsultaCadastro.Size = new System.Drawing.Size(257, 22);
             this.cmConsultaCadastro.Text = "Consultar cadastro de contribuinte";
             this.cmConsultaCadastro.Click += new System.EventHandler(this.cmConsultaCadastro_Click);
             // 
             // cmValidarXML
             // 
             this.cmValidarXML.Name = "cmValidarXML";
-            this.cmValidarXML.Size = new System.Drawing.Size(273, 22);
+            this.cmValidarXML.Size = new System.Drawing.Size(257, 22);
             this.cmValidarXML.Text = "Validar arquivos XML";
             this.cmValidarXML.Click += new System.EventHandler(this.cmValidarXML_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(270, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(254, 6);
             // 
             // cmLogs
             // 
             this.cmLogs.Name = "cmLogs";
-            this.cmLogs.Size = new System.Drawing.Size(273, 22);
+            this.cmLogs.Size = new System.Drawing.Size(257, 22);
             this.cmLogs.Text = "Logs";
             this.cmLogs.Click += new System.EventHandler(this.cmLogs_Click);
             // 
             // cmManual
             // 
             this.cmManual.Name = "cmManual";
-            this.cmManual.Size = new System.Drawing.Size(273, 22);
+            this.cmManual.Size = new System.Drawing.Size(257, 22);
             this.cmManual.Text = "Manual do UniNFe";
             this.cmManual.Click += new System.EventHandler(this.cmManual_Click);
             // 
             // cmSobre
             // 
             this.cmSobre.Name = "cmSobre";
-            this.cmSobre.Size = new System.Drawing.Size(273, 22);
+            this.cmSobre.Size = new System.Drawing.Size(257, 22);
             this.cmSobre.Text = "Sobre o UniNFe";
             this.cmSobre.Click += new System.EventHandler(this.cmSobre_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(270, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(254, 6);
             // 
             // cmFechar
             // 
             this.cmFechar.Name = "cmFechar";
-            this.cmFechar.Size = new System.Drawing.Size(273, 22);
+            this.cmFechar.Size = new System.Drawing.Size(257, 22);
             this.cmFechar.Text = "Fechar o UniNFe";
             this.cmFechar.Click += new System.EventHandler(this.cmFechar_Click);
             // 
@@ -204,7 +203,7 @@
             this.toolStripSeparator1,
             this.cmFechar});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(274, 320);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(258, 298);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.metroContextMenu1_Opening);
             // 
             // pictureBox1
@@ -228,7 +227,6 @@
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "Form_Main";
             this.Padding = new System.Windows.Forms.Padding(15, 60, 15, 15);
-            this.Resizable = false;
             this.ShadowType = MetroFramework.Forms.MetroFormShadowType.AeroShadow;
             this.Text = "UniNFe";
             this.Load += new System.EventHandler(this.Form1_Load);

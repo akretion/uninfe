@@ -22,12 +22,14 @@ namespace NFe.Components
     {
 #if _fw35
 
-        #region Criar protocolo de comunicação TLS12 para .NET 3.5
+        #region Criar protocolo de comunicação TLS11 e TLS12 para .NET 3.5
 
         private const SslProtocols _Tls12 = (SslProtocols)0x00000C00;
+        private const SslProtocols _Tls11 = (SslProtocols)0x00000300;
+        private const SecurityProtocolType Tls11 = (SecurityProtocolType)_Tls11;
         private const SecurityProtocolType Tls12 = (SecurityProtocolType)_Tls12;
 
-        #endregion Criar protocolo de comunicação TLS12 para .NET 3.5
+        #endregion Criar protocolo de comunicação TLS11 e TLS12 para .NET 3.5
 
 #endif
 
@@ -489,7 +491,7 @@ namespace NFe.Components
         public static SecurityProtocolType DefinirProtocoloSeguranca(int cUF, bool taHomologacao, int tpEmis, PadroesNFSe padraoNFSe, Servicos servico)
         {
 #if _fw35
-            SecurityProtocolType securityProtocolType = Tls12 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
+            SecurityProtocolType securityProtocolType = Tls11 | Tls12 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
 #else
             SecurityProtocolType securityProtocolType = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
 #endif

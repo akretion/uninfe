@@ -339,7 +339,16 @@ namespace NFe.Validate
                 {
                     EncryptAssinatura(Arquivo);
 
-                    oAD.Assinar(Arquivo, emp, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
+                    if (TipoArqXml.TagAssinatura == "eSocial" || TipoArqXml.TagAssinatura == "Reinf")
+                    {
+                        oAD.Assinar(Arquivo, emp, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, AlgorithmType.Sha256);
+                    }
+                    else
+                    {
+                        oAD.Assinar(Arquivo, emp, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
+                    }
+
+                    
 
                     Assinou = true;
                 }
