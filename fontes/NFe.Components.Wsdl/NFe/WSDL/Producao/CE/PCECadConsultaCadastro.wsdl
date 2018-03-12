@@ -2,23 +2,35 @@
   <wsdl:types>
 <s:schema xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4">
 			
-			<s:element name="nfeDadosMsg">
-				<s:complexType mixed="true">
-					<s:sequence>
-						<s:any/>
-					</s:sequence>
-				</s:complexType>
-			</s:element>
+  <s:element name="nfeDadosMsg">
+				
+    <s:complexType mixed="true">
+					
+      <s:sequence>
+						
+        <s:any/>
+					
+      </s:sequence>
+				
+    </s:complexType>
+			
+  </s:element>
 			
   <s:element name="nfeResultMsg">
 				
-				<s:complexType mixed="true">
-					<s:sequence>
-						<s:any/>
-					</s:sequence>
-				</s:complexType>
-			</s:element>
-		</s:schema>
+    <s:complexType mixed="true">
+					
+      <s:sequence>
+						
+        <s:any/>
+					
+      </s:sequence>
+				
+    </s:complexType>
+			
+  </s:element>
+		
+</s:schema>
   </wsdl:types>
   <wsdl:message name="cadConsultaCadastroSoap12Out">
     <wsdl:part element="tns:nfeResultMsg" name="nfeResultMsg">
@@ -50,7 +62,7 @@
   </wsdl:binding>
   <wsdl:service name="CadConsultaCadastro4">
     <wsdl:port binding="tns:CadConsultaCadastroSoap12" name="CadConsultaCadastroSoap12">
-      <soap12:address location="https://nfeh.sefaz.ce.gov.br/nfe4/services/CadConsultaCadastro4"/>
+      <soap12:address location="https://nfe.sefaz.ce.gov.br/nfe4/services/CadConsultaCadastro4"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

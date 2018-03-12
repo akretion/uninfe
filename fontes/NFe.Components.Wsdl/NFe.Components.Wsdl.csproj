@@ -359,10 +359,10 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeInutilizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBANfeStatusServico.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\BA\PBARecepcaoEvento.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCECadConsultaCadastro2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeInutilizacao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeStatusServico2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCECadConsultaCadastro.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeConsulta.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeInutilizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeStatusServico.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCERecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGOCadConsultaCadastro.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\GO\PGONfeConsulta.wsdl" />
@@ -380,10 +380,10 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeInutilizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeStatusServico.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNFeRecepcaoEvento.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeCadConsultaCadastro2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeConsulta2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeInutilizacao2.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeStatusServico2.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeCadConsultaCadastro.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeConsulta.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeInutilizacao.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeStatusServico.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeRecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPECadConsultaCadastro.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\PE\PPENfeConsulta.wsdl" />
@@ -1647,11 +1647,11 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeRetAutorizacao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeStatusServico_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeAutorizacao_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeConsulta2_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeInutilizacao2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeConsulta_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeInutilizacao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeRecepcaoEvento_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeRetAutorizacao_C.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeStatusServico2_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeStatusServico_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeAutorizacao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeRetAutorizacao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeAutorizacao.wsdl" />
@@ -3659,6 +3659,64 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\AVMB_ASTEN\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\envioLoteEventos-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoLoteEventos-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorContribuinte-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorEvento-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtEspDesportivo-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtExclusao-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtFechamento-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoContribuinte-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoCPRB-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoProdRural-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtPrestadorServicos-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtReabreEvPer-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRecebidoAssociacao-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRepassadoAssociacao-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTabProcesso-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTomadorServicos-v1_03_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeConsulta_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeInutilizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeRetAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeStatusServico_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeConsulta_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeInutilizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeRetAutorizacao_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeStatusServico_400.wsdl" />
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>

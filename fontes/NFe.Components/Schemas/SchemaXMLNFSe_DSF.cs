@@ -30,8 +30,8 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\DSF\\ReqConsultaNFSeRPS.xsd",
                 Descricao = "XML de Consulta de NFSe por Rps",
-                TagAssinatura = "",
-                TagAtributoId = "",
+                TagAssinatura = "ns1:ReqConsultaNFSeRPS",
+                TagAtributoId = "Lote",
                 TargetNameSpace = "http://localhost:8080/WsNFe2/lote"
             });
             #endregion

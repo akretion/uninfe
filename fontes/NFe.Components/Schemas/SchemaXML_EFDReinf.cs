@@ -169,7 +169,7 @@
 
             #endregion R-3010 - Receita de Espetáculo Desportivo
 
-            #region R-5001 - Informações das bases e dos tributos consolidados por contribuinte
+            #region R-5001 - Informações das bases e dos tributos consolidados por contribuinte - evtTotal (versão 1.02.00 ou inferior)
 
             SchemaXML.InfSchemas.Add("Reinf-evtTotal", new InfSchema()
             {
@@ -180,6 +180,21 @@
                 TagAssinatura = "Reinf",
                 TagAtributoId = "evtTotal",
                 TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/retornoTotalizadorContribuinte/v{0}"
+            });
+
+            #endregion R-5001 - Informações das bases e dos tributos consolidados por contribuinte
+
+            #region R-5001 - Informações das bases e dos tributos consolidados por contribuinte - evtTotalContrib - versão 1.03.00
+
+            SchemaXML.InfSchemas.Add("Reinf-evtTotalContrib", new InfSchema()
+            {
+                Tag = "evtTotalContrib",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "EFDReinf\\retornoTotalizadorContribuinte-v{0}.xsd",
+                Descricao = "XML EFDReinf - 5001 - Informações das bases e dos tributos consolidados por contribuinte",
+                TagAssinatura = "Reinf",
+                TagAtributoId = "evtTotalContrib",
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtTotalContrib/v{0}"
             });
 
             #endregion R-5001 - Informações das bases e dos tributos consolidados por contribuinte

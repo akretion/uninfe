@@ -82,6 +82,10 @@ namespace NFe.Service
                 // Envio de NFe Compactada - Renan 29/04/2014
                 string nOperacao = wsProxy.NomeMetodoWS[(Servico == Servicos.NFeEnviarLoteZip) ? 1 : 0];
 
+                //System.Windows.Forms.DialogResult gravarRetorno = System.Windows.Forms.MessageBox.Show("Gravar xml de retorno retorno?", "DEBUG", System.Windows.Forms.MessageBoxButtons.YesNo, System.Windows.Forms.MessageBoxIcon.Question, System.Windows.Forms.MessageBoxDefaultButton.Button2);
+
+                System.Windows.Forms.DialogResult gravarRetorno = System.Windows.Forms.DialogResult.Yes;
+                
                 //Invocar o método que envia o XML para o SEFAZ
                 if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.indSinc)
                 {
@@ -96,7 +100,9 @@ namespace NFe.Service
                                         false,
                                         securityProtocolType);
 
-                    Protocolo(vStrXmlRetorno);
+
+                    if (gravarRetorno == System.Windows.Forms.DialogResult.Yes)
+                       Protocolo(vStrXmlRetorno);
                 }
                 else
                 {
@@ -107,47 +113,52 @@ namespace NFe.Service
                                         this,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML,
                                         Propriedade.ExtRetorno.Rec,
-                                        true,
+                                        (gravarRetorno == System.Windows.Forms.DialogResult.Yes ? true : false),
                                         securityProtocolType);
 
-                    Recibo(vStrXmlRetorno, emp);
+                    if (gravarRetorno == System.Windows.Forms.DialogResult.Yes)
+                       Recibo(vStrXmlRetorno, emp);
                 }
 
-                if (dadosRec.cStat == "104") //Lote processado - Processo da NFe Síncrono - Wandrey 13/03/2014
+                if (gravarRetorno == System.Windows.Forms.DialogResult.Yes)
                 {
-                    FinalizarNFeSincrono(vStrXmlRetorno, emp, oLer.oDadosNfe.chavenfe);
-
-                    oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML, vStrXmlRetorno);
-                }
-                else if (dadosRec.cStat == "103") //Lote recebido com sucesso - Processo da NFe Assíncrono
-                {
-                    if (dadosRec.tMed > 0)
-                        Thread.Sleep(dadosRec.tMed * 1000);
-
-                    //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
-                    oFluxoNfe.AtualizarTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, (dadosRec.tMed + 2).ToString());
-                    oFluxoNfe.AtualizarTagRec(idLote, dadosRec.nRec);
-
-                    XmlDocument xmlPedRec = oGerarXML.XmlPedRecNFe(dadosRec.nRec, oLer.oDadosNfe.versao, oLer.oDadosNfe.mod, emp);
-                    TaskNFeRetRecepcao nfeRetRecepcao = new TaskNFeRetRecepcao(xmlPedRec);
-                    nfeRetRecepcao.chNFe = oLer.oDadosNfe.chavenfe;
-                    nfeRetRecepcao.Execute();
-                }
-                else if (Convert.ToInt32(dadosRec.cStat) > 200 ||
-                         Convert.ToInt32(dadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
-                         Convert.ToInt32(dadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012
-                {
-                    if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.indSinc)
+                    if (dadosRec.cStat == "104") //Lote processado - Processo da NFe Síncrono - Wandrey 13/03/2014
                     {
-                        // OPS!!! Processo sincrono rejeição da SEFAZ, temos que gravar o XML para o ERP, pois no processo síncrono isso não pode ser feito dentro do método Invocar
-                        oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML/*.ExtRetorno.ProRec_XML*/, vStrXmlRetorno);
+                        FinalizarNFeSincrono(vStrXmlRetorno, emp, oLer.oDadosNfe.chavenfe);
+
+                        oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML, vStrXmlRetorno);
                     }
-                    //Se o status do retorno do lote for maior que 200 ou for igual a 108 ou 109,
-                    //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
-                    //Primeiro vamos mover o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois a tira do fluxo
-                    //Wandrey 30/04/2009
-                    oAux.MoveArqErro(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
-                    oFluxoNfe.ExcluirNfeFluxo(oLer.oDadosNfe.chavenfe);
+                    else if (dadosRec.cStat == "103") //Lote recebido com sucesso - Processo da NFe Assíncrono
+                    {
+                        if (dadosRec.tMed > 0)
+                            Thread.Sleep(dadosRec.tMed * 1000);
+
+                        //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
+                        oFluxoNfe.AtualizarTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, (dadosRec.tMed + 2).ToString());
+                        oFluxoNfe.AtualizarTagRec(idLote, dadosRec.nRec);
+
+                        XmlDocument xmlPedRec = oGerarXML.XmlPedRecNFe(dadosRec.nRec, oLer.oDadosNfe.versao, oLer.oDadosNfe.mod, emp);
+                        TaskNFeRetRecepcao nfeRetRecepcao = new TaskNFeRetRecepcao(xmlPedRec);
+                        nfeRetRecepcao.chNFe = oLer.oDadosNfe.chavenfe;
+                        nfeRetRecepcao.Execute();
+                    }
+                    else if (Convert.ToInt32(dadosRec.cStat) > 200 ||
+                             Convert.ToInt32(dadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
+                             Convert.ToInt32(dadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012
+                    {
+                        if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.indSinc)
+                        {
+                            // OPS!!! Processo sincrono rejeição da SEFAZ, temos que gravar o XML para o ERP, pois no processo síncrono isso não pode ser feito dentro do método Invocar
+                            oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML/*.ExtRetorno.ProRec_XML*/, vStrXmlRetorno);
+                        }
+                        //Se o status do retorno do lote for maior que 200 ou for igual a 108 ou 109,
+                        //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
+                        //Primeiro vamos mover o xml da nota da pasta EmProcessamento para pasta de XML´s com erro e depois a tira do fluxo
+                        //Wandrey 30/04/2009
+                        oAux.MoveArqErro(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + oFluxoNfe.LerTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoFixo.ArqNFe));
+                        oFluxoNfe.ExcluirNfeFluxo(oLer.oDadosNfe.chavenfe);
+                    }
+
                 }
 
                 //Deleta o arquivo de lote

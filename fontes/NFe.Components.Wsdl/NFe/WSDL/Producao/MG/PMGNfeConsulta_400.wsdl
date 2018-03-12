@@ -47,7 +47,7 @@
  <wsdl:service name='NFeConsultaProtocolo4'>
   <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado ao atendimento de solicitacoes de consulta da situacao atual da NFe na Base de Dados do Portal da Secretaria de Fazenda Estadual</wsdl:documentation>
   <wsdl:port binding='tns:NFeConsultaProtocolo4Soap12' name='NFeConsultaProtocolo4ServicePort'>
-   <soap12:address location='https://nfe.fazenda.mg.gov.br/nfe2/services/NFeConsulta4'/>
+   <soap12:address location='https://nfe.fazenda.mg.gov.br/nfe2/services/NFeConsultaProtocolo4'/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

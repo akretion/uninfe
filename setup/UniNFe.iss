@@ -40,6 +40,8 @@ Name: brazilianportuguese; MessagesFile: compiler:Languages\BrazilianPortuguese.
 
 [Files]
 Source: ..\fontes\uninfe\bin\Release\MetroFramework.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\MetroFramework.Design.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\MetroFramework.Fonts.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Certificado.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Components.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Components.Info.dll; DestDir: {app}; Flags: ignoreversion

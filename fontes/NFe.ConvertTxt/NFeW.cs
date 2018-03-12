@@ -2279,8 +2279,6 @@ namespace NFe.ConvertTxt
             if ((double)NFe.infNFe.Versao >= 3.10)
             {
                 wCampo(NFe.Total.ICMSTot.vICMSDeson, TpcnTipoCampo.tcDec2, TpcnResources.vICMSDeson);
-                if (NFe.infNFe.Versao >= 4)
-                    wCampo(NFe.Total.ICMSTot.vFCP, TpcnTipoCampo.tcDec2, TpcnResources.vFCP);
 
                 if (NFe.Total.ICMSTot.vFCPUFDest > 0 || NFe.Total.ICMSTot.vICMSUFDest > 0 || NFe.Total.ICMSTot.vICMSUFRemet > 0)
                 {
@@ -2288,6 +2286,8 @@ namespace NFe.ConvertTxt
                     wCampo(NFe.Total.ICMSTot.vICMSUFDest, TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFDest, ObOp.Opcional);
                     wCampo(NFe.Total.ICMSTot.vICMSUFRemet, TpcnTipoCampo.tcDec2, TpcnResources.vICMSUFRemet, ObOp.Opcional);
                 }
+                if (NFe.infNFe.Versao >= 4)
+                    wCampo(NFe.Total.ICMSTot.vFCP, TpcnTipoCampo.tcDec2, TpcnResources.vFCP);
             }
             wCampo(NFe.Total.ICMSTot.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST);
             wCampo(NFe.Total.ICMSTot.vST, TpcnTipoCampo.tcDec2, TpcnResources.vST);
