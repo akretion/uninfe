@@ -283,7 +283,7 @@ namespace NFe.ConvertTxt
                 {
                     wCampo((int)pagItem.tPag, TpcnTipoCampo.tcInt, TpcnResources.tPag, ObOp.Obrigatorio, 2);    //YA02
                     wCampo(pagItem.vPag, TpcnTipoCampo.tcDec2, TpcnResources.vPag, ObOp.Obrigatorio);           //YA03
-                    
+
                     //Modificado Samuel 24/01/2018
                     if ((int)pagItem.tpIntegra > 0 || !string.IsNullOrEmpty(pagItem.CNPJ) || (int)pagItem.tBand > 0 || !string.IsNullOrEmpty(pagItem.cAut))
                     {
@@ -522,7 +522,7 @@ namespace NFe.ConvertTxt
                 rootDet.AppendChild(nodeProd);
                 nodeCurrent = nodeProd;
 
-                this.convertToOem = (det.Prod.comb.cProdANP > 0 && det.Prod.comb.cProdANP > 0 ? false : true);
+                this.convertToOem = (det.Prod.comb.cProdANP > 0 ? false : true);
 
                 wCampo(det.Prod.cProd, TpcnTipoCampo.tcStr, TpcnResources.cProd);
                 wCampo(det.Prod.cEAN, TpcnTipoCampo.tcStr, TpcnResources.cEAN);
@@ -531,7 +531,7 @@ namespace NFe.ConvertTxt
                     det.Prod.nItem == 1)
                     wCampo("NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL", TpcnTipoCampo.tcStr, TpcnResources.xProd);
                 else
-                wCampo(det.Prod.xProd, TpcnTipoCampo.tcStr, TpcnResources.xProd);
+                    wCampo(det.Prod.xProd, TpcnTipoCampo.tcStr, TpcnResources.xProd);
                 this.convertToOem = true;
                 wCampo(det.Prod.NCM, TpcnTipoCampo.tcStr, TpcnResources.NCM);
                 wCampo(det.Prod.NVE, TpcnTipoCampo.tcStr, TpcnResources.NVE, ObOp.Opcional);

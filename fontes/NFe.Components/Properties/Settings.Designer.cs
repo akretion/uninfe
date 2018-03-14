@@ -857,7 +857,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://pmassis.dyndns-server.com/IssWeb-ejb/IssWebWS/IssWebWS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfsews.assis.sp.gov.br/IssWeb-ejb/IssWebWS/IssWebWS")]
         public string NFe_Components_com_dyndnsserver_pmassis2_p_IssWebWS {
             get {
                 return ((string)(this["NFe_Components_com_dyndnsserver_pmassis2_p_IssWebWS"]));

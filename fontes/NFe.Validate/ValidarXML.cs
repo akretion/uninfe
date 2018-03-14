@@ -17,6 +17,7 @@ namespace NFe.Validate
     {
         #region Construtores
 
+
         public ValidarXML(string arquivoXML, int UFCod, bool soValidar)
         {
             TipoArqXml = new TipoArquivoXML(arquivoXML, UFCod, soValidar);
@@ -149,7 +150,14 @@ namespace NFe.Validate
             if (File.Exists(rotaArqXML))
             {
                 XmlDocument doc = new XmlDocument();
-                doc.Load(rotaArqXML);
+                try
+                {
+                    doc.Load(rotaArqXML);
+                }
+                catch
+                {
+                    doc.LoadXml(System.IO.File.ReadAllText(rotaArqXML, System.Text.Encoding.UTF8));
+                }
                 Validar(doc, rotaArqXML);
             }
             else
@@ -348,7 +356,7 @@ namespace NFe.Validate
                         oAD.Assinar(Arquivo, emp, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
                     }
 
-                    
+
 
                     Assinou = true;
                 }

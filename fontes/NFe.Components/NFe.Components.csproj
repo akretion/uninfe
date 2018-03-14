@@ -938,7 +938,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\com.dyndnsserver.pmassis2.p\Reference.cs">
+    <Compile Include="Web References\PAssisSP\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -3062,6 +3062,36 @@
     <None Include="Web References\HVacariRS\Services0.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Web References\PAssisSP\CancelarNfseResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAssisSP\ConsultarLoteRpsResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAssisSP\ConsultarNfseFaixaResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAssisSP\ConsultarNfseRpsResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAssisSP\ConsultarNfseServicoPrestadoResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAssisSP\ConsultarNfseServicoTomadoResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAssisSP\EnviarLoteRpsResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAssisSP\EnviarLoteRpsSincronoResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAssisSP\GerarNfseResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAssisSP\SubstituirNfseResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\PCachoeiraSulRS\NFSeIntegracao.wsdl" />
     <None Include="Web References\PCachoeiraSulRS\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -3081,40 +3111,10 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\com.dyndnsserver.pmassis2.p\CancelarNfseResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\com.dyndnsserver.pmassis2.p\ConsultarLoteRpsResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\com.dyndnsserver.pmassis2.p\ConsultarNfseFaixaResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\com.dyndnsserver.pmassis2.p\ConsultarNfseRpsResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\com.dyndnsserver.pmassis2.p\ConsultarNfseServicoPrestadoResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\com.dyndnsserver.pmassis2.p\ConsultarNfseServicoTomadoResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\com.dyndnsserver.pmassis2.p\EnviarLoteRpsResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\com.dyndnsserver.pmassis2.p\EnviarLoteRpsSincronoResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\com.dyndnsserver.pmassis2.p\GerarNfseResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\com.dyndnsserver.pmassis2.p\IssWebWS.wsdl" />
-    <None Include="Web References\com.dyndnsserver.pmassis2.p\Reference.map">
+    <None Include="Web References\PAssisSP\IssWebWS.wsdl" />
+    <None Include="Web References\PAssisSP\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\com.dyndnsserver.pmassis2.p\SubstituirNfseResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\PCorumbaMS\CancelarNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -3774,10 +3774,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_simplissweb_wsitaporanga2_p_IssWebWS</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PAssisSP-FIORRILI.wsdl">
+    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PAssisSP-FIORILLI.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\com.dyndnsserver.pmassis2.p\</RelPath>
-      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PAssisSP-FIORRILI.wsdl</UpdateFromURL>
+      <RelPath>Web References\PAssisSP\</RelPath>
+      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PAssisSP-FIORILLI.wsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

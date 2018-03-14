@@ -1244,19 +1244,19 @@ namespace NFe.Settings
         /// <summary>
         /// Método responsável por gravar as configurações da Aplicação no arquivo "UniNfeConfig.xml"
         /// </summary>
-        public void GravarConfig(bool gravaArqEmpresa, bool validaCertificado)  //<<<<<<danasa 1-5-2011
-        {
-            ValidarConfig(validaCertificado, null);
-            GravarConfigGeral();
-            foreach (Empresa empresa in Empresas.Configuracoes)
-            {
-                empresa.SalvarConfiguracao(false, false);
-            }
-            if (gravaArqEmpresa)        //<<<<<<danasa 1-5-2011
-            {                           //<<<<<<danasa 1-5-2011
-                GravarArqEmpresas();    //<<<<<<danasa 1-5-2011
-            }                           //<<<<<<danasa 1-5-2011
-        }
+        ////public void GravarConfig(bool gravaArqEmpresa, bool validaCertificado)  //<<<<<<danasa 1-5-2011
+        ////{
+        ////    ValidarConfig(validaCertificado, null);
+        ////    GravarConfigGeral();
+        ////    foreach (Empresa empresa in Empresas.Configuracoes)
+        ////    {
+        ////        empresa.SalvarConfiguracao(false, false);
+        ////    }
+        ////    if (gravaArqEmpresa)        //<<<<<<danasa 1-5-2011
+        ////    {                           //<<<<<<danasa 1-5-2011
+        ////        GravarArqEmpresas();    //<<<<<<danasa 1-5-2011
+        ////    }                           //<<<<<<danasa 1-5-2011
+        ////}
 
         #endregion GravarConfig()
 
@@ -1374,7 +1374,7 @@ namespace NFe.Settings
             }
             catch
             {
-                return "Não é permitido a utilização de pasta idênticas na mesma ou entre empresas.\r\nPasta utilizada: \r\n" + folder;
+                return "Não é permitido a utilização de pastas idênticas na mesma ou entre empresas.\r\nPasta utilizada: \r\n" + folder;
             }
         }
 
@@ -1413,7 +1413,9 @@ namespace NFe.Settings
                     emp.Servico == TipoAplicativo.NFCe ||
                     emp.Servico == TipoAplicativo.Todos)
                     && emp.UnidadeFederativaCodigo == 35 && emp.IndSinc == true)
-                    erro = "Estado de São Paulo não dispõe do serviço síncrono para emissão de NFe.";
+                {
+                    erro += "\r\nEstado de São Paulo não dispõe do serviço síncrono para emissão de NFe.".TrimStart(new char[] { '\r', '\n' });
+                }
 
                 if (erro != "")
                 {
@@ -1486,17 +1488,17 @@ namespace NFe.Settings
                         throw new Exception("Não foi possivel encontrar a empresa para validação");
 
                     ++empTo;
-                }
 
-                if (empresaValidada.Servico == TipoAplicativo.NFCe)
-                {
-                    if (!string.IsNullOrEmpty(empresaValidada.IdentificadorCSC) && string.IsNullOrEmpty(empresaValidada.TokenCSC))
+                    if (empresaValidada.Servico == TipoAplicativo.NFCe)
                     {
-                        throw new Exception("É obrigatório informar o IDToken quando informado o CSC.");
-                    }
-                    else if (string.IsNullOrEmpty(empresaValidada.IdentificadorCSC) && !string.IsNullOrEmpty(empresaValidada.TokenCSC))
-                    {
-                        throw new Exception("É obrigatório informar o CSC quando informado o IDToken.");
+                        if (!string.IsNullOrEmpty(empresaValidada.IdentificadorCSC) && string.IsNullOrEmpty(empresaValidada.TokenCSC))
+                        {
+                            throw new Exception("É obrigatório informar o IDToken quando informado o CSC.");
+                        }
+                        else if (string.IsNullOrEmpty(empresaValidada.IdentificadorCSC) && !string.IsNullOrEmpty(empresaValidada.TokenCSC))
+                        {
+                            throw new Exception("É obrigatório informar o CSC quando informado o IDToken.");
+                        }
                     }
                 }
 
@@ -1981,7 +1983,14 @@ namespace NFe.Settings
                         #region Formato XML
 
                         XmlDocument doc = new XmlDocument();
-                        doc.Load(cArquivoXml);
+                        try
+                        {
+                            doc.Load(cArquivoXml);
+                        }
+                        catch
+                        {
+                            doc.LoadXml(System.IO.File.ReadAllText(cArquivoXml, System.Text.Encoding.UTF8));
+                        }
 
                         XmlNodeList ConfUniNfeList = doc.GetElementsByTagName("altConfUniNFe");
 

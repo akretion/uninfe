@@ -1958,7 +1958,14 @@ namespace NFe.Service
         public void AssinarValidarXMLNFe()
         {
             XmlDocument conteudoXML = new XmlDocument();
-            conteudoXML.Load(NomeArquivoXML);
+            try
+            {
+                conteudoXML.Load(NomeArquivoXML);
+            }
+            catch
+            {
+                conteudoXML.LoadXml(File.ReadAllText(NomeArquivoXML, System.Text.Encoding.UTF8));
+            }
 
             AssinarValidarXMLNFe(conteudoXML);
 
@@ -2214,6 +2221,9 @@ namespace NFe.Service
                 case (int)TipoEmissao.teSVCAN:
                 case (int)TipoEmissao.teSVCRS:
                     var se = Propriedade.Estados.First(s => s.CodigoMunicipio.Equals(Convert.ToInt32(dadosNFe.cUF)));
+                    if (se.UF == "SP" && dadosNFe.mod == "57") // São Paulo para CTe é SVC-RS, então não dá para pegar o que está no Websevice.XML pois está definido o da NFe. Wandrey 12/03/2018
+                        se.svc = TipoEmissao.teSVCRS;
+
                     if (se.svc != (TipoEmissao)tpEmis && se.svc != TipoEmissao.teNone)
                     {
                         throw new Exception("UF: " + Functions.CodigoParaUF(Convert.ToInt32(dadosNFe.cUF)) + " não está sendo atendida pelo WebService do SVC: " +

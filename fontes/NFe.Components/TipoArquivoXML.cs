@@ -45,7 +45,14 @@ namespace NFe.Components
         public TipoArquivoXML(string rotaArqXML, int UFCod, bool soValidar)
         {
             XmlDocument conteudoXML = new XmlDocument();
-            conteudoXML.Load(rotaArqXML);
+            try
+            {
+                conteudoXML.Load(rotaArqXML);
+            }
+            catch
+            {
+                conteudoXML.LoadXml(File.ReadAllText(rotaArqXML, System.Text.Encoding.UTF8));
+            }
 
             DefinirTipoArq(rotaArqXML, conteudoXML, UFCod, soValidar);
         }

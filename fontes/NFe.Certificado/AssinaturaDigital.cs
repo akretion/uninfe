@@ -47,7 +47,14 @@ namespace NFe.Certificado
         {
             XmlDocument doc = new XmlDocument();
             doc.PreserveWhitespace = false;
-            doc.Load(arqXMLAssinar);
+            try
+            {
+                doc.Load(arqXMLAssinar);
+            }
+            catch
+            {
+                doc.LoadXml(System.IO.File.ReadAllText(arqXMLAssinar, System.Text.Encoding.UTF8));
+            }
 
             Assinar(doc, tagAssinatura, tagAtributoId, x509Cert, empresa, algorithmType, comURI);
 

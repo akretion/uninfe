@@ -1,5 +1,5 @@
 ﻿using NFe.Components.Abstract;
-using NFe.Components.com.dyndnsserver.pmassis2.p;
+using NFe.Components.PAssisSP;
 using System;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;

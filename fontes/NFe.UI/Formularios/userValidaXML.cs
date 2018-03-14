@@ -203,9 +203,19 @@ namespace NFe.UI
                         codUF = 202;
                 }
                 Validate.ValidarXML validarXML = new Validate.ValidarXML(cArquivo, codUF, false);
-                XmlDocument conteudoXML = new XmlDocument();
+
                 string resultValidacao = "";
-                conteudoXML.Load(cArquivo);
+
+                XmlDocument conteudoXML = new XmlDocument();
+                try
+                {
+                    conteudoXML.Load(cArquivo);
+                }
+                catch
+                {
+                    conteudoXML.LoadXml(File.ReadAllText(cArquivo, System.Text.Encoding.UTF8));
+                }
+
                 if (conteudoXML.DocumentElement.Name.Equals("CTe") ||
                     conteudoXML.DocumentElement.Name.Equals("MDFe"))
                 {
@@ -236,10 +246,10 @@ namespace NFe.UI
                     AssinaturaDigital oAD = new AssinaturaDigital();
                     try
                     {
-                        validarXML.EncryptAssinatura(cArquivo); 
-                        oAD.Assinar(cArquivo, 
-                            Emp, 
-                            Empresas.Configuracoes[Emp].UnidadeFederativaCodigo, 
+                        validarXML.EncryptAssinatura(cArquivo);
+                        oAD.Assinar(cArquivo,
+                            Emp,
+                            Empresas.Configuracoes[Emp].UnidadeFederativaCodigo,
                             (conteudoXML.DocumentElement.Name.Equals("Reinf") || conteudoXML.DocumentElement.Name.Equals("eSocial") ? AlgorithmType.Sha256 : AlgorithmType.Sha1));
 
                         lValidar = true;
@@ -292,6 +302,7 @@ namespace NFe.UI
                         wb.Dock = DockStyle.Fill;
                         wb.DocumentCompleted += webBrowser1_DocumentCompleted;
                     }
+                    wb.Visible = true;
                     wb.Navigate(cArquivo);
                 }
                 catch
@@ -302,6 +313,9 @@ namespace NFe.UI
             catch (Exception ex)
             {
                 this.textBox_resultado.Text = ex.Message + "\r\n" + ex.StackTrace;
+
+                if (wb != null)
+                    wb.Visible = false;
             }
         }
 
