@@ -47,7 +47,7 @@
  <wsdl:service name='NFeRecepcaoEvento4'>
   <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado a recepcao de mensagens de evento de NFe</wsdl:documentation>
   <wsdl:port binding='tns:NFeRecepcaoEvento4Soap12' name='NFeRecepcaoEvento4ServicePort'>
-   <soap12:address location='https://homologacao.nfe.ms.gov.br:443/ws/NFeRecepcaoEvento4'/>
+   <soap12:address location='https://hom.nfe.sefaz.ms.gov.br/ws/NFeRecepcaoEvento4'/>
   </wsdl:port>
  </wsdl:service>
 </wsdl:definitions>

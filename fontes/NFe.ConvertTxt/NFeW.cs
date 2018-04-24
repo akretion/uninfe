@@ -252,7 +252,7 @@ namespace NFe.ConvertTxt
 
             foreach (pag pagItem in nfe.pag)
             {
-                if (nodePag == null)
+                if (nodePag == null || nfe.infNFe.Versao < 4)
                 {
                     nodePag = doc.CreateElement("pag"); //YA01
                     root.AppendChild(nodePag);

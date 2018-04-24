@@ -1866,9 +1866,10 @@ namespace NFe.Service
 
                 #endregion JOINVILLE_SC
 
-                #region AVMB_ASTEN
+                #region AVMB_ASTEN e EMBRAS
 
                 case PadroesNFSe.AVMB_ASTEN:
+                case PadroesNFSe.EMBRAS:
                     switch (servico)
                     {
                         case Servicos.NFSeConsultarLoteRps:
@@ -1905,7 +1906,41 @@ namespace NFe.Service
                     }
                     break;
 
+                #endregion AVMB_ASTEN
+
+                #region DESENVOLVECIDADE
+
+                case PadroesNFSe.DESENVOLVECIDADE:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "consultarLoteRpsEnvio";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "consultarNfseRpsEnvio";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "enviarLoteRpsEnvio";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "cancelarNfseEnvio";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "enviarLoteRpsSincronoEnvio";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "gerarNfseEnvio";
+                            break;
+                    }
+                    break;
+
                     #endregion AVMB_ASTEN
+
             }
 
             return retorna;
@@ -2546,7 +2581,8 @@ namespace NFe.Service
                     if (cMunicipio == 4109401 ||
                         cMunicipio == 3131703 ||
                         cMunicipio == 4303004 ||
-                        cMunicipio == 4322509)
+                        cMunicipio == 4322509 ||
+                        cMunicipio == 3556602)
                         retorno = false;
                     break;
 
@@ -2658,6 +2694,8 @@ namespace NFe.Service
             {
                 case PadroesNFSe.AVMB_ASTEN:
                 case PadroesNFSe.WEBISS_202:
+                case PadroesNFSe.EMBRAS:
+                case PadroesNFSe.DESENVOLVECIDADE:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
                     {
                         switch (doc.DocumentElement.Name)

@@ -103,7 +103,7 @@
   </wsdl:binding>
   <wsdl:service name="NfeRetAutorizacao">
     <wsdl:port binding="tns:NfeRetAutorizacaoSoap" name="NfeRetAutorizacaoSoap">
-      <soap:address location="https://nfe.sefaz.ce.gov.br/nfe2/services/NfeRetAutorizacao"/>
+      <soap:address location="https://nfce.sefaz.ce.gov.br/nfce/services/NfeRetAutorizacao"/>
     </wsdl:port>
     <wsdl:port binding="tns:NfeRetAutorizacaoSoap12" name="NfeRetAutorizacaoSoap12">
       <soap12:address location="http://nfceh.sefaz.ce.gov.br:80/nfce/services/NfeRetAutorizacao"/>

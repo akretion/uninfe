@@ -23,10 +23,10 @@ namespace NFe.Components.br.com.fgmaiss.www.p.penapois.envio {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="webserviceBinding", Namespace="http://www.fgmaiss.com.br/issqn/wservice/wsnfeenvia.php")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="webserviceBinding", Namespace="http://201.16.156.170/issqn/wservice/wsnfeenvia.php")]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(EnvNfe))]
     public partial class webservice : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
@@ -186,7 +186,10 @@ namespace NFe.Components.br.com.fgmaiss.www.p.penapois.envio {
                     string valser6, 
                     string valser7, 
                     string valser8, 
-                    string paisest) {
+                    string paisest, 
+                    string ssrecbr, 
+                    string ssanexo, 
+                    string ssdtini) {
             object[] results = this.Invoke("EnvNfe", new object[] {
                         usuario,
                         pass,
@@ -297,7 +300,10 @@ namespace NFe.Components.br.com.fgmaiss.www.p.penapois.envio {
                         valser6,
                         valser7,
                         valser8,
-                        paisest});
+                        paisest,
+                        ssrecbr,
+                        ssanexo,
+                        ssdtini});
             return ((EnvNfe[])(results[0]));
         }
         
@@ -412,8 +418,11 @@ namespace NFe.Components.br.com.fgmaiss.www.p.penapois.envio {
                     string valser6, 
                     string valser7, 
                     string valser8, 
-                    string paisest) {
-            this.EnvNfeAsync(usuario, pass, prf, usr, ctr, cnpj, cnpjn, ie, im, lgr, num, cpl, bai, cid, est, cep, fon, mail, dat, f1n, f1d, f1v, f2n, f2d, f2v, f3n, f3d, f3v, f4n, f4d, f4v, f5n, f5d, f5v, f6n, f6d, f6v, item1, item2, item3, aliq1, aliq2, aliq3, val1, val2, val3, loc, ret, txt, val, valtrib, iss, issret, desci, desco, binss, birrf, bcsll, bpis, bcofins, ainss, airrf, acsll, apis, acofins, inss, irrf, csll, pis, cofins, item4, item5, item6, item7, item8, aliq4, aliq5, aliq6, aliq7, aliq8, val4, val5, val6, val7, val8, iteser1, iteser2, iteser3, iteser4, iteser5, iteser6, iteser7, iteser8, alqser1, alqser2, alqser3, alqser4, alqser5, alqser6, alqser7, alqser8, valser1, valser2, valser3, valser4, valser5, valser6, valser7, valser8, paisest, null);
+                    string paisest, 
+                    string ssrecbr, 
+                    string ssanexo, 
+                    string ssdtini) {
+            this.EnvNfeAsync(usuario, pass, prf, usr, ctr, cnpj, cnpjn, ie, im, lgr, num, cpl, bai, cid, est, cep, fon, mail, dat, f1n, f1d, f1v, f2n, f2d, f2v, f3n, f3d, f3v, f4n, f4d, f4v, f5n, f5d, f5v, f6n, f6d, f6v, item1, item2, item3, aliq1, aliq2, aliq3, val1, val2, val3, loc, ret, txt, val, valtrib, iss, issret, desci, desco, binss, birrf, bcsll, bpis, bcofins, ainss, airrf, acsll, apis, acofins, inss, irrf, csll, pis, cofins, item4, item5, item6, item7, item8, aliq4, aliq5, aliq6, aliq7, aliq8, val4, val5, val6, val7, val8, iteser1, iteser2, iteser3, iteser4, iteser5, iteser6, iteser7, iteser8, alqser1, alqser2, alqser3, alqser4, alqser5, alqser6, alqser7, alqser8, valser1, valser2, valser3, valser4, valser5, valser6, valser7, valser8, paisest, ssrecbr, ssanexo, ssdtini, null);
         }
         
         /// <remarks/>
@@ -528,6 +537,9 @@ namespace NFe.Components.br.com.fgmaiss.www.p.penapois.envio {
                     string valser7, 
                     string valser8, 
                     string paisest, 
+                    string ssrecbr, 
+                    string ssanexo, 
+                    string ssdtini, 
                     object userState) {
             if ((this.EnvNfeOperationCompleted == null)) {
                 this.EnvNfeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnvNfeOperationCompleted);
@@ -642,7 +654,10 @@ namespace NFe.Components.br.com.fgmaiss.www.p.penapois.envio {
                         valser6,
                         valser7,
                         valser8,
-                        paisest}, this.EnvNfeOperationCompleted, userState);
+                        paisest,
+                        ssrecbr,
+                        ssanexo,
+                        ssdtini}, this.EnvNfeOperationCompleted, userState);
         }
         
         private void OnEnvNfeOperationCompleted(object arg) {
@@ -672,11 +687,11 @@ namespace NFe.Components.br.com.fgmaiss.www.p.penapois.envio {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2612.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://www.fgmaiss.com.br/issqn/wservice/wsnfeenvia.php")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://201.16.156.170/issqn/wservice/wsnfeenvia.php")]
     public partial class EnvNfe {
         
         private string okkField;
@@ -693,11 +708,11 @@ namespace NFe.Components.br.com.fgmaiss.www.p.penapois.envio {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     public delegate void EnvNfeCompletedEventHandler(object sender, EnvNfeCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2556.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EnvNfeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

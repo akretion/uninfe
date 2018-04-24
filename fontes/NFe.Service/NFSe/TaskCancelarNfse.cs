@@ -430,7 +430,8 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.PRONIN:
                         if (oDadosPedCanNfse.cMunicipio == 4109401 ||
                             oDadosPedCanNfse.cMunicipio == 3131703 ||
-                            oDadosPedCanNfse.cMunicipio == 4303004)
+                            oDadosPedCanNfse.cMunicipio == 4303004 ||
+                            oDadosPedCanNfse.cMunicipio == 3556602)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -561,6 +562,10 @@ namespace NFe.Service.NFSe
                             pedCanNfse = new Components.HPelotasRS.INfseservice();
                         else
                             pedCanNfse = new Components.PPelotasRS.INfseservice();
+                        break;
+
+                    case PadroesNFSe.EMBRAS:
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
                 }
 

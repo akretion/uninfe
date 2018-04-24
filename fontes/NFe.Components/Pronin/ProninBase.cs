@@ -59,6 +59,10 @@ namespace NFe.Components.Pronin
                                 proninService = new VacariRS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
+                            case 3556602: //Vera Cruz-RS
+                                proninService = new VeraCruzRS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

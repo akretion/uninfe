@@ -41,7 +41,6 @@ namespace NFe.Service
                 conteudoXML.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText + Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML;
         }
 
-
         #region Classe com os dados do XML do pedido de consulta do recibo do lote de nfe enviado
 
         /// <summary>
@@ -52,6 +51,7 @@ namespace NFe.Service
         #endregion Classe com os dados do XML do pedido de consulta do recibo do lote de nfe enviado
 
         #region Execute
+
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
@@ -264,8 +264,6 @@ namespace NFe.Service
 
                     case "214":
                     case "243":
-                    case "108":
-                    case "109":
 
                     #endregion Validação inicial da mensagem no webservice
 
@@ -317,6 +315,19 @@ namespace NFe.Service
                         break;
 
                     #endregion Lote não foi localizado pelo recibo que está sendo consultado
+
+                    #region Serviço paralisado
+
+                    case "108":
+                    case "109":
+                        //Se o serviço estiver paralisado momentaneamente ou sem previsão de retorno, vamos tentar consultar somente a cada 3 minutos pra evitar consumo indevido.
+                        if (nRec != string.Empty)
+                        {
+                            fluxoNFe.AtualizarDPedRec(nRec, DateTime.Now.AddSeconds(180));
+                        }
+                        break;
+
+                    #endregion Serviço paralisado
 
                     #endregion Rejeições do XML de consulta do recibo (Não é o lote que foi rejeitado e sim o XML de consulta do recibo)
 

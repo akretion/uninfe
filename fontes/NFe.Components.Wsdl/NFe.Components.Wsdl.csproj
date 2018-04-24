@@ -3260,7 +3260,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeAutorizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeConsulta_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeInutilizacao_C_400.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeRecepcaoEvento_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeRetAutorizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeStatusServico_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AM\HAMNfeAutorizacao_C_400.wsdl" />
@@ -3514,10 +3513,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\WSDL\Producao\AN\EFDReinf.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeAutorizacao_400.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeCadConsultaCadastro_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeConsulta_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeInutilizacao_400.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeRecepcaoEvento_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeRetAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeStatusServico_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AN\eSocial_ServicoEnviarLoteEventos.wsdl" />
@@ -3717,6 +3714,21 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeInutilizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeRetAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeStatusServico_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeConsulta_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeInutilizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeRetAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeStatusServico_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeConsulta_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeInutilizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeRetAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeStatusServico_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeConsulta_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeInutilizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeRetAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeStatusServico_C_400.wsdl" />
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -4034,6 +4046,48 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PBomDespachoMG-WebISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPelotas_RS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPelotas_RS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HItajaiSC-PUBLICA.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItajaiSC-PUBLICA.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HLorenaSP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PLorenaSP.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\EMBRAS\nfsev202.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\EMBRAS\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoGabrielRS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoGabrielRS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PVeraCruzRS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HParagominasPA.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PParagominasPA.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\DESENVOLVECIDADE\nfsev203.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DESENVOLVECIDADE\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBageRS-WebISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HBageRS-WebISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HAstorgaPR-SIMPLISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PAstorgaPR-SIMPLISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HArarasSP-SIMPLISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PArarasSP-SIMPLISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaPrata-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaPrata-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaPrata-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaPrata-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaPrata-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaPrata-ConsultaNFSeServicosTomadosIntermediados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaPrata-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaPrata-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaPrata-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaPrata-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaPrata-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaPrata-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaPrata-ConsultaNFSeServicosTomadosIntermediados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaPrata-ConsultaSequenciaLoteNotaRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaPrata-EnvioLoteRPSSincrono.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

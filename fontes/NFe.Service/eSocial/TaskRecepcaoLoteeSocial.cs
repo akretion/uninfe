@@ -88,35 +88,7 @@ namespace NFe.Service
         private void AssinarXMLLote(int emp)
         {
             AssinaturaDigital ad = new AssinaturaDigital();
-
-            XmlNodeList envioLoteEventosNodeList = ConteudoXML.GetElementsByTagName("envioLoteEventos");
-
-            foreach (XmlNode envioLoteEventosNode in envioLoteEventosNodeList)
-            {
-                XmlElement envioLoteEventosElement = (XmlElement)envioLoteEventosNode;
-                XmlNodeList eventosNodeList = ConteudoXML.GetElementsByTagName("eventos");
-
-                foreach (XmlNode eventosNode in eventosNodeList)
-                {
-                    XmlElement eventosNodeElement = (XmlElement)eventosNode;
-                    XmlNodeList eventoNodeList = ConteudoXML.GetElementsByTagName("evento");
-
-                    foreach (XmlNode eventoNode in eventoNodeList)
-                    {
-                        XmlElement eventoElement = (XmlElement)eventoNode;
-                        XmlNodeList eSocialNodeList = eventoElement.GetElementsByTagName("eSocial");
-
-                        XmlDocument xmlDoc = new XmlDocument();
-                        xmlDoc.LoadXml(eSocialNodeList[0].OuterXml);
-
-                        ad.Assinar(xmlDoc, emp, 991, AlgorithmType.Sha256, false);
-
-                        XmlNode newNode = xmlDoc.ChildNodes[0];
-                        eventoNode.RemoveChild(eSocialNodeList[0]);
-                        eventoNode.AppendChild(ConteudoXML.ImportNode(xmlDoc.DocumentElement, true));
-                    }
-                }
-            }
+            ad.AssinarLoteESocial(ConteudoXML, emp);
         }
     }
 }

@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
+﻿using NFe.Components.Abstract;
+using System;
 using System.Xml;
-using System.Xml.Serialization;
-using NFe.Components.Abstract;
-using NFe.Components.br.com.fgmaiss.www.p.penapois.envio;
-using NFe.Components.br.com.fgmaiss.www.p.penapolis.consulta;
-using NFe.Components.br.com.fgmaiss.www.p.penapolis.consultaxml;
-using NFe.Components.br.com.fgmaiss.www.p.penapolis.cancela;
 
 namespace NFe.Components.MGM.PenapolisSP.p
 {
@@ -18,6 +8,7 @@ namespace NFe.Components.MGM.PenapolisSP.p
     {
         string Login;
         string Senha;
+
         public override string NameSpaces
         {
             get
@@ -32,15 +23,18 @@ namespace NFe.Components.MGM.PenapolisSP.p
         NFe.Components.br.com.fgmaiss.www.p.penapolis.consultaxml.webservice serviceConsultaXML = new br.com.fgmaiss.www.p.penapolis.consultaxml.webservice();
 
         #region construtores
+
         public MGMP(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senha)
             : base(tpAmb, pastaRetorno)
         {
             Login = usuario;
             Senha = senha;
         }
-        #endregion
+
+        #endregion construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
             XmlTextReader reader = new XmlTextReader(file);
@@ -49,8 +43,9 @@ namespace NFe.Components.MGM.PenapolisSP.p
 
             XmlDocument oXml = new XmlDocument();
             oXml.Load(reader);
+            reader.Close();
 
-            Array result = serviceEnvio.EnvNfe( Login,
+            Array result = serviceEnvio.EnvNfe(Login,
                                                 Senha,
                                                 XmlDocumentUtilities.GetValue<string>(oXml, "prf"),
                                                 XmlDocumentUtilities.GetValue<string>(oXml, "usr"),
@@ -159,11 +154,13 @@ namespace NFe.Components.MGM.PenapolisSP.p
                                                 XmlDocumentUtilities.GetValue<string>(oXml, "valser6"),
                                                 XmlDocumentUtilities.GetValue<string>(oXml, "valser7"),
                                                 XmlDocumentUtilities.GetValue<string>(oXml, "valser8"),
-                                                XmlDocumentUtilities.GetValue<string>(oXml, "paisest"));
-
-
+                                                XmlDocumentUtilities.GetValue<string>(oXml, "paisest"),
+                                                XmlDocumentUtilities.GetValue<string>(oXml, "ssrecbr"),
+                                                XmlDocumentUtilities.GetValue<string>(oXml, "ssanexo"),
+                                                XmlDocumentUtilities.GetValue<string>(oXml, "ssdtini"));
+                
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);//.LoteRps);
         }
 
@@ -185,8 +182,8 @@ namespace NFe.Components.MGM.PenapolisSP.p
                                                      XmlDocumentUtilities.GetValue<string>(oXml, "obs"));
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, 
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);            
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
@@ -216,7 +213,7 @@ namespace NFe.Components.MGM.PenapolisSP.p
                                                        XmlDocumentUtilities.GetValue<string>(oXml, "tipo"));
 
             string strResult = base.CreateXML(result);
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML, 
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
@@ -225,6 +222,6 @@ namespace NFe.Components.MGM.PenapolisSP.p
             throw new Exceptions.ServicoInexistenteException();
         }
 
-        #endregion
+        #endregion Métodos
     }
 }

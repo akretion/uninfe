@@ -577,16 +577,21 @@ namespace NFe.Components
         [Description("EFD Reinf e eSocial")]
         EFDReinfeSocial = 8,
 
+#if _fw46
+
         [Description("NF-e, NFC-e, CT-e, MDF-e, EFD Reinf e eSocial")]
         Todos = 10,
-
+#else
+        [Description("NF-e, NFC-e, CT-e, MDF-e")]
+        Todos = 10,
+#endif
         [Description("")]
         Nulo = 100
     }
 
-    #endregion TipoAplicativo
+#endregion TipoAplicativo
 
-    #region Padrão NFSe
+#region Padrão NFSe
 
     public enum PadroesNFSe
     {
@@ -633,7 +638,7 @@ namespace NFe.Components
         CANOAS_RS,
 
         /// <summary>
-        /// Padrão da ISS Net
+        /// Padrão da ISS Net / NotaControl
         /// </summary>
         [Description("ISS Net")]
         ISSNET,
@@ -1050,15 +1055,27 @@ namespace NFe.Components
         /// Padrão utilizado pela prefeitura de Pelotas-RS
         /// </summary>
         [Description("AVMB/ASTEN")]
-        AVMB_ASTEN
+        AVMB_ASTEN,
+
+        /// <summary>
+        /// Padrão utilizado pela prefeitura de Lorena-SP
+        /// </summary>
+        [Description("EMBRAS")]
+        EMBRAS,
+
+        /// <summary>
+        /// Padrão utilizado pela prefeitura Paragominas-PA
+        /// </summary>
+        [Description("Desenvolve Cidade")]
+        DESENVOLVECIDADE
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
     }
 
-    #endregion Padrão NFSe
+#endregion Padrão NFSe
 
-    #region Classe dos tipos de ambiente da NFe
+#region Classe dos tipos de ambiente da NFe
 
     /// <summary>
     /// Tipo de ambiente
@@ -1072,7 +1089,7 @@ namespace NFe.Components
         taHomologacao = 2
     }
 
-    #endregion Classe dos tipos de ambiente da NFe
+#endregion Classe dos tipos de ambiente da NFe
 
     /// <summary>
     /// Regime tributação ISSQN
@@ -1109,7 +1126,7 @@ namespace NFe.Components
         N
     }
 
-    #region TipoEmissao
+#region TipoEmissao
 
     /// <summary>
     /// TipoEmissao
@@ -1144,9 +1161,9 @@ namespace NFe.Components
         teOffLine = 9
     }
 
-    #endregion TipoEmissao
+#endregion TipoEmissao
 
-    #region Erros Padrões
+#region Erros Padrões
 
     public enum ErroPadrao
     {
@@ -1158,9 +1175,9 @@ namespace NFe.Components
         CertificadoNaoEncontrado = 6
     }
 
-    #endregion Erros Padrões
+#endregion Erros Padrões
 
-    #region EnumHelper
+#region EnumHelper
 
     /*
 ComboBox combo = new ComboBox();
@@ -1338,5 +1355,5 @@ combo.ValueMember = "Key";
         }
     }
 
-    #endregion EnumHelper
+#endregion EnumHelper
 }

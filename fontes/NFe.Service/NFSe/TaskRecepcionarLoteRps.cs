@@ -549,7 +549,8 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.PRONIN:
                         if (oDadosEnvLoteRps.cMunicipio == 4109401 ||
                             oDadosEnvLoteRps.cMunicipio == 3131703 ||
-                            oDadosEnvLoteRps.cMunicipio == 4303004)
+                            oDadosEnvLoteRps.cMunicipio == 4303004 ||
+                            oDadosEnvLoteRps.cMunicipio == 3556602)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -685,6 +686,15 @@ namespace NFe.Service.NFSe
                         else
                             envLoteRps = new Components.PPelotasRS.INfseservice();
                         break;
+
+                    case PadroesNFSe.EMBRAS:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.EMBRAS);
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.DESENVOLVECIDADE:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.EMBRAS);
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))
@@ -727,7 +737,7 @@ namespace NFe.Service.NFSe
                 {
                     Functions.DeletarArquivo(NomeArquivoXML);
                 }
-                catch
+                catch 
                 {
                     //Se falhou algo na hora de deletar o XML de cancelamento de NFe, infelizmente
                     //não posso fazer mais nada, o UniNFe vai tentar mandar o arquivo novamente para o webservice, pois ainda não foi excluido.

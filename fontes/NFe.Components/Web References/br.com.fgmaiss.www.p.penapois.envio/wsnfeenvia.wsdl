@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.fgmaiss.com.br/issqn/wservice/wsnfeenvia.php" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.fgmaiss.com.br/issqn/wservice/wsnfeenvia.php" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://201.16.156.170/issqn/wservice/wsnfeenvia.php" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://201.16.156.170/issqn/wservice/wsnfeenvia.php" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <xsd:schema targetNamespace="http://www.fgmaiss.com.br/issqn/wservice/wsnfeenvia.php">
+    <xsd:schema targetNamespace="http://201.16.156.170/issqn/wservice/wsnfeenvia.php">
       <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
       <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
       <xsd:complexType name="StrEnvNfe">
@@ -129,6 +129,9 @@
     <wsdl:part name="valser7" type="xsd:string" />
     <wsdl:part name="valser8" type="xsd:string" />
     <wsdl:part name="paisest" type="xsd:string" />
+    <wsdl:part name="ssrecbr" type="xsd:string" />
+    <wsdl:part name="ssanexo" type="xsd:string" />
+    <wsdl:part name="ssdtini" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="EnvNfeResponse">
     <wsdl:part name="return" type="tns:StrEnvNfe" />

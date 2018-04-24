@@ -398,5 +398,14 @@
     <Setting Name="NFe_Components_PPelotasRS_INfseservice" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://ws.pelotas.rs.gov.br/wsnfse/NfseWSISAPI.dll/soap/INfse</Value>
     </Setting>
+    <Setting Name="NFe_Components_PVeraCruzRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://187.60.188.222:8086/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PAstorgaPR_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://wsastorga.simplissweb.com.br/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PArarasSP_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://189.56.68.34:8080/ws_araras/nfseservice.svc</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

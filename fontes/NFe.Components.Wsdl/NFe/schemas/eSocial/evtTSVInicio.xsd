@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtTSVInicio/v02_04_01" targetNamespace="http://www.esocial.gov.br/schema/evt/evtTSVInicio/v02_04_01" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtTSVInicio/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtTSVInicio/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -1043,7 +1043,7 @@ Registro preenchido exclusivamente caso seja necessário enviar cadastramento in
             <xs:documentation>CTPS</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:minLength value="3"/>
+            <xs:minLength value="2"/>
             <xs:maxLength value="11"/>
           </xs:restriction>
         </xs:simpleType>
@@ -1560,7 +1560,7 @@ Registro preenchido exclusivamente caso seja necessário enviar cadastramento in
       <xs:documentation>Informações do Trabalhador Estrangeiro</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="dtChegada">
+      <xs:element name="dtChegada" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Data de chegada ao Brasil</xs:documentation>

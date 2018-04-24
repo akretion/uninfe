@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NFe.Components.Abstract;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.IO;
-using System.Xml.Serialization;
-using System.Xml;
+﻿using NFe.Components.Abstract;
 
 namespace NFe.Components.SimplISS
 {
     public abstract class SimplISSBase : EmiteNFSeBase
     {
         #region locais/ protegidos
+
         int CodigoMun = 0;
         string Usuario = "";
         string SenhaWs = "";
@@ -21,6 +13,7 @@ namespace NFe.Components.SimplISS
         string ProxyPass = "";
         string ProxyServer = "";
         EmiteNFSeBase simplissService;
+
         protected EmiteNFSeBase SimplISSService
         {
             get
@@ -40,7 +33,7 @@ namespace NFe.Components.SimplISS
                     else
                         switch (CodigoMun)
                         {
-                            case 3538709: //Piracicaba-SP 
+                            case 3538709: //Piracicaba-SP
                                 simplissService = new PiracicabaSP.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
 
@@ -76,6 +69,14 @@ namespace NFe.Components.SimplISS
                                 simplissService = new MacaraiSP.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
 
+                            case 4102109: //Astorgar-PR
+                                simplissService = new AstorgaPR.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                break;
+
+                            case 3503307: //Araras-SP
+                                simplissService = new ArarasSP.p.SimplISSP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -83,9 +84,11 @@ namespace NFe.Components.SimplISS
                 return simplissService;
             }
         }
-        #endregion
+
+        #endregion locais/ protegidos
 
         #region Construtores
+
         public SimplISSBase(TipoAmbiente tpAmb, string pastaRetorno, int codMun, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver)
             : base(tpAmb, pastaRetorno)
         {
@@ -96,9 +99,11 @@ namespace NFe.Components.SimplISS
             ProxyPass = proxypass;
             ProxyServer = proxyserver;
         }
-        #endregion
+
+        #endregion Construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
             SimplISSService.EmiteNF(file);
@@ -128,8 +133,7 @@ namespace NFe.Components.SimplISS
         {
             SimplISSService.ConsultarNfsePorRps(file);
         }
-        #endregion
 
-
+        #endregion Métodos
     }
 }

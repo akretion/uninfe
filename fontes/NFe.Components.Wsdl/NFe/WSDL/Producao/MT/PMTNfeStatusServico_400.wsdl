@@ -44,7 +44,7 @@
   </wsdl:binding>
  <wsdl:service name='NFeStatusServico4'>
   <wsdl:port binding='tns:NFeStatusServico4Soap12' name='NFeStatusServico4ServicePort'>
-   <soap12:address location='https://www.sefaz.mt.gov.br/nfews/v2/services/NfeStatusServico4'/>
+   <soap12:address location='https://nfe.sefaz.mt.gov.br/nfews/v2/services/NfeStatusServico4'/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

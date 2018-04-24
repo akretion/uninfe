@@ -334,6 +334,7 @@ namespace NFe.UI.Formularios
                 object xuf = this.comboBox_UF.SelectedValue;
 
                 edtCodMun.Text = xuf.ToString();
+
                 //edtPadrao.Text = Functions.PadraoNFSe(Convert.ToInt32(xuf)).ToString();
 
                 edtPadrao.Text = EnumHelper.GetEnumItemDescription(Functions.PadraoNFSe(Convert.ToInt32(xuf)));

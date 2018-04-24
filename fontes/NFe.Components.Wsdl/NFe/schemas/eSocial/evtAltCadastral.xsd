@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtAltCadastral/v02_04_01" targetNamespace="http://www.esocial.gov.br/schema/evt/evtAltCadastral/v02_04_01" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtAltCadastral/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtAltCadastral/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -133,6 +133,111 @@
                                 <xs:maxLength value="70"/>
                               </xs:restriction>
                             </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="nascimento">
+                            <xs:annotation>
+                              <xs:documentation>Grupo de informações do nascimento do trabalhador</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="dtNascto">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation>Data de Nascimento</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:date">
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="codMunic" minOccurs="0">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation>Código do Município</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:integer">
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="uf" minOccurs="0">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation>Sigla da UF</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                      <xs:enumeration value="AC"/>
+                                      <xs:enumeration value="AL"/>
+                                      <xs:enumeration value="AP"/>
+                                      <xs:enumeration value="AM"/>
+                                      <xs:enumeration value="BA"/>
+                                      <xs:enumeration value="CE"/>
+                                      <xs:enumeration value="DF"/>
+                                      <xs:enumeration value="ES"/>
+                                      <xs:enumeration value="GO"/>
+                                      <xs:enumeration value="MA"/>
+                                      <xs:enumeration value="MT"/>
+                                      <xs:enumeration value="MS"/>
+                                      <xs:enumeration value="MG"/>
+                                      <xs:enumeration value="PA"/>
+                                      <xs:enumeration value="PB"/>
+                                      <xs:enumeration value="PR"/>
+                                      <xs:enumeration value="PE"/>
+                                      <xs:enumeration value="PI"/>
+                                      <xs:enumeration value="RJ"/>
+                                      <xs:enumeration value="RN"/>
+                                      <xs:enumeration value="RS"/>
+                                      <xs:enumeration value="RO"/>
+                                      <xs:enumeration value="RR"/>
+                                      <xs:enumeration value="SC"/>
+                                      <xs:enumeration value="SP"/>
+                                      <xs:enumeration value="SE"/>
+                                      <xs:enumeration value="TO"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="paisNascto">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation>País de Nascimento</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                      <xs:length value="3"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="paisNac">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation>Nacionalidade</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                      <xs:length value="3"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="nmMae" minOccurs="0">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation>Nome da mãe</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="2"/>
+                                      <xs:maxLength value="70"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="nmPai" minOccurs="0">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation>Nome do pai</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="2"/>
+                                      <xs:maxLength value="70"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
                           </xs:element>
                           <xs:element name="documentos" minOccurs="0">
                             <xs:annotation>
@@ -431,7 +536,7 @@
             <xs:documentation>CTPS</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:minLength value="3"/>
+            <xs:minLength value="2"/>
             <xs:maxLength value="11"/>
           </xs:restriction>
         </xs:simpleType>
@@ -948,7 +1053,7 @@
       <xs:documentation>Informações do Trabalhador Estrangeiro</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="dtChegada">
+      <xs:element name="dtChegada" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Data de chegada ao Brasil</xs:documentation>

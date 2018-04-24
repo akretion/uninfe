@@ -191,10 +191,15 @@
     <Compile Include="Interface\IRequest.cs" />
     <Compile Include="Pronin\VacariRS\h\ProninH.cs" />
     <Compile Include="Pronin\VacariRS\p\ProninP.cs" />
+    <Compile Include="Pronin\VeraCruzRS\p\ProninP.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_DESENVOLVECIDADE.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_EMBRAS.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_JOINVILLE_SC.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_MANAUS_AM.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_AVMB_ASTEN.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_SOFTPLAN.cs" />
+    <Compile Include="SimplISS\ArarasSP\p\SimplISSP.cs" />
+    <Compile Include="SimplISS\AstorgaPR\p\SimplISSP.cs" />
     <Compile Include="SOFTPLAN\SOFTPLAN.cs" />
     <Compile Include="SOFTPLAN\Token.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_INTERSOL.cs" />
@@ -928,6 +933,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\PArarasSP\Reference.cs" />
+    <Compile Include="Web References\PAstorgaPR\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\PCachoeiraSulRS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1044,6 +1055,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\PVacariRS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PVeraCruzRS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -3062,6 +3078,28 @@
     <None Include="Web References\HVacariRS\Services0.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Web References\PArarasSP\CancelarNfseResposta.datasource" />
+    <None Include="Web References\PArarasSP\ConsultarLoteRpsResposta.datasource" />
+    <None Include="Web References\PArarasSP\ConsultarNfseResposta.datasource" />
+    <None Include="Web References\PArarasSP\ConsultarNfseRpsResposta.datasource" />
+    <None Include="Web References\PArarasSP\ConsultarSituacaoLoteRpsResposta.datasource" />
+    <None Include="Web References\PArarasSP\EnviarLoteRpsResposta.datasource" />
+    <None Include="Web References\PArarasSP\GerarNovaNfseResposta.datasource" />
+    <None Include="Web References\PArarasSP\NfseService.wsdl" />
+    <None Include="Web References\PArarasSP\nfseservice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PArarasSP\nfseservice0.wsdl" />
+    <None Include="Web References\PArarasSP\nfseservice0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PArarasSP\nfseservice1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PArarasSP\nfseservice2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PArarasSP\Reference.map" />
     <None Include="Web References\PAssisSP\CancelarNfseResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -3091,6 +3129,45 @@
     </None>
     <None Include="Web References\PAssisSP\SubstituirNfseResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAstorgaPR\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAstorgaPR\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAstorgaPR\ConsultarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAstorgaPR\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAstorgaPR\ConsultarSituacaoLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAstorgaPR\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAstorgaPR\GerarNovaNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAstorgaPR\NfseService.wsdl" />
+    <None Include="Web References\PAstorgaPR\nfseservice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PAstorgaPR\nfseservice0.wsdl" />
+    <None Include="Web References\PAstorgaPR\nfseservice0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PAstorgaPR\nfseservice1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PAstorgaPR\nfseservice2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PAstorgaPR\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\PCachoeiraSulRS\NFSeIntegracao.wsdl" />
     <None Include="Web References\PCachoeiraSulRS\Reference.map">
@@ -3418,6 +3495,17 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Web References\PVacariRS\Services0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PVeraCruzRS\NFSeIntegracao.wsdl" />
+    <None Include="Web References\PVeraCruzRS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PVeraCruzRS\Services.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PVeraCruzRS\Services0.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -3862,6 +3950,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_gov_sp_embudasartes_sistemas_www_p_NfseService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://187.60.188.222:8086/NFSe.Portal.Integracao/Services.svc%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PVeraCruzRS\</RelPath>
+      <UpdateFromURL>http://187.60.188.222:8086/NFSe.Portal.Integracao/Services.svc%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PVeraCruzRS_NFSeIntegracao</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://187.60.188.82:8091/NFSe.Portal.Integracao.Teste/Services.svc%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\PCachoeiraSulRS\</RelPath>
@@ -4070,6 +4169,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_metropolisweb_lftributos_p_Nfse</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://wsastorga.simplissweb.com.br/nfseservice.svc%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PAstorgaPR\</RelPath>
+      <UpdateFromURL>http://wsastorga.simplissweb.com.br/nfseservice.svc%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PAstorgaPR_NfseService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://nfewshomologacao.joinville.sc.gov.br/NotaFiscal/Servicos.asmx%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

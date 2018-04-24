@@ -18,9 +18,18 @@
                 </s:complexType>
             </s:element>
    <s:element name='nfeDadosMsgZip'>
-    <s:simpleType>
-     <s:restriction base='s:string'/>
-    </s:simpleType>
+    <s:complexType mixed='true'>
+     <s:sequence>
+      <s:any/>
+     </s:sequence>
+    </s:complexType>
+   </s:element>
+   <s:element name='nfeResultMsgZip'>
+    <s:complexType mixed='true'>
+     <s:sequence>
+      <s:any/>
+     </s:sequence>
+    </s:complexType>
    </s:element>
         </s:schema>
     </wsdl:types>
@@ -30,6 +39,9 @@
  <wsdl:message name='nfeAutorizacaoLoteZipSoap12In'>
   <wsdl:part element='tns:nfeDadosMsgZip' name='nfeDadosMsgZip'></wsdl:part>
     </wsdl:message>
+ <wsdl:message name='nfeAutorizacaoLoteZipSoap12Out'>
+  <wsdl:part element='tns:nfeResultMsgZip' name='nfeResultMsgZip'></wsdl:part>
+ </wsdl:message>
  <wsdl:message name='nfeAutorizacaoLoteSoap12In'>
   <wsdl:part element='tns:nfeDadosMsg' name='nfeDadosMsg'></wsdl:part>
     </wsdl:message>
@@ -42,7 +54,7 @@
   <wsdl:operation name='nfeAutorizacaoLoteZip'>
    <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Transmissao de Lote Compactado de NFCe</wsdl:documentation>
    <wsdl:input message='tns:nfeAutorizacaoLoteZipSoap12In'></wsdl:input>
-   <wsdl:output message='tns:nfeAutorizacaoLoteSoap12Out'></wsdl:output>
+   <wsdl:output message='tns:nfeAutorizacaoLoteZipSoap12Out'></wsdl:output>
         </wsdl:operation>
     </wsdl:portType>
  <wsdl:binding name='NFeAutorizacao4Soap12' type='tns:NFeAutorizacao4Soap12'>

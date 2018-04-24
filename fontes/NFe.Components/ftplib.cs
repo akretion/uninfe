@@ -1109,12 +1109,15 @@ namespace NFe.Components
             {
                 case 125:
                 case 150:
+                    //file.Close();
+                    //file = null;
                     break;
                 default:
                     file.Close();
                     file = null;
                     throw new Exception(responseStr);
             }
+
             ConnectDataSocket();		// #######################################	
         }
 

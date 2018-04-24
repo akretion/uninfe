@@ -1,77 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<definitions
-    
-     targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2"
-     xmlns="http://schemas.xmlsoap.org/wsdl/"
-     xmlns:tns="http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2"
-     xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
-     xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
-     xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
-     xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
-     xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
-     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-     xmlns:s="http://www.w3.org/2001/XMLSchema"
-    >
-    <types>
-        <s:schema elementFormDefault="qualified" targetNamespace="http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2">
-            <s:element name="nfeDadosMsg">
-                <s:complexType mixed="true">
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions targetNamespace='http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4' xmlns:http='http://schemas.xmlsoap.org/wsdl/http/' xmlns:mime='http://schemas.xmlsoap.org/wsdl/mime/' xmlns:s='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' xmlns:soap12='http://schemas.xmlsoap.org/wsdl/soap12/' xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/' xmlns:tm='http://microsoft.com/wsdl/mime/textMatching/' xmlns:tns='http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4' xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>
+ <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado ao atendimento de solicitacoes de consulta ao Cadastro de Contribuintes do ICMS da Secretaria de Fazenda Estatual.</wsdl:documentation>
+ <wsdl:types>
+  <s:schema elementFormDefault='qualified' targetNamespace='http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4'>
+   <s:element name='nfeDadosMsg'>
+    <s:complexType mixed='true'>
                     <s:sequence>
                         <s:any/>
                     </s:sequence>
                 </s:complexType>
             </s:element>
-            <s:element name="consultaCadastro2Result">
-                <s:complexType mixed="true">
+   <s:element name='nfeResultMsg'>
+    <s:complexType mixed='true'>
                     <s:sequence>
                         <s:any/>
                     </s:sequence>
                 </s:complexType>
             </s:element>
-            <s:element name="nfeCabecMsg" type="tns:nfeCabecMsg"/>
-            <s:complexType name="nfeCabecMsg">
-                <s:sequence>
-                    <s:element maxOccurs="1" minOccurs="0" name="cUF" type="s:string"/>
-                    <s:element maxOccurs="1" minOccurs="0" name="versaoDados" type="s:string"/>
-                </s:sequence>
-                <s:anyAttribute/>
-            </s:complexType>
         </s:schema>
-    </types>
-    <message name="consultaCadastro2Soap12In">
-        <part name="nfeDadosMsg" element="tns:nfeDadosMsg"/>
-    </message>
-    <message name="consultaCadastro2Soap12Out">
-        <part name="consultaCadastro2Result" element="tns:consultaCadastro2Result"/>
-    </message>
-    <message name="consultaCadastro2nfeCabecMsg">
-        <part name="nfeCabecMsg" element="tns:nfeCabecMsg"/>
-    </message>
-    <portType name="CadConsultaCadastro2Soap12">
-        <operation name="consultaCadastro2">
-            <input message="tns:consultaCadastro2Soap12In"/>
-            <output message="tns:consultaCadastro2Soap12Out"/>
-        </operation>
-    </portType>
-    <binding name="CadConsultaCadastro2Soap12" type="tns:CadConsultaCadastro2Soap12">
-        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
-        <operation name="consultaCadastro2">
-            <soap12:operation style="document" soapAction="http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro2/consultaCadastro2"
-                 soapActionRequired="false"/>
-            <input>
-                <soap12:body use="literal"/>
-                <soap12:header message="tns:consultaCadastro2nfeCabecMsg" part="nfeCabecMsg" use="literal"/>
-            </input>
-            <output>
-                <soap12:body use="literal"/>
-                <soap12:header message="tns:consultaCadastro2nfeCabecMsg" part="nfeCabecMsg" use="literal"/>
-            </output>
-        </operation>
-    </binding>
-    <service name="CadConsultaCadastro2">
-        <port name="CadConsultaCadastro2Soap12" binding="tns:CadConsultaCadastro2Soap12">
-            <soap12:address location="https://homologacao.sefaz.mt.gov.br/nfews/v2/services/CadConsultaCadastro2"/>
-        </port>
-    </service>
-</definitions>
+ </wsdl:types>
+ <wsdl:message name='consultaCadastro4Soap12In'>
+  <wsdl:part element='tns:nfeDadosMsg' name='nfeDadosMsg'></wsdl:part>
+ </wsdl:message>
+ <wsdl:message name='consultaCadastro4Soap12Out'>
+  <wsdl:part element='tns:nfeResultMsg' name='nfeResultMsg'></wsdl:part>
+ </wsdl:message>
+ <wsdl:portType name='CadConsultaCadastro4Soap12'>
+  <wsdl:operation name='consultaCadastro'>
+   <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Consulta Cadastro de Contribuintes do ICMS</wsdl:documentation>
+   <wsdl:input message='tns:consultaCadastro4Soap12In'></wsdl:input>
+   <wsdl:output message='tns:consultaCadastro4Soap12Out'></wsdl:output>
+  </wsdl:operation>
+ </wsdl:portType>
+ <wsdl:binding name='CadConsultaCadastro4Soap12' type='tns:CadConsultaCadastro4Soap12'>
+  <soap12:binding transport='http://schemas.xmlsoap.org/soap/http'/>
+  <wsdl:operation name='consultaCadastro'>
+   <soap12:operation soapAction='http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4/consultaCadastro' style='document'/>
+   <wsdl:input>
+    <soap12:body use='literal'/>
+   </wsdl:input>
+   <wsdl:output>
+    <soap12:body use='literal'/>
+   </wsdl:output>
+  </wsdl:operation>
+ </wsdl:binding>
+ <wsdl:service name='CadConsultaCadastro4'>
+  <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado ao atendimento de solicitacoes de consulta ao Cadastro de Contribuintes do ICMS da Secretaria de Fazenda Estatual.</wsdl:documentation>
+  <wsdl:port binding='tns:CadConsultaCadastro4Soap12' name='CadConsultaCadastro4ServicePort'>
+   <soap12:address location='https://homologacao.sefaz.mt.gov.br/nfews/v2/services/CadConsultaCadastro4'/>
+  </wsdl:port>
+ </wsdl:service>
+</wsdl:definitions>

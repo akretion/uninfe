@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtDeslig/v02_04_01" targetNamespace="http://www.esocial.gov.br/schema/evt/evtDeslig/v02_04_01" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtDeslig/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtDeslig/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -118,7 +118,8 @@
                           <xs:documentation>Nr Processo Trabalhista</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:string">
-                          <xs:maxLength value="20"/>
+                          <xs:minLength value="3"/>
+                          <xs:maxLength value="21"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -132,17 +133,36 @@
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
-                    <xs:element name="observacao" minOccurs="0">
+                    <xs:element name="qtdDiasInterm" minOccurs="0">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Observação</xs:documentation>
+                          <xs:documentation>Quantidade de dias trabalhados - contrato intermitente</xs:documentation>
                         </xs:annotation>
-                        <xs:restriction base="xs:string">
-                          <xs:whiteSpace value="preserve"/>
-                          <xs:minLength value="3"/>
-                          <xs:maxLength value="255"/>
+                        <xs:restriction base="xs:byte">
+                          <xs:pattern value="\d{1,2}"/>
                         </xs:restriction>
                       </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="observacoes" minOccurs="0" maxOccurs="99">
+                      <xs:annotation>
+                        <xs:documentation>Observações sobre o desligamento</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="observacao">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Observação</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:whiteSpace value="preserve"/>
+                                <xs:minLength value="3"/>
+                                <xs:maxLength value="255"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
                     </xs:element>
                     <xs:element name="sucessaoVinc" minOccurs="0">
                       <xs:annotation>
@@ -156,7 +176,6 @@
                                 <xs:documentation>CNPJ da empresa sucessora</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:length value="14"/>
                                 <xs:pattern value="\d{8,14}"/>
                               </xs:restriction>
                             </xs:simpleType>
@@ -668,12 +687,12 @@ Não preencher nos demais casos.</xs:documentation>
                                       <xs:documentation>Nr Processo Judicial</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:minLength value="1"/>
-                                      <xs:maxLength value="20"/>
+                                      <xs:minLength value="3"/>
+                                      <xs:maxLength value="21"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
-                                <xs:element name="codSusp">
+                                <xs:element name="codSusp" minOccurs="0">
                                   <xs:simpleType>
                                     <xs:annotation>
                                       <xs:documentation>Código do Indicativo da Suspensão</xs:documentation>
@@ -710,6 +729,26 @@ Não preencher nos demais casos.</xs:documentation>
                               </xs:sequence>
                             </xs:complexType>
                           </xs:element>
+                          <xs:element name="procCS" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Informação sobre processo judicial que suspende a exigibilidade da Contribuição Social Rescisória</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="nrProcJud">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation>Nr Processo Judicial</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="3"/>
+                                      <xs:maxLength value="21"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
@@ -731,23 +770,13 @@ Não preencher nos demais casos.</xs:documentation>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
-                    <xs:element name="consigFGTS">
+                    <xs:element name="consigFGTS" minOccurs="0" maxOccurs="9">
                       <xs:annotation>
                         <xs:documentation>Informações sobre operação de crédito consignado com garantia de FGTS</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="idConsig">
-                            <xs:simpleType>
-                              <xs:annotation>
-                                <xs:documentation>Informar contrato de empréstimo consignado com garantia de FGTS</xs:documentation>
-                              </xs:annotation>
-                              <xs:restriction base="xs:string">
-                                <xs:pattern value="[N|S]"/>
-                              </xs:restriction>
-                            </xs:simpleType>
-                          </xs:element>
-                          <xs:element name="insConsig" minOccurs="0">
+                          <xs:element name="insConsig">
                             <xs:simpleType>
                               <xs:annotation>
                                 <xs:documentation>Matrícula da Instituição Consignatária, cadastrada na Caixa Econômica Federal</xs:documentation>
@@ -758,7 +787,7 @@ Não preencher nos demais casos.</xs:documentation>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-                          <xs:element name="nrContr" minOccurs="0">
+                          <xs:element name="nrContr">
                             <xs:simpleType>
                               <xs:annotation>
                                 <xs:documentation>Número do contrato de empréstimo consignado existente na Instituição Consignatária</xs:documentation>

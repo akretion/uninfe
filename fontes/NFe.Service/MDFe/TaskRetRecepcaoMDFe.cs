@@ -218,8 +218,6 @@ namespace NFe.Service
 
                     case "214":
                     case "243":
-                    case "108":
-                    case "109":
 
                     #endregion Validação inicial da mensagem no webservice
 
@@ -256,6 +254,19 @@ namespace NFe.Service
                         #endregion Validação das regras de negócio da consulta recibo
 
                         break;
+
+                    #region Serviço paralisado
+
+                    case "108":
+                    case "109":
+                        //Se o serviço estiver paralisado momentaneamente ou sem previsão de retorno, vamos tentar consultar somente a cada 3 minutos pra evitar consumo indevido.
+                        if (nRec != string.Empty)
+                        {
+                            fluxoNFe.AtualizarDPedRec(nRec, DateTime.Now.AddSeconds(180));
+                        }
+                        break;
+
+                    #endregion Serviço paralisado
 
                     #region Lote não foi localizado pelo recibo que está sendo consultado
 

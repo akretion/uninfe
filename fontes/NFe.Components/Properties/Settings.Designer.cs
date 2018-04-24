@@ -1360,5 +1360,35 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_PPelotasRS_INfseservice"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://187.60.188.222:8086/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PVeraCruzRS_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PVeraCruzRS_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://wsastorga.simplissweb.com.br/nfseservice.svc")]
+        public string NFe_Components_PAstorgaPR_NfseService {
+            get {
+                return ((string)(this["NFe_Components_PAstorgaPR_NfseService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://189.56.68.34:8080/ws_araras/nfseservice.svc")]
+        public string NFe_Components_PArarasSP_NfseService {
+            get {
+                return ((string)(this["NFe_Components_PArarasSP_NfseService"]));
+            }
+        }
     }
 }

@@ -125,7 +125,7 @@ namespace NFe.Service
                         Thread.Sleep(dadosRec.tMed * 1000);
 
                     //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
-                    oFluxoNfe.AtualizarTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, (dadosRec.tMed + 2).ToString());
+                    oFluxoNfe.AtualizarTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, dadosRec.tMed.ToString());
                     oFluxoNfe.AtualizarTagRec(idLote, dadosRec.nRec);
 
                     XmlDocument xmlPedRec = oGerarXML.XmlPedRecNFe(dadosRec.nRec, oLer.oDadosNfe.versao, oLer.oDadosNfe.mod, emp);

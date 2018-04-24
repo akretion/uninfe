@@ -764,7 +764,7 @@ namespace NFe.Service
 
                                 if (documentoElemento.GetElementsByTagName(TpcnResources.idLote.ToString())[0].InnerText == strLote)
                                 {
-                                    AtualizarTag(strChaveNFe, ElementoEditavel.dPedRec, DateTime.Now.ToString());
+                                    AtualizarTag(strChaveNFe, ElementoEditavel.dPedRec, DateTime.Now.AddSeconds(20).ToString());
                                     AtualizarTag(strChaveNFe, ElementoEditavel.nRec, strRecibo);
                                 }
                             }

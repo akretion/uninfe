@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtPgtos/v02_04_01" targetNamespace="http://www.esocial.gov.br/schema/evt/evtPgtos/v02_04_01" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtPgtos/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtPgtos/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -233,10 +233,92 @@ O somatório de cada uma das rubricas cujo {codIncIRRF} = [31, 32, 33, 34, 35] n
                                     </xs:sequence>
                                   </xs:complexType>
                                 </xs:element>
-                                <xs:element name="infoPgtoParc" type="TPgtoParc" minOccurs="0" maxOccurs="99">
+                                <xs:element name="infoPgtoParc" minOccurs="0" maxOccurs="99">
                                   <xs:annotation>
-                                    <xs:documentation>Informações complentares relacionadas ao pagamento efetuado em valor menor que o apurado no demonstrativo.</xs:documentation>
+                                    <xs:documentation>Informações complentares relacionadas ao pagamento efetuado em valor menor que o apurado no demonstrativo.
+Devem ser utilizadas rubricas que integram o demonstrativo de valores devidos ao trabalhador ({ideDmDev}) do respectivo evento (S-1200, S-1202, S-2299, S-2399) que deu origem ao presente pagamento parcial, além de rubricas que representam os descontos de IRRF e pensão alimentícia.</xs:documentation>
                                   </xs:annotation>
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="matricula" minOccurs="0">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Matricula</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                            <xs:maxLength value="30"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="codRubr">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Código da Rubrica</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                            <xs:maxLength value="30"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="ideTabRubr">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Identificador da tabela de rubricas</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                            <xs:maxLength value="8"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="qtdRubr" minOccurs="0">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Qtde de referência para apuração da rubrica.</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:decimal">
+                                            <xs:totalDigits value="6"/>
+                                            <xs:fractionDigits value="2"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="fatorRubr" minOccurs="0">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Fator utilizado na apuração da rubrica</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:decimal">
+                                            <xs:totalDigits value="5"/>
+                                            <xs:fractionDigits value="2"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="vrUnit" minOccurs="0">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Valor Unitário </xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:decimal">
+                                            <xs:totalDigits value="14"/>
+                                            <xs:fractionDigits value="2"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="vrRubr">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Valor total da rubrica</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:decimal">
+                                            <xs:totalDigits value="14"/>
+                                            <xs:fractionDigits value="2"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
                                 </xs:element>
                               </xs:sequence>
                             </xs:complexType>
@@ -295,10 +377,81 @@ O somatório de cada uma das rubricas cujo {codIncIRRF} = [31, 32, 33, 34, 35] n
                                     <xs:documentation>Retenções efetuadas no ato do pagamento pelo valor integral do demonstrativo</xs:documentation>
                                   </xs:annotation>
                                 </xs:element>
-                                <xs:element name="infoPgtoParc" type="TPgtoParc" minOccurs="0" maxOccurs="99">
+                                <xs:element name="infoPgtoParc" minOccurs="0" maxOccurs="99">
                                   <xs:annotation>
-                                    <xs:documentation>Informações complentares relacionadas ao pagamento efetuado em valor menor que o apurado no demonstrativo.</xs:documentation>
+                                    <xs:documentation>Informações complentares relacionadas ao pagamento efetuado em valor menor que o apurado no demonstrativo.
+Devem ser utilizadas rubricas que integram o demonstrativo de valores devidos ao trabalhador ({ideDmDev}) do respectivo evento (S-1207) que deu origem ao presente pagamento parcial, além de rubricas que representam os descontos de IRRF e pensão alimentícia.</xs:documentation>
                                   </xs:annotation>
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="codRubr">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Código da Rubrica</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                            <xs:maxLength value="30"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="ideTabRubr">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Identificador da tabela de rubricas</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="1"/>
+                                            <xs:maxLength value="8"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="qtdRubr" minOccurs="0">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Qtde de referência para apuração da rubrica.</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:decimal">
+                                            <xs:totalDigits value="6"/>
+                                            <xs:fractionDigits value="2"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="fatorRubr" minOccurs="0">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Fator utilizado na apuração da rubrica</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:decimal">
+                                            <xs:totalDigits value="5"/>
+                                            <xs:fractionDigits value="2"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="vrUnit" minOccurs="0">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Valor Unitário </xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:decimal">
+                                            <xs:totalDigits value="14"/>
+                                            <xs:fractionDigits value="2"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="vrRubr">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Valor total da rubrica</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:decimal">
+                                            <xs:totalDigits value="14"/>
+                                            <xs:fractionDigits value="2"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
                                 </xs:element>
                               </xs:sequence>
                             </xs:complexType>
@@ -317,6 +470,17 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
                                     </xs:annotation>
                                     <xs:restriction base="xs:integer">
                                       <xs:pattern value="\d{3}"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="matricula">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation>Matricula</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                      <xs:minLength value="1"/>
+                                      <xs:maxLength value="30"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -645,79 +809,6 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Valor da pensão alimentícia</xs:documentation>
-          </xs:annotation>
-          <xs:restriction base="xs:decimal">
-            <xs:totalDigits value="14"/>
-            <xs:fractionDigits value="2"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="TPgtoParc">
-    <xs:annotation>
-      <xs:documentation>Detalhamento do pagamento parcial utilizando-se das rubricas de folha de pagamento. Devem ser utilizadas todas as rubricas que compõem o pagamento, ou seja, vencimentos, descontos e informativas (se necessário).</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="codRubr">
-        <xs:simpleType>
-          <xs:annotation>
-            <xs:documentation>Código da Rubrica</xs:documentation>
-          </xs:annotation>
-          <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
-            <xs:maxLength value="30"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
-      <xs:element name="ideTabRubr">
-        <xs:simpleType>
-          <xs:annotation>
-            <xs:documentation>Identificador da tabela de rubricas</xs:documentation>
-          </xs:annotation>
-          <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
-            <xs:maxLength value="8"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
-      <xs:element name="qtdRubr" minOccurs="0">
-        <xs:simpleType>
-          <xs:annotation>
-            <xs:documentation>Qtde de referência para apuração da rubrica.</xs:documentation>
-          </xs:annotation>
-          <xs:restriction base="xs:decimal">
-            <xs:totalDigits value="6"/>
-            <xs:fractionDigits value="2"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
-      <xs:element name="fatorRubr" minOccurs="0">
-        <xs:simpleType>
-          <xs:annotation>
-            <xs:documentation>Fator utilizado na apuração da rubrica</xs:documentation>
-          </xs:annotation>
-          <xs:restriction base="xs:decimal">
-            <xs:totalDigits value="5"/>
-            <xs:fractionDigits value="2"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
-      <xs:element name="vrUnit" minOccurs="0">
-        <xs:simpleType>
-          <xs:annotation>
-            <xs:documentation>Valor Unitário </xs:documentation>
-          </xs:annotation>
-          <xs:restriction base="xs:decimal">
-            <xs:totalDigits value="14"/>
-            <xs:fractionDigits value="2"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:element>
-      <xs:element name="vrRubr">
-        <xs:simpleType>
-          <xs:annotation>
-            <xs:documentation>Valor total da rubrica</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:decimal">
             <xs:totalDigits value="14"/>

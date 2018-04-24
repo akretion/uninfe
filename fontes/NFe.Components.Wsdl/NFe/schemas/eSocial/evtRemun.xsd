@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtRemun/v02_04_01" targetNamespace="http://www.esocial.gov.br/schema/evt/evtRemun/v02_04_01" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtRemun/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtRemun/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -144,7 +144,7 @@
                           </xs:element>
                           <xs:element name="remunOutrEmpr" type="TRemunOutrasEmpresas" maxOccurs="10">
                             <xs:annotation>
-                              <xs:documentation>Informações relativas ao trabalhador que possui vínculo empregatício com outra(s) empresa(s) e/ou que exerce outras atividades como contribuinte individual, detalhando as empresas que efetuaram (ou efetuarão) desconto da contribuição, ou ainda valores recolhidos pelo próprio trabalhador como contribuinte individual. As informações são necessárias para a conferência da contribuição descontada do segurado.</xs:documentation>
+                              <xs:documentation>Informações relativas ao trabalhador que possui vínculo empregatício com outra(s) empresa(s) e/ou que exerce outras atividades como contribuinte individual, detalhando as empresas que efetuaram (ou efetuarão) desconto da contribuição. As informações são necessárias para a conferência da contribuição descontada do segurado.</xs:documentation>
                             </xs:annotation>
                           </xs:element>
                         </xs:sequence>
@@ -152,7 +152,7 @@
                     </xs:element>
                     <xs:element name="infoComplem" minOccurs="0">
                       <xs:annotation>
-                        <xs:documentation>Registro preenchido exclusivamente quando o evento de remuneração referir-se a trabalhador cuja categoria não está sujeita ao evento de admissão ou ao evento de início de "trabalhador sem vínculo". No caso das categorias em que o envio do evento TSV é opcional, o preenchimento do grupo somente é exigido se não houver evento TSV Início correspondente (cpf + categoria). As informações complementares são necessárias para correta identificação do trabalhador (Nome, data de nascimento, etc).</xs:documentation>
+                        <xs:documentation>Registro preenchido exclusivamente quando o evento de remuneração referir-se a trabalhador cuja categoria não está sujeita ao evento de admissão ou ao evento de início de "trabalhador sem vínculo". No caso das categorias em que o envio do evento TSV é opcional, o preenchimento do grupo somente é exigido se não houver evento TSV Início correspondente (cpf + categoria). As informações complementares são necessárias para correta identificação do trabalhador.</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
@@ -176,36 +176,6 @@
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-                          <xs:element name="codCBO">
-                            <xs:simpleType>
-                              <xs:annotation>
-                                <xs:documentation>CBO</xs:documentation>
-                              </xs:annotation>
-                              <xs:restriction base="xs:string">
-                                <xs:pattern value="\d{4,6}"/>
-                              </xs:restriction>
-                            </xs:simpleType>
-                          </xs:element>
-                          <xs:element name="natAtividade" minOccurs="0">
-                            <xs:simpleType>
-                              <xs:annotation>
-                                <xs:documentation>Natureza da atividade</xs:documentation>
-                              </xs:annotation>
-                              <xs:restriction base="xs:byte">
-                                <xs:pattern value="\d"/>
-                              </xs:restriction>
-                            </xs:simpleType>
-                          </xs:element>
-                          <xs:element name="qtdDiasTrab" minOccurs="0">
-                            <xs:simpleType>
-                              <xs:annotation>
-                                <xs:documentation>Qtd dias trabalhados</xs:documentation>
-                              </xs:annotation>
-                              <xs:restriction base="xs:byte">
-                                <xs:pattern value="\d{1,2}"/>
-                              </xs:restriction>
-                            </xs:simpleType>
-                          </xs:element>
                           <xs:element name="sucessaoVinc" minOccurs="0">
                             <xs:annotation>
                               <xs:documentation>Grupo de informações da sucessão de vínculo trabalhista/estatutário</xs:documentation>
@@ -218,7 +188,6 @@
                                       <xs:documentation>CNPJ do empregador anterior</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:length value="14"/>
                                       <xs:pattern value="\d{8,14}"/>
                                     </xs:restriction>
                                   </xs:simpleType>
@@ -283,18 +252,37 @@
                                 <xs:documentation>Nr Processo Judicial</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:minLength value="1"/>
-                                <xs:maxLength value="20"/>
+                                <xs:minLength value="3"/>
+                                <xs:maxLength value="21"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-                          <xs:element name="codSusp">
+                          <xs:element name="codSusp" minOccurs="0">
                             <xs:simpleType>
                               <xs:annotation>
                                 <xs:documentation>Código do Indicativo da Suspensão</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:integer">
                                 <xs:pattern value="\d{1,14}"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="infoInterm" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Informações relativas ao trabalho intermitente</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="qtdDiasInterm">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Quantidade de dias trabalhados - contrato intermitente</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:byte">
+                                <xs:pattern value="\d{1,2}"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -440,6 +428,26 @@ Não preencher nos demais casos.</xs:documentation>
                                                 </xs:annotation>
                                                 <xs:restriction base="xs:byte">
                                                   <xs:pattern value="\d"/>
+                                                </xs:restriction>
+                                              </xs:simpleType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="infoTrabInterm" minOccurs="0" maxOccurs="99">
+                                        <xs:annotation>
+                                          <xs:documentation>Informações da(s) convocação(ões) de trabalho intermitente</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="codConv">
+                                              <xs:simpleType>
+                                                <xs:annotation>
+                                                  <xs:documentation>Código que identifica a convocação para trabalho intermitente</xs:documentation>
+                                                </xs:annotation>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:minLength value="1"/>
+                                                  <xs:maxLength value="30"/>
                                                 </xs:restriction>
                                               </xs:simpleType>
                                             </xs:element>
@@ -637,6 +645,26 @@ OBS.: as informações previstas nos itens "a", "b" e "d" acima podem se referir
                                                       </xs:sequence>
                                                     </xs:complexType>
                                                   </xs:element>
+                                                  <xs:element name="infoTrabInterm" minOccurs="0" maxOccurs="99">
+                                                    <xs:annotation>
+                                                      <xs:documentation>Informações da(s) convocação(ões) de trabalho intermitente</xs:documentation>
+                                                    </xs:annotation>
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="codConv">
+                                                          <xs:simpleType>
+                                                            <xs:annotation>
+                                                              <xs:documentation>Código que identifica a convocação para trabalho intermitente</xs:documentation>
+                                                            </xs:annotation>
+                                                            <xs:restriction base="xs:string">
+                                                              <xs:minLength value="1"/>
+                                                              <xs:maxLength value="30"/>
+                                                            </xs:restriction>
+                                                          </xs:simpleType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
                                                 </xs:sequence>
                                               </xs:complexType>
                                             </xs:element>
@@ -652,20 +680,39 @@ OBS.: as informações previstas nos itens "a", "b" e "d" acima podem se referir
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
-                    <xs:element name="infoTrabInterm" minOccurs="0" maxOccurs="99">
+                    <xs:element name="infoComplCont" minOccurs="0">
                       <xs:annotation>
-                        <xs:documentation>Informações da(s) convocação(ões) de trabalho intermitente</xs:documentation>
+                        <xs:documentation>Registro preenchido exclusivamente quando o evento de remuneração se referir a trabalhador cuja categoria não estiver obrigada ao evento de início de TSVE e se não houver evento S-2300 correspondente (CPF + categoria).</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="codConv">
+                          <xs:element name="codCBO">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Código que identifica a convocação para trabalho intermitente</xs:documentation>
+                                <xs:documentation>CBO</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:minLength value="1"/>
-                                <xs:maxLength value="30"/>
+                                <xs:pattern value="\d{4,6}"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="natAtividade" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Natureza da atividade</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:byte">
+                                <xs:pattern value="\d"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="qtdDiasTrab" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Qtd dias trabalhados</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:byte">
+                                <xs:pattern value="\d{1,2}"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>

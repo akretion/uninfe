@@ -64,7 +64,7 @@
   </wsdl:binding>
   <wsdl:service name="NfeInutilizacao2">
     <wsdl:port name="NfeInutilizacao2Soap12" binding="tns:NfeInutilizacao2Soap12">
-      <soap12:address location="http://homnfce.sefaz.am.gov.br/nfce-services-nac/services/NfeInutilizacao2"/>
+      <soap12:address location="https://homnfce.sefaz.am.gov.br/nfce-services-nac/services/NfeInutilizacao2"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

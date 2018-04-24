@@ -353,6 +353,128 @@ namespace NFe.Certificado
             }
         }
 
+        #region Assinar lote de eventos do eSocial
+
+        /// <summary>
+        /// Assinar lote de eventos do eSocial
+        /// </summary>
+        /// <param name="conteudoXML">Conteúdo do XML de lote do eSocial para ser assinado/param>
+        /// <param name="emp">Código da empresa das configurações</param>
+        public void AssinarLoteESocial(XmlDocument conteudoXML, int emp)
+        {
+            XmlNodeList envioLoteEventosNodeList = conteudoXML.GetElementsByTagName("envioLoteEventos");
+
+            foreach (XmlNode envioLoteEventosNode in envioLoteEventosNodeList)
+            {
+                XmlElement envioLoteEventosElement = (XmlElement)envioLoteEventosNode;
+                XmlNodeList eventosNodeList = conteudoXML.GetElementsByTagName("eventos");
+
+                foreach (XmlNode eventosNode in eventosNodeList)
+                {
+                    XmlElement eventosNodeElement = (XmlElement)eventosNode;
+                    XmlNodeList eventoNodeList = conteudoXML.GetElementsByTagName("evento");
+
+                    foreach (XmlNode eventoNode in eventoNodeList)
+                    {
+                        XmlElement eventoElement = (XmlElement)eventoNode;
+                        XmlNodeList eSocialNodeList = eventoElement.GetElementsByTagName("eSocial");
+
+                        XmlDocument xmlDoc = new XmlDocument();
+                        xmlDoc.LoadXml(eSocialNodeList[0].OuterXml);
+
+                        Assinar(xmlDoc, emp, 991, AlgorithmType.Sha256, false);
+
+                        XmlNode newNode = xmlDoc.ChildNodes[0];
+                        eventoNode.RemoveChild(eSocialNodeList[0]);
+                        eventoNode.AppendChild(conteudoXML.ImportNode(xmlDoc.DocumentElement, true));
+                    }
+                }
+            }
+        }
+
+        public void AssinarLoteESocial(string arquivoXML, int emp)
+        {
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(arquivoXML);
+
+                AssinarLoteESocial(doc, emp);
+
+                // Atualizar a string do XML já assinada
+                string StringXMLAssinado = doc.OuterXml;
+
+                // Gravar o XML Assinado no HD
+                StreamWriter SW_2 = File.CreateText(arquivoXML);
+                SW_2.Write(StringXMLAssinado);
+                SW_2.Close();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        #endregion Assinar lote de eventos do eSocial
+
+        #region Assinar lote de eventos do EFDReinf
+
+        /// <summary>
+        /// Assinar lote de eventos do EFD-Reinf
+        /// </summary>
+        /// <param name="conteudoXML">Conteúdo do XML de lote do EFDReinf para ser assinado</param>
+        /// <param name="emp">Código da empresa das configurações</param>
+        public void AssinarLoteEFDReinf(XmlDocument conteudoXML, int emp)
+        {
+            XmlNodeList loteNodeList = conteudoXML.GetElementsByTagName("loteEventos");
+
+            foreach (XmlNode loteEventosNode in loteNodeList)
+            {
+                XmlElement loteEventosElement = (XmlElement)loteEventosNode;
+                XmlNodeList eventoNodeList = conteudoXML.GetElementsByTagName("evento");
+
+                foreach (XmlNode eventoNode in eventoNodeList)
+                {
+                    XmlElement eventoElement = (XmlElement)eventoNode;
+                    XmlNodeList reinfNodeList = eventoElement.GetElementsByTagName("Reinf");
+
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.LoadXml(reinfNodeList[0].OuterXml);
+
+                    Assinar(xmlDoc, emp, 991, AlgorithmType.Sha256, true);
+
+                    XmlNode newNode = xmlDoc.ChildNodes[0];
+                    eventoNode.RemoveChild(reinfNodeList[0]);
+                    eventoNode.AppendChild(conteudoXML.ImportNode(xmlDoc.DocumentElement, true));
+                }
+            }
+        }
+
+        public void AssinarLoteEFDReinf(string arquivoXML, int emp)
+        {
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(arquivoXML);
+
+                AssinarLoteEFDReinf(doc, emp);
+
+                // Atualizar a string do XML já assinada
+                string StringXMLAssinado = doc.OuterXml;
+
+                // Gravar o XML Assinado no HD
+                StreamWriter SW_2 = File.CreateText(arquivoXML);
+                SW_2.Write(StringXMLAssinado);
+                SW_2.Close();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        #endregion Assinar lote de eventos do EFDReinf
+
         #endregion Assinar()
 
         public void CarregarPIN(int emp, string arqXML, Servicos servico)

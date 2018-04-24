@@ -34,7 +34,6 @@ namespace NFe.Service
                 conteudoXML.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText + Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML;
         }
 
-
         #region Classe com os dados do XML do pedido de consulta do recibo do lote de nfe enviado
 
         /// <summary>
@@ -210,8 +209,6 @@ namespace NFe.Service
                     case "282": //A-Falta a extensão de CNPJ no Certificado
                     case "214": //B-Tamanho do XML de dados superior a 500 Kbytes
                     case "243": //B-XML de dados mal formatado
-                    case "108": //B-Verifica se o Serviço está paralisado momentaneamente
-                    case "109": //B-Verifica se o serviço está paralisado sem previsão
                     case "242": //C-Elemento nfeCabecMsg inexistente no SOAP Header
                     case "409": //C-Campo cUF inexistente no elemento nfeCabecMsg do SOAP Header
                     case "410": //C-Campo versaoDados inexistente no elemento nfeCabecMsg do SOAP
@@ -227,6 +224,19 @@ namespace NFe.Service
                     case "217": //E-Acesso BD CTE
                     case "216": //E-Verificar se campo "Codigo Numerico"
                         break;
+
+                    #region Serviço paralisado
+
+                    case "108":
+                    case "109":
+                        //Se o serviço estiver paralisado momentaneamente ou sem previsão de retorno, vamos tentar consultar somente a cada 3 minutos pra evitar consumo indevido.
+                        if (nRec != string.Empty)
+                        {
+                            fluxoNFe.AtualizarDPedRec(nRec, DateTime.Now.AddSeconds(180));
+                        }
+                        break;
+
+                    #endregion Serviço paralisado
 
                     #endregion Rejeições do XML de consulta do recibo (Não é o lote que foi rejeitado e sim o XML de consulta do recibo)
 

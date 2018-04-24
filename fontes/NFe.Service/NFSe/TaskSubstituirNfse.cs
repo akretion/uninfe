@@ -56,6 +56,10 @@ namespace NFe.Service.NFSe
                         else
                             pedSubstNfse = new Components.PPelotasRS.INfseservice();
                         break;
+
+                    case PadroesNFSe.EMBRAS:
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
                 }
 
                 System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosXML.cMunicipio, dadosXML.tpAmb, dadosXML.tpEmis, padraoNFSe, Servico);

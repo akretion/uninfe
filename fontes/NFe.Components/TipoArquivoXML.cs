@@ -127,6 +127,10 @@ namespace NFe.Components
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4322509-";
                                 break;
 
+                            case 3556602: //Vera Cruz-RS
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3556602-";
+                                break;
+
                             default:
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                                 break;

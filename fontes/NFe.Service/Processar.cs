@@ -1581,20 +1581,19 @@ namespace NFe.Service
                 ReciboCons reciboCons = recibos[i];
                 var tempoConsulta = reciboCons.tMed;
 
-                if (tempoConsulta > 15)
-                    tempoConsulta = 15; //Tempo previsto no manual da SEFAZ, isso foi feito pq o ambiente SVAN está retornando na consulta recibo, tempo superior a 160, mas não está com problema, é erro no calculo deste tempo. Wandrey
+                if (tempoConsulta > 30)
+                    tempoConsulta = 30; //Tempo previsto no manual da SEFAZ, isso foi feito pq o ambiente SVAN está retornando na consulta recibo, tempo superior a 160, mas não está com problema, é erro no calculo deste tempo. Wandrey
 
                 if (tempoConsulta < Empresas.Configuracoes[empresa].TempoConsulta)
                     tempoConsulta = Empresas.Configuracoes[empresa].TempoConsulta;
 
-                //Vou dar no mínimo 3 segundos para efetuar a consulta do recibo. Wandrey 21/11/2014
                 if (tempoConsulta < 3)
                     tempoConsulta = 3;
 
                 if (DateTime.Now.Subtract(reciboCons.dPedRec).Seconds >= tempoConsulta)
                 {
-                    //Atualizar a tag da data e hora da ultima consulta do recibo aumentando 10 segundos
-                    fluxoNfe.AtualizarDPedRec(reciboCons.nRec, DateTime.Now.AddSeconds(10));
+                    //Atualizar a tag da data e hora da ultima consulta do recibo aumentando 180 segundos (3 minutos) para evitar consumo indevido
+                    fluxoNfe.AtualizarDPedRec(reciboCons.nRec, DateTime.Now.AddSeconds(180));
 
                     XmlDocument dadosXMLRec = (XmlDocument)tipoServico.InvokeMember("XmlPedRec", BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec, reciboCons.versao, reciboCons.mod });
 

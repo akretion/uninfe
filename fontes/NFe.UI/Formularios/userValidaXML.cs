@@ -107,6 +107,13 @@ namespace NFe.UI
                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML,
                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioXML,
                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML);
+                            dlg.Filter += string.Format("|Arquivos do eSocial (*.*{0},*.*{1},*.*{2})|*{0};*{1};*{2}", 
+                                Propriedade.Extensao(Propriedade.TipoEnvio.eSocial_evt).EnvioXML,
+                                Propriedade.Extensao(Propriedade.TipoEnvio.eSocial_consloteevt).EnvioXML,
+                                Propriedade.Extensao(Propriedade.TipoEnvio.eSocial_loteevt).EnvioXML);
+                            dlg.Filter += string.Format("|Arquivos do EFDReinf (*.*{0},*.*{1})|*{0};*{1}",
+                                Propriedade.Extensao(Propriedade.TipoEnvio.Reinf_evt).EnvioXML,
+                                Propriedade.Extensao(Propriedade.TipoEnvio.Reinf_loteevt).EnvioXML);
                         }
 
                         if (!string.IsNullOrEmpty(path))

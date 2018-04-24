@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
-using NFe.Components.Abstract;
+﻿using NFe.Components.Abstract;
 using NFe.Components.br.com.mgmtributacao.www.penapolis.h;
+using System;
+using System.Xml;
 
 namespace NFe.Components.MGM.PenapolisSP.h
 {
@@ -21,25 +15,28 @@ namespace NFe.Components.MGM.PenapolisSP.h
             }
         }
 
-        webservice service = new webservice();        
+        webservice service = new webservice();
 
         #region construtores
+
         public MGMH(TipoAmbiente tpAmb, string pastaRetorno)
             : base(tpAmb, pastaRetorno)
         {
-
         }
-        #endregion
+
+        #endregion construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
             XmlTextReader reader = new XmlTextReader(file);
             reader.WhitespaceHandling = WhitespaceHandling.None;
             reader.MoveToContent();
-            
+
             XmlDocument oXml = new XmlDocument();
             oXml.Load(reader);
+            reader.Close();
 
             Array result = service.EnvNfe(XmlDocumentUtilities.GetValue<string>(oXml, "prf"),
                                           XmlDocumentUtilities.GetValue<string>(oXml, "usr"),
@@ -149,10 +146,10 @@ namespace NFe.Components.MGM.PenapolisSP.h
                                           XmlDocumentUtilities.GetValue<string>(oXml, "valser7"),
                                           XmlDocumentUtilities.GetValue<string>(oXml, "valser8"));
 
-
             string strResult = base.CreateXML(result);
+
             /// WANDREY: como não tem consulta a lote, a extensao do retorno deve seguir o padrao ou já retorna como -loterps.xml?????????????????????
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);//.LoteRps);
         }
 
@@ -181,6 +178,6 @@ namespace NFe.Components.MGM.PenapolisSP.h
             throw new Exceptions.ServicoInexistenteException();
         }
 
-        #endregion
+        #endregion Métodos
     }
 }
