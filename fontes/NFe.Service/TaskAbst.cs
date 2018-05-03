@@ -746,7 +746,8 @@ namespace NFe.Service
 
                         case Servicos.NFSeConsultar:
                             if (cMunicipio.Equals(3300308) ||
-                                cMunicipio.Equals(3303302))
+                                cMunicipio.Equals(3303302) || 
+                                cMunicipio.Equals(4301602))
                                 retorna = "ConsultarNfsePorFaixa";
                             else
                                 retorna = "ConsultarNfse";

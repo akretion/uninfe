@@ -82,7 +82,7 @@
 	</wsdl:binding>
 	<wsdl:service name="RecepcaoLoteReinf">
 		<wsdl:port name="BasicHttpBinding_RecepcaoLoteReinf" binding="tns:BasicHttpBinding_RecepcaoLoteReinf">
-			<soap:address location="https://preprodefdreinf.receita.fazenda.gov.br/RecepcaoLoteReinf.svc"/>
+			<soap:address location="https://preprodefdreinf.receita.fazenda.gov.br/WsREINF/RecepcaoLoteReinf.svc"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
