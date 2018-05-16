@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
 
 namespace uninfe_ws
 {
@@ -80,7 +77,15 @@ namespace uninfe_ws
                     NFe.Components.URLws temp = new NFe.Components.URLws();
                     foreach (var se in temp.GetType().GetProperties())
                     {
-                        if (se.Name.StartsWith("NFe") || se.Name.StartsWith("CTe") || se.Name.StartsWith("DFe") || se.Name.StartsWith("MDFe"))
+                        if (se.Name.StartsWith("NFe") || 
+                            se.Name.StartsWith("CTe") ||
+                            se.Name.StartsWith("Cte") ||
+                            se.Name.StartsWith("DFe") || 
+                            se.Name.StartsWith("MDFe") ||
+                            se.Name.StartsWith("LMC") ||
+                            se.Name.EndsWith("Cfse") ||
+                            se.Name.EndsWith("eSocial") ||
+                            se.Name.EndsWith("Reinf"))
                         {
                             if (this._tipo == NFe.Components.TipoAplicativo.Nfe)
                                 this.xlabels.Add(se.Name);

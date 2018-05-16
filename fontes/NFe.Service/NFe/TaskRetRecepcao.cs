@@ -455,7 +455,7 @@ namespace NFe.Service
                                     if (!File.Exists(strArquivoNFeProc))
                                     {
                                         Auxiliar.WriteLog("TaskNFeRetRecepcao: Gerou o arquivo de distribuição através da consulta recibo.", false);
-                                        oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcNFe, versao);
+                                        oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcNFe, oLerXml.oDadosNfe.versao);
                                     }
                                 }
 
@@ -525,7 +525,7 @@ namespace NFe.Service
                         case "301":
                         case "302":
                         case "303":
-                            ProcessaNFeDenegada(emp, oLerXml, strArquivoNFe, conteudoXMLLote, protNFeElemento.OuterXml, versao);
+                            ProcessaNFeDenegada(emp, oLerXml, strArquivoNFe, conteudoXMLLote, protNFeElemento.OuterXml);
                             break;
 
                         default: //NFe foi rejeitada

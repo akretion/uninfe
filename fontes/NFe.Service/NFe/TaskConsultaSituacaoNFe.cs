@@ -380,7 +380,7 @@ namespace NFe.Service
                                                 if (!File.Exists(strArquivoNFeProc))
                                                 {
                                                     Auxiliar.WriteLog("TaskNFeConsultaSituacao: Gerou o arquivo de distribuição através da consulta situação da NFe.", false);
-                                                    oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcNFe, versao);
+                                                    oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.ProcNFe, oLerXml.oDadosNfe.versao);
                                                 }
                                             }
 
@@ -455,7 +455,7 @@ namespace NFe.Service
                                             /// se o ERP copiou o arquivo da NFe para a pasta em Processamento, o Uninfe irá montar o XML de distribuicao, caso nao exista,
                                             /// e imprimir o DANFE
                                             ///
-                                            ProcessaNFeDenegada(emp, oLerXml, strArquivoNFe, null, protNFeElemento.OuterXml, versao);
+                                            ProcessaNFeDenegada(emp, oLerXml, strArquivoNFe, null, protNFeElemento.OuterXml);
                                         }
                                         //ProcessaNFeDenegada(emp, oLerXml, strArquivoNFe, retConsSitElemento.GetElementsByTagName("protNFe")[0].OuterXml, versao);
                                         break;

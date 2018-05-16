@@ -699,21 +699,20 @@ namespace NFe.Components
                     {
                         try
                         {
-                            contaTentativa++;
                             doc.Load(Propriedade.NomeArqXMLMunicipios);
+                            break;
                         }
                         catch (Exception ex)
                         {
                             Functions.WriteLog("Ocorreu um erro na tentativa de carregamento do arquivo " + Propriedade.NomeArqXMLMunicipios + ".\r\n\r\n" +
                                 "Erro:\r\n\r\n" + ex.Message, true, true, "");
 
+                            if (contaTentativa++ == 2) break;
+
                             //Forçar recriar o arquivo
                             File.Delete(Propriedade.NomeArqXMLMunicipios);
                             WebServiceNFSe.SalvarXMLMunicipios();
-                            continue;
                         }
-
-                        break;
                     }
 
                     XmlNodeList estadoList = doc.GetElementsByTagName(NFeStrConstants.Registro);
@@ -1070,8 +1069,8 @@ namespace NFe.Components
 
         #region NFe
 
-        public string NFeRecepcao { get; set; }
-        public string NFeRetRecepcao { get; set; }
+       // public string NFeRecepcao { get; set; }
+        //public string NFeRetRecepcao { get; set; }
         public string NFeInutilizacao { get; set; }
         public string NFeConsulta { get; set; }
         public string NFeStatusServico { get; set; }

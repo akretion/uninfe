@@ -746,7 +746,7 @@ namespace NFe.Service
 
                         case Servicos.NFSeConsultar:
                             if (cMunicipio.Equals(3300308) ||
-                                cMunicipio.Equals(3303302) || 
+                                cMunicipio.Equals(3303302) ||
                                 cMunicipio.Equals(4301602))
                                 retorna = "ConsultarNfsePorFaixa";
                             else
@@ -1022,7 +1022,11 @@ namespace NFe.Service
                     switch (servico)
                     {
                         case Servicos.NFSeConsultarLoteRps:
-                            if (cMunicipio.Equals(3301702) || cMunicipio.Equals(3300407) || cMunicipio.Equals(3304003) || cMunicipio.Equals(2611606))
+                            if (cMunicipio.Equals(3301702) || 
+                                cMunicipio.Equals(3300407) || 
+                                cMunicipio.Equals(3304003) || 
+                                cMunicipio.Equals(2611606) ||
+                                cMunicipio.Equals(3300100))
                                 retorna = "ConsultarLoteRps";
                             else
                                 retorna = "ConsultarLoteRPS";
@@ -1033,7 +1037,11 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultarPorRps:
-                            if (cMunicipio.Equals(3301702) || cMunicipio.Equals(3300407) || cMunicipio.Equals(3304003) || cMunicipio.Equals(2611606))
+                            if (cMunicipio.Equals(3301702) || 
+                                cMunicipio.Equals(3300407) || 
+                                cMunicipio.Equals(3304003) || 
+                                cMunicipio.Equals(2611606) || 
+                                cMunicipio.Equals(3300100))
                                 retorna = "ConsultarNfsePorRps";
                             else
                                 retorna = "ConsultarNfseRPS";
@@ -1041,7 +1049,11 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultarSituacaoLoteRps:
-                            if (cMunicipio.Equals(3301702) || cMunicipio.Equals(3300407) || cMunicipio.Equals(3304003) || cMunicipio.Equals(2611606))
+                            if (cMunicipio.Equals(3301702) || 
+                                cMunicipio.Equals(3300407) || 
+                                cMunicipio.Equals(3304003) || 
+                                cMunicipio.Equals(2611606) || 
+                                cMunicipio.Equals(3300100))
                                 retorna = "ConsultarSituacaoLoteRps";
                             else
                                 retorna = "ConsultarSituacaoLoteRPS";
@@ -1907,7 +1919,7 @@ namespace NFe.Service
                     }
                     break;
 
-                #endregion AVMB_ASTEN
+                #endregion AVMB_ASTEN e EMBRAS
 
                 #region DESENVOLVECIDADE
 
@@ -1940,8 +1952,47 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion AVMB_ASTEN
+                #endregion DESENVOLVECIDADE
 
+                #region VITORIA_ES
+
+                case PadroesNFSe.VITORIA_ES:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfseFaixa";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+
+                        case Servicos.NFSeSubstituirNfse:
+                            retorna = "SubstituirNfse";
+                            break;
+                    }
+                    break;
+
+                    #endregion VITORIA_ES
             }
 
             return retorna;
@@ -2153,6 +2204,7 @@ namespace NFe.Service
                 catch (Exception exx)
                 {
                     Auxiliar.WriteLog(exx.Message, true);
+
                     //Se ocorrer algum erro na hora de tentar gravar o XML de erro para o ERP ou mover o arquivo XML para a pasta de XML com erro, não
                     //vou poder fazer nada, pq foi algum erro de rede, permissão de acesso a pasta ou arquivo, etc.
                     //Wandey 13/03/2010
@@ -2204,6 +2256,7 @@ namespace NFe.Service
                             switch (tpEmis)
                             {
                                 case (int)TipoEmissao.teNormal:
+
                                 ///
                                 /// Foi emitido em contingencia e agora os quer enviar
                                 ///
@@ -2232,6 +2285,7 @@ namespace NFe.Service
                         case (int)TipoEmissao.teEPEC:
                         case (int)TipoEmissao.teFSDA:
                         case (int)TipoEmissao.teOffLine:
+
                             //Retorno somente falso mas sem exception para não fazer nada. Wandrey 09/06/2009
                             gException = booValido = false;
                             break;
@@ -2457,7 +2511,7 @@ namespace NFe.Service
 
         #region ProcessaNFeDenegada
 
-        protected void ProcessaNFeDenegada(int emp, LerXML oLerXml, string strArquivoNFe, XmlDocument conteudoXML, string protNFe, string versao)
+        protected void ProcessaNFeDenegada(int emp, LerXML oLerXml, string strArquivoNFe, XmlDocument conteudoXML, string protNFe)
         {
             string strProtNfe;
 
@@ -2494,18 +2548,21 @@ namespace NFe.Service
                 ///
                 /// monta o XML de denegacao
                 strProtNfe = protNFe;
+
                 ///
                 /// gera o arquivo de denegacao na pasta EmProcessamento
-                strNomeArqDenegadaNFe = oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.Den, versao);
+                strNomeArqDenegadaNFe = oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.Den, oLerXml.oDadosNfe.versao);
                 if (string.IsNullOrEmpty(strNomeArqDenegadaNFe))
                     throw new Exception("Erro de criação do arquivo de distribuição da nota denegada");
 
                 ///
                 /// exclui o XML denegado, se existir
                 Functions.DeletarArquivo(dArquivo);
+
                 ///
                 /// Move a NFE-denegada da pasta em processamento para NFe Denegadas
                 TFunctions.MoverArquivo(strNomeArqDenegadaNFe, PastaEnviados.Denegados, oLerXml.oDadosNfe.dEmi);
+
                 ///
                 /// verifica se o arquivo da NFe já existe na pasta denegadas
                 dArquivo = Path.Combine(nomePastaEnviado, Path.GetFileName(strArquivoNFe));
@@ -2534,10 +2591,12 @@ namespace NFe.Service
                             //throw new Exception("Pasta de backup informada nas configurações não existe. (Pasta: " + nomePastaBackup + ")");
                         }
                     }
+
                     // move o arquivo NFe para a pasta Denegada
                     File.Move(strArquivoNFe, dArquivo);
                 }
                 else
+
                     // Como já existe na pasta Enviados\Denegados, só vou excluir da pasta EmProcessamento. Wandrey 22/12/2015
                     Functions.DeletarArquivo(strArquivoNFe);
             }
@@ -3042,6 +3101,7 @@ namespace NFe.Service
                     if (consStatServElemento.GetElementsByTagName(TpcnResources.mod.ToString()).Count != 0)
                     {
                         dadosPedSta.mod = consStatServElemento.GetElementsByTagName(TpcnResources.mod.ToString())[0].InnerText;
+
                         /// para que o validador não rejeite, excluo a tag <mod>
                         ConteudoXML.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName(TpcnResources.mod.ToString())[0]);
                     }
@@ -3075,6 +3135,7 @@ namespace NFe.Service
                 if (consSitNFeElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString()).Count != 0)
                 {
                     dadosPedSit.tpEmis = Convert.ToInt16(consSitNFeElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0].InnerText);
+
                     /// para que o validador não rejeite, excluo a tag <tpEmis>
                     ConteudoXML.DocumentElement.RemoveChild(consSitNFeElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0]);
                 }
@@ -3137,11 +3198,13 @@ namespace NFe.Service
                     var node = envEventoElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0];
 
                     dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEmis = Convert.ToInt16("0" + node.InnerText);
+
                     /// para que o validador não rejeite, excluo a tag <tpEmis>
                     envEventoNode.RemoveChild(node);
                     doSave = true;
                 }
             }
+
             /// salvo o arquivo modificado
             if (doSave)
                 ConteudoXML.Save(NomeArquivoXML);

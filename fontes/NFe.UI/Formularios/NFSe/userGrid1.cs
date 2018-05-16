@@ -16,6 +16,7 @@ namespace NFe.UI.Formularios.NFSe
     [ToolboxItem(false)]
     public partial class userGrid1 : MetroFramework.Controls.MetroUserControl
     {
+        private string currpadrao;
         private ArrayList arrUF = new ArrayList();
         public userMunicipios umunicipio { private get; set; }
 
@@ -27,8 +28,6 @@ namespace NFe.UI.Formularios.NFSe
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            
-            //colPadrao.Items.AddRange(WebServiceNFSe.PadroesNFSeList);
 
             colPadrao.Sorted = false;
             colPadrao.DataSource = WebServiceNFSe.PadroesNFSeUnicoWSDLDataSource;
@@ -39,13 +38,7 @@ namespace NFe.UI.Formularios.NFSe
             {
                 arrUF.Add(new ComboElem(estado.UF, estado.CodigoMunicipio, estado.Nome));
             }
-            /*
-            for (int v = 0; v < Propriedade.CodigosEstados.Length / 2; ++v)
-            {
-                arrUF.Add(new ComboElem(Propriedade.CodigosEstados[v, 1].Substring(0, 2),
-                    Convert.ToInt32(Propriedade.CodigosEstados[v, 0]),
-                    Propriedade.CodigosEstados[v, 1].Substring(5)));
-            }*/
+            
             this.comboUf.SelectedValueChanged -= comboUf_SelectedValueChanged;
             this.comboUf.DataSource = arrUF;
             this.comboUf.DisplayMember = "nome";
@@ -81,6 +74,32 @@ namespace NFe.UI.Formularios.NFSe
                                 GetManifestResourceStream("NFe.UI.Formularios.NFSe.Municipios.MunIBGE-UF" + cUF.ToString("00") + ".txt");
                 if (str != null)
                 {
+                    if (str.Length > 0)
+                    {
+                        byte[] b = new byte[str.Length];
+                        str.Read(b, 0, (int)str.Length);
+                        string text = System.Text.Encoding.UTF7.GetString(b);
+                        if (text != "")
+                        {
+                            foreach (var linha in text.Split(new char[] { '\n' }))
+                            {
+                                if (string.IsNullOrEmpty(linha)) continue;
+                                var cm = Convert.ToInt32(linha.Substring(0, 7));
+                                ///
+                                /// municipio já tem um padrão definido?
+                                if (Propriedade.Municipios.FirstOrDefault(w => w.CodigoMunicipio == cm) == null)
+                                {
+                                    cidades.Add(new NFe.Components.Municipio
+                                    {
+                                        CodigoMunicipio = cm,
+                                        Nome = linha.Substring(7).Trim(),
+                                        PadraoStr = Functions.PadraoNFSe(cm).ToString()
+                                    });
+                                }
+                            }
+                        }
+                    }
+#if false
                     ///
                     /// pega um nome de arquivo na pasta temporaria
                     string fileTemp = Path.GetTempFileName();
@@ -96,17 +115,22 @@ namespace NFe.UI.Formularios.NFSe
                     string[] lines = System.IO.File.ReadAllLines(fileTemp, Encoding.UTF7);
                     foreach (string linha in lines)
                     {
-                        cidades.Add(new NFe.Components.Municipio
-                        { 
-                            CodigoMunicipio = Convert.ToInt32(linha.Substring(0, 7)), 
-                            Nome = linha.Substring(7).Trim(), 
-                            PadraoStr = Functions.PadraoNFSe(Convert.ToInt32(linha.Substring(0, 7).Trim())).ToString() 
-                        });
+                        var cm = Convert.ToInt32(linha.Substring(0, 7));
+                        if (Propriedade.Municipios.FirstOrDefault(w => w.CodigoMunicipio == cm) == null)
+                        {
+                            cidades.Add(new NFe.Components.Municipio
+                            {
+                                CodigoMunicipio = cm,//Convert.ToInt32(linha.Substring(0, 7)),
+                                Nome = linha.Substring(7).Trim(),
+                                PadraoStr = Functions.PadraoNFSe(cm).ToString()//Convert.ToInt32(linha.Substring(0, 7).Trim())).ToString()
+                            });
+                        }
                     }
                     ///
                     /// exclui o arquivo temporario
                     FileInfo fi = new FileInfo(fileTemp);
                     fi.Delete();
+#endif
                 }
                 else
                     MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "Não foi possivel ler os municipios", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -131,7 +155,18 @@ namespace NFe.UI.Formularios.NFSe
                 string padrao = (sender as DataGridView).Rows[e.RowIndex].Cells[this.colPadrao.Index].Value.ToString();
                 string uf = Functions.CodigoParaUF(Convert.ToInt32(codmun.ToString().Substring(0, 2)));
 
+                if (padrao.Equals(currpadrao)) return;
+
                 WebServiceNFSe.SalvarXMLMunicipios(uf, cidade, codmun, padrao, false);
+
+                if (padrao != PadroesNFSe.NaoIdentificado.ToString())
+                    ///
+                    /// remove o municipio da grade
+                    this.metroGrid1.Rows.RemoveAt(e.RowIndex);
+
+                /*
+
+                WANDREY: nao sei pq desse codigo abaixo...
 
                 string cUF = ((ComboElem)(new System.Collections.ArrayList(this.arrUF))[this.comboUf.SelectedIndex]).Valor;
                 if (cUF == uf)
@@ -145,11 +180,13 @@ namespace NFe.UI.Formularios.NFSe
                 }
                 if (padrao == PadroesNFSe.NaoIdentificado.ToString())
                 {
-                    umunicipio.RefreshGrid2();
+                    umunicipio.RefreshGrid2(); //nao precisa pq o refresh será efetuando quando se muda a tabsheet
                 }
+                */
             }
             catch (Exception ex)
             {
+                (sender as DataGridView).Rows[e.RowIndex].Cells[this.colPadrao.Index].Value = currpadrao;
                 MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
             }
         }
@@ -157,6 +194,11 @@ namespace NFe.UI.Formularios.NFSe
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
+        }
+
+        private void metroGrid1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            currpadrao = (sender as DataGridView).Rows[e.RowIndex].Cells[this.colPadrao.Index].Value.ToString();
         }
     }
 }

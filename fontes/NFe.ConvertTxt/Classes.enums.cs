@@ -84,8 +84,8 @@ namespace NFe.ConvertTxt
         fpValePresente=12, 
         [Description("13=Vale Combustível")]
         fpValeCombustivel=13,
-        [Description("14=Duplicata Mercantil")]
-        fpDulicataMercantil = 14,
+        //[Description("14=Duplicata Mercantil")]
+        //fpDulicataMercantil = 14,
         [Description("15=Boleto Bancário")]
         fpBoletoBancario = 15,
         [Description("90=Sem pagamento")]
@@ -212,6 +212,7 @@ namespace NFe.ConvertTxt
 
     public enum TpcnIndicadorPagamento 
     { 
+        ipNone = -1,
         ipVista = 0, 
         ipPrazo = 1, 
         ipOutras = 2 

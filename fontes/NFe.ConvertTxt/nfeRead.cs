@@ -242,6 +242,7 @@ namespace NFe.ConvertTxt
         {
             pag pagItem = new pag();
 
+            pagItem.indPag = (TpcnIndicadorPagamento)this.readInt32(nodenfeProc, TpcnResources.indPag);
             pagItem.tPag = (TpcnFormaPagamento)this.readInt32(nodenfeProc, TpcnResources.tPag);
             pagItem.vPag = this.readDouble(nodenfeProc, TpcnResources.vPag);
             pagItem.tpIntegra = this.readInt32(nodenfeProc, TpcnResources.tpIntegra);

@@ -130,6 +130,7 @@
             this.metroGrid1.Style = MetroFramework.MetroColorStyle.Green;
             this.metroGrid1.TabIndex = 10;
             this.metroGrid1.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroGrid1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.metroGrid1_CellBeginEdit);
             this.metroGrid1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.metroGrid1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             // 
@@ -154,8 +155,6 @@
             this.colPadrao.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.colPadrao.DataPropertyName = "PadraoStr";
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Green;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Empty;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Empty;
             this.colPadrao.DefaultCellStyle = dataGridViewCellStyle2;
             this.colPadrao.HeaderText = "Padrão";
             this.colPadrao.MinimumWidth = 200;

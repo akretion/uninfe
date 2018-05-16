@@ -24,7 +24,9 @@ namespace uninfe_ws
                 if (string.IsNullOrEmpty(Padrao))
                     return Nome + " - " + UF + " - " + ID;
 
-                return Nome + " - " +  ID + (string.IsNullOrEmpty(Padrao) ? "" : " - " + Padrao);
+                if (Nome.StartsWith("Geral - "))
+                    return Nome;
+                return Nome + " - " + ID + (string.IsNullOrEmpty(Padrao) ? "" : " - " + Padrao);
             }
         }
         public string key

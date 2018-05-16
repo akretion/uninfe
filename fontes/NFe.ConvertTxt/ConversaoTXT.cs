@@ -227,6 +227,7 @@ namespace NFe.ConvertTxt
                     _LayoutTXT.Add("YA_6",       prefix + "YA|tPag|vPag|CNPJ|tBand|cAut|");
                     _LayoutTXT.Add("YA_7",       prefix + "YA|tPag|vPag|CNPJ|tBand|cAut|tpIntegra|");
                     _LayoutTXT.Add("YA_8",       prefix + "YA|tPag|vPag|CNPJ|tBand|cAut|tpIntegra|vTroco");
+                    _LayoutTXT.Add("YA_9",       prefix + "YA|indPag|tPag|vPag|CNPJ|tBand|cAut|tpIntegra|vTroco");
                     _LayoutTXT.Add("YA04",       prefix + "YA04|tpIntegra|");
                     _LayoutTXT.Add("YA04A",      prefix + "YA04a|tpIntegra");
                     /// "Z":
@@ -2564,6 +2565,9 @@ namespace NFe.ConvertTxt
                 case "YA":
                     #region YA
                     NFe.pag.Add(new pag());
+                    NFe.pag[NFe.pag.Count - 1].indPag = TpcnIndicadorPagamento.ipNone;
+                    if (lenPipesRegistro >= 9 && NFe.infNFe.Versao >= 4)
+                        NFe.pag[NFe.pag.Count - 1].indPag = (TpcnIndicadorPagamento)this.LerInt32(TpcnResources.indPag, ObOp.Obrigatorio, 1, 1);
                     NFe.pag[NFe.pag.Count - 1].tPag = (TpcnFormaPagamento)this.LerInt32(TpcnResources.tPag, ObOp.Obrigatorio, 2, 2);
                     NFe.pag[NFe.pag.Count - 1].vPag = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vPag, ObOp.Obrigatorio, 15);
                     NFe.pag[NFe.pag.Count - 1].CNPJ = this.LerString(TpcnResources.CNPJ, ObOp.Opcional, 14, 14);
@@ -2573,7 +2577,9 @@ namespace NFe.ConvertTxt
                     {
                         NFe.pag[NFe.pag.Count - 1].tpIntegra = this.LerInt32(TpcnResources.tpIntegra, ObOp.Opcional, 1, 1);
                         if (NFe.infNFe.Versao >= 4)
+                        {
                             NFe.pag[NFe.pag.Count - 1].vTroco = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vTroco, ObOp.Opcional, 15);
+                        }
                     }
                     #endregion
                     break;

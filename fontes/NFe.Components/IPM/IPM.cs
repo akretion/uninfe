@@ -92,6 +92,9 @@ namespace NFSe.Components
 
                 case 4211900: // Palhoça-SC
                     return (int)8233;
+
+                case 4317202: // Santa Rosa-RS
+                    return (int)8847;
             }
 
             return 0;

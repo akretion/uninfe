@@ -265,6 +265,9 @@ namespace NFe.ConvertTxt
                     nodeCurrent = nodedetPag;
                     nodePag.AppendChild(nodedetPag);
 
+                    if (pagItem.indPag != TpcnIndicadorPagamento.ipNone)
+
+                    wCampo((int)pagItem.indPag, TpcnTipoCampo.tcInt, TpcnResources.indPag, ObOp.Obrigatorio, 0);//YA01b
                     wCampo((int)pagItem.tPag, TpcnTipoCampo.tcInt, TpcnResources.tPag, ObOp.Obrigatorio, 2);    //YA02
                     wCampo(pagItem.vPag, TpcnTipoCampo.tcDec2, TpcnResources.vPag, ObOp.Obrigatorio);           //YA03
                     if (pagItem.tpIntegra != 0)
@@ -274,9 +277,9 @@ namespace NFe.ConvertTxt
                         nodedetPag.AppendChild(xnodedetPag);
 
                         wCampo((int)pagItem.tpIntegra, TpcnTipoCampo.tcInt, TpcnResources.tpIntegra, ObOp.Obrigatorio);
-                        wCampo(pagItem.CNPJ, TpcnTipoCampo.tcStr, TpcnResources.CNPJ, ObOp.Obrigatorio); //YA05
-                        wCampo((int)pagItem.tBand, TpcnTipoCampo.tcInt, TpcnResources.tBand, ObOp.Obrigatorio, 2);          //YA06
-                        wCampo(pagItem.cAut, TpcnTipoCampo.tcStr, TpcnResources.cAut, ObOp.Obrigatorio);                    //YA07
+                        wCampo(pagItem.CNPJ, TpcnTipoCampo.tcStr, TpcnResources.CNPJ, ObOp.Opcional);           //YA05
+                        wCampo((int)pagItem.tBand, TpcnTipoCampo.tcInt, TpcnResources.tBand, ObOp.Opcional, 2); //YA06
+                        wCampo(pagItem.cAut, TpcnTipoCampo.tcStr, TpcnResources.cAut, ObOp.Opcional);           //YA07
                     }
                 }
                 else

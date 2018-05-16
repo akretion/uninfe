@@ -1067,7 +1067,13 @@ namespace NFe.Components
         /// Padrão utilizado pela prefeitura Paragominas-PA
         /// </summary>
         [Description("Desenvolve Cidade")]
-        DESENVOLVECIDADE
+        DESENVOLVECIDADE,
+
+        /// <summary>
+        /// Padrão utilizada pela prefeitura de Vitória-ES
+        /// </summary>
+        [Description("VITORIA_ES")]
+        VITORIA_ES
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

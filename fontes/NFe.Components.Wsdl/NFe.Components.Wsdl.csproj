@@ -1925,12 +1925,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HContagemMG-Services.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PContagemMG-Services.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HTriunfoRS.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -4138,6 +4132,30 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PNovaPrata-EnvioLoteRPSSincrono.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HBarbacenaMG-WebISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PBarbacenaMG-WebISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HAlegreteRS-DBSELLER.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PAlegreteRS-DBSELLER.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HVitoriaES-VITORIA_ES.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PVitoriaES-VITORIA_ES.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\VITORIA_ES\nfse v2 01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\VITORIA_ES\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PAngraDosReisRJ-TIPLAN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPresidenteLucena-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPresidenteLucena-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPresidenteLucena-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPresidenteLucena-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPresidenteLucena-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPresidenteLucena-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPresidenteLucena-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPresidenteLucena-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPresidenteLucena-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPresidenteLucena-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPresidenteLucena-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPresidenteLucena-ConsultaSequenciaLoteNotaRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPresidenteLucena-EnvioLoteRPSSincrono.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">
@@ -4153,6 +4171,7 @@
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HJoinvilleSC.wsdl" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

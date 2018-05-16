@@ -47,7 +47,7 @@
  <wsdl:service name='NFeInutilizacao4'>
   <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado ao atendimento de solicitacoes de inutilizacao de numeracao</wsdl:documentation>
   <wsdl:port binding='tns:NFeInutilizacao4Soap12' name='NFeInutilizacao4ServicePort'>
-   <soap12:address location='https://homnfce.sefaz.am.gov.br/nfce-services/services/NfeInutilizacao4'/>
+   <soap12:address location='https://homnfce.sefaz.am.gov.br/nfce-services-nac/services/NfeInutilizacao4'/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

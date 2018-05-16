@@ -184,33 +184,40 @@ namespace NFe.Components
             {
                 if (uf != null)
                 {
-                    Municipio mun = null;
-                    for (int i = 0; i < Propriedade.Municipios.Count; ++i)
-                        if (Propriedade.Municipios[i].CodigoMunicipio == codigomunicipio)
-                        {
-                            mun = Propriedade.Municipios[i];
-                            break;
-                        }
+                    Municipio mun = Propriedade.Municipios.FirstOrDefault(w=>w.CodigoMunicipio == codigomunicipio);
 
-                    if (padrao == PadroesNFSe.NaoIdentificado.ToString() && mun != null)
-                        Propriedade.Municipios.Remove(mun);
+                    var geral = PadroesNFSeUnicoWSDLDataSource.FirstOrDefault(w => w.fromType == GetPadraoFromString(padrao).ToString());
 
-                    if (padrao != PadroesNFSe.NaoIdentificado.ToString())
+                    if (geral != null && mun != null)/*(padrao == PadroesNFSe.NaoIdentificado.ToString() ||
+                         padrao == PadroesNFSe.BETHA.ToString() ||
+                         padrao == PadroesNFSe.GINFES.ToString() ||
+                         padrao == PadroesNFSe.EQUIPLANO.ToString() ||
+                         padrao == PadroesNFSe.ABASE.ToString()) && mun != null)*/
                     {
-                        if (mun != null)
+                        ///
+                        /// sai da lista "Municipios" pq esses padroes tem enderecos unicos
+                        /// 
+                        Propriedade.Municipios.Remove(mun);
+                    }
+                    else
+                    {
+                        if (padrao != PadroesNFSe.NaoIdentificado.ToString())
                         {
-                            ///
-                            /// é o mesmo padrão definido?
-                            /// o parametro "forcaAtualizacao" é "true" somente quando vier da aba "Municipios definidos"
-                            /// desde que o datagrid atualiza automaticamente o membro "padrao" da classe "Municipio" quando ele é alterado.
-                            if (mun.PadraoStr == padrao && !forcaAtualizacao)
-                                return;
+                            if (mun != null)
+                            {
+                                ///
+                                /// é o mesmo padrão definido?
+                                /// o parametro "forcaAtualizacao" é "true" somente quando vier da aba "Municipios definidos"
+                                /// desde que o datagrid atualiza automaticamente o membro "padrao" da classe "Municipio" quando ele é alterado.
+                                if (mun.PadraoStr == padrao && !forcaAtualizacao)
+                                    return;
 
-                            mun.Padrao = GetPadraoFromString(padrao);
-                            mun.PadraoStr = padrao;
+                                mun.Padrao = GetPadraoFromString(padrao);
+                                mun.PadraoStr = padrao;
+                            }
+                            else
+                                Propriedade.Municipios.Add(new Municipio(codigomunicipio, uf, cidade.Trim(), GetPadraoFromString(padrao)));
                         }
-                        else
-                            Propriedade.Municipios.Add(new Municipio(codigomunicipio, uf, cidade.Trim(), GetPadraoFromString(padrao)));
                     }
                 }
                 if (System.IO.File.Exists(Propriedade.NomeArqXMLMunicipios))
@@ -231,7 +238,7 @@ namespace NFe.Components
                 var xml = new XDocument(new XDeclaration("1.0", "utf-8", null));
                 XElement elementos = new XElement("nfes_municipios");
                 var r = (from ss in Propriedade.Municipios orderby ss.Nome select ss);
-                foreach (Municipio item in r)//Propriedade.Municipios)
+                foreach (Municipio item in r)
                 {
                     elementos.Add(new XElement(NFeStrConstants.Registro,
                                     new XAttribute(TpcnResources.ID.ToString(), item.CodigoMunicipio.ToString()),

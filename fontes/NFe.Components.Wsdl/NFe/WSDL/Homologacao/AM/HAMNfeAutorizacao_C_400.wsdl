@@ -81,7 +81,7 @@
  <wsdl:service name='NFeAutorizacao4'>
   <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado a recepcao de mensagens de lote de NFCe</wsdl:documentation>
   <wsdl:port binding='tns:NFeAutorizacao4Soap12' name='NFeAutorizacao4ServicePort'>
-   <soap12:address location='https://homnfce.sefaz.am.gov.br/nfce-services/services/NfeAutorizacao4'/>
+   <soap12:address location='https://homnfce.sefaz.am.gov.br/nfce-services-nac/services/NfeAutorizacao4'/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

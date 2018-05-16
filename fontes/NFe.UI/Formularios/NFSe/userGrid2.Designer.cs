@@ -33,20 +33,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.municipioBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnAdd = new MetroFramework.Controls.MetroButton();
             this.metroGrid1 = new MetroFramework.Controls.MetroGrid();
             this.colIBGE_D = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNome_D = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPadrao_D = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.municipioBindingSource)).BeginInit();
+            this.municipioBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.municipioBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // municipioBindingSource
-            // 
-            this.municipioBindingSource.AllowNew = false;
-            this.municipioBindingSource.DataSource = typeof(NFe.Components.Municipio);
             // 
             // btnAdd
             // 
@@ -117,6 +112,7 @@
             this.metroGrid1.Style = MetroFramework.MetroColorStyle.Lime;
             this.metroGrid1.TabIndex = 12;
             this.metroGrid1.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.metroGrid1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.metroGrid1_CellBeginEdit);
             this.metroGrid1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDireto_CellEndEdit);
             this.metroGrid1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvDireto_DataError);
             // 
@@ -150,6 +146,11 @@
             this.colPadrao_D.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.colPadrao_D.Width = 200;
             // 
+            // municipioBindingSource
+            // 
+            this.municipioBindingSource.AllowNew = false;
+            this.municipioBindingSource.DataSource = typeof(NFe.Components.Municipio);
+            // 
             // userGrid2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,8 +161,8 @@
             this.Size = new System.Drawing.Size(691, 350);
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Theme = MetroFramework.MetroThemeStyle.Light;
-            ((System.ComponentModel.ISupportInitialize)(this.municipioBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.municipioBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
