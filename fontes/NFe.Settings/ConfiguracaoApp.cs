@@ -1115,6 +1115,10 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.RecepcaoLoteReinf : list.LocalProducao.RecepcaoLoteReinf);
                             break;
 
+                        case Servicos.ConsultarLoteReinf:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarLoteReinf : list.LocalProducao.ConsultarLoteReinf);
+                            break;
+
                         #endregion EFDReinf
 
                         #region eSocial

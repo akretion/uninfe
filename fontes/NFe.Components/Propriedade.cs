@@ -358,6 +358,7 @@ namespace NFe.Components
             Reinf_evt,
 
             Reinf_loteevt,
+            Reinf_consloteevt,
 
             ///
             /// eSocial
@@ -714,6 +715,12 @@ namespace NFe.Components
                         "-ret-reinf-loteevt.xml", "",
                         "-ret-reinf-loteevt.err",
                         "XML EFDReinf - Lote de Eventos"));
+
+                    ListaExtensoes.Add(TipoEnvio.Reinf_consloteevt, new ExtensaoClass(
+                        "-reinf-consloteevt.xml", "",
+                        "-ret-reinf-consloteevt.xml", "",
+                        "-ret-reinf-consloteevt.err",
+                        "XML EFDReinf - Consultar Lote de Eventos"));
 
                     #endregion Extensões EFDReinf
 

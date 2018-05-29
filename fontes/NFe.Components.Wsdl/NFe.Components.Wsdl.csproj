@@ -1503,14 +1503,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\RS\HRSNFeRetAutorizacao.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValadaresRecepcionarLoteRpsSincrono.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValadaresCancelarNfse.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValadaresConsultarNfsePorRps.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaresCancelarNfse.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaresConsultarNfsePorRps.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaresRecepcionarLoteRpsSincrono.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeAutorizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl" />
   </ItemGroup>
@@ -2386,14 +2378,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PSistemaISSOnLine4rJuquiaRecepcionarLoteRpsSincrono.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PSinopMTcancelarnfse-FISSLEX.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PSinopMTconsultaloterps-FISSLEX.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PSinopMTconsultanfse-FISSLEX.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PSinopMTconsultanfseporrps-FISSLEX.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PSinopMTconsultarsituacaoloterps-FISSLEX.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PSinopMTrecepcionarloterps-FISSLEX.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFse\schemas\NFSe\FISSLEX\nfse.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -2724,7 +2708,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorLauroFreitas-METROPOLIS.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValarares-ACTCON.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\ACTCON\nfse_v201.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -3771,6 +3754,9 @@
     <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorEvento-v1_03_02.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\EFDReinfConsultas.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AN\EFDReinfConsultas.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\EFDReinf.wsdl" />
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -3781,7 +3767,6 @@
       <SubType>Designer</SubType>
     </None>
     <EmbeddedResource Include="NFse\WSDL\Producao\PJaraguaGO-BSITBR.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValarares-ACTCON.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSerraES-SMARAPDWSEntrada.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSerraES-SMARAPDWSSaida.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSerraES-SMARAPDWSUtil.wsdl" />
@@ -4156,6 +4141,39 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PPresidenteLucena-ConsultaNFSeServicosPrestados.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPresidenteLucena-ConsultaSequenciaLoteNotaRPS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPresidenteLucena-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTaquarivaiSP-cancelarnfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTaquarivaiSP-consultarnfseporrps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTaquarivaiSP-recepcionarloterpssincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTaquarivaiSP-cancelarnfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTaquarivaiSP-consultarnfseporrps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTaquarivaiSP-recepcionarloterpssincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HParaguacuPaulistaSP-SIMPLISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PParaguacuPaulistaSP-SIMPLISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCosmopolisSP-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGuarantaNorteMT-COPLAN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGuarantaNorteMT-COPLAN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HViamaoRS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PViamaoRS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSinopMT-COPLAN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSinopMT-COPLAN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HHarmonia-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HHarmonia-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HHarmonia-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HHarmonia-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HHarmonia-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HHarmonia-ConsultaNFSeServicosTomadosIntermediados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HHarmonia-ConsultaSequenciaLoteNotaRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HHarmonia-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PHarmonia-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PHarmonia-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PHarmonia-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PHarmonia-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PHarmonia-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PHarmonia-ConsultaNFSeServicosTomadosIntermediados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PHarmonia-ConsultaSequenciaLoteNotaRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PHarmonia-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValadaresMG-SIGCORP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaresMG-SIGCORP.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">
@@ -4171,7 +4189,6 @@
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HJoinvilleSC.wsdl" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

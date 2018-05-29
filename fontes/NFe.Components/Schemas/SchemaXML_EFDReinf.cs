@@ -182,7 +182,7 @@
                 TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/retornoTotalizadorContribuinte/v{0}"
             });
 
-            #endregion R-5001 - Informações das bases e dos tributos consolidados por contribuinte
+            #endregion R-5001 - Informações das bases e dos tributos consolidados por contribuinte - evtTotal (versão 1.02.00 ou inferior)
 
             #region R-5001 - Informações das bases e dos tributos consolidados por contribuinte - evtTotalContrib - versão 1.03.00
 
@@ -197,7 +197,7 @@
                 TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evtTotalContrib/v{0}"
             });
 
-            #endregion R-5001 - Informações das bases e dos tributos consolidados por contribuinte
+            #endregion R-5001 - Informações das bases e dos tributos consolidados por contribuinte - evtTotalContrib - versão 1.03.00
 
             #region R-9000 - Exclusão de Eventos
 
@@ -228,6 +228,21 @@
             });
 
             #endregion Lote de eventos
+
+            #region Consulta Lote de eventos
+
+            SchemaXML.InfSchemas.Add("Reinf-ConsultaInformacoesConsolidadas", new InfSchema()
+            {
+                Tag = "ConsultaInformacoesConsolidadas",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "EFReinf - XML de Consulta de Lote de Eventos",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+
+            #endregion Consulta Lote de eventos
         }
     }
 }

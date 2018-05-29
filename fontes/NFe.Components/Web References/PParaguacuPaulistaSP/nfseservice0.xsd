@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.sistema.com.br/Sistema.Ws.Nfse" elementFormDefault="qualified" targetNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://wsparaguacupaulista.simplissweb.com.br/nfseservice.svc?xsd=xsd1" namespace="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" />
+  <xs:import schemaLocation="http://wsparaguacupaulista.simplissweb.com.br/nfseservice.svc?xsd=xsd3" namespace="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn" />
+  <xs:element name="Versao">
+    <xs:complexType />
+  </xs:element>
+  <xs:element name="VersaoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="VersaoResult" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecepcionarLoteRps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="EnviarLoteRpsEnvio" type="q1:EnviarLoteRpsEnvio" />
+        <xs:element xmlns:q2="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn" minOccurs="0" maxOccurs="1" name="pParam" type="q2:ddDuasStrings" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecepcionarLoteRpsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="RecepcionarLoteRpsResult" type="q3:EnviarLoteRpsResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarSituacaoLoteRps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="ConsultarSituacaoLoteRpsEnvio" type="q4:ConsultarSituacaoLoteRpsEnvio" />
+        <xs:element xmlns:q5="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn" minOccurs="0" maxOccurs="1" name="pParam" type="q5:ddDuasStrings" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarSituacaoLoteRpsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="ConsultarSituacaoLoteRpsResult" type="q6:ConsultarSituacaoLoteRpsResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfsePorRps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="ConsultarNfseRpsEnvio" type="q7:ConsultarNfseRpsEnvio" />
+        <xs:element xmlns:q8="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn" minOccurs="0" maxOccurs="1" name="pParam" type="q8:ddDuasStrings" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfsePorRpsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="ConsultarNfsePorRpsResult" type="q9:ConsultarNfseRpsResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="ConsultarNfseEnvio" type="q10:ConsultarNfseEnvio" />
+        <xs:element xmlns:q11="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn" minOccurs="0" maxOccurs="1" name="pParam" type="q11:ddDuasStrings" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="ConsultarNfseResult" type="q12:ConsultarNfseResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarLoteRps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="ConsultarLoteRpsEnvio" type="q13:ConsultarLoteRpsEnvio" />
+        <xs:element xmlns:q14="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn" minOccurs="0" maxOccurs="1" name="pParam" type="q14:ddDuasStrings" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarLoteRpsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="ConsultarLoteRpsResult" type="q15:ConsultarLoteRpsResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarNfse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="CancelarNfseEnvio" type="q16:CancelarNfseEnvio" />
+        <xs:element xmlns:q17="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn" minOccurs="0" maxOccurs="1" name="pParam" type="q17:ddDuasStrings" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarNfseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="CancelarNfseResult" type="q18:CancelarNfseResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GerarNfse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="GerarNovaNfseEnvio" type="q19:GerarNovaNfseEnvio" />
+        <xs:element xmlns:q20="http://www.sistema.com.br/Sistema.Ws.Nfse.Cn" minOccurs="0" maxOccurs="1" name="pParam" type="q20:ddDuasStrings" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GerarNfseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd" minOccurs="0" maxOccurs="1" name="GerarNfseResult" type="q21:GerarNovaNfseResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -430,6 +430,10 @@ namespace NFe.Service
                             DirecionarArquivo(emp, true, true, arquivo, new TaskRecepcaoLoteReinf(arquivo));
                             break;
 
+                        case Servicos.ConsultarLoteReinf:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskConsultarLoteReinf(arquivo));
+                            break;
+
                         #endregion EFDReinf
 
                         #region eSocial
@@ -860,7 +864,21 @@ namespace NFe.Service
                             #region EFDReinf
 
                             case "Reinf":
-                                tipoServico = Servicos.RecepcaoLoteReinf;
+                                switch (doc.DocumentElement.LastChild.Name)
+                                {
+                                    case "ConsultaInformacoesConsolidadas":
+                                        tipoServico = Servicos.ConsultarLoteReinf;
+                                        break;
+
+                                    case "loteEventos":
+                                        tipoServico = Servicos.RecepcaoLoteReinf;
+                                        break;
+
+                                    default:
+                                        throw new Exception("Para envio dos eventos do EFDReinf gere o arquivo de lote, o que tem o prefixo final igual a -reinf-loteevt.xml\r\n" +
+                                            "Para envio da consulta do lote de eventos, gere o arquivo com o prefixo final igual a -reinf-consloteevt.xml\r\n\r\n" +
+                                            "Os modelos de arquivos do EFDReinf estão disponíveis no link www.unimake.com.br/uninfe/modelosxml/efdreinf");
+                                }
                                 break;
 
                             #endregion EFDReinf
@@ -1465,7 +1483,8 @@ namespace NFe.Service
                         (nfe is TaskCTeEventos && Empresas.Configuracoes[emp].tpEmis == (int)TipoEmissao.teEPEC) ||
                         nfe is TaskRecepcaoLoteReinf ||
                         nfe is TaskRecepcaoLoteeSocial ||
-                        nfe is TaskConsultarLoteeSocial)
+                        nfe is TaskConsultarLoteeSocial ||
+                        nfe is TaskConsultarLoteReinf)
                     {
                         doExecute = true;
                     }

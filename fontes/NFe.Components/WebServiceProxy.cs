@@ -163,7 +163,9 @@ namespace NFe.Components
                                     cMunicipio == 3131703 ||
                                     cMunicipio == 4303004 ||
                                     cMunicipio == 4322509 ||
-                                    cMunicipio == 3556602)
+                                    cMunicipio == 3556602 ||
+                                    cMunicipio == 3512803 ||
+                                    cMunicipio == 4323002)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -172,7 +174,8 @@ namespace NFe.Components
                                 if (cMunicipio == 4109401 ||
                                     cMunicipio == 3131703 ||
                                     cMunicipio == 4303004 ||
-                                    cMunicipio == 4322509)
+                                    cMunicipio == 4322509 ||
+                                    cMunicipio == 3512803)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -1069,7 +1072,7 @@ namespace NFe.Components
 
         #region NFe
 
-       // public string NFeRecepcao { get; set; }
+        // public string NFeRecepcao { get; set; }
         //public string NFeRetRecepcao { get; set; }
         public string NFeInutilizacao { get; set; }
         public string NFeConsulta { get; set; }
@@ -1300,6 +1303,11 @@ namespace NFe.Components
         /// Recepção do lote de eventos do EFDReinf
         /// </summary>
         public string RecepcaoLoteReinf { get; set; }
+
+        /// <summary>
+        /// Consulta do lote de eventos do EFDReinf
+        /// </summary>
+        public string ConsultarLoteReinf { get; set; }
 
         #endregion EFDReinf
 

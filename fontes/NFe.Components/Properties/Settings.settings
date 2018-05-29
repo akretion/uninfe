@@ -83,18 +83,6 @@
     <Setting Name="NFe_Components_br_gov_pr_londrina_iss_ModuloEmissorNFSe" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://iss.londrina.pr.gov.br:443/ws/v1_03/sigiss_ws.php</Value>
     </Setting>
-    <Setting Name="NFe_Components_br_com_fisslex_sinop_aws_consultaloterps_p_WS_ConsultaLoteRps" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultaloterps</Value>
-    </Setting>
-    <Setting Name="NFe_Components_br_com_fisslex_sinop_aws_consultanfse_p_WS_ConsultaNfse" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultanfse</Value>
-    </Setting>
-    <Setting Name="NFe_Components_br_com_fisslex_sinop_aws_consultanfseporrps_p_WS_ConsultaNfsePorRps" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultanfseporrps</Value>
-    </Setting>
-    <Setting Name="NFe_Components_br_com_fisslex_sinop_aws_consultarsituacaoloterps_p_WS_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultarsituacaoloterps</Value>
-    </Setting>
     <Setting Name="NFe_Components_br_com_fisslex_demo_aws_consultaloterps_h_WS_ConsultaLoteRps" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://demo.fisslex.com.br/fiss-lex/servlet/aws_consultaloterps</Value>
     </Setting>
@@ -406,6 +394,30 @@
     </Setting>
     <Setting Name="NFe_Components_PArarasSP_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://189.56.68.34:8080/ws_araras/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PParaguacuPaulistaSP_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://wsparaguacupaulista.simplissweb.com.br/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCosmopolisSP_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://187.63.32.18:98/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PGuarantaNorteMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.gp.srv.br/tributario_guarantadonorte/servlet/anfse_web_service</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PViamaoRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://acesso.viamao.rs.gov.br:8085/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HViamaoRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://acesso.viamao.rs.gov.br:8083/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSinopMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.gp.srv.br/tributario_sinop/servlet/anfse_web_service</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HGovernadorValadaresMG_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://testevaladares.sigiss.com.br:443/testevaladares/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PGovernadorValadaresMG_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://valadares.sigiss.com.br:443/valadares/ws/sigiss_ws.php</Value>
     </Setting>
   </Settings>
 </SettingsFile>

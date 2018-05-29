@@ -24,10 +24,6 @@ namespace NFe.Components.FISSLEX
                     else
                         switch (CodigoMun)
                         {
-                            case 5107909: //Sinop-MT
-                                fisslexService = new SinopMT.p.FISSLEXP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
-                                break;
-
                             case 3530805: //Mogi Mirim-SP
                                 fisslexService = new MogiMirimSP.p.FISSLEXP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;

@@ -313,7 +313,8 @@ namespace NFe.UI.Formularios
                            ufCod == 4320404 /*Serafina Corrêa-RS*/ ||
                            ufCod == 4307807 /*Estrela-RS*/ ||
                            ufCod == 4211900 /*Palhoça-SC*/ ||
-                           ufCod == 4317202 /*Santa Rosa-RS*/; ;
+                           ufCod == 4317202 /*Santa Rosa-RS*/ ||
+                           ufCod == 4202909 /*Brusque-SC*/; 
 
             bool visiblepass = ufCod == 3152105 || visible; /*Ponte nova*/
 

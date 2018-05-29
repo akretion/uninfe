@@ -163,6 +163,13 @@ namespace NFe.Service
 
                 XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[] { encodedData });
             }
+            else if (servico == Servicos.ConsultarLoteReinf)
+                XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[] 
+                {
+                    Convert.ToByte(docXML.GetElementsByTagName("tipoInscricaoContribuinte")[0].InnerText),
+                    docXML.GetElementsByTagName("numeroInscricaoContribuinte")[0].InnerText,
+                    docXML.GetElementsByTagName("numeroReciboFechamento")[0].InnerText
+                });
             else
                 XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[] { docXML });
 

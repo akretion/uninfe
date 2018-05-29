@@ -1649,7 +1649,8 @@
       <CTeConsultaCadastro></CTeConsultaCadastro>
       <CTeDistribuicaoDFe>WSDL\Homologacao\AN\HANCTeDistribuicaoDFe.wsdl</CTeDistribuicaoDFe>
       <CteRecepcaoOS></CteRecepcaoOS>
-      <RecepcaoLoteReinf>WSDL\Producao\AN\EFDReinf.wsdl</RecepcaoLoteReinf>
+      <RecepcaoLoteReinf>WSDL\Homologacao\AN\EFDReinf.wsdl</RecepcaoLoteReinf>
+      <ConsultarLoteReinf>WSDL\Homologacao\AN\EFDReinfConsultas.wsdl</ConsultarLoteReinf>
       <RecepcaoLoteeSocial>WSDL\Homologacao\AN\eSocial_ServicoEnviarLoteEventos.wsdl</RecepcaoLoteeSocial>
       <ConsultarLoteeSocial>WSDL\Homologacao\AN\eSocial_ServicoConsultarLoteEventos.wsdl</ConsultarLoteeSocial>
     </LocalHomologacao>
@@ -1680,6 +1681,7 @@
       <CTeDistribuicaoDFe>WSDL\Producao\AN\PANCTeDistribuicaoDFe.wsdl</CTeDistribuicaoDFe>
       <CteRecepcaoOS></CteRecepcaoOS>
       <RecepcaoLoteReinf>WSDL\Producao\AN\EFDReinf.wsdl</RecepcaoLoteReinf>
+      <ConsultarLoteReinf>WSDL\Producao\AN\EFDReinfConsultas.wsdl</ConsultarLoteReinf>
       <RecepcaoLoteeSocial>WSDL\Producao\AN\eSocial_ServicoEnviarLoteEventos.wsdl</RecepcaoLoteeSocial>
       <ConsultarLoteeSocial>WSDL\Producao\AN\eSocial_ServicoConsultarLoteEventos.wsdl</ConsultarLoteeSocial>
     </LocalProducao>

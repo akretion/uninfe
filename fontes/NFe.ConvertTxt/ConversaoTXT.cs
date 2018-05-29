@@ -27,7 +27,7 @@ namespace NFe.ConvertTxt
                     _LayoutTXT.Add("B_310",     prefix + "B|cUF|cNF|NatOp|indPag|mod|serie|nNF|dhEmi|dhSaiEnt|tpNF|idDest|cMunFG|TpImp|TpEmis|cDV|TpAmb|FinNFe|indFinal|indPres|ProcEmi|VerProc|dhCont|xJust|");
                     _LayoutTXT.Add("B_400",     prefix + "B|cUF|cNF|NatOp|mod|serie|nNF|dhEmi|dhSaiEnt|tpNF|idDest|cMunFG|TpImp|TpEmis|cDV|TpAmb|FinNFe|indFinal|indPres|ProcEmi|VerProc|dhCont|xJust|");
                     _LayoutTXT.Add("B13",       prefix + "B13|refNFe|");
-                    _LayoutTXT.Add("BA02",      prefix + "B02|refNFe|");
+                    _LayoutTXT.Add("BA02",      prefix + "BA02|refNFe|");
                     _LayoutTXT.Add("B14",       prefix + "B14|cUF|AAMM|CNPJ|mod|serie|nNF|");
                     _LayoutTXT.Add("BA03",      prefix + "BA03|cUF|AAMM|CNPJ|mod|serie|nNF|");
                     _LayoutTXT.Add("BA10",      prefix + "BA10|cUF|AAMM|IE|mod|serie|nNF|refCTe|");

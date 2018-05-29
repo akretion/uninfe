@@ -131,6 +131,14 @@ namespace NFe.Components
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3556602-";
                                 break;
 
+                            case 3512803: //Cosmópolis-SP
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3512803-";
+                                break;
+
+                            case 4323002: //Viamão-RS
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4323002-";
+                                break;
+
                             default:
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                                 break;

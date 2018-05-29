@@ -95,6 +95,9 @@ namespace NFSe.Components
 
                 case 4317202: // Santa Rosa-RS
                     return (int)8847;
+
+                case 4202909: // Brusque-SC
+                    return (int)8055;
             }
 
             return 0;

@@ -57,6 +57,10 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new BotucatuSP.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
+                            case 3127701: //Governador Valadares-MG
+                                sigCorpService = new GovernadorValadaresMG.h.SigCorpH(tpAmb, PastaRetorno);
+                                break;
+
                             default:
                                 throw new Exception("Município não possui ambiente de homologação (padrão SIGCORP/SIGISS).");
                         }
@@ -101,6 +105,10 @@ namespace NFe.Components.SigCorp
 
                             case 3530706: //Mogi Guaçu-SP
                                 sigCorpService = new MogiGuacuSP.p.SigCorpP(tpAmb, PastaRetorno);
+                                break;
+
+                            case 3127701: //Governador Valadares-MG
+                                sigCorpService = new GovernadorValadaresMG.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             default:

@@ -298,48 +298,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultaloterps")]
-        public string NFe_Components_br_com_fisslex_sinop_aws_consultaloterps_p_WS_ConsultaLoteRps {
-            get {
-                return ((string)(this["NFe_Components_br_com_fisslex_sinop_aws_consultaloterps_p_WS_ConsultaLoteRps"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultanfse")]
-        public string NFe_Components_br_com_fisslex_sinop_aws_consultanfse_p_WS_ConsultaNfse {
-            get {
-                return ((string)(this["NFe_Components_br_com_fisslex_sinop_aws_consultanfse_p_WS_ConsultaNfse"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultanfseporrps")]
-        public string NFe_Components_br_com_fisslex_sinop_aws_consultanfseporrps_p_WS_ConsultaNfsePorRps {
-            get {
-                return ((string)(this["NFe_Components_br_com_fisslex_sinop_aws_consultanfseporrps_p_WS_ConsultaNfsePorRp" +
-                    "s"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultarsituacaoloterps")]
-        public string NFe_Components_br_com_fisslex_sinop_aws_consultarsituacaoloterps_p_WS_ConsultarSituacaoLoteRps {
-            get {
-                return ((string)(this["NFe_Components_br_com_fisslex_sinop_aws_consultarsituacaoloterps_p_WS_ConsultarSi" +
-                    "tuacaoLoteRps"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://demo.fisslex.com.br/fiss-lex/servlet/aws_consultaloterps")]
         public string NFe_Components_br_com_fisslex_demo_aws_consultaloterps_h_WS_ConsultaLoteRps {
             get {
@@ -1388,6 +1346,86 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PArarasSP_NfseService {
             get {
                 return ((string)(this["NFe_Components_PArarasSP_NfseService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://wsparaguacupaulista.simplissweb.com.br/nfseservice.svc")]
+        public string NFe_Components_PParaguacuPaulistaSP_NfseService {
+            get {
+                return ((string)(this["NFe_Components_PParaguacuPaulistaSP_NfseService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://187.63.32.18:98/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PCosmopolisSP_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PCosmopolisSP_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.gp.srv.br/tributario_guarantadonorte/servlet/anfse_web_service")]
+        public string NFe_Components_PGuarantaNorteMT_nfse_web_service {
+            get {
+                return ((string)(this["NFe_Components_PGuarantaNorteMT_nfse_web_service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://acesso.viamao.rs.gov.br:8085/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PViamaoRS_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PViamaoRS_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://acesso.viamao.rs.gov.br:8083/NFSe.Portal.Integracao.Teste/Services.svc")]
+        public string NFe_Components_HViamaoRS_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_HViamaoRS_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.gp.srv.br/tributario_sinop/servlet/anfse_web_service")]
+        public string NFe_Components_PSinopMT_nfse_web_service {
+            get {
+                return ((string)(this["NFe_Components_PSinopMT_nfse_web_service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://testevaladares.sigiss.com.br:443/testevaladares/ws/sigiss_ws.php")]
+        public string NFe_Components_HGovernadorValadaresMG_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_HGovernadorValadaresMG_WebService_SigISS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://valadares.sigiss.com.br:443/valadares/ws/sigiss_ws.php")]
+        public string NFe_Components_PGovernadorValadaresMG_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_PGovernadorValadaresMG_WebService_SigISS"]));
             }
         }
     }

@@ -550,7 +550,9 @@ namespace NFe.Service.NFSe
                         if (oDadosEnvLoteRps.cMunicipio == 4109401 ||
                             oDadosEnvLoteRps.cMunicipio == 3131703 ||
                             oDadosEnvLoteRps.cMunicipio == 4303004 ||
-                            oDadosEnvLoteRps.cMunicipio == 3556602)
+                            oDadosEnvLoteRps.cMunicipio == 3556602 ||
+                            oDadosEnvLoteRps.cMunicipio == 3512803 ||
+                            oDadosEnvLoteRps.cMunicipio == 4323002)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -670,7 +672,7 @@ namespace NFe.Service.NFSe
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
                         if (oDadosEnvLoteRps.tpAmb == 2)
-                            envLoteRps = new Components.HJoinvilleSC.Servicos();                        
+                            envLoteRps = new Components.HJoinvilleSC.Servicos();
                         else
                             throw new Exception("Ambiente de produção de Joinville-SC ainda não foi implementado no UniNFe.");
                         break;
@@ -682,7 +684,7 @@ namespace NFe.Service.NFSe
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
                         if (oDadosEnvLoteRps.tpAmb == 2)
-                            envLoteRps = new Components.HPelotasRS.INfseservice();                        
+                            envLoteRps = new Components.HPelotasRS.INfseservice();
                         else
                             envLoteRps = new Components.PPelotasRS.INfseservice();
                         break;
@@ -737,7 +739,7 @@ namespace NFe.Service.NFSe
                 {
                     Functions.DeletarArquivo(NomeArquivoXML);
                 }
-                catch 
+                catch
                 {
                     //Se falhou algo na hora de deletar o XML de cancelamento de NFe, infelizmente
                     //não posso fazer mais nada, o UniNFe vai tentar mandar o arquivo novamente para o webservice, pois ainda não foi excluido.

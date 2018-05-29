@@ -34,6 +34,19 @@ namespace NFe.Components.Coplan
                                 new NovaMutumMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
                             break;
 
+                        case 5104104: //Guarantã do Norte-MT
+                            coplanService = tpAmb == TipoAmbiente.taHomologacao ?
+                                new GuarantaNorteMT.h.CoplanH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase :
+                                new GuarantaNorteMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
+                            break;
+
+                        case 5107909: //Sinop-MT
+                            coplanService = tpAmb == TipoAmbiente.taHomologacao ?
+                                new SinopMT.h.CoplanH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase :
+                                new SinopMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
+                            break;
+
+
                         default:
                             throw new Exceptions.ServicoInexistenteException();
                     }

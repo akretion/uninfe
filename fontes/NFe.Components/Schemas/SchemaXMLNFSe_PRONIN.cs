@@ -7,6 +7,7 @@ namespace NFSe.Components
         public static void CriarListaIDXML()
         {
             #region XML de Consulta de NFSe por Data
+
             SchemaXML.InfSchemas.Add("NFSE-PRONIN-ConsultarNfseEnvio", new InfSchema()
             {
                 Tag = "ConsultarNfseEnvio",
@@ -20,6 +21,7 @@ namespace NFSe.Components
             #endregion XML de Consulta de NFSe por Data
 
             #region XML de Consulta de NFSe por Rps
+
             SchemaXML.InfSchemas.Add("NFSE-PRONIN-ConsultarNfseRpsEnvio", new InfSchema()
             {
                 Tag = "ConsultarNfseRpsEnvio",
@@ -33,6 +35,7 @@ namespace NFSe.Components
             #endregion XML de Consulta de NFSe por Rps
 
             #region XML de Consulta de Lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-PRONIN-ConsultarLoteRpsEnvio", new InfSchema()
             {
                 Tag = "ConsultarLoteRpsEnvio",
@@ -46,6 +49,7 @@ namespace NFSe.Components
             #endregion XML de Consulta de Lote RPS
 
             #region XML de Cancelamento de NFS-e
+
             SchemaXML.InfSchemas.Add("NFSE-PRONIN-CancelarNfseEnvio", new InfSchema()
             {
                 Tag = "CancelarNfseEnvio",
@@ -59,6 +63,7 @@ namespace NFSe.Components
             #endregion XML de Cancelamento de NFS-e
 
             #region XML de Consulta Situação do Lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-PRONIN-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
             {
                 Tag = "ConsultarSituacaoLoteRpsEnvio",
@@ -72,6 +77,7 @@ namespace NFSe.Components
             #endregion XML de Consulta Situação do Lote RPS
 
             #region XML de lote RPS
+
             SchemaXML.InfSchemas.Add("NFSE-PRONIN-EnviarLoteRpsEnvio", new InfSchema()
             {
                 Tag = "EnviarLoteRpsEnvio",
@@ -86,7 +92,8 @@ namespace NFSe.Components
             });
             #endregion XML de lote RPS
 
-            #region XML de lote RPS
+            #region XML de lote RPS - Guarapuava-PR
+
             SchemaXML.InfSchemas.Add("NFSE-PRONIN-4109401-EnviarLoteRpsEnvio", new InfSchema()
             {
                 Tag = "EnviarLoteRpsEnvio",
@@ -99,9 +106,10 @@ namespace NFSe.Components
                 TagLoteAtributoId = "LoteRps",
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
             });
-            #endregion XML de lote RPS
+            #endregion XML de lote RPS - Guarapuava-PR
 
-            #region XML de lote RPS
+            #region XML de lote RPS - Cachoeira do Sul-RS
+
             SchemaXML.InfSchemas.Add("NFSE-PRONIN-4303004-EnviarLoteRpsEnvio", new InfSchema()
             {
                 Tag = "EnviarLoteRpsEnvio",
@@ -114,9 +122,10 @@ namespace NFSe.Components
                 TagLoteAtributoId = "LoteRps",
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
             });
-            #endregion XML de lote RPS
+            #endregion XML de lote RPS - Cachoeira do Sul-RS
 
-            #region XML de lote RPS
+            #region XML de lote RPS - Vacari-RS
+
             SchemaXML.InfSchemas.Add("NFSE-PRONIN-4322509-EnviarLoteRpsEnvio", new InfSchema()
             {
                 Tag = "EnviarLoteRpsEnvio",
@@ -129,9 +138,10 @@ namespace NFSe.Components
                 TagLoteAtributoId = "LoteRps",
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
             });
-            #endregion XML de lote RPS
+            #endregion XML de lote RPS - Vacari-RS
 
-            #region XML de lote RPS
+            #region XML de lote RPS - Vera Cruz-SC
+
             SchemaXML.InfSchemas.Add("NFSE-PRONIN-3556602-EnviarLoteRpsEnvio", new InfSchema()
             {
                 Tag = "EnviarLoteRpsEnvio",
@@ -144,7 +154,39 @@ namespace NFSe.Components
                 TagLoteAtributoId = "LoteRps",
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
             });
-            #endregion XML de lote RPS
+            #endregion XML de lote RPS - Vera Cruz-SC
+
+            #region XML de lote RPS - Cosmópolis-SP
+
+            SchemaXML.InfSchemas.Add("NFSE-PRONIN-3512803-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion XML de lote RPS - Cosmópolis-SP
+
+            #region XML de lote RPS - Viamão-RS
+
+            SchemaXML.InfSchemas.Add("NFSE-PRONIN-4323002-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion XML de lote RPS - Viamão-RS
         }
     }
 }
