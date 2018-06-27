@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.Settings;
+using System;
+using System.IO;
 
 namespace NFe.Service
 {
@@ -14,6 +10,10 @@ namespace NFe.Service
         public override void Execute()
         {
             int emp = Empresas.FindEmpresaByThread();
+            ///
+            /// danasa: 06-2018
+            ConteudoXML.PreserveWhitespace = false;
+            ConteudoXML.Load(this.NomeArquivoXML);
 
             if (NomeArquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML, StringComparison.InvariantCultureIgnoreCase) ||
                 NomeArquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML, StringComparison.InvariantCultureIgnoreCase) ||
@@ -26,7 +26,7 @@ namespace NFe.Service
                     Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML) + Propriedade.ExtRetorno.retCancelamento_ERR));
                 if (NomeArquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML, StringComparison.InvariantCultureIgnoreCase))
                     Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML) + Propriedade.ExtRetorno.retManifestacao_ERR));
-                if (NomeArquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML, StringComparison.InvariantCultureIgnoreCase)) 
+                if (NomeArquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML, StringComparison.InvariantCultureIgnoreCase))
                     Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML) + Propriedade.ExtRetorno.Eve_ERR));
 
                 DadosenvEvento eve = new DadosenvEvento();
@@ -37,7 +37,7 @@ namespace NFe.Service
             {
                 Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlErro, Path.GetFileName(NomeArquivoXML)));
                 Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML) + Propriedade.ExtRetorno.Sit_ERR));
-                
+
                 DadosPedSit sit = new DadosPedSit();
                 PedSit(emp, sit);
             }

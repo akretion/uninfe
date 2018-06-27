@@ -105,7 +105,6 @@ namespace NFe.UI
                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML,
                                 Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML,
                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML,
-                                Propriedade.Extensao(Propriedade.TipoEnvio.EnvDownload).EnvioXML,
                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML);
                             dlg.Filter += string.Format("|Arquivos do eSocial (*.*{0},*.*{1},*.*{2})|*{0};*{1};*{2}", 
                                 Propriedade.Extensao(Propriedade.TipoEnvio.eSocial_evt).EnvioXML,

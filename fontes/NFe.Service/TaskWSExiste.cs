@@ -214,8 +214,6 @@ servicos|NFeConsultaCadastro=True|False,NFeStatusServico=True|False,...
                                 srv = Servicos.NFePedidoConsultaSituacao; break;
                             case "nfeconsultacadastro":
                                 srv = Servicos.ConsultaCadastroContribuinte; break;
-                            case "nfedownload":
-                                srv = Servicos.NFeDownload; break;
                             case "nfeinutilizacao":
                                 srv = Servicos.NFeInutilizarNumeros; break;
                             case "nfemanifestacao":

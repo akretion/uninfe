@@ -242,6 +242,7 @@ namespace NFe.Components
             AltCon,
             ConsCertificado,
             ConsInf,
+            Update,
             GerarChaveNFe,
 
             /// <summary>
@@ -251,7 +252,6 @@ namespace NFe.Components
 
             EnvCancelamento,
             EnvCCe,
-            EnvDownload,
             EnvManifestacao,
 
             /// <summary>
@@ -397,6 +397,12 @@ namespace NFe.Components
                         "",
                         "Consulta as configurações do UniNFe"));
 
+                    ListaExtensoes.Add(TipoEnvio.Update, new ExtensaoClass(
+                        "-upd.xml", "-upd.txt",
+                        "-ret-upd.xml", "-ret-upd.txt",
+                        "",
+                        "Atualização do UniNFe"));
+
                     #endregion Extensões gerais
 
                     #region Extensões da NFe
@@ -418,12 +424,6 @@ namespace NFe.Components
                         "-ret-env-manif.xml", "",
                         "",
                         "Pedido de manifestação, use a extensao -ped-eve.xml ou -ped-eve.txt"));
-
-                    ListaExtensoes.Add(TipoEnvio.EnvDownload, new ExtensaoClass(
-                        "-nfe-down.xml", "-nfe-down.txt",
-                        "-ret-nfe-down.xml", "",
-                        "",
-                        "Pedido de download de NFe"));
 
                     ListaExtensoes.Add(TipoEnvio.GerarChaveNFe, new ExtensaoClass(
                         "-gerar-chave.xml", "-gerar-chave.txt",
@@ -965,16 +965,6 @@ namespace NFe.Components
             /// </summary>
             public static string GerarChaveNFe_TXT = Extensao(TipoEnvio.GerarChaveNFe).EnvioTXT;
 
-            /// <summary>
-            /// -down-nfe.xml
-            /// </summary>
-            public static string EnvDownload_XML = Extensao(TipoEnvio.EnvDownload).EnvioXML;
-
-            /// <summary>
-            /// -down-nfe.txt
-            /// </summary>
-            public static string EnvDownload_TXT = Extensao(TipoEnvio.EnvDownload).EnvioTXT;
-
             #endregion Extensões da NFe
 
             #region Extensões do CTe
@@ -1194,7 +1184,6 @@ namespace NFe.Components
             public static string RetConsInf_TXT = Extensao(TipoEnvio.ConsInf).RetornoTXT;
             public static string retEnvCCe_XML = Extensao(TipoEnvio.EnvCCe).RetornoXML;
             public static string retCancelamento_XML = Extensao(TipoEnvio.EnvCancelamento).RetornoXML;
-            public static string retDownload_XML = Extensao(TipoEnvio.EnvDownload).RetornoXML;
             public static string retManifestacao_XML = Extensao(TipoEnvio.EnvManifestacao).RetornoXML;
             public static string MDFeConsNaoEnc = Extensao(TipoEnvio.MDFeConsNaoEncerrados).RetornoXML;
             public static string Eve = Extensao(TipoEnvio.PedEve).RetornoXML;
@@ -1263,11 +1252,6 @@ namespace NFe.Components
             /// -nfe.err
             /// </summary>
             public const string Nfe_ERR = "-nfe.err";
-
-            /// <summary>
-            /// -ret-down-nfe.err
-            /// </summary>
-            public const string retDownload_ERR = "-ret-nfe-down.err";
 
             /// <summary>
             /// -ret-cons-nfe-dest.err

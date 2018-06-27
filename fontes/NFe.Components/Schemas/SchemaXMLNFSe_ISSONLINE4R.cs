@@ -41,7 +41,7 @@ namespace NFSe.Components
             {
                 Tag = "EnviarLoteRpsSincronoEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\ISSONLINE4R\\nfsev20.xsd",
+                ArquivoXSD = "", //"NFSe\\ISSONLINE4R\\nfsev20.xsd",
                 Descricao = "XML de Lote RPS",
                 TagLoteAssinatura = "EnviarLoteRpsSincronoEnvio",
                 TagLoteAtributoId = "LoteRps",
@@ -50,6 +50,22 @@ namespace NFSe.Components
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
             #endregion
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-ISSONLINE4R-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "", //"NFSe\\ISSONLINE4R\\nfsev20.xsd",
+                Descricao = "XML de Lote RPS",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion
+
         }
     }
 }

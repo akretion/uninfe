@@ -31,7 +31,7 @@ namespace NFe.Service
                 WebServiceProxy wsProxy = null;
                 object efdReinf = null;
 
-                wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, 991, 1, 0);
+                wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, 991, Empresas.Configuracoes[emp].AmbienteCodigo, 0);
                 if (wsProxy != null)
                     efdReinf = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
 

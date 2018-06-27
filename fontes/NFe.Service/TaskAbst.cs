@@ -257,19 +257,6 @@ namespace NFe.Service
                     }
                     break;
 
-                case Servicos.NFeEnviarLoteZip:
-                    switch (cUFeVersao)
-                    {
-                        case "29|3.10": //Bahia - XML versão 3.10
-                            retorna = "NfeAutorizacaoLoteZip";
-                            break;
-
-                        default:
-                            retorna = "nfeAutorizacaoLoteZip";
-                            break;
-                    }
-                    break;
-
                 case Servicos.EventoCCe:
                 case Servicos.EventoCancelamento:
                 case Servicos.EventoManifestacaoDest:
@@ -747,7 +734,8 @@ namespace NFe.Service
                         case Servicos.NFSeConsultar:
                             if (cMunicipio.Equals(3300308) ||
                                 cMunicipio.Equals(3303302) ||
-                                cMunicipio.Equals(4301602))
+                                cMunicipio.Equals(4301602) ||
+                                cMunicipio.Equals(1100304))
                                 retorna = "ConsultarNfsePorFaixa";
                             else
                                 retorna = "ConsultarNfse";
@@ -1022,26 +1010,31 @@ namespace NFe.Service
                     switch (servico)
                     {
                         case Servicos.NFSeConsultarLoteRps:
-                            if (cMunicipio.Equals(3301702) || 
-                                cMunicipio.Equals(3300407) || 
-                                cMunicipio.Equals(3304003) || 
+                            if (cMunicipio.Equals(3301702) ||
+                                cMunicipio.Equals(3300407) ||
+                                cMunicipio.Equals(3304003) ||
                                 cMunicipio.Equals(2611606) ||
-                                cMunicipio.Equals(3300100))
+                                cMunicipio.Equals(3300100) ||
+                                cMunicipio.Equals(3303302))
                                 retorna = "ConsultarLoteRps";
                             else
                                 retorna = "ConsultarLoteRPS";
                             break;
 
                         case Servicos.NFSeConsultar:
-                            retorna = "ConsultarNfse";
+                            if (cMunicipio.Equals(3303302))
+                                retorna = "ConsultarNfsePorFaixa";
+                            else
+                                retorna = "ConsultarNfse";
                             break;
 
                         case Servicos.NFSeConsultarPorRps:
-                            if (cMunicipio.Equals(3301702) || 
-                                cMunicipio.Equals(3300407) || 
-                                cMunicipio.Equals(3304003) || 
-                                cMunicipio.Equals(2611606) || 
-                                cMunicipio.Equals(3300100))
+                            if (cMunicipio.Equals(3301702) ||
+                                cMunicipio.Equals(3300407) ||
+                                cMunicipio.Equals(3304003) ||
+                                cMunicipio.Equals(2611606) ||
+                                cMunicipio.Equals(3300100) ||
+                                cMunicipio.Equals(3303302))
                                 retorna = "ConsultarNfsePorRps";
                             else
                                 retorna = "ConsultarNfseRPS";
@@ -1049,11 +1042,12 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultarSituacaoLoteRps:
-                            if (cMunicipio.Equals(3301702) || 
-                                cMunicipio.Equals(3300407) || 
-                                cMunicipio.Equals(3304003) || 
-                                cMunicipio.Equals(2611606) || 
-                                cMunicipio.Equals(3300100))
+                            if (cMunicipio.Equals(3301702) ||
+                                cMunicipio.Equals(3300407) ||
+                                cMunicipio.Equals(3304003) ||
+                                cMunicipio.Equals(2611606) ||
+                                cMunicipio.Equals(3300100) ||
+                                cMunicipio.Equals(3303302))
                                 retorna = "ConsultarSituacaoLoteRps";
                             else
                                 retorna = "ConsultarSituacaoLoteRPS";
@@ -1978,6 +1972,7 @@ namespace NFe.Service
                         case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
+
                         case Servicos.NFSeRecepcionarLoteRpsSincrono:
                             retorna = "RecepcionarLoteRpsSincrono";
                             break;
@@ -1992,7 +1987,89 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion VITORIA_ES
+                #endregion VITORIA_ES
+
+                #region MODERNIZACAO_PUBLICA
+
+                case PadroesNFSe.MODERNIZACAO_PUBLICA:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfsePorFaixa";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+
+                        case Servicos.NFSeSubstituirNfse:
+                            retorna = "SubstituirNfse";
+                            break;
+                    }
+                    break;
+
+                #endregion MODERNIZACAO_PUBLICA
+
+                #region E_RECEITA
+
+                case PadroesNFSe.E_RECEITA:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfseFaixa";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+
+                        case Servicos.NFSeSubstituirNfse:
+                            retorna = "SubstituirNfse";
+                            break;
+                    }
+                    break;
+
+                    #endregion E_RECEITA
             }
 
             return retorna;
@@ -2644,7 +2721,9 @@ namespace NFe.Service
                         cMunicipio == 4322509 ||
                         cMunicipio == 3556602 ||
                         cMunicipio == 3512803 ||
-                        cMunicipio == 4323002)
+                        cMunicipio == 4323002 ||
+                        cMunicipio == 3505807 ||
+                        cMunicipio == 3530300)
                         retorno = false;
                     break;
 
@@ -2758,6 +2837,8 @@ namespace NFe.Service
                 case PadroesNFSe.WEBISS_202:
                 case PadroesNFSe.EMBRAS:
                 case PadroesNFSe.DESENVOLVECIDADE:
+                case PadroesNFSe.MODERNIZACAO_PUBLICA:
+                case PadroesNFSe.E_RECEITA:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
                     {
                         switch (doc.DocumentElement.Name)
@@ -2967,6 +3048,17 @@ namespace NFe.Service
                                 break;
                         }
                     }
+                    break;
+
+                case PadroesNFSe.TIPLAN:
+                    if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].UnidadeFederativaCodigo == 3303302)
+                        if (servico == Servicos.NFSeRecepcionarLoteRps)
+                            switch (doc.DocumentElement.Name)
+                            {
+                                case "EnviarLoteRpsEnvio":
+                                    result = Servicos.NFSeRecepcionarLoteRps;
+                                    break;
+                            }
                     break;
             }
 

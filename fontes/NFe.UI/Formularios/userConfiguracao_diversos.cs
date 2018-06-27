@@ -111,7 +111,6 @@ namespace NFe.UI.Formularios
                 checkBoxGravarEventosDeTerceiros.Checked = this.empresa.GravarEventosDeTerceiros;
                 checkBoxGravarEventosNaPastaEnviadosNFe.Checked = this.empresa.GravarEventosNaPastaEnviadosNFe;
                 checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Checked = this.empresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
-                checkBoxCompactaNFe.Checked = this.empresa.CompactarNfe;
                 checkBoxArqNSU.Checked = this.empresa.ArqNSU;
 
                 // São Paulo não possui processo síncrono
@@ -210,7 +209,6 @@ namespace NFe.UI.Formularios
 
             this.empresa.AmbienteCodigo = (int)comboBox_Ambiente.SelectedValue;
             this.empresa.CNPJ = cnpj;
-            this.empresa.CompactarNfe = checkBoxCompactaNFe.Checked;
             this.empresa.ArqNSU = checkBoxArqNSU.Checked;
             this.empresa.DiasLimpeza = Math.Abs(Convert.ToInt32("0" + this.udDiasLimpeza.Text));
             this.empresa.DiretorioSalvarComo = cboDiretorioSalvarComo.Text;
@@ -237,7 +235,6 @@ namespace NFe.UI.Formularios
         private void HabilitaOpcaoCompactar(bool ativar)
         {
             if (this.empresa.Servico == TipoAplicativo.Nfse) ativar = false;
-            checkBoxCompactaNFe.Visible = ativar;
         }
 
         private void udDiasLimpeza_KeyPress(object sender, KeyPressEventArgs e)
@@ -263,7 +260,6 @@ namespace NFe.UI.Formularios
             else
             {
                 HabilitaOpcaoCompactar(false);
-                checkBoxCompactaNFe.Checked = false;
             }
             if (this.changeEvent != null)
                 this.changeEvent(sender, e);
@@ -314,7 +310,10 @@ namespace NFe.UI.Formularios
                            ufCod == 4307807 /*Estrela-RS*/ ||
                            ufCod == 4211900 /*Palhoça-SC*/ ||
                            ufCod == 4317202 /*Santa Rosa-RS*/ ||
-                           ufCod == 4202909 /*Brusque-SC*/; 
+                           ufCod == 4202909 /*Brusque-SC*/ ||
+                           ufCod == 3535507 /*Paraguaçu Paulista-SP*/ ||
+                           ufCod == 1503606 /*Itaituba-PA*/ ||
+                           ufCod == 3200904 /*Barra de São Francisco-ES*/;
 
             bool visiblepass = ufCod == 3152105 || visible; /*Ponte nova*/
 
@@ -433,7 +432,6 @@ namespace NFe.UI.Formularios
                     checkBoxRetornoNFETxt.Visible = false;
                     checkBoxGravarEventosDeTerceiros.Visible = false;
                     checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible = false;
-                    checkBoxCompactaNFe.Visible = false;
                     udTempoConsulta.Visible = lbl_udTempoConsulta.Visible = false;
                     cbIndSinc.Visible = false;
                     comboBox_Ambiente.Visible = true;
@@ -452,7 +450,6 @@ namespace NFe.UI.Formularios
                     checkBoxRetornoNFETxt.Visible = false;
                     checkBoxGravarEventosDeTerceiros.Visible = false;
                     checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible = false;
-                    checkBoxCompactaNFe.Visible = false;
                     udTempoConsulta.Visible = lbl_udTempoConsulta.Visible = false;
                     cbIndSinc.Visible = false;
                     metroLabel10.Visible = false;
@@ -474,7 +471,6 @@ namespace NFe.UI.Formularios
                     comboBox_UF.Visible = false;
                     comboBox_tpEmis.Visible = false;
                     udTempoConsulta.Visible = false;
-                    checkBoxCompactaNFe.Visible = false;
                     checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible = false;
                     checkBoxGravarEventosDeTerceiros.Visible = false;
                     checkBoxGravarEventosNaPastaEnviadosNFe.Visible = false;
@@ -509,7 +505,6 @@ namespace NFe.UI.Formularios
                     checkBoxRetornoNFETxt.Visible = true;
                     checkBoxGravarEventosDeTerceiros.Visible = true;
                     checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible = true;
-                    checkBoxCompactaNFe.Visible = true;
                     udTempoConsulta.Visible = lbl_udTempoConsulta.Visible = true;
                     cbIndSinc.Visible = true;
                     metroLabel10.Visible = true;

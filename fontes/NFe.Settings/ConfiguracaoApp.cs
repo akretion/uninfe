@@ -89,26 +89,7 @@ namespace NFe.Settings
 
         #region SenhaConfig
 
-        private static bool mSenhaConfigAlterada = false;
-        private static string mSenhaConfig;
-
-        public static string SenhaConfig
-        {
-            get
-            {
-                return mSenhaConfig;
-            }
-            set
-            {
-                if (value != mSenhaConfig)
-                {
-                    mSenhaConfigAlterada = true;
-                    mSenhaConfig = value;
-                }
-                else
-                    mSenhaConfigAlterada = false;
-            }
-        }
+        public static string SenhaConfig { get; set; }
 
         #endregion SenhaConfig
 
@@ -927,10 +908,6 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeRecepcaoEvento : list.LocalProducao.NFeRecepcaoEvento);
                             break;
 
-                        case Servicos.NFeDownload:
-                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeDownload : list.LocalProducao.NFeDownload);
-                            break;
-
                         case Servicos.EventoManifestacaoDest:
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.NFeManifDest : list.LocalProducao.NFeManifDest);
                             break;
@@ -1202,9 +1179,6 @@ namespace NFe.Settings
                     case Servicos.EventoEPEC:
                         throw new Exception(string.Format(errorStr, "de envio de eventos da NFe"));
 
-                    case Servicos.NFeDownload:
-                        throw new Exception(string.Format(errorStr, "de envio de download de NFe do destinatário"));
-
                     case Servicos.MDFeConsultaStatusServico:
                     case Servicos.MDFePedidoConsultaSituacao:
                     case Servicos.MDFePedidoSituacaoLote:
@@ -1302,7 +1276,7 @@ namespace NFe.Settings
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 30/07/2010
         /// </remarks>
-        public void GravarConfigGeral()
+        public void GravarConfigGeral(bool configuracaoPorArquivo = false)
         {
             var xml = new XDocument(new XDeclaration("1.0", "utf-8", null));
             XElement elementos = new XElement(NFeStrConstants.nfe_configuracoes);
@@ -1317,13 +1291,11 @@ namespace NFe.Settings
             elementos.Add(new XElement(NfeConfiguracoes.ConfirmaSaida.ToString(), ConfiguracaoApp.ConfirmaSaida.ToString()));
             if (!string.IsNullOrEmpty(ConfiguracaoApp.SenhaConfig))
             {
-                if (ConfiguracaoApp.mSenhaConfigAlterada)
-                {
+
+                if (!configuracaoPorArquivo)
                     ConfiguracaoApp.SenhaConfig = Functions.GerarMD5(ConfiguracaoApp.SenhaConfig);
-                }
 
                 elementos.Add(new XElement(NfeConfiguracoes.SenhaConfig.ToString(), ConfiguracaoApp.SenhaConfig));
-                ConfiguracaoApp.mSenhaConfigAlterada = false;
             }
             xml.Add(elementos);
             xml.Save(Propriedade.PastaExecutavel + "\\" + Propriedade.NomeArqConfig);
@@ -1973,8 +1945,7 @@ namespace NFe.Settings
                                     break;
 
                                 case "senhaconfig": //Se a tag <senhaconfig> existir ele pega o novo conteúdo
-                                    ConfiguracaoApp.SenhaConfig = (nElementos == 2 ? dados[1].Trim() : "");
-                                    ConfiguracaoApp.mSenhaConfigAlterada = false;
+                                    ConfiguracaoApp.SenhaConfig = Functions.GerarMD5((nElementos == 2 ? dados[1].Trim() : ""));
                                     lEncontrouTag = true;
                                     break;
                             }
@@ -2047,8 +2018,7 @@ namespace NFe.Settings
                             //Se a tag <SenhaConfig> existir ele pega no novo conteúdo
                             if (ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.SenhaConfig.ToString()).Count != 0)
                             {
-                                ConfiguracaoApp.SenhaConfig = ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.SenhaConfig.ToString())[0].InnerText;
-                                ConfiguracaoApp.mSenhaConfigAlterada = false;
+                                ConfiguracaoApp.SenhaConfig = Functions.GerarMD5(ConfUniNfeElemento.GetElementsByTagName(NfeConfiguracoes.SenhaConfig.ToString())[0].InnerText);
                                 lEncontrouTag = true;
                             }
                             //Se a tag <ConfirmaSaida> existir ele pega novo conteúdo
@@ -2085,7 +2055,7 @@ namespace NFe.Settings
                         this.GravarArqEmpresas();
 
                         /// salva as configuracoes gerais
-                        this.GravarConfigGeral();
+                        this.GravarConfigGeral(true);
 
                         cStat = "1";
                         xMotivo = "Configuração do " + Propriedade.NomeAplicacao + " alterada com sucesso";

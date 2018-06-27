@@ -1428,5 +1428,167 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_PGovernadorValadaresMG_WebService_SigISS"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://187.108.203.210:8110/IssWeb-ejb/IssWebWS/IssWebWS")]
+        public string NFe_Components_PItaitubaPA_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_PItaitubaPA_IssWebWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS")]
+        public string NFe_Components_HItaitubaPA_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_HItaitubaPA_IssWebWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.govdigital.com.br:443/ws/guax")]
+        public string NFe_Components_PGuaxupeMG_NfseServiceImplGuaxService {
+            get {
+                return ((string)(this["NFe_Components_PGuaxupeMG_NfseServiceImplGuaxService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.govdigital.com.br:443/ws/guax")]
+        public string NFe_Components_HGuaxupeMG_NfseServiceImplGuaxService {
+            get {
+                return ((string)(this["NFe_Components_HGuaxupeMG_NfseServiceImplGuaxService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.govdigital.com.br:443/ws/andradas")]
+        public string NFe_Components_HAndradasMG_NfseServiceImpleAndradasService {
+            get {
+                return ((string)(this["NFe_Components_HAndradasMG_NfseServiceImpleAndradasService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.govdigital.com.br:443/ws/andradas")]
+        public string NFe_Components_PAndradasMG_NfseServiceImpleAndradasService {
+            get {
+                return ((string)(this["NFe_Components_PAndradasMG_NfseServiceImpleAndradasService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://189.56.95.154/NFSe.Portal.Integracao.Teste/Services.svc")]
+        public string NFe_Components_HBastosSP_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_HBastosSP_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://189.56.95.154/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PBastosSP_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PBastosSP_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nf-barradesaofrancisco-es.el.com.br:443/RpsService")]
+        public string NFe_Components_PBarraDeSaoFranciscoES_RpsServiceService {
+            get {
+                return ((string)(this["NFe_Components_PBarraDeSaoFranciscoES_RpsServiceService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://nfse.mirassol.sp.gov.br:5557/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PMirassolSP_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PMirassolSP_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://lucasdorioverde.fisslex.com.br/fiss-lex/servlet/aws_cancelarnfse")]
+        public string NFe_Components_PLucasDoRioVerdeMTCancelarNfse_WS_CancelarNfse {
+            get {
+                return ((string)(this["NFe_Components_PLucasDoRioVerdeMTCancelarNfse_WS_CancelarNfse"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://lucasdorioverde.fisslex.com.br/fiss-lex/servlet/aws_consultaloterps")]
+        public string NFe_Components_PLucasDoRioVerdeMTConsultaLoteRps_WS_ConsultaLoteRps {
+            get {
+                return ((string)(this["NFe_Components_PLucasDoRioVerdeMTConsultaLoteRps_WS_ConsultaLoteRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://lucasdorioverde.fisslex.com.br/fiss-lex/servlet/aws_consultanfse")]
+        public string NFe_Components_PLucasDoRioVerdeMTConsultaNFse_WS_ConsultaNfse {
+            get {
+                return ((string)(this["NFe_Components_PLucasDoRioVerdeMTConsultaNFse_WS_ConsultaNfse"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://lucasdorioverde.fisslex.com.br/fiss-lex/servlet/aws_consultanfseporrps")]
+        public string NFe_Components_PLucasDoRioVerdeMTConsultaNfsePorRps_WS_ConsultaNfsePorRps {
+            get {
+                return ((string)(this["NFe_Components_PLucasDoRioVerdeMTConsultaNfsePorRps_WS_ConsultaNfsePorRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://lucasdorioverde.fisslex.com.br/fiss-lex/servlet/aws_recepcionarloterps")]
+        public string NFe_Components_PLucasDoRioVerdeMTRecepcionarLoteRps_WS_RecepcionarLoteRps {
+            get {
+                return ((string)(this["NFe_Components_PLucasDoRioVerdeMTRecepcionarLoteRps_WS_RecepcionarLoteRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://lucasdorioverde.fisslex.com.br/fiss-lex/servlet/aws_consultarsituacaoloter" +
+            "ps")]
+        public string NFe_Components_PLucasDoRioVerdeMTConsultarSituacaoLoteRps_WS_ConsultarSituacaoLoteRps {
+            get {
+                return ((string)(this["NFe_Components_PLucasDoRioVerdeMTConsultarSituacaoLoteRps_WS_ConsultarSituacaoLot" +
+                    "eRps"]));
+            }
+        }
     }
 }

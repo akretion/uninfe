@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="FISS-LEX" xmlns:wsdlns="FISS-LEX" name="WS_ConsultarSituacaoLoteRps" targetNamespace="FISS-LEX" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" elementFormDefault="qualified" targetNamespace="FISS-LEX">
+      <xsd:complexType name="ConsultarSituacaoLoteRpsEnvio">
+        <xsd:sequence>
+          <xsd:element form="unqualified" name="Prestador" type="wsdlns:tcIdentificacaoPrestador" />
+          <xsd:element form="unqualified" name="Protocolo" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tcIdentificacaoPrestador">
+        <xsd:sequence>
+          <xsd:element form="unqualified" name="Cnpj" type="xsd:string" />
+          <xsd:element form="unqualified" name="InscricaoMunicipal" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarSituacaoLoteRpsResposta">
+        <xsd:sequence>
+          <xsd:element form="unqualified" name="NumeroLote" type="xsd:int" />
+          <xsd:element form="unqualified" name="Situacao" type="xsd:byte" />
+          <xsd:element form="unqualified" name="ListaMensagemRetorno" type="wsdlns:ArrayOftcMensagemRetorno" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOftcMensagemRetorno">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="tcMensagemRetorno" type="wsdlns:tcMensagemRetorno" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="tcMensagemRetorno">
+        <xsd:sequence>
+          <xsd:element form="unqualified" name="Codigo" type="xsd:string" />
+          <xsd:element form="unqualified" name="Mensagem" type="xsd:string" />
+          <xsd:element form="unqualified" name="Correcao" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="WS_ConsultarSituacaoLoteRps.Execute">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarsituacaoloterpsenvio" type="wsdlns:ConsultarSituacaoLoteRpsEnvio" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="WS_ConsultarSituacaoLoteRps.ExecuteResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarsituacaoloterpsresposta" type="wsdlns:ConsultarSituacaoLoteRpsResposta" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </types>
+  <message name="WS_ConsultarSituacaoLoteRps.ExecuteSoapIn">
+    <part name="parameters" element="wsdlns:WS_ConsultarSituacaoLoteRps.Execute" />
+  </message>
+  <message name="WS_ConsultarSituacaoLoteRps.ExecuteSoapOut">
+    <part name="parameters" element="wsdlns:WS_ConsultarSituacaoLoteRps.ExecuteResponse" />
+  </message>
+  <portType name="WS_ConsultarSituacaoLoteRpsSoapPort">
+    <operation name="Execute">
+      <input message="wsdlns:WS_ConsultarSituacaoLoteRps.ExecuteSoapIn" />
+      <output message="wsdlns:WS_ConsultarSituacaoLoteRps.ExecuteSoapOut" />
+    </operation>
+  </portType>
+  <binding name="WS_ConsultarSituacaoLoteRpsSoapBinding" type="wsdlns:WS_ConsultarSituacaoLoteRpsSoapPort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="Execute">
+      <soap:operation soapAction="FISS-LEXaction/AWS_CONSULTARSITUACAOLOTERPS.Execute" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="WS_ConsultarSituacaoLoteRps">
+    <port name="WS_ConsultarSituacaoLoteRpsSoapPort" binding="wsdlns:WS_ConsultarSituacaoLoteRpsSoapBinding">
+      <soap:address location="http://lucasdorioverde.fisslex.com.br/fiss-lex/servlet/aws_consultarsituacaoloterps" />
+    </port>
+  </service>
+</definitions>

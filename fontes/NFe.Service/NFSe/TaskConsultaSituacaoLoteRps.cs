@@ -277,7 +277,9 @@ namespace NFe.Service.NFSe
                             oDadosPedSitLoteRps.cMunicipio == 4322509 ||
                             oDadosPedSitLoteRps.cMunicipio == 3556602 ||
                             oDadosPedSitLoteRps.cMunicipio == 3512803 || 
-                            oDadosPedSitLoteRps.cMunicipio == 4323002)
+                            oDadosPedSitLoteRps.cMunicipio == 4323002 ||
+                            oDadosPedSitLoteRps.cMunicipio == 3505807 || 
+                            oDadosPedSitLoteRps.cMunicipio == 3530300)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -312,6 +314,23 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.MANAUS_AM:
                         cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.MODERNIZACAO_PUBLICA:
+                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.E_RECEITA:
+                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.TIPLAN:
+                        switch (oDadosPedSitLoteRps.cMunicipio)
+                        {
+                            case 3303302: //Niterói-RJ
+                                cabecMsg = "<cabecalho versao=\"2.03\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.03</versaoDados></cabecalho>";
+                                break;
+                        }
                         break;
                 }
 

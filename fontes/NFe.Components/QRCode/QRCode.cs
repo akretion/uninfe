@@ -16,8 +16,9 @@ namespace NFe.Components.QRCode
 
         #region Recupera dados do XML da NFCe
 
-        private string CNPJ { get; set; }
+        private string CNPJ { get; set; }        
         private string CPF { get; set; }
+        private string tpEmis { get; set; }
         private string idEstrangeiro { get; set; }
         private string ChaveAcesso { get; set; }
         private string TpAmb { get; set; }
@@ -67,19 +68,46 @@ namespace NFe.Components.QRCode
 
             Populate();
 
-            ParametrosQR = "chNFe=" + ChaveAcesso +
-                "&nVersao=100" +
-                "&tpAmb=" + TpAmb +
-                (String.IsNullOrEmpty(CNPJ) ? (String.IsNullOrEmpty(CPF) ? (String.IsNullOrEmpty(idEstrangeiro) ? "" : "&cDest=" + idEstrangeiro) : "&cDest=" + CPF) : "&cDest=" + CNPJ) +
-                "&dhEmi=" + Functions.ComputeHexadecimal(DhEmi) +
-                "&vNF=" + vNF +
-                "&vICMS=" + vICMS +
-                "&digVal=" + Functions.ComputeHexadecimal(digVal) +
-                "&cIdToken=" + tokenCSC;
+            int versaoQRCode = 1;
 
-            HashQRCode = Criptografia.GetSHA1HashData(ParametrosQR + identificadorCSC, true);
+            if (versaoQRCode.Equals(2))
+            {
+                if (tpEmis.Equals("9"))
+                {
+                    ParametrosQR = ChaveAcesso + "|" +
+                        "2" + "|" +
+                        TpAmb + "|" +
+                        DhEmi.Substring(8, 2) + "|" +
+                        vNF + "|" +
+                        Functions.ComputeHexadecimal(digVal) + "|" +
+                        Convert.ToInt32(tokenCSC).ToString();
+                }
+                else
+                {
+                    ParametrosQR = ChaveAcesso + "|" +
+                        "2" + "|" +
+                        TpAmb + "|" +
+                        Convert.ToInt32(tokenCSC).ToString();
+                }
 
-            ParametrosLinkConsulta = linkUF + "?" + ParametrosQR.Trim() + "&cHashQRCode=" + HashQRCode.Trim();
+                HashQRCode = Criptografia.GetSHA1HashData(ParametrosQR + identificadorCSC, true);
+                ParametrosLinkConsulta = linkUF + "?p=" + ParametrosQR.Trim() + "|" + HashQRCode.Trim();
+            }
+            else
+            {
+                ParametrosQR = "chNFe=" + ChaveAcesso +
+                    "&nVersao=100" +
+                    "&tpAmb=" + TpAmb +
+                    (String.IsNullOrEmpty(CNPJ) ? (String.IsNullOrEmpty(CPF) ? (String.IsNullOrEmpty(idEstrangeiro) ? "" : "&cDest=" + idEstrangeiro) : "&cDest=" + CPF) : "&cDest=" + CNPJ) +
+                    "&dhEmi=" + Functions.ComputeHexadecimal(DhEmi) +
+                    "&vNF=" + vNF +
+                    "&vICMS=" + vICMS +
+                    "&digVal=" + Functions.ComputeHexadecimal(digVal) +
+                    "&cIdToken=" + tokenCSC;
+
+                HashQRCode = Criptografia.GetSHA1HashData(ParametrosQR + identificadorCSC, true);
+                ParametrosLinkConsulta = linkUF + "?" + ParametrosQR.Trim() + "&cHashQRCode=" + HashQRCode.Trim();
+            }
 
             AddLinkQRCode(linkUFManual);
         }
@@ -150,6 +178,7 @@ namespace NFe.Components.QRCode
 
             CNPJ = GetValueXML("dest", "CNPJ").Trim();
             CPF = GetValueXML("dest", "CPF").Trim();
+            tpEmis = GetValueXML("ide", "tpEmis").Trim();
             idEstrangeiro = GetValueXML("dest", "idEstrangeiro").Trim();
             ChaveAcesso = GetAttributeXML("infNFe", "Id").Substring(3).Trim();
             TpAmb = GetValueXML("ide", "tpAmb").Trim();

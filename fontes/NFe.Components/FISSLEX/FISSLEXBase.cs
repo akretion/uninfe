@@ -28,6 +28,10 @@ namespace NFe.Components.FISSLEX
                                 fisslexService = new MogiMirimSP.p.FISSLEXP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
                                 break;
 
+                            case 5105259: //Lucas do Rio Verde-MT
+                                fisslexService = new LucasDoRioVerdeMT.p.FISSLEXP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

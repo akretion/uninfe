@@ -57,6 +57,10 @@ namespace NFe.Components.Fiorilli
                                 fiorilliService = new SerafinaCorreaRS.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
+                            case 1503606: //Itaituba-PA
+                                fiorilliService = new ItaitubaPA.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -105,6 +109,10 @@ namespace NFe.Components.Fiorilli
 
                             case 4320404: //Serafina Corrêa-RS
                                 fiorilliService = new SerafinaCorreaRS.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 1503606: //Itaituba-PA
+                                fiorilliService = new ItaitubaPA.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             default:

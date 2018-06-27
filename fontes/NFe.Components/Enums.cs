@@ -46,11 +46,6 @@ namespace NFe.Components
         NFeEnviarLote,
 
         /// <summary>
-        /// Envia os lotes de NFe para os webservices de forma Compactada (NFeAutorizacao)
-        /// </summary>
-        NFeEnviarLoteZip,
-
-        /// <summary>
         /// Envia XML de Inutilização da NFe
         /// </summary>
         NFeInutilizarNumeros,
@@ -103,11 +98,6 @@ namespace NFe.Components
         /// Assinar e validar um XML de NFe no envio em Lote
         /// </summary>
         NFeAssinarValidarEnvioEmLote,
-
-        /// <summary>
-        /// Enviar solicitacao de download de nfe
-        /// </summary>
-        NFeDownload,
 
         /// <summary>
         /// Monta chave de acesso
@@ -460,6 +450,11 @@ namespace NFe.Components
         /// Consulta Certificados Instalados na estação do UniNFe.
         /// </summary>
         UniNFeConsultaCertificados,
+
+        /// <summary>
+        /// Força atualizar o aplicativo UniNFe
+        /// </summary>
+        UniNFeUpdate,
 
         #endregion Serviços gerais
 
@@ -1075,7 +1070,18 @@ namespace NFe.Components
         /// Padrão utilizada pela prefeitura de Vitória-ES
         /// </summary>
         [Description("VITORIA_ES")]
-        VITORIA_ES
+        VITORIA_ES,
+
+        /// <summary>
+        /// Padrão utilizada pela prefeitura de Nova Friburgo-RJ
+        /// </summary>
+        [Description("MODERNIZACAO_PUBLICA")]
+        MODERNIZACAO_PUBLICA,
+        /// <summary>
+        /// Padrão utilizado pelo município de Montes Claros-MG
+        /// </summary>
+        [Description("e-Receita")]
+        E_RECEITA
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

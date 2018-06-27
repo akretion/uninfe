@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <wsdl:definitions targetNamespace='http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4' xmlns:http='http://schemas.xmlsoap.org/wsdl/http/' xmlns:mime='http://schemas.xmlsoap.org/wsdl/mime/' xmlns:s='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/' xmlns:soap12='http://schemas.xmlsoap.org/wsdl/soap12/' xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/' xmlns:tm='http://microsoft.com/wsdl/mime/textMatching/' xmlns:tns='http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4' xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>
- <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado a recepcao de mensagens de lote de NFe</wsdl:documentation>
+ <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado a recepcao de mensagens de lote de NFCe.</wsdl:documentation>
  <wsdl:types>
   <s:schema elementFormDefault='qualified' targetNamespace='http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4'>
    <s:element name='nfeDadosMsg'>
@@ -35,12 +35,12 @@
  </wsdl:message>
  <wsdl:portType name='NFeAutorizacao4Soap12'>
   <wsdl:operation name='nfeAutorizacaoLote'>
-   <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Transmissao de Lote de NFe</wsdl:documentation>
+   <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Transmissao de Lote de NFCe</wsdl:documentation>
    <wsdl:input message='tns:nfeAutorizacaoLoteSoap12In'></wsdl:input>
    <wsdl:output message='tns:nfeAutorizacaoLoteSoap12Out'></wsdl:output>
   </wsdl:operation>
   <wsdl:operation name='nfeAutorizacaoLoteZip'>
-   <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Transmissao de Lote Compactado de NFe</wsdl:documentation>
+   <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Transmissao de Lote Compactado de NFCe</wsdl:documentation>
    <wsdl:input message='tns:nfeAutorizacaoLoteZipSoap12In'></wsdl:input>
    <wsdl:output message='tns:nfeAutorizacaoLoteSoap12Out'></wsdl:output>
   </wsdl:operation>
@@ -67,9 +67,9 @@
   </wsdl:operation>
  </wsdl:binding>
  <wsdl:service name='NFeAutorizacao4'>
-  <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado a recepcao de mensagens de lote de NFe</wsdl:documentation>
+  <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado a recepcao de mensagens de lote de NFCe</wsdl:documentation>
   <wsdl:port binding='tns:NFeAutorizacao4Soap12' name='NFeAutorizacao4ServicePort'>
-   <soap12:address location='https://nfce.fazenda.ms.gov.br:443/ws/NFeAutorizacao4'/>
+   <soap12:address location='https://nfce.fazenda.ms.gov.br/ws/NFeAutorizacao4'/>
   </wsdl:port>
  </wsdl:service>
 </wsdl:definitions>

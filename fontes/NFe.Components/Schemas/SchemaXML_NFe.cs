@@ -358,22 +358,7 @@
             });
 
             #endregion XML Envio de consulta de nfe
-
-            #region XML Envio de download de nfe
-
-            SchemaXML.InfSchemas.Add("NFE-downloadNFe", new InfSchema()
-            {
-                Tag = "downloadNFe",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "DownloadNFe\\downloadNFe_v1.00.xsd",
-                Descricao = "XML de download de nfe",
-                TagAssinatura = "",
-                TagAtributoId = "",
-                TargetNameSpace = string.Empty
-            });
-
-            #endregion XML Envio de download de nfe
-
+                        
             #region XML Envio de confirmacao de recebimento de manifestacoes
 
             SchemaXML.InfSchemas.Add("NFE-envConfRecebto", new InfSchema()

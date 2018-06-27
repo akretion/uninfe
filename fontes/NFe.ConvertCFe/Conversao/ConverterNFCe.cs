@@ -183,11 +183,14 @@ namespace NFe.SAT.Conversao
 
                         case "imposto":
                             det.imposto = new envCFeCFeInfCFeDetImposto();
-                            det.imposto.vItem12741 = ValorDoItem;
                             foreach (XmlNode n in itensDet.ChildNodes)
                             {
                                 switch (n.Name)
                                 {
+                                    case "vTotTrib":
+                                        det.imposto.vItem12741 = n.InnerText;
+                                        break;
+
                                     case "ICMS":
                                         det.imposto.Item = ImpostoProduto<envCFeCFeInfCFeDetImpostoICMS>(n.ChildNodes);
                                         break;

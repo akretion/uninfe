@@ -27,7 +27,7 @@
  </wsdl:message>
  <wsdl:portType name='NFeInutilizacao4Soap12'>
   <wsdl:operation name='nfeInutilizacaoNF'>
-   <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Inutilizacao de numeracao de NFe</wsdl:documentation>
+   <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Inutilizacao de numeracao de NFCe</wsdl:documentation>
    <wsdl:input message='tns:nfeInutilizacaoNFSoap12In'></wsdl:input>
    <wsdl:output message='tns:nfeInutilizacaoNFSoap12Out'></wsdl:output>
   </wsdl:operation>
@@ -45,9 +45,9 @@
   </wsdl:operation>
  </wsdl:binding>
  <wsdl:service name='NFeInutilizacao4'>
-  <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado ao atendimento de solicitacoes de inutilizacao de numeracao.</wsdl:documentation>
+  <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado ao atendimento de solicitacoes de inutilizacao de numeracao</wsdl:documentation>
   <wsdl:port binding='tns:NFeInutilizacao4Soap12' name='NFeInutilizacao4ServicePort'>
-   <soap12:address location='https://nfce.fazenda.ms.gov.br:443/ws/NFeInutilizacao4'/>
+   <soap12:address location='https://nfce.fazenda.ms.gov.br/ws/NFeInutilizacao4'/>
   </wsdl:port>
  </wsdl:service>
 </wsdl:definitions>

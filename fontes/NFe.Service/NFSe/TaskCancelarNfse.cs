@@ -433,7 +433,9 @@ namespace NFe.Service.NFSe
                             oDadosPedCanNfse.cMunicipio == 4303004 ||
                             oDadosPedCanNfse.cMunicipio == 3556602 ||
                             oDadosPedCanNfse.cMunicipio == 3512803 ||
-                            oDadosPedCanNfse.cMunicipio == 4323002)
+                            oDadosPedCanNfse.cMunicipio == 4323002 ||
+                            oDadosPedCanNfse.cMunicipio == 3505807 || 
+                            oDadosPedCanNfse.cMunicipio == 3530300)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -568,6 +570,23 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.EMBRAS:
                         cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.MODERNIZACAO_PUBLICA:
+                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.E_RECEITA:
+                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.TIPLAN:
+                        switch (oDadosPedCanNfse.cMunicipio)
+                        {
+                            case 3303302: //Niterói-RJ
+                                cabecMsg = "<cabecalho versao=\"2.03\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.03</versaoDados></cabecalho>";
+                                break;
+                        }
                         break;
                 }
 

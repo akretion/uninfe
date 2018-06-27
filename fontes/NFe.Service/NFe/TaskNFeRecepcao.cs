@@ -65,9 +65,6 @@ namespace NFe.Service
 
                 System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb), Convert.ToInt32(oLer.oDadosNfe.tpEmis), Servico);
 
-                if (Empresas.Configuracoes[emp].CompactarNfe && wsProxy.NomeMetodoWS.Length == 2)
-                    Servico = Servicos.NFeEnviarLoteZip;
-
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
 
@@ -79,16 +76,13 @@ namespace NFe.Service
                     wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), oLer.oDadosNfe.versao);
                 }
 
-                // Envio de NFe Compactada - Renan 29/04/2014
-                string nOperacao = wsProxy.NomeMetodoWS[(Servico == Servicos.NFeEnviarLoteZip) ? 1 : 0];
-
                 //Invocar o método que envia o XML para o SEFAZ
                 if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.indSinc)
                 {
                     //Não posso gerar o arquivo na pasta de retorno através do método Invocar, por isso não estou colocando os dois ultimos parâmetros com a definição dos prefixos dos arquivos. O arquivo de retorno no processo síncrono deve acontecer somente depois de finalizado o processo da nota, ou gera problemas. Wandrey 11/06/2015
                     oInvocarObj.Invocar(wsProxy,
                                         oRecepcao,
-                                        nOperacao,
+                                        wsProxy.NomeMetodoWS[0],
                                         oCabecMsg,
                                         this,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML,
@@ -102,7 +96,7 @@ namespace NFe.Service
                 {
                     oInvocarObj.Invocar(wsProxy,
                                         oRecepcao,
-                                        nOperacao,
+                                        wsProxy.NomeMetodoWS[0],
                                         oCabecMsg,
                                         this,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML,
@@ -152,10 +146,6 @@ namespace NFe.Service
 
                 //Deleta o arquivo de lote
                 Functions.DeletarArquivo(NomeArquivoXML);
-
-                // Envio de NFe Compactada - Renan 29/04/2014
-                if (Servico == Servicos.NFeEnviarLoteZip)
-                    Functions.DeletarArquivo(NomeArquivoXML + ".gz");
             }
             catch (ExceptionEnvioXML ex)
             {

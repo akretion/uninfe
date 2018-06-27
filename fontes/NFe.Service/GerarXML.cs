@@ -1060,7 +1060,6 @@ namespace NFe.Service
             switch (Servico)
             {
                 case Servicos.NFeEnviarLote:
-                case Servicos.NFeEnviarLoteZip:
                     {
                         #region Servicos.EnviarLoteNfe
 
@@ -1410,69 +1409,6 @@ namespace NFe.Service
                     break;
 
                 case Servicos.UniNFeConsultaInformacoes:
-                    break;
-
-                case Servicos.NFeDownload:
-                    /*
-                    <retDownloadNFe versao="1.00" xmlns="http://www.portalfiscal.inf.br/nfe">
-                        <tpAmb>2</tpAmb>
-                        <verAplic>XX_v123</verAplic>
-                        <cStat>139</cStat>
-                        <xMotivo>Pedido de download Processado</xMotivo>
-                        <dhResp>2011-11-24T10:02:46</dhResp>
-                        <retNFe>
-                            <chNFe>12345678901234567890123456789012345678901234</chNFe>
-                            <cStat>632</cStat>
-                            <xMotivo>Rejeição: Solicitação fora de prazo, a NF-e não está mais disponível para download</xMotivo>
-                        </retNFe>
-                        <retNFe>
-                            <chNFe>12345678901234567890123456789012345678901245</chNFe>
-                            <cStat>140</cStat>
-                            <xMotivo>Download disponibilizado</xMotivo>
-                            <procNFeZip > (xml da procNFe compactado no padrão gZip com representação base64binary) </procNFeZip >
-                        </retNFe>
-                        <retNFe>
-                            <chNFe>12345678901234567890123456789012345678901256</chNFe>
-                            <cStat>140</cStat>
-                            <xMotivo>Download disponibilizado</xMotivo>
-                            <procNFeZip> (xml da procNFe compactado no padrão gZip com representação base64binary) </procNFeZip >
-                        </retNFe>
-                    </retDownloadNFe>
-                     */
-                    {
-                        #region Servicos.DownloadNFe
-
-                        XmlDocument docretDownload = new XmlDocument();
-                        docretDownload.Load(msXml);
-
-                        XmlNodeList retDownLoadList = docretDownload.GetElementsByTagName("retDownloadNFe");
-
-                        if (retDownLoadList != null)
-                        {
-                            if (retDownLoadList.Count > 0)
-                            {
-                                XmlElement retElemento = (XmlElement)retDownLoadList.Item(0);
-                                ConteudoRetorno += Functions.LerTag(retElemento, NFe.Components.TpcnResources.tpAmb.ToString());
-                                ConteudoRetorno += Functions.LerTag(retElemento, NFe.Components.TpcnResources.verAplic.ToString());
-                                ConteudoRetorno += Functions.LerTag(retElemento, NFe.Components.TpcnResources.cStat.ToString());
-                                ConteudoRetorno += Functions.LerTag(retElemento, NFe.Components.TpcnResources.xMotivo.ToString());
-                                ConteudoRetorno += Functions.LerTag(retElemento, NFe.Components.TpcnResources.dhResp.ToString());
-                                ConteudoRetorno += "\r\n";
-
-                                foreach (XmlNode infretNFe in retElemento.ChildNodes)
-                                {
-                                    XmlElement infElemento = (XmlElement)infretNFe;
-
-                                    ConteudoRetorno += Functions.LerTag(infElemento, NFe.Components.TpcnResources.chNFe.ToString());
-                                    ConteudoRetorno += Functions.LerTag(infElemento, NFe.Components.TpcnResources.cStat.ToString());
-                                    ConteudoRetorno += Functions.LerTag(infElemento, NFe.Components.TpcnResources.xMotivo.ToString());
-                                    ConteudoRetorno += "\r\n";
-                                }
-                            }
-                        }
-
-                        #endregion Servicos.DownloadNFe
-                    }
                     break;
 
                 case Servicos.DFeEnviar:
@@ -2200,27 +2136,7 @@ namespace NFe.Service
             return nomeArqProcLMC;
         }
 
-        #endregion XMLDistLMC()
-
-        #region DownloadDest
-
-        public void EnvioDownloadNFe(string pArquivo, DadosenvDownload dadosEnvDownload)
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.InsertBefore(doc.CreateXmlDeclaration("1.0", "UTF-8", ""), doc.DocumentElement);
-            XmlNode envDownload = doc.CreateElement("downloadNFe");
-            envDownload.Attributes.Append(criaAttribute(doc, NFe.Components.TpcnResources.versao.ToString(), NFe.ConvertTxt.versoes.VersaoXMLEnvDownload));
-            envDownload.Attributes.Append(criaAttribute(doc, NFe.Components.TpcnResources.xmlns.ToString(), NFeStrConstants.NAME_SPACE_NFE));
-            envDownload.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.tpAmb.ToString(), dadosEnvDownload.tpAmb.ToString()));
-            envDownload.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.xServ.ToString(), "DOWNLOAD NFE"));
-            envDownload.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.CNPJ.ToString(), dadosEnvDownload.CNPJ));
-            envDownload.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.chNFe.ToString(), dadosEnvDownload.chNFe));
-            doc.AppendChild(envDownload);
-
-            GravarArquivoParaEnvio(pArquivo, doc.OuterXml, true);
-        }
-
-        #endregion DownloadDest
+        #endregion XMLDistLMC()        
 
         #region EnvioConsultaNFeDest
 

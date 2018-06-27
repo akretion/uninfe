@@ -552,7 +552,9 @@ namespace NFe.Service.NFSe
                             oDadosEnvLoteRps.cMunicipio == 4303004 ||
                             oDadosEnvLoteRps.cMunicipio == 3556602 ||
                             oDadosEnvLoteRps.cMunicipio == 3512803 ||
-                            oDadosEnvLoteRps.cMunicipio == 4323002)
+                            oDadosEnvLoteRps.cMunicipio == 4323002 ||
+                            oDadosEnvLoteRps.cMunicipio == 3505807 ||
+                            oDadosEnvLoteRps.cMunicipio == 3530300)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -696,6 +698,26 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.DESENVOLVECIDADE:
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.EMBRAS);
+                        break;
+
+                    case PadroesNFSe.MODERNIZACAO_PUBLICA:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.MODERNIZACAO_PUBLICA);
+                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.E_RECEITA:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.E_RECEITA);
+                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.TIPLAN:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.TIPLAN);
+                        switch (oDadosEnvLoteRps.cMunicipio)
+                        {
+                            case 3303302: //Niterói-RJ
+                                cabecMsg = "<cabecalho versao=\"2.03\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.03</versaoDados></cabecalho>";
+                                break;
+                        }
                         break;
                 }
 

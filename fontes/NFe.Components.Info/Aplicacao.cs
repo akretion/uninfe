@@ -1,8 +1,8 @@
-﻿using System;
-using System.Text;
+﻿using NFe.Certificado;
 using NFe.Settings;
-using NFe.Certificado;
+using System;
 using System.IO;
+using System.Text;
 using System.Xml;
 
 namespace NFe.Components.Info
@@ -27,22 +27,27 @@ namespace NFe.Components.Info
 
             CertificadoDigital cert = new CertificadoDigital();
 
-            if (cert.PrepInfCertificado(Empresas.Configuracoes[emp]))
+            if (Empresas.Configuracoes[emp].UsaCertificado)
             {
-                sSubject = cert.sSubject;
-                sValIni = cert.dValidadeInicial.ToString();
-                sValFin = cert.dValidadeFinal.ToString();
-            }
-            else
-            {
-                if (!Empresas.Configuracoes[emp].UsaCertificado)
-                    xMotivo = "Empresa sem certificado digital informado e/ou não necessário";
+                if (cert.PrepInfCertificado(Empresas.Configuracoes[emp]))
+                {
+                    sSubject = cert.sSubject;
+                    sValIni = cert.dValidadeInicial.ToString();
+                    sValFin = cert.dValidadeFinal.ToString();
+                }
                 else
                 {
-                    cStat = "2";
-                    xMotivo = "Certificado digital não foi localizado";
+                    //if (!Empresas.Configuracoes[emp].UsaCertificado)
+                    //    xMotivo = "Empresa sem certificado digital informado e/ou não necessário";
+                    //else
+                    {
+                        cStat = "2";
+                        xMotivo = "Certificado digital não foi localizado";
+                    }
                 }
             }
+            else
+                xMotivo = "Empresa sem certificado digital informado e/ou não necessário";
 
             //danasa 22/7/2011
             //pega a data da ultima modificacao do 'uninfe.exe' diretamente porque pode ser que esteja sendo executado o servico
@@ -89,12 +94,15 @@ namespace NFe.Components.Info
                 Functions.GravaTxtXml(oXmlGravar, NFe.Components.TpcnResources.cStat.ToString(), cStat);
                 Functions.GravaTxtXml(oXmlGravar, NFe.Components.TpcnResources.xMotivo.ToString(), xMotivo);
 
-                //Dados do certificado digital
-                if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement("DadosCertificado");
-                Functions.GravaTxtXml(oXmlGravar, "sSubject", sSubject);
-                Functions.GravaTxtXml(oXmlGravar, "dValIni", sValIni);
-                Functions.GravaTxtXml(oXmlGravar, "dValFin", sValFin);
-                if (isXml) ((XmlWriter)oXmlGravar).WriteEndElement(); //DadosCertificado                
+                if (Empresas.Configuracoes[emp].UsaCertificado)
+                {
+                    //Dados do certificado digital
+                    if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement("DadosCertificado");
+                    Functions.GravaTxtXml(oXmlGravar, "sSubject", sSubject);
+                    Functions.GravaTxtXml(oXmlGravar, "dValIni", sValIni);
+                    Functions.GravaTxtXml(oXmlGravar, "dValFin", sValFin);
+                    if (isXml) ((XmlWriter)oXmlGravar).WriteEndElement(); //DadosCertificado
+                }
 
                 //Dados gerais do Aplicativo
                 if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement("DadosUniNfe");
@@ -128,10 +136,10 @@ namespace NFe.Components.Info
                             }
                             else
                                 if (hasFTP && !pT.Name.StartsWith("FTP"))
-                                {
-                                    ((XmlWriter)oXmlGravar).WriteEndElement();
-                                    hasFTP = false;
-                                }
+                            {
+                                ((XmlWriter)oXmlGravar).WriteEndElement();
+                                hasFTP = false;
+                            }
                         }
                         object v = pT.GetValue(Empresas.Configuracoes[emp], null);
                         NFe.Components.Functions.GravaTxtXml(oXmlGravar, pT.Name, v == null ? "" : v.ToString());
@@ -141,7 +149,7 @@ namespace NFe.Components.Info
 
                 ///
                 /// o ERP poderá verificar se determinado servico está definido no UniNFe
-                /// 
+                ///
                 foreach (webServices list in WebServiceProxy.webServicesList)
                 {
                     if (list.ID == Empresas.Configuracoes[emp].UnidadeFederativaCodigo)
@@ -186,7 +194,6 @@ namespace NFe.Components.Info
                                     //Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRecepcao", (!string.IsNullOrEmpty(item.NFeRecepcao)).ToString());
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "NFeRecepcaoEvento", (!string.IsNullOrEmpty(item.NFeRecepcaoEvento)).ToString());
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "NFeConsultaCadastro", (!string.IsNullOrEmpty(item.NFeConsultaCadastro)).ToString());
-                                    Functions.GravaTxtXml(oXmlGravar, tipo + Servicos.NFeDownload.ToString(), (!string.IsNullOrEmpty(item.NFeDownload)).ToString());
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "NFeInutilizacao", (!string.IsNullOrEmpty(item.NFeInutilizacao)).ToString());
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "NFeManifDest", (!string.IsNullOrEmpty(item.NFeManifDest)).ToString());
                                     Functions.GravaTxtXml(oXmlGravar, tipo + "NFeStatusServico", (!string.IsNullOrEmpty(item.NFeStatusServico)).ToString());
@@ -266,7 +273,7 @@ namespace NFe.Components.Info
                 Functions.DeletarArquivo(sArquivo);
                 ///
                 /// danasa 8-2009
-                /// 
+                ///
                 Auxiliar oAux = new Auxiliar();
                 oAux.GravarArqErroERP(Path.GetFileNameWithoutExtension(sArquivo) + ".err", ex.Message);
             }
@@ -291,7 +298,7 @@ namespace NFe.Components.Info
 
                 Empresas.CanRun();
 
-                // Se puder executar a aplicação aqui será recriado todos os arquivos de .lock, 
+                // Se puder executar a aplicação aqui será recriado todos os arquivos de .lock,
                 // pois podem ter sofridos alterações de configurações nas pastas
                 Empresas.CreateLockFile();
             }
@@ -314,9 +321,11 @@ namespace NFe.Components.Info
 
             return false;
         }
-        #endregion
+
+        #endregion AppExecutando()
 
         #region AppExecutando()
+
         /// <summary>
         /// Verifica se a aplicação já está executando ou não
         /// </summary>
@@ -335,7 +344,7 @@ namespace NFe.Components.Info
             {
                 Empresas.CanRun();
 
-                // Se puder executar a aplicação aqui será recriado todos os arquivos de .lock, 
+                // Se puder executar a aplicação aqui será recriado todos os arquivos de .lock,
                 // pois podem ter sofridos alterações de configurações nas pastas
                 Empresas.CreateLockFile();
 
@@ -357,6 +366,7 @@ namespace NFe.Components.Info
 
             return executando;
         }
-        #endregion
+
+        #endregion AppExecutando()
     }
 }

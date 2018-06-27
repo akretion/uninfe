@@ -73,7 +73,6 @@ namespace NFe.Service
             switch (servico)
             {
                 case Servicos.NFeEnviarLote:
-                case Servicos.NFeEnviarLoteZip:
                 case Servicos.CTeEnviarLote:
                 case Servicos.MDFeEnviarLote:
                     //XML de NFe, CTe e MDFe, na montagem do lote eu valido o XML antes, como o lote quem monta é o XML entendo que não está montando errado, sendo assim, não vou validar novamente o XML para ganhar desempenho. Wandrey 18/09/2016
@@ -156,15 +155,8 @@ namespace NFe.Service
             //Definir novamente o protocolo de segurança, pois é uma propriedade estática e o seu valor pode ser alterado antes do envio. Wandrey 03/05/2016
             ServicePointManager.SecurityProtocol = securityProtocolType;
 
-            // Envio da NFe Compactada - Renan
-            if (servico == Servicos.NFeEnviarLoteZip)
-            {
-                string encodedData = TFunctions.CompressXML(docXML);
-
-                XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[] { encodedData });
-            }
-            else if (servico == Servicos.ConsultarLoteReinf)
-                XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[] 
+            if (servico == Servicos.ConsultarLoteReinf)
+                XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[]
                 {
                     Convert.ToByte(docXML.GetElementsByTagName("tipoInscricaoContribuinte")[0].InnerText),
                     docXML.GetElementsByTagName("numeroInscricaoContribuinte")[0].InnerText,

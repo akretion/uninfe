@@ -243,9 +243,6 @@ namespace NFe.Settings
         [AttributeTipoAplicacao(TipoAplicativo.Nfe)]
         public bool GravarEventosDeTerceiros { get; set; }
 
-        [AttributeTipoAplicacao(TipoAplicativo.Nfe)]
-        public bool CompactarNfe { get; set; }
-
         [AttributeTipoAplicacao(TipoAplicativo.Nfe | TipoAplicativo.Todos)]
         public bool ArqNSU { get; set; }
 

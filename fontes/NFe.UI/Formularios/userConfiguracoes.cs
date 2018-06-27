@@ -310,7 +310,6 @@ namespace NFe.UI
             oempresa.GravarEventosNaPastaEnviadosNFe = empresa.GravarEventosNaPastaEnviadosNFe;
             oempresa.GravarEventosCancelamentoNaPastaEnviadosNFe = empresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
             oempresa.GravarEventosDeTerceiros = empresa.GravarEventosDeTerceiros;
-            oempresa.CompactarNfe = empresa.CompactarNfe;
             oempresa.IndSinc = empresa.IndSinc;
 
             oempresa.CodigoAtivacaoSAT = empresa.CodigoAtivacaoSAT;

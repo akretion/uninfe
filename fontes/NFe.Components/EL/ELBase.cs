@@ -42,6 +42,10 @@ namespace NFe.Components.EL
                                 elService = new IconhaES.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
                                 break;
 
+                            case 3200904: //Barra de São Francisco-ES
+                                elService = new BarraDeSaoFranciscoES.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

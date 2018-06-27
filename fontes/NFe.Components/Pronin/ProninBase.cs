@@ -41,6 +41,10 @@ namespace NFe.Components.Pronin
                                 proninService = new ViamaoRS.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
+                            case 3505807: //Bastos-SP
+                                proninService = new BastosSP.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -73,6 +77,14 @@ namespace NFe.Components.Pronin
 
                             case 4323002: //Viamão-RS
                                 proninService = new ViamaoRS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
+                            case 3505807: //Bastos-SP
+                                proninService = new BastosSP.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
+                            case 3530300: //Mirassol-SP
+                                proninService = new MirassolSP.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
                             default:

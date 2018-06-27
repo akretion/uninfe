@@ -139,6 +139,17 @@ namespace NFe.Components
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4323002-";
                                 break;
 
+                            case 3505807: //Bastos-SP
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3505807-";
+                                break;
+
+                            case 3530300: //Mirassol-SP
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3530300-";
+                                break;
+
+                            case 3303302: //Niterói-RJ
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3303302-";
+                                break;
                             default:
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                                 break;
