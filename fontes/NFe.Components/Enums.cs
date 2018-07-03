@@ -751,6 +751,12 @@ namespace NFe.Components
         TIPLAN,
 
         /// <summary>
+        /// Preifetura de Niterói - RJ
+        /// </summary>
+        [Description("Tiplan")]
+        TIPLAN_203,
+
+        /// <summary>
         /// Prefeitura do Rio de Janeiro - RJ
         /// </summary>
         [Description("Carioca")]

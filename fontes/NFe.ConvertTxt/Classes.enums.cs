@@ -328,7 +328,8 @@ namespace NFe.ConvertTxt
     internal enum ObOp
     {
         Obrigatorio,
-        Opcional
+        Opcional, 
+        None
     }
 
     public enum TpcnindIEDest {

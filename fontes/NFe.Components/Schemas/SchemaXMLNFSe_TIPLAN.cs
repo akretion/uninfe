@@ -94,33 +94,78 @@ namespace NFSe.Components
 
             #region Versão 2.03
 
-            #region XML de Lote RPS
+            #region XML de lote RPS
 
-            SchemaXML.InfSchemas.Add("NFSE-TIPLAN-3303302-EnviarLoteRpsEnvio", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFSE-TIPLAN_203-EnviarLoteRpsEnvio", new InfSchema()
             {
                 Tag = "EnviarLoteRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "",
+                ArquivoXSD = "NFSe\\TIPLAN\\nfse_v2-03.xsd",
                 Descricao = "XML de Lote RPS",
                 TagAssinatura = "Rps",
                 TagAtributoId = "InfDeclaracaoPrestacaoServico",
                 TagLoteAssinatura = "EnviarLoteRpsEnvio",
                 TagLoteAtributoId = "LoteRps",
-                TargetNameSpace = ""
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
+            #endregion XML de lote RPS
 
-            #endregion XML de Lote RPS
+            #region XML de Cancelamento de NFS-e
 
-            SchemaXML.InfSchemas.Add("NFSE-TIPLAN-3303302-ConsultarNfseFaixaEnvio", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFSE-TIPLAN_203-CancelarNfseEnvio", new InfSchema()
+            {
+                Tag = "CancelarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\TIPLAN\\nfse_v2-03.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "Pedido",
+                TagAtributoId = "InfPedidoCancelamento",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion XML de Cancelamento de NFS-e
+
+            #region XML de Consulta de Lote RPS
+
+            SchemaXML.InfSchemas.Add("NFSE-TIPLAN_203-ConsultarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\TIPLAN\\nfse_v2-03.xsd",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion XML de Consulta de Lote RPS
+
+            #region XML de Consulta de NFSe por Rps
+
+            SchemaXML.InfSchemas.Add("NFSE-TIPLAN_203-ConsultarNfseRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\TIPLAN\\nfse_v2-03.xsd",
+                Descricao = "XML de Consulta de NFSe por Rps",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion XML de Consulta de NFSe por Rps
+
+            #region XML de Consulta de NFSe por Faixa
+
+            SchemaXML.InfSchemas.Add("NFSE-TIPLAN_203-ConsultarNfseFaixaEnvio", new InfSchema()
             {
                 Tag = "ConsultarNfseFaixaEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "",
+                ArquivoXSD = "NFSe\\TIPLAN\\nfse_v2-03.xsd",
                 Descricao = "XML de Consulta de NFSe por Faixa",
                 TagAssinatura = "",
                 TagAtributoId = "",
-                TargetNameSpace = ""
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
+
+            #endregion XML de Consulta de NFSe por Faixa
 
             #endregion Versão 2.03
         }

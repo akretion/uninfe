@@ -1,8 +1,8 @@
-﻿using NFe.Certificado;
-using NFe.Settings;
-using System;
-using System.IO;
+﻿using System;
 using System.Text;
+using NFe.Settings;
+using NFe.Certificado;
+using System.IO;
 using System.Xml;
 
 namespace NFe.Components.Info
@@ -32,8 +32,8 @@ namespace NFe.Components.Info
                 if (cert.PrepInfCertificado(Empresas.Configuracoes[emp]))
                 {
                     sSubject = cert.sSubject;
-                    sValIni = cert.dValidadeInicial.ToString();
-                    sValFin = cert.dValidadeFinal.ToString();
+                    sValIni = cert.dValidadeInicial.ToString("dd/MM/yyyy HH:mm:ss");
+                    sValFin = cert.dValidadeFinal.ToString("dd/MM/yyyy HH:mm:ss");
                 }
                 else
                 {

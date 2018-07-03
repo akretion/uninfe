@@ -1006,6 +1006,35 @@ namespace NFe.Service
 
                 #region TIPLAN
 
+                case PadroesNFSe.TIPLAN_203:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfsePorFaixa";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRps";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+                    }
+                    break;
+
                 case PadroesNFSe.TIPLAN:
                     switch (servico)
                     {
@@ -1014,8 +1043,7 @@ namespace NFe.Service
                                 cMunicipio.Equals(3300407) ||
                                 cMunicipio.Equals(3304003) ||
                                 cMunicipio.Equals(2611606) ||
-                                cMunicipio.Equals(3300100) ||
-                                cMunicipio.Equals(3303302))
+                                cMunicipio.Equals(3300100))
                                 retorna = "ConsultarLoteRps";
                             else
                                 retorna = "ConsultarLoteRPS";
@@ -1033,8 +1061,7 @@ namespace NFe.Service
                                 cMunicipio.Equals(3300407) ||
                                 cMunicipio.Equals(3304003) ||
                                 cMunicipio.Equals(2611606) ||
-                                cMunicipio.Equals(3300100) ||
-                                cMunicipio.Equals(3303302))
+                                cMunicipio.Equals(3300100))
                                 retorna = "ConsultarNfsePorRps";
                             else
                                 retorna = "ConsultarNfseRPS";
@@ -1046,8 +1073,7 @@ namespace NFe.Service
                                 cMunicipio.Equals(3300407) ||
                                 cMunicipio.Equals(3304003) ||
                                 cMunicipio.Equals(2611606) ||
-                                cMunicipio.Equals(3300100) ||
-                                cMunicipio.Equals(3303302))
+                                cMunicipio.Equals(3300100))
                                 retorna = "ConsultarSituacaoLoteRps";
                             else
                                 retorna = "ConsultarSituacaoLoteRPS";
@@ -3048,17 +3074,6 @@ namespace NFe.Service
                                 break;
                         }
                     }
-                    break;
-
-                case PadroesNFSe.TIPLAN:
-                    if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].UnidadeFederativaCodigo == 3303302)
-                        if (servico == Servicos.NFSeRecepcionarLoteRps)
-                            switch (doc.DocumentElement.Name)
-                            {
-                                case "EnviarLoteRpsEnvio":
-                                    result = Servicos.NFSeRecepcionarLoteRps;
-                                    break;
-                            }
                     break;
             }
 

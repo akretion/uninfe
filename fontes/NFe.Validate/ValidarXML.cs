@@ -355,7 +355,11 @@ namespace NFe.Validate
                     {
                         oAD.AssinarLoteESocial(Arquivo, emp);
                     }
-                    else if (TipoArqXml.TagAssinatura == "eSocial" || TipoArqXml.TagAssinatura == "Reinf")
+                    else if (TipoArqXml.TagAssinatura == "eSocial")
+                    {
+                        oAD.Assinar(Arquivo, emp, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, AlgorithmType.Sha256, false);
+                    }
+                    else if (TipoArqXml.TagAssinatura == "Reinf")
                     {
                         oAD.Assinar(Arquivo, emp, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, AlgorithmType.Sha256);
                     }

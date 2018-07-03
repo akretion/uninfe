@@ -73,6 +73,10 @@ namespace NFe.ConvertTxt
         public double vBCFCPSTRet;
         public double pFCPSTRet;
         public double vFCPSTRet;
+        public double pRedBCEfet;
+        public double vBCEfet;
+        public double pICMSEfet;
+        public double vICMSEfet;
 
         //-- CSON
         public int CSOSN;

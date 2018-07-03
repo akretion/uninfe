@@ -3733,6 +3733,12 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\EFDReinfConsultas.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AN\EFDReinfConsultas.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\EFDReinf.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\ADM_SISTEMAS\nfse v2 01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\ADM_SISTEMAS\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -4198,6 +4204,11 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PLucasDoRioVerdeMTconsultanfseporrps-FISSLEX.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PLucasDoRioVerderMTconsultarsituacaoloterps-FISSLEX.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PLucasDoRioVerdeMTrecepcionarloterps-FISSLEX.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\TIPLAN\nfse_v2-03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HAmargosaBA-ADM_SISTEMAS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PAmargosaBA-ADM_SISTEMAS.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

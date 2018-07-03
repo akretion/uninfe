@@ -879,6 +879,11 @@ namespace NFe.ConvertTxt
                         detInfo.Imposto.ICMS.vBCFCPSTRet = this.readDouble(nodedetImpostoICMS_, TpcnResources.vBCFCPSTRet);
                         detInfo.Imposto.ICMS.pFCPSTRet = this.readDouble(nodedetImpostoICMS_, TpcnResources.pFCPSTRet);
                         detInfo.Imposto.ICMS.vFCPSTRet = this.readDouble(nodedetImpostoICMS_, TpcnResources.vFCPSTRet);
+
+                        detInfo.Imposto.ICMS.vBCEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.vBCEfet);
+                        detInfo.Imposto.ICMS.pRedBCEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.pRedBCEfet);
+                        detInfo.Imposto.ICMS.pICMSEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.pICMSEfet);
+                        detInfo.Imposto.ICMS.vICMSEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSEfet);
                     }
                 }
                 #endregion
