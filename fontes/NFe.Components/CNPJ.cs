@@ -78,6 +78,8 @@ namespace NFe.Components
         {
             if (string.IsNullOrEmpty(cnpj)) return false;
 
+            cnpj = Functions.OnlyNumbers(cnpj, "-.,/").ToString();
+
             try
             {
                 #region Valida

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://nfse.abrasf.org.br" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://nfse.abrasf.org.br" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://nfse.abrasf.org.br/Imports">
+      <xsd:import schemaLocation="https://homologa-demo.saatri.com.br/Servicos/nfse.svc?xsd=xsd0" namespace="http://nfse.abrasf.org.br" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="RecepcionarLoteRpsRequest">
+    <wsdl:part name="parameters" element="tns:RecepcionarLoteRpsRequest" />
+  </wsdl:message>
+  <wsdl:message name="RecepcionarLoteRpsResponse">
+    <wsdl:part name="parameters" element="tns:RecepcionarLoteRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="Infse_RecepcionarLoteRps_ExcecaoDetalhesFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:ExcecaoDetalhes" />
+  </wsdl:message>
+  <wsdl:message name="RecepcionarLoteRpsSincronoRequest">
+    <wsdl:part name="parameters" element="tns:RecepcionarLoteRpsSincronoRequest" />
+  </wsdl:message>
+  <wsdl:message name="RecepcionarLoteRpsSincronoResponse">
+    <wsdl:part name="parameters" element="tns:RecepcionarLoteRpsSincronoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Infse_RecepcionarLoteRpsSincrono_ExcecaoDetalhesFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:ExcecaoDetalhes" />
+  </wsdl:message>
+  <wsdl:message name="GerarNfseRequest">
+    <wsdl:part name="parameters" element="tns:GerarNfseRequest" />
+  </wsdl:message>
+  <wsdl:message name="GerarNfseResponse">
+    <wsdl:part name="parameters" element="tns:GerarNfseResponse" />
+  </wsdl:message>
+  <wsdl:message name="Infse_GerarNfse_ExcecaoDetalhesFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:ExcecaoDetalhes" />
+  </wsdl:message>
+  <wsdl:message name="CancelarNfseRequest">
+    <wsdl:part name="parameters" element="tns:CancelarNfseRequest" />
+  </wsdl:message>
+  <wsdl:message name="CancelarNfseResponse">
+    <wsdl:part name="parameters" element="tns:CancelarNfseResponse" />
+  </wsdl:message>
+  <wsdl:message name="Infse_CancelarNfse_ExcecaoDetalhesFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:ExcecaoDetalhes" />
+  </wsdl:message>
+  <wsdl:message name="SubstituirNfseRequest">
+    <wsdl:part name="parameters" element="tns:SubstituirNfseRequest" />
+  </wsdl:message>
+  <wsdl:message name="SubstituirNfseResponse">
+    <wsdl:part name="parameters" element="tns:SubstituirNfseResponse" />
+  </wsdl:message>
+  <wsdl:message name="Infse_SubstituirNfse_ExcecaoDetalhesFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:ExcecaoDetalhes" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarLoteRpsRequest">
+    <wsdl:part name="parameters" element="tns:ConsultarLoteRpsRequest" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarLoteRpsResponse">
+    <wsdl:part name="parameters" element="tns:ConsultarLoteRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="Infse_ConsultarLoteRps_ExcecaoDetalhesFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:ExcecaoDetalhes" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfsePorRpsRequest">
+    <wsdl:part name="parameters" element="tns:ConsultarNfsePorRpsRequest" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfsePorRpsResponse">
+    <wsdl:part name="parameters" element="tns:ConsultarNfsePorRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="Infse_ConsultarNfsePorRps_ExcecaoDetalhesFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:ExcecaoDetalhes" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfseServicoPrestadoRequest">
+    <wsdl:part name="parameters" element="tns:ConsultarNfseServicoPrestadoRequest" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfseServicoPrestadoResponse">
+    <wsdl:part name="parameters" element="tns:ConsultarNfseServicoPrestadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Infse_ConsultarNfseServicoPrestado_ExcecaoDetalhesFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:ExcecaoDetalhes" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfseServicoTomadoRequest">
+    <wsdl:part name="parameters" element="tns:ConsultarNfseServicoTomadoRequest" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfseServicoTomadoResponse">
+    <wsdl:part name="parameters" element="tns:ConsultarNfseServicoTomadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Infse_ConsultarNfseServicoTomado_ExcecaoDetalhesFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:ExcecaoDetalhes" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfsePorFaixaRequest">
+    <wsdl:part name="parameters" element="tns:ConsultarNfsePorFaixaRequest" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNfsePorFaixaResponse">
+    <wsdl:part name="parameters" element="tns:ConsultarNfsePorFaixaResponse" />
+  </wsdl:message>
+  <wsdl:message name="Infse_ConsultarNfsePorFaixa_ExcecaoDetalhesFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:ExcecaoDetalhes" />
+  </wsdl:message>
+  <wsdl:message name="IncluirOutrasInformacoesNaNfseRequest">
+    <wsdl:part name="parameters" element="tns:IncluirOutrasInformacoesNaNfseRequest" />
+  </wsdl:message>
+  <wsdl:message name="IncluirOutrasInformacoesNaNfseResponse">
+    <wsdl:part name="parameters" element="tns:IncluirOutrasInformacoesNaNfseResponse" />
+  </wsdl:message>
+  <wsdl:message name="Infse_IncluirOutrasInformacoesNaNfse_ExcecaoDetalhesFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:ExcecaoDetalhes" />
+  </wsdl:message>
+  <wsdl:portType name="Infse">
+    <wsdl:operation name="RecepcionarLoteRps">
+      <wsdl:input wsaw:Action="http://nfse.abrasf.org.br/Infse/RecepcionarLoteRps" name="RecepcionarLoteRpsRequest" message="tns:RecepcionarLoteRpsRequest" />
+      <wsdl:output wsaw:Action="http://nfse.abrasf.org.br/Infse/RecepcionarLoteRpsResponse" name="RecepcionarLoteRpsResponse" message="tns:RecepcionarLoteRpsResponse" />
+      <wsdl:fault wsaw:Action="http://nfse.abrasf.org.br/Infse/RecepcionarLoteRpsExcecaoDetalhesFault" name="ExcecaoDetalhesFault" message="tns:Infse_RecepcionarLoteRps_ExcecaoDetalhesFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RecepcionarLoteRpsSincrono">
+      <wsdl:input wsaw:Action="http://nfse.abrasf.org.br/Infse/RecepcionarLoteRpsSincrono" name="RecepcionarLoteRpsSincronoRequest" message="tns:RecepcionarLoteRpsSincronoRequest" />
+      <wsdl:output wsaw:Action="http://nfse.abrasf.org.br/Infse/RecepcionarLoteRpsSincronoResponse" name="RecepcionarLoteRpsSincronoResponse" message="tns:RecepcionarLoteRpsSincronoResponse" />
+      <wsdl:fault wsaw:Action="http://nfse.abrasf.org.br/Infse/RecepcionarLoteRpsSincronoExcecaoDetalhesFault" name="ExcecaoDetalhesFault" message="tns:Infse_RecepcionarLoteRpsSincrono_ExcecaoDetalhesFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GerarNfse">
+      <wsdl:input wsaw:Action="http://nfse.abrasf.org.br/Infse/GerarNfse" name="GerarNfseRequest" message="tns:GerarNfseRequest" />
+      <wsdl:output wsaw:Action="http://nfse.abrasf.org.br/Infse/GerarNfseResponse" name="GerarNfseResponse" message="tns:GerarNfseResponse" />
+      <wsdl:fault wsaw:Action="http://nfse.abrasf.org.br/Infse/GerarNfseExcecaoDetalhesFault" name="ExcecaoDetalhesFault" message="tns:Infse_GerarNfse_ExcecaoDetalhesFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelarNfse">
+      <wsdl:input wsaw:Action="http://nfse.abrasf.org.br/Infse/CancelarNfse" name="CancelarNfseRequest" message="tns:CancelarNfseRequest" />
+      <wsdl:output wsaw:Action="http://nfse.abrasf.org.br/Infse/CancelarNfseResponse" name="CancelarNfseResponse" message="tns:CancelarNfseResponse" />
+      <wsdl:fault wsaw:Action="http://nfse.abrasf.org.br/Infse/CancelarNfseExcecaoDetalhesFault" name="ExcecaoDetalhesFault" message="tns:Infse_CancelarNfse_ExcecaoDetalhesFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubstituirNfse">
+      <wsdl:input wsaw:Action="http://nfse.abrasf.org.br/Infse/SubstituirNfse" name="SubstituirNfseRequest" message="tns:SubstituirNfseRequest" />
+      <wsdl:output wsaw:Action="http://nfse.abrasf.org.br/Infse/SubstituirNfseResponse" name="SubstituirNfseResponse" message="tns:SubstituirNfseResponse" />
+      <wsdl:fault wsaw:Action="http://nfse.abrasf.org.br/Infse/SubstituirNfseExcecaoDetalhesFault" name="ExcecaoDetalhesFault" message="tns:Infse_SubstituirNfse_ExcecaoDetalhesFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarLoteRps">
+      <wsdl:input wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarLoteRps" name="ConsultarLoteRpsRequest" message="tns:ConsultarLoteRpsRequest" />
+      <wsdl:output wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarLoteRpsResponse" name="ConsultarLoteRpsResponse" message="tns:ConsultarLoteRpsResponse" />
+      <wsdl:fault wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarLoteRpsExcecaoDetalhesFault" name="ExcecaoDetalhesFault" message="tns:Infse_ConsultarLoteRps_ExcecaoDetalhesFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarNfsePorRps">
+      <wsdl:input wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarNfsePorRps" name="ConsultarNfsePorRpsRequest" message="tns:ConsultarNfsePorRpsRequest" />
+      <wsdl:output wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarNfsePorRpsResponse" name="ConsultarNfsePorRpsResponse" message="tns:ConsultarNfsePorRpsResponse" />
+      <wsdl:fault wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarNfsePorRpsExcecaoDetalhesFault" name="ExcecaoDetalhesFault" message="tns:Infse_ConsultarNfsePorRps_ExcecaoDetalhesFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarNfseServicoPrestado">
+      <wsdl:input wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarNfseServicoPrestado" name="ConsultarNfseServicoPrestadoRequest" message="tns:ConsultarNfseServicoPrestadoRequest" />
+      <wsdl:output wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarNfseServicoPrestadoResponse" name="ConsultarNfseServicoPrestadoResponse" message="tns:ConsultarNfseServicoPrestadoResponse" />
+      <wsdl:fault wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarNfseServicoPrestadoExcecaoDetalhesFault" name="ExcecaoDetalhesFault" message="tns:Infse_ConsultarNfseServicoPrestado_ExcecaoDetalhesFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarNfseServicoTomado">
+      <wsdl:input wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarNfseServicoTomado" name="ConsultarNfseServicoTomadoRequest" message="tns:ConsultarNfseServicoTomadoRequest" />
+      <wsdl:output wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarNfseServicoTomadoResponse" name="ConsultarNfseServicoTomadoResponse" message="tns:ConsultarNfseServicoTomadoResponse" />
+      <wsdl:fault wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarNfseServicoTomadoExcecaoDetalhesFault" name="ExcecaoDetalhesFault" message="tns:Infse_ConsultarNfseServicoTomado_ExcecaoDetalhesFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarNfsePorFaixa">
+      <wsdl:input wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarNfsePorFaixa" name="ConsultarNfsePorFaixaRequest" message="tns:ConsultarNfsePorFaixaRequest" />
+      <wsdl:output wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarNfsePorFaixaResponse" name="ConsultarNfsePorFaixaResponse" message="tns:ConsultarNfsePorFaixaResponse" />
+      <wsdl:fault wsaw:Action="http://nfse.abrasf.org.br/Infse/ConsultarNfsePorFaixaExcecaoDetalhesFault" name="ExcecaoDetalhesFault" message="tns:Infse_ConsultarNfsePorFaixa_ExcecaoDetalhesFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IncluirOutrasInformacoesNaNfse">
+      <wsdl:input wsaw:Action="http://nfse.abrasf.org.br/Infse/IncluirOutrasInformacoesNaNfse" name="IncluirOutrasInformacoesNaNfseRequest" message="tns:IncluirOutrasInformacoesNaNfseRequest" />
+      <wsdl:output wsaw:Action="http://nfse.abrasf.org.br/Infse/IncluirOutrasInformacoesNaNfseResponse" name="IncluirOutrasInformacoesNaNfseResponse" message="tns:IncluirOutrasInformacoesNaNfseResponse" />
+      <wsdl:fault wsaw:Action="http://nfse.abrasf.org.br/Infse/IncluirOutrasInformacoesNaNfseExcecaoDetalhesFault" name="ExcecaoDetalhesFault" message="tns:Infse_IncluirOutrasInformacoesNaNfse_ExcecaoDetalhesFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

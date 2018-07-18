@@ -47,7 +47,7 @@
  <wsdl:service name='NFeRetAutorizacao4'>
   <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado a retornar o resultado do processamento do lote de NFCe</wsdl:documentation>
   <wsdl:port binding='tns:NFeRetAutorizacao4Soap12' name='NFeRetAutorizacao4ServicePort'>
-   <soap12:address location='https://nfce.fazenda.ms.gov.br/ws/NFeRetAutorizacao4'/>
+   <soap12:address location='https://nfce.sefaz.ms.gov.br/ws/NFeRetAutorizacao4'/>
   </wsdl:port>
  </wsdl:service>
 </wsdl:definitions>

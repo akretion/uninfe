@@ -97,7 +97,10 @@ namespace NFe.UI.Formularios
                 this.edtNome.Text = empresa.Nome;
 
                 if (!string.IsNullOrEmpty(empresa.CNPJ))
-                    this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(this.edtCNPJ.Text, true);
+                    if (empresa.CNPJ.Length < 14)
+                        this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(this.edtCNPJ.Text, false);
+                    else
+                        this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(this.edtCNPJ.Text, true);
 
                 comboBox_tpEmis.SelectedValue = this.empresa.tpEmis;
                 comboBox_Ambiente.SelectedValue = this.empresa.AmbienteCodigo;
@@ -313,15 +316,11 @@ namespace NFe.UI.Formularios
                            ufCod == 4202909 /*Brusque-SC*/ ||
                            ufCod == 3535507 /*Paraguaçu Paulista-SP*/ ||
                            ufCod == 1503606 /*Itaituba-PA*/ ||
-                           ufCod == 3200904 /*Barra de São Francisco-ES*/;
+                           ufCod == 3200904 /*Barra de São Francisco-ES*/ ||
+                           ufCod == 2901007 /*Amargosa/ BA*/ ||
+                           ufCod == 3152105 /*Ponte nova*/;
 
-            bool visiblepass = ufCod == 3152105 || visible; /*Ponte nova*/
-
-            lbl_UsuarioWS.Visible =
-                txtUsuarioWS.Visible = visible;
-
-            lbl_SenhaWS.Visible =
-                txtSenhaWS.Visible = visiblepass;
+            lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }
 
         private void comboBox_UF_SelectedIndexChanged(object sender, EventArgs e)
@@ -356,6 +355,11 @@ namespace NFe.UI.Formularios
                     txtClienteID.Visible = false;
                     txtClientSecret.Visible = false;
                 }
+
+#if _fw35
+                if (edtCodMun.Text.Equals("2901007"))
+                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, @"Este município não funciona com a versão do UniNFe com .NET Framework 3.5. Dessa forma, instale a versão do UniNFe com .NET Framework 4.6.2 que consta no site da Unimake.", "Atenção");
+#endif
             }
             catch
             {

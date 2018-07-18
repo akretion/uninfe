@@ -18,6 +18,10 @@ using NFSe.Components;
 using NFe.Components.Coplan;
 using System;
 using System.IO;
+#if _fw46
+using System.ServiceModel;
+using static NFe.Components.Security.SOAPSecurity;
+#endif
 
 namespace NFe.Service.NFSe
 {
@@ -452,6 +456,18 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.TIPLAN_203:
                         cabecMsg = "<cabecalho versao=\"2.03\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.03</versaoDados></cabecalho>";
                         break;
+#if _fw46
+                    case PadroesNFSe.ADM_SISTEMAS:
+                        cabecMsg = "<cabecalho versao=\"2.01\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.01</versaoDados></cabecalho>";
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        pedLoteRps = ler.oDadosPedSitNfseRps.tpAmb == 1 ?
+                                        new Components.PAmargosaBA.InfseClient(GetBinding(), new EndpointAddress("https://demo.saatri.com.br/servicos/nfse.svc")) :
+                                        new Components.HAmargosaBA.InfseClient(GetBinding(), new EndpointAddress("https://homologa-demo.saatri.com.br/servicos/nfse.svc")) as object;
+
+                        SignUsingCredentials(emp, pedLoteRps);
+                        break;
+#endif
                 }
 
                 if (base.IsInvocar(padraoNFSe, Servico, ler.oDadosPedSitNfseRps.cMunicipio))

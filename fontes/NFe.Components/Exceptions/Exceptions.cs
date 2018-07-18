@@ -108,4 +108,21 @@ namespace NFe.Components.Exceptions
         }
 
     }
+
+    /// <summary>
+    /// Lançado quando um município não funciona com o .NET Framework 3.5
+    /// </summary>
+    public class MunicipioSemSuporteAoNETFramework35Exception : Exception
+    {
+        /// <summary>
+        /// Mensagem que é exibida ao usuário
+        /// </summary>
+        public override string Message
+        {
+            get
+            {
+                return "Este município não funciona com a versão do UniNFe com .NET Framework 3.5. Dessa forma, instale a versão do UniNFe com .NET Framework 4.6.2 que consta no site da Unimake.";
+            }
+        }
+    }
 }

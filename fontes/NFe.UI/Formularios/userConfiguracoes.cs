@@ -588,7 +588,7 @@ namespace NFe.UI
                     if (ok)
                     {
                         currentEmpresa = new Empresa();
-                        currentEmpresa.CNPJ = NFe.Components.Functions.OnlyNumbers(f.edtCNPJ.Text, ".,-/").ToString().PadLeft(14, '0');
+                        currentEmpresa.CNPJ = Functions.OnlyNumbers(f.edtCNPJ.Text, ".,-/").ToString();
                         currentEmpresa.Nome = f.edtNome.Text;
                         currentEmpresa.Servico = (TipoAplicativo)f.cbServico.SelectedValue;
                         if (currentEmpresa.Servico == TipoAplicativo.Nfse)
@@ -834,6 +834,8 @@ namespace NFe.UI
                     uce_pastas.Populate(empresa);
                     uce_ftp.Populate(empresa);
                     uce_cert.Populate(empresa);
+                    _tpEmpresa_cert.Parent = tc_empresa;
+                    _tpEmpresa_ftp.Parent = tc_empresa;
                     _tpEmpresa_danfe.Parent = null;
                     _tpEmpresa_sat.Parent = null;
                     break;

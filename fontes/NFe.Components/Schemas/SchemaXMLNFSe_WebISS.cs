@@ -178,6 +178,17 @@ namespace NFSe.Components
                 TargetNameSpace = "http://www.abrasf.org.br/nfse"
             });
 
+            SchemaXML.InfSchemas.Add("NFSE-WEBISS_202-ConsultarNfseFaixaEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseFaixaEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "", //NFSe\\WEBISS\\servico_consultar_nfse_envio.xsd",
+                Descricao = "XML de Consulta da NFSe por período",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+
             #endregion Consulta NFSe por período
 
             #region XML de Consulta de Lote RPS
@@ -208,6 +219,21 @@ namespace NFSe.Components
             });
 
             #endregion XML de Consulta Situação do Lote RPS
+
+            #region XML para Gerar NFse
+
+            SchemaXML.InfSchemas.Add("NFSE-WEBISS_202-GerarNfseEnvio", new InfSchema()
+            {
+                Tag = "GerarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "XML de Lote RPS - Sincrono",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+
+            #endregion XML para Gerar NFse
 
             #endregion Versão 2
         }

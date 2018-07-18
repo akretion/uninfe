@@ -1087,7 +1087,13 @@ namespace NFe.Components
         /// Padrão utilizado pelo município de Montes Claros-MG
         /// </summary>
         [Description("e-Receita")]
-        E_RECEITA
+        E_RECEITA, 
+
+        /// <summary>
+        /// Padrão utilizado pelo município de Amargosa-BA
+        /// </summary>
+        [Description("ADM_SISTEMAS")]
+        ADM_SISTEMAS
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

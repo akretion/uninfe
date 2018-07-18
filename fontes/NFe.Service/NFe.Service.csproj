@@ -129,6 +129,7 @@
       <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -144,10 +145,6 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Unimake.SAT, Version=1.0.6359.14888, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\NFe.ConvertCFe\bin\Debug\Unimake.SAT.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CFSe\TaskConsultarDadosCadastroCfse.cs" />
@@ -207,6 +204,7 @@
     <Compile Include="NFSe\TaskRecepcionarLoteRps.cs" />
     <Compile Include="Processar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\SOAPSecurity.cs" />
     <Compile Include="TaskAbst.cs" />
     <Compile Include="NFe\TaskAssinarValidarNFe.cs" />
     <Compile Include="NFe\TaskCadastroContribuinte.cs" />

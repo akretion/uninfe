@@ -182,8 +182,8 @@ namespace NFe.Settings
                                 }
                                 else
                                 {
-                                    fileoutput = (fileoutput.Substring(0, fileoutput.LastIndexOf('.')) + "#" +
-                                                    fileoutput.Substring(fileoutput.LastIndexOf('.') + 1)).Replace(".", "\\").Replace("#", ".");
+                                    fileoutput = (fileoutput.Substring(0, fileoutput.LastIndexOf('.')) + "####" +
+                                                    fileoutput.Substring(fileoutput.LastIndexOf('.') + 1)).Replace(".", "\\").Replace("####", ".");
                                 }
 
                                 ExtractResourceToDisk(ass, s, fileoutput);

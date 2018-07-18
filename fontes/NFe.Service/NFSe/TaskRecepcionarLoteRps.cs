@@ -23,6 +23,10 @@ using NFe.Validate;
 using NFSe.Components;
 using System;
 using System.IO;
+#if _fw46
+using System.ServiceModel;
+using static NFe.Components.Security.SOAPSecurity;
+#endif
 
 namespace NFe.Service.NFSe
 {
@@ -713,6 +717,18 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.TIPLAN_203:
                         cabecMsg = "<cabecalho versao=\"2.03\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.03</versaoDados></cabecalho>";
                         break;
+#if _fw46
+                    case PadroesNFSe.ADM_SISTEMAS:
+                        cabecMsg = "<cabecalho versao=\"2.01\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.01</versaoDados></cabecalho>";
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        envLoteRps = oDadosEnvLoteRps.tpAmb == 1 ?
+                                        new Components.PAmargosaBA.InfseClient(GetBinding(), new EndpointAddress("https://demo.saatri.com.br/servicos/nfse.svc")) :
+                                        new Components.HAmargosaBA.InfseClient(GetBinding(), new EndpointAddress("https://homologa-demo.saatri.com.br/servicos/nfse.svc")) as object;
+
+                        SignUsingCredentials(emp, envLoteRps);
+                        break;
+#endif
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))
@@ -764,7 +780,7 @@ namespace NFe.Service.NFSe
             }
         }
 
-        #region EncryptAssinatura()
+#region EncryptAssinatura()
 
         /// <summary>
         /// Encriptar a tag Assinatura quando for município de Blumenau - SC
@@ -776,9 +792,9 @@ namespace NFe.Service.NFSe
             val.EncryptAssinatura(NomeArquivoXML);
         }
 
-        #endregion EncryptAssinatura()
+#endregion EncryptAssinatura()
 
-        #region EnvLoteRps()
+#region EnvLoteRps()
 
         /// <summary>
         /// Fazer a leitura do conteúdo do XML de lote rps e disponibiliza o conteúdo em um objeto para analise
@@ -799,6 +815,6 @@ namespace NFe.Service.NFSe
             //}
         }
 
-        #endregion EnvLoteRps()
+#endregion EnvLoteRps()
     }
 }

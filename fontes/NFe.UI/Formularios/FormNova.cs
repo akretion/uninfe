@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using NFe.Components;
 using NFe.Settings;
-using NFe.Components;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace NFe.UI.Formularios
 {
     public partial class FormNova : MetroFramework.Forms.MetroForm
     {
         Form _owner;
+
         public FormNova(Form parente)
         {
             InitializeComponent();
@@ -59,32 +55,43 @@ namespace NFe.UI.Formularios
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            this.edtCNPJ.Focus();
+            FormatarCPFCNPJ();
 
-            string cnpj = NFe.Components.Functions.OnlyNumbers(this.edtCNPJ.Text, ".,-/").ToString().PadLeft(14, '0');
-            this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(cnpj, true);
-
-            if (!NFe.Components.CNPJ.Validate(cnpj) || cnpj.Equals("00000000000000"))
+            if (edtCNPJ.Text.Length == 14)
             {
-                if (cnpj.Equals("00000000000000"))
-                    this.edtCNPJ.Clear();
-
-                MetroFramework.MetroMessageBox.Show(this, "CNPJ inválido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (!CPF.Validate(edtCNPJ.Text, false))
+                {
+                    MetroFramework.MetroMessageBox.Show(this, "CPF inválido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.edtCNPJ.Focus();
+                    return;
+                }
             }
+            else
+            {
+                if (!CNPJ.Validate(edtCNPJ.Text))
+                {
+                    MetroFramework.MetroMessageBox.Show(this, "CNPJ inválido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.edtCNPJ.Focus();
+                    return;
+                }
+            }
+
+            string cnpj = Functions.OnlyNumbers(edtCNPJ.Text, ".-/").ToString();
+
             if (this.edtNome.Text.Trim().Length == 0)
             {
                 this.edtNome.Focus();
                 MetroFramework.MetroMessageBox.Show(this, "Nome deve ser informado", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            NFe.Components.TipoAplicativo servico = (NFe.Components.TipoAplicativo)cbServico.SelectedValue;
+            TipoAplicativo servico = (TipoAplicativo)cbServico.SelectedValue;
 
             Empresa empresa = null;
             switch (servico)
             {
                 case TipoAplicativo.Todos:
                 case TipoAplicativo.Nfe:
+
                     //Serviço todos e NFe utilizam a mesma pasta de configurações, então não posso permitir configurar o mesmo CNPJ para os dois serviços. Wandrey
                     if ((empresa = Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Todos)) == null)
                         empresa = Empresas.FindConfEmpresa(cnpj, TipoAplicativo.Nfe);
@@ -105,7 +112,7 @@ namespace NFe.UI.Formularios
                 return;
             }
 
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.DialogResult = DialogResult.OK;
         }
 
         private void edtCNPJ_TextChanged(object sender, EventArgs e)
@@ -120,8 +127,27 @@ namespace NFe.UI.Formularios
 
         private void edtCNPJ_Leave(object sender, EventArgs e)
         {
-            string cnpj = NFe.Components.Functions.OnlyNumbers(this.edtCNPJ.Text, ".,-/").ToString().PadLeft(14, '0');
-            this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(cnpj, true);
+            FormatarCPFCNPJ();
+        }
+
+        private void FormatarCPFCNPJ()
+        {
+            string cnpj = Functions.OnlyNumbers(this.edtCNPJ.Text, ".,-/").ToString();
+
+            if (string.IsNullOrEmpty(cnpj))
+                return;
+
+            if (Convert.ToInt64(cnpj).Equals(0))
+            {
+                this.edtCNPJ.Clear();
+                this.edtCNPJ.Focus();
+                return;
+            }
+
+            if (cnpj.Length < 13)
+                this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(cnpj, false);
+            else
+                this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(cnpj, true);
         }
     }
 }

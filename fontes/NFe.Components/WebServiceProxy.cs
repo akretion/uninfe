@@ -343,26 +343,14 @@ namespace NFe.Components
             }
             catch (Exception ex)
             {
-                string msgErro = "Erro ao invocar o método '" + methodName + "'.\r\nWSDL: " + this.ArquivoWSDL + "\r\n" + ex.Message;
+                string msgErro = $"Erro ao invocar o método '{methodName}'.\r\nWSDL: {ArquivoWSDL} {Environment.NewLine}{ex.Message}";
 
-                if (ex.InnerException != null)
+                var inner = ex.InnerException;
+
+                while(inner != null)
                 {
-                    msgErro += "\r\n " + ex.InnerException.Message;
-
-                    if (ex.InnerException.InnerException != null)
-                    {
-                        msgErro += "\r\n " + ex.InnerException.InnerException.Message;
-
-                        if (ex.InnerException.InnerException.InnerException != null)
-                        {
-                            msgErro += "\r\n " + ex.InnerException.InnerException.InnerException.Message;
-
-                            if (ex.InnerException.InnerException.InnerException.InnerException != null)
-                            {
-                                msgErro += "\r\n " + ex.InnerException.InnerException.InnerException.InnerException.Message;
-                            }
-                        }
-                    }
+                    msgErro += $"{Environment.NewLine}{inner.Message}";
+                    inner = inner.InnerException;
                 }
 
                 throw new Exception(msgErro);
@@ -421,8 +409,7 @@ namespace NFe.Components
         {
             Type tipoInstance = instance.GetType();
             PropertyInfo property = tipoInstance.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
-
-            property.SetValue(instance, novoValor, null);
+            property?.SetValue(instance, novoValor, null);
         }
 
         #endregion SetProp()
@@ -551,7 +538,7 @@ namespace NFe.Components
 
             #endregion Gerar o código da classe
 
-            string codigoClasse = writer.ToString();
+           string codigoClasse = writer.ToString();
 
             #region Compilar o código da classe
 
@@ -668,8 +655,11 @@ namespace NFe.Components
         /// <param name="instance">Objeto do serviço que será consumido</param>
         private void RelacCertificado(object instance)
         {
-            if (this.oCertificado != null)
-                ((System.Web.Services.Protocols.SoapHttpClientProtocol)instance).ClientCertificates.Add(this.oCertificado);
+            if(oCertificado != null)
+            {
+                var client = instance as System.Web.Services.Protocols.SoapHttpClientProtocol;
+                client?.ClientCertificates.Add(oCertificado);
+            }
         }
 
         #endregion RelacCertificado

@@ -47,7 +47,7 @@
  <wsdl:service name='CadConsultaCadastro4'>
   <wsdl:documentation xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'>Servico destinado ao atendimento de solicitacoes de consulta ao Cadastro de Contribuintes do ICMS da Secretaria de Fazenda Estatual.</wsdl:documentation>
   <wsdl:port binding='tns:CadConsultaCadastro4Soap12' name='CadConsultaCadastro4ServicePort'>
-   <soap12:address location='https://nfe.fazenda.ms.gov.br/ws/CadConsultaCadastro4'/>
+   <soap12:address location='https://nfe.sefaz.ms.gov.br:443/ws/CadConsultaCadastro4'/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

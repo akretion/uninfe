@@ -3,6 +3,10 @@ using NFe.Components;
 using NFe.Settings;
 using System;
 using System.IO;
+#if _fw46
+using System.ServiceModel;
+using static NFe.Components.Security.SOAPSecurity;
+#endif
 
 namespace NFe.Service.NFSe
 {
@@ -14,16 +18,16 @@ namespace NFe.Service.NFSe
             NomeArquivoXML = arquivo;
         }
 
-        #region Objeto com os dados do XML da consulta nfse
+#region Objeto com os dados do XML da consulta nfse
 
         /// <summary>
         /// Esta herança que deve ser utilizada fora da classe para obter os valores das tag´s da consulta nfse
         /// </summary>
         private DadosPedSitNfse dadosXML;
 
-        #endregion Objeto com os dados do XML da consulta nfse
+#endregion Objeto com os dados do XML da consulta nfse
 
-        #region Execute
+#region Execute
 
         public override void Execute()
         {
@@ -39,8 +43,14 @@ namespace NFe.Service.NFSe
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(dadosXML.cMunicipio);
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosXML.cMunicipio, dadosXML.tpAmb, dadosXML.tpEmis, padraoNFSe, dadosXML.cMunicipio);
-                object pedSubstNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                WebServiceProxy wsProxy = null;
+                object pedSubstNfse = null;
+
+                if (IsUtilizaCompilacaoWs(padraoNFSe))
+                {
+                    wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosXML.cMunicipio, dadosXML.tpAmb, dadosXML.tpEmis, padraoNFSe, dadosXML.cMunicipio);
+                    pedSubstNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                }
                 string cabecMsg = "";
 
                 switch (padraoNFSe)
@@ -64,6 +74,18 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.E_RECEITA:
                         cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
+#if _fw46
+                    case PadroesNFSe.ADM_SISTEMAS:
+                        cabecMsg = "<cabecalho versao=\"2.01\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.01</versaoDados></cabecalho>";
+                        wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
+
+                        pedSubstNfse = dadosXML.tpAmb == 1 ?
+                                        new Components.PAmargosaBA.InfseClient(GetBinding(), new EndpointAddress("https://demo.saatri.com.br/servicos/nfse.svc")) :
+                                        new Components.HAmargosaBA.InfseClient(GetBinding(), new EndpointAddress("https://homologa-demo.saatri.com.br/servicos/nfse.svc")) as object;
+
+                        SignUsingCredentials(emp, pedSubstNfse);
+                        break;
+#endif
                 }
 
                 System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosXML.cMunicipio, dadosXML.tpAmb, dadosXML.tpEmis, padraoNFSe, Servico);
@@ -117,6 +139,6 @@ namespace NFe.Service.NFSe
             }
         }
 
-        #endregion Execute
+#endregion Execute
     }
 }

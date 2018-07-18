@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://nfse.abrasf.org.br" elementFormDefault="qualified" targetNamespace="http://nfse.abrasf.org.br" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="RecepcionarLoteRpsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseCabecMsg" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseDadosMsg" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecepcionarLoteRpsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="outputXML" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExcecaoDetalhes" nillable="true" type="tns:ExcecaoDetalhes" />
+  <xs:complexType name="ExcecaoDetalhes">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Componente" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Classe" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Metodo" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CodigoErro" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DescricaoErro" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="MotivoErro" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Mensagem" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RecepcionarLoteRpsSincronoRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseCabecMsg" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseDadosMsg" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecepcionarLoteRpsSincronoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="outputXML" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GerarNfseRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseCabecMsg" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseDadosMsg" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GerarNfseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="outputXML" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarNfseRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseCabecMsg" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseDadosMsg" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarNfseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="outputXML" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubstituirNfseRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseCabecMsg" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseDadosMsg" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubstituirNfseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="outputXML" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarLoteRpsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseCabecMsg" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseDadosMsg" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarLoteRpsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="outputXML" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfsePorRpsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseCabecMsg" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseDadosMsg" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfsePorRpsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="outputXML" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfseServicoPrestadoRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseCabecMsg" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseDadosMsg" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfseServicoPrestadoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="outputXML" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfseServicoTomadoRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseCabecMsg" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseDadosMsg" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfseServicoTomadoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="outputXML" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfsePorFaixaRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseCabecMsg" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="nfseDadosMsg" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfsePorFaixaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="outputXML" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IncluirOutrasInformacoesNaNfseRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="inscricaoMunicipalPrestador" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="numeroNfse" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="codigoVerificacao" type="xs:string" />
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="outrasInformacoes" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IncluirOutrasInformacoesNaNfseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="outputXML" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

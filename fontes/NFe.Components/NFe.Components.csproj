@@ -125,6 +125,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -173,6 +174,7 @@
     <Compile Include="Coplan\CampoNovoParecisMT\p\CoplanP.cs" />
     <Compile Include="Coplan\Coplan.cs" />
     <Compile Include="Coplan\CoplanBase.cs" />
+    <Compile Include="CPF.cs" />
     <Compile Include="EL\BarraDeSaoFranciscoES\p\ELP.cs" />
     <Compile Include="EL\IconhaES\p\ELP.cs" />
     <Compile Include="Fiorilli\AssisSP\p\FiorilliP.cs" />
@@ -206,6 +208,7 @@
     <Compile Include="Pronin\VeraCruzRS\p\ProninP.cs" />
     <Compile Include="Pronin\ViamaoRS\h\ProninH.cs" />
     <Compile Include="Pronin\ViamaoRS\p\ProninP.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_ADM_SISTEMAS.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_E_RECEITA.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_MODERNIZACAO_PUBLICA.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_VITORIA_ES.cs" />
@@ -215,6 +218,16 @@
     <Compile Include="Schemas\SchemaXMLNFSe_MANAUS_AM.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_AVMB_ASTEN.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_SOFTPLAN.cs" />
+    <Compile Include="Service References\HAmargosaBA\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\PAmargosaBA\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="SigCorp\GovernadorValdaresMG\h\SigCorpH.cs" />
     <Compile Include="SigCorp\GovernadorValdaresMG\p\SigCorpP.cs" />
     <Compile Include="SimplISS\ArarasSP\p\SimplISSP.cs" />
@@ -1232,6 +1245,82 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Service References\HAmargosaBA\NFe.Components.HAmargosaBA.CancelarNfseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HAmargosaBA\NFe.Components.HAmargosaBA.ConsultarLoteRpsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HAmargosaBA\NFe.Components.HAmargosaBA.ConsultarNfsePorFaixaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HAmargosaBA\NFe.Components.HAmargosaBA.ConsultarNfsePorRpsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HAmargosaBA\NFe.Components.HAmargosaBA.ConsultarNfseServicoPrestadoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HAmargosaBA\NFe.Components.HAmargosaBA.ConsultarNfseServicoTomadoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HAmargosaBA\NFe.Components.HAmargosaBA.GerarNfseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HAmargosaBA\NFe.Components.HAmargosaBA.IncluirOutrasInformacoesNaNfseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HAmargosaBA\NFe.Components.HAmargosaBA.RecepcionarLoteRpsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HAmargosaBA\NFe.Components.HAmargosaBA.RecepcionarLoteRpsSincronoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HAmargosaBA\NFe.Components.HAmargosaBA.SubstituirNfseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\HAmargosaBA\nfse.wsdl" />
+    <None Include="Service References\HAmargosaBA\nfse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\HAmargosaBA\nfse1.wsdl" />
+    <None Include="Service References\PAmargosaBA\NFe.Components.PAmargosaBA.CancelarNfseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PAmargosaBA\NFe.Components.PAmargosaBA.ConsultarLoteRpsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PAmargosaBA\NFe.Components.PAmargosaBA.ConsultarNfsePorFaixaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PAmargosaBA\NFe.Components.PAmargosaBA.ConsultarNfsePorRpsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PAmargosaBA\NFe.Components.PAmargosaBA.ConsultarNfseServicoPrestadoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PAmargosaBA\NFe.Components.PAmargosaBA.ConsultarNfseServicoTomadoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PAmargosaBA\NFe.Components.PAmargosaBA.GerarNfseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PAmargosaBA\NFe.Components.PAmargosaBA.IncluirOutrasInformacoesNaNfseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PAmargosaBA\NFe.Components.PAmargosaBA.RecepcionarLoteRpsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PAmargosaBA\NFe.Components.PAmargosaBA.RecepcionarLoteRpsSincronoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PAmargosaBA\NFe.Components.PAmargosaBA.SubstituirNfseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PAmargosaBA\nfse.wsdl" />
+    <None Include="Service References\PAmargosaBA\nfse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PAmargosaBA\nfse1.wsdl" />
     <None Include="Web References\br.com.bauru_sp.baurusp.h\item.wsdl" />
     <None Include="Web References\br.com.bauru_sp.baurusp.h\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -5606,6 +5695,40 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\HAmargosaBA\" />
+    <WCFMetadataStorage Include="Service References\PAmargosaBA\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\HAmargosaBA\nfse.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\HAmargosaBA\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\HAmargosaBA\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\HAmargosaBA\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PAmargosaBA\nfse.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PAmargosaBA\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PAmargosaBA\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PAmargosaBA\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

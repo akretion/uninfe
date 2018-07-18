@@ -339,8 +339,9 @@ namespace NFe.Service
         {
             string retorna = string.Empty;
             bool taHomologacao = (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao);
+            PadroesNFSe padroesNFSe = Functions.PadraoNFSe(cMunicipio);
 
-            switch (Functions.PadraoNFSe(cMunicipio))
+            switch (padroesNFSe)
             {
                 #region ISSWEB
 
@@ -732,13 +733,20 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultar:
-                            if (cMunicipio.Equals(3300308) ||
-                                cMunicipio.Equals(3303302) ||
-                                cMunicipio.Equals(4301602) ||
-                                cMunicipio.Equals(1100304))
+                            if (padroesNFSe == PadroesNFSe.WEBISS_202)
+                            {
+                                retorna = "ConsultarNfseServicoPrestado";
+                            }
+                            else if (cMunicipio.Equals(3300308) ||
+                                     cMunicipio.Equals(3303302) ||
+                                     cMunicipio.Equals(4301602))
+                            {
                                 retorna = "ConsultarNfsePorFaixa";
+                            }
                             else
+                            {
                                 retorna = "ConsultarNfse";
+                            }
                             break;
 
                         case Servicos.NFSeConsultarPorRps:
@@ -759,6 +767,10 @@ namespace NFe.Service
 
                         case Servicos.NFSeRecepcionarLoteRpsSincrono:
                             retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
                             break;
                     }
                     break;
@@ -2095,7 +2107,48 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion E_RECEITA
+                #endregion E_RECEITA
+
+                #region ADM_SISTEMAS
+
+                case PadroesNFSe.ADM_SISTEMAS:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfsePorFaixa";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+
+                        case Servicos.NFSeSubstituirNfse:
+                            retorna = "SubstituirNfse";
+                            break;
+                    }
+                    break;
+
+                    #endregion ADM_SISTEMAS
             }
 
             return retorna;
@@ -2780,6 +2833,7 @@ namespace NFe.Service
                 case PadroesNFSe.SOFTPLAN:
                 case PadroesNFSe.JOINVILLE_SC:
                 case PadroesNFSe.AVMB_ASTEN:
+                case PadroesNFSe.ADM_SISTEMAS:
                     retorno = false;
                     break;
 
@@ -2823,6 +2877,7 @@ namespace NFe.Service
                 case PadroesNFSe.BSITBR:
                 case PadroesNFSe.JOINVILLE_SC:
                 case PadroesNFSe.AVMB_ASTEN:
+                case PadroesNFSe.ADM_SISTEMAS:
                     invocar = true;
                     break;
             }
@@ -2865,6 +2920,7 @@ namespace NFe.Service
                 case PadroesNFSe.DESENVOLVECIDADE:
                 case PadroesNFSe.MODERNIZACAO_PUBLICA:
                 case PadroesNFSe.E_RECEITA:
+                case PadroesNFSe.ADM_SISTEMAS:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
                     {
                         switch (doc.DocumentElement.Name)

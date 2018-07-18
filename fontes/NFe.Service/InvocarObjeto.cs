@@ -156,12 +156,25 @@ namespace NFe.Service
             ServicePointManager.SecurityProtocol = securityProtocolType;
 
             if (servico == Servicos.ConsultarLoteReinf)
+            {
+                string reciboEFD = string.Empty;
+
+                if (docXML.GetElementsByTagName("numeroReciboFechamento")[0] != null)
+                {
+                    reciboEFD = docXML.GetElementsByTagName("numeroReciboFechamento")[0].InnerText;
+                }
+                else
+                {
+                    reciboEFD = docXML.GetElementsByTagName("numeroProtocoloFechamento")[0].InnerText;
+                }
+
                 XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[]
                 {
                     Convert.ToByte(docXML.GetElementsByTagName("tipoInscricaoContribuinte")[0].InnerText),
                     docXML.GetElementsByTagName("numeroInscricaoContribuinte")[0].InnerText,
-                    docXML.GetElementsByTagName("numeroReciboFechamento")[0].InnerText
+                    reciboEFD
                 });
+            }
             else
                 XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[] { docXML });
 
