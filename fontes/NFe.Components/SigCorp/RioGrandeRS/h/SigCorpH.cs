@@ -72,7 +72,7 @@ namespace NFe.Components.SigCorp.RioGrandeRS.h
         {
             tcDadosPrestador oTcDadosPrestador = ReadXML<tcDadosPrestador>(file);
             tcEstruturaDescricaoErros[] tcErros = null;
-            tcDadosNota result = service.ConsultarNotaPrestador(oTcDadosPrestador, NumeroNota(file, "urn:ConsultarNotaPrestador"), out tcErros);
+            tcDadosNota result = service.ConsultarNotaPrestador(oTcDadosPrestador, NumeroNota(file, "ConsultarNotaPrestador"), out tcErros);
             string strResult = base.CreateXML(result, tcErros);
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
                                           Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);

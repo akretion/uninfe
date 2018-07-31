@@ -36,6 +36,8 @@
           <xsd:element minOccurs="0" maxOccurs="1" name="tomador_fone" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="tomador_ramal" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="tomador_fax" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="outro_municipio" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="cod_outro_municipio" type="xsd:int" />
           <xsd:element minOccurs="0" maxOccurs="1" name="rps_num" type="xsd:int" />
           <xsd:element minOccurs="0" maxOccurs="1" name="rps_serie" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="rps_dia" type="xsd:int" />
@@ -70,6 +72,7 @@
         <xsd:all>
           <xsd:element minOccurs="1" maxOccurs="1" name="Resultado" type="xsd:int" />
           <xsd:element minOccurs="1" maxOccurs="1" name="Nota" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="autenticidade" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="LinkImpressao" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
@@ -129,7 +132,7 @@
           <xsd:element minOccurs="0" maxOccurs="1" name="emissao_rps" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="prestador_razao" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="prestador_endereco" type="xsd:string" />
-          <xsd:element minOccurs="1" maxOccurs="1" name="prestador_numero" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="prestador_numero" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="prestador_complemento" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="prestador_bairro" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="prestador_cidade" type="xsd:string" />
@@ -142,20 +145,20 @@
           <xsd:element minOccurs="1" maxOccurs="1" name="aliquota_atividade" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="iss" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="cnpj_tomador" type="xsd:string" />
-          <xsd:element minOccurs="1" maxOccurs="1" name="razao_tomador" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="razao_tomador" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="endereco_tomador" type="xsd:string" />
-          <xsd:element minOccurs="1" maxOccurs="1" name="numero_tomador" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="numero_tomador" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="complemento_tomador" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="bairro_tomador" type="xsd:string" />
-          <xsd:element minOccurs="1" maxOccurs="1" name="cidade_tomador" type="xsd:int" />
-          <xsd:element minOccurs="1" maxOccurs="1" name="estado_tomador" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="cidade_tomador" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="estado_tomador" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="cep_tomador" type="xsd:int" />
           <xsd:element minOccurs="0" maxOccurs="1" name="email_tomador" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="descricao" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="ISSRetido" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="StatusNFe" type="xsd:string" />
           <xsd:element minOccurs="1" maxOccurs="1" name="situacao" type="xsd:string" />
-          <xsd:element minOccurs="1" maxOccurs="1" name="OpcaoSimples" type="xsd:int" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="OpcaoSimples" type="xsd:string" />
           <xsd:element minOccurs="0" maxOccurs="1" name="LinkImpressao" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
@@ -225,6 +228,7 @@
   <wsdl:message name="ConsultarNotaPrestadorRequest">
     <wsdl:part name="DadosPrestador" type="tns:tcDadosPrestador" />
     <wsdl:part name="Nota" type="xsd:int" />
+    <wsdl:part name="id_sis_legado" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="ConsultarNotaPrestadorResponse">
     <wsdl:part name="DadosNota" type="tns:tcDadosNota" />

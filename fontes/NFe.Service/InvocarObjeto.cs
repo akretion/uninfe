@@ -218,7 +218,7 @@ namespace NFe.Service
                             PadroesNFSe padraoNFSe,
                             Servicos servicoNFSe,
                             SecurityProtocolType securityProtocolType)
-        {
+       {
             int emp = Empresas.FindEmpresaByThread();
 
             finalArqEnvio = Functions.ExtractExtension(finalArqEnvio);
@@ -699,6 +699,10 @@ namespace NFe.Service
                     }
                     break;
                 #endregion
+
+                case PadroesNFSe.PUBLIC_SOFT:
+                    strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { docXML.OuterXml, cabecMsg.ToString() });
+                    break;
 
                 default:
 

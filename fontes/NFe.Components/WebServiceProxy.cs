@@ -266,7 +266,7 @@ namespace NFe.Components
             NomeMetodoWS = null;
             if (serviceDescription.Services != null && serviceDescription.Services.Count > 0)
             {
-                NomeClasseWS = ((Service)serviceDescription.Services[0]).Name.Replace(" ", "");
+                NomeClasseWS = ((Service)serviceDescription.Services[0]).Name.Replace(" ", "").Replace(".", "");
             }
 
             if (serviceDescription.Bindings != null)
@@ -489,6 +489,11 @@ namespace NFe.Components
 #else
             SecurityProtocolType securityProtocolType = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
 #endif
+            if (cUF == 2910800) //Feira de Santana
+            {
+                securityProtocolType = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
+            }
+
             return securityProtocolType;
         }
 

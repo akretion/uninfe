@@ -3145,13 +3145,11 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeRetAutorizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNfeStatusServico_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNfeStatusServico_C_400.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGOCadConsultaCadastro_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeConsulta_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeInutilizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeRetAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGONfeStatusServico_400.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\GO\HGORecepcaoEvento_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeAutorizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeConsulta_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\BA\HBANfeInutilizacao_C_400.wsdl" />
@@ -4209,6 +4207,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HAmargosaBA-ADM_SISTEMAS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PAmargosaBA-ADM_SISTEMAS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPublicSoft.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPublicSoft.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\PUBLIC_SOFT\nfse.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PUBLIC_SOFT\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

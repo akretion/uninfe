@@ -2148,7 +2148,36 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion ADM_SISTEMAS
+                #endregion ADM_SISTEMAS
+
+                #region PUBLIC_SOFT
+
+                case PadroesNFSe.PUBLIC_SOFT:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfseEnvio";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfseRpsEnvio";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfseFaixaEnvio";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfseEnvio";
+                            break;
+
+                        case Servicos.NFSeConsultarURL:
+                            retorna = "LinksNotaFiscal";
+                            break;
+                    }
+                    break;
+
+                    #endregion PUBLIC_SOFT
             }
 
             return retorna;
@@ -2242,7 +2271,7 @@ namespace NFe.Service
                 string TpEmis = dadosNFe.tpEmis;
 
                 //Inserir NFe no XML de controle do fluxo
-                FluxoNfe oFluxoNfe = new FluxoNfe();
+                FluxoNfe oFluxoNfe = new FluxoNfe(emp);
                 if (oFluxoNfe.NfeExiste(ChaveNfe))
                 {
                     //Mover o arquivo da pasta em processamento para a pasta de XML´s com erro
@@ -2921,6 +2950,7 @@ namespace NFe.Service
                 case PadroesNFSe.MODERNIZACAO_PUBLICA:
                 case PadroesNFSe.E_RECEITA:
                 case PadroesNFSe.ADM_SISTEMAS:
+                case PadroesNFSe.PUBLIC_SOFT:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
                     {
                         switch (doc.DocumentElement.Name)

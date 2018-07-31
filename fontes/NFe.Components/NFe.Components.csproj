@@ -208,6 +208,7 @@
     <Compile Include="Pronin\VeraCruzRS\p\ProninP.cs" />
     <Compile Include="Pronin\ViamaoRS\h\ProninH.cs" />
     <Compile Include="Pronin\ViamaoRS\p\ProninP.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_PUBLIC_SOFT.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_ADM_SISTEMAS.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_E_RECEITA.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_MODERNIZACAO_PUBLICA.cs" />

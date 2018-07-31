@@ -101,7 +101,7 @@ namespace NFe.UI
                             dlg.Filter += string.Format("|Arquivos de DFe (*.*{0})|*{0}", Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML);
                             dlg.Filter += string.Format("|Arquivos de DFe (*.*{0})|*{0}", Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioXML);
                             dlg.Filter += string.Format("|Arquivos de MDFe (*.*{0})|*{0}", Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML);
-                            dlg.Filter += string.Format("|Arquivos de eventos (*.*{0},*.*{1},*.*{2},*.*{3},*.*{4})|*{0};*{1};*{2};*{3};*{4}",
+                            dlg.Filter += string.Format("|Arquivos de eventos (*.*{0},*.*{1},*.*{2},*.*{3})|*{0};*{1};*{2};*{3}",
                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML,
                                 Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML,
                                 Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML,

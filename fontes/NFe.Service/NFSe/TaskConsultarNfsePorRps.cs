@@ -440,6 +440,11 @@ namespace NFe.Service.NFSe
                         SignUsingCredentials(emp, pedLoteRps);
                         break;
 #endif
+
+                    case PadroesNFSe.PUBLIC_SOFT:
+                        if (ler.oDadosPedSitNfseRps.cMunicipio.Equals(2610707))
+                            cabecMsg = "N9M=";
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, ler.oDadosPedSitNfseRps.cMunicipio))

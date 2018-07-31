@@ -23,7 +23,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="WebService SigISSBinding", Namespace="urn:sigiss_ws")]
@@ -263,27 +263,29 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:sigiss_ws#ConsultarNotaPrestador", RequestNamespace="urn:sigiss_ws", ResponseNamespace="urn:sigiss_ws")]
         [return: System.Xml.Serialization.SoapElementAttribute("DadosNota")]
-        public tcDadosNota ConsultarNotaPrestador(tcDadosPrestador DadosPrestador, int Nota, out tcEstruturaDescricaoErros[] DescricaoErros) {
+        public tcDadosNota ConsultarNotaPrestador(tcDadosPrestador DadosPrestador, int Nota, string id_sis_legado, out tcEstruturaDescricaoErros[] DescricaoErros) {
             object[] results = this.Invoke("ConsultarNotaPrestador", new object[] {
                         DadosPrestador,
-                        Nota});
+                        Nota,
+                        id_sis_legado});
             DescricaoErros = ((tcEstruturaDescricaoErros[])(results[1]));
             return ((tcDadosNota)(results[0]));
         }
         
         /// <remarks/>
-        public void ConsultarNotaPrestadorAsync(tcDadosPrestador DadosPrestador, int Nota) {
-            this.ConsultarNotaPrestadorAsync(DadosPrestador, Nota, null);
+        public void ConsultarNotaPrestadorAsync(tcDadosPrestador DadosPrestador, int Nota, string id_sis_legado) {
+            this.ConsultarNotaPrestadorAsync(DadosPrestador, Nota, id_sis_legado, null);
         }
         
         /// <remarks/>
-        public void ConsultarNotaPrestadorAsync(tcDadosPrestador DadosPrestador, int Nota, object userState) {
+        public void ConsultarNotaPrestadorAsync(tcDadosPrestador DadosPrestador, int Nota, string id_sis_legado, object userState) {
             if ((this.ConsultarNotaPrestadorOperationCompleted == null)) {
                 this.ConsultarNotaPrestadorOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarNotaPrestadorOperationCompleted);
             }
             this.InvokeAsync("ConsultarNotaPrestador", new object[] {
                         DadosPrestador,
-                        Nota}, this.ConsultarNotaPrestadorOperationCompleted, userState);
+                        Nota,
+                        id_sis_legado}, this.ConsultarNotaPrestadorOperationCompleted, userState);
         }
         
         private void OnConsultarNotaPrestadorOperationCompleted(object arg) {
@@ -343,7 +345,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -411,6 +413,10 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         private string tomador_ramalField;
         
         private string tomador_faxField;
+        
+        private int outro_municipioField;
+        
+        private int cod_outro_municipioField;
         
         private int rps_numField;
         
@@ -782,6 +788,26 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         }
         
         /// <remarks/>
+        public int outro_municipio {
+            get {
+                return this.outro_municipioField;
+            }
+            set {
+                this.outro_municipioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int cod_outro_municipio {
+            get {
+                return this.cod_outro_municipioField;
+            }
+            set {
+                this.cod_outro_municipioField = value;
+            }
+        }
+        
+        /// <remarks/>
         public int rps_num {
             get {
                 return this.rps_numField;
@@ -1081,7 +1107,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1108,7 +1134,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         
         private string prestador_enderecoField;
         
-        private int prestador_numeroField;
+        private string prestador_numeroField;
         
         private string prestador_complementoField;
         
@@ -1134,19 +1160,19 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         
         private string cnpj_tomadorField;
         
-        private int razao_tomadorField;
+        private string razao_tomadorField;
         
         private string endereco_tomadorField;
         
-        private int numero_tomadorField;
+        private string numero_tomadorField;
         
         private string complemento_tomadorField;
         
         private string bairro_tomadorField;
         
-        private int cidade_tomadorField;
+        private string cidade_tomadorField;
         
-        private int estado_tomadorField;
+        private string estado_tomadorField;
         
         private int cep_tomadorField;
         
@@ -1160,7 +1186,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         
         private string situacaoField;
         
-        private int opcaoSimplesField;
+        private string opcaoSimplesField;
         
         private string linkImpressaoField;
         
@@ -1266,7 +1292,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         }
         
         /// <remarks/>
-        public int prestador_numero {
+        public string prestador_numero {
             get {
                 return this.prestador_numeroField;
             }
@@ -1396,7 +1422,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         }
         
         /// <remarks/>
-        public int razao_tomador {
+        public string razao_tomador {
             get {
                 return this.razao_tomadorField;
             }
@@ -1416,7 +1442,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         }
         
         /// <remarks/>
-        public int numero_tomador {
+        public string numero_tomador {
             get {
                 return this.numero_tomadorField;
             }
@@ -1446,7 +1472,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         }
         
         /// <remarks/>
-        public int cidade_tomador {
+        public string cidade_tomador {
             get {
                 return this.cidade_tomadorField;
             }
@@ -1456,7 +1482,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         }
         
         /// <remarks/>
-        public int estado_tomador {
+        public string estado_tomador {
             get {
                 return this.estado_tomadorField;
             }
@@ -1526,7 +1552,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         }
         
         /// <remarks/>
-        public int OpcaoSimples {
+        public string OpcaoSimples {
             get {
                 return this.opcaoSimplesField;
             }
@@ -1547,7 +1573,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1628,7 +1654,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1673,7 +1699,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1767,7 +1793,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1812,7 +1838,7 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1822,6 +1848,8 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         private int resultadoField;
         
         private int notaField;
+        
+        private string autenticidadeField;
         
         private string linkImpressaoField;
         
@@ -1846,6 +1874,16 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
         }
         
         /// <remarks/>
+        public string autenticidade {
+            get {
+                return this.autenticidadeField;
+            }
+            set {
+                this.autenticidadeField = value;
+            }
+        }
+        
+        /// <remarks/>
         public string LinkImpressao {
             get {
                 return this.linkImpressaoField;
@@ -1857,11 +1895,11 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void GerarNotaCompletedEventHandler(object sender, GerarNotaCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GerarNotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1891,11 +1929,11 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void GerarNota_assinadaCompletedEventHandler(object sender, GerarNota_assinadaCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GerarNota_assinadaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1925,11 +1963,11 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void CancelarNotaCompletedEventHandler(object sender, CancelarNotaCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CancelarNotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1959,11 +1997,11 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void CancelarNota_assinadaCompletedEventHandler(object sender, CancelarNota_assinadaCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CancelarNota_assinadaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1993,11 +2031,11 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void ConsultarNotaValidaCompletedEventHandler(object sender, ConsultarNotaValidaCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultarNotaValidaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2027,11 +2065,11 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void ConsultarNotaPrestadorCompletedEventHandler(object sender, ConsultarNotaPrestadorCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultarNotaPrestadorCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2061,11 +2099,11 @@ namespace NFe.Components.br.com.sigiss.riogrande.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     public delegate void geratesteCompletedEventHandler(object sender, geratesteCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class geratesteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

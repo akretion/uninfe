@@ -252,6 +252,9 @@ namespace NFe.ConvertTxt
         {
             XmlElement nodePag = null;
 
+            if (nfe.pag.Count == 0)
+                throw new Exception("Falta definir valores do pagamento, tag <pag>.");
+
             foreach (pag pagItem in nfe.pag)
             {
                 if (nodePag == null || nfe.infNFe.Versao < 4)
@@ -1249,11 +1252,14 @@ namespace NFe.ConvertTxt
                             if ((double)nfe.infNFe.Versao >= 2.0)
                             {
                                 if (imposto.ICMS.vBCSTRet + imposto.ICMS.vICMSSTRet + imposto.ICMS.pST +
-                                    imposto.ICMS.vBCFCPSTRet + imposto.ICMS.pFCPSTRet + imposto.ICMS.vFCPSTRet > 0)
+                                    imposto.ICMS.vBCFCPSTRet + imposto.ICMS.pFCPSTRet + imposto.ICMS.vFCPSTRet + 
+                                    imposto.ICMS.pRedBCEfet + imposto.ICMS.vBCEfet + imposto.ICMS.pICMSEfet + imposto.ICMS.vICMSEfet > 0)
                                 {
                                     wCampo(imposto.ICMS.vBCSTRet, TpcnTipoCampo.tcDec2, TpcnResources.vBCSTRet);
+
                                     if (nfe.infNFe.Versao >= 4)
                                         wCampo(imposto.ICMS.pST, this.nDecimaisPerc, TpcnResources.pST);
+
                                     wCampo(imposto.ICMS.vICMSSTRet, TpcnTipoCampo.tcDec2, TpcnResources.vICMSSTRet);
                                     if (nfe.infNFe.Versao >= 4
                                          && imposto.ICMS.vBCFCPSTRet + imposto.ICMS.pFCPSTRet + imposto.ICMS.vFCPSTRet > 0)

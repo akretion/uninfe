@@ -1093,7 +1093,13 @@ namespace NFe.Components
         /// Padrão utilizado pelo município de Amargosa-BA
         /// </summary>
         [Description("ADM_SISTEMAS")]
-        ADM_SISTEMAS
+        ADM_SISTEMAS,
+
+        /// <summary>
+        /// Padrão utilizado pela prefeitura de Paulistana-PE
+        /// </summary>
+        [Description("PUBLIC_SOFT")]
+        PUBLIC_SOFT
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

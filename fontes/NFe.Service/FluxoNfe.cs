@@ -273,7 +273,7 @@ namespace NFe.Service
                             }
                             catch
                             {
-                                throw new Exception("Não pode ler a versão no arquivo: " + fullPathNFe);
+                                throw new Exception("Ocorreu uma falha na leitura da versão do arquivo XML na hora de inseri-lo no fluxo de envio: " + fullPathNFe);
                             }
                             #endregion
 

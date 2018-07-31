@@ -28,7 +28,7 @@ namespace NFe.UI
             uninfeDummy.mainForm = this;
             uninfeDummy.UltimoAcessoConfiguracao = DateTime.MinValue;
 
-       }
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -50,14 +50,11 @@ namespace NFe.UI
                 this.MinimumSize = new Size(800, 600);
                 this.MaximumSize = new Size(800, 600);
                 //Trazer minimizado e no systray
-                this.notifyIcon1.BalloonTipText = string.Format("Para abrir novamente o {0}, de um duplo clique ou pressione o botão direito do mouse sobre o ícone.", NFe.Components.Propriedade.NomeAplicacao);
-                this.notifyIcon1.BalloonTipTitle =
-                    this.notifyIcon1.Text = NFe.Components.Propriedade.NomeAplicacao + " - " + NFe.Components.Propriedade.DescricaoAplicacao;
+                this.notifyIcon1.Text = NFe.Components.Propriedade.NomeAplicacao + " - " + NFe.Components.Propriedade.DescricaoAplicacao;
                 this.notifyIcon1.Visible = true;
                 this.WindowState = FormWindowState.Minimized;
                 this.Visible = false;
                 this.ShowInTaskbar = false;
-                this.notifyIcon1.ShowBalloonTip(6000);
 
                 ConfiguracaoApp.StartVersoes();
 
@@ -107,13 +104,6 @@ namespace NFe.UI
                 if (this.WindowState == FormWindowState.Minimized)
                 {
                     this.ShowInTaskbar = false;
-
-                    //Mostrar o balão com as informações que selecionamos
-                    //O parâmetro passado refere-se ao tempo (ms)
-                    // em que ficará aparecendo. Coloque "0" se quiser
-                    // que ele feche somente quando o usuário clicar
-
-                    notifyIcon1.ShowBalloonTip(6000);
                 }
             }
             first = true;
@@ -173,7 +163,6 @@ namespace NFe.UI
                 } while ((form = form.Owner) != null);
 
                 this.notifyIcon1.Visible = true;
-                this.notifyIcon1.ShowBalloonTip(6000);
             }
             else
             {
@@ -476,9 +465,6 @@ namespace NFe.UI
             }
             uninfeDummy.opServicos = uninfeOpcoes2.opRestartTasks;
             MetroTaskWindow.ShowTaskWindow(this, "", new NFe.UI.Formularios.UserControl2());
-
-            if (!MainVisible)
-                notifyIcon1.ShowBalloonTip(6000);
         }
 
         private void metroContextMenu1_Opening(object sender, CancelEventArgs e)

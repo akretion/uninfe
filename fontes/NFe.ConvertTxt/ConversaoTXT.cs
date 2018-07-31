@@ -124,7 +124,7 @@ namespace NFe.ConvertTxt
                     _LayoutTXT.Add("N07_400",   prefix + "N07|orig|CST|modBC|pRedBC|vBC|pICMS|vICMSOp|pDif|vICMSDif|vICMS|vBCFCP|pFCP|vFCP|");
                     _LayoutTXT.Add("N08_200",   prefix + "N08|Orig|CST|vBCST|vICMSST|");
                     _LayoutTXT.Add("N08_310",   prefix + "N08|Orig|CST|vBCSTRet|vICMSSTRet|");
-                    _LayoutTXT.Add("N08_400",   prefix + "N08|Orig|CST|vBCSTRet|pST|vICMSSTRet|vBCFCPSTRet|pFCPSTRet|vFCPSTRet|");
+                    _LayoutTXT.Add("N08_400_9", prefix + "N08|Orig|CST|vBCSTRet|pST|vICMSSTRet|vBCFCPSTRet|pFCPSTRet|vFCPSTRet|");
                     _LayoutTXT.Add("N08_400_13",prefix + "N08|Orig|CST|vBCSTRet|pST|vICMSSTRet|vBCFCPSTRet|pFCPSTRet|vFCPSTRet|pRedBCEfet|vBCEfet|pICMSEfet|vICMSEfet|");
                     _LayoutTXT.Add("N09_200",   prefix + "N09|Orig|CST|modBC|PRedBC|VBC|pICMS|VICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|");
                     _LayoutTXT.Add("N09_310",   prefix + "N09|orig|CST|modBC|pRedBC|vBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vICMSDeson|motDesICMS|");
@@ -146,8 +146,8 @@ namespace NFe.ConvertTxt
                     _LayoutTXT.Add("N10G_310_5",prefix + "N10g|orig|CSOSN|vBCSTRet|vICMSSTRet|");
                     _LayoutTXT.Add("N10G_400_5",prefix + "N10g|orig|CSOSN|vBCSTRet|vICMSSTRet|");
                     _LayoutTXT.Add("N10G_400_9",prefix + "N10g|orig|CSOSN|vBCSTRet|pST|vICMSSTRet|vBCFCPSTRet|pFCPSTRet|vFCPSTRet|");
-                    _LayoutTXT.Add("N10H",      prefix + "N10h|orig|CSOSN|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pCredSN|vCredICMSSN|");
                     _LayoutTXT.Add("N10G_400_13",prefix + "N10g|orig|CSOSN|vBCSTRet|pST|vICMSSTRet|vBCFCPSTRet|pFCPSTRet|vFCPSTRet|pRedBCEfet|vBCEfet|pICMSEfet|vICMSEfet|");
+                    _LayoutTXT.Add("N10H",      prefix + "N10h|orig|CSOSN|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|pCredSN|vCredICMSSN|");
                     _LayoutTXT.Add("N10H_400",  prefix + "N10h|orig|CSOSN|modBC|vBC|pRedBC|pICMS|vICMS|modBCST|pMVAST|pRedBCST|vBCST|pICMSST|vICMSST|vBCFCPST|pFCPST|vFCPST|pCredSN|vCredICMSSN|");
                     _LayoutTXT.Add("NA",        prefix + "NA|vBCUFDest|pFCPUFDest|pICMSUFDest|pICMSInter|pICMSInterPart|vFCPUFDest|vICMSUFDest|vICMSUFRemet|");
                     _LayoutTXT.Add("NA_400",    prefix + "NA|vBCUFDest|vBCFCPUFDest|pFCPUFDest|pICMSUFDest|pICMSInter|pICMSInterPart|vFCPUFDest|vICMSUFDest|vICMSUFRemet|");
@@ -316,7 +316,7 @@ namespace NFe.ConvertTxt
                             }
                             List<string> temp;
                             xConteudoArquivo.TryGetValue(nNota, out temp);
-                            temp.Add(prefix + cLinhaTXT.Trim() + (!cLinhaTXT.EndsWith("|") ? "|" : ""));
+                            temp.Add(prefix + cLinhaTXT.Trim() + (!cLinhaTXT.TrimEnd().EndsWith("|") ? "|" : ""));
                         }
                         cLinhaTXT = txt.ReadLine();
                     }
@@ -419,6 +419,12 @@ namespace NFe.ConvertTxt
                             }
                         }
                     }
+                }
+                if (!string.IsNullOrEmpty(this.cMensagemErro))
+                {
+                    this.cMensagemErro += "----------------------" + Environment.NewLine;
+                    this.cMensagemErro += "Para gerar o layout em TXT da NFe/NFCe, grave um arquivo com o nome 'uninfe-layout.txt' ou 'uninfe-layout.xml' com conteudo vazio na pasta 'geral' do Uninfe.";
+                    this.cMensagemErro += "----------------------" + Environment.NewLine;
                 }
                 return string.IsNullOrEmpty(this.cMensagemErro);
             }
@@ -2570,7 +2576,7 @@ namespace NFe.ConvertTxt
                     /// 
                     #region <cobr><dup>
                     NFe.Cobr.Dup.Add(new Dup());
-                    NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].nDup = this.LerString(TpcnResources.nDup, ObOp.Opcional, 1, 60);
+                    NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].nDup = this.LerString(TpcnResources.nDup, ObOp.Opcional, 1, NFe.infNFe.Versao >= 4?3:60);
                     NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].dVenc = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD, TpcnResources.dVenc, ObOp.Opcional, 10, 10, true, false);
                     NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].vDup = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vDup, ObOp.Opcional, 15);
                     #endregion

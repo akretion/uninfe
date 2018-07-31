@@ -729,6 +729,14 @@ namespace NFe.Service.NFSe
                         SignUsingCredentials(emp, envLoteRps);
                         break;
 #endif
+
+                    case PadroesNFSe.PUBLIC_SOFT:
+                        if (oDadosEnvLoteRps.cMunicipio.Equals(2610707))
+                        {
+                            Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.PUBLIC_SOFT);
+                            cabecMsg = "N9M=";
+                        }
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))

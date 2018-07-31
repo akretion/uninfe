@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
+using System.Net;
 
 #if _fw46
 
@@ -36,6 +37,7 @@ namespace NFe.Service
                     {
                         ValidarExtensao(arquivo);
                     }
+
                     // Só vou validar a extensão em homologação, pois depois que o desenvolvedor fez toda a integração, acredito que ele não vá mais gerar extensões erradas, com isso evito ficar validando todas as vezes arquivos corretos. Wandrey 17/09/2016
                     else if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao)
                     {
@@ -463,7 +465,7 @@ namespace NFe.Service
                             break;
 
                         case Servicos.UniNFeUpdate:
-                            new UniNFeUpdate().Instalar();
+                            new UniNFeUpdate(DefinirProxy()).Instalar();
                             break;
 
                         case Servicos.UniNFeConsultaInformacoes:
@@ -507,6 +509,7 @@ namespace NFe.Service
                         case Servicos.NFeConsultaStatusServico:
                         case Servicos.UniNFeUpdate:
                         case Servicos.Nulo:
+
                             /// 7/2012 <<< danasa
                             ///o erp nao precisa esperar pelo tempo excedido, então retornamos um arquivo .err
                             ///
@@ -895,8 +898,8 @@ namespace NFe.Service
                                         break;
 
                                     default:
-                                        throw new Exception("Para envio dos eventos do eSocial gere o arquivo de lote, o que tem o prefixo final igual a -esocial-loteevt.xml\r\n"+
-                                            "Para envio da consulta do lote de eventos, gere o arquivo com o prefixo final igual a -esocial-consloteevt.xml\r\n\r\n"+
+                                        throw new Exception("Para envio dos eventos do eSocial gere o arquivo de lote, o que tem o prefixo final igual a -esocial-loteevt.xml\r\n" +
+                                            "Para envio da consulta do lote de eventos, gere o arquivo com o prefixo final igual a -esocial-consloteevt.xml\r\n\r\n" +
                                             "Os modelos de arquivos do eSocial estão disponíveis no link www.unimake.com.br/uninfe/modelosxml/esocial");
                                 }
                                 break;
@@ -1293,6 +1296,8 @@ namespace NFe.Service
         /// </summary>
         public void LimpezaTemporario()
         {
+            Thread.Sleep(600000); // 10 minutos para executar a primeira vez para evitar apagar arquivo que estava na pasta de envio e foi para a temp
+
             while (true)
             {
                 ExecutaLimpeza();
@@ -1344,11 +1349,13 @@ namespace NFe.Service
             Auxiliar oAux = new Auxiliar();
 
             FileInfo fi = new FileInfo(arquivo);
+
             // processa arquivos XML
             if (fi.Extension.ToLower() == ".xml")
             {
                 new NFeW().GerarChaveNFe(arquivo, true);
             }
+
             // processa arquivos TXT
             else
             {
@@ -1425,8 +1432,10 @@ namespace NFe.Service
         {
             //Processa ou envia o XML
             var valclass = new TaskValidar();
+
             //Definir o tipo do serviço
             Type tipoServico = valclass.GetType();
+
             //Definir o arquivo XML para a classe UniNfeClass
             tipoServico.InvokeMember("NomeArquivoXML", BindingFlags.SetProperty, null, valclass, new object[] { arquivo });
             tipoServico.InvokeMember("Execute", BindingFlags.InvokeMethod, null, valclass, null);
@@ -1697,6 +1706,7 @@ namespace NFe.Service
                 foreach (string file in files)
                 {
                     FileInfo fi = new FileInfo(file);
+
                     //usar a última data de acesso, e não a data de criação
                     if (fi.LastWriteTime <= UltimaData)
                     {
@@ -1921,9 +1931,11 @@ namespace NFe.Service
                 //case Servicos.AssinarValidar:
                 //case Servicos.UniNFeConsultaInformacoes:
                 case Servicos.NFeConverterTXTparaXML:
+
                 //case Servicos.EmProcessamento:
                 //case Servicos.NFeGerarChave:
                 case Servicos.UniNFeLimpezaTemporario:
+
                     //Não tem definição pois não gera arquivo .ERR
                     break;
 
@@ -2011,5 +2023,23 @@ namespace NFe.Service
         }
 
         #endregion ConsultaDFe()
+
+        #region Definir Proxy
+
+        private IWebProxy DefinirProxy()
+        {
+            IWebProxy result = null;
+
+            if (ConfiguracaoApp.Proxy)
+                result = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor,
+                    ConfiguracaoApp.ProxyUsuario,
+                    ConfiguracaoApp.ProxySenha,
+                    ConfiguracaoApp.ProxyPorta,
+                    ConfiguracaoApp.DetectarConfiguracaoProxyAuto);
+
+            return result;
+        }
+
+        #endregion Definir Proxy
     }
 }
