@@ -53,21 +53,6 @@ namespace NFe.Certificado
         #endregion
 
         #region Metodos
-        /// <summary>
-        /// Define a propriedade com o provider que deverá ser sugerida ao usuario
-        /// </summary>
-        private void GetProviderValido()
-        {
-            for (int i = 0; i < ProvidersIdentificados.Count; i++)
-            {
-                if (TestarProvider(ProvidersIdentificados[i]))
-                {
-                    ProviderValido = ProvidersIdentificados[i];
-                    ProviderIdentificado = true;
-                    break;
-                }
-            }
-        }
 
         /// <summary>
         /// Realiza efetivamente o teste assinando o XML de simualação

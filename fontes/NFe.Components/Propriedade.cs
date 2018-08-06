@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace NFe.Components
@@ -99,12 +100,33 @@ namespace NFe.Components
 
         #region Pastas de comunicação geral do ERP com o UniNFe
 
+        private static string _pastaGeral { get; set; }
         /// <summary>
         /// Pasta de comunicação geral do ERP com o UniNFe (Envio)
         /// </summary>
         public static string PastaGeral
         {
-            get { return Propriedade.PastaExecutavel + "\\Geral"; }
+            get
+            {
+                if (string.IsNullOrEmpty(_pastaGeral))
+                {
+                    _pastaGeral = Propriedade.PastaExecutavel + "\\Geral";
+
+                    string arqConfigPastaGeral = Propriedade.PastaExecutavel + "\\UniNFePastaGeral.xml";
+                    if (File.Exists(arqConfigPastaGeral))
+                    {
+                        XmlDocument doc = new XmlDocument();
+                        doc.Load(arqConfigPastaGeral);
+
+                        if (doc.GetElementsByTagName("PastaGeral")[0] != null)
+                        {
+                            _pastaGeral = doc.GetElementsByTagName("PastaGeral")[0].InnerText.Trim() + "\\Geral";
+                        }
+                    }
+                }
+
+                return _pastaGeral;
+            }
         }
 
         /// <summary>

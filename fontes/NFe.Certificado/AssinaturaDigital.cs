@@ -524,9 +524,8 @@ namespace NFe.Certificado
             int codEmp,
             string pin)
         {
-            string _pin = Empresas.Configuracoes[codEmp].CertificadoPIN;
-
-            Empresas.Configuracoes[codEmp].CertificadoPIN = pin;
+            string _pin = pin;
+            
             AssinaturaValida = true;
             try
             {

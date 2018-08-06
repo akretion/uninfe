@@ -445,6 +445,10 @@ namespace NFe.Service.NFSe
                         if (ler.oDadosPedSitNfseRps.cMunicipio.Equals(2610707))
                             cabecMsg = "N9M=";
                         break;
+
+                    case PadroesNFSe.MEGASOFT:
+                        cabecMsg = "<cabecalho versao=\"1.00\" xmlns=\"http://megasoftarrecadanet.com.br/xsd/nfse_v01.xsd\"><versaoDados>1.00</versaoDados></cabecalho>";
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, ler.oDadosPedSitNfseRps.cMunicipio))

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Xml.Linq;
 
@@ -44,6 +45,22 @@ namespace NFe.Threadings
         /// </summary>
         private void MonitorarPasta()
         {
+            #region Vou verificar se na pasta geral tem o arquivo para forçar fechar o uninfe, se tiver, vou excluir, pois acabei de entrar no sistema
+
+            DirectoryInfo dirInfo = new DirectoryInfo(Components.Propriedade.PastaGeral);
+            FileInfo[] files = dirInfo.GetFiles("*.*", SearchOption.TopDirectoryOnly);
+
+            foreach (FileInfo fi in files)
+            {
+                var sext = Components.Propriedade.Extensao(Components.Propriedade.TipoEnvio.sair_XML);
+                if (fi.Name.EndsWith(sext.EnvioTXT) || fi.Name.EndsWith(sext.EnvioXML))
+                {
+                    fi.Delete();
+                }
+            }
+
+            #endregion
+
             fsw.Clear();
 
             for (int i = 0; i < Empresas.Configuracoes.Count; i++)
@@ -75,9 +92,9 @@ namespace NFe.Threadings
                 fsw[fsw.Count - 1].StartWatch();
             }
 
-            #region Pasta Geral
+            #region Pasta Geral            
 
-            fsw.Add(new FileSystemWatcher(Path.Combine(System.Windows.Forms.Application.StartupPath, "Geral"), "*.xml,*.txt"));
+            fsw.Add(new FileSystemWatcher(Components.Propriedade.PastaGeral, "*.xml,*.txt"));
             fsw[fsw.Count - 1].OnFileChanged += new FileSystemWatcher.FileChangedHandler(fsw_OnFileChanged);
             fsw[fsw.Count - 1].StartWatch();
 

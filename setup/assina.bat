@@ -9,6 +9,8 @@
 
 :uninfe
    call assina_udf.bat ..\fontes\uninfe\bin\release\MetroFramework.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\release\MetroFramework.Fonts.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\release\MetroFramework.Design.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Certificado.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Components.dll
    call assina_udf.bat ..\fontes\uninfe\bin\release\NFe.Components.Info.dll
@@ -25,6 +27,8 @@
    call assina_udf.bat ..\fontes\uninfe\bin\release\uninfeservico.exe
 
    call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\MetroFramework.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\MetroFramework.Fonts.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\MetroFramework.Design.dll
    call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Certificado.dll
    call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Components.dll
    call assina_udf.bat ..\fontes\uninfe\bin\Release35_AnyCPU\NFe.Components.Info.dll
@@ -39,6 +43,8 @@
    call assina_udf.bat ..\fontes\uninfe\bin\release35_AnyCPU\uninfeservico.exe
 
    call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\MetroFramework.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\MetroFramework.Fonts.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\MetroFramework.Design.dll
    call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.Certificado.dll
    call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.Components.dll
    call assina_udf.bat ..\fontes\uninfe\bin\x86\Release46_x86\NFe.Components.Info.dll
@@ -55,6 +61,8 @@
    call assina_udf.bat ..\fontes\uninfe\bin\x86\release46_x86\uninfeservico.exe
 
    call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\MetroFramework.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\MetroFramework.Fonts.dll
+   call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\MetroFramework.Design.dll
    call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\NFe.Certificado.dll
    call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\NFe.Components.dll
    call assina_udf.bat ..\fontes\uninfe\bin\x64\Release46_x64\NFe.Components.Info.dll

@@ -157,22 +157,22 @@ namespace NFe.UI
                 case TipoAplicativo.Todos:
                     cbVersao.Enabled = cbServico.Enabled = true;
                     cbVersao.Items.Clear();
-                    cbVersao.Items.AddRange(new object[] { "4.00", "3.10", "3.00" });
-                    cbVersao.SelectedItem = "3.10";
+                    cbVersao.Items.AddRange(new object[] { "4.00", "3.00" });
+                    cbVersao.SelectedItem = "4.00";
                     break;
 
                 case TipoAplicativo.Nfe:
                     cbVersao.Enabled = true;
                     cbVersao.Items.Clear();
-                    cbVersao.Items.AddRange(new object[] { "4.00", "3.10" });
-                    cbVersao.SelectedItem = "3.10";
+                    cbVersao.Items.AddRange(new object[] { "4.00" });
+                    cbVersao.SelectedItem = "4.00";
                     break;
 
                 case TipoAplicativo.NFCe:
                     cbVersao.Enabled = true;
                     cbVersao.Items.Clear();
-                    cbVersao.Items.AddRange(new object[] { "4.00", "3.10" });
-                    cbVersao.SelectedItem = "3.10";
+                    cbVersao.Items.AddRange(new object[] { "4.00" });
+                    cbVersao.SelectedItem = "4.00";
                     break;
 
                 case TipoAplicativo.Cte:

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Xml;
 
 namespace NFe.Components.QRCode
@@ -68,7 +69,9 @@ namespace NFe.Components.QRCode
 
             Populate();
 
-            int versaoQRCode = 1;
+            int versaoQRCode = 2;
+            if (File.Exists(Propriedade.PastaExecutavel + "\\gerar_qrcode_100.txt"))
+                versaoQRCode = 1;            
 
             if (versaoQRCode.Equals(2))
             {

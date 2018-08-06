@@ -2177,7 +2177,23 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion PUBLIC_SOFT
+                #endregion PUBLIC_SOFT
+
+                #region MEGASOFT
+
+                case PadroesNFSe.MEGASOFT:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+                    }
+                    break;
+                    #endregion MEGASOFT
             }
 
             return retorna;
@@ -2951,6 +2967,7 @@ namespace NFe.Service
                 case PadroesNFSe.E_RECEITA:
                 case PadroesNFSe.ADM_SISTEMAS:
                 case PadroesNFSe.PUBLIC_SOFT:
+                case PadroesNFSe.MEGASOFT:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
                     {
                         switch (doc.DocumentElement.Name)

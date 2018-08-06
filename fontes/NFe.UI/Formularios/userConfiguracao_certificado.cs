@@ -337,9 +337,12 @@ namespace NFe.UI.Formularios
             Wait.Show("Validando PIN...");
             try
             {
+                if (Empresas.FindConfEmpresaIndex(empresa.CNPJ, empresa.Servico) == -1)
+                    Empresas.Configuracoes.Add(empresa);
+
                 CertificadoProviders certificadoProviders = new CertificadoProviders(empresa.X509Certificado,
                                                                                      empresa.PastaXmlEnvio,
-                                                                                     Empresas.FindEmpresaByThread(),
+                                                                                     Empresas.FindConfEmpresaIndex(empresa.CNPJ, empresa.Servico),
                                                                                      empresa.CertificadoPIN);
                 CertProviders xCertProviders = new CertProviders();
 

@@ -737,6 +737,11 @@ namespace NFe.Service.NFSe
                             cabecMsg = "N9M=";
                         }
                         break;
+
+                    case PadroesNFSe.MEGASOFT:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.MEGASOFT);
+                        cabecMsg = "<cabecalho versao=\"1.00\" xmlns=\"http://megasoftarrecadanet.com.br/xsd/nfse_v01.xsd\"><versaoDados>1.00</versaoDados></cabecalho>";
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))
