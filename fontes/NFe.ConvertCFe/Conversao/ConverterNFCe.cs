@@ -228,17 +228,19 @@ namespace NFe.SAT.Conversao
         {
             List<envCFeCFeInfCFePgtoMP> result = new List<envCFeCFeInfCFePgtoMP>();
 
-            XmlNodeList nodes = Document.GetElementsByTagName("pag");
-            foreach (XmlNode pagNFCe in nodes)
+            XmlNodeList detalhesPagamento = Document.GetElementsByTagName("detPag");
+
+            foreach (XmlNode detahePagamento in detalhesPagamento)
             {
-                envCFeCFeInfCFePgtoMP mp = new envCFeCFeInfCFePgtoMP
+                envCFeCFeInfCFePgtoMP meiosPagamento = new envCFeCFeInfCFePgtoMP
                 {
-                    cMP = GetXML(pagNFCe.ChildNodes, "tPag"),
-                    vMP = GetXML(pagNFCe.ChildNodes, "vPag")
+                    cMP = GetXML(detahePagamento.ChildNodes, "tPag"),
+                    vMP = GetXML(detahePagamento.ChildNodes, "vPag")
                 };
 
-                result.Add(mp);
+                result.Add(meiosPagamento);
             }
+
             return result;
         }
 
@@ -349,13 +351,15 @@ namespace NFe.SAT.Conversao
                     #region PISOutr
 
                     case "PISOutr":
+                        string pPis = GetXML(tag.ChildNodes, "pPIS");
+                        pPis = String.Format("{0:N4}", Convert.ToDouble(pPis)).Replace(",", ".");
                         envCFeCFeInfCFeDetImpostoPISPISOutr PISOutr = new envCFeCFeInfCFeDetImpostoPISPISOutr
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
                             Items = new string[]
                             {
                                 GetXML(tag.ChildNodes, "vBC"),
-                                GetXML(tag.ChildNodes, "pPIS"),
+                                pPis,
                                 GetXML(tag.ChildNodes, "qBCProd"),
                                 GetXML(tag.ChildNodes, "vAliqProd"),
                             },
@@ -430,13 +434,15 @@ namespace NFe.SAT.Conversao
                     #region COFINSOutr
 
                     case "COFINSOutr":
+                        string pCofins = GetXML(tag.ChildNodes, "pCOFINS");
+                        pCofins = String.Format("{0:N4}", Convert.ToDouble(pCofins)).Replace(",", ".");
                         envCFeCFeInfCFeDetImpostoCOFINSCOFINSOutr COFINSOutr = new envCFeCFeInfCFeDetImpostoCOFINSCOFINSOutr
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
                             Items = new string[]
                             {
                                 GetXML(tag.ChildNodes, "vBC"),
-                                GetXML(tag.ChildNodes, "pCOFINS"),
+                                pCofins,
                                 GetXML(tag.ChildNodes, "qBCProd"),
                                 GetXML(tag.ChildNodes, "vAliqProd"),
                             },

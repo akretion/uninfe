@@ -9,7 +9,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="nfeInutilizacaoNFResult">
+      <s:element name="nfeResultMsg">
         <s:complexType mixed="true">
           <s:sequence>
             <s:any />
@@ -22,7 +22,7 @@
     <wsdl:part name="nfeDadosMsg" element="tns:nfeDadosMsg" />
   </wsdl:message>
   <wsdl:message name="nfeInutilizacaoNFSoapOut">
-    <wsdl:part name="nfeInutilizacaoNFResult" element="tns:nfeInutilizacaoNFResult" />
+    <wsdl:part name="nfeInutilizacaoNFResult" element="tns:nfeResultMsg" />
   </wsdl:message>
   <wsdl:portType name="NFeInutilizacao4Soap">
     <wsdl:operation name="nfeInutilizacaoNF">

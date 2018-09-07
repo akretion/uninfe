@@ -32,7 +32,7 @@ namespace NFe.Settings
         /// <param name="showMessage">Se verdadeiro, irá exibir a mensage e retornar o resultado
         /// <para>O padrão é verdadeiro</para></param>
         /// <returns></returns>
-        public static void CanRun()
+        public static void CanRun(Empresa empresaX)
         {
             if (Empresas.Configuracoes == null || Empresas.Configuracoes.Count == 0)
             {
@@ -43,6 +43,9 @@ namespace NFe.Settings
 
             foreach (Empresa emp in Empresas.Configuracoes)
             {
+                if (empresaX != null && (!empresaX.CNPJ.Equals(emp.CNPJ) || !empresaX.Servico.Equals(emp.Servico)))
+                    continue;
+
                 if (string.IsNullOrEmpty(emp.PastaBase))
                 {
                     throw new NFe.Components.Exceptions.ProblemaExecucaoUniNFe("Pasta de envio da empresa '" + emp.Nome + "' não está definida.");
@@ -154,7 +157,7 @@ namespace NFe.Settings
                         {
                             int tipoerro = 0;
                             string rc = empresa.BuscaConfiguracao(ref tipoerro);
-                            switch(tipoerro)
+                            switch (tipoerro)
                             {
                                 case 0:
                                     string uf = GetUF(empresa.UnidadeFederativaCodigo);
@@ -497,10 +500,10 @@ namespace NFe.Settings
                 }
                 else
                     if (!Directory.Exists(node.InnerText.Trim()) && node.InnerText.Trim() != "")
-                    {
-                        Empresas.ExisteErroDiretorio = true;
-                        ErroCaminhoDiretorio += "Empresa: " + empresa.Nome + "   Pasta: " + node.InnerText.Trim() + "\r\n";
-                    }
+                {
+                    Empresas.ExisteErroDiretorio = true;
+                    ErroCaminhoDiretorio += "Empresa: " + empresa.Nome + "   Pasta: " + node.InnerText.Trim() + "\r\n";
+                }
             }
             else
             {

@@ -14,6 +14,7 @@ namespace NFe.Service
     public class TFunctions
     {
         #region GravarArqErroServico()
+
         /// <summary>
         /// Grava um arquivo texto com os erros ocorridos durante as operações para que o ERP possa tratá-los
         /// </summary>
@@ -190,6 +191,7 @@ namespace NFe.Service
                     //Antes estava deletando o arquivo, agora vou retornar uma mensagem de erro
                     //pois não podemos excluir, pode ser coisa importante. Wandrey 25/02/2011
                     throw new Exception("A pasta de XML´s com erro informada nas configurações não existe, por favor verifique.");
+
                     //oArquivo.Delete();
                 }
             }
@@ -209,7 +211,7 @@ namespace NFe.Service
         /// <param name="Emissao">Data de emissão da Nota Fiscal ou Data Atual do envio do XML para separação dos XML´s em subpastas por Ano e Mês</param>
         /// <date>16/07/2008</date>
         /// <by>Wandrey Mundin Ferreira</by>
-        public static void MoverArquivo(string arquivo, PastaEnviados subPastaXMLEnviado, DateTime emissao)
+        public static void MoverArquivo(string arquivo, PastaEnviados subPastaXMLEnviado, DateTime emissao, string nomeArquivoDestino)
         {
             int emp = Empresas.FindEmpresaByThread();
 
@@ -224,7 +226,7 @@ namespace NFe.Service
             {
                 case PastaEnviados.EmProcessamento:
                     nomePastaEnviado = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString();
-                    destinoArquivo = nomePastaEnviado + "\\" + Path.GetFileName(arquivo);
+                    destinoArquivo = nomePastaEnviado + "\\" + (String.IsNullOrEmpty(nomeArquivoDestino) ? Path.GetFileName(arquivo) : nomeArquivoDestino);
                     break;
 
                 case PastaEnviados.Autorizados:
@@ -382,7 +384,31 @@ namespace NFe.Service
         /// <by>Wandrey Mundin Ferreira</by>
         public static void MoverArquivo(string Arquivo, PastaEnviados SubPastaXMLEnviado)
         {
-            MoverArquivo(Arquivo, SubPastaXMLEnviado, DateTime.Now);
+            MoverArquivo(Arquivo, SubPastaXMLEnviado, DateTime.Now, "");
+        }
+
+        /// <summary>
+        /// Move arquivos da nota fiscal eletrônica para suas respectivas pastas
+        /// </summary>
+        /// <param name="Arquivo">Nome do arquivo a ser movido</param>
+        /// <param name="PastaXMLEnviado">Pasta de XML´s enviados para onde será movido o arquivo</param>
+        /// <param name="SubPastaXMLEnviado">SubPasta de XML´s enviados para onde será movido o arquivo</param>
+        /// <date>05/08/2009</date>
+        /// <by>Wandrey Mundin Ferreira</by>
+        public static void MoverArquivo(string Arquivo, PastaEnviados SubPastaXMLEnviado, string nomeArquivoDestino)
+        {
+            MoverArquivo(Arquivo, SubPastaXMLEnviado, DateTime.Now, nomeArquivoDestino);
+        }
+
+        /// <summary>
+        /// Move arquivos da nota fiscal eletrônica para suas respectivas pastas
+        /// </summary>
+        /// <param name="arquivo">Nome do arquivo a ser movido</param>
+        /// <param name="subPastaXMLEnviado">Pasta de XML´s enviados para onde será movido o arquivo</param>
+        /// <param name="emissao">Data de emissão da Nota Fiscal ou Data Atual do envio do XML para separação dos XML´s em subpastas por Ano e Mês</param>
+        public static void MoverArquivo(string arquivo, PastaEnviados subPastaXMLEnviado, DateTime emissao)
+        {
+            MoverArquivo(arquivo, subPastaXMLEnviado, emissao, "");
         }
 
         #endregion MoverArquivo()
@@ -639,6 +665,7 @@ namespace NFe.Service
                     case "CTeOS":
                         tipo = "cteos";
                         arqProcNFe = nomeArquivoRecebido;
+
                         ///
                         /// le o protocolo de autorizacao
                         ///
@@ -667,6 +694,7 @@ namespace NFe.Service
                     case "CTe":
                         tipo = "cte";
                         arqProcNFe = nomeArquivoRecebido;
+
                         ///
                         /// le o protocolo de autorizacao
                         ///
@@ -739,6 +767,7 @@ namespace NFe.Service
                                                 break;
 
                                             case "procEventoMDFe":
+
                                                 ///
                                                 /// nao existe CCe de MDFe, mas fica aqui por enquanto
                                                 tipo = "ccemdfe";
@@ -780,6 +809,7 @@ namespace NFe.Service
                                         break;
 
                                     default:
+
                                         ///
                                         /// tipo de evento desconhecido
                                         ///
@@ -905,6 +935,7 @@ namespace NFe.Service
                 if (arqProcNFe != string.Empty)
                 {
                     if (File.Exists(Path.Combine(Path.GetDirectoryName(nomeArquivoRecebido), Path.GetFileName(arqProcNFe))))
+
                         ///
                         /// em sistemas que o XML é gravado no DB, ele pode nao precisar deixar gravado o XML nas pastas de autorizados/denegados
                         /// então eles podem extrair os conteudos do DB e gravá-los em uma pasta qualquer
@@ -913,6 +944,7 @@ namespace NFe.Service
                     else
 
                         if (Path.GetDirectoryName(arqProcNFe) == "")
+
                         ///
                         /// o nome pode ter sido atribuido pela leitura do evento, então não tem 'path'
                         ///
@@ -946,6 +978,7 @@ namespace NFe.Service
                                 break;
                             }
                             if (emp.DiretorioSalvarComo.ToString().Equals("Raiz") || emp.DiretorioSalvarComo.ToString().Equals(""))
+
                                 ///
                                 /// ops!
                                 /// Se definido como 'Raiz' e nao encontrou, nao precisamos mais pesquisar pelo arquivo em
@@ -1043,6 +1076,7 @@ namespace NFe.Service
                                                          Path.GetFileName(filenameCancelamento));
                                 }
                                 if (!File.Exists(fTemp))
+
                                     ///
                                     /// em sistemas que o XML é gravado no DB, ele pode nao precisar deixar gravado o XML nas pastas de autorizados/denegados
                                     /// então eles podem extrair os conteudos do DB e gravá-los em uma pasta qualquer
@@ -1060,6 +1094,7 @@ namespace NFe.Service
                                 else
                                 {
                                     if (!tipo.Equals("nfe") || emp.DiretorioSalvarComo.ToString().Equals("Raiz") || emp.DiretorioSalvarComo.ToString().Equals(""))
+
                                         ///
                                         /// ops!
                                         /// Se definido como 'Raiz' e nao encontrou, nao precisamos mais pesquisar pelo arquivo em
@@ -1071,6 +1106,7 @@ namespace NFe.Service
                         }
                     }
                 }
+
                 ///
                 /// EPEC, CCe e Cancelamento por evento
                 ///
@@ -1161,6 +1197,7 @@ namespace NFe.Service
                         /// define como arquivo principal o XML da NFe/NFCe/MDFe/CTe
                         ///
                         Args += " A=\"" + arqProcNFe + "\"";
+
                         ///
                         /// define como arquivo adicional o enviado a esta chamada
                         ///
@@ -1325,6 +1362,7 @@ namespace NFe.Service
 
                         File.WriteAllText(fAuxiliar, xmlAux.ToString());
                         Args += " AU=\"" + fAuxiliar + "\"";
+
                         ///
                         ///OBS: deveria existir um argumento para excluir o arquivo auxiliar, já que ele é temporario
                     }
@@ -1336,6 +1374,7 @@ namespace NFe.Service
                     if (args != null)
                     {
                         string fFileNameRetornoOk = temps + NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).RetornoXML;
+
                         ///
                         /// formata o arquivo de retorno ao ERP com base no arquivo enviado para impressao
                         /// 999999-procNFe.xml -> 99999-procNFe-ret-danfe.xml

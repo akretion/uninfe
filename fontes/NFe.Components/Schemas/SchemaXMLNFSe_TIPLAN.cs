@@ -110,6 +110,22 @@ namespace NFSe.Components
             });
             #endregion XML de lote RPS
 
+            #region XML de lote RPS Síncrono
+
+            SchemaXML.InfSchemas.Add("NFSE-TIPLAN_203-EnviarLoteRpsSincronoEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsSincronoEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\TIPLAN\\nfse_v2-03.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagLoteAssinatura = "EnviarLoteRpsSincronoEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion XML de lote RPS Síncrono
+
             #region XML de Cancelamento de NFS-e
 
             SchemaXML.InfSchemas.Add("NFSE-TIPLAN_203-CancelarNfseEnvio", new InfSchema()

@@ -53,8 +53,9 @@ namespace NFe.UI
             this.tbSenha.Focus();
 
             string senhaCrip = NFe.Components.Functions.GerarMD5(tbSenha.Text.Trim());
+                       
 
-            if (string.IsNullOrEmpty(tbSenha.Text) || senhaCrip != NFe.Settings.ConfiguracaoApp.SenhaConfig)
+            if (string.IsNullOrEmpty(tbSenha.Text) || (senhaCrip != NFe.Settings.ConfiguracaoApp.SenhaConfig && senhaCrip != NFe.Components.Propriedade.SenhaAdm))
             {
                 MetroFramework.MetroMessageBox.Show(this, "Senha inválida", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

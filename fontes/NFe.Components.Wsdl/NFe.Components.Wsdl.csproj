@@ -3167,7 +3167,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNFeInutilizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeRetAutorizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeStatusServico_C_400.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANRecepcaoEvento_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeConsulta_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeInutilizacao_400.wsdl" />
@@ -3206,7 +3205,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeConsulta_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeRetAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeStatusServico_400.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANRecepcaoEvento_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVAN\HSVANNfeInutilizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeAutorizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeConsulta_C_400.wsdl" />
@@ -3872,7 +3870,6 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HHorizontinaRS-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HOsascoEGOVERNEISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\POsascoEGOVERNEISS.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PBarraMansaRJ_AssessorPublico.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\SUPERNOVA\nfse.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4223,6 +4220,9 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\MEGASOFT\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBarraMansaRJ.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCangucuRS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCangucuRS-PRONIN.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

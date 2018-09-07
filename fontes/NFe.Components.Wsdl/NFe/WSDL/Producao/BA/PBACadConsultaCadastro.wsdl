@@ -26,7 +26,7 @@
   </wsdl:message>
   <wsdl:portType name="CadConsultaCadastro4Soap">
     <wsdl:operation name="consultaCadastro">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">ServiÃ§o destinado Ã  consulta no Cadastro.</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Serviço destinado à consulta no Cadastro.</wsdl:documentation>
       <wsdl:input message="tns:consultaCadastroSoapIn" />
       <wsdl:output message="tns:consultaCadastroSoapOut" />
     </wsdl:operation>
@@ -57,10 +57,10 @@
   </wsdl:binding>
   <wsdl:service name="CadConsultaCadastro4">
     <wsdl:port name="CadConsultaCadastro4Soap" binding="tns:CadConsultaCadastro4Soap">
-      <soap:address location="https://nfe.sefaz.ba.gov.br/webservices/CadConsultaCadastro4/CadConsultaCadastro4.asmx" />
+      <soap:address location="https://hnfe.sefaz.ba.gov.br/webservices/CadConsultaCadastro4/CadConsultaCadastro4.asmx" />
     </wsdl:port>
     <wsdl:port name="CadConsultaCadastro4Soap12" binding="tns:CadConsultaCadastro4Soap12">
-      <soap12:address location="https://nfe.sefaz.ba.gov.br/webservices/CadConsultaCadastro4/CadConsultaCadastro4.asmx" />
+      <soap12:address location="https://hnfe.sefaz.ba.gov.br/webservices/CadConsultaCadastro4/CadConsultaCadastro4.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

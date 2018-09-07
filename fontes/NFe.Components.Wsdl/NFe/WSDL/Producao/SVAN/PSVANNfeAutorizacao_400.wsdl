@@ -9,7 +9,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="nfeAutorizacaoLoteResult">
+      <s:element name="nfeResultMsg">
         <s:complexType mixed="true">
           <s:sequence>
             <s:any />
@@ -17,26 +17,19 @@
         </s:complexType>
       </s:element>
       <s:element name="nfeDadosMsgZip" type="s:string" />
-      <s:element name="nfeAutorizacaoLoteZipResult">
-        <s:complexType mixed="true">
-          <s:sequence>
-            <s:any />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="nfeAutorizacaoLoteSoapIn">
     <wsdl:part name="nfeDadosMsg" element="tns:nfeDadosMsg" />
   </wsdl:message>
   <wsdl:message name="nfeAutorizacaoLoteSoapOut">
-    <wsdl:part name="nfeAutorizacaoLoteResult" element="tns:nfeAutorizacaoLoteResult" />
+    <wsdl:part name="nfeAutorizacaoLoteResult" element="tns:nfeResultMsg" />
   </wsdl:message>
   <wsdl:message name="nfeAutorizacaoLoteZipSoapIn">
     <wsdl:part name="nfeDadosMsgZip" element="tns:nfeDadosMsgZip" />
   </wsdl:message>
   <wsdl:message name="nfeAutorizacaoLoteZipSoapOut">
-    <wsdl:part name="nfeAutorizacaoLoteZipResult" element="tns:nfeAutorizacaoLoteZipResult" />
+    <wsdl:part name="nfeAutorizacaoLoteZipResult" element="tns:nfeResultMsg" />
   </wsdl:message>
   <wsdl:portType name="NFeAutorizacao4Soap">
     <wsdl:operation name="nfeAutorizacaoLote">

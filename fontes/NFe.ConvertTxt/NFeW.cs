@@ -1390,7 +1390,7 @@ namespace NFe.ConvertTxt
                 switch (imposto.ICMS.CSOSN)
                 {
                     case 101:
-                        wCampo(imposto.ICMS.pCredSN, TpcnTipoCampo.tcDec2, TpcnResources.pCredSN);
+                        wCampo(imposto.ICMS.pCredSN, this.nDecimaisPerc, TpcnResources.pCredSN);
                         wCampo(imposto.ICMS.vCredICMSSN, TpcnTipoCampo.tcDec2, TpcnResources.vCredICMSSN);
                         break;
 

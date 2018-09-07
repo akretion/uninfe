@@ -60,6 +60,7 @@
             this.metroTile_Configuracoes = new MetroFramework.Controls.MetroTile();
             this.metroTile_sefaz_mdfe = new MetroFramework.Controls.MetroTile();
             this.metroTile_manualapp = new MetroFramework.Controls.MetroTile();
+            this.metroTile_Layout = new MetroFramework.Controls.MetroTile();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -258,15 +259,15 @@
             this.metroTile_municipios.Click += new System.EventHandler(this.metroTile_municipios_Click);
             this.metroTile_municipios.MouseDown += new System.Windows.Forms.MouseEventHandler(this.metroTile_Configuracoes_MouseDown);
             // 
-            // metroTile_manual
+            // metroTile_Manual
             // 
             this.metroTile_Manual.ActiveControl = null;
             this.metroTile_Manual.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.metroTile_Manual.ContextMenuStrip = this.contextMenuStrip1;
             this.metroTile_Manual.Cursor = System.Windows.Forms.Cursors.Hand;
             this.metroTile_Manual.Location = new System.Drawing.Point(344, 56);
-            this.metroTile_Manual.Name = "metroTile_manual";
-            this.metroTile_Manual.Size = new System.Drawing.Size(298, 120);
+            this.metroTile_Manual.Name = "metroTile_Manual";
+            this.metroTile_Manual.Size = new System.Drawing.Size(143, 120);
             this.metroTile_Manual.Style = MetroFramework.MetroColorStyle.Green;
             this.metroTile_Manual.TabIndex = 47;
             this.metroTile_Manual.Text = "Manual de integração";
@@ -458,11 +459,40 @@
             this.metroTile_sefaz_mdfe.UseTileImage = true;
             this.metroTile_sefaz_mdfe.Click += new System.EventHandler(this.metroTile1_Click);
             // 
+            // metroTile_manualapp
+            // 
+            this.metroTile_manualapp.ActiveControl = null;
+            this.metroTile_manualapp.Location = new System.Drawing.Point(0, 0);
+            this.metroTile_manualapp.Name = "metroTile_manualapp";
+            this.metroTile_manualapp.Size = new System.Drawing.Size(75, 23);
+            this.metroTile_manualapp.TabIndex = 0;
+            this.metroTile_manualapp.UseSelectable = true;
+            // 
+            // metroTile_Layout
+            // 
+            this.metroTile_Layout.ActiveControl = null;
+            this.metroTile_Layout.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.metroTile_Layout.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroTile_Layout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroTile_Layout.Location = new System.Drawing.Point(494, 56);
+            this.metroTile_Layout.Name = "metroTile_Layout";
+            this.metroTile_Layout.Size = new System.Drawing.Size(148, 120);
+            this.metroTile_Layout.Style = MetroFramework.MetroColorStyle.Green;
+            this.metroTile_Layout.TabIndex = 50;
+            this.metroTile_Layout.Text = "Layout";
+            this.metroTile_Layout.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.metroTile_Layout.TileImage = global::NFe.UI.Properties.Resources.documentacao;
+            this.metroTile_Layout.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.metroTile_Layout.UseSelectable = true;
+            this.metroTile_Layout.UseTileImage = true;
+            this.metroTile_Layout.Click += new System.EventHandler(this.metroTile_Layout_Click);
+            // 
             // menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.metroTile_Layout);
             this.Controls.Add(this.metroTile_sefaz_mdfe);
             this.Controls.Add(this.metroTile_municipios);
             this.Controls.Add(this.metroTile_Manual);
@@ -516,5 +546,6 @@
         private MetroFramework.Controls.MetroTile metroTile_sefaz_mdfe;
         private MetroFramework.Controls.MetroTile metroTile_Manual;
         private MetroFramework.Controls.MetroTile metroTile_manualapp;
+        private MetroFramework.Controls.MetroTile metroTile_Layout;
     }
 }

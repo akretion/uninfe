@@ -2576,7 +2576,10 @@ namespace NFe.ConvertTxt
                     /// 
                     #region <cobr><dup>
                     NFe.Cobr.Dup.Add(new Dup());
+                    if (DateTime.Today >= new DateTime(2018,9,3))
                     NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].nDup = this.LerString(TpcnResources.nDup, ObOp.Opcional, 1, NFe.infNFe.Versao >= 4?3:60);
+                    else
+                        NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].nDup = this.LerString(TpcnResources.nDup, ObOp.Opcional, 1, 60);
                     NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].dVenc = (DateTime)this.LerCampo(TpcnTipoCampo.tcDatYYYY_MM_DD, TpcnResources.dVenc, ObOp.Opcional, 10, 10, true, false);
                     NFe.Cobr.Dup[NFe.Cobr.Dup.Count - 1].vDup = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vDup, ObOp.Opcional, 15);
                     #endregion

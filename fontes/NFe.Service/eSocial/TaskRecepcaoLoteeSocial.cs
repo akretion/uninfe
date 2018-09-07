@@ -49,6 +49,8 @@ namespace NFe.Service
                                     true,
                                     securityProtocolType);
 
+                MoverPastaProcessamento();
+
                 ///
                 /// grava o arquivo no FTP
                 string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -74,7 +76,7 @@ namespace NFe.Service
             {
                 try
                 {
-                    Functions.DeletarArquivo(NomeArquivoXML);
+                    TFunctions.MoveArqErro(NomeArquivoXML);
                 }
                 catch
                 {
@@ -82,6 +84,23 @@ namespace NFe.Service
                     //não posso fazer mais nada, o UniNFe vai tentar mandar o arquivo novamente para o webservice, pois ainda não foi excluido.
                     //Wandrey 31/08/2011
                 }
+            }
+        }
+
+        private void MoverPastaProcessamento()
+        {
+            XmlDocument arquivoRetornoLoteEventos = new XmlDocument();
+            arquivoRetornoLoteEventos.LoadXml(vStrXmlRetorno);
+
+            XmlNode retornoEnvioLoteEventos = arquivoRetornoLoteEventos.GetElementsByTagName("retornoEnvioLoteEventos")[0];
+
+            var codigoResposta = ((XmlElement)retornoEnvioLoteEventos).GetElementsByTagName("cdResposta")[0].InnerText;
+
+            if (codigoResposta.Equals("201") && !String.IsNullOrEmpty(codigoResposta))
+            {
+                var protocoloEnvio = ((XmlElement)retornoEnvioLoteEventos).GetElementsByTagName("protocoloEnvio")[0].InnerText;
+
+                TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.EmProcessamento, $"{protocoloEnvio}.xml");
             }
         }
 

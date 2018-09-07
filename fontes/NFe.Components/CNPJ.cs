@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using NFe.Exceptions;
+﻿using NFe.Exceptions;
+using System;
 using System.ComponentModel;
 
 namespace NFe.Components
 {
-    public class CNPJ 
+    public class CNPJ
     {
         #region Atributos
+
         private string mValue;
-        #endregion
+        #endregion Atributos
 
         #region Construtores
+
         private CNPJ(string cnpj)
         {
             if (cnpj.Length == 0) return;
@@ -21,7 +21,17 @@ namespace NFe.Components
             if (CNPJ.Validate(cnpj) == false) throw new ExceptionCNPJInvalido(cnpj);
             this.mValue = cnpj;
         }
-        #endregion
+
+        #endregion Construtores
+
+        #region Public Operator
+
+        public static implicit operator CNPJ(string cnpj)
+        {
+            return new CNPJ(cnpj);
+        }
+
+        #endregion Public Operator
 
         #region Overrides
 
@@ -44,11 +54,12 @@ namespace NFe.Components
             return CNPJ.FormatCNPJ(mValue);
         }
 
-        #endregion
+        #endregion Overrides
 
         #region Métodos estáticos
 
         #region FormatCNPJ
+
         /// <summary>
         /// formata o CNPJ
         /// </summary>
@@ -59,6 +70,7 @@ namespace NFe.Components
             string ret = "";
             MaskedTextProvider mascara;
             cnpj = Functions.OnlyNumbers(cnpj, "-.,/").ToString();
+
             //cnpj
             //##.###.###/####-##
             mascara = new MaskedTextProvider(@"00\.000\.000/0000-00");
@@ -66,9 +78,11 @@ namespace NFe.Components
             ret = mascara.ToString();
             return ret;
         }
-        #endregion
+
+        #endregion FormatCNPJ
 
         #region Validate()
+
         /// <summary>
         /// valida o CNPJ
         /// </summary>
@@ -83,6 +97,7 @@ namespace NFe.Components
             try
             {
                 #region Valida
+
                 string Cnpj_1 = cnpj.Substring(0, 12);
                 string Cnpj_2 = cnpj.Substring(cnpj.Length - 2);
                 string Mult = "543298765432";
@@ -92,7 +107,6 @@ namespace NFe.Components
 
                 for (int j = 1; j < 3; j++)
                 {
-
                     Soma = 0;
 
                     for (int i = 0; i < 12; i++)
@@ -103,7 +117,6 @@ namespace NFe.Components
                     if (Digito == 10) Digito = 0;
                     Controle = Controle + Digito.ToString();
                     Mult = "654329876543";
-
                 }
 
                 if (Controle != Cnpj_2)
@@ -114,17 +127,17 @@ namespace NFe.Components
                 {
                     return true;
                 }
-                #endregion
+                #endregion Valida
             }
             catch
             {
                 return false;
             }
-
         }
-        #endregion
 
-        #endregion
+        #endregion Validate()
+
+        #endregion Métodos estáticos
     }
 }
 
@@ -136,6 +149,7 @@ namespace NFe.Exceptions
     public class ExceptionCNPJInvalido : Exception
     {
         private string mCnpj = "";
+
         public ExceptionCNPJInvalido(string cnpj)
         {
             mCnpj = cnpj;

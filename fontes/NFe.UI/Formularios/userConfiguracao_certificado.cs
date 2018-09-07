@@ -123,6 +123,8 @@ namespace NFe.UI.Formularios
 
         private void button_selecionar_certificado_Click(object sender, EventArgs e)
         {
+            try
+            {
             if (this.ckbUsarCertificadoInstalado.Checked)
             {
                 CertificadoDigital oCertDig = new CertificadoDigital();
@@ -159,6 +161,14 @@ namespace NFe.UI.Formularios
             }
 
             HabilitaComponentesPINA3();
+        }
+            catch(Exception ex)
+            {
+                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                                      ex.Message,
+                                      "Seleção de certificado digital.",
+                                      MessageBoxButtons.OK);
+            }
         }
 
         #region DemonstraDadosCertificado()

@@ -20,6 +20,9 @@ namespace NFe.Components
 
         public static string ServiceName = "UniNFeServico";
 
+        public static string SenhaAdm = "6669cd292bdd72783706b013860c546a";
+
+
         public const string UrlManualUniNFe = "http://wiki.unimake.com.br/index.php/Manuais:UniNFe";
 
         /// <summary>
@@ -101,6 +104,7 @@ namespace NFe.Components
         #region Pastas de comunicação geral do ERP com o UniNFe
 
         private static string _pastaGeral { get; set; }
+
         /// <summary>
         /// Pasta de comunicação geral do ERP com o UniNFe (Envio)
         /// </summary>
@@ -242,10 +246,15 @@ namespace NFe.Components
         public class ExtensaoClass
         {
             public string EnvioXML { get; set; }
+
             public string EnvioTXT { get; set; }
+
             public string RetornoXML { get; set; }
+
             public string RetornoTXT { get; set; }
+
             public string RetornoERR { get; set; }
+
             public string descricao { get; set; }
 
             public ExtensaoClass(string exml, string etxt, string rxml, string rtxt, string rerr, string descr)
@@ -907,7 +916,6 @@ namespace NFe.Components
             }
         }
 
-
         #region Propriedades com as extensões dos XML ou TXT de envio
 
         /// <summary>
@@ -1468,6 +1476,24 @@ namespace NFe.Components
             public static string ProcLMC = "-procLMC.xml";
 
             #endregion Extensões do LMC
+
+            #region EFD Reinf
+
+            /// <summary>
+            /// Arquivo de distribuição do EFD Reinf
+            /// </summary>
+            public static string ProcReinf = "-reinfproc.xml";
+
+            #endregion EFD Reinf
+
+            #region eSocial
+
+            /// <summary>
+            /// Arquivo de sistribuição do eSocial
+            /// </summary>
+            public static string ProceSocial = "-esocialproc.xml";
+
+            #endregion eSocial
         }
 
         #endregion Propriedades com as extensões dos XML ou TXT de retorno
@@ -1517,6 +1543,7 @@ namespace NFe.Components
 
                 Assembly _assembly = AssemblyEXE;
                 if (!ExecutandoPeloUniNFe)
+
                     //danasa 22/7/2011
                     //se o servico está sendo executado, pega a versão do 'uninfe.exe'
                     _assembly = System.Reflection.Assembly.LoadFile(Path.Combine(PastaExecutavel, "uninfe.exe"));

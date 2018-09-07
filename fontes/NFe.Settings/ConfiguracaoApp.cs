@@ -1305,23 +1305,6 @@ namespace NFe.Settings
 
         #region ValidarConfig()
 
-#if f
-        void AddEmpresaNaListaDeComparacao(List<FolderCompare> fc, int i, Empresa empresa)
-        {
-            fc.Add(new FolderCompare(i, empresa.PastaXmlEnvio));
-            fc.Add(new FolderCompare(i + 1, empresa.PastaXmlRetorno));
-            fc.Add(new FolderCompare(i + 2, empresa.PastaXmlErro));
-            fc.Add(new FolderCompare(i + 3, empresa.PastaValidar));
-            if (empresa.Servico != TipoAplicativo.Nfse)
-            {
-                fc.Add(new FolderCompare(i + 4, empresa.PastaXmlEnviado));
-                fc.Add(new FolderCompare(i + 5, empresa.PastaXmlEmLote));
-                fc.Add(new FolderCompare(i + 6, empresa.PastaBackup));
-                fc.Add(new FolderCompare(i + 7, empresa.PastaDownloadNFeDest));
-            }
-        }
-#endif
-
         internal class xValid
         {
             public bool valid;
@@ -1402,52 +1385,6 @@ namespace NFe.Settings
 
                 #endregion Verificar a duplicação de nome de pastas que não pode existir
             }
-
-            //substitui pq para debugar dava muito trabalho
-#if f
-
-            #region Verificar a duplicação de nome de pastas que não pode existir
-
-            List<FolderCompare> fc = new List<FolderCompare>();
-
-            for (int i = 0; i < Empresas.Configuracoes.Count; i++)
-            {
-                AddEmpresaNaListaDeComparacao(fc, i, Empresas.Configuracoes[i]);
-            }
-
-            foreach (FolderCompare fc1 in fc)
-            {
-                if (string.IsNullOrEmpty(fc1.folder))
-                    continue;
-
-                var fCount = fc.Count(fc2 => fc2.id != fc1.id && fc1.folder.ToLower().Equals(fc2.folder.ToLower()));
-                if (fCount > 0)
-                {
-                    erro = "Não é permitido a utilização de pasta idênticas na mesma ou entre empresas. \r\nPasta utilizada: \r\n" + fc1.folder.Trim();
-                    validou = false;
-                    break;
-                }
-                /*
-
-                foreach (FolderCompare fc2 in fc)
-                {
-                    if (fc1.id != fc2.id)
-                    {
-                        if (fc1.folder.ToLower().Equals(fc2.folder.ToLower()))
-                        {
-                            erro = "Não é permitido a utilização de pasta idênticas na mesma ou entre empresas. \r\nPasta utilizada: \r\n" + fc1.folder.Trim();
-                            validou = false;
-                            break;
-                        }
-                    }
-                }*/
-                if (!validou)
-                    break;
-            }
-
-            #endregion Verificar a duplicação de nome de pastas que não pode existir
-
-#endif
 
             if (validou)
             {
@@ -1677,38 +1614,32 @@ namespace NFe.Settings
                             erro = "Pasta de envio não pode terminar com a subpasta 'geral'." + xNomeCNPJ;
                             validou = false;
                         }
-                        else
-                            if (empresa.PastaXmlEmLote.ToLower().EndsWith("geral"))
+                        else if (empresa.PastaXmlEmLote.ToLower().EndsWith("geral"))
                         {
                             erro = "Pasta de envio em lote não pode terminar com a subpasta 'geral'." + xNomeCNPJ;
                             validou = false;
                         }
-                        else
-                                if (empresa.PastaValidar.ToLower().EndsWith("geral"))
+                        else if (empresa.PastaValidar.ToLower().EndsWith("geral"))
                         {
                             erro = "Pasta de validação não pode terminar com a subpasta 'geral'." + xNomeCNPJ;
                             validou = false;
                         }
-                        else
-                                    if (empresa.PastaXmlEnvio.ToLower().EndsWith("temp"))
+                        else if (empresa.PastaXmlEnvio.ToLower().EndsWith("temp"))
                         {
                             erro = "Pasta de envio não pode terminar com a subpasta 'temp'." + xNomeCNPJ;
                             validou = false;
                         }
-                        else
-                                        if (empresa.PastaXmlEmLote.ToLower().EndsWith("temp"))
+                        else if (empresa.PastaXmlEmLote.ToLower().EndsWith("temp"))
                         {
                             erro = "Pasta de envio em lote não pode terminar com a subpasta 'temp'." + xNomeCNPJ;
                             validou = false;
                         }
-                        else
-                                            if (empresa.PastaValidar.ToLower().EndsWith("temp"))
+                        else if (empresa.PastaValidar.ToLower().EndsWith("temp"))
                         {
                             erro = "Pasta de validação não pode terminar com a subpasta 'temp'." + xNomeCNPJ;
                             validou = false;
                         }
-                        else
-                                                if (empresa.PastaXmlErro.ToLower().EndsWith("temp"))
+                        else if (empresa.PastaXmlErro.ToLower().EndsWith("temp"))
                         {
                             erro = "Pasta de XML's com erro na tentativa de envio não pode terminar com a subpasta 'temp'." + xNomeCNPJ;
                             validou = false;
@@ -1840,7 +1771,7 @@ namespace NFe.Settings
                 //Se encontrar algum arquivo de lock nos diretórios, não permitir que seja executado
                 try
                 {
-                    Empresas.CanRun();
+                    Empresas.CanRun(empresaValidada);
                 }
                 catch (NFe.Components.Exceptions.AppJaExecutando ex)
                 {

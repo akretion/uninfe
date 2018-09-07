@@ -299,7 +299,10 @@ namespace NFe.Service
                                 if (string.IsNullOrEmpty(strNomeArqNfe))
                                 {
                                     if (string.IsNullOrEmpty(strChaveNFe))
+                                    {
+                                        oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML, vStrXmlRetorno);
                                         throw new Exception("LerRetornoLoteCTe(): Não pode obter o nome do arquivo");
+                                    }
 
                                     strNomeArqNfe = strChaveNFe.Substring(3) + Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML;
                                 }

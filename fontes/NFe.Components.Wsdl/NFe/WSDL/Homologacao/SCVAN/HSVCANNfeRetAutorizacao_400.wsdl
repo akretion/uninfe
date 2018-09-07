@@ -9,7 +9,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="nfeRetAutorizacaoLoteResult">
+      <s:element name="nfeResultMsg">
         <s:complexType mixed="true">
           <s:sequence>
             <s:any />
@@ -22,7 +22,7 @@
     <wsdl:part name="nfeDadosMsg" element="tns:nfeDadosMsg" />
   </wsdl:message>
   <wsdl:message name="nfeRetAutorizacaoLoteSoapOut">
-    <wsdl:part name="nfeRetAutorizacaoLoteResult" element="tns:nfeRetAutorizacaoLoteResult" />
+    <wsdl:part name="nfeRetAutorizacaoLoteResult" element="tns:nfeResultMsg" />
   </wsdl:message>
   <wsdl:portType name="NFeRetAutorizacao4Soap">
     <wsdl:operation name="nfeRetAutorizacaoLote">

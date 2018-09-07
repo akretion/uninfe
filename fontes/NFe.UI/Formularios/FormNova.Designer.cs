@@ -45,18 +45,18 @@
             this.lblCNPJ.AutoSize = true;
             this.lblCNPJ.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblCNPJ.Location = new System.Drawing.Point(15, 18);
-            this.lblCNPJ.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblCNPJ.Margin = new System.Windows.Forms.Padding(4);
             this.lblCNPJ.Name = "lblCNPJ";
-            this.lblCNPJ.Size = new System.Drawing.Size(61, 17);
+            this.lblCNPJ.Size = new System.Drawing.Size(84, 17);
             this.lblCNPJ.TabIndex = 0;
-            this.lblCNPJ.Text = "CPF/CNPJ";
+            this.lblCNPJ.Text = "CNPJ/CPF/CEI";
             // 
             // edtCNPJ
             // 
             this.edtCNPJ.Lines = new string[] {
         "Normal Textbox"};
             this.edtCNPJ.Location = new System.Drawing.Point(15, 41);
-            this.edtCNPJ.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edtCNPJ.Margin = new System.Windows.Forms.Padding(4);
             this.edtCNPJ.MaxLength = 14;
             this.edtCNPJ.Name = "edtCNPJ";
             this.edtCNPJ.PasswordChar = '\0';
@@ -75,7 +75,7 @@
             this.lblNome.AutoSize = true;
             this.lblNome.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lblNome.Location = new System.Drawing.Point(15, 80);
-            this.lblNome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lblNome.Margin = new System.Windows.Forms.Padding(4);
             this.lblNome.Name = "lblNome";
             this.lblNome.Size = new System.Drawing.Size(42, 17);
             this.lblNome.TabIndex = 2;
@@ -88,7 +88,7 @@
             this.edtNome.Lines = new string[] {
         "Normal Textbox"};
             this.edtNome.Location = new System.Drawing.Point(15, 103);
-            this.edtNome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edtNome.Margin = new System.Windows.Forms.Padding(4);
             this.edtNome.MaxLength = 100;
             this.edtNome.Name = "edtNome";
             this.edtNome.PasswordChar = '\0';
@@ -107,7 +107,7 @@
             this.cbServico.IntegralHeight = false;
             this.cbServico.ItemHeight = 21;
             this.cbServico.Location = new System.Drawing.Point(15, 160);
-            this.cbServico.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbServico.Margin = new System.Windows.Forms.Padding(4);
             this.cbServico.MaxDropDownItems = 15;
             this.cbServico.Name = "cbServico";
             this.cbServico.Size = new System.Drawing.Size(399, 27);
@@ -119,7 +119,7 @@
             this.metroLabel19.AutoSize = true;
             this.metroLabel19.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel19.Location = new System.Drawing.Point(15, 138);
-            this.metroLabel19.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroLabel19.Margin = new System.Windows.Forms.Padding(4);
             this.metroLabel19.Name = "metroLabel19";
             this.metroLabel19.Size = new System.Drawing.Size(48, 17);
             this.metroLabel19.TabIndex = 4;
@@ -129,7 +129,7 @@
             // 
             this.metroButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.metroButton1.Location = new System.Drawing.Point(531, 303);
-            this.metroButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroButton1.Margin = new System.Windows.Forms.Padding(4);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(107, 31);
             this.metroButton1.TabIndex = 1;
@@ -142,7 +142,7 @@
             this.metroButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.metroButton2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.metroButton2.Location = new System.Drawing.Point(645, 303);
-            this.metroButton2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroButton2.Margin = new System.Windows.Forms.Padding(4);
             this.metroButton2.Name = "metroButton2";
             this.metroButton2.Size = new System.Drawing.Size(107, 31);
             this.metroButton2.TabIndex = 2;
@@ -166,7 +166,7 @@
             this.metroPanel2.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanel2.HorizontalScrollbarSize = 12;
             this.metroPanel2.Location = new System.Drawing.Point(31, 73);
-            this.metroPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.metroPanel2.Name = "metroPanel2";
             this.metroPanel2.Size = new System.Drawing.Size(721, 222);
             this.metroPanel2.TabIndex = 0;
@@ -184,7 +184,7 @@
             this.Controls.Add(this.metroPanel2);
             this.Controls.Add(this.metroButton2);
             this.Controls.Add(this.metroButton1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormNova";

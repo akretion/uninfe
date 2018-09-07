@@ -33,8 +33,16 @@ namespace NFe.Components
 
         #endregion Private Constructors
 
-        #region Public Methods
+        #region Public Operator
 
+        public static implicit operator CPF(string value)
+        {
+            return new CPF(value);
+        }
+
+        #endregion Public Operator
+
+        #region Public Methods
 
         /// <summary>
         /// Analisa o CPF informado e verifica se é válido
@@ -106,7 +114,6 @@ namespace NFe.Components
             }
         }
 
-
         /// <summary>
         /// gravação de dados
         /// </summary>
@@ -136,7 +143,8 @@ namespace NFe.Components
             if (string.IsNullOrEmpty(cpf)) return "___.___.___-__";
 
             cpf = Functions.OnlyNumbers(cpf, "-.").ToString();
-            return String.Format("{0}:000.000.000-00", cpf);
+
+            return Convert.ToInt64(cpf).ToString(@"000\.000\.000-00");
         }
 
         #endregion Public Methods
@@ -168,6 +176,7 @@ namespace NFe.Exceptions
     public class ExceptionCPFInvalido : Exception
     {
         private string _cpf = "";
+
         public ExceptionCPFInvalido(string cpf)
         {
             _cpf = cpf;

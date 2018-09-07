@@ -57,24 +57,8 @@ namespace NFe.UI.Formularios
         {
             FormatarCPFCNPJ();
 
-            if (edtCNPJ.Text.Length == 14)
-            {
-                if (!CPF.Validate(edtCNPJ.Text, false))
-                {
-                    MetroFramework.MetroMessageBox.Show(this, "CPF inválido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.edtCNPJ.Focus();
-                    return;
-                }
-            }
-            else
-            {
-                if (!CNPJ.Validate(edtCNPJ.Text))
-                {
-                    MetroFramework.MetroMessageBox.Show(this, "CNPJ inválido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    this.edtCNPJ.Focus();
-                    return;
-                }
-            }
+            if (!ValidarDocumento())
+                edtCNPJ.Focus();
 
             string cnpj = Functions.OnlyNumbers(edtCNPJ.Text, ".-/").ToString();
 
@@ -144,10 +128,57 @@ namespace NFe.UI.Formularios
                 return;
             }
 
-            if (cnpj.Length < 13)
-                this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(cnpj, false);
+            if (cnpj.Length <= 11)
+            {
+                cnpj = cnpj.PadLeft(11, '0');
+                edtCNPJ.Text = ((CPF)cnpj).ToString();
+            }
+            else if (cnpj.Length <= 12)
+            {
+                cnpj = cnpj.PadLeft(12, '0');
+                edtCNPJ.Text = ((CEI)cnpj).ToString();
+            }
             else
-                this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(cnpj, true);
+            {
+                cnpj = cnpj.PadLeft(14, '0');
+                edtCNPJ.Text = ((CNPJ)cnpj).ToString();
+            }
+
+
+            //if (cnpj.Length < 13)
+            //    this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(cnpj, false);
+            //else
+            //    this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(cnpj, true);
+        }
+
+        private bool ValidarDocumento()
+        {
+            if (edtCNPJ.Text.Length == 14)
+            {
+                if (!CPF.Validate(edtCNPJ.Text, false))
+                {
+                    MetroFramework.MetroMessageBox.Show(this, "CPF inválido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            else if (edtCNPJ.Text.Length == 15)
+            {
+                if (!CEI.Validate(edtCNPJ.Text))
+                {
+                    MetroFramework.MetroMessageBox.Show(this, "CEI inválido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            else
+            {
+                if (!CNPJ.Validate(edtCNPJ.Text))
+                {
+                    MetroFramework.MetroMessageBox.Show(this, "CNPJ inválido", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

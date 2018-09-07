@@ -251,7 +251,7 @@ namespace NFe.UI
 
         private void metroTile_sefaz_310_Click(object sender, EventArgs e)
         {
-            StartPage("http://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx?versao=3.100");
+            StartPage("http://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx?versao=4.00");// 3.100");
         }
 
         private void StartPage(string url)
@@ -311,6 +311,21 @@ namespace NFe.UI
         private void metroTile_Manual_Click(object sender, EventArgs e)
         {
             StartPage(Propriedade.UrlManualUniNFe);
+        }
+
+        private void metroTile_Layout_Click(object sender, EventArgs e)
+        {
+            string pdffile = System.IO.Path.GetTempFileName() + ".pdf";
+            try
+            {
+                new NFe.Service.TaskLayouts().CriaPDFLayout(pdffile);
+                if (System.IO.File.Exists(pdffile))
+                    StartPage(pdffile);
+            }
+            catch (Exception ex)
+            {
+                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

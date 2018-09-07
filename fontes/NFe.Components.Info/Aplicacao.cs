@@ -296,7 +296,7 @@ namespace NFe.Components.Info
             {
                 Empresas.CarregaConfiguracao();
 
-                Empresas.CanRun();
+                Empresas.CanRun(null);
 
                 // Se puder executar a aplicação aqui será recriado todos os arquivos de .lock,
                 // pois podem ter sofridos alterações de configurações nas pastas
@@ -342,7 +342,7 @@ namespace NFe.Components.Info
 
             try
             {
-                Empresas.CanRun();
+                Empresas.CanRun(null);
 
                 // Se puder executar a aplicação aqui será recriado todos os arquivos de .lock,
                 // pois podem ter sofridos alterações de configurações nas pastas

@@ -47,11 +47,11 @@
             this.lblCNPJ = new MetroFramework.Controls.MetroLabel();
             this.txtCNPJ = new MetroFramework.Controls.MetroTextBox();
             this.metroGridSituacao = new MetroFramework.Controls.MetroGrid();
-            this.txtMensagem = new MetroFramework.Controls.MetroTextBox();
             this.columnEmpresa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnUF = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnTipoServico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnSitucao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtMensagem = new MetroFramework.Controls.MetroTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.metroGridSituacao)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,7 +117,7 @@
             // 
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel2.Location = new System.Drawing.Point(189, 109);
+            this.metroLabel2.Location = new System.Drawing.Point(185, 109);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(41, 15);
             this.metroLabel2.TabIndex = 20;
@@ -255,6 +255,8 @@
             this.metroGridSituacao.AllowUserToResizeColumns = false;
             this.metroGridSituacao.AllowUserToResizeRows = false;
             this.metroGridSituacao.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metroGridSituacao.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.metroGridSituacao.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.metroGridSituacao.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(181)))), ((int)(((byte)(181)))), ((int)(((byte)(181)))));
@@ -298,20 +300,6 @@
             this.metroGridSituacao.TabIndex = 32;
             this.metroGridSituacao.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.metroGridSituacao_CellClick);
             // 
-            // txtMensagem
-            // 
-            this.txtMensagem.Lines = new string[0];
-            this.txtMensagem.Location = new System.Drawing.Point(0, 427);
-            this.txtMensagem.MaxLength = 32767;
-            this.txtMensagem.Multiline = true;
-            this.txtMensagem.Name = "txtMensagem";
-            this.txtMensagem.PasswordChar = '\0';
-            this.txtMensagem.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMensagem.SelectedText = "";
-            this.txtMensagem.Size = new System.Drawing.Size(772, 100);
-            this.txtMensagem.TabIndex = 33;
-            this.txtMensagem.UseSelectable = true;
-            // 
             // columnEmpresa
             // 
             this.columnEmpresa.HeaderText = "Empresa";
@@ -338,6 +326,20 @@
             this.columnSitucao.Name = "columnSitucao";
             this.columnSitucao.ReadOnly = true;
             this.columnSitucao.Width = 330;
+            // 
+            // txtMensagem
+            // 
+            this.txtMensagem.Lines = new string[0];
+            this.txtMensagem.Location = new System.Drawing.Point(0, 427);
+            this.txtMensagem.MaxLength = 32767;
+            this.txtMensagem.Multiline = true;
+            this.txtMensagem.Name = "txtMensagem";
+            this.txtMensagem.PasswordChar = '\0';
+            this.txtMensagem.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtMensagem.SelectedText = "";
+            this.txtMensagem.Size = new System.Drawing.Size(772, 100);
+            this.txtMensagem.TabIndex = 33;
+            this.txtMensagem.UseSelectable = true;
             // 
             // userPedidoSituacao
             // 

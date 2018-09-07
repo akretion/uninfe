@@ -97,10 +97,12 @@ namespace NFe.UI.Formularios
                 this.edtNome.Text = empresa.Nome;
 
                 if (!string.IsNullOrEmpty(empresa.CNPJ))
-                    if (empresa.CNPJ.Length < 14)
-                        this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(this.edtCNPJ.Text, false);
+                    if (empresa.CNPJ.Length == 11)
+                        this.edtCNPJ.Text = ((CPF)edtCNPJ.Text).ToString();
+                    else if (empresa.CNPJ.Length == 12)
+                        this.edtCNPJ.Text = ((CEI)edtCNPJ.Text).ToString();
                     else
-                        this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(this.edtCNPJ.Text, true);
+                        this.edtCNPJ.Text = ((CNPJ)edtCNPJ.Text).ToString();
 
                 comboBox_tpEmis.SelectedValue = this.empresa.tpEmis;
                 comboBox_Ambiente.SelectedValue = this.empresa.AmbienteCodigo;

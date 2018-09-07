@@ -29,10 +29,16 @@ namespace NFe.UI
     {
         public static string vStatus = "Ocorreu uma falha ao tentar obter a solicitação junto ao SEFAZ.\r\n\r\n" +
                 "O problema pode ter ocorrido por causa dos seguintes fatores:\r\n\r\n" +
-                "- Problema com o certificado digital\r\n" +
-                "- Necessidade de atualização da cadeia de certificados digitais\r\n" +
-                "- Falha de conexão com a internet\r\n" +
-                "- Falha nos servidores do SEFAZ\r\n\r\n" +
+                "- O windows é inferior a versão 7 SP1 (Service Pack 1).\r\n" +
+                "- O windows utilizado não é compatível com o TLS 1.2 (XP, Server 2003, Windows 8.0).\r\n" +
+                "- O windows não está 100% atualizado, para atualizar execute o windows update mais de uma vez, garantindo que o sistema está completamente atualizado.\r\n" +
+                "- Problema com o certificado digital.\r\n" +
+                "- Necessidade de atualização da cadeia de certificados digitais.\r\n" +
+                "- Falha de conexão com a internet.\r\n" +
+                "- Falha nos servidores do SEFAZ.\r\n" +
+                "- Antivírus ativado pode interferir na comunicação com os servidores da SEFAZ. Configure o antivírus para não verificar conexões seguras (https) e inclua a pasta do UniNFE nas exceções.\r\n" +
+                "- Existe proxy na rede, o mesmo deve ser configurado na aba configurações. \r\n" +
+                "- Existe firewall ativado impedindo a comunicação com os servidores da SEFAZ.\r\n\r\n" +
                 "Afirmamos que a produtora do software não se responsabiliza por decisões tomadas e/ou execuções realizadas com base nas informações acima.\r\n\r\n";
 
         public static DateTime UltimoAcessoConfiguracao { get; set; }

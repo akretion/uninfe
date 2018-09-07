@@ -82,10 +82,6 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.GINFES:
                         switch (oDadosPedSitNfse.cMunicipio)
                         {
-                            case 2304400: //Fortaleza - CE
-                                cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
-                                break;
-
                             case 4125506: //São José dos Pinhais - PR
                                 cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://nfe.sjp.pr.gov.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
                                 break;

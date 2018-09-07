@@ -1044,6 +1044,10 @@ namespace NFe.Service
                         case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
                     }
                     break;
 
@@ -2630,7 +2634,22 @@ namespace NFe.Service
 
                 #region Tag <CNPJ> da tag <emit>
 
-                if (dadosNFe.CNPJ != dadosNFe.chavenfe.Substring(9 + nPos, 14))
+                if (string.IsNullOrEmpty(dadosNFe.CNPJ))
+                {
+                    if (string.IsNullOrEmpty(dadosNFe.CPF))
+                    {
+                        cTextoErro += "O CNPJ ou CPF do emitente não foi localizado no XML <emit><CNPJ> ou <emit><CPF>.\r\n\r\n";
+                        booValido = false;
+                    }
+                    else if (dadosNFe.CPF != dadosNFe.chavenfe.Substring(12 + nPos, 11))
+                    {
+                        cTextoErro += "O CPF do emitente informado na tag <emit><CPF> está diferente do informado na chave da NF-e.\r\n" +
+                            "CPF do emitente informado na tag <emit><CPF>: " + dadosNFe.CPF + "\r\n" +
+                            "CPF do emitente informado na chave da NF-e: " + dadosNFe.chavenfe.Substring(12 + nPos, 11) + "\r\n\r\n";
+                        booValido = false;
+                    }
+                }
+                else if (dadosNFe.CNPJ != dadosNFe.chavenfe.Substring(9 + nPos, 14))
                 {
                     cTextoErro += "O CNPJ do emitente informado na tag <emit><CNPJ> está diferente do informado na chave da NF-e.\r\n" +
                         "CNPJ do emitente informado na tag <emit><CNPJ>: " + dadosNFe.CNPJ + "\r\n" +
@@ -2967,6 +2986,7 @@ namespace NFe.Service
                 case PadroesNFSe.E_RECEITA:
                 case PadroesNFSe.ADM_SISTEMAS:
                 case PadroesNFSe.PUBLIC_SOFT:
+                case PadroesNFSe.TIPLAN_203:
                 case PadroesNFSe.MEGASOFT:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
                     {
@@ -2975,7 +2995,6 @@ namespace NFe.Service
                             case "EnviarLoteRpsEnvio":
                                 result = Servicos.NFSeRecepcionarLoteRps;
                                 break;
-
                             case "EnviarLoteRpsSincronoEnvio":
                                 result = Servicos.NFSeRecepcionarLoteRpsSincrono;
                                 break;

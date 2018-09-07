@@ -29,6 +29,39 @@ namespace NFe.Service
             //Document document = new Document();
             try
             {
+                CriaPDFLayout(arqRetorno);
+            }
+            catch (DocumentException de)
+            {
+                exx = de;
+            }
+            catch (IOException ioe)
+            {
+                exx = ioe;
+            }
+            catch(Exception ex)
+            {
+                exx = ex;
+            }
+            finally
+            {
+                Functions.DeletarArquivo(this.NomeArquivoXML);
+
+                if (exx != null)
+                {
+                    Functions.DeletarArquivo(arqRetorno);
+
+                    try
+                    {
+                        NFe.Service.TFunctions.GravarArqErroServico(this.NomeArquivoXML, ExtRetorno, finalArqErro, exx);
+                    }
+                    catch { }
+                }
+            }
+        }
+
+        public void CriaPDFLayout(string arqRetorno)
+        {
                 using (Document document = new Document(PageSize.A4, 20f, 20f, 80f, 10f))
                 {
                     var pdfWriter = PdfWriter.GetInstance(document, new FileStream(arqRetorno, FileMode.Create));
@@ -59,7 +92,7 @@ namespace NFe.Service
                     int n = 0;
                     foreach (Propriedade.TipoEnvio item in Enum.GetValues(typeof(Propriedade.TipoEnvio)))
                     {
-                        if ((n % 20) == 0 || table == null)
+                    if ((n % 16) == 0 || table == null)
                         {
                             if (table != null)
                             {
@@ -95,17 +128,23 @@ namespace NFe.Service
                     /// Layout NFe/NFCe
                     /// 
 
+                string old = "";
+
                     n = 0;
                     table = null;
                     //document.Add(new Phrase("Layout de notas NF-e/NFc-e", new Font(Font.FontFamily.HELVETICA, 18)));
                     foreach (KeyValuePair<string, string> key in new NFe.ConvertTxt.ConversaoTXT().LayoutTXT)
                     {
+                    if (old == key.Value.ToString().Substring(1)) continue;
+
+                    old = key.Value.ToString().Substring(1);
+
                         if (key.Key.Contains("_"))
                             ///
                             /// só considera o layout da versao >= 3.1
                             if (key.Key.Contains("_200")) continue;
 
-                        if ((n % 24) == 0 || table == null)
+                    if ((n % 20) == 0 || table == null)
                         {
                             if (table != null)
                             {
@@ -120,12 +159,12 @@ namespace NFe.Service
                             table.TotalWidth = document.PageSize.GetRight(41);
                             table.LockedWidth = true;
                             table.PaddingTop = 2;
-                            table.SetWidths(new float[] { 8f, 100f });
+                        table.SetWidths(new float[] { 15f, 100f });
                         }
                         ++n;
-                        if (key.Key.Contains("_"))
-                            table.AddCell(this.texto(key.Key.Substring(0, key.Key.IndexOf("_"))));
-                        else
+                    //if (key.Key.Contains("_"))
+                    //    table.AddCell(this.texto(key.Key.Substring(0, key.Key.IndexOf("_"))));
+                    //else
                             table.AddCell(this.texto(key.Key));
                         table.AddCell(this.texto(key.Value.ToString().Substring(1)));
                     }
@@ -167,34 +206,6 @@ namespace NFe.Service
                     document.Close();
                 }
             }
-            catch (DocumentException de)
-            {
-                exx = de;
-            }
-            catch (IOException ioe)
-            {
-                exx = ioe;
-            }
-            catch(Exception ex)
-            {
-                exx = ex;
-            }
-            finally
-            {
-                Functions.DeletarArquivo(this.NomeArquivoXML);
-
-                if (exx != null)
-                {
-                    Functions.DeletarArquivo(arqRetorno);
-
-                    try
-                    {
-                        NFe.Service.TFunctions.GravarArqErroServico(this.NomeArquivoXML, ExtRetorno, finalArqErro, exx);
-                    }
-                    catch { }
-                }
-            }
-        }
 
         string fmtname(string value, string prefix = "")
         {
@@ -358,7 +369,7 @@ namespace NFe.Service
             pdfCell3.VerticalAlignment = Element.ALIGN_MIDDLE;
             pdfCell3.Border = 0;
 
-            Phrase p1Header = new Phrase(ConfiguracaoApp.NomeEmpresa + "  Sample Header Here", baseFontNormal);
+            Phrase p1Header = new Phrase(ConfiguracaoApp.NomeEmpresa, baseFontNormal);
             PdfPCell pdfCell_p1Header = new PdfPCell(p1Header);
             pdfCell_p1Header.HorizontalAlignment = Element.ALIGN_CENTER;
             pdfCell_p1Header.VerticalAlignment = Element.ALIGN_BOTTOM;

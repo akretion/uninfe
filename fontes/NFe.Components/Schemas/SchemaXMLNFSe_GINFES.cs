@@ -18,7 +18,7 @@ namespace NFSe.Components
                 ArquivoXSD = "NFSe\\GINFES\\servico_consultar_nfse_envio_v03.xsd",
                 Descricao = "XML de Consulta de NFSe por Data",
                 TagAssinatura = "ConsultarNfseEnvio",
-                TagAtributoId = "NumeroNfse",
+                TagAtributoId = "Prestador",
                 TargetNameSpace = "http://www.ginfes.com.br/servico_consultar_nfse_envio_v03.xsd"
             });
             #endregion

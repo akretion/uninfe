@@ -1,5 +1,4 @@
-﻿using NFe.Certificado;
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.Settings;
 using System;
 using System.IO;
@@ -47,6 +46,8 @@ namespace NFe.Service
                                     true,
                                     securityProtocolType);
 
+                GerarXMLDistribuicao(NomeArquivoXML, emp);
+
                 ///
                 /// grava o arquivo no FTP
                 string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -80,6 +81,83 @@ namespace NFe.Service
                     //não posso fazer mais nada, o UniNFe vai tentar mandar o arquivo novamente para o webservice, pois ainda não foi excluido.
                     //Wandrey 31/08/2011
                 }
+            }
+        }
+
+        private void GerarXMLDistribuicao(string nomeArquivoXML, int emp)
+        {
+            XmlDocument arquivoRetornoConsultaLoteEventos = new XmlDocument();
+            arquivoRetornoConsultaLoteEventos.LoadXml(vStrXmlRetorno);
+            XmlNode retornoEventoNode = null;
+            XmlNode eventoNode = null;
+            StreamWriter swProc = null;
+            var protocoloEnvio = ConteudoXML.GetElementsByTagName("protocoloEnvio")[0].InnerText;
+#if _fw46
+            var nomeArquivoProtocolo = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, "EmProcessamento", $"{protocoloEnvio}.xml");
+#else
+            var nomeArquivoProtocolo = ""; //Não temos eSocial para .NET 3.5, não vai gerar problema, criei só para compilar.
+#endif
+
+            XmlNode retornoProcessamentoLoteEventos = arquivoRetornoConsultaLoteEventos.GetElementsByTagName("retornoProcessamentoLoteEventos")[0];
+
+            var codigoResposta = ((XmlElement)retornoProcessamentoLoteEventos).GetElementsByTagName("cdResposta")[0].InnerText;
+
+            if (codigoResposta.Equals("201") && !String.IsNullOrEmpty(codigoResposta))
+            {
+                XmlNode retornoEventos = ((XmlElement)retornoProcessamentoLoteEventos).GetElementsByTagName("retornoEventos")[0];
+
+                foreach (XmlNode retornoEvento in retornoEventos)
+                {
+                    var codigoRespostaEvento = ((XmlElement)retornoEvento).GetElementsByTagName("cdResposta")[0].InnerText;
+
+                    if (codigoRespostaEvento.Equals("201") && !String.IsNullOrEmpty(codigoRespostaEvento))
+                    {
+                        var retornoEventoID = retornoEvento.Attributes.GetNamedItem("Id").Value;
+
+                        XmlDocument arquivoLoteEventos = new XmlDocument();
+                        arquivoLoteEventos.Load(nomeArquivoProtocolo);
+
+                        XmlNode eventos = arquivoLoteEventos.GetElementsByTagName("eventos")[0];
+
+                        foreach (XmlNode evento in eventos)
+                        {
+                            var eventoID = evento.Attributes.GetNamedItem("Id").Value;
+
+                            if (retornoEventoID.Equals(eventoID))
+                            {
+                                eventoNode = ((XmlElement)evento).GetElementsByTagName("eSocial")[0];
+
+                                XmlNode retEventos = ((XmlElement)retornoEvento).GetElementsByTagName("retornoEvento")[0];
+
+                                foreach (XmlNode retEvento in retEventos)
+                                    retornoEventoNode = ((XmlElement)retEvento).GetElementsByTagName("retornoEvento")[0];
+
+                                var xmlDistribuicao = "<esocialProc>";
+                                xmlDistribuicao += eventoNode.OuterXml;
+                                xmlDistribuicao += retornoEventoNode.OuterXml;
+                                xmlDistribuicao += "</esocialProc>";
+
+                                //Nome do arquivo de distribuição do eSocial
+                                string nomeArqDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                    PastaEnviados.EmProcessamento.ToString() + "\\" +
+                                    eventoID + Propriedade.ExtRetorno.ProceSocial;
+
+                                //Gravar o XML em uma linha só (sem quebrar as tag´s linha a linha) ou dá erro na hora de
+                                //validar o XML pelos Schemas. Wandrey/André 10/08/2018
+                                swProc = File.CreateText(nomeArqDist);
+                                swProc.Write(xmlDistribuicao);
+                                swProc.Close();
+                                swProc = null;
+
+                                DateTime dataEvento = Convert.ToDateTime(eventoID.Substring(17, 4) + "-" + eventoID.Substring(21, 2) + "-" + eventoID.Substring(23, 2));
+
+                                TFunctions.MoverArquivo(nomeArqDist, PastaEnviados.Autorizados, dataEvento);
+                            }
+                        }
+                    }
+                }
+
+                TFunctions.MoveArqErro(nomeArquivoProtocolo);
             }
         }
     }

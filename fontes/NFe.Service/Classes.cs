@@ -345,6 +345,11 @@ namespace NFe.Service
         public string CNPJ { get; set; }
 
         /// <summary>
+        /// CPF do emitente
+        /// </summary>
+        public string CPF { get; set; }
+
+        /// <summary>
         /// Versão do XML
         /// </summary>
         public string versao { get; set; }

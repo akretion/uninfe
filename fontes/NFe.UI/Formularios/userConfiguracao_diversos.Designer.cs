@@ -76,7 +76,7 @@
             // 
             this.checkBoxRetornoNFETxt.AutoSize = true;
             this.checkBoxRetornoNFETxt.Location = new System.Drawing.Point(4, 368);
-            this.checkBoxRetornoNFETxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxRetornoNFETxt.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxRetornoNFETxt.Name = "checkBoxRetornoNFETxt";
             this.checkBoxRetornoNFETxt.Size = new System.Drawing.Size(424, 17);
             this.checkBoxRetornoNFETxt.TabIndex = 29;
@@ -88,7 +88,7 @@
             // 
             this.cbIndSinc.AutoSize = true;
             this.cbIndSinc.Location = new System.Drawing.Point(4, 394);
-            this.cbIndSinc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbIndSinc.Margin = new System.Windows.Forms.Padding(4);
             this.cbIndSinc.Name = "cbIndSinc";
             this.cbIndSinc.Size = new System.Drawing.Size(281, 17);
             this.cbIndSinc.TabIndex = 30;
@@ -101,7 +101,7 @@
             this.lbl_udTempoConsulta.AutoSize = true;
             this.lbl_udTempoConsulta.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_udTempoConsulta.Location = new System.Drawing.Point(4, 233);
-            this.lbl_udTempoConsulta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbl_udTempoConsulta.Margin = new System.Windows.Forms.Padding(4);
             this.lbl_udTempoConsulta.Name = "lbl_udTempoConsulta";
             this.lbl_udTempoConsulta.Size = new System.Drawing.Size(467, 17);
             this.lbl_udTempoConsulta.TabIndex = 24;
@@ -112,7 +112,7 @@
             this.udTempoConsulta.Lines = new string[] {
         "Styled Textbox"};
             this.udTempoConsulta.Location = new System.Drawing.Point(4, 256);
-            this.udTempoConsulta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.udTempoConsulta.Margin = new System.Windows.Forms.Padding(4);
             this.udTempoConsulta.MaxLength = 4;
             this.udTempoConsulta.Name = "udTempoConsulta";
             this.udTempoConsulta.PasswordChar = '\0';
@@ -131,7 +131,7 @@
             this.lbl_udDiasLimpeza.AutoSize = true;
             this.lbl_udDiasLimpeza.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_udDiasLimpeza.Location = new System.Drawing.Point(4, 181);
-            this.lbl_udDiasLimpeza.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbl_udDiasLimpeza.Margin = new System.Windows.Forms.Padding(4);
             this.lbl_udDiasLimpeza.Name = "lbl_udDiasLimpeza";
             this.lbl_udDiasLimpeza.Size = new System.Drawing.Size(552, 17);
             this.lbl_udDiasLimpeza.TabIndex = 18;
@@ -143,7 +143,7 @@
             this.udDiasLimpeza.Lines = new string[] {
         "Styled Textbox"};
             this.udDiasLimpeza.Location = new System.Drawing.Point(4, 204);
-            this.udDiasLimpeza.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.udDiasLimpeza.Margin = new System.Windows.Forms.Padding(4);
             this.udDiasLimpeza.MaxLength = 2;
             this.udDiasLimpeza.Name = "udDiasLimpeza";
             this.udDiasLimpeza.PasswordChar = '\0';
@@ -183,7 +183,7 @@
             "D\\M",
             "D\\A"});
             this.cboDiretorioSalvarComo.Location = new System.Drawing.Point(317, 139);
-            this.cboDiretorioSalvarComo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboDiretorioSalvarComo.Margin = new System.Windows.Forms.Padding(4);
             this.cboDiretorioSalvarComo.MaxDropDownItems = 15;
             this.cboDiretorioSalvarComo.Name = "cboDiretorioSalvarComo";
             this.cboDiretorioSalvarComo.Size = new System.Drawing.Size(231, 27);
@@ -200,7 +200,7 @@
             this.comboBox_tpEmis.FormattingEnabled = true;
             this.comboBox_tpEmis.ItemHeight = 21;
             this.comboBox_tpEmis.Location = new System.Drawing.Point(4, 139);
-            this.comboBox_tpEmis.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox_tpEmis.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox_tpEmis.MaxDropDownItems = 15;
             this.comboBox_tpEmis.Name = "comboBox_tpEmis";
             this.comboBox_tpEmis.Size = new System.Drawing.Size(261, 27);
@@ -213,7 +213,7 @@
             this.metroLabel11.AutoSize = true;
             this.metroLabel11.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel11.Location = new System.Drawing.Point(-1, 117);
-            this.metroLabel11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroLabel11.Margin = new System.Windows.Forms.Padding(4);
             this.metroLabel11.Name = "metroLabel11";
             this.metroLabel11.Size = new System.Drawing.Size(98, 17);
             this.metroLabel11.TabIndex = 10;
@@ -225,7 +225,7 @@
             this.comboBox_Ambiente.FormattingEnabled = true;
             this.comboBox_Ambiente.ItemHeight = 21;
             this.comboBox_Ambiente.Location = new System.Drawing.Point(743, 79);
-            this.comboBox_Ambiente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox_Ambiente.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox_Ambiente.MaxDropDownItems = 15;
             this.comboBox_Ambiente.Name = "comboBox_Ambiente";
             this.comboBox_Ambiente.Size = new System.Drawing.Size(139, 27);
@@ -238,7 +238,7 @@
             this.metroLabel10.AutoSize = true;
             this.metroLabel10.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel10.Location = new System.Drawing.Point(743, 57);
-            this.metroLabel10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroLabel10.Margin = new System.Windows.Forms.Padding(4);
             this.metroLabel10.Name = "metroLabel10";
             this.metroLabel10.Size = new System.Drawing.Size(62, 17);
             this.metroLabel10.TabIndex = 8;
@@ -251,7 +251,7 @@
             this.comboBox_UF.IntegralHeight = false;
             this.comboBox_UF.ItemHeight = 21;
             this.comboBox_UF.Location = new System.Drawing.Point(556, 79);
-            this.comboBox_UF.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox_UF.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox_UF.MaxDropDownItems = 15;
             this.comboBox_UF.Name = "comboBox_UF";
             this.comboBox_UF.Size = new System.Drawing.Size(177, 27);
@@ -266,7 +266,7 @@
             this.labelUF.AutoSize = true;
             this.labelUF.FontSize = MetroFramework.MetroLabelSize.Small;
             this.labelUF.Location = new System.Drawing.Point(552, 57);
-            this.labelUF.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.labelUF.Margin = new System.Windows.Forms.Padding(4);
             this.labelUF.Name = "labelUF";
             this.labelUF.Size = new System.Drawing.Size(139, 17);
             this.labelUF.TabIndex = 6;
@@ -279,7 +279,7 @@
             this.cbServico.IntegralHeight = false;
             this.cbServico.ItemHeight = 21;
             this.cbServico.Location = new System.Drawing.Point(4, 79);
-            this.cbServico.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbServico.Margin = new System.Windows.Forms.Padding(4);
             this.cbServico.MaxDropDownItems = 15;
             this.cbServico.Name = "cbServico";
             this.cbServico.Size = new System.Drawing.Size(543, 27);
@@ -291,7 +291,7 @@
             // 
             this.checkBoxGravarEventosNaPastaEnviadosNFe.AutoSize = true;
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Location = new System.Drawing.Point(4, 290);
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Name = "checkBoxGravarEventosNaPastaEnviadosNFe";
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(607, 17);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.TabIndex = 26;
@@ -304,7 +304,7 @@
             // 
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.AutoSize = true;
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Location = new System.Drawing.Point(4, 316);
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Name = "checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe";
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(710, 17);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.TabIndex = 27;
@@ -318,7 +318,7 @@
             this.metroLabel19.AutoSize = true;
             this.metroLabel19.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel19.Location = new System.Drawing.Point(4, 57);
-            this.metroLabel19.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroLabel19.Margin = new System.Windows.Forms.Padding(4);
             this.metroLabel19.Name = "metroLabel19";
             this.metroLabel19.Size = new System.Drawing.Size(48, 17);
             this.metroLabel19.TabIndex = 4;
@@ -329,7 +329,7 @@
             this.lbl_DiretorioSalvarComo.AutoSize = true;
             this.lbl_DiretorioSalvarComo.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_DiretorioSalvarComo.Location = new System.Drawing.Point(315, 117);
-            this.lbl_DiretorioSalvarComo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbl_DiretorioSalvarComo.Margin = new System.Windows.Forms.Padding(4);
             this.lbl_DiretorioSalvarComo.Name = "lbl_DiretorioSalvarComo";
             this.lbl_DiretorioSalvarComo.Size = new System.Drawing.Size(108, 17);
             this.lbl_DiretorioSalvarComo.TabIndex = 12;
@@ -340,7 +340,7 @@
             this.metroLabel21.AutoSize = true;
             this.metroLabel21.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel21.Location = new System.Drawing.Point(244, 4);
-            this.metroLabel21.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroLabel21.Margin = new System.Windows.Forms.Padding(4);
             this.metroLabel21.Name = "metroLabel21";
             this.metroLabel21.Size = new System.Drawing.Size(42, 17);
             this.metroLabel21.TabIndex = 2;
@@ -353,7 +353,7 @@
             this.edtNome.Lines = new string[] {
         "Styled Textbox"};
             this.edtNome.Location = new System.Drawing.Point(244, 26);
-            this.edtNome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edtNome.Margin = new System.Windows.Forms.Padding(4);
             this.edtNome.MaxLength = 32767;
             this.edtNome.Name = "edtNome";
             this.edtNome.PasswordChar = '\0';
@@ -370,18 +370,18 @@
             this.metroLabel22.AutoSize = true;
             this.metroLabel22.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel22.Location = new System.Drawing.Point(4, 4);
-            this.metroLabel22.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroLabel22.Margin = new System.Windows.Forms.Padding(4);
             this.metroLabel22.Name = "metroLabel22";
-            this.metroLabel22.Size = new System.Drawing.Size(61, 17);
+            this.metroLabel22.Size = new System.Drawing.Size(84, 17);
             this.metroLabel22.TabIndex = 0;
-            this.metroLabel22.Text = "CPF/CNPJ";
+            this.metroLabel22.Text = "CNPJ/CPF/CEI";
             // 
             // edtCNPJ
             // 
             this.edtCNPJ.Lines = new string[] {
         "Styled Textbox"};
             this.edtCNPJ.Location = new System.Drawing.Point(4, 26);
-            this.edtCNPJ.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edtCNPJ.Margin = new System.Windows.Forms.Padding(4);
             this.edtCNPJ.MaxLength = 14;
             this.edtCNPJ.Name = "edtCNPJ";
             this.edtCNPJ.PasswordChar = '\0';
@@ -399,7 +399,7 @@
             // 
             this.checkBoxGravarEventosDeTerceiros.AutoSize = true;
             this.checkBoxGravarEventosDeTerceiros.Location = new System.Drawing.Point(4, 342);
-            this.checkBoxGravarEventosDeTerceiros.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxGravarEventosDeTerceiros.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxGravarEventosDeTerceiros.Name = "checkBoxGravarEventosDeTerceiros";
             this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(427, 17);
             this.checkBoxGravarEventosDeTerceiros.TabIndex = 28;
@@ -412,7 +412,7 @@
             this.lbl_UsuarioWS.AutoSize = true;
             this.lbl_UsuarioWS.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_UsuarioWS.Location = new System.Drawing.Point(556, 175);
-            this.lbl_UsuarioWS.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbl_UsuarioWS.Margin = new System.Windows.Forms.Padding(4);
             this.lbl_UsuarioWS.Name = "lbl_UsuarioWS";
             this.lbl_UsuarioWS.Size = new System.Drawing.Size(71, 17);
             this.lbl_UsuarioWS.TabIndex = 20;
@@ -423,7 +423,7 @@
             this.txtUsuarioWS.Lines = new string[] {
         "Styled Textbox"};
             this.txtUsuarioWS.Location = new System.Drawing.Point(556, 197);
-            this.txtUsuarioWS.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtUsuarioWS.Margin = new System.Windows.Forms.Padding(4);
             this.txtUsuarioWS.MaxLength = 32767;
             this.txtUsuarioWS.Name = "txtUsuarioWS";
             this.txtUsuarioWS.PasswordChar = '\0';
@@ -441,7 +441,7 @@
             this.lbl_SenhaWS.AutoSize = true;
             this.lbl_SenhaWS.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_SenhaWS.Location = new System.Drawing.Point(743, 175);
-            this.lbl_SenhaWS.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbl_SenhaWS.Margin = new System.Windows.Forms.Padding(4);
             this.lbl_SenhaWS.Name = "lbl_SenhaWS";
             this.lbl_SenhaWS.Size = new System.Drawing.Size(64, 17);
             this.lbl_SenhaWS.TabIndex = 22;
@@ -452,7 +452,7 @@
             this.txtSenhaWS.Lines = new string[] {
         "Styled Textbox"};
             this.txtSenhaWS.Location = new System.Drawing.Point(743, 197);
-            this.txtSenhaWS.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSenhaWS.Margin = new System.Windows.Forms.Padding(4);
             this.txtSenhaWS.MaxLength = 32767;
             this.txtSenhaWS.Name = "txtSenhaWS";
             this.txtSenhaWS.PasswordChar = '*';
@@ -470,7 +470,7 @@
             this.lbl_Padrao.AutoSize = true;
             this.lbl_Padrao.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_Padrao.Location = new System.Drawing.Point(743, 118);
-            this.lbl_Padrao.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbl_Padrao.Margin = new System.Windows.Forms.Padding(4);
             this.lbl_Padrao.Name = "lbl_Padrao";
             this.lbl_Padrao.Size = new System.Drawing.Size(44, 17);
             this.lbl_Padrao.TabIndex = 16;
@@ -481,7 +481,7 @@
             this.edtPadrao.Lines = new string[] {
         "Styled Textbox"};
             this.edtPadrao.Location = new System.Drawing.Point(743, 140);
-            this.edtPadrao.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edtPadrao.Margin = new System.Windows.Forms.Padding(4);
             this.edtPadrao.MaxLength = 32767;
             this.edtPadrao.Name = "edtPadrao";
             this.edtPadrao.PasswordChar = '\0';
@@ -500,7 +500,7 @@
             this.lbl_CodMun.AutoSize = true;
             this.lbl_CodMun.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_CodMun.Location = new System.Drawing.Point(556, 118);
-            this.lbl_CodMun.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbl_CodMun.Margin = new System.Windows.Forms.Padding(4);
             this.lbl_CodMun.Name = "lbl_CodMun";
             this.lbl_CodMun.Size = new System.Drawing.Size(123, 17);
             this.lbl_CodMun.TabIndex = 14;
@@ -511,7 +511,7 @@
             this.edtCodMun.Lines = new string[] {
         "Styled Textbox"};
             this.edtCodMun.Location = new System.Drawing.Point(556, 140);
-            this.edtCodMun.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edtCodMun.Margin = new System.Windows.Forms.Padding(4);
             this.edtCodMun.MaxLength = 32767;
             this.edtCodMun.Name = "edtCodMun";
             this.edtCodMun.PasswordChar = '\0';
@@ -533,9 +533,9 @@
             this.grpQRCode.Controls.Add(this.metroLabel2);
             this.grpQRCode.Controls.Add(this.metroLabel1);
             this.grpQRCode.Location = new System.Drawing.Point(4, 443);
-            this.grpQRCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpQRCode.Margin = new System.Windows.Forms.Padding(4);
             this.grpQRCode.Name = "grpQRCode";
-            this.grpQRCode.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grpQRCode.Padding = new System.Windows.Forms.Padding(4);
             this.grpQRCode.Size = new System.Drawing.Size(908, 82);
             this.grpQRCode.TabIndex = 32;
             this.grpQRCode.TabStop = false;
@@ -549,7 +549,7 @@
             this.edtTokenCSC.Lines = new string[] {
         "Styled Textbox"};
             this.edtTokenCSC.Location = new System.Drawing.Point(480, 46);
-            this.edtTokenCSC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edtTokenCSC.Margin = new System.Windows.Forms.Padding(4);
             this.edtTokenCSC.MaxLength = 6;
             this.edtTokenCSC.Name = "edtTokenCSC";
             this.edtTokenCSC.PasswordChar = '\0';
@@ -568,7 +568,7 @@
             this.edtIdentificadorCSC.Lines = new string[] {
         "Styled Textbox"};
             this.edtIdentificadorCSC.Location = new System.Drawing.Point(27, 46);
-            this.edtIdentificadorCSC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edtIdentificadorCSC.Margin = new System.Windows.Forms.Padding(4);
             this.edtIdentificadorCSC.MaxLength = 36;
             this.edtIdentificadorCSC.Name = "edtIdentificadorCSC";
             this.edtIdentificadorCSC.PasswordChar = '\0';
@@ -585,7 +585,7 @@
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel2.Location = new System.Drawing.Point(480, 23);
-            this.metroLabel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroLabel2.Margin = new System.Windows.Forms.Padding(4);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(59, 17);
             this.metroLabel2.TabIndex = 18;
@@ -596,7 +596,7 @@
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel1.Location = new System.Drawing.Point(27, 23);
-            this.metroLabel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(4);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(33, 17);
             this.metroLabel1.TabIndex = 16;
@@ -607,7 +607,7 @@
             this.txtClienteID.Lines = new string[] {
         "Styled TextBox"};
             this.txtClienteID.Location = new System.Drawing.Point(556, 271);
-            this.txtClienteID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtClienteID.Margin = new System.Windows.Forms.Padding(4);
             this.txtClienteID.MaxLength = 32767;
             this.txtClienteID.Name = "txtClienteID";
             this.txtClienteID.PasswordChar = '\0';
@@ -624,7 +624,7 @@
             this.txtClientSecret.Lines = new string[] {
         "Styled TextBox"};
             this.txtClientSecret.Location = new System.Drawing.Point(743, 270);
-            this.txtClientSecret.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtClientSecret.Margin = new System.Windows.Forms.Padding(4);
             this.txtClientSecret.MaxLength = 32767;
             this.txtClientSecret.Name = "txtClientSecret";
             this.txtClientSecret.PasswordChar = '\0';
@@ -664,7 +664,7 @@
             // 
             this.checkBoxArqNSU.AutoSize = true;
             this.checkBoxArqNSU.Location = new System.Drawing.Point(4, 417);
-            this.checkBoxArqNSU.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBoxArqNSU.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxArqNSU.Name = "checkBoxArqNSU";
             this.checkBoxArqNSU.Size = new System.Drawing.Size(618, 17);
             this.checkBoxArqNSU.TabIndex = 37;
@@ -715,7 +715,7 @@
             this.Controls.Add(this.metroLabel22);
             this.Controls.Add(this.edtCNPJ);
             this.Controls.Add(this.checkBoxGravarEventosDeTerceiros);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "userConfiguracao_diversos";
             this.Size = new System.Drawing.Size(935, 558);
             this.grpQRCode.ResumeLayout(false);

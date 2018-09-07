@@ -8,10 +8,10 @@ namespace NFe.ConvertTxt
     public static class versoes
     {
         #region NFe
-        public static string VersaoXMLStatusServico = "3.10";
-        public static string VersaoXMLNFe = "3.10";
-        public static string VersaoXMLPedSit = "3.10";
-        public static string VersaoXMLInut = "3.10";
+        public static string VersaoXMLStatusServico = "4.00";
+        public static string VersaoXMLNFe = "4.00";
+        public static string VersaoXMLPedSit = "4.00";
+        public static string VersaoXMLInut = "4.00";
         public static string VersaoXMLConsCad = "2.00";
         public static string VersaoXMLEvento = "1.00";
         public static string VersaoXMLEnvConsultaNFeDest = "1.01";

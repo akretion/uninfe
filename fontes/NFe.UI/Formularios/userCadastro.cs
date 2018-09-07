@@ -44,7 +44,7 @@ namespace NFe.UI
                 comboUf.DataSource = Functions.CarregaEstados();
 
                 int posicao = uninfeDummy.xmlParams.ReadValue(this.GetType().Name, "last_empresa", 0);
-                if (posicao > (this.cbEmpresa.DataSource as System.Collections.ArrayList).Count)
+                if (posicao > (this.cbEmpresa.DataSource as System.Collections.ArrayList).Count - 1)
                     posicao = 0;
 
                 this.cbEmpresa.SelectedIndex = posicao;

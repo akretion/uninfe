@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using Servicos = Unimake.SAT.Servico;
-using EnunsSAT = Unimake.SAT.Enuns;
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.SAT.Abstract.Servico;
-using Unimake.SAT;
-using NFe.Settings;
 using NFe.SAT.Conversao;
-using System.Xml.Linq;
+using NFe.Settings;
+using System.IO;
+using System.Xml;
 
 namespace NFe.SAT.Servico.Envio
 {
@@ -35,7 +26,6 @@ namespace NFe.SAT.Servico.Envio
         /// Caminho do arquivo XML convertido
         /// </summary>
         private string ArquivoConvertido { get; set; }
-
 
         /// <summary>
         /// Construtor com serialização

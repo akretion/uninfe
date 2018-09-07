@@ -162,6 +162,7 @@
     <Compile Include="Betha\NewVersion\Betha.cs" />
     <Compile Include="Betha\NewVersion\BethaBase.cs" />
     <Compile Include="Betha\Betha.cs" />
+    <Compile Include="CEI.cs" />
     <Compile Include="CNPJ.cs" />
     <Compile Include="ComboElemen.cs" />
     <Compile Include="Coplan\SinopMT\h\CoplanH.cs" />
