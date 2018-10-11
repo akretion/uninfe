@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NFe.Components.Abstract;
+﻿using NFe.Components.Abstract;
+using System;
+using System.IO;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
-using System.IO;
 
 namespace NFe.Components.SystemPro
 {
     public abstract class SystemProBase : EmiteNFSeBase
     {
-
         #region locais/ protegidos
+
+        int CodMun = 0;
+
         object systemProService;
         protected object SystemProService
         {
@@ -21,12 +20,35 @@ namespace NFe.Components.SystemPro
                 if (systemProService == null)
                 {
                     if (tpAmb == TipoAmbiente.taHomologacao)
-                        systemProService = new br.gov.rs.erechim.nfse.www.h.NfseService_Homolog();
+                    {
+                        switch (CodMun)
+                        {
+                            case 4307005:
+                                systemProService = new br.gov.rs.erechim.nfse.www.h.NfseService_Homolog();
+                                break;
+
+                            case 4301701:
+                                systemProService = new HBaraoDeCotegipeRS.NfseService_Homolog();
+                                break;
+                        }
+                    }
                     else
-                        systemProService = new br.gov.rs.erechim.nfse.www.p.NfseService();
+                    {
+                        switch (CodMun)
+                        {
+                            case 4307005:
+                                systemProService = new br.gov.rs.erechim.nfse.www.p.NfseService();
+                                break;
+
+                            case 4301701:
+                                systemProService = new PBaraoDeCotegipeRS.NfseService();
+                                break;
+                        }
+                    }
 
                     AddClientCertificates();
                 }
+
                 return systemProService;
             }
         }
@@ -39,33 +61,40 @@ namespace NFe.Components.SystemPro
             certificates = pi.GetValue(systemProService, null) as X509CertificateCollection;
             certificates.Add(Certificate);
         }
-        #endregion
+
+        #endregion locais/ protegidos
 
         #region propriedades
+
         public X509Certificate Certificate { get; private set; }
+
         private string NfseCabecMsg = "<cabecalho versao=\"2.01\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"<versaoDados>2.01</versaoDados></cabecalho>";
-        #endregion
+        #endregion propriedades
 
         #region Construtores
-        public SystemProBase(TipoAmbiente tpAmb, string pastaRetorno, X509Certificate certificate)
+
+        public SystemProBase(TipoAmbiente tpAmb, string pastaRetorno, X509Certificate certificate, int codMun)
             : base(tpAmb, pastaRetorno)
         {
             Certificate = certificate;
+            CodMun = codMun;
         }
-        #endregion
+
+        #endregion Construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
             string strResult = Invoke("EnviarLoteRpsSincrono", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, 
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
         {
             string strResult = Invoke("CancelarNfse", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, 
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
@@ -82,7 +111,7 @@ namespace NFe.Components.SystemPro
         public override void ConsultarNfse(string file)
         {
             string strResult = Invoke("ConsultarNfseFaixa", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML, 
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
@@ -90,9 +119,11 @@ namespace NFe.Components.SystemPro
         {
             throw new Exceptions.ServicoInexistenteException();
         }
-        #endregion
+
+        #endregion Métodos
 
         #region invoke
+
         string Invoke(string methodName, params object[] _params)
         {
             object result = "";
@@ -101,9 +132,11 @@ namespace NFe.Components.SystemPro
             result = mi.Invoke(SystemProService, _params);
             return result.ToString();
         }
-        #endregion
+
+        #endregion invoke
 
         #region ReaderXML
+
         private string ReaderXML(string file)
         {
             string result = "";
@@ -118,6 +151,7 @@ namespace NFe.Components.SystemPro
             }
             return result;
         }
-        #endregion
+
+        #endregion ReaderXML
     }
 }

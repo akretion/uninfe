@@ -98,6 +98,8 @@ namespace NFe.Service
 
             if (codigoResposta.Equals("201") && !String.IsNullOrEmpty(codigoResposta))
             {
+                ConteudoXML.Save(NomeArquivoXML);
+
                 var protocoloEnvio = ((XmlElement)retornoEnvioLoteEventos).GetElementsByTagName("protocoloEnvio")[0].InnerText;
 
                 TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.EmProcessamento, $"{protocoloEnvio}.xml");

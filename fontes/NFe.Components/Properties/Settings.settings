@@ -194,12 +194,6 @@
     <Setting Name="NFe_Components_br_com_simplissweb_wshomologacao_h_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://wshomologacao.simplissweb.com.br/nfseservice.svc</Value>
     </Setting>
-    <Setting Name="NFe_Components_br_com_memory_pontenovamg_h_loterpswsdl" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://web1.memory.com.br:81/nfse/ws/lote_rps_service.php</Value>
-    </Setting>
-    <Setting Name="NFe_Components_br_com_memory_pontenovamg_p_loterpswsdl" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://nfsebrasil.net.br/nfse/ws/lote_rps_service.php</Value>
-    </Setting>
     <Setting Name="NFe_Components_br_com_sigiss_mogiguacu_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://mogiguacu.sigiss.com.br:443/mogiguacu/ws/sigiss_ws.php</Value>
     </Setting>
@@ -466,6 +460,48 @@
     </Setting>
     <Setting Name="NFe_Components_PLucasDoRioVerdeMTConsultarSituacaoLoteRps_WS_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://lucasdorioverde.fisslex.com.br/fiss-lex/servlet/aws_consultarsituacaoloterps</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HCaboDeSantoAgostinhoPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testecab/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HCaboDeSantoAgostinhoPE_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testecab/WSNFSE.ConsultarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testecab/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HCaboDeSantoAgostinhoPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testecab/WSNFSE.ConsultarNfsePorRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HCaboDeSantoAgostinhoPE_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testecab/WSNFSE.ConsultarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HCaboDeSantoAgostinhoPE_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testecab/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HBaraoDeCotegipeRS_NfseService_Homolog" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://portal.baraodecotegipe.rs.gov.br:8182/NfseService_Homolog/NfseService_Homolog</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PBaraoDeCotegipeRS_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://portal.baraodecotegipe.rs.gov.br:8182/NfseService/NfseService</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HGetulioVargasRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sistemaspmgv.no-ip.info:8083/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PGetulioVargasRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://sistemaspmgv.no-ip.info:8083/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HMemory_loterpswsdl" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://web1.memory.com.br:81/nfse/ws/lote_rps_service.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PMemory_loterpswsdl" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nfsebrasil.net.br/nfse/ws/lote_rps_service.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HPatoBrancoPR_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nfse2.patobranco.pr.gov.br/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPatoBrancoPR_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nfse2.patobranco.pr.gov.br/NFSe.Portal.Integracao/Services.svc</Value>
     </Setting>
   </Settings>
 </SettingsFile>

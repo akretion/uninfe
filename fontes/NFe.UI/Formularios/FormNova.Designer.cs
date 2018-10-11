@@ -57,7 +57,7 @@
         "Normal Textbox"};
             this.edtCNPJ.Location = new System.Drawing.Point(15, 41);
             this.edtCNPJ.Margin = new System.Windows.Forms.Padding(4);
-            this.edtCNPJ.MaxLength = 14;
+            this.edtCNPJ.MaxLength = 18;
             this.edtCNPJ.Name = "edtCNPJ";
             this.edtCNPJ.PasswordChar = '\0';
             this.edtCNPJ.ScrollBars = System.Windows.Forms.ScrollBars.None;

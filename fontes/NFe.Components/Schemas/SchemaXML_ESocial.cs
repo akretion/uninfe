@@ -708,6 +708,51 @@
             });
 
             #endregion Consulta Lote de eventos
+
+            #region Consulta Identificadores dos Eventos dos Empregadores
+
+            SchemaXML.InfSchemas.Add("eSocial-consultaIdentificadoresEvts-consultaEvtsEmpregador", new InfSchema()
+            {
+                Tag = "consultaIdentificadoresEvts",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\ConsultaIdentificadoresEventosEmpregador-v1_0_0.xsd",
+                Descricao = "eSocial - XML de Consulta Identificadores dos Eventos dos Empregadores",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "consultaIdentificadoresEvts",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/consulta/identificadores-eventos/empregador/v1_0_0"
+            });
+
+            #endregion Consulta Identificadores dos Eventos dos Empregadores
+
+            #region Consulta Identificadores dos Eventos das Tabelas
+
+            SchemaXML.InfSchemas.Add("eSocial-consultaIdentificadoresEvts-consultaEvtsTabela", new InfSchema()
+            {
+                Tag = "consultaIdentificadoresEvts",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\ConsultaIdentificadoresEventosTabela-v1_0_0.xsd",
+                Descricao = "eSocial - XML deConsulta Identificadores dos Eventos das Tabelas",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "consultaIdentificadoresEvts",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/consulta/identificadores-eventos/tabela/v1_0_0"
+            });
+
+            #endregion Consulta Identificadores dos Eventos das Tabelas
+
+            #region Consulta Identificadores dos Eventos dos Trabalhadores
+
+            SchemaXML.InfSchemas.Add("eSocial-consultaIdentificadoresEvts-consultaEvtsTrabalhador", new InfSchema()
+            {
+                Tag = "consultaIdentificadoresEvts",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\ConsultaIdentificadoresEventosTrabalhador-v1_0_0.xsd",
+                Descricao = "eSocial - XML de Consulta Identificadores dos Eventos dos Trabalhadores",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "consultaIdentificadoresEvts",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/consulta/identificadores-eventos/trabalhador/v1_0_0"
+            });
+
+            #endregion Consulta Identificadores dos Eventos dos Trabalhadores
         }
     }
 }

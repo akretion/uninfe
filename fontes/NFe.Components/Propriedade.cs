@@ -397,7 +397,8 @@ namespace NFe.Components
             eSocial_evt,
 
             eSocial_loteevt,
-            eSocial_consloteevt
+            eSocial_consloteevt,
+            eSocial_considevt
         }
 
         private static Dictionary<TipoEnvio, ExtensaoClass> ListaExtensoes = new Dictionary<TipoEnvio, ExtensaoClass>();
@@ -778,6 +779,12 @@ namespace NFe.Components
                     "-ret-esocial-consloteevt.xml", "",
                     "-ret-esocial-consloteevt.err",
                     "XML eSocial - Consultar Lote de Eventos"));
+
+                ListaExtensoes.Add(TipoEnvio.eSocial_considevt, new ExtensaoClass(
+                    "-esocial-considevt.xml", "",
+                    "-ret-esocial-considevt.xml", "",
+                    "-ret-esocial-considevt.err",
+                    "XML eSocial - Consultar Identificadores dos Eventos"));
 
                 #endregion Extensões eSocial
 

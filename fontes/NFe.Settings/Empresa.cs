@@ -200,6 +200,10 @@ namespace NFe.Settings
         /// Serviço que está sendo monitorado na configuração da empresa
         /// </summary>
         public TipoAplicativo Servico { get; set; }
+        /// <summary>
+        /// Se verdadediro valida o DigestValue da NFe/NFCe/MDFe/CTe que estão na pasta em processamento com o DigestValeu do pedido de situação
+        /// </summary>
+        public bool CompararDigestValueDFeRetornadoSEFAZ { get; set; }
         #endregion
 
         #region Propriedades da parte das configurações por empresa

@@ -88,7 +88,6 @@ namespace NFe.Service
         {
             XmlDocument arquivoRetornoConsultaLoteEventos = new XmlDocument();
             arquivoRetornoConsultaLoteEventos.LoadXml(vStrXmlRetorno);
-            XmlNode retornoEventoNode = null;
             XmlNode eventoNode = null;
             StreamWriter swProc = null;
             var protocoloEnvio = ConteudoXML.GetElementsByTagName("protocoloEnvio")[0].InnerText;
@@ -129,12 +128,16 @@ namespace NFe.Service
 
                                 XmlNode retEventos = ((XmlElement)retornoEvento).GetElementsByTagName("retornoEvento")[0];
 
-                                foreach (XmlNode retEvento in retEventos)
-                                    retornoEventoNode = ((XmlElement)retEvento).GetElementsByTagName("retornoEvento")[0];
-
                                 var xmlDistribuicao = "<esocialProc>";
                                 xmlDistribuicao += eventoNode.OuterXml;
-                                xmlDistribuicao += retornoEventoNode.OuterXml;
+
+                                foreach (XmlNode retEvento in retEventos)
+                                {
+                                    xmlDistribuicao += "<retornoEvento>";
+                                    xmlDistribuicao += retEvento.OuterXml;
+                                    xmlDistribuicao += "</retornoEvento>";
+                                }
+
                                 xmlDistribuicao += "</esocialProc>";
 
                                 //Nome do arquivo de distribuição do eSocial

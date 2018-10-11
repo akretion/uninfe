@@ -48,7 +48,7 @@ namespace NFe.Settings
 
                 if (string.IsNullOrEmpty(emp.PastaBase))
                 {
-                    throw new NFe.Components.Exceptions.ProblemaExecucaoUniNFe("Pasta de envio da empresa '" + emp.Nome + "' não está definida.");
+                    throw new Components.Exceptions.ProblemaExecucaoUniNFe("Pasta de envio da empresa '" + emp.Nome + "' não está definida.");
                 }
                 else
                 {
@@ -56,7 +56,7 @@ namespace NFe.Settings
 
                     if (!Directory.Exists(dir))
                     {
-                        throw new NFe.Components.Exceptions.ProblemaExecucaoUniNFe("Pasta de envio da empresa '" + emp.Nome + "' não existe.");
+                        throw new Components.Exceptions.ProblemaExecucaoUniNFe("Pasta de envio da empresa '" + emp.Nome + "' não existe.");
                     }
                     else
                     {
@@ -64,7 +64,7 @@ namespace NFe.Settings
                         string filePath = String.Format("{0}\\{1}", dir, fileName);
 
                         //se já existe um arquivo de lock e o nome do arquivo for diferente desta máquina
-                        //não pode deixar executar
+                        //não pode deixar executar                        
 
                         string fileLock = (from x in
                                                (from f in Directory.GetFiles(dir, "*" + Propriedade.NomeAplicacao + "*.lock")
@@ -72,13 +72,21 @@ namespace NFe.Settings
                                            where !x.Name.Equals(fileName, StringComparison.InvariantCultureIgnoreCase)
                                            select x.FullName).FirstOrDefault();
 
+                        if (Propriedade.NomeAplicacao.ToLower() == "uninfeservico" && string.IsNullOrEmpty(fileLock))
+                        {
+                            string filename2 = String.Format("{0}-{1}.lock", "UniNFe", Environment.MachineName);
+                            fileLock = (from x in
+                                            (from f in Directory.GetFiles(dir, "*UniNFe" + "*.lock")
+                                             select new FileInfo(f))
+                                        where !x.Name.Equals(fileName, StringComparison.InvariantCultureIgnoreCase)
+                                        select x.FullName).FirstOrDefault();
+                        }
+
                         if (!String.IsNullOrEmpty(fileLock))
                         {
-                            FileInfo fi = new FileInfo(fileLock);
-
-                            throw new NFe.Components.Exceptions.AppJaExecutando("Já existe uma instância do " + Propriedade.NomeAplicacao +
-                                                                                 " em Execução que atende a conjunto de pastas: " + fi.Directory.FullName + " (*Incluindo subdiretórios).\r\n\r\n" +
-                                                                                 "Nome da estação que está executando: " + fi.Name.Replace(Propriedade.NomeAplicacao + "-", "").Replace(".lock", ""));
+                            throw new Components.Exceptions.AppJaExecutando("Já existe uma instância do UniNFe em Execução que atende a conjunto de pastas: " + 
+                                dir + " (*Incluindo subdiretórios).\r\n\r\n" +
+                                "Nome da estação que está executando: " + fileName.Replace(Propriedade.NomeAplicacao + "-", "").Replace(".lock", ""));
                         }
                     }
                 }

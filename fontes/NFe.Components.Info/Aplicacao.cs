@@ -284,11 +284,8 @@ namespace NFe.Components.Info
         /// <summary>
         /// Verifica se a aplicação já está executando ou não
         /// </summary>
-        /// <param name="oOneMutex">Objeto do tipo Mutex para ter como retorno para conseguir encerrar o mutex na finalização do aplicativo</param>
         /// <returns>True=Aplicação está executando</returns>
-        /// <date>31/07/2009</date>
-        /// <by>Wandrey Mundin Ferreira</by>
-        public static Boolean AppExecutando(ref System.Threading.Mutex oOneMutex)
+        public static Boolean UniNFeSevicoAppExecutando()
         {
             Propriedade.ExecutandoPeloUniNFe = false; //Executado pelo UniNfeServico
 

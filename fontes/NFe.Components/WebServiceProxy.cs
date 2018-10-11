@@ -85,6 +85,7 @@ namespace NFe.Components
         public string ArquivoWSDL { get; set; }
 
         private PadroesNFSe PadraoNFSe { get; set; }
+
         private Servicos servico;
         private bool taHomologacao;
         private int cMunicipio;
@@ -167,7 +168,9 @@ namespace NFe.Components
                                     cMunicipio == 3512803 ||
                                     cMunicipio == 4323002 ||
                                     cMunicipio == 3505807 ||
-                                    cMunicipio == 3530300)
+                                    cMunicipio == 3530300 ||
+                                    cMunicipio == 4308904 ||
+                                    cMunicipio == 4118501)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -177,7 +180,9 @@ namespace NFe.Components
                                     cMunicipio == 3131703 ||
                                     cMunicipio == 4303004 ||
                                     cMunicipio == 4322509 ||
-                                    cMunicipio == 3512803)
+                                    cMunicipio == 3512803 ||
+                                    cMunicipio == 4308904 ||
+                                    cMunicipio == 4118501)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -187,7 +192,8 @@ namespace NFe.Components
                                     cMunicipio == 3131703 ||
                                     cMunicipio == 4303004 ||
                                     cMunicipio == 4322509 ||
-                                    cMunicipio == 3556602)
+                                    cMunicipio == 3556602 ||
+                                    cMunicipio == 4308904)
                                     return "BasicHttpBinding_INFSEConsultas";
                                 else
                                     return "basic_INFSEConsultas";
@@ -347,7 +353,7 @@ namespace NFe.Components
 
                 var inner = ex.InnerException;
 
-                while(inner != null)
+                while (inner != null)
                 {
                     msgErro += $"{Environment.NewLine}{inner.Message}";
                     inner = inner.InnerException;
@@ -375,6 +381,23 @@ namespace NFe.Components
         }
 
         #endregion InvokeXML()
+
+        #region InvokeElement()
+
+        /// <summary>
+        /// Invocar o método da classe
+        /// </summary>
+        /// <param name="Instance">Instância do objeto</param>
+        /// <param name="methodName">Nome do método</param>
+        /// <param name="parameters">Objeto com o conteúdo dos parâmetros do método</param>
+        /// <returns>Um objeto do tipo XML</returns>
+        public XmlNode InvokeElement(object Instance, string methodName, object[] parameters)
+        {
+            //Invocar método do serviço
+            return (XmlNode)this.Invoke(Instance, methodName, parameters);
+        }
+
+        #endregion InvokeElement()
 
         #region InvokeXML()
 
@@ -543,7 +566,7 @@ namespace NFe.Components
 
             #endregion Gerar o código da classe
 
-           string codigoClasse = writer.ToString();
+            string codigoClasse = writer.ToString();
 
             #region Compilar o código da classe
 
@@ -611,6 +634,7 @@ namespace NFe.Components
                 case PadroesNFSe.GIF:
                 case PadroesNFSe.PRONIN:
                 case PadroesNFSe.INTERSOL:
+
                     //Tive que utilizar a WebClient para que a OpenRead funcionasse, não foi possível fazer funcionar com a SecureWebClient. Tem que analisar melhor. Wandrey e Renan 10/09/2013
                     WebClient client = new WebClient();
                     Stream stream = client.OpenRead(ArquivoWSDL);
@@ -660,7 +684,7 @@ namespace NFe.Components
         /// <param name="instance">Objeto do serviço que será consumido</param>
         private void RelacCertificado(object instance)
         {
-            if(oCertificado != null)
+            if (oCertificado != null)
             {
                 var client = instance as System.Web.Services.Protocols.SoapHttpClientProtocol;
                 client?.ClientCertificates.Add(oCertificado);
@@ -691,6 +715,7 @@ namespace NFe.Components
                 Propriedade.Municipios = new List<Municipio>();
 
                 XmlDocument doc = new XmlDocument();
+
                 /// danasa 1-2012
                 if (File.Exists(Propriedade.NomeArqXMLMunicipios))
                 {
@@ -751,6 +776,7 @@ namespace NFe.Components
                                     webServicesList.Add(wsItem);
                                 }
                             }
+
                             ///
                             /// adiciona na lista que será usada na manutencao
                             ///
@@ -758,6 +784,7 @@ namespace NFe.Components
                         }
                     }
                 }
+
                 /// danasa 1-2012
 
                 bool salvaXmlLocal = false;
@@ -838,6 +865,7 @@ namespace NFe.Components
 
                                 webServicesList.Add(wsItem);
                             }
+
                             // danasa 1-2012
                             if (estadoElemento.HasAttribute(NFeStrConstants.Padrao))
                             {
@@ -868,6 +896,7 @@ namespace NFe.Components
                                 }
                                 catch { }
                             }
+
                             // danasa 1-2012
                         }
                     }
@@ -963,9 +992,13 @@ namespace NFe.Components
     public class webServices
     {
         public int ID { get; private set; }
+
         public string Nome { get; private set; }
+
         public string UF { get; private set; }
+
         public URLws LocalHomologacao { get; private set; }
+
         public URLws LocalProducao { get; private set; }
 
         public webServices(int id, string nome, string uf)
@@ -1013,6 +1046,7 @@ namespace NFe.Components
             InutilizarNFSe =
             RecepcionarLoteRps =
             ConsultaSequenciaLoteNotaRPS =
+
             ///
             /// CFS-e
             RecepcionarLoteCfse =
@@ -1023,6 +1057,7 @@ namespace NFe.Components
             EnviarInformeManutencaoCfse =
             InformeTrasmissaoSemMovimentoCfse =
             ConsultarDadosCadastroCfse =
+
             ///
             /// NF-e
             NFeRecepcaoEvento =
@@ -1034,6 +1069,7 @@ namespace NFe.Components
             NFeStatusServico =
             NFeAutorizacao =
             NFeRetAutorizacao =
+
             ///
             /// MDF-e
             MDFeRecepcao =
@@ -1042,9 +1078,11 @@ namespace NFe.Components
             MDFeStatusServico =
             MDFeRecepcaoEvento =
             MDFeNaoEncerrado =
+
             ///
             /// DF-e
             DFeRecepcao =
+
             ///
             /// CT-e
             CTeRecepcao =
@@ -1056,6 +1094,7 @@ namespace NFe.Components
             CTeConsultaCadastro =
             CTeDistribuicaoDFe =
             CteRecepcaoOS =
+
             ///
             /// LMC
             LMCAutorizacao = string.Empty;
@@ -1072,10 +1111,15 @@ namespace NFe.Components
         // public string NFeRecepcao { get; set; }
         //public string NFeRetRecepcao { get; set; }
         public string NFeInutilizacao { get; set; }
+
         public string NFeConsulta { get; set; }
+
         public string NFeStatusServico { get; set; }
+
         public string NFeConsultaCadastro { get; set; }
+
         public string NFeAutorizacao { get; set; }
+
         public string NFeRetAutorizacao { get; set; }
 
         /// <summary>
@@ -1084,6 +1128,7 @@ namespace NFe.Components
         public string NFeRecepcaoEvento { get; set; }
 
         public string NFeDownload { get; set; }
+
         public string NFeManifDest { get; set; }
 
         /// <summary>
@@ -1319,6 +1364,11 @@ namespace NFe.Components
         /// Consulta do lote de eventos do eSocial
         /// </summary>
         public string ConsultarLoteeSocial { get; set; }
+
+        /// <summary>
+        /// Consulta dos identificadores dos eventos do eSocial: Empregador, Tabela e Trabalhador
+        /// </summary>
+        public string ConsultarIdentificadoresEventoseSocial { get; set; }
 
         #endregion eSocial
 

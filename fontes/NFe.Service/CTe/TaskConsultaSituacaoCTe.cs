@@ -152,6 +152,23 @@ namespace NFe.Service
                 {
                     if (notDaEmpresa)
                         return;
+
+                    var arquivos = Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString(), "*-cte.*");
+
+                    foreach (var arquivo in arquivos)
+                    {
+                        XmlDocument arqXML = new XmlDocument();
+                        arqXML.Load(arquivo);
+
+                        string chave = ((XmlElement)arqXML.GetElementsByTagName("infCte")[0]).GetAttribute("Id").Substring(3);
+
+                        if (chave.Equals(ChaveCTe))
+                        {
+                            strNomeArqCTe = Path.GetFileName(arquivo);
+                            strArquivoCTe = arquivo;
+                            break;
+                        }
+                    }
                 }
 
                 #endregion CNPJ da chave não é de uma empresa Uninfe
@@ -237,14 +254,27 @@ namespace NFe.Service
                                             conteudoXML.Load(strArquivoCTe);
                                             oLerXml.Cte(conteudoXML);
 
+                                            if (Empresas.Configuracoes[emp].CompararDigestValueDFeRetornadoSEFAZ)
+                                            {
+                                                var digestValueConsultaSituacao = infConsSitElemento.GetElementsByTagName("digVal")[0].InnerText;
+                                                var digestValueCTe = conteudoXML.GetElementsByTagName("DigestValue")[0].InnerText;
+
+                                                if (!string.IsNullOrWhiteSpace(digestValueConsultaSituacao) && !string.IsNullOrWhiteSpace(digestValueCTe))
+                                                    if (!digestValueConsultaSituacao.Equals(digestValueCTe))
+                                                    {
+                                                        oAux.MoveArqErro(strArquivoCTe);
+                                                        throw new Exception("O valor do DigestValue da consulta situação é diferente do DigestValue do CTe.");
+                                                    }
+                                            }
+
                                             //Verificar se a -nfe.xml existe na pasta de autorizados
-                                            bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, 
-                                                Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML, 
+                                            bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi,
+                                                Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML,
                                                 Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML);
 
                                             //Verificar se o -procNfe.xml existe na past de autorizados
-                                            bool procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, 
-                                                Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML, 
+                                            bool procNFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi,
+                                                Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML,
                                                 Propriedade.ExtRetorno.ProcCTe);
 
                                             //Se o XML de distribuição não estiver na pasta em processamento
@@ -276,9 +306,9 @@ namespace NFe.Service
                                             if (procNFeJaNaAutorizada)
                                                 try
                                                 {
-                                                    var strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + 
-                                                        PastaEnviados.Autorizados.ToString() + "\\" + 
-                                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + 
+                                                    var strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                                        PastaEnviados.Autorizados.ToString() + "\\" +
+                                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) +
                                                         Path.GetFileName(strArquivoNFeProc);
                                                     TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                                 }
@@ -314,9 +344,9 @@ namespace NFe.Service
                                                 ///
                                                 try
                                                 {
-                                                    var strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + 
-                                                        PastaEnviados.Denegados.ToString() + "\\" + 
-                                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) + 
+                                                    var strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                                                        PastaEnviados.Denegados.ToString() + "\\" +
+                                                        Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi) +
                                                         Functions.ExtrairNomeArq(strArquivoCTe, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML) + Propriedade.ExtRetorno.Den;
 
                                                     TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);

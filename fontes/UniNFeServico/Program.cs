@@ -24,7 +24,7 @@ namespace UniNFeServico
 
             System.Threading.Mutex oneMutex = null;
 
-            if (Aplicacao.AppExecutando(ref oneMutex))//danasa 22/7/2011
+            if (Aplicacao.UniNFeSevicoAppExecutando())
             {
                 return;
             }

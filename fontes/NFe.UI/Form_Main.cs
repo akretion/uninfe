@@ -47,8 +47,8 @@ namespace NFe.UI
                 ///
                 /// danasa 9-2009
                 ///
-                this.MinimumSize = new Size(800, 600);
-                this.MaximumSize = new Size(800, 600);
+                this.MinimumSize = new Size(800, 630);
+                this.MaximumSize = new Size(800, 630);
                 //Trazer minimizado e no systray
                 this.notifyIcon1.Text = NFe.Components.Propriedade.NomeAplicacao + " - " + NFe.Components.Propriedade.DescricaoAplicacao;
                 this.notifyIcon1.Visible = true;

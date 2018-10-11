@@ -228,10 +228,6 @@ namespace NFe.Service.NFSe
 
                         break;
 
-                    case PadroesNFSe.FREIRE_INFORMATICA:
-                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
-                        break;
-
                     case PadroesNFSe.MEMORY:
 
                         #region Memory
@@ -279,7 +275,9 @@ namespace NFe.Service.NFSe
                             oDadosPedSitLoteRps.cMunicipio == 3512803 || 
                             oDadosPedSitLoteRps.cMunicipio == 4323002 ||
                             oDadosPedSitLoteRps.cMunicipio == 3505807 || 
-                            oDadosPedSitLoteRps.cMunicipio == 3530300)
+                            oDadosPedSitLoteRps.cMunicipio == 3530300 ||
+                            oDadosPedSitLoteRps.cMunicipio == 4308904 ||
+                            oDadosPedSitLoteRps.cMunicipio == 4118501)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

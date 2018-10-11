@@ -215,7 +215,7 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.SYSTEMPRO:
                         SystemPro syspro = new SystemPro((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                                                        Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado, oDadosPedCanNfse.cMunicipio);
                         AssinaturaDigital ad = new AssinaturaDigital();
                         ad.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
 
@@ -404,9 +404,7 @@ namespace NFe.Service.NFSe
                     #endregion MGM
 
                     case PadroesNFSe.NATALENSE:
-                        cabecMsg = @"
-                                    <![CDATA[<?xml version=""1.0""?> <cabecalho xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" versao =""1"" xmlns =""http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"" > <versaoDados>1</versaoDados></cabecalho>
-                                    ";
+						cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"1\" xmlns=\"http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd\"><versaoDados>1</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.CONSIST:
@@ -426,10 +424,6 @@ namespace NFe.Service.NFSe
                         break;
 
                     #endregion Consist
-
-                    case PadroesNFSe.FREIRE_INFORMATICA:
-                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
-                        break;
 
                     case PadroesNFSe.MEMORY:
 
@@ -471,7 +465,9 @@ namespace NFe.Service.NFSe
                             oDadosPedCanNfse.cMunicipio == 3512803 ||
                             oDadosPedCanNfse.cMunicipio == 4323002 ||
                             oDadosPedCanNfse.cMunicipio == 3505807 ||
-                            oDadosPedCanNfse.cMunicipio == 3530300)
+                            oDadosPedCanNfse.cMunicipio == 3530300 ||
+                            oDadosPedCanNfse.cMunicipio == 4308904 ||
+                            oDadosPedCanNfse.cMunicipio == 4118501)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

@@ -1592,6 +1592,7 @@
       <ConsultarLoteReinf>WSDL\Homologacao\AN\EFDReinfConsultas.wsdl</ConsultarLoteReinf>
       <RecepcaoLoteeSocial>WSDL\Homologacao\AN\eSocial_ServicoEnviarLoteEventos.wsdl</RecepcaoLoteeSocial>
       <ConsultarLoteeSocial>WSDL\Homologacao\AN\eSocial_ServicoConsultarLoteEventos.wsdl</ConsultarLoteeSocial>
+      <ConsultarIdentificadoresEventoseSocial>WSDL\Homologacao\AN\eSocial_ConsultarIdentificadoresEventos.wsdl</ConsultarIdentificadoresEventoseSocial>
     </LocalHomologacao>
     <LocalProducao>
       <NFeInutilizacao></NFeInutilizacao>
@@ -1622,6 +1623,7 @@
       <ConsultarLoteReinf>WSDL\Producao\AN\EFDReinfConsultas.wsdl</ConsultarLoteReinf>
       <RecepcaoLoteeSocial>WSDL\Producao\AN\eSocial_ServicoEnviarLoteEventos.wsdl</RecepcaoLoteeSocial>
       <ConsultarLoteeSocial>WSDL\Producao\AN\eSocial_ServicoConsultarLoteEventos.wsdl</ConsultarLoteeSocial>
+      <ConsultarIdentificadoresEventoseSocial>WSDL\Producao\AN\eSocial_ConsultarIdentificadoresEventos.wsdl</ConsultarIdentificadoresEventoseSocial>
     </LocalProducao>
   </Estado>
   <Estado ID="17" Nome="Tocantins" UF="TO" SVC="teSVCAN">

@@ -45,6 +45,14 @@ namespace NFe.Components.Pronin
                                 proninService = new BastosSP.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
+                            case 4308904: //Getúlio Vargas-RS
+                                proninService = new GetulioVargasRS.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
+                            case 4118501: //Pato Branco-PR
+                                proninService = new PatoBrancoPR.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -85,6 +93,14 @@ namespace NFe.Components.Pronin
 
                             case 3530300: //Mirassol-SP
                                 proninService = new MirassolSP.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
+                            case 4308904: //Getúlio Vargas-RS
+                                proninService = new GetulioVargasRS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
+                            case 4118501: //Pato Branco-PR
+                                proninService = new PatoBrancoPR.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
                             default:

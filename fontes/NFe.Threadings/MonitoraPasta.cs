@@ -1,6 +1,8 @@
-﻿using NFe.Settings;
+﻿using NFe.Components;
+using NFe.Settings;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -37,6 +39,13 @@ namespace NFe.Threadings
         public static List<FileSystemWatcher> fsw = new List<FileSystemWatcher>();
 
         #endregion Propriedades
+        private static void RestartService()
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "servico_reiniciar.bat");
+            p.Start();
+        }
+
 
         #region MonitorarPastas()
 
@@ -243,25 +252,16 @@ namespace NFe.Threadings
                         File.Delete(fi.FullName);
                         try
                         {
-                            if (Components.Propriedade.ExecutandoPeloUniNFe)
+
+                            if (Propriedade.ServicoRodando)
                             {
-                                System.Diagnostics.Process.Start(Components.Propriedade.PastaExecutavel + "\\uninfe.exe", "/restart");
+                                RestartService();
                             }
                             else
                             {
-                                Components.ServiceProcess.StopService(Components.Propriedade.ServiceName, 40000);
-                                for (int i = 0; i < 10; ++i)
-                                {
-                                    Thread.Sleep(500);
-
-                                    if (Components.ServiceProcess.StatusService(Components.Propriedade.ServiceName) == System.ServiceProcess.ServiceControllerStatus.Stopped)
-                                    {
-                                        Components.ServiceProcess.RestartService(Components.Propriedade.ServiceName, 40000);
-                                        break;
-                                    }
-                                }
+                                System.Diagnostics.Process.Start(Components.Propriedade.PastaExecutavel + "\\uninfe.exe", "/restart");
                             }
-
+                                                      
                             return;
                         }
                         catch (Exception ex)

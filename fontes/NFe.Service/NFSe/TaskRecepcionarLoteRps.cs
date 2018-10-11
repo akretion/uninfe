@@ -251,7 +251,7 @@ namespace NFe.Service.NFSe
                         #region SystemPro
 
                         SystemPro syspro = new SystemPro((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado);
+                            Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado, oDadosEnvLoteRps.cMunicipio);
                         AssinaturaDigital ad = new AssinaturaDigital();
                         ad.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
                         syspro.EmiteNF(NomeArquivoXML);
@@ -515,10 +515,6 @@ namespace NFe.Service.NFSe
 
                     #endregion Coplan
 
-                    case PadroesNFSe.FREIRE_INFORMATICA:
-                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
-                        break;
-
                     case PadroesNFSe.MEMORY:
 
                         #region Memory
@@ -558,7 +554,9 @@ namespace NFe.Service.NFSe
                             oDadosEnvLoteRps.cMunicipio == 3512803 ||
                             oDadosEnvLoteRps.cMunicipio == 4323002 ||
                             oDadosEnvLoteRps.cMunicipio == 3505807 ||
-                            oDadosEnvLoteRps.cMunicipio == 3530300)
+                            oDadosEnvLoteRps.cMunicipio == 3530300 ||
+                            oDadosEnvLoteRps.cMunicipio == 4308904 ||
+                            oDadosEnvLoteRps.cMunicipio == 4118501)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

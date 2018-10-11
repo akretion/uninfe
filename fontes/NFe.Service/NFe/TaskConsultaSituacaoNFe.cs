@@ -239,6 +239,23 @@ namespace NFe.Service
                 {
                     if (notDaEmpresa)
                         return;
+
+                    var arquivos = Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString(), "*-nfe.*");
+
+                    foreach (var arquivo in arquivos)
+                    {
+                        XmlDocument arqXML = new XmlDocument();
+                        arqXML.Load(arquivo);
+
+                        string chave = ((XmlElement)arqXML.GetElementsByTagName("infNFe")[0]).GetAttribute("Id").Substring(3);
+
+                        if (chave.Equals(ChaveNFe))
+                        {
+                            strNomeArqNfe = Path.GetFileName(arquivo);
+                            strArquivoNFe = arquivo;
+                            break;
+                        }
+                    }
                 }
 
                 #endregion CNPJ da chave não é de uma empresa Uninfe
@@ -367,6 +384,19 @@ namespace NFe.Service
                                             XmlDocument conteudoXML = new XmlDocument();
                                             conteudoXML.Load(strArquivoNFe);
                                             oLerXml.Nfe(conteudoXML);
+
+                                            if (Empresas.Configuracoes[emp].CompararDigestValueDFeRetornadoSEFAZ)
+                                            {
+                                                var digestValueConsultaSituacao = infConsSitElemento.GetElementsByTagName("digVal")[0].InnerText;
+                                                var digestValueNota = conteudoXML.GetElementsByTagName("DigestValue")[0].InnerText;
+
+                                                if (!string.IsNullOrWhiteSpace(digestValueConsultaSituacao) && !string.IsNullOrWhiteSpace(digestValueNota))
+                                                    if (!digestValueConsultaSituacao.Equals(digestValueNota))
+                                                    {
+                                                        oAux.MoveArqErro(strArquivoNFe);
+                                                        throw new Exception("O valor do DigestValue da consulta situação é diferente do DigestValue da NFe ou NFCe.");
+                                                    }
+                                            }
 
                                             //Verificar se a -nfe.xml existe na pasta de autorizados
                                             bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML);

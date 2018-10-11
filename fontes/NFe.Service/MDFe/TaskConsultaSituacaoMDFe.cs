@@ -149,8 +149,28 @@ namespace NFe.Service
                 bool notDaEmpresa = (ChaveMDFe.Substring(6, 14) != Empresas.Configuracoes[emp].CNPJ ||
                                     ChaveMDFe.Substring(0, 2) != Empresas.Configuracoes[emp].UnidadeFederativaCodigo.ToString());
 
-                if (!File.Exists(strArquivoNFe) && notDaEmpresa)
-                    return;
+                if (!File.Exists(strArquivoNFe))
+                {
+                    if (notDaEmpresa)
+                        return;
+
+                    var arquivos = Directory.GetFiles(Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString(), "*-mdfe.*");
+
+                    foreach (var arquivo in arquivos)
+                    {
+                        XmlDocument arqXML = new XmlDocument();
+                        arqXML.Load(arquivo);
+
+                        string chave = ((XmlElement)arqXML.GetElementsByTagName("infMDFe")[0]).GetAttribute("Id").Substring(4);
+
+                        if (chave.Equals(ChaveMDFe))
+                        {
+                            strNomeArqNfe = Path.GetFileName(arquivo);
+                            strArquivoNFe = arquivo;
+                            break;
+                        }
+                    }
+                }
 
                 #endregion CNPJ da chave não é de uma empresa Uninfe
 
@@ -258,6 +278,19 @@ namespace NFe.Service
                                             XmlDocument conteudoXML = new XmlDocument();
                                             conteudoXML.Load(strArquivoNFe);
                                             oLerXml.Mdfe(conteudoXML);
+
+                                            if (Empresas.Configuracoes[emp].CompararDigestValueDFeRetornadoSEFAZ)
+                                            {
+                                                var digestValueConsultaSituacao = infConsSitElemento.GetElementsByTagName("digVal")[0].InnerText;
+                                                var digestValueMDFe = conteudoXML.GetElementsByTagName("DigestValue")[0].InnerText;
+
+                                                if (!string.IsNullOrWhiteSpace(digestValueConsultaSituacao) && !string.IsNullOrWhiteSpace(digestValueMDFe))
+                                                    if (!digestValueConsultaSituacao.Equals(digestValueMDFe))
+                                                    {
+                                                        oAux.MoveArqErro(strArquivoNFe);
+                                                        throw new Exception("O valor do DigestValue da consulta situação é diferente do DigestValue do MDFe.");
+                                                    }
+                                            }
 
                                             //Verificar se a -nfe.xml existe na pasta de autorizados
                                             bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML);

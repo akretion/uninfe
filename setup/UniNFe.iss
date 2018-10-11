@@ -2,7 +2,7 @@
 
 [Setup]
 AppName=UniNFe - Monitor de Documentos Fiscais Eletrônicos
-AppVerName=UniNFe 5.0
+AppVerName=UniNFe 5.1
 DefaultDirName={sd}\Unimake\UniNFe
 DefaultGroupName=Unimake Softwares
 SetupIconFile=C:\clipart\unimake\ICONES\Install.ico
@@ -15,7 +15,7 @@ LicenseFile=..\doc\usuario\licenca.txt
 AppPublisherURL=www.uninfe.com.br
 AppSupportURL=www.uninfe.com.br
 AppUpdatesURL=www.uninfe.com.br
-AppVersion=5.0
+AppVersion=5.1
 AppSupportPhone=(044) 3141-4900
 UninstallDisplayIcon={app}\uninfe.exe
 UninstallDisplayName=UniNFe - Monitor DF-e
@@ -26,12 +26,12 @@ DisableFinishedPage=true
 WizardImageFile=C:\Program Files (x86)\Inno Setup 5\WizModernImage-IS.bmp
 WizardSmallImageFile=C:\Program Files (x86)\Inno Setup 5\WizModernSmallImage-IS.bmp
 OutputBaseFilename=iuninfe5
-VersionInfoVersion=5.0
+VersionInfoVersion=5.1
 VersionInfoCompany=Unimake Softwares
 VersionInfoDescription=UniNFe - Monitor DF-e
 VersionInfoCopyright=Unimake Softwares
 VersionInfoProductName=UniNFe
-VersionInfoProductVersion=5.0
+VersionInfoProductVersion=5.1
 OutputDir=\projetos\instaladores
 DisableDirPage=false
 

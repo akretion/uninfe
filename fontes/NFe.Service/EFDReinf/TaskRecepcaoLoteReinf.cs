@@ -114,7 +114,7 @@ namespace NFe.Service
 
                         if (cdRetorno.Equals("0"))
                         {
-                            evtTotal = ((XmlElement)retonoEvento).GetElementsByTagName("evtTotal")[0];
+                            evtTotal = ((XmlElement)retonoEvento).GetElementsByTagName("Reinf")[0];
 
                             string retornoEventoID = ((XmlElement)retonoEvento).Attributes.GetNamedItem("id").Value;
 
@@ -129,7 +129,9 @@ namespace NFe.Service
                                     string xmlDistribuicao = "<reinfProc>";
                                     eventoAprovado = ((XmlElement)evento).GetElementsByTagName("Reinf")[0];
                                     xmlDistribuicao += eventoAprovado.OuterXml;
+                                    xmlDistribuicao += "<retornoEvento>";
                                     xmlDistribuicao += evtTotal.OuterXml;
+                                    xmlDistribuicao += "</retornoEvento>";
                                     xmlDistribuicao += "</reinfProc>";
 
                                     //Nome do arquivo de distribuição do EFDReinf

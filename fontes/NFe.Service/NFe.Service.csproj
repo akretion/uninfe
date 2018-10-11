@@ -170,6 +170,7 @@
     <Compile Include="DFe\TaskRecepcaoDFe.cs" />
     <Compile Include="EFDReinf\TaskConsultarLoteReinf.cs" />
     <Compile Include="EFDReinf\TaskRecepcaoLoteReinf.cs" />
+    <Compile Include="eSocial\TaskConsultarIdentificadoresEventoseSocial.cs" />
     <Compile Include="eSocial\TaskConsultarLoteeSocial.cs" />
     <Compile Include="eSocial\TaskRecepcaoLoteeSocial.cs" />
     <Compile Include="LMC\LMCAutorizacao.cs" />

@@ -3,7 +3,6 @@ using NFe.Settings;
 using System;
 using System.Collections;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace NFe.UI.Formularios
@@ -48,31 +47,29 @@ namespace NFe.UI.Formularios
                 #endregion Montar Array DropList da UF
 
                 #region Montar Array DropList do Ambiente
+
                 comboBox_Ambiente.DataSource = EnumHelper.ToList(typeof(TipoAmbiente), true, true);
                 comboBox_Ambiente.DisplayMember = "Value";
                 comboBox_Ambiente.ValueMember = "Key";
                 #endregion Montar Array DropList do Ambiente
 
                 #region Montar array DropList dos tipos de serviços
+
                 this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo(false);
                 this.cbServico.DisplayMember = "Value";
                 this.cbServico.ValueMember = "Key";
                 #endregion Montar array DropList dos tipos de serviços
 
                 #region Montar Array DropList do Tipo de Emissão da NF-e
+
                 comboBox_tpEmis.DataSource = EnumHelper.ToList(typeof(TipoEmissao), true, true);
                 comboBox_tpEmis.DisplayMember = "Value";
                 comboBox_tpEmis.ValueMember = "Key";
                 #endregion Montar Array DropList do Tipo de Emissão da NF-e
 
                 this.cbServico.SelectedIndexChanged += cbServico_SelectedIndexChanged;
-
-                loc_1 = lbl_udDiasLimpeza.Location;
-                loc_2 = udDiasLimpeza.Location;
             }
         }
-
-        private Point loc_1, loc_2;
 
         public void Populate(Empresa empresa, bool novaempresa)
         {
@@ -150,6 +147,12 @@ namespace NFe.UI.Formularios
 
                 if (this.empresa.Servico != TipoAplicativo.Nfse && !novaempresa)
                     this.cbServico.Enabled = true;
+
+                if (this.empresa.Servico.Equals(TipoAplicativo.Nfe) ||
+                    this.empresa.Servico.Equals(TipoAplicativo.NFCe) ||
+                    this.empresa.Servico.Equals(TipoAplicativo.MDFe) ||
+                    this.empresa.Servico.Equals(TipoAplicativo.Cte))
+                    checkBoxValidarDigestValue.Checked = this.empresa.CompararDigestValueDFeRetornadoSEFAZ;
             }
             finally
             {
@@ -233,6 +236,7 @@ namespace NFe.UI.Formularios
             this.empresa.TokenCSC = this.edtTokenCSC.Text;
             this.empresa.ClientID = this.txtClienteID.Text;
             this.empresa.ClientSecret = this.txtClientSecret.Text;
+            this.empresa.CompararDigestValueDFeRetornadoSEFAZ = checkBoxValidarDigestValue.Checked;
 
             return true;
         }
@@ -254,6 +258,12 @@ namespace NFe.UI.Formularios
 
             this.grpQRCode.Visible = (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.NFCe ||
                                      (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Nfe ||
+                                     (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Todos;
+
+            this.checkBoxValidarDigestValue.Visible = (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.NFCe ||
+                                     (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Nfe ||
+                                     (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Cte ||
+                                     (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.MDFe ||
                                      (TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Todos;
 
             if ((TipoAplicativo)this.cbServico.SelectedValue == TipoAplicativo.Nfe ||
@@ -320,7 +330,9 @@ namespace NFe.UI.Formularios
                            ufCod == 1503606 /*Itaituba-PA*/ ||
                            ufCod == 3200904 /*Barra de São Francisco-ES*/ ||
                            ufCod == 2901007 /*Amargosa/ BA*/ ||
-                           ufCod == 3152105 /*Ponte nova*/;
+                           ufCod == 3152105 /*Ponte Nova-MG*/ ||
+                           ufCod == 3536703 /*Pederneiras-SP*/ ||
+                           ufCod == 3120904 /*Curvelo-MG*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }
@@ -424,8 +436,6 @@ namespace NFe.UI.Formularios
                     labelUF.Visible = true;
                     labelUF.Text = "Município";
                     comboBox_UF.Visible = true;
-                    lbl_udDiasLimpeza.Location = new Point(this.lbl_udTempoConsulta.Location.X, this.lbl_udTempoConsulta.Location.Y);
-                    udDiasLimpeza.Location = new Point(this.udTempoConsulta.Location.X, this.udTempoConsulta.Location.Y);
                     lbl_CodMun.Visible = true;
                     edtCodMun.Visible = true;
                     edtPadrao.Visible = true;
@@ -442,6 +452,7 @@ namespace NFe.UI.Formularios
                     cbIndSinc.Visible = false;
                     comboBox_Ambiente.Visible = true;
                     checkBoxArqNSU.Visible = false;
+                    checkBoxValidarDigestValue.Visible = false;
                     break;
 
                 case TipoAplicativo.SAT:
@@ -469,6 +480,7 @@ namespace NFe.UI.Formularios
                     txtClienteID.Visible = false;
                     txtClientSecret.Visible = false;
                     checkBoxArqNSU.Visible = false;
+                    checkBoxValidarDigestValue.Visible = false;
                     break;
 
                 case TipoAplicativo.EFDReinf:
@@ -495,14 +507,13 @@ namespace NFe.UI.Formularios
                     txtClienteID.Visible = false;
                     txtClientSecret.Visible = false;
                     checkBoxArqNSU.Visible = false;
+                    checkBoxValidarDigestValue.Visible = false;
                     break;
 
                 default:
                     labelUF.Visible = true;
                     labelUF.Text = "Unidade Federativa (UF)";
                     comboBox_UF.Visible = true;
-                    lbl_udDiasLimpeza.Location = loc_1;
-                    udDiasLimpeza.Location = loc_2;
                     cboDiretorioSalvarComo.Visible = true;
                     lbl_DiretorioSalvarComo.Visible = true;
                     comboBox_tpEmis.Visible = true;
@@ -529,6 +540,7 @@ namespace NFe.UI.Formularios
                     txtClienteID.Visible = false;
                     txtClientSecret.Visible = false;
                     checkBoxArqNSU.Visible = true;
+                    checkBoxValidarDigestValue.Visible = true;
                     break;
             }
         }

@@ -146,7 +146,15 @@ namespace NFe.Components
                             case 3530300: //Mirassol-SP
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3530300-";
                                 break;
-                            
+
+                            case 4308904: //Getúlio Vargas-RS
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4308904-";
+                                break;
+
+                            case 4118501: //Pato Branco-PR
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4118501-";
+                                break;
+
                             default:
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                                 break;
@@ -181,8 +189,10 @@ namespace NFe.Components
                         #region eSocial
 
                         case "eSocial":
-                            chave = nome + "-" + conteudoXML.DocumentElement.FirstChild.Name;
-
+                            if (conteudoXML.DocumentElement.FirstChild.Name.Equals("consultaIdentificadoresEvts"))
+                                chave = nome + "-" + conteudoXML.DocumentElement.FirstChild.Name + "-" + conteudoXML.DocumentElement.FirstChild.FirstChild.NextSibling.Name;
+                            else
+                                chave = nome + "-" + conteudoXML.DocumentElement.FirstChild.Name;
                             break;
 
                         #endregion eSocial

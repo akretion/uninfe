@@ -27,6 +27,10 @@ namespace NFe.Components.Tinus
                                 tinusService = new JaboataodDosGuararapesPE.h.TinusH(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
+                            case 2602902: // Cabo de Santo Agostinho-PE
+                                tinusService = new CaboDeSantoAgostinhoPE.h.TinusH(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

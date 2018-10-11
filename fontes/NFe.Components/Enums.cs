@@ -502,6 +502,7 @@ namespace NFe.Components
 
         RecepcaoLoteeSocial,
         ConsultarLoteeSocial,
+        ConsultarIdentificadoresEventoseSocial,
 
         #endregion eSocial
 
@@ -915,13 +916,6 @@ namespace NFe.Components
         NOTAINTELIGENTE,
 
         /// <summary>
-        /// Padrão Freire Informática
-        /// Prefeitura de Alagoinhas - BA
-        /// </summary>
-        [Description("Freire Informática")]
-        FREIRE_INFORMATICA,
-
-        /// <summary>
         /// Padrão Memory
         /// Prefeitura de Ponte Nova - MG
         /// </summary>
@@ -1105,7 +1099,13 @@ namespace NFe.Components
         /// Padrão utilizado pelo município de Cromínia-GO
         /// </summary>
         [Description("MEGASOFT")]
-        MEGASOFT
+        MEGASOFT,
+
+        /// <summary>s
+        /// Padrão CECAM
+        /// </summary>
+        [Description("CECAM")]
+        CECAM
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

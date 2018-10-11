@@ -1108,6 +1108,10 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarLoteeSocial : list.LocalProducao.ConsultarLoteeSocial);
                             break;
 
+                        case Servicos.ConsultarIdentificadoresEventoseSocial:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarIdentificadoresEventoseSocial : list.LocalProducao.ConsultarIdentificadoresEventoseSocial);
+                            break;
+
                             #endregion eSocial
                     }
                     if (tipoEmissao == (int)TipoEmissao.teEPEC)

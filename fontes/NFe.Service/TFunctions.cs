@@ -105,7 +105,7 @@ namespace NFe.Service
             {
             }
 
-            File.WriteAllText(arqErro, erroMessage, Encoding.UTF8);
+            File.WriteAllText(arqErro, erroMessage); 
 
             // grava o arquivo de erro no FTP
             new GerarXML(emp).XmlParaFTP(emp, arqErro);
@@ -1551,6 +1551,12 @@ namespace NFe.Service
 
                     File.WriteAllText(Path.Combine(Propriedade.PastaExecutavel, "servico_parar.bat"),
                         "net stop UniNFeServico" +
+                        "\r\npause");
+
+                    File.WriteAllText(Path.Combine(Propriedade.PastaExecutavel, "servico_reiniciar.bat"),
+                        "net stop UniNFeServico" +
+                        "\r\n" +
+                        "net start UniNFeServico" +
                         "\r\npause");
 
                     File.WriteAllText(Path.Combine(Propriedade.PastaExecutavel, "servico_remover.bat"),

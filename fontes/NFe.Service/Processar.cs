@@ -444,6 +444,10 @@ namespace NFe.Service
                             DirecionarArquivo(emp, true, true, arquivo, new TaskConsultarLoteeSocial(arquivo));
                             break;
 
+                        case Servicos.ConsultarIdentificadoresEventoseSocial:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskConsultarIdentificadoresEventoseSocial(arquivo));
+                            break;
+
                             #endregion eSocial
                     }
 
@@ -895,6 +899,10 @@ namespace NFe.Service
 
                                     case "envioLoteEventos":
                                         tipoServico = Servicos.RecepcaoLoteeSocial;
+                                        break;
+
+                                    case "consultaIdentificadoresEvts":
+                                        tipoServico = Servicos.ConsultarIdentificadoresEventoseSocial;
                                         break;
 
                                     default:
@@ -1491,7 +1499,8 @@ namespace NFe.Service
                         nfe is TaskRecepcaoLoteReinf ||
                         nfe is TaskRecepcaoLoteeSocial ||
                         nfe is TaskConsultarLoteeSocial ||
-                        nfe is TaskConsultarLoteReinf)
+                        nfe is TaskConsultarLoteReinf ||
+                        nfe is TaskConsultarIdentificadoresEventoseSocial)
                     {
                         doExecute = true;
                     }

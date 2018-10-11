@@ -1,25 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NFe.Components.Abstract;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.IO;
-using System.Xml.Serialization;
-using System.Xml;
+﻿using NFe.Components.Abstract;
 
 namespace NFe.Components.Memory
 {
     public abstract class MemoryBase : EmiteNFSeBase
     {
         #region locais/ protegidos
+
         int CodigoMun = 0;
         string Usuario = "";
         string SenhaWs = "";
         string ProxyUser = "";
         string ProxyPass = "";
-        string ProxyServer = "";        
+        string ProxyServer = "";
         EmiteNFSeBase memoryService;
 
         protected EmiteNFSeBase MemoryService
@@ -29,25 +21,18 @@ namespace NFe.Components.Memory
                 if (memoryService == null)
                 {
                     if (tpAmb == TipoAmbiente.taHomologacao)
-                        memoryService = new PonteNovaMG.h.MemoryH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, CodigoMun);
-
+                        memoryService = new H.MemoryH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, CodigoMun);
                     else
-                        switch (CodigoMun)
-                        {
-                            case 3152105: // Ponte Nova - MG
-                                memoryService = new PonteNovaMG.p.MemoryP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, CodigoMun);
-                                break;
-
-                            default:
-                                throw new Exceptions.ServicoInexistenteException();
-                        }
+                        memoryService = new P.MemoryP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, CodigoMun);
                 }
                 return memoryService;
             }
         }
-        #endregion
+
+        #endregion locais/ protegidos
 
         #region Construtores
+
         public MemoryBase(TipoAmbiente tpAmb, string pastaRetorno, int codMun, string usuario, string senhaWs, string proxyuser, string proxypass, string proxyserver)
             : base(tpAmb, pastaRetorno)
         {
@@ -58,9 +43,11 @@ namespace NFe.Components.Memory
             ProxyPass = proxypass;
             ProxyServer = proxyserver;
         }
-        #endregion
+
+        #endregion Construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
             MemoryService.EmiteNF(file);
@@ -90,8 +77,7 @@ namespace NFe.Components.Memory
         {
             MemoryService.ConsultarNfsePorRps(file);
         }
-        #endregion
 
-
+        #endregion Métodos
     }
 }

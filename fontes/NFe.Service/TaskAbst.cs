@@ -1409,7 +1409,7 @@ namespace NFe.Service
                     }
                     break;
 
-                #endregion VVISS
+                #endregion FISSLEX
 
                 #region VVISS
 
@@ -1417,7 +1417,7 @@ namespace NFe.Service
                     retorna = "Execute";
                     break;
 
-                #endregion VVISS
+                #endregion FISSLEX
 
                 #region NATALENSE
 
@@ -1472,39 +1472,6 @@ namespace NFe.Service
                     break;
 
                 #endregion NOTA INTELIGENTE
-
-                #region FREIRE INFORMATICA
-
-                case PadroesNFSe.FREIRE_INFORMATICA:
-                    switch (servico)
-                    {
-                        case Servicos.NFSeConsultarLoteRps:
-                            retorna = "ConsultarLoteRps";
-                            break;
-
-                        case Servicos.NFSeConsultar:
-                            retorna = "ConsultarNfse";
-                            break;
-
-                        case Servicos.NFSeConsultarPorRps:
-                            retorna = "ConsultarNfsePorRps";
-                            break;
-
-                        case Servicos.NFSeConsultarSituacaoLoteRps:
-                            retorna = "ConsultarSituacaoLoteRps";
-                            break;
-
-                        case Servicos.NFSeCancelar:
-                            retorna = "CancelarNfse";
-                            break;
-
-                        case Servicos.NFSeRecepcionarLoteRps:
-                            retorna = "RecepcionarLoteRps";
-                            break;
-                    }
-                    break;
-
-                #endregion FREIRE INFORMATICA
 
                 #region CAMACARI_BA
 
@@ -2197,7 +2164,31 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                    #endregion MEGASOFT
+                #endregion MEGASOFT
+
+                #region CECAM
+
+                case PadroesNFSe.CECAM:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNotaFiscal";
+                            break;
+                   
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao)
+                                retorna = "EnviarLoteNotaFiscalDeTeste";
+                            else
+                                retorna = "EnviarLoteNotaFiscal";
+                            break;
+
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNotaFiscalEletronica";
+                            break;
+                    }
+                    break;
+                    #endregion CECAM
             }
 
             return retorna;
@@ -2866,7 +2857,9 @@ namespace NFe.Service
                         cMunicipio == 3512803 ||
                         cMunicipio == 4323002 ||
                         cMunicipio == 3505807 ||
-                        cMunicipio == 3530300)
+                        cMunicipio == 3530300 ||
+                        cMunicipio == 4308904 ||
+                        cMunicipio == 4118501)
                         retorno = false;
                     break;
 

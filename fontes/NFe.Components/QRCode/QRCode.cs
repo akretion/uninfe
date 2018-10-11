@@ -112,13 +112,13 @@ namespace NFe.Components.QRCode
                 ParametrosLinkConsulta = linkUF + "?" + ParametrosQR.Trim() + "&cHashQRCode=" + HashQRCode.Trim();
             }
 
-            AddLinkQRCode(linkUFManual);
+            AddLinkQRCode(linkUFManual, versaoQRCode);
         }
 
         /// <summary>
         /// Adicionar link gerado ao XML
         /// </summary>
-        private void AddLinkQRCode(string linkUFManual)
+        private void AddLinkQRCode(string linkUFManual, int versaoQRCode)
         {
             foreach (var item in ConteudoXML)
             {
@@ -128,7 +128,12 @@ namespace NFe.Components.QRCode
                     XmlNode el = item as XmlNode;
                     XmlNode nd = ConteudoXML.CreateElement("infNFeSupl", ConteudoXML.DocumentElement.NamespaceURI);
                     XmlNode nd1 = ConteudoXML.CreateElement("qrCode", ConteudoXML.DocumentElement.NamespaceURI);
-                    nd1.InnerXml = ("<![CDATA[" + this.ParametrosLinkConsulta.Trim() + "]]>").Trim();
+
+                    if (versaoQRCode.Equals(1))
+                        nd1.InnerXml = ("<![CDATA[" + this.ParametrosLinkConsulta.Trim() + "]]>").Trim();
+                    else
+                        nd1.InnerXml = this.ParametrosLinkConsulta.Trim();
+
                     nd.AppendChild(nd1);
 
                     if (((XmlElement)ConteudoXML.GetElementsByTagName("infNFe")[0]).GetAttribute("versao").Equals("4.00"))
