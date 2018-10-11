@@ -259,7 +259,7 @@ namespace NFe.Service
                                                 var digestValueConsultaSituacao = infConsSitElemento.GetElementsByTagName("digVal")[0].InnerText;
                                                 var digestValueCTe = conteudoXML.GetElementsByTagName("DigestValue")[0].InnerText;
 
-                                                if (!string.IsNullOrWhiteSpace(digestValueConsultaSituacao) && !string.IsNullOrWhiteSpace(digestValueCTe))
+                                                if (!string.IsNullOrEmpty(digestValueConsultaSituacao) && !string.IsNullOrEmpty(digestValueCTe))
                                                     if (!digestValueConsultaSituacao.Equals(digestValueCTe))
                                                     {
                                                         oAux.MoveArqErro(strArquivoCTe);
