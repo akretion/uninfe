@@ -200,7 +200,11 @@ namespace NFe.Threadings
 
                     if (emp >= 0)
                     {
-                        if (Empresas.Configuracoes[emp].X509Certificado.IsA3())
+                        if (fi.Name.ToLower().IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).EnvioXML) >= 0 ||
+                            fi.Name.ToLower().IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).EnvioTXT) >= 0)
+                            Empresas.Configuracoes[emp].CriarFilaProcesamento = true;
+
+                        if (Empresas.Configuracoes[emp].X509Certificado.IsA3() || Empresas.Configuracoes[emp].CriarFilaProcesamento)
                         {
                             tworker.Join();
                         }

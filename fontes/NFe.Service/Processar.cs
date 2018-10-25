@@ -461,7 +461,7 @@ namespace NFe.Service
                             break;
 
                         case Servicos.UniNFeAlterarConfiguracoes:
-                            AlterarConfiguracoesUniNFe(arquivo);
+                            ReconfigurarUniNFe(arquivo, emp);
                             break;
 
                         case Servicos.UniNFeConsultaGeral:
@@ -1113,25 +1113,6 @@ namespace NFe.Service
 
         #endregion AssinarValidarMDFe()
 
-        #region AlterarConfiguracoesUniNFe()
-
-        /// <summary>
-        /// Executa as tarefas pertinentes a consulta das informações do UniNFe
-        /// </summary>
-        /// <param name="arquivo">Arquivo a ser tratado/param>
-        protected void AlterarConfiguracoesUniNFe(string arquivo)
-        {
-            try
-            {
-                ReconfigurarUniNFe(arquivo);
-            }
-            catch
-            {
-            }
-        }
-
-        #endregion AlterarConfiguracoesUniNFe()
-
         #region AssinarValidar()
 
         /// <summary>
@@ -1571,7 +1552,7 @@ namespace NFe.Service
         /// Reconfigura o UniNFe, gravando as novas informações na tela de configuração
         /// </summary>
         /// <param name="cArquivo">Nome do arquivo XML contendo as novas configurações</param>
-        protected void ReconfigurarUniNFe(string cArquivo)
+        protected void ReconfigurarUniNFe(string cArquivo, int emp)
         {
             try
             {
