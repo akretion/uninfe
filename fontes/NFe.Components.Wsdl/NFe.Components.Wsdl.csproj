@@ -4362,6 +4362,8 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoMarcos-ConsultaSequenciaLoteNotaRPS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPatoBrancoPR-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPatoBrancoPR-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCaboFrioRJ_SuperNova.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCaboFrioRJ_SuperNova.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

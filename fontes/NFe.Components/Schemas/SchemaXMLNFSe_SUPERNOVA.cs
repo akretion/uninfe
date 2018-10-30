@@ -55,9 +55,10 @@ namespace NFSe.Components
 
             #endregion XML de Lote RPS (Síncrono)
 
+
             #region XML de Consulta Situação do Lote RPS
 
-            SchemaXML.InfSchemas.Add("NFSE-SUPERNOVA-ConsultarLoteRpsEnvio", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFSE-SUPERNOVA-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
             {
                 Tag = "ConsultarSituacaoLoteRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
@@ -68,6 +69,20 @@ namespace NFSe.Components
             });
 
             #endregion XML de Consulta Situação do Lote RPS
+
+            #region XML de Consulta Lote RPS
+
+            SchemaXML.InfSchemas.Add("NFSE-SUPERNOVA-ConsultarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarLoteRpsEnvio",                
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\SUPERNOVA\\nfse.xsd",
+                Descricao = "XML de Consulta do Lote RPS",
+                TagAssinatura = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+
+            #endregion XML de Consulta Lote RPS
 
             #region Consulta NFSe por Rps
 
