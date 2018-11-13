@@ -46,6 +46,14 @@ namespace NFe.Components.EL
                                 elService = new BarraDeSaoFranciscoES.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
                                 break;
 
+                            case 3162708: //São João do Paraíso-MG
+                                elService = new SaoJoaoParaisoMG.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
+                                break;
+
+                            case 3168002: //Taiobeiras-MG
+                                elService = new TaiobeirasMG.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
+                                break;
+                                
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

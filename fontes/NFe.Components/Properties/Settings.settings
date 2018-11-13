@@ -503,5 +503,53 @@
     <Setting Name="NFe_Components_PPatoBrancoPR_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://nfse2.patobranco.pr.gov.br/NFSe.Portal.Integracao/Services.svc</Value>
     </Setting>
+    <Setting Name="NFe_Components_HSaoJoaoMeritiRJ_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://testesaojoaodemeriti.sigiss.com.br:443/testesaojoaodemeriti/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSaoJoaoMeritiRJ_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://saojoaodemeriti.sigiss.com.br:443/saojoaodemeriti/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSaoJoaoParaisoMG_RpsServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nf-saojoaodoparaiso-mg.el.com.br:443/RpsService</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PTaiobeirasMG_RpsServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nf-taiobeiras-mg.el.com.br:443/RpsService</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PGoianaPE_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/goiana/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PGoianaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/goiana/WSNFSE.ConsultarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PGoianaPE_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/goiana/WSNFSE.ConsultarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PGoianaPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/goiana/WSNFSE.ConsultarNfsePorRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PGoianaPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/goiana/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PGoianaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/goiana/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HGoianaPE_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testegoi/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HGoianaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testegoi/WSNFSE.ConsultarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HGoianaPE_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testegoi/WSNFSE.ConsultarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HGoianaPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testegoi/WSNFSE.ConsultarNfsePorRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HGoianaPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testegoi/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HGoianaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testegoi/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

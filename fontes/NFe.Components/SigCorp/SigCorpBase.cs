@@ -61,6 +61,10 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new GovernadorValadaresMG.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
+                            case 3305109: //São João de Meriti-RJ
+                                sigCorpService = new SaoJoaoMeritiRJ.h.SigCorpH(tpAmb, PastaRetorno);
+                                break;
+
                             default:
                                 throw new Exception("Município não possui ambiente de homologação (padrão SIGCORP/SIGISS).");
                         }
@@ -109,6 +113,10 @@ namespace NFe.Components.SigCorp
 
                             case 3127701: //Governador Valadares-MG
                                 sigCorpService = new GovernadorValadaresMG.p.SigCorpP(tpAmb, PastaRetorno);
+                                break;
+
+                            case 3305109: //São João de Meriti-RJ
+                                sigCorpService = new SaoJoaoMeritiRJ.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             default:

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="file:///Z:/UniNFe/trunk/fontes/NFe.Components.Wsdl/NFse/WSDL/Producao/PTaiobeirasMG-EL.wsdl" filename="RpsServiceService.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://nf-taiobeiras-mg.el.com.br/RpsService?xsd=1" filename="RpsService.xsd" />
+  </Results>
+</DiscoveryClientResultsFile>

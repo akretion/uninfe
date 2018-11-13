@@ -178,6 +178,8 @@
     <Compile Include="CPF.cs" />
     <Compile Include="EL\BarraDeSaoFranciscoES\p\ELP.cs" />
     <Compile Include="EL\IconhaES\p\ELP.cs" />
+    <Compile Include="EL\SaoJoaoParaisoMG\p\ELP.cs" />
+    <Compile Include="EL\TaiobeirasMG\p\ELP.cs" />
     <Compile Include="Fiorilli\AssisSP\p\FiorilliP.cs" />
     <Compile Include="Fiorilli\CorumbaMS\h\FiorilliH.cs" />
     <Compile Include="Fiorilli\CorumbaMS\p\FiorilliP.cs" />
@@ -238,6 +240,8 @@
     </Compile>
     <Compile Include="SigCorp\GovernadorValdaresMG\h\SigCorpH.cs" />
     <Compile Include="SigCorp\GovernadorValdaresMG\p\SigCorpP.cs" />
+    <Compile Include="SigCorp\SaoJoaoMeritiRJ\h\SigCorpH.cs" />
+    <Compile Include="SigCorp\SaoJoaoMeritiRJ\p\SigCorpP.cs" />
     <Compile Include="SimplISS\ArarasSP\p\SimplISSP.cs" />
     <Compile Include="SimplISS\AstorgaPR\p\SimplISSP.cs" />
     <Compile Include="SimplISS\ParaguacuPaulistaSP\p\SimplISSP.cs" />
@@ -246,6 +250,8 @@
     <Compile Include="Schemas\SchemaXMLNFSe_INTERSOL.cs" />
     <Compile Include="Tinus\CaboDeSantoAgostinhoPE\h\TinusH.cs" />
     <Compile Include="Tinus\CaboDeSantoAgostinhoPE\p\TinusP.cs" />
+    <Compile Include="Tinus\GoianaPE\h\TinusH.cs" />
+    <Compile Include="Tinus\GoianaPE\p\TinusP.cs" />
     <Compile Include="TraceSOAPMessage.cs" />
     <Compile Include="Pronin\CachoeiraSulRS\h\ProninH.cs" />
     <Compile Include="Pronin\CachoeiraSulRS\p\ProninP.cs" />
@@ -930,6 +936,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\HGoianaPE_TINUS_CancelarNfse\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\HGoianaPE_TINUS_ConsultarLoteRps\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\HGoianaPE_TINUS_ConsultarNfsePorRps\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\HGoianaPE_TINUS_ConsultarNfse\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\HGoianaPE_TINUS_ConsultarSituacaoLoteRps\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\HGoianaPE_TINUS_RecepcionarLoteRps\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\HGovernadorValadaresMG\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1010,6 +1046,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\HSaoJoaoMeritiRJ\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\HSerafinaCorreaRS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1077,6 +1118,36 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\PGetulioVargasRS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PGoianaPE_TINUS_CancelarNfse\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PGoianaPE_TINUS_ConsultarLoteRps\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PGoianaPE_TINUS_ConsultarNfsePorRps\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PGoianaPE_TINUS_ConsultarNfse\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PGoianaPE_TINUS_ConsultarSituacaoLoteRps\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PGoianaPE_TINUS_RecepcionarLoteRps\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1236,6 +1307,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\PSaoJoaoMeritiRJ\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PSaoJoaoParaisoMG\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\PSaoPauloSP\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1247,6 +1328,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\PSinopMT\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PTaiobeirasMG\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -3194,6 +3280,54 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\HGoianaPE_TINUS_CancelarNfse\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HGoianaPE_TINUS_CancelarNfse\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\HGoianaPE_TINUS_CancelarNfse\WSNFSE.wsdl" />
+    <None Include="Web References\HGoianaPE_TINUS_ConsultarLoteRps\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HGoianaPE_TINUS_ConsultarLoteRps\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\HGoianaPE_TINUS_ConsultarLoteRps\WSNFSE.wsdl" />
+    <None Include="Web References\HGoianaPE_TINUS_ConsultarNfsePorRps\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HGoianaPE_TINUS_ConsultarNfsePorRps\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\HGoianaPE_TINUS_ConsultarNfsePorRps\WSNFSE.wsdl" />
+    <None Include="Web References\HGoianaPE_TINUS_ConsultarNfse\ConsultarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HGoianaPE_TINUS_ConsultarNfse\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\HGoianaPE_TINUS_ConsultarNfse\WSNFSE.wsdl" />
+    <None Include="Web References\HGoianaPE_TINUS_ConsultarSituacaoLoteRps\ConsultarSituacaoLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HGoianaPE_TINUS_ConsultarSituacaoLoteRps\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\HGoianaPE_TINUS_ConsultarSituacaoLoteRps\WSNFSE.wsdl" />
+    <None Include="Web References\HGoianaPE_TINUS_RecepcionarLoteRps\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HGoianaPE_TINUS_RecepcionarLoteRps\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\HGoianaPE_TINUS_RecepcionarLoteRps\WSNFSE.wsdl" />
     <None Include="Web References\HGovernadorValadaresMG\HGovernadorValadaresMG-SIGCORP.wsdl" />
     <None Include="Web References\HGovernadorValadaresMG\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -3419,6 +3553,20 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\HPotirendabaSP\SubstituirNfseResposta1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HSaoJoaoMeritiRJ\HSaoJoaoMeritiRJ-SIGCORP.wsdl" />
+    <None Include="Web References\HSaoJoaoMeritiRJ\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\HSaoJoaoMeritiRJ\tcDadosNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HSaoJoaoMeritiRJ\tcEstruturaDescricaoErros.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HSaoJoaoMeritiRJ\tcRetornoNota.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\HSerafinaCorreaRS\CancelarNfseResposta.datasource">
@@ -3706,6 +3854,54 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\PGoianaPE_TINUS_CancelarNfse\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PGoianaPE_TINUS_CancelarNfse\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PGoianaPE_TINUS_CancelarNfse\WSNFSE.wsdl" />
+    <None Include="Web References\PGoianaPE_TINUS_ConsultarLoteRps\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PGoianaPE_TINUS_ConsultarLoteRps\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PGoianaPE_TINUS_ConsultarLoteRps\WSNFSE.wsdl" />
+    <None Include="Web References\PGoianaPE_TINUS_ConsultarNfsePorRps\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PGoianaPE_TINUS_ConsultarNfsePorRps\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PGoianaPE_TINUS_ConsultarNfsePorRps\WSNFSE.wsdl" />
+    <None Include="Web References\PGoianaPE_TINUS_ConsultarNfse\ConsultarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PGoianaPE_TINUS_ConsultarNfse\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PGoianaPE_TINUS_ConsultarNfse\WSNFSE.wsdl" />
+    <None Include="Web References\PGoianaPE_TINUS_ConsultarSituacaoLoteRps\ConsultarSituacaoLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PGoianaPE_TINUS_ConsultarSituacaoLoteRps\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PGoianaPE_TINUS_ConsultarSituacaoLoteRps\WSNFSE.wsdl" />
+    <None Include="Web References\PGoianaPE_TINUS_RecepcionarLoteRps\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PGoianaPE_TINUS_RecepcionarLoteRps\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PGoianaPE_TINUS_RecepcionarLoteRps\WSNFSE.wsdl" />
     <None Include="Web References\PGovernadorValadaresMG\PGovernadorValadaresMG-SIGCORP.wsdl" />
     <None Include="Web References\PGovernadorValadaresMG\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -4097,6 +4293,55 @@
     <None Include="Web References\PPotirendabaSP\SubstituirNfseResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\PSaoJoaoMeritiRJ\PSaoJoaoMeritiRJ-SIGCORP.wsdl" />
+    <None Include="Web References\PSaoJoaoMeritiRJ\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PSaoJoaoMeritiRJ\tcDadosNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSaoJoaoMeritiRJ\tcEstruturaDescricaoErros.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSaoJoaoMeritiRJ\tcRetornoNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSaoJoaoParaisoMG\cnae.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSaoJoaoParaisoMG\empresa.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSaoJoaoParaisoMG\loteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSaoJoaoParaisoMG\nfseContribuinte.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSaoJoaoParaisoMG\nfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSaoJoaoParaisoMG\nfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSaoJoaoParaisoMG\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PSaoJoaoParaisoMG\RpsService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PSaoJoaoParaisoMG\RpsServiceService.wsdl" />
+    <None Include="Web References\PSaoJoaoParaisoMG\servico116Municipal.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSaoJoaoParaisoMG\servicoMunic.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSaoJoaoParaisoMG\situacaoLoteRps.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\PSaoPauloSP\PSaoPauloSP-PAULISTANA.wsdl" />
     <None Include="Web References\PSaoPauloSP\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -4144,6 +4389,41 @@
     <None Include="Web References\PSinopMT\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PTaiobeirasMG\cnae.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTaiobeirasMG\empresa.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTaiobeirasMG\loteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTaiobeirasMG\nfseContribuinte.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTaiobeirasMG\nfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTaiobeirasMG\nfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTaiobeirasMG\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PTaiobeirasMG\RpsService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PTaiobeirasMG\RpsServiceService.wsdl" />
+    <None Include="Web References\PTaiobeirasMG\servico116Municipal.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTaiobeirasMG\servicoMunic.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTaiobeirasMG\situacaoLoteRps.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\PVacariRS\NFSeIntegracao.wsdl" />
     <None Include="Web References\PVacariRS\Reference.map">
@@ -5049,6 +5329,72 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PParaguacuPaulistaSP_NfseService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www.tinus.com.br/csp/goiana/WSNFSE.CancelarNfse.CLS%3fWSDL=1">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PGoianaPE_TINUS_CancelarNfse\</RelPath>
+      <UpdateFromURL>http://www.tinus.com.br/csp/goiana/WSNFSE.CancelarNfse.CLS%3fWSDL=1</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PGoianaPE_TINUS_CancelarNfse_CancelarNfse</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www.tinus.com.br/csp/goiana/WSNFSE.ConsultarLoteRps.CLS%3fWSDL=1">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PGoianaPE_TINUS_ConsultarLoteRps\</RelPath>
+      <UpdateFromURL>http://www.tinus.com.br/csp/goiana/WSNFSE.ConsultarLoteRps.CLS%3fWSDL=1</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PGoianaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www.tinus.com.br/csp/goiana/WSNFSE.ConsultarNfse.CLS%3fWSDL=1">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PGoianaPE_TINUS_ConsultarNfse\</RelPath>
+      <UpdateFromURL>http://www.tinus.com.br/csp/goiana/WSNFSE.ConsultarNfse.CLS%3fWSDL=1</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PGoianaPE_TINUS_ConsultarNfse_ConsultarNfse</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www.tinus.com.br/csp/goiana/WSNFSE.ConsultarNfsePorRps.CLS%3fWSDL=1">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PGoianaPE_TINUS_ConsultarNfsePorRps\</RelPath>
+      <UpdateFromURL>http://www.tinus.com.br/csp/goiana/WSNFSE.ConsultarNfsePorRps.CLS%3fWSDL=1</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PGoianaPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www.tinus.com.br/csp/goiana/WSNFSE.ConsultarSituacaoLoteRps.CLS%3fWSDL=1">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PGoianaPE_TINUS_ConsultarSituacaoLoteRps\</RelPath>
+      <UpdateFromURL>http://www.tinus.com.br/csp/goiana/WSNFSE.ConsultarSituacaoLoteRps.CLS%3fWSDL=1</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PGoianaPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www.tinus.com.br/csp/goiana/WSNFSE.RecepcionarLoteRps.CLS%3fWSDL=1">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PGoianaPE_TINUS_RecepcionarLoteRps\</RelPath>
+      <UpdateFromURL>http://www.tinus.com.br/csp/goiana/WSNFSE.RecepcionarLoteRps.CLS%3fWSDL=1</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PGoianaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://www2.tinus.com.br/csp/testecab/WSNFSE.CancelarNfse.CLS%3fWSDL=1">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\HCaboDeSantoAgostinhoPE_TINUS_CancelarNfse\</RelPath>
@@ -5114,6 +5460,72 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_HCaboDeSantoAgostinhoPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www2.tinus.com.br/csp/testegoi/WSNFSE.CancelarNfse.CLS%3fWSDL=1">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HGoianaPE_TINUS_CancelarNfse\</RelPath>
+      <UpdateFromURL>http://www2.tinus.com.br/csp/testegoi/WSNFSE.CancelarNfse.CLS%3fWSDL=1</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_HGoianaPE_TINUS_CancelarNfse_CancelarNfse</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www2.tinus.com.br/csp/testegoi/WSNFSE.ConsultarLoteRps.CLS%3fWSDL=1">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HGoianaPE_TINUS_ConsultarLoteRps\</RelPath>
+      <UpdateFromURL>http://www2.tinus.com.br/csp/testegoi/WSNFSE.ConsultarLoteRps.CLS%3fWSDL=1</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_HGoianaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www2.tinus.com.br/csp/testegoi/WSNFSE.ConsultarNfse.CLS%3fWSDL=1">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HGoianaPE_TINUS_ConsultarNfse\</RelPath>
+      <UpdateFromURL>http://www2.tinus.com.br/csp/testegoi/WSNFSE.ConsultarNfse.CLS%3fWSDL=1</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_HGoianaPE_TINUS_ConsultarNfse_ConsultarNfse</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www2.tinus.com.br/csp/testegoi/WSNFSE.ConsultarNfsePorRps.CLS%3fWSDL=1">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HGoianaPE_TINUS_ConsultarNfsePorRps\</RelPath>
+      <UpdateFromURL>http://www2.tinus.com.br/csp/testegoi/WSNFSE.ConsultarNfsePorRps.CLS%3fWSDL=1</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_HGoianaPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www2.tinus.com.br/csp/testegoi/WSNFSE.ConsultarSituacaoLoteRps.CLS%3fWSDL=1">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HGoianaPE_TINUS_ConsultarSituacaoLoteRps\</RelPath>
+      <UpdateFromURL>http://www2.tinus.com.br/csp/testegoi/WSNFSE.ConsultarSituacaoLoteRps.CLS%3fWSDL=1</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_HGoianaPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://www2.tinus.com.br/csp/testegoi/WSNFSE.RecepcionarLoteRps.CLS%3fWSDL=1">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HGoianaPE_TINUS_RecepcionarLoteRps\</RelPath>
+      <UpdateFromURL>http://www2.tinus.com.br/csp/testegoi/WSNFSE.RecepcionarLoteRps.CLS%3fWSDL=1</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_HGoianaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://nfewshomologacao.joinville.sc.gov.br/NotaFiscal/Servicos.asmx%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -5885,6 +6297,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_HPatoBrancoPR_NFSeIntegracao</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="Z:\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HSaoJoaoMeritiRJ-SIGCORP.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HSaoJoaoMeritiRJ\</RelPath>
+      <UpdateFromURL>Z:\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HSaoJoaoMeritiRJ-SIGCORP.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_HSaoJoaoMeritiRJ_WebService_SigISS</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="Z:\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PBaraoDeCotegipeRS-SystemPro.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\PBaraoDeCotegipeRS\</RelPath>
@@ -5983,6 +6406,39 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PPatoBrancoPR_NFSeIntegracao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="Z:\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSaoJoaoMeritiRJ-SIGCORP.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PSaoJoaoMeritiRJ\</RelPath>
+      <UpdateFromURL>Z:\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSaoJoaoMeritiRJ-SIGCORP.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PSaoJoaoMeritiRJ_WebService_SigISS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="Z:\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSaoJoaoParaisoMG-EL.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PSaoJoaoParaisoMG\</RelPath>
+      <UpdateFromURL>Z:\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSaoJoaoParaisoMG-EL.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PSaoJoaoParaisoMG_RpsServiceService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="Z:\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PTaiobeirasMG-EL.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PTaiobeirasMG\</RelPath>
+      <UpdateFromURL>Z:\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PTaiobeirasMG-EL.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PTaiobeirasMG_RpsServiceService</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>

@@ -1420,8 +1420,7 @@ namespace NFe.ConvertTxt
                         wCampo(imposto.ICMS.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST);
                         wCampo(imposto.ICMS.pICMSST, this.nDecimaisPerc, TpcnResources.pICMSST);
                         wCampo(imposto.ICMS.vICMSST, TpcnTipoCampo.tcDec2, TpcnResources.vICMSST);
-                        if (nfe.infNFe.Versao >= 4 && imposto.ICMS.CSOSN == 202
-                             && imposto.ICMS.vBCFCPST + imposto.ICMS.pFCPST + imposto.ICMS.vFCPST > 0)
+                        if (nfe.infNFe.Versao >= 4 && imposto.ICMS.vBCFCPST + imposto.ICMS.pFCPST + imposto.ICMS.vFCPST > 0)
                         {
                             wCampo(imposto.ICMS.vBCFCPST, TpcnTipoCampo.tcDec2, TpcnResources.vBCFCPST);//, ObOp.Opcional);
                             wCampo(imposto.ICMS.pFCPST, this.nDecimaisPerc, TpcnResources.pFCPST);//, ObOp.Opcional);

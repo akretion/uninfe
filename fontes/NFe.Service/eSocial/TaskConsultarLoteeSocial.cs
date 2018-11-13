@@ -91,6 +91,7 @@ namespace NFe.Service
             XmlNode eventoNode = null;
             StreamWriter swProc = null;
             var protocoloEnvio = ConteudoXML.GetElementsByTagName("protocoloEnvio")[0].InnerText;
+            bool contemEventoComErro = false;
 #if _fw46
             var nomeArquivoProtocolo = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, "EmProcessamento", $"{protocoloEnvio}.xml");
 #else
@@ -158,9 +159,14 @@ namespace NFe.Service
                             }
                         }
                     }
+                    else
+                        contemEventoComErro = true;
                 }
 
-                TFunctions.MoveArqErro(nomeArquivoProtocolo);
+                if (contemEventoComErro)
+                    TFunctions.MoveArqErro(nomeArquivoProtocolo);
+                else
+                    Functions.DeletarArquivo(nomeArquivoProtocolo);
             }
         }
     }

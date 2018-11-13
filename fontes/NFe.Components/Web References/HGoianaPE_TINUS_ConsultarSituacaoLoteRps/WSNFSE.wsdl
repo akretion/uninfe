@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s0="http://www2.tinus.com.br" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www2.tinus.com.br" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www2.tinus.com.br">
+      <s:element name="ConsultarSituacaoLoteRps">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" name="Arg" type="s0:ConsultarSituacaoLoteRpsEnvio" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ConsultarSituacaoLoteRpsEnvio">
+        <s:sequence>
+          <s:element name="Prestador" type="s0:tcIdentificacaoPrestador" />
+          <s:element name="Protocolo" type="s0:tsNumeroProtocolo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="tcIdentificacaoPrestador">
+        <s:sequence>
+          <s:element name="Cnpj" type="s0:tsCnpj" />
+          <s:element minOccurs="0" name="InscricaoMunicipal" type="s0:tsInscricaoMunicipal" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="tsCnpj">
+        <s:restriction base="s:string">
+          <s:maxLength value="14" />
+          <s:minLength value="14" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="tsInscricaoMunicipal">
+        <s:restriction base="s:string">
+          <s:maxLength value="15" />
+          <s:minLength value="1" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="tsNumeroProtocolo">
+        <s:restriction base="s:string">
+          <s:maxLength value="50" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ConsultarSituacaoLoteRpsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="ConsultarSituacaoLoteRpsResult" type="s0:ConsultarSituacaoLoteRpsResposta" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ConsultarSituacaoLoteRpsResposta">
+        <s:sequence>
+          <s:element minOccurs="0" name="NumeroLote" type="s0:tsNumeroLote" />
+          <s:element minOccurs="0" name="Situacao" type="s0:tsSituacaoLoteRps" />
+          <s:element minOccurs="0" ref="s0:ListaMensagemRetorno" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ListaMensagemRetorno" type="s0:ArrayOfMensagemRetornotcMensagemRetorno" />
+      <s:simpleType name="tsNumeroLote">
+        <s:restriction base="s:nonNegativeInteger">
+          <s:minInclusive value="0" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="tsSituacaoLoteRps">
+        <s:restriction base="s:byte">
+          <s:pattern value="1|2|3|4" />
+          <s:maxInclusive value="127" />
+          <s:minInclusive value="-128" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfMensagemRetornotcMensagemRetorno">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MensagemRetorno" nillable="true" type="s0:tcMensagemRetorno" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="tcMensagemRetorno">
+        <s:sequence>
+          <s:element name="Codigo" type="s0:tsCodigoMensagemAlerta" />
+          <s:element name="Mensagem" type="s0:tsDescricaoMensagemAlerta" />
+          <s:element minOccurs="0" name="Correcao" type="s0:tsDescricaoMensagemAlerta" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="tsCodigoMensagemAlerta">
+        <s:restriction base="s:string">
+          <s:maxLength value="4" />
+          <s:minLength value="1" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="tsDescricaoMensagemAlerta">
+        <s:restriction base="s:string">
+          <s:maxLength value="200" />
+          <s:minLength value="1" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="Test">
+        <s:complexType>
+          <s:sequence />
+        </s:complexType>
+      </s:element>
+      <s:element name="TestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="TestResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultarSituacaoLoteRpsSoapIn">
+    <wsdl:part name="parameters" element="s0:ConsultarSituacaoLoteRps" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarSituacaoLoteRpsSoapOut">
+    <wsdl:part name="parameters" element="s0:ConsultarSituacaoLoteRpsResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestSoapIn">
+    <wsdl:part name="parameters" element="s0:Test" />
+  </wsdl:message>
+  <wsdl:message name="TestSoapOut">
+    <wsdl:part name="parameters" element="s0:TestResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ConsultarSituacaoLoteRpsSoap">
+    <wsdl:operation name="ConsultarSituacaoLoteRps">
+      <wsdl:input message="s0:ConsultarSituacaoLoteRpsSoapIn" />
+      <wsdl:output message="s0:ConsultarSituacaoLoteRpsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <wsdl:input message="s0:TestSoapIn" />
+      <wsdl:output message="s0:TestSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ConsultarSituacaoLoteRpsSoap" type="s0:ConsultarSituacaoLoteRpsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultarSituacaoLoteRps">
+      <soap:operation soapAction="http://www2.tinus.com.br/WSNFSE.ConsultarSituacaoLoteRps.ConsultarSituacaoLoteRps" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Test">
+      <soap:operation soapAction="http://www2.tinus.com.br/WSNFSE.ConsultarSituacaoLoteRps.Test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ConsultarSituacaoLoteRps">
+    <wsdl:port name="ConsultarSituacaoLoteRpsSoap" binding="s0:ConsultarSituacaoLoteRpsSoap">
+      <soap:address location="http://www2.tinus.com.br/csp/testegoi/WSNFSE.ConsultarSituacaoLoteRps.cls" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

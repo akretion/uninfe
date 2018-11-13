@@ -4364,6 +4364,22 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PPatoBrancoPR-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HCaboFrioRJ_SuperNova.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCaboFrioRJ_SuperNova.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoJoaoMeritiRJ-SIGCORP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoJoaoMeritiRJ-SIGCORP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoJoaoParaisoMG-EL.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTaiobeirasMG-EL.wsdl" />
+	<EmbeddedResource Include="NFse\WSDL\Homologacao\HGoianaPE_TINUS_CancelarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGoianaPE_TINUS_ConsultarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGoianaPE_TINUS_ConsultarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGoianaPE_TINUS_ConsultarNfsePorRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGoianaPE_TINUS_ConsultarSituacaoLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGoianaPE_TINUS_RecepcionarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGoianaPE_TINUS_CancelarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGoianaPE_TINUS_ConsultarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGoianaPE_TINUS_ConsultarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGoianaPE_TINUS_ConsultarNfsePorRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGoianaPE_TINUS_ConsultarSituacaoLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGoianaPE_TINUS_RecepcionarLoteRps.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">
