@@ -8,6 +8,6 @@
         string ClientID { get; set; }
         string ClientSecret { get; set; }
         string URLAPIBase { get; }
-        string GerarToken();
+        string Token { get; set; } 
     }
 }

@@ -92,6 +92,20 @@ namespace NFSe.Components
             });
             #endregion XML de lote RPS
 
+            #region Gerar NFSe Envio
+
+            SchemaXML.InfSchemas.Add("NFSE-PRONIN-GerarNfseEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion Gerar NFSe Envio
+
             #region XML de lote RPS - Guarapuava-PR
 
             SchemaXML.InfSchemas.Add("NFSE-PRONIN-4109401-EnviarLoteRpsEnvio", new InfSchema()

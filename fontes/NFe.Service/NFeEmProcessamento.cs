@@ -82,6 +82,7 @@ namespace NFe.Service
                                         break;
 
                                     case "CTe":
+                                    case "CTeOS":
                                         tipoArquivo = TipoAplicativo.Cte;
                                         extNFe = Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML;
                                         extProcNFe = Propriedade.ExtRetorno.ProcCTe;

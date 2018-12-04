@@ -1,8 +1,14 @@
 ﻿using NFe.Components;
+
+#if _fw46
+using NFe.Components.SOFTPLAN;
+#endif
+
 using NFe.Settings;
 using System;
 using System.Collections;
 using System.ComponentModel;
+using System.Net;
 using System.Windows.Forms;
 
 namespace NFe.UI.Formularios
@@ -32,7 +38,7 @@ namespace NFe.UI.Formularios
                 this.cbServico.SelectedIndexChanged -= cbServico_SelectedIndexChanged;
                 servicoCurrent = TipoAplicativo.Nulo;
 
-                #region Montar Array DropList da UF
+#region Montar Array DropList da UF
 
                 try
                 {
@@ -44,28 +50,28 @@ namespace NFe.UI.Formularios
                     MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
                 }
 
-                #endregion Montar Array DropList da UF
+#endregion Montar Array DropList da UF
 
-                #region Montar Array DropList do Ambiente
+#region Montar Array DropList do Ambiente
 
                 comboBox_Ambiente.DataSource = EnumHelper.ToList(typeof(TipoAmbiente), true, true);
                 comboBox_Ambiente.DisplayMember = "Value";
                 comboBox_Ambiente.ValueMember = "Key";
-                #endregion Montar Array DropList do Ambiente
+#endregion Montar Array DropList do Ambiente
 
-                #region Montar array DropList dos tipos de serviços
+#region Montar array DropList dos tipos de serviços
 
                 this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo(false);
                 this.cbServico.DisplayMember = "Value";
                 this.cbServico.ValueMember = "Key";
-                #endregion Montar array DropList dos tipos de serviços
+#endregion Montar array DropList dos tipos de serviços
 
-                #region Montar Array DropList do Tipo de Emissão da NF-e
+#region Montar Array DropList do Tipo de Emissão da NF-e
 
                 comboBox_tpEmis.DataSource = EnumHelper.ToList(typeof(TipoEmissao), true, true);
                 comboBox_tpEmis.DisplayMember = "Value";
                 comboBox_tpEmis.ValueMember = "Key";
-                #endregion Montar Array DropList do Tipo de Emissão da NF-e
+#endregion Montar Array DropList do Tipo de Emissão da NF-e
 
                 this.cbServico.SelectedIndexChanged += cbServico_SelectedIndexChanged;
             }
@@ -234,9 +240,46 @@ namespace NFe.UI.Formularios
             this.empresa.UsuarioWS = this.txtUsuarioWS.Text;
             this.empresa.IdentificadorCSC = this.edtIdentificadorCSC.Text;
             this.empresa.TokenCSC = this.edtTokenCSC.Text;
-            this.empresa.ClientID = this.txtClienteID.Text;
-            this.empresa.ClientSecret = this.txtClientSecret.Text;
             this.empresa.CompararDigestValueDFeRetornadoSEFAZ = checkBoxValidarDigestValue.Checked;
+
+            //Configurações para o município de Florianópolis-SC
+#if _fw46
+            if (edtCodMun.Text.Equals("4205407") && 
+                (!String.IsNullOrEmpty(txtUsuarioWS.Text) &&
+                !String.IsNullOrEmpty(txtSenhaWS.Text) &&
+                !String.IsNullOrEmpty(txtClienteID.Text) &&
+                !String.IsNullOrEmpty(txtClientSecret.Text)))
+            {
+                IWebProxy proxy = null;
+
+                if (ConfiguracaoApp.Proxy)
+                {
+                    if (ConfiguracaoApp.Proxy)
+                        proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor,
+                            ConfiguracaoApp.ProxyUsuario,
+                            ConfiguracaoApp.ProxySenha,
+                            ConfiguracaoApp.ProxyPorta,
+                            ConfiguracaoApp.DetectarConfiguracaoProxyAuto);
+                }
+
+                string url = "";
+
+                if ((TipoAmbiente)comboBox_Ambiente.SelectedValue == TipoAmbiente.taHomologacao)
+                    url = @"https://nfps-e-hml.pmf.sc.gov.br/api/v1/";
+                else
+                    url = @"https://nfps-e.pmf.sc.gov.br/api/v1/";
+
+                this.empresa.SenhaWS = txtSenhaWS.Text;
+                this.empresa.ClientID = txtClienteID.Text;
+                this.empresa.ClientSecret = txtClientSecret.Text;
+                this.empresa.TokenNFse = Token.GerarToken(proxy,
+                                                          txtUsuarioWS.Text,
+                                                          Functions.GerarMD5(txtSenhaWS.Text).ToUpper(),
+                                                          txtClienteID.Text,
+                                                          txtClientSecret.Text,
+                                                          url);
+            }
+#endif
 
             return true;
         }
@@ -334,7 +377,8 @@ namespace NFe.UI.Formularios
                            ufCod == 3536703 /*Pederneiras-SP*/ ||
                            ufCod == 3120904 /*Curvelo-MG*/ ||
                            ufCod == 3162708 /*São João do Paraíso-MG*/ ||
-                           ufCod == 3168002 /*Taiobeiras-MG*/;
+                           ufCod == 3168002 /*Taiobeiras-MG*/ ||
+                           ufCod == 3530607 /*Mogi das Cruzes-SP*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }
@@ -425,6 +469,18 @@ namespace NFe.UI.Formularios
         }
 
         private void txtSenhaWS_TextChanged(object sender, EventArgs e)
+        {
+            if (this.changeEvent != null)
+                this.changeEvent(sender, e);
+        }
+
+        private void txtClienteID_TextChanged(object sender, EventArgs e)
+        {
+            if (this.changeEvent != null)
+                this.changeEvent(sender, e);
+        }
+
+        private void txtClientSecret_TextChanged(object sender, EventArgs e)
         {
             if (this.changeEvent != null)
                 this.changeEvent(sender, e);

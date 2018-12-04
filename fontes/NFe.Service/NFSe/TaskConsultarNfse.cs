@@ -16,6 +16,7 @@ using NFe.Components.Pronin;
 using NFe.Components.RLZ_INFORMATICA;
 using NFe.Components.SigCorp;
 using NFe.Components.SimplISS;
+using NFe.Components.Simple;
 using NFe.Components.SystemPro;
 using NFe.Components.Tinus;
 using NFe.Settings;
@@ -465,12 +466,9 @@ namespace NFe.Service.NFSe
 
 #if _fw46
                     case PadroesNFSe.SOFTPLAN:
-                        NFe.Components.SOFTPLAN.SOFTPLAN softplan = new NFe.Components.SOFTPLAN.SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        NFe.Components.SOFTPLAN.SOFTPLAN softplan = new Components.SOFTPLAN.SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                        Empresas.Configuracoes[emp].UsuarioWS,
-                                                        Empresas.Configuracoes[emp].SenhaWS,
-                                                        Empresas.Configuracoes[emp].ClientID,
-                                                        Empresas.Configuracoes[emp].ClientSecret);
+                                                        Empresas.Configuracoes[emp].TokenNFse);
 
                         if (ConfiguracaoApp.Proxy)
                             softplan.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
@@ -524,6 +522,19 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.PUBLIC_SOFT:
                         if (oDadosPedSitNfse.cMunicipio.Equals(2610707))
                             cabecMsg = "N9M=";
+                        break;
+
+                    case PadroesNFSe.SIMPLE:
+
+                        Simple simple = new Simple((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                        oDadosPedSitNfse.cMunicipio,
+                                                        ConfiguracaoApp.ProxyUsuario,
+                                                        ConfiguracaoApp.ProxySenha,
+                                                        ConfiguracaoApp.ProxyServidor,
+                                                        Empresas.Configuracoes[emp].X509Certificado);
+
+                        simple.ConsultarNfse(NomeArquivoXML);
                         break;
                 }
 

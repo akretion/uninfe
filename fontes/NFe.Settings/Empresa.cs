@@ -453,6 +453,12 @@ namespace NFe.Settings
         [AttributeTipoAplicacao(TipoAplicativo.Nfse)]
         public string ClientSecret { get; set; }
 
+        /// <summary>
+        /// Token utilizado pela para acessar os serviços REST do município de Florianópolis-SC
+        /// </summary>
+        [AttributeTipoAplicacao(TipoAplicativo.Nfse)]
+        public string TokenNFse { get; set; }
+
         #endregion
 
         #endregion

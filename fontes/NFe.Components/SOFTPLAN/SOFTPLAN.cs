@@ -36,28 +36,17 @@ namespace NFe.Components.SOFTPLAN
                     return @"https://nfps-e.pmf.sc.gov.br/api/v1/";
             }
         }
-        private string _token;
-        public string Token
-        {
-            get
-            {
-                if (String.IsNullOrWhiteSpace(_token))
-                    _token = GerarToken();
 
-                return _token;
-            }
-        }
+        public string Token { get; set; }
 
         #endregion Public Properties
 
         #region Public Construstor
-        public SOFTPLAN(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senha, string clientID, string clientSecret)
+
+        public SOFTPLAN(TipoAmbiente tpAmb, string pastaRetorno, string token)
             : base(tpAmb, pastaRetorno)
         {
-            Usuario = usuario;
-            Senha = Functions.GerarMD5(senha).ToUpper();
-            ClientID = clientID;
-            ClientSecret = clientSecret;
+            Token = token;
         }
 
         #endregion Public Construstor
@@ -166,37 +155,6 @@ namespace NFe.Components.SOFTPLAN
             write.Flush();
             write.Close();
             write.Dispose();
-        }
-
-        public string GerarToken()
-        {
-            string result = string.Empty;
-
-            using (POSTRequest post = new POSTRequest
-            {
-                Proxy = Proxy
-            })
-            {
-                string autorization = Functions.Base64Encode($"{ClientID}:{ClientSecret}");
-
-                IList<string> autorizations = new List<string>()
-                {
-                    $"Authorization: Basic {autorization}"
-                };
-
-                result = post.PostForm(Path.Combine(URLAPIBase, "autenticacao/oauth/token"), new Dictionary<string, string> {
-                     {"grant_type", "password"  },
-                     {"username", Usuario  },
-                     {"password", Senha },
-                     {"client_id", ClientID},
-                     {"client_secret", ClientSecret}
-                }, autorizations);
-            }
-
-            var token = JsonConvert.DeserializeObject<Token>(result);
-            result = token.AccessToken;
-
-            return result;
         }
 
         #endregion Public Methods

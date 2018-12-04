@@ -17,6 +17,7 @@ using NFe.Components.SigCorp;
 using NFe.Components.SimplISS;
 using NFe.Components.SystemPro;
 using NFe.Components.Tinus;
+using NFe.Components.Simple;
 using NFe.Settings;
 using NFe.Validate;
 using NFSe.Components;
@@ -550,10 +551,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.SOFTPLAN:
                         Components.SOFTPLAN.SOFTPLAN softplan = new Components.SOFTPLAN.SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                           Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                          Empresas.Configuracoes[emp].UsuarioWS,
-                                          Empresas.Configuracoes[emp].SenhaWS,
-                                          Empresas.Configuracoes[emp].ClientID,
-                                          Empresas.Configuracoes[emp].ClientSecret);
+                                          Empresas.Configuracoes[emp].TokenNFse);
 
                         AssinaturaDigital softplanAssinatura = new AssinaturaDigital();
                         softplanAssinatura.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
@@ -631,6 +629,19 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.PUBLIC_SOFT:
                         if (oDadosPedCanNfse.cMunicipio.Equals(2610707))
                             cabecMsg = "N9M=";
+                        break;
+
+                    case PadroesNFSe.SIMPLE:
+
+                        Simple simple = new Simple((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                        oDadosPedCanNfse.cMunicipio,
+                                                        ConfiguracaoApp.ProxyUsuario,
+                                                        ConfiguracaoApp.ProxySenha,
+                                                        ConfiguracaoApp.ProxyServidor,
+                                                        Empresas.Configuracoes[emp].X509Certificado);
+
+                        simple.CancelarNfse(NomeArquivoXML);
                         break;
                 }
 

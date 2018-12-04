@@ -198,7 +198,7 @@ namespace NFSe.Components
 
             try
             {
-                response = request.GetResponse();
+                response = request?.GetResponse();
             }
             catch (WebException webEx)
             {

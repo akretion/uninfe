@@ -16,6 +16,7 @@ using NFe.Components.Pronin;
 using NFe.Components.RLZ_INFORMATICA;
 using NFe.Components.SigCorp;
 using NFe.Components.SimplISS;
+using NFe.Components.Simple;
 using NFe.Components.SystemPro;
 using NFe.Components.Tinus;
 using NFe.Settings;
@@ -637,10 +638,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.SOFTPLAN:
                         Components.SOFTPLAN.SOFTPLAN softplan = new Components.SOFTPLAN.SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                        Empresas.Configuracoes[emp].UsuarioWS,
-                                                        Empresas.Configuracoes[emp].SenhaWS,
-                                                        Empresas.Configuracoes[emp].ClientID,
-                                                        Empresas.Configuracoes[emp].ClientSecret);
+                                                        Empresas.Configuracoes[emp].TokenNFse);
 
                         AssinaturaDigital softplanAssinatura = new AssinaturaDigital();
                         softplanAssinatura.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
@@ -740,6 +738,19 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.MEGASOFT:
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.MEGASOFT);
                         cabecMsg = "<cabecalho versao=\"1.00\" xmlns=\"http://megasoftarrecadanet.com.br/xsd/nfse_v01.xsd\"><versaoDados>1.00</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.SIMPLE:
+
+                        Simple simple = new Simple((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                      Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                      oDadosEnvLoteRps.cMunicipio,
+                                                      ConfiguracaoApp.ProxyUsuario,
+                                                      ConfiguracaoApp.ProxySenha,
+                                                      ConfiguracaoApp.ProxyServidor,
+                                                      Empresas.Configuracoes[emp].X509Certificado);
+
+                        simple.EmiteNF(NomeArquivoXML);
                         break;
                 }
 

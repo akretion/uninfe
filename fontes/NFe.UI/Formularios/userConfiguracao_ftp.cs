@@ -138,5 +138,11 @@ namespace NFe.UI.Formularios
             if (this.changeEvent != null)
                 this.changeEvent(sender, e);
         }
+
+        private void edtFTP_Passivo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.changeEvent != null)
+                this.changeEvent(sender, e);
+        }
     }
 }

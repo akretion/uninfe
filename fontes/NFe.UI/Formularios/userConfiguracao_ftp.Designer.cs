@@ -268,6 +268,7 @@
             this.edtFTP_Passivo.TabIndex = 76;
             this.edtFTP_Passivo.Text = "Modo passivo?";
             this.edtFTP_Passivo.UseSelectable = true;
+            this.edtFTP_Passivo.CheckedChanged += new System.EventHandler(this.edtFTP_Passivo_CheckedChanged);
             // 
             // userConfiguracao_ftp
             // 

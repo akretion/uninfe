@@ -613,6 +613,9 @@ namespace NFe.ConvertTxt
                     if (ConteudoTag.StartsWith(prefix))
                         ConteudoTag = "";
 
+                if (string.IsNullOrEmpty(ConteudoTag) && (tag.ToString() == "cEAN" || tag.ToString() == "cEANTrib"))
+                    return ConteudoTag = "SEM GTIN";
+
                 int len = ConteudoTag.Length;
                 if (len == 0 && (optional == ObOp.Opcional || optional == ObOp.None))
                 {

@@ -1105,7 +1105,13 @@ namespace NFe.Components
         /// Padrão CECAM
         /// </summary>
         [Description("CECAM")]
-        CECAM
+        CECAM,
+
+        /// <summary>
+        /// Padrão utilizado pela prefeitura de Camboriú-SC
+        /// </summary>
+        [Description("SIMPLE")]
+        SIMPLE
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

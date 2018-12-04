@@ -1875,5 +1875,15 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_HGoianaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://simple.camboriu.sc.gov.br/LISIPMC/NFSePrefeituraCamboriu.wso")]
+        public string NFe_Components_PCamboriuSC_NFSePrefeituraCamboriu {
+            get {
+                return ((string)(this["NFe_Components_PCamboriuSC_NFSePrefeituraCamboriu"]));
+            }
+        }
     }
 }

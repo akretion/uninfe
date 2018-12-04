@@ -964,7 +964,8 @@ namespace NFe.Service
                             if (taHomologacao &&
                                 cMunicipio.ToString() != "2111300") //São Luiz - MA
 
-                                if (cMunicipio.ToString().Equals("5002704")) // Campo grande - MS não tem web service de teste
+                                if (cMunicipio.ToString().Equals("5002704") || // Campo grande - MS não tem web service de teste
+                                    cMunicipio.ToString().Equals("3303500")) //Nova Iguaçu-RS
                                     throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
                                 else
                                     retorna = "testeEnviar";
@@ -2891,6 +2892,7 @@ namespace NFe.Service
                 case PadroesNFSe.JOINVILLE_SC:
                 case PadroesNFSe.AVMB_ASTEN:
                 case PadroesNFSe.ADM_SISTEMAS:
+                case PadroesNFSe.SIMPLE:
                     retorno = false;
                     break;
 

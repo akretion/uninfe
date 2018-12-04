@@ -280,7 +280,10 @@ namespace NFe.Service
                                             //Se o XML de distribuição não estiver na pasta em processamento
                                             if (!procNFeJaNaAutorizada && !File.Exists(strArquivoNFeProc))
                                             {
-                                                oGerarXML.XmlDistCTe(strArquivoCTe, strProtNfe, oLerXml.oDadosNfe.versao);
+                                                if (ChaveCTe.Substring(20, 2) == "67")
+                                                    oGerarXML.XmlDistCTeOS(strArquivoCTe, strProtNfe, oLerXml.oDadosNfe.versao);
+                                                else
+                                                    oGerarXML.XmlDistCTe(strArquivoCTe, strProtNfe, oLerXml.oDadosNfe.versao);
                                             }
 
                                             //Se o XML de distribuição não estiver ainda na pasta de autorizados
@@ -395,7 +398,9 @@ namespace NFe.Service
                     #region Nota fiscal cancelada
 
                     case "101": //Cancelamento Homologado ou Nfe Cancelada
-                        goto case "100";
+                        oFluxoNfe.ExcluirNfeFluxo(strChaveCTe);
+                        oAux.MoveArqErro(strArquivoCTe);
+                        break;
 
                     #endregion Nota fiscal cancelada
 

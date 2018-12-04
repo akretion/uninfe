@@ -36,8 +36,8 @@ namespace NFe.Components.Pronin.GetulioVargasRS.p
             ServiceConsultas.ClientCertificates.Add(certificado);
 
             Cabecalho cabecMsg = new Cabecalho();
-            cabecMsg.versao = "2.02";
-            cabecMsg.versaoDados = "2.02";
+            cabecMsg.versao = "2.03";
+            cabecMsg.versaoDados = "2.03";
 
             ServiceGeracao.cabecalho = cabecMsg;
             ServiceConsultas.cabecalho = cabecMsg;
@@ -67,7 +67,22 @@ namespace NFe.Components.Pronin.GetulioVargasRS.p
             XmlDocument doc = new XmlDocument();
             doc.Load(file);
 
-            string result = ServiceGeracao.RecepcionarLoteRps(doc.InnerXml);
+            string result = "";
+
+            switch (doc.DocumentElement.Name)
+            {
+                case "GerarNfseEnvio":
+                    result = ServiceGeracao.GerarNfse(doc.InnerXml);
+                    break;
+
+                case "EnviarLoteRpsEnvio":
+                    result = ServiceGeracao.RecepcionarLoteRps(doc.InnerXml);
+                    break;
+
+                case "EnviarLoteRpsSincronoEnvio":
+                    result = ServiceGeracao.EnviarLoteRpsSincrono(doc.InnerXml);
+                    break;
+            }
 
             GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);

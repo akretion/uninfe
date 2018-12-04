@@ -705,7 +705,7 @@ namespace NFe.UI
                         }
                         catch { }
                     }
-                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
+                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "UniNFe");
                 }
             }
         }

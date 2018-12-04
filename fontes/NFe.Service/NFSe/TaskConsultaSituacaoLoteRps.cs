@@ -8,6 +8,7 @@ using NFe.Components.Metropolis;
 using NFe.Components.Pronin;
 using NFe.Components.SimplISS;
 using NFe.Components.Tinus;
+using NFe.Components.Simple;
 using NFe.Settings;
 using NFSe.Components;
 using System;
@@ -320,6 +321,20 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.E_RECEITA:
                         cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.SIMPLE:
+
+                        Simple simple = new Simple((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                        oDadosPedSitLoteRps.cMunicipio,
+                                                        ConfiguracaoApp.ProxyUsuario,
+                                                        ConfiguracaoApp.ProxySenha,
+                                                        ConfiguracaoApp.ProxyServidor,
+                                                        Empresas.Configuracoes[emp].X509Certificado);
+
+                        simple.ConsultarSituacaoLoteRps(NomeArquivoXML);
+
                         break;
                 }
 

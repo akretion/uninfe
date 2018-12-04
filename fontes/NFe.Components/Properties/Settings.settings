@@ -551,5 +551,8 @@
     <Setting Name="NFe_Components_HGoianaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://www2.tinus.com.br/csp/testegoi/WSNFSE.RecepcionarLoteRps.cls</Value>
     </Setting>
+    <Setting Name="NFe_Components_PCamboriuSC_NFSePrefeituraCamboriu" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://simple.camboriu.sc.gov.br/LISIPMC/NFSePrefeituraCamboriu.wso</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

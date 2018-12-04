@@ -13,6 +13,7 @@ using NFe.Components.Metropolis;
 using NFe.Components.Pronin;
 using NFe.Components.SigCorp;
 using NFe.Components.SimplISS;
+using NFe.Components.Simple;
 using NFe.Settings;
 using NFSe.Components;
 using NFe.Components.Coplan;
@@ -466,6 +467,19 @@ namespace NFe.Service.NFSe
                         SignUsingCredentials(emp, pedLoteRps);
                         break;
 #endif
+
+                    case PadroesNFSe.SIMPLE:
+
+                        Simple simple = new Simple((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                        ler.oDadosPedSitNfseRps.cMunicipio,
+                                                        ConfiguracaoApp.ProxyUsuario,
+                                                        ConfiguracaoApp.ProxySenha,
+                                                        ConfiguracaoApp.ProxyServidor,
+                                                        Empresas.Configuracoes[emp].X509Certificado);
+
+                        simple.ConsultarNfsePorRps(NomeArquivoXML);
+                        break;
                 }
 
                 if (base.IsInvocar(padraoNFSe, Servico, ler.oDadosPedSitNfseRps.cMunicipio))

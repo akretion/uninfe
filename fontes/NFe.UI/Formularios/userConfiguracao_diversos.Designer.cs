@@ -100,7 +100,7 @@
             this.lbl_udTempoConsulta.AutoSize = true;
             this.lbl_udTempoConsulta.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_udTempoConsulta.Location = new System.Drawing.Point(3, 189);
-            this.lbl_udTempoConsulta.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lbl_udTempoConsulta.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_udTempoConsulta.Name = "lbl_udTempoConsulta";
             this.lbl_udTempoConsulta.Size = new System.Drawing.Size(427, 15);
             this.lbl_udTempoConsulta.TabIndex = 24;
@@ -129,7 +129,7 @@
             this.lbl_udDiasLimpeza.AutoSize = true;
             this.lbl_udDiasLimpeza.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_udDiasLimpeza.Location = new System.Drawing.Point(3, 147);
-            this.lbl_udDiasLimpeza.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lbl_udDiasLimpeza.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_udDiasLimpeza.Name = "lbl_udDiasLimpeza";
             this.lbl_udDiasLimpeza.Size = new System.Drawing.Size(502, 15);
             this.lbl_udDiasLimpeza.TabIndex = 18;
@@ -206,7 +206,7 @@
             this.metroLabel11.AutoSize = true;
             this.metroLabel11.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel11.Location = new System.Drawing.Point(-1, 95);
-            this.metroLabel11.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.metroLabel11.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel11.Name = "metroLabel11";
             this.metroLabel11.Size = new System.Drawing.Size(89, 15);
             this.metroLabel11.TabIndex = 10;
@@ -230,7 +230,7 @@
             this.metroLabel10.AutoSize = true;
             this.metroLabel10.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel10.Location = new System.Drawing.Point(557, 46);
-            this.metroLabel10.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.metroLabel10.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel10.Name = "metroLabel10";
             this.metroLabel10.Size = new System.Drawing.Size(56, 15);
             this.metroLabel10.TabIndex = 8;
@@ -257,7 +257,7 @@
             this.labelUF.AutoSize = true;
             this.labelUF.FontSize = MetroFramework.MetroLabelSize.Small;
             this.labelUF.Location = new System.Drawing.Point(414, 46);
-            this.labelUF.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.labelUF.Margin = new System.Windows.Forms.Padding(3);
             this.labelUF.Name = "labelUF";
             this.labelUF.Size = new System.Drawing.Size(127, 15);
             this.labelUF.TabIndex = 6;
@@ -306,7 +306,7 @@
             this.metroLabel19.AutoSize = true;
             this.metroLabel19.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel19.Location = new System.Drawing.Point(3, 46);
-            this.metroLabel19.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.metroLabel19.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel19.Name = "metroLabel19";
             this.metroLabel19.Size = new System.Drawing.Size(43, 15);
             this.metroLabel19.TabIndex = 4;
@@ -317,7 +317,7 @@
             this.lbl_DiretorioSalvarComo.AutoSize = true;
             this.lbl_DiretorioSalvarComo.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_DiretorioSalvarComo.Location = new System.Drawing.Point(236, 95);
-            this.lbl_DiretorioSalvarComo.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lbl_DiretorioSalvarComo.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_DiretorioSalvarComo.Name = "lbl_DiretorioSalvarComo";
             this.lbl_DiretorioSalvarComo.Size = new System.Drawing.Size(104, 15);
             this.lbl_DiretorioSalvarComo.TabIndex = 12;
@@ -328,7 +328,7 @@
             this.metroLabel21.AutoSize = true;
             this.metroLabel21.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel21.Location = new System.Drawing.Point(183, 3);
-            this.metroLabel21.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.metroLabel21.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel21.Name = "metroLabel21";
             this.metroLabel21.Size = new System.Drawing.Size(39, 15);
             this.metroLabel21.TabIndex = 2;
@@ -357,7 +357,7 @@
             this.metroLabel22.AutoSize = true;
             this.metroLabel22.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel22.Location = new System.Drawing.Point(3, 3);
-            this.metroLabel22.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.metroLabel22.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel22.Name = "metroLabel22";
             this.metroLabel22.Size = new System.Drawing.Size(77, 15);
             this.metroLabel22.TabIndex = 0;
@@ -397,7 +397,7 @@
             this.lbl_UsuarioWS.AutoSize = true;
             this.lbl_UsuarioWS.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_UsuarioWS.Location = new System.Drawing.Point(417, 142);
-            this.lbl_UsuarioWS.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lbl_UsuarioWS.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_UsuarioWS.Name = "lbl_UsuarioWS";
             this.lbl_UsuarioWS.Size = new System.Drawing.Size(67, 15);
             this.lbl_UsuarioWS.TabIndex = 20;
@@ -425,7 +425,7 @@
             this.lbl_SenhaWS.AutoSize = true;
             this.lbl_SenhaWS.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_SenhaWS.Location = new System.Drawing.Point(557, 142);
-            this.lbl_SenhaWS.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lbl_SenhaWS.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_SenhaWS.Name = "lbl_SenhaWS";
             this.lbl_SenhaWS.Size = new System.Drawing.Size(59, 15);
             this.lbl_SenhaWS.TabIndex = 22;
@@ -453,7 +453,7 @@
             this.lbl_Padrao.AutoSize = true;
             this.lbl_Padrao.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_Padrao.Location = new System.Drawing.Point(557, 96);
-            this.lbl_Padrao.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lbl_Padrao.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_Padrao.Name = "lbl_Padrao";
             this.lbl_Padrao.Size = new System.Drawing.Size(43, 15);
             this.lbl_Padrao.TabIndex = 16;
@@ -482,7 +482,7 @@
             this.lbl_CodMun.AutoSize = true;
             this.lbl_CodMun.FontSize = MetroFramework.MetroLabelSize.Small;
             this.lbl_CodMun.Location = new System.Drawing.Point(417, 96);
-            this.lbl_CodMun.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.lbl_CodMun.Margin = new System.Windows.Forms.Padding(3);
             this.lbl_CodMun.Name = "lbl_CodMun";
             this.lbl_CodMun.Size = new System.Drawing.Size(111, 15);
             this.lbl_CodMun.TabIndex = 14;
@@ -558,7 +558,7 @@
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel2.Location = new System.Drawing.Point(360, 19);
-            this.metroLabel2.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.metroLabel2.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(52, 15);
             this.metroLabel2.TabIndex = 18;
@@ -569,7 +569,7 @@
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel1.Location = new System.Drawing.Point(20, 19);
-            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.metroLabel1.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(30, 15);
             this.metroLabel1.TabIndex = 16;
@@ -590,6 +590,7 @@
             this.txtClienteID.Text = "Styled TextBox";
             this.txtClienteID.UseSelectable = true;
             this.txtClienteID.Visible = false;
+            this.txtClienteID.TextChanged += new System.EventHandler(this.txtClienteID_TextChanged);
             // 
             // txtClientSecret
             // 
@@ -606,6 +607,7 @@
             this.txtClientSecret.Text = "Styled TextBox";
             this.txtClientSecret.UseSelectable = true;
             this.txtClientSecret.Visible = false;
+            this.txtClientSecret.TextChanged += new System.EventHandler(this.txtClientSecret_TextChanged);
             // 
             // lblClienteID
             // 
@@ -645,12 +647,13 @@
             // 
             this.checkBoxValidarDigestValue.AutoSize = true;
             this.checkBoxValidarDigestValue.Location = new System.Drawing.Point(3, 358);
-            this.checkBoxValidarDigestValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.checkBoxValidarDigestValue.Margin = new System.Windows.Forms.Padding(2);
             this.checkBoxValidarDigestValue.Name = "checkBoxValidarDigestValue";
             this.checkBoxValidarDigestValue.Size = new System.Drawing.Size(444, 15);
             this.checkBoxValidarDigestValue.TabIndex = 38;
             this.checkBoxValidarDigestValue.Text = "Comparar Digest Value do DFe em processamento com o retornado pela SEFAZ?";
             this.checkBoxValidarDigestValue.UseSelectable = true;
+            this.checkBoxValidarDigestValue.CheckedChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
             // 
             // userConfiguracao_diversos
             // 

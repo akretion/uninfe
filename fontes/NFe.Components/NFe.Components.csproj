@@ -242,6 +242,9 @@
     <Compile Include="SigCorp\GovernadorValdaresMG\p\SigCorpP.cs" />
     <Compile Include="SigCorp\SaoJoaoMeritiRJ\h\SigCorpH.cs" />
     <Compile Include="SigCorp\SaoJoaoMeritiRJ\p\SigCorpP.cs" />
+    <Compile Include="Simple\CamboriuSC\p\SimpleP.cs" />
+    <Compile Include="Simple\Simple.cs" />
+    <Compile Include="Simple\SimpleBase.cs" />
     <Compile Include="SimplISS\ArarasSP\p\SimplISSP.cs" />
     <Compile Include="SimplISS\AstorgaPR\p\SimplISSP.cs" />
     <Compile Include="SimplISS\ParaguacuPaulistaSP\p\SimplISSP.cs" />
@@ -1093,6 +1096,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\PCachoeiraSulRS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PCamboriuSC\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -3790,6 +3798,17 @@
     <None Include="Web References\PCachoeiraSulRS\Services0.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Web References\PCamboriuSC\CancelamentoNota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PCamboriuSC\NFSePrefeituraCamboriu.wsdl" />
+    <None Include="Web References\PCamboriuSC\Nota.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PCamboriuSC\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\PCampoNovoDoParecisMT\nfse_web_service.wsdl" />
     <None Include="Web References\PCampoNovoDoParecisMT\output1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -5306,6 +5325,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_metropolisweb_lftributos_p_Nfse</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://simple.camboriu.sc.gov.br/LISIPMC/NFSePrefeituraCamboriu.wso%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PCamboriuSC\</RelPath>
+      <UpdateFromURL>http://simple.camboriu.sc.gov.br/LISIPMC/NFSePrefeituraCamboriu.wso%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PCamboriuSC_NFSePrefeituraCamboriu</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://wsastorga.simplissweb.com.br/nfseservice.svc%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

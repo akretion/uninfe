@@ -11,6 +11,7 @@ using NFe.Components.Memory;
 using NFe.Components.Metropolis;
 using NFe.Components.Pronin;
 using NFe.Components.SimplISS;
+using NFe.Components.Simple;
 using NFe.Settings;
 using NFSe.Components;
 using System;
@@ -446,6 +447,19 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.MEGASOFT:
                         cabecMsg = "<cabecalho versao=\"1.00\" xmlns=\"http://megasoftarrecadanet.com.br/xsd/nfse_v01.xsd\"><versaoDados>1.00</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.SIMPLE:
+
+                        Simple simple = new Simple((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                        ler.oDadosPedSitNfseRps.cMunicipio,
+                                                        ConfiguracaoApp.ProxyUsuario,
+                                                        ConfiguracaoApp.ProxySenha,
+                                                        ConfiguracaoApp.ProxyServidor,
+                                                        Empresas.Configuracoes[emp].X509Certificado);
+
+                        simple.ConsultarNfsePorRps(NomeArquivoXML);
                         break;
                 }
 
