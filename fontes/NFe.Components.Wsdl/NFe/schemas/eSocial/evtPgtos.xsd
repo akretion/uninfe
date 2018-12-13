@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtPgtos/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtPgtos/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtPgtos/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtPgtos/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="evtPgtos">
           <xs:annotation>
-            <xs:documentation>Evento pagtos. de rendimentos do trabalho</xs:documentation>
+            <xs:documentation>Evento Pagtos Efetuados</xs:documentation>
           </xs:annotation>
           <xs:complexType>
             <xs:sequence>
@@ -22,7 +22,7 @@
               </xs:element>
               <xs:element name="ideBenef">
                 <xs:annotation>
-                  <xs:documentation>Identificação do beneficiário do pagamento.</xs:documentation>
+                  <xs:documentation>Identificação do beneficiário do pagamento</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
@@ -38,7 +38,7 @@
                     </xs:element>
                     <xs:element name="deps" minOccurs="0">
                       <xs:annotation>
-                        <xs:documentation>Informações de dependentes do beneficiário do pagamento</xs:documentation>
+                        <xs:documentation>Informações de dependentes do beneficiário</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
@@ -50,6 +50,7 @@
                               <xs:restriction base="xs:decimal">
                                 <xs:totalDigits value="14"/>
                                 <xs:fractionDigits value="2"/>
+                                <xs:maxInclusive value="999999999999"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -65,7 +66,7 @@
                           <xs:element name="dtPgto">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Data do pagamento.</xs:documentation>
+                                <xs:documentation>Data do pagamento</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:date">
                               </xs:restriction>
@@ -74,7 +75,7 @@
                           <xs:element name="tpPgto">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Informar o tipo de pagamento.</xs:documentation>
+                                <xs:documentation>Informar o tipo de pagamento</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:byte">
                                 <xs:pattern value="\d{1,2}"/>
@@ -84,18 +85,16 @@
                           <xs:element name="indResBr">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Tem residência fiscal no Brasil?</xs:documentation>
+                                <xs:documentation>Indicativo de residência do beneficiário do pagamento no Brasil</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:length value="1"/>
                                 <xs:pattern value="[N|S]"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
                           <xs:element name="detPgtoFl" minOccurs="0" maxOccurs="200">
                             <xs:annotation>
-                              <xs:documentation>Detalhamento dos pagamentos efetuados, relativos a folha de pagamento e rescisões contratuais, apurados em S-1200, S-1202, S-2299 e S-2399.
-O somatório de cada uma das rubricas cujo {codIncIRRF} = [31, 32, 33, 34, 35] não pode ser negativo.</xs:documentation>
+                              <xs:documentation>Detalhamento dos pagamentos efetuados apurados em S-1200 ou S-1202</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
@@ -105,8 +104,7 @@ O somatório de cada uma das rubricas cujo {codIncIRRF} = [31, 32, 33, 34, 35] n
                                       <xs:documentation>Período de referência</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:minLength value="4"/>
-                                      <xs:maxLength value="7"/>
+                                      <xs:pattern value="[2]{1}\d{3}-(1[0-2]|0[1-9])"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -139,6 +137,7 @@ O somatório de cada uma das rubricas cujo {codIncIRRF} = [31, 32, 33, 34, 35] n
                                     <xs:restriction base="xs:decimal">
                                       <xs:totalDigits value="14"/>
                                       <xs:fractionDigits value="2"/>
+                                      <xs:maxInclusive value="999999999999"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -155,7 +154,7 @@ O somatório de cada uma das rubricas cujo {codIncIRRF} = [31, 32, 33, 34, 35] n
                                 </xs:element>
                                 <xs:element name="retPgtoTot" minOccurs="0" maxOccurs="99">
                                   <xs:annotation>
-                                    <xs:documentation>Retenções efetuadas no ato do pagamento pelo valor total do demonstrativo.</xs:documentation>
+                                    <xs:documentation>Retenções efetuadas no ato do pagamento</xs:documentation>
                                   </xs:annotation>
                                   <xs:complexType>
                                     <xs:sequence>
@@ -184,11 +183,12 @@ O somatório de cada uma das rubricas cujo {codIncIRRF} = [31, 32, 33, 34, 35] n
                                       <xs:element name="qtdRubr" minOccurs="0">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Qtde de referência para apuração da rubrica.</xs:documentation>
+                                            <xs:documentation>Qtde de referência para apuração da rubrica</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="6"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="9999.99"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -200,17 +200,19 @@ O somatório de cada uma das rubricas cujo {codIncIRRF} = [31, 32, 33, 34, 35] n
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="5"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999.99"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
                                       <xs:element name="vrUnit" minOccurs="0">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Valor Unitário </xs:documentation>
+                                            <xs:documentation>Valor Unitário</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="14"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999999999999"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -222,21 +224,18 @@ O somatório de cada uma das rubricas cujo {codIncIRRF} = [31, 32, 33, 34, 35] n
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="14"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999999999999"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
                                       <xs:element name="penAlim" type="TPensaoAlim" minOccurs="0" maxOccurs="99">
-                                        <xs:annotation>
-                                          <xs:documentation>Informações sobre beneficiários de pensão alimentícia.</xs:documentation>
-                                        </xs:annotation>
                                       </xs:element>
                                     </xs:sequence>
                                   </xs:complexType>
                                 </xs:element>
                                 <xs:element name="infoPgtoParc" minOccurs="0" maxOccurs="99">
                                   <xs:annotation>
-                                    <xs:documentation>Informações complentares relacionadas ao pagamento efetuado em valor menor que o apurado no demonstrativo.
-Devem ser utilizadas rubricas que integram o demonstrativo de valores devidos ao trabalhador ({ideDmDev}) do respectivo evento (S-1200, S-1202, S-2299, S-2399) que deu origem ao presente pagamento parcial, além de rubricas que representam os descontos de IRRF e pensão alimentícia.</xs:documentation>
+                                    <xs:documentation>Informações complementares relacionadas ao pagamento parcial</xs:documentation>
                                   </xs:annotation>
                                   <xs:complexType>
                                     <xs:sequence>
@@ -276,11 +275,12 @@ Devem ser utilizadas rubricas que integram o demonstrativo de valores devidos ao
                                       <xs:element name="qtdRubr" minOccurs="0">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Qtde de referência para apuração da rubrica.</xs:documentation>
+                                            <xs:documentation>Qtde de referência para apuração da rubrica</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="6"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="9999.99"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -292,17 +292,19 @@ Devem ser utilizadas rubricas que integram o demonstrativo de valores devidos ao
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="5"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999.99"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
                                       <xs:element name="vrUnit" minOccurs="0">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Valor Unitário </xs:documentation>
+                                            <xs:documentation>Valor Unitário</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="14"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999999999999"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -314,6 +316,7 @@ Devem ser utilizadas rubricas que integram o demonstrativo de valores devidos ao
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="14"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999999999999"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -335,8 +338,7 @@ Devem ser utilizadas rubricas que integram o demonstrativo de valores devidos ao
                                       <xs:documentation>Período de referência</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:minLength value="4"/>
-                                      <xs:maxLength value="7"/>
+                                      <xs:pattern value="[2]{1}\d{3}-(1[0-2]|0[1-9])"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -369,18 +371,18 @@ Devem ser utilizadas rubricas que integram o demonstrativo de valores devidos ao
                                     <xs:restriction base="xs:decimal">
                                       <xs:totalDigits value="14"/>
                                       <xs:fractionDigits value="2"/>
+                                      <xs:maxInclusive value="999999999999"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
                                 <xs:element name="retPgtoTot" type="TRubrCaixa" minOccurs="0" maxOccurs="99">
                                   <xs:annotation>
-                                    <xs:documentation>Retenções efetuadas no ato do pagamento pelo valor integral do demonstrativo</xs:documentation>
+                                    <xs:documentation>Retenções efetuadas no ato do pagamento</xs:documentation>
                                   </xs:annotation>
                                 </xs:element>
                                 <xs:element name="infoPgtoParc" minOccurs="0" maxOccurs="99">
                                   <xs:annotation>
-                                    <xs:documentation>Informações complentares relacionadas ao pagamento efetuado em valor menor que o apurado no demonstrativo.
-Devem ser utilizadas rubricas que integram o demonstrativo de valores devidos ao trabalhador ({ideDmDev}) do respectivo evento (S-1207) que deu origem ao presente pagamento parcial, além de rubricas que representam os descontos de IRRF e pensão alimentícia.</xs:documentation>
+                                    <xs:documentation>Informações complementares relacionadas ao pagamento parcial</xs:documentation>
                                   </xs:annotation>
                                   <xs:complexType>
                                     <xs:sequence>
@@ -409,11 +411,12 @@ Devem ser utilizadas rubricas que integram o demonstrativo de valores devidos ao
                                       <xs:element name="qtdRubr" minOccurs="0">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Qtde de referência para apuração da rubrica.</xs:documentation>
+                                            <xs:documentation>Qtde de referência para apuração da rubrica</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="6"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="9999.99"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -425,17 +428,19 @@ Devem ser utilizadas rubricas que integram o demonstrativo de valores devidos ao
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="5"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999.99"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
                                       <xs:element name="vrUnit" minOccurs="0">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Valor Unitário </xs:documentation>
+                                            <xs:documentation>Valor Unitário</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="14"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999999999999"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -447,6 +452,7 @@ Devem ser utilizadas rubricas que integram o demonstrativo de valores devidos ao
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="14"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999999999999"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -458,22 +464,21 @@ Devem ser utilizadas rubricas que integram o demonstrativo de valores devidos ao
                           </xs:element>
                           <xs:element name="detPgtoFer" minOccurs="0" maxOccurs="5">
                             <xs:annotation>
-                              <xs:documentation>Detalhamento dos pagamentos efetuados relativos a férias.
-O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codIncIRRF} = [31, 32, 33, 34, 35] não pode ser negativo.</xs:documentation>
+                              <xs:documentation>Detalhamento dos pagamentos de férias</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
                                 <xs:element name="codCateg">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Código da Categoria</xs:documentation>
+                                      <xs:documentation>Código da Categoria do Trabalhador</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:integer">
                                       <xs:pattern value="\d{3}"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
-                                <xs:element name="matricula">
+                                <xs:element name="matricula" minOccurs="0">
                                   <xs:simpleType>
                                     <xs:annotation>
                                       <xs:documentation>Matricula</xs:documentation>
@@ -511,12 +516,13 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
                                     <xs:restriction base="xs:decimal">
                                       <xs:totalDigits value="14"/>
                                       <xs:fractionDigits value="2"/>
+                                      <xs:maxInclusive value="999999999999"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
                                 <xs:element name="detRubrFer" maxOccurs="99">
                                   <xs:annotation>
-                                    <xs:documentation>Detalhamento das rubricas do Recibo Antecipado de Férias</xs:documentation>
+                                    <xs:documentation>Detalhamento das rubricas</xs:documentation>
                                   </xs:annotation>
                                   <xs:complexType>
                                     <xs:sequence>
@@ -534,7 +540,7 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
                                       <xs:element name="ideTabRubr">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Identificador da tabela de rubricas</xs:documentation>
+                                            <xs:documentation>Preencher com o identificador da tabela de rubricas</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="1"/>
@@ -545,11 +551,12 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
                                       <xs:element name="qtdRubr" minOccurs="0">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Qtde de referência para apuração da rubrica.</xs:documentation>
+                                            <xs:documentation>Qtde de referência para apuração da rubrica</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="6"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="9999.99"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -561,17 +568,19 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="5"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999.99"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
                                       <xs:element name="vrUnit" minOccurs="0">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Valor Unitário </xs:documentation>
+                                            <xs:documentation>Valor Unitário</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="14"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999999999999"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -583,13 +592,11 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="14"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999999999999"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
                                       <xs:element name="penAlim" type="TPensaoAlim" minOccurs="0" maxOccurs="99">
-                                        <xs:annotation>
-                                          <xs:documentation>Informações sobre beneficiários de pensão alimentícia.</xs:documentation>
-                                        </xs:annotation>
                                       </xs:element>
                                     </xs:sequence>
                                   </xs:complexType>
@@ -599,14 +606,14 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
                           </xs:element>
                           <xs:element name="detPgtoAnt" minOccurs="0" maxOccurs="99">
                             <xs:annotation>
-                              <xs:documentation>Pagamento relativo a competências anteriores ao início de obrigatoriedade dos eventos periódicos para o contribuinte.</xs:documentation>
+                              <xs:documentation>Pagamento relativo a competências anteriores ao início de obrigatoriedade dos eventos periódicos</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
                                 <xs:element name="codCateg">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Código da Categoria</xs:documentation>
+                                      <xs:documentation>Código da Categoria do Trabalhador</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:integer">
                                       <xs:pattern value="\d{3}"/>
@@ -632,11 +639,12 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
                                       <xs:element name="vrBcIRRF">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>BC IRRF</xs:documentation>
+                                            <xs:documentation>Valor BC IRRF</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="14"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999999999999"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -648,7 +656,7 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
                           </xs:element>
                           <xs:element name="idePgtoExt" type="TNaoResid" minOccurs="0">
                             <xs:annotation>
-                              <xs:documentation>Informações complementares relativas a pagamentos efetuados a beneficiário residente fiscal no exterior.</xs:documentation>
+                              <xs:documentation>Informações complementares sobre pagamentos no exterior</xs:documentation>
                             </xs:annotation>
                           </xs:element>
                         </xs:sequence>
@@ -683,7 +691,7 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
       <xs:element name="nrRecibo" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Recibo arquivo a ser retificado</xs:documentation>
+            <xs:documentation>Número do recibo do arquivo a ser retificado</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -694,8 +702,7 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
       <xs:element name="indApuracao">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Indicativo de período de apuração:
-            1 - Mensal.</xs:documentation>
+            <xs:documentation>Indicativo de período de apuração</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -705,11 +712,10 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
       <xs:element name="perApur">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Período ao qual se referem as informações.</xs:documentation>
+            <xs:documentation>Período ao qual se referem as informações</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:minLength value="4"/>
-            <xs:maxLength value="7"/>
+            <xs:pattern value="[2]{1}\d{3}-(1[0-2]|0[1-9])"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -736,7 +742,7 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
       <xs:element name="verProc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Versão do processo de emissão do evento. </xs:documentation>
+            <xs:documentation>Versão do processo de emissão do evento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -751,7 +757,7 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -764,16 +770,13 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="TPensaoAlim">
-    <xs:annotation>
-      <xs:documentation>Pensao alimentícia</xs:documentation>
-    </xs:annotation>
     <xs:sequence>
       <xs:element name="cpfBenef">
         <xs:simpleType>
@@ -802,6 +805,7 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
           <xs:restriction base="xs:string">
             <xs:minLength value="2"/>
             <xs:maxLength value="70"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -813,6 +817,7 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
           <xs:restriction base="xs:decimal">
             <xs:totalDigits value="14"/>
             <xs:fractionDigits value="2"/>
+            <xs:maxInclusive value="999999999999"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -837,7 +842,7 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
       <xs:element name="ideTabRubr">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Identificador da tabela de rubricas</xs:documentation>
+            <xs:documentation>Preencher com o identificador da tabela de rubricas</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -848,11 +853,12 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
       <xs:element name="qtdRubr" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Qtde de referência para apuração da rubrica.</xs:documentation>
+            <xs:documentation>Qtde de referência para apuração da rubrica</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:decimal">
             <xs:totalDigits value="6"/>
             <xs:fractionDigits value="2"/>
+            <xs:maxInclusive value="9999.99"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -864,17 +870,19 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
           <xs:restriction base="xs:decimal">
             <xs:totalDigits value="5"/>
             <xs:fractionDigits value="2"/>
+            <xs:maxInclusive value="999.99"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="vrUnit" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Valor Unitário </xs:documentation>
+            <xs:documentation>Valor Unitário</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:decimal">
             <xs:totalDigits value="14"/>
             <xs:fractionDigits value="2"/>
+            <xs:maxInclusive value="999999999999"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -886,6 +894,7 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
           <xs:restriction base="xs:decimal">
             <xs:totalDigits value="14"/>
             <xs:fractionDigits value="2"/>
+            <xs:maxInclusive value="999999999999"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -925,11 +934,12 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
             <xs:element name="nifBenef" minOccurs="0">
               <xs:simpleType>
                 <xs:annotation>
-                  <xs:documentation>NIF do beneficiário</xs:documentation>
+                  <xs:documentation>Número de Identificação Fiscal - NIF</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="1"/>
+                  <xs:minLength value="2"/>
                   <xs:maxLength value="20"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -938,7 +948,7 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
       </xs:element>
       <xs:element name="endExt">
         <xs:annotation>
-          <xs:documentation>Informações complementares de endereço do beneficiário.</xs:documentation>
+          <xs:documentation>Informações complementares de endereço do beneficiário</xs:documentation>
         </xs:annotation>
         <xs:complexType>
           <xs:sequence>
@@ -949,7 +959,8 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
                 </xs:annotation>
                 <xs:restriction base="xs:string">
                   <xs:minLength value="1"/>
-                  <xs:maxLength value="80"/>
+                  <xs:maxLength value="100"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -967,21 +978,24 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
             <xs:element name="complem" minOccurs="0">
               <xs:simpleType>
                 <xs:annotation>
-                  <xs:documentation>Complemento</xs:documentation>
+                  <xs:documentation>Complemento do logradouro</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
+                  <xs:minLength value="2"/>
                   <xs:maxLength value="30"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
             <xs:element name="bairro" minOccurs="0">
               <xs:simpleType>
                 <xs:annotation>
-                  <xs:documentation>Nome do bairro/distrito.</xs:documentation>
+                  <xs:documentation>Nome do bairro/distrito</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
                   <xs:minLength value="1"/>
-                  <xs:maxLength value="60"/>
+                  <xs:maxLength value="90"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -991,19 +1005,21 @@ O somatório de cada uma das rubricas cujo {codIncCP} = [31, 32, 34, 35] e {codI
                   <xs:documentation>Nome da Cidade</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
+                  <xs:minLength value="2"/>
                   <xs:maxLength value="50"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
             <xs:element name="codPostal" minOccurs="0">
               <xs:simpleType>
                 <xs:annotation>
-                  <xs:documentation>CEP</xs:documentation>
+                  <xs:documentation>Código de Endereçamento Postal</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
-                  <xs:whiteSpace value="preserve"/>
                   <xs:minLength value="4"/>
                   <xs:maxLength value="12"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtAltCadastral/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtAltCadastral/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtAltCadastral/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtAltCadastral/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -79,6 +79,7 @@
                               <xs:restriction base="xs:string">
                                 <xs:minLength value="2"/>
                                 <xs:maxLength value="70"/>
+                                <xs:whiteSpace value="preserve"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -88,7 +89,6 @@
                                 <xs:documentation>Sexo</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:length value="1"/>
                                 <xs:pattern value="[F|M]"/>
                               </xs:restriction>
                             </xs:simpleType>
@@ -131,6 +131,7 @@
                               <xs:restriction base="xs:string">
                                 <xs:minLength value="2"/>
                                 <xs:maxLength value="70"/>
+                                <xs:whiteSpace value="preserve"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -155,6 +156,7 @@
                                       <xs:documentation>Código do Município</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:integer">
+                                      <xs:pattern value="\d{7}"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -197,7 +199,7 @@
                                 <xs:element name="paisNascto">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>País de Nascimento</xs:documentation>
+                                      <xs:documentation>Código do País de Nascimento</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
                                       <xs:length value="3"/>
@@ -207,7 +209,7 @@
                                 <xs:element name="paisNac">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Nacionalidade</xs:documentation>
+                                      <xs:documentation>Código do país de nacionalidade do trabalhador</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
                                       <xs:length value="3"/>
@@ -217,22 +219,24 @@
                                 <xs:element name="nmMae" minOccurs="0">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Nome da mãe</xs:documentation>
+                                      <xs:documentation>Nome da mãe do trabalhador</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
                                       <xs:minLength value="2"/>
                                       <xs:maxLength value="70"/>
+                                      <xs:whiteSpace value="preserve"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
                                 <xs:element name="nmPai" minOccurs="0">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Nome do pai</xs:documentation>
+                                      <xs:documentation>Nome do pai do trabalhador</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
                                       <xs:minLength value="2"/>
                                       <xs:maxLength value="70"/>
+                                      <xs:whiteSpace value="preserve"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -247,12 +251,12 @@
                               <xs:sequence>
                                 <xs:element name="CTPS" type="TCtps" minOccurs="0">
                                   <xs:annotation>
-                                    <xs:documentation>Informações da Carteira de Trabalho e Previdência Social</xs:documentation>
+                                    <xs:documentation>Carteira de Trabalho e Previdência Social</xs:documentation>
                                   </xs:annotation>
                                 </xs:element>
                                 <xs:element name="RIC" type="TRic" minOccurs="0">
                                   <xs:annotation>
-                                    <xs:documentation>Informações do Documento Nacional de Identidade - DNI (Registro de Identificação Civil - RIC)</xs:documentation>
+                                    <xs:documentation>Informações do Documento Nacional de Identidade (DNI)</xs:documentation>
                                   </xs:annotation>
                                 </xs:element>
                                 <xs:element name="RG" type="TRg" minOccurs="0">
@@ -280,19 +284,19 @@
                           </xs:element>
                           <xs:element name="endereco">
                             <xs:annotation>
-                              <xs:documentation>Grupo de informações do endereço do Trabalhador</xs:documentation>
+                              <xs:documentation>Endereço do Trabalhador</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
                                 <xs:choice>
                                   <xs:element name="brasil" type="TEnderecoBrasil">
                                     <xs:annotation>
-                                      <xs:documentation>Preenchimento obrigatório para trabalhador residente no Brasil.</xs:documentation>
+                                      <xs:documentation>Endereço no Brasil</xs:documentation>
                                     </xs:annotation>
                                   </xs:element>
                                   <xs:element name="exterior" type="TEnderecoExterior">
                                     <xs:annotation>
-                                      <xs:documentation>Preenchido em caso de trabalhador residente no exterior.</xs:documentation>
+                                      <xs:documentation>Endereço no Exterior</xs:documentation>
                                     </xs:annotation>
                                   </xs:element>
                                 </xs:choice>
@@ -301,10 +305,13 @@
                           </xs:element>
                           <xs:element name="trabEstrangeiro" type="TTrabEstrang" minOccurs="0">
                             <xs:annotation>
-                              <xs:documentation>Grupo de informações do Trabalhador Estrangeiro</xs:documentation>
+                              <xs:documentation>Informações do Trabalhador Estrangeiro</xs:documentation>
                             </xs:annotation>
                           </xs:element>
                           <xs:element name="infoDeficiencia" minOccurs="0">
+                            <xs:annotation>
+                              <xs:documentation>Pessoa com Deficiência</xs:documentation>
+                            </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
                                 <xs:element name="defFisica">
@@ -313,7 +320,6 @@
                                       <xs:documentation>Deficiência Física</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:length value="1"/>
                                       <xs:pattern value="[N|S]"/>
                                     </xs:restriction>
                                   </xs:simpleType>
@@ -324,7 +330,6 @@
                                       <xs:documentation>Deficiência visual</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:length value="1"/>
                                       <xs:pattern value="[N|S]"/>
                                     </xs:restriction>
                                   </xs:simpleType>
@@ -335,7 +340,6 @@
                                       <xs:documentation>Deficiência auditiva</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:length value="1"/>
                                       <xs:pattern value="[N|S]"/>
                                     </xs:restriction>
                                   </xs:simpleType>
@@ -346,7 +350,6 @@
                                       <xs:documentation>Deficiência Mental</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:length value="1"/>
                                       <xs:pattern value="[N|S]"/>
                                     </xs:restriction>
                                   </xs:simpleType>
@@ -357,7 +360,6 @@
                                       <xs:documentation>Deficiência Intelectual</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:length value="1"/>
                                       <xs:pattern value="[N|S]"/>
                                     </xs:restriction>
                                   </xs:simpleType>
@@ -368,7 +370,6 @@
                                       <xs:documentation>Reabilitado?</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:length value="1"/>
                                       <xs:pattern value="[N|S]"/>
                                     </xs:restriction>
                                   </xs:simpleType>
@@ -389,9 +390,9 @@
                                       <xs:documentation>Observação</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:whiteSpace value="preserve"/>
-                                      <xs:minLength value="3"/>
+                                      <xs:minLength value="2"/>
                                       <xs:maxLength value="255"/>
+                                      <xs:whiteSpace value="preserve"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -412,10 +413,9 @@
                                 <xs:element name="trabAposent">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Aposentado?</xs:documentation>
+                                      <xs:documentation>Informar se o trabalhador já recebe o benefício previdenciário da aposentadoria por tempo de contribuição ou por idade</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:length value="1"/>
                                       <xs:pattern value="[N|S]"/>
                                     </xs:restriction>
                                   </xs:simpleType>
@@ -460,7 +460,7 @@
       <xs:element name="nrRecibo" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Recibo arquivo a ser retificado</xs:documentation>
+            <xs:documentation>Número do recibo do arquivo a ser retificado</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -491,7 +491,7 @@
       <xs:element name="verProc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Versão do processo de emissão do evento. </xs:documentation>
+            <xs:documentation>Versão do processo de emissão do evento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -506,7 +506,7 @@
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -519,7 +519,7 @@
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -533,7 +533,7 @@
       <xs:element name="nrCtps">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>CTPS</xs:documentation>
+            <xs:documentation>Número da CTPS</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="2"/>
@@ -544,10 +544,9 @@
       <xs:element name="serieCtps">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Número de série da CTPS.</xs:documentation>
+            <xs:documentation>Número de série da CTPS</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="preserve"/>
             <xs:minLength value="1"/>
             <xs:maxLength value="5"/>
           </xs:restriction>
@@ -556,7 +555,7 @@
       <xs:element name="ufCtps">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>UF da expedição da CTPS.</xs:documentation>
+            <xs:documentation>UF da expedição da CTPS</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:enumeration value="AC"/>
@@ -602,8 +601,9 @@
             <xs:documentation>N° do DIC</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:minLength value="3"/>
+            <xs:minLength value="2"/>
             <xs:maxLength value="14"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -613,9 +613,9 @@
             <xs:documentation>Órgão e UF de emissão</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="preserve"/>
-            <xs:minLength value="3"/>
+            <xs:minLength value="2"/>
             <xs:maxLength value="20"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -631,19 +631,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="TRg">
-    <xs:annotation>
-      <xs:documentation>Registro Geral</xs:documentation>
-    </xs:annotation>
     <xs:sequence>
       <xs:element name="nrRg">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>RG</xs:documentation>
+            <xs:documentation>Número do RG</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="preserve"/>
-            <xs:minLength value="3"/>
+            <xs:minLength value="2"/>
             <xs:maxLength value="14"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -653,9 +650,9 @@
             <xs:documentation>Órgão e UF de emissão</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="preserve"/>
-            <xs:minLength value="3"/>
+            <xs:minLength value="2"/>
             <xs:maxLength value="20"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -681,9 +678,9 @@
             <xs:documentation>RNE</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="preserve"/>
-            <xs:minLength value="3"/>
+            <xs:minLength value="2"/>
             <xs:maxLength value="14"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -693,9 +690,9 @@
             <xs:documentation>Órgão e UF de emissão</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="preserve"/>
-            <xs:minLength value="3"/>
+            <xs:minLength value="2"/>
             <xs:maxLength value="20"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -718,12 +715,12 @@
       <xs:element name="nrOc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Inscr no órgão de classe</xs:documentation>
+            <xs:documentation>Número Inscrição OC</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="preserve"/>
-            <xs:minLength value="3"/>
+            <xs:minLength value="2"/>
             <xs:maxLength value="14"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -733,9 +730,9 @@
             <xs:documentation>Órgão e UF de emissão</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="preserve"/>
-            <xs:minLength value="3"/>
+            <xs:minLength value="2"/>
             <xs:maxLength value="20"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -751,7 +748,7 @@
       <xs:element name="dtValid" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Data de validade do documento.</xs:documentation>
+            <xs:documentation>Data de validade do documento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:date">
           </xs:restriction>
@@ -767,7 +764,7 @@
       <xs:element name="nrRegCnh">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>CNH</xs:documentation>
+            <xs:documentation>Número do Registro da Carteira Nacional de Habilitação - CNH</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="3"/>
@@ -787,7 +784,7 @@
       <xs:element name="ufCnh">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>UF emissor CNH</xs:documentation>
+            <xs:documentation>Estado da Federação emissor da CNH</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:enumeration value="AC"/>
@@ -823,7 +820,7 @@
       <xs:element name="dtValid">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Data de validade do documento.</xs:documentation>
+            <xs:documentation>Data de validade do documento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:date">
           </xs:restriction>
@@ -873,7 +870,8 @@
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
-            <xs:maxLength value="80"/>
+            <xs:maxLength value="100"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -891,21 +889,24 @@
       <xs:element name="complemento" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Complemento</xs:documentation>
+            <xs:documentation>Complemento do logradouro</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
+            <xs:minLength value="2"/>
             <xs:maxLength value="30"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="bairro" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Nome do bairro/distrito.</xs:documentation>
+            <xs:documentation>Nome do bairro/distrito</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
-            <xs:maxLength value="60"/>
+            <xs:maxLength value="90"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -925,6 +926,7 @@
             <xs:documentation>Código do Município</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:integer">
+            <xs:pattern value="\d{7}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -988,7 +990,8 @@
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
-            <xs:maxLength value="80"/>
+            <xs:maxLength value="100"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -1006,21 +1009,24 @@
       <xs:element name="complemento" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Complemento</xs:documentation>
+            <xs:documentation>Complemento do logradouro</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
+            <xs:minLength value="2"/>
             <xs:maxLength value="30"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="bairro" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Nome do bairro/distrito.</xs:documentation>
+            <xs:documentation>Nome do bairro/distrito</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
-            <xs:maxLength value="60"/>
+            <xs:maxLength value="90"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -1030,19 +1036,21 @@
             <xs:documentation>Nome da Cidade</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
+            <xs:minLength value="2"/>
             <xs:maxLength value="50"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="codPostal" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>CEP</xs:documentation>
+            <xs:documentation>Código de Endereçamento Postal</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="preserve"/>
             <xs:minLength value="4"/>
             <xs:maxLength value="12"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -1075,10 +1083,11 @@
       <xs:element name="casadoBr">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Casado com brasileiro</xs:documentation>
+            <xs:documentation>Casado com brasileiro(a): 
+            S - Sim;
+            N - Não</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:length value="1"/>
             <xs:pattern value="[N|S]"/>
           </xs:restriction>
         </xs:simpleType>
@@ -1086,10 +1095,11 @@
       <xs:element name="filhosBr">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tem filhos brasileiros?</xs:documentation>
+            <xs:documentation>Indicar se o trabalhador estrangeiro tem filhos brasileiros:
+            S - Sim;
+            N - Não</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:length value="1"/>
             <xs:pattern value="[N|S]"/>
           </xs:restriction>
         </xs:simpleType>
@@ -1105,6 +1115,7 @@
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:length value="2"/>
+            <xs:pattern value="\d{2}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -1116,6 +1127,7 @@
           <xs:restriction base="xs:string">
             <xs:minLength value="2"/>
             <xs:maxLength value="70"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -1144,7 +1156,6 @@
             <xs:documentation>Dependente para fins de IRRF</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:length value="1"/>
             <xs:pattern value="[N|S]"/>
           </xs:restriction>
         </xs:simpleType>
@@ -1155,7 +1166,6 @@
             <xs:documentation>Dependente SF</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:length value="1"/>
             <xs:pattern value="[N|S]"/>
           </xs:restriction>
         </xs:simpleType>
@@ -1185,6 +1195,7 @@
           <xs:restriction base="xs:string">
             <xs:minLength value="8"/>
             <xs:maxLength value="13"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -1196,13 +1207,14 @@
           <xs:restriction base="xs:string">
             <xs:minLength value="8"/>
             <xs:maxLength value="13"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="emailPrinc" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Endereço eletrônico.</xs:documentation>
+            <xs:documentation>Endereço eletrônico</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="6"/>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtAfastTemp/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtAfastTemp/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtAfastTemp/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtAfastTemp/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -22,7 +22,7 @@
               </xs:element>
               <xs:element name="ideVinculo">
                 <xs:annotation>
-                  <xs:documentation>Informações de Identificação do Trabalhador e do Vínculo.</xs:documentation>
+                  <xs:documentation>Informações de Identificação do Trabalhador e do Vínculo</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
@@ -95,7 +95,7 @@
                           <xs:element name="codMotAfast">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Código do motivo de afastamento</xs:documentation>
+                                <xs:documentation>Código do motivo de afastamento temporário, conforme tabela 18</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
                                 <xs:length value="2"/>
@@ -106,7 +106,7 @@
                           <xs:element name="infoMesmoMtv" minOccurs="0">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Informar se o afastamento decorre de mesmo acidente/doença anterior</xs:documentation>
+                                <xs:documentation>O afastamento decorre de mesmo acidente/doença anterior?</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
                                 <xs:pattern value="[N|S]"/>
@@ -129,15 +129,15 @@
                                 <xs:documentation>Observação</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:whiteSpace value="preserve"/>
-                                <xs:minLength value="3"/>
+                                <xs:minLength value="2"/>
                                 <xs:maxLength value="255"/>
+                                <xs:whiteSpace value="preserve"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
                           <xs:element name="infoAtestado" minOccurs="0" maxOccurs="9">
                             <xs:annotation>
-                              <xs:documentation>Informações complementares relativas ao atestado médico</xs:documentation>
+                              <xs:documentation>Informações Complementares - Atestado Médico</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
@@ -147,7 +147,8 @@
                                       <xs:documentation>Código CID</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:pattern value="\w{3,4}"/>
+                                      <xs:minLength value="1"/>
+                                      <xs:maxLength value="4"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -170,18 +171,21 @@
                                       <xs:element name="nmEmit">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Nome do médico/dentista</xs:documentation>
+                                            <xs:documentation>Nome do médico/dentista que emitiu o atestado</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="2"/>
                                             <xs:maxLength value="70"/>
+                                            <xs:whiteSpace value="preserve"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
                                       <xs:element name="ideOC">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Órgão de classe</xs:documentation>
+                                            <xs:documentation>Órgão de classe:
+                                            1 - Conselho Regional de Medicina (CRM);
+                                            2 - Conselho Regional de Odontologia (CRO)</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:byte">
                                             <xs:pattern value="\d"/>
@@ -191,12 +195,12 @@
                                       <xs:element name="nrOc">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Inscr no órgão de classe</xs:documentation>
+                                            <xs:documentation>Número Inscrição OC</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
-                                            <xs:whiteSpace value="preserve"/>
-                                            <xs:minLength value="3"/>
+                                            <xs:minLength value="2"/>
                                             <xs:maxLength value="14"/>
+                                            <xs:whiteSpace value="preserve"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -244,7 +248,7 @@
                           </xs:element>
                           <xs:element name="infoCessao" minOccurs="0">
                             <xs:annotation>
-                              <xs:documentation>Registro preenchido nos casos de afastamento por cessão ou requisição do trabalhador.</xs:documentation>
+                              <xs:documentation>Informações Complementares - Cessão/requisição de trabalhador</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
@@ -255,7 +259,7 @@
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
                                       <xs:length value="14"/>
-                                      <xs:pattern value="\d{8,14}"/>
+                                      <xs:pattern value="\d{14}"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -285,14 +289,17 @@
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
                                       <xs:length value="14"/>
-                                      <xs:pattern value="\d{8,14}"/>
+                                      <xs:pattern value="\d{14}"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
                                 <xs:element name="infOnusRemun">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Ônus da Remuneração</xs:documentation>
+                                      <xs:documentation>Ônus da Remuneração:
+                                      1 - Apenas do Empregador; 
+                                      2 - Apenas do Sindicato;
+                                      3 - Parte do Empregador, sendo a diferença e/ou complementação salarial paga pelo Sindicato</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:byte">
                                       <xs:pattern value="\d"/>
@@ -307,7 +314,7 @@
                     </xs:element>
                     <xs:element name="infoRetif" minOccurs="0">
                       <xs:annotation>
-                        <xs:documentation>Informações de retificação do Afastamento Temporário. Preenchimento obrigatório caso {codMotAfast} seja retificado de [01] para [03] ou de [03] para [01].</xs:documentation>
+                        <xs:documentation>Informações de retificação do Afastamento Temporário</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
@@ -337,8 +344,9 @@
                                 <xs:documentation>Número do Processo</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:minLength value="3"/>
+                                <xs:minLength value="2"/>
                                 <xs:maxLength value="21"/>
+                                <xs:whiteSpace value="preserve"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -354,7 +362,7 @@
                           <xs:element name="dtTermAfast">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Preencher com a data do término do afastamento do trabalhador.</xs:documentation>
+                                <xs:documentation>Preencher com a data do término do afastamento do trabalhador</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:date">
                               </xs:restriction>
@@ -392,7 +400,7 @@
       <xs:element name="nrRecibo" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Recibo arquivo a ser retificado</xs:documentation>
+            <xs:documentation>Número do recibo do arquivo a ser retificado</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -423,7 +431,7 @@
       <xs:element name="verProc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Versão do processo de emissão do evento. </xs:documentation>
+            <xs:documentation>Versão do processo de emissão do evento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -438,7 +446,7 @@
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -451,7 +459,7 @@
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>

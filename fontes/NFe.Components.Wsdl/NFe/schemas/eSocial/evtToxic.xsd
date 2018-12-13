@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtReintegr/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtReintegr/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtToxic/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtToxic/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="evtReintegr">
+        <xs:element name="evtToxic">
+          <xs:annotation>
+            <xs:documentation>Evento Exame Toxicológico do Motorista Profissional</xs:documentation>
+          </xs:annotation>
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ideEvento" type="TIdeEveTrab">
@@ -17,74 +20,109 @@
                   <xs:documentation>Informações de identificação do empregador</xs:documentation>
                 </xs:annotation>
               </xs:element>
-              <xs:element name="ideVinculo" type="TIdeVinculoNisObrig">
+              <xs:element name="ideVinculo" type="TIdeVinculoEstag">
                 <xs:annotation>
                   <xs:documentation>Informações de Identificação do Trabalhador e do Vínculo</xs:documentation>
                 </xs:annotation>
               </xs:element>
-              <xs:element name="infoReintegr">
+              <xs:element name="toxicologico">
+                <xs:annotation>
+                  <xs:documentation>Informações do exame toxicológico do motorista profissional</xs:documentation>
+                </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="tpReint">
+                    <xs:element name="dtExame">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Tipo de Reintegração:
-                          1 - Reintegração por Decisão Judicial;
-                          2 - Reintegração por Anistia Legal;
-                          3 - Reversão de Servidor Público;
-                          4 - Recondução de Servidor Público;
-                          5 - Reinclusão de Militar;
-                          9 - Outros</xs:documentation>
-                        </xs:annotation>
-                        <xs:restriction base="xs:byte">
-                          <xs:pattern value="\d"/>
-                        </xs:restriction>
-                      </xs:simpleType>
-                    </xs:element>
-                    <xs:element name="nrProcJud" minOccurs="0">
-                      <xs:simpleType>
-                        <xs:annotation>
-                          <xs:documentation>Nr Processo Judicial</xs:documentation>
-                        </xs:annotation>
-                        <xs:restriction base="xs:string">
-                          <xs:length value="20"/>
-                        </xs:restriction>
-                      </xs:simpleType>
-                    </xs:element>
-                    <xs:element name="nrLeiAnistia" minOccurs="0">
-                      <xs:simpleType>
-                        <xs:annotation>
-                          <xs:documentation>Preencher com uma das opções relativas a Leis de Anistia</xs:documentation>
-                        </xs:annotation>
-                        <xs:restriction base="xs:string">
-                          <xs:pattern value="\w{5,13}"/>
-                        </xs:restriction>
-                      </xs:simpleType>
-                    </xs:element>
-                    <xs:element name="dtEfetRetorno">
-                      <xs:simpleType>
-                        <xs:annotation>
-                          <xs:documentation>Data do efetivo retorno</xs:documentation>
+                          <xs:documentation>Data Exame</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:date">
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
-                    <xs:element name="dtEfeito">
+                    <xs:element name="cnpjLab" minOccurs="0">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Data dos efeitos da reintegração</xs:documentation>
+                          <xs:documentation>CNPJ Laboratório</xs:documentation>
                         </xs:annotation>
-                        <xs:restriction base="xs:date">
+                        <xs:restriction base="xs:string">
+                          <xs:pattern value="\d{14}"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
-                    <xs:element name="indPagtoJuizo">
+                    <xs:element name="codSeqExame" minOccurs="0">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Indicar se as remunerações e correspondentes contribuições do período compreendido entre o desligamento e a reintegração foram pagas em juízo:
-                          S- Sim;
-                          N - Não</xs:documentation>
+                          <xs:documentation>Código do exame toxicológico</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                          <xs:pattern value="\w{11}"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="nmMed" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>Nome do médico</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="2"/>
+                          <xs:maxLength value="70"/>
+                          <xs:whiteSpace value="preserve"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="nrCRM" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>CRM do Médico</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                          <xs:minLength value="1"/>
+                          <xs:maxLength value="8"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ufCRM" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>UF CRM</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:string">
+                          <xs:enumeration value="AC"/>
+                          <xs:enumeration value="AL"/>
+                          <xs:enumeration value="AP"/>
+                          <xs:enumeration value="AM"/>
+                          <xs:enumeration value="BA"/>
+                          <xs:enumeration value="CE"/>
+                          <xs:enumeration value="DF"/>
+                          <xs:enumeration value="ES"/>
+                          <xs:enumeration value="GO"/>
+                          <xs:enumeration value="MA"/>
+                          <xs:enumeration value="MT"/>
+                          <xs:enumeration value="MS"/>
+                          <xs:enumeration value="MG"/>
+                          <xs:enumeration value="PA"/>
+                          <xs:enumeration value="PB"/>
+                          <xs:enumeration value="PR"/>
+                          <xs:enumeration value="PE"/>
+                          <xs:enumeration value="PI"/>
+                          <xs:enumeration value="RJ"/>
+                          <xs:enumeration value="RN"/>
+                          <xs:enumeration value="RS"/>
+                          <xs:enumeration value="RO"/>
+                          <xs:enumeration value="RR"/>
+                          <xs:enumeration value="SC"/>
+                          <xs:enumeration value="SP"/>
+                          <xs:enumeration value="SE"/>
+                          <xs:enumeration value="TO"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="indRecusa">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>Indicar recusa à realização de exame toxicológico</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:string">
                           <xs:pattern value="[N|S]"/>
@@ -185,9 +223,9 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="TIdeVinculoNisObrig">
+  <xs:complexType name="TIdeVinculoEstag">
     <xs:annotation>
-      <xs:documentation>Informações do Vínculo</xs:documentation>
+      <xs:documentation>Informacoes do Vínculo trabalhista e estagiário</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="cpfTrab">
@@ -201,18 +239,17 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="nisTrab">
+      <xs:element name="nisTrab" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>NIS</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
             <xs:maxLength value="11"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="matricula">
+      <xs:element name="matricula" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Matricula</xs:documentation>
@@ -220,6 +257,16 @@
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
             <xs:maxLength value="30"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="codCateg" minOccurs="0">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Código da Categoria</xs:documentation>
+          </xs:annotation>
+          <xs:restriction base="xs:integer">
+            <xs:pattern value="\d{3}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>

@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtTSVAltContr/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtTSVAltContr/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtTSVAltContr/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtTSVAltContr/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="evtTSVAltContr">
           <xs:annotation>
-            <xs:documentation>Evento Trabalhador Sem Vínculo de Emprego/Estatutário - Alteração Contratual</xs:documentation>
+            <xs:documentation>TSVE - Alteração Contratual</xs:documentation>
           </xs:annotation>
           <xs:complexType>
             <xs:sequence>
@@ -86,14 +86,11 @@
                       </xs:simpleType>
                     </xs:element>
                     <xs:element name="infoComplementares" minOccurs="0">
-                      <xs:annotation>
-                        <xs:documentation>Registro onde são fornecidas informações complementares, preenchidas conforme a categoria do trabalhador sem vínculo.</xs:documentation>
-                      </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="cargoFuncao" minOccurs="0">
                             <xs:annotation>
-                              <xs:documentation>Registro que apresenta o cargo e/ou função ocupada pelo trabalhador sem vínculo.  Preenchimento obrigatório para o Trabalhador Avulso, Diretor não Empregado, Cooperado e Servidor Público indicado a Conselho.</xs:documentation>
+                              <xs:documentation>Cargo/Função ocupado pelo Trabalhador Sem Vínculo</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
@@ -124,7 +121,7 @@
                           </xs:element>
                           <xs:element name="remuneracao" type="TRemun" minOccurs="0">
                             <xs:annotation>
-                              <xs:documentation>Informações da remuneração e periodicidade de pagamento.  O preenchimento do grupo é restrito às categorias de diretor não empregado, servidor público indicado a conselho e membro de Conselho Tutelar.</xs:documentation>
+                              <xs:documentation>Informações da remuneração e periodicidade de pagamento</xs:documentation>
                             </xs:annotation>
                           </xs:element>
                           <xs:element name="infoEstagiario" minOccurs="0">
@@ -136,17 +133,24 @@
                                 <xs:element name="natEstagio">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Natureza do Estágio</xs:documentation>
+                                      <xs:documentation>Natureza do Estágio:
+                                      O - Obrigatório
+                                      N - Não Obrigatório</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:length value="1"/>
+                                      <xs:minLength value="1"/>
+                                      <xs:maxLength value="1"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
                                 <xs:element name="nivEstagio">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Nível do estágio</xs:documentation>
+                                      <xs:documentation>Informar o nível do estágio:
+                                      1 - Fundamental;
+                                      2 - Médio;
+                                      3 - Formação Profissional;
+                                      4 - Superior</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:byte">
                                       <xs:pattern value="\d"/>
@@ -159,8 +163,9 @@
                                       <xs:documentation>Área de atuação do estagiário</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:whiteSpace value="preserve"/>
+                                      <xs:minLength value="2"/>
                                       <xs:maxLength value="50"/>
+                                      <xs:whiteSpace value="preserve"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -170,9 +175,9 @@
                                       <xs:documentation>Nr. Apólice de Seguro</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:whiteSpace value="preserve"/>
-                                      <xs:minLength value="1"/>
+                                      <xs:minLength value="2"/>
                                       <xs:maxLength value="30"/>
+                                      <xs:whiteSpace value="preserve"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -184,6 +189,7 @@
                                     <xs:restriction base="xs:decimal">
                                       <xs:totalDigits value="14"/>
                                       <xs:fractionDigits value="2"/>
+                                      <xs:maxInclusive value="999999999999"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -209,7 +215,7 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:length value="14"/>
-                                            <xs:pattern value="\d{8,14}"/>
+                                            <xs:pattern value="\d{14}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -219,8 +225,9 @@
                                             <xs:documentation>Nome/Razão Social</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
-                                            <xs:minLength value="2"/>
+                                            <xs:minLength value="1"/>
                                             <xs:maxLength value="100"/>
+                                            <xs:whiteSpace value="preserve"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -231,7 +238,8 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="1"/>
-                                            <xs:maxLength value="80"/>
+                                            <xs:maxLength value="100"/>
+                                            <xs:whiteSpace value="preserve"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -249,11 +257,12 @@
                                       <xs:element name="bairro" minOccurs="0">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Nome do bairro/distrito.</xs:documentation>
+                                            <xs:documentation>Nome do bairro/distrito</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="1"/>
-                                            <xs:maxLength value="60"/>
+                                            <xs:maxLength value="90"/>
+                                            <xs:whiteSpace value="preserve"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -273,6 +282,7 @@
                                             <xs:documentation>Código do Município</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:integer">
+                                            <xs:pattern value="\d{7}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -328,7 +338,7 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:length value="14"/>
-                                            <xs:pattern value="\d{8,14}"/>
+                                            <xs:pattern value="\d{14}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -338,8 +348,9 @@
                                             <xs:documentation>Nome/Razão Social</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
-                                            <xs:minLength value="2"/>
+                                            <xs:minLength value="1"/>
                                             <xs:maxLength value="100"/>
+                                            <xs:whiteSpace value="preserve"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -350,7 +361,8 @@
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="1"/>
-                                            <xs:maxLength value="80"/>
+                                            <xs:maxLength value="100"/>
+                                            <xs:whiteSpace value="preserve"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -368,11 +380,12 @@
                                       <xs:element name="bairro" minOccurs="0">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Nome do bairro/distrito.</xs:documentation>
+                                            <xs:documentation>Nome do bairro/distrito</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="1"/>
-                                            <xs:maxLength value="60"/>
+                                            <xs:maxLength value="90"/>
+                                            <xs:whiteSpace value="preserve"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -392,6 +405,7 @@
                                             <xs:documentation>Código do Município</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:integer">
+                                            <xs:pattern value="\d{7}"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -454,11 +468,12 @@
                                       <xs:element name="nmSuperv">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Nome do Supervisor Estágio</xs:documentation>
+                                            <xs:documentation>Nome do Supervisor do Estágio</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
                                             <xs:minLength value="2"/>
                                             <xs:maxLength value="70"/>
+                                            <xs:whiteSpace value="preserve"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -500,7 +515,7 @@
       <xs:element name="nrRecibo" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Recibo arquivo a ser retificado</xs:documentation>
+            <xs:documentation>Número do recibo do arquivo a ser retificado</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -531,7 +546,7 @@
       <xs:element name="verProc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Versão do processo de emissão do evento. </xs:documentation>
+            <xs:documentation>Versão do processo de emissão do evento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -546,7 +561,7 @@
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -559,7 +574,7 @@
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -573,18 +588,19 @@
       <xs:element name="vrSalFx">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Salário base do trabalhador, correspondente à parte fixa da remuneração.</xs:documentation>
+            <xs:documentation>Salário base do trabalhador</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:decimal">
             <xs:totalDigits value="14"/>
             <xs:fractionDigits value="2"/>
+            <xs:maxInclusive value="999999999999"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="undSalFixo">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Unid Sal Fixo</xs:documentation>
+            <xs:documentation>Unidade de pagamento da parte fixa da remuneração</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -594,12 +610,12 @@
       <xs:element name="dscSalVar" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Descrição do salário variável</xs:documentation>
+            <xs:documentation>Descrição do salário variável e como este é calculado  ex: Comissões pagas no percentual de 10% sobre as vendas</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="preserve"/>
-            <xs:minLength value="3"/>
+            <xs:minLength value="2"/>
             <xs:maxLength value="255"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>

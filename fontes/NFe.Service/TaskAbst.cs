@@ -808,6 +808,10 @@ namespace NFe.Service
                             else
                                 retorna = "EnvioLoteRPS";
                             break;
+
+                        case Servicos.NFSeConsultarNFSeRecebidas:
+                            retorna = "ConsultaNFeRecebidas";
+                            break;
                     }
                     break;
 

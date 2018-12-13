@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtConvInterm/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtConvInterm/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtTreiCap/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtTreiCap/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="evtConvInterm">
+        <xs:element name="evtTreiCap">
           <xs:annotation>
-            <xs:documentation>Evento Convocação para Trabalho Intermitente</xs:documentation>
+            <xs:documentation>Evento Treinamentos, Capacitações, Exercícios Simulados e Outras Anotações</xs:documentation>
           </xs:annotation>
           <xs:complexType>
             <xs:sequence>
@@ -20,221 +20,147 @@
                   <xs:documentation>Informações de identificação do empregador</xs:documentation>
                 </xs:annotation>
               </xs:element>
-              <xs:element name="ideVinculo" type="TIdeVinculoNisObrig">
+              <xs:element name="ideVinculo" type="TIdeVinculoEstag">
                 <xs:annotation>
                   <xs:documentation>Informações de Identificação do Trabalhador e do Vínculo</xs:documentation>
                 </xs:annotation>
               </xs:element>
-              <xs:element name="infoConvInterm">
+              <xs:element name="treiCap">
                 <xs:annotation>
-                  <xs:documentation>Informações da convocação para trabalho intermitente</xs:documentation>
+                  <xs:documentation>Treinamentos, capacitações e exercícios simulados</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="codConv">
+                    <xs:element name="codTreiCap">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Código que identifica a convocação para trabalho intermitente</xs:documentation>
+                          <xs:documentation>Código conforme tabela 29</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:integer">
+                          <xs:pattern value="\d{4}"/>
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="obsTreiCap" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>Observações</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:string">
                           <xs:minLength value="2"/>
-                          <xs:maxLength value="30"/>
+                          <xs:maxLength value="999"/>
                           <xs:whiteSpace value="preserve"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
-                    <xs:element name="dtInicio">
-                      <xs:simpleType>
-                        <xs:annotation>
-                          <xs:documentation>Data de Início</xs:documentation>
-                        </xs:annotation>
-                        <xs:restriction base="xs:date">
-                        </xs:restriction>
-                      </xs:simpleType>
-                    </xs:element>
-                    <xs:element name="dtFim">
-                      <xs:simpleType>
-                        <xs:annotation>
-                          <xs:documentation>Data Fim</xs:documentation>
-                        </xs:annotation>
-                        <xs:restriction base="xs:date">
-                        </xs:restriction>
-                      </xs:simpleType>
-                    </xs:element>
-                    <xs:element name="dtPrevPgto">
-                      <xs:simpleType>
-                        <xs:annotation>
-                          <xs:documentation>Data prevista para o pagamento da remuneração</xs:documentation>
-                        </xs:annotation>
-                        <xs:restriction base="xs:date">
-                        </xs:restriction>
-                      </xs:simpleType>
-                    </xs:element>
-                    <xs:element name="jornada">
-                      <xs:annotation>
-                        <xs:documentation>Informações da(s) jornada(s) diária(s) da prestação de trabalho intermitente</xs:documentation>
-                      </xs:annotation>
+                    <xs:element name="infoComplem" minOccurs="0">
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="codHorContrat" minOccurs="0">
+                          <xs:element name="dtTreiCap">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Código do Horário Contratual</xs:documentation>
+                                <xs:documentation>Data de início do treinamento</xs:documentation>
                               </xs:annotation>
-                              <xs:restriction base="xs:string">
-                                <xs:minLength value="1"/>
-                                <xs:maxLength value="30"/>
+                              <xs:restriction base="xs:date">
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-                          <xs:element name="dscJornada" minOccurs="0">
+                          <xs:element name="durTreiCap">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Descrição das jornadas de trabalho intermitente</xs:documentation>
+                                <xs:documentation>Duração do treinamento/capacitação/exercício simulado, em horas</xs:documentation>
                               </xs:annotation>
-                              <xs:restriction base="xs:string">
-                                <xs:minLength value="2"/>
-                                <xs:maxLength value="999"/>
-                                <xs:whiteSpace value="preserve"/>
+                              <xs:restriction base="xs:decimal">
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                    <xs:element name="localTrab">
-                      <xs:annotation>
-                        <xs:documentation>Informações do local da prestação de trabalho intermitente</xs:documentation>
-                      </xs:annotation>
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="indLocal">
+                          <xs:element name="modTreiCap">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Indicativo do local da prestação de trabalho intermitente</xs:documentation>
+                                <xs:documentation>Modalidade do treinamento/capacitação/exercício simulado</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:byte">
                                 <xs:pattern value="\d"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-                          <xs:element name="localTrabInterm" minOccurs="0">
+                          <xs:element name="tpTreiCap">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Tipo de treinamento/capacitação/exercício simulado</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:byte">
+                                <xs:pattern value="\d"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="ideProfResp" maxOccurs="99">
                             <xs:annotation>
-                              <xs:documentation>Informações do local de trabalho intermitente</xs:documentation>
+                              <xs:documentation>Informações relativas ao profissional responsável</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
-                                <xs:element name="tpLograd">
+                                <xs:element name="cpfProf" minOccurs="0">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Tipo de Logradouro</xs:documentation>
+                                      <xs:documentation>CPF do profissional responsável</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:minLength value="1"/>
-                                      <xs:maxLength value="4"/>
+                                      <xs:pattern value="\d{11}"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
-                                <xs:element name="dscLograd">
+                                <xs:element name="nmProf">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Descrição do logradouro</xs:documentation>
-                                    </xs:annotation>
-                                    <xs:restriction base="xs:string">
-                                      <xs:minLength value="1"/>
-                                      <xs:maxLength value="100"/>
-                                      <xs:whiteSpace value="preserve"/>
-                                    </xs:restriction>
-                                  </xs:simpleType>
-                                </xs:element>
-                                <xs:element name="nrLograd">
-                                  <xs:simpleType>
-                                    <xs:annotation>
-                                      <xs:documentation>Número do logradouro</xs:documentation>
-                                    </xs:annotation>
-                                    <xs:restriction base="xs:string">
-                                      <xs:minLength value="1"/>
-                                      <xs:maxLength value="10"/>
-                                    </xs:restriction>
-                                  </xs:simpleType>
-                                </xs:element>
-                                <xs:element name="complem" minOccurs="0">
-                                  <xs:simpleType>
-                                    <xs:annotation>
-                                      <xs:documentation>Complemento</xs:documentation>
+                                      <xs:documentation>Nome do profissional</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
                                       <xs:minLength value="2"/>
-                                      <xs:maxLength value="30"/>
+                                      <xs:maxLength value="70"/>
                                       <xs:whiteSpace value="preserve"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
-                                <xs:element name="bairro" minOccurs="0">
+                                <xs:element name="tpProf">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Nome do bairro/distrito</xs:documentation>
+                                      <xs:documentation>Tipo de profissional</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:byte">
+                                      <xs:pattern value="\d"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="formProf">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation>Formação profissional do responsável</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:minLength value="1"/>
-                                      <xs:maxLength value="90"/>
+                                      <xs:minLength value="2"/>
+                                      <xs:maxLength value="255"/>
                                       <xs:whiteSpace value="preserve"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
-                                <xs:element name="cep">
+                                <xs:element name="codCBO">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Código de Endereçamento Postal - CEP</xs:documentation>
+                                      <xs:documentation>CBO</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:pattern value="\d{8}"/>
+                                      <xs:pattern value="\d{4,6}"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
-                                <xs:element name="codMunic">
+                                <xs:element name="nacProf">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Código do Município</xs:documentation>
+                                      <xs:documentation>Nacionalidade do profissional</xs:documentation>
                                     </xs:annotation>
-                                    <xs:restriction base="xs:integer">
-                                      <xs:pattern value="\d{7}"/>
-                                    </xs:restriction>
-                                  </xs:simpleType>
-                                </xs:element>
-                                <xs:element name="uf">
-                                  <xs:simpleType>
-                                    <xs:annotation>
-                                      <xs:documentation>Sigla da UF</xs:documentation>
-                                    </xs:annotation>
-                                    <xs:restriction base="xs:string">
-                                      <xs:enumeration value="AC"/>
-                                      <xs:enumeration value="AL"/>
-                                      <xs:enumeration value="AP"/>
-                                      <xs:enumeration value="AM"/>
-                                      <xs:enumeration value="BA"/>
-                                      <xs:enumeration value="CE"/>
-                                      <xs:enumeration value="DF"/>
-                                      <xs:enumeration value="ES"/>
-                                      <xs:enumeration value="GO"/>
-                                      <xs:enumeration value="MA"/>
-                                      <xs:enumeration value="MT"/>
-                                      <xs:enumeration value="MS"/>
-                                      <xs:enumeration value="MG"/>
-                                      <xs:enumeration value="PA"/>
-                                      <xs:enumeration value="PB"/>
-                                      <xs:enumeration value="PR"/>
-                                      <xs:enumeration value="PE"/>
-                                      <xs:enumeration value="PI"/>
-                                      <xs:enumeration value="RJ"/>
-                                      <xs:enumeration value="RN"/>
-                                      <xs:enumeration value="RS"/>
-                                      <xs:enumeration value="RO"/>
-                                      <xs:enumeration value="RR"/>
-                                      <xs:enumeration value="SC"/>
-                                      <xs:enumeration value="SP"/>
-                                      <xs:enumeration value="SE"/>
-                                      <xs:enumeration value="TO"/>
+                                    <xs:restriction base="xs:byte">
+                                      <xs:pattern value="\d"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -338,9 +264,9 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="TIdeVinculoNisObrig">
+  <xs:complexType name="TIdeVinculoEstag">
     <xs:annotation>
-      <xs:documentation>Informações do Vínculo</xs:documentation>
+      <xs:documentation>Informacoes do Vínculo trabalhista e estagiário</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="cpfTrab">
@@ -354,18 +280,17 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="nisTrab">
+      <xs:element name="nisTrab" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>NIS</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
             <xs:maxLength value="11"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="matricula">
+      <xs:element name="matricula" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Matricula</xs:documentation>
@@ -373,6 +298,16 @@
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
             <xs:maxLength value="30"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="codCateg" minOccurs="0">
+        <xs:simpleType>
+          <xs:annotation>
+            <xs:documentation>Código da Categoria</xs:documentation>
+          </xs:annotation>
+          <xs:restriction base="xs:integer">
+            <xs:pattern value="\d{3}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>

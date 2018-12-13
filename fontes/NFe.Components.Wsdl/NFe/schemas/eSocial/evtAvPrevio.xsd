@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtAvPrevio/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtAvPrevio/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtAvPrevio/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtAvPrevio/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -33,9 +33,6 @@
                   <xs:sequence>
                     <xs:choice>
                       <xs:element name="detAvPrevio">
-                        <xs:annotation>
-                          <xs:documentation>Detalha as informações do evento trabalhista</xs:documentation>
-                        </xs:annotation>
                         <xs:complexType>
                           <xs:sequence>
                             <xs:element name="dtAvPrv">
@@ -50,7 +47,7 @@
                             <xs:element name="dtPrevDeslig">
                               <xs:simpleType>
                                 <xs:annotation>
-                                  <xs:documentation>Data prevista para o desligamento</xs:documentation>
+                                  <xs:documentation>Data prevista para o desligamento do trabalhador</xs:documentation>
                                 </xs:annotation>
                                 <xs:restriction base="xs:date">
                                 </xs:restriction>
@@ -59,7 +56,12 @@
                             <xs:element name="tpAvPrevio">
                               <xs:simpleType>
                                 <xs:annotation>
-                                  <xs:documentation>Tipo de aviso prévio</xs:documentation>
+                                  <xs:documentation>Tipo de Aviso Prévio Indica quem avisou o desligamento, conforme opções abaixo:
+                                  1 - Aviso prévio trabalhado dado pelo empregador ao empregado, que optou pela redução de duas horas diárias [caput do art 488 da CLT]
+                                  2 - Aviso prévio trabalhado dado pelo empregador ao empregado, que optou pela redução de dias corridos [parágrafo único do art 488 da CLT]
+                                  3 - Aviso prévio dado pelo empregado (pedido de demissão), dispensado de seu cumprimento 
+                                  4 - Aviso prévio dado pelo empregado (pedido de demissão), não dispensado de seu cumprimento, sob pena de desconto, pelo empregador, dos salários correspondentes ao prazo respectivo (§2º do art 487 da CLT);
+                                  5 - Aviso prévio trabalhado dado pelo empregador rural ao empregado, com redução de um dia por semana ( art 15 da Lei nº 5889/73)</xs:documentation>
                                 </xs:annotation>
                                 <xs:restriction base="xs:byte">
                                   <xs:pattern value="\d"/>
@@ -72,9 +74,9 @@
                                   <xs:documentation>Observação</xs:documentation>
                                 </xs:annotation>
                                 <xs:restriction base="xs:string">
-                                  <xs:whiteSpace value="preserve"/>
-                                  <xs:minLength value="3"/>
+                                  <xs:minLength value="2"/>
                                   <xs:maxLength value="255"/>
+                                  <xs:whiteSpace value="preserve"/>
                                 </xs:restriction>
                               </xs:simpleType>
                             </xs:element>
@@ -102,16 +104,20 @@
                                   <xs:documentation>Observação</xs:documentation>
                                 </xs:annotation>
                                 <xs:restriction base="xs:string">
-                                  <xs:whiteSpace value="preserve"/>
-                                  <xs:minLength value="3"/>
+                                  <xs:minLength value="2"/>
                                   <xs:maxLength value="255"/>
+                                  <xs:whiteSpace value="preserve"/>
                                 </xs:restriction>
                               </xs:simpleType>
                             </xs:element>
                             <xs:element name="mtvCancAvPrevio">
                               <xs:simpleType>
                                 <xs:annotation>
-                                  <xs:documentation>Motivo do Canc. do Av Prévio</xs:documentation>
+                                  <xs:documentation>Motivo do Cancelamento do Aviso Prévio:
+                                  1 - Reconsideração prevista no artigo 489 da CLT;
+                                  2 - Determinação Judicial;
+                                  3 - Cumprimento de norma legal;
+                                  9 - Outros;</xs:documentation>
                                 </xs:annotation>
                                 <xs:restriction base="xs:byte">
                                   <xs:pattern value="\d"/>
@@ -151,7 +157,7 @@
       <xs:element name="nrRecibo" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Recibo arquivo a ser retificado</xs:documentation>
+            <xs:documentation>Número do recibo do arquivo a ser retificado</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -182,7 +188,7 @@
       <xs:element name="verProc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Versão do processo de emissão do evento. </xs:documentation>
+            <xs:documentation>Versão do processo de emissão do evento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -197,7 +203,7 @@
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -210,7 +216,7 @@
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>

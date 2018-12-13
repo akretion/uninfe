@@ -273,6 +273,12 @@ namespace NFe.Components
         [Description("Substituir NFS-e")]
         NFSeSubstituirNfse,
 
+        /// <summary>
+        /// Consultar as notas fiscais de serviço recebidas
+        /// </summary>
+        [Description("Consultar NFS-e recebidas")]
+        NFSeConsultarNFSeRecebidas,
+
         #endregion NFSe
 
         #region CFSe

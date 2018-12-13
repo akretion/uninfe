@@ -1,13 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtDeslig/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtDeslig/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtDeslig/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtDeslig/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="evtDeslig">
-          <xs:annotation>
-            <xs:documentation>Evento Desligamento</xs:documentation>
-          </xs:annotation>
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ideEvento" type="TIdeEveTrab">
@@ -26,15 +23,12 @@
                 </xs:annotation>
               </xs:element>
               <xs:element name="infoDeslig">
-                <xs:annotation>
-                  <xs:documentation>Apresenta as informações relativas ao desligamento do vínculo identificado no registro superior.</xs:documentation>
-                </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="mtvDeslig">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Código de Motivo do Desligamento</xs:documentation>
+                          <xs:documentation>Código de Motivo do Desligamento, conforme tabela 19</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:string">
                           <xs:pattern value="\d{2}"/>
@@ -53,10 +47,11 @@
                     <xs:element name="indPagtoAPI">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Indicativo de pagto de Aviso Prévio Indenizado</xs:documentation>
+                          <xs:documentation>Indicativo de pagamento de Aviso Prévio Indenizado pelo empregador, ao empregado:
+                          S - Sim;
+                          N - Não</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:string">
-                          <xs:length value="1"/>
                           <xs:pattern value="[N|S]"/>
                         </xs:restriction>
                       </xs:simpleType>
@@ -64,7 +59,7 @@
                     <xs:element name="dtProjFimAPI" minOccurs="0">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Data projetada para o término do aviso</xs:documentation>
+                          <xs:documentation>Data projetada para o término do aviso prévio indenizado</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:date">
                         </xs:restriction>
@@ -73,7 +68,7 @@
                     <xs:element name="pensAlim">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Indicativo de pensão</xs:documentation>
+                          <xs:documentation>Indicativo de pensão para fins de FGTS</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:byte">
                           <xs:pattern value="\d"/>
@@ -83,11 +78,12 @@
                     <xs:element name="percAliment" minOccurs="0">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Percentual alimentando</xs:documentation>
+                          <xs:documentation>Percentual a ser destinado a pensão alimentícia</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="5"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="100"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -99,6 +95,7 @@
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="14"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="999999999999"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -115,11 +112,10 @@
                     <xs:element name="nrProcTrab" minOccurs="0">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Nr Processo Trabalhista</xs:documentation>
+                          <xs:documentation>Número que identifica o processo trabalhista, quando o desligamento se der por decisão judicial</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:string">
-                          <xs:minLength value="3"/>
-                          <xs:maxLength value="21"/>
+                          <xs:length value="20"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -155,9 +151,9 @@
                                 <xs:documentation>Observação</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:whiteSpace value="preserve"/>
-                                <xs:minLength value="3"/>
+                                <xs:minLength value="2"/>
                                 <xs:maxLength value="255"/>
+                                <xs:whiteSpace value="preserve"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -166,10 +162,20 @@
                     </xs:element>
                     <xs:element name="sucessaoVinc" minOccurs="0">
                       <xs:annotation>
-                        <xs:documentation>Registro preenchido exclusivamente nos casos de sucessão do vínculo trabalhista, com a identificação da empresa sucessora.</xs:documentation>
+                        <xs:documentation>Sucessão do Vínculo Trabalhista/Estatutário</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
+                          <xs:element name="tpInscSuc">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Tipo de inscrição</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:byte">
+                                <xs:pattern value="\d"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
                           <xs:element name="cnpjSucessora">
                             <xs:simpleType>
                               <xs:annotation>
@@ -185,12 +191,15 @@
                     </xs:element>
                     <xs:element name="transfTit" minOccurs="0">
                       <xs:annotation>
-                        <xs:documentation>Transferência de titularidade do empregado doméstico para outro representante da mesma unidade familiar</xs:documentation>
+                        <xs:documentation>Transferência de titularidade do empregado doméstico</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="cpfSubstituto">
                             <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>CPF do novo titular</xs:documentation>
+                              </xs:annotation>
                               <xs:restriction base="xs:string">
                                 <xs:pattern value="\d{11}"/>
                               </xs:restriction>
@@ -208,27 +217,38 @@
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
-                    <xs:element name="verbasResc" minOccurs="0">
+                    <xs:element name="mudancaCPF" minOccurs="0">
                       <xs:annotation>
-                        <xs:documentation>Registro onde são prestadas as informações relativas às verbas devidas ao trabalhador na rescisão contratual.</xs:documentation>
+                        <xs:documentation>Informação do novo CPF do trabalhador</xs:documentation>
                       </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="novoCPF">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Novo CPF do trabalhador</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="\d{11}"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="verbasResc" minOccurs="0">
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="dmDev" maxOccurs="50">
                             <xs:annotation>
-                              <xs:documentation>Identificação de cada um dos demonstrativos de valores devidos ao trabalhador antes das retenções de pensão alimentícia e IRRF. (As retenções de pensão alimentícia e IRRF devem ser realizadas no ato do pagamento e, portanto, são informadas no evento S-1210).
-Para as rubricas cujo {codIncCP} = [31, 32, 34, 35], o somatório do valor das rubricas cujo ({tpRubr} = [2,4]) deverá ser maior ou igual ao somatório do valor das rubricas cujo ({tpRubr} = [1,3]), considerando cada um dos códigos {codIncCP} individualmente.
-O somatório dos Vencimentos deve ser maior ou igual ao somatório dos Descontos.
-As informações dos campos {ideEstabLot/nrInsc}, {detVerbas/codRubr}, {ideEstabLot/codLotacao} vinculadas a este registro, devem constar nas respectivas tabelas S-1005, S-1010 e S-1020, no mês:
-a) da data do desligamento, informada no campo {dtDeslig} se as informações pertencerem ao grupo {infoPerApur};
-b) informado em {perRef} se as informações pertencerem ao grupo {infoPerAnt}.</xs:documentation>
+                              <xs:documentation>Demonstrativos de valores devidos ao trabalhador</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
                                 <xs:element name="ideDmDev">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Identificador do demonstrativo de pagamento</xs:documentation>
+                                      <xs:documentation>Identificador atribuído pela empresa para o demonstrativo de pagamento (contracheque/holerite) conforme definido em S-1200</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
                                       <xs:minLength value="1"/>
@@ -244,14 +264,14 @@ b) informado em {perRef} se as informações pertencerem ao grupo {infoPerAnt}.<
                                     <xs:sequence>
                                       <xs:element name="ideEstabLot" maxOccurs="24">
                                         <xs:annotation>
-                                          <xs:documentation>Registro que identifica o Estabelecimento/Lotação no qual o trabalhador possui remuneração no período de apuração. O estabelecimento identificado no registro pode ser: o número do CNPJ do estabelecimento da própria empresa (matriz/filial), o número da obra (própria) no CNO, ou o número do CAEPF (no caso de pessoa física obrigada a inscrição no cadastro de atividades específicas da pessoa física).  No caso específico do trabalhador doméstico, o estabelecimento deve ser o próprio CPF do empregador.</xs:documentation>
+                                          <xs:documentation>Identificação do estabelecimento e lotação</xs:documentation>
                                         </xs:annotation>
                                         <xs:complexType>
                                           <xs:sequence>
                                             <xs:element name="tpInsc">
                                               <xs:simpleType>
                                                 <xs:annotation>
-                                                  <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+                                                  <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
                                                 </xs:annotation>
                                                 <xs:restriction base="xs:byte">
                                                   <xs:pattern value="\d"/>
@@ -264,7 +284,7 @@ b) informado em {perRef} se as informações pertencerem ao grupo {infoPerAnt}.<
                                                   <xs:documentation>Número de Inscrição</xs:documentation>
                                                 </xs:annotation>
                                                 <xs:restriction base="xs:string">
-                                                  <xs:pattern value="\d{8,15}"/>
+                                                  <xs:pattern value="\d{8,14}"/>
                                                 </xs:restriction>
                                               </xs:simpleType>
                                             </xs:element>
@@ -281,7 +301,7 @@ b) informado em {perRef} se as informações pertencerem ao grupo {infoPerAnt}.<
                                             </xs:element>
                                             <xs:element name="detVerbas" maxOccurs="200">
                                               <xs:annotation>
-                                                <xs:documentation>Detalhamento das verbas rescisórias devidas ao trabalhador. Deve haver, pelo menos uma rubrica de folha, mesmo que o valor líquido a ser pago ao trabalhador seja 0 (zero) em função de descontos.</xs:documentation>
+                                                <xs:documentation>Detalhamento das verbas rescisórias</xs:documentation>
                                               </xs:annotation>
                                               <xs:complexType>
                                                 <xs:sequence>
@@ -310,11 +330,12 @@ b) informado em {perRef} se as informações pertencerem ao grupo {infoPerAnt}.<
                                                   <xs:element name="qtdRubr" minOccurs="0">
                                                     <xs:simpleType>
                                                       <xs:annotation>
-                                                        <xs:documentation>Qtde de referência para apuração da rubrica.</xs:documentation>
+                                                        <xs:documentation>Qtde de referência para apuração da rubrica</xs:documentation>
                                                       </xs:annotation>
                                                       <xs:restriction base="xs:decimal">
                                                         <xs:totalDigits value="6"/>
                                                         <xs:fractionDigits value="2"/>
+                                                        <xs:maxInclusive value="9999.99"/>
                                                       </xs:restriction>
                                                     </xs:simpleType>
                                                   </xs:element>
@@ -326,17 +347,19 @@ b) informado em {perRef} se as informações pertencerem ao grupo {infoPerAnt}.<
                                                       <xs:restriction base="xs:decimal">
                                                         <xs:totalDigits value="5"/>
                                                         <xs:fractionDigits value="2"/>
+                                                        <xs:maxInclusive value="999.99"/>
                                                       </xs:restriction>
                                                     </xs:simpleType>
                                                   </xs:element>
                                                   <xs:element name="vrUnit" minOccurs="0">
                                                     <xs:simpleType>
                                                       <xs:annotation>
-                                                        <xs:documentation>Valor Unitário </xs:documentation>
+                                                        <xs:documentation>Valor Unitário</xs:documentation>
                                                       </xs:annotation>
                                                       <xs:restriction base="xs:decimal">
                                                         <xs:totalDigits value="14"/>
                                                         <xs:fractionDigits value="2"/>
+                                                        <xs:maxInclusive value="999999999999"/>
                                                       </xs:restriction>
                                                     </xs:simpleType>
                                                   </xs:element>
@@ -348,6 +371,7 @@ b) informado em {perRef} se as informações pertencerem ao grupo {infoPerAnt}.<
                                                       <xs:restriction base="xs:decimal">
                                                         <xs:totalDigits value="14"/>
                                                         <xs:fractionDigits value="2"/>
+                                                        <xs:maxInclusive value="999999999999"/>
                                                       </xs:restriction>
                                                     </xs:simpleType>
                                                   </xs:element>
@@ -356,20 +380,19 @@ b) informado em {perRef} se as informações pertencerem ao grupo {infoPerAnt}.<
                                             </xs:element>
                                             <xs:element name="infoSaudeColet" type="TSaudeCol" minOccurs="0">
                                               <xs:annotation>
-                                                <xs:documentation>Informações de plano privado coletivo empresarial de assistência à saúde. Só preencher se houver {codRubr} em {itensRemun}, cuja natureza de rubrica {natRubr} indicada em S-1010 seja igual a [9219].
-Não preencher nos demais casos.</xs:documentation>
+                                                <xs:documentation>Informações de plano privado coletivo empresarial de assistência à saúde</xs:documentation>
                                               </xs:annotation>
                                             </xs:element>
                                             <xs:element name="infoAgNocivo" minOccurs="0">
                                               <xs:annotation>
-                                                <xs:documentation>Registro preenchido exclusivamente em relação a remuneração de trabalhador amparado pelo RGPS - Regime Geral de Previdência Social.</xs:documentation>
+                                                <xs:documentation>Grau de Exposição a Agentes Nocivos</xs:documentation>
                                               </xs:annotation>
                                               <xs:complexType>
                                                 <xs:sequence>
                                                   <xs:element name="grauExp">
                                                     <xs:simpleType>
                                                       <xs:annotation>
-                                                        <xs:documentation>Grau de exposição a agentes nocivos</xs:documentation>
+                                                        <xs:documentation>Grau de exposição a agentes nocivos, conforme tabela 2</xs:documentation>
                                                       </xs:annotation>
                                                       <xs:restriction base="xs:byte">
                                                         <xs:pattern value="\d"/>
@@ -381,7 +404,7 @@ Não preencher nos demais casos.</xs:documentation>
                                             </xs:element>
                                             <xs:element name="infoSimples" minOccurs="0">
                                               <xs:annotation>
-                                                <xs:documentation>Informação relativa a empresas enquadradas no Regime de Tributação Simples</xs:documentation>
+                                                <xs:documentation>Informação relativa a empresas do Simples</xs:documentation>
                                               </xs:annotation>
                                               <xs:complexType>
                                                 <xs:sequence>
@@ -406,13 +429,13 @@ Não preencher nos demais casos.</xs:documentation>
                                 </xs:element>
                                 <xs:element name="infoPerAnt" minOccurs="0">
                                   <xs:annotation>
-                                    <xs:documentation>Remuneração relativa a Períodos Anteriores, devida em função de acordos coletivos, legislação específica, convenção coletiva de trabalho, dissídio ou Conversão de Licença Saúde em Acidente de Trabalho.</xs:documentation>
+                                    <xs:documentation>Remuneração em Períodos Anteriores (Acordo/Convenção/CCP/Dissídio)</xs:documentation>
                                   </xs:annotation>
                                   <xs:complexType>
                                     <xs:sequence>
                                       <xs:element name="ideADC" maxOccurs="8">
                                         <xs:annotation>
-                                          <xs:documentation>Identificação do Acordo coletivo, Legislação, Convenção Coletiva, Dissídio ou Conversão da licença saúde em acidente de trabalho.</xs:documentation>
+                                          <xs:documentation>Identificação do Acordo/Legislação/Convenção/CCP/Dissídio/Conversão</xs:documentation>
                                         </xs:annotation>
                                         <xs:complexType>
                                           <xs:sequence>
@@ -431,7 +454,8 @@ Não preencher nos demais casos.</xs:documentation>
                                                   <xs:documentation>Tipo do instrumento ou situação</xs:documentation>
                                                 </xs:annotation>
                                                 <xs:restriction base="xs:string">
-                                                  <xs:length value="1"/>
+                                                  <xs:minLength value="1"/>
+                                                  <xs:maxLength value="1"/>
                                                 </xs:restriction>
                                               </xs:simpleType>
                                             </xs:element>
@@ -460,15 +484,15 @@ Não preencher nos demais casos.</xs:documentation>
                                                   <xs:documentation>Descrição</xs:documentation>
                                                 </xs:annotation>
                                                 <xs:restriction base="xs:string">
-                                                  <xs:whiteSpace value="preserve"/>
-                                                  <xs:minLength value="3"/>
+                                                  <xs:minLength value="2"/>
                                                   <xs:maxLength value="255"/>
+                                                  <xs:whiteSpace value="preserve"/>
                                                 </xs:restriction>
                                               </xs:simpleType>
                                             </xs:element>
                                             <xs:element name="idePeriodo" maxOccurs="180">
                                               <xs:annotation>
-                                                <xs:documentation>Identificação do período ao qual se referem as diferenças de remuneração.</xs:documentation>
+                                                <xs:documentation>Identificação do período de referência da remuneração</xs:documentation>
                                               </xs:annotation>
                                               <xs:complexType>
                                                 <xs:sequence>
@@ -478,21 +502,20 @@ Não preencher nos demais casos.</xs:documentation>
                                                         <xs:documentation>Período de referência</xs:documentation>
                                                       </xs:annotation>
                                                       <xs:restriction base="xs:string">
-                                                        <xs:minLength value="4"/>
-                                                        <xs:maxLength value="7"/>
+                                                        <xs:pattern value="[2]{1}\d{3}-(1[0-2]|0[1-9])"/>
                                                       </xs:restriction>
                                                     </xs:simpleType>
                                                   </xs:element>
                                                   <xs:element name="ideEstabLot" maxOccurs="24">
                                                     <xs:annotation>
-                                                      <xs:documentation>O registro identifica o estabelecimento e lotação ao qual se referem as diferenças de remuneração do mês identificado no registro superior.</xs:documentation>
+                                                      <xs:documentation>Identificação do estabelecimento e lotação</xs:documentation>
                                                     </xs:annotation>
                                                     <xs:complexType>
                                                       <xs:sequence>
                                                         <xs:element name="tpInsc">
                                                           <xs:simpleType>
                                                             <xs:annotation>
-                                                              <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+                                                              <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
                                                             </xs:annotation>
                                                             <xs:restriction base="xs:byte">
                                                               <xs:pattern value="\d"/>
@@ -505,7 +528,7 @@ Não preencher nos demais casos.</xs:documentation>
                                                               <xs:documentation>Número de Inscrição</xs:documentation>
                                                             </xs:annotation>
                                                             <xs:restriction base="xs:string">
-                                                              <xs:pattern value="\d{8,15}"/>
+                                                              <xs:pattern value="\d{8,14}"/>
                                                             </xs:restriction>
                                                           </xs:simpleType>
                                                         </xs:element>
@@ -522,7 +545,7 @@ Não preencher nos demais casos.</xs:documentation>
                                                         </xs:element>
                                                         <xs:element name="detVerbas" maxOccurs="200">
                                                           <xs:annotation>
-                                                            <xs:documentation>Registro que relaciona as rubricas que compõem a remuneração do trabalhador.</xs:documentation>
+                                                            <xs:documentation>Itens da Remuneração do Trabalhador</xs:documentation>
                                                           </xs:annotation>
                                                           <xs:complexType>
                                                             <xs:sequence>
@@ -551,11 +574,12 @@ Não preencher nos demais casos.</xs:documentation>
                                                               <xs:element name="qtdRubr" minOccurs="0">
                                                                 <xs:simpleType>
                                                                   <xs:annotation>
-                                                                    <xs:documentation>Qtde de referência para apuração da rubrica.</xs:documentation>
+                                                                    <xs:documentation>Qtde de referência para apuração da rubrica</xs:documentation>
                                                                   </xs:annotation>
                                                                   <xs:restriction base="xs:decimal">
                                                                     <xs:totalDigits value="6"/>
                                                                     <xs:fractionDigits value="2"/>
+                                                                    <xs:maxInclusive value="9999.99"/>
                                                                   </xs:restriction>
                                                                 </xs:simpleType>
                                                               </xs:element>
@@ -567,17 +591,19 @@ Não preencher nos demais casos.</xs:documentation>
                                                                   <xs:restriction base="xs:decimal">
                                                                     <xs:totalDigits value="5"/>
                                                                     <xs:fractionDigits value="2"/>
+                                                                    <xs:maxInclusive value="999.99"/>
                                                                   </xs:restriction>
                                                                 </xs:simpleType>
                                                               </xs:element>
                                                               <xs:element name="vrUnit" minOccurs="0">
                                                                 <xs:simpleType>
                                                                   <xs:annotation>
-                                                                    <xs:documentation>Valor Unitário </xs:documentation>
+                                                                    <xs:documentation>Valor Unitário</xs:documentation>
                                                                   </xs:annotation>
                                                                   <xs:restriction base="xs:decimal">
                                                                     <xs:totalDigits value="14"/>
                                                                     <xs:fractionDigits value="2"/>
+                                                                    <xs:maxInclusive value="999999999999"/>
                                                                   </xs:restriction>
                                                                 </xs:simpleType>
                                                               </xs:element>
@@ -589,6 +615,7 @@ Não preencher nos demais casos.</xs:documentation>
                                                                   <xs:restriction base="xs:decimal">
                                                                     <xs:totalDigits value="14"/>
                                                                     <xs:fractionDigits value="2"/>
+                                                                    <xs:maxInclusive value="999999999999"/>
                                                                   </xs:restriction>
                                                                 </xs:simpleType>
                                                               </xs:element>
@@ -597,14 +624,14 @@ Não preencher nos demais casos.</xs:documentation>
                                                         </xs:element>
                                                         <xs:element name="infoAgNocivo" minOccurs="0">
                                                           <xs:annotation>
-                                                            <xs:documentation>Registro preenchido exclusivamente em relação a remuneração de trabalhador enquadrado em uma das categorias relativas a Empregado ou Agente Público, permitindo o detalhamento do grau de exposição do trabalhador aos agentes nocivos que ensejam a cobrança da contribuição adicional para financiamento dos benefícios de aposentadoria especial.</xs:documentation>
+                                                            <xs:documentation>Grau de Exposição a Agentes Nocivos</xs:documentation>
                                                           </xs:annotation>
                                                           <xs:complexType>
                                                             <xs:sequence>
                                                               <xs:element name="grauExp">
                                                                 <xs:simpleType>
                                                                   <xs:annotation>
-                                                                    <xs:documentation>Grau de exposição a agentes nocivos</xs:documentation>
+                                                                    <xs:documentation>Grau de exposição a agentes nocivos, conforme tabela 2</xs:documentation>
                                                                   </xs:annotation>
                                                                   <xs:restriction base="xs:byte">
                                                                     <xs:pattern value="\d"/>
@@ -616,7 +643,7 @@ Não preencher nos demais casos.</xs:documentation>
                                                         </xs:element>
                                                         <xs:element name="infoSimples" minOccurs="0">
                                                           <xs:annotation>
-                                                            <xs:documentation>Informação relativa a empresas enquadradas no Regime de Tributação Simples</xs:documentation>
+                                                            <xs:documentation>Informação relativa a empresas do Simples</xs:documentation>
                                                           </xs:annotation>
                                                           <xs:complexType>
                                                             <xs:sequence>
@@ -646,6 +673,9 @@ Não preencher nos demais casos.</xs:documentation>
                                   </xs:complexType>
                                 </xs:element>
                                 <xs:element name="infoTrabInterm" minOccurs="0" maxOccurs="99">
+                                  <xs:annotation>
+                                    <xs:documentation>Informações da(s) convocação(ões) de trabalho intermitente</xs:documentation>
+                                  </xs:annotation>
                                   <xs:complexType>
                                     <xs:sequence>
                                       <xs:element name="codConv">
@@ -654,8 +684,9 @@ Não preencher nos demais casos.</xs:documentation>
                                             <xs:documentation>Código que identifica a convocação para trabalho intermitente</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:string">
-                                            <xs:minLength value="1"/>
+                                            <xs:minLength value="2"/>
                                             <xs:maxLength value="30"/>
+                                            <xs:whiteSpace value="preserve"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -667,7 +698,7 @@ Não preencher nos demais casos.</xs:documentation>
                           </xs:element>
                           <xs:element name="procJudTrab" minOccurs="0" maxOccurs="99">
                             <xs:annotation>
-                              <xs:documentation>Informações sobre a existência de processos judiciais do trabalhador com decisão favorável quanto à não incidência de contribuição previdenciária e/ou Imposto de Renda</xs:documentation>
+                              <xs:documentation>Informações sobre a existência de processos judiciais do trabalhador</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
@@ -687,8 +718,7 @@ Não preencher nos demais casos.</xs:documentation>
                                       <xs:documentation>Nr Processo Judicial</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:minLength value="3"/>
-                                      <xs:maxLength value="21"/>
+                                      <xs:length value="20"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -707,7 +737,7 @@ Não preencher nos demais casos.</xs:documentation>
                           </xs:element>
                           <xs:element name="infoMV" minOccurs="0">
                             <xs:annotation>
-                              <xs:documentation>Registro preenchido exclusivamente em caso de trabalhador que possua outros vínculos/atividades nos quais já tenha ocorrido desconto de contribuição previdenciária.</xs:documentation>
+                              <xs:documentation>Informação de Múltiplos Vínculos</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
@@ -721,9 +751,9 @@ Não preencher nos demais casos.</xs:documentation>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
-                                <xs:element name="remunOutrEmpr" type="TRemunOutrasEmpresas" maxOccurs="10">
+                                <xs:element name="remunOutrEmpr" type="TRemunOutrasEmpresas" maxOccurs="999">
                                   <xs:annotation>
-                                    <xs:documentation>Informações relativas ao trabalhador que possui vínculo empregatício com outra(s) empresa(s) e/ou que exerce outras atividades como contribuinte individual, detalhando as empresas que efetuaram (ou efetuarão) desconto da contribuição, ou ainda valores recolhidos pelo próprio trabalhador como contribuinte individual. As informações são necessárias para a conferência da contribuição descontada do segurado.</xs:documentation>
+                                    <xs:documentation>Remuneração recebida pelo trabalhador em outras empresas ou atividades</xs:documentation>
                                   </xs:annotation>
                                 </xs:element>
                               </xs:sequence>
@@ -741,8 +771,7 @@ Não preencher nos demais casos.</xs:documentation>
                                       <xs:documentation>Nr Processo Judicial</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:minLength value="3"/>
-                                      <xs:maxLength value="21"/>
+                                      <xs:length value="20"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -754,14 +783,14 @@ Não preencher nos demais casos.</xs:documentation>
                     </xs:element>
                     <xs:element name="quarentena" minOccurs="0">
                       <xs:annotation>
-                        <xs:documentation>Informações sobre a 'quarentena' remunerada de trabalhador desligado.  O registro deve ser preenchido apenas no caso do trabalhador que recebe remuneração após o desligamento por estar impossibilitado de exercer atividade remunerada.</xs:documentation>
+                        <xs:documentation>Informações sobre a quarentena remunerada de trabalhador desligado</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="dtFimQuar">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Data final da quarentena</xs:documentation>
+                                <xs:documentation>Preencher com a data final da quarentena a que está sujeito o trabalhador</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:date">
                               </xs:restriction>
@@ -770,7 +799,7 @@ Não preencher nos demais casos.</xs:documentation>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
-                    <xs:element name="consigFGTS" minOccurs="0" maxOccurs="9">
+                    <xs:element name="consigFGTS" minOccurs="0" maxOccurs="99">
                       <xs:annotation>
                         <xs:documentation>Informações sobre operação de crédito consignado com garantia de FGTS</xs:documentation>
                       </xs:annotation>
@@ -779,7 +808,7 @@ Não preencher nos demais casos.</xs:documentation>
                           <xs:element name="insConsig">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Matrícula da Instituição Consignatária, cadastrada na Caixa Econômica Federal</xs:documentation>
+                                <xs:documentation>Matrícula da Instituição Consignatária cadastrada na CEF</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
                                 <xs:minLength value="1"/>
@@ -790,10 +819,10 @@ Não preencher nos demais casos.</xs:documentation>
                           <xs:element name="nrContr">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Número do contrato de empréstimo consignado existente na Instituição Consignatária</xs:documentation>
+                                <xs:documentation>N° do contr. de empréstimo consignado existente na Instituição Consignatária</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:pattern value="\d{1,15}"/>
+                                <xs:pattern value="\d{1,40}"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -829,7 +858,7 @@ Não preencher nos demais casos.</xs:documentation>
       <xs:element name="nrRecibo" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Recibo arquivo a ser retificado</xs:documentation>
+            <xs:documentation>Número do recibo do arquivo a ser retificado</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -860,7 +889,7 @@ Não preencher nos demais casos.</xs:documentation>
       <xs:element name="verProc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Versão do processo de emissão do evento. </xs:documentation>
+            <xs:documentation>Versão do processo de emissão do evento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -875,7 +904,7 @@ Não preencher nos demais casos.</xs:documentation>
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -888,7 +917,7 @@ Não preencher nos demais casos.</xs:documentation>
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -941,7 +970,7 @@ Não preencher nos demais casos.</xs:documentation>
     <xs:sequence>
       <xs:element name="detOper" maxOccurs="99">
         <xs:annotation>
-          <xs:documentation>Detalhamento dos valores pagos a Operadoras de Planos de Saúde.</xs:documentation>
+          <xs:documentation>Detalhamento dos valores pagos a Operadoras de Planos de Saúde</xs:documentation>
         </xs:annotation>
         <xs:complexType>
           <xs:sequence>
@@ -952,14 +981,14 @@ Não preencher nos demais casos.</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
                   <xs:length value="14"/>
-                  <xs:pattern value="\d{8,14}"/>
+                  <xs:pattern value="\d{14}"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
             <xs:element name="regANS">
               <xs:simpleType>
                 <xs:annotation>
-                  <xs:documentation>Registro da operadora na Agência Nacional de Saúde.</xs:documentation>
+                  <xs:documentation>Registro da operadora na Agência Nacional de Saúde</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
                   <xs:length value="6"/>
@@ -974,12 +1003,13 @@ Não preencher nos demais casos.</xs:documentation>
                 <xs:restriction base="xs:decimal">
                   <xs:totalDigits value="14"/>
                   <xs:fractionDigits value="2"/>
+                  <xs:maxInclusive value="999999999999"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
             <xs:element name="detPlano" minOccurs="0" maxOccurs="99">
               <xs:annotation>
-                <xs:documentation>Informações do dependente do plano privado de saúde.</xs:documentation>
+                <xs:documentation>Informações do dependente do plano privado de saúde</xs:documentation>
               </xs:annotation>
               <xs:complexType>
                 <xs:sequence>
@@ -990,6 +1020,7 @@ Não preencher nos demais casos.</xs:documentation>
                       </xs:annotation>
                       <xs:restriction base="xs:string">
                         <xs:length value="2"/>
+                        <xs:pattern value="\d{2}"/>
                       </xs:restriction>
                     </xs:simpleType>
                   </xs:element>
@@ -1011,6 +1042,7 @@ Não preencher nos demais casos.</xs:documentation>
                       <xs:restriction base="xs:string">
                         <xs:minLength value="2"/>
                         <xs:maxLength value="70"/>
+                        <xs:whiteSpace value="preserve"/>
                       </xs:restriction>
                     </xs:simpleType>
                   </xs:element>
@@ -1031,6 +1063,7 @@ Não preencher nos demais casos.</xs:documentation>
                       <xs:restriction base="xs:decimal">
                         <xs:totalDigits value="14"/>
                         <xs:fractionDigits value="2"/>
+                        <xs:maxInclusive value="999999999999"/>
                       </xs:restriction>
                     </xs:simpleType>
                   </xs:element>
@@ -1044,13 +1077,13 @@ Não preencher nos demais casos.</xs:documentation>
   </xs:complexType>
   <xs:complexType name="TRemunOutrasEmpresas">
     <xs:annotation>
-      <xs:documentation>Registro que complementa as informações relativas ao trabalhador que possui vínculo empregatício com outra(s) empresa(s) e/ou que exerce outras atividades como contribuinte individual, detalhando as empresas que efetuaram (ou efetuarão) desconto da contribuição, ou ainda valores recolhidos pelo próprio trabalhador como contribuinte individual.   As informações prestadas são necessárias para a conferência da contribuição descontada do segurado. </xs:documentation>
+      <xs:documentation>Remuneração em outras empresas ou atividades</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -1063,7 +1096,7 @@ Não preencher nos demais casos.</xs:documentation>
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -1085,6 +1118,7 @@ Não preencher nos demais casos.</xs:documentation>
           <xs:restriction base="xs:decimal">
             <xs:totalDigits value="14"/>
             <xs:fractionDigits value="2"/>
+            <xs:maxInclusive value="999999999999"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>

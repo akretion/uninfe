@@ -1,15 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtIrrfBenef/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtIrrfBenef/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtIrrfBenef/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtIrrfBenef/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
-    <xs:annotation>
-      <xs:documentation>eSocial</xs:documentation>
-    </xs:annotation>
     <xs:complexType>
       <xs:sequence>
         <xs:element name="evtIrrfBenef">
           <xs:annotation>
-            <xs:documentation>Imposto de Renda Retido do beneficiário do rendimento</xs:documentation>
+            <xs:documentation>IRRF do beneficiário</xs:documentation>
           </xs:annotation>
           <xs:complexType>
             <xs:sequence>
@@ -19,7 +16,7 @@
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="nrRecArqBase" minOccurs="0">
+                    <xs:element name="nrRecArqBase">
                       <xs:simpleType>
                         <xs:annotation>
                           <xs:documentation>Recibo do arquivo de origem</xs:documentation>
@@ -33,11 +30,10 @@
                     <xs:element name="perApur">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Período ao qual se referem as informações.</xs:documentation>
+                          <xs:documentation>Período ao qual se referem as informações</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:string">
-                          <xs:minLength value="4"/>
-                          <xs:maxLength value="7"/>
+                          <xs:pattern value="[2]{1}\d{3}-(1[0-2]|0[1-9])"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -51,7 +47,7 @@
               </xs:element>
               <xs:element name="ideTrabalhador">
                 <xs:annotation>
-                  <xs:documentation>Registro que apresenta a identificação básica do trabalhador ao qual se refere o evento de remuneração.</xs:documentation>
+                  <xs:documentation>Identificação do Trabalhador</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
@@ -71,8 +67,7 @@
               </xs:element>
               <xs:element name="infoDep" minOccurs="0">
                 <xs:annotation>
-                  <xs:documentation>Informações relativas a existência de dependentes do beneficiário do pagamento.
-Origem: S-1210 - registro {deps}</xs:documentation>
+                  <xs:documentation>Informações relativas a existência de dependentes</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
@@ -84,6 +79,7 @@ Origem: S-1210 - registro {deps}</xs:documentation>
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="14"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="999999999999"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -92,8 +88,7 @@ Origem: S-1210 - registro {deps}</xs:documentation>
               </xs:element>
               <xs:element name="infoIrrf" maxOccurs="9">
                 <xs:annotation>
-                  <xs:documentation>Informações relativas ao Imposto de Renda Retido na Fonte do Trabalhador e suas bases de cálculo.
-Origem S-1200, S-1202, S-1207, S-1210, S-2299, S-2399.</xs:documentation>
+                  <xs:documentation>Informações relativas ao IRRF</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
@@ -113,14 +108,13 @@ Origem S-1200, S-1202, S-1207, S-1210, S-2299, S-2399.</xs:documentation>
                           <xs:documentation>Tem residência fiscal no Brasil?</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:string">
-                          <xs:length value="1"/>
                           <xs:pattern value="[N|S]"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
                     <xs:element name="basesIrrf" maxOccurs="99">
                       <xs:annotation>
-                        <xs:documentation>Bases, deduções, isenções e retenções do IRRF</xs:documentation>
+                        <xs:documentation>Bases do IRRF</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
@@ -142,6 +136,7 @@ Origem S-1200, S-1202, S-1207, S-1210, S-2299, S-2399.</xs:documentation>
                               <xs:restriction base="xs:decimal">
                                 <xs:totalDigits value="14"/>
                                 <xs:fractionDigits value="2"/>
+                                <xs:maxInclusive value="999999999999"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -150,14 +145,14 @@ Origem S-1200, S-1202, S-1207, S-1210, S-2299, S-2399.</xs:documentation>
                     </xs:element>
                     <xs:element name="irrf" minOccurs="0" maxOccurs="20">
                       <xs:annotation>
-                        <xs:documentation>Informações relativas ao Imposto de Renda Retido na Fonte</xs:documentation>
+                        <xs:documentation>Informações relativas ao IRRF</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="tpCR">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Código de Receita - CR.</xs:documentation>
+                                <xs:documentation>Código de Receita - CR</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:integer">
                               </xs:restriction>
@@ -166,11 +161,12 @@ Origem S-1200, S-1202, S-1207, S-1210, S-2299, S-2399.</xs:documentation>
                           <xs:element name="vrIrrfDesc">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Valor efetivamente descontado do trabalhador relativo ao IRRF.</xs:documentation>
+                                <xs:documentation>Valor efetivamente descontado do trabalhador relativo ao IRRF</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:decimal">
                                 <xs:totalDigits value="14"/>
                                 <xs:fractionDigits value="2"/>
+                                <xs:maxInclusive value="999999999999"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -179,7 +175,7 @@ Origem S-1200, S-1202, S-1207, S-1210, S-2299, S-2399.</xs:documentation>
                     </xs:element>
                     <xs:element name="idePgtoExt" type="TNaoResid" minOccurs="0">
                       <xs:annotation>
-                        <xs:documentation>Informações complementares relativas a pagamento efetuado a beneficiário residente fiscal no exterior.</xs:documentation>
+                        <xs:documentation>Informações complementares sobre pagamentos a residente fiscal no exterior</xs:documentation>
                       </xs:annotation>
                     </xs:element>
                   </xs:sequence>
@@ -198,7 +194,7 @@ Origem S-1200, S-1202, S-1207, S-1210, S-2299, S-2399.</xs:documentation>
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -211,7 +207,7 @@ Origem S-1200, S-1202, S-1207, S-1210, S-2299, S-2399.</xs:documentation>
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -251,11 +247,12 @@ Origem S-1200, S-1202, S-1207, S-1210, S-2299, S-2399.</xs:documentation>
             <xs:element name="nifBenef" minOccurs="0">
               <xs:simpleType>
                 <xs:annotation>
-                  <xs:documentation>NIF do beneficiário</xs:documentation>
+                  <xs:documentation>Número de Identificação Fiscal - NIF</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="1"/>
+                  <xs:minLength value="2"/>
                   <xs:maxLength value="20"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -264,7 +261,7 @@ Origem S-1200, S-1202, S-1207, S-1210, S-2299, S-2399.</xs:documentation>
       </xs:element>
       <xs:element name="endExt">
         <xs:annotation>
-          <xs:documentation>Informações complementares de endereço do beneficiário.</xs:documentation>
+          <xs:documentation>Informações complementares de endereço do beneficiário</xs:documentation>
         </xs:annotation>
         <xs:complexType>
           <xs:sequence>
@@ -275,7 +272,8 @@ Origem S-1200, S-1202, S-1207, S-1210, S-2299, S-2399.</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
                   <xs:minLength value="1"/>
-                  <xs:maxLength value="80"/>
+                  <xs:maxLength value="100"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -293,21 +291,24 @@ Origem S-1200, S-1202, S-1207, S-1210, S-2299, S-2399.</xs:documentation>
             <xs:element name="complem" minOccurs="0">
               <xs:simpleType>
                 <xs:annotation>
-                  <xs:documentation>Complemento</xs:documentation>
+                  <xs:documentation>Complemento do logradouro</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
+                  <xs:minLength value="2"/>
                   <xs:maxLength value="30"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
             <xs:element name="bairro" minOccurs="0">
               <xs:simpleType>
                 <xs:annotation>
-                  <xs:documentation>Nome do bairro/distrito.</xs:documentation>
+                  <xs:documentation>Nome do bairro/distrito</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
                   <xs:minLength value="1"/>
-                  <xs:maxLength value="60"/>
+                  <xs:maxLength value="90"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -317,19 +318,21 @@ Origem S-1200, S-1202, S-1207, S-1210, S-2299, S-2399.</xs:documentation>
                   <xs:documentation>Nome da Cidade</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
+                  <xs:minLength value="2"/>
                   <xs:maxLength value="50"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
             <xs:element name="codPostal" minOccurs="0">
               <xs:simpleType>
                 <xs:annotation>
-                  <xs:documentation>CEP</xs:documentation>
+                  <xs:documentation>Código de Endereçamento Postal</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
-                  <xs:whiteSpace value="preserve"/>
                   <xs:minLength value="4"/>
                   <xs:maxLength value="12"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>

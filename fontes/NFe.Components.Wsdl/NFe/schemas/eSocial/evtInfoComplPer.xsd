@@ -1,13 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtInfoComplPer/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtInfoComplPer/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtInfoComplPer/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtInfoComplPer/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="evtInfoComplPer">
-          <xs:annotation>
-            <xs:documentation>Informações Complementares aos Eventos Periódicos</xs:documentation>
-          </xs:annotation>
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ideEvento" type="TIdeEveFopag">
@@ -22,7 +19,7 @@
               </xs:element>
               <xs:element name="infoSubstPatr" minOccurs="0">
                 <xs:annotation>
-                  <xs:documentation>Registro preenchido exclusivamente por empresa enquadrada nos artigos 7 a 9 da Lei 12.546/2011, conforme classificação tributária indicada no evento de Informações Cadastrais do Empregador.</xs:documentation>
+                  <xs:documentation>Inf. Complementares - Empresas Enquadradas nos artigos 7 a 9 da Lei 12.546/2011</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
@@ -44,6 +41,7 @@
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="5"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="100"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -52,7 +50,7 @@
               </xs:element>
               <xs:element name="infoSubstPatrOpPort" minOccurs="0" maxOccurs="9999">
                 <xs:annotation>
-                  <xs:documentation>Registro preenchido exclusivamente pelo OGMO ({classTrib}=[09]) listando apenas seus Operadores Portuários enquadrados nos artigos 7 a 9 da Lei 12.546/2011.</xs:documentation>
+                  <xs:documentation>Informação de substituição prevista na Lei 12.546/2011</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
@@ -63,7 +61,7 @@
                         </xs:annotation>
                         <xs:restriction base="xs:string">
                           <xs:length value="14"/>
-                          <xs:pattern value="\d{8,14}"/>
+                          <xs:pattern value="\d{14}"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -72,29 +70,31 @@
               </xs:element>
               <xs:element name="infoAtivConcom" minOccurs="0">
                 <xs:annotation>
-                  <xs:documentation>Registro preenchido por empresa enquadrada no regime de tributação Simples Nacional com tributação previdenciária substituída e não substituída. </xs:documentation>
+                  <xs:documentation>Empresas enquadradas no Simples Nacional - Atividades Concomitantes</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="fatorMes">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Fator mês</xs:documentation>
+                          <xs:documentation>Fator a ser utilizado para cálculo da contribuição incidente sobre a remuneração mensal</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="5"/>
-                          <xs:fractionDigits value="4"/>
+                          <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="100"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
                     <xs:element name="fator13">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Fator 13°</xs:documentation>
+                          <xs:documentation>Fator a ser utilizado para cálculo da contribuição incidente sobre a remuneração relativa ao décimo terceiro salário</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="5"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="100"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -127,7 +127,7 @@
       <xs:element name="nrRecibo" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Recibo arquivo a ser retificado</xs:documentation>
+            <xs:documentation>Número do recibo do arquivo a ser retificado</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -138,9 +138,7 @@
       <xs:element name="indApuracao">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Indicativo de período de apuração:
-            1 - Mensal;
-            2 - Anual (13° salário).</xs:documentation>
+            <xs:documentation>Indicativo de período de apuração</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -150,11 +148,10 @@
       <xs:element name="perApur">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Período ao qual se referem as informações.</xs:documentation>
+            <xs:documentation>Período ao qual se referem as informações</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:minLength value="4"/>
-            <xs:maxLength value="7"/>
+            <xs:pattern value="[2]{1}\d{3}-(1[0-2]|0[1-9])"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -181,7 +178,7 @@
       <xs:element name="verProc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Versão do processo de emissão do evento. </xs:documentation>
+            <xs:documentation>Versão do processo de emissão do evento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -196,7 +193,7 @@
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -209,7 +206,7 @@
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>

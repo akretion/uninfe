@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtCdBenPrRP/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtCdBenPrRP/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtCdBenPrRP/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtCdBenPrRP/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -44,6 +44,7 @@
                         <xs:restriction base="xs:string">
                           <xs:minLength value="2"/>
                           <xs:maxLength value="70"/>
+                          <xs:whiteSpace value="preserve"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -57,7 +58,7 @@
               </xs:element>
               <xs:element name="infoBeneficio">
                 <xs:annotation>
-                  <xs:documentation>Informações relacionadas ao benefício previdenciário concedido ao servidor</xs:documentation>
+                  <xs:documentation>Informações relacionadas ao benefício previdenciário</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
@@ -73,20 +74,17 @@
                     </xs:element>
                     <xs:element name="iniBeneficio" type="TDadosBeneficio" minOccurs="0">
                       <xs:annotation>
-                        <xs:documentation>Informações relativas a benefícios previdenciários - Início
-Validação: Não pode ser informado se já houver informação anterior de benefícios para o beneficiário identificado em {ideBenef} e para os qual não tenha havido ainda informação de término de benefícios.</xs:documentation>
+                        <xs:documentation>Informações relativas a benefícios previdenciários - Início</xs:documentation>
                       </xs:annotation>
                     </xs:element>
                     <xs:element name="altBeneficio" type="TDadosBeneficio" minOccurs="0">
                       <xs:annotation>
-                        <xs:documentation>Informações relativas a benefícios previdenciários - Alteração.
-Validação: Só pode ser informado se já houver informação anterior de benefícios para o beneficiário identificado em {ideBenef} e para o qual não tenha havido ainda informação de término de benefícios.</xs:documentation>
+                        <xs:documentation>Informações relativas a benefícios previdenciários - Alteração</xs:documentation>
                       </xs:annotation>
                     </xs:element>
                     <xs:element name="fimBeneficio" minOccurs="0">
                       <xs:annotation>
-                        <xs:documentation>Informações relativas a benefícios previdenciários - Término.
-Validação: Só pode ser informado se já houver informação anterior de benefícios para o beneficiário identificado em {ideBenef} e para o qual não tenha havido ainda informação de término de benefícios.</xs:documentation>
+                        <xs:documentation>Informações relativas a benefícios previdenciários - Término</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
@@ -106,8 +104,9 @@ Validação: Só pode ser informado se já houver informação anterior de benef
                                 <xs:documentation>Número do benefício</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:minLength value="3"/>
+                                <xs:minLength value="2"/>
                                 <xs:maxLength value="20"/>
+                                <xs:whiteSpace value="preserve"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -162,7 +161,7 @@ Validação: Só pode ser informado se já houver informação anterior de benef
       <xs:element name="nrRecibo" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Recibo arquivo a ser retificado</xs:documentation>
+            <xs:documentation>Número do recibo do arquivo a ser retificado</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -193,7 +192,7 @@ Validação: Só pode ser informado se já houver informação anterior de benef
       <xs:element name="verProc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Versão do processo de emissão do evento. </xs:documentation>
+            <xs:documentation>Versão do processo de emissão do evento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -211,7 +210,7 @@ Validação: Só pode ser informado se já houver informação anterior de benef
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -224,7 +223,7 @@ Validação: Só pode ser informado se já houver informação anterior de benef
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -232,7 +231,7 @@ Validação: Só pode ser informado se já houver informação anterior de benef
   </xs:complexType>
   <xs:complexType name="TDadosBenef">
     <xs:annotation>
-      <xs:documentation>Dados de beneficiário</xs:documentation>
+      <xs:documentation>Dados do beneficiário</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="dadosNasc">
@@ -256,6 +255,7 @@ Validação: Só pode ser informado se já houver informação anterior de benef
                   <xs:documentation>Código do Município</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:integer">
+                  <xs:pattern value="\d{7}"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -298,7 +298,7 @@ Validação: Só pode ser informado se já houver informação anterior de benef
             <xs:element name="paisNascto">
               <xs:simpleType>
                 <xs:annotation>
-                  <xs:documentation>País de Nascimento</xs:documentation>
+                  <xs:documentation>Código do País de Nascimento</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
                   <xs:length value="3"/>
@@ -308,7 +308,7 @@ Validação: Só pode ser informado se já houver informação anterior de benef
             <xs:element name="paisNac">
               <xs:simpleType>
                 <xs:annotation>
-                  <xs:documentation>Nacionalidade</xs:documentation>
+                  <xs:documentation>Código do país de nacionalidade do trabalhador</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
                   <xs:length value="3"/>
@@ -318,22 +318,24 @@ Validação: Só pode ser informado se já houver informação anterior de benef
             <xs:element name="nmMae" minOccurs="0">
               <xs:simpleType>
                 <xs:annotation>
-                  <xs:documentation>Nome da mãe</xs:documentation>
+                  <xs:documentation>Nome da mãe do trabalhador</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
                   <xs:minLength value="2"/>
                   <xs:maxLength value="70"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
             <xs:element name="nmPai" minOccurs="0">
               <xs:simpleType>
                 <xs:annotation>
-                  <xs:documentation>Nome do pai</xs:documentation>
+                  <xs:documentation>Nome do pai do trabalhador</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
                   <xs:minLength value="2"/>
                   <xs:maxLength value="70"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -342,19 +344,19 @@ Validação: Só pode ser informado se já houver informação anterior de benef
       </xs:element>
       <xs:element name="endereco">
         <xs:annotation>
-          <xs:documentation>Grupo de informações do endereço do Trabalhador</xs:documentation>
+          <xs:documentation>Endereço do Trabalhador</xs:documentation>
         </xs:annotation>
         <xs:complexType>
           <xs:sequence>
             <xs:choice>
               <xs:element name="brasil" type="TEnderecoBrasil">
                 <xs:annotation>
-                  <xs:documentation>Preenchimento obrigatório para trabalhador residente no Brasil.</xs:documentation>
+                  <xs:documentation>Endereço no Brasil</xs:documentation>
                 </xs:annotation>
               </xs:element>
               <xs:element name="exterior" type="TEnderecoExterior">
                 <xs:annotation>
-                  <xs:documentation>Preenchido em caso de trabalhador residente no exterior.</xs:documentation>
+                  <xs:documentation>Endereço no Exterior</xs:documentation>
                 </xs:annotation>
               </xs:element>
             </xs:choice>
@@ -386,7 +388,8 @@ Validação: Só pode ser informado se já houver informação anterior de benef
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
-            <xs:maxLength value="80"/>
+            <xs:maxLength value="100"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -404,21 +407,24 @@ Validação: Só pode ser informado se já houver informação anterior de benef
       <xs:element name="complemento" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Complemento</xs:documentation>
+            <xs:documentation>Complemento do logradouro</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
+            <xs:minLength value="2"/>
             <xs:maxLength value="30"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="bairro" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Nome do bairro/distrito.</xs:documentation>
+            <xs:documentation>Nome do bairro/distrito</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
-            <xs:maxLength value="60"/>
+            <xs:maxLength value="90"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -438,6 +444,7 @@ Validação: Só pode ser informado se já houver informação anterior de benef
             <xs:documentation>Código do Município</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:integer">
+            <xs:pattern value="\d{7}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -501,7 +508,8 @@ Validação: Só pode ser informado se já houver informação anterior de benef
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
-            <xs:maxLength value="80"/>
+            <xs:maxLength value="100"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -519,21 +527,24 @@ Validação: Só pode ser informado se já houver informação anterior de benef
       <xs:element name="complemento" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Complemento</xs:documentation>
+            <xs:documentation>Complemento do logradouro</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
+            <xs:minLength value="2"/>
             <xs:maxLength value="30"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="bairro" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Nome do bairro/distrito.</xs:documentation>
+            <xs:documentation>Nome do bairro/distrito</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
-            <xs:maxLength value="60"/>
+            <xs:maxLength value="90"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -543,19 +554,21 @@ Validação: Só pode ser informado se já houver informação anterior de benef
             <xs:documentation>Nome da Cidade</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
+            <xs:minLength value="2"/>
             <xs:maxLength value="50"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="codPostal" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>CEP</xs:documentation>
+            <xs:documentation>Código de Endereçamento Postal</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="preserve"/>
             <xs:minLength value="4"/>
             <xs:maxLength value="12"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -582,8 +595,9 @@ Validação: Só pode ser informado se já houver informação anterior de benef
             <xs:documentation>Número do benefício</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:minLength value="3"/>
+            <xs:minLength value="2"/>
             <xs:maxLength value="20"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -604,6 +618,7 @@ Validação: Só pode ser informado se já houver informação anterior de benef
           <xs:restriction base="xs:decimal">
             <xs:totalDigits value="14"/>
             <xs:fractionDigits value="2"/>
+            <xs:maxInclusive value="999999999999"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -619,8 +634,9 @@ Validação: Só pode ser informado se já houver informação anterior de benef
                   <xs:documentation>Identificação da quota do benefício</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="1"/>
+                  <xs:minLength value="2"/>
                   <xs:maxLength value="30"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>

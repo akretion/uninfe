@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtBasesTrab/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtBasesTrab/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtBasesTrab/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtBasesTrab/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -16,7 +16,7 @@
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="nrRecArqBase" minOccurs="0">
+                    <xs:element name="nrRecArqBase">
                       <xs:simpleType>
                         <xs:annotation>
                           <xs:documentation>Recibo do arquivo de origem</xs:documentation>
@@ -30,9 +30,7 @@
                     <xs:element name="indApuracao">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Indicativo de período de apuração:
-                          1 - Mensal;
-                          2 - Anual (13° salário).</xs:documentation>
+                          <xs:documentation>Indicativo de período de apuração</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:byte">
                           <xs:pattern value="\d"/>
@@ -42,11 +40,10 @@
                     <xs:element name="perApur">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Período ao qual se referem as informações.</xs:documentation>
+                          <xs:documentation>Período ao qual se referem as informações</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:string">
-                          <xs:minLength value="4"/>
-                          <xs:maxLength value="7"/>
+                          <xs:pattern value="[2]{1}\d{3}-(1[0-2]|0[1-9])"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -60,7 +57,7 @@
               </xs:element>
               <xs:element name="ideTrabalhador">
                 <xs:annotation>
-                  <xs:documentation>Registro que apresenta a identificação básica do trabalhador ao qual se refere o evento de remuneração.</xs:documentation>
+                  <xs:documentation>Identificação do Trabalhador</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
@@ -77,7 +74,7 @@
                     </xs:element>
                     <xs:element name="procJudTrab" minOccurs="0" maxOccurs="99">
                       <xs:annotation>
-                        <xs:documentation>Informações sobre processos judiciais do trabalhador com decisão favorável quanto à não incidência ou alterações na incidência de contribuição previdenciária.</xs:documentation>
+                        <xs:documentation>Processos judiciais do trabalhador</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
@@ -87,8 +84,7 @@
                                 <xs:documentation>Nr Processo Judicial</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:minLength value="3"/>
-                                <xs:maxLength value="21"/>
+                                <xs:length value="20"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -110,14 +106,14 @@
               </xs:element>
               <xs:element name="infoCpCalc" minOccurs="0" maxOccurs="9">
                 <xs:annotation>
-                  <xs:documentation>Cálculo da contribuição previdenciária do segurado, incidente sobre a Remuneração do Período de Apuração e de Períodos Anteriores informada nos eventos S-1200, S-2299 e S-2399.</xs:documentation>
+                  <xs:documentation>Cálculo da contribuição previdenciária do segurado</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="tpCR">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Código de Receita - CR.</xs:documentation>
+                          <xs:documentation>Código de Receita - CR</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:integer">
                         </xs:restriction>
@@ -126,45 +122,46 @@
                     <xs:element name="vrCpSeg">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Valor da contribuição do segurado calculada segundo as regras da legislação em vigor, por CR.</xs:documentation>
+                          <xs:documentation>Valor da contribuição do segurado calculada</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="14"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="999999999999"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
                     <xs:element name="vrDescSeg">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Valor efetivamente descontado do segurado.</xs:documentation>
+                          <xs:documentation>Valor efetivamente descontado do segurado</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="14"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="999999999999"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
-              <xs:element name="infoCp">
+              <xs:element name="infoCp" minOccurs="0">
                 <xs:annotation>
-                  <xs:documentation>Informações sobre bases de cálculo, descontos e deduções de contribuições sociais devidas à Previdência Social e a Outras Entidades e Fundos, referentes à Remuneração do Período de Apuração e de Períodos Anteriores informados nos eventos S-1200, S-2299 e S-2399.</xs:documentation>
+                  <xs:documentation>Informações sobre bases e valores das contribuições sociais</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="ideEstabLot" maxOccurs="99">
+                    <xs:element name="ideEstabLot" maxOccurs="unbounded">
                       <xs:annotation>
-                        <xs:documentation>Identificação do estabelecimento ou obra de construção civil e da lotação tributária.
-As informações desse grupo foram prestadas pelo contribuinte nos eventos S-1200, S-2299 e S-2399.</xs:documentation>
+                        <xs:documentation>Identificação do estabelecimento ou obra e da lotação tributária</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
                           <xs:element name="tpInsc">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+                                <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:byte">
                                 <xs:pattern value="\d"/>
@@ -177,7 +174,7 @@ As informações desse grupo foram prestadas pelo contribuinte nos eventos S-120
                                 <xs:documentation>Número de Inscrição</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:pattern value="\d{8,15}"/>
+                                <xs:pattern value="\d{8,14}"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -194,7 +191,7 @@ As informações desse grupo foram prestadas pelo contribuinte nos eventos S-120
                           </xs:element>
                           <xs:element name="infoCategIncid" maxOccurs="10">
                             <xs:annotation>
-                              <xs:documentation>Informações relativas à matrícula e categoria do trabalhador e tipos de incidências.</xs:documentation>
+                              <xs:documentation>Informações relativas à matrícula e categoria do trabalhador e tipos de incidências</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
@@ -231,8 +228,7 @@ As informações desse grupo foram prestadas pelo contribuinte nos eventos S-120
                                 </xs:element>
                                 <xs:element name="infoBaseCS" minOccurs="0" maxOccurs="99">
                                   <xs:annotation>
-                                    <xs:documentation>Informações sobre bases de cálculo, descontos e deduções de contribuições sociais devidas à Previdência Social e a Outras Entidades e Fundos.
-Evento de origem (S-1200, S-2299 e S-2399).</xs:documentation>
+                                    <xs:documentation>Informações sobre bases de cálculo, descontos e deduções de CS</xs:documentation>
                                   </xs:annotation>
                                   <xs:complexType>
                                     <xs:sequence>
@@ -264,6 +260,7 @@ Evento de origem (S-1200, S-2299 e S-2399).</xs:documentation>
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="14"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999999999999"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -272,14 +269,14 @@ Evento de origem (S-1200, S-2299 e S-2399).</xs:documentation>
                                 </xs:element>
                                 <xs:element name="calcTerc" minOccurs="0" maxOccurs="2">
                                   <xs:annotation>
-                                    <xs:documentation>Cálculo das contribuições sociais devidas a Outras Entidades e Fundos.</xs:documentation>
+                                    <xs:documentation>Cálculo das contribuições sociais devidas a Outras Entidades e Fundos</xs:documentation>
                                   </xs:annotation>
                                   <xs:complexType>
                                     <xs:sequence>
                                       <xs:element name="tpCR">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Código de Receita - CR.</xs:documentation>
+                                            <xs:documentation>Código de Receita - CR</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:integer">
                                           </xs:restriction>
@@ -288,11 +285,12 @@ Evento de origem (S-1200, S-2299 e S-2399).</xs:documentation>
                                       <xs:element name="vrCsSegTerc">
                                         <xs:simpleType>
                                           <xs:annotation>
-                                            <xs:documentation>Valor da contribuição social devida a Outras Entidades ou Fundos.</xs:documentation>
+                                            <xs:documentation>Valor da contribuição social devida aos Terceiros</xs:documentation>
                                           </xs:annotation>
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="14"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999999999999"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -304,6 +302,7 @@ Evento de origem (S-1200, S-2299 e S-2399).</xs:documentation>
                                           <xs:restriction base="xs:decimal">
                                             <xs:totalDigits value="14"/>
                                             <xs:fractionDigits value="2"/>
+                                            <xs:maxInclusive value="999999999999"/>
                                           </xs:restriction>
                                         </xs:simpleType>
                                       </xs:element>
@@ -332,7 +331,7 @@ Evento de origem (S-1200, S-2299 e S-2399).</xs:documentation>
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -345,7 +344,7 @@ Evento de origem (S-1200, S-2299 e S-2399).</xs:documentation>
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>

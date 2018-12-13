@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtExpRisco/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtExpRisco/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtExpRisco/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtExpRisco/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -20,92 +20,77 @@
                   <xs:documentation>Informações de identificação do empregador</xs:documentation>
                 </xs:annotation>
               </xs:element>
-              <xs:element name="ideVinculo" type="TIdeVincEstagCoop">
+              <xs:element name="ideVinculo" type="TIdeVinculoEstag">
                 <xs:annotation>
-                  <xs:documentation>Informações de Identificação do Trabalhador e do Vínculo. Aplicar uma das seguintes regras, de acordo com a categoria do trabalhador.</xs:documentation>
+                  <xs:documentation>Informações de Identificação do Trabalhador e do Vínculo</xs:documentation>
                 </xs:annotation>
               </xs:element>
               <xs:element name="infoExpRisco">
                 <xs:annotation>
-                  <xs:documentation>Informações sobre o ambiente de trabalho, atividades desempenhadas e exposição a fatores de risco</xs:documentation>
+                  <xs:documentation>Ambiente de trabalho, atividades desempenhadas e exposição a fatores de risco</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element name="iniExpRisco" minOccurs="0">
+                    <xs:element name="dtIniCondicao">
+                      <xs:simpleType>
+                        <xs:annotation>
+                          <xs:documentation>Data de Início da Condição</xs:documentation>
+                        </xs:annotation>
+                        <xs:restriction base="xs:date">
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="infoAmb" maxOccurs="99">
                       <xs:annotation>
-                        <xs:documentation>Condições ambientais do trabalho - Início</xs:documentation>
+                        <xs:documentation>Informações relativas ao ambiente de trabalho</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="dtIniCondicao">
+                          <xs:element name="codAmb">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Data de Início da Condição</xs:documentation>
+                                <xs:documentation>Código do Ambiente de Trabalho</xs:documentation>
                               </xs:annotation>
-                              <xs:restriction base="xs:date">
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="1"/>
+                                <xs:maxLength value="30"/>
                               </xs:restriction>
                             </xs:simpleType>
-                          </xs:element>
-                          <xs:element name="infoAmb" type="TinfoAmb" maxOccurs="99">
-                            <xs:annotation>
-                              <xs:documentation>Informações relativas ao ambiente de trabalho</xs:documentation>
-                            </xs:annotation>
                           </xs:element>
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
-                    <xs:element name="altExpRisco" minOccurs="0">
+                    <xs:element name="infoAtiv">
                       <xs:annotation>
-                        <xs:documentation>Condições ambientais do trabalho - Alteração</xs:documentation>
+                        <xs:documentation>Descrição das atividades desempenhadas</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="dtAltCondicao">
+                          <xs:element name="dscAtivDes">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Data de Alteração da Condição</xs:documentation>
+                                <xs:documentation>Descrição das atividades, físicas ou mentais</xs:documentation>
                               </xs:annotation>
-                              <xs:restriction base="xs:date">
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="2"/>
+                                <xs:maxLength value="999"/>
+                                <xs:whiteSpace value="preserve"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-                          <xs:element name="infoAmb" type="TinfoAmb" maxOccurs="99">
+                          <xs:element name="ativPericInsal" maxOccurs="99">
                             <xs:annotation>
-                              <xs:documentation>Informações relativas ao ambiente de trabalho</xs:documentation>
-                            </xs:annotation>
-                          </xs:element>
-                        </xs:sequence>
-                      </xs:complexType>
-                    </xs:element>
-                    <xs:element name="fimExpRisco" minOccurs="0">
-                      <xs:annotation>
-                        <xs:documentation>Condições ambientais do trabalho - Fim</xs:documentation>
-                      </xs:annotation>
-                      <xs:complexType>
-                        <xs:sequence>
-                          <xs:element name="dtFimCondicao">
-                            <xs:simpleType>
-                              <xs:annotation>
-                                <xs:documentation>Data Término da Condição Diferenciada</xs:documentation>
-                              </xs:annotation>
-                              <xs:restriction base="xs:date">
-                              </xs:restriction>
-                            </xs:simpleType>
-                          </xs:element>
-                          <xs:element name="infoAmb" maxOccurs="99">
-                            <xs:annotation>
-                              <xs:documentation>Informações relativas ao ambiente de trabalho</xs:documentation>
+                              <xs:documentation>Informação da(s) atividade(s) perigosa(s), insalubre(s) ou especial(is) desempenhada(s)</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
-                                <xs:element name="codAmb">
+                                <xs:element name="codAtiv">
                                   <xs:simpleType>
                                     <xs:annotation>
-                                      <xs:documentation>Código do Ambiente de Trabalho</xs:documentation>
+                                      <xs:documentation>Codigo da atividade conforme tabela 28</xs:documentation>
                                     </xs:annotation>
                                     <xs:restriction base="xs:string">
-                                      <xs:minLength value="1"/>
-                                      <xs:maxLength value="30"/>
+                                      <xs:pattern value="\w{6}"/>
                                     </xs:restriction>
                                   </xs:simpleType>
                                 </xs:element>
@@ -115,27 +100,265 @@
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
-                    <xs:element name="respReg" maxOccurs="9">
+                    <xs:element name="fatRisco" maxOccurs="999">
                       <xs:annotation>
-                        <xs:documentation>Informações relativas ao responsável pelos registros ambientais</xs:documentation>
+                        <xs:documentation>Fator(es) de risco ao(s) qual(is) o trabalhador está exposto</xs:documentation>
                       </xs:annotation>
                       <xs:complexType>
                         <xs:sequence>
-                          <xs:element name="dtIni">
+                          <xs:element name="codFatRis">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Data de Início</xs:documentation>
+                                <xs:documentation>Código do fator de risco</xs:documentation>
                               </xs:annotation>
-                              <xs:restriction base="xs:date">
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="9"/>
+                                <xs:maxLength value="9"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-                          <xs:element name="dtFim" minOccurs="0">
+                          <xs:element name="tpAval">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Data Fim</xs:documentation>
+                                <xs:documentation>Tipo de avaliação de fator de risco</xs:documentation>
                               </xs:annotation>
-                              <xs:restriction base="xs:date">
+                              <xs:restriction base="xs:byte">
+                                <xs:pattern value="\d"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="intConc" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Intensidade/Concentração</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:decimal">
+                                <xs:totalDigits value="6"/>
+                                <xs:fractionDigits value="4"/>
+                                <xs:maxInclusive value="999999.9999"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="limTol" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Limite de tolerância</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:decimal">
+                                <xs:totalDigits value="6"/>
+                                <xs:fractionDigits value="4"/>
+                                <xs:maxInclusive value="999999.9999"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="unMed" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Dose ou unidade de medida do agente</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:byte">
+                                <xs:pattern value="\d{1,2}"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="tecMedicao" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Técnica utilizada para medição</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="2"/>
+                                <xs:maxLength value="40"/>
+                                <xs:whiteSpace value="preserve"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="insalubridade" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Configura do trabalho insalubre?</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="[N|S]"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="periculosidade" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Configura trabalho perigoso?</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="[N|S]"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="aposentEsp" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>A exposição a fatores de risco enseja aposentadoria especial?</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="[N|S]"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="epcEpi">
+                            <xs:annotation>
+                              <xs:documentation>EPC e EPI</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="utilizEPC">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation>Utilização de EPC</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:byte">
+                                      <xs:pattern value="\d"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="eficEpc" minOccurs="0">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation>Eficácia do EPC</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:string">
+                                      <xs:pattern value="[N|S]"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="utilizEPI">
+                                  <xs:simpleType>
+                                    <xs:annotation>
+                                      <xs:documentation>Utiliza EPI</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:restriction base="xs:byte">
+                                      <xs:pattern value="\d"/>
+                                    </xs:restriction>
+                                  </xs:simpleType>
+                                </xs:element>
+                                <xs:element name="epi" minOccurs="0" maxOccurs="50">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="caEPI" minOccurs="0">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Certificado de Aprovação do EPI</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="2"/>
+                                            <xs:maxLength value="20"/>
+                                            <xs:whiteSpace value="preserve"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="dscEPI" minOccurs="0">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Descrição do EPI</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:minLength value="2"/>
+                                            <xs:maxLength value="999"/>
+                                            <xs:whiteSpace value="preserve"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="eficEpi">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>O EPI é eficaz?</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:pattern value="[N|S]"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="medProtecao">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Medidas de proteção coletiva?</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:pattern value="[N|S]"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="condFuncto">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Condições de funcionamento do EPI</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:pattern value="[N|S]"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="usoInint">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Foi observado o uso ininterrupto do EPI?</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:pattern value="[N|S]"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="przValid">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Foi observado o prazo de validade, conf. CA do MTE?</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:pattern value="[N|S]"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="periodicTroca">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Periodicidade de troca</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:pattern value="[N|S]"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                      <xs:element name="higienizacao">
+                                        <xs:simpleType>
+                                          <xs:annotation>
+                                            <xs:documentation>Foi observada a higienização?</xs:documentation>
+                                          </xs:annotation>
+                                          <xs:restriction base="xs:string">
+                                            <xs:pattern value="[N|S]"/>
+                                          </xs:restriction>
+                                        </xs:simpleType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="respReg" maxOccurs="9">
+                      <xs:annotation>
+                        <xs:documentation>Responsável pelos registros ambientais</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="cpfResp">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Número de Inscrição no CPF</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:length value="11"/>
+                                <xs:pattern value="\d{11}"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -149,19 +372,53 @@
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-                          <xs:element name="nrOc">
+                          <xs:element name="nmResp">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Responsável pelas informações</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="2"/>
+                                <xs:maxLength value="70"/>
+                                <xs:whiteSpace value="preserve"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="ideOC">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Órgão de classe</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:byte">
+                                <xs:pattern value="\d"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="dscOC" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Descrição (sigla) do órgão de classe</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="2"/>
+                                <xs:maxLength value="20"/>
+                                <xs:whiteSpace value="preserve"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="nrOC">
                             <xs:simpleType>
                               <xs:annotation>
                                 <xs:documentation>Inscr no órgão de classe</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:whiteSpace value="preserve"/>
-                                <xs:minLength value="3"/>
+                                <xs:minLength value="2"/>
                                 <xs:maxLength value="14"/>
+                                <xs:whiteSpace value="preserve"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-                          <xs:element name="ufOC" minOccurs="0">
+                          <xs:element name="ufOC">
                             <xs:simpleType>
                               <xs:annotation>
                                 <xs:documentation>Sigla da UF do órgão de classe</xs:documentation>
@@ -200,6 +457,39 @@
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
+                    <xs:element name="obs" minOccurs="0">
+                      <xs:annotation>
+                        <xs:documentation>Observações relativas a registros ambientais</xs:documentation>
+                      </xs:annotation>
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="metErg" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Metodologia utilizada para o levantamento dos riscos ergonômicos</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="2"/>
+                                <xs:maxLength value="999"/>
+                                <xs:whiteSpace value="preserve"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="obsCompl" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Observações</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:minLength value="2"/>
+                                <xs:maxLength value="999"/>
+                                <xs:whiteSpace value="preserve"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
@@ -229,7 +519,7 @@
       <xs:element name="nrRecibo" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Recibo arquivo a ser retificado</xs:documentation>
+            <xs:documentation>Número do recibo do arquivo a ser retificado</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -260,7 +550,7 @@
       <xs:element name="verProc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Versão do processo de emissão do evento. </xs:documentation>
+            <xs:documentation>Versão do processo de emissão do evento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -275,7 +565,7 @@
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -288,15 +578,15 @@
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="TIdeVincEstagCoop">
+  <xs:complexType name="TIdeVinculoEstag">
     <xs:annotation>
-      <xs:documentation>Informações do vínculo - empregados, estagiários e cooperados</xs:documentation>
+      <xs:documentation>Informacoes do Vínculo trabalhista e estagiário</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="cpfTrab">
@@ -331,232 +621,15 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="TinfoAmb">
-    <xs:annotation>
-      <xs:documentation>Detalha o(s) Ambiente(s) de Trabalho em que o trabalhador desempenha atividades.</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element name="codAmb">
+      <xs:element name="codCateg" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Código do Ambiente de Trabalho</xs:documentation>
+            <xs:documentation>Código da Categoria</xs:documentation>
           </xs:annotation>
-          <xs:restriction base="xs:string">
-            <xs:minLength value="1"/>
-            <xs:maxLength value="30"/>
+          <xs:restriction base="xs:integer">
+            <xs:pattern value="\d{3}"/>
           </xs:restriction>
         </xs:simpleType>
-      </xs:element>
-      <xs:element name="infoAtiv">
-        <xs:annotation>
-          <xs:documentation>Descrição das Atividades Desempenhadas</xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="dscAtivDes">
-              <xs:simpleType>
-                <xs:annotation>
-                  <xs:documentation>Descrição das atividades, físicas ou mentais</xs:documentation>
-                </xs:annotation>
-                <xs:restriction base="xs:string">
-                  <xs:whiteSpace value="preserve"/>
-                  <xs:minLength value="3"/>
-                  <xs:maxLength value="999"/>
-                </xs:restriction>
-              </xs:simpleType>
-            </xs:element>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="fatRisco" maxOccurs="999">
-        <xs:annotation>
-          <xs:documentation>Fator de risco ao qual o trabalhador está exposto na atividade exercida no ambiente</xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="codFatRis">
-              <xs:simpleType>
-                <xs:annotation>
-                  <xs:documentation>Código do fator de risco</xs:documentation>
-                </xs:annotation>
-                <xs:restriction base="xs:string">
-                  <xs:minLength value="4"/>
-                  <xs:maxLength value="10"/>
-                </xs:restriction>
-              </xs:simpleType>
-            </xs:element>
-            <xs:element name="intConc" minOccurs="0">
-              <xs:simpleType>
-                <xs:annotation>
-                  <xs:documentation>Intensidade/Concentração</xs:documentation>
-                </xs:annotation>
-                <xs:restriction base="xs:string">
-                  <xs:maxLength value="15"/>
-                </xs:restriction>
-              </xs:simpleType>
-            </xs:element>
-            <xs:element name="tecMedicao" minOccurs="0">
-              <xs:simpleType>
-                <xs:annotation>
-                  <xs:documentation>Técnica utilizada para medição</xs:documentation>
-                </xs:annotation>
-                <xs:restriction base="xs:string">
-                  <xs:whiteSpace value="preserve"/>
-                  <xs:minLength value="2"/>
-                  <xs:maxLength value="40"/>
-                </xs:restriction>
-              </xs:simpleType>
-            </xs:element>
-            <xs:element name="epcEpi">
-              <xs:annotation>
-                <xs:documentation>Informações relativas a Equipamentos de Proteção Coletiva - EPC e Equipamentos de Proteção Individual - EPI</xs:documentation>
-              </xs:annotation>
-              <xs:complexType>
-                <xs:sequence>
-                  <xs:element name="utilizEPC">
-                    <xs:simpleType>
-                      <xs:annotation>
-                        <xs:documentation>Utilização de EPC</xs:documentation>
-                      </xs:annotation>
-                      <xs:restriction base="xs:byte">
-                        <xs:pattern value="\d"/>
-                      </xs:restriction>
-                    </xs:simpleType>
-                  </xs:element>
-                  <xs:element name="utilizEPI">
-                    <xs:simpleType>
-                      <xs:annotation>
-                        <xs:documentation>Utiliza EPI</xs:documentation>
-                      </xs:annotation>
-                      <xs:restriction base="xs:byte">
-                        <xs:pattern value="\d"/>
-                      </xs:restriction>
-                    </xs:simpleType>
-                  </xs:element>
-                  <xs:element name="epc" minOccurs="0" maxOccurs="50">
-                    <xs:annotation>
-                      <xs:documentation>Equipamentos de Proteção Coletiva - EPC</xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                      <xs:sequence>
-                        <xs:element name="dscEpc">
-                          <xs:simpleType>
-                            <xs:annotation>
-                              <xs:documentation>Descrição do EPC</xs:documentation>
-                            </xs:annotation>
-                            <xs:restriction base="xs:string">
-                              <xs:whiteSpace value="preserve"/>
-                              <xs:minLength value="3"/>
-                              <xs:maxLength value="70"/>
-                            </xs:restriction>
-                          </xs:simpleType>
-                        </xs:element>
-                        <xs:element name="eficEpc" minOccurs="0">
-                          <xs:simpleType>
-                            <xs:annotation>
-                              <xs:documentation>Eficácia do EPC</xs:documentation>
-                            </xs:annotation>
-                            <xs:restriction base="xs:string">
-                              <xs:pattern value="[N|S]"/>
-                            </xs:restriction>
-                          </xs:simpleType>
-                        </xs:element>
-                      </xs:sequence>
-                    </xs:complexType>
-                  </xs:element>
-                  <xs:element name="epi" minOccurs="0" maxOccurs="50">
-                    <xs:annotation>
-                      <xs:documentation>Equipamentos de Proteção Individual - EPI</xs:documentation>
-                    </xs:annotation>
-                    <xs:complexType>
-                      <xs:sequence>
-                        <xs:element name="caEPI" minOccurs="0">
-                          <xs:simpleType>
-                            <xs:annotation>
-                              <xs:documentation>Certificado de Aprovação do EPI</xs:documentation>
-                            </xs:annotation>
-                            <xs:restriction base="xs:string">
-                              <xs:whiteSpace value="preserve"/>
-                              <xs:maxLength value="20"/>
-                            </xs:restriction>
-                          </xs:simpleType>
-                        </xs:element>
-                        <xs:element name="eficEpi">
-                          <xs:simpleType>
-                            <xs:annotation>
-                              <xs:documentation>O EPI é eficaz?
-                              </xs:documentation>
-                            </xs:annotation>
-                            <xs:restriction base="xs:string">
-                              <xs:pattern value="[N|S]"/>
-                            </xs:restriction>
-                          </xs:simpleType>
-                        </xs:element>
-                        <xs:element name="medProtecao">
-                          <xs:simpleType>
-                            <xs:annotation>
-                              <xs:documentation>Medidas de proteção coletiva?</xs:documentation>
-                            </xs:annotation>
-                            <xs:restriction base="xs:string">
-                              <xs:length value="1"/>
-                              <xs:pattern value="[N|S]"/>
-                            </xs:restriction>
-                          </xs:simpleType>
-                        </xs:element>
-                        <xs:element name="condFuncto">
-                          <xs:simpleType>
-                            <xs:annotation>
-                              <xs:documentation>Condições de funcionamento do EPI</xs:documentation>
-                            </xs:annotation>
-                            <xs:restriction base="xs:string">
-                              <xs:length value="1"/>
-                              <xs:pattern value="[N|S]"/>
-                            </xs:restriction>
-                          </xs:simpleType>
-                        </xs:element>
-                        <xs:element name="przValid">
-                          <xs:simpleType>
-                            <xs:annotation>
-                              <xs:documentation>Foi observado o prazo de validade, conforme Certificado de Aprovação - CA do MTE?</xs:documentation>
-                            </xs:annotation>
-                            <xs:restriction base="xs:string">
-                              <xs:length value="1"/>
-                              <xs:pattern value="[N|S]"/>
-                            </xs:restriction>
-                          </xs:simpleType>
-                        </xs:element>
-                        <xs:element name="periodicTroca">
-                          <xs:simpleType>
-                            <xs:annotation>
-                              <xs:documentation>Periodicidade de troca</xs:documentation>
-                            </xs:annotation>
-                            <xs:restriction base="xs:string">
-                              <xs:length value="1"/>
-                              <xs:pattern value="[N|S]"/>
-                            </xs:restriction>
-                          </xs:simpleType>
-                        </xs:element>
-                        <xs:element name="higienizacao">
-                          <xs:simpleType>
-                            <xs:annotation>
-                              <xs:documentation>Foi observada a higienização?</xs:documentation>
-                            </xs:annotation>
-                            <xs:restriction base="xs:string">
-                              <xs:length value="1"/>
-                              <xs:pattern value="[N|S]"/>
-                            </xs:restriction>
-                          </xs:simpleType>
-                        </xs:element>
-                      </xs:sequence>
-                    </xs:complexType>
-                  </xs:element>
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
-          </xs:sequence>
-        </xs:complexType>
       </xs:element>
     </xs:sequence>
   </xs:complexType>

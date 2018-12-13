@@ -1,22 +1,28 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtTabRubrica/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtTabRubrica/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtTabRubrica/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtTabRubrica/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="evtTabRubrica">
           <xs:annotation>
-            <xs:documentation>Evento destinado a incluir, alterar ou excluir informações da tabela de rubricas</xs:documentation>
+            <xs:documentation>Evento Tabela de Rubricas</xs:documentation>
           </xs:annotation>
           <xs:complexType>
             <xs:sequence>
               <xs:element name="ideEvento" type="TIdeCadastro">
+                <xs:annotation>
+                  <xs:documentation>Informações de Identificação do Evento</xs:documentation>
+                </xs:annotation>
               </xs:element>
               <xs:element name="ideEmpregador" type="TEmpregador">
+                <xs:annotation>
+                  <xs:documentation>Informações de identificação do empregador</xs:documentation>
+                </xs:annotation>
               </xs:element>
               <xs:element name="infoRubrica">
                 <xs:annotation>
-                  <xs:documentation>Identificação da operação (inclusão, alteração ou exclusão) e das informações da rubrica.</xs:documentation>
+                  <xs:documentation>Informações da Rubrica</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
@@ -29,12 +35,12 @@
                           <xs:sequence>
                             <xs:element name="ideRubrica" type="TIdeRubrica">
                               <xs:annotation>
-                                <xs:documentation>Informações de identificação da rubrica e validade das informações que estão sendo incluídas</xs:documentation>
+                                <xs:documentation>Informações de identificação da rubrica e validade das informações</xs:documentation>
                               </xs:annotation>
                             </xs:element>
                             <xs:element name="dadosRubrica" type="TDadosRubrica">
                               <xs:annotation>
-                                <xs:documentation>Detalhamento das informações da rubrica que está sendo incluída</xs:documentation>
+                                <xs:documentation>Informações da rubrica</xs:documentation>
                               </xs:annotation>
                             </xs:element>
                           </xs:sequence>
@@ -42,13 +48,13 @@
                       </xs:element>
                       <xs:element name="alteracao">
                         <xs:annotation>
-                          <xs:documentation>Alteração de informações já existentes</xs:documentation>
+                          <xs:documentation>Alteração das informações</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
                           <xs:sequence>
                             <xs:element name="ideRubrica" type="TIdeRubrica">
                               <xs:annotation>
-                                <xs:documentation>Grupo de informações de identificação da rubrica, apresentando código e período de validade da rubrica cujas informações serão alteradas pelos dados constantes neste evento.</xs:documentation>
+                                <xs:documentation>Informações de identificação da rubrica</xs:documentation>
                               </xs:annotation>
                             </xs:element>
                             <xs:element name="dadosRubrica" type="TDadosRubrica">
@@ -58,7 +64,7 @@
                             </xs:element>
                             <xs:element name="novaValidade" type="TPeriodoValidade" minOccurs="0">
                               <xs:annotation>
-                                <xs:documentation>Informação preenchida exclusivamente em caso de alteração do período de validade das informações da rubrica identificada em {ideRubrica}, apresentando o novo período de validade.</xs:documentation>
+                                <xs:documentation>Novo período de validade das informações</xs:documentation>
                               </xs:annotation>
                             </xs:element>
                           </xs:sequence>
@@ -66,13 +72,13 @@
                       </xs:element>
                       <xs:element name="exclusao">
                         <xs:annotation>
-                          <xs:documentation>Exclusão de informações</xs:documentation>
+                          <xs:documentation>Exclusão das informações</xs:documentation>
                         </xs:annotation>
                         <xs:complexType>
                           <xs:sequence>
                             <xs:element name="ideRubrica" type="TIdeRubrica">
                               <xs:annotation>
-                                <xs:documentation>Grupo de informações que identifica a rubrica que será excluída.</xs:documentation>
+                                <xs:documentation>Identificação da rubrica que será excluída</xs:documentation>
                               </xs:annotation>
                             </xs:element>
                           </xs:sequence>
@@ -118,7 +124,7 @@
       <xs:element name="verProc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Versão do processo de emissão do evento. </xs:documentation>
+            <xs:documentation>Versão do processo de emissão do evento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -133,7 +139,7 @@
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -146,7 +152,7 @@
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -154,7 +160,7 @@
   </xs:complexType>
   <xs:complexType name="TIdeRubrica">
     <xs:annotation>
-      <xs:documentation>Informações de identificação da rubrica (código) e período de validade</xs:documentation>
+      <xs:documentation>Identificação da Rubrica e período de validade</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="codRubr">
@@ -203,17 +209,18 @@
   </xs:complexType>
   <xs:complexType name="TDadosRubrica">
     <xs:annotation>
-      <xs:documentation>Detalhamento da rubrica</xs:documentation>
+      <xs:documentation>Informações da Rubrica</xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element name="dscRubr">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Descrição da rubrica no sistema de folha</xs:documentation>
+            <xs:documentation>Descrição (nome) da rubrica no sistema de folha de pagamento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
             <xs:maxLength value="100"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -287,15 +294,15 @@
             <xs:documentation>Observação</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:whiteSpace value="preserve"/>
-            <xs:minLength value="3"/>
+            <xs:minLength value="2"/>
             <xs:maxLength value="255"/>
+            <xs:whiteSpace value="preserve"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
       <xs:element name="ideProcessoCP" minOccurs="0" maxOccurs="99">
         <xs:annotation>
-          <xs:documentation>Caso a empresa possua processo administrativo ou judicial com decisão/sentença favorável, determinando a não incidência de contribuição previdenciária relativa a rubrica identificada no evento, as informações deverão ser incluídas neste registro, e o detalhamento do processo deverá ser efetuado através de evento específico na tabela de processos.</xs:documentation>
+          <xs:documentation>Identificação de Processo - Incidência de Contrib. Previdenciária</xs:documentation>
         </xs:annotation>
         <xs:complexType>
           <xs:sequence>
@@ -315,8 +322,9 @@
                   <xs:documentation>Número do Processo</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="3"/>
+                  <xs:minLength value="2"/>
                   <xs:maxLength value="21"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -345,7 +353,7 @@
       </xs:element>
       <xs:element name="ideProcessoIRRF" minOccurs="0" maxOccurs="99">
         <xs:annotation>
-          <xs:documentation>Caso a empresa possua processo judicial com decisão/sentença favorável, determinando a não incidência de imposto de renda relativo a rubrica identificada no evento, as informações deverão ser incluídas neste registro, e o detalhamento do processo deverá ser efetuado através de evento específico na tabela de processos.</xs:documentation>
+          <xs:documentation>Identificação de Processo - Incidência de IRRF</xs:documentation>
         </xs:annotation>
         <xs:complexType>
           <xs:sequence>
@@ -355,8 +363,9 @@
                   <xs:documentation>Número do Processo</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="3"/>
+                  <xs:minLength value="2"/>
                   <xs:maxLength value="21"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -375,7 +384,7 @@
       </xs:element>
       <xs:element name="ideProcessoFGTS" minOccurs="0" maxOccurs="99">
         <xs:annotation>
-          <xs:documentation>Caso a empresa possua processo judicial com decisão/sentença favorável, determinando a não incidência de FGTS relativo a rubrica identificada no evento, as informações deverão ser incluídas neste registro, e o detalhamento do processo deverá ser efetuado através de evento específico na tabela de processos.</xs:documentation>
+          <xs:documentation>Identificação de Processo - Incidência de FGTS</xs:documentation>
         </xs:annotation>
         <xs:complexType>
           <xs:sequence>
@@ -385,8 +394,9 @@
                   <xs:documentation>Número do Processo</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="3"/>
+                  <xs:minLength value="2"/>
                   <xs:maxLength value="21"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -395,7 +405,7 @@
       </xs:element>
       <xs:element name="ideProcessoSIND" minOccurs="0" maxOccurs="99">
         <xs:annotation>
-          <xs:documentation>Caso a empresa possua processo judicial com decisão/sentença favorável, determinando a não incidência de contribuição sindical relativa a rubrica identificada no evento, as informações deverão ser incluídas neste registro, e o detalhamento do processo deverá ser efetuado através de evento específico na tabela de processos.</xs:documentation>
+          <xs:documentation>Identificação de Processo - Incidência de Contrib. Sindical</xs:documentation>
         </xs:annotation>
         <xs:complexType>
           <xs:sequence>
@@ -405,8 +415,9 @@
                   <xs:documentation>Número do Processo</xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
-                  <xs:minLength value="3"/>
+                  <xs:minLength value="2"/>
                   <xs:maxLength value="21"/>
+                  <xs:whiteSpace value="preserve"/>
                 </xs:restriction>
               </xs:simpleType>
             </xs:element>
@@ -416,6 +427,9 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="TPeriodoValidade">
+    <xs:annotation>
+      <xs:documentation>Período de validade das informações</xs:documentation>
+    </xs:annotation>
     <xs:sequence>
       <xs:element name="iniValid">
         <xs:simpleType>

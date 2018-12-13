@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtAqProd/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtAqProd/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtAqProd/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtAqProd/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
@@ -35,7 +35,7 @@
                           <xs:element name="tpInscAdq">
                             <xs:simpleType>
                               <xs:annotation>
-                                <xs:documentation>Tipo de inscrição do adquirente, conforme tabela 5.</xs:documentation>
+                                <xs:documentation>Tipo de inscrição do adquirente, conforme tabela 05</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:byte">
                                 <xs:pattern value="\d"/>
@@ -48,260 +48,79 @@
                                 <xs:documentation>Indicar o número de inscrição</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:pattern value="\d{11,15}"/>
+                                <xs:pattern value="\d{14}"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
-                          <xs:element name="tpAquis" maxOccurs="3">
+                          <xs:element name="tpAquis" maxOccurs="6">
                             <xs:annotation>
-                              <xs:documentation>Registro preenchido por Pessoa Jurídica em geral, quando o estabelecimento identificado no registro superior efetuar aquisição de produtos rurais de pessoa física.  O registro também deve ser preenchido nas seguintes situações:
-- Por PF, quando a mesma adquire produção de produtor rural pessoa física ou segurado especial para venda no varejo a consumidor final pessoa física;
-- Por Entidade inscrita no Programa de Aquisição de Alimentos (PAA), quando a mesma efetuar a aquisição de produtos rurais no âmbito do PAA, de produtor rural pessoa física ou pessoa jurídica.</xs:documentation>
+                              <xs:documentation>Aquisição de produção</xs:documentation>
                             </xs:annotation>
                             <xs:complexType>
                               <xs:sequence>
-                                <xs:element name="indAquis">
-                                  <xs:simpleType>
-                                    <xs:annotation>
-                                      <xs:documentation>Indicativo da Aquisição</xs:documentation>
-                                    </xs:annotation>
-                                    <xs:restriction base="xs:byte">
-                                      <xs:pattern value="\d"/>
-                                    </xs:restriction>
-                                  </xs:simpleType>
-                                </xs:element>
-                                <xs:element name="vlrTotAquis">
-                                  <xs:simpleType>
-                                    <xs:annotation>
-                                      <xs:documentation>Valor total da aquisição</xs:documentation>
-                                    </xs:annotation>
-                                    <xs:restriction base="xs:decimal">
-                                      <xs:totalDigits value="14"/>
-                                      <xs:fractionDigits value="2"/>
-                                    </xs:restriction>
-                                  </xs:simpleType>
-                                </xs:element>
                                 <xs:element name="ideProdutor" maxOccurs="9999">
                                   <xs:annotation>
-                                    <xs:documentation>Registro que identifica os produtores rurais dos quais foi efetuada aquisição da produção pelo contribuinte declarante.</xs:documentation>
+                                    <xs:documentation>Identificação dos produtores rurais</xs:documentation>
                                   </xs:annotation>
                                   <xs:complexType>
                                     <xs:sequence>
-                                      <xs:element name="tpInscProd">
-                                        <xs:simpleType>
-                                          <xs:annotation>
-                                            <xs:documentation>Informar [1] (CNPJ) ou [2] (CPF).</xs:documentation>
-                                          </xs:annotation>
-                                          <xs:restriction base="xs:byte">
-                                            <xs:pattern value="\d"/>
-                                          </xs:restriction>
-                                        </xs:simpleType>
-                                      </xs:element>
-                                      <xs:element name="nrInscProd">
-                                        <xs:simpleType>
-                                          <xs:annotation>
-                                            <xs:documentation>Inscrição do produtor</xs:documentation>
-                                          </xs:annotation>
-                                          <xs:restriction base="xs:string">
-                                            <xs:pattern value="\d{11,15}"/>
-                                          </xs:restriction>
-                                        </xs:simpleType>
-                                      </xs:element>
-                                      <xs:element name="vlrBruto">
-                                        <xs:simpleType>
-                                          <xs:annotation>
-                                            <xs:documentation>Valor bruto</xs:documentation>
-                                          </xs:annotation>
-                                          <xs:restriction base="xs:decimal">
-                                            <xs:totalDigits value="14"/>
-                                            <xs:fractionDigits value="2"/>
-                                          </xs:restriction>
-                                        </xs:simpleType>
-                                      </xs:element>
-                                      <xs:element name="vrCPDescPR">
-                                        <xs:simpleType>
-                                          <xs:annotation>
-                                            <xs:documentation>Valor da Contribuição Previdenciária descontada pelo adquirente</xs:documentation>
-                                          </xs:annotation>
-                                          <xs:restriction base="xs:decimal">
-                                            <xs:totalDigits value="14"/>
-                                            <xs:fractionDigits value="2"/>
-                                          </xs:restriction>
-                                        </xs:simpleType>
-                                      </xs:element>
-                                      <xs:element name="vrRatDescPR">
-                                        <xs:simpleType>
-                                          <xs:annotation>
-                                            <xs:documentation>Valor da GILRAT incidente sobre a aquisição de produção rural de produtor rural pessoa física.</xs:documentation>
-                                          </xs:annotation>
-                                          <xs:restriction base="xs:decimal">
-                                            <xs:totalDigits value="14"/>
-                                            <xs:fractionDigits value="2"/>
-                                          </xs:restriction>
-                                        </xs:simpleType>
-                                      </xs:element>
-                                      <xs:element name="vrSenarDesc">
-                                        <xs:simpleType>
-                                          <xs:annotation>
-                                            <xs:documentation>Valor da contribuição destinada ao SENAR</xs:documentation>
-                                          </xs:annotation>
-                                          <xs:restriction base="xs:decimal">
-                                            <xs:totalDigits value="14"/>
-                                            <xs:fractionDigits value="2"/>
-                                          </xs:restriction>
-                                        </xs:simpleType>
-                                      </xs:element>
                                       <xs:element name="nfs" minOccurs="0" maxOccurs="9999">
                                         <xs:annotation>
-                                          <xs:documentation>Detalhamento das notas fiscais relativas a aquisição de produção do produtor rural identificado no registro superior, não sendo obrigatório nas aquisições de produção de pessoa física/segurado especial.</xs:documentation>
+                                          <xs:documentation>Notas Fiscais da aquisição de produção</xs:documentation>
                                         </xs:annotation>
                                         <xs:complexType>
                                           <xs:sequence>
-                                            <xs:element name="serie" minOccurs="0">
-                                              <xs:simpleType>
-                                                <xs:annotation>
-                                                  <xs:documentation>Série da Nota Fiscal/Fatura</xs:documentation>
-                                                </xs:annotation>
-                                                <xs:restriction base="xs:string">
-                                                  <xs:minLength value="1"/>
-                                                  <xs:maxLength value="5"/>
-                                                </xs:restriction>
-                                              </xs:simpleType>
-                                            </xs:element>
-                                            <xs:element name="nrDocto">
-                                              <xs:simpleType>
-                                                <xs:annotation>
-                                                  <xs:documentation>Número da NF/Fatura</xs:documentation>
-                                                </xs:annotation>
-                                                <xs:restriction base="xs:string">
-                                                  <xs:minLength value="1"/>
-                                                  <xs:maxLength value="20"/>
-                                                </xs:restriction>
-                                              </xs:simpleType>
-                                            </xs:element>
-                                            <xs:element name="dtEmisNF">
-                                              <xs:simpleType>
-                                                <xs:annotation>
-                                                  <xs:documentation>Data de Emissão da Nota Fiscal/Fatura</xs:documentation>
-                                                </xs:annotation>
-                                                <xs:restriction base="xs:date">
-                                                </xs:restriction>
-                                              </xs:simpleType>
-                                            </xs:element>
-                                            <xs:element name="vlrBruto">
-                                              <xs:simpleType>
-                                                <xs:annotation>
-                                                  <xs:documentation>Valor bruto</xs:documentation>
-                                                </xs:annotation>
-                                                <xs:restriction base="xs:decimal">
-                                                  <xs:totalDigits value="14"/>
-                                                  <xs:fractionDigits value="2"/>
-                                                </xs:restriction>
-                                              </xs:simpleType>
-                                            </xs:element>
-                                            <xs:element name="vrCPDescPR">
-                                              <xs:simpleType>
-                                                <xs:annotation>
-                                                  <xs:documentation>Valor da Contribuição Previdenciária descontada pelo adquirente</xs:documentation>
-                                                </xs:annotation>
-                                                <xs:restriction base="xs:decimal">
-                                                  <xs:totalDigits value="14"/>
-                                                  <xs:fractionDigits value="2"/>
-                                                </xs:restriction>
-                                              </xs:simpleType>
-                                            </xs:element>
-                                            <xs:element name="vrRatDescPR">
-                                              <xs:simpleType>
-                                                <xs:annotation>
-                                                  <xs:documentation>Valor da GILRAT incidente sobre a aquisição de produção rural de produtor rural pessoa física.</xs:documentation>
-                                                </xs:annotation>
-                                                <xs:restriction base="xs:decimal">
-                                                  <xs:totalDigits value="14"/>
-                                                  <xs:fractionDigits value="2"/>
-                                                </xs:restriction>
-                                              </xs:simpleType>
-                                            </xs:element>
-                                            <xs:element name="vrSenarDesc">
-                                              <xs:simpleType>
-                                                <xs:annotation>
-                                                  <xs:documentation>Valor da contribuição destinada ao SENAR</xs:documentation>
-                                                </xs:annotation>
-                                                <xs:restriction base="xs:decimal">
-                                                  <xs:totalDigits value="14"/>
-                                                  <xs:fractionDigits value="2"/>
-                                                </xs:restriction>
-                                              </xs:simpleType>
-                                            </xs:element>
                                           </xs:sequence>
+                                          <xs:attribute name="serie" type="xs:string"/>
+                                          <xs:attribute name="nrDocto" type="xs:string" use="required"/>
+                                          <xs:attribute name="dtEmisNF" type="xs:date" use="required"/>
+                                          <xs:attribute name="vlrBruto" type="xs:decimal" use="required"/>
+                                          <xs:attribute name="vrCPDescPR" type="xs:decimal" use="required"/>
+                                          <xs:attribute name="vrRatDescPR" type="xs:decimal" use="required"/>
+                                          <xs:attribute name="vrSenarDesc" type="xs:decimal" use="required"/>
                                         </xs:complexType>
                                       </xs:element>
                                       <xs:element name="infoProcJud" minOccurs="0" maxOccurs="10">
                                         <xs:annotation>
-                                          <xs:documentation>Registro preenchido quando o Produtor Rural (pessoa física ou segurado especial), identificado em {ideProdutor}, ou o próprio declarante, possuir processo judicial com decisão/sentença determinando a não retenção, pelo adquirente, das contribuições incidentes sobre a aquisição de produção.</xs:documentation>
+                                          <xs:documentation>Informação de Processo Judicial do produtor</xs:documentation>
                                         </xs:annotation>
                                         <xs:complexType>
                                           <xs:sequence>
-                                            <xs:element name="nrProcJud">
-                                              <xs:simpleType>
-                                                <xs:annotation>
-                                                  <xs:documentation>Nr Processo Judicial</xs:documentation>
-                                                </xs:annotation>
-                                                <xs:restriction base="xs:string">
-                                                  <xs:minLength value="3"/>
-                                                  <xs:maxLength value="21"/>
-                                                </xs:restriction>
-                                              </xs:simpleType>
-                                            </xs:element>
-                                            <xs:element name="codSusp">
-                                              <xs:simpleType>
-                                                <xs:annotation>
-                                                  <xs:documentation>Código do Indicativo da Suspensão</xs:documentation>
-                                                </xs:annotation>
-                                                <xs:restriction base="xs:integer">
-                                                  <xs:pattern value="\d{1,14}"/>
-                                                </xs:restriction>
-                                              </xs:simpleType>
-                                            </xs:element>
-                                            <xs:element name="vrCPNRet">
-                                              <xs:simpleType>
-                                                <xs:annotation>
-                                                  <xs:documentation>Valor da Contribuição Previdenciária que deixou de ser retida pelo declarante em decorrência de decisão/sentença judicial. </xs:documentation>
-                                                </xs:annotation>
-                                                <xs:restriction base="xs:decimal">
-                                                  <xs:totalDigits value="14"/>
-                                                  <xs:fractionDigits value="2"/>
-                                                </xs:restriction>
-                                              </xs:simpleType>
-                                            </xs:element>
-                                            <xs:element name="vrRatNRet">
-                                              <xs:simpleType>
-                                                <xs:annotation>
-                                                  <xs:documentation>Vr RAT não retido</xs:documentation>
-                                                </xs:annotation>
-                                                <xs:restriction base="xs:decimal">
-                                                  <xs:totalDigits value="14"/>
-                                                  <xs:fractionDigits value="2"/>
-                                                </xs:restriction>
-                                              </xs:simpleType>
-                                            </xs:element>
-                                            <xs:element name="vrSenarNRet">
-                                              <xs:simpleType>
-                                                <xs:annotation>
-                                                  <xs:documentation>Vr Senar não retido</xs:documentation>
-                                                </xs:annotation>
-                                                <xs:restriction base="xs:decimal">
-                                                  <xs:totalDigits value="14"/>
-                                                  <xs:fractionDigits value="2"/>
-                                                </xs:restriction>
-                                              </xs:simpleType>
-                                            </xs:element>
                                           </xs:sequence>
+                                          <xs:attribute name="nrProcJud" type="xs:string" use="required"/>
+                                          <xs:attribute name="codSusp" type="xs:integer" use="required"/>
+                                          <xs:attribute name="vrCPNRet" type="xs:decimal" use="required"/>
+                                          <xs:attribute name="vrRatNRet" type="xs:decimal" use="required"/>
+                                          <xs:attribute name="vrSenarNRet" type="xs:decimal" use="required"/>
                                         </xs:complexType>
                                       </xs:element>
                                     </xs:sequence>
+                                    <xs:attribute name="tpInscProd" type="xs:byte" use="required"/>
+                                    <xs:attribute name="nrInscProd" type="xs:string" use="required"/>
+                                    <xs:attribute name="vlrBruto" type="xs:decimal" use="required"/>
+                                    <xs:attribute name="vrCPDescPR" type="xs:decimal" use="required"/>
+                                    <xs:attribute name="vrRatDescPR" type="xs:decimal" use="required"/>
+                                    <xs:attribute name="vrSenarDesc" type="xs:decimal" use="required"/>
+                                    <xs:attribute name="indOpcCP" type="xs:byte" use="required"/>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="infoProcJ" minOccurs="0" maxOccurs="20">
+                                  <xs:annotation>
+                                    <xs:documentation>Informações de Processo Judicial comum a todos os produtores</xs:documentation>
+                                  </xs:annotation>
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                    </xs:sequence>
+                                    <xs:attribute name="nrProcJud" type="xs:string" use="required"/>
+                                    <xs:attribute name="codSusp" type="xs:integer" use="required"/>
+                                    <xs:attribute name="vrCPNRet" type="xs:decimal" use="required"/>
+                                    <xs:attribute name="vrRatNRet" type="xs:decimal" use="required"/>
+                                    <xs:attribute name="vrSenarNRet" type="xs:decimal" use="required"/>
                                   </xs:complexType>
                                 </xs:element>
                               </xs:sequence>
+                              <xs:attribute name="indAquis" type="xs:byte" use="required"/>
+                              <xs:attribute name="vlrTotAquis" type="xs:decimal" use="required"/>
                             </xs:complexType>
                           </xs:element>
                         </xs:sequence>
@@ -336,7 +155,7 @@
       <xs:element name="nrRecibo" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Recibo arquivo a ser retificado</xs:documentation>
+            <xs:documentation>Número do recibo do arquivo a ser retificado</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -347,8 +166,7 @@
       <xs:element name="indApuracao">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Indicativo de período de apuração:
-            1 - Mensal.</xs:documentation>
+            <xs:documentation>Indicativo de período de apuração</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -358,11 +176,10 @@
       <xs:element name="perApur">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Período ao qual se referem as informações.</xs:documentation>
+            <xs:documentation>Período ao qual se referem as informações</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:minLength value="4"/>
-            <xs:maxLength value="7"/>
+            <xs:pattern value="[2]{1}\d{3}-(1[0-2]|0[1-9])"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -389,7 +206,7 @@
       <xs:element name="verProc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Versão do processo de emissão do evento. </xs:documentation>
+            <xs:documentation>Versão do processo de emissão do evento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -404,7 +221,7 @@
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -417,7 +234,7 @@
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>

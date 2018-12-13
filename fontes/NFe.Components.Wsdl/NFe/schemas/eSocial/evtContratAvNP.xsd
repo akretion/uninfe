@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtContratAvNP/v02_04_02" targetNamespace="http://www.esocial.gov.br/schema/evt/evtContratAvNP/v02_04_02" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.esocial.gov.br/schema/evt/evtContratAvNP/v02_05_00" targetNamespace="http://www.esocial.gov.br/schema/evt/evtContratAvNP/v02_05_00" elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="xmldsig-core-schema.xsd"/>
   <xs:element name="eSocial">
     <xs:complexType>
       <xs:sequence>
         <xs:element name="evtContratAvNP">
           <xs:annotation>
-            <xs:documentation>Remuneração de Trabalhadores Avulsos Não Portuários</xs:documentation>
+            <xs:documentation>Remuneração de Trab. Avulsos Não Portuários</xs:documentation>
           </xs:annotation>
           <xs:complexType>
             <xs:sequence>
@@ -22,14 +22,14 @@
               </xs:element>
               <xs:element name="remunAvNP" maxOccurs="999">
                 <xs:annotation>
-                  <xs:documentation>Registro que apresenta a remuneração dos trabalhadores avulsos não portuários, de forma totalizada por estabelecimento contratante.</xs:documentation>
+                  <xs:documentation>Remuneração dos trabalhadores avulsos não portuários</xs:documentation>
                 </xs:annotation>
                 <xs:complexType>
                   <xs:sequence>
                     <xs:element name="tpInsc">
                       <xs:simpleType>
                         <xs:annotation>
-                          <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+                          <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:byte">
                           <xs:pattern value="\d"/>
@@ -42,7 +42,7 @@
                           <xs:documentation>Número de Inscrição</xs:documentation>
                         </xs:annotation>
                         <xs:restriction base="xs:string">
-                          <xs:pattern value="\d{8,15}"/>
+                          <xs:pattern value="\d{8,14}"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -65,6 +65,7 @@
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="14"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="999999999999"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -76,6 +77,7 @@
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="14"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="999999999999"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -87,6 +89,7 @@
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="14"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="999999999999"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -98,6 +101,7 @@
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="14"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="999999999999"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -109,6 +113,7 @@
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="14"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="999999999999"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -120,6 +125,7 @@
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="14"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="999999999999"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -131,6 +137,7 @@
                         <xs:restriction base="xs:decimal">
                           <xs:totalDigits value="14"/>
                           <xs:fractionDigits value="2"/>
+                          <xs:maxInclusive value="999999999999"/>
                         </xs:restriction>
                       </xs:simpleType>
                     </xs:element>
@@ -163,7 +170,7 @@
       <xs:element name="nrRecibo" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Recibo arquivo a ser retificado</xs:documentation>
+            <xs:documentation>Número do recibo do arquivo a ser retificado</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -174,8 +181,7 @@
       <xs:element name="indApuracao">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Indicativo de período de apuração:
-            1 - Mensal.</xs:documentation>
+            <xs:documentation>Indicativo de período de apuração</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -185,11 +191,10 @@
       <xs:element name="perApur">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Período ao qual se referem as informações.</xs:documentation>
+            <xs:documentation>Período ao qual se referem as informações</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:minLength value="4"/>
-            <xs:maxLength value="7"/>
+            <xs:pattern value="[2]{1}\d{3}-(1[0-2]|0[1-9])"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
@@ -216,7 +221,7 @@
       <xs:element name="verProc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Versão do processo de emissão do evento. </xs:documentation>
+            <xs:documentation>Versão do processo de emissão do evento</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
             <xs:minLength value="1"/>
@@ -231,7 +236,7 @@
       <xs:element name="tpInsc">
         <xs:simpleType>
           <xs:annotation>
-            <xs:documentation>Tipo de Inscrição, conforme tabela 5.</xs:documentation>
+            <xs:documentation>Tipo de Inscrição, conforme Tabela 05</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:byte">
             <xs:pattern value="\d"/>
@@ -244,7 +249,7 @@
             <xs:documentation>Número de Inscrição</xs:documentation>
           </xs:annotation>
           <xs:restriction base="xs:string">
-            <xs:pattern value="\d{8,15}"/>
+            <xs:pattern value="\d{8,14}"/>
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
