@@ -1040,6 +1040,10 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.SubstituirNfse : list.LocalProducao.SubstituirNfse);
                             break;
 
+                        case Servicos.NFSeConsultarNFSeTomados:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultaNFSeTomados : list.LocalProducao.ConsultaNFSeTomados);
+                            break;
+
                         #endregion NFS-e
 
                         #region CFS-e
@@ -1110,6 +1114,10 @@ namespace NFe.Settings
 
                         case Servicos.ConsultarIdentificadoresEventoseSocial:
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarIdentificadoresEventoseSocial : list.LocalProducao.ConsultarIdentificadoresEventoseSocial);
+                            break;
+
+                        case Servicos.DownloadEventoseSocial:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.DownloadEventoseSocial : list.LocalProducao.DownloadEventoseSocial);
                             break;
 
                             #endregion eSocial
@@ -1979,11 +1987,36 @@ namespace NFe.Settings
                         Empresas.Configuracoes[emp].RemoveEndSlash();
                         Empresas.CriarPasta(false);
 
+                        //Se o certificado digital for o instalado no windows, vamos tentar buscar ele no repositório para ver se existe.
+                        if (Empresas.Configuracoes[emp].CertificadoInstalado)
+                        {
+                            X509Certificate2 oX509Cert = new X509Certificate2();
+                            X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
+                            store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
+                            X509Certificate2Collection collection = store.Certificates;
+                            X509Certificate2Collection collection1 = collection.Find(X509FindType.FindByTimeValid, DateTime.Now, false);
+                            X509Certificate2Collection collection2 = collection.Find(X509FindType.FindByKeyUsage, X509KeyUsageFlags.DigitalSignature, false);
+
+                            //Primeiro tento encontrar pelo thumbprint
+                            X509Certificate2Collection collection3 = collection2.Find(X509FindType.FindByThumbprint, Empresas.Configuracoes[emp].CertificadoDigitalThumbPrint, false);
+                            if (collection3.Count <= 0)
+                            {
+                                //Se não encontrou pelo thumbprint tento pelo SerialNumber pegando o mesmo thumbprint que veio no arquivo de configurações para ver se não encontro.
+                                collection3 = collection2.Find(X509FindType.FindBySerialNumber, Empresas.Configuracoes[emp].CertificadoDigitalThumbPrint, false);
+
+                                if (collection3.Count <= 0)
+                                {
+                                    throw new Exception("Certificado digital informado não foi localizado no repositório do windows.");
+                                }
+
+                                Empresas.Configuracoes[emp].CertificadoDigitalThumbPrint = collection3[0].Thumbprint;
+                            }
+                        }
+
                         ///
                         /// salva a configuracao da empresa
                         ///
 
-                        //Na reconfiguração enviada pelo ERP, não vou validar o certificado, vou deixar gravar mesmo que o certificado esteja com problema. Wandrey 05/10/2012
                         Empresas.Configuracoes[emp].SalvarConfiguracao(false, true);
 
                         /// salva o arquivo da lista de empresas
@@ -2059,7 +2092,8 @@ namespace NFe.Settings
                         var xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
                                                 new XElement("retAltConfUniNFe",
                                                     new XElement(NFe.Components.TpcnResources.cStat.ToString(), cStat),
-                                                    new XElement(NFe.Components.TpcnResources.xMotivo.ToString(), xMotivo)));
+                                                    new XElement(NFe.Components.TpcnResources.xMotivo.ToString(), xMotivo),
+                                                    new XElement("CertificadoDigitalThumbPrint", Empresas.Configuracoes[emp].CertificadoDigitalThumbPrint)));
                         xml.Save(cArqRetorno);
                     }
                 }
@@ -2430,17 +2464,20 @@ namespace NFe.Settings
                         XmlNode ValidadeInicial = docGerar.CreateElement("ValidadeInicial");
                         XmlNode ValidadeFinal = docGerar.CreateElement("ValidadeFinal");
                         XmlNode A3 = docGerar.CreateElement("A3");
+                        XmlNode SerialNumber = docGerar.CreateElement("SerialNumber");
 
                         Subject.InnerText = _X509Cert.Subject.ToString();
                         ValidadeInicial.InnerText = _X509Cert.NotBefore.ToShortDateString();
                         ValidadeFinal.InnerText = _X509Cert.NotAfter.ToShortDateString();
                         A3.InnerText = _X509Cert.IsA3().ToString().ToLower();
+                        SerialNumber.InnerText = _X509Cert.SerialNumber;
 
                         docGerar.SelectSingleNode("Certificados").AppendChild(Registro);
                         Registro.AppendChild(Subject);
                         Registro.AppendChild(ValidadeInicial);
                         Registro.AppendChild(ValidadeFinal);
                         Registro.AppendChild(A3);
+                        Registro.AppendChild(SerialNumber);
 
                         docGerar.Save(tmp_arqRet);
                     }

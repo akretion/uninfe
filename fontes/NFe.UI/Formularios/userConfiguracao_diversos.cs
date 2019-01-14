@@ -38,7 +38,7 @@ namespace NFe.UI.Formularios
                 this.cbServico.SelectedIndexChanged -= cbServico_SelectedIndexChanged;
                 servicoCurrent = TipoAplicativo.Nulo;
 
-#region Montar Array DropList da UF
+                #region Montar Array DropList da UF
 
                 try
                 {
@@ -50,28 +50,28 @@ namespace NFe.UI.Formularios
                     MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, ex.Message, "");
                 }
 
-#endregion Montar Array DropList da UF
+                #endregion Montar Array DropList da UF
 
-#region Montar Array DropList do Ambiente
+                #region Montar Array DropList do Ambiente
 
                 comboBox_Ambiente.DataSource = EnumHelper.ToList(typeof(TipoAmbiente), true, true);
                 comboBox_Ambiente.DisplayMember = "Value";
                 comboBox_Ambiente.ValueMember = "Key";
-#endregion Montar Array DropList do Ambiente
+                #endregion Montar Array DropList do Ambiente
 
-#region Montar array DropList dos tipos de serviços
+                #region Montar array DropList dos tipos de serviços
 
                 this.cbServico.DataSource = uninfeDummy.DatasouceTipoAplicativo(false);
                 this.cbServico.DisplayMember = "Value";
                 this.cbServico.ValueMember = "Key";
-#endregion Montar array DropList dos tipos de serviços
+                #endregion Montar array DropList dos tipos de serviços
 
-#region Montar Array DropList do Tipo de Emissão da NF-e
+                #region Montar Array DropList do Tipo de Emissão da NF-e
 
                 comboBox_tpEmis.DataSource = EnumHelper.ToList(typeof(TipoEmissao), true, true);
                 comboBox_tpEmis.DisplayMember = "Value";
                 comboBox_tpEmis.ValueMember = "Key";
-#endregion Montar Array DropList do Tipo de Emissão da NF-e
+                #endregion Montar Array DropList do Tipo de Emissão da NF-e
 
                 this.cbServico.SelectedIndexChanged += cbServico_SelectedIndexChanged;
             }
@@ -157,7 +157,8 @@ namespace NFe.UI.Formularios
                 if (this.empresa.Servico.Equals(TipoAplicativo.Nfe) ||
                     this.empresa.Servico.Equals(TipoAplicativo.NFCe) ||
                     this.empresa.Servico.Equals(TipoAplicativo.MDFe) ||
-                    this.empresa.Servico.Equals(TipoAplicativo.Cte))
+                    this.empresa.Servico.Equals(TipoAplicativo.Cte) ||
+                    this.empresa.Servico.Equals(TipoAplicativo.Todos))
                     checkBoxValidarDigestValue.Checked = this.empresa.CompararDigestValueDFeRetornadoSEFAZ;
             }
             finally
@@ -244,7 +245,7 @@ namespace NFe.UI.Formularios
 
             //Configurações para o município de Florianópolis-SC
 #if _fw46
-            if (edtCodMun.Text.Equals("4205407") && 
+            if (edtCodMun.Text.Equals("4205407") &&
                 (!String.IsNullOrEmpty(txtUsuarioWS.Text) &&
                 !String.IsNullOrEmpty(txtSenhaWS.Text) &&
                 !String.IsNullOrEmpty(txtClienteID.Text) &&
@@ -378,7 +379,10 @@ namespace NFe.UI.Formularios
                            ufCod == 3120904 /*Curvelo-MG*/ ||
                            ufCod == 3162708 /*São João do Paraíso-MG*/ ||
                            ufCod == 3168002 /*Taiobeiras-MG*/ ||
-                           ufCod == 3530607 /*Mogi das Cruzes-SP*/;
+                           ufCod == 3530607 /*Mogi das Cruzes-SP*/ ||
+                           ufCod == 3515509 /*Fernandópolis-SP*/ ||
+                           ufCod == 3527108 /*Lins-SP*/ ||
+                           ufCod == 3514403 /*Dracena-SP*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }
@@ -511,6 +515,8 @@ namespace NFe.UI.Formularios
                     comboBox_Ambiente.Visible = true;
                     checkBoxArqNSU.Visible = false;
                     checkBoxValidarDigestValue.Visible = false;
+                    lbl_udDiasLimpeza.Location = new System.Drawing.Point(3, 247);
+                    udDiasLimpeza.Location = new System.Drawing.Point(3, 266);
                     break;
 
                 case TipoAplicativo.SAT:
@@ -539,6 +545,8 @@ namespace NFe.UI.Formularios
                     txtClientSecret.Visible = false;
                     checkBoxArqNSU.Visible = false;
                     checkBoxValidarDigestValue.Visible = false;
+                    lbl_udDiasLimpeza.Location = new System.Drawing.Point(3, 147);
+                    udDiasLimpeza.Location = new System.Drawing.Point(3, 166);
                     break;
 
                 case TipoAplicativo.EFDReinf:
@@ -566,6 +574,8 @@ namespace NFe.UI.Formularios
                     txtClientSecret.Visible = false;
                     checkBoxArqNSU.Visible = false;
                     checkBoxValidarDigestValue.Visible = false;
+                    lbl_udDiasLimpeza.Location = new System.Drawing.Point(3, 147);
+                    udDiasLimpeza.Location = new System.Drawing.Point(3, 166);
                     break;
 
                 default:
@@ -599,6 +609,8 @@ namespace NFe.UI.Formularios
                     txtClientSecret.Visible = false;
                     checkBoxArqNSU.Visible = true;
                     checkBoxValidarDigestValue.Visible = true;
+                    lbl_udDiasLimpeza.Location = new System.Drawing.Point(3, 147);
+                    udDiasLimpeza.Location = new System.Drawing.Point(3, 166);
                     break;
             }
         }

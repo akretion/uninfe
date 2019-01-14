@@ -178,7 +178,8 @@ namespace NFe.Service
                     reciboEFD
                 });
             }
-            else if (servico == Servicos.ConsultarIdentificadoresEventoseSocial)
+            else if (servico == Servicos.ConsultarIdentificadoresEventoseSocial ||
+                     servico == Servicos.DownloadEventoseSocial)
             {
                 XmlRetorno = wsProxy.InvokeElement(servicoWS, metodo, new object[] { docXML.DocumentElement });
             }
@@ -225,7 +226,7 @@ namespace NFe.Service
                             PadroesNFSe padraoNFSe,
                             Servicos servicoNFSe,
                             SecurityProtocolType securityProtocolType)
-       {
+        {
             int emp = Empresas.FindEmpresaByThread();
 
             finalArqEnvio = Functions.ExtractExtension(finalArqEnvio);
@@ -713,9 +714,9 @@ namespace NFe.Service
 
                 case PadroesNFSe.CECAM:
                     string cnpjcpfprestador = docXML.GetElementsByTagName("CNPJCPFPrestador")[0].InnerText;
-                
+
                     string versaoXml = docXML.GetElementsByTagName("Versao")[0].InnerText;
-                 
+
                     strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { cnpjcpfprestador, docXML.OuterXml, versaoXml });
                     break;
 

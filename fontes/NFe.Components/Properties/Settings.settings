@@ -315,10 +315,10 @@
       <Value Profile="(Default)">http://www.tinus.com.br/csp/jaboatao/WSNFSE.RecepcionarLoteRps.cls</Value>
     </Setting>
     <Setting Name="NFe_Components_PCachoeiraSulRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://187.60.188.82:8091/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+      <Value Profile="(Default)">http://177.84.147.222:8091/NFSe.Portal.Integracao/Services.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_HCachoeiraSulRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://187.60.188.82:8091/NFSe.Portal.Integracao/Services.svc</Value>
+      <Value Profile="(Default)">http://177.84.147.222:8091/NFSe.Portal.Integracao.Teste/Services.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_PJaboataoDosGuararapesPE_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://www.tinus.com.br/csp/jaboatao/WSNFSE.CancelarNfse.cls</Value>
@@ -381,7 +381,7 @@
       <Value Profile="(Default)">http://ws.pelotas.rs.gov.br/wsnfse/NfseWSISAPI.dll/soap/INfse</Value>
     </Setting>
     <Setting Name="NFe_Components_PVeraCruzRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://187.60.188.222:8086/NFSe.Portal.Integracao/Services.svc</Value>
+      <Value Profile="(Default)">http://srvwebveracruz.ddns.com.br:8086/NFSe.Portal.Integracao/Services.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_PAstorgaPR_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://wsastorga.simplissweb.com.br/nfseservice.svc</Value>
@@ -553,6 +553,18 @@
     </Setting>
     <Setting Name="NFe_Components_PCamboriuSC_NFSePrefeituraCamboriu" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://simple.camboriu.sc.gov.br/LISIPMC/NFSePrefeituraCamboriu.wso</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HFernandopolisSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PFernandopolisSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://servicos1.fernandopolis.sp.gov.br:8080/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HTeodoroSampaioSP_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://201.91.25.66/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PTeodoroSampaioSP_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://201.91.25.66/NFSe.Portal.Integracao/Services.svc</Value>
     </Setting>
   </Settings>
 </SettingsFile>

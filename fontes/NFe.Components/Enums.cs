@@ -279,6 +279,12 @@ namespace NFe.Components
         [Description("Consultar NFS-e recebidas")]
         NFSeConsultarNFSeRecebidas,
 
+        /// <summary>
+        /// Consultar as notas fiscais de serviço tomados
+        /// </summary>
+        [Description("Consultar NFS-e tomados")]
+        NFSeConsultarNFSeTomados,
+
         #endregion NFSe
 
         #region CFSe
@@ -509,6 +515,7 @@ namespace NFe.Components
         RecepcaoLoteeSocial,
         ConsultarLoteeSocial,
         ConsultarIdentificadoresEventoseSocial,
+        DownloadEventoseSocial,
 
         #endregion eSocial
 
@@ -1117,7 +1124,13 @@ namespace NFe.Components
         /// Padrão utilizado pela prefeitura de Camboriú-SC
         /// </summary>
         [Description("SIMPLE")]
-        SIMPLE
+        SIMPLE,
+
+        /// <summary>
+        /// Padrão utilizado pela prefeitura de Indaiatuba-SP
+        /// </summary>
+        [Description("INDAIATUBA_SP")]
+        INDAIATUBA_SP,
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

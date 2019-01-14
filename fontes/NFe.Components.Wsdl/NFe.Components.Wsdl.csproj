@@ -3789,6 +3789,36 @@
     <EmbeddedResource Include="NFe\schemas\eSocial\evtTreiCap.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\eSocial_DownloadEventos.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AN\eSocial_DownloadEventos.wsdl" />
+    <EmbeddedResource Include="NFe\schemas\eSocial\SolicitacaoDownloadEventosPorId-v1_0_0.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\eSocial\SolicitacaoDownloadEventosPorNrRecibo-v1_0_0.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeConsulta_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeInutilizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeRetAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeStatusServico_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeConsulta_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeInutilizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeRecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGNfeStatusServico_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeConsulta_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeInutilizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNFeRecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeRetAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeStatusServico_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeConsulta_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeInutilizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeRetAutorizacao_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeStatusServico_C.wsdl" />
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -4396,6 +4426,20 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HMogidasCruzesSP-SMARAPDWSSaida.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HMogidasCruzesSP-SMARAPDWSUtil.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamboriuSC-SIMPLE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFernandopolisSP-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PFernandopolisSP-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PLinsSP-ISSONLINE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTeodoroSampaioSP-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTeodoroSampaioSP-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\INDAIATUBA_SP\nfse_v2-03 2016.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\INDAIATUBA_SP\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HIndaiatubaSP-INDAIATUBA_SP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PIndaiatubaSP-INDAIATUBA_SP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PDracenaSP-ISSONLINE.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

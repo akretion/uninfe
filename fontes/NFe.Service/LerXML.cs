@@ -87,6 +87,8 @@ namespace NFe.Service
                     oDadosNfe.cUF = Functions.LerTag(ideElemento, TpcnResources.cUF.ToString(), false);
                     oDadosNfe.mod = Functions.LerTag(ideElemento, TpcnResources.mod.ToString(), false);
                     oDadosNfe.cDV = Functions.LerTag(ideElemento, TpcnResources.cDV.ToString(), false);
+                    oDadosNfe.dhCont = Functions.LerTag(ideElemento, TpcnResources.dhCont.ToString(), false);
+                    oDadosNfe.xJust = Functions.LerTag(ideElemento, TpcnResources.xJust.ToString(), false);
                 }
 
                 //Montar lista de tag´s da tag <emit>
@@ -164,6 +166,8 @@ namespace NFe.Service
                     oDadosNfe.cUF = Functions.LerTag(ideElemento, TpcnResources.cUF.ToString(), false);
                     oDadosNfe.mod = Functions.LerTag(ideElemento, TpcnResources.mod.ToString(), false);
                     oDadosNfe.cDV = Functions.LerTag(ideElemento, TpcnResources.cDV.ToString(), false);
+                    oDadosNfe.dhCont = Functions.LerTag(ideElemento, TpcnResources.dhCont.ToString(), false);
+                    oDadosNfe.xJust = Functions.LerTag(ideElemento, TpcnResources.xJust.ToString(), false);
                 }
 
                 //Montar lista de tag´s da tag <emit>
@@ -238,6 +242,7 @@ namespace NFe.Service
                     XmlElement emitElemento = (XmlElement)emitNode;
 
                     oDadosNfe.CNPJ = Functions.LerTag(emitElemento, NFe.Components.TpcnResources.CNPJ.ToString(), false);
+                    oDadosNfe.CPF = Functions.LerTag(emitElemento, NFe.Components.TpcnResources.CPF.ToString(), false);
                 }
             }
 
@@ -271,6 +276,8 @@ namespace NFe.Service
             oDadosNfe.nNF =
             oDadosNfe.cDV =
             oDadosNfe.CNPJ =
+            oDadosNfe.dhCont =
+            oDadosNfe.xJust =
             oDadosNfe.versao = string.Empty;
         }
 

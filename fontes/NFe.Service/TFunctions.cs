@@ -650,11 +650,11 @@ namespace NFe.Service
                         {
                             if (((XmlElement)el3).GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0] != null)
                             {
-                                NFe.Components.TipoEmissao tpe = NFe.Components.EnumHelper.StringToEnum<NFe.Components.TipoEmissao>(((XmlElement)el3).GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
-                                if (tpe != (NFe.Components.TipoEmissao)emp.tpEmis)
-                                {
-                                    throw new Exception("Tipo de emissão do arquivo diferente do tipo de emissão definido na empresa");
-                                }
+                                //NFe.Components.TipoEmissao tpe = NFe.Components.EnumHelper.StringToEnum<NFe.Components.TipoEmissao>(((XmlElement)el3).GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
+                                //if (tpe != (NFe.Components.TipoEmissao)emp.tpEmis)
+                                //{
+                                //    throw new Exception("Tipo de emissão do arquivo diferente do tipo de emissão definido na empresa");
+                                //}
                                 tipo = ((XmlElement)el3).GetElementsByTagName(NFe.Components.TpcnResources.mod.ToString())[0].InnerText.Equals("55") ? "nfe" : "nfce";
                             }
                         }

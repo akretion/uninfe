@@ -753,6 +753,36 @@
             });
 
             #endregion Consulta Identificadores dos Eventos dos Trabalhadores
+
+            #region Download dos Eventos por Id
+
+            SchemaXML.InfSchemas.Add("eSocial-download-solicDownloadEvtsPorId", new InfSchema()
+            {
+                Tag = "download",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\SolicitacaoDownloadEventosPorId-v1_0_0.xsd",
+                Descricao = "eSocial - XML de Download dos Eventos por Id",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "download",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/download/solicitacao/id/v1_0_0"
+            });
+
+            #endregion Download dos Eventos por Id
+
+            #region Download dos Eventos por Número do Recibo
+
+            SchemaXML.InfSchemas.Add("eSocial-download-solicDownloadEventosPorNrRecibo", new InfSchema()
+            {
+                Tag = "download",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\SolicitacaoDownloadEventosPorNrRecibo-v1_0_0.xsd",
+                Descricao = "eSocial - XML de Download dos Eventos por Número do Recibo",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "download",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/download/solicitacao/nrRecibo/v1_0_0"
+            });
+
+            #endregion Download dos Eventos por Número do Recibo
         }
     }
 }

@@ -155,6 +155,10 @@ namespace NFe.Components
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4118501-";
                                 break;
 
+                            case 3554300: //Teodoro Sampaio-SP
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3554300-";
+                                break;
+
                             default:
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                                 break;
@@ -189,7 +193,8 @@ namespace NFe.Components
                         #region eSocial
 
                         case "eSocial":
-                            if (conteudoXML.DocumentElement.FirstChild.Name.Equals("consultaIdentificadoresEvts"))
+                            if (conteudoXML.DocumentElement.FirstChild.Name.Equals("consultaIdentificadoresEvts") ||
+                                conteudoXML.DocumentElement.FirstChild.Name.Equals("download"))
                                 chave = nome + "-" + conteudoXML.DocumentElement.FirstChild.Name + "-" + conteudoXML.DocumentElement.FirstChild.FirstChild.NextSibling.Name;
                             else
                                 chave = nome + "-" + conteudoXML.DocumentElement.FirstChild.Name;

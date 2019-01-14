@@ -358,6 +358,16 @@ namespace NFe.Service
         /// Enviar nota no modo síncrono? true/false
         /// </summary>
         public bool indSinc { get; set; }
+
+        /// <summary>
+        /// Data e hora da entrada em contingência
+        /// </summary>
+        public string dhCont { get; set; }
+
+        /// <summary>
+        /// Justificativa para a entrada em contingência
+        /// </summary>
+        public string xJust { get; set; }
     }
 
     #endregion Classe com os dados do XML da NFe

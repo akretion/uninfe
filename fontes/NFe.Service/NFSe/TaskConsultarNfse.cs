@@ -405,7 +405,8 @@ namespace NFe.Service.NFSe
                             oDadosPedSitNfse.cMunicipio == 3505807 ||
                             oDadosPedSitNfse.cMunicipio == 3530300 ||
                             oDadosPedSitNfse.cMunicipio == 4308904 ||
-                            oDadosPedSitNfse.cMunicipio == 4118501)
+                            oDadosPedSitNfse.cMunicipio == 4118501 ||
+                            oDadosPedSitNfse.cMunicipio == 3554300)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -504,6 +505,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.TIPLAN_203:
+                    case PadroesNFSe.INDAIATUBA_SP:
                         cabecMsg = "<cabecalho versao=\"2.03\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.03</versaoDados></cabecalho>";
                         break;
 #if _fw46

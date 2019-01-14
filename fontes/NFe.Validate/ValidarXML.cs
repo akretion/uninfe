@@ -185,6 +185,8 @@ namespace NFe.Validate
 
                 try
                 {
+                    ValidarInformacaoContingencia(conteudoXML);
+
                     EncryptAssinatura(rotaArqXML);    //danasa: 12/2013
 
                     XmlReaderSettings settings = new XmlReaderSettings();
@@ -521,5 +523,40 @@ namespace NFe.Validate
         }
 
         #endregion GravarXMLRetornoValidacao()
+
+        public void ValidarInformacaoContingencia(XmlDocument conteudoXML)
+        {
+            var tipoServico = conteudoXML.DocumentElement.Name;
+
+            if (!String.IsNullOrEmpty(tipoServico))
+            {
+                if (tipoServico.Equals("NFe") || tipoServico.Equals("CTe"))
+                {
+                    var tipoEmissao = conteudoXML.GetElementsByTagName("tpEmis")[0]?.InnerText;
+
+                    if (!String.IsNullOrEmpty(tipoEmissao))
+                    {
+                        TipoEmissao tpEmissao = (TipoEmissao)Convert.ToInt32(tipoEmissao);
+
+                        switch (tpEmissao)
+                        {
+                            case TipoEmissao.teFS:
+                            case TipoEmissao.teEPEC:
+                            case TipoEmissao.teFSDA:
+                            case TipoEmissao.teSVCAN:
+                            case TipoEmissao.teSVCRS:
+                            case TipoEmissao.teSVCSP:
+                            case TipoEmissao.teOffLine:
+                                var dhCont = conteudoXML.GetElementsByTagName("dhCont")[0]?.InnerText;
+                                var xJust = conteudoXML.GetElementsByTagName("xJust")[0]?.InnerText;
+
+                                if (String.IsNullOrEmpty(dhCont) || String.IsNullOrEmpty(xJust))
+                                    throw new Exception("XML em contingência e não foi informado a data, hora e justificativa da entrada em contingência, tags <dhCont> e <xJust>.");
+                                break;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

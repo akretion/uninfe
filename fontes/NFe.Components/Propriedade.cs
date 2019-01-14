@@ -321,6 +321,7 @@ namespace NFe.Components
             PedSeqLoteNotaRPS,
             PedSubstNfse,
             PedSitNFSeRec,
+            PedSitNFSeTom,
 
             /// <summary>
             /// CFSe
@@ -399,7 +400,8 @@ namespace NFe.Components
 
             eSocial_loteevt,
             eSocial_consloteevt,
-            eSocial_considevt
+            eSocial_considevt,
+            eSocial_downevt
         }
 
         private static Dictionary<TipoEnvio, ExtensaoClass> ListaExtensoes = new Dictionary<TipoEnvio, ExtensaoClass>();
@@ -691,6 +693,12 @@ namespace NFe.Components
                     "-sitnfserec.err",
                     "Consultar NFSe recebidas"));
 
+                ListaExtensoes.Add(TipoEnvio.PedSitNFSeTom, new ExtensaoClass(
+                    "-ped-sitnfsetom.xml", "",
+                    "-sitnfsetom.xml", "",
+                    "-sitnfsetom.err",
+                    "Consultar NFSe recebidas"));
+
                 #endregion Extensoes da NFSe
 
                 #region Extensões CFSe
@@ -792,6 +800,12 @@ namespace NFe.Components
                     "-ret-esocial-considevt.xml", "",
                     "-ret-esocial-considevt.err",
                     "XML eSocial - Consultar Identificadores dos Eventos"));
+
+                ListaExtensoes.Add(TipoEnvio.eSocial_downevt, new ExtensaoClass(
+                    "-esocial-downevt.xml", "",
+                    "-ret-esocial-downevt.xml", "",
+                    "-ret-esocial-downevt.err",
+                    "XML eSocial - Download dos Eventos"));
 
                 #endregion Extensões eSocial
 

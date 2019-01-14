@@ -494,7 +494,8 @@ namespace NFe.Service
                                                                     Path.GetFileName(strArquivoNFeProc);
                                     try
                                     {
-                                        TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
+                                        if (oLerXml.oDadosNfe.mod != "65" || oLerXml.oDadosNfe.tpEmis != "9")
+                                            TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                     }
                                     catch (Exception ex)
                                     {
