@@ -1,11 +1,11 @@
 ﻿using System;
 using NFe.Components.Abstract;
-using NFe.Components.PJaboataoDosGuararapesPE_TINUS_CancelarNfse;
-using NFe.Components.PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps;
-using NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfse;
-using NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps;
-using NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps;
-using NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps;
+using NFe.Components.PCaboDeSantoAgostinhoPE_TINUS_CancelarNfse;
+using NFe.Components.PCaboDeSantoAgostinhoPE_TINUS_RecepcionarLoteRps;
+using NFe.Components.PCaboDeSantoAgostinhoPE_TINUS_ConsultarNfse;
+using NFe.Components.PCaboDeSantoAgostinhoPE_TINUS_ConsultarLoteRps;
+using NFe.Components.PCaboDeSantoAgostinhoPE_TINUS_ConsultarNfsePorRps;
+using NFe.Components.PCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 

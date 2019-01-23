@@ -4440,6 +4440,22 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HIndaiatubaSP-INDAIATUBA_SP.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PIndaiatubaSP-INDAIATUBA_SP.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PDracenaSP-ISSONLINE.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMatupaMT-COPLAN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMatupaMT-COPLAN.wsdl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HChapecoSC-PUBLICA.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PChapecoSC-PUBLICA.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HRioPedrasSP-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PRioPedrasSP-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPontalinaGO-MEGASOFT.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPontalinaGO-MEGASOFT.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-CancelarNfse-TINUS..wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-ConsultarLoteRps-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-ConsultarNfse-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-ConsultarNfsePorRps-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-ConsultarSituacaoLoteRps-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-RecepcionarLoteRps-TINUS.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

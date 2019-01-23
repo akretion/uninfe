@@ -566,5 +566,32 @@
     <Setting Name="NFe_Components_PTeodoroSampaioSP_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://201.91.25.66/NFSe.Portal.Integracao/Services.svc</Value>
     </Setting>
+    <Setting Name="NFe_Components_PMatupaMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.gp.srv.br/tributario_matupa/servlet/anfse_web_service</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HRioPedrasSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PRioPedrasSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://riodaspedras.brgov.com.br:5661/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCaboDeSantoAgostinhoPE_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.tinus.com.br:443/csp/cabo/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCaboDeSantoAgostinhoPE_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.tinus.com.br:443/csp/cabo/WSNFSE.ConsultarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCaboDeSantoAgostinhoPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.tinus.com.br:443/csp/cabo/WSNFSE.ConsultarNfsePorRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCaboDeSantoAgostinhoPE_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.tinus.com.br:443/csp/cabo/WSNFSE.ConsultarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.tinus.com.br:443/csp/cabo/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCaboDeSantoAgostinhoPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.tinus.com.br:443/csp/cabo/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

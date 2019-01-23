@@ -591,6 +591,8 @@ namespace NFe.UI
                         currentEmpresa.CNPJ = Functions.OnlyNumbers(f.edtCNPJ.Text, ".,-/").ToString();
                         currentEmpresa.Nome = f.edtNome.Text;
                         currentEmpresa.Servico = (TipoAplicativo)f.cbServico.SelectedValue;
+                        currentEmpresa.Documento = f.comboDocumento.SelectedItem.ToString();
+
                         if (currentEmpresa.Servico == TipoAplicativo.Nfse)
                             currentEmpresa.UnidadeFederativaCodigo = 0;
                         else

@@ -99,13 +99,26 @@ namespace NFe.UI.Formularios
                 cnpjCurrent = this.edtCNPJ.Text = empresa.CNPJ;
                 this.edtNome.Text = empresa.Nome;
 
-                if (!string.IsNullOrEmpty(empresa.CNPJ))
-                    if (empresa.CNPJ.Length == 11)
+                if (!String.IsNullOrEmpty(empresa.Documento))
+                {
+                    if (empresa.Documento.Equals("CPF"))
                         this.edtCNPJ.Text = ((CPF)edtCNPJ.Text).ToString();
-                    else if (empresa.CNPJ.Length == 12)
+                    else if (empresa.Documento.Equals("CEI"))
+                        this.edtCNPJ.Text = ((CEI)edtCNPJ.Text).ToString();
+                    else if (empresa.Documento.Equals("CAEPF"))
+                        this.edtCNPJ.Text = Convert.ToInt64(edtCNPJ.Text).ToString(@"000\.000\.000\/000\-00");
+                    else
+                        this.edtCNPJ.Text = ((CNPJ)edtCNPJ.Text).ToString();
+                }
+                else
+                {
+                    if (empresa?.CNPJ?.Length == 11)
+                        this.edtCNPJ.Text = ((CPF)edtCNPJ.Text).ToString();
+                    else if (empresa?.CNPJ?.Length == 12)
                         this.edtCNPJ.Text = ((CEI)edtCNPJ.Text).ToString();
                     else
                         this.edtCNPJ.Text = ((CNPJ)edtCNPJ.Text).ToString();
+                }
 
                 comboBox_tpEmis.SelectedValue = this.empresa.tpEmis;
                 comboBox_Ambiente.SelectedValue = this.empresa.AmbienteCodigo;
@@ -382,7 +395,8 @@ namespace NFe.UI.Formularios
                            ufCod == 3530607 /*Mogi das Cruzes-SP*/ ||
                            ufCod == 3515509 /*Fernandópolis-SP*/ ||
                            ufCod == 3527108 /*Lins-SP*/ ||
-                           ufCod == 3514403 /*Dracena-SP*/;
+                           ufCod == 3514403 /*Dracena-SP*/ ||
+                           ufCod == 3544004 /*Rio das Pedras-SP*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }

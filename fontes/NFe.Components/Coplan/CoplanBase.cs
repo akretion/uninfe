@@ -46,6 +46,12 @@ namespace NFe.Components.Coplan
                                 new SinopMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
                             break;
 
+                        case 5105606: //Matupá-MT
+                            coplanService = tpAmb == TipoAmbiente.taHomologacao ?
+                                new MatupaMT.h.CoplanH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase :
+                                new MatupaMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
+                            break;
+
 
                         default:
                             throw new Exceptions.ServicoInexistenteException();

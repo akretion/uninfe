@@ -35,6 +35,7 @@ namespace NFe.UI.Formularios
             this.cbServico.Enabled = true;
             this.cbServico.SelectedIndex = 0;
             this.edtCNPJ.Text = this.edtNome.Text = "";
+            this.comboDocumento.SelectedIndex = 3;
         }
 
         protected override void OnShown(EventArgs e)
@@ -55,10 +56,8 @@ namespace NFe.UI.Formularios
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            FormatarCPFCNPJ();
-
-            if (!ValidarDocumento())
-                edtCNPJ.Focus();
+            if (!ValidarDocumento(comboDocumento.SelectedItem.ToString()))
+                return;
 
             string cnpj = Functions.OnlyNumbers(edtCNPJ.Text, ".-/").ToString();
 
@@ -111,10 +110,12 @@ namespace NFe.UI.Formularios
 
         private void edtCNPJ_Leave(object sender, EventArgs e)
         {
-            FormatarCPFCNPJ();
+            var documento = comboDocumento.SelectedItem.ToString();
+
+            FormatarCPFCNPJ(documento);
         }
 
-        private void FormatarCPFCNPJ()
+        private void FormatarCPFCNPJ(string documento)
         {
             string cnpj = Functions.OnlyNumbers(this.edtCNPJ.Text, ".,-/").ToString();
 
@@ -128,32 +129,31 @@ namespace NFe.UI.Formularios
                 return;
             }
 
-            if (cnpj.Length <= 11)
+            if (documento.Equals("CPF"))
             {
                 cnpj = cnpj.PadLeft(11, '0');
                 edtCNPJ.Text = ((CPF)cnpj).ToString();
             }
-            else if (cnpj.Length <= 12)
+            else if (documento.Equals("CEI"))
             {
                 cnpj = cnpj.PadLeft(12, '0');
                 edtCNPJ.Text = ((CEI)cnpj).ToString();
+            }
+            else if (documento.Equals("CAEPF"))
+            {
+                cnpj = cnpj.PadLeft(14, '0');
+                edtCNPJ.Text = Convert.ToInt64(cnpj).ToString(@"000\.000\.000\/000\-00");
             }
             else
             {
                 cnpj = cnpj.PadLeft(14, '0');
                 edtCNPJ.Text = ((CNPJ)cnpj).ToString();
             }
-
-
-            //if (cnpj.Length < 13)
-            //    this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(cnpj, false);
-            //else
-            //    this.edtCNPJ.Text = uninfeDummy.FmtCnpjCpf(cnpj, true);
         }
 
-        private bool ValidarDocumento()
+        private bool ValidarDocumento(string documento)
         {
-            if (edtCNPJ.Text.Length == 14)
+            if (documento.Equals("CPF"))
             {
                 if (!CPF.Validate(edtCNPJ.Text, false))
                 {
@@ -161,7 +161,7 @@ namespace NFe.UI.Formularios
                     return false;
                 }
             }
-            else if (edtCNPJ.Text.Length == 15)
+            else if (documento.Equals("CEI"))
             {
                 if (!CEI.Validate(edtCNPJ.Text))
                 {
@@ -169,7 +169,7 @@ namespace NFe.UI.Formularios
                     return false;
                 }
             }
-            else
+            else if (documento.Equals("CNPJ"))
             {
                 if (!CNPJ.Validate(edtCNPJ.Text))
                 {
@@ -179,6 +179,11 @@ namespace NFe.UI.Formularios
             }
 
             return true;
+        }
+
+        private void comboDocumento_SelectedValueChanged(object sender, EventArgs e)
+        {
+            edtCNPJ.Focus();
         }
     }
 }

@@ -359,9 +359,9 @@
             this.metroLabel22.Location = new System.Drawing.Point(3, 3);
             this.metroLabel22.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel22.Name = "metroLabel22";
-            this.metroLabel22.Size = new System.Drawing.Size(77, 15);
+            this.metroLabel22.Size = new System.Drawing.Size(115, 15);
             this.metroLabel22.TabIndex = 0;
-            this.metroLabel22.Text = "CNPJ/CPF/CEI";
+            this.metroLabel22.Text = "CNPJ/CPF/CEI/CAEPF";
             // 
             // edtCNPJ
             // 

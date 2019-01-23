@@ -205,6 +205,10 @@ namespace NFe.Settings
         /// </summary>
         public bool CompararDigestValueDFeRetornadoSEFAZ { get; set; }
         /// <summary>
+        /// Pode ser: CPF, CEI, CAEPF ou CNPJ
+        /// </summary>
+        public string Documento { get; set; }
+        /// <summary>
         /// Esta propriedade se true, vai processar um arquivo de cada vez.
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
