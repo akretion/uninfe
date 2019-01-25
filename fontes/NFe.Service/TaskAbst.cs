@@ -845,6 +845,10 @@ namespace NFe.Service
                         case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "EnviarLoteRPS";
                             break;
+
+                        case Servicos.NFSeConsultarStatusNota: //FABIO - FULLTIME
+                            retorna = "ConsultarSituacaoNfse";
+                            break;
                     }
                     break;
 
@@ -1416,13 +1420,13 @@ namespace NFe.Service
 
                 #endregion VVISS
 
-                #region VVISS
+                #region FISSLEX
 
                 case PadroesNFSe.FISSLEX:
                     retorna = "Execute";
                     break;
 
-                #endregion VVISS
+                #endregion FISSLEX
 
                 #region NATALENSE
 
@@ -2238,6 +2242,44 @@ namespace NFe.Service
                     break;
 
                     #endregion INDAIATUBA_SP
+
+                #region SISPMJP
+
+                case PadroesNFSe.SISPMJP:
+
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfsePorFaixa";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+                    }
+                    break;
+
+                    #endregion SISPMJP
             }
 
             return retorna;
@@ -3175,6 +3217,7 @@ namespace NFe.Service
                 case PadroesNFSe.PORTALFACIL_ACTCON_202:
                 case PadroesNFSe.PORTALFACIL_ACTCON:
                 case PadroesNFSe.MARINGA_PR:
+                case PadroesNFSe.SISPMJP:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
                     {
                         switch (doc.DocumentElement.Name)

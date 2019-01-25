@@ -273,7 +273,15 @@ namespace NFe.Components
         [Description("Substituir NFS-e")]
         NFSeSubstituirNfse,
 
+        //FULLTIME - FABIO
+
         /// <summary>
+        /// Consultar Status NFS-e
+        /// </summary>
+        [Description("Consultar Status da NFS-e")]
+        NFSeConsultarStatusNota,
+
+		// <summary>
         /// Consultar as notas fiscais de serviço recebidas
         /// </summary>
         [Description("Consultar NFS-e recebidas")]
@@ -1131,6 +1139,13 @@ namespace NFe.Components
         /// </summary>
         [Description("INDAIATUBA_SP")]
         INDAIATUBA_SP,
+
+        /// <summary>
+        /// Padrão utilizado pela prefeitura de João Pessoa-PB
+        /// </summary>
+        [Description("SISPMJP")]
+        SISPMJP
+
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

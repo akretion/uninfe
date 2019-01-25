@@ -337,6 +337,10 @@ namespace NFe.Service.NFSe
                         simple.ConsultarSituacaoLoteRps(NomeArquivoXML);
 
                         break;
+                    case PadroesNFSe.SISPMJP:
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" ><versaoDados>2.02</versaoDados></cabecalho>";
+
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, oDadosPedSitLoteRps.cMunicipio))

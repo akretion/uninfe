@@ -4441,9 +4441,7 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PIndaiatubaSP-INDAIATUBA_SP.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PDracenaSP-ISSONLINE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HMatupaMT-COPLAN.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PMatupaMT-COPLAN.wsdl">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMatupaMT-COPLAN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HChapecoSC-PUBLICA.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PChapecoSC-PUBLICA.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HRioPedrasSP-FIORILLI.wsdl" />
@@ -4456,6 +4454,10 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-ConsultarNfsePorRps-TINUS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-ConsultarSituacaoLoteRps-TINUS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-RecepcionarLoteRps-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\SISPMJP\nfse v2 02.xsd" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\SISPMJP\xmldsig-core-schema20020212.xsd" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJoaoPessoaPB_SISPMJP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PJoaoPessoaPB_SISPMJP.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

@@ -230,6 +230,7 @@
     <Compile Include="Schemas\SchemaXMLNFSe_ADM_SISTEMAS.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_E_RECEITA.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_MODERNIZACAO_PUBLICA.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_SISPMJP﻿.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_VITORIA_ES.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_DESENVOLVECIDADE.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_EMBRAS.cs" />

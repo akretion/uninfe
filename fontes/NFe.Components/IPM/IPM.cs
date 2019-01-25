@@ -98,6 +98,9 @@ namespace NFSe.Components
 
                 case 4202909: // Brusque-SC
                     return (int)8055;
+
+                case 4302105: // Bento Gonçalves-RS
+                    return (int)8041;
             }
 
             return 0;

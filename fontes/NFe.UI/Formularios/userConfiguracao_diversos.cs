@@ -396,7 +396,8 @@ namespace NFe.UI.Formularios
                            ufCod == 3515509 /*Fernandópolis-SP*/ ||
                            ufCod == 3527108 /*Lins-SP*/ ||
                            ufCod == 3514403 /*Dracena-SP*/ ||
-                           ufCod == 3544004 /*Rio das Pedras-SP*/;
+                           ufCod == 3544004 /*Rio das Pedras-SP*/ ||
+                           ufCod == 4302105 /*Bento Gonçalves-RS*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }
