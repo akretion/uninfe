@@ -101,6 +101,9 @@ namespace NFSe.Components
 
                 case 4302105: // Bento Gonçalves-RS
                     return (int)8041;
+
+                case 4207502: // Indaial-SC
+                    return (int)8147;
             }
 
             return 0;

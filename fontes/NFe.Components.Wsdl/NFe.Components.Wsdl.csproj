@@ -4448,7 +4448,7 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PRioPedrasSP-FIORILLI.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPontalinaGO-MEGASOFT.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPontalinaGO-MEGASOFT.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-CancelarNfse-TINUS..wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-CancelarNfse-TINUS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-ConsultarLoteRps-TINUS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-ConsultarNfse-TINUS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCaboDeSantoAgostinhoPE-ConsultarNfsePorRps-TINUS.wsdl" />

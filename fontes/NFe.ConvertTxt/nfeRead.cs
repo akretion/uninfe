@@ -287,7 +287,7 @@ namespace NFe.ConvertTxt
         private void processaProtNfe(XmlNode nodenfeProc)
         {
             nfe.protNFe.chNFe = this.readValue(nodenfeProc, TpcnResources.chNFe);
-            nfe.protNFe.cStat = Convert.ToInt32(" 0" + this.readValue(nodenfeProc, TpcnResources.cStat.ToString()));
+            nfe.protNFe.cStat = this.readInt32(nodenfeProc, TpcnResources.cStat);
             nfe.protNFe.dhRecbto = this.readDate(nodenfeProc, TpcnResources.dhRecbto);
             nfe.protNFe.digVal = this.readValue(nodenfeProc, TpcnResources.digVal.ToString());
             nfe.protNFe.nProt = this.readValue(nodenfeProc, TpcnResources.nProt.ToString());
@@ -491,7 +491,7 @@ namespace NFe.ConvertTxt
                 switch (noder.LocalName.ToLower())
                 {
                     case "modfrete":
-                        nfe.Transp.modFrete = (TpcnModalidadeFrete)this.readInt32(noder, TpcnResources.modFrete);
+                        nfe.Transp.modFrete = (TpcnModalidadeFrete)this.readInt32(nodeinfNFe, TpcnResources.modFrete);
                         break;
 
                     case "transporta":
