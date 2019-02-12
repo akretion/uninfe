@@ -26,9 +26,9 @@ namespace NFe.UI.Formularios
 
             #region Definir um texto explicativo sobre a impressão do DANFE. Wandrey 02/02/2010
             this.tbTextoDANFE.Text = 
-                "Você pode automatizar o processo de geração/impressão do documento fiscal eletrônico através do UniDANFe ou do DANFeMon, bastando preencher os campos abaixo." +
+                "Você pode automatizar o processo de geração/impressão do documento fiscal eletrônico através do UniDANFE ou do DANFE Mon, bastando preencher os campos abaixo." +
                 "\r\n\r\n" +
-                "As configurações adicionais devem ser definidas no UniDANFe ou no arquivo XML auxiliar. Para maiores detalhes, consulte a documentação do UniDANFe.";
+                "As configurações adicionais devem ser definidas no UniDANFE ou no arquivo XML auxiliar. Para maiores detalhes, consulte a documentação do UniDANFE.";
             #endregion
 
             this.empresa = empresa;

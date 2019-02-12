@@ -14,13 +14,7 @@ namespace NFSe.Components
         /// </summary>
         public class ServicoInexistenteIPMException : NFe.Components.Exceptions.ServicoInexistenteException
         {
-            public override string Message
-            {
-                get
-                {
-                    return "Serviço não disponível para padrão IPM";
-                }
-            }
+            public override string Message => "Serviço não disponível para padrão IPM";
         }
     }
 
@@ -29,13 +23,7 @@ namespace NFSe.Components
     /// </summary>
     public class IPM : EmiteNFSeBase, IEmiteNFSeIPM
     {
-        public override string NameSpaces
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public override string NameSpaces => throw new NotImplementedException();
 
         #region Construtores
         public IPM(TipoAmbiente tpAmb, string pastaRetorno, string usuario, string senha, int cidade)
@@ -67,53 +55,66 @@ namespace NFSe.Components
             switch (nCodIbge)
             {
                 case 4104303: // Campo mourão - PR
-                    return (int)7483;
+                    return 7483;
 
                 case 4309209: // Gravataí - RS
-                    return (int)8683;
+                    return 8683;
 
                 case 4104204: // Campo Largo - PR
-                    return (int)7481;
+                    return 7481;
 
                 case 4118204: // Paranaguá - PR
-                    return (int)7745;
+                    return 7745;
 
                 case 4217808: // Taió - SC
-                    return (int)8351;
+                    return 8351;
 
                 case 4201307: // Araquari - SC
-                    return (int)8025;
+                    return 8025;
 
                 case 4215802: // São Bento do Sul-SC
-                    return (int)8311;
+                    return 8311;
 
                 case 4307807: // Estrela-RS
-                    return (int)8653;
+                    return 8653;
 
                 case 4211900: // Palhoça-SC
-                    return (int)8233;
+                    return 8233;
 
                 case 4317202: // Santa Rosa-RS
-                    return (int)8847;
+                    return 8847;
 
                 case 4202909: // Brusque-SC
-                    return (int)8055;
+                    return 8055;
 
                 case 4302105: // Bento Gonçalves-RS
-                    return (int)8041;
+                    return 8041;
 
                 case 4207502: // Indaial-SC
-                    return (int)8147;
+                    return 8147;
+
+                case 4211801: // Ouro-SC
+                    return 8231;
             }
 
             return 0;
         }
 
         public override void EmiteNF(string file)
-        { }
+        {
+            string result = EnviaXML(file);
+
+            GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
+        }
 
         public override void CancelarNfse(string file)
-        { }
+        {
+            string result = EnviaXML(file);
+
+            GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
+        }
 
         public override void ConsultarLoteRps(string file)
         { }
@@ -122,12 +123,17 @@ namespace NFSe.Components
         { }
 
         public override void ConsultarNfse(string file)
-        { }
+        {
+            string result = EnviaXML(file);
+
+            GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
+        }
 
         public override void ConsultarNfsePorRps(string file)
         { }
 
-        public override string EmiteNF(string file, bool cancelamento)
+        private string EnviaXML(string file)
         {
             string result = "";
 
@@ -144,13 +150,6 @@ namespace NFSe.Components
                      {"f1", file}           //Endereço físico do arquivo
                 });
             }
-
-            if (!cancelamento)
-                GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
-            else
-                GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
 
             return result;
         }

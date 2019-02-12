@@ -3819,6 +3819,8 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeInutilizacao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeRetAutorizacao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeStatusServico_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\EFDReinfConsultasReinf.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\AN\EFDReinfConsultasReinf.wsdl" />
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -4458,6 +4460,11 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\SISPMJP\xmldsig-core-schema20020212.xsd" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HJoaoPessoaPB_SISPMJP.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PJoaoPessoaPB_SISPMJP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSenadorCanedoGO-BSITBR.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoBorjaRS-DBSELLER.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoBorjaRS-DBSELLER.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGuaraSP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGuaraSP.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

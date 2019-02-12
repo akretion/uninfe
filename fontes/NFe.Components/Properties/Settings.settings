@@ -593,5 +593,8 @@
     <Setting Name="NFe_Components_PCaboDeSantoAgostinhoPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://www.tinus.com.br:443/csp/cabo/WSNFSE.RecepcionarLoteRps.cls</Value>
     </Setting>
+    <Setting Name="NFe_Components_PSenadorCanedoGO_nfseWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://canedo.bsit-br.com.br/integracao/services/nfseWS</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

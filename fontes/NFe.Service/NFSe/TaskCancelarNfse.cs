@@ -121,7 +121,7 @@ namespace NFe.Service.NFSe
                         if (ConfiguracaoApp.Proxy)
                             ipm.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
 
-                        ipm.EmiteNF(NomeArquivoXML, true);
+                        ipm.CancelarNfse(NomeArquivoXML);
 
                         break;
 
@@ -372,9 +372,20 @@ namespace NFe.Service.NFSe
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
                         if (oDadosPedCanNfse.tpAmb == 1)
-                            pedCanNfse = new Components.PJaraguaGO.nfseWS();
+                        {
+                            switch (oDadosPedCanNfse.cMunicipio)
+                            {
+                                case 5211800:
+                                    pedCanNfse = new Components.PJaraguaGO.nfseWS();
+                                    break;
+
+                                case 5220454:
+                                    pedCanNfse = new Components.PSenadorCanedoGO.nfseWS();
+                                    break;
+                            }
+                        }
                         else
-                            throw new Exception("Município de Jaraguá-GO não dispõe de ambiente de homologação para envio de NFS-e em teste.");
+                            throw new Exception("Este município não dispõe de ambiente de homologação para envio de NFS-e em teste.");
                         break;
 
                     case PadroesNFSe.EQUIPLANO:

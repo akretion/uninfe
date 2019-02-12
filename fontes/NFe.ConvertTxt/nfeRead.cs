@@ -46,6 +46,8 @@ namespace NFe.ConvertTxt
             if (((XmlElement)element).GetElementsByTagName(tag)[0] != null)
                 return ReverterFiltroTextoXML(((XmlElement)element).GetElementsByTagName(tag)[0].InnerText);
 
+            Console.WriteLine($"TAG: {tag} nao encontrada no element: {element}");
+
             return "";
         }
 
@@ -267,16 +269,36 @@ namespace NFe.ConvertTxt
         /// <param name="nodenfeProc"></param>
         private void processaPag(XmlNode nodenfeProc)
         {
+            if (nfe.infNFe.Versao >= 4)
+            {
+                foreach (XmlNode noder in nodenfeProc.ChildNodes)
+                {
+                    switch (noder.LocalName)
+                    {
+                        case "detPag":
+                            LerPag(noder);
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                LerPag(nodenfeProc);
+            }
+        }
+
+        private void LerPag(XmlNode noder)
+        {
             pag pagItem = new pag();
 
-            pagItem.indPag = (TpcnIndicadorPagamento)this.readInt32(nodenfeProc, TpcnResources.indPag);
-            pagItem.tPag = (TpcnFormaPagamento)this.readInt32(nodenfeProc, TpcnResources.tPag);
-            pagItem.vPag = this.readDouble(nodenfeProc, TpcnResources.vPag);
-            pagItem.tpIntegra = this.readInt32(nodenfeProc, TpcnResources.tpIntegra);
-            pagItem.CNPJ = this.readValue(nodenfeProc, TpcnResources.CNPJ);
-            pagItem.tBand = (TpcnBandeiraCartao)this.readInt32(nodenfeProc, TpcnResources.tBand);
-            pagItem.cAut = this.readValue(nodenfeProc, TpcnResources.cAut);
-            pagItem.vTroco = this.readDouble(nodenfeProc, TpcnResources.vTroco);
+            pagItem.indPag = (TpcnIndicadorPagamento)this.readInt32(noder, TpcnResources.indPag);
+            pagItem.tPag = (TpcnFormaPagamento)this.readInt32(noder, TpcnResources.tPag);
+            pagItem.vPag = this.readDouble(noder, TpcnResources.vPag);
+            pagItem.tpIntegra = this.readInt32(noder, TpcnResources.tpIntegra);
+            pagItem.CNPJ = this.readValue(noder, TpcnResources.CNPJ);
+            pagItem.tBand = (TpcnBandeiraCartao)this.readInt32(noder, TpcnResources.tBand);
+            pagItem.cAut = this.readValue(noder, TpcnResources.cAut);
+            pagItem.vTroco = this.readDouble(noder, TpcnResources.vTroco);
             nfe.pag.Add(pagItem);
         }
 

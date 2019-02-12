@@ -54,14 +54,13 @@ namespace NFe.Components.SigCorp.MogiGuacuSP.h
 
         public override void ConsultarLoteRps(string file)
         {
-
-            tcDadosPrestador oTcDadosConsultaNota = ReadXML<tcDadosPrestador>(file);
+            tcDadosConsultaNota oTcDadosConsultaNota = ReadXML<tcDadosConsultaNota>(file);
             tcEstruturaDescricaoErros[] tcErros = null;
-
-            string result = service.ConsultarNotaPrestador(oTcDadosConsultaNota, NumeroNota(file, "urn:ConsultarNotaPrestador"), out tcErros).ToString();
-            string strResult = result;
+            tcRetornoNota result = service.ConsultarNotaValida(oTcDadosConsultaNota, out tcErros);
+            string strResult = base.CreateXML(result, tcErros);
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
                                           Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
+
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -71,10 +70,10 @@ namespace NFe.Components.SigCorp.MogiGuacuSP.h
 
         public override void ConsultarNfse(string file)
         {
-
-            tcDadosConsultaNota oTcDadosPrestador = ReadXML<tcDadosConsultaNota>(file);
+            tcDadosPrestador oTcDadosPrestador = ReadXML<tcDadosPrestador>(file);
             tcEstruturaDescricaoErros[] tcErros = null;
-            string strResult = service.ConsultarNotaValida(oTcDadosPrestador, out tcErros).ToString();
+            tcDadosNota result = service.ConsultarNotaPrestador(oTcDadosPrestador, NumeroNota(file, "ConsultarNotaPrestador"), out tcErros);
+            string strResult = base.CreateXML(result, tcErros);
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
                                           Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }

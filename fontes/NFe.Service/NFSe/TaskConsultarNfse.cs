@@ -123,6 +123,21 @@ namespace NFe.Service.NFSe
 
                     #endregion Betha
 
+                    case PadroesNFSe.IPM:
+                        //código da cidade da receita federal, este arquivo pode ser encontrado em ~\uninfe\doc\Codigos_Cidades_Receita_Federal.xls</para>
+                        //O código da cidade está hardcoded pois ainda está sendo usado apenas para campo mourão
+                        IPM ipm = new IPM((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                          Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                          Empresas.Configuracoes[emp].UsuarioWS,
+                                          Empresas.Configuracoes[emp].SenhaWS,
+                                          oDadosPedSitNfse.cMunicipio);
+
+                        if (ConfiguracaoApp.Proxy)
+                            ipm.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
+
+                        ipm.ConsultarNfse(NomeArquivoXML);
+                        break;
+
                     case PadroesNFSe.ABACO:
                     case PadroesNFSe.CANOAS_RS:
                         cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
@@ -593,9 +608,9 @@ namespace NFe.Service.NFSe
             }
         }
 
-#endregion Execute
+        #endregion Execute
 
-#region PedSitNfse()
+        #region PedSitNfse()
 
         /// <summary>
         /// Fazer a leitura do conteúdo do XML de consulta nfse por numero e disponibiliza conteúdo em um objeto para analise
@@ -606,6 +621,6 @@ namespace NFe.Service.NFSe
             int emp = Empresas.FindEmpresaByThread();
         }
 
-#endregion PedSitNfse()
+        #endregion PedSitNfse()
     }
 }

@@ -440,6 +440,10 @@ namespace NFe.Service
                             DirecionarArquivo(emp, true, true, arquivo, new TaskConsultarLoteReinf(arquivo));
                             break;
 
+                        case Servicos.ConsultasReinf:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskConsultasReinf(arquivo));
+                            break;
+
                         #endregion EFDReinf
 
                         #region eSocial
@@ -890,6 +894,11 @@ namespace NFe.Service
                                 {
                                     case "ConsultaInformacoesConsolidadas":
                                         tipoServico = Servicos.ConsultarLoteReinf;
+                                        break;
+
+                                    case "ConsultaTotalizadores":
+                                    case "ConsultaReciboEvento":
+                                        tipoServico = Servicos.ConsultasReinf;
                                         break;
 
                                     case "loteEventos":

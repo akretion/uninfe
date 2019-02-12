@@ -1363,6 +1363,11 @@ namespace NFe.Components
         /// </summary>
         public string ConsultarLoteReinf { get; set; }
 
+        /// <summary>
+        /// Consultas do EFDReinf: totalizações e recibo de entrega
+        /// </summary>
+        public string ConsultasReinf { get; set; }
+
         #endregion EFDReinf
 
         #region eSocial

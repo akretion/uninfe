@@ -236,13 +236,39 @@
                 Tag = "ConsultaInformacoesConsolidadas",
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "",
-                Descricao = "EFReinf - XML de Consulta de Lote de Eventos",
+                Descricao = "EFDReinf - XML de Consulta de Lote de Eventos",
                 TagAssinatura = "",
                 TagAtributoId = "",
                 TargetNameSpace = ""
             });
 
             #endregion Consulta Lote de eventos
+
+            #region Consultas do EFDReinf
+
+            SchemaXML.InfSchemas.Add("Reinf-ConsultaTotalizadores", new InfSchema()
+            {
+                Tag = "ConsultaTotalizadores",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "EFDReinf - XML de Consultas do EFDReinf",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+
+            SchemaXML.InfSchemas.Add("Reinf-ConsultaReciboEvento", new InfSchema()
+            {
+                Tag = "ConsultaReciboEvento",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "EFDReinf - XML de Consultas do EFDReinf",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+
+            #endregion Consultas do EFDReinf
         }
     }
 }

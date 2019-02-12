@@ -2018,5 +2018,15 @@ namespace NFe.Components.Properties {
                     "s"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://canedo.bsit-br.com.br/integracao/services/nfseWS")]
+        public string NFe_Components_PSenadorCanedoGO_nfseWS {
+            get {
+                return ((string)(this["NFe_Components_PSenadorCanedoGO_nfseWS"]));
+            }
+        }
     }
 }

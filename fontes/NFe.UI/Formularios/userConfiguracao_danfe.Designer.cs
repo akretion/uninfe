@@ -78,9 +78,9 @@
             this.metroLabel37.Location = new System.Drawing.Point(3, 298);
             this.metroLabel37.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel37.Name = "metroLabel37";
-            this.metroLabel37.Size = new System.Drawing.Size(432, 15);
+            this.metroLabel37.Size = new System.Drawing.Size(436, 15);
             this.metroLabel37.TabIndex = 12;
-            this.metroLabel37.Text = "XML´s a serem copiados na pasta para impressão do DANFE a partir do DANFeMon";
+            this.metroLabel37.Text = "XML´s a serem copiados na pasta para impressão do DANFE a partir do DANFE Mon";
             // 
             // metroLabel36
             // 
@@ -145,7 +145,7 @@
             this.metroLabel34.Location = new System.Drawing.Point(27, 203);
             this.metroLabel34.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel34.Name = "metroLabel34";
-            this.metroLabel34.Size = new System.Drawing.Size(117, 15);
+            this.metroLabel34.Size = new System.Drawing.Size(115, 15);
             this.metroLabel34.TabIndex = 6;
             this.metroLabel34.Text = "NFe/MDFe/CTe/NFCe";
             // 
@@ -156,10 +156,10 @@
             this.metroLabel33.Location = new System.Drawing.Point(3, 250);
             this.metroLabel33.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel33.Name = "metroLabel33";
-            this.metroLabel33.Size = new System.Drawing.Size(502, 15);
+            this.metroLabel33.Size = new System.Drawing.Size(505, 15);
             this.metroLabel33.TabIndex = 10;
             this.metroLabel33.Text = "Pasta onde deve ser gravado o XML para a impressão do documento fiscal a partir d" +
-    "o DANFeMon";
+    "o DANFE Mon";
             // 
             // metroLabel32
             // 
@@ -168,9 +168,9 @@
             this.metroLabel32.Location = new System.Drawing.Point(3, 139);
             this.metroLabel32.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel32.Name = "metroLabel32";
-            this.metroLabel32.Size = new System.Drawing.Size(253, 15);
+            this.metroLabel32.Size = new System.Drawing.Size(252, 15);
             this.metroLabel32.TabIndex = 3;
-            this.metroLabel32.Text = "Pasta do arquivo de configurações do UniDANFe";
+            this.metroLabel32.Text = "Pasta do arquivo de configurações do UniDANFE";
             // 
             // metroLabel31
             // 
@@ -179,9 +179,9 @@
             this.metroLabel31.Location = new System.Drawing.Point(3, 98);
             this.metroLabel31.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel31.Name = "metroLabel31";
-            this.metroLabel31.Size = new System.Drawing.Size(179, 15);
+            this.metroLabel31.Size = new System.Drawing.Size(178, 15);
             this.metroLabel31.TabIndex = 1;
-            this.metroLabel31.Text = "Pasta do executável do UniDANFe";
+            this.metroLabel31.Text = "Pasta do executável do UniDANFE";
             // 
             // tbTextoDANFE
             // 
