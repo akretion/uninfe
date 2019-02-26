@@ -429,6 +429,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.PRODATA:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.PRODATA);
                         cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
                         break;
 

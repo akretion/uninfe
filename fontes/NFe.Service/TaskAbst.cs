@@ -1366,6 +1366,14 @@ namespace NFe.Service
                         case Servicos.NFSeConsultarURLSerie:
                             retorna = "";
                             break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+
+                        case Servicos.NFSeConsultarNFSePDF:
+                            retorna = "ConsultarNotapdf";
+                            break;
                     }
                     break;
 
@@ -3131,6 +3139,7 @@ namespace NFe.Service
                     break;
 
                 case PadroesNFSe.CARIOCA:
+                case PadroesNFSe.PRODATA:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
                     {
                         switch (doc.DocumentElement.Name)

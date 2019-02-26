@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using NFe.Components;
+﻿using NFe.Components;
 
 namespace NFSe.Components
 {
@@ -31,7 +27,7 @@ namespace NFSe.Components
                 ArquivoXSD = "NFSe\\ABRASF\\nfse_v2_01.xsd",
                 Descricao = "XML de Lote RPS",
                 TagAssinatura = "Rps",
-                TagAtributoId = "InfRps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
                 TagLoteAssinatura = "EnviarLoteRpsEnvio",
                 TagLoteAtributoId = "LoteRps",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
@@ -58,6 +54,32 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\ABRASF\\nfse_v2_01.xsd",
                 Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-PRODATA-GerarNfseEnvio", new InfSchema()
+            {
+                Tag = "GerarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ABRASF\\nfse_v2_01.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion
+
+            #region XML de consulta NFSe em PDF
+            SchemaXML.InfSchemas.Add("NFSE-PRODATA-ConsultarNotaPdfEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNotaPdfEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ABRASF\\nfse_v2_01.xsd",
+                Descricao = "XML de consulta da NFSe em PDF padrão GIF",
                 TagAssinatura = "",
                 TagAtributoId = "",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"

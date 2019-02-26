@@ -28,6 +28,7 @@ namespace NFe.Components.Fiorilli
                             case 3522802: //Itaporanga-SP
                             case 3512902: //Cosmorama-SP
                             case 3553807: //Taquarituba-SP
+                            case 3500501: //Águas de Lindóia-SP
                                 fiorilliService = new TaquaraSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
@@ -129,6 +130,10 @@ namespace NFe.Components.Fiorilli
 
                             case 3544004: //Rio das Pedras-SP
                                 fiorilliService = new RioPedrasSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 3500501: //Águas de Lindóia - SP
+                                fiorilliService = new AguasDeLindoiaSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             default:

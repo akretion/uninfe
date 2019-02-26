@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.IO;
-using System.Xml;
-
+﻿using NFe.Certificado;
 using NFe.Components;
 using NFe.Settings;
-using NFe.Certificado;
-using NFSe.Components;
+using System;
+using System.IO;
+using System.Xml;
 
 namespace NFe.Service.NFSe
 {
@@ -44,6 +39,13 @@ namespace NFe.Service.NFSe
                 object pedNfsePNG = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 string cabecMsg = "";
 
+                switch (padraoNFSe)
+                {
+                    case PadroesNFSe.PRODATA:
+                        cabecMsg = "<cabecalho><versaoDados>2.01</versaoDados></cabecalho>";
+                        break;
+                }
+
                 System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosPedNfsePDF.cMunicipio, oDadosPedNfsePDF.tpAmb, oDadosPedNfsePDF.tpEmis, padraoNFSe, Servico);
 
                 //Assinar o XML
@@ -52,8 +54,8 @@ namespace NFe.Service.NFSe
 
                 //Invocar o método que envia o XML para o municipio
                 oInvocarObj.InvocarNFSe(wsProxy, pedNfsePNG, NomeMetodoWS(Servico, oDadosPedNfsePDF.cMunicipio), cabecMsg, this,
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML,   //"-ped-nfsepdf", 
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).RetornoXML,   //"-nfsepdf", 
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML,   
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).RetornoXML, 
                                         padraoNFSe, Servico, securityProtocolType);
 
                 ConvertBase64ToPDF(emp, padraoNFSe);
@@ -63,7 +65,9 @@ namespace NFe.Service.NFSe
                                                 Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML) +
                                                 Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).RetornoXML);
                 if (File.Exists(filenameFTP))
+                {
                     new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
+                }
             }
             catch (Exception ex)
             {
@@ -114,7 +118,9 @@ namespace NFe.Service.NFSe
             arqPDF = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, arqPDF.Replace(".xml", ".pdf"));
 
             if (File.Exists(arqPDF))
+            {
                 File.Delete(arqPDF);
+            }
 
             BinaryWriter writer = null;
 
@@ -124,15 +130,20 @@ namespace NFe.Service.NFSe
 
                 MemoryStream msXml = Functions.StringXmlToStream(vStrXmlRetorno);
                 XmlDocument doc = new XmlDocument();
-                doc.Load(msXml);                
+                doc.Load(msXml);
 
                 switch (padraoNFSe)
                 {
                     case PadroesNFSe.GIF:
                         if (doc.GetElementsByTagName("NFS-ePDF")[0] != null)
+                        {
                             base64BinaryStr = doc.GetElementsByTagName("NFS-ePDF")[0].InnerText;
+                        }
                         else
+                        {
                             throw new Exception("Não foi possível localizar a tag <NFS-ePDF> no xml retornado pela prefeitura, sendo assim, o arquivo PDF da NFS-e não foi gerado.");
+                        }
+
                         break;
                 }
 
@@ -144,7 +155,9 @@ namespace NFe.Service.NFSe
             finally
             {
                 if (writer != null)
+                {
                     writer.Close();
+                }
             }
         }
         #endregion

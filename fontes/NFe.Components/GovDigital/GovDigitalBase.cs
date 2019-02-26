@@ -68,6 +68,10 @@ namespace NFe.Components.GovDigital
                                 govDigitalService = new HAndradasMG.NfseServiceImpleAndradasService();
                                 break;
 
+                            case 3550605: //São Roque-SP
+                                govDigitalService = new HSaoRoqueSP.NfseServiceImplSaoRoqueService();
+                                break;
+
                             default:
                                 break;
                         }
@@ -114,6 +118,10 @@ namespace NFe.Components.GovDigital
 
                             case 3102605: //Andradas-MG
                                 govDigitalService = new PAndradasMG.NfseServiceImpleAndradasService();
+                                break;
+
+                            case 3550605: //São Roque-SP
+                                govDigitalService = new PSaoRoqueSP.NfseServiceImplSaoRoqueService();
                                 break;
 
                             default:

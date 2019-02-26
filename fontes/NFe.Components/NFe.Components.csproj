@@ -182,6 +182,8 @@
     <Compile Include="EL\IconhaES\p\ELP.cs" />
     <Compile Include="EL\SaoJoaoParaisoMG\p\ELP.cs" />
     <Compile Include="EL\TaiobeirasMG\p\ELP.cs" />
+    <Compile Include="Fiorilli\AguasDeLindoiaSP\h\FiorilliH.cs" />
+    <Compile Include="Fiorilli\AguasDeLindoiaSP\p\FiorilliP.cs" />
     <Compile Include="Fiorilli\AssisSP\p\FiorilliP.cs" />
     <Compile Include="Fiorilli\CorumbaMS\h\FiorilliH.cs" />
     <Compile Include="Fiorilli\CorumbaMS\p\FiorilliP.cs" />
@@ -525,6 +527,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\br.com.fgmaiss.www.p.penapolis.consulta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1074,6 +1081,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\HSaoRoqueSP\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\HSerafinaCorreaRS\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1396,6 +1408,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\PSaoPauloSP\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PSaoRoqueSP\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1851,6 +1868,41 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\br.com.fgmaiss.www.p.penapolis.consulta\wsnfeconsulta.wsdl" />
+    <None Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\ConsultarNfseFaixaResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\ConsultarNfseServicoPrestadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\ConsultarNfseServicoTomadoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\EnviarLoteRpsSincronoResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\GerarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\IssWebWS.wsdl" />
+    <None Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\SubstituirNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\br.com.fiorilli.avaresp.p\CancelarNfseResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -3727,6 +3779,14 @@
     <None Include="Web References\HSaoJoaoMeritiRJ\tcRetornoNota.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\HSaoRoqueSP\NfseServiceImplSaoRoqueService.wsdl" />
+    <None Include="Web References\HSaoRoqueSP\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\HSaoRoqueSP\saoRoque.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web References\HSerafinaCorreaRS\CancelarNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -4653,6 +4713,14 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\PSaoRoqueSP\NfseServiceImplSaoRoqueService.wsdl" />
+    <None Include="Web References\PSaoRoqueSP\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PSaoRoqueSP\saoRoque.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web References\PSenadorCanedoGO\nfseWS.wsdl" />
     <None Include="Web References\PSenadorCanedoGO\nfseWS0.wsdl" />
     <None Include="Web References\PSenadorCanedoGO\Reference.map">
@@ -5465,6 +5533,28 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_gov_sp_presidenteprudente_sistemas_www_p_NfseService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="D:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HSaoRoqueSP-GOVDIGITAL.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HSaoRoqueSP\</RelPath>
+      <UpdateFromURL>D:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HSaoRoqueSP-GOVDIGITAL.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_HSaoRoqueSP_NfseServiceImplSaoRoqueService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="D:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSaoRoqueSP-GOVDIGITAL.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PSaoRoqueSP\</RelPath>
+      <UpdateFromURL>D:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSaoRoqueSP-GOVDIGITAL.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PSaoRoqueSP_NfseServiceImplSaoRoqueService</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://187.45.245.217/ws_nfse/nfseservice.svc%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.gov.sp.piracicaba.sistemas.www.h\</RelPath>
@@ -5541,6 +5631,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_net_cosmorama_fiorilli_p_IssWebWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://191.209.11.231:5661/IssWeb-ejb/IssWebWS/IssWebWS%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.fiorilli.aguasdelindoiasp.p\</RelPath>
+      <UpdateFromURL>http://191.209.11.231:5661/IssWeb-ejb/IssWebWS/IssWebWS%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_fiorilli_aguasdelindoiasp_p_IssWebWS</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://200.162.29.193:8080/axis2/services/eISSWService%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

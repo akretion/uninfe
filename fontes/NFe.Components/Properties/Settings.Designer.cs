@@ -12,7 +12,7 @@ namespace NFe.Components.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -2026,6 +2026,36 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PSenadorCanedoGO_nfseWS {
             get {
                 return ((string)(this["NFe_Components_PSenadorCanedoGO_nfseWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://191.209.11.231:5661/IssWeb-ejb/IssWebWS/IssWebWS")]
+        public string NFe_Components_br_com_fiorilli_aguasdelindoiasp_p_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_br_com_fiorilli_aguasdelindoiasp_p_IssWebWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.govdigital.com.br:443/ws/saoRoque")]
+        public string NFe_Components_HSaoRoqueSP_NfseServiceImplSaoRoqueService {
+            get {
+                return ((string)(this["NFe_Components_HSaoRoqueSP_NfseServiceImplSaoRoqueService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.govdigital.com.br:443/ws/saoRoque")]
+        public string NFe_Components_PSaoRoqueSP_NfseServiceImplSaoRoqueService {
+            get {
+                return ((string)(this["NFe_Components_PSaoRoqueSP_NfseServiceImplSaoRoqueService"]));
             }
         }
     }
