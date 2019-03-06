@@ -35,7 +35,8 @@ namespace NFe.UI
             _tpEmpresa_pastas,
             _tpEmpresa_cert,
             _tpEmpresa_ftp,
-            _tpEmpresa_sat;
+            _tpEmpresa_sat,
+            _tpEmpresa_resptecnico;
 
         private string empcnpj = "";
         private TipoAplicativo servico;
@@ -47,6 +48,7 @@ namespace NFe.UI
         private Formularios.userConfiguracao_geral uc_geral = null;
         public Formularios.UserConfiguracaoPastas uce_pastas;
         private Formularios.userConfiguracao_sat uce_sat;
+        private Formularios.userConfiguracao_resptecnico uce_resptecnico;
         private Empresa currentEmpresa;
         private TipoAplicativo servicoCurrent;
 
@@ -107,6 +109,20 @@ namespace NFe.UI
                     uce_sat.changeEvent += changed_Modificado;
                     tpage.Controls.Add(uce_sat);
                     break;
+
+                case 6:
+                    tpage.Text = "Responsável Técnico";
+                    uce_resptecnico = new Formularios.userConfiguracao_resptecnico();
+                    uce_resptecnico.changeEvent += changed_Modificado;
+                    tpage.Controls.Add(uce_resptecnico);
+                    break;
+
+                    /*
+                    tpage.Text = "Responsável Técnico";
+                    uce_resptecnico = new Formularios.userConfiguracao_resptecnico();
+                    uce_resptecnico.changeEvent += changed_Modificado;
+                    tpage.Controls.Add(uce_resptecnico);
+                    */
             }
             tpage.Controls[tpage.Controls.Count - 1].Dock = DockStyle.Fill;
 
@@ -145,11 +161,12 @@ namespace NFe.UI
                 };
                 tc_empresa.Selected += (_sender, _e) =>
                 {
-                    if (_e.TabPage == _tpEmpresa_ftp) uce_ftp.FocusFirstControl();
                     if (_e.TabPage == _tpEmpresa_pastas) uce_pastas.FocusFirstControl();
-                    if (_e.TabPage == _tpEmpresa_danfe) uce_danfe.FocusFirstControl();
                     if (_e.TabPage == _tpEmpresa_cert) uce_cert.FocusFirstControl();
+                    if (_e.TabPage == _tpEmpresa_ftp) uce_ftp.FocusFirstControl();
+                    if (_e.TabPage == _tpEmpresa_danfe) uce_danfe.FocusFirstControl();
                     if (_e.TabPage == _tpEmpresa_sat) uce_sat.FocusFirstControl();
+                    if (_e.TabPage == _tpEmpresa_resptecnico) uce_resptecnico.FocusFirstControl();
                 };
 
                 tc_main.SelectedIndex = 1;
@@ -177,6 +194,7 @@ namespace NFe.UI
                 tc_empresa.TabPages.Add(_tpEmpresa_ftp = createtpage(3));
                 tc_empresa.TabPages.Add(_tpEmpresa_danfe = createtpage(4));
                 tc_empresa.TabPages.Add(_tpEmpresa_sat = createtpage(5));
+                tc_empresa.TabPages.Add(_tpEmpresa_resptecnico = createtpage(6));
                 uc_geral = new Formularios.userConfiguracao_geral();
                 tpGeral.Controls.Add(uc_geral);
             }
@@ -514,8 +532,8 @@ namespace NFe.UI
                 switch (currentEmpresa.Servico)
                 {
                     case TipoAplicativo.SAT:
-                        uce_danfe.Validar();
                         uce_ftp.Validar();
+                        uce_danfe.Validar();
                         uce_sat.Validar();
                         break;
                     case TipoAplicativo.Nfse:
@@ -525,15 +543,17 @@ namespace NFe.UI
                         uce_cert.Validar();
                         break;
                     case TipoAplicativo.Nfe:
-                    case TipoAplicativo.Cte:
-                    case TipoAplicativo.MDFe:
                     case TipoAplicativo.NFCe:
                     case TipoAplicativo.Todos:
-                    case TipoAplicativo.Nulo:
+                        uce_cert.Validar();
+                        uce_ftp.Validar();
+                        uce_danfe.Validar();
+                        uce_resptecnico.Validar();
+                        break;
                     default:
                         uce_cert.Validar();
-                        uce_danfe.Validar();
                         uce_ftp.Validar();
+                        uce_danfe.Validar();
                         break;
                 }
             }
@@ -834,21 +854,23 @@ namespace NFe.UI
                 case TipoAplicativo.Nfse:
                     uce_divs.Populate(empresa, novaempresa);
                     uce_pastas.Populate(empresa);
-                    uce_ftp.Populate(empresa);
                     uce_cert.Populate(empresa);
+                    uce_ftp.Populate(empresa);
                     _tpEmpresa_cert.Parent = tc_empresa;
                     _tpEmpresa_ftp.Parent = tc_empresa;
                     _tpEmpresa_danfe.Parent = null;
                     _tpEmpresa_sat.Parent = null;
+                    _tpEmpresa_resptecnico.Parent = null;
                     break;
                 case TipoAplicativo.SAT:
                     uce_divs.Populate(empresa, novaempresa);
                     uce_pastas.Populate(empresa);
                     uce_ftp.Populate(empresa);
                     uce_danfe.Populate(empresa);
-                    _tpEmpresa_sat.Parent = tc_empresa;
                     uce_sat.Populate(empresa);
+                    _tpEmpresa_sat.Parent = tc_empresa;
                     _tpEmpresa_cert.Parent = null;
+                    _tpEmpresa_resptecnico.Parent = null;
                     break;
                 case TipoAplicativo.EFDReinf:
                 case TipoAplicativo.eSocial:
@@ -858,19 +880,36 @@ namespace NFe.UI
                     uce_cert.Populate(empresa);
                     _tpEmpresa_cert.Parent = tc_empresa;
                     _tpEmpresa_ftp.Parent = null;
-                    _tpEmpresa_sat.Parent = null;
                     _tpEmpresa_danfe.Parent = null;
+                    _tpEmpresa_sat.Parent = null;
+                    _tpEmpresa_resptecnico.Parent = null;
+                    break;
+                case TipoAplicativo.Nfe:
+                case TipoAplicativo.NFCe:
+                case TipoAplicativo.Todos:
+                    uce_divs.Populate(empresa, novaempresa);
+                    uce_pastas.Populate(empresa);
+                    uce_cert.Populate(empresa);
+                    uce_ftp.Populate(empresa);
+                    uce_danfe.Populate(empresa);
+                    uce_resptecnico.Populate(empresa);
+                    _tpEmpresa_cert.Parent = tc_empresa;
+                    _tpEmpresa_ftp.Parent = tc_empresa;
+                    _tpEmpresa_danfe.Parent = tc_empresa;
+                    _tpEmpresa_resptecnico.Parent = tc_empresa;
+                    _tpEmpresa_sat.Parent = null;
                     break;
                 default:
                     uce_divs.Populate(empresa, novaempresa);
                     uce_pastas.Populate(empresa);
-                    uce_ftp.Populate(empresa);
                     uce_cert.Populate(empresa);
+                    uce_ftp.Populate(empresa);
                     uce_danfe.Populate(empresa);
                     _tpEmpresa_cert.Parent = tc_empresa;
-                    _tpEmpresa_danfe.Parent = tc_empresa;
                     _tpEmpresa_ftp.Parent = tc_empresa;
+                    _tpEmpresa_danfe.Parent = tc_empresa;
                     _tpEmpresa_sat.Parent = null;
+                    _tpEmpresa_resptecnico.Parent = null;
                     break;
             }
         }

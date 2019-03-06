@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -193,6 +193,12 @@
     </Compile>
     <Compile Include="Formularios\userConfiguracao_diversos.Designer.cs">
       <DependentUpon>userConfiguracao_diversos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_resptecnico.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_resptecnico.Designer.cs">
+      <DependentUpon>userConfiguracao_resptecnico.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\userConfiguracao_sat.cs">
       <SubType>UserControl</SubType>
@@ -389,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\userConfiguracao_diversos.resx">
       <DependentUpon>userConfiguracao_diversos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userConfiguracao_resptecnico.resx">
+      <DependentUpon>userConfiguracao_resptecnico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\userConfiguracao_sat.resx">
       <DependentUpon>userConfiguracao_sat.cs</DependentUpon>

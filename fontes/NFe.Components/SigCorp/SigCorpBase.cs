@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NFe.Components.Abstract;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.IO;
-using System.Xml.Serialization;
-using System.Xml;
+﻿using NFe.Components.Abstract;
+using System;
 
 namespace NFe.Components.SigCorp
 {
     public abstract class SigCorpBase : EmiteNFSeBase
     {
         #region locais/ protegidos
+
         int CodigoMun = 0;
         EmiteNFSeBase sigCorpService;
+
         protected EmiteNFSeBase SigCorpService
         {
             get
@@ -65,6 +59,10 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new SaoJoaoMeritiRJ.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
+                            case 3303906: //Petrópolis-RJ
+                                sigCorpService = new PetropolisRJ.h.SigCorpH(tpAmb, PastaRetorno);
+                                break;
+
                             default:
                                 throw new Exception("Município não possui ambiente de homologação (padrão SIGCORP/SIGISS).");
                         }
@@ -83,7 +81,7 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new BotucatuSP.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
-                            case 4113700: //Londrina-PR 
+                            case 4113700: //Londrina-PR
                                 sigCorpService = new LondrinaPR.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
@@ -119,6 +117,10 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new SaoJoaoMeritiRJ.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
+                            case 3303906: //Petrópolis-RJ
+                                sigCorpService = new PetropolisRJ.p.SigCorpP(tpAmb, PastaRetorno);
+                                break;
+
                             default:
                                 throw new Exception("Município não implementado para o ambiente de produção no padrão SIGCORP/SIGISS.");
                         }
@@ -126,17 +128,21 @@ namespace NFe.Components.SigCorp
                 return sigCorpService;
             }
         }
-        #endregion
+
+        #endregion locais/ protegidos
 
         #region Construtores
+
         public SigCorpBase(TipoAmbiente tpAmb, string pastaRetorno, int codMun)
             : base(tpAmb, pastaRetorno)
         {
             CodigoMun = codMun;
         }
-        #endregion
+
+        #endregion Construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
             SigCorpService.EmiteNF(file);
@@ -166,8 +172,7 @@ namespace NFe.Components.SigCorp
         {
             SigCorpService.ConsultarNfsePorRps(file);
         }
-        #endregion
 
-
+        #endregion Métodos
     }
 }

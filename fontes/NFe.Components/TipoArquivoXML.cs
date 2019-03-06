@@ -159,6 +159,10 @@ namespace NFe.Components
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3554300-";
                                 break;
 
+                            case 3303609: //Paracambi-RJ
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3303609-";
+                                break;
+
                             default:
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                                 break;

@@ -4481,6 +4481,13 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PSantoAntonioPatrulha-NFSEcancelamento.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSantoAntonioPatrulha-NFSEconsulta.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSantoAntonioPatrulha-NFSEremessa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HParacambiRJ-FINTEL.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PParacambiRJ-FINTEL.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPetropolisRJ-SIGCORP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPetropolisRJ-SIGCORP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItaquaquecetubaSP-WSEntrada.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItaquaquecetubaSP-WSSaida.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItaquaquecetubaSP-WSUtil.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

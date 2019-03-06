@@ -463,6 +463,36 @@ namespace NFe.Settings
         [AttributeTipoAplicacao(TipoAplicativo.Nfse)]
         public string TokenNFse { get; set; }
 
+        /// <summary>
+        /// CNPJ do responsável técnico
+        /// </summary>
+        public string RespTecCNPJ { get; set; }
+
+        /// <summary>
+        /// Nome do contato do responsável técnico
+        /// </summary>
+        public string RespTecXContato { get; set; }
+
+        /// <summary>
+        /// E-mail do responsável técnico
+        /// </summary>
+        public string RespTecEmail { get; set; }
+
+        /// <summary>
+        /// Telefone do responsável técnico
+        /// </summary>
+        public string RespTecTelefone { get; set; }
+
+        /// <summary>
+        /// Identificador do CSRT do responsável técnico
+        /// </summary>
+        public string RespTecIdCSRT { get; set; }
+
+        /// <summary>
+        /// Número do CSRT do responsável técnico
+        /// </summary>
+        public string RespTecCSRT { get; set; }
+
         #endregion
 
         #endregion

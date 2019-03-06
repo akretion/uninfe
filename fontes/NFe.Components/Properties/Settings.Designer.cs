@@ -12,7 +12,7 @@ namespace NFe.Components.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -2056,6 +2056,46 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PSaoRoqueSP_NfseServiceImplSaoRoqueService {
             get {
                 return ((string)(this["NFe_Components_PSaoRoqueSP_NfseServiceImplSaoRoqueService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://nfse.regentefeijo.sp.gov.br:81/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PRegenteFeijoSP_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PRegenteFeijoSP_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://nfse.regentefeijo.sp.gov.br:81/NFSe.Portal.Integracao.Teste/Services.svc")]
+        public string NFe_Components_HRegenteFeijoSP_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_HRegenteFeijoSP_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://testepetropolis.sigiss.com.br:443/testepetropolis/ws/sigiss_ws.php")]
+        public string NFe_Components_HPetropolisRJ_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_HPetropolisRJ_WebService_SigISS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://petropolis.sigiss.com.br:443/petropolis/ws/sigiss_ws.php")]
+        public string NFe_Components_PPetropolisRJ_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_PPetropolisRJ_WebService_SigISS"]));
             }
         }
     }

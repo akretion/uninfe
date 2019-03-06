@@ -605,5 +605,17 @@
     <Setting Name="NFe_Components_PSaoRoqueSP_NfseServiceImplSaoRoqueService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://ws.govdigital.com.br:443/ws/saoRoque</Value>
     </Setting>
+    <Setting Name="NFe_Components_PRegenteFeijoSP_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nfse.regentefeijo.sp.gov.br:81/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HRegenteFeijoSP_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nfse.regentefeijo.sp.gov.br:81/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HPetropolisRJ_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://testepetropolis.sigiss.com.br:443/testepetropolis/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPetropolisRJ_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://petropolis.sigiss.com.br:443/petropolis/ws/sigiss_ws.php</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

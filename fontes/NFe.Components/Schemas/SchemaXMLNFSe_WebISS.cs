@@ -107,7 +107,7 @@ namespace NFSe.Components
             {
                 Tag = "EnviarLoteRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "", //"NFSe\\WEBISS\\servico_enviar_lote_rps_envio.xsd",
+                ArquivoXSD = "",
                 Descricao = "XML de Lote RPS",
                 TagLoteAssinatura = "EnviarLoteRpsEnvio",
                 TagLoteAtributoId = "LoteRps",
@@ -124,7 +124,7 @@ namespace NFSe.Components
             {
                 Tag = "EnviarLoteRpsSincronoEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "", //"NFSe\\WEBISS\\servico_enviar_lote_rps_envio.xsd",
+                ArquivoXSD = "",
                 Descricao = "XML de Lote RPS",
                 TagLoteAssinatura = "EnviarLoteRpsSincronoEnvio",
                 TagLoteAtributoId = "LoteRps",
@@ -141,10 +141,10 @@ namespace NFSe.Components
             {
                 Tag = "CancelarNfseEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "", //"NFSe\\WEBISS\\servico_cancelar_nfse_envio.xsd",
+                ArquivoXSD = "",
                 Descricao = "XML de Cancelamento da NFS-e",
-                TagAssinatura = "",
-                TagAtributoId = "",
+                TagAssinatura = "Pedido",
+                TagAtributoId = "InfPedidoCancelamento",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse"
             });
 
@@ -156,7 +156,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarNfseRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "", //"NFSe\\WEBISS\\servico_consultar_nfse_rps_envio.xsd",
+                ArquivoXSD = "",
                 Descricao = "XML de Consulta da NFSe por RPS",
                 TagAssinatura = "",
                 TagAtributoId = "",
@@ -171,7 +171,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarNfseEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "", //NFSe\\WEBISS\\servico_consultar_nfse_envio.xsd",
+                ArquivoXSD = "",
                 Descricao = "XML de Consulta da NFSe por período",
                 TagAssinatura = "",
                 TagAtributoId = "",
@@ -182,7 +182,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarNfseFaixaEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "", //NFSe\\WEBISS\\servico_consultar_nfse_envio.xsd",
+                ArquivoXSD = "",
                 Descricao = "XML de Consulta da NFSe por período",
                 TagAssinatura = "",
                 TagAtributoId = "",
@@ -197,7 +197,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarLoteRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "", //"NFSe\\WEBISS\\servico_consultar_lote_rps_envio.xsd",
+                ArquivoXSD = "",
                 Descricao = "XML de Consulta de Lote RPS",
                 TagAssinatura = "",
                 TagAtributoId = "",
@@ -212,7 +212,7 @@ namespace NFSe.Components
             {
                 Tag = "ConsultarSituacaoLoteRpsEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "", //"NFSe\\WEBISS\\servico_consultar_situacao_lote_rps_envio.xsd",
+                ArquivoXSD = "",
                 Descricao = "XML de Consulta da Situacao do Lote RPS",
                 TagAssinatura = "",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse"

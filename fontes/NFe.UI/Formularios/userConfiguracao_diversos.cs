@@ -447,7 +447,8 @@ namespace NFe.UI.Formularios
                            ufCod == 4302105 /*Bento Gonçalves-RS*/ ||
                            ufCod == 4207502 /*Indaial-SC*/ ||
                            ufCod == 4211801 /*Ouro-SC*/ ||
-                           ufCod == 3500501 /*Aguas de Lindoia-SP*/;
+                           ufCod == 3500501 /*Aguas de Lindoia-SP*/ ||
+                           ufCod == 3523107 /*Itaquaquecetuba-SP*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }

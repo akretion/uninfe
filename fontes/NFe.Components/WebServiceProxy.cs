@@ -171,7 +171,8 @@ namespace NFe.Components
                                     cMunicipio == 3530300 ||
                                     cMunicipio == 4308904 ||
                                     cMunicipio == 4118501 ||
-                                    cMunicipio == 3554300)
+                                    cMunicipio == 3554300 ||
+                                    cMunicipio == 3542404)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -184,7 +185,8 @@ namespace NFe.Components
                                     cMunicipio == 3512803 ||
                                     cMunicipio == 4308904 ||
                                     cMunicipio == 4118501 || 
-                                    cMunicipio == 3554300)
+                                    cMunicipio == 3554300 ||
+                                    cMunicipio == 3542404)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";

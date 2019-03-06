@@ -543,9 +543,6 @@ namespace NFe.Validate
                             case TipoEmissao.teFS:
                             case TipoEmissao.teEPEC:
                             case TipoEmissao.teFSDA:
-                            case TipoEmissao.teSVCAN:
-                            case TipoEmissao.teSVCRS:
-                            case TipoEmissao.teSVCSP:
                             case TipoEmissao.teOffLine:
                                 var dhCont = conteudoXML.GetElementsByTagName("dhCont")[0]?.InnerText;
                                 var xJust = conteudoXML.GetElementsByTagName("xJust")[0]?.InnerText;

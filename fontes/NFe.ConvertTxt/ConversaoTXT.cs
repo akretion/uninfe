@@ -1291,7 +1291,7 @@ namespace NFe.ConvertTxt
                     NFe.det.Add(new Det());
                     nProd = NFe.det.Count - 1;
                     NFe.det[nProd].Prod.nItem = this.LerInt32(TpcnResources.NItem, ObOp.Obrigatorio, 1, 3);
-                    NFe.det[nProd].infAdProd = this.LerString(TpcnResources.infAdProd, ObOp.Opcional, 0, 500);
+                    NFe.det[nProd].infAdProd = this.LerString(TpcnResources.infAdProd, ObOp.Opcional, 0, 500, false);
                     break;
 
                 case "I":
