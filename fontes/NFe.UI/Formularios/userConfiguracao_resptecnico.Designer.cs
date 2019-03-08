@@ -161,6 +161,7 @@
             this.txtIdCSRT.TabIndex = 9;
             this.txtIdCSRT.UseSelectable = true;
             this.txtIdCSRT.TextChanged += new System.EventHandler(this.txtIdCSRT_TextChanged);
+            this.txtIdCSRT.Leave += new System.EventHandler(this.txtIdCSRT_Leave);
             // 
             // lblIdCSRT
             // 

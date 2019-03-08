@@ -119,5 +119,14 @@ namespace NFe.UI.Formularios
                 txtCnpj.Focus();
             }
         }
+
+        private void txtIdCSRT_Leave(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(txtIdCSRT.Text) || Convert.ToInt32(txtIdCSRT.Text) <= 0)
+            {
+                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "ID do CSRT inválido", "UniNFe");
+                txtIdCSRT.Focus();
+            }
+        }
     }
 }

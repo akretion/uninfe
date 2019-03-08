@@ -110,13 +110,7 @@ namespace NFe.Service
             infRespTecnico.AppendChild(fone);
             infRespTecnico.AppendChild(idCSRT);
             infRespTecnico.AppendChild(csrt);
-
-            var infNFeSupl = ConteudoXML.GetElementsByTagName("infNFeSupl")[0];
-
-            if (infNFeSupl == null)
-                infNFe.AppendChild(infRespTecnico);
-            else
-                infNFe.InsertBefore(infRespTecnico, infNFeSupl);
+            infNFe.AppendChild(infRespTecnico);
 
             ConteudoXML.Save(NomeArquivoXML);
         }
