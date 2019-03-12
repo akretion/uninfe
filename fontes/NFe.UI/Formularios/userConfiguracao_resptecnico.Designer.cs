@@ -46,7 +46,7 @@
             // 
             this.lblCnpj.AutoSize = true;
             this.lblCnpj.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblCnpj.Location = new System.Drawing.Point(11, 16);
+            this.lblCnpj.Location = new System.Drawing.Point(11, 17);
             this.lblCnpj.Name = "lblCnpj";
             this.lblCnpj.Size = new System.Drawing.Size(33, 15);
             this.lblCnpj.TabIndex = 0;

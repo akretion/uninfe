@@ -21,7 +21,7 @@ namespace NFe.UI.Formularios
             this.empresa = empresa;
             uninfeDummy.ClearControls(this, true, false);
 
-            txtCnpj.Text = string.IsNullOrEmpty(empresa.RespTecCNPJ) ? "" :  CNPJ.FormatCNPJ(empresa.RespTecCNPJ);
+            txtCnpj.Text = string.IsNullOrEmpty(empresa.RespTecCNPJ) ? "" : CNPJ.FormatCNPJ(empresa.RespTecCNPJ);
             txtContato.Text = empresa.RespTecXContato;
             txtEmail.Text = empresa.RespTecEmail;
             txtTelefone.Text = empresa.RespTecTelefone;
@@ -35,7 +35,7 @@ namespace NFe.UI.Formularios
             empresa.RespTecXContato = txtContato.Text;
             empresa.RespTecEmail = txtEmail.Text;
             empresa.RespTecTelefone = Functions.OnlyNumbers(txtTelefone.Text, "()-").ToString().Trim();
-            empresa.RespTecIdCSRT = txtIdCSRT.Text.PadLeft(2, '0');
+            empresa.RespTecIdCSRT = String.IsNullOrEmpty(txtIdCSRT.Text) ? txtIdCSRT.Text : txtIdCSRT.Text.PadLeft(2, '0');
             empresa.RespTecCSRT = txtCSRT.Text;
         }
 
@@ -122,10 +122,13 @@ namespace NFe.UI.Formularios
 
         private void txtIdCSRT_Leave(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(txtIdCSRT.Text) || Convert.ToInt32(txtIdCSRT.Text) <= 0)
+            if (!String.IsNullOrEmpty(txtIdCSRT.Text))
             {
-                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "ID do CSRT inválido", "UniNFe");
-                txtIdCSRT.Focus();
+                if (Convert.ToInt32(txtIdCSRT.Text) <= 0)
+                {
+                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "ID do CSRT inválido", "UniNFe");
+                    txtIdCSRT.Focus();
+                }
             }
         }
     }
