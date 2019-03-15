@@ -14,27 +14,29 @@ namespace NFe.Components.SOFTPLAN
         #region Privte Properties
 
         [JsonProperty(PropertyName = "access_token")]
-        private string AccessToken { get; set; }
+        public string AccessToken { get; set; }
 
         [JsonProperty(PropertyName = "token_type")]
-        private string TokenType { get; set; }
+        public string TokenType { get; set; }
 
         [JsonProperty(PropertyName = "refresh_token")]
-        private string RefreshToken { get; set; }
+        public string RefreshToken { get; set; }
 
         [JsonProperty(PropertyName = "expires_in")]
-        private int ExpiresIn { get; set; }
+        public double ExpiresIn { get; set; }
 
         [JsonProperty(PropertyName = "scope")]
-        private string Scope { get; set; }
+        public string Scope { get; set; }
 
         #endregion Privte Properties
 
         #region Public Methods
 
-        public static string GerarToken(IWebProxy proxy, string usuario, string senha, string clientID, string clientSecret, string url)
+        public static Token GerarToken(IWebProxy proxy, string usuario, string senha, string clientID, string clientSecret, string url)
         {
             string result = string.Empty;
+            var tokenResult = new Token();
+            senha = Criptografia.descriptografaSenha(senha);
 
             try
             {
@@ -53,7 +55,7 @@ namespace NFe.Components.SOFTPLAN
                     result = post.PostForm(Path.Combine(url, "autenticacao/oauth/token"), new Dictionary<string, string> {
                      {"grant_type", "password" },
                      {"username", usuario },
-                     {"password", senha },
+                     {"password", Functions.GerarMD5(senha).ToUpper() },
                      {"client_id", clientID},
                      {"client_secret", clientSecret}
                 }, autorizations);
@@ -64,14 +66,14 @@ namespace NFe.Components.SOFTPLAN
                 if (token.AccessToken == null)
                     throw new Exception("O token informado é inválido");
 
-                result = token.AccessToken;
+                tokenResult = token;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
-            return result;
+            return tokenResult;
         }
 
         #endregion Public Methods

@@ -943,6 +943,7 @@ namespace NFe.ConvertTxt
                         detInfo.Imposto.ICMS.pRedBCEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.pRedBCEfet);
                         detInfo.Imposto.ICMS.pICMSEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.pICMSEfet);
                         detInfo.Imposto.ICMS.vICMSEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSEfet);
+                        detInfo.Imposto.ICMS.vICMSSubstituto = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSSubstituto);
                     }
                 }
                 #endregion -->Imposto->ICMS

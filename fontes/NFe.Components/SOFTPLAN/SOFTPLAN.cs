@@ -1,4 +1,5 @@
 ﻿#if _fw46
+
 using Newtonsoft.Json;
 using NFe.Components.Abstract;
 using NFSe.Components;
@@ -26,6 +27,10 @@ namespace NFe.Components.SOFTPLAN
 
         public string ClientSecret { get; set; }
 
+        public string Token { get; set; }
+
+        public DateTime TokenExpire { get; set; }
+
         public string URLAPIBase
         {
             get
@@ -37,16 +42,19 @@ namespace NFe.Components.SOFTPLAN
             }
         }
 
-        public string Token { get; set; }
-
         #endregion Public Properties
 
         #region Public Construstor
 
-        public SOFTPLAN(TipoAmbiente tpAmb, string pastaRetorno, string token)
+        public SOFTPLAN(TipoAmbiente tpAmb, string pastaRetorno, string token, DateTime tokenExpire, string usuario, string senha, string clienteID, string clientSecret)
             : base(tpAmb, pastaRetorno)
         {
             Token = token;
+            TokenExpire = tokenExpire;
+            Usuario = usuario;
+            Senha = senha;
+            ClientID = clienteID;
+            ClientSecret = clientSecret;
         }
 
         #endregion Public Construstor
@@ -56,6 +64,11 @@ namespace NFe.Components.SOFTPLAN
         public override void CancelarNfse(string file)
         {
             string result = "";
+
+            TokenTimeExpire();
+
+            if (String.IsNullOrEmpty(Token))
+                throw new Exception("Token inválido");
 
             using (POSTRequest post = new POSTRequest
             {
@@ -122,6 +135,11 @@ namespace NFe.Components.SOFTPLAN
         {
             string result = "";
 
+            TokenTimeExpire();
+
+            if (String.IsNullOrEmpty(Token))
+                throw new Exception("Token inválido");
+
             using (POSTRequest post = new POSTRequest
             {
                 Proxy = Proxy
@@ -155,6 +173,17 @@ namespace NFe.Components.SOFTPLAN
             write.Flush();
             write.Close();
             write.Dispose();
+        }
+
+        private void TokenTimeExpire()
+        {
+            if (TokenExpire < DateTime.Now)
+            {
+                var token = Components.SOFTPLAN.Token.GerarToken(Proxy, Usuario, Senha, ClientID, ClientSecret, URLAPIBase);
+
+                Token = token.AccessToken;
+                TokenExpire = DateTime.Now.AddSeconds(token.ExpiresIn);
+            }
         }
 
         #endregion Public Methods

@@ -175,8 +175,18 @@ namespace NFe.UI.Formularios
 
                 txtSenhaWS.Text = this.empresa.SenhaWS;
                 txtUsuarioWS.Text = this.empresa.UsuarioWS;
-                txtClienteID.Text = this.empresa.ClientID;
-                txtClientSecret.Text = this.empresa.ClientSecret;
+
+                if (empresa.UnidadeFederativaCodigo.Equals(4205407))
+                {
+                    var result = empresa.RecuperarConfiguracaoNFSeSoftplan(empresa.CNPJ);
+
+                    txtClienteID.Text = result.ClientID;
+                    txtClientSecret.Text = result.ClientSecret;
+                    empresa.ClientID = result.ClientID;
+                    empresa.ClientSecret = result.ClientSecret;
+                    empresa.TokenNFse = result.TokenNFse;
+                    empresa.TokenNFSeExpire = result.TokenNFSeExpire;
+                }
 
                 HabilitaUsuarioSenhaWS(this.empresa.UnidadeFederativaCodigo);
                 servicoCurrent = this.empresa.Servico;
@@ -292,12 +302,14 @@ namespace NFe.UI.Formularios
 
             //Configurações para o município de Florianópolis-SC
 #if _fw46
-            if (edtCodMun.Text.Equals("4205407") &&
-                (!string.IsNullOrEmpty(txtUsuarioWS.Text) &&
-                !string.IsNullOrEmpty(txtSenhaWS.Text) &&
-                !string.IsNullOrEmpty(txtClienteID.Text) &&
-                !string.IsNullOrEmpty(txtClientSecret.Text)))
+            if (edtCodMun.Text.Equals("4205407"))
             {
+                if (string.IsNullOrEmpty(txtUsuarioWS.Text) ||
+                string.IsNullOrEmpty(txtSenhaWS.Text) ||
+                string.IsNullOrEmpty(txtClienteID.Text) ||
+                string.IsNullOrEmpty(txtClientSecret.Text))
+                    throw new Exception("As seguintes informações tem que estarem todas informadas: Usuário, Senha, ClientID e ClientSecret");
+
                 IWebProxy proxy = null;
 
                 if (ConfiguracaoApp.Proxy)
@@ -323,15 +335,22 @@ namespace NFe.UI.Formularios
                     url = @"https://nfps-e.pmf.sc.gov.br/api/v1/";
                 }
 
-                empresa.SenhaWS = txtSenhaWS.Text;
-                empresa.ClientID = txtClienteID.Text;
-                empresa.ClientSecret = txtClientSecret.Text;
-                empresa.TokenNFse = Token.GerarToken(proxy,
-                                                          txtUsuarioWS.Text,
-                                                          Functions.GerarMD5(txtSenhaWS.Text).ToUpper(),
-                                                          txtClienteID.Text,
-                                                          txtClientSecret.Text,
-                                                          url);
+                var token = Token.GerarToken(proxy,
+                                             txtUsuarioWS.Text,
+                                             txtSenhaWS.Text,
+                                             txtClienteID.Text,
+                                             txtClientSecret.Text,
+                                             url);
+
+                var tokenNFSeExpire = DateTime.Now.AddSeconds(token.ExpiresIn);
+
+                empresa.SalvarConfiguracoesNFSeSoftplan(txtUsuarioWS.Text,
+                                                        txtSenhaWS.Text,
+                                                        txtClienteID.Text,
+                                                        txtClientSecret.Text,
+                                                        token.AccessToken,
+                                                        tokenNFSeExpire,
+                                                        edtCNPJ.Text);
             }
 #endif
 

@@ -6,6 +6,7 @@ using System.Xml;
 using System.IO;
 using System.Threading;
 using NFe.Components;
+using System.Windows.Forms;
 
 namespace NFe.Settings
 {
@@ -449,19 +450,29 @@ namespace NFe.Settings
         /// Código da aplicação que está cadastrada para acessar os serviços REST do município de Florianópolis-SC
         /// </summary>
         [AttributeTipoAplicacao(TipoAplicativo.Nfse)]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string ClientID { get; set; }
 
         /// <summary>
         /// Código secreto da aplicação que está cadastrada para acessar os serviços REST do município de Florianópolis-SC
         /// </summary>
         [AttributeTipoAplicacao(TipoAplicativo.Nfse)]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string ClientSecret { get; set; }
 
         /// <summary>
         /// Token utilizado pela para acessar os serviços REST do município de Florianópolis-SC
         /// </summary>
         [AttributeTipoAplicacao(TipoAplicativo.Nfse)]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string TokenNFse { get; set; }
+
+        /// <summary>
+        /// Data e hora em que o token de acesso da nfse irá exiprar
+        /// </summary>
+        [AttributeTipoAplicacao(TipoAplicativo.Nfse)]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public DateTime TokenNFSeExpire { get; set; }
 
         /// <summary>
         /// CNPJ do responsável técnico
@@ -589,6 +600,15 @@ namespace NFe.Settings
 
                     if (t.UnidadeFederativaCodigo == 35)
                         t.IndSinc = false;
+
+                    if (t.UnidadeFederativaCodigo.Equals(4205407))
+                    {
+                        var result = t.RecuperarConfiguracaoNFSeSoftplan(t.CNPJ);
+                        this.ClientID = result.ClientID;
+                        this.ClientSecret= result.ClientSecret;
+                        this.TokenNFse = result.TokenNFse;
+                        this.TokenNFSeExpire = result.TokenNFSeExpire;
+                    }
 
                     CriarPastasDaEmpresa();
 
@@ -1139,6 +1159,80 @@ namespace NFe.Settings
                 //t.Join();
 
             }
+        }
+
+        public void SalvarConfiguracoesNFSeSoftplan(string usuario, string senha, string clientID, string clientSecret, string token, DateTime tokenExpire, string cnpj)
+        {
+            try
+            {
+                cnpj = Functions.OnlyNumbers(cnpj, ".-/").ToString();
+
+                if (File.Exists($@"{Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), cnpj, "ConfiguracaoNFSeSoftplan.xml")}"))
+                    File.Delete($@"{Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), cnpj, "ConfiguracaoNFSeSoftplan.xml")}");
+
+                XmlDocument xmlConfiguracao = new XmlDocument();
+                XmlDeclaration declaration = xmlConfiguracao.CreateXmlDeclaration("1.0", "UTF-8", "");
+                xmlConfiguracao.AppendChild(declaration);
+
+                XmlElement configuracao = xmlConfiguracao.CreateElement("Configuracao");
+                xmlConfiguracao.AppendChild(configuracao);
+
+                XmlNode usuarioConfiguracao = xmlConfiguracao.CreateNode(XmlNodeType.Element, "Usuario", "");
+                XmlNode senhaConfiguracao = xmlConfiguracao.CreateNode(XmlNodeType.Element, "Senha", "");
+                XmlNode clientIDConfiguracao = xmlConfiguracao.CreateNode(XmlNodeType.Element, "ClientID", "");
+                XmlNode clientSecretConfiguracao = xmlConfiguracao.CreateNode(XmlNodeType.Element, "ClientSecret", "");
+                XmlNode tokenConfiguracao = xmlConfiguracao.CreateNode(XmlNodeType.Element, "TokenNFSe", "");
+                XmlNode tokenExpireConfiguracao = xmlConfiguracao.CreateNode(XmlNodeType.Element, "TokenNFSeExpire", "");
+
+                usuarioConfiguracao.InnerText = usuario;
+                senhaConfiguracao.InnerText = Criptografia.criptografaSenha(senha);
+                clientIDConfiguracao.InnerText = clientID;
+                clientSecretConfiguracao.InnerText = clientSecret;
+                tokenConfiguracao.InnerText = token;
+                tokenExpireConfiguracao.InnerText = tokenExpire.ToString();
+
+                configuracao.AppendChild(usuarioConfiguracao);
+                configuracao.AppendChild(senhaConfiguracao);
+                configuracao.AppendChild(clientIDConfiguracao);
+                configuracao.AppendChild(clientSecretConfiguracao);
+                configuracao.AppendChild(tokenConfiguracao);
+                configuracao.AppendChild(tokenExpireConfiguracao);
+
+                xmlConfiguracao.Save($@"{Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), cnpj, "ConfiguracaoNFSeSoftplan.xml")}");
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public Empresa RecuperarConfiguracaoNFSeSoftplan(string cnpj)
+        {
+            var result = new Empresa();
+
+            try
+            {
+                cnpj = Functions.OnlyNumbers(cnpj, ".-/").ToString();
+
+                if (File.Exists($@"{Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), cnpj, "ConfiguracaoNFSeSoftplan.xml")}"))
+                {
+                    var xmlConfiguracao = new XmlDocument();
+                    xmlConfiguracao.Load($@"{Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), cnpj, "ConfiguracaoNFSeSoftplan.xml")}");
+
+                    result.ClientID = xmlConfiguracao.GetElementsByTagName("ClientID")[0].InnerText;
+                    result.ClientSecret = xmlConfiguracao.GetElementsByTagName("ClientSecret")[0].InnerText;
+                    result.TokenNFse = xmlConfiguracao.GetElementsByTagName("TokenNFSe")[0].InnerText;
+                    result.TokenNFSeExpire = Convert.ToDateTime(xmlConfiguracao.GetElementsByTagName("TokenNFSeExpire")[0].InnerText);
+                    result.UsuarioWS = xmlConfiguracao.GetElementsByTagName("Usuario")[0].InnerText;
+                    result.SenhaWS = Criptografia.descriptografaSenha(xmlConfiguracao.GetElementsByTagName("Senha")[0].InnerText);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+
+            return result;
         }
 
         private void doneThread_FTP(Thread thread)

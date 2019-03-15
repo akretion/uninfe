@@ -77,6 +77,7 @@ namespace NFe.ConvertTxt
         public double vBCEfet;
         public double pICMSEfet;
         public double vICMSEfet;
+        public double vICMSSubstituto;
 
         //-- CSON
         public int CSOSN;

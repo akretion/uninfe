@@ -318,6 +318,7 @@ namespace NFe.Components
         prtEmb,
         prtTrans,
         pST,
+        vICMSSubstituto,
 
         qBCProd,
         qCarga,

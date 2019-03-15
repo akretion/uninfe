@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Xml;
-using System.Xml.Linq;
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.Components.Info;
 using NFe.Settings;
+using System;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace uninfe
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler((sender, e) =>
             {
@@ -48,12 +43,13 @@ namespace uninfe
             Propriedade.AssemblyEXE = Assembly.GetExecutingAssembly();
 
             bool silencioso = false;
-            
+
             //Começar a contar o tempo de execução do aplicativo - Renan 24/06/2015
             ConfiguracaoApp.ExecutionTime = new System.Diagnostics.Stopwatch();
             ConfiguracaoApp.ExecutionTime.Start();
 
             if (args.Length >= 1)
+            {
                 foreach (string param in args)
                 {
                     if (param.ToLower().Equals("/silent"))
@@ -87,11 +83,14 @@ namespace uninfe
                                 {
                                 }
                                 if (param.ToLower().Equals("/quit"))
+                                {
                                     return;
+                                }
                             }
                         }
                     }
                 }
+            }
 
             Propriedade.TipoAplicativo = TipoAplicativo.Todos;
 
@@ -107,18 +106,24 @@ namespace uninfe
             if (executando)
             {
                 if (!silencioso)
+                {
                     MetroFramework.MetroMessageBox.Show(null,
                         "Somente uma instância do " + Propriedade.NomeAplicacao + " pode ser executada." + (Empresas.ExisteErroDiretorio ? "\r\nPossíveis erros:\r\n" + Empresas.ErroCaminhoDiretorio : ""), "",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
                 if (!silencioso)
+                {
                     if (Empresas.ExisteErroDiretorio)
+                    {
                         MetroFramework.MetroMessageBox.Show(null,
                                 "Ocorreu um erro ao efetuar a leitura das configurações da empresa. " +
                                 "Por favor entre na tela de configurações da(s) empresa(s) listada(s), acesse a aba \"Pastas\" e reconfigure-as.\r\n\r\n" + Empresas.ErroCaminhoDiretorio, "",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
 
                 Application.Run(new NFe.UI.Form_Main());
             }
@@ -128,5 +133,4 @@ namespace uninfe
         }
 
     }
-
 }

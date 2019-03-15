@@ -652,7 +652,12 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.SOFTPLAN:
                         Components.SOFTPLAN.SOFTPLAN softplan = new Components.SOFTPLAN.SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                        Empresas.Configuracoes[emp].TokenNFse);
+                                                        Empresas.Configuracoes[emp].TokenNFse, 
+                                                        Empresas.Configuracoes[emp].TokenNFSeExpire,
+                                                        Empresas.Configuracoes[emp].UsuarioWS,
+                                                        Empresas.Configuracoes[emp].SenhaWS,
+                                                        Empresas.Configuracoes[emp].ClientID,
+                                                        Empresas.Configuracoes[emp].ClientSecret);
 
                         AssinaturaDigital softplanAssinatura = new AssinaturaDigital();
                         softplanAssinatura.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
@@ -670,6 +675,18 @@ namespace NFe.Service.NFSe
                         softplanAss.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio, AlgorithmType.Sha256);
 
                         softplan.EmiteNF(NomeArquivoXML);
+
+                        if (Empresas.Configuracoes[emp].TokenNFse != softplan.Token)
+                        {
+                            Empresas.Configuracoes[emp].SalvarConfiguracoesNFSeSoftplan(softplan.Usuario,
+                                                                                        softplan.Senha,
+                                                                                        softplan.ClientID,
+                                                                                        softplan.ClientSecret,
+                                                                                        softplan.Token,
+                                                                                        softplan.TokenExpire,
+                                                                                        Empresas.Configuracoes[emp].CNPJ);
+                        }
+                        
                         break;
 
                     #endregion SOFTPLAN
