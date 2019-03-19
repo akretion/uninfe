@@ -134,6 +134,7 @@ namespace NFe.ConvertTxt
             GerarExporta(NFe, NFe.exporta, infNfe);
             GerarCompra(NFe.compra, infNfe);
             GerarCana(NFe.cana, infNfe);
+            GerarRespTecnico(NFe.resptecnico, infNfe);
 
             this.cFileName = NFe.infNFe.ID + Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML;
 
@@ -272,7 +273,7 @@ namespace NFe.ConvertTxt
 
                     if (pagItem.indPag != TpcnIndicadorPagamento.ipNone)
 
-                        wCampo((int)pagItem.indPag, TpcnTipoCampo.tcInt, TpcnResources.indPag, ObOp.Obrigatorio, 0);//YA01b
+                    wCampo((int)pagItem.indPag, TpcnTipoCampo.tcInt, TpcnResources.indPag, ObOp.Obrigatorio, 0);//YA01b
                     wCampo((int)pagItem.tPag, TpcnTipoCampo.tcInt, TpcnResources.tPag, ObOp.Obrigatorio, 2);    //YA02
                     wCampo(pagItem.vPag, TpcnTipoCampo.tcDec2, TpcnResources.vPag, ObOp.Obrigatorio);           //YA03
                     if (pagItem.tpIntegra != 0)
@@ -743,6 +744,7 @@ namespace NFe.ConvertTxt
                     else
                     {
                         wCampo(med.cProdANVISA, TpcnTipoCampo.tcStr, TpcnResources.cProdANVISA);
+                        wCampo(med.xMotivoIsencao, TpcnTipoCampo.tcStr, nameof(med.xMotivoIsencao), ObOp.Opcional);
                     }
                     wCampo(med.vPMC, TpcnTipoCampo.tcDec2, TpcnResources.vPMC);
                 }
@@ -1154,7 +1156,7 @@ namespace NFe.ConvertTxt
                                 wCampo(imposto.ICMS.pBCOp, this.nDecimaisPerc, TpcnResources.pBCOp);
                                 wCampo(imposto.ICMS.UFST, TpcnTipoCampo.tcStr, TpcnResources.UFST);
                             }
-                            if (nfe.infNFe.Versao >= 4
+                            if (nfe.infNFe.Versao >= 4 
                                 && imposto.ICMS.vBCFCPST + imposto.ICMS.pFCPST + imposto.ICMS.vFCPST > 0)
                             {
                                 wCampo(imposto.ICMS.vBCFCPST, TpcnTipoCampo.tcDec2, TpcnResources.vBCFCPST);//, ObOp.Opcional);
@@ -1190,7 +1192,7 @@ namespace NFe.ConvertTxt
                             wCampo(imposto.ICMS.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST);
                             wCampo(imposto.ICMS.pICMSST, this.nDecimaisPerc, TpcnResources.pICMSST);
                             wCampo(imposto.ICMS.vICMSST, TpcnTipoCampo.tcDec2, TpcnResources.vICMSST);
-                            if (nfe.infNFe.Versao >= 4
+                            if (nfe.infNFe.Versao >= 4 
                                 && imposto.ICMS.vBCFCPST + imposto.ICMS.pFCPST + imposto.ICMS.vFCPST > 0)
                             {
                                 wCampo(imposto.ICMS.vBCFCPST, TpcnTipoCampo.tcDec2, TpcnResources.vBCFCPST);//, ObOp.Opcional);
@@ -1284,9 +1286,9 @@ namespace NFe.ConvertTxt
                                          && imposto.ICMS.pRedBCEfet + imposto.ICMS.vBCEfet + imposto.ICMS.pICMSEfet + imposto.ICMS.vICMSEfet > 0)
                                     {
                                         wCampo(imposto.ICMS.pRedBCEfet, this.nDecimaisPerc, TpcnResources.pRedBCEfet);
-                                        wCampo(imposto.ICMS.vBCEfet, TpcnTipoCampo.tcDec2, TpcnResources.vBCEfet);
-                                        wCampo(imposto.ICMS.pICMSEfet, this.nDecimaisPerc, TpcnResources.pICMSEfet);
-                                        wCampo(imposto.ICMS.vICMSEfet, TpcnTipoCampo.tcDec2, TpcnResources.vICMSEfet);
+                                        wCampo(imposto.ICMS.vBCEfet,    TpcnTipoCampo.tcDec2, TpcnResources.vBCEfet);
+                                        wCampo(imposto.ICMS.pICMSEfet,  this.nDecimaisPerc, TpcnResources.pICMSEfet);
+                                        wCampo(imposto.ICMS.vICMSEfet,  TpcnTipoCampo.tcDec2, TpcnResources.vICMSEfet);
                                     }
                                 }
                             }
@@ -1748,6 +1750,28 @@ namespace NFe.ConvertTxt
         }
 
         /// <summary>
+        /// GerarRespTecnico
+        /// </summary>
+        /// <param name="responsavel"></param>
+        /// <param name="root"></param>
+        private void GerarRespTecnico(RespTecnico responsavel, XmlElement root)
+        {
+            if (string.IsNullOrEmpty(responsavel.CNPJ))
+                return;
+
+            XmlElement rootRespTec = doc.CreateElement("infRespTec");
+            root.AppendChild(rootRespTec);
+            nodeCurrent = rootRespTec;
+
+            wCampo(responsavel.CNPJ, TpcnTipoCampo.tcStr, TpcnResources.CNPJ, ObOp.Obrigatorio);
+            wCampo(responsavel.xContato, TpcnTipoCampo.tcStr, nameof(responsavel.xContato), ObOp.Opcional, 0);
+            wCampo(responsavel.email, TpcnTipoCampo.tcStr, TpcnResources.email, ObOp.Opcional);
+            wCampo(responsavel.fone, TpcnTipoCampo.tcStr, TpcnResources.fone, ObOp.Opcional);
+            wCampo(responsavel.idCSRT, TpcnTipoCampo.tcInt, nameof(responsavel.idCSRT), ObOp.Obrigatorio, 2);
+            wCampo(responsavel.hashCSRT, TpcnTipoCampo.tcStr, nameof(responsavel.hashCSRT), ObOp.Obrigatorio, 0);
+        }
+
+        /// <summary>
         /// GerarDigito
         /// </summary>
         /// <param name="chave"></param>
@@ -1863,6 +1887,14 @@ namespace NFe.ConvertTxt
                 wCampo(NFe.entrega.cMun, TpcnTipoCampo.tcInt, TpcnResources.cMun, ObOp.Obrigatorio, 7);
                 wCampo(NFe.entrega.xMun, TpcnTipoCampo.tcStr, TpcnResources.xMun);
                 wCampo(NFe.entrega.UF, TpcnTipoCampo.tcStr, TpcnResources.UF);
+
+                wCampo(NFe.entrega.xNome, TpcnTipoCampo.tcStr, TpcnResources.xNome, ObOp.Opcional);
+                wCampo(NFe.entrega.CEP, TpcnTipoCampo.tcStr, TpcnResources.CEP, ObOp.Opcional);
+                wCampo(NFe.entrega.cPais, TpcnTipoCampo.tcStr, TpcnResources.cPais, ObOp.Opcional);
+                wCampo(NFe.entrega.xPais, TpcnTipoCampo.tcStr, TpcnResources.xPais, ObOp.Opcional);
+                wCampo(NFe.entrega.IE, TpcnTipoCampo.tcStr, TpcnResources.IE, ObOp.Opcional);
+                wCampo(NFe.entrega.fone, TpcnTipoCampo.tcStr, TpcnResources.fone, ObOp.Opcional);
+                wCampo(NFe.entrega.email, TpcnTipoCampo.tcStr, TpcnResources.email, ObOp.Opcional);
             }
         }
 
@@ -2188,6 +2220,14 @@ namespace NFe.ConvertTxt
                 wCampo(NFe.retirada.cMun, TpcnTipoCampo.tcInt, TpcnResources.cMun, ObOp.Obrigatorio, 7);
                 wCampo(NFe.retirada.xMun, TpcnTipoCampo.tcStr, TpcnResources.xMun);
                 wCampo(NFe.retirada.UF, TpcnTipoCampo.tcStr, TpcnResources.UF);
+
+                wCampo(NFe.retirada.xNome, TpcnTipoCampo.tcStr, TpcnResources.xNome, ObOp.Opcional);
+                wCampo(NFe.retirada.CEP, TpcnTipoCampo.tcStr, TpcnResources.CEP, ObOp.Opcional);
+                wCampo(NFe.retirada.cPais, TpcnTipoCampo.tcStr, TpcnResources.cPais, ObOp.Opcional);
+                wCampo(NFe.retirada.xPais, TpcnTipoCampo.tcStr, TpcnResources.xPais, ObOp.Opcional);
+                wCampo(NFe.retirada.IE, TpcnTipoCampo.tcStr, TpcnResources.IE, ObOp.Opcional);
+                wCampo(NFe.retirada.fone, TpcnTipoCampo.tcStr, TpcnResources.fone, ObOp.Opcional);
+                wCampo(NFe.retirada.email, TpcnTipoCampo.tcStr, TpcnResources.email, ObOp.Opcional);
             }
         }
 
@@ -2435,16 +2475,20 @@ namespace NFe.ConvertTxt
             #endregion --retTrib
         }
 
+        private void wCampo(object obj, TpcnTipoCampo Tipo, string TAG) =>
+            wCampo(obj, Tipo, TAG, ObOp.Obrigatorio, 0);
+
+        private void wCampo(object obj, TpcnTipoCampo Tipo, string TAG, ObOp Obrigatorio) =>
+            wCampo(obj, Tipo, TAG, Obrigatorio, 0);
+
         /// <summary>
         /// wCampo
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="Tipo"></param>
         /// <param name="TAG"></param>
-        private void wCampo(object obj, TpcnTipoCampo Tipo, TpcnResources TAG)
-        {
+        private void wCampo(object obj, TpcnTipoCampo Tipo, TpcnResources TAG) =>
             wCampo(obj, Tipo, TAG.ToString(), ObOp.Obrigatorio, 0);
-        }
 
         /// <summary>
         /// wCampo
@@ -2453,10 +2497,8 @@ namespace NFe.ConvertTxt
         /// <param name="Tipo"></param>
         /// <param name="TAG"></param>
         /// <param name="Obrigatorio"></param>
-        private void wCampo(object obj, TpcnTipoCampo Tipo, TpcnResources TAG, ObOp Obrigatorio)
-        {
+        private void wCampo(object obj, TpcnTipoCampo Tipo, TpcnResources TAG, ObOp Obrigatorio) =>
             wCampo(obj, Tipo, TAG.ToString(), Obrigatorio, 0);
-        }
 
         /// <summary>
         /// wCampo
@@ -2466,10 +2508,8 @@ namespace NFe.ConvertTxt
         /// <param name="TAG"></param>
         /// <param name="Obrigatorio"></param>
         /// <param name="nAlign"></param>
-        private void wCampo(object obj, TpcnTipoCampo Tipo, TpcnResources TAG, ObOp Obrigatorio, int nAlign)
-        {
+        private void wCampo(object obj, TpcnTipoCampo Tipo, TpcnResources TAG, ObOp Obrigatorio, int nAlign) =>
             wCampo(obj, Tipo, TAG.ToString(), Obrigatorio, nAlign);
-        }
 
         private void wCampo(object obj, TpcnTipoCampo Tipo, string TAG, ObOp Obrigatorio, int nAlign)
         {

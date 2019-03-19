@@ -19,5 +19,12 @@ namespace NFe.ConvertTxt
         public int cMun;
         public string xMun;
         public string UF;
+        public string xNome { get; set; }
+        public string CEP { get; set; }
+        public int cPais { get; set; }
+        public string xPais { get; set; }
+        public string fone { get; set; }
+        public string email { get; set; }
+        public string IE { get; set; }
     }
 }

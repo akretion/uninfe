@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using System.Xml;
-using System.Xml.Linq;
+using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
-using System.Windows.Forms;
-using System.Reflection;
-using System.Net;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace NFe.Components
 {
     public static class Functions
     {
         #region MemoryStream
+
         /// <summary>
         /// Método responsável por converter uma String contendo a estrutura de um XML em uma Stream para
         /// ser lida pela XMLDocument
@@ -47,9 +47,11 @@ namespace NFe.Components
 
             return memoryStream;
         }
-        #endregion
+
+        #endregion MemoryStream
 
         #region Move()
+
         /// <summary>
         /// Mover arquivo para uma determinada pasta
         /// </summary>
@@ -64,9 +66,11 @@ namespace NFe.Components
 
             File.Move(arquivoOrigem, arquivoDestino);
         }
-        #endregion
+
+        #endregion Move()
 
         #region DeletarArquivo()
+
         /// <summary>
         /// Excluir arquivos do HD
         /// </summary>
@@ -80,9 +84,11 @@ namespace NFe.Components
                 File.Delete(arquivo);
             }
         }
-        #endregion
+
+        #endregion DeletarArquivo()
 
         #region CodigoParaUF()
+
         public static string CodigoParaUF(int codigo)
         {
             try
@@ -95,9 +101,11 @@ namespace NFe.Components
                 return "";
             }
         }
-        #endregion
+
+        #endregion CodigoParaUF()
 
         #region UFParaCodigo()
+
         public static int UFParaCodigo(string uf)
         {
             try
@@ -110,9 +118,11 @@ namespace NFe.Components
                 return 0;
             }
         }
-        #endregion
+
+        #endregion UFParaCodigo()
 
         #region PadraoNFe()
+
         public static PadroesNFSe PadraoNFSe(int municipio)
         {
             PadroesNFSe result = PadroesNFSe.NaoIdentificado;
@@ -123,9 +133,11 @@ namespace NFe.Components
 
             return result;
         }
-        #endregion
+
+        #endregion PadraoNFe()
 
         #region OnlyNumbers()
+
         /// <summary>
         /// Remove caracteres não-numéricos e retorna.
         /// </summary>
@@ -150,9 +162,11 @@ namespace NFe.Components
 
             return ret;
         }
-        #endregion
+
+        #endregion OnlyNumbers()
 
         #region OnlyNumbers()
+
         /// <summary>
         /// Remove caracteres não-numéricos e retorna.
         /// </summary>
@@ -170,9 +184,11 @@ namespace NFe.Components
 
             return ret;
         }
-        #endregion
+
+        #endregion OnlyNumbers()
 
         #region Gerar MD5
+
         public static string GerarMD5(string valor)
         {
             // Cria uma nova intância do objeto que implementa o algoritmo para
@@ -196,9 +212,11 @@ namespace NFe.Components
             // retorna o valor criptografado como string
             return strBuilder.ToString();
         }
-        #endregion
+
+        #endregion Gerar MD5
 
         #region LerArquivo()
+
         /// <summary>
         /// Le arquivos no formato TXT
         /// Retorna uma lista do conteudo do arquivo
@@ -235,9 +253,11 @@ namespace NFe.Components
             }
             return lstRetorno;
         }
-        #endregion
+
+        #endregion LerArquivo()
 
         #region ExtrairNomeArq()
+
         /// <summary>
         /// Extrai o nome do arquivo de uma determinada string. Este não mantem a pasta que ele está localizado, fica somente o nome do arquivo.
         /// </summary>
@@ -247,7 +267,7 @@ namespace NFe.Components
         /// <example>
         /// MessageBox.Show(ExtrairNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", "-ped-sta.xml"));
         /// //Será demonstrado no message a string "ArqSituacao"
-        /// 
+        ///
         /// MessageBox.Show(ExtrairNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", ".xml"));
         /// //Será demonstrado no message a string "ArqSituacao-ped-sta"
         /// </example>
@@ -278,10 +298,11 @@ namespace NFe.Components
                 -rec.err
                 -rec.xml
              */
+
             ///
             /// pesquisa primeiro pela lista de retornos, porque geralmente os nomes são maiores que os de envio
             /// isso evita conflito de nomes como por ex: -cons-cad.xml x -ret-cons-cad.xml
-            /// 
+            ///
             foreach (var pS in typeof(Propriedade.ExtRetorno).GetFields(BindingFlags.Public | BindingFlags.Static))
             {
                 string extensao = pS.GetValue(null).ToString();
@@ -301,7 +322,7 @@ namespace NFe.Components
 
                     ///
                     /// pesquisa primeiro pelas extensões de retorno, pois geralmente, elas são maiores que as de envio
-                    /// 
+                    ///
                     if (!string.IsNullOrEmpty(EXT.RetornoXML))
                         if (ret.EndsWith(EXT.RetornoXML, StringComparison.InvariantCultureIgnoreCase))
                             retorno = ret.Substring(0, ret.Length - EXT.RetornoXML.Length);
@@ -344,9 +365,10 @@ namespace NFe.Components
             return fi.Name;
         }
 
-        #endregion
+        #endregion ExtrairNomeArq()
 
         #region ExtraiPastaNomeArq()
+
         /// <summary>
         /// Extrai o nome do arquivo de uma determinada string mantendo a pasta que ele está localizado
         /// </summary>
@@ -356,7 +378,7 @@ namespace NFe.Components
         /// <example>
         /// MessageBox.Show(ExtrairPastaNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", "-ped-sta.xml"));
         /// //Será demonstrado no message a string "C:\\TESTE\\NFE\\ENVIO\\ArqSituacao"
-        /// 
+        ///
         /// MessageBox.Show(ExtrairPastaNomeArq("C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta.xml", ".xml"));
         /// //Será demonstrado no message a string "C:\\TESTE\\NFE\\ENVIO\\ArqSituacao-ped-sta"
         /// </example>
@@ -367,7 +389,8 @@ namespace NFe.Components
             ret = ret.Substring(0, ret.Length - finalArq.Length);
             return ret;
         }
-        #endregion
+
+        #endregion ExtraiPastaNomeArq()
 
         public static string ExtractExtension(string value)
         {
@@ -388,6 +411,7 @@ namespace NFe.Components
         }
 
         #region FileInUse()
+
         /// <summary>
         /// detectar se o arquivo está em uso
         /// </summary>
@@ -413,9 +437,11 @@ namespace NFe.Components
 
             return ret;
         }
-        #endregion
+
+        #endregion FileInUse()
 
         #region LerTag()
+
         /// <summary>
         /// Busca o nome de uma determinada TAG em um Elemento do XML para ver se existe, se existir retorna seu conteúdo com um ponto e vírgula no final do conteúdo.
         /// </summary>
@@ -428,9 +454,11 @@ namespace NFe.Components
         {
             return LerTag(Elemento, NomeTag, true);
         }
-        #endregion
+
+        #endregion LerTag()
 
         #region LerTag()
+
         /// <summary>
         /// Busca o nome de uma determinada TAG em um Elemento do XML para ver se existe, se existir retorna seu conteúdo, com ou sem um ponto e vírgula no final do conteúdo.
         /// </summary>
@@ -467,9 +495,11 @@ namespace NFe.Components
                 result = defaultValue;
             return result;
         }
-        #endregion
+
+        #endregion LerTag()
 
         #region IsConnectedToInternet()
+
         //Creating the extern function...
         [DllImport("wininet.dll")]
         private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
@@ -480,9 +510,11 @@ namespace NFe.Components
             int Desc;
             return InternetGetConnectedState(out Desc, 0);
         }
-        #endregion
+
+        #endregion IsConnectedToInternet()
 
         #region XmlToString()
+
         /// <summary>
         /// Método responsável por ler o conteúdo de um XML e retornar em uma string
         /// </summary>
@@ -512,9 +544,11 @@ namespace NFe.Components
 
             return conteudo_xml;
         }
-        #endregion
+
+        #endregion XmlToString()
 
         #region getDateTime()
+
         public static DateTime GetDateTime(string value)
         {
             if (string.IsNullOrEmpty(value))
@@ -532,9 +566,11 @@ namespace NFe.Components
             }
             return new DateTime(_ano, _mes, _dia);
         }
-        #endregion
+
+        #endregion getDateTime()
 
         #region CarregaUF()
+
         /// <summary>
         /// Carrega os Estados que possuem serviço de NFE já disponível. Estes Estados são carregados a partir do XML Webservice.xml que fica na pasta do executável do UNINFE
         /// </summary>
@@ -543,7 +579,7 @@ namespace NFe.Components
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 01/03/2010
         /// </remarks>
-        /// 
+        ///
         public static ArrayList CarregaMunicipios()
         {
             ArrayList UF = new ArrayList();
@@ -592,9 +628,11 @@ namespace NFe.Components
             UF.Sort(new OrdenacaoPorNome());
             return UF;
         }
-        #endregion
+
+        #endregion CarregaUF()
 
         #region ComputeHexadecimal()
+
         /// <summary>
         /// Calcula valor hexadecimal
         /// Usado para calcular o Link do QRCode da NFCe
@@ -609,14 +647,15 @@ namespace NFe.Components
             {
                 // Get the integral value of the character.
                 int value = Convert.ToInt32(letter);
+
                 // Convert the decimal value to a hexadecimal value in string form.
                 hexOutput += String.Format("{0:x}", value);
             }
 
             return hexOutput;
-
         }
-        #endregion
+
+        #endregion ComputeHexadecimal()
 
         /// <summary>
         /// Criptografar conteúdo com MD5
@@ -647,10 +686,12 @@ namespace NFe.Components
         }
 
         #region Ticket: #110
+
         /*
          * Marcelo
          * 03/06/2013
          */
+
         /// <summary>
         /// Retorna o endereço IP desta estação
         /// </summary>
@@ -666,7 +707,8 @@ namespace NFe.Components
 
             return ip;
         }
-        #endregion
+
+        #endregion Ticket: #110
 
         [System.Diagnostics.DebuggerHidden()]
         public static void CopyObjectTo(this object Source, object Destino)
@@ -720,21 +762,27 @@ namespace NFe.Components
                     case "Int32":
                         propertyInfo.SetValue(_this, Convert.ToInt32(value), null);
                         break;
+
                     case "String":
                         propertyInfo.SetValue(_this, value.ToString(), null);
                         break;
+
                     case "Boolean":
                         propertyInfo.SetValue(_this, Convert.ToBoolean(value), null);
                         break;
+
                     case "Double":
                         propertyInfo.SetValue(_this, Convert.ToDouble(value), null);
                         break;
+
                     case "Decimal":
                         propertyInfo.SetValue(_this, Convert.ToDecimal(value), null);
                         break;
+
                     case "DateTime":
                         propertyInfo.SetValue(_this, Convert.ToDateTime(value), null);
                         break;
+
                     default:
                         switch (propertyInfo.PropertyType.FullName)
                         {
@@ -742,17 +790,22 @@ namespace NFe.Components
                                 var ta1 = (NFe.Components.TipoAplicativo)Enum.Parse(typeof(NFe.Components.TipoAplicativo), value.ToString(), true);
                                 propertyInfo.SetValue(_this, ta1, null);
                                 break;
+
                             case "NFe.Components.TipoAmbiente":
                                 var ta2 = (NFe.Components.TipoAmbiente)Enum.Parse(typeof(NFe.Components.TipoAmbiente), value.ToString(), true);
                                 propertyInfo.SetValue(_this, ta2, null);
                                 break;
+
                             case "NFe.Components.TipoEmissao":
                                 var ta3 = (NFe.Components.TipoEmissao)Enum.Parse(typeof(NFe.Components.TipoEmissao), value.ToString(), true);
                                 propertyInfo.SetValue(_this, ta3, null);
                                 break;
+
                             case "NFe.Components.DiretorioSalvarComo":
+
                                 //propertyInfo.SetValue(_this, value.ToString(), null);
                                 break;
+
                             default:
                                 throw new Exception(propertyInfo.Name + "..." + propertyInfo.PropertyType.FullName + "...." + value.ToString());
                         }
@@ -835,6 +888,7 @@ namespace NFe.Components
         }
 
         #region WriteLog()
+
         public static void WriteLog(string msg, bool gravarStackTrace, bool geraLog, string CNPJEmpresa)
         {
             if (string.IsNullOrEmpty(msg)) return;
@@ -880,7 +934,6 @@ namespace NFe.Components
                             {
                                 msg += "\r\nModule: " + s.GetMethod().ReflectedType.Module.Name + " Class: " + s.GetMethod().ReflectedType.FullName + " Method: " + s.GetMethod().Name;
                                 msg += " line: " + s.GetFileLineNumber();
-                                
                             }*/
                         }
 
@@ -906,10 +959,11 @@ namespace NFe.Components
                 }
             }
         }
-        #endregion
+
+        #endregion WriteLog()
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="file"></param>
         /// <param name="resultFolder"></param>
@@ -943,6 +997,24 @@ namespace NFe.Components
         {
             byte[] encode = Encoding.UTF8.GetBytes(value);
             return Convert.ToBase64String(encode);
+        }
+
+        /// <summary>
+        /// Retorna um Base64 com 28 caracteres
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ToBase64Hex(string value)
+        {
+            int countChars = value.Length;
+            byte[] bytes = new byte[countChars / 2];
+
+            for (int i = 0; i < countChars; i += 2)
+            {
+                bytes[i / 2] = Convert.ToByte(value.Substring(i, 2), 16);
+            }
+
+            return Convert.ToBase64String(bytes);
         }
     }
 }

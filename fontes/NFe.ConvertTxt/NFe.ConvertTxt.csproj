@@ -156,6 +156,7 @@
     <Compile Include="Classes.prot_proc.cs" />
     <Compile Include="Classes.rastro.cs" />
     <Compile Include="Classes.Reboque.cs" />
+    <Compile Include="Classes.resptecnico.cs" />
     <Compile Include="Classes.Retirada.cs" />
     <Compile Include="Classes.transp.cs" />
     <Compile Include="Classes.adi.cs" />

@@ -83,10 +83,13 @@ namespace NFe.UI.Formularios
 
         private void txtEmail_Leave(object sender, EventArgs e)
         {
-            if (!ValidaEmail())
+            if (!String.IsNullOrEmpty(txtEmail.Text))
             {
-                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "E-mail inválido", "UniNFe");
-                txtEmail.Focus();
+                if (!ValidaEmail())
+                {
+                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm, "E-mail inválido", "UniNFe");
+                    txtEmail.Focus();
+                }
             }
         }
 

@@ -605,80 +605,80 @@ namespace NFe.Components
                 ListaExtensoes.Add(TipoEnvio.EnvLoteRps, new ExtensaoClass(
                     "-env-loterps.xml", "",
                     "-ret-loterps.xml", "",
-                    "",
+                    "-ret-loterps.err",
                     "Envio de lote/rps (NFSe)"));
 
                 ListaExtensoes.Add(TipoEnvio.PedCanNFSe, new ExtensaoClass(
                     "-ped-cannfse.xml", "",
                     "-cannfse.xml", "",
-                    "",
+                    "-cannfse.err",
                     "Pedido de cancelamento (NFSe)"));
 
                 ListaExtensoes.Add(TipoEnvio.PedLoteRps, new ExtensaoClass(
                     "-ped-loterps.xml", "",
                     "-loterps.xml", "",
-                    "",
+                    "-loterps.err",
                     "Envio de consulta de lote/rps (NFSe)"));
 
                 ListaExtensoes.Add(TipoEnvio.PedSitLoteRps, new ExtensaoClass(
                     "-ped-sitloterps.xml", "",
                     "-sitloterps.xml", "",
-                    "",
+                    "-sitloterps.err",
                     "Pedido de situação de lote/rps (NFSe)"));
 
                 ListaExtensoes.Add(TipoEnvio.PedSitNFSeRps, new ExtensaoClass(
                     "-ped-sitnfserps.xml", "",
                     "-sitnfserps.xml", "",
-                    "",
+                    "-sitnfserps.err",
                     "Pedido de situação do rps (NFSe)"));
 
                 ListaExtensoes.Add(TipoEnvio.PedSitNFSe, new ExtensaoClass(
                     "-ped-sitnfse.xml", "",
                     "-sitnfse.xml", "",
-                    "",
+                    "-sitnfse.err",
                     "Pedido de situação da nota (NFSe)"));
 
                 ListaExtensoes.Add(TipoEnvio.PedURLNFSe, new ExtensaoClass(
                     "-ped-urlnfse.xml", "",
                     "-urlnfse.xml", "",
-                    "",
+                    "-urlnfse.err",
                     "XML de Consulta da URL de Visualização da NFSe"));
 
                 ListaExtensoes.Add(TipoEnvio.PedURLNFSeSerie, new ExtensaoClass(
                     "-ped-urlnfseserie.xml", "",
                     "-urlnfseserie.xml", "",
-                    "",
+                    "-urlnfseserie.err",
                     "XML de Consulta da URL de Visualização da NFSe-Serie"));
 
                 ListaExtensoes.Add(TipoEnvio.PedNFSePDF, new ExtensaoClass(
                     "-ped-nfsepdf.xml", "",
                     "-nfsepdf.xml", "",
-                    "",
+                    "-nfsepdf.err",
                     "Pedido do link da NFSe"));
 
                 ListaExtensoes.Add(TipoEnvio.PedNFSeXML, new ExtensaoClass(
                     "-ped-nfsexml.xml", "",
                     "-nfsexml.xml", "",
-                    "",
+                    "-nfsexml.err",
                     "Pedido do XML da NFSe"
                     ));
 
                 ListaExtensoes.Add(TipoEnvio.PedNFSePNG, new ExtensaoClass(
                     "-ped-nfsepng.xml", "",
                     "-nfsepng.xml", "",
-                    "",
+                    "-nfsepng.err",
                     "Pedido do link da NFSe"));
 
                 ListaExtensoes.Add(TipoEnvio.PedInuNFSe, new ExtensaoClass(
                     "-ped-inunfse.xml", "",
                     "-inunfse.xml", "",
-                    "",
+                    "-inunfse.err",
                     "Inutilização de NFSe"));
 
                 ListaExtensoes.Add(TipoEnvio.PedSeqLoteNotaRPS, new ExtensaoClass(
                     "-ped-seqlotenotarps.xml", "",
                     "-seqlotenotarps.xml", "",
-                    "",
+                    "-seqlotenotarps.err",
                     "Consulta sequência do lote da nota RPS"));
 
                 ListaExtensoes.Add(TipoEnvio.PedSubstNfse, new ExtensaoClass(

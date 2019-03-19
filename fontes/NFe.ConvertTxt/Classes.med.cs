@@ -13,5 +13,6 @@ namespace NFe.ConvertTxt
         public DateTime dVal;
         public string cProdANVISA;
         public double vPMC;
+        public string xMotivoIsencao { get; set; }
     }
 }

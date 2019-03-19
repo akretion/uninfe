@@ -26,5 +26,7 @@ namespace NFe.ConvertTxt
         public string digVal;
         public int cStat;
         public string xMotivo;
+        public int cMsg { get; set; }
+        public string xMsg { get; set; }
     }
 }

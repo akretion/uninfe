@@ -256,6 +256,10 @@ namespace NFe.ConvertTxt
                                 case "pag":
                                     processaPag(nodeinfNFe);
                                     break;
+
+                                case "infRespTec":
+                                    processaRespTec(nodeinfNFe);
+                                    break;
                             }
                         }
                         break;
@@ -284,6 +288,19 @@ namespace NFe.ConvertTxt
             else
             {
                 LerPag(nodenfeProc);
+            }
+        }
+
+        private void processaRespTec(XmlNode noderesptec)
+        {
+            if (nfe.infNFe.Versao >= 4)
+            {
+                nfe.resptecnico.CNPJ = this.readValue(noderesptec, nameof(RespTecnico.CNPJ));
+                nfe.resptecnico.xContato = this.readValue(noderesptec, nameof(RespTecnico.xContato));
+                nfe.resptecnico.email = this.readValue(noderesptec, nameof(RespTecnico.email));
+                nfe.resptecnico.fone = this.readValue(noderesptec, nameof(RespTecnico.fone));
+                nfe.resptecnico.idCSRT = Convert.ToInt32("0" + this.readValue(noderesptec, nameof(RespTecnico.idCSRT)));
+                nfe.resptecnico.hashCSRT = this.readValue(noderesptec, nameof(RespTecnico.hashCSRT));
             }
         }
 
@@ -316,6 +333,9 @@ namespace NFe.ConvertTxt
             nfe.protNFe.tpAmb = (TipoAmbiente)this.readInt32(nodenfeProc, TpcnResources.tpAmb);
             nfe.protNFe.verAplic = this.readValue(nodenfeProc, TpcnResources.verAplic);
             nfe.protNFe.xMotivo = this.readValue(nodenfeProc, TpcnResources.xMotivo);
+
+            nfe.protNFe.cMsg = Convert.ToInt32("0" + this.readValue(nodenfeProc, "cMsg"));
+            nfe.protNFe.xMsg = this.readValue(nodenfeProc, "xMsg");
         }
 
         /// <summary>
@@ -444,13 +464,20 @@ namespace NFe.ConvertTxt
             nfe.retirada.cMun = this.readInt32(nodeinfNFe, TpcnResources.cMun);
             nfe.retirada.xMun = this.readValue(nodeinfNFe, TpcnResources.xMun);
             nfe.retirada.UF = this.readValue(nodeinfNFe, TpcnResources.UF);
+            nfe.retirada.xNome = this.readValue(nodeinfNFe, TpcnResources.xNome);
+            nfe.retirada.CEP = this.readValue(nodeinfNFe, TpcnResources.CEP);
+            nfe.retirada.cPais = this.readInt32(nodeinfNFe, TpcnResources.cPais);
+            nfe.retirada.xPais = this.readValue(nodeinfNFe, TpcnResources.xPais);
+            nfe.retirada.fone = this.readValue(nodeinfNFe, TpcnResources.fone);
+            nfe.retirada.email = this.readValue(nodeinfNFe, TpcnResources.email);
+            nfe.retirada.IE = this.readValue(nodeinfNFe, TpcnResources.IE);
         }
 
-        /// <summary>
-        /// processaEntrega
-        /// </summary>
-        /// <param name="nodeinfNFe"></param>
-        private void processaEntrega(XmlNode nodeinfNFe)
+    /// <summary>
+    /// processaEntrega
+    /// </summary>
+    /// <param name="nodeinfNFe"></param>
+    private void processaEntrega(XmlNode nodeinfNFe)
         {
             nfe.entrega.CNPJ = this.readValue(nodeinfNFe, TpcnResources.CNPJ);
             nfe.entrega.CPF = this.readValue(nodeinfNFe, TpcnResources.CPF);
@@ -461,6 +488,13 @@ namespace NFe.ConvertTxt
             nfe.entrega.cMun = this.readInt32(nodeinfNFe, TpcnResources.cMun);
             nfe.entrega.xMun = this.readValue(nodeinfNFe, TpcnResources.xMun);
             nfe.entrega.UF = this.readValue(nodeinfNFe, TpcnResources.UF);
+            nfe.entrega.xNome = this.readValue(nodeinfNFe, TpcnResources.xNome);
+            nfe.entrega.CEP = this.readValue(nodeinfNFe, TpcnResources.CEP);
+            nfe.entrega.cPais = this.readInt32(nodeinfNFe, TpcnResources.cPais);
+            nfe.entrega.xPais = this.readValue(nodeinfNFe, TpcnResources.xPais);
+            nfe.entrega.fone = this.readValue(nodeinfNFe, TpcnResources.fone);
+            nfe.entrega.email = this.readValue(nodeinfNFe, TpcnResources.email);
+            nfe.entrega.IE = this.readValue(nodeinfNFe, TpcnResources.IE);
         }
 
         /// <summary>
@@ -775,6 +809,7 @@ namespace NFe.ConvertTxt
                 else
                 {
                     medInfo.cProdANVISA = this.readValue(nodedetmed, TpcnResources.cProdANVISA);
+                    medInfo.xMotivoIsencao = this.readValue(nodedetmed, nameof(medInfo.xMotivoIsencao));
                 }
                 medInfo.vPMC = this.readDouble(nodedetmed, TpcnResources.vPMC);
                 detInfo.Prod.med.Add(medInfo);
@@ -943,7 +978,7 @@ namespace NFe.ConvertTxt
                         detInfo.Imposto.ICMS.pRedBCEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.pRedBCEfet);
                         detInfo.Imposto.ICMS.pICMSEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.pICMSEfet);
                         detInfo.Imposto.ICMS.vICMSEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSEfet);
-                        detInfo.Imposto.ICMS.vICMSSubstituto = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSSubstituto);
+						detInfo.Imposto.ICMS.vICMSSubstituto = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSSubstituto);
                     }
                 }
                 #endregion -->Imposto->ICMS

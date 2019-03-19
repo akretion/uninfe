@@ -176,6 +176,7 @@ namespace NFe.UI.Formularios
                 txtSenhaWS.Text = this.empresa.SenhaWS;
                 txtUsuarioWS.Text = this.empresa.UsuarioWS;
 
+#if _fw46
                 if (empresa.UnidadeFederativaCodigo.Equals(4205407))
                 {
                     var result = empresa.RecuperarConfiguracaoNFSeSoftplan(empresa.CNPJ);
@@ -187,6 +188,7 @@ namespace NFe.UI.Formularios
                     empresa.TokenNFse = result.TokenNFse;
                     empresa.TokenNFSeExpire = result.TokenNFSeExpire;
                 }
+#endif
 
                 HabilitaUsuarioSenhaWS(this.empresa.UnidadeFederativaCodigo);
                 servicoCurrent = this.empresa.Servico;

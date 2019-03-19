@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace NFe.ConvertTxt
 {
@@ -27,6 +24,7 @@ namespace NFe.ConvertTxt
         public Exporta exporta;
         public Compra compra;
         public Cana cana;
+        public RespTecnico resptecnico;
         public protNFe protNFe { get; private set; }
 
         /// <summary>
@@ -49,13 +47,14 @@ namespace NFe.ConvertTxt
             Cobr = new Cobr();
             InfAdic = new InfAdic();
             cana = new Cana();
+            resptecnico = new RespTecnico();
             protNFe = new protNFe();
             ///
             /// NFC-e
             pag = new List<pag>();
             qrCode = new qrCode();
 
-            infNFe.Versao = (decimal)2.0;
+            infNFe.Versao = (decimal)4.0;
         }
     }
 }

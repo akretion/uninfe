@@ -60,6 +60,7 @@ namespace NFe.Components
         CNAE,
         cNF,
         CNPJ,
+        CNPJ_CPF,
         CNPJAgeNav,
         CNPJDest,
         CNPJFab,
@@ -318,7 +319,6 @@ namespace NFe.Components
         prtEmb,
         prtTrans,
         pST,
-        vICMSSubstituto,
 
         qBCProd,
         qCarga,
@@ -497,6 +497,7 @@ namespace NFe.Components
         vICMSUFDest,
         vICMSUFRemet,
         vICMSEfet,
+ 		vICMSSubstituto,
         vII,
         VIN,
         vIOF,

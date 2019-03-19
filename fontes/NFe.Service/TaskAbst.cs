@@ -2378,8 +2378,9 @@ namespace NFe.Service
                 //Fazer uma leitura de algumas tags do XML
                 DadosNFeClass dadosNFe = LerXMLNFe(conteudoXML);
 
-                if (dadosNFe.mod == "55" || dadosNFe.mod == "65")
-                    AdicionarResponsavelTecnico(emp, dadosNFe.chavenfe.Substring(3, 44), conteudoXML);
+                if ((dadosNFe.mod == "55" || dadosNFe.mod == "65"))
+                    if (dadosNFe.tpAmb == "2" || (dadosNFe.tpAmb == "1" && dadosNFe.dEmi >= new DateTime(2019, 5, 7)))
+                        AdicionarResponsavelTecnico(emp, dadosNFe.chavenfe.Substring(3, 44), conteudoXML);
 
                 string ChaveNfe = dadosNFe.chavenfe;
                 string TpEmis = dadosNFe.tpEmis;
@@ -3629,6 +3630,7 @@ namespace NFe.Service
         private string GerarHashCSRT(string csrt, string chaveNFe)
         {
             var result = Criptografia.GetSHA1HashData(csrt + chaveNFe);
+            result = Functions.ToBase64Hex(result);
 
             return result;
         }
