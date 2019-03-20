@@ -1767,8 +1767,8 @@ namespace NFe.ConvertTxt
             wCampo(responsavel.xContato, TpcnTipoCampo.tcStr, nameof(responsavel.xContato), ObOp.Opcional, 0);
             wCampo(responsavel.email, TpcnTipoCampo.tcStr, TpcnResources.email, ObOp.Opcional);
             wCampo(responsavel.fone, TpcnTipoCampo.tcStr, TpcnResources.fone, ObOp.Opcional);
-            wCampo(responsavel.idCSRT, TpcnTipoCampo.tcInt, nameof(responsavel.idCSRT), ObOp.Obrigatorio, 2);
-            wCampo(responsavel.hashCSRT, TpcnTipoCampo.tcStr, nameof(responsavel.hashCSRT), ObOp.Obrigatorio, 0);
+            wCampo(responsavel.idCSRT, TpcnTipoCampo.tcInt, nameof(responsavel.idCSRT), ObOp.Opcional, 2);
+            wCampo(responsavel.hashCSRT, TpcnTipoCampo.tcStr, nameof(responsavel.hashCSRT), ObOp.Opcional, 0);
         }
 
         /// <summary>
@@ -1880,6 +1880,7 @@ namespace NFe.ConvertTxt
                     wCampo(NFe.entrega.CNPJ, TpcnTipoCampo.tcStr, TpcnResources.CNPJ);
                 else
                     wCampo(NFe.entrega.CPF, TpcnTipoCampo.tcStr, TpcnResources.CPF);
+                wCampo(NFe.entrega.xNome, TpcnTipoCampo.tcStr, TpcnResources.xNome, ObOp.Opcional);
                 wCampo(NFe.entrega.xLgr, TpcnTipoCampo.tcStr, TpcnResources.xLgr);
                 wCampo(NFe.entrega.nro, TpcnTipoCampo.tcStr, TpcnResources.nro);
                 wCampo(NFe.entrega.xCpl, TpcnTipoCampo.tcStr, TpcnResources.xCpl, ObOp.Opcional);
@@ -1888,13 +1889,12 @@ namespace NFe.ConvertTxt
                 wCampo(NFe.entrega.xMun, TpcnTipoCampo.tcStr, TpcnResources.xMun);
                 wCampo(NFe.entrega.UF, TpcnTipoCampo.tcStr, TpcnResources.UF);
 
-                wCampo(NFe.entrega.xNome, TpcnTipoCampo.tcStr, TpcnResources.xNome, ObOp.Opcional);
                 wCampo(NFe.entrega.CEP, TpcnTipoCampo.tcStr, TpcnResources.CEP, ObOp.Opcional);
                 wCampo(NFe.entrega.cPais, TpcnTipoCampo.tcStr, TpcnResources.cPais, ObOp.Opcional);
                 wCampo(NFe.entrega.xPais, TpcnTipoCampo.tcStr, TpcnResources.xPais, ObOp.Opcional);
-                wCampo(NFe.entrega.IE, TpcnTipoCampo.tcStr, TpcnResources.IE, ObOp.Opcional);
                 wCampo(NFe.entrega.fone, TpcnTipoCampo.tcStr, TpcnResources.fone, ObOp.Opcional);
                 wCampo(NFe.entrega.email, TpcnTipoCampo.tcStr, TpcnResources.email, ObOp.Opcional);
+                wCampo(NFe.entrega.IE, TpcnTipoCampo.tcStr, TpcnResources.IE, ObOp.Opcional);
             }
         }
 
@@ -2213,6 +2213,7 @@ namespace NFe.ConvertTxt
                     wCampo(NFe.retirada.CNPJ, TpcnTipoCampo.tcStr, TpcnResources.CNPJ);
                 else
                     wCampo(NFe.retirada.CPF, TpcnTipoCampo.tcStr, TpcnResources.CPF);
+                wCampo(NFe.retirada.xNome, TpcnTipoCampo.tcStr, TpcnResources.xNome, ObOp.Opcional);
                 wCampo(NFe.retirada.xLgr, TpcnTipoCampo.tcStr, TpcnResources.xLgr);
                 wCampo(NFe.retirada.nro, TpcnTipoCampo.tcStr, TpcnResources.nro);
                 wCampo(NFe.retirada.xCpl, TpcnTipoCampo.tcStr, TpcnResources.xCpl, ObOp.Opcional);
@@ -2221,13 +2222,12 @@ namespace NFe.ConvertTxt
                 wCampo(NFe.retirada.xMun, TpcnTipoCampo.tcStr, TpcnResources.xMun);
                 wCampo(NFe.retirada.UF, TpcnTipoCampo.tcStr, TpcnResources.UF);
 
-                wCampo(NFe.retirada.xNome, TpcnTipoCampo.tcStr, TpcnResources.xNome, ObOp.Opcional);
                 wCampo(NFe.retirada.CEP, TpcnTipoCampo.tcStr, TpcnResources.CEP, ObOp.Opcional);
                 wCampo(NFe.retirada.cPais, TpcnTipoCampo.tcStr, TpcnResources.cPais, ObOp.Opcional);
                 wCampo(NFe.retirada.xPais, TpcnTipoCampo.tcStr, TpcnResources.xPais, ObOp.Opcional);
-                wCampo(NFe.retirada.IE, TpcnTipoCampo.tcStr, TpcnResources.IE, ObOp.Opcional);
                 wCampo(NFe.retirada.fone, TpcnTipoCampo.tcStr, TpcnResources.fone, ObOp.Opcional);
                 wCampo(NFe.retirada.email, TpcnTipoCampo.tcStr, TpcnResources.email, ObOp.Opcional);
+                wCampo(NFe.retirada.IE, TpcnTipoCampo.tcStr, TpcnResources.IE, ObOp.Opcional);
             }
         }
 

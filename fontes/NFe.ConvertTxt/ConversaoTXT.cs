@@ -2796,8 +2796,8 @@ namespace NFe.ConvertTxt
                     NFe.resptecnico.xContato = this.LerString(nameof(RespTecnico.xContato), ObOp.Obrigatorio, 2, 60);
                     NFe.resptecnico.email = this.LerString(TpcnResources.email, ObOp.Obrigatorio, 2, 60);
                     NFe.resptecnico.fone = this.LerString(TpcnResources.fone, ObOp.Obrigatorio, 6, 14);
-                    NFe.resptecnico.idCSRT = this.LerInt32(nameof(RespTecnico.idCSRT), ObOp.Obrigatorio, 2, 2);
-                    NFe.resptecnico.hashCSRT = this.LerString(nameof(RespTecnico.hashCSRT), ObOp.Obrigatorio, 28, 28);
+                    NFe.resptecnico.idCSRT = this.LerInt32(nameof(RespTecnico.idCSRT), ObOp.Opcional, 2, 2);
+                    NFe.resptecnico.hashCSRT = this.LerString(nameof(RespTecnico.hashCSRT), ObOp.Opcional, 28, 28);
                     break;
             }
         }

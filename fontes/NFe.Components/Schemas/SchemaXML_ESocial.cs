@@ -469,6 +469,20 @@
 
             #endregion S-2241 - Insalubridade, Periculosidade e Aposentadoria Especial
 
+            #region S-2245 - Evento Treinamentos, Capacitações, Exercícios Simulados e Outras Anotações
+
+            SchemaXML.InfSchemas.Add("eSocial-evtTreiCap", new InfSchema()
+            {
+                Tag = "evtTreiCap",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\evtTreiCap.xsd",
+                Descricao = "XML eSocial - 2245 - Evento Treinamentos, Capacitações, Exercícios Simulados e Outras Anotações",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "evtTreiCap",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTreiCap/v02_05_00"
+            });
+            #endregion S-2245 - Evento Treinamentos, Capacitações, Exercícios Simulados e Outras Anotações
+
             #region S-2250 - Aviso Prévio
 
             SchemaXML.InfSchemas.Add("eSocial-evtAvPrevio", new InfSchema()
