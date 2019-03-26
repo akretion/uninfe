@@ -169,6 +169,21 @@ namespace NFe.Components.Betha.NewVersion.Ambiente
                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
 
+        public override void ConsultarNfseServicoTomado(string file)
+        {
+            ReadXML(file);
+
+            ConsultarNfseServicoTomado envio = new ConsultarNfseServicoTomado
+            {
+                nfseCabecMsg = CabecMsg,
+                nfseDadosMsg = XmlString
+            };
+
+            string result = Service.ConsultarNfseServicoTomado(envio).@return;
+            GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeTom).EnvioXML,
+                                       Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeTom).RetornoXML);
+        }
+
         private void ReadXML(string file)
         {
             StreamReader SR = null;
@@ -189,7 +204,5 @@ namespace NFe.Components.Betha.NewVersion.Ambiente
             }
         }
         #endregion
-
-
     }
 }

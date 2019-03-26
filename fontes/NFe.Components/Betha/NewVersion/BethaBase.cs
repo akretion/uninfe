@@ -85,8 +85,12 @@ namespace NFe.Components.Betha.NewVersion
         {
             BethaService.ConsultarNfsePorRps(file);
         }
+
+        public override void ConsultarNfseServicoTomado(string file)
+        {
+            BethaService.ConsultarNfseServicoTomado(file);
+        }
+        
         #endregion
-
-
     }
 }

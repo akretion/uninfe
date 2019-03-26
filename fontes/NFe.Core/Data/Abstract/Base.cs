@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
-using ERP.Net.Data.Cadastro.Pessoa;
-using ERP.Net.Model;
-using Newtonsoft.Json;
+//using ERP.Net.Data.Cadastro.Pessoa;
+//using ERP.Net.Model;
+//using Newtonsoft.Json;
 using Unimake;
 using Unimake.Data.Generic;
 using Unimake.Data.Generic.Definitions;
@@ -14,6 +14,7 @@ using Unimake.Data.Generic.Model;
 
 namespace ERP.Net.Data.Abstract
 {
+    /*
     /// <summary>
     /// Classe de base para acesso à base de dados
     /// </summary>
@@ -579,4 +580,5 @@ namespace ERP.Net.Data.Abstract
 
         #endregion Private Methods
     }
+    */
 }

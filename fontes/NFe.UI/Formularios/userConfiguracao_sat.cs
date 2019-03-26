@@ -57,6 +57,12 @@ namespace NFe.UI.Formularios
 
         public void Validar()
         {
+            if (cbMacarSAT.SelectedItem == null)
+                throw new Exception("É obrigatório informar uma marca");
+
+            if (string.IsNullOrEmpty(txtCodigoAtivacaoSAT.Text))
+                throw new Exception("É obrigatório informar o código de ativação");
+             
             empresa.MarcaSAT = cbMacarSAT.SelectedItem.ToString();
             empresa.CodigoAtivacaoSAT = txtCodigoAtivacaoSAT.Text;
             empresa.UtilizaConversaoCFe = ckConversaoNFCe.Checked;

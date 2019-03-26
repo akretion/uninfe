@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuracoes>
+  <Arquivo ID="35">
+     <Nome>São Paulo</Nome>
+     <UF>SP</SP>
+     <ArqConfig>SP.xml</ArqConfig>
+  </Arquivo>
+</Configuracoes>

@@ -113,6 +113,21 @@ namespace NFSe.Components
             });
 
             #endregion Consulta NFSe por Faixa
+
+            #region Consulta NFSe por Faixa
+
+            SchemaXML.InfSchemas.Add("NFSE-SUPERNOVA-ConsultarNfseServicoTomadoEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseServicoTomadoEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\SUPERNOVA\\nfse.xsd",
+                Descricao = "XML de Consulta da NFSe Servicos Tomados",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+
+            #endregion Consulta NFSe por Faixa
         }
     }
 }

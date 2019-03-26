@@ -364,6 +364,21 @@
 
             #endregion S-2200 - Cadastramento Inicial do Vínculo e Admissão/Ingresso de Trabalhador
 
+            #region S-2221 - Exame Toxicológico do Motorista Profissional
+
+            SchemaXML.InfSchemas.Add("eSocial-evtToxic", new InfSchema()
+            {
+                Tag = "evtToxic",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\evtToxic.xsd",
+                Descricao = "XML eSocial - 2221 - Exame Toxicológico do Motorista Profissional",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "evtToxic",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtToxic/v02_05_00"
+            });
+
+            #endregion S-2221 - Exame Toxicológico do Motorista Profissional
+
             #region S-2205 - Alteração de Dados Cadastrais do Trabalhador
 
             SchemaXML.InfSchemas.Add("eSocial-evtAltCadastral", new InfSchema()

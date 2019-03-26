@@ -142,6 +142,10 @@ namespace NFe.Components.Abstract
 
         public abstract void ConsultarNfsePorRps(string file);
 
+        public virtual void ConsultarNfseServicoTomado(string file)
+        {
+        }
+
         public object WSGeracao
         {
             get;

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuracoes>
+  <SVC>SVCAN</SVC>
+  <Servicos>
+    <StatusServico>
+      <Descricao>Consulta situação do serviço da nota fiscal eletrônica</Descricao>
+      <WebEnderecoHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/ws/nfestatusservico4.asmx</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://nfe.fazenda.sp.gov.br/ws/nfestatusservico4.asmx</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeStatusServico4</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeStatusServico4</WebActionProducao>
+      <WebTagRetorno>nfeResultMsg</WebTagRetorno>
+      <Schema>consStatServ_v{0}.xsd</Schema>
+      <SchemaVersao>4.00</SchemaVersao>
+      <TagAssinatura></TagAssinatura>
+      <TagAtributoID></TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+    </StatusServico>
+    <Inutilizacao></Inutilizacao>
+    <ConsultaProtocolo></ConsultaProtocolo>
+    <ConsultaCadastro></ConsultaCadastro>
+    <RecepcaoEvento></RecepcaoEvento>
+    <Autorizacao></Autorizacao>
+    <RetAutorizacao></RetAutorizacao>
+  </Servicos>
+</Configuracoes>
