@@ -163,7 +163,8 @@ namespace NFe.ConvertTxt
         oeNacional_Cuja_produção_tenha_sido_feita_em_conformidade_com_o_PPB = 4,
         oeNacional_Mercadoria_com_bem_ou_conteúdo_de_importação_inferior_a_40 = 5,
         oeEstrangeira_Importação_direta_sem_similar_nacional = 6,
-        oeEstrangeira_Adquirida_no_mercado_interno_com_similar_nacional=7
+        oeEstrangeira_Adquirida_no_mercado_interno_com_similar_nacional = 7,
+        oeEstrangeira_Nacional_Conteúdo_de_Importação_superior_a_70 = 8
     }
     public enum TpcnTipoArma 
     { 

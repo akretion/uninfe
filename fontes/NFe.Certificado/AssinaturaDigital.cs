@@ -45,23 +45,39 @@ namespace NFe.Certificado
             int empresa,
             AlgorithmType algorithmType = AlgorithmType.Sha1, bool comURI = true)
         {
-            XmlDocument doc = new XmlDocument();
-            doc.PreserveWhitespace = false;
-            try
+            Assinar(new XmlDocument(), arqXMLAssinar, tagAssinatura, tagAtributoId, x509Cert, empresa, algorithmType, comURI);
+        }
+
+        private void Assinar(XmlDocument conteudoXML,
+            string arqXMLAssinar,
+            string tagAssinatura,
+            string tagAtributoId,
+            X509Certificate2 x509Cert,
+            int empresa,
+            AlgorithmType algorithmType = AlgorithmType.Sha1, bool comURI = true)
+        {
+            conteudoXML.PreserveWhitespace = true;
+
+            if (string.IsNullOrEmpty(conteudoXML.InnerText))
             {
-                doc.Load(arqXMLAssinar);
-            }
-            catch
-            {
-                doc.LoadXml(System.IO.File.ReadAllText(arqXMLAssinar, System.Text.Encoding.UTF8));
+                conteudoXML = new XmlDocument();
+
+                try
+                {
+                    conteudoXML.Load(arqXMLAssinar);
+                }
+                catch
+                {
+                    conteudoXML.LoadXml(File.ReadAllText(arqXMLAssinar, System.Text.Encoding.UTF8));
+                }
             }
 
-            Assinar(doc, tagAssinatura, tagAtributoId, x509Cert, empresa, algorithmType, comURI);
+            Assinar(conteudoXML, tagAssinatura, tagAtributoId, x509Cert, empresa, algorithmType, comURI);
 
             try
             {
                 // Atualizar a string do XML já assinada
-                string StringXMLAssinado = doc.OuterXml;
+                string StringXMLAssinado = conteudoXML.OuterXml;
 
                 // Gravar o XML Assinado no HD
                 StreamWriter SW_2 = File.CreateText(arqXMLAssinar);
@@ -300,6 +316,11 @@ namespace NFe.Certificado
         /// <param name="algorithmType">Tipo de algoritimo para assinatura do XML.</param>
         public void Assinar(string arqXMLAssinar, int emp, int UFCod, AlgorithmType algorithmType = AlgorithmType.Sha1, bool comURI = true)
         {
+            Assinar(new XmlDocument(), arqXMLAssinar, emp, UFCod, algorithmType, comURI);
+        }
+
+        public void Assinar(XmlDocument conteudoXML, string arqXMLAssinar, int emp, int UFCod, AlgorithmType algorithmType = AlgorithmType.Sha1, bool comURI = true)
+        {
             if (Empresas.Configuracoes[emp].UsaCertificado)
             {
                 TipoArquivoXML v = new TipoArquivoXML(arqXMLAssinar, UFCod, false);
@@ -307,19 +328,19 @@ namespace NFe.Certificado
                 if (!string.IsNullOrEmpty(v.TagAssinatura0))
                 {
                     if (!Assinado(arqXMLAssinar, v.TagAssinatura0))
-                        Assinar(arqXMLAssinar, v.TagAssinatura0, v.TagAtributoId0, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
+                        Assinar(conteudoXML, arqXMLAssinar, v.TagAssinatura0, v.TagAtributoId0, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
                 }
 
                 if (!string.IsNullOrEmpty(v.TagAssinatura))
                 {
                     if (!Assinado(arqXMLAssinar, v.TagAssinatura))
-                        Assinar(arqXMLAssinar, v.TagAssinatura, v.TagAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
+                        Assinar(conteudoXML, arqXMLAssinar, v.TagAssinatura, v.TagAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
                 }
 
                 //Assinar o lote
                 if (!string.IsNullOrEmpty(v.TagLoteAssinatura))
                     if (!Assinado(arqXMLAssinar, v.TagLoteAssinatura))
-                        Assinar(arqXMLAssinar, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
+                        Assinar(conteudoXML, arqXMLAssinar, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
             }
         }
 
@@ -525,7 +546,7 @@ namespace NFe.Certificado
             string pin)
         {
             string _pin = pin;
-            
+
             AssinaturaValida = true;
             try
             {

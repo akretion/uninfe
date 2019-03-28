@@ -343,8 +343,22 @@ namespace NFe.Validate
             //Assinar o XML se tiver tag para assinar
             AssinaturaDigital oAD = new AssinaturaDigital();
 
+            XmlDocument conteudoXML = null;
+
             try
             {
+                conteudoXML = new XmlDocument();
+                conteudoXML.Load(Arquivo);
+
+                RespTecnico respTecnico = new RespTecnico(Empresas.Configuracoes[emp].RespTecCNPJ,
+                    Empresas.Configuracoes[emp].RespTecXContato,
+                    Empresas.Configuracoes[emp].RespTecEmail,
+                    Empresas.Configuracoes[emp].RespTecTelefone,
+                    Empresas.Configuracoes[emp].RespTecIdCSRT,
+                    Empresas.Configuracoes[emp].RespTecCSRT);
+
+                respTecnico.AdicionarResponsavelTecnico(conteudoXML);
+
                 if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
                 {
                     EncryptAssinatura(Arquivo);
@@ -367,7 +381,7 @@ namespace NFe.Validate
                     }
                     else
                     {
-                        oAD.Assinar(Arquivo, emp, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
+                        oAD.Assinar(conteudoXML, Arquivo, emp, Empresas.Configuracoes[emp].UnidadeFederativaCodigo);
                     }
 
                     Assinou = true;
@@ -396,7 +410,6 @@ namespace NFe.Validate
                 {
                     if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IdentificadorCSC))
                     {
-                        XmlDocument conteudoXML = new XmlDocument();
                         conteudoXML.Load(Arquivo);
 
                         QRCode qrCode = new QRCode(conteudoXML);

@@ -127,6 +127,22 @@ namespace NFe.Certificado
         {
             bool retorna = false;
 
+
+            //if (Empresas.Configuracoes[emp].X509Certificado.Verify())
+            //    MessageBox.Show("Certificado1 OK");
+            //else
+            //    MessageBox.Show("Certificado1 Erro");
+
+            //Empresas.Configuracoes[emp].X509Certificado.Reset();
+            //Empresa empresa = Empresas.Configuracoes[emp];
+            //Empresas.Configuracoes[emp].X509Certificado = empresa.BuscaConfiguracaoCertificado();
+
+            //if (Empresas.Configuracoes[emp].X509Certificado.Verify())
+            //    MessageBox.Show("Certificado3 OK");
+            //else
+            //    MessageBox.Show("Certificado3 Erro");
+
+
             if (Empresas.Configuracoes[emp].UsaCertificado)
             {
                 if (Empresas.Configuracoes[emp].X509Certificado == null)
