@@ -32,7 +32,7 @@ namespace NFe.Validate
 
             DateTime dhEmi = Convert.ToDateTime(conteudoXML.GetElementsByTagName("dhEmi")[0].InnerText);
 
-            if (conteudoXML.GetElementsByTagName("tpAmb")[0].InnerText == "1" && dhEmi >= new DateTime(2019, 5, 7))
+            if (conteudoXML.GetElementsByTagName("tpAmb")[0].InnerText == "1" && dhEmi < new DateTime(2019, 5, 7))
                 return;
 
             XmlNode infRespTec = conteudoXML.GetElementsByTagName("infRespTec")[0];
