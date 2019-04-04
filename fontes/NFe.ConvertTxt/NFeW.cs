@@ -1910,7 +1910,7 @@ namespace NFe.ConvertTxt
                 wCampo(NFe.entrega.UF, TpcnTipoCampo.tcStr, TpcnResources.UF);
 
                 wCampo(NFe.entrega.CEP, TpcnTipoCampo.tcStr, TpcnResources.CEP, ObOp.Opcional);
-                wCampo(NFe.entrega.cPais, TpcnTipoCampo.tcStr, TpcnResources.cPais, ObOp.Opcional);
+                wCampo(NFe.entrega.cPais, TpcnTipoCampo.tcInt, TpcnResources.cPais, ObOp.Opcional);
                 wCampo(NFe.entrega.xPais, TpcnTipoCampo.tcStr, TpcnResources.xPais, ObOp.Opcional);
                 wCampo(NFe.entrega.fone, TpcnTipoCampo.tcStr, TpcnResources.fone, ObOp.Opcional);
                 wCampo(NFe.entrega.email, TpcnTipoCampo.tcStr, TpcnResources.email, ObOp.Opcional);
@@ -2243,7 +2243,7 @@ namespace NFe.ConvertTxt
                 wCampo(NFe.retirada.UF, TpcnTipoCampo.tcStr, TpcnResources.UF);
 
                 wCampo(NFe.retirada.CEP, TpcnTipoCampo.tcStr, TpcnResources.CEP, ObOp.Opcional);
-                wCampo(NFe.retirada.cPais, TpcnTipoCampo.tcStr, TpcnResources.cPais, ObOp.Opcional);
+                wCampo(NFe.retirada.cPais, TpcnTipoCampo.tcInt, TpcnResources.cPais, ObOp.Opcional);
                 wCampo(NFe.retirada.xPais, TpcnTipoCampo.tcStr, TpcnResources.xPais, ObOp.Opcional);
                 wCampo(NFe.retirada.fone, TpcnTipoCampo.tcStr, TpcnResources.fone, ObOp.Opcional);
                 wCampo(NFe.retirada.email, TpcnTipoCampo.tcStr, TpcnResources.email, ObOp.Opcional);
