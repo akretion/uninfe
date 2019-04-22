@@ -15,15 +15,28 @@ namespace Unimake.DFe.Security
         Sha256
     }
 
+    /// <summary>
+    /// Classe para fazer assinatura digital de XMLs
+    /// </summary>
     public class AssinaturaDigital
     {
-        private void Assinar(XmlDocument conteudoXML,
+        /// <summary>
+        /// Assinar digitalmente o XML
+        /// </summary>
+        /// <param name="conteudoXML">XML a ser assinado</param>
+        /// <param name="tagAssinatura">Nome da tag a ser assinada</param>
+        /// <param name="tagAtributoId">Nome da tag que possui o ID para referencia na URI da assinatura</param>
+        /// <param name="x509Cert">Certificado digital a ser utilizado na assinatura</param>
+        /// <param name="algorithmType">Tipo de algorítimo a ser utilizado na assinatura</param>
+        /// <param name="definirURI">Define o Reference.URI na assinatura</param>
+        /// <param name="pinCertificado">PIN do certificado digital, quando do tipo A3</param>
+        public void Assinar(XmlDocument conteudoXML,
             string tagAssinatura,
             string tagAtributoId,
             X509Certificate2 x509Cert,
-            AlgorithmType algorithmType,
-            bool definirURI,
-            string pinCertificado)
+            AlgorithmType algorithmType = AlgorithmType.Sha1,
+            bool definirURI = true,
+            string pinCertificado = "")
         {
             try
             {

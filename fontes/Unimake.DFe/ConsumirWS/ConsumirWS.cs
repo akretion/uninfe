@@ -10,6 +10,8 @@ namespace Unimake.DFe
 {
     public class ConsumirWS
     {
+        #region Propriedades
+
         private readonly CookieContainer cookies = new CookieContainer();
 
         /// <summary>
@@ -22,6 +24,16 @@ namespace Unimake.DFe
         /// </summary>
         public XmlDocument RetornoServicoXML { get; private set; }
 
+        #endregion
+
+        #region Métodos
+
+        /// <summary>
+        /// Estabelece conexão com o Webservice e faz o envio do XML e recupera o retorno. Conteúdo retornado pelo webservice pode ser recuperado através das propriedades RetornoServicoXML ou RetornoServicoString.
+        /// </summary>
+        /// <param name="xml">XML a ser enviado para o webservice</param>
+        /// <param name="servico">Parâmetros para execução do serviço (parâmetros do soap)</param>
+        /// <param name="certificado">Certificado digital a ser utilizado na conexão com os serviços</param>
         public void ExecutarServico(XmlDocument xml, object servico, X509Certificate2 certificado)
         {
             WSSoap soap = (WSSoap)servico;
@@ -29,44 +41,38 @@ namespace Unimake.DFe
             try
             {
                 Uri urlpost = new Uri(soap.EnderecoWeb);
-                HttpWebRequest httpPostNFe = (HttpWebRequest)HttpWebRequest.Create(urlpost);
-
-                string sNFeDados = EnveloparXML(xml.OuterXml, soap);
-
-                string postConsultaComParametros = sNFeDados;
-
-                byte[] buffer2 = Encoding.UTF8.GetBytes(postConsultaComParametros);
-
-                httpPostNFe.CookieContainer = cookies;
-                httpPostNFe.Timeout = 60000;
-                httpPostNFe.ContentType = "application/soap+xml; charset=utf-8; action=" + soap.ActionWeb;
-                httpPostNFe.Method = "POST";
+                string soapXML = EnveloparXML(soap, "", xml.OuterXml);
+                byte[] buffer2 = Encoding.UTF8.GetBytes(soapXML);
 
                 ServicePointManager.Expect100Continue = false;
                 ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(RetornoValidacao);
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | (SecurityProtocolType)768 | (SecurityProtocolType)3072;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
 
-                //Certifica o objeto/servico -> adiciona o certificado
-                httpPostNFe.ClientCertificates.Add(certificado);
+                HttpWebRequest httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(urlpost);
+                httpWebRequest.Headers.Add("SOAPAction: " + soap.ActionWeb);
+                httpWebRequest.CookieContainer = cookies;
+                httpWebRequest.Timeout = 60000;
+                httpWebRequest.ContentType = (string.IsNullOrEmpty(soap.ContentType) ? "application/soap+xml; charset=utf-8;" : soap.ContentType);
+                httpWebRequest.Method = "POST";
+                httpWebRequest.ClientCertificates.Add(certificado);
+                httpWebRequest.ContentLength = buffer2.Length;
 
-                httpPostNFe.ContentLength = buffer2.Length;
+                Stream postData = httpWebRequest.GetRequestStream();
+                postData.Write(buffer2, 0, buffer2.Length);
+                postData.Close();
 
-                Stream PostData = httpPostNFe.GetRequestStream();
-                PostData.Write(buffer2, 0, buffer2.Length);
-                PostData.Close();
-
-                HttpWebResponse responsePost = (HttpWebResponse)httpPostNFe.GetResponse();
-                Stream istreamPost = responsePost.GetResponseStream();
-                StreamReader strRespotaUrlConsultaNFe = new StreamReader(istreamPost, Encoding.UTF8);
-
-                string x = strRespotaUrlConsultaNFe.ReadToEnd();
+                HttpWebResponse responsePost = (HttpWebResponse)httpWebRequest.GetResponse();
+                Stream streamPost = responsePost.GetResponseStream();
+                StreamReader streamReaderResponse = new StreamReader(streamPost, Encoding.UTF8);
 
                 XmlDocument retornoXml = new XmlDocument();
-                retornoXml.LoadXml(x);
+                retornoXml.LoadXml(streamReaderResponse.ReadToEnd());
 
                 RetornoServicoString = retornoXml.GetElementsByTagName(soap.TagRetorno)[0].ChildNodes[0].OuterXml;
-                RetornoServicoXML = new XmlDocument();
-                RetornoServicoXML.PreserveWhitespace = false;
+                RetornoServicoXML = new XmlDocument
+                {
+                    PreserveWhitespace = false
+                };
                 RetornoServicoXML.LoadXml(RetornoServicoString);
             }
             catch
@@ -76,25 +82,50 @@ namespace Unimake.DFe
         }
 
         /// <summary>
-        /// Envelopar XML
+        /// Criar o envelope (SOAP) para envio ao webservice
         /// </summary>
-        /// <param name="xml">string do XML a ser envelopado</param>
         /// <param name="soap">Soap</param>
-        /// <returns>string do XML já envelopado</returns>
-        private static string EnveloparXML(string xml, WSSoap soap)
+        /// <param name="xmlHeader">string do XML a ser enviado no cabeçalho do soap</param>
+        /// <param name="xmlBody">string do XML a ser enviado no corpo do soap</param>
+        /// <returns>string do envelope (soap)</returns>
+        private static string EnveloparXML(WSSoap soap, string xmlHeader, string xmlBody)
         {
             string retorna = string.Empty;
-            if (xml.IndexOf("?>") >= 0)
+
+            if (!string.IsNullOrEmpty(xmlHeader))
             {
-                xml = xml.Substring(xml.IndexOf("?>") + 2);
+                if (xmlHeader.IndexOf("?>") >= 0)
+                {
+                    xmlHeader = xmlHeader.Substring(xmlHeader.IndexOf("?>") + 2);
+                }
             }
 
-            retorna = "<?xml version='1.0' encoding='UTF-8'?>";
-            retorna += "<" + soap.VersaoSoap + ":Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:" + soap.VersaoSoap + "='http://www.w3.org/2003/05/soap-envelope'>";
-            retorna += "<" + soap.VersaoSoap + ":Body>";
-            retorna += "<nfeDadosMsg xmlns= '" + soap.ActionWeb + "'>" + xml + "</nfeDadosMsg>";
-            retorna += "</" + soap.VersaoSoap + ":Body>";
-            retorna += "</" + soap.VersaoSoap + ":Envelope>";
+            if (xmlBody.IndexOf("?>") >= 0)
+            {
+                xmlBody = xmlBody.Substring(xmlBody.IndexOf("?>") + 2);
+            }
+
+            retorna = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+
+            if (!string.IsNullOrEmpty(soap.SoapString))
+            {
+                //Soap string definido nas configurações
+                retorna += soap.SoapString.Replace("{0}", xmlHeader).Replace("{1}", soap.ActionWeb).Replace("{2}", xmlBody);
+            }
+            else
+            {
+                //Soap string default
+                retorna += "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">";
+                retorna += "<soap:Header>";
+                retorna += xmlHeader;
+                retorna += "</soap:Header>";
+                retorna += "<soap:Body>";
+                retorna += "<nfeDadosMsg xmlns=\"" + soap.ActionWeb + "\">";
+                retorna += xmlBody;
+                retorna += "</nfeDadosMsg>";
+                retorna += "</soap:Body>";
+                retorna += "</soap:Envelope>";
+            }
 
             return retorna;
         }
@@ -106,5 +137,7 @@ namespace Unimake.DFe
         {
             return true;
         }
+
+        #endregion
     }
 }

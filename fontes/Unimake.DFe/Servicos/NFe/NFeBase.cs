@@ -1,55 +1,64 @@
 ﻿using System;
+using System.IO;
 using System.Xml;
 
 namespace Unimake.DFe.Servicos.NFe
 {
     public abstract class NFeBase : ServicoBase
     {
-        private const string ArquivoConfig = @"Servicos\Nfe\Config\Config.xml";
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+        /// <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        public NFeBase(XmlDocument conteudoXML, Configuracao configuracao)
+            : base(conteudoXML, configuracao) { }
 
-        public NFeBase(XmlDocument conteudoXML, Configuracao configuracao) :
-            base(conteudoXML, configuracao)
+        /// <summary>
+        /// Executar o serviço
+        /// </summary>
+        public override void Executar()
         {
-            if (!configuracao.Definida)
+            XmlValidar();
+
+            WSSoap soap = new WSSoap
             {
-                DefinirConfiguracao(configuracao);
+                EnderecoWeb = (Configuracoes.tpAmb == 1 ? Configuracoes.WebEnderecoProducao : Configuracoes.WebEnderecoHomologacao),
+                ActionWeb = (Configuracoes.tpAmb == 1 ? Configuracoes.WebActionProducao : Configuracoes.WebActionHomologacao),
+                TagRetorno = Configuracoes.WebTagRetorno,
+                VersaoSoap = Configuracoes.WebSoapVersion,
+                SoapString = Configuracoes.WebSoapString,
+                ContentType = Configuracoes.WebContentType
+            };
+
+            ConsumirWS consumirWS = new ConsumirWS();
+            consumirWS.ExecutarServico(ConteudoXML, soap, Configuracoes.CertificadoDigital);
+
+            RetornoWSString = consumirWS.RetornoServicoString;
+            RetornoWSXML = consumirWS.RetornoServicoXML;
+        }
+
+        /// <summary>
+        /// Validar o XML
+        /// </summary>
+        protected override void XmlValidar()
+        {
+            ValidarSchema validar = new ValidarSchema();
+            validar.Validar(ConteudoXML, Path.Combine(Configuracoes.SchemaPasta, Configuracoes.SchemaArquivo), Configuracoes.TargetNS);
+
+            if (!validar.Success)
+            {
+                throw new Exception(validar.ErrorMessage);
             }
         }
 
-        private void DefinirConfiguracao(Configuracao configuracao)
+        /// <summary>
+        /// Definir configurações
+        /// </summary>
+        protected override void DefinirConfiguracao()
         {
-            if (configuracao.cUF.Equals(0))
-            {
-                if (ConteudoXML.GetElementsByTagName("cUF")[0] != null)
-                {
-                    configuracao.cUF = Convert.ToInt32(ConteudoXML.GetElementsByTagName("cUF")[0].InnerText);
-                }
-            }
-
-            if (configuracao.tpAmb.Equals(0))
-            {
-                if (ConteudoXML.GetElementsByTagName("tpAmb")[0] != null)
-                {
-                    configuracao.tpAmb = Convert.ToInt32(ConteudoXML.GetElementsByTagName("tpAmb")[0].InnerText);
-                }
-            }
-
-            XmlDocument doc = new XmlDocument();
-            doc.Load(ArquivoConfig);
-
-            XmlNodeList listConfiguracoes = doc.GetElementsByTagName("Configuracoes");
-
-            foreach (object nodeConfiguracoes in listConfiguracoes)
-            {
-                XmlElement elementConfiguracoes = (XmlElement)nodeConfiguracoes;
-                if (elementConfiguracoes.GetAttribute("ID") == configuracao.cUF.ToString())
-                {
-                    XmlDocument docConfig = new XmlDocument();
-                    docConfig.Load(elementConfiguracoes.GetElementsByTagName("Arquivo")[0].InnerText);
-
-
-                }
-            }
+            //Definir a pasta onde fica o schema do XML
+            Configuracoes.SchemaPasta = @"Xml\NFe\Schemas\";
         }
     }
 }

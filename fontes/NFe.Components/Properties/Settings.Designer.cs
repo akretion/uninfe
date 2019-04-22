@@ -12,7 +12,7 @@ namespace NFe.Components.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -709,16 +709,6 @@ namespace NFe.Components.Properties {
         public string NFe_Components_br_com_metropolisweb_lftributos_p_Nfse {
             get {
                 return ((string)(this["NFe_Components_br_com_metropolisweb_lftributos_p_Nfse"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://fiorilli.avare.sp.gov.br:5661/IssWeb-ejb/IssWebWS/IssWebWS")]
-        public string NFe_Components_br_com_fiorilli_fi1_avaresp_p_IssWebWS {
-            get {
-                return ((string)(this["NFe_Components_br_com_fiorilli_fi1_avaresp_p_IssWebWS"]));
             }
         }
         
@@ -2096,6 +2086,16 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PPetropolisRJ_WebService_SigISS {
             get {
                 return ((string)(this["NFe_Components_PPetropolisRJ_WebService_SigISS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://wsmontecarmelo.simplissweb.com.br/nfseservice.svc")]
+        public string NFe_Components_PMonteCarmeloMG_NfseService {
+            get {
+                return ((string)(this["NFe_Components_PMonteCarmeloMG_NfseService"]));
             }
         }
     }

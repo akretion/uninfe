@@ -2308,6 +2308,17 @@ namespace NFe.Service
                         }
                         break;
 
+                    case ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe:
+                        {
+                            detEvento.AppendChild(criaElemento(doc, TpcnResources.cOrgaoAutor.ToString(), evento.cancelamentoSubstituicao.cOrgaoAutor.ToString()));
+                            detEvento.AppendChild(criaElemento(doc, TpcnResources.tpAutor.ToString(), ((Int32)evento.cancelamentoSubstituicao.tpAutor).ToString()));
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.verAplic.ToString(), evento.cancelamentoSubstituicao.verAplic.Trim()));
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.nProt.ToString(), evento.nProt));
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.xJust.ToString(), evento.xJust.Trim()));
+                            detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.chNFeRef.ToString(), evento.cancelamentoSubstituicao.chNFeRef));
+                        }
+                        break;
+
                     case ConvertTxt.tpEventos.tpEvOperacaoNaoRealizada:
                         detEvento.AppendChild(criaElemento(doc, NFe.Components.TpcnResources.xJust.ToString(), evento.xJust.Trim()));
                         break;
@@ -2495,6 +2506,7 @@ namespace NFe.Service
             /// a situacao da mesma nota, os eventos serão gravados na pasta de 'Terceiros'
             ///
             if ((tpEvento != ConvertTxt.tpEventos.tpEvCancelamentoNFe &&
+                tpEvento != ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe &&
                 tpEvento != ConvertTxt.tpEventos.tpEvCCe &&
                 tpEvento != ConvertTxt.tpEventos.tpEvEPEC) && !FromTaskEventos && NFeDeTerceiros)
             {
@@ -2513,7 +2525,8 @@ namespace NFe.Service
                 if (tpEvento != ConvertTxt.tpEventos.tpEvEPEC && !NFeDeTerceiros)
                 {
                     bool vePasta = false;
-                    if (tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe)
+                    if (tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe ||
+                        tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe)
                         vePasta = Empresas.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
                     else
                         vePasta = Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
@@ -2545,7 +2558,8 @@ namespace NFe.Service
             if (!string.IsNullOrEmpty(filenameBackup))
             {
                 bool vePasta = false;
-                if (tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe)
+                if (tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe ||
+                    tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe)
                     vePasta = Empresas.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
                 else
                     vePasta = Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
@@ -2658,7 +2672,8 @@ namespace NFe.Service
             else
             {
                 bool vePasta = false;
-                if ((ConvertTxt.tpEventos)tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe)
+                if ((ConvertTxt.tpEventos)tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe ||
+                    (ConvertTxt.tpEventos)tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe)
                     vePasta = Empresas.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
                 else
                     vePasta = Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;
@@ -2788,7 +2803,8 @@ namespace NFe.Service
             else
             {
                 bool vePasta = false;
-                if ((NFe.ConvertTxt.tpEventos)tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe)
+                if ((NFe.ConvertTxt.tpEventos)tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoNFe ||
+                    (NFe.ConvertTxt.tpEventos)tpEvento == ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe)
                     vePasta = Empresas.Configuracoes[emp].GravarEventosCancelamentoNaPastaEnviadosNFe;
                 else
                     vePasta = Empresas.Configuracoes[emp].GravarEventosNaPastaEnviadosNFe;

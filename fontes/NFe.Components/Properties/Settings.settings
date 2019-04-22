@@ -206,9 +206,6 @@
     <Setting Name="NFe_Components_br_com_metropolisweb_lftributos_p_Nfse" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://lftributos.metropolisweb.com.br:9090/webservicenfse/nfse/services</Value>
     </Setting>
-    <Setting Name="NFe_Components_br_com_fiorilli_fi1_avaresp_p_IssWebWS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://fiorilli.avare.sp.gov.br:5661/IssWeb-ejb/IssWebWS/IssWebWS</Value>
-    </Setting>
     <Setting Name="NFe_Components_br_gov_sp_avare_fiorilli_h_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
@@ -616,6 +613,9 @@
     </Setting>
     <Setting Name="NFe_Components_PPetropolisRJ_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://petropolis.sigiss.com.br:443/petropolis/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PMonteCarmeloMG_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://wsmontecarmelo.simplissweb.com.br/nfseservice.svc</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -47,6 +47,7 @@ namespace NFe.Service
                 switch (EnumHelper.StringToEnum<ConvertTxt.tpEventos>(currentEvento))
                 {
                     case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
+                    case ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe:
                         Servico = Servicos.EventoCancelamento;
                         break;
 
@@ -589,6 +590,7 @@ namespace NFe.Service
                         case "nprot":
                             this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].nProt = dados[1].Trim();
                             break;
+
                         ///
                         /// Prorrogacao/Cancelamento de ICMS
                         ///
@@ -710,6 +712,23 @@ namespace NFe.Service
                         case "epec.dest.vst":
                             this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].epec.dest.vST = Convert.ToDouble("0" + dados[1].Trim().Replace(".", System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator));
                             break;
+
+                        ///Cancelamento por substituição da NFCe
+                        case "cancelamentosubstituicao.corgaoautor":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].cancelamentoSubstituicao.cOrgaoAutor = Convert.ToInt32("0" + dados[1].Trim());
+                            break;
+
+                        case "cancelamentosubstituicao.chnferef":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].cancelamentoSubstituicao.chNFeRef = dados[1].Trim();
+                            break;
+
+                        case "cancelamentosubstituicao.veraplic":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].cancelamentoSubstituicao.verAplic = dados[1].Trim();
+                            break;
+
+                        case "cancelamentosubstituicao.tpautor":
+                            this.dadosEnvEvento.eventos[this.dadosEnvEvento.eventos.Count - 1].cancelamentoSubstituicao.tpAutor = NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.TpcnTipoAutor>(dados[1].Trim());
+                            break;
                     }
                 }
                 foreach (Evento evento in this.dadosEnvEvento.eventos)
@@ -719,6 +738,7 @@ namespace NFe.Service
                     {
                         case ConvertTxt.tpEventos.tpEvEPEC:
                         case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
+                        case ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe:
                         case ConvertTxt.tpEventos.tpEvCienciaOperacao:
                         case ConvertTxt.tpEventos.tpEvConfirmacaoOperacao:
                         case ConvertTxt.tpEventos.tpEvDesconhecimentoOperacao:
@@ -875,8 +895,9 @@ namespace NFe.Service
                                                                     true);
 
                                             switch (tpEvento)
-                                            {
+                                            {   
                                                 case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
+                                                case ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe:
                                                 case ConvertTxt.tpEventos.tpEvCCe:
                                                     try
                                                     {

@@ -80,7 +80,7 @@ namespace NFSe.Components
             {
                 Tag = "tbnfd",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "",
+                ArquivoXSD = "NFSe\\SMARAPD\\WSEntradaNfd.xsd",
                 Descricao = "XML de Lote RPS",
                 TagAssinatura = "tbnfd",
                 TagAtributoId = "nfd",

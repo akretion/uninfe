@@ -609,7 +609,7 @@ namespace NFe.Service
 
         /// Cancelamento de NFe como Evento e Manifestação do Destinatário
         public string xJust { get; set; }
-
+        
         /// <summary>
         /// EPEC
         /// </summary>
@@ -634,6 +634,11 @@ namespace NFe.Service
         public RespPedido respPedido { get; set; }
         public RespCancPedido respCancPedido { get; set; }
 
+        /// <summary>
+        /// Cancelamento por subistituição da NFCe
+        /// </summary>
+        public EventoCancelamentoSubstituicao cancelamentoSubstituicao { get; set; }
+
         public Evento()
         {
             epec = new EventoEPEC();
@@ -644,6 +649,7 @@ namespace NFe.Service
             versao = "1.00";
             tpEvento = "110110";
             tpEmis = 0;
+            cancelamentoSubstituicao = new EventoCancelamentoSubstituicao();
         }
     }
 
@@ -726,6 +732,11 @@ namespace NFe.Service
             versao = "1.00";
             eventos = new List<Evento>();
         }
+    }
+
+    public class EventoCancelamentoSubstituicao : EventoEPEC
+    {
+        public string chNFeRef { get; set; }
     }
 
     #endregion Classe com os dados do XML do registro de eventos

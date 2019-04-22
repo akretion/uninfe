@@ -425,7 +425,6 @@ namespace NFe.UI.Formularios
                            ufCod == 3201506 /*Colatina*/||
                            ufCod == 4118204 /*Paranaguá*/||
                            ufCod == 3130309 /*Iguatama*/||
-                           ufCod == 3504503 /*Avaré*/||
                            ufCod == 3541406 /*Presidente Prudente-SP*/||
                            ufCod == 4217808 /*Taió-SC*/||
                            ufCod == 4101101 /*Andirá-PR*/||
@@ -469,7 +468,8 @@ namespace NFe.UI.Formularios
                            ufCod == 4207502 /*Indaial-SC*/ ||
                            ufCod == 4211801 /*Ouro-SC*/ ||
                            ufCod == 3500501 /*Aguas de Lindoia-SP*/ ||
-                           ufCod == 3523107 /*Itaquaquecetuba-SP*/;
+                           ufCod == 3523107 /*Itaquaquecetuba-SP*/ ||
+                           ufCod == 3143104 /*Monte Carnmelo-MG*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }

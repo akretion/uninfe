@@ -32,11 +32,6 @@ namespace NFe.Components.Fiorilli
                                 fiorilliService = new TaquaraSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
-                            case 3504503: //Avaré-SP
-                            case 3524501: //Jaci-SP
-                                fiorilliService = new AvareSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
-                                break;
-
                             case 3504008: //Assis-SP
                             case 3530409: //Mirassolândia-SP
                                 fiorilliService = new MirassolandiaSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
@@ -66,6 +61,7 @@ namespace NFe.Components.Fiorilli
                                 fiorilliService = new FernandopolisSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
+                            case 3524501: //Jaci-SP
                             case 3544004: //Rio das Pedras-SP
                                 fiorilliService = new RioPedrasSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
@@ -86,10 +82,6 @@ namespace NFe.Components.Fiorilli
 
                             case 3512902: //Cosmorama-SP
                                 fiorilliService = new CosmoramaSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
-                                break;
-
-                            case 3504503: //Avaré-SP
-                                fiorilliService = new AvareSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             case 3522802: //Itaporanga-SP

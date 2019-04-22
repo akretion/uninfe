@@ -220,6 +220,21 @@
 
             #endregion XML Envio de Eventos de cancelamento
 
+            #region XML Envio de Eventos de cancelamento por substituição
+
+            SchemaXML.InfSchemas.Add("NFE-envEvento110112", new InfSchema()
+            {
+                Tag = "envEvento",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "EventoCanc\\envEventoCancSubst_v1.00.xsd",
+                Descricao = "XML de evento de cancelamento da NFe por substituição",
+                TagAssinatura = "evento",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = string.Empty
+            });
+
+            #endregion XML Envio de Eventos de cancelamento por substituição
+
             #region XML Envio de manifestacoes-e210200
 
             SchemaXML.InfSchemas.Add("NFE-envEvento210200", new InfSchema()

@@ -254,6 +254,8 @@ namespace NFe.ConvertTxt
         tpEvCCe = 110110,
         [Description("Cancelamento")]
         tpEvCancelamentoNFe = 110111,
+        [Description("Cancelamento por substituicao")]
+        tpEvCancelamentoSubstituicaoNFCe = 110112,
         [Description("Confirmacao da Operacao")]
         tpEvConfirmacaoOperacao = 210200,
         [Description("Ciencia da Operacao")]
@@ -265,7 +267,7 @@ namespace NFe.ConvertTxt
         [Description("Operação nao Realizada")]
         tpEvOperacaoNaoRealizada = 210240,
         [Description("Encerramento MDFe")]
-        tpEvEncerramentoMDFe = 110112,
+        tpEvEncerramentoMDFe = 1101120, //O código correto do evento é 110112, mas como tem o evento de cancelamento por substituição da nfce que tem o mesmo número acrescentamos um zero no final para não gerar conflito. Wandrey/André
         [Description("Inclusao de condutor")]
         tpEvInclusaoCondutor = 110114,
         [Description("Registro de passagem")]

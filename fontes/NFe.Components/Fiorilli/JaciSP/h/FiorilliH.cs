@@ -1,5 +1,5 @@
 ﻿using NFe.Components.Abstract;
-using NFe.Components.br.gov.sp.avare.fiorilli.h;
+using NFe.Components.FiorilliH;
 using System;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;

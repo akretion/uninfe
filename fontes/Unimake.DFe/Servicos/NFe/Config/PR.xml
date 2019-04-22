@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuracoes>
+  <SVC>SVCRS</SVC>
+  <Servicos ID="NFe">
+    <StatusServico>
+      <Descricao>Consulta situação do serviço da nota fiscal eletrônica</Descricao>
+      <WebEnderecoHomologacao>https://homologacao.nfe.sefa.pr.gov.br/nfe/NFeStatusServico4</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://nfe.sefa.pr.gov.br/nfe/NFeStatusServico4</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeStatusServico4</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeStatusServico4</WebActionProducao>
+      <WebContentType></WebContentType>
+      <WebSoapString></WebSoapString>
+      <WebSoapVersion>soap12</WebSoapVersion>
+      <WebTagRetorno>nfeResultMsg</WebTagRetorno>
+      <SchemaArquivo>consStatServ_v{0}.xsd</SchemaArquivo>
+      <SchemaVersao>4.00</SchemaVersao>
+      <TagAssinatura></TagAssinatura>
+      <TagAtributoID></TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+      <TargetNS>http://www.portalfiscal.inf.br/nfe</TargetNS>
+    </StatusServico>
+    <ConsultaProtocolo>
+      <Descricao>Consulta situação da nota fiscal eletrônica</Descricao>
+      <WebEnderecoHomologacao>https://homologacao.nfe.sefa.pr.gov.br/nfe/NFeConsultaProtocolo4</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://nfe.sefa.pr.gov.br/nfe/NFeConsultaProtocolo4</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeConsultaProtocolo4</WebActionProducao>
+      <WebContentType></WebContentType>
+      <WebSoapString></WebSoapString>
+      <WebTagRetorno>nfeResultMsg</WebTagRetorno>
+      <WebSoapVersion>soap12</WebSoapVersion>
+      <SchemaArquivo>consSitNFe_v{0}.xsd</SchemaArquivo>
+      <SchemaVersao>4.00</SchemaVersao>
+      <TagAssinatura></TagAssinatura>
+      <TagAtributoID></TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+      <TargetNS>http://www.portalfiscal.inf.br/nfe</TargetNS>
+    </ConsultaProtocolo>
+    <Inutilizacao>
+      <Descricao>Inutilização de números da nota fiscal eletrônica</Descricao>
+      <WebEnderecoHomologacao>https://homologacao.nfe.sefa.pr.gov.br/nfe/NFeInutilizacao4</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://nfe.sefa.pr.gov.br/nfe/NFeInutilizacao4</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeInutilizacao4</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeInutilizacao4</WebActionProducao>
+      <WebContentType></WebContentType>
+      <WebSoapString></WebSoapString>
+      <WebTagRetorno>nfeResultMsg</WebTagRetorno>
+      <WebSoapVersion>soap12</WebSoapVersion>
+      <SchemaArquivo>inutNFe_v{0}.xsd</SchemaArquivo>
+      <SchemaVersao>4.00</SchemaVersao>
+      <TagAssinatura>inutNFe</TagAssinatura>
+      <TagAtributoID>infInut</TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+      <TargetNS>http://www.portalfiscal.inf.br/nfe</TargetNS>
+    </Inutilizacao>
+    <ConsultaCadastro>
+      <Descricao>Consulta cadastro do contribuinte</Descricao>
+      <WebEnderecoHomologacao>https://homologacao.nfe.fazenda.pr.gov.br/nfe/CadConsultaCadastro2</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://nfe.sefa.pr.gov.br/nfe/CadConsultaCadastro4</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4</WebActionProducao>
+      <WebContentType></WebContentType>
+      <WebSoapString></WebSoapString>
+      <WebTagRetorno>nfeResultMsg</WebTagRetorno>
+      <WebSoapVersion>soap12</WebSoapVersion>
+      <SchemaArquivo>consCad_v{0}.xsd</SchemaArquivo>
+      <SchemaVersao>2.00</SchemaVersao>
+      <TagAssinatura></TagAssinatura>
+      <TagAtributoID></TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+      <TargetNS>http://www.portalfiscal.inf.br/nfe</TargetNS>
+    </ConsultaCadastro>
+    <RecepcaoEvento></RecepcaoEvento>
+    <Autorizacao></Autorizacao>
+    <RetAutorizacao></RetAutorizacao>
+  </Servicos>
+  <Servicos ID="CTe"></Servicos>
+  <Servicos ID="MDFe"></Servicos>
+  <Servicos ID="NFCe"></Servicos>
+</Configuracoes>

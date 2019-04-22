@@ -2669,8 +2669,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Producao\PLauroFreitas-METROPOLIS.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HAvareSP-FIORILLI.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PAvareSP-FIORILLI.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HCacadorSC-PUBLICA.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCacadorSC-PUBLICA.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\PUBLICA\schema_nfse_v03.xsd">
@@ -3821,6 +3819,24 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\MG\PMGNfeStatusServico_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\EFDReinfConsultasReinf.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AN\EFDReinfConsultasReinf.wsdl" />
+    <EmbeddedResource Include="NFe\schemas\EventoCanc\e110112_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EventoCanc\envEventoCancSubst_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EventoCanc\eventoCancSubst_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EventoCanc\leiauteEventoCancSubst_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EventoCanc\procEventoCancSubst_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EventoCanc\retEnvEventoCancSubst_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -4488,6 +4504,19 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PItaquaquecetubaSP-WSEntrada.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PItaquaquecetubaSP-WSSaida.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PItaquaquecetubaSP-WSUtil.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteCarmeloMG-SIMPLISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMonteCarmeloMG-SIMPLISS.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\SMARAPD\WSEntradaNfd.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HAvareSP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PAvareSP.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\SIGCORP_SIGISS\nfse_v2-03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\SIGCORP_SIGISS\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

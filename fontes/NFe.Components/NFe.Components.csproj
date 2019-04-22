@@ -235,6 +235,7 @@
     <Compile Include="Schemas\SchemaXMLNFSe_E_RECEITA.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_MODERNIZACAO_PUBLICA.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_SISPMJP﻿.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_SIGCORP_SIGISS_203.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_VITORIA_ES.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_DESENVOLVECIDADE.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_EMBRAS.cs" />
@@ -263,6 +264,7 @@
     <Compile Include="Simple\SimpleBase.cs" />
     <Compile Include="SimplISS\ArarasSP\p\SimplISSP.cs" />
     <Compile Include="SimplISS\AstorgaPR\p\SimplISSP.cs" />
+    <Compile Include="SimplISS\MonteCarmeloMG\p\SimplISSP.cs" />
     <Compile Include="SimplISS\ParaguacuPaulistaSP\p\SimplISSP.cs" />
     <Compile Include="SOFTPLAN\SOFTPLAN.cs" />
     <Compile Include="SOFTPLAN\Token.cs" />
@@ -296,8 +298,6 @@
     <Compile Include="EGoverne\EGoverne.cs" />
     <Compile Include="EGoverne\EGoverneBase.cs" />
     <Compile Include="EstadoURLs.cs" />
-    <Compile Include="Fiorilli\AvareSP\h\FiorilliH.cs" />
-    <Compile Include="Fiorilli\AvareSP\p\FiorilliP.cs" />
     <Compile Include="Fiorilli\ItaporangaSP\p\FiorilliP.cs" />
     <Compile Include="Fiorilli\ItaporangaSP\h\FiorilliH.cs" />
     <Compile Include="GovDigital\GovDigital.cs" />
@@ -536,11 +536,6 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\br.com.fiorilli.avaresp.p\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -850,7 +845,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\br.gov.sp.avare.fiorilli.h\Reference.cs">
+    <Compile Include="Web References\FiorilliH\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1377,6 +1372,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\PMogiMirimSPConsultarSituacaoLoteRps\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PMonteCarmeloMG\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1925,41 +1925,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\br.com.fiorilli.aguasdelindoiasp.p\SubstituirNfseResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.fiorilli.avaresp.p\CancelarNfseResposta1.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.fiorilli.avaresp.p\ConsultarLoteRpsResposta1.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.fiorilli.avaresp.p\ConsultarNfseFaixaResposta1.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.fiorilli.avaresp.p\ConsultarNfseRpsResposta1.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.fiorilli.avaresp.p\ConsultarNfseServicoPrestadoResposta1.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.fiorilli.avaresp.p\ConsultarNfseServicoTomadoResposta1.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.fiorilli.avaresp.p\EnviarLoteRpsResposta1.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.fiorilli.avaresp.p\EnviarLoteRpsSincronoResposta1.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.fiorilli.avaresp.p\GerarNfseResposta1.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\br.com.fiorilli.avaresp.p\IssWebWS.wsdl" />
-    <None Include="Web References\br.com.fiorilli.avaresp.p\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\br.com.fiorilli.avaresp.p\SubstituirNfseResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.com.fiorilli.jacisp.p\CancelarNfseResposta.datasource">
@@ -2975,40 +2940,37 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\br.gov.sp.avare.fiorilli.h\CancelarNfseResposta.datasource">
+    <None Include="Web References\FiorilliH\CancelarNfseResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\br.gov.sp.avare.fiorilli.h\ConsultarLoteRpsResposta.datasource">
+    <None Include="Web References\FiorilliH\ConsultarLoteRpsResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\br.gov.sp.avare.fiorilli.h\ConsultarNfseFaixaResposta.datasource">
+    <None Include="Web References\FiorilliH\ConsultarNfseFaixaResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\br.gov.sp.avare.fiorilli.h\ConsultarNfseRpsResposta.datasource">
+    <None Include="Web References\FiorilliH\ConsultarNfseRpsResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\br.gov.sp.avare.fiorilli.h\ConsultarNfseServicoPrestadoResposta.datasource">
+    <None Include="Web References\FiorilliH\ConsultarNfseServicoPrestadoResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\br.gov.sp.avare.fiorilli.h\ConsultarNfseServicoTomadoResposta.datasource">
+    <None Include="Web References\FiorilliH\ConsultarNfseServicoTomadoResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\br.gov.sp.avare.fiorilli.h\EnviarLoteRpsResposta.datasource">
+    <None Include="Web References\FiorilliH\EnviarLoteRpsResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\br.gov.sp.avare.fiorilli.h\EnviarLoteRpsSincronoResposta.datasource">
+    <None Include="Web References\FiorilliH\EnviarLoteRpsSincronoResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\br.gov.sp.avare.fiorilli.h\GerarNfseResposta.datasource">
+    <None Include="Web References\FiorilliH\GerarNfseResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\br.gov.sp.avare.fiorilli.h\IssWebWS.wsdl" />
-    <None Include="Web References\br.gov.sp.avare.fiorilli.h\Reference.map">
+    <None Include="Web References\FiorilliH\IssWebWS.wsdl" />
+    <None Include="Web References\FiorilliH\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\br.gov.sp.avare.fiorilli.h\SubstituirNfseResposta.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\br.gov.sp.embudasartes.sistemas.www.p\CancelarNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -3308,6 +3270,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\br.net.taquarituba.fiorilli.p\SubstituirNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\FiorilliH\SubstituirNfseResposta1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\HAndradasMG\andradas.xsd">
@@ -4572,6 +4537,45 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\PMogiMirimSPConsultarSituacaoLoteRps\WS_ConsultarSituacaoLoteRps.wsdl" />
+    <None Include="Web References\PMonteCarmeloMG\CancelarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PMonteCarmeloMG\ConsultarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PMonteCarmeloMG\ConsultarNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PMonteCarmeloMG\ConsultarNfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PMonteCarmeloMG\ConsultarSituacaoLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PMonteCarmeloMG\EnviarLoteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PMonteCarmeloMG\GerarNovaNfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PMonteCarmeloMG\nfseservice.wsdl" />
+    <None Include="Web References\PMonteCarmeloMG\nfseservice.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PMonteCarmeloMG\NfseService0.wsdl" />
+    <None Include="Web References\PMonteCarmeloMG\nfseservice0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PMonteCarmeloMG\nfseservice1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PMonteCarmeloMG\nfseservice2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PMonteCarmeloMG\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\PNovaMutumMT\nfse_web_service.wsdl" />
     <None Include="Web References\PNovaMutumMT\output.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -5343,6 +5347,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PMirassolSP_NFSeIntegracao</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PMonteCarmeloMG-SIMPLISS.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PMonteCarmeloMG\</RelPath>
+      <UpdateFromURL>C:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PMonteCarmeloMG-SIMPLISS.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PMonteCarmeloMG_NfseService</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PPelotas_RS.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\PPelotasRS\</RelPath>
@@ -5488,7 +5503,7 @@
     </WebReferenceUrl>
     <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HAvareSP-FIORILLI.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\br.gov.sp.avare.fiorilli.h\</RelPath>
+      <RelPath>Web References\FiorilliH\</RelPath>
       <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HAvareSP-FIORILLI.wsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
@@ -5859,17 +5874,6 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_br_com_rlz_ceiss_santafedosul_p_Webservice_Prefeitura</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PAvareSP-FIORILLI.wsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\br.com.fiorilli.avaresp.p\</RelPath>
-      <UpdateFromURL>C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PAvareSP-FIORILLI.wsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>NFe_Components_br_com_fiorilli_fi1_avaresp_p_IssWebWS</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PTaquaritubaSP-FIORILLI.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

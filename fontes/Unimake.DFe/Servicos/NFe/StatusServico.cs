@@ -1,30 +1,34 @@
 ﻿using System.Xml;
+using Unimake.DFe.Xml.NFe;
 
 namespace Unimake.DFe.Servicos.NFe
 {
     public class StatusServico : NFeBase
     {
         public StatusServico(XmlDocument conteudoXML, Configuracao configuracao)
-            : base(conteudoXML, configuracao)
-        {
-        }
+            : base(conteudoXML, configuracao) { }
 
-        public override void Executar()
+        /// <summary>
+        /// Definir o valor de algumas das propriedades do objeto "Configuracoes"
+        /// </summary>
+        protected override void DefinirConfiguracao()
         {
-            WSSoap soap = new WSSoap
+            ConsStatServ xml = new ConsStatServ();
+            xml.Ler(ConteudoXML);
+
+            if (!Configuracoes.Definida)
             {
-                EnderecoWeb = "https://homologacao.nfe.fazenda.sp.gov.br/ws/nfestatusservico4.asmx",
-                ActionWeb = "http://www.portalfiscal.inf.br/nfe/wsdl/NFeStatusServico4",
-                TagRetorno = "nfeResultMsg",
-                VersaoSoap = "soap12"
-            };
+                Configuracoes.cUF = xml.cUF;
+                Configuracoes.tpAmb = xml.tpAmb;
+                Configuracoes.mod = "55";
+                Configuracoes.tpEmis = xml.tpEmis;
+                Configuracoes.SchemaVersao = xml.versao;
 
-            ConsumirWS consumirWS = new ConsumirWS();
-            consumirWS.ExecutarServico(ConteudoXML, soap, Configuracoes.CertificadoDigital);
+                base.DefinirConfiguracao();
+            }
 
-            RetornoWSString = consumirWS.RetornoServicoString;
-            RetornoWSXML = consumirWS.RetornoServicoXML;
-
+            //Remover a tag tpEmis que não é padrão do XML
+            ConteudoXML.DocumentElement.RemoveChild(ConteudoXML.GetElementsByTagName("tpEmis")[0]);
         }
     }
 }

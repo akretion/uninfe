@@ -105,7 +105,7 @@ namespace NFe.Service
             {
             }
 
-            File.WriteAllText(arqErro, erroMessage); 
+            File.WriteAllText(arqErro, erroMessage);
 
             // grava o arquivo de erro no FTP
             new GerarXML(emp).XmlParaFTP(emp, arqErro);
@@ -782,6 +782,7 @@ namespace NFe.Service
                                         break;
 
                                     case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
+                                    case ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe:
                                         temCancelamento = true;
                                         switch (doc.DocumentElement.Name)
                                         {
@@ -1049,6 +1050,7 @@ namespace NFe.Service
                             int ndias = 0;
                             while (ndias < 60)
                             {
+                                //TODO André/Wandrey: Tem que fazer o tratamento do cancelamento por substituição da nfce, por enquanto, não vai funcionar a impressão quando cancelamento for por substuituição
                                 string filenameCancelamento = tempFile +
                                                                 string.Format("_{0}_01{1}",
                                                                     ((int)NFe.ConvertTxt.tpEventos.tpEvCancelamentoNFe).ToString(),

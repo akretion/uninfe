@@ -94,6 +94,16 @@
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
+                          <xs:element name="indTreinAnt">
+                            <xs:simpleType>
+                              <xs:annotation>
+                                <xs:documentation>Indicar se o treinamento ocorreu antes da admissão</xs:documentation>
+                              </xs:annotation>
+                              <xs:restriction base="xs:string">
+                                <xs:pattern value="[N|S]"/>
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
                           <xs:element name="ideProfResp" minOccurs="0" maxOccurs="99">
                             <xs:annotation>
                               <xs:documentation>Informações relativas ao profissional responsável</xs:documentation>

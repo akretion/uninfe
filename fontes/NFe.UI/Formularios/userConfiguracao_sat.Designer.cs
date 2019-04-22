@@ -49,10 +49,10 @@
             // 
             this.metroLabel39.AutoSize = true;
             this.metroLabel39.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.metroLabel39.Location = new System.Drawing.Point(0, 65);
-            this.metroLabel39.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroLabel39.Location = new System.Drawing.Point(0, 53);
+            this.metroLabel39.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.metroLabel39.Name = "metroLabel39";
-            this.metroLabel39.Size = new System.Drawing.Size(115, 17);
+            this.metroLabel39.Size = new System.Drawing.Size(106, 15);
             this.metroLabel39.TabIndex = 43;
             this.metroLabel39.Text = "Código de Ativação";
             // 
@@ -61,9 +61,9 @@
             this.metroLabel38.AutoSize = true;
             this.metroLabel38.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel38.Location = new System.Drawing.Point(0, 1);
-            this.metroLabel38.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroLabel38.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.metroLabel38.Name = "metroLabel38";
-            this.metroLabel38.Size = new System.Drawing.Size(96, 17);
+            this.metroLabel38.Size = new System.Drawing.Size(87, 15);
             this.metroLabel38.TabIndex = 41;
             this.metroLabel38.Text = "Marca / Modelo";
             // 
@@ -71,7 +71,7 @@
             // 
             this.cbMacarSAT.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cbMacarSAT.FormattingEnabled = true;
-            this.cbMacarSAT.ItemHeight = 21;
+            this.cbMacarSAT.ItemHeight = 19;
             this.cbMacarSAT.Items.AddRange(new object[] {
             "BEMATECH",
             "DARUMA",
@@ -82,11 +82,11 @@
             "EMULADOR",
             "NITERE",
             "SWEDA",
-            "TANCA"});
-            this.cbMacarSAT.Location = new System.Drawing.Point(0, 23);
-            this.cbMacarSAT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            "TANCA",
+            "KRYPTUS"});
+            this.cbMacarSAT.Location = new System.Drawing.Point(0, 19);
             this.cbMacarSAT.Name = "cbMacarSAT";
-            this.cbMacarSAT.Size = new System.Drawing.Size(412, 27);
+            this.cbMacarSAT.Size = new System.Drawing.Size(310, 25);
             this.cbMacarSAT.TabIndex = 52;
             this.cbMacarSAT.UseSelectable = true;
             this.cbMacarSAT.SelectedIndexChanged += new System.EventHandler(this.cbMacarSAT_SelectedIndexChanged);
@@ -94,14 +94,13 @@
             // txtCodigoAtivacaoSAT
             // 
             this.txtCodigoAtivacaoSAT.Lines = new string[0];
-            this.txtCodigoAtivacaoSAT.Location = new System.Drawing.Point(0, 91);
-            this.txtCodigoAtivacaoSAT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCodigoAtivacaoSAT.Location = new System.Drawing.Point(0, 74);
             this.txtCodigoAtivacaoSAT.MaxLength = 32767;
             this.txtCodigoAtivacaoSAT.Name = "txtCodigoAtivacaoSAT";
             this.txtCodigoAtivacaoSAT.PasswordChar = '\0';
             this.txtCodigoAtivacaoSAT.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtCodigoAtivacaoSAT.SelectedText = "";
-            this.txtCodigoAtivacaoSAT.Size = new System.Drawing.Size(413, 28);
+            this.txtCodigoAtivacaoSAT.Size = new System.Drawing.Size(310, 23);
             this.txtCodigoAtivacaoSAT.TabIndex = 53;
             this.txtCodigoAtivacaoSAT.UseSelectable = true;
             this.txtCodigoAtivacaoSAT.TextChanged += new System.EventHandler(this.txtCodigoAtivacaoSAT_TextChanged);
@@ -109,10 +108,9 @@
             // ckConversaoNFCe
             // 
             this.ckConversaoNFCe.AutoSize = true;
-            this.ckConversaoNFCe.Location = new System.Drawing.Point(0, 133);
-            this.ckConversaoNFCe.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ckConversaoNFCe.Location = new System.Drawing.Point(0, 108);
             this.ckConversaoNFCe.Name = "ckConversaoNFCe";
-            this.ckConversaoNFCe.Size = new System.Drawing.Size(233, 17);
+            this.ckConversaoNFCe.Size = new System.Drawing.Size(209, 15);
             this.ckConversaoNFCe.TabIndex = 54;
             this.ckConversaoNFCe.Text = "Utiliza conversão de NFCe para CFe";
             this.ckConversaoNFCe.UseSelectable = true;
@@ -121,14 +119,13 @@
             // txtSignAC
             // 
             this.txtSignAC.Lines = new string[0];
-            this.txtSignAC.Location = new System.Drawing.Point(0, 193);
-            this.txtSignAC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSignAC.Location = new System.Drawing.Point(0, 157);
             this.txtSignAC.MaxLength = 32767;
             this.txtSignAC.Name = "txtSignAC";
             this.txtSignAC.PasswordChar = '\0';
             this.txtSignAC.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtSignAC.SelectedText = "";
-            this.txtSignAC.Size = new System.Drawing.Size(413, 28);
+            this.txtSignAC.Size = new System.Drawing.Size(310, 23);
             this.txtSignAC.TabIndex = 55;
             this.txtSignAC.UseSelectable = true;
             this.txtSignAC.TextChanged += new System.EventHandler(this.txtSignAC_TextChanged);
@@ -136,14 +133,13 @@
             // txtCNPJSw
             // 
             this.txtCNPJSw.Lines = new string[0];
-            this.txtCNPJSw.Location = new System.Drawing.Point(0, 252);
-            this.txtCNPJSw.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCNPJSw.Location = new System.Drawing.Point(0, 205);
             this.txtCNPJSw.MaxLength = 32767;
             this.txtCNPJSw.Name = "txtCNPJSw";
             this.txtCNPJSw.PasswordChar = '\0';
             this.txtCNPJSw.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtCNPJSw.SelectedText = "";
-            this.txtCNPJSw.Size = new System.Drawing.Size(413, 28);
+            this.txtCNPJSw.Size = new System.Drawing.Size(310, 23);
             this.txtCNPJSw.TabIndex = 56;
             this.txtCNPJSw.UseSelectable = true;
             this.txtCNPJSw.TextChanged += new System.EventHandler(this.txtCNPJSw_TextChanged);
@@ -152,10 +148,9 @@
             // 
             this.lblSignAC.AutoSize = true;
             this.lblSignAC.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblSignAC.Location = new System.Drawing.Point(0, 166);
-            this.lblSignAC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSignAC.Location = new System.Drawing.Point(0, 135);
             this.lblSignAC.Name = "lblSignAC";
-            this.lblSignAC.Size = new System.Drawing.Size(47, 17);
+            this.lblSignAC.Size = new System.Drawing.Size(43, 15);
             this.lblSignAC.TabIndex = 57;
             this.lblSignAC.Text = "SignAC";
             // 
@@ -163,10 +158,9 @@
             // 
             this.lblCNPJSw.AutoSize = true;
             this.lblCNPJSw.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblCNPJSw.Location = new System.Drawing.Point(0, 230);
-            this.lblCNPJSw.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCNPJSw.Location = new System.Drawing.Point(0, 187);
             this.lblCNPJSw.Name = "lblCNPJSw";
-            this.lblCNPJSw.Size = new System.Drawing.Size(142, 17);
+            this.lblCNPJSw.Size = new System.Drawing.Size(131, 15);
             this.lblCNPJSw.TabIndex = 58;
             this.lblCNPJSw.Text = "CNPJ da Software House";
             // 
@@ -174,11 +168,10 @@
             // 
             this.cbRegTribISSQN.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cbRegTribISSQN.FormattingEnabled = true;
-            this.cbRegTribISSQN.ItemHeight = 21;
-            this.cbRegTribISSQN.Location = new System.Drawing.Point(439, 193);
-            this.cbRegTribISSQN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbRegTribISSQN.ItemHeight = 19;
+            this.cbRegTribISSQN.Location = new System.Drawing.Point(329, 157);
             this.cbRegTribISSQN.Name = "cbRegTribISSQN";
-            this.cbRegTribISSQN.Size = new System.Drawing.Size(383, 27);
+            this.cbRegTribISSQN.Size = new System.Drawing.Size(288, 25);
             this.cbRegTribISSQN.TabIndex = 59;
             this.cbRegTribISSQN.UseSelectable = true;
             this.cbRegTribISSQN.SelectedIndexChanged += new System.EventHandler(this.cbRegTribISSQN_SelectedIndexChanged);
@@ -187,11 +180,10 @@
             // 
             this.cbindRatISSQN.FontSize = MetroFramework.MetroComboBoxSize.Small;
             this.cbindRatISSQN.FormattingEnabled = true;
-            this.cbindRatISSQN.ItemHeight = 21;
-            this.cbindRatISSQN.Location = new System.Drawing.Point(439, 252);
-            this.cbindRatISSQN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbindRatISSQN.ItemHeight = 19;
+            this.cbindRatISSQN.Location = new System.Drawing.Point(329, 205);
             this.cbindRatISSQN.Name = "cbindRatISSQN";
-            this.cbindRatISSQN.Size = new System.Drawing.Size(383, 27);
+            this.cbindRatISSQN.Size = new System.Drawing.Size(288, 25);
             this.cbindRatISSQN.TabIndex = 60;
             this.cbindRatISSQN.UseSelectable = true;
             this.cbindRatISSQN.SelectedIndexChanged += new System.EventHandler(this.cbindRatISSQN_SelectedIndexChanged);
@@ -200,10 +192,9 @@
             // 
             this.lblRegTribISSQN.AutoSize = true;
             this.lblRegTribISSQN.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblRegTribISSQN.Location = new System.Drawing.Point(436, 166);
-            this.lblRegTribISSQN.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRegTribISSQN.Location = new System.Drawing.Point(327, 135);
             this.lblRegTribISSQN.Name = "lblRegTribISSQN";
-            this.lblRegTribISSQN.Size = new System.Drawing.Size(146, 17);
+            this.lblRegTribISSQN.Size = new System.Drawing.Size(135, 15);
             this.lblRegTribISSQN.TabIndex = 61;
             this.lblRegTribISSQN.Text = "Regime tributação ISSQN";
             // 
@@ -211,10 +202,9 @@
             // 
             this.lblIndRatISSQN.AutoSize = true;
             this.lblIndRatISSQN.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblIndRatISSQN.Location = new System.Drawing.Point(436, 230);
-            this.lblIndRatISSQN.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblIndRatISSQN.Location = new System.Drawing.Point(327, 187);
             this.lblIndRatISSQN.Name = "lblIndRatISSQN";
-            this.lblIndRatISSQN.Size = new System.Drawing.Size(288, 17);
+            this.lblIndRatISSQN.Size = new System.Drawing.Size(264, 15);
             this.lblIndRatISSQN.TabIndex = 62;
             this.lblIndRatISSQN.Text = " Desconto subtotal rateado entre itens com ISSQN:";
             // 
@@ -222,31 +212,29 @@
             // 
             this.lblNumeroCaixa.AutoSize = true;
             this.lblNumeroCaixa.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblNumeroCaixa.Location = new System.Drawing.Point(0, 295);
-            this.lblNumeroCaixa.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNumeroCaixa.Location = new System.Drawing.Point(0, 240);
             this.lblNumeroCaixa.Name = "lblNumeroCaixa";
-            this.lblNumeroCaixa.Size = new System.Drawing.Size(106, 17);
+            this.lblNumeroCaixa.Size = new System.Drawing.Size(98, 15);
             this.lblNumeroCaixa.TabIndex = 64;
             this.lblNumeroCaixa.Text = "Numero do Caixa:";
             // 
             // txtNumeroCaixa
             // 
             this.txtNumeroCaixa.Lines = new string[0];
-            this.txtNumeroCaixa.Location = new System.Drawing.Point(0, 318);
-            this.txtNumeroCaixa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNumeroCaixa.Location = new System.Drawing.Point(0, 258);
             this.txtNumeroCaixa.MaxLength = 3;
             this.txtNumeroCaixa.Name = "txtNumeroCaixa";
             this.txtNumeroCaixa.PasswordChar = '\0';
             this.txtNumeroCaixa.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.txtNumeroCaixa.SelectedText = "";
-            this.txtNumeroCaixa.Size = new System.Drawing.Size(413, 28);
+            this.txtNumeroCaixa.Size = new System.Drawing.Size(310, 23);
             this.txtNumeroCaixa.TabIndex = 63;
             this.txtNumeroCaixa.UseSelectable = true;
             this.txtNumeroCaixa.TextChanged += new System.EventHandler(this.txtNumeroCaixa_TextChanged);
             // 
             // userConfiguracao_sat
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.Controls.Add(this.lblNumeroCaixa);
@@ -264,9 +252,8 @@
             this.Controls.Add(this.cbMacarSAT);
             this.Controls.Add(this.metroLabel39);
             this.Controls.Add(this.metroLabel38);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "userConfiguracao_sat";
-            this.Size = new System.Drawing.Size(851, 350);
+            this.Size = new System.Drawing.Size(638, 284);
             this.ResumeLayout(false);
             this.PerformLayout();
 

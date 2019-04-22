@@ -37,13 +37,10 @@ namespace NFe.Service
 
         public string NomeArquivoXML
         {
-            get
-            {
-                return this.mNomeArquivoXML;
-            }
+            get => mNomeArquivoXML;
             set
             {
-                this.mNomeArquivoXML = value;
+                mNomeArquivoXML = value;
                 oGerarXML.NomeXMLDadosMsg = value;
             }
         }
@@ -60,13 +57,10 @@ namespace NFe.Service
 
         public Servicos Servico
         {
-            get
-            {
-                return this.mServico;
-            }
+            get => mServico;
             protected set
             {
-                this.mServico = value;
+                mServico = value;
                 oGerarXML.Servico = value;
             }
         }
@@ -75,9 +69,7 @@ namespace NFe.Service
         /// Se o vXmlNFeDadosMsg é um XML
         /// </summary>
         public bool vXmlNfeDadosMsgEhXML    //danasa 12-9-2009
-        {
-            get { return Path.GetExtension(NomeArquivoXML).ToLower() == ".xml"; }
-        }
+=> Path.GetExtension(NomeArquivoXML).ToLower() == ".xml";
 
         #endregion Propriedades
 
@@ -140,7 +132,9 @@ namespace NFe.Service
                     retorna = "cteCabecMsg";
 
                     if (cUF == 50 && tpEmis == (int)TipoEmissao.teNormal && servico != Servicos.CteRecepcaoOS)
+                    {
                         retorna = "CTeCabecMsg";
+                    }
 
                     break;
 
@@ -176,7 +170,9 @@ namespace NFe.Service
             retorna = NomeMetodoWSNFSe(servico, cUF);
 
             if (retorna == string.Empty) //nem seria necessário, porque estamos obtendo do wsdl
+            {
                 retorna = NomeMetodoWSNFe(servico, cUF, versao);
+            }
 
             return retorna;
         }
@@ -590,9 +586,14 @@ namespace NFe.Service
 
                         case Servicos.NFSeRecepcionarLoteRps:
                             if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao)
+                            {
                                 retorna = "TesteEnvioLoteRPS";
+                            }
                             else
+                            {
                                 retorna = "EnvioLoteRPS";
+                            }
+
                             break;
                     }
                     break;
@@ -804,9 +805,14 @@ namespace NFe.Service
 
                         case Servicos.NFSeRecepcionarLoteRps:
                             if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao)
+                            {
                                 retorna = "TesteEnvioLoteRPS";
+                            }
                             else
+                            {
                                 retorna = "EnvioLoteRPS";
+                            }
+
                             break;
 
                         case Servicos.NFSeConsultarNFSeRecebidas:
@@ -935,50 +941,83 @@ namespace NFe.Service
                     {
                         case Servicos.NFSeConsultarLoteRps:
                             if (taHomologacao)
+                            {
                                 throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                            }
                             else
+                            {
                                 retorna = "consultarLote";
+                            }
+
                             break;
 
                         case Servicos.NFSeConsultar:
                             if (taHomologacao)
+                            {
                                 throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                            }
                             else
+                            {
                                 retorna = "consultarNota";
+                            }
+
                             break;
 
                         case Servicos.NFSeConsultarPorRps:
                             if (taHomologacao)
+                            {
                                 throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                            }
                             else
+                            {
                                 retorna = "consultarNFSeRps";
+                            }
+
                             break;
 
                         case Servicos.NFSeConsultarSituacaoLoteRps:
                             if (taHomologacao)
+                            {
                                 throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                            }
                             else
+                            {
                                 retorna = "consultarSequencialRps";
+                            }
+
                             break;
 
                         case Servicos.NFSeCancelar:
                             if (taHomologacao)
+                            {
                                 throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                            }
                             else
+                            {
                                 retorna = "cancelar";
+                            }
+
                             break;
 
                         case Servicos.NFSeRecepcionarLoteRps:
                             if (taHomologacao &&
                                 cMunicipio.ToString() != "2111300") //São Luiz - MA
-
+                            {
                                 if (cMunicipio.ToString().Equals("5002704") || // Campo grande - MS não tem web service de teste
                                     cMunicipio.ToString().Equals("3303500")) //Nova Iguaçu-RS
+                                {
                                     throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                                }
                                 else
+                                {
                                     retorna = "testeEnviar";
+                                }
+                            }
                             else
+                            {
                                 retorna = "enviar";
+                            }
+
                             break;
 
                         default:
@@ -1069,16 +1108,26 @@ namespace NFe.Service
                                 cMunicipio.Equals(3304003) ||
                                 cMunicipio.Equals(2611606) ||
                                 cMunicipio.Equals(3300100))
+                            {
                                 retorna = "ConsultarLoteRps";
+                            }
                             else
+                            {
                                 retorna = "ConsultarLoteRPS";
+                            }
+
                             break;
 
                         case Servicos.NFSeConsultar:
                             if (cMunicipio.Equals(3303302))
+                            {
                                 retorna = "ConsultarNfsePorFaixa";
+                            }
                             else
+                            {
                                 retorna = "ConsultarNfse";
+                            }
+
                             break;
 
                         case Servicos.NFSeConsultarPorRps:
@@ -1087,9 +1136,13 @@ namespace NFe.Service
                                 cMunicipio.Equals(3304003) ||
                                 cMunicipio.Equals(2611606) ||
                                 cMunicipio.Equals(3300100))
+                            {
                                 retorna = "ConsultarNfsePorRps";
+                            }
                             else
+                            {
                                 retorna = "ConsultarNfseRPS";
+                            }
 
                             break;
 
@@ -1099,9 +1152,13 @@ namespace NFe.Service
                                 cMunicipio.Equals(3304003) ||
                                 cMunicipio.Equals(2611606) ||
                                 cMunicipio.Equals(3300100))
+                            {
                                 retorna = "ConsultarSituacaoLoteRps";
+                            }
                             else
+                            {
                                 retorna = "ConsultarSituacaoLoteRPS";
+                            }
 
                             break;
 
@@ -2198,9 +2255,14 @@ namespace NFe.Service
 
                         case Servicos.NFSeRecepcionarLoteRps:
                             if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao)
+                            {
                                 retorna = "EnviarLoteNotaFiscalDeTeste";
+                            }
                             else
+                            {
                                 retorna = "EnviarLoteNotaFiscal";
+                            }
+
                             break;
 
                         case Servicos.NFSeCancelar:
@@ -2291,7 +2353,56 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion SISPMJP
+                #endregion SISPMJP
+
+                #region SIGCORP_SIGISS_203
+
+                case PadroesNFSe.SIGCORP_SIGISS_203:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfsePorFaixa";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRps";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelaNota";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeSubstituirNfse:
+                            retorna = "SubstituirNfse";
+                            break;
+
+                        case Servicos.NFSeConsultarNFSeTomados:
+                            retorna = "ConsultarNfseServicoTomado";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+                    }
+                    break;
+
+                    #endregion SIGCORP_SIGISS_203
             }
 
             return retorna;
@@ -2423,13 +2534,19 @@ namespace NFe.Service
                 assDig.Assinar(conteudoXML, emp, Convert.ToInt32(dadosNFe.cUF));
 
                 //Adicionar a tag do QRCode
-                if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IdentificadorCSC) && dadosNFe.mod == "65")
+                if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].IdentificadorCSC) && dadosNFe.mod == "65")
                 {
                     if (Empresas.Configuracoes[emp].URLConsultaDFe == null)
+                    {
                         if (!File.Exists(Path.Combine(Application.StartupPath, "sefaz.inc")))
+                        {
                             throw new Exception("Não foi possível localizar o arquivo SEFAZ.INC na pasta de execução do UniNFe, por favor, reinstale o aplicativo.");
+                        }
                         else
+                        {
                             throw new Exception("Não foi possível localizar o link do QRCode no arquivo SEFAZ.INC.");
+                        }
+                    }
 
                     QRCode qrCode = new QRCode(conteudoXML);
 
@@ -2478,7 +2595,9 @@ namespace NFe.Service
                         resultValidacao += validarModal.ValidarArqXML(modal, NomeArquivoXML);
 
                         if (resultValidacao != "")
+                        {
                             throw new Exception(resultValidacao);
+                        }
                     }
                 }
 
@@ -2619,9 +2738,11 @@ namespace NFe.Service
             {
                 case (int)TipoEmissao.teSVCAN:
                 case (int)TipoEmissao.teSVCRS:
-                    var se = Propriedade.Estados.First(s => s.CodigoMunicipio.Equals(Convert.ToInt32(dadosNFe.cUF)));
+                    Components.Municipio se = Propriedade.Estados.First(s => s.CodigoMunicipio.Equals(Convert.ToInt32(dadosNFe.cUF)));
                     if (se.UF == "SP" && dadosNFe.mod == "57") // São Paulo para CTe é SVC-RS, então não dá para pegar o que está no Websevice.XML pois está definido o da NFe. Wandrey 12/03/2018
+                    {
                         se.svc = TipoEmissao.teSVCRS;
+                    }
 
                     if (se.svc != (TipoEmissao)tpEmis && se.svc != TipoEmissao.teNone)
                     {
@@ -2799,8 +2920,10 @@ namespace NFe.Service
 
         private bool ValidarInformacaoContingencia(DadosNFeClass dadosNFe)
         {
-            if (String.IsNullOrEmpty(dadosNFe.dhCont) || String.IsNullOrEmpty(dadosNFe.xJust))
+            if (string.IsNullOrEmpty(dadosNFe.dhCont) || string.IsNullOrEmpty(dadosNFe.xJust))
+            {
                 return false;
+            }
 
             return true;
         }
@@ -2817,8 +2940,10 @@ namespace NFe.Service
         /// <param name="versaoXml">Versão do XML</param>
         protected XmlDocument LoteNfe(XmlDocument conteudoXML, string arquivo, string versaoXml)
         {
-            List<ArquivoXMLDFe> arquivos = new List<ArquivoXMLDFe>();
-            arquivos.Add(new ArquivoXMLDFe() { NomeArquivoXML = arquivo, ConteudoXML = conteudoXML });
+            List<ArquivoXMLDFe> arquivos = new List<ArquivoXMLDFe>
+            {
+                new ArquivoXMLDFe() { NomeArquivoXML = arquivo, ConteudoXML = conteudoXML }
+            };
 
             return oGerarXML.LoteNfe(Servico, arquivos, versaoXml);
         }
@@ -2848,7 +2973,9 @@ namespace NFe.Service
             string strProtNfe;
 
             if (!File.Exists(strArquivoNFe))
+            {
                 throw new Exception("Arquivo \"" + strArquivoNFe + "\" não encontrado");
+            }
 
             if (conteudoXML == null)
             {
@@ -2873,7 +3000,9 @@ namespace NFe.Service
                 // e que já estao na pasta de notas denegadas.
                 // Para futuras notas denegadas esta propriedade sempre será false
                 if (File.ReadAllText(dArquivo).IndexOf("<protNFe>") > 0)
+                {
                     addNFeDen = false;
+                }
             }
             if (addNFeDen)
             {
@@ -2885,7 +3014,9 @@ namespace NFe.Service
                 /// gera o arquivo de denegacao na pasta EmProcessamento
                 strNomeArqDenegadaNFe = oGerarXML.XmlDistNFe(strArquivoNFe, strProtNfe, Propriedade.ExtRetorno.Den, oLerXml.oDadosNfe.versao);
                 if (string.IsNullOrEmpty(strNomeArqDenegadaNFe))
+                {
                     throw new Exception("Erro de criação do arquivo de distribuição da nota denegada");
+                }
 
                 ///
                 /// exclui o XML denegado, se existir
@@ -2908,7 +3039,9 @@ namespace NFe.Service
                                                     PastaEnviados.Denegados + "\\" +
                                                     Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(oLerXml.oDadosNfe.dEmi);
                         if (!Directory.Exists(nomePastaBackup))
+                        {
                             System.IO.Directory.CreateDirectory(nomePastaBackup);
+                        }
 
                         //Se conseguiu criar a pasta ele move o arquivo, caso contrário
                         if (Directory.Exists(nomePastaBackup))
@@ -2928,9 +3061,11 @@ namespace NFe.Service
                     File.Move(strArquivoNFe, dArquivo);
                 }
                 else
+                {
 
                     // Como já existe na pasta Enviados\Denegados, só vou excluir da pasta EmProcessamento. Wandrey 22/12/2015
                     Functions.DeletarArquivo(strArquivoNFe);
+                }
             }
             try
             {
@@ -2983,7 +3118,10 @@ namespace NFe.Service
                         cMunicipio == 4118501 ||
                         cMunicipio == 3554300 ||
                         cMunicipio == 3542404)
+                    {
                         retorno = false;
+                    }
+
                     break;
 
                 case PadroesNFSe.EGOVERNEISS:
@@ -3080,7 +3218,7 @@ namespace NFe.Service
         ///
         public void XmlRetorno(string pFinalArqEnvio, string pFinalArqRetorno)
         {
-            oGerarXML.XmlRetorno(pFinalArqEnvio, pFinalArqRetorno, this.vStrXmlRetorno);
+            oGerarXML.XmlRetorno(pFinalArqEnvio, pFinalArqRetorno, vStrXmlRetorno);
         }
 
         #endregion XmlRetorno()
@@ -3106,6 +3244,9 @@ namespace NFe.Service
                 case PadroesNFSe.TIPLAN_203:
                 case PadroesNFSe.MEGASOFT:
                 case PadroesNFSe.INDAIATUBA_SP:
+                case PadroesNFSe.PORTALFACIL_ACTCON_202:
+                case PadroesNFSe.PORTALFACIL_ACTCON:
+                case PadroesNFSe.SIGCORP_SIGISS_203:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
                     {
                         switch (doc.DocumentElement.Name)
@@ -3238,8 +3379,6 @@ namespace NFe.Service
                     break;
 
                 case PadroesNFSe.SUPERNOVA:
-                case PadroesNFSe.PORTALFACIL_ACTCON_202:
-                case PadroesNFSe.PORTALFACIL_ACTCON:
                 case PadroesNFSe.MARINGA_PR:
                 case PadroesNFSe.SISPMJP:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
@@ -3335,13 +3474,19 @@ namespace NFe.Service
             foreach (Evento item in dadosEnvEvento.eventos)
             {
                 if (!currentEvento.Equals(item.tpEvento))
+                {
                     throw new Exception(string.Format("Não é possivel mesclar tipos de eventos dentro de um mesmo xml/txt de eventos. O tipo de evento neste xml/txt é {0}", currentEvento));
+                }
 
                 switch (NFe.Components.EnumHelper.StringToEnum<NFe.ConvertTxt.tpEventos>(currentEvento))
                 {
                     case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
+                    case ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe:
                         if (!ctpEmis.Equals(item.chNFe.Substring(34, 1)))
+                        {
                             cErro += "Não é possivel mesclar chaves com tipo de emissão dentro de um mesmo xml/txt de eventos.\r\n";
+                        }
+
                         break;
 
                     case ConvertTxt.tpEventos.tpEvEPEC:
@@ -3382,7 +3527,9 @@ namespace NFe.Service
                 }
             }
             if (cErro != "")
+            {
                 throw new Exception(cErro);
+            }
         }
 
         #endregion ValidaEvento
@@ -3417,12 +3564,18 @@ namespace NFe.Service
                 {
                     consStatServList = ConteudoXML.GetElementsByTagName("consStatServMDFe");
                     if (consStatServList.Count == 0)
+                    {
                         consStatServList = ConteudoXML.GetElementsByTagName("consStatServ");
+                    }
                     else
+                    {
                         isCteMDFe = true;
+                    }
                 }
                 else
+                {
                     isCteMDFe = true;
+                }
 
                 foreach (XmlNode consStatServNode in consStatServList)
                 {
@@ -3547,7 +3700,7 @@ namespace NFe.Service
 
                 if (envEventoElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString()).Count != 0)
                 {
-                    var node = envEventoElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0];
+                    XmlNode node = envEventoElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0];
 
                     dadosEnvEvento.eventos[dadosEnvEvento.eventos.Count - 1].tpEmis = Convert.ToInt16("0" + node.InnerText);
 
@@ -3559,7 +3712,9 @@ namespace NFe.Service
 
             /// salvo o arquivo modificado
             if (doSave)
+            {
                 ConteudoXML.Save(NomeArquivoXML);
+            }
         }
 
         #endregion EnvEvento

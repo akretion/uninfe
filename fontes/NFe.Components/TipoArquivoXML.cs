@@ -241,6 +241,7 @@ namespace NFe.Components
                                         {
                                             case "110110":  //XML de Evento da CCe
                                             case "110111":  //XML de Envio de evento de cancelamento
+                                            case "110112":  //XML de Envio de evento de cancelamento por substituição
                                             case "110113":  //XML de Envio do evento de contingencia EPEC, CTe
                                             case "110160":  //XML de Envio do evento de Registro Multimodal, CTe
                                             case "111500":  //Evento pedido de prorrogação 1º. prazo

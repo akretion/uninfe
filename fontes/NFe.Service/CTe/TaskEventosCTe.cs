@@ -192,7 +192,9 @@ namespace NFe.Service
 
                                 switch ((ConvertTxt.tpEventos)Convert.ToInt32(tpEvento))
                                 {
+                                    //Verificar se para o evento cancelamento por substituição será necessário disparar o unidanfe
                                     case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
+                                    case ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe:
                                     case ConvertTxt.tpEventos.tpEvCCe:
                                     case ConvertTxt.tpEventos.tpEvEPEC:
                                         try

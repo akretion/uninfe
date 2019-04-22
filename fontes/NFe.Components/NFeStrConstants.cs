@@ -590,7 +590,8 @@ namespace NFe.Components
         xTexto,
         dEmissao,
         infProt,
-        protLivroCombustivel
+        protLivroCombustivel,
+        chNFeRef
     }
 
     public class NFeStrConstants
