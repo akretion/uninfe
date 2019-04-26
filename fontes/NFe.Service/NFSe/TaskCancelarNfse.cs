@@ -485,7 +485,8 @@ namespace NFe.Service.NFSe
                             oDadosPedCanNfse.cMunicipio == 4308904 ||
                             oDadosPedCanNfse.cMunicipio == 4118501 ||
                             oDadosPedCanNfse.cMunicipio == 3554300 ||
-                            oDadosPedCanNfse.cMunicipio == 3542404)
+                            oDadosPedCanNfse.cMunicipio == 3542404 ||
+                            oDadosPedCanNfse.cMunicipio == 5005707)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -532,6 +533,10 @@ namespace NFe.Service.NFSe
                         {
                             throw new Exception("Município de Cariacica-ES não permite cancelamento de NFS-e via webservice.");
                         }
+                        break;
+
+                    case PadroesNFSe.SMARAPD_204:
+                        cabecMsg = "<cabecalho versao=\"2.04\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.04</versaoDados></cabecalho>";
                         break;
 
                     #region Tinus

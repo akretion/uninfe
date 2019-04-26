@@ -413,7 +413,6 @@ namespace NFe.UI.Formularios
                            ufCod == 4104204 /*Campo Largo*/||
                            ufCod == 3537305 /*Penapolis*/||
                            ufCod == 4309209 /*Gravataí*/||
-                           ufCod == 3551702 /*Sertãozinho*/||
                            ufCod == 3201308 /*Cariacica*/||
                            ufCod == 3538709 /*Piracicaba*/||
                            ufCod == 2930709 /*Simões Filho*/||

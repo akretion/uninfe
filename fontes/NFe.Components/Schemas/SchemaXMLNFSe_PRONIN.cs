@@ -265,6 +265,23 @@ namespace NFSe.Components
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
             });
             #endregion XML de lote RPS - Teodoro Sampaio-SP
+        
+            #region XML de lote RPS - Naviraí - MS
+        
+            SchemaXML.InfSchemas.Add("NFSE-PRONIN-5005707-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion XML de lote RPS - Naviraí - MS
+
         }
     }
 }

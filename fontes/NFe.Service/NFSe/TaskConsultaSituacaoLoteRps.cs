@@ -280,7 +280,8 @@ namespace NFe.Service.NFSe
                             oDadosPedSitLoteRps.cMunicipio == 4308904 ||
                             oDadosPedSitLoteRps.cMunicipio == 4118501 ||
                             oDadosPedSitLoteRps.cMunicipio == 3554300 ||
-                            oDadosPedSitLoteRps.cMunicipio == 3542404)
+                            oDadosPedSitLoteRps.cMunicipio == 3542404 ||
+                            oDadosPedSitLoteRps.cMunicipio == 5005707)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

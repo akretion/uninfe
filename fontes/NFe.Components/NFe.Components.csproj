@@ -220,6 +220,8 @@
     <Compile Include="Pronin\PatoBrancoPR\p\ProninP.cs" />
     <Compile Include="Pronin\RegenteFeijoSP\h\ProninH.cs" />
     <Compile Include="Pronin\RegenteFeijoSP\p\ProninP.cs" />
+    <Compile Include="Pronin\NaviraiMS\h\ProninH.cs" />
+    <Compile Include="Pronin\NaviraiMS\p\ProninP.cs" />
     <Compile Include="Pronin\TeodoroSampaioSP\h\ProninH.cs" />
     <Compile Include="Pronin\TeodoroSampaioSP\p\ProninP.cs" />
     <Compile Include="Pronin\VacariRS\h\ProninH.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="Schemas\SchemaXMLNFSe_ADM_SISTEMAS.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_E_RECEITA.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_MODERNIZACAO_PUBLICA.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_SMARAPD_204.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_SISPMJP﻿.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_SIGCORP_SIGISS_203.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_VITORIA_ES.cs" />
@@ -1055,6 +1058,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\HNaviraiMS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\HPatoBrancoPR\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1381,6 +1389,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\PNaviraiMS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\PNovaMutumMT\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1447,6 +1460,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\PSerafinaCorreaRS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PSmaraPD_204\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -3665,6 +3683,17 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\HNaviraiMS\NFSeIntegracao.wsdl" />
+    <None Include="Web References\HNaviraiMS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\HNaviraiMS\Services.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\HNaviraiMS\Services0.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web References\HPatoBrancoPR\NFSeIntegracao.wsdl" />
     <None Include="Web References\HPatoBrancoPR\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -4576,6 +4605,17 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\PNaviraiMS\NFSeIntegracao.wsdl" />
+    <None Include="Web References\PNaviraiMS\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PNaviraiMS\Services.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PNaviraiMS\Services0.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web References\PNovaMutumMT\nfse_web_service.wsdl" />
     <None Include="Web References\PNovaMutumMT\output.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -4840,6 +4880,14 @@
     <None Include="Web References\PSerafinaCorreaRS\SubstituirNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\PSmaraPD_204\output1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PSmaraPD_204\PSertaozinhoSP.wsdl" />
+    <None Include="Web References\PSmaraPD_204\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\PSinopMT\nfse_web_service.wsdl" />
     <None Include="Web References\PSinopMT\output.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -5071,6 +5119,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_HJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HNaviraiMS-PRONIN.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HNaviraiMS\</RelPath>
+      <UpdateFromURL>C:\Projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HNaviraiMS-PRONIN.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_HNaviraiMS_NFSeIntegracao</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HPelotas_RS.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -5358,6 +5417,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PMonteCarmeloMG_NfseService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PNaviraiMS-PRONIN.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PNaviraiMS\</RelPath>
+      <UpdateFromURL>C:\Projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PNaviraiMS-PRONIN.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PNaviraiMS_NFSeIntegracao</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PPelotas_RS.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\PPelotasRS\</RelPath>
@@ -5401,6 +5471,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PSenadorCanedoGO_nfseWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSertaozinhoSP.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PSmaraPD_204\</RelPath>
+      <UpdateFromURL>C:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSertaozinhoSP.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PSertaozinhoSP_NfseWSService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="C:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSinopMT-COPLAN.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

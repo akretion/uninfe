@@ -60,7 +60,9 @@ namespace NFe.Components.Pronin
                             case 3542404: //Regente Feijó-SP
                                 proninService = new RegenteFeijoSP.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
-
+                            case 5005707: //Regente Navirai-SP
+                                proninService = new NaviraiMS.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -117,6 +119,9 @@ namespace NFe.Components.Pronin
 
                             case 3542404: //Regente Feijó-SP
                                 proninService = new RegenteFeijoSP.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+                            case 5005707: //Regente Naviraí-MS
+                                proninService = new NaviraiMS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
                             default:

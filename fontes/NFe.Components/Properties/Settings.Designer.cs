@@ -2098,5 +2098,35 @@ namespace NFe.Components.Properties {
                 return ((string)(this["NFe_Components_PMonteCarmeloMG_NfseService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://nfse.navirai.ms.gov.br:9191/NFSe.Portal.Integracao.Teste/Services.svc")]
+        public string NFe_Components_HNaviraiMS_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_HNaviraiMS_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://nfse.navirai.ms.gov.br:9191/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PNaviraiMS_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PNaviraiMS_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.sertaozinho.sp.gov.br:8443/tbw/services/nfseSOAP")]
+        public string NFe_Components_PSertaozinhoSP_NfseWSService {
+            get {
+                return ((string)(this["NFe_Components_PSertaozinhoSP_NfseWSService"]));
+            }
+        }
     }
 }

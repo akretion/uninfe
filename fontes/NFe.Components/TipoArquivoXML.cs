@@ -163,6 +163,9 @@ namespace NFe.Components
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3303609-";
                                 break;
 
+                            case 5005707: //Naviraí-MS
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-5005707-";
+                                break;
                             default:
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                                 break;

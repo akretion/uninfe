@@ -2402,7 +2402,56 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion SIGCORP_SIGISS_203
+                #endregion SIGCORP_SIGISS_203
+
+                #region SMARAPD_204
+
+                case PadroesNFSe.SMARAPD_204:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfsePorFaixa";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "ConsultarSituacaoLoteRps";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeSubstituirNfse:
+                            retorna = "SubstituirNfse";
+                            break;
+
+                        case Servicos.NFSeConsultarNFSeTomados:
+                            retorna = "ConsultarNfseServicoTomado";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+                    }
+                    break;
+
+                    #endregion SMARAPD_204
             }
 
             return retorna;
@@ -3117,7 +3166,8 @@ namespace NFe.Service
                         cMunicipio == 4308904 ||
                         cMunicipio == 4118501 ||
                         cMunicipio == 3554300 ||
-                        cMunicipio == 3542404)
+                        cMunicipio == 3542404 ||
+                        cMunicipio == 5005707)
                     {
                         retorno = false;
                     }
@@ -3247,6 +3297,7 @@ namespace NFe.Service
                 case PadroesNFSe.PORTALFACIL_ACTCON_202:
                 case PadroesNFSe.PORTALFACIL_ACTCON:
                 case PadroesNFSe.SIGCORP_SIGISS_203:
+                case PadroesNFSe.SMARAPD_204:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
                     {
                         switch (doc.DocumentElement.Name)

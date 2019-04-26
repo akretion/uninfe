@@ -617,5 +617,14 @@
     <Setting Name="NFe_Components_PMonteCarmeloMG_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://wsmontecarmelo.simplissweb.com.br/nfseservice.svc</Value>
     </Setting>
+    <Setting Name="NFe_Components_HNaviraiMS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nfse.navirai.ms.gov.br:9191/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PNaviraiMS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nfse.navirai.ms.gov.br:9191/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSertaozinhoSP_NfseWSService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.sertaozinho.sp.gov.br:8443/tbw/services/nfseSOAP</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

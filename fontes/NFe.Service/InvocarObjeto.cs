@@ -829,6 +829,18 @@ namespace NFe.Service
                     strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { cnpjcpfprestador, docXML.OuterXml, versaoXml });
                     break;
 
+                case PadroesNFSe.SMARAPD_204:
+#if _fw46
+                    dynamic smarapdOutput = Activator.CreateInstance(servicoWS.GetType().GetMethod(metodo).ReturnType);
+                    dynamic smarapdInput = Activator.CreateInstance(servicoWS.GetType().GetMethod(metodo).GetParameters()[0].ParameterType);
+                    smarapdInput.nfseCabecMsg = cabecMsg;
+                    smarapdInput.nfseDadosMsg = docXML.OuterXml;
+
+                    smarapdOutput = wsProxy.Invoke(servicoWS, metodo, new object[] { smarapdInput });
+                    strRetorno = smarapdOutput.outputXML;
+#endif
+                    break;
+
                 default:
 
                     #region Demais padrões

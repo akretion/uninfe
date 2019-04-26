@@ -1775,11 +1775,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PCampoGrandeMS-DSF-LoteRps.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PSertaozinhoSP-SmaraPDPWSSaida.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PSertaozinhoSP-SmaraPDPWSUtil.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PSertaozinhoSP-SmaraPDWSEntrada.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoLuizMADSF-LoteRps.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSaoLuizMADSF-LoteRps.wsdl" />
   </ItemGroup>
@@ -4515,6 +4510,16 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\schemas\NFSe\SIGCORP_SIGISS\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNaviraiMS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNaviraiMS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\SMARAPD\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSertaozinhoSP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSertaozinhoSP.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\SMARAPD\nfse_v2-04.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

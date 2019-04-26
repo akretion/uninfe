@@ -1410,6 +1410,9 @@ namespace NFe.ConvertTxt
                     case 203: nodeCurrent = doc.CreateElement("ICMSSN202"); break;
                     case 500: nodeCurrent = doc.CreateElement("ICMSSN500"); break;
                     case 900: nodeCurrent = doc.CreateElement("ICMSSN900"); break;
+
+                    default:
+                        throw new Exception(String.Format("O CSOSN {0} informado é incorreto. CSOSN permitidos são: 101, 102, 103, 201, 202, 203, 300, 400, 500 e 900.", imposto.ICMS.CSOSN));
                 }
                 e0.AppendChild(nodeCurrent);
                 nodeImposto.AppendChild(e0);

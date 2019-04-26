@@ -354,7 +354,8 @@ namespace NFe.Service.NFSe
                             ler.oDadosPedSitNfseRps.cMunicipio == 4308904 ||
                             ler.oDadosPedSitNfseRps.cMunicipio == 4118501 ||
                             ler.oDadosPedSitNfseRps.cMunicipio == 3554300 ||
-                            ler.oDadosPedSitNfseRps.cMunicipio == 3542404)
+                            ler.oDadosPedSitNfseRps.cMunicipio == 3542404 ||
+                            ler.oDadosPedSitNfseRps.cMunicipio == 5005707)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -482,6 +483,10 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.SIGCORP_SIGISS_203:
                         cabecMsg = "<cabecalho versao=\"2.03\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.03</versaoDados></cabecalho>";
+                        break;
+
+                    case PadroesNFSe.SMARAPD_204:
+                        cabecMsg = "<cabecalho versao=\"2.04\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.04</versaoDados></cabecalho>";
                         break;
                 }
 

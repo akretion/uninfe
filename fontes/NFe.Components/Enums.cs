@@ -805,6 +805,12 @@ namespace NFe.Components
         SMARAPD,
 
         /// <summary>
+        /// SMARAPD na versão 2.04
+        /// </summary>
+        [Description("SmaraPD")]
+        SMARAPD_204,
+
+        /// <summary>
         /// Padrão Fiorilli
         /// Prefeitura de Taquara - SP
         /// </summary>
