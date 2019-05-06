@@ -181,6 +181,8 @@
     <Compile Include="EL\BarraDeSaoFranciscoES\p\ELP.cs" />
     <Compile Include="EL\IconhaES\p\ELP.cs" />
     <Compile Include="EL\SaoJoaoParaisoMG\p\ELP.cs" />
+    <Compile Include="EL\VianaES\p\ELP.cs" />
+    <Compile Include="EL\TeixeiraDeFreitasBA\p\ELP.cs" />
     <Compile Include="EL\TaiobeirasMG\p\ELP.cs" />
     <Compile Include="Fiorilli\AguasDeLindoiaSP\h\FiorilliH.cs" />
     <Compile Include="Fiorilli\AguasDeLindoiaSP\p\FiorilliP.cs" />
@@ -1479,6 +1481,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\PTeixeiraDeFreitasBA\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\PTeodoroSampaioSP\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1495,6 +1502,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\PViamaoRS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PVianaES\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -4931,6 +4943,41 @@
     <None Include="Web References\PTaiobeirasMG\situacaoLoteRps.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\PTeixeiraDeFreitasBA\cnae.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTeixeiraDeFreitasBA\empresa.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTeixeiraDeFreitasBA\loteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTeixeiraDeFreitasBA\nfseContribuinte.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTeixeiraDeFreitasBA\nfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTeixeiraDeFreitasBA\nfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTeixeiraDeFreitasBA\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PTeixeiraDeFreitasBA\RpsService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PTeixeiraDeFreitasBA\RpsServiceService.wsdl" />
+    <None Include="Web References\PTeixeiraDeFreitasBA\servico116Municipal.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTeixeiraDeFreitasBA\servicoMunic.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PTeixeiraDeFreitasBA\situacaoLoteRps.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\PTeodoroSampaioSP\NFSeIntegracao.wsdl" />
     <None Include="Web References\PTeodoroSampaioSP\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -4974,6 +5021,41 @@
     </None>
     <None Include="Web References\PViamaoRS\Services0.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PVianaES\cnae.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PVianaES\empresa.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PVianaES\loteRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PVianaES\nfseContribuinte.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PVianaES\nfseResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PVianaES\nfseRpsResposta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PVianaES\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PVianaES\RpsService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PVianaES\RpsServiceService.wsdl" />
+    <None Include="Web References\PVianaES\servico116Municipal.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PVianaES\servicoMunic.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PVianaES\situacaoLoteRps.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -5493,6 +5575,28 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PSinopMT_nfse_web_service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PTeixeiraDeFreitasBA-EL.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PTeixeiraDeFreitasBA\</RelPath>
+      <UpdateFromURL>C:\Projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PTeixeiraDeFreitasBA-EL.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PTeixeiraDeFreitasBA_RpsServiceService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PVianaES-EL.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PVianaES\</RelPath>
+      <UpdateFromURL>C:\Projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PVianaES-EL.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PVianaES_RpsServiceService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="C:\Projetos\UniNFe\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HSerafinaCorreaRS-FIORILLI.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

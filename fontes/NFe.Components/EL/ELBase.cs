@@ -53,7 +53,13 @@ namespace NFe.Components.EL
                             case 3168002: //Taiobeiras-MG
                                 elService = new TaiobeirasMG.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
                                 break;
-                                
+                            case 2931350: //Teixeira de Freitas-BA
+                                elService = new TeixeiraDeFreitasBA.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
+                                break;
+                            case 3205101: //Viana-ES
+                                elService = new Viana.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

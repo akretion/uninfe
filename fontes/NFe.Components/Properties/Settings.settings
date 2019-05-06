@@ -626,5 +626,11 @@
     <Setting Name="NFe_Components_PSertaozinhoSP_NfseWSService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://nfe.sertaozinho.sp.gov.br:8443/tbw/services/nfseSOAP</Value>
     </Setting>
+    <Setting Name="NFe_Components_PTeixeiraDeFreitasBA_RpsServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://ba-teixeiradefreitas-pm-nfs.cloud.el.com.br:80/RpsService</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PVianaES_RpsServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://es-viana-pm-nfs.cloud.el.com.br:80/RpsService</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

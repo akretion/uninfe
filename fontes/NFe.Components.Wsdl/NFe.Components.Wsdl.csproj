@@ -4522,6 +4522,8 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\SMARAPD\nfse_v2-04.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTeixeiraDeFreitasBA-EL.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PVianaES-EL.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

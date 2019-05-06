@@ -468,7 +468,9 @@ namespace NFe.UI.Formularios
                            ufCod == 4211801 /*Ouro-SC*/ ||
                            ufCod == 3500501 /*Aguas de Lindoia-SP*/ ||
                            ufCod == 3523107 /*Itaquaquecetuba-SP*/ ||
-                           ufCod == 3143104 /*Monte Carnmelo-MG*/;
+                           ufCod == 3143104 /*Monte Carnmelo-MG*/||
+                           ufCod == 2931350 /*Teixeira de Freitas-BA*/||
+                           ufCod == 3205101 /*Viana-ES*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }
