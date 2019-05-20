@@ -1548,26 +1548,22 @@ namespace NFe.ConvertTxt
                         break;
 
                     case 500:
-                        wCampo(imposto.ICMS.vBCSTRet, TpcnTipoCampo.tcDec2, TpcnResources.vBCSTRet);
-
-                        if (nfe.infNFe.Versao >= 4)
+                        if (imposto.ICMS.vBCSTRet + imposto.ICMS.pST + imposto.ICMS.vICMSSubstituto + imposto.ICMS.vICMSSTRet > 0 || nfe.ide.indFinal == TpcnConsumidorFinal.cfNao)
                         {
+                            wCampo(imposto.ICMS.vBCSTRet, TpcnTipoCampo.tcDec2, TpcnResources.vBCSTRet);
                             wCampo(imposto.ICMS.pST, TpcnTipoCampo.tcDec4, TpcnResources.pST);
                             wCampo(imposto.ICMS.vICMSSubstituto, TpcnTipoCampo.tcDec2, TpcnResources.vICMSSubstituto);
+                            wCampo(imposto.ICMS.vICMSSTRet, TpcnTipoCampo.tcDec2, TpcnResources.vICMSSTRet);
                         }
 
-                        wCampo(imposto.ICMS.vICMSSTRet, TpcnTipoCampo.tcDec2, TpcnResources.vICMSSTRet);
-
-                        if (nfe.infNFe.Versao >= 4
-                             && imposto.ICMS.vBCFCPSTRet + imposto.ICMS.pFCPSTRet + imposto.ICMS.vFCPSTRet > 0)
+                        if (imposto.ICMS.vBCFCPSTRet + imposto.ICMS.pFCPSTRet + imposto.ICMS.vFCPSTRet > 0)
                         {
                             wCampo(imposto.ICMS.vBCFCPSTRet, TpcnTipoCampo.tcDec2, TpcnResources.vBCFCPSTRet);
                             wCampo(imposto.ICMS.pFCPSTRet, nDecimaisPerc, TpcnResources.pFCPSTRet);
                             wCampo(imposto.ICMS.vFCPSTRet, TpcnTipoCampo.tcDec2, TpcnResources.vFCPSTRet);
                         }
 
-                        if (nfe.infNFe.Versao >= 4
-                             && imposto.ICMS.pRedBCEfet + imposto.ICMS.vBCEfet + imposto.ICMS.pICMSEfet + imposto.ICMS.vICMSEfet > 0)
+                        if (imposto.ICMS.pRedBCEfet + imposto.ICMS.vBCEfet + imposto.ICMS.pICMSEfet + imposto.ICMS.vICMSEfet > 0)
                         {
                             wCampo(imposto.ICMS.pRedBCEfet, nDecimaisPerc, TpcnResources.pRedBCEfet);
                             wCampo(imposto.ICMS.vBCEfet, TpcnTipoCampo.tcDec2, TpcnResources.vBCEfet);

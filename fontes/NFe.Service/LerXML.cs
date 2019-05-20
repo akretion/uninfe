@@ -78,7 +78,7 @@ namespace NFe.Service
                 {
                     XmlElement ideElemento = (XmlElement)ideNode;
 
-                    oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, TpcnResources.dhEmi.ToString(), false));
+                    oDadosNfe.dEmi = Convert.ToDateTime(Functions.LerTag(ideElemento, TpcnResources.dhEmi.ToString(), false).Substring(0,10));
                     oDadosNfe.cNF = Functions.LerTag(ideElemento, TpcnResources.cNF.ToString(), false);
                     oDadosNfe.nNF = Functions.LerTag(ideElemento, TpcnResources.nNF.ToString(), false);
                     oDadosNfe.tpEmis = Functions.LerTag(ideElemento, TpcnResources.tpEmis.ToString(), false);

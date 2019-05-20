@@ -2469,10 +2469,14 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PSSebastiaoCai-EnvioLoteRPSSincrono.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNatalRN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNatalRN.wsdl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PNatalRN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNatalRN.wsdl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\schemas\NFSe\NATALENSE\nfse.xsd">
@@ -3832,6 +3836,19 @@
     <EmbeddedResource Include="NFe\schemas\EventoCanc\retEnvEventoCancSubst_v1.00.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeConsulta_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeInutilizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeRetAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCENfeStatusServico_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\CE\HCERecepcaoEvento_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeConsulta_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeInutilizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeRetAutorizacao_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCENfeStatusServico_C_400.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCERecepcaoEvento_C.wsdl" />
+    <EmbeddedResource Include="NFe\WSDL\Producao\CE\PCERecepcaoEvento_C_400.wsdl" />
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -4524,6 +4541,16 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Producao\PTeixeiraDeFreitasBA-EL.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PVianaES-EL.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGuarapariES-SMARAPDWSEntrada.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGuarapariES-SMARAPDWSSaida.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PGuarapariES-SMARAPDWSUtil.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGuarapariES-SMARAPDWSEntrada.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGuarapariES-SMARAPDWSSaida.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGuarapariES-SMARAPDWSUtil.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSeteLagoasMG.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSeteLagoasMG.wsdl">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

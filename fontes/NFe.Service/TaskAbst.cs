@@ -1015,7 +1015,14 @@ namespace NFe.Service
                             }
                             else
                             {
-                                retorna = "enviar";
+                                if (cMunicipio.ToString() != "1501402") //Belém - PA
+                                {
+                                    retorna = "enviarSincrono";
+                                }
+                                else
+                                {
+                                    retorna = "enviar";
+                                }
                             }
 
                             break;

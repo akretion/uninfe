@@ -470,7 +470,8 @@ namespace NFe.UI.Formularios
                            ufCod == 3523107 /*Itaquaquecetuba-SP*/ ||
                            ufCod == 3143104 /*Monte Carnmelo-MG*/||
                            ufCod == 2931350 /*Teixeira de Freitas-BA*/||
-                           ufCod == 3205101 /*Viana-ES*/;
+                           ufCod == 3205101 /*Viana-ES*/ ||
+                           ufCod == 3202405 /*Guarapari-ES*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }

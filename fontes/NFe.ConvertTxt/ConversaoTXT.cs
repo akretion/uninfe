@@ -1132,7 +1132,7 @@ namespace NFe.ConvertTxt
                     /// 
                     #region <emit><EnderEmit>
 
-                    NFe.emit.enderEmit.xLgr = this.LerString(TpcnResources.xLgr, ObOp.Obrigatorio, 2, 60);
+                    NFe.emit.enderEmit.xLgr = this.LerString(TpcnResources.xLgr, ObOp.Obrigatorio, 1, 60);
                     NFe.emit.enderEmit.nro = this.LerString(TpcnResources.nro, ObOp.Obrigatorio, 1, 60);
                     NFe.emit.enderEmit.xCpl = this.LerString(TpcnResources.xCpl, ObOp.Opcional, 1, 60);
                     NFe.emit.enderEmit.xBairro = this.LerString(TpcnResources.xBairro, ObOp.Obrigatorio, 2, 60);
@@ -1214,7 +1214,7 @@ namespace NFe.ConvertTxt
                     /// Grupo da TAG <dest><EnderDest>
                     /// 
                     #region <dest><EnderDest>
-                    NFe.dest.enderDest.xLgr = this.LerString(TpcnResources.xLgr, ObOp.Obrigatorio, 2, 60);
+                    NFe.dest.enderDest.xLgr = this.LerString(TpcnResources.xLgr, ObOp.Obrigatorio, 1, 60);
                     NFe.dest.enderDest.nro = this.LerString(TpcnResources.nro, ObOp.Obrigatorio, 1, 60);
                     NFe.dest.enderDest.xCpl = this.LerString(TpcnResources.xCpl, ObOp.Opcional, 1, 60);
                     NFe.dest.enderDest.xBairro = this.LerString(TpcnResources.xBairro, ObOp.Obrigatorio, 1, 60);
@@ -1247,7 +1247,7 @@ namespace NFe.ConvertTxt
                             }
                             NFe.retirada.xNome = this.LerString(TpcnResources.xNome, ObOp.Opcional, 2, 60);
                         }
-                        NFe.retirada.xLgr = this.LerString(TpcnResources.xLgr, ObOp.Obrigatorio, 2, 60);
+                        NFe.retirada.xLgr = this.LerString(TpcnResources.xLgr, ObOp.Obrigatorio, 1, 60);
                         NFe.retirada.nro = this.LerString(TpcnResources.nro, ObOp.Obrigatorio, 1, 60);
                         NFe.retirada.xCpl = this.LerString(TpcnResources.xCpl, ObOp.Opcional, 1, 60);
                         NFe.retirada.xBairro = this.LerString(TpcnResources.xBairro, ObOp.Obrigatorio, 1, 60);
@@ -1296,7 +1296,7 @@ namespace NFe.ConvertTxt
                             }
                             NFe.entrega.xNome = this.LerString(TpcnResources.xNome, ObOp.Opcional, 2, 60);
                         }
-                        NFe.entrega.xLgr = this.LerString(TpcnResources.xLgr, ObOp.Obrigatorio, 2, 60);
+                        NFe.entrega.xLgr = this.LerString(TpcnResources.xLgr, ObOp.Obrigatorio, 1, 60);
                         NFe.entrega.nro = this.LerString(TpcnResources.nro, ObOp.Obrigatorio, 1, 60);
                         NFe.entrega.xCpl = this.LerString(TpcnResources.xCpl, ObOp.Opcional, 1, 60);
                         NFe.entrega.xBairro = this.LerString(TpcnResources.xBairro, ObOp.Obrigatorio, 1, 60);
@@ -1821,7 +1821,7 @@ namespace NFe.ConvertTxt
                             NFe.det[nProd].Imposto.ICMS.vICMSEfet = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSEfet, ObOp.Opcional, 15);
                         }
 
-                        NFe.det[nProd].Imposto.ICMS.vICMSSubstituto = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSSubstituto, ObOp.None, 15, true);
+                        NFe.det[nProd].Imposto.ICMS.vICMSSubstituto = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSSubstituto, ObOp.Opcional, 15);
                     }
                     #endregion
                     break;
@@ -2045,7 +2045,7 @@ namespace NFe.ConvertTxt
                             NFe.det[nProd].Imposto.ICMS.vICMSEfet = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSEfet, ObOp.Opcional, 15);
                         }
                         
-                        NFe.det[nProd].Imposto.ICMS.vICMSSubstituto = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSSubstituto, ObOp.None, 15, true);
+                        NFe.det[nProd].Imposto.ICMS.vICMSSubstituto = this.LerDouble(TpcnTipoCampo.tcDec2, TpcnResources.vICMSSubstituto, ObOp.Opcional, 15);
                     }
 
                     #endregion
