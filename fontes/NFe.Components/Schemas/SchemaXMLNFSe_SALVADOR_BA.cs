@@ -23,6 +23,19 @@ namespace NFSe.Components
             });
             #endregion
 
+            #region XML de Consulta de NFSe (Situação da Nota)
+            SchemaXML.InfSchemas.Add("NFSE-SALVADOR_BA-ConsultarSituacaoNfseEnvio", new InfSchema()
+            {
+                Tag = "ConsultarSituacaoNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\SALVADOR_BA\\ServicosComplementares.xsd",
+                Descricao = "XML de Consulta de NFSe (Situação da Nota)",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "https://nfse.sefaz.salvador.ba.gov.br/OnLine/XSD/ServicosComplementares.xsd"
+            });
+            #endregion
+
             #region XML de Consulta de NFSe por Rps
             SchemaXML.InfSchemas.Add("NFSE-SALVADOR_BA-ConsultarNfseRpsEnvio", new InfSchema()
             {

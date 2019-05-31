@@ -1044,6 +1044,10 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultaNFSeTomados : list.LocalProducao.ConsultaNFSeTomados);
                             break;
 
+                        case Servicos.NFSeConsultarStatusNota:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarStatusNFse : list.LocalProducao.ConsultarStatusNFse);
+                            break;
+
                         #endregion NFS-e
 
                         #region CFS-e
@@ -1222,6 +1226,7 @@ namespace NFe.Settings
                             case Servicos.NFSeConsultarPorRps:
                             case Servicos.NFSeConsultarSituacaoLoteRps:
                             case Servicos.NFSeRecepcionarLoteRps:
+                            case Servicos.NFSeConsultarStatusNota:
                                 throw new Exception(string.Format(errorStr, "da NFS-e"));
                         }
                         throw new Exception(string.Format(errorStr, "da NF-e"));
@@ -1384,13 +1389,13 @@ namespace NFe.Settings
                                             if ((erro = this.AddEmpresaNaLista(emp.PastaBackup)) == "")
                                                 erro = this.AddEmpresaNaLista(emp.PastaDownloadNFeDest);
 
-                if ((emp.Servico == TipoAplicativo.Nfe ||
-                    emp.Servico == TipoAplicativo.NFCe ||
-                    emp.Servico == TipoAplicativo.Todos)
-                    && emp.UnidadeFederativaCodigo == 35 && emp.IndSinc == true)
-                {
-                    erro += "\r\nEstado de São Paulo não dispõe do serviço síncrono para emissão de NFe.".TrimStart(new char[] { '\r', '\n' });
-                }
+                //if ((emp.Servico == TipoAplicativo.Nfe ||
+                //    emp.Servico == TipoAplicativo.NFCe ||
+                //    emp.Servico == TipoAplicativo.Todos)
+                //    && emp.UnidadeFederativaCodigo == 35 && emp.IndSinc == true)
+                //{
+                //    erro += "\r\nEstado de São Paulo não dispõe do serviço síncrono para emissão de NFe.".TrimStart(new char[] { '\r', '\n' });
+                //}
 
                 if (erro != "")
                 {

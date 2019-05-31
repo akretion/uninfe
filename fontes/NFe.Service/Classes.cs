@@ -833,6 +833,26 @@ namespace NFe.Service
 
     #endregion DadosPedSitNfse
 
+    #region DadosPedStaNfse
+    /// <summary>
+    /// Classe com os dados do XML da consulta de status da nfse por numero da nfse
+    /// </summary>
+    public class DadosPedStaNfse
+    {
+        public int cMunicipio { get; set; }
+        public int tpAmb { get; set; }
+        public int tpEmis { get; set; }
+
+        public DadosPedStaNfse(int emp)
+        {
+            tpEmis = Empresas.Configuracoes[emp].tpEmis;
+            tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
+            cMunicipio = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
+        }
+    }
+
+    #endregion DadosPedStaNfse
+
     #region DadosPedSitNfseRps
 
     /// <summary>

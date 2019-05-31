@@ -154,17 +154,17 @@ namespace NFe.UI.Formularios
                 checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Checked = this.empresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
                 checkBoxArqNSU.Checked = this.empresa.ArqNSU;
 
-                // São Paulo não possui processo síncrono
-                if (this.empresa.UnidadeFederativaCodigo == 35)
-                {
-                    cbIndSinc.Checked =
-                    cbIndSinc.Enabled = false;
-                }
-                else
-                {
-                    cbIndSinc.Enabled = true;
-                    cbIndSinc.Checked = this.empresa.IndSinc;
-                }
+                //// São Paulo não possui processo síncrono
+                //if (this.empresa.UnidadeFederativaCodigo == 35)
+                //{
+                //    cbIndSinc.Checked =
+                //    cbIndSinc.Enabled = false;
+                //}
+                //else
+                //{
+                cbIndSinc.Enabled = true;
+                cbIndSinc.Checked = this.empresa.IndSinc;
+                //}
 
                 edtIdentificadorCSC.Text = this.empresa.IdentificadorCSC;
                 edtTokenCSC.Text = this.empresa.TokenCSC;
@@ -179,7 +179,7 @@ namespace NFe.UI.Formularios
 #if _fw46
                 if (empresa.UnidadeFederativaCodigo.Equals(4205407))
                 {
-                    var result = empresa.RecuperarConfiguracaoNFSeSoftplan(empresa.CNPJ);
+                    Empresa result = empresa.RecuperarConfiguracaoNFSeSoftplan(empresa.CNPJ);
 
                     txtClienteID.Text = result.ClientID;
                     txtClientSecret.Text = result.ClientSecret;
@@ -310,7 +310,9 @@ namespace NFe.UI.Formularios
                 string.IsNullOrEmpty(txtSenhaWS.Text) ||
                 string.IsNullOrEmpty(txtClienteID.Text) ||
                 string.IsNullOrEmpty(txtClientSecret.Text))
+                {
                     throw new Exception("As seguintes informações tem que estarem todas informadas: Usuário, Senha, ClientID e ClientSecret");
+                }
 
                 IWebProxy proxy = null;
 
@@ -337,14 +339,14 @@ namespace NFe.UI.Formularios
                     url = @"https://nfps-e.pmf.sc.gov.br/api/v1/";
                 }
 
-                var token = Token.GerarToken(proxy,
+                Token token = Token.GerarToken(proxy,
                                              txtUsuarioWS.Text,
                                              txtSenhaWS.Text,
                                              txtClienteID.Text,
                                              txtClientSecret.Text,
                                              url);
 
-                var tokenNFSeExpire = DateTime.Now.AddSeconds(token.ExpiresIn);
+                DateTime tokenNFSeExpire = DateTime.Now.AddSeconds(token.ExpiresIn);
 
                 empresa.SalvarConfiguracoesNFSeSoftplan(txtUsuarioWS.Text,
                                                         txtSenhaWS.Text,

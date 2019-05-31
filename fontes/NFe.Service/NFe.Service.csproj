@@ -193,6 +193,7 @@
     <Compile Include="NFeEmProcessamento.cs" />
     <Compile Include="NFSe\TaskConsultarNfseTomados.cs" />
     <Compile Include="NFSe\TaskConsultarNfseRecebidas.cs" />
+    <Compile Include="NFSe\TaskConsultarStatusNFse.cs" />
     <Compile Include="NFSe\TaskSubstituirNfse.cs" />
     <Compile Include="NFSe\TaskConsultaSequenciaLoteNotaRPS.cs" />
     <Compile Include="NFSe\TaskObterNotaFiscal.cs" />

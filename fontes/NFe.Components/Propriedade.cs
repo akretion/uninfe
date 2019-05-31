@@ -322,6 +322,7 @@ namespace NFe.Components
             PedSubstNfse,
             PedSitNFSeRec,
             PedSitNFSeTom,
+			PedStaNFse,
 
             /// <summary>
             /// CFSe
@@ -698,6 +699,12 @@ namespace NFe.Components
                     "-sitnfsetom.xml", "",
                     "-sitnfsetom.err",
                     "Consultar NFSe recebidas"));
+				
+				ListaExtensoes.Add(TipoEnvio.PedStaNFse, new ExtensaoClass(
+                    "-ped-stanfse.xml", "",
+                    "-stanfse.xml", "",
+                    "",
+                    "Pedido de Status da nota (NFSe)"));
 
                 #endregion Extensoes da NFSe
 

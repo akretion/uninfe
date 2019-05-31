@@ -32,8 +32,13 @@ namespace NFe.Validate
 
             DateTime dhEmi = Convert.ToDateTime(conteudoXML.GetElementsByTagName("dhEmi")[0].InnerText);
 
-            if (conteudoXML.GetElementsByTagName("tpAmb")[0].InnerText == "1" && dhEmi < new DateTime(2019, 6, 3))
-                return;
+            //UFs que ná estão aceitando o responsável técnico em produção
+            string cUFs = "31, 35, 41, 50";
+            if (! cUFs.Contains(((XmlElement)conteudoXML.GetElementsByTagName("ide")[0]).GetElementsByTagName("cUF")[0].InnerText))
+            {
+                if (conteudoXML.GetElementsByTagName("tpAmb")[0].InnerText == "1" && dhEmi < new DateTime(2019, 6, 3))
+                    return;
+            }
 
             XmlNode infRespTec = conteudoXML.GetElementsByTagName("infRespTec")[0];
 

@@ -12,7 +12,7 @@ namespace NFe.Components.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -2146,6 +2146,27 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PVianaES_RpsServiceService {
             get {
                 return ((string)(this["NFe_Components_PVianaES_RpsServiceService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://portal.picadacafe.rs.gov.br:8383/NFSe.Portal.Integracao.teste/Services.svc" +
+            "")]
+        public string NFe_Components_HPicadaCafeRS_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_HPicadaCafeRS_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://portal.picadacafe.rs.gov.br:8383/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PPicadaCafeRS_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PPicadaCafeRS_NFSeIntegracao"]));
             }
         }
     }

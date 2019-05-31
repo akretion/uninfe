@@ -632,5 +632,11 @@
     <Setting Name="NFe_Components_PVianaES_RpsServiceService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://es-viana-pm-nfs.cloud.el.com.br:80/RpsService</Value>
     </Setting>
+    <Setting Name="NFe_Components_HPicadaCafeRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://portal.picadacafe.rs.gov.br:8383/NFSe.Portal.Integracao.teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPicadaCafeRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://portal.picadacafe.rs.gov.br:8383/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

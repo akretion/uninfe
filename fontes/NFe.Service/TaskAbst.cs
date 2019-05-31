@@ -852,7 +852,7 @@ namespace NFe.Service
                             retorna = "EnviarLoteRPS";
                             break;
 
-                        case Servicos.NFSeConsultarStatusNota: //FABIO - FULLTIME
+                        case Servicos.NFSeConsultarStatusNota:
                             retorna = "ConsultarSituacaoNfse";
                             break;
                     }
@@ -1015,14 +1015,7 @@ namespace NFe.Service
                             }
                             else
                             {
-                                if (cMunicipio.ToString() != "1501402") //Belém - PA
-                                {
-                                    retorna = "enviarSincrono";
-                                }
-                                else
-                                {
-                                    retorna = "enviar";
-                                }
+                                 retorna = "enviar";
                             }
 
                             break;
@@ -3174,7 +3167,8 @@ namespace NFe.Service
                         cMunicipio == 4118501 ||
                         cMunicipio == 3554300 ||
                         cMunicipio == 3542404 ||
-                        cMunicipio == 5005707)
+                        cMunicipio == 5005707 ||
+                        cMunicipio == 4314423)
                     {
                         retorno = false;
                     }

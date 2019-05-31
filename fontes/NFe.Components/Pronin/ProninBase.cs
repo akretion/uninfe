@@ -60,9 +60,15 @@ namespace NFe.Components.Pronin
                             case 3542404: //Regente Feijó-SP
                                 proninService = new RegenteFeijoSP.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
-                            case 5005707: //Regente Navirai-SP
+
+                            case 5005707: //Navirai-SP
                                 proninService = new NaviraiMS.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
+
+                            case 4314423: //Picada Café-RS
+                                proninService = new PicadaCafeRS.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -120,8 +126,13 @@ namespace NFe.Components.Pronin
                             case 3542404: //Regente Feijó-SP
                                 proninService = new RegenteFeijoSP.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
-                            case 5005707: //Regente Naviraí-MS
+
+                            case 5005707: //Naviraí-MS
                                 proninService = new NaviraiMS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
+                            case 4314423: //Picada Café-RS
+                                proninService = new PicadaCafeRS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
                             default:
