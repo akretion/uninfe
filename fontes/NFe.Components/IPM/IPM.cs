@@ -96,6 +96,14 @@ namespace NFSe.Components
 
                 case 4211801: // Ouro-SC
                     return 8231;
+
+                case 4119152: // Pinhais-PR
+                    return 5453;
+
+                case 4127205: // Terra Boa - PR
+
+                case 4313508: // Osório-RS 
+                    return 8773;
             }
 
             return 0;

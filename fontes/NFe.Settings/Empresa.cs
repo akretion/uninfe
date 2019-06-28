@@ -202,6 +202,11 @@ namespace NFe.Settings
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool CriarFilaProcesamento { get; set; }
+
+        /// <summary>
+        /// Se verdadeiro, só irá salvar o xml de distribuição na pasta de autorizados
+        /// </summary>
+        public bool SalvarSomenteXMLDistribuicao { get; set; }
         #endregion
 
         #region Propriedades da parte das configurações por empresa
@@ -415,6 +420,9 @@ namespace NFe.Settings
 
         [AttributeTipoAplicacao(TipoAplicativo.SAT)]
         public IndRatISSQN IndRatISSQNSAT { get; set; }
+
+        [AttributeTipoAplicacao(TipoAplicativo.SAT)]
+        public string VersaoLayoutSAT { get; set; }
 
         /// <summary>
         /// Código da aplicação que está cadastrada para acessar os serviços REST do município de Florianópolis-SC

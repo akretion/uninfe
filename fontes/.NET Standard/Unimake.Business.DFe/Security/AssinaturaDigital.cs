@@ -1,0 +1,160 @@
+﻿using System;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Xml;
+using System.Xml;
+
+namespace Unimake.Business.DFe.Security
+{
+    public delegate void CryptographicExceptionHandler(object sender, EventArgs args);
+
+    public enum AlgorithmType
+    {
+        Sha1,
+        Sha256
+    }
+
+    /// <summary>
+    /// Classe para fazer assinatura digital de XMLs
+    /// </summary>
+    public class AssinaturaDigital
+    {
+        /// <summary>
+        /// Assinar digitalmente o XML
+        /// </summary>
+        /// <param name="conteudoXML">XML a ser assinado</param>
+        /// <param name="tagAssinatura">Nome da tag a ser assinada</param>
+        /// <param name="tagAtributoId">Nome da tag que possui o ID para referencia na URI da assinatura</param>
+        /// <param name="x509Cert">Certificado digital a ser utilizado na assinatura</param>
+        /// <param name="algorithmType">Tipo de algorítimo a ser utilizado na assinatura</param>
+        /// <param name="definirURI">Define o Reference.URI na assinatura</param>
+        /// <param name="pinCertificado">PIN do certificado digital, quando do tipo A3</param>
+        public void Assinar(XmlDocument conteudoXML,
+            string tagAssinatura,
+            string tagAtributoId,
+            X509Certificate2 x509Cert,
+            AlgorithmType algorithmType = AlgorithmType.Sha1,
+            bool definirURI = true,
+            string pinCertificado = "")
+        {
+            try
+            {
+                //TODO: WANDREY - Tenho que voltar este código depois que acabar a conversão para .NET Standard
+                //if (x509Cert == null)
+                //{
+                //    throw new ExceptionCertificadoDigital();
+                //}
+
+                if (conteudoXML.GetElementsByTagName(tagAssinatura).Count == 0)
+                {
+                    throw new Exception("A tag de assinatura " + tagAssinatura.Trim() + " não existe no XML. (Código do Erro: 5)");
+                }
+                else if (conteudoXML.GetElementsByTagName(tagAtributoId).Count == 0)
+                {
+                    throw new Exception("A tag de assinatura " + tagAtributoId.Trim() + " não existe no XML. (Código do Erro: 4)");
+                }
+                else
+                {
+                    XmlNodeList lists = conteudoXML.GetElementsByTagName(tagAssinatura);
+
+                    foreach (XmlNode nodes in lists)
+                    {
+                        foreach (XmlNode childNodes in nodes.ChildNodes)
+                        {
+                            if (!childNodes.Name.Equals(tagAtributoId))
+                            {
+                                continue;
+                            }
+
+                            // Create a reference to be signed
+                            Reference reference = new Reference
+                            {
+                                Uri = ""
+                            };
+
+                            // pega o uri que deve ser assinada
+                            XmlElement childElemen = (XmlElement)childNodes;
+
+                            if (definirURI)
+                            {
+                                if (childElemen.GetAttributeNode("Id") != null)
+                                {
+                                    reference.Uri = "#" + childElemen.GetAttributeNode("Id").Value;
+                                }
+                                else if (childElemen.GetAttributeNode("id") != null)
+                                {
+                                    reference.Uri = "#" + childElemen.GetAttributeNode("id").Value;
+                                }
+                            }
+
+                            // Create a SignedXml object.
+                            SignedXml signedXml = new SignedXml(conteudoXML);
+
+                            //Para certificado A3, vamos carregar o PIN para não ficar solicitando.
+                            if (!string.IsNullOrWhiteSpace(pinCertificado))
+                            {
+                                x509Cert.SetPinPrivateKey(pinCertificado);
+                            }
+
+                            if (algorithmType.Equals(AlgorithmType.Sha256))
+                            {
+                                signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
+                                signedXml.SigningKey = x509Cert.GetRSAPrivateKey();
+                            }
+
+                            if (algorithmType.Equals(AlgorithmType.Sha1))
+                            {
+                                signedXml.SigningKey = x509Cert.PrivateKey;
+                            }
+
+                            // Add an enveloped transformation to the reference.
+                            reference.AddTransform(new XmlDsigEnvelopedSignatureTransform());
+                            reference.AddTransform(new XmlDsigC14NTransform());
+
+                            // Add the reference to the SignedXml object.
+                            signedXml.AddReference(reference);
+
+                            if (algorithmType.Equals(AlgorithmType.Sha256))
+                            {
+                                reference.DigestMethod = "http://www.w3.org/2001/04/xmlenc#sha256";
+                            }
+
+                            // Create a new KeyInfo object
+                            KeyInfo keyInfo = new KeyInfo();
+
+                            // Load the certificate into a KeyInfoX509Data object
+                            // and add it to the KeyInfo object.
+                            keyInfo.AddClause(new KeyInfoX509Data(x509Cert));
+
+                            // Add the KeyInfo object to the SignedXml object.
+                            signedXml.KeyInfo = keyInfo;
+                            signedXml.ComputeSignature();
+
+                            // Get the XML representation of the signature and save
+                            // it to an XmlElement object.
+                            XmlElement xmlDigitalSignature = signedXml.GetXml();
+
+                            // Gravar o elemento no documento XML
+                            nodes.AppendChild(conteudoXML.ImportNode(xmlDigitalSignature, true));
+                        }
+                    }
+                }
+            }
+            catch (CryptographicException ex)
+            {
+                if (x509Cert.IsA3())
+                {
+                    throw new Exception("O certificado deverá ser reiniciado.\r\n Retire o certificado.\r\nAguarde o LED terminar de piscar.\r\n Recoloque o certificado e informe o PIN novamente.\r\n" + ex.ToString());// #12342 concatenar com a mensagem original
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+    }
+}

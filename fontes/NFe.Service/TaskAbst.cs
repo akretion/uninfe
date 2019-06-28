@@ -2582,7 +2582,7 @@ namespace NFe.Service
                 AssinaturaDigital assDig = new AssinaturaDigital();
                 assDig.Assinar(conteudoXML, emp, Convert.ToInt32(dadosNFe.cUF));
 
-                //Adicionar a tag do QRCode
+                #region Adicionar a tag do QrCode no NFCe
                 if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].IdentificadorCSC) && dadosNFe.mod == "65")
                 {
                     if (Empresas.Configuracoes[emp].URLConsultaDFe == null)
@@ -2597,7 +2597,7 @@ namespace NFe.Service
                         }
                     }
 
-                    QRCode qrCode = new QRCode(conteudoXML);
+                    QRCodeNFCe qrCode = new QRCodeNFCe(conteudoXML);
 
                     string url;
 
@@ -2614,6 +2614,16 @@ namespace NFe.Service
 
                     qrCode.GerarLinkConsulta(url, Empresas.Configuracoes[emp].IdentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, linkUFManual);
                 }
+                #endregion
+                #region Adicionar a tag do QrCode no MDFe
+                else if (dadosNFe.mod == "58") // MDFe
+                {
+                    QRCodeMDFe qrCodeMDFe = new QRCodeMDFe(conteudoXML);
+                    qrCodeMDFe.MontarLinkQRCode();
+                }
+                #endregion
+
+                //Adicionar q tag do QRCode MDFe
 
                 // Validar o Arquivo XML da NFe com os Schemas se estiver assinado
                 ValidarXML validar = new ValidarXML(conteudoXML, Convert.ToInt32(dadosNFe.cUF), false);
@@ -3168,7 +3178,9 @@ namespace NFe.Service
                         cMunicipio == 3554300 ||
                         cMunicipio == 3542404 ||
                         cMunicipio == 5005707 ||
-                        cMunicipio == 4314423)
+                        cMunicipio == 4314423 ||
+                        cMunicipio == 3511102 ||
+                        cMunicipio == 3535804)
                     {
                         retorno = false;
                     }

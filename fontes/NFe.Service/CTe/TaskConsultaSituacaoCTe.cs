@@ -297,7 +297,14 @@ namespace NFe.Service
                                             if (!(NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoCTe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.CTe).EnvioXML)))
                                             {
                                                 //Mover a NFE da pasta de NFE em processamento para NFe Autorizada
-                                                TFunctions.MoverArquivo(strArquivoCTe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+                                                if (!Empresas.Configuracoes[emp].SalvarSomenteXMLDistribuicao)
+                                                {
+                                                    TFunctions.MoverArquivo(strArquivoCTe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+                                                }
+                                                else
+                                                {
+                                                    TFunctions.MoverArquivo(strArquivoCTe, PastaEnviados.Originais, oLerXml.oDadosNfe.dEmi);
+                                                }
                                             }
                                             else
                                             {

@@ -36,7 +36,8 @@ namespace NFe.UI
             _tpEmpresa_cert,
             _tpEmpresa_ftp,
             _tpEmpresa_sat,
-            _tpEmpresa_resptecnico;
+            _tpEmpresa_resptecnico,
+            _tpEmpresa_outrasconfiguracoes;
 
         private string empcnpj = "";
         private TipoAplicativo servico;
@@ -49,6 +50,7 @@ namespace NFe.UI
         public Formularios.UserConfiguracaoPastas uce_pastas;
         private Formularios.userConfiguracao_sat uce_sat;
         private Formularios.userConfiguracao_resptecnico uce_resptecnico;
+        private Formularios.userConfiguracao_outrasconfiguracoes uce_outrasconfiguracoes;
         private Empresa currentEmpresa;
         private TipoAplicativo servicoCurrent;
 
@@ -117,12 +119,12 @@ namespace NFe.UI
                     tpage.Controls.Add(uce_resptecnico);
                     break;
 
-                    /*
-                    tpage.Text = "Responsável Técnico";
-                    uce_resptecnico = new Formularios.userConfiguracao_resptecnico();
-                    uce_resptecnico.changeEvent += changed_Modificado;
-                    tpage.Controls.Add(uce_resptecnico);
-                    */
+                case 7:
+                    tpage.Text = "Outras Configurações";
+                    uce_outrasconfiguracoes = new Formularios.userConfiguracao_outrasconfiguracoes();
+                    uce_outrasconfiguracoes.changeEvent += changed_Modificado;
+                    tpage.Controls.Add(uce_outrasconfiguracoes);
+                    break;
             }
             tpage.Controls[tpage.Controls.Count - 1].Dock = DockStyle.Fill;
 
@@ -167,6 +169,7 @@ namespace NFe.UI
                     if (_e.TabPage == _tpEmpresa_danfe) uce_danfe.FocusFirstControl();
                     if (_e.TabPage == _tpEmpresa_sat) uce_sat.FocusFirstControl();
                     if (_e.TabPage == _tpEmpresa_resptecnico) uce_resptecnico.FocusFirstControl();
+                    if (_e.TabPage == _tpEmpresa_outrasconfiguracoes) uce_outrasconfiguracoes.FocusFirstControl();
                 };
 
                 tc_main.SelectedIndex = 1;
@@ -195,6 +198,7 @@ namespace NFe.UI
                 tc_empresa.TabPages.Add(_tpEmpresa_danfe = createtpage(4));
                 tc_empresa.TabPages.Add(_tpEmpresa_sat = createtpage(5));
                 tc_empresa.TabPages.Add(_tpEmpresa_resptecnico = createtpage(6));
+                tc_empresa.TabPages.Add(_tpEmpresa_outrasconfiguracoes = createtpage(7));
                 uc_geral = new Formularios.userConfiguracao_geral();
                 tpGeral.Controls.Add(uc_geral);
             }
@@ -204,7 +208,7 @@ namespace NFe.UI
 
             cbEmpresas.SelectedIndexChanged -= cbEmpresas_SelectedIndexChanged;
             cbEmpresas.DataSource = null;
-            cbEmpresas.DisplayMember = NFe.Components.NFeStrConstants.Nome;
+            cbEmpresas.DisplayMember = NFeStrConstants.Nome;
             cbEmpresas.ValueMember = "Key";
             cbEmpresas.DataSource = Auxiliar.CarregaEmpresa(false);
             btnExcluir.Visible = cbEmpresas.Items.Count > 0;
@@ -544,11 +548,14 @@ namespace NFe.UI
                         break;
                     case TipoAplicativo.Nfe:
                     case TipoAplicativo.NFCe:
+                    case TipoAplicativo.Cte:
+                    case TipoAplicativo.MDFe:
                     case TipoAplicativo.Todos:
                         uce_cert.Validar();
                         uce_ftp.Validar();
                         uce_danfe.Validar();
                         uce_resptecnico.Validar();
+                        uce_outrasconfiguracoes.Validar();
                         break;
                     default:
                         uce_cert.Validar();
@@ -861,6 +868,7 @@ namespace NFe.UI
                     _tpEmpresa_danfe.Parent = null;
                     _tpEmpresa_sat.Parent = null;
                     _tpEmpresa_resptecnico.Parent = null;
+                    _tpEmpresa_outrasconfiguracoes.Parent = null;
                     break;
                 case TipoAplicativo.SAT:
                     uce_divs.Populate(empresa, novaempresa);
@@ -871,6 +879,7 @@ namespace NFe.UI
                     _tpEmpresa_sat.Parent = tc_empresa;
                     _tpEmpresa_cert.Parent = null;
                     _tpEmpresa_resptecnico.Parent = null;
+                    _tpEmpresa_outrasconfiguracoes.Parent = null;
                     break;
                 case TipoAplicativo.EFDReinf:
                 case TipoAplicativo.eSocial:
@@ -883,9 +892,12 @@ namespace NFe.UI
                     _tpEmpresa_danfe.Parent = null;
                     _tpEmpresa_sat.Parent = null;
                     _tpEmpresa_resptecnico.Parent = null;
+                    _tpEmpresa_outrasconfiguracoes.Parent = null;
                     break;
                 case TipoAplicativo.Nfe:
                 case TipoAplicativo.NFCe:
+                case TipoAplicativo.Cte:
+                case TipoAplicativo.MDFe:
                 case TipoAplicativo.Todos:
                     uce_divs.Populate(empresa, novaempresa);
                     uce_pastas.Populate(empresa);
@@ -893,10 +905,13 @@ namespace NFe.UI
                     uce_ftp.Populate(empresa);
                     uce_danfe.Populate(empresa);
                     uce_resptecnico.Populate(empresa);
+                    uce_outrasconfiguracoes.Populate(empresa);
                     _tpEmpresa_cert.Parent = tc_empresa;
                     _tpEmpresa_ftp.Parent = tc_empresa;
                     _tpEmpresa_danfe.Parent = tc_empresa;
                     _tpEmpresa_resptecnico.Parent = tc_empresa;
+                    _tpEmpresa_outrasconfiguracoes.Parent = null;
+                    _tpEmpresa_outrasconfiguracoes.Parent = tc_empresa;
                     _tpEmpresa_sat.Parent = null;
                     break;
                 default:
@@ -910,6 +925,7 @@ namespace NFe.UI
                     _tpEmpresa_danfe.Parent = tc_empresa;
                     _tpEmpresa_sat.Parent = null;
                     _tpEmpresa_resptecnico.Parent = null;
+                    _tpEmpresa_outrasconfiguracoes.Parent = null;
                     break;
             }
         }

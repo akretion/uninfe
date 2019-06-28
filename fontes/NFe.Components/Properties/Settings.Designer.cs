@@ -12,7 +12,7 @@ namespace NFe.Components.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.1.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -2167,6 +2167,87 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PPicadaCafeRS_NFSeIntegracao {
             get {
                 return ((string)(this["NFe_Components_PPicadaCafeRS_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://nfse.catanduva.sp.gov.br/NFSe.Portal.Integracao.Teste/Services.svc")]
+        public string NFe_Components_HCatanduvaSP_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_HCatanduvaSP_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://nfse.catanduva.sp.gov.br/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PCatanduvaSP_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PCatanduvaSP_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://cidadaoonline.jales.sp.gov.br/amfphp/services/RLZ/webservice/server.php")]
+        public string NFe_Components_PJalesSP_Webservice_Prefeitura {
+            get {
+                return ((string)(this["NFe_Components_PJalesSP_Webservice_Prefeitura"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://saturno.rlz.com.br:3080/amfphp/services/RLZ/webservice/jales.php")]
+        public string NFe_Components_HJalesSP_Webservice_Prefeitura {
+            get {
+                return ((string)(this["NFe_Components_HJalesSP_Webservice_Prefeitura"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://187.92.100.222/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PParanapanemaSP_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PParanapanemaSP_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://187.92.100.222/NFSe.Portal.Integracao.Teste/Services.svc")]
+        public string NFe_Components_HParanapanemaSP_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_HParanapanemaSP_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.gp.srv.br/tributario_homologacao/servlet/anfse_web_service")]
+        public string NFe_Components_HRondonopolisMT_nfse_web_service {
+            get {
+                return ((string)(this["NFe_Components_HRondonopolisMT_nfse_web_service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://intranet.rondonopolis.mt.gov.br/tributario_rondonopolis/servlet/anfse_web" +
+            "_service")]
+        public string NFe_Components_PRondonopolisMT_nfse_web_service {
+            get {
+                return ((string)(this["NFe_Components_PRondonopolisMT_nfse_web_service"]));
             }
         }
     }

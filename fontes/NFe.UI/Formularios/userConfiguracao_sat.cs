@@ -37,6 +37,7 @@ namespace NFe.UI.Formularios
             ckConversaoNFCe.Checked = empresa.UtilizaConversaoCFe;
             cbRegTribISSQN.SelectedValue = (int)empresa.RegTribISSQNSAT;
             cbindRatISSQN.SelectedValue = (int)empresa.IndRatISSQNSAT;
+            comboVersaoLayout.SelectedItem = empresa.VersaoLayoutSAT;
 
             lblCNPJSw.Visible =
                 txtCNPJSw.Visible =
@@ -47,7 +48,10 @@ namespace NFe.UI.Formularios
                 cbindRatISSQN.Visible =
                 cbRegTribISSQN.Visible =
                 lblNumeroCaixa.Visible =
-                txtNumeroCaixa.Visible = ckConversaoNFCe.Checked;
+                txtNumeroCaixa.Visible = 
+                lblVersaoLayout.Visible = 
+                comboVersaoLayout.Visible =
+                ckConversaoNFCe.Checked;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -71,6 +75,7 @@ namespace NFe.UI.Formularios
             empresa.NumeroCaixa = txtNumeroCaixa.Text;
             empresa.RegTribISSQNSAT = (RegTribISSQN)cbRegTribISSQN.SelectedValue;
             empresa.IndRatISSQNSAT = (IndRatISSQN)cbindRatISSQN.SelectedValue;
+            empresa.VersaoLayoutSAT = comboVersaoLayout.SelectedItem.ToString();
         }
 
         public void FocusFirstControl()
@@ -107,7 +112,12 @@ namespace NFe.UI.Formularios
                 cbindRatISSQN.Visible =
                 cbRegTribISSQN.Visible =
                 lblNumeroCaixa.Visible =
-                txtNumeroCaixa.Visible = ckConversaoNFCe.Checked;
+                txtNumeroCaixa.Visible = 
+                lblVersaoLayout.Visible =
+                comboVersaoLayout.Visible =
+                ckConversaoNFCe.Checked;
+
+            comboVersaoLayout.SelectedItem = "0.07";
         }
 
         private void txtSignAC_TextChanged(object sender, EventArgs e)
@@ -131,6 +141,11 @@ namespace NFe.UI.Formularios
         }
 
         private void txtNumeroCaixa_TextChanged(object sender, EventArgs e)
+        {
+            changeEvent?.Invoke(sender, e);
+        }
+
+        private void ComboVersaoLayout_SelectedIndexChanged(object sender, EventArgs e)
         {
             changeEvent?.Invoke(sender, e);
         }

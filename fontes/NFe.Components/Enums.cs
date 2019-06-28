@@ -16,7 +16,8 @@ namespace NFe.Components
     {
         EmProcessamento,
         Autorizados,
-        Denegados
+        Denegados,
+        Originais
     }
 
     #endregion SubPastas da pasta de enviados

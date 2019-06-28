@@ -86,10 +86,10 @@ namespace NFe.SAT.Conversao
             {
                 infCFe = new envCFeCFeInfCFe
                 {
-                    versaoDadosEnt = "0.07",
+                    versaoDadosEnt = DadosEmpresa.VersaoLayoutSAT,
                     ide = new envCFeCFeInfCFeIde
                     {
-                        CNPJ = DadosEmpresa.CNPJSoftwareHouse.Replace(".", "").Replace("/", ""),
+                        CNPJ = DadosEmpresa.CNPJSoftwareHouse.Replace(".", "").Replace("/", "").Replace("-", ""),
                         signAC = DadosEmpresa.SignACSAT,
                         numeroCaixa = DadosEmpresa.NumeroCaixa.Substring(0, 3)
                     },
@@ -559,10 +559,17 @@ namespace NFe.SAT.Conversao
         /// <returns></returns>
         private string GetDocumentoPessoa(string parentTag)
         {
-            string result = GetValueXML("dest", "CPF");
+            string result = GetValueXML("dest", "CNPJ");
 
-            if (String.IsNullOrEmpty(result))
-                result = GetValueXML("dest", "CNPJ");
+            if (!String.IsNullOrEmpty(result))
+                result = result.PadLeft(14, '0');
+            else
+            {
+                result = GetValueXML("dest", "CPF");
+
+                if (DadosEmpresa.VersaoLayoutSAT == "0.08") 
+                    result = result.PadLeft(11, '0');
+            }
 
             return result;
         }

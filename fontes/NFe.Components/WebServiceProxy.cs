@@ -174,8 +174,10 @@ namespace NFe.Components
                                     cMunicipio == 3554300 ||
                                     cMunicipio == 3542404 ||
                                     cMunicipio == 5005707 ||
-                                    cMunicipio == 4314423)
-                                    return "BasicHttpBinding_INFSEGeracao";                                            
+                                    cMunicipio == 4314423 ||
+                                    cMunicipio == 3511102 ||
+                                    cMunicipio == 3535804)
+                                    return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
 
@@ -190,7 +192,9 @@ namespace NFe.Components
                                     cMunicipio == 3554300 ||
                                     cMunicipio == 3542404 ||
                                     cMunicipio == 5005707 ||
-                                    cMunicipio == 4314423)
+                                    cMunicipio == 4314423 ||
+                                    cMunicipio == 3511102 ||
+                                    cMunicipio == 3535804)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -203,7 +207,9 @@ namespace NFe.Components
                                     cMunicipio == 3556602 ||
                                     cMunicipio == 4308904 ||
                                     cMunicipio == 5005707 ||
-                                    cMunicipio == 4314423)
+                                    cMunicipio == 4314423 ||
+                                    cMunicipio == 3511102 ||
+                                    cMunicipio == 3535804)
                                     return "BasicHttpBinding_INFSEConsultas";
                                 else
                                     return "basic_INFSEConsultas";
@@ -1230,7 +1236,7 @@ namespace NFe.Components
         /// </summary>
         public string ConsultarStatusNFse { get; set; }
 
-		/// <summary>
+        /// <summary>
         /// Consultar as NFS-e tomados
         /// </summary>
         public string ConsultaNFSeTomados { get; set; }

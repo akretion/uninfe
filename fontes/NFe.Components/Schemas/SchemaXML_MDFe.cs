@@ -126,6 +126,21 @@
 
             #endregion XML de Evento de Inclusão de Condutor
 
+            #region XML de Evento de Inclusão de Condutor
+
+            SchemaXML.InfSchemas.Add("NFE-eventoMDFe110115", new InfSchema()
+            {
+                Tag = "eventoMDFe",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "MDFe\\eventoMDFe_v{0}.xsd",
+                Descricao = "XML de evento de encerramento do MDF-e",
+                TagAssinatura = "eventoMDFe",
+                TagAtributoId = "infEvento",
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_MDFE
+            });
+
+            #endregion XML de Evento de Inclusão de Condutor
+
             #region XML de Eventos Gerais do MDFe
 
             SchemaXML.InfSchemas.Add("NFE-eventoMDFe310620", new InfSchema()

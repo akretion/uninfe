@@ -337,7 +337,14 @@ namespace NFe.Service
                                             //Para envitar falhar, tenho que mover primeiro o XML de distribuição (-procCTe.xml) para
                                             //depois mover o da nfe (-cte.xml), pois se ocorrer algum erro, tenho como reconstruir o cenário.
                                             //assim sendo não inverta as posições. Wandrey 08/10/2009
-                                            TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+                                            if (!Empresas.Configuracoes[emp].SalvarSomenteXMLDistribuicao)
+                                            {
+                                                TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+                                            }
+                                            else
+                                            {
+                                                TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Originais, oLerXml.oDadosNfe.dEmi);
+                                            }
 
                                             //Disparar a geração/impressao do UniDanfe. 03/02/2010 - Wandrey
                                             try

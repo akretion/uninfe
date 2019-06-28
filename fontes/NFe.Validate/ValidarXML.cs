@@ -38,7 +38,7 @@ namespace NFe.Validate
         /// <summary>
         /// Pasta dos schemas para validação do XML
         /// </summary>
-        private string PastaSchema = Propriedade.PastaSchemas;
+        private readonly string PastaSchema = Propriedade.PastaSchemas;
 
         private string cErro;
 
@@ -86,7 +86,9 @@ namespace NFe.Validate
                                     else
                                     {
                                         if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado == null)
+                                        {
                                             throw new Exceptions.ExceptionCertificadoDigital(ErroPadrao.CertificadoNaoEncontrado);
+                                        }
 
                                         sh1 = Criptografia.SignWithRSASHA1(Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado,
                                                 rpsElement.GetElementsByTagName(Assinatura)[0].InnerText);
@@ -96,7 +98,9 @@ namespace NFe.Validate
                             }
                         }
                         if (!found)
+                        {
                             throw new Exception("Não foi possivel encontrar a tag <RPS><" + Assinatura + ">");
+                        }
                     }
                     else if (arquivoXML.EndsWith(NFe.Components.Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, StringComparison.InvariantCultureIgnoreCase) &&
                             !TipoArqXml.cArquivoSchema.Contains("DSF"))
@@ -114,7 +118,9 @@ namespace NFe.Validate
                                 if (detalheElement.GetElementsByTagName(AssinaturaCancelamento)[0].InnerText.Length == 20)
                                 {
                                     if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].X509Certificado == null)
+                                    {
                                         throw new Exceptions.ExceptionCertificadoDigital(ErroPadrao.CertificadoNaoEncontrado);
+                                    }
 
                                     bSave = true;
                                     //Encryptar a tag Assinatura
@@ -126,11 +132,15 @@ namespace NFe.Validate
                             }
                         }
                         if (!found)
+                        {
                             throw new Exception("Não foi possivel encontrar a tag <Detalhe><" + AssinaturaCancelamento + ">");
+                        }
                     }
                     //Salvar o XML com as alterações efetuadas
                     if (bSave)
+                    {
                         doc.Save(arquivoXML);
+                    }
                 }
             }
         }
@@ -189,24 +199,32 @@ namespace NFe.Validate
 
                     EncryptAssinatura(rotaArqXML);    //danasa: 12/2013
 
-                    XmlReaderSettings settings = new XmlReaderSettings();
-                    settings.ValidationType = ValidationType.Schema;
+                    XmlReaderSettings settings = new XmlReaderSettings
+                    {
+                        ValidationType = ValidationType.Schema
+                    };
 
                     XmlSchemaSet schemas = new XmlSchemaSet();
                     settings.Schemas = schemas;
 
                     /* Se dentro do XSD houver referência a outros XSDs externos, pode ser necessário ter certas permissões para localizá-lo.
                      * Usa um "Resolver" com as credencias-padrão para obter esse recurso externo. */
-                    XmlUrlResolver resolver = new XmlUrlResolver();
-                    resolver.Credentials = System.Net.CredentialCache.DefaultCredentials;
+                    XmlUrlResolver resolver = new XmlUrlResolver
+                    {
+                        Credentials = System.Net.CredentialCache.DefaultCredentials
+                    };
                     /* Informa à configuração de leitura do XML que deve usar o "Resolver" criado acima e que a validação deve respeitar
                      * o esquema informado no início. */
                     settings.XmlResolver = resolver;
 
                     if (TipoArqXml.TargetNameSpace != string.Empty)
+                    {
                         schemas.Add(TipoArqXml.TargetNameSpace, TipoArqXml.cArquivoSchema);
+                    }
                     else
+                    {
                         schemas.Add(NFeStrConstants.NAME_SPACE_NFE, TipoArqXml.cArquivoSchema);
+                    }
 
                     settings.ValidationEventHandler += new ValidationEventHandler(reader_ValidationEventHandler);
 
@@ -227,7 +245,9 @@ namespace NFe.Validate
                 catch (Exception ex)
                 {
                     if (xmlReader != null)
+                    {
                         xmlReader.Close();
+                    }
 
                     cErro = ex.Message + "\r\n";
                 }
@@ -338,7 +358,7 @@ namespace NFe.Validate
         {
             int emp = Empresas.FindEmpresaByThread();
 
-            Boolean Assinou = true;
+            bool Assinou = true;
 
             //Assinar o XML se tiver tag para assinar
             AssinaturaDigital oAD = new AssinaturaDigital();
@@ -408,18 +428,22 @@ namespace NFe.Validate
 
                 if (Arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioXML, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].IdentificadorCSC))
+                    if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].IdentificadorCSC))
                     {
                         conteudoXML.Load(Arquivo);
 
-                        QRCode qrCode = new QRCode(conteudoXML);
+                        QRCodeNFCe qrCode = new QRCodeNFCe(conteudoXML);
 
                         string url;
                         string versao = string.Empty;
                         if (((XmlElement)conteudoXML.GetElementsByTagName(conteudoXML.DocumentElement.Name)[0]).Attributes[TpcnResources.versao.ToString()] != null)
+                        {
                             versao = ((XmlElement)conteudoXML.GetElementsByTagName(conteudoXML.DocumentElement.Name)[0]).Attributes[TpcnResources.versao.ToString()].Value;
+                        }
                         else if (((XmlElement)conteudoXML.GetElementsByTagName(conteudoXML.DocumentElement.FirstChild.Name)[0]).Attributes[TpcnResources.versao.ToString()] != null)
+                        {
                             versao = ((XmlElement)conteudoXML.GetElementsByTagName(conteudoXML.DocumentElement.FirstChild.Name)[0]).Attributes[TpcnResources.versao.ToString()].Value;
+                        }
 
                         if (versao == "4.00")
                         {
@@ -439,8 +463,20 @@ namespace NFe.Validate
                         sw.Close();
                     }
                 }
+                #endregion
+                #region Adicionar a tag do QrCode no MDFe
+                else if (Arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    conteudoXML.Load(Arquivo);
 
-                #endregion Adicionar a tag do qrCode na NFCe
+                    QRCodeMDFe qrCodeMDFe = new QRCodeMDFe(conteudoXML);
+                    qrCodeMDFe.MontarLinkQRCode();
+
+                    StreamWriter sw = File.CreateText(Arquivo);
+                    sw.Write(conteudoXML.OuterXml);
+                    sw.Close();
+                }
+                #endregion
 
                 // Validar o Arquivo XML
                 if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
@@ -464,14 +500,14 @@ namespace NFe.Validate
 
                             Functions.Move(Arquivo, ArquivoNovo);
 
-                            this.GravarXMLRetornoValidacao(Arquivo, "1", "XML assinado e validado com sucesso.");
+                            GravarXMLRetornoValidacao(Arquivo, "1", "XML assinado e validado com sucesso.");
                         }
                     }
                     catch (Exception ex)
                     {
                         try
                         {
-                            this.GravarXMLRetornoValidacao(Arquivo, "4", "Ocorreu um erro ao validar o XML: " + ex.Message);
+                            GravarXMLRetornoValidacao(Arquivo, "4", "Ocorreu um erro ao validar o XML: " + ex.Message);
                             new Auxiliar().MoveArqErro(Arquivo);
                         }
                         catch
@@ -488,14 +524,14 @@ namespace NFe.Validate
                         ///
                         /// OPS!!! Arquivo de NFS-e enviado p/ a pasta de validação, mas não existe definicao de schemas p/ sua validacao
                         ///
-                        this.GravarXMLRetornoValidacao(Arquivo, "1", "XML não validado contra o schema da prefeitura. XML: " + TipoArqXml.cRetornoTipoArq);
+                        GravarXMLRetornoValidacao(Arquivo, "1", "XML não validado contra o schema da prefeitura. XML: " + TipoArqXml.cRetornoTipoArq);
                         new Auxiliar().MoveArqErro(Arquivo);
                     }
                     else
                     {
                         try
                         {
-                            this.GravarXMLRetornoValidacao(Arquivo, "5", "Ocorreu um erro ao validar o XML: " + TipoArqXml.cRetornoTipoArq);
+                            GravarXMLRetornoValidacao(Arquivo, "5", "Ocorreu um erro ao validar o XML: " + TipoArqXml.cRetornoTipoArq);
                             new Auxiliar().MoveArqErro(Arquivo);
                         }
                         catch
@@ -528,7 +564,7 @@ namespace NFe.Validate
             //Definir o nome do arquivo de retorno
             string ArquivoRetorno = Functions.ExtrairNomeArq(Arquivo, ".xml") + "-ret.xml";
 
-            var xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
+            XDocument xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
                 new XElement("Validacao",
                 new XElement(TpcnResources.cStat.ToString(), cStat),
                 new XElement(TpcnResources.xMotivo.ToString(), xMotivo)));
@@ -539,15 +575,15 @@ namespace NFe.Validate
 
         public void ValidarInformacaoContingencia(XmlDocument conteudoXML)
         {
-            var tipoServico = conteudoXML.DocumentElement.Name;
+            string tipoServico = conteudoXML.DocumentElement.Name;
 
-            if (!String.IsNullOrEmpty(tipoServico))
+            if (!string.IsNullOrEmpty(tipoServico))
             {
                 if (tipoServico.Equals("NFe") || tipoServico.Equals("CTe"))
                 {
-                    var tipoEmissao = conteudoXML.GetElementsByTagName("tpEmis")[0]?.InnerText;
+                    string tipoEmissao = conteudoXML.GetElementsByTagName("tpEmis")[0]?.InnerText;
 
-                    if (!String.IsNullOrEmpty(tipoEmissao))
+                    if (!string.IsNullOrEmpty(tipoEmissao))
                     {
                         TipoEmissao tpEmissao = (TipoEmissao)Convert.ToInt32(tipoEmissao);
 
@@ -557,11 +593,14 @@ namespace NFe.Validate
                             case TipoEmissao.teEPEC:
                             case TipoEmissao.teFSDA:
                             case TipoEmissao.teOffLine:
-                                var dhCont = conteudoXML.GetElementsByTagName("dhCont")[0]?.InnerText;
-                                var xJust = conteudoXML.GetElementsByTagName("xJust")[0]?.InnerText;
+                                string dhCont = conteudoXML.GetElementsByTagName("dhCont")[0]?.InnerText;
+                                string xJust = conteudoXML.GetElementsByTagName("xJust")[0]?.InnerText;
 
-                                if (String.IsNullOrEmpty(dhCont) || String.IsNullOrEmpty(xJust))
+                                if (string.IsNullOrEmpty(dhCont) || string.IsNullOrEmpty(xJust))
+                                {
                                     throw new Exception("XML em contingência e não foi informado a data, hora e justificativa da entrada em contingência, tags <dhCont> e <xJust>.");
+                                }
+
                                 break;
                         }
                     }

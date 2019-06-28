@@ -30,6 +30,9 @@ namespace NFe.Components.RLZ_INFORMATICA
                             case 3546603: //Santa Fé do Sul-SP
                                 rlz_informaticaService = new NFe.Components.RLZ_INFORMATICA.SantaFeDoSul.h.Rlz_InformaticaH(tpAmb, PastaRetorno);
                                 break;
+                            case 3524808: //Jales - SP
+                                rlz_informaticaService = new NFe.Components.RLZ_INFORMATICA.Jales.h.Rlz_InformaticaH(tpAmb, PastaRetorno);
+                                break;
 
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
@@ -40,6 +43,10 @@ namespace NFe.Components.RLZ_INFORMATICA
                             case 3546603: //Santa Fé do Sul-SP
                                 rlz_informaticaService = new NFe.Components.RLZ_INFORMATICA.SantaFeDoSul.p.Rlz_InformaticaP(tpAmb, PastaRetorno);
                                 break;
+                            case 3524808: //Jales - SP
+                                rlz_informaticaService = new NFe.Components.RLZ_INFORMATICA.Jales.p.Rlz_InformaticaP(tpAmb, PastaRetorno);
+                                break;
+
 
                             default:
                                 throw new Exceptions.ServicoInexistenteException();

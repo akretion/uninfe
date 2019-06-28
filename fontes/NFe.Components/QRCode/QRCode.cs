@@ -5,19 +5,13 @@ using System.Xml;
 
 namespace NFe.Components.QRCode
 {
-    public class QRCode
+    public class QRCodeNFCe : QRCodeBase
     {
         #region Propriedades
 
-        #region Proriedades de resultado do processamento
-
-        public XmlDocument ConteudoXML;
-
-        #endregion Proriedades de resultado do processamento
-
         #region Recupera dados do XML da NFCe
 
-        private string CNPJ { get; set; }        
+        private string CNPJ { get; set; }
         private string CPF { get; set; }
         private string tpEmis { get; set; }
         private string idEstrangeiro { get; set; }
@@ -46,7 +40,7 @@ namespace NFe.Components.QRCode
         /// Construtor
         /// </summary>
         /// <param name="conteudoXML">Conteúdo do XML</param>
-        public QRCode(XmlDocument conteudoXML)
+        public QRCodeNFCe(XmlDocument conteudoXML)
         {
             ConteudoXML = conteudoXML;
         }
@@ -65,13 +59,17 @@ namespace NFe.Components.QRCode
         public void GerarLinkConsulta(string linkUF, string identificadorCSC, string tokenCSC, string linkUFManual)
         {
             if (!CalcularLink())
+            {
                 return;
+            }
 
             Populate();
 
             int versaoQRCode = 2;
             if (File.Exists(Propriedade.PastaExecutavel + "\\gerar_qrcode_100.txt"))
-                versaoQRCode = 1;            
+            {
+                versaoQRCode = 1;
+            }
 
             if (versaoQRCode.Equals(2))
             {
@@ -101,7 +99,7 @@ namespace NFe.Components.QRCode
                 ParametrosQR = "chNFe=" + ChaveAcesso +
                     "&nVersao=100" +
                     "&tpAmb=" + TpAmb +
-                    (String.IsNullOrEmpty(CNPJ) ? (String.IsNullOrEmpty(CPF) ? (String.IsNullOrEmpty(idEstrangeiro) ? "" : "&cDest=" + idEstrangeiro) : "&cDest=" + CPF) : "&cDest=" + CNPJ) +
+                    (string.IsNullOrEmpty(CNPJ) ? (string.IsNullOrEmpty(CPF) ? (string.IsNullOrEmpty(idEstrangeiro) ? "" : "&cDest=" + idEstrangeiro) : "&cDest=" + CPF) : "&cDest=" + CNPJ) +
                     "&dhEmi=" + Functions.ComputeHexadecimal(DhEmi) +
                     "&vNF=" + vNF +
                     "&vICMS=" + vICMS +
@@ -120,7 +118,7 @@ namespace NFe.Components.QRCode
         /// </summary>
         private void AddLinkQRCode(string linkUFManual, int versaoQRCode)
         {
-            foreach (var item in ConteudoXML)
+            foreach (object item in ConteudoXML)
             {
                 if (typeof(XmlElement) == item.GetType())
                 {
@@ -130,9 +128,13 @@ namespace NFe.Components.QRCode
                     XmlNode nd1 = ConteudoXML.CreateElement("qrCode", ConteudoXML.DocumentElement.NamespaceURI);
 
                     if (versaoQRCode.Equals(1))
-                        nd1.InnerXml = ("<![CDATA[" + this.ParametrosLinkConsulta.Trim() + "]]>").Trim();
+                    {
+                        nd1.InnerXml = ("<![CDATA[" + ParametrosLinkConsulta.Trim() + "]]>").Trim();
+                    }
                     else
-                        nd1.InnerXml = this.ParametrosLinkConsulta.Trim();
+                    {
+                        nd1.InnerXml = ParametrosLinkConsulta.Trim();
+                    }
 
                     nd.AppendChild(nd1);
 
@@ -169,7 +171,9 @@ namespace NFe.Components.QRCode
                     bool naoTemQrCode = string.IsNullOrEmpty(GetValueXML("infNFeSupl", "qrCode").Trim());
 
                     if (naoTemQrCode)
+                    {
                         result = true;
+                    }
                 }
             }
 
@@ -181,7 +185,7 @@ namespace NFe.Components.QRCode
         /// </summary>
         private void Populate()
         {
-            var minhaCultura = new CultureInfo("pt-BR"); //pt-BR usada como base
+            CultureInfo minhaCultura = new CultureInfo("pt-BR"); //pt-BR usada como base
             minhaCultura.NumberFormat.NumberDecimalSeparator = ".";
 
             CNPJ = GetValueXML("dest", "CNPJ").Trim();
@@ -196,13 +200,99 @@ namespace NFe.Components.QRCode
             digVal = GetValueXML("Reference", "DigestValue").Trim();
         }
 
+        #endregion Metodos
+    }
+
+    public class QRCodeMDFe : QRCodeBase
+    {
+        private readonly string urlMDFe = "http://dfe-portal.svrs.rs.gov.br/mdfe/QRCode";
+
+        public QRCodeMDFe(XmlDocument conteudoXML)
+        {
+            ConteudoXML = conteudoXML;
+        }
+
+        public void MontarLinkQRCode()
+        {
+            string tpAmb = GetValueXML("ide", "tpAmb").Trim();
+            string tpEmis = GetValueXML("ide", "tpEmis").Trim();
+            string chMDFe = GetAttributeXML("infMDFe", "Id").Substring(4).Trim();
+
+            string linkQRCode = urlMDFe +
+                "?chMDFe=" + chMDFe +
+                "&tpAmb=" + tpAmb;
+
+            if (tpEmis.Equals("2")) //Contingência
+            {
+                linkQRCode += "&sign=" + "";
+            }
+
+            //Por enquanto não vou adicionar a tag do QRCode, pois a SEFAZ RS ainda não liberou ambiente de produção 
+            //que aceita a TAG, a previsão é 07 de outubro a obrigatoriedade, vou aguardar mais algumas semanas para
+            //tentar enviar em homologação e em produção para ver se já aceita, se já aceitar vou liberar de vez. Wandrey 18/06/2019
+            //AddLinkQRCode(linkQRCode);
+        }
+
+        /// <summary>
+        /// Adiciona as tags do link do Qrcode no XML do MDFe
+        /// </summary>
+        /// <param name="linkQrCode">Link do QRCode</param>
+        private void AddLinkQRCode(string linkQrCode)
+        {
+            foreach (object item in ConteudoXML)
+            {
+                if (typeof(XmlElement) == item.GetType())
+                {
+                    XmlNode Signature = (XmlElement)ConteudoXML.GetElementsByTagName("Signature")[0];
+                    XmlNode el = item as XmlNode;
+                    XmlNode nd = ConteudoXML.CreateElement("infMDFeSupl", ConteudoXML.DocumentElement.NamespaceURI);
+                    XmlNode nd1 = ConteudoXML.CreateElement("qrCodMDFe", ConteudoXML.DocumentElement.NamespaceURI);
+
+                    nd1.InnerXml = ("<![CDATA[" + linkQrCode.Trim() + "]]>").Trim();
+
+                    nd.AppendChild(nd1);
+
+                    el.RemoveChild(Signature);
+                    el.AppendChild(nd);
+                    el.AppendChild(Signature);
+
+                    break;
+                }
+            }
+        }
+    }
+
+    public abstract class QRCodeBase
+    {
+        #region Proriedades de resultado do processamento
+
+        public XmlDocument ConteudoXML;
+
+        #endregion Proriedades de resultado do processamento
+
+        /// <summary>
+        /// Recuperar valor de um atributo do XML
+        /// </summary>
+        /// <param name="node">Atribute</param>
+        /// <param name="attribute">Nome do atributo</param>
+        /// <returns></returns>
+        protected string GetAttributeXML(string node, string attribute)
+        {
+            string result = "";
+
+            XmlElement elementos = (XmlElement)ConteudoXML.GetElementsByTagName(node)[0];
+            result = elementos.GetAttribute(attribute);
+
+            return result;
+        }
+
         /// <summary>
         /// Recupera as informações no XML
         /// </summary>
         /// <param name="elementTag">Grupo de tag</param>
         /// <param name="valueTag">Elmento que deseja retornar o valor</param>
         /// <returns>Valor do elemento</returns>
-        private string GetValueXML(string elementTag, string valueTag)
+        protected string GetValueXML(string elementTag, string valueTag)
         {
             string value = "";
             XmlNodeList nodes = ConteudoXML.GetElementsByTagName(elementTag);
@@ -226,23 +316,5 @@ namespace NFe.Components.QRCode
 
             return value;
         }
-
-        /// <summary>
-        /// Recuperar valor de um atributo do XML
-        /// </summary>
-        /// <param name="node">Atribute</param>
-        /// <param name="attribute">Nome do atributo</param>
-        /// <returns></returns>
-        private string GetAttributeXML(string node, string attribute)
-        {
-            string result = "";
-
-            XmlElement elementos = (XmlElement)ConteudoXML.GetElementsByTagName(node)[0];
-            result = elementos.GetAttribute(attribute);
-
-            return result;
-        }
     }
-
-    #endregion Metodos
 }

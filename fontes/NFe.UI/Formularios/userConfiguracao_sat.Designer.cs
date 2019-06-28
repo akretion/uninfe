@@ -43,6 +43,8 @@
             this.lblIndRatISSQN = new MetroFramework.Controls.MetroLabel();
             this.lblNumeroCaixa = new MetroFramework.Controls.MetroLabel();
             this.txtNumeroCaixa = new MetroFramework.Controls.MetroTextBox();
+            this.lblVersaoLayout = new MetroFramework.Controls.MetroLabel();
+            this.comboVersaoLayout = new MetroFramework.Controls.MetroComboBox();
             this.SuspendLayout();
             // 
             // metroLabel39
@@ -50,7 +52,7 @@
             this.metroLabel39.AutoSize = true;
             this.metroLabel39.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel39.Location = new System.Drawing.Point(0, 53);
-            this.metroLabel39.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.metroLabel39.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel39.Name = "metroLabel39";
             this.metroLabel39.Size = new System.Drawing.Size(106, 15);
             this.metroLabel39.TabIndex = 43;
@@ -61,7 +63,7 @@
             this.metroLabel38.AutoSize = true;
             this.metroLabel38.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel38.Location = new System.Drawing.Point(0, 1);
-            this.metroLabel38.Margin = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.metroLabel38.Margin = new System.Windows.Forms.Padding(3);
             this.metroLabel38.Name = "metroLabel38";
             this.metroLabel38.Size = new System.Drawing.Size(87, 15);
             this.metroLabel38.TabIndex = 41;
@@ -232,11 +234,38 @@
             this.txtNumeroCaixa.UseSelectable = true;
             this.txtNumeroCaixa.TextChanged += new System.EventHandler(this.txtNumeroCaixa_TextChanged);
             // 
+            // lblVersaoLayout
+            // 
+            this.lblVersaoLayout.AutoSize = true;
+            this.lblVersaoLayout.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblVersaoLayout.Location = new System.Drawing.Point(329, 237);
+            this.lblVersaoLayout.Name = "lblVersaoLayout";
+            this.lblVersaoLayout.Size = new System.Drawing.Size(133, 15);
+            this.lblVersaoLayout.TabIndex = 66;
+            this.lblVersaoLayout.Text = "Versão do layout do SAT:";
+            // 
+            // comboVersaoLayout
+            // 
+            this.comboVersaoLayout.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.comboVersaoLayout.FormattingEnabled = true;
+            this.comboVersaoLayout.ItemHeight = 19;
+            this.comboVersaoLayout.Items.AddRange(new object[] {
+            "0.07",
+            "0.08"});
+            this.comboVersaoLayout.Location = new System.Drawing.Point(331, 255);
+            this.comboVersaoLayout.Name = "comboVersaoLayout";
+            this.comboVersaoLayout.Size = new System.Drawing.Size(288, 25);
+            this.comboVersaoLayout.TabIndex = 65;
+            this.comboVersaoLayout.UseSelectable = true;
+            this.comboVersaoLayout.SelectedIndexChanged += new System.EventHandler(this.ComboVersaoLayout_SelectedIndexChanged);
+            // 
             // userConfiguracao_sat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.lblVersaoLayout);
+            this.Controls.Add(this.comboVersaoLayout);
             this.Controls.Add(this.lblNumeroCaixa);
             this.Controls.Add(this.txtNumeroCaixa);
             this.Controls.Add(this.lblIndRatISSQN);
@@ -275,5 +304,7 @@
         private MetroFramework.Controls.MetroLabel lblIndRatISSQN;
         private MetroFramework.Controls.MetroLabel lblNumeroCaixa;
         private MetroFramework.Controls.MetroTextBox txtNumeroCaixa;
+        private MetroFramework.Controls.MetroLabel lblVersaoLayout;
+        private MetroFramework.Controls.MetroComboBox comboVersaoLayout;
     }
 }

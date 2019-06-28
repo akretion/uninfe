@@ -194,6 +194,12 @@
     <Compile Include="Formularios\userConfiguracao_diversos.Designer.cs">
       <DependentUpon>userConfiguracao_diversos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\userConfiguracao_outrasconfiguracoes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\userConfiguracao_outrasconfiguracoes.Designer.cs">
+      <DependentUpon>userConfiguracao_outrasconfiguracoes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\userConfiguracao_resptecnico.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -395,6 +401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\userConfiguracao_diversos.resx">
       <DependentUpon>userConfiguracao_diversos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\userConfiguracao_outrasconfiguracoes.resx">
+      <DependentUpon>userConfiguracao_outrasconfiguracoes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\userConfiguracao_resptecnico.resx">
       <DependentUpon>userConfiguracao_resptecnico.cs</DependentUpon>

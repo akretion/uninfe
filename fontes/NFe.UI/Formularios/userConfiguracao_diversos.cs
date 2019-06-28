@@ -473,7 +473,12 @@ namespace NFe.UI.Formularios
                            ufCod == 3143104 /*Monte Carnmelo-MG*/||
                            ufCod == 2931350 /*Teixeira de Freitas-BA*/||
                            ufCod == 3205101 /*Viana-ES*/ ||
-                           ufCod == 3202405 /*Guarapari-ES*/;
+                           ufCod == 3202405 /*Guarapari-ES*/ ||
+                           ufCod == 3157005 /*Salinas-MG*/ ||
+                           ufCod == 3141108 /*Matozinhos-MG*/||
+                           ufCod == 4119152 /*Pinhais-PR*/||
+                           ufCod == 4127205 /*Terra Boa-PR*/||
+                           ufCod == 4313508 /*Osório-RS */;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }
@@ -686,7 +691,7 @@ namespace NFe.UI.Formularios
                     lbl_udDiasLimpeza.Location = new System.Drawing.Point(3, 147);
                     udDiasLimpeza.Location = new System.Drawing.Point(3, 166);
                     break;
-
+              
                 default:
                     labelUF.Visible = true;
                     labelUF.Text = "Unidade Federativa (UF)";

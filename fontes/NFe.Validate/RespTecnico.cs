@@ -25,71 +25,84 @@ namespace NFe.Validate
 
         public void AdicionarResponsavelTecnico(XmlDocument conteudoXML)
         {
-            if (conteudoXML.GetElementsByTagName("infNFe")[0] == null)
+            XmlNode infDFe = null;
+            bool isNFe = false;
+            bool isCTe = false;
+            bool isMDFe = false;
+
+            switch (conteudoXML.DocumentElement.Name)
             {
-                return;
+                case "NFe":
+                    infDFe = conteudoXML.GetElementsByTagName("infNFe")[0];
+                    isNFe = true;
+                    break;
+
+                case "CTe":
+                    infDFe = conteudoXML.GetElementsByTagName("infCte")[0];
+                    isCTe = true;
+                    break;
+
+                case "MDFe":
+                    infDFe = conteudoXML.GetElementsByTagName("infMDFe")[0];
+                    isMDFe = true;
+                    break;
+
+                default:
+                    break;
             }
 
-            DateTime dhEmi = Convert.ToDateTime(conteudoXML.GetElementsByTagName("dhEmi")[0].InnerText);
-
-            //UFs que ná estão aceitando o responsável técnico em produção
-            string cUFs = "31, 35, 41, 50";
-            if (! cUFs.Contains(((XmlElement)conteudoXML.GetElementsByTagName("ide")[0]).GetElementsByTagName("cUF")[0].InnerText))
+            if (isNFe || isCTe || isMDFe)
             {
-                if (conteudoXML.GetElementsByTagName("tpAmb")[0].InnerText == "1" && dhEmi < new DateTime(2019, 6, 3))
+                XmlNode infRespTec = conteudoXML.GetElementsByTagName("infRespTec")[0];
+
+                if (infRespTec != null)
                     return;
-            }
 
-            XmlNode infRespTec = conteudoXML.GetElementsByTagName("infRespTec")[0];
-
-            if (infRespTec != null)
-                return;
-
-            if (!string.IsNullOrEmpty(RespTecCNPJ) ||
-                !string.IsNullOrEmpty(RespTecXContato) ||
-                !string.IsNullOrEmpty(RespTecEmail) ||
-                !string.IsNullOrEmpty(RespTecTelefone) ||
-                !string.IsNullOrEmpty(RespTecIdCSRT) ||
-                !string.IsNullOrEmpty(RespTecCSRT))
-            {
-                XmlNode infNFe = conteudoXML.GetElementsByTagName("infNFe")[0];
-                string chaveNFe = infNFe.Attributes.GetNamedItem("Id").InnerText.Substring(3, 44);
-
-                XmlElement infRespTecnico = conteudoXML.CreateElement("infRespTec", infNFe.NamespaceURI);
-                XmlNode cnpj = conteudoXML.CreateElement("CNPJ", infNFe.NamespaceURI);
-                XmlNode contato = conteudoXML.CreateElement("xContato", infNFe.NamespaceURI);
-                XmlNode email = conteudoXML.CreateElement("email", infNFe.NamespaceURI);
-                XmlNode fone = conteudoXML.CreateElement("fone", infNFe.NamespaceURI);
-                XmlNode idCSRT = conteudoXML.CreateElement("idCSRT", infNFe.NamespaceURI);
-                XmlNode csrt = conteudoXML.CreateElement("hashCSRT", infNFe.NamespaceURI);
-
-                cnpj.InnerText = RespTecCNPJ;
-                contato.InnerText = RespTecXContato;
-                email.InnerText = RespTecEmail;
-                fone.InnerText = RespTecTelefone;
-
-                infRespTecnico.AppendChild(cnpj);
-                infRespTecnico.AppendChild(contato);
-                infRespTecnico.AppendChild(email);
-                infRespTecnico.AppendChild(fone);
-
-                if (!string.IsNullOrEmpty(RespTecIdCSRT) &&
+                if (!string.IsNullOrEmpty(RespTecCNPJ) ||
+                    !string.IsNullOrEmpty(RespTecXContato) ||
+                    !string.IsNullOrEmpty(RespTecEmail) ||
+                    !string.IsNullOrEmpty(RespTecTelefone) ||
+                    !string.IsNullOrEmpty(RespTecIdCSRT) ||
                     !string.IsNullOrEmpty(RespTecCSRT))
                 {
-                    idCSRT.InnerText = RespTecIdCSRT;
-                    csrt.InnerText = GerarHashCSRT(RespTecCSRT, chaveNFe);
+                    string chaveDFe = infDFe.Attributes.GetNamedItem("Id").InnerText.Substring(3, 44);
 
-                    infRespTecnico.AppendChild(idCSRT);
-                    infRespTecnico.AppendChild(csrt);
+                    XmlElement infRespTecnico = conteudoXML.CreateElement("infRespTec", infDFe.NamespaceURI);
+                    XmlNode cnpj = conteudoXML.CreateElement("CNPJ", infDFe.NamespaceURI);
+                    XmlNode contato = conteudoXML.CreateElement("xContato", infDFe.NamespaceURI);
+                    XmlNode email = conteudoXML.CreateElement("email", infDFe.NamespaceURI);
+                    XmlNode fone = conteudoXML.CreateElement("fone", infDFe.NamespaceURI);
+                    XmlNode idCSRT = conteudoXML.CreateElement("idCSRT", infDFe.NamespaceURI);
+                    XmlNode csrt = conteudoXML.CreateElement("hashCSRT", infDFe.NamespaceURI);
+
+                    cnpj.InnerText = RespTecCNPJ;
+                    contato.InnerText = RespTecXContato;
+                    email.InnerText = RespTecEmail;
+                    fone.InnerText = RespTecTelefone;
+
+                    infRespTecnico.AppendChild(cnpj);
+                    infRespTecnico.AppendChild(contato);
+                    infRespTecnico.AppendChild(email);
+                    infRespTecnico.AppendChild(fone);
+
+                    if (!string.IsNullOrEmpty(RespTecIdCSRT) &&
+                        !string.IsNullOrEmpty(RespTecCSRT) && isNFe)
+                    {
+                        idCSRT.InnerText = RespTecIdCSRT;
+                        csrt.InnerText = GerarHashCSRT(RespTecCSRT, chaveDFe);
+
+                        infRespTecnico.AppendChild(idCSRT);
+                        infRespTecnico.AppendChild(csrt);
+                    }
+
+                    infDFe.AppendChild(infRespTecnico);
                 }
-
-                infNFe.AppendChild(infRespTecnico);
             }
         }
 
-        private string GerarHashCSRT(string csrt, string chaveNFe)
+        private string GerarHashCSRT(string csrt, string chaveDFe)
         {
-            string result = Criptografia.GetSHA1HashData(csrt + chaveNFe);
+            string result = Criptografia.GetSHA1HashData(csrt + chaveDFe);
             result = Functions.ToBase64Hex(result);
 
             return result;

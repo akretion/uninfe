@@ -327,7 +327,16 @@ namespace NFe.Service
                                                 //  para tentar gerar novamente o -procnfe.xml
                                                 //  Isso vai dar uma maior segurança para não deixar sem gerar o -procnfe.xml. Wandrey 13/12/2012
                                                 if (procNFeJaNaAutorizada)
-                                                    TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+                                                {
+                                                    if (!Empresas.Configuracoes[emp].SalvarSomenteXMLDistribuicao)
+                                                    {
+                                                        TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Autorizados, oLerXml.oDadosNfe.dEmi);
+                                                    }
+                                                    else
+                                                    {
+                                                        TFunctions.MoverArquivo(strArquivoNFe, PastaEnviados.Originais, oLerXml.oDadosNfe.dEmi);
+                                                    }
+                                                }
                                             }
                                             else
                                             {
