@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace Unimake.Business.DFe
+namespace Unimake.Business.DFe.Security
 {
     #region clsX509Certificate2Extension  
     /// <summary>

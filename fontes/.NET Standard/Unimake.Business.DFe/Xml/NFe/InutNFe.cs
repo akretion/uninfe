@@ -5,44 +5,76 @@ using Unimake.Business.DFe.Servicos;
 
 namespace Unimake.Business.DFe.Xml.NFe
 {
+    [XmlRoot("inutNFe", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
     public class InutNFe : XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
-        public string versao { get; set; }
+        public string Versao { get; set; }
 
-        [XmlElement(ElementName = "infInut")]
-        public InutNFeInfInut infInut = new InutNFeInfInut();
+        [XmlElement("infInut")]
+        public InutNFeInfInut InfInut = new InutNFeInfInut();
     }
 
     public class InutNFeInfInut
     {
         private UFBrasilIBGE UFField;
+        private string IdField;
+        private string AnoField;
 
-        public string Id { get; set; }
-        [XmlElement(ElementName = "tpAmb")]
-        public TipoAmbiente tpAmb { get; set; }
-        [XmlElement(ElementName = "xServ")]
-        public InutNFeInfInutXServ xServ { get; set; }
-        [XmlElement(ElementName = "cUF")]
+        [XmlAttribute(DataType = "ID")]
+        public string Id
+        {
+            get => "ID" + ((int)CUF).ToString() + Ano + CNPJ + ((int)Mod).ToString() + Serie.ToString("000") + NNFIni.ToString("000000000") + NNFFin.ToString("000000000");
+            set => IdField = value;
+        }
+
+        [XmlElement("tpAmb")]
+        public TipoAmbiente TpAmb { get; set; }
+        [XmlElement("xServ")]
+        public string XServ { get; set; } = "INUTILIZAR";
+
+        [XmlElement("cUF")]
         public UFBrasilIBGE CUF
         {
             get => UFField;
             set => UFField = value;
         }
-        public string ano { get; set; }
-        public string CNPJ { get; set; }
-        public string mod { get; set; }
-        public string serie { get; set; }
-        public string nNFIni { get; set; }
-        public string nNFFin { get; set; }
-        public string xJust { get; set; }
 
-        /// <summary>
-        /// Conteúdo da tag xServ
-        /// </summary>
-        public enum InutNFeInfInutXServ
+        [XmlElement("ano")]
+        public string Ano
         {
-            INUTILIZAR
+            get => AnoField;
+            set
+            {
+                AnoField = value;
+
+                if (AnoField.Length > 2)
+                {
+                    throw new Exception("Tag ano deve ter somente os dois últimos algarismos, exemplo: Para o ano de 2019 informe somente 19, ou para 2001 informe 01.");
+                }
+                else if (AnoField.Length < 2)
+                {
+                    throw new Exception("Tag ano deve ter dois 2 algarismos. Exemplo: Para o ano 2001 informe 01, ou para 2019 informe 19.");
+                }
+            }
         }
+
+        [XmlElement("CNPJ")]
+        public string CNPJ { get; set; }
+
+        [XmlElement("mod")]
+        public ModeloDFe Mod { get; set; }
+
+        [XmlElement("serie")]
+        public int Serie { get; set; }
+
+        [XmlElement("nNFIni")]
+        public int NNFIni { get; set; }
+
+        [XmlElement("nNFFin")]
+        public int NNFFin { get; set; }
+
+        [XmlElement("xJust")]
+        public string XJust { get; set; }
     }
 }

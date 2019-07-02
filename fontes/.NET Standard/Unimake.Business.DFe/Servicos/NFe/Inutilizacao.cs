@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using Unimake.Business.DFe.Security;
 using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFe
@@ -18,11 +19,11 @@ namespace Unimake.Business.DFe.Servicos.NFe
             
             if (!Configuracoes.Definida)
             {
-//                Configuracoes.CodigoUF = (int)xml.infInut.cUF;
-                Configuracoes.TipoAmbiente = (int)xml.infInut.tpAmb;
-                Configuracoes.Modelo = xml.infInut.mod;
+                Configuracoes.CodigoUF = (int)xml.InfInut.CUF;
+                Configuracoes.TipoAmbiente = (int)xml.InfInut.TpAmb;
+                Configuracoes.Modelo = ((int)xml.InfInut.Mod).ToString();
                 Configuracoes.TipoEmissao = 1; //Inutilização só funciona no tipo de emissão Normal, ou seja, não tem inutilização em SVC-AN ou SVC-RS
-                Configuracoes.SchemaVersao = xml.versao;
+                Configuracoes.SchemaVersao = xml.Versao;
 
                 base.DefinirConfiguracao();
             }
@@ -33,7 +34,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// </summary>
         public override void Executar()
         {
-            new Security.AssinaturaDigital().Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital);
+            new AssinaturaDigital().Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id");
 
             base.Executar();
         }

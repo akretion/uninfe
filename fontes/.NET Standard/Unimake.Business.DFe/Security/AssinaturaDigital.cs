@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using System.Xml;
+using Unimake.Security.Exceptions;
 
 namespace Unimake.Business.DFe.Security
 {
@@ -29,21 +30,22 @@ namespace Unimake.Business.DFe.Security
         /// <param name="algorithmType">Tipo de algorítimo a ser utilizado na assinatura</param>
         /// <param name="definirURI">Define o Reference.URI na assinatura</param>
         /// <param name="pinCertificado">PIN do certificado digital, quando do tipo A3</param>
+        /// <param name="idAttributeName">Nome do atributo que tem o ID para assinatura. Se nada for passado o sistema vai tentar buscar o nome Id ou id, se não encontrar, não vai criar a URI Reference na assinatura com ID.</param>
         public void Assinar(XmlDocument conteudoXML,
             string tagAssinatura,
             string tagAtributoId,
             X509Certificate2 x509Cert,
             AlgorithmType algorithmType = AlgorithmType.Sha1,
             bool definirURI = true,
-            string pinCertificado = "")
+            string pinCertificado = "",
+            string idAttributeName = "")
         {
             try
             {
-                //TODO: WANDREY - Tenho que voltar este código depois que acabar a conversão para .NET Standard
-                //if (x509Cert == null)
-                //{
-                //    throw new ExceptionCertificadoDigital();
-                //}
+                if (x509Cert == null)
+                {
+                    throw new ExceptionCertificadoDigital();
+                }
 
                 if (conteudoXML.GetElementsByTagName(tagAssinatura).Count == 0)
                 {
@@ -77,64 +79,59 @@ namespace Unimake.Business.DFe.Security
 
                             if (definirURI)
                             {
-                                if (childElemen.GetAttributeNode("Id") != null)
+                                if (string.IsNullOrEmpty(idAttributeName))
                                 {
-                                    reference.Uri = "#" + childElemen.GetAttributeNode("Id").Value;
+                                    if (childElemen.GetAttributeNode("Id") != null)
+                                    {
+                                        idAttributeName = "Id";
+                                    }
+                                    else if (childElemen.GetAttributeNode("id") != null)
+                                    {
+                                        idAttributeName = "id";
+                                    }
                                 }
-                                else if (childElemen.GetAttributeNode("id") != null)
+
+                                if (!string.IsNullOrEmpty(idAttributeName))
                                 {
-                                    reference.Uri = "#" + childElemen.GetAttributeNode("id").Value;
+                                    reference.Uri = "#" + childElemen.GetAttributeNode(idAttributeName).Value;
                                 }
                             }
 
-                            // Create a SignedXml object.
                             SignedXml signedXml = new SignedXml(conteudoXML);
 
-                            //Para certificado A3, vamos carregar o PIN para não ficar solicitando.
                             if (!string.IsNullOrWhiteSpace(pinCertificado))
                             {
                                 x509Cert.SetPinPrivateKey(pinCertificado);
                             }
 
-                            if (algorithmType.Equals(AlgorithmType.Sha256))
-                            {
-                                signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
-                                signedXml.SigningKey = x509Cert.GetRSAPrivateKey();
-                            }
-
-                            if (algorithmType.Equals(AlgorithmType.Sha1))
-                            {
-                                signedXml.SigningKey = x509Cert.PrivateKey;
-                            }
-
-                            // Add an enveloped transformation to the reference.
                             reference.AddTransform(new XmlDsigEnvelopedSignatureTransform());
                             reference.AddTransform(new XmlDsigC14NTransform());
 
-                            // Add the reference to the SignedXml object.
-                            signedXml.AddReference(reference);
-
-                            if (algorithmType.Equals(AlgorithmType.Sha256))
+                            switch (algorithmType)
                             {
-                                reference.DigestMethod = "http://www.w3.org/2001/04/xmlenc#sha256";
+                                case AlgorithmType.Sha256:
+                                    signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
+                                    signedXml.SigningKey = x509Cert.GetRSAPrivateKey();
+                                    signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
+                                    reference.DigestMethod = "http://www.w3.org/2001/04/xmlenc#sha256";
+                                    break;
+
+                                default:
+                                    signedXml.SigningKey = x509Cert.PrivateKey;
+                                    signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
+                                    reference.DigestMethod = "http://www.w3.org/2000/09/xmldsig#sha1";
+                                    break;
                             }
 
-                            // Create a new KeyInfo object
+                            signedXml.AddReference(reference);
+
                             KeyInfo keyInfo = new KeyInfo();
-
-                            // Load the certificate into a KeyInfoX509Data object
-                            // and add it to the KeyInfo object.
                             keyInfo.AddClause(new KeyInfoX509Data(x509Cert));
-
-                            // Add the KeyInfo object to the SignedXml object.
                             signedXml.KeyInfo = keyInfo;
                             signedXml.ComputeSignature();
 
-                            // Get the XML representation of the signature and save
-                            // it to an XmlElement object.
                             XmlElement xmlDigitalSignature = signedXml.GetXml();
 
-                            // Gravar o elemento no documento XML
                             nodes.AppendChild(conteudoXML.ImportNode(xmlDigitalSignature, true));
                         }
                     }

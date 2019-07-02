@@ -29,8 +29,10 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         [XmlElement("CNPJ")]
         public string CNPJ { get; set; }
+
         [XmlElement("CPF")]
         public string CPF { get; set; }
+
         [XmlElement("IE")]
         public string IE { get; set; }
 

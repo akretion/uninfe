@@ -69,6 +69,10 @@ namespace Unimake.Business.DFe.Servicos
                 case "ConsCad":
                     tipoServico = Servico.NFeConsultaCadastro;
                     break;
+
+                case "envEvento":
+                    tipoServico = Servico.NFeRecepcaoEvento;
+                    break;
             }
 
             return tipoServico;
