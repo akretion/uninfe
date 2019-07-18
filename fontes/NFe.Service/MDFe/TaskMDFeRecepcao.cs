@@ -11,7 +11,17 @@ namespace NFe.Service
     {
         public TaskMDFeRecepcao(string arquivo)
         {
-            Servico = Servicos.MDFeEnviarLote;
+            int emp = Empresas.FindEmpresaByThread();
+
+            if (Empresas.Configuracoes[emp].IndSincMDFe)
+            {
+                Servico = Servicos.MDFeEnviarLoteSinc;
+            }
+            else
+            {
+                Servico = Servicos.MDFeEnviarLote;
+            }
+
             NomeArquivoXML = arquivo;
             ConteudoXML.PreserveWhitespace = false;
             ConteudoXML.Load(arquivo);
@@ -19,11 +29,20 @@ namespace NFe.Service
 
         public TaskMDFeRecepcao(XmlDocument conteudoXML)
         {
-            Servico = Servicos.MDFeEnviarLote;
+            int emp = Empresas.FindEmpresaByThread();
+
+            if (Empresas.Configuracoes[emp].IndSincMDFe)
+            {
+                Servico = Servicos.MDFeEnviarLoteSinc;
+            }
+            else
+            {
+                Servico = Servicos.MDFeEnviarLote;
+            }
 
             ConteudoXML = conteudoXML;
             ConteudoXML.PreserveWhitespace = false;
-            NomeArquivoXML = Empresas.Configuracoes[Empresas.FindEmpresaByThread()].PastaXmlEnvio + "\\temp\\" +
+            NomeArquivoXML = Empresas.Configuracoes[emp].PastaXmlEnvio + "\\temp\\" +
                 conteudoXML.GetElementsByTagName(TpcnResources.idLote.ToString())[0].InnerText + Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML;
         }
 
@@ -51,7 +70,7 @@ namespace NFe.Service
                 //Ler o XML de Lote para pegar o número do lote que está sendo enviado
                 lerXml.Mdfe(ConteudoXML);
 
-                var idLote = lerXml.oDadosNfe.idLote;
+                string idLote = lerXml.oDadosNfe.idLote;
 
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, Convert.ToInt32(lerXml.oDadosNfe.cUF), Convert.ToInt32(lerXml.oDadosNfe.tpAmb), Convert.ToInt32(lerXml.oDadosNfe.tpEmis), 0);
@@ -59,16 +78,16 @@ namespace NFe.Service
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(lerXml.oDadosNfe.cUF), Servico));
+                object oCabecMsg = null;
 
-                //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), lerXml.oDadosNfe.cUF);
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), lerXml.oDadosNfe.versao);
+                if (Servico == Servicos.MDFeEnviarLote)
+                {
+                    wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(lerXml.oDadosNfe.cUF), Servico));
 
-                //
-                //XML neste ponto o MDFe já está assinado, pois foi assinado, validado e montado o lote para envio por outro serviço.
-                //Fica aqui somente este lembrete. Wandrey 16/03/2010
-                //
+                    //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
+                    wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), lerXml.oDadosNfe.cUF);
+                    wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), lerXml.oDadosNfe.versao);
+                }
 
                 //Invocar o método que envia o XML para o SEFAZ
                 oInvocarObj.Invocar(wsProxy,
@@ -80,14 +99,27 @@ namespace NFe.Service
                                     true,
                                     securityProtocolType);
 
-                #region Parte que trata o retorno do lote, ou seja, o número do recibo
+                if (Servico == Servicos.MDFeEnviarLoteSinc)
+                {
+                    Protocolo(vStrXmlRetorno);
+                }
+                else
+                {
+                    Recibo(vStrXmlRetorno, emp);
+                }
 
-                Recibo(vStrXmlRetorno, emp);
+                if (dadosRec.cStat == "104") //Lote processado - Envio Síncrono
+                {
+                    FinalizarNFeSincrono(vStrXmlRetorno, emp, lerXml.oDadosNfe.chavenfe);
 
-                if (dadosRec.cStat == "103") //Lote recebido com sucesso
+                    oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML, vStrXmlRetorno);
+                }
+                else if (dadosRec.cStat == "103") //Lote recebido com sucesso
                 {
                     if (dadosRec.tMed > 0)
+                    {
                         Thread.Sleep(dadosRec.tMed * 1000);
+                    }
 
                     //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
                     fluxoNfe.AtualizarTag(lerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, (dadosRec.tMed + 2).ToString());
@@ -97,8 +129,8 @@ namespace NFe.Service
                     mdfeRetRecepcao.Execute();
                 }
                 else if (Convert.ToInt32(dadosRec.cStat) > 200 ||
-                         Convert.ToInt32(dadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
-                         Convert.ToInt32(dadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012
+                    Convert.ToInt32(dadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
+                    Convert.ToInt32(dadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012
                 {
                     //Se o status do retorno do lote for maior que 200 ou for igual a 108 ou 109,
                     //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
@@ -110,8 +142,6 @@ namespace NFe.Service
 
                 //Deleta o arquivo de lote
                 Functions.DeletarArquivo(NomeArquivoXML);
-
-                #endregion Parte que trata o retorno do lote, ou seja, o número do recibo
             }
             catch (ExceptionEnvioXML ex)
             {
@@ -208,14 +238,73 @@ namespace NFe.Service
                     dadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName(TpcnResources.tMed.ToString())[0].InnerText);
 
                     if (dadosRec.tMed > 15)
+                    {
                         dadosRec.tMed = 15;
+                    }
 
                     if (dadosRec.tMed <= 0)
+                    {
                         dadosRec.tMed = Empresas.Configuracoes[emp].TempoConsulta;
+                    }
                 }
             }
         }
 
         #endregion Recibo
+
+        #region Protocolo()
+
+        /// <summary>
+        /// Faz leitura do protocolo quando configurado para processo Síncrono
+        /// </summary>
+        /// <param name="strXml">String contendo o XML</param>
+        private void Protocolo(string strXml)
+        {
+            dadosRec.cStat =
+                dadosRec.nRec = string.Empty;
+            dadosRec.tMed = 0;
+
+            XmlDocument xml = new XmlDocument();
+            xml.Load(Functions.StringXmlToStream(strXml));
+
+            XmlNodeList retEnviNFeList = xml.GetElementsByTagName(xml.FirstChild.Name);
+
+            foreach (XmlNode retEnviNFeNode in retEnviNFeList)
+            {
+                XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeNode;
+
+                dadosRec.cStat = retEnviNFeElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
+
+                if (retEnviNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0] != null)
+                {
+                    dadosRec.nRec = retEnviNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
+                }
+            }
+        }
+
+        #endregion Protocolo()
+
+        #region FinalizarNFeSincrono()
+
+        /// <summary>
+        /// Finalizar a NFe no processo Síncrono
+        /// </summary>
+        /// <param name="xmlRetorno">Conteúdo do XML retornado da SEFAZ</param>
+        /// <param name="emp">Código da empresa para buscar as configurações</param>
+        private void FinalizarNFeSincrono(string xmlRetorno, int emp, string chMDFe)
+        {
+            XmlDocument xml = new XmlDocument();
+            xml.Load(Functions.StringXmlToStream(xmlRetorno));
+
+            XmlNodeList protMDFe = xml.GetElementsByTagName("protMDFe");
+
+            FluxoNfe fluxoNFe = new FluxoNfe();
+
+            TaskMDFeRetRecepcao retRecepcao = new TaskMDFeRetRecepcao();
+            retRecepcao.chMDFe = chMDFe;
+            retRecepcao.FinalizarMDFe(protMDFe, fluxoNFe, emp, ConteudoXML);
+        }
+
+        #endregion FinalizarNFeSincrono()
     }
 }

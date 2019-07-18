@@ -52,6 +52,7 @@ namespace NFe.UI.Formularios
                 lblVersaoLayout.Visible = 
                 comboVersaoLayout.Visible =
                 ckConversaoNFCe.Checked;
+            comboVersaoLayout.SelectedItem = "0.07";
         }
 
         protected override void OnLoad(EventArgs e)
@@ -116,8 +117,6 @@ namespace NFe.UI.Formularios
                 lblVersaoLayout.Visible =
                 comboVersaoLayout.Visible =
                 ckConversaoNFCe.Checked;
-
-            comboVersaoLayout.SelectedItem = "0.07";
         }
 
         private void txtSignAC_TextChanged(object sender, EventArgs e)

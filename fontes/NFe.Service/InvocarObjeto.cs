@@ -74,6 +74,7 @@ namespace NFe.Service
                 case Servicos.NFeEnviarLote:
                 case Servicos.CTeEnviarLote:
                 case Servicos.MDFeEnviarLote:
+                case Servicos.MDFeEnviarLoteSinc:
                     //XML de NFe, CTe e MDFe, na montagem do lote eu valido o XML antes, como o lote quem monta é o XML entendo que não está montando errado, sendo assim, não vou validar novamente o XML para ganhar desempenho. Wandrey 18/09/2016
                     break;
 
@@ -108,6 +109,7 @@ namespace NFe.Service
                     case Servicos.MDFePedidoConsultaSituacao:
                     case Servicos.MDFePedidoSituacaoLote:
                     case Servicos.MDFeEnviarLote:
+                    case Servicos.MDFeEnviarLoteSinc:
                     case Servicos.MDFeConsultaStatusServico:
                     case Servicos.MDFeRecepcaoEvento:
                     case Servicos.MDFeConsultaNaoEncerrado:
@@ -287,6 +289,10 @@ namespace NFe.Service
                 case Servicos.ConsultarIdentificadoresEventoseSocial:
                 case Servicos.DownloadEventoseSocial:
                     XmlRetorno = wsProxy.InvokeElement(servicoWS, metodo, new object[] { docXML.DocumentElement });
+                    break;
+
+                case Servicos.MDFeEnviarLoteSinc:
+                    XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[] { TFunctions.CompressXML(docXML) });
                     break;
 
                 default:
@@ -840,7 +846,7 @@ namespace NFe.Service
                     strRetorno = smarapdOutput.outputXML;
 #endif
                     break;
-
+                                   
                 default:
 
                     #region Demais padrões
@@ -848,7 +854,7 @@ namespace NFe.Service
                     if (string.IsNullOrEmpty(cabecMsg))
                         strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { docXML.OuterXml });
                     else
-                        strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
+                       strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
                     break;
 
                     #endregion Demais padrões

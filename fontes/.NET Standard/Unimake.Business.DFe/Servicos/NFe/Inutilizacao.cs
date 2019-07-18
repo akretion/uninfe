@@ -1,13 +1,16 @@
 ﻿using System.Xml;
 using Unimake.Business.DFe.Security;
+using Unimake.Business.DFe.Utility;
 using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
     public class Inutilizacao : ServicoBase
     {
-        public Inutilizacao(XmlDocument conteudoXML, Configuracao configuracao)
+        private Inutilizacao(XmlDocument conteudoXML, Configuracao configuracao)
             : base(conteudoXML, configuracao) { }
+
+        public RetInutNFe RetornoWSObj;
 
         /// <summary>
         /// Definir o valor de algumas das propriedades do objeto "Configuracoes"
@@ -16,13 +19,14 @@ namespace Unimake.Business.DFe.Servicos.NFe
         {
             InutNFe xml = new InutNFe();
             xml = xml.LerXML<InutNFe>(ConteudoXML);
-            
+
             if (!Configuracoes.Definida)
             {
+                Configuracoes.Servico = Servico.NFeInutilizacao;
                 Configuracoes.CodigoUF = (int)xml.InfInut.CUF;
-                Configuracoes.TipoAmbiente = (int)xml.InfInut.TpAmb;
-                Configuracoes.Modelo = ((int)xml.InfInut.Mod).ToString();
-                Configuracoes.TipoEmissao = 1; //Inutilização só funciona no tipo de emissão Normal, ou seja, não tem inutilização em SVC-AN ou SVC-RS
+                Configuracoes.TipoAmbiente = xml.InfInut.TpAmb;
+                Configuracoes.Modelo = xml.InfInut.Mod;
+                Configuracoes.TipoEmissao = TipoEmissao.Normal; //Inutilização só funciona no tipo de emissão Normal, ou seja, não tem inutilização em SVC-AN ou SVC-RS
                 Configuracoes.SchemaVersao = xml.Versao;
 
                 base.DefinirConfiguracao();
@@ -35,8 +39,29 @@ namespace Unimake.Business.DFe.Servicos.NFe
         public override void Executar()
         {
             new AssinaturaDigital().Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id");
-
+            RetornoWSObj = XMLUtility.Deserializar<RetInutNFe>(RetornoWSXML);
             base.Executar();
         }
+
+        //public RetConsStatServ Result
+        //{
+        //    get
+        //    {
+        //        if (!string.IsNullOrWhiteSpace(RetornoWSString))
+        //        {
+        //            return XMLUtility.Deserializar<RetConsStatServ>(RetornoWSXML);
+        //        }
+
+        //        return new RetConsStatServ
+        //        {
+        //            CStat = 0,
+        //            XMotivo = "Ocorreu uma falha ao tentar criar o objeto a partir do XML retornado da SEFAZ."
+        //        };
+        //    }
+        //}
+
+        public Inutilizacao(InutNFe inutNFe, Configuracao configuracao)
+                    : this(inutNFe.GerarXML(), configuracao) { }
+
     }
 }

@@ -928,6 +928,10 @@ namespace NFe.Settings
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeRecepcao : list.LocalProducao.MDFeRecepcao);
                             break;
 
+                        case Servicos.MDFeEnviarLoteSinc:
+                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeRecepcaoSinc : list.LocalProducao.MDFeRecepcaoSinc);
+                            break;
+
                         case Servicos.MDFePedidoSituacaoLote:
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.MDFeRetRecepcao : list.LocalProducao.MDFeRetRecepcao);
                             break;
@@ -1203,6 +1207,7 @@ namespace NFe.Settings
                     case Servicos.MDFePedidoConsultaSituacao:
                     case Servicos.MDFePedidoSituacaoLote:
                     case Servicos.MDFeEnviarLote:
+                    case Servicos.MDFeEnviarLoteSinc:
                     case Servicos.MDFeRecepcaoEvento:
                     case Servicos.MDFeConsultaNaoEncerrado:
                         throw new Exception(string.Format(errorStr, "do MDF-e"));

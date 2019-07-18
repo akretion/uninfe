@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.438
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unimake.DFe", "Unimake.DFe.csproj", "{A77CD414-6B83-4D04-B37A-8A029DA8AC3D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Net Framework", ".Net Framework", "{566DA3AD-AD01-4C87-B77B-8FE8837C2B6D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Net Standard", ".Net Standard", "{73AEAFDD-DB25-4B98-B91F-42707D9B23B7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{D10FBE56-68C9-4634-BBB1-FE112414512C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unimake.Security.Platform", "..\.NET Framework\Unimake.Security.Platform\Unimake.Security.Platform.csproj", "{C57F555F-3C39-45D3-B759-8091C9304882}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unimake.Business.DFe", "..\.NET Standard\Unimake.Business.DFe\Unimake.Business.DFe.csproj", "{4CCF76AA-892C-4357-8A7C-2375BEEBD86A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteDLL_Unimake.Business.DFe", "..\..\..\testes\TesteDLL_Unimake.Business.DFe\TesteDLL_Unimake.Business.DFe.csproj", "{C1A11D75-79A5-4D01-B125-D891A0C047F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +21,28 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A77CD414-6B83-4D04-B37A-8A029DA8AC3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A77CD414-6B83-4D04-B37A-8A029DA8AC3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A77CD414-6B83-4D04-B37A-8A029DA8AC3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A77CD414-6B83-4D04-B37A-8A029DA8AC3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C57F555F-3C39-45D3-B759-8091C9304882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C57F555F-3C39-45D3-B759-8091C9304882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C57F555F-3C39-45D3-B759-8091C9304882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C57F555F-3C39-45D3-B759-8091C9304882}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CCF76AA-892C-4357-8A7C-2375BEEBD86A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CCF76AA-892C-4357-8A7C-2375BEEBD86A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CCF76AA-892C-4357-8A7C-2375BEEBD86A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CCF76AA-892C-4357-8A7C-2375BEEBD86A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1A11D75-79A5-4D01-B125-D891A0C047F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1A11D75-79A5-4D01-B125-D891A0C047F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1A11D75-79A5-4D01-B125-D891A0C047F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1A11D75-79A5-4D01-B125-D891A0C047F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C57F555F-3C39-45D3-B759-8091C9304882} = {566DA3AD-AD01-4C87-B77B-8FE8837C2B6D}
+		{4CCF76AA-892C-4357-8A7C-2375BEEBD86A} = {73AEAFDD-DB25-4B98-B91F-42707D9B23B7}
+		{C1A11D75-79A5-4D01-B125-D891A0C047F3} = {D10FBE56-68C9-4634-BBB1-FE112414512C}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {BDFDA262-E0C7-46D7-8121-5EED359FAB85}
+		SolutionGuid = {B785A409-3157-4CD9-9DFA-E6F647FB490D}
 	EndGlobalSection
 EndGlobal

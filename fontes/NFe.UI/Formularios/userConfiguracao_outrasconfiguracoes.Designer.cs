@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.chkSalvarXMLDistribuicao = new MetroFramework.Controls.MetroCheckBox();
+            this.cbIndSincMDFe = new MetroFramework.Controls.MetroCheckBox();
             this.SuspendLayout();
             // 
             // chkSalvarXMLDistribuicao
@@ -42,10 +43,22 @@
             this.chkSalvarXMLDistribuicao.UseSelectable = true;
             this.chkSalvarXMLDistribuicao.CheckedChanged += new System.EventHandler(this.ChkSalvarXMLDistribuicao_CheckedChanged);
             // 
+            // cbIndSincMDFe
+            // 
+            this.cbIndSincMDFe.AutoSize = true;
+            this.cbIndSincMDFe.Location = new System.Drawing.Point(9, 28);
+            this.cbIndSincMDFe.Name = "cbIndSincMDFe";
+            this.cbIndSincMDFe.Size = new System.Drawing.Size(268, 15);
+            this.cbIndSincMDFe.TabIndex = 1;
+            this.cbIndSincMDFe.Text = "Enviar o MDF-e utilizando o processo síncrono";
+            this.cbIndSincMDFe.UseSelectable = true;
+            this.cbIndSincMDFe.CheckedChanged += new System.EventHandler(this.cbIndSincMDFe_CheckedChanged);
+            // 
             // userConfiguracao_outrasconfiguracoes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.cbIndSincMDFe);
             this.Controls.Add(this.chkSalvarXMLDistribuicao);
             this.Name = "userConfiguracao_outrasconfiguracoes";
             this.Size = new System.Drawing.Size(640, 374);
@@ -57,5 +70,6 @@
         #endregion
 
         private MetroFramework.Controls.MetroCheckBox chkSalvarXMLDistribuicao;
+        private MetroFramework.Controls.MetroCheckBox cbIndSincMDFe;
     }
 }

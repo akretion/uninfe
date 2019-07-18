@@ -1,9 +1,12 @@
-﻿using System.Xml;
+﻿using System;
+using System.Reflection;
+using System.Xml;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 
 namespace Unimake.Business.DFe.Xml.NFe
 {
+    [System.Serializable()]
     [XmlRoot("envEvento", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
     public class EnvEvento : XMLBase
     {
@@ -14,22 +17,34 @@ namespace Unimake.Business.DFe.Xml.NFe
         public string IdLote { get; set; }
 
         [XmlElement("evento")]
-        public EnvEventoEvento[] Evento { get; set; }
+        public Evento[] Evento { get; set; }
+
+        public override XmlDocument GerarXML()
+        {
+            XmlDocument xmlDocument = base.GerarXML();
+
+            XmlRootAttribute attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
+            XmlElement xmlElement = (XmlElement)xmlDocument.GetElementsByTagName("evento")[0];
+            xmlElement.SetAttribute("xmlns", attribute.Namespace);
+
+            return xmlDocument;
+        }
     }
 
-    //TODO: WANDREY - Não está gerando o Namespace neste ponto do XML, ou seja, na tag <evento>
-    [XmlRoot("evento", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
-    public class EnvEventoEvento
+    [System.Serializable()]
+    [XmlType(Namespace = "http://www.portalfiscal.inf.br/nfe")]
+    public class Evento
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }
 
         [XmlElement("infEvento")]
-        public EnvEventoEventoInfEvento InfEvento { get; set; }
+        public InfEvento InfEvento { get; set; }
     }
 
-    [XmlRoot("infEvento", IsNullable = false)]
-    public class EnvEventoEventoInfEvento
+    [System.Serializable()]
+    [XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/nfe")]
+    public class InfEvento
     {
         private string IdField;
 
@@ -40,9 +55,16 @@ namespace Unimake.Business.DFe.Xml.NFe
             set => IdField = value;
         }
 
-        [XmlElement("cOrgao")]
-        public OrgaoIBGE COrgao { get; set; }
+        [XmlIgnore]
+        public UFBrasil COrgao { get; set; }
 
+        [XmlElement("cOrgao")]
+        public int COrgaoField
+        {
+            get => (int)COrgao;
+            set => COrgao = (UFBrasil)Enum.Parse(typeof(UFBrasil), value.ToString());
+        }
+        
         [XmlElement("tpAmb")]
         public TipoAmbiente TpAmb { get; set; }
 
@@ -55,8 +77,15 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("chNFe")]
         public string ChNFe { get; set; }
 
+        [XmlIgnore]
+        public DateTime DhEvento { get; set; }
+
         [XmlElement("dhEvento")]
-        public string DhEvento { get; set; }
+        public string DhEventoField
+        {
+            get => DhEvento.ToString("yyyy-MM-ddTHH:mm:ssK");
+            set => DhEvento = DateTime.Parse(value);
+        }
 
         [XmlElement("tpEvento")]
         public TipoEventoNFe TpEvento { get; set; }
@@ -68,7 +97,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         public string VerEvento { get; set; }
 
         [XmlElement("detEvento")]
-        public EnvEventoEventoInfEventoDetEvento DetEvento { get; set; }
+        public DetEvento DetEvento { get; set; }
 
         #region ShouldSerialize
 
@@ -84,8 +113,9 @@ namespace Unimake.Business.DFe.Xml.NFe
         #endregion
     }
 
-    [XmlRoot("detEvento", IsNullable = false)]
-    public class EnvEventoEventoInfEventoDetEvento
+    [System.Serializable()]
+    [XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/nfe")]
+    public class DetEvento
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }

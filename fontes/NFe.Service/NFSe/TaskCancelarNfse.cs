@@ -691,6 +691,10 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.SISPMJP:
                         cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" ><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
+
+                    case PadroesNFSe.D2TI:
+                        cabecMsg = "<cabecalhoCancelamentoNfseLote xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.ctaconsult.com/nfse\"><versao>1.00</versao><ambiente>2</ambiente></cabecalhoCancelamentoNfseLote>";
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, Empresas.Configuracoes[emp].UnidadeFederativaCodigo))

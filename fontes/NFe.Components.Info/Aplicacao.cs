@@ -215,6 +215,7 @@ namespace NFe.Components.Info
                                         Empresas.Configuracoes[emp].Servico == TipoAplicativo.Todos)
                                     {
                                         Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeRecepcao", (!string.IsNullOrEmpty(item.MDFeRecepcao)).ToString());
+                                        Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeRecepcaoSinc", (!string.IsNullOrEmpty(item.MDFeRecepcaoSinc)).ToString());
                                         Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeRetRecepcao", (!string.IsNullOrEmpty(item.MDFeRetRecepcao)).ToString());
                                         Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeConsulta", (!string.IsNullOrEmpty(item.MDFeConsulta)).ToString());
                                         Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeStatusServico", (!string.IsNullOrEmpty(item.MDFeStatusServico)).ToString());

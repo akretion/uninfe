@@ -73,6 +73,10 @@ namespace Unimake.Business.DFe.Servicos
                 case "envEvento":
                     tipoServico = Servico.NFeRecepcaoEvento;
                     break;
+
+                case "enviNFe":
+                    tipoServico = Servico.NFeAutorizacao;
+                    break;
             }
 
             return tipoServico;

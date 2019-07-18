@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Unimake.Business.DFe.Servicos
 {
@@ -17,7 +18,7 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// Ambiente (2-Homologação ou 1-Produção)
         /// </summary>
-        public int TipoAmbiente { get; set; }
+        public TipoAmbiente TipoAmbiente { get; set; }
 
         /// <summary>
         /// Código da Unidade Federativa (UF)
@@ -32,12 +33,12 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// Tipo de Emissao (1-Normal, 2-Contingencia, 6/7/8-SVC/AN/RS/SP, ...
         /// </summary>
-        public int TipoEmissao { get; set; }
+        public TipoEmissao TipoEmissao { get; set; }
 
         /// <summary>
         /// Modelo do documento fiscal que é para consultar o status do serviço
         /// </summary>
-        public string Modelo { get; set; }
+        public ModeloDFe Modelo { get; set; }
 
         /// <summary>
         /// Tipo do Documento Fiscal Eletrônico (DF-e)
@@ -53,6 +54,11 @@ namespace Unimake.Business.DFe.Servicos
         /// Nome do arquivo de schema para validação do XML
         /// </summary>
         public string SchemaArquivo { get; set; }
+
+        /// <summary>
+        /// Schemas específicos de um mesmo serviço (Tipos de Evento, Modal CTe ou Modal MDFe)
+        /// </summary>
+        public List<SchemaEspecifico> SchemasEspecificos = new List<SchemaEspecifico>();
 
         /// <summary>
         /// Versão do schema do XML
@@ -157,5 +163,24 @@ namespace Unimake.Business.DFe.Servicos
         ///    Deixe o conteúdo em branco para utilizar um soap padrão.
         /// </example>
         public string WebSoapString { get; set; }
+    }
+
+    /// <summary>
+    /// Arquivos de schema específicos. Um mesmo serviço mais com vários arquivos de schema para validação, varia de acordo com uma determinada informação de tag, exemplo: CTe tem o Modal, Evento tem o tipo de evento, MDFe tem o modal, etc...
+    /// </summary>
+    public class SchemaEspecifico
+    {
+        /// <summary>
+        /// ID da parte específica do XML. Pode ser o TipoEvento para eventos ou o Modal para CTe e MDFe.
+        /// </summary>
+        public string Id { get; set; }
+        /// <summary>
+        /// Arquivo de schema principal
+        /// </summary>
+        public string SchemaArquivo { get; set; }
+        /// <summary>
+        /// Arquivo de schema da parte específica do XML
+        /// </summary>
+        public string SchemaArquivoEspecifico { get; set; }
     }
 }

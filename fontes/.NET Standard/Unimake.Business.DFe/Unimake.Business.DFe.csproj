@@ -5,8 +5,20 @@
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\Unimake.DFe\Compilacao\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\Unimake.DFe\Compilacao\</OutputPath>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="System.Security.Cryptography.Xml" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\.NET Framework\Unimake.Security.Platform\Unimake.Security.Platform.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +31,9 @@
     <None Update="Servicos\NFe\Config\SP.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Xml\NFe\Schemas\CCe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Xml\NFe\Schemas\consCad_v2.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -29,6 +44,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Xml\NFe\Schemas\consStatServ_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\e110110_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\e110111_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\e110112_v1.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Xml\NFe\Schemas\e111500_v1.00.xsd">
@@ -55,16 +79,34 @@
     <None Update="Xml\NFe\Schemas\e411503_v1.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Xml\NFe\Schemas\envCCe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\envEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\envEventoCancSubst_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Xml\NFe\Schemas\enviNFe_v4.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Xml\NFe\Schemas\envRemIndus_v1.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Xml\NFe\Schemas\eventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\eventoCancSubst_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Xml\NFe\Schemas\eventoRemIndus_v1.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Xml\NFe\Schemas\inutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\leiauteCCe_v1.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Xml\NFe\Schemas\leiauteConsSitNFe_v4.00.xsd">
@@ -74,6 +116,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Xml\NFe\Schemas\leiauteConsultaCadastro_v2.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\leiauteEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\leiauteEventoCancSubst_v1.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Xml\NFe\Schemas\leiauteInutNFe_v4.00.xsd">
@@ -86,6 +134,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Xml\NFe\Schemas\nfe_v4.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\procCCeNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\procEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\procEventoCancSubst_v1.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Xml\NFe\Schemas\procEventoNFe_v99.99.xsd">
@@ -115,6 +172,15 @@
     <None Update="Xml\NFe\Schemas\retConsStatServ_v4.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Xml\NFe\Schemas\retEnvCCe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\retEnvEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xml\NFe\Schemas\retEnvEventoCancSubst_v1.00.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Xml\NFe\Schemas\retEnviNFe_v4.00.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -134,5 +200,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command=":: Enquanto a gente não colocar no nuget, manter este carinha aqui,&#xD;&#xA;:: pois ele copia todo o conteúdo pro ERP.Net.&#xD;&#xA;:: Estamos fazendo muitas alterações.&#xD;&#xA;$(SolutionDir)Post-Build.bat" />
+  </Target>
 
 </Project>

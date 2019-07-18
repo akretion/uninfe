@@ -370,9 +370,14 @@ namespace NFe.Components
         MDFeConsultaStatusServico,
 
         /// <summary>
-        /// Envia os lotes de MDFe para os webservices
+        /// Envia os lotes de MDFe para os webservices Assincrono
         /// </summary>
         MDFeEnviarLote,
+
+        /// <summary>
+        /// Envia os lotes de MDFe para os webservices Sincrono
+        /// </summary>
+        MDFeEnviarLoteSinc,
 
         /// <summary>
         /// Montar lote de um MDFe
@@ -1156,8 +1161,13 @@ namespace NFe.Components
         /// Padrão utilizado pela prefeitura de João Pessoa-PB
         /// </summary>
         [Description("SISPMJP")]
-        SISPMJP
+        SISPMJP,
 
+         /// <summary>s
+         /// Padrão D2TI
+         /// </summary>
+        [Description("D2TI")]
+        D2TI,
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao

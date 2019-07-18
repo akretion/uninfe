@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NFe.Components;
+using NFe.Settings;
 
 namespace NFe.UI.Formularios
 {
     public partial class userConfiguracao_outrasconfiguracoes : MetroFramework.Controls.MetroUserControl
     {
         public event EventHandler changeEvent;
+        
 
         private Settings.Empresa empresa;
         public userConfiguracao_outrasconfiguracoes()
@@ -25,11 +28,14 @@ namespace NFe.UI.Formularios
             this.empresa = empresa;
             uninfeDummy.ClearControls(this, true, false);
             chkSalvarXMLDistribuicao.Checked = empresa.SalvarSomenteXMLDistribuicao;
+            cbIndSincMDFe.Checked = empresa.IndSincMDFe;
+            Configurar(empresa);    
         }
 
         public void Validar(bool salvando = true)
         {
             empresa.SalvarSomenteXMLDistribuicao = chkSalvarXMLDistribuicao.Checked;
+            empresa.IndSincMDFe = cbIndSincMDFe.Checked;
         }
 
         public void FocusFirstControl()
@@ -47,6 +53,33 @@ namespace NFe.UI.Formularios
         private void ChkSalvarXMLDistribuicao_CheckedChanged(object sender, EventArgs e)
         {
             changeEvent?.Invoke(sender, e);
+        }
+
+        private void cbIndSincMDFe_CheckedChanged(object sender, EventArgs e)
+        {
+            changeEvent?.Invoke(sender, e);
+        }
+
+        private void Configurar(Empresa empresa)
+        {
+            switch (empresa.Servico)
+            {
+                case TipoAplicativo.Nfe:
+                case TipoAplicativo.Nfse:
+                case TipoAplicativo.Cte:
+                case TipoAplicativo.NFCe:
+                case TipoAplicativo.SAT:
+                case TipoAplicativo.EFDReinf:
+                case TipoAplicativo.eSocial:
+                case TipoAplicativo.EFDReinfeSocial:
+                case TipoAplicativo.Nulo:
+                    cbIndSincMDFe.Visible = false;
+                    break;
+                case TipoAplicativo.Todos:
+                case TipoAplicativo.MDFe:
+                    cbIndSincMDFe.Visible = true;
+                    break;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System;
+using System.Xml;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 
@@ -7,19 +8,20 @@ namespace Unimake.Business.DFe.Xml.NFe
     [XmlRoot("consStatServ", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
     public class ConsStatServ : XMLBase
     {
-        private UFBrasilIBGE UFField;
-
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }
 
         [XmlElement("tpAmb")]
         public TipoAmbiente TpAmb { get; set; }
 
+        [XmlIgnore]
+        public UFBrasil CUF { get; set; }
+
         [XmlElement("cUF")]
-        public UFBrasilIBGE CUF
+        public int CUFField
         {
-            get => UFField;
-            set => UFField = value;
+            get => (int)CUF;
+            set => CUF = (UFBrasil)Enum.Parse(typeof(UFBrasil), value.ToString());
         }
 
         [XmlElement("xServ")]

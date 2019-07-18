@@ -17,7 +17,6 @@ namespace Unimake.Business.DFe.Xml.NFe
 
     public class InutNFeInfInut
     {
-        private UFBrasilIBGE UFField;
         private string IdField;
         private string AnoField;
 
@@ -33,11 +32,14 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("xServ")]
         public string XServ { get; set; } = "INUTILIZAR";
 
+        [XmlIgnore]
+        public UFBrasil CUF { get; set; }
+
         [XmlElement("cUF")]
-        public UFBrasilIBGE CUF
+        public int CUFField
         {
-            get => UFField;
-            set => UFField = value;
+            get => (int)CUF;
+            set => CUF = (UFBrasil)Enum.Parse(typeof(UFBrasil), value.ToString());
         }
 
         [XmlElement("ano")]

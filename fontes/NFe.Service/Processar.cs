@@ -348,6 +348,7 @@ namespace NFe.Service
                             break;
 
                         case Servicos.MDFeEnviarLote:
+                        case Servicos.MDFeEnviarLoteSinc:
                             DirecionarArquivo(emp, false, true, arquivo, new TaskMDFeRecepcao(arquivo));
                             break;
 
@@ -2022,6 +2023,7 @@ namespace NFe.Service
                 case Servicos.CTeEnviarLote:
                 case Servicos.NFeEnviarLote:
                 case Servicos.MDFeEnviarLote:
+                case Servicos.MDFeEnviarLoteSinc:
                     extRet = Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML;
                     extRetERR = Propriedade.ExtRetorno.Rec_ERR;
                     break;

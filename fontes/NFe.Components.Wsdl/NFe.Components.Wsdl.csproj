@@ -4555,6 +4555,31 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PSabaraMG-SUPERNOVA.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HRondonopolisMT-COPLAN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PRondonopolisMT-COPLAN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HItapetiningaSP-cancelarnfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HItapetiningaSP-consultarnfseporrps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HItapetiningaSP-recepcionarloterpssincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItapetiningaSP-cancelarnfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItapetiningaSP-consultarnfseporrps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItapetiningaSP-recepcionarloterpssincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSjbicas-GovDigital.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSjbicas-GovDigital.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\D2TI\CancelamentoNFSe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\D2TI\RecepcaoNFSe_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\D2TI\RetornoCancelamentoNFse_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\D2TI\RetornoRecepcaoNFse_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\D2TI\tiposBasicosCTA_v1.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PImperatrizMA-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PImperatrizMA-RecepcaoNFSe.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">
@@ -4569,6 +4594,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HJoinvilleSC.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Producao\MDFe\PMDFeRecepcaoSinc.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="NFe\WSDL\Homologacao\MDFe\HMDFeRecepcaoSinc.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

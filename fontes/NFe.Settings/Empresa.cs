@@ -248,6 +248,12 @@ namespace NFe.Settings
         public bool IndSinc { get; set; }
 
         /// <summary>
+        /// Enviar NFe utilizando o processo síncrono (true or false)
+        /// </summary>
+        [AttributeTipoAplicacao(TipoAplicativo.MDFe)]
+        public bool IndSincMDFe { get; set; }
+
+        /// <summary>
         /// URLs de Serviços da NFe, NFCe, CTe
         /// </summary>
         [System.Xml.Serialization.XmlIgnoreAttribute()]

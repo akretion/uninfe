@@ -112,6 +112,7 @@ namespace NFe.Service
                 case Servicos.MDFePedidoConsultaSituacao:
                 case Servicos.MDFePedidoSituacaoLote:
                 case Servicos.MDFeEnviarLote:
+                case Servicos.MDFeEnviarLoteSinc:
                 case Servicos.MDFeConsultaStatusServico:
                 case Servicos.MDFeRecepcaoEvento:
                 case Servicos.MDFeConsultaNaoEncerrado:
@@ -266,6 +267,10 @@ namespace NFe.Service
 
                 case Servicos.MDFeConsultaStatusServico:
                     retorna = "mdfeStatusServicoMDF";
+                    break;
+
+                case Servicos.MDFeEnviarLoteSinc:
+                    retorna = "mdfeRecepcao";
                     break;
 
                 case Servicos.MDFeEnviarLote:
@@ -2451,7 +2456,14 @@ namespace NFe.Service
                     }
                     break;
 
-                    #endregion SMARAPD_204
+                #endregion SMARAPD_204
+
+                #region D2TI
+
+                case PadroesNFSe.D2TI:
+                    retorna = "executar";
+                    break;
+                    #endregion D2TI
             }
 
             return retorna;

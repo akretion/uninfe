@@ -205,6 +205,8 @@ namespace NFe.Certificado
                             if (algorithmType.Equals(AlgorithmType.Sha1))
                             {
                                 signedXml.SigningKey = x509Cert.PrivateKey;
+                                signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
+                                reference.DigestMethod = "http://www.w3.org/2000/09/xmldsig#sha1";
                             }
 
                             // Add an enveloped transformation to the reference.

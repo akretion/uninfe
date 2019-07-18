@@ -803,6 +803,10 @@ namespace NFe.Service.NFSe
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.SMARAPD_204);
                         cabecMsg = "<cabecalho versao=\"2.04\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.04</versaoDados></cabecalho>";
                         break;
+
+                    case PadroesNFSe.D2TI:                 
+                        cabecMsg = "<cabecalhoNfseLote xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.ctaconsult.com/nfse\"><versao>1.00</versao><ambiente>2</ambiente></cabecalhoNfseLote>";
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))

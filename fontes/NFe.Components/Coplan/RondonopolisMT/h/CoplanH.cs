@@ -1,5 +1,5 @@
 ﻿using NFe.Components.Abstract;
-using NFe.Components.HCampoNovoDoParecisMT;
+using NFe.Components.HRondonopolisMT;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;

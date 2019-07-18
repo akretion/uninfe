@@ -1,11 +1,12 @@
 ﻿using System.Xml;
+using Unimake.Business.DFe.Utility;
 using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
     public class ConsultaCadastro : ServicoBase
     {
-        public ConsultaCadastro(XmlDocument conteudoXML, Configuracao configuracao)
+        private ConsultaCadastro(XmlDocument conteudoXML, Configuracao configuracao)
             : base(conteudoXML, configuracao) { }
 
         /// <summary>
@@ -18,12 +19,38 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
             if (!Configuracoes.Definida)
             {
+                Configuracoes.Servico = Servico.NFeConsultaCadastro;
                 Configuracoes.CodigoUF = (int)xml.InfCons.UF;
-                Configuracoes.Modelo = "";
+                Configuracoes.Modelo =  ModeloDFe.NFe;
                 Configuracoes.SchemaVersao = xml.Versao;
+                Configuracoes.TipoAmbiente = TipoAmbiente.Producao;
+                Configuracoes.TipoEmissao = TipoEmissao.Normal;
 
                 base.DefinirConfiguracao();
             }
         }
+
+        public RetConsCad Result
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(RetornoWSString))
+                {
+                    return XMLUtility.Deserializar<RetConsCad>(RetornoWSXML);
+                }
+
+                return new RetConsCad
+                {
+                    InfCons = new InfConsRetorno
+                    {
+                        CStat = 0,
+                        XMotivo = "Ocorreu uma falha ao tentar criar o objeto a partir do XML retornado da SEFAZ."
+                    }
+                };
+            }
+        }
+
+        public ConsultaCadastro(ConsCad consCad, Configuracao configuracao)
+                    : this(consCad.GerarXML(), configuracao) { }
     }
 }

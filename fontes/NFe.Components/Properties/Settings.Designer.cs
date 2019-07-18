@@ -845,7 +845,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://200.95.195.126:8080/IssWeb-ejb/IssWebWS/IssWebWS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://200.95.195.126:5661/IssWeb-ejb/IssWebWS/IssWebWS")]
         public string NFe_Components_br_com_fiorilli_jacisp_p_IssWebWS {
             get {
                 return ((string)(this["NFe_Components_br_com_fiorilli_jacisp_p_IssWebWS"]));
@@ -2243,11 +2243,31 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://intranet.rondonopolis.mt.gov.br/tributario_rondonopolis/servlet/anfse_web" +
-            "_service")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://intranet.rondonopolis.mt.gov.br/tributario_rondonopolis/servlet/anfse_web_" +
+            "service")]
         public string NFe_Components_PRondonopolisMT_nfse_web_service {
             get {
                 return ((string)(this["NFe_Components_PRondonopolisMT_nfse_web_service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.govdigital.com.br/ws/sjbicas")]
+        public string NFe_Components_PSjbicas_NfseServiceImplSjbicasService {
+            get {
+                return ((string)(this["NFe_Components_PSjbicas_NfseServiceImplSjbicasService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.govdigital.com.br/ws/sjbicas")]
+        public string NFe_Components_HSjbicas_NfseServiceImplSjbicasService {
+            get {
+                return ((string)(this["NFe_Components_HSjbicas_NfseServiceImplSjbicasService"]));
             }
         }
     }

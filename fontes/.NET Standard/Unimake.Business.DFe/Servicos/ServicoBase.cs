@@ -1,84 +1,27 @@
 ﻿using System.Xml;
+using Unimake.Business.DFe.ConfigurationManager;
 
 namespace Unimake.Business.DFe.Servicos
 {
     public abstract class ServicoBase
     {
-        #region Construtores
+        #region Private Methods
 
-        public ServicoBase(XmlDocument conteudoXML, Configuracao configuracao)
-        {
-            Configuracoes = configuracao;
-            ConteudoXML = conteudoXML;
-
-            Inicializar();
-        }
-
-        #endregion
-
-        #region Propriedades
-
-        protected XmlDocument ConteudoXML;
-        protected Configuracao Configuracoes;
-        public string RetornoWSString;
-        public XmlDocument RetornoWSXML;
-
-        #endregion
-
-        #region Constantes
-
-        private const string PastaArqConfig = @"Servicos\Nfe\Config\";
-        private const string ArquivoConfigGeral = PastaArqConfig + "Config.xml";
-
-        #endregion
-
-        #region Métodos
+        /// <summary>
+        /// Definir o nome da tag que contem as propriedades de acordo com o serviço que está sendo executado
+        /// </summary>
+        /// <returns>Nome da tag</returns>
+        private string DefinirNomeTag() => GetType().Name;
 
         /// <summary>
         /// Inicializa configurações, parmâtros e propriedades para execução do serviço.
         /// </summary>
         private void Inicializar()
         {
-            if (!Configuracoes.Definida)
+            if(!Configuracoes.Definida)
             {
                 DefinirConfiguracao();
-
                 LerXmlConfigGeral();
-            }
-        }
-
-        /// <summary>
-        /// Defini o valor das propriedades do objeto "Configuracoes"
-        /// </summary>
-        protected abstract void DefinirConfiguracao();
-
-        /// <summary>
-        /// Efetua a leitura do XML que contem configurações gerais e atribui o conteúdo nas propriedades do objeto "Configuracoes"
-        /// </summary>
-        private void LerXmlConfigGeral()
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(ArquivoConfigGeral);
-
-            XmlNodeList listConfiguracoes = doc.GetElementsByTagName("Configuracoes");
-
-            foreach (XmlNode nodeConfiguracoes in listConfiguracoes)
-            {
-                XmlElement elementConfiguracoes = (XmlElement)nodeConfiguracoes;
-                XmlNodeList listArquivos = elementConfiguracoes.GetElementsByTagName("Arquivo");
-
-                foreach (object nodeArquivos in listArquivos)
-                {
-                    XmlElement elementArquivos = (XmlElement)nodeArquivos;
-
-                    if (elementArquivos.GetAttribute("ID") == Configuracoes.CodigoUF.ToString())
-                    {
-                        Configuracoes.Nome = elementArquivos.GetElementsByTagName("Nome")[0].InnerText;
-                        Configuracoes.NomeUF = elementArquivos.GetElementsByTagName("UF")[0].InnerText;
-
-                        LerXmlConfigEspecifico(PastaArqConfig + elementArquivos.GetElementsByTagName("ArqConfig")[0].InnerText);
-                    }
-                }
             }
         }
 
@@ -87,24 +30,24 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         private void LerXmlConfigEspecifico(string xmlConfigEspecifico)
         {
-            XmlDocument doc = new XmlDocument();
+            var doc = new XmlDocument();
             doc.Load(xmlConfigEspecifico);
 
-            XmlNodeList listServicos = doc.GetElementsByTagName("Servicos");
-            foreach (object nodeServicos in listServicos)
+            var listServicos = doc.GetElementsByTagName("Servicos");
+            foreach(var nodeServicos in listServicos)
             {
-                XmlElement elementServicos = (XmlElement)nodeServicos;
+                var elementServicos = (XmlElement)nodeServicos;
 
-                if (elementServicos.GetAttribute("ID") == Configuracoes.TipoDFe.ToString())
+                if(elementServicos.GetAttribute("ID") == Configuracoes.TipoDFe.ToString())
                 {
-                    string nomeTagServico = DefinirNomeTag();
+                    var nomeTagServico = DefinirNomeTag();
 
-                    XmlNodeList listPropriedades = elementServicos.GetElementsByTagName(DefinirNomeTag());
+                    var listPropriedades = elementServicos.GetElementsByTagName(DefinirNomeTag());
 
-                    foreach (object nodePropridades in listPropriedades)
+                    foreach(var nodePropridades in listPropriedades)
                     {
-                        XmlElement elementPropriedades = (XmlElement)nodePropridades;
-                        if (elementPropriedades.GetAttribute("versao") == Configuracoes.SchemaVersao)
+                        var elementPropriedades = (XmlElement)nodePropridades;
+                        if(elementPropriedades.GetAttribute("versao") == Configuracoes.SchemaVersao)
                         {
                             Configuracoes.Descricao = elementPropriedades.GetElementsByTagName("Descricao")[0].InnerText;
                             Configuracoes.WebActionHomologacao = elementPropriedades.GetElementsByTagName("WebActionHomologacao")[0].InnerText;
@@ -122,6 +65,31 @@ namespace Unimake.Business.DFe.Servicos
                             Configuracoes.TagAtributoID = elementPropriedades.GetElementsByTagName("TagAtributoID")[0].InnerText;
                             Configuracoes.TagLoteAssinatura = elementPropriedades.GetElementsByTagName("TagLoteAssinatura")[0].InnerText;
                             Configuracoes.TagLoteAtributoID = elementPropriedades.GetElementsByTagName("TagLoteAtributoID")[0].InnerText;
+
+                            //Verificar se existem schemas específicos de validação
+                            if (elementPropriedades.GetElementsByTagName("SchemasEspecificos")[0] != null)
+                            {
+                                var listSchemasEspecificios = elementPropriedades.GetElementsByTagName("SchemasEspecificos");
+
+                                foreach (var nodeSchemasEspecificos in listSchemasEspecificios)
+                                {
+                                    XmlElement elemenSchemasEspecificos = (XmlElement)nodeSchemasEspecificos;
+
+                                    var listTipo = elemenSchemasEspecificos.GetElementsByTagName("Tipo");
+
+                                    foreach (var nodeTipo in listTipo)
+                                    {
+                                        XmlElement elementTipo = (XmlElement)nodeTipo;
+                                        
+                                        Configuracoes.SchemasEspecificos.Add(new SchemaEspecifico
+                                        {
+                                            Id = elementTipo.GetElementsByTagName("ID")[0].InnerText,
+                                            SchemaArquivo = elementTipo.GetElementsByTagName("SchemaArquivo")[0].InnerText.Replace("{0}", Configuracoes.SchemaVersao),
+                                            SchemaArquivoEspecifico = elementTipo.GetElementsByTagName("SchemaArquivoEspecifico")[0].InnerText.Replace("{0}", Configuracoes.SchemaVersao)
+                                        });
+                                    }
+                                }
+                            }
                         }
                     }
 
@@ -131,24 +99,84 @@ namespace Unimake.Business.DFe.Servicos
         }
 
         /// <summary>
-        /// Definir o nome da tag que contem as propriedades de acordo com o serviço que está sendo executado
+        /// Efetua a leitura do XML que contem configurações gerais e atribui o conteúdo nas propriedades do objeto "Configuracoes"
         /// </summary>
-        /// <returns>Nome da tag</returns>
-        private string DefinirNomeTag()
+        private void LerXmlConfigGeral()
         {
-            return this.GetType().Name;
+            var doc = new XmlDocument();
+            doc.Load(CurrentConfig.ArquivoConfigGeral);
+
+            var listConfiguracoes = doc.GetElementsByTagName("Configuracoes");
+
+            foreach(XmlNode nodeConfiguracoes in listConfiguracoes)
+            {
+                var elementConfiguracoes = (XmlElement)nodeConfiguracoes;
+                var listArquivos = elementConfiguracoes.GetElementsByTagName("Arquivo");
+
+                foreach(var nodeArquivos in listArquivos)
+                {
+                    var elementArquivos = (XmlElement)nodeArquivos;
+
+                    if(elementArquivos.GetAttribute("ID") == Configuracoes.CodigoUF.ToString())
+                    {
+                        Configuracoes.Nome = elementArquivos.GetElementsByTagName("Nome")[0].InnerText;
+                        Configuracoes.NomeUF = elementArquivos.GetElementsByTagName("UF")[0].InnerText;
+
+                        LerXmlConfigEspecifico(CurrentConfig.PastaArqConfig + elementArquivos.GetElementsByTagName("ArqConfig")[0].InnerText);
+                    }
+                }
+            }
         }
 
+        #endregion Private Methods
+
+        #region Protected Fields
+
+        protected Configuracao Configuracoes;
+        protected XmlDocument ConteudoXML;
+
+        #endregion Protected Fields
+
+        #region Protected Methods
+
         /// <summary>
-        /// Executar o serviço para consumir o webservice
+        /// Defini o valor das propriedades do objeto "Configuracoes"
         /// </summary>
-        public abstract void Executar();
+        protected abstract void DefinirConfiguracao();
 
         /// <summary>
         /// Método para validar o schema do XML
         /// </summary>
         protected abstract void XmlValidar();
 
-        #endregion
+        #endregion Protected Methods
+
+        #region Public Fields
+
+        public string RetornoWSString;
+        public XmlDocument RetornoWSXML;
+
+        #endregion Public Fields
+
+        #region Public Constructors
+
+        public ServicoBase(XmlDocument conteudoXML, Configuracao configuracao)
+        {
+            Configuracoes = configuracao;
+            ConteudoXML = conteudoXML;
+
+            Inicializar();
+        }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        /// <summary>
+        /// Executar o serviço para consumir o webservice
+        /// </summary>
+        public abstract void Executar();
+
+        #endregion Public Methods
     }
 }

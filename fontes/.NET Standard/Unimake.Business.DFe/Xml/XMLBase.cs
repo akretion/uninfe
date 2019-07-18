@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
-using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Utility;
@@ -42,10 +40,9 @@ namespace Unimake.Business.DFe.Xml
         /// <typeparam name="T">Tipo do objeto</typeparam>
         /// <param name="retorno">Objeto a ser serializado</param>
         /// <returns>String contendo o XML</returns>
-        public XmlDocument GerarXML<T>(T objeto)
-            where T : new()
+        public virtual XmlDocument GerarXML()
         {
-            return XMLUtility.Serializar<T>(objeto, NameSpaces);
+            return XMLUtility.Serializar(this, NameSpaces);
         }
     }
 }

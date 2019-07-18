@@ -11,6 +11,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -36,6 +37,7 @@
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -63,6 +65,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -88,6 +91,7 @@
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -115,6 +119,7 @@
       <NFeAutorizacao>wsdl\homologacao\AM\HAMNfeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\AM\HAMNfeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -140,6 +145,7 @@
       <NFeAutorizacao>wsdl\producao\AM\PAMNfeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\AM\PAMNfeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -167,6 +173,7 @@
       <NFeAutorizacao>wsdl\homologacao\BA\HBANFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\BA\HBANFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -192,6 +199,7 @@
       <NFeAutorizacao>wsdl\producao\BA\PBANFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\BA\PBANFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -219,6 +227,7 @@
       <NFeAutorizacao>wsdl\homologacao\CE\HCENFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\CE\HCENFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -244,6 +253,7 @@
       <NFeAutorizacao>wsdl\producao\CE\PCENFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\CE\PCENFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -271,6 +281,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -296,6 +307,7 @@
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -427,6 +439,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -452,6 +465,7 @@
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -479,6 +493,7 @@
       <NFeAutorizacao>wsdl\homologacao\GO\HGONFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\GO\HGONFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -504,6 +519,7 @@
       <NFeAutorizacao>wsdl\producao\GO\PGONFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\GO\PGONFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -531,6 +547,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVAN\HSVANNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVAN\HSVANNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -556,6 +573,7 @@
       <NFeAutorizacao>wsdl\producao\SVAN\PSVANNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVAN\PSVANNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -583,6 +601,7 @@
       <NFeAutorizacao>wsdl\homologacao\MT\HMTNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\MT\HMTNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -608,6 +627,7 @@
       <NFeAutorizacao>wsdl\producao\MT\PMTNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\MT\PMTNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -635,6 +655,7 @@
       <NFeAutorizacao>wsdl\homologacao\MS\HMSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\MS\HMSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -660,6 +681,7 @@
       <NFeAutorizacao>wsdl\producao\MS\PMSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\MS\PMSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -687,6 +709,7 @@
       <NFeAutorizacao>wsdl\homologacao\MG\HMGNfeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\MG\HMGNfeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -712,6 +735,7 @@
       <NFeAutorizacao>wsdl\producao\MG\PMGNfeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\MG\PMGNfeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -739,6 +763,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVAN\HSVANNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVAN\HSVANNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -764,6 +789,7 @@
       <NFeAutorizacao>wsdl\producao\SVAN\PSVANNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVAN\PSVANNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -791,6 +817,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -816,6 +843,7 @@
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -843,6 +871,7 @@
       <NFeAutorizacao>wsdl\homologacao\PR\HPRNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\PR\HPRNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -869,6 +898,7 @@
       <NFeAutorizacao>wsdl\producao\PR\PPRNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\PR\PPRNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -897,6 +927,7 @@
       <NFeAutorizacao>wsdl\homologacao\PE\HPENfeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\PE\HPENfeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -922,6 +953,7 @@
       <NFeAutorizacao>wsdl\producao\PE\PPENfeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\PE\PPENfeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -949,6 +981,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -974,6 +1007,7 @@
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>	 
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1001,6 +1035,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1026,6 +1061,7 @@
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1053,6 +1089,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1078,6 +1115,7 @@
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1105,6 +1143,7 @@
       <NFeAutorizacao>wsdl\homologacao\RS\HRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\RS\HRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1130,6 +1169,7 @@
       <NFeAutorizacao>wsdl\producao\RS\PRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\RS\PRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1157,6 +1197,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1182,6 +1223,7 @@
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1209,6 +1251,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1234,6 +1277,7 @@
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1261,6 +1305,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1286,6 +1331,7 @@
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1313,6 +1359,7 @@
       <NFeAutorizacao>wsdl\homologacao\SP\HSPNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SP\HSPNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1338,6 +1385,7 @@
       <NFeAutorizacao>wsdl\producao\SP\PSPNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SP\PSPNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1365,6 +1413,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1390,6 +1439,7 @@
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1641,6 +1691,7 @@
       <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1666,6 +1717,7 @@
       <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
       <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1693,6 +1745,7 @@
       <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\homologacao\mdfe\HMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\homologacao\mdfe\HMDFeStatusServico.wsdl</MDFeStatusServico>
@@ -1718,6 +1771,7 @@
       <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
+      <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
       <MDFeConsulta>wsdl\producao\mdfe\PMDFeConsulta.wsdl</MDFeConsulta>
       <MDFeStatusServico>wsdl\producao\mdfe\PMDFeStatusServico.wsdl</MDFeStatusServico>

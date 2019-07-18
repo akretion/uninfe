@@ -84,15 +84,49 @@
       <WebSoapString></WebSoapString>
       <WebTagRetorno>nfeResultMsg</WebTagRetorno>
       <WebSoapVersion>soap12</WebSoapVersion>
-      <SchemaArquivo>envEventoCancNFe_v{0}.xsd</SchemaArquivo>
+      <SchemaArquivo></SchemaArquivo>
+      <SchemasEspecificos>
+        <Tipo>
+          <ID>110111</ID>
+          <SchemaArquivo>envEventoCancNFe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>e110111_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+        <Tipo>
+          <ID>110112</ID>
+          <SchemaArquivo>envEventoCancNFe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>e110112_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+        <Tipo>
+          <ID>110110</ID>
+          <SchemaArquivo>CCe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>e110110_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+      </SchemasEspecificos>
       <SchemaVersao>1.00</SchemaVersao>
-      <TagAssinatura></TagAssinatura>
-      <TagAtributoID></TagAtributoID>
+      <TagAssinatura>evento</TagAssinatura>
+      <TagAtributoID>infEvento</TagAtributoID>
       <TagLoteAssinatura></TagLoteAssinatura>
       <TagLoteAtributoID></TagLoteAtributoID>
       <TargetNS>http://www.portalfiscal.inf.br/nfe</TargetNS>
     </RecepcaoEvento>
-    <Autorizacao versao="4.00"></Autorizacao>
+    <Autorizacao versao="4.00">
+      <Descricao>Autorização da NFe</Descricao>
+      <WebEnderecoHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://nfe.fazenda.sp.gov.br/ws/nfeautorizacao4.asmx</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeAutorizacao4</WebActionProducao>
+      <WebContentType></WebContentType>
+      <WebSoapString></WebSoapString>
+      <WebTagRetorno>nfeResultMsg</WebTagRetorno>
+      <WebSoapVersion>soap12</WebSoapVersion>
+      <SchemaArquivo>enviNFe_v{0}.xsd</SchemaArquivo>
+      <SchemaVersao>4.00</SchemaVersao>
+      <TagAssinatura>NFe</TagAssinatura>
+      <TagAtributoID>infNFe</TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+      <TargetNS>http://www.portalfiscal.inf.br/nfe</TargetNS>
+    </Autorizacao>
     <RetAutorizacao versao="4.00"></RetAutorizacao>
   </Servicos>
   <Servicos ID="CTe"></Servicos>
