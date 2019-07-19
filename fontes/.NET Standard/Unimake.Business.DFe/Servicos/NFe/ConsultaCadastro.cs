@@ -21,7 +21,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
             {
                 Configuracoes.Servico = Servico.NFeConsultaCadastro;
                 Configuracoes.CodigoUF = (int)xml.InfCons.UF;
-                Configuracoes.Modelo =  ModeloDFe.NFe;
+                Configuracoes.Modelo = ModeloDFe.NFe;
                 Configuracoes.SchemaVersao = xml.Versao;
                 Configuracoes.TipoAmbiente = TipoAmbiente.Producao;
                 Configuracoes.TipoEmissao = TipoEmissao.Normal;
@@ -52,5 +52,20 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         public ConsultaCadastro(ConsCad consCad, Configuracao configuracao)
                     : this(consCad.GerarXML(), configuracao) { }
+
+        public override void Executar()
+        {
+            base.Executar();
+
+            //Mato Grosso do Sul está retornando o XML da consulta cadastro fora do padrão, vou ter que intervir neste ponto para fazer a correção
+            if (Configuracoes.CodigoUF == (int)UFBrasil.MT)
+            {
+                if (RetornoWSXML.GetElementsByTagName("retConsCad")[0] != null)
+                {
+                    RetornoWSString = RetornoWSXML.GetElementsByTagName("retConsCad")[0].OuterXml;
+                    RetornoWSXML.LoadXml(RetornoWSString);
+                }
+            }
+        }
     }
 }

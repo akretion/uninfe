@@ -5,7 +5,7 @@ using Unimake.Business.DFe.Servicos;
 namespace Unimake.Business.DFe.Xml.NFe
 {
 
-    [XmlRoot("ConsCad", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
+    [XmlRoot("retInutNFe", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
     public class RetInutNFe : XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
@@ -29,8 +29,15 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("xMotivo")]
         public string XMotivo { get; set; }
 
-        [XmlElement("cUF")]
+        [XmlIgnore]
         public UFBrasil CUF { get; set; }
+
+        [XmlElement("cUF")]
+        public int CUFField
+        {
+            get => (int)CUF;
+            set => CUF = (UFBrasil)Enum.Parse(typeof(UFBrasil), value.ToString());
+        }
 
         [XmlElement("ano")]
         public string Ano { get; set; }

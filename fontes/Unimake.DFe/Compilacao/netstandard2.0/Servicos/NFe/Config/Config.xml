@@ -10,4 +10,29 @@
     <UF>PR</UF>
     <ArqConfig>PR.xml</ArqConfig>
   </Arquivo>
+  <Arquivo ID="51">
+    <Nome>Mato Grosso</Nome>
+    <UF>MT</UF>
+    <ArqConfig>MT.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="50">
+    <Nome>Mato Grosso do Sul</Nome>
+    <UF>MS</UF>
+    <ArqConfig>MS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="31">
+    <Nome>Minas Gerais</Nome>
+    <UF>MG</UF>
+    <ArqConfig>MG.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="43">
+    <Nome>Rio Grande do Sul</Nome>
+    <UF>RS</UF>
+    <ArqConfig>RS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="33">
+    <Nome>Rio de Janeiro</Nome>
+    <UF>RJ</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
 </Configuracoes>

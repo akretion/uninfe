@@ -28,8 +28,15 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("xMotivo")]
         public string XMotivo { get; set; }
 
-        [XmlElement("UF")]
+        [XmlIgnore]
         public UFBrasil UF { get; set; }
+
+        [XmlElement("UF")]
+        public string UFField
+        {
+            get => UF.ToString();
+            set => UF = (UFBrasil)Enum.Parse(typeof(UFBrasil), value);
+        }
 
         [XmlElement("CNPJ")]
         public string CNPJ { get; set; }

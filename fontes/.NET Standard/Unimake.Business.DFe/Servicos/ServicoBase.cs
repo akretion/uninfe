@@ -166,6 +166,8 @@ namespace Unimake.Business.DFe.Servicos
             ConteudoXML = conteudoXML;
 
             Inicializar();
+
+            System.Diagnostics.Trace.WriteLine(ConteudoXML?.InnerXml, "Unimake.DFe");
         }
 
         #endregion Public Constructors

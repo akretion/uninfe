@@ -10,8 +10,6 @@ namespace Unimake.Business.DFe.Servicos.NFe
         private Inutilizacao(XmlDocument conteudoXML, Configuracao configuracao)
             : base(conteudoXML, configuracao) { }
 
-        public RetInutNFe RetornoWSObj;
-
         /// <summary>
         /// Definir o valor de algumas das propriedades do objeto "Configuracoes"
         /// </summary>
@@ -39,26 +37,29 @@ namespace Unimake.Business.DFe.Servicos.NFe
         public override void Executar()
         {
             new AssinaturaDigital().Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id");
-            RetornoWSObj = XMLUtility.Deserializar<RetInutNFe>(RetornoWSXML);
+
             base.Executar();
         }
 
-        //public RetConsStatServ Result
-        //{
-        //    get
-        //    {
-        //        if (!string.IsNullOrWhiteSpace(RetornoWSString))
-        //        {
-        //            return XMLUtility.Deserializar<RetConsStatServ>(RetornoWSXML);
-        //        }
+        public RetInutNFe Result
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(RetornoWSString))
+                {
+                    return XMLUtility.Deserializar<RetInutNFe>(RetornoWSXML);
+                }
 
-        //        return new RetConsStatServ
-        //        {
-        //            CStat = 0,
-        //            XMotivo = "Ocorreu uma falha ao tentar criar o objeto a partir do XML retornado da SEFAZ."
-        //        };
-        //    }
-        //}
+                return new RetInutNFe
+                {
+                    infInut = new InfInut
+                    {
+                        CStat = 0,
+                        XMotivo = "Ocorreu uma falha ao tentar criar o objeto a partir do XML retornado da SEFAZ."
+                    }
+                };
+            }
+        }
 
         public Inutilizacao(InutNFe inutNFe, Configuracao configuracao)
                     : this(inutNFe.GerarXML(), configuracao) { }

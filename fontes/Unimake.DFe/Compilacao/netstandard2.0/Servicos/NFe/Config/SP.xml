@@ -84,7 +84,24 @@
       <WebSoapString></WebSoapString>
       <WebTagRetorno>nfeResultMsg</WebTagRetorno>
       <WebSoapVersion>soap12</WebSoapVersion>
-      <SchemaArquivo>envEventoCancNFe_v{0}.xsd</SchemaArquivo>
+      <SchemaArquivo></SchemaArquivo>
+      <SchemasEspecificos>
+        <Tipo>
+          <ID>110111</ID>
+          <SchemaArquivo>envEventoCancNFe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>e110111_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+        <Tipo>
+          <ID>110112</ID>
+          <SchemaArquivo>envEventoCancNFe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>e110112_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+        <Tipo>
+          <ID>110110</ID>
+          <SchemaArquivo>CCe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>e110110_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+      </SchemasEspecificos>
       <SchemaVersao>1.00</SchemaVersao>
       <TagAssinatura>evento</TagAssinatura>
       <TagAtributoID>infEvento</TagAtributoID>
