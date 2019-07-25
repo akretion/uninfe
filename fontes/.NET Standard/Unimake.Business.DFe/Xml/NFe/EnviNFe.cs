@@ -858,8 +858,21 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("vUnCom")]
         public double VUnCom { get; set; }
 
-        [XmlElement("vProd")]
+        [XmlIgnore]
         public double VProd { get; set; }
+        [XmlElement("vProd")]
+
+        public string VProdField
+        {
+            get => VProd.ToString("F2", CultureInfo.InvariantCulture);
+            set
+            {
+                if (double.TryParse(value, out double valor))
+                {
+                    VProd = valor;
+                }
+            }
+        }
 
         [XmlElement("cEANTrib")]
         public string CEANTrib { get; set; } = "";

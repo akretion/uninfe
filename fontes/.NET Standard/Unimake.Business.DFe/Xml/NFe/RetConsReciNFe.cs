@@ -43,7 +43,13 @@ namespace Unimake.Business.DFe.Xml.NFe
         public string DhRecbtoField
         {
             get => DhRecbto.ToString("yyyy-MM-ddTHH:mm:ssK");
-            set => DhRecbto = DateTime.Parse(value);
+            set
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    DhRecbto = DateTime.Parse(value);
+                }
+            }
         }
 
         [XmlElement("cMsg")]

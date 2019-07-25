@@ -19,6 +19,11 @@
         NFeConsultaProtocolo,
 
         /// <summary>
+        /// Consulta recibo NFe/NFCe
+        /// </summary>
+        NFeConsultaRecibo,
+
+        /// <summary>
         /// Inutilização de números da nota fiscal eletrônica
         /// </summary>
         NFeInutilizacao,

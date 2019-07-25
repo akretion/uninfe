@@ -81,7 +81,8 @@ namespace Unimake.Business.DFe.Servicos.NFe
             }
 
             XmlDocument xmlEspecifico = new XmlDocument();
-            xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEvento>(xml.Evento[0].InfEvento.DetEvento).OuterXml);
+            //TODO: Wandrey - Tenho que analisar o que o Marcelo fez e ajustar esta linha abaixo.
+            //xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEvento>(xml.Evento[0].InfEvento.DetEvento).OuterXml);
             
             ValidarXMLEvento(ConteudoXML, schemaArquivo, Configuracoes.TargetNS);
             ValidarXMLEvento(xmlEspecifico, schemaArquivoEspecifico, Configuracoes.TargetNS);

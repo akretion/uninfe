@@ -116,7 +116,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.sistemas.pmp.sp.gov.br/semfi/simpliss/ws_nfse/nfseservice.svc")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://wspiracicaba.simplissweb.com.br/nfseservice.svc")]
         public string NFe_Components_br_gov_sp_piracicaba_sistemas_www_p_NfseService {
             get {
                 return ((string)(this["NFe_Components_br_gov_sp_piracicaba_sistemas_www_p_NfseService"]));
@@ -1196,46 +1196,6 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PPotirendabaSPPotirendabaSP_IssWebWS {
             get {
                 return ((string)(this["NFe_Components_PPotirendabaSPPotirendabaSP_IssWebWS"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://sinop.fisslex.com.br/fiss-lex/servlet/aws_consultaloterps")]
-        public string NFe_Components_PMogiMirimSPConsultaLoteRps_WS_ConsultaLoteRps {
-            get {
-                return ((string)(this["NFe_Components_PMogiMirimSPConsultaLoteRps_WS_ConsultaLoteRps"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://mogimirim.fisslex.com.br/fiss-lex/servlet/aws_consultanfse")]
-        public string NFe_Components_PMogiMirimSPConsultaNfse_WS_ConsultaNfse {
-            get {
-                return ((string)(this["NFe_Components_PMogiMirimSPConsultaNfse_WS_ConsultaNfse"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://mogimirim.fisslex.com.br/fiss-lex/servlet/aws_consultanfseporrps")]
-        public string NFe_Components_PMogiMirimSPConsultaNfsePorRps_WS_ConsultaNfsePorRps {
-            get {
-                return ((string)(this["NFe_Components_PMogiMirimSPConsultaNfsePorRps_WS_ConsultaNfsePorRps"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://mogimirim.fisslex.com.br/fiss-lex/servlet/aws_consultarsituacaoloterps")]
-        public string NFe_Components_PMogiMirimSPConsultarSituacaoLoteRps_WS_ConsultarSituacaoLoteRps {
-            get {
-                return ((string)(this["NFe_Components_PMogiMirimSPConsultarSituacaoLoteRps_WS_ConsultarSituacaoLoteRps"]));
             }
         }
         

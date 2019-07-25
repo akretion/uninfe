@@ -35,4 +35,99 @@
     <UF>RJ</UF>
     <ArqConfig>SVRS.xml</ArqConfig>
   </Arquivo>
+  <Arquivo ID="13">
+    <Nome>Amazonas</Nome>
+    <UF>AM</UF>
+    <ArqConfig>AM.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="29">
+    <Nome>Bahia</Nome>
+    <UF>BA</UF>
+    <ArqConfig>BA.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="23">
+    <Nome>Ceara</Nome>
+    <UF>CE</UF>
+    <ArqConfig>CE.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="52">
+    <Nome>Goias</Nome>
+    <UF>GO</UF>
+    <ArqConfig>GO.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="26">
+    <Nome>Pernambuco</Nome>
+    <UF>PR</UF>
+    <ArqConfig>PE.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="15">
+    <Nome>Para</Nome>
+    <UF>PA</UF>
+    <ArqConfig>SVAN.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="12">
+    <Nome>Acre</Nome>
+    <UF>AC</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="27">
+    <Nome>Alagoas</Nome>
+    <UF>AL</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="16">
+    <Nome>Amapa</Nome>
+    <UF>AP</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="53">
+    <Nome>Distrito Federal</Nome>
+    <UF>DF</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="32">
+    <Nome>Espírito Santo</Nome>
+    <UF>ES</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="25">
+    <Nome>Paraiba</Nome>
+    <UF>PB</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="22">
+    <Nome>Piaui</Nome>
+    <UF>PI</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="24">
+    <Nome>Rio Grande do Norte</Nome>
+    <UF>RN</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="11">
+    <Nome>Rondonia</Nome>
+    <UF>RO</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="14">
+    <Nome>Roraima</Nome>
+    <UF>RR</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="42">
+    <Nome>Santa Catarina</Nome>
+    <UF>SC</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="28">
+    <Nome>Sergipe</Nome>
+    <UF>SE</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="17">
+    <Nome>Tocantins</Nome>
+    <UF>TO</UF>
+    <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
 </Configuracoes>

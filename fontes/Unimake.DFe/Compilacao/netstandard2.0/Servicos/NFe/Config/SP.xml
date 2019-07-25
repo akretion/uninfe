@@ -58,7 +58,7 @@
     </Inutilizacao>
     <ConsultaCadastro versao="2.00">
       <Descricao>Consulta cadastro do contribuinte</Descricao>
-      <WebEnderecoHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx</WebEnderecoHomologacao>
+      <WebEnderecoHomologacao>https://nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx</WebEnderecoHomologacao>
       <WebEnderecoProducao>https://nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx</WebEnderecoProducao>
       <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4</WebActionHomologacao>
       <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4</WebActionProducao>
@@ -127,7 +127,24 @@
       <TagLoteAtributoID></TagLoteAtributoID>
       <TargetNS>http://www.portalfiscal.inf.br/nfe</TargetNS>
     </Autorizacao>
-    <RetAutorizacao versao="4.00"></RetAutorizacao>
+    <RetAutorizacao versao="4.00">
+      <Descricao>Consulta recibo da nota fiscal eletrônica</Descricao>
+      <WebEnderecoHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx</WebEnderecoHomologacao>      
+      <WebEnderecoProducao>https://nfe.fazenda.sp.gov.br/ws/nferetautorizacao4.asmx</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeRetAutorizacao4</WebActionHomologacao>      
+      <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeRetAutorizacao4</WebActionProducao>
+      <WebContentType></WebContentType>
+      <WebSoapString></WebSoapString>
+      <WebTagRetorno>nfeResultMsg</WebTagRetorno>
+      <WebSoapVersion>soap12</WebSoapVersion>
+      <SchemaArquivo>consReciNFe_v{0}.xsd</SchemaArquivo>
+      <SchemaVersao>4.00</SchemaVersao>
+      <TagAssinatura></TagAssinatura>
+      <TagAtributoID></TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+      <TargetNS>http://www.portalfiscal.inf.br/nfe</TargetNS>
+    </RetAutorizacao>
   </Servicos>
   <Servicos ID="CTe"></Servicos>
   <Servicos ID="MDFe"></Servicos>

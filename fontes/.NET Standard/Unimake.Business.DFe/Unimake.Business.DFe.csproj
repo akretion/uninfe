@@ -25,6 +25,33 @@
     <None Update="Servicos\NFe\Config\Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Servicos\NFe\Config\AM.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Servicos\NFe\Config\BA.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Servicos\NFe\Config\CE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Servicos\NFe\Config\GO.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Servicos\NFe\Config\PE.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Servicos\NFe\Config\AN.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Servicos\NFe\Config\SVC-RS.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Servicos\NFe\Config\SVC-AN.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Servicos\NFe\Config\SVAN.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Servicos\NFe\Config\SVRS.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

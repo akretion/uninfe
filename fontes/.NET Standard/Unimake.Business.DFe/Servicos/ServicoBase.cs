@@ -42,7 +42,7 @@ namespace Unimake.Business.DFe.Servicos
                 {
                     var nomeTagServico = DefinirNomeTag();
 
-                    var listPropriedades = elementServicos.GetElementsByTagName(DefinirNomeTag());
+                    var listPropriedades = elementServicos.GetElementsByTagName(nomeTagServico);
 
                     foreach(var nodePropridades in listPropriedades)
                     {
@@ -123,6 +123,8 @@ namespace Unimake.Business.DFe.Servicos
                         Configuracoes.NomeUF = elementArquivos.GetElementsByTagName("UF")[0].InnerText;
 
                         LerXmlConfigEspecifico(CurrentConfig.PastaArqConfig + elementArquivos.GetElementsByTagName("ArqConfig")[0].InnerText);
+
+                        break;
                     }
                 }
             }

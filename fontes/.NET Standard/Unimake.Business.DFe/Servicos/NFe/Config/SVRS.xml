@@ -58,7 +58,7 @@
     </Inutilizacao>
     <ConsultaCadastro versao="2.00">
       <Descricao>Consulta cadastro do contribuinte</Descricao>
-      <WebEnderecoHomologacao></WebEnderecoHomologacao>
+      <WebEnderecoHomologacao>https://cad.svrs.rs.gov.br/ws/cadconsultacadastro/cadconsultacadastro4.asmx</WebEnderecoHomologacao>
       <WebEnderecoProducao>https://cad.svrs.rs.gov.br/ws/cadconsultacadastro/cadconsultacadastro4.asmx</WebEnderecoProducao>
       <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4/consultaCadastro</WebActionHomologacao>
       <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4/consultaCadastro</WebActionProducao>
@@ -127,8 +127,25 @@
       <TagLoteAtributoID></TagLoteAtributoID>
       <TargetNS>http://www.portalfiscal.inf.br/nfe</TargetNS>
     </Autorizacao>
-    <RetAutorizacao versao="4.00"></RetAutorizacao>
-  </Servicos>
+    <RetAutorizacao versao="4.00">
+      <Descricao>Consulta recibo da nota fiscal eletrônica</Descricao>
+      <WebEnderecoHomologacao>https://nfe-homologacao.svrs.rs.gov.br/ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://nfe.svrs.rs.gov.br/ws/NfeRetAutorizacao/NFeRetAutorizacao4.asmx</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeRetAutorizacao4</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeRetAutorizacao4</WebActionProducao>
+      <WebContentType></WebContentType>
+      <WebSoapString></WebSoapString>
+      <WebTagRetorno>nfeResultMsg</WebTagRetorno>
+      <WebSoapVersion>soap12</WebSoapVersion>
+      <SchemaArquivo>consReciNFe_v{0}.xsd</SchemaArquivo>
+      <SchemaVersao>4.00</SchemaVersao>
+      <TagAssinatura></TagAssinatura>
+      <TagAtributoID></TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+      <TargetNS>http://www.portalfiscal.inf.br/nfe</TargetNS>
+    </RetAutorizacao>
+   </Servicos>
   <Servicos ID="CTe"></Servicos>
   <Servicos ID="MDFe"></Servicos>
   <Servicos ID="NFCe"></Servicos>

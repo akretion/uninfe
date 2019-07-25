@@ -127,7 +127,24 @@
       <TagLoteAtributoID></TagLoteAtributoID>
       <TargetNS>http://www.portalfiscal.inf.br/nfe</TargetNS>
     </Autorizacao>
-    <RetAutorizacao versao="4.00"></RetAutorizacao>
+    <RetAutorizacao versao="4.00">
+      <Descricao>Consulta recibo da nota fiscal eletrônica</Descricao>
+      <WebEnderecoHomologacao>https://homologacao.sefaz.mt.gov.br/nfews/v2/services/NfeRetAutorizacao4?wsdl</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://nfe.sefaz.mt.gov.br/nfews/v2/services/NfeRetAutorizacao4?wsdl</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeRetAutorizacao4</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeRetAutorizacao4</WebActionProducao>
+      <WebContentType></WebContentType>
+      <WebSoapString></WebSoapString>
+      <WebTagRetorno>nfeResultMsg</WebTagRetorno>
+      <WebSoapVersion>soap12</WebSoapVersion>
+      <SchemaArquivo>consReciNFe_v{0}.xsd</SchemaArquivo>
+      <SchemaVersao>4.00</SchemaVersao>
+      <TagAssinatura></TagAssinatura>
+      <TagAtributoID></TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+      <TargetNS>http://www.portalfiscal.inf.br/nfe</TargetNS>
+    </RetAutorizacao>
   </Servicos>
   <Servicos ID="CTe"></Servicos>
   <Servicos ID="MDFe"></Servicos>

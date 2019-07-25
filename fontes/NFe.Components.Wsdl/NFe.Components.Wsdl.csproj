@@ -1993,9 +1993,6 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPiracicabaSP-SIMPLISS.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PPiracicabaSP-SIMPLISS.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFse\schemas\NFSe\SIMPLISS\nfse_3.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -3984,8 +3981,6 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\SUPERNOVA\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaLimaMG_SuperNova.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaLimaMG_SuperNova.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPatrocinioMG-SIMPLISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPatrocinioMG-SIMPLISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HMirassolandiaSP-FIORILLI.wsdl" />
@@ -4115,18 +4110,6 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HEusebioCE-Intersol.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPotirendabaSP-FIORILLI.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPotirendabaSP-FIORILLI.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PMogiMirimSPcancelarnfse-FISSLEX.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PMogiMirimSPconsultaloterps-FISSLEX.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PMogiMirimSPconsultanfse-FISSLEX.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PMogiMirimSPconsultanfseporrps-FISSLEX.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PMogiMirimSPconsultarsituacaoloterps-FISSLEX.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PMogiMirimSPrecepcionarloterps-FISSLEX.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFISSLEXcancelarnfse.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFISSLEXconsultaloterps.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFISSLEXconsultanfse.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFISSLEXconsultanfseporrps.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFISSLEXconsultarsituacaoloterps.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFISSLEXrecepcionarloterps.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\FISSLEX\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4580,6 +4563,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Producao\PImperatrizMA-CancelamentoNFSe.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PImperatrizMA-RecepcaoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaLimaMG_SuperNova.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaLimaMG_SuperNova.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPiracicabaSP-SIMPLISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMogiMirim-SIGCORP_SIGISS_203.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMogiMirim-SIGCORP_SIGISS_203.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">
