@@ -46,12 +46,12 @@
     <ArqConfig>BA.xml</ArqConfig>
   </Arquivo>
   <Arquivo ID="23">
-    <Nome>Ceara</Nome>
+    <Nome>Ceará</Nome>
     <UF>CE</UF>
     <ArqConfig>CE.xml</ArqConfig>
   </Arquivo>
   <Arquivo ID="52">
-    <Nome>Goias</Nome>
+    <Nome>Goiás</Nome>
     <UF>GO</UF>
     <ArqConfig>GO.xml</ArqConfig>
   </Arquivo>

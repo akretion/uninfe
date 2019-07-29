@@ -9,7 +9,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 {
     [Serializable()]
     [XmlRoot("enviNFe", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
-    public class EnviNFe : XMLBase
+    public class EnviNFe: XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }
@@ -25,16 +25,16 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         public override XmlDocument GerarXML()
         {
-            XmlDocument xmlDoc = base.GerarXML();
+            var xmlDoc = base.GerarXML();
 
-            XmlNodeList listEnvNFe = xmlDoc.GetElementsByTagName("enviNFe");
-            foreach (object XmlNode in listEnvNFe)
+            var listEnvNFe = xmlDoc.GetElementsByTagName("enviNFe");
+            foreach(var XmlNode in listEnvNFe)
             {
-                XmlElement xmlElem = (XmlElement)XmlNode;
-                if (xmlElem.GetElementsByTagName("NFe")[0] != null)
+                var xmlElem = (XmlElement)XmlNode;
+                if(xmlElem.GetElementsByTagName("NFe")[0] != null)
                 {
-                    XmlElement elemNFe = (XmlElement)xmlElem.GetElementsByTagName("NFe")[0];
-                    XmlRootAttribute attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
+                    var elemNFe = (XmlElement)xmlElem.GetElementsByTagName("NFe")[0];
+                    var attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
                     elemNFe.SetAttribute("xmlns", attribute.Namespace);
                 }
             }
@@ -123,9 +123,9 @@ namespace Unimake.Business.DFe.Xml.NFe
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(IdField))
+                if(string.IsNullOrWhiteSpace(IdField))
                 {
-                    if (Ide.Chave?.Length != 44)
+                    if(Ide.Chave?.Length != 44)
                     {
                         Ide.Chave = ((int)Ide.CUF).ToString() +
                             Ide.DhEmi.ToString("yyMM") +
@@ -142,7 +142,7 @@ namespace Unimake.Business.DFe.Xml.NFe
                 }
                 else
                 {
-                    if (IdField.Substring(0, 3).ToUpper() == "NFE")
+                    if(IdField.Substring(0, 3).ToUpper() == "NFE")
                     {
                         Ide.Chave = IdField.Substring(3);
                     }
@@ -179,11 +179,11 @@ namespace Unimake.Business.DFe.Xml.NFe
         {
             get
             {
-                string retorno = string.Empty;
+                var retorno = string.Empty;
 
-                if (string.IsNullOrWhiteSpace(CNFField))
+                if(string.IsNullOrWhiteSpace(CNFField))
                 {
-                    if (NNF == 0)
+                    if(NNF == 0)
                     {
                         throw new Exception("Defina antes o conteudo da TAG <nNF>, pois o mesmo é utilizado como base para calcular o código numérico.");
                     }
@@ -289,14 +289,8 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeDhContField()
-        {
-            return DhCont > DateTime.MinValue;
-        }
-        public bool ShouldSerializeXJust()
-        {
-            return !string.IsNullOrWhiteSpace(XJust);
-        }
+        public bool ShouldSerializeDhContField() => DhCont > DateTime.MinValue;
+        public bool ShouldSerializeXJust() => !string.IsNullOrWhiteSpace(XJust);
 
         #endregion
     }
@@ -322,26 +316,11 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeRefCTe()
-        {
-            return !string.IsNullOrWhiteSpace(RefCTe);
-        }
-        public bool ShouldSerializeRefECF()
-        {
-            return !string.IsNullOrWhiteSpace(RefECF);
-        }
-        public bool ShouldSerializeRefNF()
-        {
-            return !string.IsNullOrWhiteSpace(RefNF);
-        }
-        public bool ShouldSerializeRefNFP()
-        {
-            return !string.IsNullOrWhiteSpace(RefNFP);
-        }
-        public bool ShouldSerializeRefNFe()
-        {
-            return !string.IsNullOrWhiteSpace(RefNFe);
-        }
+        public bool ShouldSerializeRefCTe() => !string.IsNullOrWhiteSpace(RefCTe);
+        public bool ShouldSerializeRefECF() => !string.IsNullOrWhiteSpace(RefECF);
+        public bool ShouldSerializeRefNF() => !string.IsNullOrWhiteSpace(RefNF);
+        public bool ShouldSerializeRefNFP() => !string.IsNullOrWhiteSpace(RefNFP);
+        public bool ShouldSerializeRefNFe() => !string.IsNullOrWhiteSpace(RefNFe);
 
         #endregion
     }
@@ -382,22 +361,10 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeCNPJ()
-        {
-            return !string.IsNullOrWhiteSpace(CNPJ);
-        }
-        public bool ShouldSerializeCPF()
-        {
-            return !string.IsNullOrWhiteSpace(CPF);
-        }
-        public bool ShouldSerializeIEST()
-        {
-            return !string.IsNullOrWhiteSpace(IEST);
-        }
-        public bool ShouldSerializeCNAE()
-        {
-            return !string.IsNullOrWhiteSpace(CNAE);
-        }
+        public bool ShouldSerializeCNPJ() => !string.IsNullOrWhiteSpace(CNPJ);
+        public bool ShouldSerializeCPF() => !string.IsNullOrWhiteSpace(CPF);
+        public bool ShouldSerializeIEST() => !string.IsNullOrWhiteSpace(IEST);
+        public bool ShouldSerializeCNAE() => !string.IsNullOrWhiteSpace(CNAE);
 
         #endregion
     }
@@ -441,22 +408,10 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeCPais()
-        {
-            return CPais > 0;
-        }
-        public bool ShouldSerializeXPais()
-        {
-            return !string.IsNullOrWhiteSpace(XPais);
-        }
-        public bool ShouldSerializeXCpl()
-        {
-            return !string.IsNullOrWhiteSpace(XCpl);
-        }
-        public bool ShouldSerializeFone()
-        {
-            return !string.IsNullOrWhiteSpace(Fone);
-        }
+        public bool ShouldSerializeCPais() => CPais > 0;
+        public bool ShouldSerializeXPais() => !string.IsNullOrWhiteSpace(XPais);
+        public bool ShouldSerializeXCpl() => !string.IsNullOrWhiteSpace(XCpl);
+        public bool ShouldSerializeFone() => !string.IsNullOrWhiteSpace(Fone);
 
         #endregion
     }
@@ -528,7 +483,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         {
             set
             {
-                if (value.Length <= 11)
+                if(value.Length <= 11)
                 {
                     CPF = value;
                 }
@@ -565,38 +520,14 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeCNPJ()
-        {
-            return !string.IsNullOrWhiteSpace(CNPJ);
-        }
-        public bool ShouldSerializeCPF()
-        {
-            return !string.IsNullOrWhiteSpace(CPF);
-        }
-        public bool ShouldSerializeIdEstrangeiro()
-        {
-            return !string.IsNullOrWhiteSpace(IdEstrangeiro);
-        }
-        public bool ShouldSerializeXNome()
-        {
-            return !string.IsNullOrWhiteSpace(XNome);
-        }
-        public bool ShouldSerializeIE()
-        {
-            return !string.IsNullOrWhiteSpace(IE);
-        }
-        public bool ShouldSerializeISUF()
-        {
-            return !string.IsNullOrWhiteSpace(ISUF);
-        }
-        public bool ShouldSerializeIM()
-        {
-            return !string.IsNullOrWhiteSpace(IM);
-        }
-        public bool ShouldSerializeEmail()
-        {
-            return !string.IsNullOrWhiteSpace(Email);
-        }
+        public bool ShouldSerializeCNPJ() => !string.IsNullOrWhiteSpace(CNPJ);
+        public bool ShouldSerializeCPF() => !string.IsNullOrWhiteSpace(CPF);
+        public bool ShouldSerializeIdEstrangeiro() => !string.IsNullOrWhiteSpace(IdEstrangeiro);
+        public bool ShouldSerializeXNome() => !string.IsNullOrWhiteSpace(XNome);
+        public bool ShouldSerializeIE() => !string.IsNullOrWhiteSpace(IE);
+        public bool ShouldSerializeISUF() => !string.IsNullOrWhiteSpace(ISUF);
+        public bool ShouldSerializeIM() => !string.IsNullOrWhiteSpace(IM);
+        public bool ShouldSerializeEmail() => !string.IsNullOrWhiteSpace(Email);
 
         #endregion
     }
@@ -640,26 +571,11 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeXCpl()
-        {
-            return !string.IsNullOrWhiteSpace(XCpl);
-        }
-        public bool ShouldSerializeCEP()
-        {
-            return !string.IsNullOrWhiteSpace(CEP);
-        }
-        public bool ShouldSerializeCPais()
-        {
-            return CPais > 0;
-        }
-        public bool ShouldSerializeXPais()
-        {
-            return !string.IsNullOrWhiteSpace(XPais);
-        }
-        public bool ShouldSerializeFone()
-        {
-            return !string.IsNullOrWhiteSpace(Fone);
-        }
+        public bool ShouldSerializeXCpl() => !string.IsNullOrWhiteSpace(XCpl);
+        public bool ShouldSerializeCEP() => !string.IsNullOrWhiteSpace(CEP);
+        public bool ShouldSerializeCPais() => CPais > 0;
+        public bool ShouldSerializeXPais() => !string.IsNullOrWhiteSpace(XPais);
+        public bool ShouldSerializeFone() => !string.IsNullOrWhiteSpace(Fone);
 
         #endregion
     }
@@ -716,57 +632,27 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeXCpl()
-        {
-            return !string.IsNullOrWhiteSpace(XCpl);
-        }
-        public bool ShouldSerializeCNPJ()
-        {
-            return !string.IsNullOrWhiteSpace(CNPJ);
-        }
-        public bool ShouldSerializeCPF()
-        {
-            return !string.IsNullOrWhiteSpace(CPF);
-        }
-        public bool ShouldSerializeXNome()
-        {
-            return !string.IsNullOrWhiteSpace(XNome);
-        }
-        public bool ShouldSerializeCEP()
-        {
-            return !string.IsNullOrWhiteSpace(CEP);
-        }
-        public bool ShouldSerializeCPais()
-        {
-            return CPais > 0;
-        }
-        public bool ShouldSerializeXPais()
-        {
-            return !string.IsNullOrWhiteSpace(XPais);
-        }
-        public bool ShouldSerializeFone()
-        {
-            return !string.IsNullOrWhiteSpace(Fone);
-        }
-        public bool ShouldSerializeIE()
-        {
-            return !string.IsNullOrWhiteSpace(IE);
-        }
-        public bool ShouldSerializeEmail()
-        {
-            return !string.IsNullOrWhiteSpace(Email);
-        }
+        public bool ShouldSerializeXCpl() => !string.IsNullOrWhiteSpace(XCpl);
+        public bool ShouldSerializeCNPJ() => !string.IsNullOrWhiteSpace(CNPJ);
+        public bool ShouldSerializeCPF() => !string.IsNullOrWhiteSpace(CPF);
+        public bool ShouldSerializeXNome() => !string.IsNullOrWhiteSpace(XNome);
+        public bool ShouldSerializeCEP() => !string.IsNullOrWhiteSpace(CEP);
+        public bool ShouldSerializeCPais() => CPais > 0;
+        public bool ShouldSerializeXPais() => !string.IsNullOrWhiteSpace(XPais);
+        public bool ShouldSerializeFone() => !string.IsNullOrWhiteSpace(Fone);
+        public bool ShouldSerializeIE() => !string.IsNullOrWhiteSpace(IE);
+        public bool ShouldSerializeEmail() => !string.IsNullOrWhiteSpace(Email);
 
         #endregion
     }
 
     [Serializable()]
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/nfe")]
-    public partial class Retirada : LocalBase { }
+    public partial class Retirada: LocalBase { }
 
     [Serializable()]
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/nfe")]
-    public partial class Entrega : LocalBase { }
+    public partial class Entrega: LocalBase { }
 
     [Serializable()]
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/nfe")]
@@ -780,14 +666,8 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeCNPJ()
-        {
-            return !string.IsNullOrWhiteSpace(CNPJ);
-        }
-        public bool ShouldSerializeCPF()
-        {
-            return !string.IsNullOrWhiteSpace(CPF);
-        }
+        public bool ShouldSerializeCNPJ() => !string.IsNullOrWhiteSpace(CNPJ);
+        public bool ShouldSerializeCPF() => !string.IsNullOrWhiteSpace(CPF);
 
         #endregion
     }
@@ -796,6 +676,12 @@ namespace Unimake.Business.DFe.Xml.NFe
     [XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/nfe")]
     public partial class Det
     {
+        #region Private Fields
+
+        private string _infAdProd; 
+        
+        #endregion
+
         [XmlAttribute(AttributeName = "nItem")]
         public int NItem { get; set; }
 
@@ -809,7 +695,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         public ImpostoDevol ImpostoDevol { get; set; }
 
         [XmlElement("infAdProd")]
-        public string InfAdProd { get; set; }
+        public string InfAdProd { get => string.IsNullOrWhiteSpace(_infAdProd) ? null : _infAdProd; set => _infAdProd = value; }
     }
 
     [Serializable()]
@@ -867,7 +753,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VProd.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VProd = valor;
                 }
@@ -895,7 +781,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFrete.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFrete = valor;
                 }
@@ -911,7 +797,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VSeg.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VSeg = valor;
                 }
@@ -927,7 +813,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VDesc.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VDesc = valor;
                 }
@@ -943,7 +829,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VOutro.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VOutro = valor;
                 }
@@ -989,58 +875,19 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeNVE()
-        {
-            return NVE != null;
-        }
-        public bool ShouldSerializeCEST()
-        {
-            return !string.IsNullOrWhiteSpace(CEST);
-        }
-        public bool ShouldSerializeCNPJFab()
-        {
-            return !string.IsNullOrWhiteSpace(CNPJFab);
-        }
-        public bool ShouldSerializeCBenef()
-        {
-            return !string.IsNullOrWhiteSpace(CBenef);
-        }
-        public bool ShouldSerializeEXTIPI()
-        {
-            return !string.IsNullOrWhiteSpace(EXTIPI);
-        }
-        public bool ShouldSerializeVFreteField()
-        {
-            return VFrete > 0;
-        }
-        public bool ShouldSerializeVSegField()
-        {
-            return VSeg > 0;
-        }
-        public bool ShouldSerializeVDescField()
-        {
-            return VDesc > 0;
-        }
-        public bool ShouldSerializeVOutroField()
-        {
-            return VOutro > 0;
-        }
-        public bool ShouldSerializeXPed()
-        {
-            return !string.IsNullOrWhiteSpace(XPed);
-        }
-        public bool ShouldSerializeNItemPed()
-        {
-            return NItemPed > 0;
-        }
-        public bool ShouldSerializeNFCI()
-        {
-            return !string.IsNullOrWhiteSpace(NFCI);
-        }
-        public bool ShouldSerializeIndEscala()
-        {
-            return IndEscala != null;
-        }
+        public bool ShouldSerializeNVE() => NVE != null;
+        public bool ShouldSerializeCEST() => !string.IsNullOrWhiteSpace(CEST);
+        public bool ShouldSerializeCNPJFab() => !string.IsNullOrWhiteSpace(CNPJFab);
+        public bool ShouldSerializeCBenef() => !string.IsNullOrWhiteSpace(CBenef);
+        public bool ShouldSerializeEXTIPI() => !string.IsNullOrWhiteSpace(EXTIPI);
+        public bool ShouldSerializeVFreteField() => VFrete > 0;
+        public bool ShouldSerializeVSegField() => VSeg > 0;
+        public bool ShouldSerializeVDescField() => VDesc > 0;
+        public bool ShouldSerializeVOutroField() => VOutro > 0;
+        public bool ShouldSerializeXPed() => !string.IsNullOrWhiteSpace(XPed);
+        public bool ShouldSerializeNItemPed() => NItemPed > 0;
+        public bool ShouldSerializeNFCI() => !string.IsNullOrWhiteSpace(NFCI);
+        public bool ShouldSerializeIndEscala() => IndEscala != null;
 
         #endregion
     }
@@ -1090,7 +937,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VAFRMM.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VAFRMM = valor;
                 }
@@ -1114,18 +961,9 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeVAFRMM()
-        {
-            return VAFRMM > 0;
-        }
-        public bool ShouldSerializeCNPJ()
-        {
-            return !string.IsNullOrWhiteSpace(CNPJ);
-        }
-        public bool ShouldSerializeUFTerceiro()
-        {
-            return Enum.IsDefined(typeof(UFBrasil), UFTerceiro);
-        }
+        public bool ShouldSerializeVAFRMM() => VAFRMM > 0;
+        public bool ShouldSerializeCNPJ() => !string.IsNullOrWhiteSpace(CNPJ);
+        public bool ShouldSerializeUFTerceiro() => Enum.IsDefined(typeof(UFBrasil), UFTerceiro);
 
         #endregion
     }
@@ -1152,7 +990,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VDescDI.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VDescDI = valor;
                 }
@@ -1164,14 +1002,8 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeNDraw()
-        {
-            return NDraw > 0;
-        }
-        public bool ShouldSerializenVDescDIField()
-        {
-            return VDescDI > 0;
-        }
+        public bool ShouldSerializeNDraw() => NDraw > 0;
+        public bool ShouldSerializenVDescDIField() => VDescDI > 0;
 
         #endregion
     }
@@ -1188,10 +1020,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeNDraw()
-        {
-            return NDraw > 0;
-        }
+        public bool ShouldSerializeNDraw() => NDraw > 0;
 
         #endregion
     }
@@ -1215,7 +1044,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => QExport.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     QExport = valor;
                 }
@@ -1239,7 +1068,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => QLote.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     QLote = valor;
                 }
@@ -1271,10 +1100,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeCAgreg()
-        {
-            return !string.IsNullOrWhiteSpace(CAgreg);
-        }
+        public bool ShouldSerializeCAgreg() => !string.IsNullOrWhiteSpace(CAgreg);
 
         #endregion
     }
@@ -1298,7 +1124,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PGLP.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PGLP = valor;
                 }
@@ -1314,7 +1140,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PGNn.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PGNn = valor;
                 }
@@ -1330,7 +1156,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PGNi.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PGNi = valor;
                 }
@@ -1346,7 +1172,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VPart.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VPart = valor;
                 }
@@ -1365,7 +1191,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => QTemp.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     QTemp = valor;
                 }
@@ -1384,30 +1210,12 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializePGLPField()
-        {
-            return PGLP > 0;
-        }
-        public bool ShouldSerializePGNnField()
-        {
-            return PGNn > 0;
-        }
-        public bool ShouldSerializePGNiField()
-        {
-            return PGNi > 0;
-        }
-        public bool ShouldSerializeVPartField()
-        {
-            return VPart > 0;
-        }
-        public bool ShouldSerializeCODIF()
-        {
-            return !string.IsNullOrWhiteSpace(CODIF);
-        }
-        public bool ShouldSerializeQTempField()
-        {
-            return QTemp > 0;
-        }
+        public bool ShouldSerializePGLPField() => PGLP > 0;
+        public bool ShouldSerializePGNnField() => PGNn > 0;
+        public bool ShouldSerializePGNiField() => PGNi > 0;
+        public bool ShouldSerializeVPartField() => VPart > 0;
+        public bool ShouldSerializeCODIF() => !string.IsNullOrWhiteSpace(CODIF);
+        public bool ShouldSerializeQTempField() => QTemp > 0;
 
         #endregion
     }
@@ -1428,7 +1236,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VAliqProd.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VAliqProd = valor;
                 }
@@ -1444,7 +1252,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VCIDE.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VCIDE = valor;
                 }
@@ -1474,7 +1282,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VEncIni.ToString("F3", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VEncIni = valor;
                 }
@@ -1490,7 +1298,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VEncFin.ToString("F3", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VEncFin = valor;
                 }
@@ -1499,10 +1307,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeNBomba()
-        {
-            return NBomba > 0;
-        }
+        public bool ShouldSerializeNBomba() => NBomba > 0;
 
         #endregion
     }
@@ -1526,7 +1331,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VPMC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VPMC = valor;
                 }
@@ -1547,7 +1352,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VTotTrib.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VTotTrib = valor;
                 }
@@ -1662,7 +1467,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -1678,7 +1483,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMS.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMS = valor;
                 }
@@ -1694,7 +1499,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMS = valor;
                 }
@@ -1710,7 +1515,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCP.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCP = valor;
                 }
@@ -1726,7 +1531,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCP.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCP = valor;
                 }
@@ -1735,14 +1540,8 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializePFCPField()
-        {
-            return PFCP > 0;
-        }
-        public bool ShouldSerializeVFCPField()
-        {
-            return VFCP > 0;
-        }
+        public bool ShouldSerializePFCPField() => PFCP > 0;
+        public bool ShouldSerializeVFCPField() => VFCP > 0;
 
         #endregion
     }
@@ -1769,7 +1568,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -1785,7 +1584,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMS.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMS = valor;
                 }
@@ -1801,7 +1600,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMS = valor;
                 }
@@ -1817,7 +1616,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCFCP.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCFCP = valor;
                 }
@@ -1833,7 +1632,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCP.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCP = valor;
                 }
@@ -1849,7 +1648,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCP.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCP = valor;
                 }
@@ -1868,7 +1667,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PMVAST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PMVAST = valor;
                 }
@@ -1884,7 +1683,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBCST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBCST = valor;
                 }
@@ -1900,7 +1699,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCST = valor;
                 }
@@ -1916,7 +1715,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMSST = valor;
                 }
@@ -1932,7 +1731,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSST = valor;
                 }
@@ -1948,7 +1747,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCFCPST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCFCPST = valor;
                 }
@@ -1964,7 +1763,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCPST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCPST = valor;
                 }
@@ -1980,7 +1779,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCPST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCPST = valor;
                 }
@@ -1989,38 +1788,14 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeVBCFCPField()
-        {
-            return VBCFCP > 0;
-        }
-        public bool ShouldSerializePFCPField()
-        {
-            return PFCP > 0;
-        }
-        public bool ShouldSerializeVFCPField()
-        {
-            return VFCP > 0;
-        }
-        public bool ShouldSerializePMVASTField()
-        {
-            return PMVAST > 0;
-        }
-        public bool ShouldSerializePRedBCSTField()
-        {
-            return PRedBCST > 0;
-        }
-        public bool ShouldSerializeVBCFCPSTField()
-        {
-            return VBCFCPST > 0;
-        }
-        public bool ShouldSerializePFCPSTField()
-        {
-            return PFCPST > 0;
-        }
-        public bool ShouldSerializeVFCPSTField()
-        {
-            return VFCPST > 0;
-        }
+        public bool ShouldSerializeVBCFCPField() => VBCFCP > 0;
+        public bool ShouldSerializePFCPField() => PFCP > 0;
+        public bool ShouldSerializeVFCPField() => VFCP > 0;
+        public bool ShouldSerializePMVASTField() => PMVAST > 0;
+        public bool ShouldSerializePRedBCSTField() => PRedBCST > 0;
+        public bool ShouldSerializeVBCFCPSTField() => VBCFCPST > 0;
+        public bool ShouldSerializePFCPSTField() => PFCPST > 0;
+        public bool ShouldSerializeVFCPSTField() => VFCPST > 0;
 
         #endregion
     }
@@ -2047,7 +1822,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBC.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBC = valor;
                 }
@@ -2063,7 +1838,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -2079,7 +1854,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMS.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMS = valor;
                 }
@@ -2095,7 +1870,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMS = valor;
                 }
@@ -2111,7 +1886,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCFCP.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCFCP = valor;
                 }
@@ -2127,7 +1902,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCP.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCP = valor;
                 }
@@ -2143,7 +1918,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCP.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCP = valor;
                 }
@@ -2159,7 +1934,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSDeson.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSDeson = valor;
                 }
@@ -2171,26 +1946,11 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeVBCFCPField()
-        {
-            return VBCFCP > 0;
-        }
-        public bool ShouldSerializePFCPField()
-        {
-            return PFCP > 0;
-        }
-        public bool ShouldSerializeVFCPField()
-        {
-            return VFCP > 0;
-        }
-        public bool ShouldSerializeVICMSDesonField()
-        {
-            return VICMSDeson > 0;
-        }
-        public bool ShouldSerializeMotDesICMS()
-        {
-            return VICMSDeson > 0;
-        }
+        public bool ShouldSerializeVBCFCPField() => VBCFCP > 0;
+        public bool ShouldSerializePFCPField() => PFCP > 0;
+        public bool ShouldSerializeVFCPField() => VFCP > 0;
+        public bool ShouldSerializeVICMSDesonField() => VICMSDeson > 0;
+        public bool ShouldSerializeMotDesICMS() => VICMSDeson > 0;
 
         #endregion
     }
@@ -2217,7 +1977,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PMVAST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PMVAST = valor;
                 }
@@ -2233,7 +1993,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBCST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBCST = valor;
                 }
@@ -2249,7 +2009,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCST = valor;
                 }
@@ -2265,7 +2025,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMSST = valor;
                 }
@@ -2281,7 +2041,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSST = valor;
                 }
@@ -2297,7 +2057,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCFCPST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCFCPST = valor;
                 }
@@ -2313,7 +2073,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCPST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCPST = valor;
                 }
@@ -2329,7 +2089,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCPST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCPST = valor;
                 }
@@ -2345,7 +2105,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSDeson.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSDeson = valor;
                 }
@@ -2357,34 +2117,13 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializePMVASTField()
-        {
-            return PMVAST > 0;
-        }
-        public bool ShouldSerializePRedBCSTField()
-        {
-            return PRedBCST > 0;
-        }
-        public bool ShouldSerializeVBCFCPSTField()
-        {
-            return VBCFCPST > 0;
-        }
-        public bool ShouldSerializePFCPSTField()
-        {
-            return PFCPST > 0;
-        }
-        public bool ShouldSerializeVFCPSTField()
-        {
-            return VFCPST > 0;
-        }
-        public bool ShouldSerializeVICMSDesonField()
-        {
-            return VICMSDeson > 0;
-        }
-        public bool ShouldSerializeMotDesICMS()
-        {
-            return VICMSDeson > 0;
-        }
+        public bool ShouldSerializePMVASTField() => PMVAST > 0;
+        public bool ShouldSerializePRedBCSTField() => PRedBCST > 0;
+        public bool ShouldSerializeVBCFCPSTField() => VBCFCPST > 0;
+        public bool ShouldSerializePFCPSTField() => PFCPST > 0;
+        public bool ShouldSerializeVFCPSTField() => VFCPST > 0;
+        public bool ShouldSerializeVICMSDesonField() => VICMSDeson > 0;
+        public bool ShouldSerializeMotDesICMS() => VICMSDeson > 0;
 
         #endregion
     }
@@ -2404,7 +2143,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSTField;
             set
             {
-                if (value.Equals("40") || value.Equals("41") || value.Equals("50"))
+                if(value.Equals("40") || value.Equals("41") || value.Equals("50"))
                 {
                     CSTField = value;
                 }
@@ -2424,7 +2163,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSDeson.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSDeson = valor;
                 }
@@ -2436,14 +2175,8 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeVICMSDesonField()
-        {
-            return VICMSDeson > 0;
-        }
-        public bool ShouldSerializeMotDesICMS()
-        {
-            return VICMSDeson > 0;
-        }
+        public bool ShouldSerializeVICMSDesonField() => VICMSDeson > 0;
+        public bool ShouldSerializeMotDesICMS() => VICMSDeson > 0;
 
         #endregion
     }
@@ -2470,7 +2203,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBC.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBC = valor;
                 }
@@ -2486,7 +2219,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -2502,7 +2235,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMS.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMS = valor;
                 }
@@ -2518,7 +2251,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSOp.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSOp = valor;
                 }
@@ -2534,7 +2267,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PDif.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PDif = valor;
                 }
@@ -2550,7 +2283,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSDif.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSDif = valor;
                 }
@@ -2566,7 +2299,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMS = valor;
                 }
@@ -2582,7 +2315,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCFCP.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCFCP = valor;
                 }
@@ -2598,7 +2331,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCP.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCP = valor;
                 }
@@ -2614,7 +2347,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCP.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCP = valor;
                 }
@@ -2623,50 +2356,17 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeVBCFCPField()
-        {
-            return VBCFCP > 0;
-        }
-        public bool ShouldSerializePFCPField()
-        {
-            return PFCP > 0;
-        }
-        public bool ShouldSerializeVFCPField()
-        {
-            return VFCP > 0;
-        }
-        public bool ShouldSerializePRedBCField()
-        {
-            return PRedBC > 0;
-        }
-        public bool ShouldSerializeVBCField()
-        {
-            return VBC > 0;
-        }
-        public bool ShouldSerializPICMSeField()
-        {
-            return PICMS > 0;
-        }
-        public bool ShouldSerializeVICMSOpField()
-        {
-            return VICMSOp > 0;
-        }
-        public bool ShouldSerializePDifField()
-        {
-            return PDif > 0;
-        }
-        public bool ShouldSerializeVICMSDifField()
-        {
-            return VICMSDif > 0;
-        }
-        public bool ShouldSerializeVICMSField()
-        {
-            return VICMS > 0;
-        }
-        public bool ShouldSerializeModBCField()
-        {
-            return Enum.IsDefined(typeof(ModalidadeBaseCalculoICMS), ModBC);
-        }
+        public bool ShouldSerializeVBCFCPField() => VBCFCP > 0;
+        public bool ShouldSerializePFCPField() => PFCP > 0;
+        public bool ShouldSerializeVFCPField() => VFCP > 0;
+        public bool ShouldSerializePRedBCField() => PRedBC > 0;
+        public bool ShouldSerializeVBCField() => VBC > 0;
+        public bool ShouldSerializPICMSeField() => PICMS > 0;
+        public bool ShouldSerializeVICMSOpField() => VICMSOp > 0;
+        public bool ShouldSerializePDifField() => PDif > 0;
+        public bool ShouldSerializeVICMSDifField() => VICMSDif > 0;
+        public bool ShouldSerializeVICMSField() => VICMS > 0;
+        public bool ShouldSerializeModBCField() => Enum.IsDefined(typeof(ModalidadeBaseCalculoICMS), ModBC);
 
         #endregion
     }
@@ -2690,7 +2390,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCSTRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCSTRet = valor;
                 }
@@ -2706,7 +2406,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PST = valor;
                 }
@@ -2722,7 +2422,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSSTRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSSTRet = valor;
                 }
@@ -2738,7 +2438,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCFCPSTRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCFCPSTRet = valor;
                 }
@@ -2754,7 +2454,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCPSTRet.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCPSTRet = valor;
                 }
@@ -2770,7 +2470,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCPSTRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCPSTRet = valor;
                 }
@@ -2786,7 +2486,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBCEfet.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBCEfet = valor;
                 }
@@ -2802,7 +2502,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCEfet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCEfet = valor;
                 }
@@ -2818,7 +2518,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSEfet.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMSEfet = valor;
                 }
@@ -2834,7 +2534,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSEfet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSEfet = valor;
                 }
@@ -2843,46 +2543,16 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeVBCFCPSTRetField()
-        {
-            return VBCFCPSTRet > 0;
-        }
-        public bool ShouldSerializePFCPSTRetField()
-        {
-            return PFCPSTRet > 0;
-        }
-        public bool ShouldSerializeVFCPSTRetField()
-        {
-            return VFCPSTRet > 0;
-        }
-        public bool ShouldSerializeVBCSTRetField()
-        {
-            return VBCSTRet > 0;
-        }
-        public bool ShouldSerializePSTField()
-        {
-            return PST > 0;
-        }
-        public bool ShouldSerializeVICMSSTRetField()
-        {
-            return VICMSSTRet > 0;
-        }
-        public bool ShouldSerializePRedBCEfetField()
-        {
-            return PRedBCEfet > 0;
-        }
-        public bool ShouldSerializeVBCEfetField()
-        {
-            return VBCEfet > 0;
-        }
-        public bool ShouldSerializePICMSEfetField()
-        {
-            return PICMSEfet > 0;
-        }
-        public bool ShouldSerializeVICMSEfetField()
-        {
-            return VICMSEfet > 0;
-        }
+        public bool ShouldSerializeVBCFCPSTRetField() => VBCFCPSTRet > 0;
+        public bool ShouldSerializePFCPSTRetField() => PFCPSTRet > 0;
+        public bool ShouldSerializeVFCPSTRetField() => VFCPSTRet > 0;
+        public bool ShouldSerializeVBCSTRetField() => VBCSTRet > 0;
+        public bool ShouldSerializePSTField() => PST > 0;
+        public bool ShouldSerializeVICMSSTRetField() => VICMSSTRet > 0;
+        public bool ShouldSerializePRedBCEfetField() => PRedBCEfet > 0;
+        public bool ShouldSerializeVBCEfetField() => VBCEfet > 0;
+        public bool ShouldSerializePICMSEfetField() => PICMSEfet > 0;
+        public bool ShouldSerializeVICMSEfetField() => VICMSEfet > 0;
 
         #endregion
     }
@@ -2909,7 +2579,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBC.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBC = valor;
                 }
@@ -2925,7 +2595,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -2941,7 +2611,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMS.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMS = valor;
                 }
@@ -2957,7 +2627,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMS = valor;
                 }
@@ -2973,7 +2643,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCFCP.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCFCP = valor;
                 }
@@ -2989,7 +2659,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCP.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCP = valor;
                 }
@@ -3005,7 +2675,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCP.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCP = valor;
                 }
@@ -3024,7 +2694,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PMVAST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PMVAST = valor;
                 }
@@ -3040,7 +2710,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBCST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBCST = valor;
                 }
@@ -3056,7 +2726,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCST = valor;
                 }
@@ -3072,7 +2742,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMSST = valor;
                 }
@@ -3088,7 +2758,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSST = valor;
                 }
@@ -3104,7 +2774,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCFCPST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCFCPST = valor;
                 }
@@ -3120,7 +2790,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCPST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCPST = valor;
                 }
@@ -3136,7 +2806,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCPST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCPST = valor;
                 }
@@ -3152,7 +2822,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSDeson.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSDeson = valor;
                 }
@@ -3164,53 +2834,23 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeVBCFCPField()
-        {
-            return VBCFCP > 0;
-        }
-        public bool ShouldSerializePFCPField()
-        {
-            return PFCP > 0;
-        }
-        public bool ShouldSerializeVFCPField()
-        {
-            return VFCP > 0;
-        }
-        public bool ShouldSerializePMVASTField()
-        {
-            return PMVAST > 0;
-        }
-        public bool ShouldSerializePRedBCSTField()
-        {
-            return PRedBCST > 0;
-        }
-        public bool ShouldSerializeVBCFCPSTField()
-        {
-            return VBCFCPST > 0;
-        }
-        public bool ShouldSerializePFCPSTField()
-        {
-            return PFCPST > 0;
-        }
-        public bool ShouldSerializeVFCPSTField()
-        {
-            return VFCPST > 0;
-        }
-        public bool ShouldSerializeVICMSDesonField()
-        {
-            return VICMSDeson > 0;
-        }
-        public bool ShouldSerializeMotDesICMS()
-        {
-            return VICMSDeson > 0;
-        }
+        public bool ShouldSerializeVBCFCPField() => VBCFCP > 0;
+        public bool ShouldSerializePFCPField() => PFCP > 0;
+        public bool ShouldSerializeVFCPField() => VFCP > 0;
+        public bool ShouldSerializePMVASTField() => PMVAST > 0;
+        public bool ShouldSerializePRedBCSTField() => PRedBCST > 0;
+        public bool ShouldSerializeVBCFCPSTField() => VBCFCPST > 0;
+        public bool ShouldSerializePFCPSTField() => PFCPST > 0;
+        public bool ShouldSerializeVFCPSTField() => VFCPST > 0;
+        public bool ShouldSerializeVICMSDesonField() => VICMSDeson > 0;
+        public bool ShouldSerializeMotDesICMS() => VICMSDeson > 0;
 
         #endregion
     }
 
     [Serializable()]
     [XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/nfe")]
-    public partial class ICMS90 : ICMS70
+    public partial class ICMS90: ICMS70
     {
         [XmlElement("CST")]
         public override string CST { get; set; } = "90";
@@ -3231,7 +2871,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSTField;
             set
             {
-                if (value.Equals("10") || value.Equals("90"))
+                if(value.Equals("10") || value.Equals("90"))
                 {
                     CSTField = value;
                 }
@@ -3254,7 +2894,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -3270,7 +2910,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBC.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBC = valor;
                 }
@@ -3286,7 +2926,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMS.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMS = valor;
                 }
@@ -3302,7 +2942,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMS = valor;
                 }
@@ -3321,7 +2961,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PMVAST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PMVAST = valor;
                 }
@@ -3337,7 +2977,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBCST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBCST = valor;
                 }
@@ -3353,7 +2993,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCST = valor;
                 }
@@ -3369,7 +3009,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMSST = valor;
                 }
@@ -3385,7 +3025,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSST = valor;
                 }
@@ -3401,7 +3041,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PBCOp.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PBCOp = valor;
                 }
@@ -3413,18 +3053,9 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializePRedBCField()
-        {
-            return PRedBC > 0;
-        }
-        public bool ShouldSerializePRedBCSTField()
-        {
-            return PRedBCST > 0;
-        }
-        public bool ShouldSerializePMVASTField()
-        {
-            return PMVAST > 0;
-        }
+        public bool ShouldSerializePRedBCField() => PRedBC > 0;
+        public bool ShouldSerializePRedBCSTField() => PRedBCST > 0;
+        public bool ShouldSerializePMVASTField() => PMVAST > 0;
 
         #endregion
     }
@@ -3444,7 +3075,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSOSNField;
             set
             {
-                if (value.Equals("101"))
+                if(value.Equals("101"))
                 {
                     CSOSNField = value;
                 }
@@ -3464,7 +3095,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PCredSN.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PCredSN = valor;
                 }
@@ -3480,7 +3111,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VCredICMSSN.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VCredICMSSN = valor;
                 }
@@ -3503,7 +3134,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSOSNField;
             set
             {
-                if (value.Equals("102") || value.Equals("103") || value.Equals("300") || value.Equals("400"))
+                if(value.Equals("102") || value.Equals("103") || value.Equals("300") || value.Equals("400"))
                 {
                     CSOSNField = value;
                 }
@@ -3530,7 +3161,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSOSNField;
             set
             {
-                if (value.Equals("201"))
+                if(value.Equals("201"))
                 {
                     CSOSNField = value;
                 }
@@ -3553,7 +3184,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PMVAST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PMVAST = valor;
                 }
@@ -3569,7 +3200,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBCST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBCST = valor;
                 }
@@ -3585,7 +3216,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCST = valor;
                 }
@@ -3601,7 +3232,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMSST = valor;
                 }
@@ -3617,7 +3248,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSST = valor;
                 }
@@ -3633,7 +3264,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCFCPST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCFCPST = valor;
                 }
@@ -3649,7 +3280,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCPST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCPST = valor;
                 }
@@ -3665,7 +3296,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCPST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCPST = valor;
                 }
@@ -3681,7 +3312,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PCredSN.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PCredSN = valor;
                 }
@@ -3697,7 +3328,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VCredICMSSN.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VCredICMSSN = valor;
                 }
@@ -3706,14 +3337,8 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializePRedBCSTField()
-        {
-            return PRedBCST > 0;
-        }
-        public bool ShouldSerializePMVASTField()
-        {
-            return PMVAST > 0;
-        }
+        public bool ShouldSerializePRedBCSTField() => PRedBCST > 0;
+        public bool ShouldSerializePMVASTField() => PMVAST > 0;
 
         #endregion
     }
@@ -3733,7 +3358,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSOSNField;
             set
             {
-                if (value.Equals("202") || value.Equals("203"))
+                if(value.Equals("202") || value.Equals("203"))
                 {
                     CSOSNField = value;
                 }
@@ -3756,7 +3381,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PMVAST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PMVAST = valor;
                 }
@@ -3772,7 +3397,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBCST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBCST = valor;
                 }
@@ -3788,7 +3413,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCST = valor;
                 }
@@ -3804,7 +3429,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMSST = valor;
                 }
@@ -3820,7 +3445,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSST = valor;
                 }
@@ -3836,7 +3461,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCFCPST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCFCPST = valor;
                 }
@@ -3852,7 +3477,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCPST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCPST = valor;
                 }
@@ -3868,7 +3493,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCPST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCPST = valor;
                 }
@@ -3877,14 +3502,8 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializePRedBCSTField()
-        {
-            return PRedBCST > 0;
-        }
-        public bool ShouldSerializePMVASTField()
-        {
-            return PMVAST > 0;
-        }
+        public bool ShouldSerializePRedBCSTField() => PRedBCST > 0;
+        public bool ShouldSerializePMVASTField() => PMVAST > 0;
 
         #endregion
     }
@@ -3904,7 +3523,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSOSNField;
             set
             {
-                if (value.Equals("500"))
+                if(value.Equals("500"))
                 {
                     CSOSNField = value;
                 }
@@ -3924,7 +3543,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCSTRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCSTRet = valor;
                 }
@@ -3940,7 +3559,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PST = valor;
                 }
@@ -3956,7 +3575,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSSubstituto.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSSubstituto = valor;
                 }
@@ -3972,7 +3591,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSSTRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSSTRet = valor;
                 }
@@ -3988,7 +3607,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCFCPSTRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCFCPSTRet = valor;
                 }
@@ -4004,7 +3623,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCPSTRet.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCPSTRet = valor;
                 }
@@ -4020,7 +3639,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCPSTRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCPSTRet = valor;
                 }
@@ -4036,7 +3655,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBCEfet.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBCEfet = valor;
                 }
@@ -4052,7 +3671,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCEfet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCEfet = valor;
                 }
@@ -4068,7 +3687,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSEfet.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMSEfet = valor;
                 }
@@ -4084,7 +3703,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSEfet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSEfet = valor;
                 }
@@ -4093,50 +3712,17 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeVBCSTRetField()
-        {
-            return VBCSTRet > 0;
-        }
-        public bool ShouldSerializePSTField()
-        {
-            return PST > 0;
-        }
-        public bool ShouldSerializeVICMSSubstitutoField()
-        {
-            return VICMSSubstituto > 0;
-        }
-        public bool ShouldSerializeVICMSSTRetField()
-        {
-            return VICMSSTRet > 0;
-        }
-        public bool ShouldSerializeVBCFCPSTRetField()
-        {
-            return VBCFCPSTRet > 0;
-        }
-        public bool ShouldSerializePFCPSTRetField()
-        {
-            return PFCPSTRet > 0;
-        }
-        public bool ShouldSerializeVFCPSTRetField()
-        {
-            return VFCPSTRet > 0;
-        }
-        public bool ShouldSerializePRedBCEfetField()
-        {
-            return PRedBCEfet > 0;
-        }
-        public bool ShouldSerializeVBCEfetField()
-        {
-            return VBCEfet > 0;
-        }
-        public bool ShouldSerializePICMSEfetField()
-        {
-            return PICMSEfet > 0;
-        }
-        public bool ShouldSerializeVICMSEfetField()
-        {
-            return VICMSEfet > 0;
-        }
+        public bool ShouldSerializeVBCSTRetField() => VBCSTRet > 0;
+        public bool ShouldSerializePSTField() => PST > 0;
+        public bool ShouldSerializeVICMSSubstitutoField() => VICMSSubstituto > 0;
+        public bool ShouldSerializeVICMSSTRetField() => VICMSSTRet > 0;
+        public bool ShouldSerializeVBCFCPSTRetField() => VBCFCPSTRet > 0;
+        public bool ShouldSerializePFCPSTRetField() => PFCPSTRet > 0;
+        public bool ShouldSerializeVFCPSTRetField() => VFCPSTRet > 0;
+        public bool ShouldSerializePRedBCEfetField() => PRedBCEfet > 0;
+        public bool ShouldSerializeVBCEfetField() => VBCEfet > 0;
+        public bool ShouldSerializePICMSEfetField() => PICMSEfet > 0;
+        public bool ShouldSerializeVICMSEfetField() => VICMSEfet > 0;
 
         #endregion
     }
@@ -4156,7 +3742,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSOSNField;
             set
             {
-                if (value.Equals("900"))
+                if(value.Equals("900"))
                 {
                     CSOSNField = value;
                 }
@@ -4179,7 +3765,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -4195,7 +3781,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBC.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBC = valor;
                 }
@@ -4211,7 +3797,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMS.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMS = valor;
                 }
@@ -4227,7 +3813,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMS = valor;
                 }
@@ -4246,7 +3832,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PMVAST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PMVAST = valor;
                 }
@@ -4262,7 +3848,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PRedBCST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PRedBCST = valor;
                 }
@@ -4278,7 +3864,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCST = valor;
                 }
@@ -4294,7 +3880,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMSST = valor;
                 }
@@ -4310,7 +3896,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSST = valor;
                 }
@@ -4326,7 +3912,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCFCPST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCFCPST = valor;
                 }
@@ -4342,7 +3928,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCPST.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCPST = valor;
                 }
@@ -4358,7 +3944,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCPST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCPST = valor;
                 }
@@ -4374,7 +3960,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PCredSN.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PCredSN = valor;
                 }
@@ -4390,7 +3976,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VCredICMSSN.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VCredICMSSN = valor;
                 }
@@ -4399,70 +3985,22 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeModBC()
-        {
-            return ModBC != null;
-        }
-        public bool ShouldSerializeVBCField()
-        {
-            return VBC > 0;
-        }
-        public bool ShouldSerializePRedBCField()
-        {
-            return PRedBC > 0;
-        }
-        public bool ShouldSerializePICMSField()
-        {
-            return PICMS > 0;
-        }
-        public bool ShouldSerializeVICMSField()
-        {
-            return VICMS > 0;
-        }
-        public bool ShouldSerializeModBCST()
-        {
-            return ModBCST != null;
-        }
-        public bool ShouldSerializePMVASTField()
-        {
-            return PMVAST > 0;
-        }
-        public bool ShouldSerializePRedBCSTField()
-        {
-            return PRedBCST > 0;
-        }
-        public bool ShouldSerializeVBCSTField()
-        {
-            return VBCST > 0;
-        }
-        public bool ShouldSerializePICMSSTField()
-        {
-            return PICMSST > 0;
-        }
-        public bool ShouldSerializeVICMSSTField()
-        {
-            return VICMSST > 0;
-        }
-        public bool ShouldSerializeVBCFCPSTField()
-        {
-            return VBCFCPST > 0;
-        }
-        public bool ShouldSerializePFCPSTField()
-        {
-            return PFCPST > 0;
-        }
-        public bool ShouldSerializeVFCPSTField()
-        {
-            return VFCPST > 0;
-        }
-        public bool ShouldSerializePCredSNField()
-        {
-            return PCredSN > 0;
-        }
-        public bool ShouldSerializeVCredICMSSNField()
-        {
-            return VCredICMSSN > 0;
-        }
+        public bool ShouldSerializeModBC() => ModBC != null;
+        public bool ShouldSerializeVBCField() => VBC > 0;
+        public bool ShouldSerializePRedBCField() => PRedBC > 0;
+        public bool ShouldSerializePICMSField() => PICMS > 0;
+        public bool ShouldSerializeVICMSField() => VICMS > 0;
+        public bool ShouldSerializeModBCST() => ModBCST != null;
+        public bool ShouldSerializePMVASTField() => PMVAST > 0;
+        public bool ShouldSerializePRedBCSTField() => PRedBCST > 0;
+        public bool ShouldSerializeVBCSTField() => VBCST > 0;
+        public bool ShouldSerializePICMSSTField() => PICMSST > 0;
+        public bool ShouldSerializeVICMSSTField() => VICMSST > 0;
+        public bool ShouldSerializeVBCFCPSTField() => VBCFCPST > 0;
+        public bool ShouldSerializePFCPSTField() => PFCPST > 0;
+        public bool ShouldSerializeVFCPSTField() => VFCPST > 0;
+        public bool ShouldSerializePCredSNField() => PCredSN > 0;
+        public bool ShouldSerializeVCredICMSSNField() => VCredICMSSN > 0;
 
         #endregion
     }
@@ -4482,7 +4020,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSTField;
             set
             {
-                if (value.Equals("41") || value.Equals("60"))
+                if(value.Equals("41") || value.Equals("60"))
                 {
                     CSTField = value;
                 }
@@ -4502,7 +4040,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCSTRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCSTRet = valor;
                 }
@@ -4518,7 +4056,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSSTRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSSTRet = valor;
                 }
@@ -4534,7 +4072,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCSTDest.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCSTDest = valor;
                 }
@@ -4550,7 +4088,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSSTDest.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSSTDest = valor;
                 }
@@ -4582,18 +4120,9 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeCNPJProd()
-        {
-            return !string.IsNullOrWhiteSpace(CNPJProd);
-        }
-        public bool ShouldSerializeCSelo()
-        {
-            return !string.IsNullOrWhiteSpace(CSelo);
-        }
-        public bool ShouldSerializeQSelo()
-        {
-            return QSelo > 0;
-        }
+        public bool ShouldSerializeCNPJProd() => !string.IsNullOrWhiteSpace(CNPJProd);
+        public bool ShouldSerializeCSelo() => !string.IsNullOrWhiteSpace(CSelo);
+        public bool ShouldSerializeQSelo() => QSelo > 0;
 
         #endregion
     }
@@ -4610,7 +4139,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSTField;
             set
             {
-                if (value.Equals("01") || value.Equals("02") || value.Equals("03") ||
+                if(value.Equals("01") || value.Equals("02") || value.Equals("03") ||
                     value.Equals("04") || value.Equals("05") || value.Equals("51") ||
                     value.Equals("52") || value.Equals("53") || value.Equals("54") ||
                     value.Equals("55"))
@@ -4637,7 +4166,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSTField;
             set
             {
-                if (value.Equals("00") || value.Equals("49") || value.Equals("50") ||
+                if(value.Equals("00") || value.Equals("49") || value.Equals("50") ||
                     value.Equals("99"))
                 {
                     CSTField = value;
@@ -4658,7 +4187,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -4674,7 +4203,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PIPI.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PIPI = valor;
                 }
@@ -4690,7 +4219,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => QUnid.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     QUnid = valor;
                 }
@@ -4706,7 +4235,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VUnid.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VUnid = valor;
                 }
@@ -4722,7 +4251,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VIPI.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VIPI = valor;
                 }
@@ -4731,22 +4260,10 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeVBCField()
-        {
-            return VBC > 0;
-        }
-        public bool ShouldSerializePIPIField()
-        {
-            return PIPI > 0;
-        }
-        public bool ShouldSerializeQUnidField()
-        {
-            return QUnid > 0;
-        }
-        public bool ShouldSerializeVUnidField()
-        {
-            return VUnid > 0;
-        }
+        public bool ShouldSerializeVBCField() => VBC > 0;
+        public bool ShouldSerializePIPIField() => PIPI > 0;
+        public bool ShouldSerializeQUnidField() => QUnid > 0;
+        public bool ShouldSerializeVUnidField() => VUnid > 0;
 
         #endregion
     }
@@ -4780,7 +4297,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSTField;
             set
             {
-                if (value.Equals("01") || value.Equals("02"))
+                if(value.Equals("01") || value.Equals("02"))
                 {
                     CSTField = value;
                 }
@@ -4800,7 +4317,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -4816,7 +4333,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PPIS.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PPIS = valor;
                 }
@@ -4832,7 +4349,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VPIS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VPIS = valor;
                 }
@@ -4852,7 +4369,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSTField;
             set
             {
-                if (value.Equals("04") || value.Equals("05") || value.Equals("06") || value.Equals("07") || value.Equals("08") || value.Equals("09"))
+                if(value.Equals("04") || value.Equals("05") || value.Equals("06") || value.Equals("07") || value.Equals("08") || value.Equals("09"))
                 {
                     CSTField = value;
                 }
@@ -4876,7 +4393,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSTField;
             set
             {
-                if (value.Equals("49") || value.Equals("50") || value.Equals("51") || value.Equals("52") || value.Equals("53") || value.Equals("54") ||
+                if(value.Equals("49") || value.Equals("50") || value.Equals("51") || value.Equals("52") || value.Equals("53") || value.Equals("54") ||
                     value.Equals("55") || value.Equals("56") || value.Equals("60") || value.Equals("61") || value.Equals("62") || value.Equals("63") ||
                     value.Equals("64") || value.Equals("65") || value.Equals("66") || value.Equals("67") || value.Equals("70") || value.Equals("71") ||
                     value.Equals("72") || value.Equals("73") || value.Equals("74") || value.Equals("75") || value.Equals("98") || value.Equals("99"))
@@ -4899,7 +4416,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -4915,7 +4432,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PPIS.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PPIS = valor;
                 }
@@ -4937,7 +4454,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VPIS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VPIS = valor;
                 }
@@ -4946,22 +4463,10 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializePPISField()
-        {
-            return PPIS > 0;
-        }
-        public bool ShouldSerializQBCProd()
-        {
-            return QBCProd > 0;
-        }
-        public bool ShouldSerializeVAliqProd()
-        {
-            return VAliqProd > 0;
-        }
-        public bool ShouldSerializeVBCField()
-        {
-            return VBC > 0;
-        }
+        public bool ShouldSerializePPISField() => PPIS > 0;
+        public bool ShouldSerializQBCProd() => QBCProd > 0;
+        public bool ShouldSerializeVAliqProd() => VAliqProd > 0;
+        public bool ShouldSerializeVBCField() => VBC > 0;
 
         #endregion
     }
@@ -4981,7 +4486,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSTField;
             set
             {
-                if (value.Equals("03"))
+                if(value.Equals("03"))
                 {
                     CSTField = value;
                 }
@@ -5007,7 +4512,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VPIS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VPIS = valor;
                 }
@@ -5028,7 +4533,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -5044,7 +4549,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PPIS.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PPIS = valor;
                 }
@@ -5067,7 +4572,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VPIS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VPIS = valor;
                 }
@@ -5076,22 +4581,10 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializePPISField()
-        {
-            return PPIS > 0;
-        }
-        public bool ShouldSerializQBCProd()
-        {
-            return QBCProd > 0;
-        }
-        public bool ShouldSerializeVAliqProd()
-        {
-            return VAliqProd > 0;
-        }
-        public bool ShouldSerializeVBCField()
-        {
-            return VBC > 0;
-        }
+        public bool ShouldSerializePPISField() => PPIS > 0;
+        public bool ShouldSerializQBCProd() => QBCProd > 0;
+        public bool ShouldSerializeVAliqProd() => VAliqProd > 0;
+        public bool ShouldSerializeVBCField() => VBC > 0;
 
         #endregion
     }
@@ -5125,7 +4618,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSTField;
             set
             {
-                if (value.Equals("01") || value.Equals("02"))
+                if(value.Equals("01") || value.Equals("02"))
                 {
                     CSTField = value;
                 }
@@ -5145,7 +4638,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -5161,7 +4654,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PCOFINS.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PCOFINS = valor;
                 }
@@ -5177,7 +4670,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VCOFINS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VCOFINS = valor;
                 }
@@ -5197,7 +4690,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSTField;
             set
             {
-                if (value.Equals("04") || value.Equals("05") || value.Equals("06") || value.Equals("07") || value.Equals("08") || value.Equals("09"))
+                if(value.Equals("04") || value.Equals("05") || value.Equals("06") || value.Equals("07") || value.Equals("08") || value.Equals("09"))
                 {
                     CSTField = value;
                 }
@@ -5221,7 +4714,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSTField;
             set
             {
-                if (value.Equals("49") || value.Equals("50") || value.Equals("51") || value.Equals("52") || value.Equals("53") || value.Equals("54") ||
+                if(value.Equals("49") || value.Equals("50") || value.Equals("51") || value.Equals("52") || value.Equals("53") || value.Equals("54") ||
                     value.Equals("55") || value.Equals("56") || value.Equals("60") || value.Equals("61") || value.Equals("62") || value.Equals("63") ||
                     value.Equals("64") || value.Equals("65") || value.Equals("66") || value.Equals("67") || value.Equals("70") || value.Equals("71") ||
                     value.Equals("72") || value.Equals("73") || value.Equals("74") || value.Equals("75") || value.Equals("98") || value.Equals("99"))
@@ -5244,7 +4737,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -5260,7 +4753,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PCOFINS.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PCOFINS = valor;
                 }
@@ -5282,7 +4775,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VCOFINS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VCOFINS = valor;
                 }
@@ -5291,22 +4784,10 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializePCOFINSField()
-        {
-            return PCOFINS > 0;
-        }
-        public bool ShouldSerializQBCProd()
-        {
-            return QBCProd > 0;
-        }
-        public bool ShouldSerializeVAliqProd()
-        {
-            return VAliqProd > 0;
-        }
-        public bool ShouldSerializeVBCField()
-        {
-            return VBC > 0;
-        }
+        public bool ShouldSerializePCOFINSField() => PCOFINS > 0;
+        public bool ShouldSerializQBCProd() => QBCProd > 0;
+        public bool ShouldSerializeVAliqProd() => VAliqProd > 0;
+        public bool ShouldSerializeVBCField() => VBC > 0;
 
         #endregion
     }
@@ -5326,7 +4807,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => CSTField;
             set
             {
-                if (value.Equals("03"))
+                if(value.Equals("03"))
                 {
                     CSTField = value;
                 }
@@ -5352,7 +4833,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VCOFINS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VCOFINS = valor;
                 }
@@ -5373,7 +4854,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -5389,7 +4870,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PCOFINS.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PCOFINS = valor;
                 }
@@ -5411,7 +4892,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VCOFINS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VCOFINS = valor;
                 }
@@ -5420,22 +4901,10 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializePCOFINSField()
-        {
-            return PCOFINS > 0;
-        }
-        public bool ShouldSerializQBCProd()
-        {
-            return QBCProd > 0;
-        }
-        public bool ShouldSerializeVAliqProd()
-        {
-            return VAliqProd > 0;
-        }
-        public bool ShouldSerializeVBCField()
-        {
-            return VBC > 0;
-        }
+        public bool ShouldSerializePCOFINSField() => PCOFINS > 0;
+        public bool ShouldSerializQBCProd() => QBCProd > 0;
+        public bool ShouldSerializeVAliqProd() => VAliqProd > 0;
+        public bool ShouldSerializeVBCField() => VBC > 0;
 
         #endregion
     }
@@ -5453,7 +4922,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCUFDest.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCUFDest = valor;
                 }
@@ -5469,7 +4938,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCFCPUFDest.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCFCPUFDest = valor;
                 }
@@ -5485,7 +4954,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PFCPUFDest.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PFCPUFDest = valor;
                 }
@@ -5501,7 +4970,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSUFDest.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMSUFDest = valor;
                 }
@@ -5516,7 +4985,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSInterField2;
             set
             {
-                if (value == 4 || value == 7 || value == 12)
+                if(value == 4 || value == 7 || value == 12)
                 {
                     PICMSInterField2 = value;
                 }
@@ -5533,7 +5002,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSInter.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMSInter = valor;
                 }
@@ -5549,7 +5018,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSInterPart.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMSInterPart = valor;
                 }
@@ -5565,7 +5034,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCPUFDest.ToString("F4", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCPUFDest = valor;
                 }
@@ -5581,7 +5050,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSUFDest.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSUFDest = valor;
                 }
@@ -5597,7 +5066,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSUFRemet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSUFRemet = valor;
                 }
@@ -5606,18 +5075,9 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeVBCFCPUFDestField()
-        {
-            return VBCFCPUFDest > 0;
-        }
-        public bool ShouldSerializePFCPUFDestField()
-        {
-            return PFCPUFDest > 0;
-        }
-        public bool ShouldSerializeVFCPUFDestField()
-        {
-            return VFCPUFDest > 0;
-        }
+        public bool ShouldSerializeVBCFCPUFDestField() => VBCFCPUFDest > 0;
+        public bool ShouldSerializePFCPUFDestField() => PFCPUFDest > 0;
+        public bool ShouldSerializeVFCPUFDestField() => VFCPUFDest > 0;
 
         #endregion
     }
@@ -5635,7 +5095,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PDevol.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PDevol = valor;
                 }
@@ -5659,7 +5119,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VIPIDevol.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VIPIDevol = valor;
                 }
@@ -5696,7 +5156,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBC.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBC = valor;
                 }
@@ -5711,7 +5171,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMS = valor;
                 }
@@ -5726,7 +5186,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSDeson.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSDeson = valor;
                 }
@@ -5741,7 +5201,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCPUFDest.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCPUFDest = valor;
                 }
@@ -5756,7 +5216,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSUFDest.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSUFDest = valor;
                 }
@@ -5771,7 +5231,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSUFRemet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSUFRemet = valor;
                 }
@@ -5786,7 +5246,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCP.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCP = valor;
                 }
@@ -5801,7 +5261,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCST = valor;
                 }
@@ -5816,7 +5276,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VST = valor;
                 }
@@ -5831,7 +5291,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCPST.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCPST = valor;
                 }
@@ -5846,7 +5306,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFCPSTRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFCPSTRet = valor;
                 }
@@ -5861,7 +5321,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VProd.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VProd = valor;
                 }
@@ -5876,7 +5336,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFrete.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFrete = valor;
                 }
@@ -5891,7 +5351,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VSeg.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VSeg = valor;
                 }
@@ -5906,7 +5366,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VDesc.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VDesc = valor;
                 }
@@ -5921,7 +5381,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VII.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VII = valor;
                 }
@@ -5936,7 +5396,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VIPI.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VIPI = valor;
                 }
@@ -5951,7 +5411,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VIPIDevol.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VIPIDevol = valor;
                 }
@@ -5966,7 +5426,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VPIS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VPIS = valor;
                 }
@@ -5981,7 +5441,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VCOFINS.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VCOFINS = valor;
                 }
@@ -5996,7 +5456,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VOutro.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VOutro = valor;
                 }
@@ -6011,7 +5471,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VNF.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VNF = valor;
                 }
@@ -6026,7 +5486,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VTotTrib.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VTotTrib = valor;
                 }
@@ -6035,22 +5495,10 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeVFCPUFDestField()
-        {
-            return VFCPUFDest > 0;
-        }
-        public bool ShouldSerializeVICMSUFDestField()
-        {
-            return VICMSUFDest > 0;
-        }
-        public bool ShouldSerializeVICMSUFRemetField()
-        {
-            return VICMSUFRemet > 0;
-        }
-        public bool ShouldSerializeVTotTribField()
-        {
-            return VTotTrib > 0;
-        }
+        public bool ShouldSerializeVFCPUFDestField() => VFCPUFDest > 0;
+        public bool ShouldSerializeVICMSUFDestField() => VICMSUFDest > 0;
+        public bool ShouldSerializeVICMSUFRemetField() => VICMSUFRemet > 0;
+        public bool ShouldSerializeVTotTribField() => VTotTrib > 0;
 
         #endregion
     }
@@ -6085,14 +5533,8 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeVagao()
-        {
-            return !string.IsNullOrWhiteSpace(Vagao);
-        }
-        public bool ShouldSerializeBalsa()
-        {
-            return !string.IsNullOrWhiteSpace(Balsa);
-        }
+        public bool ShouldSerializeVagao() => !string.IsNullOrWhiteSpace(Vagao);
+        public bool ShouldSerializeBalsa() => !string.IsNullOrWhiteSpace(Balsa);
 
         #endregion
     }
@@ -6124,34 +5566,13 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeCNPJ()
-        {
-            return !string.IsNullOrWhiteSpace(CNPJ);
-        }
-        public bool ShouldSerializeCPF()
-        {
-            return !string.IsNullOrWhiteSpace(CPF);
-        }
-        public bool ShouldSerializeXNome()
-        {
-            return !string.IsNullOrWhiteSpace(XNome);
-        }
-        public bool ShouldSerializeIE()
-        {
-            return !string.IsNullOrWhiteSpace(IE);
-        }
-        public bool ShouldSerializeXEnder()
-        {
-            return !string.IsNullOrWhiteSpace(XEnder);
-        }
-        public bool ShouldSerializeXMun()
-        {
-            return !string.IsNullOrWhiteSpace(XMun);
-        }
-        public bool ShouldSerializeUF()
-        {
-            return Enum.IsDefined(typeof(UFBrasil), UF);
-        }
+        public bool ShouldSerializeCNPJ() => !string.IsNullOrWhiteSpace(CNPJ);
+        public bool ShouldSerializeCPF() => !string.IsNullOrWhiteSpace(CPF);
+        public bool ShouldSerializeXNome() => !string.IsNullOrWhiteSpace(XNome);
+        public bool ShouldSerializeIE() => !string.IsNullOrWhiteSpace(IE);
+        public bool ShouldSerializeXEnder() => !string.IsNullOrWhiteSpace(XEnder);
+        public bool ShouldSerializeXMun() => !string.IsNullOrWhiteSpace(XMun);
+        public bool ShouldSerializeUF() => Enum.IsDefined(typeof(UFBrasil), UF);
 
         #endregion
     }
@@ -6169,7 +5590,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VServ.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VServ = valor;
                 }
@@ -6185,7 +5606,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VBCRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VBCRet = valor;
                 }
@@ -6201,7 +5622,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PICMSRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PICMSRet = valor;
                 }
@@ -6217,7 +5638,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VICMSRet.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VICMSRet = valor;
                 }
@@ -6244,20 +5665,17 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeRNTC()
-        {
-            return !string.IsNullOrWhiteSpace(RNTC);
-        }
+        public bool ShouldSerializeRNTC() => !string.IsNullOrWhiteSpace(RNTC);
 
         #endregion
     }
 
     [Serializable()]
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/nfe")]
-    public partial class VeicTransp : VeiculoBase { }
+    public partial class VeicTransp: VeiculoBase { }
     [Serializable()]
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/nfe")]
-    public partial class Reboque : VeiculoBase { }
+    public partial class Reboque: VeiculoBase { }
 
     [Serializable()]
     [XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/nfe")]
@@ -6284,7 +5702,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PesoL.ToString("F3", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PesoL = valor;
                 }
@@ -6300,7 +5718,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => PesoB.ToString("F3", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     PesoB = valor;
                 }
@@ -6312,30 +5730,12 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeEsp()
-        {
-            return !string.IsNullOrWhiteSpace(Esp);
-        }
-        public bool ShouldSerializeMarca()
-        {
-            return !string.IsNullOrWhiteSpace(Marca);
-        }
-        public bool ShouldSerializeNVol()
-        {
-            return !string.IsNullOrWhiteSpace(NVol);
-        }
-        public bool ShouldSerializeQVol()
-        {
-            return QVol > 0;
-        }
-        public bool ShouldSerializePesoLField()
-        {
-            return PesoL > 0;
-        }
-        public bool ShouldSerializePesoBField()
-        {
-            return PesoB > 0;
-        }
+        public bool ShouldSerializeEsp() => !string.IsNullOrWhiteSpace(Esp);
+        public bool ShouldSerializeMarca() => !string.IsNullOrWhiteSpace(Marca);
+        public bool ShouldSerializeNVol() => !string.IsNullOrWhiteSpace(NVol);
+        public bool ShouldSerializeQVol() => QVol > 0;
+        public bool ShouldSerializePesoLField() => PesoL > 0;
+        public bool ShouldSerializePesoBField() => PesoB > 0;
 
         #endregion
 
@@ -6376,7 +5776,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VOrig.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VOrig = valor;
                 }
@@ -6392,7 +5792,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VDesc.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VDesc = valor;
                 }
@@ -6408,7 +5808,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VLiq.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VLiq = valor;
                 }
@@ -6442,7 +5842,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VDup.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VDup = valor;
                 }
@@ -6466,7 +5866,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VTroco.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VTroco = valor;
                 }
@@ -6493,7 +5893,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VPag.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VPag = valor;
                 }
@@ -6503,10 +5903,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("card")]
         public Card Card { get; set; }
 
-        public bool ShouldSerializeIndPag()
-        {
-            return IndPag != null;
-        }
+        public bool ShouldSerializeIndPag() => IndPag != null;
     }
 
     [Serializable()]
@@ -6527,18 +5924,9 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeCNPJ()
-        {
-            return TpIntegra == TipoIntegracaoPagamento.PagamentoIntegrado;
-        }
-        public bool ShouldSerializeTBand()
-        {
-            return TpIntegra == TipoIntegracaoPagamento.PagamentoIntegrado;
-        }
-        public bool ShouldSerializeCAut()
-        {
-            return TpIntegra == TipoIntegracaoPagamento.PagamentoIntegrado;
-        }
+        public bool ShouldSerializeCNPJ() => TpIntegra == TipoIntegracaoPagamento.PagamentoIntegrado;
+        public bool ShouldSerializeTBand() => TpIntegra == TipoIntegracaoPagamento.PagamentoIntegrado;
+        public bool ShouldSerializeCAut() => TpIntegra == TipoIntegracaoPagamento.PagamentoIntegrado;
 
         #endregion
     }
@@ -6567,14 +5955,8 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeInfAdFisco()
-        {
-            return !string.IsNullOrWhiteSpace(InfAdFisco);
-        }
-        public bool ShouldSerializeInfCpl()
-        {
-            return !string.IsNullOrWhiteSpace(InfCpl);
-        }
+        public bool ShouldSerializeInfAdFisco() => !string.IsNullOrWhiteSpace(InfAdFisco);
+        public bool ShouldSerializeInfCpl() => !string.IsNullOrWhiteSpace(InfCpl);
 
         #endregion
     }
@@ -6624,7 +6006,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => UFSaidaPaisField;
             set
             {
-                if (value == UFBrasil.EX || value == UFBrasil.AN)
+                if(value == UFBrasil.EX || value == UFBrasil.AN)
                 {
                     throw new Exception("Conteúdo da TAG <UFSaidaPais> inválido. Não pode ser informado EX ou AN.");
                 }
@@ -6643,10 +6025,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeXLocDespacho()
-        {
-            return !string.IsNullOrWhiteSpace(XLocDespacho);
-        }
+        public bool ShouldSerializeXLocDespacho() => !string.IsNullOrWhiteSpace(XLocDespacho);
 
         #endregion
     }
@@ -6666,18 +6045,9 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeXNEmp()
-        {
-            return !string.IsNullOrWhiteSpace(XNEmp);
-        }
-        public bool ShouldSerializeXPed()
-        {
-            return !string.IsNullOrWhiteSpace(XPed);
-        }
-        public bool ShouldSerializeXCont()
-        {
-            return !string.IsNullOrWhiteSpace(XCont);
-        }
+        public bool ShouldSerializeXNEmp() => !string.IsNullOrWhiteSpace(XNEmp);
+        public bool ShouldSerializeXPed() => !string.IsNullOrWhiteSpace(XPed);
+        public bool ShouldSerializeXCont() => !string.IsNullOrWhiteSpace(XCont);
 
         #endregion
     }
@@ -6704,7 +6074,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => QTotMes.ToString("F10", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     QTotMes = valor;
                 }
@@ -6720,7 +6090,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => QTotAnt.ToString("F10", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     QTotAnt = valor;
                 }
@@ -6736,7 +6106,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => QTotGer.ToString("F10", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     QTotGer = valor;
                 }
@@ -6755,7 +6125,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VFor.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VFor = valor;
                 }
@@ -6771,7 +6141,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VTotDed.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VTotDed = valor;
                 }
@@ -6787,7 +6157,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VLiqFor.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VLiqFor = valor;
                 }
@@ -6808,7 +6178,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => Qtde.ToString("F10", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     Qtde = valor;
                 }
@@ -6835,7 +6205,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => VDed.ToString("F2", CultureInfo.InvariantCulture);
             set
             {
-                if (double.TryParse(value, out double valor))
+                if(double.TryParse(value, out var valor))
                 {
                     VDed = valor;
                 }
@@ -6867,14 +6237,8 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeIdCSRT()
-        {
-            return !string.IsNullOrWhiteSpace(IdCSRT);
-        }
-        public bool ShouldSerializeHashCSRT()
-        {
-            return HashCSRT != null;
-        }
+        public bool ShouldSerializeIdCSRT() => !string.IsNullOrWhiteSpace(IdCSRT);
+        public bool ShouldSerializeHashCSRT() => HashCSRT != null;
 
         #endregion
     }

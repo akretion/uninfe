@@ -60,8 +60,8 @@
       <Descricao>Consulta cadastro do contribuinte</Descricao>
       <WebEnderecoHomologacao>https://cad.svrs.rs.gov.br/ws/cadconsultacadastro/cadconsultacadastro4.asmx</WebEnderecoHomologacao>
       <WebEnderecoProducao>https://cad.svrs.rs.gov.br/ws/cadconsultacadastro/cadconsultacadastro4.asmx</WebEnderecoProducao>
-      <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4/consultaCadastro</WebActionHomologacao>
-      <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4/consultaCadastro</WebActionProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4</WebActionProducao>
       <WebContentType></WebContentType>
       <WebSoapString></WebSoapString>
       <WebTagRetorno>nfeResultMsg</WebTagRetorno>

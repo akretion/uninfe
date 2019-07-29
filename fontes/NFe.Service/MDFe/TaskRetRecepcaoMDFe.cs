@@ -391,7 +391,7 @@ namespace NFe.Service
                                     conteudoXMLLote = new XmlDocument();
                                     conteudoXMLLote.Load(strArquivoNFe);
                                 }
-                                oLerXml.Nfe(conteudoXMLLote);
+                                oLerXml.Mdfe(conteudoXMLLote);
 
                                 //Verificar se a -nfe.xml existe na pasta de autorizados
                                 bool NFeJaNaAutorizada = oAux.EstaAutorizada(strArquivoNFe, oLerXml.oDadosNfe.dEmi, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.MDFe).EnvioXML);

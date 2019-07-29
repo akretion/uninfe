@@ -82,7 +82,7 @@ namespace NFe.Service
 
                 if (Servico == Servicos.MDFeEnviarLote)
                 {
-                    wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(lerXml.oDadosNfe.cUF), Servico));
+                    oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(lerXml.oDadosNfe.cUF), Servico));
 
                     //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                     wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), lerXml.oDadosNfe.cUF);

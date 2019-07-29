@@ -40,13 +40,10 @@
     <None Update="Servicos\NFe\Config\PE.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Servicos\NFe\Config\AN.xml">
+    <None Update="Servicos\NFe\Config\SVCRS.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Servicos\NFe\Config\SVC-RS.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Servicos\NFe\Config\SVC-AN.xml">
+    <None Update="Servicos\NFe\Config\SVCAN.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Servicos\NFe\Config\SVAN.xml">
