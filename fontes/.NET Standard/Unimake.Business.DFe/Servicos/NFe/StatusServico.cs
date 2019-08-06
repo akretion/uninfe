@@ -47,5 +47,10 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         public StatusServico(ConsStatServ consStatServ, Configuracao configuracao)
                     : this(consStatServ.GerarXML(), configuracao) { }
+
+        public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML)
+        {
+            throw new System.Exception("Não existe XML de distribuição para consulta status do serviço.");
+        }
     }
 }

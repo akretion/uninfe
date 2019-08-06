@@ -470,7 +470,7 @@ namespace NFe.Validate
                     conteudoXML.Load(Arquivo);
 
                     QRCodeMDFe qrCodeMDFe = new QRCodeMDFe(conteudoXML);
-                    qrCodeMDFe.MontarLinkQRCode();
+                    qrCodeMDFe.MontarLinkQRCode(Empresas.Configuracoes[emp].X509Certificado);
 
                     StreamWriter sw = File.CreateText(Arquivo);
                     sw.Write(conteudoXML.OuterXml);

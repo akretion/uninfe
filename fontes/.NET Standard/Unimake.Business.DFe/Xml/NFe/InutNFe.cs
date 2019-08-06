@@ -13,6 +13,9 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         [XmlElement("infInut")]
         public InutNFeInfInut InfInut = new InutNFeInfInut();
+
+        [XmlElement(ElementName = "Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+        public Signature Signature { get; set; }
     }
 
     public class InutNFeInfInut

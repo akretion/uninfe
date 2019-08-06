@@ -12,10 +12,10 @@ namespace Unimake.Business.DFe.Xml.NFe
         public string Versao { get; set; }
 
         [XmlElement(ElementName = "infInut")]
-        public InfInut infInut = new InfInut();
+        public InfInut InfInut = new InfInut();
     }
 
-    public partial class InfInut
+    public class InfInut
     {     
         [XmlElement("tpAmb")]
         public TipoAmbiente TpAmb { get; set; }
@@ -45,11 +45,18 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("CNPJ")]
         public string CNPJ { get; set; }
 
-        [XmlElement("TMod")]
-        public ModeloDFe TMod { get; set; }
+        [XmlIgnore]
+        public ModeloDFe Mod { get; set; }
+
+        [XmlElement("mod")]
+        public int ModField
+        {
+            get => (int)Mod;
+            set => Mod = (ModeloDFe)Enum.Parse(typeof(ModeloDFe), value.ToString());
+        }
 
         [XmlElement("serie")]
-        public bool Serie { get; set; }
+        public int Serie { get; set; }
 
         [XmlElement("nNFIni")]
         public string NNFIni { get; set; }

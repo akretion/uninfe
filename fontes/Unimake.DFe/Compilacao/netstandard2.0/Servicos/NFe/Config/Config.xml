@@ -46,12 +46,12 @@
     <ArqConfig>BA.xml</ArqConfig>
   </Arquivo>
   <Arquivo ID="23">
-    <Nome>Ceara</Nome>
+    <Nome>Ceará</Nome>
     <UF>CE</UF>
     <ArqConfig>CE.xml</ArqConfig>
   </Arquivo>
   <Arquivo ID="52">
-    <Nome>Goias</Nome>
+    <Nome>Goiás</Nome>
     <UF>GO</UF>
     <ArqConfig>GO.xml</ArqConfig>
   </Arquivo>
@@ -61,7 +61,7 @@
     <ArqConfig>PE.xml</ArqConfig>
   </Arquivo>
   <Arquivo ID="15">
-    <Nome>Para</Nome>
+    <Nome>Pará</Nome>
     <UF>PA</UF>
     <ArqConfig>SVAN.xml</ArqConfig>
   </Arquivo>
@@ -76,7 +76,7 @@
     <ArqConfig>SVRS.xml</ArqConfig>
   </Arquivo>
   <Arquivo ID="16">
-    <Nome>Amapa</Nome>
+    <Nome>Amapá</Nome>
     <UF>AP</UF>
     <ArqConfig>SVRS.xml</ArqConfig>
   </Arquivo>
@@ -91,12 +91,12 @@
     <ArqConfig>SVRS.xml</ArqConfig>
   </Arquivo>
   <Arquivo ID="25">
-    <Nome>Paraiba</Nome>
+    <Nome>Paraíba</Nome>
     <UF>PB</UF>
     <ArqConfig>SVRS.xml</ArqConfig>
   </Arquivo>
   <Arquivo ID="22">
-    <Nome>Piaui</Nome>
+    <Nome>Piauí</Nome>
     <UF>PI</UF>
     <ArqConfig>SVRS.xml</ArqConfig>
   </Arquivo>
@@ -106,7 +106,7 @@
     <ArqConfig>SVRS.xml</ArqConfig>
   </Arquivo>
   <Arquivo ID="11">
-    <Nome>Rondonia</Nome>
+    <Nome>Rondônia</Nome>
     <UF>RO</UF>
     <ArqConfig>SVRS.xml</ArqConfig>
   </Arquivo>
@@ -129,5 +129,10 @@
     <Nome>Tocantins</Nome>
     <UF>TO</UF>
     <ArqConfig>SVRS.xml</ArqConfig>
+  </Arquivo>
+<Arquivo ID="21">
+    <Nome>Maranhão</Nome>
+    <UF>MA</UF>
+    <ArqConfig>SVAN.xml</ArqConfig>
   </Arquivo>
 </Configuracoes>

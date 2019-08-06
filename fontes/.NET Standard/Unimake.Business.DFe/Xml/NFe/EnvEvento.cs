@@ -4,6 +4,7 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
+using Unimake.Business.DFe.Utility;
 
 namespace Unimake.Business.DFe.Xml.NFe
 {
@@ -28,13 +29,28 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         public override XmlDocument GerarXML()
         {
-            XmlDocument xmlDocument = base.GerarXML();
+            var xmlDocument = base.GerarXML();
 
-            XmlRootAttribute attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
-            XmlElement xmlElement = (XmlElement)xmlDocument.GetElementsByTagName("evento")[0];
+            var attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
+            var xmlElement = (XmlElement)xmlDocument.GetElementsByTagName("evento")[0];
             xmlElement.SetAttribute("xmlns", attribute.Namespace);
 
             return xmlDocument;
+        }
+
+        public override T LerXML<T>(XmlDocument doc)
+        {
+            T retornar = base.LerXML<T>(doc);
+
+            if (doc.GetElementsByTagName("Signature")[0] != null)
+            {
+                XmlDocument signatureEvento = new XmlDocument();
+
+                signatureEvento.LoadXml(doc.GetElementsByTagName("Signature")[0].OuterXml);
+                ((EnvEvento)(object)retornar).Evento[0].Signature = XMLUtility.Deserializar<Signature>(signatureEvento);
+            }
+
+            return retornar;
         }
 
         #endregion Public Methods
@@ -48,6 +64,9 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         [XmlElement("infEvento", Order = 0)]
         public InfEvento InfEvento { get; set; }
+
+        [XmlElement("Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#", Order = 1)]
+        public Signature Signature { get; set; }
 
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }
@@ -119,7 +138,6 @@ namespace Unimake.Business.DFe.Xml.NFe
 
                 _detEvento.XmlReader = value.XmlReader;
                 _detEvento.ProcessReader();
-                _detEvento.Versao = VerEvento;
             }
         }
 
@@ -156,10 +174,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region Public Constructors
 
-        public InfEvento()
-        {
-            throw new ArgumentNullException("Utilize, de forma obrigatória, o construtor com parâmetro!");
-        }
+        public InfEvento() { }
 
         public InfEvento(EventoDetalhe detEvento)
         {
@@ -198,9 +213,6 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region Public Properties
 
-        [XmlAttribute(AttributeName = "versao", DataType = "token")]
-        public override string Versao { get; set; }
-
         [XmlElement("descEvento", Order = 0)]
         public override string DescEvento { get; set; } = "Cancelamento";
 
@@ -216,10 +228,12 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         public override void WriteXml(XmlWriter writer)
         {
+            base.WriteXml(writer);
+
             writer.WriteRaw($@"
-        <descEvento>{DescEvento}</descEvento>
-        <nProt>{NProt}</nProt>
-        <xJust>{XJust}</xJust>");
+            <descEvento>{DescEvento}</descEvento>
+            <nProt>{NProt}</nProt>
+            <xJust>{XJust}</xJust>");
         }
 
         #endregion Public Methods
@@ -239,9 +253,6 @@ namespace Unimake.Business.DFe.Xml.NFe
         #endregion Internal Methods
 
         #region Public Properties
-
-        [XmlAttribute(AttributeName = "versao", DataType = "token")]
-        public override string Versao { get; set; }
 
         [XmlElement("descEvento", Order = 0)]
         public override string DescEvento { get; set; } = "Carta de Correcao";
@@ -283,8 +294,8 @@ namespace Unimake.Business.DFe.Xml.NFe
                 return;
             }
 
-            PropertyInfo pi = default(PropertyInfo);
-            Type type = GetType();
+            var pi = default(PropertyInfo);
+            var type = GetType();
 
             while (XmlReader.Read())
             {
@@ -327,6 +338,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         public virtual void WriteXml(XmlWriter writer)
         {
+            writer.WriteAttributeString("versao", Versao);
         }
 
         #endregion Public Methods

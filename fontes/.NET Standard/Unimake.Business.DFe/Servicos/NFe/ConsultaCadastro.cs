@@ -67,5 +67,10 @@ namespace Unimake.Business.DFe.Servicos.NFe
                 }
             }
         }
+
+        public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML)
+        {
+            throw new System.Exception("Não existe XML de distribuição para consulta cadastro do contribuinte.");
+        }
     }
 }

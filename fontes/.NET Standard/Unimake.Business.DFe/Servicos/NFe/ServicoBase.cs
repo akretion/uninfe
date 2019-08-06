@@ -11,16 +11,18 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// <summary>
         /// Definir configurações
         /// </summary>
-        protected override void DefinirConfiguracao() =>
+        protected override void DefinirConfiguracao()
+        {
             //Definir a pasta onde fica o schema do XML
             Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.SchemaPasta;
+        }
 
         /// <summary>
         /// Validar o XML
         /// </summary>
         protected override void XmlValidar()
         {
-            var validar = new ValidarSchema();
+            ValidarSchema validar = new ValidarSchema();
             validar.Validar(ConteudoXML, Path.Combine(Configuracoes.SchemaPasta, Configuracoes.SchemaArquivo), Configuracoes.TargetNS);
 
             if (!validar.Success)
@@ -52,7 +54,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         {
             XmlValidar();
 
-            var soap = new WSSoap
+            WSSoap soap = new WSSoap
             {
                 EnderecoWeb = (Configuracoes.TipoAmbiente == TipoAmbiente.Producao ? Configuracoes.WebEnderecoProducao : Configuracoes.WebEnderecoHomologacao),
                 ActionWeb = (Configuracoes.TipoAmbiente == TipoAmbiente.Producao ? Configuracoes.WebActionProducao : Configuracoes.WebActionHomologacao),
@@ -62,11 +64,37 @@ namespace Unimake.Business.DFe.Servicos.NFe
                 ContentType = Configuracoes.WebContentType
             };
 
-            var consumirWS = new ConsumirWS();
+            ConsumirWS consumirWS = new ConsumirWS();
             consumirWS.ExecutarServico(ConteudoXML, soap, Configuracoes.CertificadoDigital);
 
             RetornoWSString = consumirWS.RetornoServicoString;
             RetornoWSXML = consumirWS.RetornoServicoXML;
+        }
+
+        /// <summary>
+        /// Gravar o XML de distribuição em uma pasta no HD
+        /// </summary>
+        /// <param name="pasta">Pasta onde deve ser gravado o XML no HD</param>
+        /// <param name="nomeArquivo">Nome do arquivo a ser gravado no HD</param>
+        /// <param name="conteudoXML">String contendo o conteúdo do XML a ser gravado no HD</param>
+        public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML)
+        {
+            StreamWriter streamWriter = null;
+
+            try
+            {
+                string conteudoXmlDistribuicao = conteudoXML;
+
+                streamWriter = File.CreateText(Path.Combine(pasta, nomeArquivo));
+                streamWriter.Write(conteudoXmlDistribuicao);
+            }
+            finally
+            {
+                if (streamWriter != null)
+                {
+                    streamWriter.Close();
+                }
+            }
         }
 
         #endregion Public Methods

@@ -83,7 +83,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
     [Serializable()]
     [XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/nfe")]
-    public partial class InfCad
+    public class InfCad
     {
         [XmlElement("IE")]
         public string IE { get; set; }
@@ -173,7 +173,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
     [Serializable()]
     [XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/nfe")]
-    public partial class Ender
+    public class Ender
     {
         [XmlElement("xLgr")]
         public string XLgr { get; set; }

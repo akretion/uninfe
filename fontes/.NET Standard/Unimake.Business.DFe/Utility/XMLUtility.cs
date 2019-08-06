@@ -21,7 +21,7 @@ namespace Unimake.Business.DFe.Utility
             #endregion Public Properties
         }
 
-        public class Utf8StringWriter : StringWriter
+        public class Utf8StringWriter: StringWriter
         {
             #region Public Properties
 
@@ -46,7 +46,7 @@ namespace Unimake.Business.DFe.Utility
 
             chave = chave.Replace("NFe", "");
 
-            if (chave.Length != 43)
+            if(chave.Length != 43)
             {
                 throw new Exception(string.Format("Erro na composição da chave [{0}] para obter o dígito verificador.", chave) + Environment.NewLine);
             }
@@ -56,13 +56,13 @@ namespace Unimake.Business.DFe.Utility
                 Digito = -1;
                 try
                 {
-                    for (i = 0; i < 43; ++i)
+                    for(i = 0; i < 43; ++i)
                     {
                         j += Convert.ToInt32(chave.Substring(i, 1)) * Convert.ToInt32(PESO.Substring(i, 1));
                     }
 
                     Digito = 11 - (j % 11);
-                    if ((j % 11) < 2)
+                    if((j % 11) < 2)
                     {
                         Digito = 0;
                     }
@@ -72,7 +72,7 @@ namespace Unimake.Business.DFe.Utility
                     Digito = -1;
                 }
 
-                if (Digito == -1)
+                if(Digito == -1)
                 {
                     throw new Exception(string.Format("Erro no cálculo do dígito verificador da chave [{0}].", chave) + Environment.NewLine);
                 }
@@ -90,10 +90,10 @@ namespace Unimake.Business.DFe.Utility
         public static T Deserializar<T>(XmlDocument doc)
             where T : new()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
+            var serializer = new XmlSerializer(typeof(T));
             Stream stream = StringXmlToStream(doc.OuterXml);
-            StreamReader reader = new StreamReader(stream);
-            T objeto = (T)serializer.Deserialize(reader);
+            var reader = new StreamReader(stream);
+            var objeto = (T)serializer.Deserialize(reader);
             reader.Close();
 
             return objeto;
@@ -106,11 +106,11 @@ namespace Unimake.Business.DFe.Utility
         /// <returns>Código numérico</returns>
         public static int GerarCodigoNumerico(int numeroNF)
         {
-            int retorno = 0;
+            var retorno = 0;
 
-            while (retorno == 0)
+            while(retorno == 0)
             {
-                Random rnd = new Random(numeroNF);
+                var rnd = new Random(numeroNF);
 
                 retorno = Convert.ToInt32(rnd.Next(1, 99999999).ToString("00000000"));
             }
@@ -126,10 +126,7 @@ namespace Unimake.Business.DFe.Utility
         /// <param name="nameSpaces">Namespaces a serem adicionados no XML</param>
         /// <returns>XML</returns>
         public static XmlDocument Serializar<T>(T objeto, List<TNameSpace> nameSpaces = null)
-            where T : new()
-        {
-            return Serializar((object)objeto, nameSpaces);
-        }
+            where T : new() => Serializar((object)objeto, nameSpaces);
 
         /// <summary>
         /// Serializar o objeto (Converte o objeto para XML)
@@ -139,18 +136,18 @@ namespace Unimake.Business.DFe.Utility
         /// <returns>XML</returns>
         public static XmlDocument Serializar(object obj, List<TNameSpace> nameSpaces = null)
         {
-            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-            if (nameSpaces != null)
+            var ns = new XmlSerializerNamespaces();
+            if(nameSpaces != null)
             {
-                for (int i = 0; i < nameSpaces.Count; i++)
+                for(var i = 0; i < nameSpaces.Count; i++)
                 {
                     ns.Add(nameSpaces[i].Prefix, nameSpaces[i].NS);
                 }
             }
 
-            XmlSerializer xmlSerializer = new XmlSerializer(obj.GetType());
-            XmlDocument doc = new XmlDocument();
-            using (StringWriter textWriter = new Utf8StringWriter())
+            var xmlSerializer = new XmlSerializer(obj.GetType());
+            var doc = new XmlDocument();
+            using(StringWriter textWriter = new Utf8StringWriter())
             {
                 xmlSerializer.Serialize(textWriter, obj, ns);
                 doc.LoadXml(textWriter.ToString());
@@ -166,10 +163,10 @@ namespace Unimake.Business.DFe.Utility
         /// <param name="conteudoXML">Conteúdo do XML a ser convertido</param>
         public static MemoryStream StringXmlToStream(string conteudoXML)
         {
-            byte[] byteArray = new byte[conteudoXML.Length];
-            ASCIIEncoding encoding = new ASCIIEncoding();
+            var byteArray = new byte[conteudoXML.Length];
+            var encoding = new ASCIIEncoding();
             byteArray = encoding.GetBytes(conteudoXML);
-            MemoryStream memoryStream = new MemoryStream(byteArray);
+            var memoryStream = new MemoryStream(byteArray);
             memoryStream.Seek(0, SeekOrigin.Begin);
 
             return memoryStream;

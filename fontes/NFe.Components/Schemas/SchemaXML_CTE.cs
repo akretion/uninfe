@@ -203,7 +203,7 @@
 
             #region XML de Envio do evento de contingencia EPEC
 
-            SchemaXML.InfSchemas.Add("NFE-eventoCTe110140", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFE-eventoCTe110113", new InfSchema()
             {
                 Tag = "eventoCTe",
                 ID = SchemaXML.InfSchemas.Count + 1,

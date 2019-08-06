@@ -2631,7 +2631,7 @@ namespace NFe.Service
                 else if (dadosNFe.mod == "58") // MDFe
                 {
                     QRCodeMDFe qrCodeMDFe = new QRCodeMDFe(conteudoXML);
-                    qrCodeMDFe.MontarLinkQRCode();
+                    qrCodeMDFe.MontarLinkQRCode(Empresas.Configuracoes[emp].X509Certificado);
                 }
                 #endregion
 

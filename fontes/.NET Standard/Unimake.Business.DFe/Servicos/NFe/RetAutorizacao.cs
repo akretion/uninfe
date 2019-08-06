@@ -55,5 +55,12 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         public RetAutorizacao(ConsReciNFe consReciNFe, Configuracao configuracao)
             : this(consReciNFe.GerarXML(), configuracao) { }
+
+
+        public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML)
+        {
+            throw new System.Exception("Não existe XML de distribuição para consulta do recibo de lote.");
+        }
+
     }
 }

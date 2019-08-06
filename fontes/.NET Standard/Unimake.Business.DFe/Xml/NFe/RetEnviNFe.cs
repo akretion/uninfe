@@ -4,7 +4,7 @@ using System.Text;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 
-namespace Unimake.Business.DFe.Xml
+namespace Unimake.Business.DFe.Xml.NFe
 {
     [System.Serializable()]
     [XmlRoot("retEnviNFe", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
@@ -51,7 +51,7 @@ namespace Unimake.Business.DFe.Xml
         [XmlElement("protNFe")]
         public ProtNFe ProtNFe { get; set; }
     }
-    public partial class RetEnviNFeInfRec
+    public class RetEnviNFeInfRec
     {
         [XmlElement("nRec")]
         public string NRec { get; set; }
@@ -60,13 +60,16 @@ namespace Unimake.Business.DFe.Xml
         public string TMed { get; set; }
     }
 
-    public partial class ProtNFe
+    public class ProtNFe
     {
+        [XmlAttribute(AttributeName = "versao", DataType = "token")]
+        public string Versao { get; set; }
+
         [XmlElement("infProt")]
         public InfProt InfProt { get; set; }
     }
 
-    public partial class InfProt
+    public class InfProt
     {
         [XmlElement("tpAmb")]
         public TipoAmbiente TpAmb { get; set; }

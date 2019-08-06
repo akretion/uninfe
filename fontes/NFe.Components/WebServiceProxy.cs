@@ -528,13 +528,15 @@ namespace NFe.Components
 #else
             SecurityProtocolType securityProtocolType = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
 #endif
-
-            string cUFs = "3106200 / "; // Belo Horizonte
-            cUFs += "2910800 / "; //Feira de Santana
-
-            if (cUFs.Contains(cUF.ToString()))
+            if (cUF.ToString().Length >= 7) //Somente para muncípios, não pode fazer para Estados
             {
-                securityProtocolType = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
+                string cUFs = "3106200 / "; // Belo Horizonte
+                cUFs += "2910800 / "; //Feira de Santana
+
+                if (cUFs.Contains(cUF.ToString()))
+                {
+                    securityProtocolType = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
+                }
             }
 
             return securityProtocolType;
