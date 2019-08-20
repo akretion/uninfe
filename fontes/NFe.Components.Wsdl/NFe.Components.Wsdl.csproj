@@ -4579,6 +4579,37 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PMogiMirim-SIGCORP_SIGISS_203.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCarazinhoRS-DBSELLER.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HCarazinhoRS-DBSELLER.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PLimeiraSP-IIBrasil.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HLimeiraSP-IIBrasil.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\IIBRASIL\servico_cancelar_nfse_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\IIBRASIL\servico_consultar_lote_rps_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\IIBRASIL\servico_consultar_nfse_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\IIBRASIL\servico_consultar_nfse_rps_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\IIBRASIL\servico_consultar_situacao_lote_rps_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\IIBRASIL\servico_enviar_lote_rps_envio.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\IIBRASIL\tipos_complexos.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\IIBRASIL\tipos_simples.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\IIBRASIL\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantanaLivramentoRS-DBSELLER.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSantanaLivramentoRS-DBSELLER.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

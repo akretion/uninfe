@@ -346,6 +346,8 @@ namespace NFe.Settings
                 var inifile = new IniFile(LocalFile);
 
                 estado.UF = uf;
+                estado.UrlCTeQrCodeP = inifile.Read("CTeQrCodeP", uf);
+                estado.UrlCTeQrCodeH = inifile.Read("CTeQrCodeH", uf);
                 estado.UrlNFCe = inifile.Read("NFC-e", uf);
                 estado.UrlNFCeH = inifile.Read("NFC-e(h)", uf);
                 estado.UrlNFCeM = inifile.Read("NFC-e_ConsultaManual", uf);

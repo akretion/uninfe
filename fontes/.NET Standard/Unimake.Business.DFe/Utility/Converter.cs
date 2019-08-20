@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 
 namespace Unimake.Business.DFe.Utility
 {
@@ -14,7 +12,7 @@ namespace Unimake.Business.DFe.Utility
         /// <returns></returns>
         public static double ToDouble(object value)
         {
-            if(value == null)
+            if (value == null)
             {
                 //TODO: Marcelo >>> Vai retornar zero por padrão mesmo?
                 return 0;
@@ -25,6 +23,17 @@ namespace Unimake.Business.DFe.Utility
                             CultureInfo.InvariantCulture,
                             out var result);
             return result;
+        }
+
+        /// <summary>
+        /// Converter STRING para ENUM
+        /// </summary>
+        /// <typeparam name="T">Tipo do objeto</typeparam>
+        /// <param name="value">String a ser convertida</param>
+        /// <returns>Retorna o Enum da string passada como parâmetro</returns>
+        public static T ToEnum<T>(this string value)
+        {
+            return (T)Enum.Parse(typeof(T), value, true);
         }
     }
 }

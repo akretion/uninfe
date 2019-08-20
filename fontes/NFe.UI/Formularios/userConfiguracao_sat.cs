@@ -37,7 +37,7 @@ namespace NFe.UI.Formularios
             ckConversaoNFCe.Checked = empresa.UtilizaConversaoCFe;
             cbRegTribISSQN.SelectedValue = (int)empresa.RegTribISSQNSAT;
             cbindRatISSQN.SelectedValue = (int)empresa.IndRatISSQNSAT;
-            comboVersaoLayout.SelectedItem = empresa.VersaoLayoutSAT;
+            comboVersaoLayout.SelectedItem = empresa.VersaoLayoutSAT == null ? "0.07" : empresa.VersaoLayoutSAT;
 
             lblCNPJSw.Visible =
                 txtCNPJSw.Visible =
@@ -52,7 +52,6 @@ namespace NFe.UI.Formularios
                 lblVersaoLayout.Visible = 
                 comboVersaoLayout.Visible =
                 ckConversaoNFCe.Checked;
-            comboVersaoLayout.SelectedItem = "0.07";
         }
 
         protected override void OnLoad(EventArgs e)

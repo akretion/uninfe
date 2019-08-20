@@ -14,18 +14,6 @@ namespace Unimake.Business.DFe.Servicos
         private string DefinirNomeTag() => GetType().Name;
 
         /// <summary>
-        /// Inicializa configurações, parmâtros e propriedades para execução do serviço.
-        /// </summary>
-        private void Inicializar()
-        {
-            if(!Configuracoes.Definida)
-            {
-                DefinirConfiguracao();
-                LerXmlConfigGeral();
-            }
-        }
-
-        /// <summary>
         /// Efetua a leitura do XML que contem configurações específicas de cada webservice e atribui o conteúdo nas propriedades do objeto "Configuracoes"
         /// </summary>
         private void LerXmlConfigEspecifico(string xmlConfigEspecifico)
@@ -67,20 +55,20 @@ namespace Unimake.Business.DFe.Servicos
                             Configuracoes.TagLoteAtributoID = elementPropriedades.GetElementsByTagName("TagLoteAtributoID")[0].InnerText;
 
                             //Verificar se existem schemas específicos de validação
-                            if (elementPropriedades.GetElementsByTagName("SchemasEspecificos")[0] != null)
+                            if(elementPropriedades.GetElementsByTagName("SchemasEspecificos")[0] != null)
                             {
                                 var listSchemasEspecificios = elementPropriedades.GetElementsByTagName("SchemasEspecificos");
 
-                                foreach (var nodeSchemasEspecificos in listSchemasEspecificios)
+                                foreach(var nodeSchemasEspecificos in listSchemasEspecificios)
                                 {
-                                    XmlElement elemenSchemasEspecificos = (XmlElement)nodeSchemasEspecificos;
+                                    var elemenSchemasEspecificos = (XmlElement)nodeSchemasEspecificos;
 
                                     var listTipo = elemenSchemasEspecificos.GetElementsByTagName("Tipo");
 
-                                    foreach (var nodeTipo in listTipo)
+                                    foreach(var nodeTipo in listTipo)
                                     {
-                                        XmlElement elementTipo = (XmlElement)nodeTipo;
-                                        
+                                        var elementTipo = (XmlElement)nodeTipo;
+
                                         Configuracoes.SchemasEspecificos.Add(new SchemaEspecifico
                                         {
                                             Id = elementTipo.GetElementsByTagName("ID")[0].InnerText,
@@ -98,10 +86,48 @@ namespace Unimake.Business.DFe.Servicos
             }
         }
 
+        #endregion Private Methods
+
+        #region Protected Fields
+
+        protected Configuracao Configuracoes;
+
+        protected XmlDocument ConteudoXML;
+
+        #endregion Protected Fields
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Defini o valor das propriedades do objeto "Configuracoes"
+        /// </summary>
+        protected abstract void DefinirConfiguracao();
+
+        /// <summary>
+        /// Método para validar o schema do XML
+        /// </summary>
+        protected abstract void XmlValidar();
+
+        #endregion Protected Methods
+
+        #region Protected Internal Methods
+
+        /// <summary>
+        /// Inicializa configurações, parmâtros e propriedades para execução do serviço.
+        /// </summary>
+        protected internal void Inicializar()
+        {
+            if(!Configuracoes.Definida)
+            {
+                DefinirConfiguracao();
+                LerXmlConfigGeral();
+            }
+        }
+
         /// <summary>
         /// Efetua a leitura do XML que contem configurações gerais e atribui o conteúdo nas propriedades do objeto "Configuracoes"
         /// </summary>
-        private void LerXmlConfigGeral()
+        protected internal void LerXmlConfigGeral()
         {
             var doc = new XmlDocument();
             doc.Load(CurrentConfig.ArquivoConfigGeral);
@@ -130,28 +156,7 @@ namespace Unimake.Business.DFe.Servicos
             }
         }
 
-        #endregion Private Methods
-
-        #region Protected Fields
-
-        protected Configuracao Configuracoes;
-        protected XmlDocument ConteudoXML;
-
-        #endregion Protected Fields
-
-        #region Protected Methods
-
-        /// <summary>
-        /// Defini o valor das propriedades do objeto "Configuracoes"
-        /// </summary>
-        protected abstract void DefinirConfiguracao();
-
-        /// <summary>
-        /// Método para validar o schema do XML
-        /// </summary>
-        protected abstract void XmlValidar();
-
-        #endregion Protected Methods
+        #endregion Protected Internal Methods
 
         #region Public Fields
 

@@ -5,7 +5,7 @@ using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
-    public class Autorizacao : ServicoBase
+    public class Autorizacao: ServicoBase
     {
         #region Private Fields
 
@@ -27,9 +27,15 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// </summary>
         protected override void DefinirConfiguracao()
         {
+            if(EnviNFe == null)
+            {
+                Configuracoes.Definida = false;
+                return;
+            }
+
             var xml = EnviNFe;
 
-            if (!Configuracoes.Definida)
+            if(!Configuracoes.Definida)
             {
                 Configuracoes.Servico = Servico.NFeAutorizacao;
                 Configuracoes.CodigoUF = (int)xml.NFe[0].InfNFe[0].Ide.CUF;
@@ -53,7 +59,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         {
             get
             {
-                if (EnviNFe.IndSinc == SimNao.Sim) //Envio síncrono
+                if(EnviNFe.IndSinc == SimNao.Sim) //Envio síncrono
                 {
                     return new NfeProc
                     {
@@ -76,7 +82,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         {
             get
             {
-                if (!string.IsNullOrWhiteSpace(RetornoWSString))
+                if(!string.IsNullOrWhiteSpace(RetornoWSString))
                 {
                     return XMLUtility.Deserializar<RetEnviNFe>(RetornoWSXML);
                 }
@@ -94,7 +100,11 @@ namespace Unimake.Business.DFe.Servicos.NFe
         #region Public Constructors
 
         public Autorizacao(EnviNFe enviNFe, Configuracao configuracao)
-                            : this(enviNFe.GerarXML(), configuracao) => EnviNFe = enviNFe;
+                            : this(enviNFe.GerarXML(), configuracao)
+        {
+            EnviNFe = enviNFe;
+            Inicializar();
+        }
 
         #endregion Public Constructors
 
@@ -116,6 +126,12 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// </summary>
         /// <param name="pasta">Pasta onde deve ser gravado o XML</param>
         public void GravarXmlDistribuicao(string pasta) => GravarXmlDistribuicao(pasta, NfeProcResult.NomeArquivoDistribuicao, NfeProcResult.GerarXML().OuterXml);
+
+        /// <summary>
+        /// Grava o XML de dsitribuição no stream
+        /// </summary>
+        /// <param name="stream">Stream que vai receber o XML de distribuição</param>
+        public void GravarXmlDistribuicao(System.IO.Stream stream) => GravarXmlDistribuicao(stream, NfeProcResult.GerarXML().OuterXml);
 
         #endregion Public Methods
     }

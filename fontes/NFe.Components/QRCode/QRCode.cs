@@ -223,11 +223,11 @@ namespace NFe.Components.QRCode
 
                 string linkQRCode = urlMDFe +
                     "?chMDFe=" + chMDFe +
-                    "&tpAmb=" + tpAmb;
+                    "&amp;tpAmb=" + tpAmb;
 
                 if (tpEmis.Equals("2")) //Contingência
                 {
-                    linkQRCode += "&sign=" + Criptografia.SignWithRSASHA1(certificado, chMDFe);
+                    linkQRCode += "&amp;sign=" + Criptografia.SignWithRSASHA1(certificado, chMDFe);
                 }
                 AddLinkQRCode(linkQRCode);
             }
@@ -248,8 +248,68 @@ namespace NFe.Components.QRCode
                     XmlNode nd = ConteudoXML.CreateElement("infMDFeSupl", ConteudoXML.DocumentElement.NamespaceURI);
                     XmlNode nd1 = ConteudoXML.CreateElement("qrCodMDFe", ConteudoXML.DocumentElement.NamespaceURI);
 
-                    nd1.InnerXml = ("<![CDATA[" + linkQrCode.Trim() + "]]>").Trim();
-                 //   nd1.InnerXml = (linkQrCode.Trim()).Trim();
+                 //   nd1.InnerXml = ("<![CDATA[" + linkQrCode.Trim() + "]]>").Trim();
+                    nd1.InnerXml = (linkQrCode.Trim()).Trim();
+
+                    nd.AppendChild(nd1);
+
+                    el.RemoveChild(Signature);
+                    el.AppendChild(nd);
+                    el.AppendChild(Signature);
+
+                    break;
+                }
+            }
+        }
+    }
+
+    public class QRCodeCTe : QRCodeBase
+    {
+        private string UrlCTe = "https://dfe-portal.svrs.rs.gov.br/mdfe/QRCode";
+
+        public QRCodeCTe(XmlDocument conteudoXML, string urlCte)
+        {
+            ConteudoXML = conteudoXML;
+            UrlCTe = urlCte;
+        }
+
+        public void MontarLinkQRCode(X509Certificate2 certificado)
+        {
+            if (ConteudoXML.GetElementsByTagName("infCTeSupl")[0] == null)
+            {
+                string tpAmb = GetValueXML("ide", "tpAmb").Trim();
+                string tpEmis = GetValueXML("ide", "tpEmis").Trim();
+                string chCTe = GetAttributeXML("infCte", "Id").Substring(4).Trim();
+
+                string linkQRCode = UrlCTe +
+                    "?chCTe=" + chCTe +
+                    "&amp;tpAmb=" + tpAmb;
+
+                if (tpEmis.Equals("2")) //Contingência
+                {
+                    linkQRCode += "&amp;sign=" + Criptografia.SignWithRSASHA1(certificado, chCTe);
+                }
+//                AddLinkQRCode(linkQRCode);
+            }
+        }
+
+        /// <summary>
+        /// Adiciona as tags do link do Qrcode no XML do CTe
+        /// </summary>
+        /// <param name="linkQrCode">Link do QRCode</param>
+        private void AddLinkQRCode(string linkQrCode)
+        {
+            foreach (object item in ConteudoXML)
+            {
+                if (typeof(XmlElement) == item.GetType())
+                {
+                    XmlNode Signature = (XmlElement)ConteudoXML.GetElementsByTagName("Signature")[0];
+                    XmlNode el = item as XmlNode;
+                    XmlNode nd = ConteudoXML.CreateElement("infCTeSupl", ConteudoXML.DocumentElement.NamespaceURI);
+                    XmlNode nd1 = ConteudoXML.CreateElement("qrCodCTe", ConteudoXML.DocumentElement.NamespaceURI);
+
+                    //nd1.InnerXml = ("<![CDATA[" + linkQrCode.Trim() + "]]>").Trim();
+                    nd1.InnerXml = (linkQrCode.Trim()).Trim();
 
                     nd.AppendChild(nd1);
 

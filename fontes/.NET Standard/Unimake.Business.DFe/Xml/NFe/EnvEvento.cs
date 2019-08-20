@@ -40,11 +40,11 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         public override T LerXML<T>(XmlDocument doc)
         {
-            T retornar = base.LerXML<T>(doc);
+            var retornar = base.LerXML<T>(doc);
 
             if (doc.GetElementsByTagName("Signature")[0] != null)
             {
-                XmlDocument signatureEvento = new XmlDocument();
+                var signatureEvento = new XmlDocument();
 
                 signatureEvento.LoadXml(doc.GetElementsByTagName("Signature")[0].OuterXml);
                 ((EnvEvento)(object)retornar).Evento[0].Signature = XMLUtility.Deserializar<Signature>(signatureEvento);
@@ -296,6 +296,15 @@ namespace Unimake.Business.DFe.Xml.NFe
 
             var pi = default(PropertyInfo);
             var type = GetType();
+
+            if (XmlReader.HasAttributes)
+            {
+                if (XmlReader.GetAttribute("versao") != "")
+                {
+                    pi = type.GetProperty("versao", BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                    pi?.SetValue(this, XmlReader.GetAttribute("versao"));
+                }
+            }
 
             while (XmlReader.Read())
             {

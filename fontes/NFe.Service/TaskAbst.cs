@@ -1020,7 +1020,7 @@ namespace NFe.Service
                             }
                             else
                             {
-                                 retorna = "enviar";
+                                retorna = "enviar";
                             }
 
                             break;
@@ -2463,9 +2463,54 @@ namespace NFe.Service
                 case PadroesNFSe.D2TI:
                     retorna = "executar";
                     break;
-                    #endregion D2TI
-            }
+                #endregion D2TI
 
+                #region IIBRASIL
+                case PadroesNFSe.IIBRASIL:
+                    switch (servico)
+
+                    {
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfsePorFaixa";
+                            break;
+
+                        case Servicos.NFSeSubstituirNfse:
+                            retorna = "SubstituirNfse";
+                            break;
+
+                        case Servicos.NFSeConsultarNFSeTomados:
+                            retorna = "ConsultarNfseServicoTomado";
+                            break;
+
+                    }
+                    #endregion IIBRASIL
+                    break;
+            }
             return retorna;
         }
 
@@ -2627,6 +2672,7 @@ namespace NFe.Service
                     qrCode.GerarLinkConsulta(url, Empresas.Configuracoes[emp].IdentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, linkUFManual);
                 }
                 #endregion
+
                 #region Adicionar a tag do QrCode no MDFe
                 else if (dadosNFe.mod == "58") // MDFe
                 {
@@ -2635,7 +2681,17 @@ namespace NFe.Service
                 }
                 #endregion
 
-                //Adicionar q tag do QRCode MDFe
+                #region Adicionar a tag do QrCode no CTe
+                else if (dadosNFe.mod == "57") // CTe
+                {
+                    string urlCte = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ?
+                        Empresas.Configuracoes[emp].URLConsultaDFe.UrlCTeQrCodeH :
+                        Empresas.Configuracoes[emp].URLConsultaDFe.UrlCTeQrCodeP;
+
+                    QRCodeCTe qrCodeCte = new QRCodeCTe(conteudoXML, urlCte);
+                    qrCodeCte.MontarLinkQRCode(Empresas.Configuracoes[emp].X509Certificado);
+                }
+                #endregion
 
                 // Validar o Arquivo XML da NFe com os Schemas se estiver assinado
                 ValidarXML validar = new ValidarXML(conteudoXML, Convert.ToInt32(dadosNFe.cUF), false);
@@ -3228,6 +3284,7 @@ namespace NFe.Service
                 case PadroesNFSe.AVMB_ASTEN:
                 case PadroesNFSe.ADM_SISTEMAS:
                 case PadroesNFSe.SIMPLE:
+                case PadroesNFSe.IIBRASIL:
                     retorno = false;
                     break;
 
@@ -3272,6 +3329,7 @@ namespace NFe.Service
                 case PadroesNFSe.JOINVILLE_SC:
                 case PadroesNFSe.AVMB_ASTEN:
                 case PadroesNFSe.ADM_SISTEMAS:
+                case PadroesNFSe.IIBRASIL:
                     invocar = true;
                     break;
             }
@@ -3323,6 +3381,7 @@ namespace NFe.Service
                 case PadroesNFSe.PORTALFACIL_ACTCON:
                 case PadroesNFSe.SIGCORP_SIGISS_203:
                 case PadroesNFSe.SMARAPD_204:
+                case PadroesNFSe.IIBRASIL:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
                     {
                         switch (doc.DocumentElement.Name)

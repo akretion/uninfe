@@ -30,7 +30,6 @@ namespace NFe.Components.Conam
                         case 3507001:   //Boituva
                         case 3525300:   //Jau
                         case 3528502:   //Mairipora
-                        case 3526902:   //Limeira
                         case 3539806:   //Poa
                         case 3552809:   //Taboao da Serra
                         case 3554102:   //Taubate

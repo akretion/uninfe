@@ -90,8 +90,7 @@ namespace Unimake.Business.DFe.Security
                                         idAttributeName = "id";
                                     }
                                 }
-
-                                if (!string.IsNullOrEmpty(idAttributeName))
+                                else
                                 {
                                     reference.Uri = "#" + childElemen.GetAttributeNode(idAttributeName).Value;
                                 }
@@ -141,7 +140,7 @@ namespace Unimake.Business.DFe.Security
             {
                 if (x509Cert.IsA3())
                 {
-                    throw new Exception("O certificado deverá ser reiniciado.\r\n Retire o certificado.\r\nAguarde o LED terminar de piscar.\r\n Recoloque o certificado e informe o PIN novamente.\r\n" + ex.ToString());// #12342 concatenar com a mensagem original
+                    throw new Exception("O certificado deverá ser reiniciado.\r\n Retire o certificado.\r\nAguarde o LED terminar de piscar.\r\n Recoloque o certificado e informe o PIN novamente.\r\n" + ex.ToString());
                 }
                 else
                 {

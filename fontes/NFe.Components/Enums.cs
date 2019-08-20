@@ -1169,6 +1169,11 @@ namespace NFe.Components
         [Description("D2TI")]
         D2TI,
 
+        /// <summary>s
+        /// Padrão IIBRASIL
+        /// </summary>
+        [Description("IIBRASIL")]
+        IIBRASIL,
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
     }

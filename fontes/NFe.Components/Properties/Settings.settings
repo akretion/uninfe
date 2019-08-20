@@ -312,7 +312,7 @@
       <Value Profile="(Default)">http://www.tinus.com.br/csp/jaboatao/WSNFSE.RecepcionarLoteRps.cls</Value>
     </Setting>
     <Setting Name="NFe_Components_PCachoeiraSulRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://177.84.147.222:8091/NFSe.Portal.Integracao/Services.svc</Value>
+      <Value Profile="(Default)">http://cachoeiradosul-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_HCachoeiraSulRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://177.84.147.222:8091/NFSe.Portal.Integracao.Teste/Services.svc</Value>

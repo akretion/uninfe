@@ -1,4 +1,6 @@
-﻿namespace Unimake.Business.DFe.Servicos
+﻿using System.Xml.Serialization;
+
+namespace Unimake.Business.DFe.Servicos
 {
     #region Servico
     /// <summary>
@@ -88,7 +90,7 @@
     #region UF
 
     /// <summary>
-    /// Unidades Federativas do Brasil (Tem como XmlEnumAttribute o nome abreviado da UF)
+    /// Unidades Federativas do Brasil (Tem como XmlEnum o nome abreviado da UF)
     /// </summary>
     public enum UFBrasil
     {
@@ -247,9 +249,9 @@
     /// </summary>
     public enum TipoAmbiente
     {
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         Producao = 1,
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         Homologacao = 2
     }
 
@@ -265,27 +267,27 @@
         /// <summary>
         /// NF-e (Modelo: 55)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("55")]
+        [XmlEnum("55")]
         NFe = 55,
         /// <summary>
         /// NFC-e (Modelo: 65)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("65")]
+        [XmlEnum("65")]
         NFCe = 65,
         /// <summary>
         /// CT-e (Modelo: 57)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("57")]
+        [XmlEnum("57")]
         CTe = 57,
         /// <summary>
         /// MDF-e (Modelo: 58)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("58")]
+        [XmlEnum("58")]
         MDFe = 58,
         /// <summary>
         /// CTeOS (Modelo: 67)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("67")]
+        [XmlEnum("67")]
         CTeOS = 67
     }
 
@@ -301,47 +303,47 @@
         /// <summary>
         /// Carta de correção eletrônica (110110)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("110110")]
+        [XmlEnum("110110")]
         CartaCorrecao = 110110,
         /// <summary>
         /// Cancelamento NFe (110111)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("110111")]
+        [XmlEnum("110111")]
         Cancelamento = 110111,
         /// <summary>
         /// Cancelamento da NFCe sendo substituida por outra NFCe (110112)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("110112")]
+        [XmlEnum("110112")]
         CancelamentoPorSubstituicao = 110112,
         /// <summary>
         /// EPEC - Evento Prévio de Emissão em Contingência (110140)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("110140")]
+        [XmlEnum("110140")]
         EPEC = 110140,
         /// <summary>
         /// Pedido de prorrogação do prazo de ICMS no caso de remessa para industrialização (111500)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("111500")]
+        [XmlEnum("111500")]
         PedidoProrrogacao = 111500,
         /// <summary>
         /// Manifestação do Destinatário - Confirmação da Operação (210200)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("210200")]
+        [XmlEnum("210200")]
         ManifestacaoConfirmacaoOperacao = 210200,
         /// <summary>
         /// Manifestação do Destinatário - Ciência da Operação (210210)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("210210")]
+        [XmlEnum("210210")]
         ManifestacaoCienciaOperacao = 210210,
         /// <summary>
         /// Manifestação do Destinatário - Desconhecimento da Operação (210220)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("210220")]
+        [XmlEnum("210220")]
         ManifestacaoDesconhecimentoOperacao = 210220,
         /// <summary>
         /// Manifestação do Destinatário - Operação não realizada (210240)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("210240")]
+        [XmlEnum("210240")]
         ManifestacaoOperacaoNaoRealizada = 210240
     }
 
@@ -357,13 +359,13 @@
         /// <summary>
         /// Não (9)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("0")]
+        [XmlEnum("0")]
         Não = 0,
 
         /// <summary>
         /// Sim (1)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         Sim = 1
     }
 
@@ -379,12 +381,12 @@
         /// <summary>
         /// Operação de entrada
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("0")]
+        [XmlEnum("0")]
         Entrada = 0,
         /// <summary>
         /// Operação de saída
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         Saida = 1
     }
 
@@ -400,19 +402,19 @@
         /// <summary>
         /// Operação interna, ou seja, dentro do estado de origem
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         OperacaoInterna = 1,
 
         /// <summary>
         /// Operação interestadual, ou seja, estado diferente do de origem
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         OperacaoInterestadual = 2,
 
         /// <summary>
         /// Operação com o exterior, ou seja, fora do país de origem
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         OperacaoExterior = 3
     }
 
@@ -428,37 +430,37 @@
         /// <summary>
         /// 0=Sem geração de DANFE
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("0")]
+        [XmlEnum("0")]
         SemGeracao = 0,
 
         /// <summary>
         /// 1=DANFE normal, Retrato
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         NormalRetrato = 1,
 
         /// <summary>
         /// 2=DANFE normal, Paisagem
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         NormalPaisagem = 2,
 
         /// <summary>
         /// 3=DANFE Simplificado
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         Simplificado = 3,
 
         /// <summary>
         /// 4=DANFE NFC-e
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("4")]
+        [XmlEnum("4")]
         NFCe = 4,
 
         /// <summary>
         /// 5=DANFE NFC-e em mensagem eletrônica
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("5")]
+        [XmlEnum("5")]
         NFCeMensagemEletronica = 5
     }
 
@@ -474,43 +476,43 @@
         /// <summary>
         /// 1=Emissão normal (não em contingência)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         Normal = 1,
 
         /// <summary>
         /// 2=Contingência FS-IA, com impressão do DANFE em formulário de segurança
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         ContingenciaFSIA = 2,
 
         /// <summary>
         /// 4=Contingência DPEC (Declaração Prévia da Emissão em Contingência);
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("4")]
+        [XmlEnum("4")]
         ContingenciaDPEC = 4,
 
         /// <summary>
         /// 5=Contingência FS-DA, com impressão do DANFE em formulário de segurança;
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("5")]
+        [XmlEnum("5")]
         ContingenciaFSDA = 5,
 
         /// <summary>
         /// 6=Contingência SVC-AN (SEFAZ Virtual de Contingência do AN);
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("6")]
+        [XmlEnum("6")]
         ContingenciaSVCAN = 6,
 
         /// <summary>
         /// 7=Contingência SVC-RS (SEFAZ Virtual de Contingência do RS);
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("7")]
+        [XmlEnum("7")]
         ContingenciaSVCRS = 7,
 
         /// <summary>
         /// 9=Contingência off-line da NFC-e
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("9")]
+        [XmlEnum("9")]
         ContingenciaOffLine = 9
     }
 
@@ -526,25 +528,25 @@
         /// <summary>
         /// 1=NF-e normal
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         Normal = 1,
 
         /// <summary>
         /// 2=NF-e complementar
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         Complementar = 2,
 
         /// <summary>
         /// 3=NF-e de ajuste
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         Auste = 3,
 
         /// <summary>
         /// 4=Devolução de mercadoria
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("4")]
+        [XmlEnum("4")]
         Devolucao = 4
     }
 
@@ -560,37 +562,37 @@
         /// <summary>
         /// 0=Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("0")]
+        [XmlEnum("0")]
         NaoSeAplica = 0,
 
         /// <summary>
         /// 1=Operação presencial
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         OperacaoPresencial = 1,
 
         /// <summary>
         /// 2=Operação não presencial, pela Internet
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         OperacaoInternet = 2,
 
         /// <summary>
         /// 3=Operação não presencial, Teleatendimento
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         OperacaoTeleAtendimento = 3,
 
         /// <summary>
         /// 4=NFC-e em operação com entrega a domicílio
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("4")]
+        [XmlEnum("4")]
         NFCeEntregaDomicilio = 4,
 
         /// <summary>
         /// 9=Operação não presencial, outros
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("9")]
+        [XmlEnum("9")]
         OperacaoOutros = 9
     }
 
@@ -606,25 +608,25 @@
         /// <summary>
         /// 0=Emissão de NF-e com aplicativo do contribuinte
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("0")]
+        [XmlEnum("0")]
         AplicativoContribuinte = 0,
 
         /// <summary>
         /// 1=Emissão de NF-e avulsa pelo Fisco;
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         AvulsaPeloFisco = 1,
 
         /// <summary>
         /// 2=Emissão de NF-e avulsa, pelo contribuinte com seu certificado digital, através do site do Fisco;
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         AvulsaPeloContribuinteSiteFisco = 2,
 
         /// <summary>
         /// 3=Emissão NF-e pelo contribuinte com aplicativo fornecido pelo Fisco.
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         AplicativoFisco = 3
     }
 
@@ -640,19 +642,19 @@
         /// <summary>
         /// 1=Simples Nacional
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         SimplesNacional = 1,
 
         /// <summary>
         /// 2=Simples Nacional, excesso sublimite de receita bruta
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         SimplesNacionalExcessoSublimite = 2,
 
         /// <summary>
         /// 3=Regime Normal
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         RegimeNormal = 3
     }
 
@@ -668,19 +670,19 @@
         /// <summary>
         /// 1=Contribuinte ICMS (informar a IE do destinatário)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         ContribuinteICMS = 1,
 
         /// <summary>
         /// 2=Contribuinte isento de Inscrição no cadastro de Contribuintes do ICMS
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         ContribuinteIsento = 2,
 
         /// <summary>
         /// 9=Não Contribuinte, que pode ou não possuir Inscrição Estadual no Cadastro de Contribuintes do ICMS
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("9")]
+        [XmlEnum("9")]
         NaoContribuinte = 9
     }
 
@@ -696,13 +698,13 @@
         /// <summary>
         /// S - Produzido em Escala Relevante
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("S")]
+        [XmlEnum("S")]
         Sim,
 
         /// <summary>
         /// N – Produzido em Escala NÃO Relevante
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("N")]
+        [XmlEnum("N")]
         Nao
     }
 
@@ -718,73 +720,73 @@
         /// <summary>
         /// 1=Marítima
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         Maritima = 1,
 
         /// <summary>
         /// 2=Fluvial
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         Fluvial = 2,
 
         /// <summary>
         /// 3=Lacustre
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         Lacustre = 3,
 
         /// <summary>
         /// 4=Aérea
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("4")]
+        [XmlEnum("4")]
         Aerea = 4,
 
         /// <summary>
         /// 5=Postal
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("5")]
+        [XmlEnum("5")]
         Postal = 5,
 
         /// <summary>
         /// 6=Ferroviária
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("6")]
+        [XmlEnum("6")]
         Ferroviaria = 6,
 
         /// <summary>
         /// 7=Rodoviária
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("7")]
+        [XmlEnum("7")]
         Rodoviaria = 7,
 
         /// <summary>
         /// 8=Conduto / Rede Transmissão
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("8")]
+        [XmlEnum("8")]
         CondutoRedeTransmissao = 8,
 
         /// <summary>
         /// 9=Meios Próprios
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("9")]
+        [XmlEnum("9")]
         MeiosProprios = 9,
 
         /// <summary>
         /// 10=Entrada / Saída ficta
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("10")]
+        [XmlEnum("10")]
         EntradaSaidaFicta = 10,
 
         /// <summary>
         /// 11=Courier
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("11")]
+        [XmlEnum("11")]
         Courier = 11,
 
         /// <summary>
         /// 12=Handcarry
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("12")]
+        [XmlEnum("12")]
         Handcarry = 12
     }
 
@@ -800,19 +802,19 @@
         /// <summary>
         /// 1=Importação por conta própria
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         ImportacaoPorContaPropria = 1,
 
         /// <summary>
         /// 2=Importação por conta e ordem
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         ImportacaoPorContaOrdem = 2,
 
         /// <summary>
         /// 3=Importação por encomenda
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         ImportacaoPorEncomenda = 3
     }
 
@@ -828,55 +830,55 @@
         /// <summary>
         /// 0 - Nacional, exceto as indicadas nos códigos 3, 4, 5 e 8;
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("0")]
+        [XmlEnum("0")]
         Nacional = 0,
 
         /// <summary>
         /// 1 - Estrangeira - Importação direta, exceto a indicada no código 6;
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         Estrangeira = 1,
 
         /// <summary>
         /// 2 - Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7;
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         Estrangeira2 = 2,
 
         /// <summary>
         /// 3 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40% e inferior ou igual a 70%;
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         Nacional3 = 3,
 
         /// <summary>
         /// 4 - Nacional, cuja produção tenha sido feita em conformidade com os processos produtivos básicos de que tratam as legislações citadas nos Ajustes;
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("4")]
+        [XmlEnum("4")]
         Nacional4 = 4,
 
         /// <summary>
         /// 5 - Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%;
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("5")]
+        [XmlEnum("5")]
         Nacional5 = 5,
 
         /// <summary>
         /// 6 - Estrangeira - Importação direta, sem similar nacional, constante em lista da CAMEX e gás natural;
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("6")]
+        [XmlEnum("6")]
         Estrangeira6 = 6,
 
         /// <summary>
         /// 7 - Estrangeira - Adquirida no mercado interno, sem similar nacional, constante lista CAMEX e gás natural.
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("7")]
+        [XmlEnum("7")]
         Estrangeira7 = 7,
 
         /// <summary>
         /// 8 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%;
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("8")]
+        [XmlEnum("8")]
         Nacional8 = 8
     }
 
@@ -892,25 +894,25 @@
         /// <summary>
         /// 0=Margem Valor Agregado (%)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("0")]
+        [XmlEnum("0")]
         MargemValorAgregado = 0,
 
         /// <summary>
         /// 1=Pauta (Valor)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         Pauta = 1,
 
         /// <summary>
         /// 2=Preço Tabelado Máx. (valor)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         PrecoTabeladoMaximo = 2,
 
         /// <summary>
         /// 3=Valor da operação
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         ValorOperacao = 3
     }
 
@@ -926,37 +928,37 @@
         /// <summary>
         /// 0=Preço tabelado ou máximo sugerido
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("0")]
+        [XmlEnum("0")]
         PrecoTabeladoMaximoSugerido = 0,
 
         /// <summary>
         /// 1=Lista Negativa (valor)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         ListaNegativa = 1,
 
         /// <summary>
         /// 2=Lista Positiva (valor)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         ListaPositiva = 2,
 
         /// <summary>
         /// 3=Lista Neutra (valor)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         ListaNeutra = 3,
 
         /// <summary>
         /// 4=Margem Valor Agregado (%)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("4")]
+        [XmlEnum("4")]
         MargemValorAgregado = 4,
 
         /// <summary>
         /// 5=Pauta (valor)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("5")]
+        [XmlEnum("5")]
         Pauta = 5
     }
 
@@ -972,31 +974,31 @@
         /// <summary>
         /// 0=SEFAZ
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("0")]
+        [XmlEnum("0")]
         SEFAZ = 0,
 
         /// <summary>
         /// 1=Justiça Federal
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         JusticaFederal = 1,
 
         /// <summary>
         /// 2=Justiça Estadual
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         JusticaEstadual = 2,
 
         /// <summary>
         /// 3=Secex/RFB
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         SecexRFB = 3,
 
         /// <summary>
         /// 9=Outros
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("9")]
+        [XmlEnum("9")]
         Outros = 9
     }
 
@@ -1009,19 +1011,19 @@
         /// <summary>
         /// 3=Uso na agropecuária
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         UsoAgropecuaria = 3,
 
         /// <summary>
         /// 9=Outros
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("9")]
+        [XmlEnum("9")]
         Outro = 9,
 
         /// <summary>
         /// 12=Órgão de fomento e desenvolvimento agropecuário
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("12")]
+        [XmlEnum("12")]
         OrgaoFomentoDesenvolvimentoAgropecuario = 12
     }
 
@@ -1034,37 +1036,37 @@
         /// <summary>
         /// 0=Contratação do Frete por conta do Remetente (CIF); 
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("0")]
+        [XmlEnum("0")]
         ContratacaoFretePorContaRemetente_CIF = 0,
 
         /// <summary>
         /// 1=Contratação do Frete por conta do Destinatário (FOB)
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("1")]
+        [XmlEnum("1")]
         ContratacaoFretePorContaDestinatário_FOB = 1,
 
         /// <summary>
         /// 2=Contratação do Frete por conta de Terceiros
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("2")]
+        [XmlEnum("2")]
         ContratacaoFretePorContaTerceiros = 2,
 
         /// <summary>
         /// 3=Transporte Próprio por conta do Remetente
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("3")]
+        [XmlEnum("3")]
         TransporteProprioPorContaRemetente = 3,
 
         /// <summary>
         /// 4=Transporte Próprio por conta do Destinatário
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("4")]
+        [XmlEnum("4")]
         TransporteProprioPorContaDestinatário = 4,
 
         /// <summary>
         /// 9=Sem Ocorrência de Transporte
         /// </summary>
-        [System.Xml.Serialization.XmlEnumAttribute("9")]
+        [XmlEnum("9")]
         SemOcorrenciaTransporte = 9
     }
 
@@ -1080,12 +1082,12 @@
         /// <summary>
         /// 1=Pagamento integrado com o sistema de automação da empresa (Ex.: equipamento TEF, Comércio Eletrônico)
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("1")]
+        [XmlEnum("1")]
         PagamentoIntegrado = 1,
         /// <summary>
         /// 2= Pagamento não integrado com o sistema de automação da empresa (Ex.: equipamento POS)
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("2")]
+        [XmlEnum("2")]
         PagamentoNaoIntegrado = 2
     }
 
@@ -1101,61 +1103,61 @@
         /// <summary>
         /// 01=Visa
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("01")]
+        [XmlEnum("01")]
         Visa = 1,
 
         /// <summary>
         /// 02=Mastercard
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("02")]
+        [XmlEnum("02")]
         Mastercard = 2,
 
         /// <summary>
         /// 03=American Express
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("03")]
+        [XmlEnum("03")]
         AmericanExpress = 3,
 
         /// <summary>
         /// 04=Sorocred
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("04")]
+        [XmlEnum("04")]
         Sorocred = 4,
 
         /// <summary>
         /// 05=Diners Club
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("05")]
+        [XmlEnum("05")]
         DinersClub = 5,
 
         /// <summary>
         /// 06=Elo
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("06")]
+        [XmlEnum("06")]
         Elo = 6,
 
         /// <summary>
         /// 07=Hipercard
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("07")]
+        [XmlEnum("07")]
         Hipercard = 7,
 
         /// <summary>
         /// 08=Aura
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("08")]
+        [XmlEnum("08")]
         Aura = 8,
 
         /// <summary>
         /// 09=Cabal
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("09")]
+        [XmlEnum("09")]
         Cabal = 9,
 
         /// <summary>
         /// 99=Outros
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("99")]
+        [XmlEnum("99")]
         Outros = 99
     }
 
@@ -1168,73 +1170,73 @@
         /// <summary>
         /// 01=Dinheiro
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("01")]
+        [XmlEnum("01")]
         Dinheiro = 1,
 
         /// <summary>
         /// 02=Cheque
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("02")]
+        [XmlEnum("02")]
         Cheque = 2,
 
         /// <summary>
         /// 03=Cartão de Crédito
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("03")]
+        [XmlEnum("03")]
         CartaoCredito = 3,
 
         /// <summary>
         /// 04=Cartão de Débito
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("04")]
+        [XmlEnum("04")]
         CartaoDebito = 4,
 
         /// <summary>
         /// 05=Crédito Loja
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("05")]
+        [XmlEnum("05")]
         CreditoLoja = 5,
 
         /// <summary>
         /// 10=Vale Alimentação
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("10")]
+        [XmlEnum("10")]
         ValeAlimentacao = 10,
 
         /// <summary>
         /// 11=Vale Refeição
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("11")]
+        [XmlEnum("11")]
         ValeRefeicao = 11,
 
         /// <summary>
         /// 12=Vale Presente
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("12")]
+        [XmlEnum("12")]
         ValePresente = 12,
 
         /// <summary>
         /// 13=Vale Combustível
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("13")]
+        [XmlEnum("13")]
         ValeCombustivel = 13,
 
         /// <summary>
         /// 15=Boleto Bancário
         /// </summary> 
-        [System.Xml.Serialization.XmlEnum("15")]
+        [XmlEnum("15")]
         BoletoBancario = 15,
 
         /// <summary>
         /// 90=Sem pagamento
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("90")]
+        [XmlEnum("90")]
         Sempagamento = 90,
 
         /// <summary>
         /// 99=Outros
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("99")]
+        [XmlEnum("99")]
         Outros = 99
     }
 
@@ -1247,14 +1249,1316 @@
         /// <summary>
         /// Pagamento à Vista
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("0")]
+        [XmlEnum("0")]
         PagamentoVista = 0,
 
         /// <summary>
         /// Pagamento à Prazo
         /// </summary>
-        [System.Xml.Serialization.XmlEnum("1")]
+        [XmlEnum("1")]
         PagamentoPrazo = 1
+    }
+
+    #endregion
+
+    #region Lista de serviços
+
+    /// <summary>
+    /// Lista de Serviços do ISSQN
+    /// </summary>
+    public enum ListaServicoISSQN
+    {
+        /// <summary>
+        /// Serviço 01.01
+        /// </summary>
+        [XmlEnum("01.01")]
+        Servico0101 = 0101,
+
+        /// <summary>
+        /// Serviço 01.02
+        /// </summary>
+        [XmlEnum("01.02")]
+        Servico0102 = 0102,
+
+        /// <summary>
+        /// Serviço 01.03
+        /// </summary>
+        [XmlEnum("01.03")]
+        Servico0103 = 0103,
+
+        /// <summary>
+        /// Serviço 01.04
+        /// </summary>
+        [XmlEnum("01.04")]
+        Servico0104 = 0104,
+
+        /// <summary>
+        /// Serviço 01.05
+        /// </summary>
+        [XmlEnum("01.05")]
+        Servico0105 = 0105,
+
+        /// <summary>
+        /// Serviço 01.06
+        /// </summary>
+        [XmlEnum("01.06")]
+        Servico0106 = 0106,
+
+        /// <summary>
+        /// Serviço 01.07
+        /// </summary>
+        [XmlEnum("01.07")]
+        Servico0107 = 0107,
+
+        /// <summary>
+        /// Serviço 01.08
+        /// </summary>
+        [XmlEnum("01.08")]
+        Servico0108 = 0108,
+
+        /// <summary>
+        /// Serviço 01.09
+        /// </summary>
+        [XmlEnum("01.09")]
+        Servico0109 = 0109,
+
+        /// <summary>
+        /// Serviço 02.01
+        /// </summary>
+        [XmlEnum("02.01")]
+        Servico0201 = 0201,
+
+        /// <summary>
+        /// Serviço 03.02
+        /// </summary>
+        [XmlEnum("03.02")]
+        Servico0302 = 0302,
+
+        /// <summary>
+        /// Serviço 03.03
+        /// </summary>
+        [XmlEnum("03.03")]
+        Servico0303 = 0303,
+
+        /// <summary>
+        /// Serviço 03.04
+        /// </summary>
+        [XmlEnum("03.04")]
+        Servico0304 = 0304,
+
+        /// <summary>
+        /// Serviço 03.05
+        /// </summary>
+        [XmlEnum("03.05")]
+        Servico0305 = 0305,
+
+        /// <summary>
+        /// Serviço 04.01
+        /// </summary>
+        [XmlEnum("04.01")]
+        Servico0401 = 0401,
+
+        /// <summary>
+        /// Serviço 04.02
+        /// </summary>
+        [XmlEnum("04.02")]
+        Servico0402 = 0402,
+
+        /// <summary>
+        /// Serviço 04.03
+        /// </summary>
+        [XmlEnum("04.03")]
+        Servico0403 = 0403,
+
+        /// <summary>
+        /// Serviço 04.04
+        /// </summary>
+        [XmlEnum("04.04")]
+        Servico0404 = 0404,
+
+        /// <summary>
+        /// Serviço 04.05
+        /// </summary>
+        [XmlEnum("04.05")]
+        Servico0405 = 0405,
+
+        /// <summary>
+        /// Serviço 04.06
+        /// </summary>
+        [XmlEnum("04.06")]
+        Servico0406 = 0406,
+
+        /// <summary>
+        /// Serviço 04.07
+        /// </summary>
+        [XmlEnum("04.07")]
+        Servico0407 = 0407,
+
+        /// <summary>
+        /// Serviço 04.08
+        /// </summary>
+        [XmlEnum("04.08")]
+        Servico0408 = 0408,
+
+        /// <summary>
+        /// Serviço 04.09
+        /// </summary>
+        [XmlEnum("04.09")]
+        Servico0409 = 0409,
+
+        /// <summary>
+        /// Serviço 04.10
+        /// </summary>
+        [XmlEnum("04.10")]
+        Servico0410 = 0410,
+
+        /// <summary>
+        /// Serviço 04.11
+        /// </summary>
+        [XmlEnum("04.11")]
+        Servico0411 = 0411,
+
+        /// <summary>
+        /// Serviço 04.12
+        /// </summary>
+        [XmlEnum("04.12")]
+        Servico0412 = 0412,
+
+        /// <summary>
+        /// Serviço 04.13
+        /// </summary>
+        [XmlEnum("04.13")]
+        Servico0413 = 0413,
+
+        /// <summary>
+        /// Serviço 04.14
+        /// </summary>
+        [XmlEnum("04.14")]
+        Servico0414 = 0414,
+
+        /// <summary>
+        /// Serviço 04.15
+        /// </summary>
+        [XmlEnum("04.15")]
+        Servico0415 = 0415,
+
+        /// <summary>
+        /// Serviço 04.16
+        /// </summary>
+        [XmlEnum("04.16")]
+        Servico0416 = 0416,
+
+        /// <summary>
+        /// Serviço 04.17
+        /// </summary>
+        [XmlEnum("04.17")]
+        Servico0417 = 0417,
+
+        /// <summary>
+        /// Serviço 04.18
+        /// </summary>
+        [XmlEnum("04.18")]
+        Servico0418 = 0418,
+
+        /// <summary>
+        /// Serviço 04.19
+        /// </summary>
+        [XmlEnum("04.19")]
+        Servico0419 = 0419,
+
+        /// <summary>
+        /// Serviço 04.20
+        /// </summary>
+        [XmlEnum("04.20")]
+        Servico0420 = 0420,
+
+        /// <summary>
+        /// Serviço 04.21
+        /// </summary>
+        [XmlEnum("04.21")]
+        Servico0421 = 0421,
+
+        /// <summary>
+        /// Serviço 04.22
+        /// </summary>
+        [XmlEnum("04.22")]
+        Servico0422 = 0422,
+
+        /// <summary>
+        /// Serviço 04.23
+        /// </summary>
+        [XmlEnum("04.23")]
+        Servico0423 = 0423,
+
+        /// <summary>
+        /// Serviço 05.01
+        /// </summary>
+        [XmlEnum("05.01")]
+        Servico0501 = 0501,
+
+        /// <summary>
+        /// Serviço 05.02
+        /// </summary>
+        [XmlEnum("05.02")]
+        Servico0502 = 0502,
+
+        /// <summary>
+        /// Serviço 05.03
+        /// </summary>
+        [XmlEnum("05.03")]
+        Servico0503 = 0503,
+
+        /// <summary>
+        /// Serviço 05.04
+        /// </summary>
+        [XmlEnum("05.04")]
+        Servico0504 = 0504,
+
+        /// <summary>
+        /// Serviço 05.05
+        /// </summary>
+        [XmlEnum("05.05")]
+        Servico0505 = 0505,
+
+        /// <summary>
+        /// Serviço 05.06
+        /// </summary>
+        [XmlEnum("05.06")]
+        Servico0506 = 0506,
+
+        /// <summary>
+        /// Serviço 05.07
+        /// </summary>
+        [XmlEnum("05.07")]
+        Servico0507 = 0507,
+
+        /// <summary>
+        /// Serviço 05.08
+        /// </summary>
+        [XmlEnum("05.08")]
+        Servico0508 = 0508,
+
+        /// <summary>
+        /// Serviço 05.09
+        /// </summary>
+        [XmlEnum("05.09")]
+        Servico0509 = 0509,
+
+        /// <summary>
+        /// Serviço 06.01
+        /// </summary>
+        [XmlEnum("06.01")]
+        Servico0601 = 0601,
+
+        /// <summary>
+        /// Serviço 06.02
+        /// </summary>
+        [XmlEnum("06.02")]
+        Servico0602 = 0602,
+
+        /// <summary>
+        /// Serviço 06.03
+        /// </summary>
+        [XmlEnum("06.03")]
+        Servico0603 = 0603,
+
+        /// <summary>
+        /// Serviço 06.04
+        /// </summary>
+        [XmlEnum("06.04")]
+        Servico0604 = 0604,
+
+        /// <summary>
+        /// Serviço 06.05
+        /// </summary>
+        [XmlEnum("06.05")]
+        Servico0605 = 0605,
+
+        /// <summary>
+        /// Serviço 06.06
+        /// </summary>
+        [XmlEnum("06.06")]
+        Servico0606 = 0606,
+
+        /// <summary>
+        /// Serviço 07.01
+        /// </summary>
+        [XmlEnum("07.01")]
+        Servico0701 = 0701,
+
+        /// <summary>
+        /// Serviço 07.02
+        /// </summary>
+        [XmlEnum("07.02")]
+        Servico0702 = 0702,
+
+        /// <summary>
+        /// Serviço 07.03
+        /// </summary>
+        [XmlEnum("07.03")]
+        Servico0703 = 0703,
+
+        /// <summary>
+        /// Serviço 07.04
+        /// </summary>
+        [XmlEnum("07.04")]
+        Servico0704 = 0704,
+
+        /// <summary>
+        /// Serviço 07.05
+        /// </summary>
+        [XmlEnum("07.05")]
+        Servico0705 = 0705,
+
+        /// <summary>
+        /// Serviço 07.06
+        /// </summary>
+        [XmlEnum("07.06")]
+        Servico0706 = 0706,
+
+        /// <summary>
+        /// Serviço 07.07
+        /// </summary>
+        [XmlEnum("07.07")]
+        Servico0707 = 0707,
+
+        /// <summary>
+        /// Serviço 07.08
+        /// </summary>
+        [XmlEnum("07.08")]
+        Servico0708 = 0708,
+
+        /// <summary>
+        /// Serviço 07.09
+        /// </summary>
+        [XmlEnum("07.09")]
+        Servico0709 = 0709,
+
+        /// <summary>
+        /// Serviço 07.10
+        /// </summary>
+        [XmlEnum("07.10")]
+        Servico0710 = 0710,
+
+        /// <summary>
+        /// Serviço 07.11
+        /// </summary>
+        [XmlEnum("07.11")]
+        Servico0711 = 0711,
+
+        /// <summary>
+        /// Serviço 07.12
+        /// </summary>
+        [XmlEnum("07.12")]
+        Servico0712 = 0712,
+
+        /// <summary>
+        /// Serviço 07.13
+        /// </summary>
+        [XmlEnum("07.13")]
+        Servico0713 = 0713,
+
+        /// <summary>
+        /// Serviço 07.16
+        /// </summary>
+        [XmlEnum("07.16")]
+        Servico0716 = 0716,
+
+        /// <summary>
+        /// Serviço 07.17
+        /// </summary>
+        [XmlEnum("07.17")]
+        Servico0717 = 0717,
+
+        /// <summary>
+        /// Serviço 07.18
+        /// </summary>
+        [XmlEnum("07.18")]
+        Servico0718 = 0718,
+
+        /// <summary>
+        /// Serviço 07.19
+        /// </summary>
+        [XmlEnum("07.19")]
+        Servico0719 = 0719,
+
+        /// <summary>
+        /// Serviço 07.20
+        /// </summary>
+        [XmlEnum("07.20")]
+        Servico0720 = 0720,
+
+        /// <summary>
+        /// Serviço 07.21
+        /// </summary>
+        [XmlEnum("07.21")]
+        Servico0721 = 0721,
+
+        /// <summary>
+        /// Serviço 07.22
+        /// </summary>
+        [XmlEnum("07.22")]
+        Servico0722 = 0722,
+
+        /// <summary>
+        /// Serviço 08.01
+        /// </summary>
+        [XmlEnum("08.01")]
+        Servico0801 = 0801,
+
+        /// <summary>
+        /// Serviço 08.02
+        /// </summary>
+        [XmlEnum("08.02")]
+        Servico0802 = 0802,
+
+        /// <summary>
+        /// Serviço 09.01
+        /// </summary>
+        [XmlEnum("09.01")]
+        Servico0901 = 0901,
+
+        /// <summary>
+        /// Serviço 09.02
+        /// </summary>
+        [XmlEnum("09.02")]
+        Servico0902 = 0902,
+
+        /// <summary>
+        /// Serviço 09.03
+        /// </summary>
+        [XmlEnum("09.03")]
+        Servico0903 = 0903,
+
+        /// <summary>
+        /// Serviço 10.01
+        /// </summary>
+        [XmlEnum("10.01")]
+        Servico1001 = 1001,
+
+        /// <summary>
+        /// Serviço 10.02
+        /// </summary>
+        [XmlEnum("10.02")]
+        Servico1002 = 1002,
+
+        /// <summary>
+        /// Serviço 10.03
+        /// </summary>
+        [XmlEnum("10.03")]
+        Servico1003 = 1003,
+
+        /// <summary>
+        /// Serviço 10.04
+        /// </summary>
+        [XmlEnum("10.04")]
+        Servico1004 = 1004,
+
+        /// <summary>
+        /// Serviço 10.05
+        /// </summary>
+        [XmlEnum("10.05")]
+        Servico1005 = 1005,
+
+        /// <summary>
+        /// Serviço 10.06
+        /// </summary>
+        [XmlEnum("10.06")]
+        Servico1006 = 1006,
+
+        /// <summary>
+        /// Serviço 10.07
+        /// </summary>
+        [XmlEnum("10.07")]
+        Servico1007 = 1007,
+
+        /// <summary>
+        /// Serviço 10.08
+        /// </summary>
+        [XmlEnum("10.08")]
+        Servico1008 = 1008,
+
+        /// <summary>
+        /// Serviço 10.09
+        /// </summary>
+        [XmlEnum("10.09")]
+        Servico1009 = 1009,
+
+        /// <summary>
+        /// Serviço 10.10
+        /// </summary>
+        [XmlEnum("10.10")]
+        Servico1010 = 1010,
+
+        /// <summary>
+        /// Serviço 11.01
+        /// </summary>
+        [XmlEnum("11.01")]
+        Servico1101 = 1101,
+
+        /// <summary>
+        /// Serviço 11.02
+        /// </summary>
+        [XmlEnum("11.02")]
+        Servico1102 = 1102,
+
+        /// <summary>
+        /// Serviço 11.03
+        /// </summary>
+        [XmlEnum("11.03")]
+        Servico1103 = 1103,
+
+        /// <summary>
+        /// Serviço 11.04
+        /// </summary>
+        [XmlEnum("11.04")]
+        Servico1104 = 1104,
+
+        /// <summary>
+        /// Serviço 12.01
+        /// </summary>
+        [XmlEnum("12.01")]
+        Servico1201 = 1201,
+
+        /// <summary>
+        /// Serviço 12.02
+        /// </summary>
+        [XmlEnum("12.02")]
+        Servico1202 = 1202,
+
+        /// <summary>
+        /// Serviço 12.03
+        /// </summary>
+        [XmlEnum("12.03")]
+        Servico1203 = 1203,
+
+        /// <summary>
+        /// Serviço 12.04
+        /// </summary>
+        [XmlEnum("12.04")]
+        Servico1204 = 1204,
+
+        /// <summary>
+        /// Serviço 12.05
+        /// </summary>
+        [XmlEnum("12.05")]
+        Servico1205 = 1205,
+
+        /// <summary>
+        /// Serviço 12.06
+        /// </summary>
+        [XmlEnum("12.06")]
+        Servico1206 = 1206,
+
+        /// <summary>
+        /// Serviço 12.07
+        /// </summary>
+        [XmlEnum("12.07")]
+        Servico1207 = 1207,
+
+        /// <summary>
+        /// Serviço 12.08
+        /// </summary>
+        [XmlEnum("12.08")]
+        Servico1208 = 1208,
+
+        /// <summary>
+        /// Serviço 12.09
+        /// </summary>
+        [XmlEnum("12.09")]
+        Servico1209 = 1209,
+
+        /// <summary>
+        /// Serviço 12.10
+        /// </summary>
+        [XmlEnum("12.10")]
+        Servico1210 = 1210,
+
+        /// <summary>
+        /// Serviço 12.11
+        /// </summary>
+        [XmlEnum("12.11")]
+        Servico1211 = 1211,
+
+        /// <summary>
+        /// Serviço 12.12
+        /// </summary>
+        [XmlEnum("12.12")]
+        Servico1212 = 1212,
+
+        /// <summary>
+        /// Serviço 12.13
+        /// </summary>
+        [XmlEnum("12.13")]
+        Servico1213 = 1213,
+
+        /// <summary>
+        /// Serviço 12.14
+        /// </summary>
+        [XmlEnum("12.14")]
+        Servico1214 = 1214,
+
+        /// <summary>
+        /// Serviço 12.15
+        /// </summary>
+        [XmlEnum("12.15")]
+        Servico1215 = 1215,
+
+        /// <summary>
+        /// Serviço 12.16
+        /// </summary>
+        [XmlEnum("12.16")]
+        Servico1216 = 1216,
+
+        /// <summary>
+        /// Serviço 12.17
+        /// </summary>
+        [XmlEnum("12.17")]
+        Servico1217 = 1217,
+
+        /// <summary>
+        /// Serviço 13.02
+        /// </summary>
+        [XmlEnum("13.02")]
+        Servico1302 = 1302,
+
+        /// <summary>
+        /// Serviço 13.03
+        /// </summary>
+        [XmlEnum("13.03")]
+        Servico1303 = 1303,
+
+        /// <summary>
+        /// Serviço 13.04
+        /// </summary>
+        [XmlEnum("13.04")]
+        Servico1304 = 1304,
+
+        /// <summary>
+        /// Serviço 13.05
+        /// </summary>
+        [XmlEnum("13.05")]
+        Servico1305 = 1305,
+
+        /// <summary>
+        /// Serviço 14.01
+        /// </summary>
+        [XmlEnum("14.01")]
+        Servico1401 = 1401,
+
+        /// <summary>
+        /// Serviço 14.02
+        /// </summary>
+        [XmlEnum("14.02")]
+        Servico1402 = 1402,
+
+        /// <summary>
+        /// Serviço 14.03
+        /// </summary>
+        [XmlEnum("14.03")]
+        Servico1403 = 1403,
+
+        /// <summary>
+        /// Serviço 14.04
+        /// </summary>
+        [XmlEnum("14.04")]
+        Servico1404 = 1404,
+
+        /// <summary>
+        /// Serviço 14.05
+        /// </summary>
+        [XmlEnum("14.05")]
+        Servico1405 = 1405,
+
+        /// <summary>
+        /// Serviço 14.06
+        /// </summary>
+        [XmlEnum("14.06")]
+        Servico1406 = 1406,
+
+        /// <summary>
+        /// Serviço 14.07
+        /// </summary>
+        [XmlEnum("14.07")]
+        Servico1407 = 1407,
+
+        /// <summary>
+        /// Serviço 14.08
+        /// </summary>
+        [XmlEnum("14.08")]
+        Servico1408 = 1408,
+
+        /// <summary>
+        /// Serviço 14.09
+        /// </summary>
+        [XmlEnum("14.09")]
+        Servico1409 = 1409,
+
+        /// <summary>
+        /// Serviço 14.10
+        /// </summary>
+        [XmlEnum("14.10")]
+        Servico1410 = 1410,
+
+        /// <summary>
+        /// Serviço 14.11
+        /// </summary>
+        [XmlEnum("14.11")]
+        Servico1411 = 1411,
+
+        /// <summary>
+        /// Serviço 14.12
+        /// </summary>
+        [XmlEnum("14.12")]
+        Servico1412 = 1412,
+
+        /// <summary>
+        /// Serviço 14.13
+        /// </summary>
+        [XmlEnum("14.13")]
+        Servico1413 = 1413,
+
+        /// <summary>
+        /// Serviço 14.14
+        /// </summary>
+        [XmlEnum("14.14")]
+        Servico1414 = 1414,
+
+        /// <summary>
+        /// Serviço 15.01
+        /// </summary>
+        [XmlEnum("15.01")]
+        Servico1501 = 1501,
+
+        /// <summary>
+        /// Serviço 15.02
+        /// </summary>
+        [XmlEnum("15.02")]
+        Servico1502 = 1502,
+
+        /// <summary>
+        /// Serviço 15.03
+        /// </summary>
+        [XmlEnum("15.03")]
+        Servico1503 = 1503,
+
+        /// <summary>
+        /// Serviço 15.04
+        /// </summary>
+        [XmlEnum("15.04")]
+        Servico1504 = 1504,
+
+        /// <summary>
+        /// Serviço 15.05
+        /// </summary>
+        [XmlEnum("15.05")]
+        Servico1505 = 1505,
+
+        /// <summary>
+        /// Serviço 15.06
+        /// </summary>
+        [XmlEnum("15.06")]
+        Servico1506 = 1506,
+
+        /// <summary>
+        /// Serviço 15.07
+        /// </summary>
+        [XmlEnum("15.07")]
+        Servico1507 = 1507,
+
+        /// <summary>
+        /// Serviço 15.08
+        /// </summary>
+        [XmlEnum("15.08")]
+        Servico1508 = 1508,
+
+        /// <summary>
+        /// Serviço 15.09
+        /// </summary>
+        [XmlEnum("15.09")]
+        Servico1509 = 1509,
+
+        /// <summary>
+        /// Serviço 15.10
+        /// </summary>
+        [XmlEnum("15.10")]
+        Servico1510 = 1510,
+
+        /// <summary>
+        /// Serviço 15.11
+        /// </summary>
+        [XmlEnum("15.11")]
+        Servico1511 = 1511,
+
+        /// <summary>
+        /// Serviço 15.12
+        /// </summary>
+        [XmlEnum("15.12")]
+        Servico1512 = 1512,
+
+        /// <summary>
+        /// Serviço 15.13
+        /// </summary>
+        [XmlEnum("15.13")]
+        Servico1513 = 1513,
+
+        /// <summary>
+        /// Serviço 15.14
+        /// </summary>
+        [XmlEnum("15.14")]
+        Servico1514 = 1514,
+
+        /// <summary>
+        /// Serviço 15.15
+        /// </summary>
+        [XmlEnum("15.15")]
+        Servico1515 = 1515,
+
+        /// <summary>
+        /// Serviço 15.16
+        /// </summary>
+        [XmlEnum("15.16")]
+        Servico1516 = 1516,
+
+        /// <summary>
+        /// Serviço 15.17
+        /// </summary>
+        [XmlEnum("15.17")]
+        Servico1517 = 1517,
+
+        /// <summary>
+        /// Serviço 15.18
+        /// </summary>
+        [XmlEnum("15.18")]
+        Servico1518 = 1518,
+
+        /// <summary>
+        /// Serviço 16.01
+        /// </summary>
+        [XmlEnum("16.01")]
+        Servico1601 = 1601,
+
+        /// <summary>
+        /// Serviço 16.02
+        /// </summary>
+        [XmlEnum("16.02")]
+        Servico1602 = 1602,
+
+        /// <summary>
+        /// Serviço 17.01
+        /// </summary>
+        [XmlEnum("17.01")]
+        Servico1701 = 1701,
+
+        /// <summary>
+        /// Serviço 17.02
+        /// </summary>
+        [XmlEnum("17.02")]
+        Servico1702 = 1702,
+
+        /// <summary>
+        /// Serviço 17.03
+        /// </summary>
+        [XmlEnum("17.03")]
+        Servico1703 = 1703,
+
+        /// <summary>
+        /// Serviço 17.04
+        /// </summary>
+        [XmlEnum("17.04")]
+        Servico1704 = 1704,
+
+        /// <summary>
+        /// Serviço 17.05
+        /// </summary>
+        [XmlEnum("17.05")]
+        Servico1705 = 1705,
+
+        /// <summary>
+        /// Serviço 17.06
+        /// </summary>
+        [XmlEnum("17.06")]
+        Servico1706 = 1706,
+
+        /// <summary>
+        /// Serviço 17.08
+        /// </summary>
+        [XmlEnum("17.08")]
+        Servico1708 = 1708,
+
+        /// <summary>
+        /// Serviço 17.09
+        /// </summary>
+        [XmlEnum("17.09")]
+        Servico1709 = 1709,
+
+        /// <summary>
+        /// Serviço 17.10
+        /// </summary>
+        [XmlEnum("17.10")]
+        Servico1710 = 1710,
+
+        /// <summary>
+        /// Serviço 17.11
+        /// </summary>
+        [XmlEnum("17.11")]
+        Servico1711 = 1711,
+
+        /// <summary>
+        /// Serviço 17.12
+        /// </summary>
+        [XmlEnum("17.12")]
+        Servico1712 = 1712,
+
+        /// <summary>
+        /// Serviço 17.13
+        /// </summary>
+        [XmlEnum("17.13")]
+        Servico1713 = 1713,
+
+        /// <summary>
+        /// Serviço 17.14
+        /// </summary>
+        [XmlEnum("17.14")]
+        Servico1714 = 1714,
+
+        /// <summary>
+        /// Serviço 17.15
+        /// </summary>
+        [XmlEnum("17.15")]
+        Servico1715 = 1715,
+
+        /// <summary>
+        /// Serviço 17.16
+        /// </summary>
+        [XmlEnum("17.16")]
+        Servico1716 = 1716,
+
+        /// <summary>
+        /// Serviço 17.17
+        /// </summary>
+        [XmlEnum("17.17")]
+        Servico1717 = 1717,
+
+        /// <summary>
+        /// Serviço 17.18
+        /// </summary>
+        [XmlEnum("17.18")]
+        Servico1718 = 1718,
+
+        /// <summary>
+        /// Serviço 17.19
+        /// </summary>
+        [XmlEnum("17.19")]
+        Servico1719 = 1719,
+
+        /// <summary>
+        /// Serviço 17.20
+        /// </summary>
+        [XmlEnum("17.20")]
+        Servico1720 = 1720,
+
+        /// <summary>
+        /// Serviço 17.21
+        /// </summary>
+        [XmlEnum("17.21")]
+        Servico1721 = 1721,
+
+        /// <summary>
+        /// Serviço 17.22
+        /// </summary>
+        [XmlEnum("17.22")]
+        Servico1722 = 1722,
+
+        /// <summary>
+        /// Serviço 17.23
+        /// </summary>
+        [XmlEnum("17.23")]
+        Servico1723 = 1723,
+
+        /// <summary>
+        /// Serviço 17.24
+        /// </summary>
+        [XmlEnum("17.24")]
+        Servico1724 = 1724,
+
+        /// <summary>
+        /// Serviço 17.25
+        /// </summary>
+        [XmlEnum("17.25")]
+        Servico1725 = 1725,
+
+        /// <summary>
+        /// Serviço 18.01
+        /// </summary>
+        [XmlEnum("18.01")]
+        Servico1801 = 1801,
+
+        /// <summary>
+        /// Serviço 19.01
+        /// </summary>
+        [XmlEnum("19.01")]
+        Servico1901 = 1901,
+
+        /// <summary>
+        /// Serviço 20.01
+        /// </summary>
+        [XmlEnum("20.01")]
+        Servico2001 = 2001,
+
+        /// <summary>
+        /// Serviço 20.02
+        /// </summary>
+        [XmlEnum("20.02")]
+        Servico2002 = 2002,
+
+        /// <summary>
+        /// Serviço 20.03
+        /// </summary>
+        [XmlEnum("20.03")]
+        Servico2003 = 2003,
+
+        /// <summary>
+        /// Serviço 21.01
+        /// </summary>
+        [XmlEnum("21.01")]
+        Servico2101 = 2101,
+
+        /// <summary>
+        /// Serviço 22.01
+        /// </summary>
+        [XmlEnum("22.01")]
+        Servico2201 = 2201,
+
+        /// <summary>
+        /// Serviço 23.01
+        /// </summary>
+        [XmlEnum("23.01")]
+        Servico2301 = 2301,
+
+        /// <summary>
+        /// Serviço 24.01
+        /// </summary>
+        [XmlEnum("24.01")]
+        Servico2401 = 2401,
+
+        /// <summary>
+        /// Serviço 25.01
+        /// </summary>
+        [XmlEnum("25.01")]
+        Servico2501 = 2501,
+
+        /// <summary>
+        /// Serviço 25.02
+        /// </summary>
+        [XmlEnum("25.02")]
+        Servico2502 = 2502,
+
+        /// <summary>
+        /// Serviço 25.03
+        /// </summary>
+        [XmlEnum("25.03")]
+        Servico2503 = 2503,
+
+        /// <summary>
+        /// Serviço 25.04
+        /// </summary>
+        [XmlEnum("25.04")]
+        Servico2504 = 2504,
+
+        /// <summary>
+        /// Serviço 25.05
+        /// </summary>
+        [XmlEnum("25.05")]
+        Servico2505 = 2505,
+
+        /// <summary>
+        /// Serviço 26.01
+        /// </summary>
+        [XmlEnum("26.01")]
+        Servico2601 = 2601,
+
+        /// <summary>
+        /// Serviço 27.01
+        /// </summary>
+        [XmlEnum("27.01")]
+        Servico2701 = 2701,
+
+        /// <summary>
+        /// Serviço 28.01
+        /// </summary>
+        [XmlEnum("28.01")]
+        Servico2801 = 2801,
+
+        /// <summary>
+        /// Serviço 29.01
+        /// </summary>
+        [XmlEnum("29.01")]
+        Servico2901 = 2901,
+
+        /// <summary>
+        /// Serviço 30.01
+        /// </summary>
+        [XmlEnum("30.01")]
+        Servico3001 = 3001,
+
+        /// <summary>
+        /// Serviço 31.01
+        /// </summary>
+        [XmlEnum("31.01")]
+        Servico3101 = 3101,
+
+        /// <summary>
+        /// Serviço 32.01
+        /// </summary>
+        [XmlEnum("32.01")]
+        Servico3201 = 3201,
+
+        /// <summary>
+        /// Serviço 33.01
+        /// </summary>
+        [XmlEnum("33.01")]
+        Servico3301 = 3301,
+
+        /// <summary>
+        /// Serviço 34.01
+        /// </summary>
+        [XmlEnum("34.01")]
+        Servico3401 = 3401,
+
+        /// <summary>
+        /// Serviço 35.01
+        /// </summary>
+        [XmlEnum("35.01")]
+        Servico3501 = 3501,
+
+        /// <summary>
+        /// Serviço 36.01
+        /// </summary>
+        [XmlEnum("36.01")]
+        Servico3601 = 3601,
+
+        /// <summary>
+        /// Serviço 37.01
+        /// </summary>
+        [XmlEnum("37.01")]
+        Servico3701 = 3701,
+
+        /// <summary>
+        /// Serviço 38.01
+        /// </summary>
+        [XmlEnum("38.01")]
+        Servico3801 = 3801,
+
+        /// <summary>
+        /// Serviço 39.01
+        /// </summary>
+        [XmlEnum("39.01")]
+        Servico3901 = 3901,
+
+        /// <summary>
+        /// Serviço 40.01
+        /// </summary>
+        [XmlEnum("40.01")]
+        Servico4001 = 4001
+    }
+
+    #endregion
+
+    #region Indicador da exigibilidade do ISS 
+
+    /// <summary>
+    /// Indicador de Exigibilidade do ISSQN
+    /// </summary>
+    public enum IndicadorExigibilidadeISSQN
+    {
+        /// <summary>
+        /// 1=Exigível
+        /// </summary>
+        [XmlEnum("1")]
+        Exigivel = 1,
+
+        /// <summary>
+        /// 2=Não incidência
+        /// </summary>
+        [XmlEnum("2")]
+        NaoIncidencia = 2,
+
+        /// <summary>
+        /// 3=Isenção
+        /// </summary>
+        [XmlEnum("3")]
+        Isencao = 3,
+
+        /// <summary>
+        /// 4=Exportação
+        /// </summary>
+        [XmlEnum("4")]
+        Exportacao = 4,
+
+        /// <summary>
+        /// 5=Imunidade
+        /// </summary>
+        [XmlEnum("5")]
+        Imunidade = 5,
+
+        /// <summary>
+        /// 6=Exigibilidade Suspensa por Decisão Judicial
+        /// </summary>
+        [XmlEnum("6")]
+        SuspensaDecisaoJudicial = 6,
+
+        /// <summary>
+        /// 7=Exigibilidade Suspensa por Processo Administrativo
+        /// </summary>
+        [XmlEnum("7")]
+        SuspensaProcessoAdministrativo = 7
+    }
+
+    #endregion
+
+    #region Código do Regime Especial de Tributação
+
+    /// <summary>
+    /// Códigos de Regime Especial de Tributação - Utilizado na prestação de serviços (ISSQN)
+    /// </summary>
+    public enum CodigoRegimeEspecialTributacao
+    {
+        /// <summary>
+        /// 1=Microempresa Municipal,
+        /// </summary>
+        [XmlEnum("1")]
+        MicroempresaMunicipal = 1,
+
+        /// <summary>
+        /// 2=Estimativa,
+        /// </summary>
+        [XmlEnum("2")]
+        Estimativa = 2,
+
+        /// <summary>
+        /// 3=Sociedade de Profissionais,
+        /// </summary>
+        [XmlEnum("3")]
+        SociedadeProfissionais = 3,
+
+        /// <summary>
+        /// 4=Cooperativa,
+        /// </summary>
+        [XmlEnum("4")]
+        Cooperativa = 4,
+
+        /// <summary>
+        /// 5=Microempresário Individual (MEI),
+        /// </summary>
+        [XmlEnum("5")]
+        MicroEmpresarioIndividual = 5,
+
+        /// <summary>
+        /// 6=Microempresário e Empresa de Pequeno Porte (ME/EPP)
+        /// </summary>
+        [XmlEnum("6")]
+        MicroEmpresarioEmpresaPequenoPorte = 6
     }
 
     #endregion

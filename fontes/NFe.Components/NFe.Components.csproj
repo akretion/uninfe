@@ -240,6 +240,7 @@
     <Compile Include="Pronin\ViamaoRS\p\ProninP.cs" />
     <Compile Include="RLZ_INFORMATICA\JalesSP\h\Rlz_InformaticaH.cs" />
     <Compile Include="RLZ_INFORMATICA\JalesSP\p\Rlz_InformaticaP.cs" />
+    <Compile Include="Schemas\SchemaXMLNFSe_IIBRASIL.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_INDAIATUBA_SP.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_CECAM.cs" />
     <Compile Include="Schemas\SchemaXMLNFSe_MEGASOFT.cs" />

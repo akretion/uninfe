@@ -1,31 +1,30 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Xml;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
-    public abstract class ServicoBase : Servicos.ServicoBase
+    public abstract class ServicoBase: Servicos.ServicoBase
     {
         #region Protected Methods
 
         /// <summary>
         /// Definir configurações
         /// </summary>
-        protected override void DefinirConfiguracao()
-        {
+        protected override void DefinirConfiguracao() =>
             //Definir a pasta onde fica o schema do XML
             Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.SchemaPasta;
-        }
 
         /// <summary>
         /// Validar o XML
         /// </summary>
         protected override void XmlValidar()
         {
-            ValidarSchema validar = new ValidarSchema();
+            var validar = new ValidarSchema();
             validar.Validar(ConteudoXML, Path.Combine(Configuracoes.SchemaPasta, Configuracoes.SchemaArquivo), Configuracoes.TargetNS);
 
-            if (!validar.Success)
+            if(!validar.Success)
             {
                 throw new Exception(validar.ErrorMessage);
             }
@@ -54,7 +53,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         {
             XmlValidar();
 
-            WSSoap soap = new WSSoap
+            var soap = new WSSoap
             {
                 EnderecoWeb = (Configuracoes.TipoAmbiente == TipoAmbiente.Producao ? Configuracoes.WebEnderecoProducao : Configuracoes.WebEnderecoHomologacao),
                 ActionWeb = (Configuracoes.TipoAmbiente == TipoAmbiente.Producao ? Configuracoes.WebActionProducao : Configuracoes.WebActionHomologacao),
@@ -64,7 +63,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
                 ContentType = Configuracoes.WebContentType
             };
 
-            ConsumirWS consumirWS = new ConsumirWS();
+            var consumirWS = new ConsumirWS();
             consumirWS.ExecutarServico(ConteudoXML, soap, Configuracoes.CertificadoDigital);
 
             RetornoWSString = consumirWS.RetornoServicoString;
@@ -83,18 +82,48 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
             try
             {
-                string conteudoXmlDistribuicao = conteudoXML;
+                var conteudoXmlDistribuicao = conteudoXML;
 
                 streamWriter = File.CreateText(Path.Combine(pasta, nomeArquivo));
                 streamWriter.Write(conteudoXmlDistribuicao);
             }
             finally
             {
-                if (streamWriter != null)
+                if(streamWriter != null)
                 {
                     streamWriter.Close();
                 }
             }
+        }
+
+        /// <summary>
+        /// Gravar o XML de distribuição em um stream
+        /// </summary>
+        /// <param name="value">Conteúdo a ser gravado no stream</param>
+        /// <param name="stream">Stream que vai receber o conteúdo do XML</param>
+        /// <param name="encoding">Define o encodingo do stream, caso não informado ,será usado o UTF8</param>
+        public virtual void GravarXmlDistribuicao(Stream stream,
+                                                  string value,
+                                                  Encoding encoding = null)
+        {
+            if(stream is null)
+            {
+                throw new ArgumentNullException(nameof(stream));
+            }
+
+            if(string.IsNullOrEmpty(value))
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+
+            if(encoding is null)
+            {
+                encoding = Encoding.UTF8;
+            }
+
+            var byteData = encoding.GetBytes(value);
+            stream.Write(byteData, 0, byteData.Length);
+            stream.Close();
         }
 
         #endregion Public Methods

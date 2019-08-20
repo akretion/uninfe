@@ -12,6 +12,16 @@
         public string UrlNFCe { get; set; }
 
         /// <summary>
+        /// URL para consulta via QRCode do CTe- Produção
+        /// </summary>
+        public string UrlCTeQrCodeP { get; set; }
+
+        /// <summary>
+        /// URL para consulta via QRCode do CTe- Homologação
+        /// </summary>
+        public string UrlCTeQrCodeH { get; set; }
+
+        /// <summary>
         /// URL para consulta via QRCode da NFCe- Homologação
         /// </summary>
         public string UrlNFCeH { get; set; }
