@@ -693,7 +693,7 @@
                                 <xs:documentation>CBO</xs:documentation>
                               </xs:annotation>
                               <xs:restriction base="xs:string">
-                                <xs:pattern value="\d{4,6}"/>
+                                <xs:pattern value="\d{6}"/>
                               </xs:restriction>
                             </xs:simpleType>
                           </xs:element>
@@ -780,7 +780,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="codCateg">
+      <xs:element name="codCateg" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Código da Categoria</xs:documentation>
@@ -790,7 +790,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="vlrRemunOE">
+      <xs:element name="vlrRemunOE" minOccurs="0">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Valor da remuneração recebida pelo trabalhador</xs:documentation>

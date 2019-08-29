@@ -1946,19 +1946,19 @@ namespace NFe.Service
                     switch (servico)
                     {
                         case Servicos.NFSeRecepcionarLoteRps:
-                            retorna = "EnviarLoteRpsEnvio";
+                            retorna = "RecepcionarLoteRps";
                             break;
 
                         case Servicos.NFSeCancelar:
-                            retorna = "CancelarNfseEnvio";
+                            retorna = "CancelarNfse";
                             break;
 
                         case Servicos.NFSeConsultarLoteRps:
-                            retorna = "ConsultarLoteRpsEnvio";
+                            retorna = "ConsultarLoteRps";
                             break;
 
                         case Servicos.NFSeConsultarPorRps:
-                            retorna = "ConsultarNfseRpsEnvio";
+                            retorna = "ConsultarNfsePorRps";
                             break;
                     }
                     break;

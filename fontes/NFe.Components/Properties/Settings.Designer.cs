@@ -1203,16 +1203,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://nfewshomologacao.joinville.sc.gov.br/NotaFiscal/Servicos.asmx")]
-        public string NFe_Components_HJoinvilleSC_Servicos {
-            get {
-                return ((string)(this["NFe_Components_HJoinvilleSC_Servicos"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://portal.serafinacorrea.rs.gov.br:8081/IssWeb-ejb/IssWebWS/IssWebWS")]
         public string NFe_Components_PSerafinaCorreaRS_IssWebWS {
             get {
@@ -2229,6 +2219,26 @@ namespace NFe.Components.Properties {
         public string NFe_Components_HSjbicas_NfseServiceImplSjbicasService {
             get {
                 return ((string)(this["NFe_Components_HSjbicas_NfseServiceImplSjbicasService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfemwshomologacao.joinville.sc.gov.br/NotaFiscal/Servicos.asmx")]
+        public string NFe_Components_HJoinvilleSC_Servicos {
+            get {
+                return ((string)(this["NFe_Components_HJoinvilleSC_Servicos"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfemws.joinville.sc.gov.br/NotaFiscal/Servicos.asmx")]
+        public string NFe_Components_PJoinvilleSC_Servicos {
+            get {
+                return ((string)(this["NFe_Components_PJoinvilleSC_Servicos"]));
             }
         }
     }

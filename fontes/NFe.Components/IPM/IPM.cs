@@ -104,6 +104,15 @@ namespace NFSe.Components
 
                 case 4313508: // Osório-RS 
                     return 8773;
+
+                case 4118006: //Paraíso do Norte - PR
+                    return 7741;
+
+                case 4300604: //Alvorada-RS
+                    return 8511;
+
+                case 4104907: //Castro-PR
+                    return 7495;
             }
 
             return 0;

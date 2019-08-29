@@ -712,7 +712,7 @@ namespace NFe.Service.NFSe
                         if (oDadosEnvLoteRps.tpAmb == 2)
                             envLoteRps = new Components.HJoinvilleSC.Servicos();
                         else
-                            throw new Exception("Ambiente de produção de Joinville-SC ainda não foi implementado no UniNFe.");
+                            envLoteRps = new Components.PJoinvilleSC.Servicos();
                         break;
 
                     case PadroesNFSe.AVMB_ASTEN:

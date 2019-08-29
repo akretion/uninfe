@@ -874,7 +874,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MDFe\HMDFeStatusServico.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaSantaRitaRS-Dueto.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HIjuiRS-Dueto.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PIjuiRS-Dueto.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HBeloHorizonteMG-BHISS.wsdl">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4610,6 +4609,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantanaLivramentoRS-DBSELLER.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSantanaLivramentoRS-DBSELLER.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PIjuiRS-Dueto.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJoinvilleSC.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PJoinvilleSC.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">
@@ -4621,9 +4623,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJoinvilleSC.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Producao\MDFe\PMDFeRecepcaoSinc.wsdl" />

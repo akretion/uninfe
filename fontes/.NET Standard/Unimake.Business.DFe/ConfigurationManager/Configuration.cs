@@ -1,4 +1,5 @@
 ﻿using Unimake.Business.DFe.ConfigurationManager.Contract;
+using Unimake.Business.DFe.Utility;
 
 namespace Unimake.Business.DFe.ConfigurationManager
 {
@@ -11,5 +12,14 @@ namespace Unimake.Business.DFe.ConfigurationManager
         public virtual string SchemaPasta => @"Xml\NFe\Schemas\";
 
         #endregion Public Properties
+
+        #region Public Constructors
+
+        static Configuration()
+        {
+            new LoadEmbeddedResource().Load();
+        }
+
+        #endregion Public Constructors
     }
 }

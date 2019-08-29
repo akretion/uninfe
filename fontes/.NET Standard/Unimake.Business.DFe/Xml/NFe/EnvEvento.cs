@@ -270,6 +270,8 @@ namespace Unimake.Business.DFe.Xml.NFe
         public override void WriteXml(XmlWriter writer)
         {
             base.WriteXml(writer);
+
+            writer.WriteRaw($@"<descEvento>{DescEvento}</descEvento><xCorrecao>{XCorrecao}</xCorrecao><xCondUso>{XCondUso}</xCondUso>");
         }
 
         #endregion Public Methods

@@ -744,20 +744,20 @@ namespace NFe.Service
                     {
                         switch (metodo)
                         {
-                            case "EnviarLoteRpsEnvio":
+                            case "RecepcionarLoteRps":
                                 strRetorno = SerializarObjeto((Components.HJoinvilleSC.EnviarLoteRpsResposta)wsProxy.Invoke(servicoWS, metodo, new object[] { docXML, null }));
                                 break;
 
-                            case "CancelarNfseEnvio":
+                            case "CancelarNfse":
                                 strRetorno = SerializarObjeto((Components.HJoinvilleSC.CancelarNfseResposta)wsProxy.Invoke(servicoWS, metodo, new object[] { docXML }));
                                 break;
 
-                            case "ConsultarLoteRpsEnvio":
+                            case "ConsultarLoteRps":
                                 strRetorno = SerializarObjeto((Components.HJoinvilleSC.ConsultarLoteRpsResposta)wsProxy.Invoke(
                                     servicoWS,
                                     metodo,
                                     new object[] {
-                                        new Components.HJoinvilleSC.IdentificacaoPessoaEmpresa
+                                        new Components.HJoinvilleSC.Prestador
                                         {
                                             CpfCnpj = new Components.HJoinvilleSC.CpfCnpj
                                             {
@@ -769,7 +769,7 @@ namespace NFe.Service
                                         docXML.GetElementsByTagName("Protocolo")[0].InnerText }));
                                 break;
 
-                            case "ConsultarNfseRpsEnvio":
+                            case "ConsultarNfseRps":
                                 strRetorno = SerializarObjeto((Components.HJoinvilleSC.ConsultarNfseRpsResposta)wsProxy.Invoke(
                                     servicoWS,
                                     metodo,
@@ -780,7 +780,7 @@ namespace NFe.Service
                                             Serie = (docXML.GetElementsByTagName("Serie")[0] != null ? docXML.GetElementsByTagName("Serie")[0].InnerText : ""),
                                             Tipo = Convert.ToInt32((docXML.GetElementsByTagName("Tipo")[0] != null ? docXML.GetElementsByTagName("Tipo")[0].InnerText : "0"))
                                         },
-                                        new Components.HJoinvilleSC.IdentificacaoPessoaEmpresa
+                                        new Components.HJoinvilleSC.Prestador
                                         {
                                             CpfCnpj = new Components.HJoinvilleSC.CpfCnpj
                                             {
@@ -792,7 +792,58 @@ namespace NFe.Service
                                     }));
                                 break;
                         }
-                    }
+                    } 
+                    else
+                        switch (metodo)
+                        {
+                            case "RecepcionarLoteRps":
+                                strRetorno = SerializarObjeto((Components.PJoinvilleSC.EnviarLoteRpsResposta)wsProxy.Invoke(servicoWS, metodo, new object[] { docXML, null }));
+                                break;
+
+                            case "CancelarNfse":
+                                strRetorno = SerializarObjeto((Components.PJoinvilleSC.CancelarNfseResposta)wsProxy.Invoke(servicoWS, metodo, new object[] { docXML }));
+                                break;
+
+                            case "ConsultarLoteRps":
+                                strRetorno = SerializarObjeto((Components.PJoinvilleSC.ConsultarLoteRpsResposta)wsProxy.Invoke(
+                                    servicoWS,
+                                    metodo,
+                                    new object[] {
+                                        new Components.PJoinvilleSC.Prestador
+                                        {
+                                            CpfCnpj = new Components.PJoinvilleSC.CpfCnpj
+                                            {
+                                                Cnpj = (docXML.GetElementsByTagName("Cnpj")[0] != null ? docXML.GetElementsByTagName("Cnpj")[0].InnerText : ""),
+                                                Cpf = (docXML.GetElementsByTagName("Cpf")[0] != null ? docXML.GetElementsByTagName("Cpf")[0].InnerText : "")
+                                            },
+                                            InscricaoMunicipal = (docXML.GetElementsByTagName("InscricaoMunicipal")[0] != null ? docXML.GetElementsByTagName("InscricaoMunicipal")[0].InnerText : "")
+                                        },
+                                        docXML.GetElementsByTagName("Protocolo")[0].InnerText }));
+                                break;
+
+                            case "ConsultarNfseRps":
+                                strRetorno = SerializarObjeto((Components.PJoinvilleSC.ConsultarNfseRpsResposta)wsProxy.Invoke(
+                                    servicoWS,
+                                    metodo,
+                                    new object[] {
+                                        new Components.PJoinvilleSC.IdentificacaoRps
+                                        {
+                                            Numero = Convert.ToInt32((docXML.GetElementsByTagName("Numero")[0] != null ? docXML.GetElementsByTagName("Numero")[0].InnerText : "0")),
+                                            Serie = (docXML.GetElementsByTagName("Serie")[0] != null ? docXML.GetElementsByTagName("Serie")[0].InnerText : ""),
+                                            Tipo = Convert.ToInt32((docXML.GetElementsByTagName("Tipo")[0] != null ? docXML.GetElementsByTagName("Tipo")[0].InnerText : "0"))
+                                        },
+                                        new Components.PJoinvilleSC.Prestador
+                                        {
+                                            CpfCnpj = new Components.PJoinvilleSC.CpfCnpj
+                                            {
+                                                Cnpj = (docXML.GetElementsByTagName("Cnpj")[0] != null ? docXML.GetElementsByTagName("Cnpj")[0].InnerText : ""),
+                                                Cpf = (docXML.GetElementsByTagName("Cpf")[0] != null ? docXML.GetElementsByTagName("Cpf")[0].InnerText : "")
+                                            },
+                                            InscricaoMunicipal = (docXML.GetElementsByTagName("InscricaoMunicipal")[0] != null ? docXML.GetElementsByTagName("InscricaoMunicipal")[0].InnerText : "")
+                                        }
+                                    }));
+                                break;
+                        }
 
                     break;
 

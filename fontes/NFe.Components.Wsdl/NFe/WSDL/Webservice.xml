@@ -754,14 +754,14 @@
   </Estado>
   <Estado ID="15" Nome="Pará" UF="PA" SVC="teSVCRS">
     <LocalHomologacao>
-      <NFeInutilizacao>wsdl\homologacao\SVAN\HSVANNfeInutilizacao.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\homologacao\SVAN\HSVANNfeConsulta.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\homologacao\SVAN\HSVANNfeStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-      <NFeRecepcaoEvento>wsdl\homologacao\SVAN\HSVANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <NFeInutilizacao>wsdl\homologacao\SVRS\HSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\homologacao\SVRS\HSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\homologacao\SVRS\HSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\homologacao\SVRS\HSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeRecepcaoEvento>wsdl\homologacao\SVRS\HSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeManifDest>wsdl\homologacao\an\HANRecepcaoEvento.wsdl</NFeManifDest>
-      <NFeAutorizacao>wsdl\homologacao\SVAN\HSVANNFeAutorizacao.wsdl</NFeAutorizacao>
-      <NFeRetAutorizacao>wsdl\homologacao\SVAN\HSVANNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
+      <NFeAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\homologacao\SVRS\HSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\homologacao\mdfe\HMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRecepcaoSinc>wsdl\homologacao\mdfe\HMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\homologacao\mdfe\HMDFeRetRecepcao.wsdl</MDFeRetRecepcao>
@@ -780,14 +780,14 @@
       <CteRecepcaoOS>wsdl\homologacao\SVRS\HSVRScterecepcaoos.wsdl</CteRecepcaoOS>
     </LocalHomologacao>
     <LocalProducao>
-      <NFeInutilizacao>wsdl\producao\SVAN\PSVANNfeInutilizacao.wsdl</NFeInutilizacao>
-      <NFeConsulta>wsdl\producao\SVAN\PSVANNfeConsulta.wsdl</NFeConsulta>
-      <NFeStatusServico>wsdl\producao\SVAN\PSVANNfeStatusServico.wsdl</NFeStatusServico>
-      <NFeConsultaCadastro></NFeConsultaCadastro>
-      <NFeRecepcaoEvento>wsdl\producao\SVAN\PSVANRecepcaoEvento.wsdl</NFeRecepcaoEvento>
+      <NFeInutilizacao>wsdl\producao\SVRS\PSVRSNfeInutilizacao.wsdl</NFeInutilizacao>
+      <NFeConsulta>wsdl\producao\SVRS\PSVRSNfeConsulta.wsdl</NFeConsulta>
+      <NFeStatusServico>wsdl\producao\SVRS\PSVRSNfeStatusServico.wsdl</NFeStatusServico>
+      <NFeConsultaCadastro>wsdl\producao\SVRS\PSVRSNFeCadConsultaCadastro.wsdl</NFeConsultaCadastro>
+      <NFeRecepcaoEvento>wsdl\producao\SVRS\PSVRSNFeRecepcaoEvento.wsdl</NFeRecepcaoEvento>
       <NFeManifDest>wsdl\producao\an\PANRecepcaoEvento.wsdl</NFeManifDest>
-      <NFeAutorizacao>wsdl\producao\SVAN\PSVANNFeAutorizacao.wsdl</NFeAutorizacao>
-      <NFeRetAutorizacao>wsdl\producao\SVAN\PSVANNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
+      <NFeAutorizacao>wsdl\producao\SVRS\PSVRSNFeAutorizacao.wsdl</NFeAutorizacao>
+      <NFeRetAutorizacao>wsdl\producao\SVRS\PSVRSNFeRetAutorizacao.wsdl</NFeRetAutorizacao>
       <MDFeRecepcao>wsdl\producao\mdfe\PMDFeRecepcao.wsdl</MDFeRecepcao>
       <MDFeRecepcaoSinc>wsdl\producao\mdfe\PMDFeRecepcaoSinc.wsdl</MDFeRecepcaoSinc>
       <MDFeRetRecepcao>wsdl\producao\mdfe\PMDFeRetRecepcao.wsdl</MDFeRetRecepcao>

@@ -959,7 +959,13 @@ namespace Unimake.Business.DFe.Servicos
         /// 5=Pauta (valor)
         /// </summary>
         [XmlEnum("5")]
-        Pauta = 5
+        Pauta = 5,
+
+        /// <summary>
+        /// 6=Valor da Operação
+        /// </summary>
+        [XmlEnum("6")]
+        ValorOperacao = 6
     }
 
     #endregion
@@ -2559,6 +2565,161 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("6")]
         MicroEmpresarioEmpresaPequenoPorte = 6
+    }
+
+    #endregion
+
+    #region TipoOperacaoVeicNovo
+
+    /// <summary>
+    /// Tipo de operação - Detalhamento de veículos novos
+    /// </summary>
+    public enum TipoOperacaoVeicNovo
+    {
+        /// <sumary>
+        /// 1=Venda concessionária,
+        /// </sumary>
+        [XmlEnum("1")]
+        VendaConcessionaria = 1,
+
+        /// <sumary>
+        /// 2=Faturamento direto para consumidor final
+        /// </sumary>
+        [XmlEnum("2")]
+        FaturamentoDiretoConsumidorfinal = 2,
+
+        /// <sumary>
+        /// 3=Venda direta para grandes consumidores (frotista, governo, etc...)
+        /// </sumary>
+        [XmlEnum("3")]
+        VendaDiretaGrandesConsumidores = 3,
+
+        /// <sumary>
+        /// 0=Outros
+        /// </sumary>
+        [XmlEnum("0")]
+        Outros = 0
+    }
+
+    #endregion
+
+    #region CondicaoVIN
+
+    /// <summary>
+    /// Condição do VIN, chassi do veículo, remarcado ou normal
+    /// </summary>
+    public enum CondicaoVIN
+    {
+        /// <summary>
+        /// R = Veículo com VIN (chassi) remarcado
+        /// </summary>
+        [XmlEnum("R")]
+        Remarcado = 0,
+
+        /// <summary>
+        /// R = Veículo com VIN (chassi) remarcado
+        /// </summary>
+        [XmlEnum("N")]
+        Normal = 1
+    }
+
+    #endregion
+
+
+    #region CondicaoVeiculo
+
+    /// <summary>
+    /// Condição do veículo
+    /// </summary>
+    public enum CondicaoVeiculo
+    {
+        /// <summary>
+        /// 1=Acabado
+        /// </summary>
+        [XmlEnum("1")]
+        Acabado = 1,
+
+        /// <summary>
+        /// 2=Inacabado
+        /// </summary>
+        [XmlEnum("2")]
+        Inacabado = 2,
+
+        /// <summary>
+        /// 3=Semiacabado
+        /// </summary>
+        [XmlEnum("3")]
+        Semiacabado = 3
+    }
+
+    #endregion
+
+
+    #region TipoRestricaoVeiculo
+
+    /// <summary>
+    /// Tipo de Restrição do Veículo
+    /// </summary>
+    public enum TipoRestricaoVeiculo
+    {
+        /// <sumary>
+        /// 0=Não há
+        /// </sumary>
+        [XmlEnum("0")]
+        NaoHa = 0,
+
+        /// <sumary>
+        /// 1=Alienação Fiduciária
+        /// </sumary>
+        [XmlEnum("1")]
+        AlienacaoFiduciaria = 1,
+
+        /// <sumary>
+        /// 2=Arrendamento Mercantil
+        /// </sumary>
+        [XmlEnum("2")]
+        ArrendamentoMercantil = 2,
+
+        /// <sumary>
+        /// 3=Reserva de Domínio
+        /// </sumary>
+        [XmlEnum("3")]
+        ReservaDominio = 3,
+
+        /// <sumary>
+        /// 4=Penhor de Veículos
+        /// </sumary>
+        [XmlEnum("4")]
+        PenhorVeiculos = 4,
+
+        /// <sumary>
+        /// 9=Outras
+        /// </sumary>
+        [XmlEnum("9")]
+        Outras = 9
+    }
+
+    #endregion
+
+
+    #region TipoArma
+
+    /// <summary>
+    /// Indicador do tipo de arma de fogo
+    /// </summary>
+    public enum TipoArma
+    {
+        /// <summary>
+        /// 0 = Uso Permitido
+        /// </summary>
+        [XmlEnum("0")]
+        UsoPermitido = 0,
+
+        /// <summary>
+        /// Uso Restrito
+        /// </summary>
+        [XmlEnum("1")]
+        UsoRestrito = 1
     }
 
     #endregion

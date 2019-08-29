@@ -120,6 +120,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
                         switch (tipoEventoNFe)
                         {
                             case TipoEventoNFe.CartaCorrecao:
+                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCCE>((DetEventoCCE)xml.Evento[i].InfEvento.DetEvento).OuterXml);
                                 break;
 
                             case TipoEventoNFe.Cancelamento:

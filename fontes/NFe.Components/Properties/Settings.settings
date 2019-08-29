@@ -350,9 +350,6 @@
     <Setting Name="NFe_Components_PPotirendabaSPPotirendabaSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://191.243.12.90:5661/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
-    <Setting Name="NFe_Components_HJoinvilleSC_Servicos" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://nfewshomologacao.joinville.sc.gov.br/NotaFiscal/Servicos.asmx</Value>
-    </Setting>
     <Setting Name="NFe_Components_PSerafinaCorreaRS_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://portal.serafinacorrea.rs.gov.br:8081/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
@@ -655,6 +652,12 @@
     </Setting>
     <Setting Name="NFe_Components_HSjbicas_NfseServiceImplSjbicasService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://homolog.govdigital.com.br/ws/sjbicas</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HJoinvilleSC_Servicos" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfemwshomologacao.joinville.sc.gov.br/NotaFiscal/Servicos.asmx</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PJoinvilleSC_Servicos" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfemws.joinville.sc.gov.br/NotaFiscal/Servicos.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace NFe.Components.HJoinvilleSC {
+namespace NFe.Components.PJoinvilleSC {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -26,7 +26,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="ServicosSoap", Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="ServicosSoap", Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class Servicos : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback RecepcionarLoteRpsOperationCompleted;
@@ -41,7 +41,7 @@ namespace NFe.Components.HJoinvilleSC {
         
         /// <remarks/>
         public Servicos() {
-            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_HJoinvilleSC_Servicos;
+            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_PJoinvilleSC_Servicos;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -88,7 +88,7 @@ namespace NFe.Components.HJoinvilleSC {
         public event ConsultarNfsePorRpsCompletedEventHandler ConsultarNfsePorRpsCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("https://nfemwshomologacao.joinville.sc.gov.br/EnviarLoteRpsEnvio", RequestElementName="EnviarLoteRpsEnvio", RequestNamespace="https://nfemwshomologacao.joinville.sc.gov.br", ResponseElementName="EnviarLoteRpsEnvioResponse", ResponseNamespace="https://nfemwshomologacao.joinville.sc.gov.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("https://nfemws.joinville.sc.gov.br/EnviarLoteRpsEnvio", RequestElementName="EnviarLoteRpsEnvio", RequestNamespace="https://nfemws.joinville.sc.gov.br", ResponseElementName="EnviarLoteRpsEnvioResponse", ResponseNamespace="https://nfemws.joinville.sc.gov.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("EnviarLoteRpsResposta", IsNullable=true)]
         public EnviarLoteRpsResposta RecepcionarLoteRps(System.Xml.XmlNode LoteRps, System.Xml.XmlNode Signature) {
             object[] results = this.Invoke("RecepcionarLoteRps", new object[] {
@@ -120,7 +120,7 @@ namespace NFe.Components.HJoinvilleSC {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("https://nfemwshomologacao.joinville.sc.gov.br/CancelarNfseEnvio", RequestElementName="CancelarNfseEnvio", RequestNamespace="https://nfemwshomologacao.joinville.sc.gov.br", ResponseElementName="CancelarNfseEnvioResponse", ResponseNamespace="https://nfemwshomologacao.joinville.sc.gov.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("https://nfemws.joinville.sc.gov.br/CancelarNfseEnvio", RequestElementName="CancelarNfseEnvio", RequestNamespace="https://nfemws.joinville.sc.gov.br", ResponseElementName="CancelarNfseEnvioResponse", ResponseNamespace="https://nfemws.joinville.sc.gov.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("CancelarNfseResposta", IsNullable=true)]
         public CancelarNfseResposta CancelarNfse(System.Xml.XmlNode Pedido) {
             object[] results = this.Invoke("CancelarNfse", new object[] {
@@ -150,7 +150,7 @@ namespace NFe.Components.HJoinvilleSC {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("https://nfemwshomologacao.joinville.sc.gov.br/ConsultarLoteRpsEnvio", RequestElementName="ConsultarLoteRpsEnvio", RequestNamespace="https://nfemwshomologacao.joinville.sc.gov.br", ResponseElementName="ConsultarLoteRpsEnvioResponse", ResponseNamespace="https://nfemwshomologacao.joinville.sc.gov.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("https://nfemws.joinville.sc.gov.br/ConsultarLoteRpsEnvio", RequestElementName="ConsultarLoteRpsEnvio", RequestNamespace="https://nfemws.joinville.sc.gov.br", ResponseElementName="ConsultarLoteRpsEnvioResponse", ResponseNamespace="https://nfemws.joinville.sc.gov.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("ConsultarLoteRpsResposta", IsNullable=true)]
         public ConsultarLoteRpsResposta ConsultarLoteRps(Prestador Prestador, string Protocolo) {
             object[] results = this.Invoke("ConsultarLoteRps", new object[] {
@@ -182,7 +182,7 @@ namespace NFe.Components.HJoinvilleSC {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("https://nfemwshomologacao.joinville.sc.gov.br/ConsultarNfseRpsEnvio", RequestElementName="ConsultarNfseRpsEnvio", RequestNamespace="https://nfemwshomologacao.joinville.sc.gov.br", ResponseElementName="ConsultarNfseRpsEnvioResponse", ResponseNamespace="https://nfemwshomologacao.joinville.sc.gov.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("https://nfemws.joinville.sc.gov.br/ConsultarNfseRpsEnvio", RequestElementName="ConsultarNfseRpsEnvio", RequestNamespace="https://nfemws.joinville.sc.gov.br", ResponseElementName="ConsultarNfseRpsEnvioResponse", ResponseNamespace="https://nfemws.joinville.sc.gov.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("ConsultarNfseRpsResposta", IsNullable=true)]
         public ConsultarNfseRpsResposta ConsultarNfsePorRps([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] IdentificacaoRps IdentificacaoRps, Prestador Prestador) {
             object[] results = this.Invoke("ConsultarNfsePorRps", new object[] {
@@ -237,7 +237,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class EnviarLoteRpsResposta {
         
         private System.Nullable<int> numeroLoteField;
@@ -296,7 +296,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class MensagemRetorno {
         
         private string codigoField;
@@ -341,7 +341,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class ConsultarNfseRpsResposta {
         
         private CompNfseTc compNfseField;
@@ -374,7 +374,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class CompNfseTc {
         
         private Nfse nfseField;
@@ -395,7 +395,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class Nfse {
         
         private InfNfse infNfseField;
@@ -440,7 +440,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class InfNfse {
         
         private int numeroField;
@@ -606,7 +606,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class ValoresNfse {
         
         private double valorIssField;
@@ -783,7 +783,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class DadosPrestador {
         
         private string razaoSocialField;
@@ -840,7 +840,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class Endereco {
         
         private string endereco1Field;
@@ -934,7 +934,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class Contato {
         
         private string telefoneField;
@@ -967,7 +967,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class IdentificacaoOrgaoGerador {
         
         private int codigoMunicipioField;
@@ -1000,7 +1000,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class DeclaracaoPrestacaoServico {
         
         private InfDeclaracaoPrestacaoServico infDeclaracaoPrestacaoServicoField;
@@ -1033,7 +1033,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class InfDeclaracaoPrestacaoServico {
         
         private InfRps rpsField;
@@ -1223,7 +1223,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class InfRps {
         
         private IdentificacaoRps identificacaoRpsField;
@@ -1293,7 +1293,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class IdentificacaoRps {
         
         private int numeroField;
@@ -1338,7 +1338,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class Servico {
         
         private Valores valoresField;
@@ -1492,7 +1492,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class Valores {
         
         private double valorServicosField;
@@ -1722,7 +1722,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class IdentificacaoPessoaEmpresa {
         
         private CpfCnpj cpfCnpjField;
@@ -1755,7 +1755,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class CpfCnpj {
         
         private string cpfField;
@@ -1788,7 +1788,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class Prestador : IdentificacaoPessoaEmpresa {
     }
     
@@ -1797,7 +1797,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class TomadorWs {
         
         private IdentificacaoTomador identificacaoTomadorField;
@@ -1878,7 +1878,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class IdentificacaoTomador {
         
         private CpfCnpj cpfCnpjField;
@@ -1911,7 +1911,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class EnderecoExterior {
         
         private string codigoPaisField;
@@ -1944,7 +1944,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class DadosIntermediario {
         
         private IdentificacaoPessoaEmpresa identificacaoIntermediarioField;
@@ -1989,7 +1989,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class DadosConstrucaoCivil {
         
         private string codigoObraField;
@@ -2022,7 +2022,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class DadosEvento {
         
         private string identificacaoEventoField;
@@ -2055,7 +2055,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class DadosDeducao {
         
         private string tipoDeducaoField;
@@ -2148,7 +2148,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class IdentificacaoDocumentoDeducao {
         
         private string identificacaoNfseField;
@@ -2193,7 +2193,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class DadosFornecedor {
     }
     
@@ -2202,7 +2202,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class ListaNfse {
         
         private CompNfseTc[] compNfseField;
@@ -2237,7 +2237,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class MensagemRetornoLote {
         
         private IdentificacaoRps identificacaoRpsField;
@@ -2282,7 +2282,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class ConsultarLoteRpsResposta {
         
         private int situacaoField;
@@ -2339,7 +2339,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class IdentificacaoNfse {
         
         private int numeroField;
@@ -2396,7 +2396,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class InfPedidoCancelamento {
         
         private IdentificacaoNfse identificacaoNfseField;
@@ -2442,7 +2442,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class PedidoCancelamento {
         
         private InfPedidoCancelamento infPedidoCancelamentoField;
@@ -2475,7 +2475,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class ConfirmacaoCancelamento {
         
         private PedidoCancelamento pedidoField;
@@ -2508,7 +2508,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class NfseCancelamento {
         
         private ConfirmacaoCancelamento confirmacaoField;
@@ -2541,7 +2541,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class RetCancelamento {
         
         private NfseCancelamento nfseCancelamentoField;
@@ -2562,7 +2562,7 @@ namespace NFe.Components.HJoinvilleSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemwshomologacao.joinville.sc.gov.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://nfemws.joinville.sc.gov.br")]
     public partial class CancelarNfseResposta {
         
         private RetCancelamento retCancelamentoField;

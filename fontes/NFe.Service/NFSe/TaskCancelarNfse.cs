@@ -627,7 +627,7 @@ namespace NFe.Service.NFSe
                         if (oDadosPedCanNfse.tpAmb == 2)
                             pedCanNfse = new Components.HJoinvilleSC.Servicos();
                         else
-                            throw new Exception("Ambiente de produção de Joinville-SC ainda não foi implementado no UniNFe.");
+                            pedCanNfse = new Components.PJoinvilleSC.Servicos();
                         break;
 
                     case PadroesNFSe.AVMB_ASTEN:
