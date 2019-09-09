@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -8,10 +9,99 @@ using Unimake.Business.DFe.Utility;
 
 namespace Unimake.Business.DFe.Xml.NFe
 {
+    [Serializable]
+    [XmlRoot(ElementName = "detEvento")]
+    public class DetEventoCanc: EventoDetalhe
+    {
+        #region Internal Methods
+
+        internal override void ProcessReader() => base.ProcessReader();
+
+        #endregion Internal Methods
+
+        #region Public Properties
+
+        [XmlElement("descEvento", Order = 0)]
+        public override string DescEvento { get; set; } = "Cancelamento";
+
+        [XmlElement("nProt", Order = 1)]
+        public string NProt { get; set; }
+
+        [XmlElement("xJust", Order = 2)]
+        public string XJust { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+
+            writer.WriteRaw($@"
+            <descEvento>{DescEvento}</descEvento>
+            <nProt>{NProt}</nProt>
+            <xJust>{XJust}</xJust>");
+        }
+
+        #endregion Public Methods
+    }
+
+    [Serializable]
+    [XmlRoot(ElementName = "detEvento")]
+    public class DetEventoCCE: EventoDetalhe
+    {
+        #region Internal Methods
+
+        internal override void ProcessReader() => base.ProcessReader();
+
+        #endregion Internal Methods
+
+        #region Public Properties
+
+        [XmlElement("descEvento", Order = 0)]
+        public override string DescEvento { get; set; } = "Carta de Correcao";
+
+        [XmlElement("xCondUso", Order = 2)]
+        public string XCondUso { get; set; } = "A Carta de Correcao e disciplinada pelo paragrafo 1o-A do art. 7o do Convenio S/N, de 15 de dezembro de 1970 e pode ser utilizada para regularizacao de erro ocorrido na emissao de documento fiscal, desde que o erro nao esteja relacionado com: I - as variaveis que determinam o valor do imposto tais como: base de calculo, aliquota, diferenca de preco, quantidade, valor da operacao ou da prestacao; II - a correcao de dados cadastrais que implique mudanca do remetente ou do destinatario; III - a data de emissao ou de saida.";
+
+        [XmlElement("xCorrecao", Order = 1)]
+        public string XCorrecao { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+
+            writer.WriteRaw($@"<descEvento>{DescEvento}</descEvento><xCorrecao>{XCorrecao}</xCorrecao><xCondUso>{XCondUso}</xCondUso>");
+        }
+
+        #endregion Public Methods
+    }
+
     [Serializable()]
     [XmlRoot("envEvento", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
-    public class EnvEvento : XMLBase
+    public class EnvEvento: XMLBase
     {
+        #region Private Methods
+
+        private void SignEvent(Evento evento, XmlElement xmlEl)
+        {
+            var signature = xmlEl.GetElementsByTagName("Signature")[0];
+            if(signature != null)
+            {
+                var signatureEvento = new XmlDocument();
+
+                signatureEvento.LoadXml(signature.OuterXml);
+                evento.Signature = XMLUtility.Deserializar<Signature>(signatureEvento);
+            }
+        }
+
+        #endregion Private Methods
+
         #region Public Properties
 
         [XmlElement("evento", Order = 2)]
@@ -40,23 +130,42 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         public override T LerXML<T>(XmlDocument doc)
         {
-            var retornar = base.LerXML<T>(doc);
-
-            if (doc.GetElementsByTagName("Signature")[0] != null)
+            if(typeof(T) != typeof(EnvEvento))
             {
-                var signatureEvento = new XmlDocument();
-
-                signatureEvento.LoadXml(doc.GetElementsByTagName("Signature")[0].OuterXml);
-                ((EnvEvento)(object)retornar).Evento[0].Signature = XMLUtility.Deserializar<Signature>(signatureEvento);
+                throw new InvalidCastException($"Cannot cast type '{typeof(T).Name}' into type '{typeof(EnvEvento).Name}'.");
             }
 
-            return retornar;
+            var retornar = base.LerXML<T>(doc) as EnvEvento;
+
+            var eventos = doc.GetElementsByTagName("evento");
+
+            if((eventos?.Count ?? 0) > 0)
+            {
+                retornar.Evento = new Evento[eventos.Count];
+
+                var index = 0;
+
+                foreach(XmlElement xmlEl in eventos)
+                {
+                    var xml = new StringBuilder();
+                    xml.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+                    xml.Append($"<envEvento xmlns=\"{xmlEl.NamespaceURI}\">");
+                    xml.Append($"{xmlEl.OuterXml}</envEvento>");
+
+                    var envEvt = XMLUtility.Deserializar<EnvEvento>(xml.ToString());
+                    var evt = envEvt.Evento[0];
+                    SignEvent(evt, xmlEl);
+                    retornar.Evento[index++] = evt;
+                }
+            }
+
+            return (T)(object)retornar;
         }
 
         #endregion Public Methods
     }
 
-    [Serializable()]
+    [Serializable]
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/nfe")]
     public class Evento
     {
@@ -72,6 +181,75 @@ namespace Unimake.Business.DFe.Xml.NFe
         public string Versao { get; set; }
 
         #endregion Public Properties
+    }
+
+    [XmlInclude(typeof(DetEventoCanc))]
+    [XmlInclude(typeof(DetEventoCCE))]
+    public class EventoDetalhe: IXmlSerializable
+    {
+        #region Internal Properties
+
+        internal XmlReader XmlReader { get; set; }
+
+        #endregion Internal Properties
+
+        #region Internal Methods
+
+        internal virtual void ProcessReader()
+        {
+            if(XmlReader == null)
+            {
+                return;
+            }
+
+            var pi = default(PropertyInfo);
+            var type = GetType();
+
+            if(XmlReader.HasAttributes)
+            {
+                if(XmlReader.GetAttribute("versao") != "")
+                {
+                    pi = type.GetProperty("versao", BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                    pi?.SetValue(this, XmlReader.GetAttribute("versao"));
+                }
+            }
+
+            while(XmlReader.Read())
+            {
+                if(XmlReader.NodeType == XmlNodeType.Element)
+                {
+                    pi = type.GetProperty(XmlReader.Name, BindingFlags.Public |
+                                                          BindingFlags.Instance |
+                                                          BindingFlags.IgnoreCase);
+                }
+                else if(XmlReader.NodeType == XmlNodeType.Text)
+                {
+                    pi?.SetValue(this, XmlReader.Value);
+                }
+            }
+        }
+
+        #endregion Internal Methods
+
+        #region Public Properties
+
+        [XmlElement("descEvento", Order = 0)]
+        public virtual string DescEvento { get; set; }
+
+        [XmlAttribute(AttributeName = "versao", DataType = "token")]
+        public virtual string Versao { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public XmlSchema GetSchema() => default;
+
+        public void ReadXml(XmlReader reader) => XmlReader = reader;
+
+        public virtual void WriteXml(XmlWriter writer) => writer.WriteAttributeString("versao", Versao);
+
+        #endregion Public Methods
     }
 
     [Serializable()]
@@ -111,7 +289,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => _detEvento;
             set
             {
-                switch (TpEvento)
+                switch(TpEvento)
                 {
                     case 0:
                         _detEvento = value;
@@ -174,183 +352,19 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region Public Constructors
 
-        public InfEvento() { }
-
-        public InfEvento(EventoDetalhe detEvento)
+        public InfEvento()
         {
-            DetEvento = detEvento ?? throw new ArgumentNullException(nameof(detEvento));
         }
+
+        public InfEvento(EventoDetalhe detEvento) => DetEvento = detEvento ?? throw new ArgumentNullException(nameof(detEvento));
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public bool ShouldSerializeCNPJ()
-        {
-            return !string.IsNullOrWhiteSpace(CNPJ);
-        }
+        public bool ShouldSerializeCNPJ() => !string.IsNullOrWhiteSpace(CNPJ);
 
-        public bool ShouldSerializeCPF()
-        {
-            return !string.IsNullOrWhiteSpace(CPF);
-        }
-
-        #endregion Public Methods
-    }
-
-    [Serializable]
-    [XmlRoot(ElementName = "detEvento")]
-    public class DetEventoCanc : EventoDetalhe
-    {
-        #region Internal Methods
-
-        internal override void ProcessReader()
-        {
-            base.ProcessReader();
-        }
-
-        #endregion Internal Methods
-
-        #region Public Properties
-
-        [XmlElement("descEvento", Order = 0)]
-        public override string DescEvento { get; set; } = "Cancelamento";
-
-        [XmlElement("nProt", Order = 1)]
-        public string NProt { get; set; }
-
-        [XmlElement("xJust", Order = 2)]
-        public string XJust { get; set; }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        public override void WriteXml(XmlWriter writer)
-        {
-            base.WriteXml(writer);
-
-            writer.WriteRaw($@"
-            <descEvento>{DescEvento}</descEvento>
-            <nProt>{NProt}</nProt>
-            <xJust>{XJust}</xJust>");
-        }
-
-        #endregion Public Methods
-    }
-
-    [Serializable]
-    [XmlRoot(ElementName = "detEvento")]
-    public class DetEventoCCE : EventoDetalhe
-    {
-        #region Internal Methods
-
-        internal override void ProcessReader()
-        {
-            base.ProcessReader();
-        }
-
-        #endregion Internal Methods
-
-        #region Public Properties
-
-        [XmlElement("descEvento", Order = 0)]
-        public override string DescEvento { get; set; } = "Carta de Correcao";
-
-        [XmlElement("xCondUso", Order = 2)]
-        public string XCondUso { get; set; } = "A Carta de Correcao e disciplinada pelo paragrafo 1o-A do art. 7o do Convenio S/N, de 15 de dezembro de 1970 e pode ser utilizada para regularizacao de erro ocorrido na emissao de documento fiscal, desde que o erro nao esteja relacionado com: I - as variaveis que determinam o valor do imposto tais como: base de calculo, aliquota, diferenca de preco, quantidade, valor da operacao ou da prestacao; II - a correcao de dados cadastrais que implique mudanca do remetente ou do destinatario; III - a data de emissao ou de saida.";
-
-        [XmlElement("xCorrecao", Order = 1)]
-        public string XCorrecao { get; set; }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        public override void WriteXml(XmlWriter writer)
-        {
-            base.WriteXml(writer);
-
-            writer.WriteRaw($@"<descEvento>{DescEvento}</descEvento><xCorrecao>{XCorrecao}</xCorrecao><xCondUso>{XCondUso}</xCondUso>");
-        }
-
-        #endregion Public Methods
-    }
-
-    [XmlInclude(typeof(DetEventoCanc))]
-    [XmlInclude(typeof(DetEventoCCE))]
-    public class EventoDetalhe : IXmlSerializable
-    {
-        #region Internal Properties
-
-        internal XmlReader XmlReader { get; set; }
-
-        #endregion Internal Properties
-
-        #region Internal Methods
-
-        internal virtual void ProcessReader()
-        {
-            if (XmlReader == null)
-            {
-                return;
-            }
-
-            var pi = default(PropertyInfo);
-            var type = GetType();
-
-            if (XmlReader.HasAttributes)
-            {
-                if (XmlReader.GetAttribute("versao") != "")
-                {
-                    pi = type.GetProperty("versao", BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
-                    pi?.SetValue(this, XmlReader.GetAttribute("versao"));
-                }
-            }
-
-            while (XmlReader.Read())
-            {
-                if (XmlReader.NodeType == XmlNodeType.Element)
-                {
-                    pi = type.GetProperty(XmlReader.Name, BindingFlags.Public |
-                                                          BindingFlags.Instance |
-                                                          BindingFlags.IgnoreCase);
-                }
-                else if (XmlReader.NodeType == XmlNodeType.Text)
-                {
-                    pi?.SetValue(this, XmlReader.Value);
-                }
-            }
-        }
-
-        #endregion Internal Methods
-
-        #region Public Properties
-
-        [XmlElement("descEvento", Order = 0)]
-        public virtual string DescEvento { get; set; }
-
-        [XmlAttribute(AttributeName = "versao", DataType = "token")]
-        public virtual string Versao { get; set; }
-
-        #endregion Public Properties
-
-        #region Public Methods
-
-        public XmlSchema GetSchema()
-        {
-            return default;
-        }
-
-        public void ReadXml(XmlReader reader)
-        {
-            XmlReader = reader;
-        }
-
-        public virtual void WriteXml(XmlWriter writer)
-        {
-            writer.WriteAttributeString("versao", Versao);
-        }
+        public bool ShouldSerializeCPF() => !string.IsNullOrWhiteSpace(CPF);
 
         #endregion Public Methods
     }

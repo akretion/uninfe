@@ -49,6 +49,9 @@ namespace NFe.Validate
         /// </summary>
         public void EncryptAssinatura(string arquivoXML)
         {
+            if (TipoArqXml.cArquivoSchema.Contains("DSF\\SJCSP"))
+                return;
+
             if (TipoArqXml.cArquivoSchema.Contains("PAULISTANA") ||
                 TipoArqXml.cArquivoSchema.Contains("BLUMENAU") ||
                 TipoArqXml.cArquivoSchema.Contains("DSF"))

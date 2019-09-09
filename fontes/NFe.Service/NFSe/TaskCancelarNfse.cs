@@ -203,7 +203,14 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.DSF:
-                        EncryptAssinatura();
+                        if (oDadosPedCanNfse.cMunicipio == 3549904)
+                        {
+                            cabecMsg = "<cabecalho versao=\"3\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>3</versaoDados></cabecalho>";
+                        }
+                        else
+                        {
+                            EncryptAssinatura();
+                        }
                         break;
 
                     case PadroesNFSe.TECNOSISTEMAS:
@@ -420,7 +427,7 @@ namespace NFe.Service.NFSe
                     #endregion MGM
 
                     case PadroesNFSe.NATALENSE:
-						cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"1\" xmlns=\"http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd\"><versaoDados>1</versaoDados></cabecalho>";
+                        cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"1\" xmlns=\"http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd\"><versaoDados>1</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.CONSIST:
@@ -720,10 +727,10 @@ namespace NFe.Service.NFSe
                     ad.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
 
                     //Invocar o método que envia o XML para o SEFAZ
-                   oInvocarObj.InvocarNFSe(wsProxy, pedCanNfse, NomeMetodoWS(Servico, oDadosPedCanNfse.cMunicipio), cabecMsg, this,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,   //"-ped-cannfse",
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML,   //"-cannfse",
-                                            padraoNFSe, Servico, securityProtocolType);
+                    oInvocarObj.InvocarNFSe(wsProxy, pedCanNfse, NomeMetodoWS(Servico, oDadosPedCanNfse.cMunicipio), cabecMsg, this,
+                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,   //"-ped-cannfse",
+                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML,   //"-cannfse",
+                                             padraoNFSe, Servico, securityProtocolType);
 
                     /// grava o arquivo no FTP
                     string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,

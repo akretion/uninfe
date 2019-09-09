@@ -37,13 +37,18 @@ namespace NFe.Components.SigCorp.CianortePR.p
             tcEstruturaDescricaoErros[] tcErros = null;
             tcRetornoNota result = service.GerarNota(oTcDescricaoRps, out tcErros);
             string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
         {
-            throw new Exceptions.ServicoInexistenteException();
+            tcDadosCancelaNota oTcDadosCancela = ReadXML<tcDadosCancelaNota>(file);
+            tcEstruturaDescricaoErros[] tcErros = null;
+            tcRetornoNota result = service.CancelarNota(oTcDadosCancela, out tcErros);
+            string strResult = base.CreateXML(result, tcErros);
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
@@ -52,7 +57,7 @@ namespace NFe.Components.SigCorp.CianortePR.p
             tcEstruturaDescricaoErros[] tcErros = null;
             tcRetornoNota result = service.ConsultarNotaValida(oTcDadosPrestador, out tcErros);
             string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
@@ -65,9 +70,9 @@ namespace NFe.Components.SigCorp.CianortePR.p
         {
             tcDadosPrestador oTcDadosPrestador = ReadXML<tcDadosPrestador>(file);
             tcEstruturaDescricaoErros[] tcErros = null;
-            tcDadosNota result = service.ConsultarNotaPrestador(oTcDadosPrestador, NumeroNota(file, "ConsultarNotaPrestador"), out tcErros);
+            tcDadosNota result = service.ConsultarNotaPrestador(oTcDadosPrestador, NumeroNota(file, "ConsultarNotaPrestador"), "", out tcErros);
             string strResult = base.CreateXML(result, tcErros);
-            GerarRetorno(file, strResult,   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
@@ -75,7 +80,7 @@ namespace NFe.Components.SigCorp.CianortePR.p
         {
             throw new Exceptions.ServicoInexistenteException();
         }
-        
+
         private T ReadXML<T>(string file)
             where T : new()
         {

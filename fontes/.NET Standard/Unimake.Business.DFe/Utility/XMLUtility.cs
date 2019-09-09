@@ -85,19 +85,24 @@ namespace Unimake.Business.DFe.Utility
         /// Deserializar XML (Converte o XML para um objeto)
         /// </summary>
         /// <typeparam name="T">Tipo do objeto</typeparam>
-        /// <param name="doc">Conteúdo do XML a ser deserilizado</param>
+        /// <param name="xml">XML a ser deserilizado</param>
         /// <returns>Retorna o objeto com o conteúdo do XML deserializado</returns>
-        public static T Deserializar<T>(XmlDocument doc)
+        public static T Deserializar<T>(string xml)
             where T : new()
         {
             var serializer = new XmlSerializer(typeof(T));
-            Stream stream = StringXmlToStream(doc.OuterXml);
-            var reader = new StreamReader(stream);
-            var objeto = (T)serializer.Deserialize(reader);
-            reader.Close();
-
-            return objeto;
+            var stream = new StringReader(xml);
+            return (T)serializer.Deserialize(stream);
         }
+
+        /// <summary>
+        /// Deserializar XML (Converte o XML para um objeto)
+        /// </summary>
+        /// <typeparam name="T">Tipo do objeto</typeparam>
+        /// <param name="doc">Conteúdo do XML a ser deserilizado</param>
+        /// <returns>Retorna o objeto com o conteúdo do XML deserializado</returns>
+        public static T Deserializar<T>(XmlDocument doc)
+            where T : new() => Deserializar<T>(doc.OuterXml);
 
         /// <summary>
         /// Gera um número randômico para ser utilizado no Codigo Numérico da NFe, NFCe, CTe, MDFe, etc...
@@ -154,22 +159,6 @@ namespace Unimake.Business.DFe.Utility
             }
 
             return doc;
-        }
-
-        /// <summary>
-        /// Converte uma string com estrutura de XML para Stream
-        /// </summary>
-        /// <returns>Conteúdo do XML em Stream</returns>
-        /// <param name="conteudoXML">Conteúdo do XML a ser convertido</param>
-        public static MemoryStream StringXmlToStream(string conteudoXML)
-        {
-            var byteArray = new byte[conteudoXML.Length];
-            var encoding = new ASCIIEncoding();
-            byteArray = encoding.GetBytes(conteudoXML);
-            var memoryStream = new MemoryStream(byteArray);
-            memoryStream.Seek(0, SeekOrigin.Begin);
-
-            return memoryStream;
         }
 
         #endregion Public Methods

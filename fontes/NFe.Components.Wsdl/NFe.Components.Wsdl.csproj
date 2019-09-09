@@ -1705,7 +1705,6 @@
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PParanapanamaSP-PRONINServices.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HParanapanamaSP-PRONINServices.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PCacapavaRS-DUETOServices.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HCacapavaRS-DUETOServices.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCuiaba-MTISSNet.wsdl" />
   </ItemGroup>
@@ -4612,6 +4611,15 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PIjuiRS-Dueto.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HJoinvilleSC.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PJoinvilleSC.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCacapavaRS-DUETOServices.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoJoseDosCamposSP.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoJoseDosCamposSP.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\SJCSP\nfse.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\DSF\SJCSP\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

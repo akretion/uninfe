@@ -491,6 +491,13 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.SMARAPD_204:
                         cabecMsg = "<cabecalho versao=\"2.04\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.04</versaoDados></cabecalho>";
                         break;
+
+                    case PadroesNFSe.DSF:
+                        if (ler.oDadosPedSitNfseRps.cMunicipio == 3549904)
+                        {
+                            cabecMsg = "<cabecalho versao=\"3\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>3</versaoDados></cabecalho>";
+                        }
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, ler.oDadosPedSitNfseRps.cMunicipio))

@@ -87,6 +87,78 @@ namespace NFSe.Components
                 TargetNameSpace = "http://localhost:8080/WsNFe2/lote"
             });
             #endregion
+
+            #region São José dos Campos-SP
+
+            SchemaXML.InfSchemas.Add("NFSE-DSF-3549904-ConsultarNfseEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\DSF\\SJCSP\\nfse.xsd",
+                Descricao = "XML de Consulta de NFSe por Data",
+                TagAssinatura = "ConsultarNfseEnvio",
+                TagAtributoId = "Prestador",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+
+            SchemaXML.InfSchemas.Add("NFSE-DSF-3549904-ConsultarNfseRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfsePorRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\DSF\\SJCSP\\nfse.xsd",
+                Descricao = "XML de Consulta de NFSe por Rps",
+                TagAssinatura = "ConsultarNfseRpsEnvio",
+                TagAtributoId = "Prestador",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+
+            SchemaXML.InfSchemas.Add("NFSE-DSF-3549904-ConsultarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\DSF\\SJCSP\\nfse.xsd",
+                Descricao = "XML de Consulta de Lote RPS",
+                TagAssinatura = "ConsultarLoteRpsEnvio",
+                TagAtributoId = "Protocolo",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+
+            SchemaXML.InfSchemas.Add("NFSE-DSF-3549904-CancelarNfseEnvio", new InfSchema()
+            {
+                Tag = "CancelarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\DSF\\SJCSP\\nfse.xsd",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "CancelarNfseEnvio",
+                TagAtributoId = "Pedido",
+                TagLoteAssinatura = "Pedido",
+                TagLoteAtributoId = "InfPedidoCancelamento",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+
+            SchemaXML.InfSchemas.Add("NFSE-DSF-3549904-ConsultarSituacaoLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarSituacaoLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\DSF\\SJCSP\\nfse.xsd",
+                Descricao = "XML de Consulta da Situacao do Lote RPS",
+                TagAssinatura = "ConsultarSituacaoLoteRpsEnvio",
+                TagAtributoId = "Protocolo",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+
+            SchemaXML.InfSchemas.Add("NFSE-DSF-3549904-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\DSF\\SJCSP\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+
+            #endregion
         }
     }
 }

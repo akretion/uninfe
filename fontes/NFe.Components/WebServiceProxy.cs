@@ -104,22 +104,22 @@ namespace NFe.Components
                         switch (servico)
                         {
                             case Servicos.NFSeConsultarLoteRps:
-                                return "basic_INFSEConsultas";
+                                return "BasicHttpBinding_INFSEConsultas";
 
                             case Servicos.NFSeConsultar:
-                                return "basic_INFSEConsultas";
+                                return "BasicHttpBinding_INFSEConsultas";
 
                             case Servicos.NFSeConsultarPorRps:
-                                return "basic_INFSEConsultas";
+                                return "BasicHttpBinding_INFSEConsultas";
 
                             case Servicos.NFSeConsultarSituacaoLoteRps:
-                                return "basic_INFSEConsultas";
+                                return "BasicHttpBinding_INFSEConsultas";
 
                             case Servicos.NFSeCancelar:
-                                return "basic_INFSEGeracao";
+                                return "BasicHttpBinding_INFSEGeracao";
 
                             case Servicos.NFSeRecepcionarLoteRps:
-                                return "basic_INFSEGeracao";
+                                return "BasicHttpBinding_INFSEGeracao";
 
                             default:
                                 return _NomeClasseWS;
@@ -587,6 +587,7 @@ namespace NFe.Components
             provider.GenerateCodeFromNamespace(GerarGrafo(), writer, null);
 
             #endregion Gerar o código da classe
+
 
             string codigoClasse = writer.ToString();
 

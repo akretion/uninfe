@@ -942,91 +942,126 @@ namespace NFe.Service
                 #region DSF
 
                 case PadroesNFSe.DSF:
-                    switch (servico)
+                    if (cMunicipio.ToString() == "3549904") //São José dos Campos-SP
                     {
-                        case Servicos.NFSeConsultarLoteRps:
-                            if (taHomologacao)
-                            {
-                                throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
-                            }
-                            else
-                            {
-                                retorna = "consultarLote";
-                            }
+                        switch (servico)
+                        {
+                            case Servicos.NFSeConsultarLoteRps:
+                                retorna = "ConsultarLoteRpsV3";
+                                break;
 
-                            break;
+                            case Servicos.NFSeConsultar:
+                                retorna = "ConsultarNfseV3";
+                                break;
 
-                        case Servicos.NFSeConsultar:
-                            if (taHomologacao)
-                            {
-                                throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
-                            }
-                            else
-                            {
-                                retorna = "consultarNota";
-                            }
+                            case Servicos.NFSeConsultarPorRps:
+                                retorna = "ConsultarNfsePorRpsV3";
+                                break;
 
-                            break;
+                            case Servicos.NFSeConsultarSituacaoLoteRps:
+                                retorna = "ConsultarSituacaoLoteRpsV3";
+                                break;
 
-                        case Servicos.NFSeConsultarPorRps:
-                            if (taHomologacao)
-                            {
-                                throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
-                            }
-                            else
-                            {
-                                retorna = "consultarNFSeRps";
-                            }
+                            case Servicos.NFSeCancelar:
+                                retorna = "CancelarNfseV3";
+                                break;
 
-                            break;
+                            case Servicos.NFSeRecepcionarLoteRps:
+                                retorna = "RecepcionarLoteRpsV3";
+                                break;
 
-                        case Servicos.NFSeConsultarSituacaoLoteRps:
-                            if (taHomologacao)
-                            {
-                                throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
-                            }
-                            else
-                            {
-                                retorna = "consultarSequencialRps";
-                            }
-
-                            break;
-
-                        case Servicos.NFSeCancelar:
-                            if (taHomologacao)
-                            {
-                                throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
-                            }
-                            else
-                            {
-                                retorna = "cancelar";
-                            }
-
-                            break;
-
-                        case Servicos.NFSeRecepcionarLoteRps:
-                            if (taHomologacao &&
-                                cMunicipio.ToString() != "2111300") //São Luiz - MA
-                            {
-                                if (cMunicipio.ToString().Equals("5002704") || // Campo grande - MS não tem web service de teste
-                                    cMunicipio.ToString().Equals("3303500")) //Nova Iguaçu-RS
+                            default:
+                                throw new NFe.Components.Exceptions.ServicoInexistenteException();
+                        }
+                    }
+                    else
+                    {
+                        switch (servico)
+                        {
+                            case Servicos.NFSeConsultarLoteRps:
+                                if (taHomologacao)
                                 {
                                     throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
                                 }
                                 else
                                 {
-                                    retorna = "testeEnviar";
+                                    retorna = "consultarLote";
                                 }
-                            }
-                            else
-                            {
-                                retorna = "enviar";
-                            }
 
-                            break;
+                                break;
 
-                        default:
-                            throw new NFe.Components.Exceptions.ServicoInexistenteException();
+                            case Servicos.NFSeConsultar:
+                                if (taHomologacao)
+                                {
+                                    throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                                }
+                                else
+                                {
+                                    retorna = "consultarNota";
+                                }
+
+                                break;
+
+                            case Servicos.NFSeConsultarPorRps:
+                                if (taHomologacao)
+                                {
+                                    throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                                }
+                                else
+                                {
+                                    retorna = "consultarNFSeRps";
+                                }
+
+                                break;
+
+                            case Servicos.NFSeConsultarSituacaoLoteRps:
+                                if (taHomologacao)
+                                {
+                                    throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                                }
+                                else
+                                {
+                                    retorna = "consultarSequencialRps";
+                                }
+
+                                break;
+
+                            case Servicos.NFSeCancelar:
+                                if (taHomologacao)
+                                {
+                                    throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                                }
+                                else
+                                {
+                                    retorna = "cancelar";
+                                }
+
+                                break;
+
+                            case Servicos.NFSeRecepcionarLoteRps:
+                                if (taHomologacao &&
+                                    cMunicipio.ToString() != "2111300") //São Luiz - MA
+                                {
+                                    if (cMunicipio.ToString().Equals("5002704") || // Campo grande - MS não tem web service de teste
+                                        cMunicipio.ToString().Equals("3303500")) //Nova Iguaçu-RS
+                                    {
+                                        throw new NFe.Components.Exceptions.ServicoInexistenteHomologacaoException(servico);
+                                    }
+                                    else
+                                    {
+                                        retorna = "testeEnviar";
+                                    }
+                                }
+                                else
+                                {
+                                    retorna = "enviar";
+                                }
+
+                                break;
+
+                            default:
+                                throw new NFe.Components.Exceptions.ServicoInexistenteException();
+                        }
                     }
                     break;
 

@@ -160,7 +160,7 @@
     "System.Memory/4.5.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-m0psCSpUxTGfvwyO0i03ajXVhgBqyXlibXz0Mo1dtKGjaHrXFLnuQ8rNBTmWRqbfRjr4eC6Wah4X5FfuFDu5og==",
+      "sha512": "sha512-ULODiqdq81e9YfQS/GL4P5zgek90jyPykAV4t1Sp4sjID3/Ebi18lbvOKm+81biHR5a5FdFRXSU/JVc6nxr/7A==",
       "path": "system.memory/4.5.0",
       "hashPath": "system.memory.4.5.0.nupkg.sha512"
     },

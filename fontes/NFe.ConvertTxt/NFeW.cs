@@ -1251,7 +1251,15 @@ namespace NFe.ConvertTxt
                                 wCampo(imposto.ICMS.vFCP, TpcnTipoCampo.tcDec2, TpcnResources.vFCP);//, ObOp.Opcional);
                             }
                             wCampo(imposto.ICMS.modBCST, TpcnTipoCampo.tcInt, TpcnResources.modBCST);
-                            wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+
+                            if (imposto.ICMS.modBCST == TpcnDeterminacaoBaseIcmsST.dbisMargemValorAgregado)
+                            {
+                                wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Obrigatorio);
+                            }
+                            else
+                            {
+                                wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+                            }                            
                             wCampo(imposto.ICMS.pRedBCST, nDecimaisPerc, TpcnResources.pRedBCST, ObOp.Opcional);
                             wCampo(imposto.ICMS.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST);
                             wCampo(imposto.ICMS.pICMSST, nDecimaisPerc, TpcnResources.pICMSST);
@@ -1292,7 +1300,16 @@ namespace NFe.ConvertTxt
 
                         case "30":
                             wCampo(imposto.ICMS.modBCST, TpcnTipoCampo.tcInt, TpcnResources.modBCST);
-                            wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+
+                            if (imposto.ICMS.modBCST == TpcnDeterminacaoBaseIcmsST.dbisMargemValorAgregado)
+                            {
+                                wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Obrigatorio);
+                            }
+                            else
+                            {
+                                wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+                            }
+
                             wCampo(imposto.ICMS.pRedBCST, nDecimaisPerc, TpcnResources.pRedBCST, ObOp.Opcional);
                             wCampo(imposto.ICMS.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST);
                             wCampo(imposto.ICMS.pICMSST, nDecimaisPerc, TpcnResources.pICMSST);
@@ -1413,7 +1430,16 @@ namespace NFe.ConvertTxt
                                 wCampo(imposto.ICMS.vFCP, TpcnTipoCampo.tcDec2, TpcnResources.vFCP);//, ObOp.Opcional);
                             }
                             wCampo(imposto.ICMS.modBCST, TpcnTipoCampo.tcInt, TpcnResources.modBCST);
-                            wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+
+                            if (imposto.ICMS.modBCST == TpcnDeterminacaoBaseIcmsST.dbisMargemValorAgregado)
+                            {
+                                wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Obrigatorio);
+                            }
+                            else
+                            {
+                                wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+                            }
+
                             wCampo(imposto.ICMS.pRedBCST, nDecimaisPerc, TpcnResources.pRedBCST, ObOp.Opcional);
                             wCampo(imposto.ICMS.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST);
                             wCampo(imposto.ICMS.pICMSST, nDecimaisPerc, TpcnResources.pICMSST);
@@ -1452,7 +1478,16 @@ namespace NFe.ConvertTxt
                             if (imposto.ICMS.vBCST > 0 || imposto.ICMS.vICMSST > 0)
                             {
                                 wCampo(imposto.ICMS.modBCST, TpcnTipoCampo.tcInt, TpcnResources.modBCST);
-                                wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+
+                                if (imposto.ICMS.modBCST == TpcnDeterminacaoBaseIcmsST.dbisMargemValorAgregado)
+                                {
+                                    wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Obrigatorio);
+                                }
+                                else
+                                {
+                                    wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+                                }
+
                                 wCampo(imposto.ICMS.pRedBCST, nDecimaisPerc, TpcnResources.pRedBCST, ObOp.Opcional);
                                 wCampo(imposto.ICMS.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST);
                                 wCampo(imposto.ICMS.pICMSST, nDecimaisPerc, TpcnResources.pICMSST);
@@ -1515,7 +1550,16 @@ namespace NFe.ConvertTxt
 
                     case 201:
                         wCampo(imposto.ICMS.modBCST, TpcnTipoCampo.tcInt, TpcnResources.modBCST);
-                        wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+
+                        if (imposto.ICMS.modBCST == TpcnDeterminacaoBaseIcmsST.dbisMargemValorAgregado)
+                        {
+                            wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Obrigatorio);
+                        }
+                        else
+                        {
+                            wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+                        }
+
                         wCampo(imposto.ICMS.pRedBCST, nDecimaisPerc, TpcnResources.pRedBCST, ObOp.Opcional);
                         wCampo(imposto.ICMS.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST);
                         wCampo(imposto.ICMS.pICMSST, nDecimaisPerc, TpcnResources.pICMSST);
@@ -1534,7 +1578,16 @@ namespace NFe.ConvertTxt
                     case 202:
                     case 203:
                         wCampo(imposto.ICMS.modBCST, TpcnTipoCampo.tcInt, TpcnResources.modBCST);
-                        wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+
+                        if (imposto.ICMS.modBCST == TpcnDeterminacaoBaseIcmsST.dbisMargemValorAgregado)
+                        {
+                            wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Obrigatorio);
+                        }
+                        else
+                        {
+                            wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+                        }
+
                         wCampo(imposto.ICMS.pRedBCST, nDecimaisPerc, TpcnResources.pRedBCST, ObOp.Opcional);
                         wCampo(imposto.ICMS.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST);
                         wCampo(imposto.ICMS.pICMSST, nDecimaisPerc, TpcnResources.pICMSST);
@@ -1584,7 +1637,15 @@ namespace NFe.ConvertTxt
                             wCampo(imposto.ICMS.modBCST, TpcnTipoCampo.tcInt, TpcnResources.modBCST);
                         }
 
-                        wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+                        if (imposto.ICMS.modBCST == TpcnDeterminacaoBaseIcmsST.dbisMargemValorAgregado)
+                        {
+                            wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Obrigatorio);
+                        }
+                        else
+                        {
+                            wCampo(imposto.ICMS.pMVAST, nDecimaisPerc, TpcnResources.pMVAST, ObOp.Opcional);
+                        }
+
                         wCampo(imposto.ICMS.pRedBCST, nDecimaisPerc, TpcnResources.pRedBCST, ObOp.Opcional);
                         wCampo(imposto.ICMS.vBCST, TpcnTipoCampo.tcDec2, TpcnResources.vBCST);
                         wCampo(imposto.ICMS.pICMSST, nDecimaisPerc, TpcnResources.pICMSST);
