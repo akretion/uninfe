@@ -28,8 +28,21 @@ namespace NFe.Components.Metropolis
                 if (metropolisService == null)
                 {
                     if (tpAmb == TipoAmbiente.taHomologacao)
-                        metropolisService = new LauroDeFreitasBA.h.MetropolisH(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                    {
+                        switch (CodigoMun)
+                        {
+                            case 2919207:
+                                metropolisService = new LauroDeFreitasBA.h.MetropolisH(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
 
+                            case 2913606:
+                                metropolisService = new IlheusBA.h.MetropolisH(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
                     else
                         switch (CodigoMun)
                         {

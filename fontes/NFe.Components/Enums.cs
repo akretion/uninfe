@@ -673,13 +673,7 @@ namespace NFe.Components
         /// </summary>
         [Description("ISS On-line/Assessor Público")]
         ISSONLINE_ASSESSORPUBLICO,
-
-        /// <summary>
-        /// Padrão da prefeitura de Blumenau-SC
-        /// </summary>
-        [Description("Blumenau-SC")]
-        BLUMENAU_SC,
-
+             
         /// <summary>
         /// Padrão da prefeitura de Juiz de Fora-MG
         /// </summary>
@@ -1174,6 +1168,12 @@ namespace NFe.Components
         /// </summary>
         [Description("IIBRASIL")]
         IIBRASIL,
+
+        /// <summary>
+        /// Padrão WEBFISCO_TECNOLOGIA
+        /// </summary>
+        [Description("WEBFISCO_TECNOLOGIA")]
+        WEBFISCO_TECNOLOGIA
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
     }

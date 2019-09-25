@@ -1,5 +1,6 @@
 ﻿using NFe.Certificado;
 using NFe.Components;
+using NFe.Components.QRCode;
 using NFe.Exceptions;
 using NFe.Settings;
 using System;
@@ -59,16 +60,29 @@ namespace NFe.Service
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(lerXml.oDadosNfe.cUF), Servico));
-
-                //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
                 wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), lerXml.oDadosNfe.cUF);
                 wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), lerXml.oDadosNfe.versao);
 
-                //Criar objeto da classe de assinatura digita
+                #region Assinar XML
+
                 AssinaturaDigital oAD = new AssinaturaDigital();
 
-                //Assinar o XML
                 oAD.Assinar(ConteudoXML, emp, Convert.ToInt32(lerXml.oDadosNfe.cUF));
+
+                #endregion
+
+                #region Adicionar a tag do QRCode
+
+                string urlCte = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ?
+                    Empresas.Configuracoes[emp].URLConsultaDFe.UrlCTeQrCodeH :
+                    Empresas.Configuracoes[emp].URLConsultaDFe.UrlCTeQrCodeP;
+
+                QRCodeCTe qrCodeCte = new QRCodeCTe(ConteudoXML, urlCte);
+                qrCodeCte.MontarLinkQRCode(Empresas.Configuracoes[emp].X509Certificado);
+
+                #endregion 
+
+
 
                 //Mover o arquivo para a pasta em processamento
                 Empresas.Configuracoes[emp].CriarSubPastaEnviado();

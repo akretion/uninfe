@@ -121,9 +121,17 @@ namespace Unimake.Business.DFe.Xml.NFe
         {
             var xmlDocument = base.GerarXML();
 
+            #region Adicionar o atributo de namespace que falta nas tags "evento"
+
             var attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
-            var xmlElement = (XmlElement)xmlDocument.GetElementsByTagName("evento")[0];
-            xmlElement.SetAttribute("xmlns", attribute.Namespace);
+
+            for (int i = 0; i < xmlDocument.GetElementsByTagName("evento").Count; i++)
+            {
+                var xmlElement = (XmlElement)xmlDocument.GetElementsByTagName("evento")[i];
+                xmlElement.SetAttribute("xmlns", attribute.Namespace);
+            }
+
+            #endregion
 
             return xmlDocument;
         }

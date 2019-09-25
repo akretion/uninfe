@@ -564,47 +564,6 @@ namespace NFe.Service
 
                 #endregion ISSONLINE
 
-                #region Blumenau-SC
-
-                case PadroesNFSe.BLUMENAU_SC:
-                    switch (servico)
-                    {
-                        case Servicos.NFSeConsultarLoteRps:
-                            retorna = "ConsultaLote";
-                            break;
-
-                        case Servicos.NFSeConsultar:
-                            retorna = "ConsultaNFeEmitidas";
-                            break;
-
-                        case Servicos.NFSeConsultarPorRps:
-                            retorna = "ConsultaNFe";
-                            break;
-
-                        case Servicos.NFSeConsultarSituacaoLoteRps:
-                            retorna = "ConsultaInformacoesLote";
-                            break;
-
-                        case Servicos.NFSeCancelar:
-                            retorna = "CancelamentoNFe";
-                            break;
-
-                        case Servicos.NFSeRecepcionarLoteRps:
-                            if (Empresas.Configuracoes[Empresas.FindEmpresaByThread()].AmbienteCodigo == (int)NFe.Components.TipoAmbiente.taHomologacao)
-                            {
-                                retorna = "TesteEnvioLoteRPS";
-                            }
-                            else
-                            {
-                                retorna = "EnvioLoteRPS";
-                            }
-
-                            break;
-                    }
-                    break;
-
-                #endregion Blumenau-SC
-
                 #region BHISS
 
                 case PadroesNFSe.BHISS:
@@ -3283,7 +3242,8 @@ namespace NFe.Service
                         cMunicipio == 5005707 ||
                         cMunicipio == 4314423 ||
                         cMunicipio == 3511102 ||
-                        cMunicipio == 3535804)
+                        cMunicipio == 3535804 ||
+                        cMunicipio == 4306932)
                     {
                         retorno = false;
                     }
@@ -3320,6 +3280,7 @@ namespace NFe.Service
                 case PadroesNFSe.ADM_SISTEMAS:
                 case PadroesNFSe.SIMPLE:
                 case PadroesNFSe.IIBRASIL:
+                case PadroesNFSe.WEBFISCO_TECNOLOGIA:
                     retorno = false;
                     break;
 

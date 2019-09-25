@@ -23,6 +23,7 @@ using NFe.Validate;
 using NFSe.Components;
 using System;
 using System.IO;
+using NFe.Components.WEBFISCO_TECNOLOGIA;
 #if _fw46
 using System.ServiceModel;
 using static NFe.Components.Security.SOAPSecurity;
@@ -169,10 +170,6 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.ABACO:
                     case PadroesNFSe.CANOAS_RS:
                         cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
-                        break;
-
-                    case PadroesNFSe.BLUMENAU_SC:
-                        EncryptAssinatura();
                         break;
 
                     case PadroesNFSe.BHISS:
@@ -496,7 +493,8 @@ namespace NFe.Service.NFSe
                             oDadosPedCanNfse.cMunicipio == 5005707 ||
                             oDadosPedCanNfse.cMunicipio == 4314423 ||
                             oDadosPedCanNfse.cMunicipio == 3511102 ||
-                            oDadosPedCanNfse.cMunicipio == 3535804)
+                            oDadosPedCanNfse.cMunicipio == 3535804 ||
+                            oDadosPedCanNfse.cMunicipio == 4306932)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -717,6 +715,16 @@ namespace NFe.Service.NFSe
                         //}
 
                         break;
+
+                    case PadroesNFSe.WEBFISCO_TECNOLOGIA:
+                        WEBFISCO_TECNOLOGIA webTecnologia = new WEBFISCO_TECNOLOGIA((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                           Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                           oDadosPedCanNfse.cMunicipio,
+                                           Empresas.Configuracoes[emp].UsuarioWS,
+                                           Empresas.Configuracoes[emp].SenhaWS);
+                        webTecnologia.CancelarNfse(NomeArquivoXML);
+                        break;
+
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, Empresas.Configuracoes[emp].UnidadeFederativaCodigo))

@@ -279,7 +279,7 @@ namespace NFe.Components.QRCode
             {
                 string tpAmb = GetValueXML("ide", "tpAmb").Trim();
                 string tpEmis = GetValueXML("ide", "tpEmis").Trim();
-                string chCTe = GetAttributeXML("infCte", "Id").Substring(4).Trim();
+                string chCTe = GetAttributeXML("infCte", "Id").Substring(3).Trim();
 
                 string linkQRCode = UrlCTe +
                     "?chCTe=" + chCTe +
@@ -289,7 +289,8 @@ namespace NFe.Components.QRCode
                 {
                     linkQRCode += "&amp;sign=" + Criptografia.SignWithRSASHA1(certificado, chCTe);
                 }
-//                AddLinkQRCode(linkQRCode);
+
+                AddLinkQRCode(linkQRCode);
             }
         }
 

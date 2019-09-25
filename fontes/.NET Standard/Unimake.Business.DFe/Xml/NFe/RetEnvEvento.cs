@@ -82,7 +82,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("tpEvento", Order = 6)]
         public TipoEventoNFe TpEvento { get; set; }
 
-        [XmlElement("XEvento", Order = 7)]
+        [XmlElement("xEvento", Order = 7)]
         public string XEvento { get; set; }
 
         [XmlElement("nSeqEvento", Order = 8)]

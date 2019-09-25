@@ -58,7 +58,7 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// Schemas específicos de um mesmo serviço (Tipos de Evento, Modal CTe ou Modal MDFe)
         /// </summary>
-        public List<SchemaEspecifico> SchemasEspecificos = new List<SchemaEspecifico>();
+        public Dictionary<string, SchemaEspecifico> SchemasEspecificos = new Dictionary<string, SchemaEspecifico>();
 
         /// <summary>
         /// Versão do schema do XML

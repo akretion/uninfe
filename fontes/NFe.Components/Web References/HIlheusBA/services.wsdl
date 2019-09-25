@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://endpoint.nfse.ws.webservicenfse.edza.com.br/" targetNamespace="http://endpoint.nfse.ws.webservicenfse.edza.com.br/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://lftributos.metropolisweb.com.br:9090/webservicenfse/nfse/services?xsd=1" namespace="http://endpoint.nfse.ws.webservicenfse.edza.com.br/" />
+    </xsd:schema>
+  </types>
+  <message name="CancelarNfse">
+    <part name="parameters" element="tns:CancelarNfse" />
+  </message>
+  <message name="CancelarNfseResponse">
+    <part name="parameters" element="tns:CancelarNfseResponse" />
+  </message>
+  <message name="ConsultarSituacaoLoteRps">
+    <part name="parameters" element="tns:ConsultarSituacaoLoteRps" />
+  </message>
+  <message name="ConsultarSituacaoLoteRpsResponse">
+    <part name="parameters" element="tns:ConsultarSituacaoLoteRpsResponse" />
+  </message>
+  <message name="ConsultarNfse">
+    <part name="parameters" element="tns:ConsultarNfse" />
+  </message>
+  <message name="ConsultarNfseResponse">
+    <part name="parameters" element="tns:ConsultarNfseResponse" />
+  </message>
+  <message name="ConsultarLoteRps">
+    <part name="parameters" element="tns:ConsultarLoteRps" />
+  </message>
+  <message name="ConsultarLoteRpsResponse">
+    <part name="parameters" element="tns:ConsultarLoteRpsResponse" />
+  </message>
+  <message name="RecepcionarLoteRps">
+    <part name="parameters" element="tns:RecepcionarLoteRps" />
+  </message>
+  <message name="RecepcionarLoteRpsResponse">
+    <part name="parameters" element="tns:RecepcionarLoteRpsResponse" />
+  </message>
+  <message name="ConsultarNfsePorRps">
+    <part name="parameters" element="tns:ConsultarNfsePorRps" />
+  </message>
+  <message name="ConsultarNfsePorRpsResponse">
+    <part name="parameters" element="tns:ConsultarNfsePorRpsResponse" />
+  </message>
+  <portType name="NfseEndpoint">
+    <operation name="CancelarNfse">
+      <input xmlns:ns1="http://www.w3.org/2007/05/addressing/metadata" ns1:Action="http://endpoint.nfse.ws.webservicenfse.edza.com.br/NfseEndpoint/CancelarNfseRequest" message="tns:CancelarNfse" />
+      <output xmlns:ns2="http://www.w3.org/2007/05/addressing/metadata" ns2:Action="http://endpoint.nfse.ws.webservicenfse.edza.com.br/NfseEndpoint/CancelarNfseResponse" message="tns:CancelarNfseResponse" />
+    </operation>
+    <operation name="ConsultarSituacaoLoteRps">
+      <input xmlns:ns3="http://www.w3.org/2007/05/addressing/metadata" ns3:Action="http://endpoint.nfse.ws.webservicenfse.edza.com.br/NfseEndpoint/ConsultarSituacaoLoteRpsRequest" message="tns:ConsultarSituacaoLoteRps" />
+      <output xmlns:ns4="http://www.w3.org/2007/05/addressing/metadata" ns4:Action="http://endpoint.nfse.ws.webservicenfse.edza.com.br/NfseEndpoint/ConsultarSituacaoLoteRpsResponse" message="tns:ConsultarSituacaoLoteRpsResponse" />
+    </operation>
+    <operation name="ConsultarNfse">
+      <input xmlns:ns5="http://www.w3.org/2007/05/addressing/metadata" ns5:Action="http://endpoint.nfse.ws.webservicenfse.edza.com.br/NfseEndpoint/ConsultarNfseRequest" message="tns:ConsultarNfse" />
+      <output xmlns:ns6="http://www.w3.org/2007/05/addressing/metadata" ns6:Action="http://endpoint.nfse.ws.webservicenfse.edza.com.br/NfseEndpoint/ConsultarNfseResponse" message="tns:ConsultarNfseResponse" />
+    </operation>
+    <operation name="ConsultarLoteRps">
+      <input xmlns:ns7="http://www.w3.org/2007/05/addressing/metadata" ns7:Action="http://endpoint.nfse.ws.webservicenfse.edza.com.br/NfseEndpoint/ConsultarLoteRpsRequest" message="tns:ConsultarLoteRps" />
+      <output xmlns:ns8="http://www.w3.org/2007/05/addressing/metadata" ns8:Action="http://endpoint.nfse.ws.webservicenfse.edza.com.br/NfseEndpoint/ConsultarLoteRpsResponse" message="tns:ConsultarLoteRpsResponse" />
+    </operation>
+    <operation name="RecepcionarLoteRps">
+      <input xmlns:ns9="http://www.w3.org/2007/05/addressing/metadata" ns9:Action="http://endpoint.nfse.ws.webservicenfse.edza.com.br/NfseEndpoint/RecepcionarLoteRpsRequest" message="tns:RecepcionarLoteRps" />
+      <output xmlns:ns10="http://www.w3.org/2007/05/addressing/metadata" ns10:Action="http://endpoint.nfse.ws.webservicenfse.edza.com.br/NfseEndpoint/RecepcionarLoteRpsResponse" message="tns:RecepcionarLoteRpsResponse" />
+    </operation>
+    <operation name="ConsultarNfsePorRps">
+      <input xmlns:ns11="http://www.w3.org/2007/05/addressing/metadata" ns11:Action="http://endpoint.nfse.ws.webservicenfse.edza.com.br/NfseEndpoint/ConsultarNfsePorRpsRequest" message="tns:ConsultarNfsePorRps" />
+      <output xmlns:ns12="http://www.w3.org/2007/05/addressing/metadata" ns12:Action="http://endpoint.nfse.ws.webservicenfse.edza.com.br/NfseEndpoint/ConsultarNfsePorRpsResponse" message="tns:ConsultarNfsePorRpsResponse" />
+    </operation>
+  </portType>
+</definitions>

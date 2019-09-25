@@ -24,6 +24,7 @@ using NFe.Validate;
 using NFSe.Components;
 using System;
 using System.IO;
+using NFe.Components.WEBFISCO_TECNOLOGIA;
 #if _fw46
 using System.ServiceModel;
 using static NFe.Components.Security.SOAPSecurity;
@@ -161,11 +162,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.CANOAS_RS:
                         cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
                         break;
-
-                    case PadroesNFSe.BLUMENAU_SC:
-                        EncryptAssinatura();
-                        break;
-
+               
                     case PadroesNFSe.BHISS:
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.BHISS);
@@ -583,7 +580,8 @@ namespace NFe.Service.NFSe
                             oDadosEnvLoteRps.cMunicipio == 5005707 ||
                             oDadosEnvLoteRps.cMunicipio == 4314423 ||
                             oDadosEnvLoteRps.cMunicipio == 3511102 ||
-                            oDadosEnvLoteRps.cMunicipio == 3535804)
+                            oDadosEnvLoteRps.cMunicipio == 3535804 ||
+                            oDadosEnvLoteRps.cMunicipio == 4306932)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -813,6 +811,15 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.D2TI:                 
                         cabecMsg = "<cabecalhoNfseLote xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.ctaconsult.com/nfse\"><versao>1.00</versao><ambiente>2</ambiente></cabecalhoNfseLote>";
+                        break;
+
+                    case PadroesNFSe.WEBFISCO_TECNOLOGIA:
+                        WEBFISCO_TECNOLOGIA webTecnologia = new WEBFISCO_TECNOLOGIA((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                           Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                           oDadosEnvLoteRps.cMunicipio,
+                                           Empresas.Configuracoes[emp].UsuarioWS,
+                                           Empresas.Configuracoes[emp].SenhaWS);
+                        webTecnologia.EmiteNF(NomeArquivoXML);
                         break;
                 }
 

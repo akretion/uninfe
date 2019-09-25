@@ -659,5 +659,44 @@
     <Setting Name="NFe_Components_PJoinvilleSC_Servicos" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://nfemws.joinville.sc.gov.br/NotaFiscal/Servicos.asmx</Value>
     </Setting>
+    <Setting Name="NFe_Components_HBarraBonitaSP_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfe_teste_homologacao.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PBarraBonitaSP_Enviar_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfeenvia.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PBarraBonitaSP_Cancelar_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfecancela.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PBarraBonitaSP_ConsultarNfe_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfeconsulta.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HIlheusBA_Nfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://lftributos.metropolisweb.com.br:9090/webservicenfse/nfse/services</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PBlumenauSC_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://wsblumenau.simplissweb.com.br/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HEntreIjuisRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://pmei-rs.ddns.net:8089/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PEntreIjuisRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://pmei-rs.ddns.net:8089/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HBlumenauSC_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://wshomologacaoabrasf.simplissweb.com.br/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HCoronelFabricianoMG_NfseServiceImplCoronelFabricianoService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.homolog.govdigital.com.br/ws/fabriciano</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCoronelFabricianoMG_NfseServiceImplCoronelFabricianoService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br/ws/fabriciano</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HEstacaoRS_NfseService_Homolog" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://sistema.pmestacao.com.br:8182/NfseService_Homolog/NfseService_Homolog</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PEstacaoRS_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://sistema.pmestacao.com.br:8182/NfseService/NfseService</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

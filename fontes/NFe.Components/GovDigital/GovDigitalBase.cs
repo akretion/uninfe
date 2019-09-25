@@ -75,6 +75,10 @@ namespace NFe.Components.GovDigital
                                 govDigitalService = new HSjbicas.NfseServiceImplSjbicasService();
                                 break;
 
+                            case 3119401: //Coronel Fabriciano-MG
+                                govDigitalService = new HCoronelFabricianoMG.NfseServiceImplCoronelFabricianoService();
+                                break;
+
                             default:
                                 break;
                         }
@@ -128,6 +132,10 @@ namespace NFe.Components.GovDigital
                                 break;
                             case 3162922: //São Roque-SP
                                 govDigitalService = new HSjbicas.NfseServiceImplSjbicasService();
+                                break;
+
+                            case 3119401: //Coronel Fabriciano-MG
+                                govDigitalService = new PCoronelFabricianoMG.NfseServiceImplCoronelFabricianoService();
                                 break;
 
                             default:

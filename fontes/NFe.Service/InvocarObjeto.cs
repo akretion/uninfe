@@ -491,14 +491,6 @@ namespace NFe.Service
 
                 #endregion Padrão ISSONLINE
 
-                #region Padrão Blumenau-SC
-
-                case PadroesNFSe.BLUMENAU_SC:
-                    strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { 1, docXML.OuterXml });
-                    break;
-
-                #endregion Padrão Blumenau-SC
-
                 #region Padrão Paulistana
 
                 case PadroesNFSe.PAULISTANA:
@@ -792,7 +784,7 @@ namespace NFe.Service
                                     }));
                                 break;
                         }
-                    } 
+                    }
                     else
                         switch (metodo)
                         {
@@ -897,7 +889,7 @@ namespace NFe.Service
                     strRetorno = smarapdOutput.outputXML;
 #endif
                     break;
-                                   
+
                 default:
 
                     #region Demais padrões
@@ -905,7 +897,7 @@ namespace NFe.Service
                     if (string.IsNullOrEmpty(cabecMsg))
                         strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { docXML.OuterXml });
                     else
-                       strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
+                        strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { cabecMsg.ToString(), docXML.OuterXml });
                     break;
 
                     #endregion Demais padrões

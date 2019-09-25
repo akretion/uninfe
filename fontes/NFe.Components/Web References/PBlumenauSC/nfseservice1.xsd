@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.sistema.com.br/Sistema.Ws.Nfse" elementFormDefault="qualified" targetNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://wsblumenau.simplissweb.com.br/nfseservice.svc?xsd=xsd1" namespace="http://www.abrasf.org.br/nfse.xsd" />
+  <xs:element name="Versao">
+    <xs:complexType />
+  </xs:element>
+  <xs:element name="VersaoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="VersaoResult" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecepcionarLoteRps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="EnviarLoteRpsEnvio" type="q1:EnviarLoteRpsEnvio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RecepcionarLoteRpsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="RecepcionarLoteRpsResult" type="q2:EnviarLoteRpsResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EnviarLoteRpsSincrono">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="EnviarLoteRpsSincronoEnvio" type="q3:EnviarLoteRpsSincronoEnvio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EnviarLoteRpsSincronoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="EnviarLoteRpsSincronoResult" type="q4:EnviarLoteRpsSincronoResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GerarNfse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="GerarNfseEnvio" type="q5:GerarNfseEnvio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GerarNfseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="GerarNfseResult" type="q6:GerarNfseResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarNfse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="CancelarNfseEnvio" type="q7:CancelarNfseEnvio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarNfseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="CancelarNfseResult" type="q8:CancelarNfseResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubstituirNfse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="SubstituirNfseEnvio" type="q9:SubstituirNfseEnvio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubstituirNfseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="SubstituirNfseResult" type="q10:SubstituirNfseResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarLoteRps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarLoteRpsEnvio" type="q11:ConsultarLoteRpsEnvio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarLoteRpsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarLoteRpsResult" type="q12:ConsultarLoteRpsResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfseRps">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarNfseRpsEnvio" type="q13:ConsultarNfseRpsEnvio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfseRpsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarNfseRpsResult" type="q14:ConsultarNfseRpsResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfseServicoPrestado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarNfseServicoPrestadoEnvio" type="q15:ConsultarNfseServicoPrestadoEnvio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfseServicoPrestadoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarNfseServicoPrestadoResult" type="q16:ConsultarNfseServicoPrestadoResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfseServicoTomado">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarNfseServicoTomadoEnvio" type="q17:ConsultarNfseServicoTomadoEnvio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfseServicoTomadoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarNfseServicoTomadoResult" type="q18:ConsultarNfseServicoTomadoResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfseFaixa">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarNfseFaixaEnvio" type="q19:ConsultarNfseFaixaEnvio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarNfseFaixaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarNfseFaixaResult" type="q20:ConsultarNfseFaixaResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GerarCfse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="GerarCfseEnvio" type="q21:GerarCfseEnvio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GerarCfseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="GerarCfseResult" type="q22:GerarCfseResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarCfse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarCfseEnvio" type="q23:ConsultarCfseEnvio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarCfseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarCfseResult" type="q24:ConsultarCfseResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarCfse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="CancelarCfseEnvio" type="q25:CancelarCfseEnvio" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarCfseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="CancelarCfseResult" type="q26:CancelarCfseResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GerarCfseHomologacao">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="GerarCfseHomologacaoEnvio" type="q27:GerarCfseEnvioHomologacao" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GerarCfseHomologacaoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="GerarCfseHomologacaoResult" type="q28:GerarCfseResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarCfseHomologacao">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarCfseHomologacaoEnvio" type="q29:ConsultarCfseEnvioHomologacao" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarCfseHomologacaoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="ConsultarCfseHomologacaoResult" type="q30:ConsultarCfseResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarCfseHomologacao">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="CancelarCfseHomologacaoEnvio" type="q31:CancelarCfseEnvioHomologacao" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarCfseHomologacaoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://www.abrasf.org.br/nfse.xsd" minOccurs="0" maxOccurs="1" name="CancelarCfseHomologacaoResult" type="q32:CancelarCfseResposta" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
