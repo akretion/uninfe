@@ -58,7 +58,7 @@ namespace NFe.Service
                 System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(ufParaWS, dadosEnvEvento.eventos[0].tpAmb, tpEmis, Servico);
 
                 object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
+                object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico, tpEmis));
 
                 wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), cOrgao.ToString());
                 wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosEnvEvento.versao);

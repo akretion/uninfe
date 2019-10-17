@@ -173,6 +173,12 @@ namespace NFe.Components.WEBFISCO_TECNOLOGIA.BarraBonitaSP.h
             throw new Exceptions.ServicoInexistenteException();
         }
 
+        public override void ConsultarXml(string file)
+        {
+            throw new Exceptions.ServicoInexistenteException();
+        }
+
+
         #endregion Métodos
     }
 }

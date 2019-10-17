@@ -250,7 +250,7 @@ catch (Exception ex)
 }
 
 // ---------------------------------------------------------------------------------------------------------
-//Enviando XML da NFe
+// Enviando XML da NFe
 // ---------------------------------------------------------------------------------------------------------
 
 try
@@ -818,3 +818,54 @@ switch (autorizacao.Result.ProtNFe.InfProt.CStat)
         autorizacao.GravarXmlDistribuicao(@"c:\testenfe\");
         break;
 }
+
+// ---------------------------------------------------------------------------------------------------------
+// Enviando a consulta de documentos fiscais destinados
+// ---------------------------------------------------------------------------------------------------------
+
+var nsu = "000000000000000";
+
+var configuracao = new Configuracao
+{
+    CertificadoDigital = CertificadoSelecionado
+};
+
+while (true)
+{
+    try
+    {
+        var xml = new DistDFeInt
+        {
+            Versao = "1.01",
+            TpAmb = TipoAmbiente.Producao,
+            CNPJ = "06117473000150",
+            CUFAutor = UFBrasil.PR,
+            DistNSU = new DistNSU
+            {
+                UltNSU = nsu
+            }
+        };
+
+        var distribuicaoDFe = new DistribuicaoDFe(xml, configuracao);
+        distribuicaoDFe.Executar();
+
+        if (distribuicaoDFe.Result.CStat.Equals(138)) //Documentos localizados
+        {
+            //Salvar os XMLs do docZIP no HD
+            distribuicaoDFe.GravarXMLDocZIP(@"c:\testenfe\doczip", true);
+        }
+
+        nsu = distribuicaoDFe.Result.UltNSU;
+
+        if (Convert.ToInt64(distribuicaoDFe.Result.UltNSU) >= Convert.ToInt64(distribuicaoDFe.Result.MaxNSU))
+        {
+            break;
+        }
+    }
+    catch (Exception ex)
+    {
+        CatchException(ex);
+    }
+}
+
+MessageBox.Show("Consulta finalizada.");

@@ -14,6 +14,7 @@ namespace NFe.Components.WEBFISCO_TECNOLOGIA.BarraBonitaSP.p
         private readonly PWebfiscoTecnologia_Enviar.webservice envioService = new PWebfiscoTecnologia_Enviar.webservice();
         private readonly PWebfiscoTecnologia_Cancelar.webservice cancelaService = new PWebfiscoTecnologia_Cancelar.webservice();
         private readonly PWebfiscoTecnologia_ConsultarNfe.webservice consultaNfeService = new PWebfiscoTecnologia_ConsultarNfe.webservice();
+        private readonly PWebFiscoTecnologia_ConsultarXml.webservice consultaXmlService = new PWebFiscoTecnologia_ConsultarXml.webservice();
 
         #region construtores
 
@@ -200,7 +201,7 @@ namespace NFe.Components.WEBFISCO_TECNOLOGIA.BarraBonitaSP.p
 
             var strResult = base.CreateXML(result);
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
@@ -232,7 +233,30 @@ namespace NFe.Components.WEBFISCO_TECNOLOGIA.BarraBonitaSP.p
 
             var strResult = base.CreateXML(result);
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
+        }
+        
+        public override void ConsultarXml(string file)
+        {
+            var reader = new XmlTextReader(file)
+            {
+                WhitespaceHandling = WhitespaceHandling.None
+            };
+            reader.MoveToContent();
+
+            var oXml = new XmlDocument();
+            oXml.Load(reader);
+
+            Array result = consultaXmlService.ConsultaNfe(Login, Senha,
+                XmlDocumentUtilities.GetValue<string>(oXml, "prf"),
+                XmlDocumentUtilities.GetValue<string>(oXml, "usr"),
+                XmlDocumentUtilities.GetValue<string>(oXml, "ctr"),
+                XmlDocumentUtilities.GetValue<string>(oXml, "tipo"));
+
+            var strResult = base.CreateXML(result);
+            GerarRetorno(file, strResult, 
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)

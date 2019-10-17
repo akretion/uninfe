@@ -6,6 +6,20 @@ namespace NFSe.Components
     {
         public static void CriarListaIDXML()
         {
+
+            #region XML para Gerar NFse
+            SchemaXML.InfSchemas.Add("NFSE-IIBRASIL-GerarNfseEnvio", new InfSchema()
+            {
+                Tag = "GerarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\IIBRASIL\\servico_enviar_lote_rps_envio.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = "http://tempuri.org/servico_enviar_lote_rps_envio.xsd"
+            });
+            #endregion
+
             #region XML de Cancelamento de NFS-e
             SchemaXML.InfSchemas.Add("NFSE-IIBRASIL-CancelarNfseEnvio", new InfSchema()
             {
@@ -91,18 +105,7 @@ namespace NFSe.Components
             });
             #endregion
 
-            #region XML para Gerar NFse
-            SchemaXML.InfSchemas.Add("NFSE-IIBRASIL-EnviarLoteRpsEnvio", new InfSchema()
-            {
-                Tag = "EnviarLoteRpsEnvio",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "NFSe\\IIBRASIL\\servico_enviar_lote_rps_envio.xsd",
-                Descricao = "XML de Lote RPS",
-                TagAssinatura = "",
-                TagAtributoId = "",
-                TargetNameSpace = "http://tempuri.org/servico_enviar_lote_rps_envio.xsd"
-            });
-            #endregion
+          
 
             #region Consulta NFSe 
           

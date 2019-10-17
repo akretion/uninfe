@@ -146,6 +146,8 @@ namespace NFe.Components.Abstract
         {
         }
 
+        public virtual void ConsultarXml(string file) { }
+
         public object WSGeracao
         {
             get;

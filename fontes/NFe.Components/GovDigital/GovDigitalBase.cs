@@ -79,6 +79,10 @@ namespace NFe.Components.GovDigital
                                 govDigitalService = new HCoronelFabricianoMG.NfseServiceImplCoronelFabricianoService();
                                 break;
 
+                            case 3556453: //Vargem Grande Paulista-SP
+                                govDigitalService = new HVargemGrandePaulistaSP.NfseServiceImplVgpService();
+                                break;
+
                             default:
                                 break;
                         }
@@ -136,6 +140,10 @@ namespace NFe.Components.GovDigital
 
                             case 3119401: //Coronel Fabriciano-MG
                                 govDigitalService = new PCoronelFabricianoMG.NfseServiceImplCoronelFabricianoService();
+                                break;
+
+                            case 3556453: //Vargem Grande Paulista-SP
+                                govDigitalService = new PVargemGrandePaulistaSP.NfseServiceImplVgpService();
                                 break;
 
                             default:

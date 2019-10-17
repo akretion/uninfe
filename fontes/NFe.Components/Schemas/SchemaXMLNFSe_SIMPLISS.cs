@@ -96,6 +96,38 @@ namespace NFSe.Components
                 TargetNameSpace = "http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd"
             });
             #endregion
+
+            #region Blumenau - SC
+                      
+            #region XML de Cancelamento de NFS-e
+
+            SchemaXML.InfSchemas.Add("NFSE-SIMPLISS-4202404-CancelarNfseEnvio", new InfSchema()
+            {
+                Tag = "CancelarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "Pedido",
+                TagAtributoId = "InfPedidoCancelamento",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+
+            #endregion
+        
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-SIMPLISS-4202404-GerarNfseEnvio", new InfSchema()
+            {
+                Tag = "GerarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+            #endregion
+            #endregion
+          
         }
     }
 }

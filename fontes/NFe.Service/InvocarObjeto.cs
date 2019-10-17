@@ -126,7 +126,7 @@ namespace NFe.Service
                         {
                             try
                             {
-                                wsProxy.SetProp(servicoWS, "cteCabecMsg", cabecMsg);
+                                wsProxy.SetProp2(servicoWS, "cteCabecMsg", cabecMsg);
                             }
                             catch //Se der erro é pq não está no ambiente normal então tem que ser o nome padrão pois Mato Grosso do Sul fugiu o padrão nacional.
                             {
@@ -737,7 +737,10 @@ namespace NFe.Service
                         switch (metodo)
                         {
                             case "RecepcionarLoteRps":
-                                strRetorno = SerializarObjeto((Components.HJoinvilleSC.EnviarLoteRpsResposta)wsProxy.Invoke(servicoWS, metodo, new object[] { docXML, null }));
+                                XmlNode joXmlAssinatura = docXML.GetElementsByTagName("Signature")[0];
+                                docXML.DocumentElement.RemoveChild(docXML.GetElementsByTagName("Signature")[0]);
+
+                                strRetorno = SerializarObjeto((Components.HJoinvilleSC.EnviarLoteRpsResposta)wsProxy.Invoke(servicoWS, metodo, new object[] { docXML, joXmlAssinatura }));
                                 break;
 
                             case "CancelarNfse":
@@ -789,7 +792,10 @@ namespace NFe.Service
                         switch (metodo)
                         {
                             case "RecepcionarLoteRps":
-                                strRetorno = SerializarObjeto((Components.PJoinvilleSC.EnviarLoteRpsResposta)wsProxy.Invoke(servicoWS, metodo, new object[] { docXML, null }));
+                                XmlNode joXmlAssinatura = docXML.GetElementsByTagName("Signature")[0];
+                                docXML.DocumentElement.RemoveChild(docXML.GetElementsByTagName("Signature")[0]);
+
+                                strRetorno = SerializarObjeto((Components.PJoinvilleSC.EnviarLoteRpsResposta)wsProxy.Invoke(servicoWS, metodo, new object[] { docXML, joXmlAssinatura }));
                                 break;
 
                             case "CancelarNfse":

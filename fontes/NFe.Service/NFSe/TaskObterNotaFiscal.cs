@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.IO;
-using System.Xml;
-
+﻿using NFe.Certificado;
 using NFe.Components;
+using NFe.Components.WEBFISCO_TECNOLOGIA;
 using NFe.Settings;
-using NFe.Certificado;
-using NFSe.Components;
+using System;
+using System.IO;
 
 namespace NFe.Service.NFSe
 {
@@ -24,7 +19,7 @@ namespace NFe.Service.NFSe
         #region Execute
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.NFSeObterNotaFiscal;
@@ -39,29 +34,59 @@ namespace NFe.Service.NFSe
                 oObterNotaFiscal = new DadosPedSitNfse(emp);
 
                 //Criar objetos das classes dos serviços dos webservices do municipio
-                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oObterNotaFiscal.cMunicipio);
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oObterNotaFiscal.cMunicipio, oObterNotaFiscal.tpAmb, oObterNotaFiscal.tpEmis, padraoNFSe, oObterNotaFiscal.cMunicipio);
-                object pedNfseXML = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                string cabecMsg = "";
+                var padraoNFSe = Functions.PadraoNFSe(oObterNotaFiscal.cMunicipio);
+                WebServiceProxy wsProxy = null;
+                object pedNfseXML = null;
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oObterNotaFiscal.cMunicipio, oObterNotaFiscal.tpAmb, oObterNotaFiscal.tpEmis, padraoNFSe, Servico);
+                if (IsUtilizaCompilacaoWs(padraoNFSe, Servico, oObterNotaFiscal.cMunicipio))
+                {
+                    wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oObterNotaFiscal.cMunicipio, oObterNotaFiscal.tpAmb, oObterNotaFiscal.tpEmis, padraoNFSe, oObterNotaFiscal.cMunicipio);
 
-                //Assinar o XML
-                AssinaturaDigital ad = new AssinaturaDigital();
-                ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oObterNotaFiscal.cMunicipio));
+                    if (wsProxy != null)
+                    {
+                        pedNfseXML = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    }
+                }
 
-                //Invocar o método que envia o XML para o municipio
-                oInvocarObj.InvocarNFSe(wsProxy, pedNfseXML, NomeMetodoWS(Servico, oObterNotaFiscal.cMunicipio), cabecMsg, this,
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML,   //"-ped-nfsexml", 
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).RetornoXML,   //"-nfsexml", 
-                                        padraoNFSe, Servico, securityProtocolType);
+                var securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oObterNotaFiscal.cMunicipio, oObterNotaFiscal.tpAmb, oObterNotaFiscal.tpEmis, padraoNFSe, Servico);
+                var cabecMsg = "";
 
-                /// grava o arquivo no FTP
-                string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML) +
-                                                Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).RetornoXML);
-                if (File.Exists(filenameFTP))
-                    new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
+                switch (padraoNFSe)
+                {
+                    case PadroesNFSe.WEBFISCO_TECNOLOGIA:
+                        var webTecnologia = new WEBFISCO_TECNOLOGIA((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            oObterNotaFiscal.cMunicipio,
+                            Empresas.Configuracoes[emp].UsuarioWS,
+                            Empresas.Configuracoes[emp].SenhaWS);
+
+                        webTecnologia.ConsultarXml(NomeArquivoXML);
+                        break;
+                }
+
+                if (IsInvocar(padraoNFSe, Servico, oObterNotaFiscal.cMunicipio))
+                {
+
+                    //Assinar o XML
+                    var ad = new AssinaturaDigital();
+                    ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oObterNotaFiscal.cMunicipio));
+
+                    //Invocar o método que envia o XML para o municipio
+                    oInvocarObj.InvocarNFSe(wsProxy, pedNfseXML, NomeMetodoWS(Servico, oObterNotaFiscal.cMunicipio), cabecMsg, this,
+                        Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML,
+                        Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).RetornoXML,
+                        padraoNFSe, Servico, securityProtocolType);
+
+                    /// grava o arquivo no FTP
+                    var filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML) +
+                        Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).RetornoXML);
+
+                    if (File.Exists(filenameFTP))
+                    {
+                        new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -69,8 +94,8 @@ namespace NFe.Service.NFSe
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
                     TFunctions.GravarArqErroServico(NomeArquivoXML,
-                                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML,
-                                                    Propriedade.ExtRetorno.NFSeXML_ERR, ex);
+                        Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML,
+                        Propriedade.ExtRetorno.NFSeXML_ERR, ex);
                 }
                 catch
                 {

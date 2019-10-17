@@ -450,6 +450,12 @@ namespace NFe.Components
             PropertyInfo property = tipoInstance.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
             property?.SetValue(instance, novoValor, null);
         }
+        public void SetProp2(object instance, string propertyName, object novoValor)
+        {
+            Type tipoInstance = instance.GetType();
+            PropertyInfo property = tipoInstance.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+            property.SetValue(instance, novoValor, null);
+        }
 
         #endregion SetProp()
 

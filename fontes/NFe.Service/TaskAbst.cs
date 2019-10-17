@@ -132,7 +132,9 @@ namespace NFe.Service
                 case Servicos.CTeRecepcaoEvento:
                     retorna = "cteCabecMsg";
 
-                    if (cUF == 50 && tpEmis == (int)TipoEmissao.teNormal && servico != Servicos.CteRecepcaoOS)
+                    if (cUF == 50 && 
+                        (tpEmis == (int)TipoEmissao.teNormal || tpEmis == (int)TipoEmissao.teEPEC || tpEmis == (int)TipoEmissao.teFSDA)
+                        && servico != Servicos.CteRecepcaoOS)
                     {
                         retorna = "CTeCabecMsg";
                     }
@@ -3279,7 +3281,6 @@ namespace NFe.Service
                 case PadroesNFSe.AVMB_ASTEN:
                 case PadroesNFSe.ADM_SISTEMAS:
                 case PadroesNFSe.SIMPLE:
-                case PadroesNFSe.IIBRASIL:
                 case PadroesNFSe.WEBFISCO_TECNOLOGIA:
                     retorno = false;
                     break;

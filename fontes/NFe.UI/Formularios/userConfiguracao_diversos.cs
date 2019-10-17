@@ -483,7 +483,8 @@ namespace NFe.UI.Formularios
                            ufCod == 4300604 /*Alvorada-RS*/ ||
                            ufCod == 4104907 /*Castro-PR*/ ||
                            ufCod == 3505302 /*Barra Bonita-SP/*/ ||
-                           ufCod == 4202404 /*Blumenau-SC/*/;
+                           ufCod == 4202404 /*Blumenau-SC*/ ||
+                           ufCod == 3520004 /*Igaraçu do Tietê-SP*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }

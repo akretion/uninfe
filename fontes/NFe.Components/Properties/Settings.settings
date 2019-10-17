@@ -698,5 +698,56 @@
     <Setting Name="NFe_Components_PEstacaoRS_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://sistema.pmestacao.com.br:8182/NfseService/NfseService</Value>
     </Setting>
+    <Setting Name="NFe_Components_PWebFiscoTecnologia_ConsultarXml_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfeconsultaxml.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HSaoJoseRibamarMA_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testesjr/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HSaoJoseRibamarMA_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testesjr/WSNFSE.ConsultarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HSaoJoseRibamarMA_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testesjr/WSNFSE.ConsultarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HSaoJoseRibamarMA_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testesjr/WSNFSE.ConsultarNfsePorRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HSaoJoseRibamarMA_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testesjr/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HSaoJoseRibamarMA_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testesjr/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HVargemGrandePaulistaSP_NfseServiceImplVgpService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.homolog.govdigital.com.br/ws/vgp</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PVargemGrandePaulistaSP_NfseServiceImplVgpService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br/ws/vgp</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCabedeloPB_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testecbd/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCabedeloPB_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testecbd/WSNFSE.ConsultarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCabedeloPB_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testecbd/WSNFSE.ConsultarNfsePorRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCabedeloPB_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testecbd/WSNFSE.ConsultarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCabedeloPB_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testecbd/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCabedeloPB_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testecbd/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPeixotoAzevedoMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.gp.srv.br/tributario_peixotodeazevedo/servlet/anfse_web_service</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HPeixotoAzevedoMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www.gp.srv.br/tributario_homologacao/servlet/anfse_web_service</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

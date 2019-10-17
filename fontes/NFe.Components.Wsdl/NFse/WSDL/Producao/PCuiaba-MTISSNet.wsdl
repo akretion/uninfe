@@ -434,10 +434,10 @@
   </wsdl:binding>
   <wsdl:service name="Servicos">
     <wsdl:port name="ServicosSoap" binding="tns:ServicosSoap">
-      <soap:address location="http://www.issnetonline.com.br/webserviceabrasf/cuiaba/servicos.asmx" />
+      <soap:address location="http://wscuiaba.issnetonline.com.br/webserviceabrasf/cuiaba/servicos.asmx" />
     </wsdl:port>
     <wsdl:port name="ServicosSoap12" binding="tns:ServicosSoap12">
-      <soap12:address location="http://www.issnetonline.com.br/webserviceabrasf/cuiaba/servicos.asmx" />
+      <soap12:address location="http://wscuiaba.issnetonline.com.br/webserviceabrasf/cuiaba/servicos.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -46,6 +46,11 @@ namespace Unimake.Business.DFe.Servicos
         NFeAutorizacao,
 
         /// <summary>
+        /// Envio do XML de consulta dos documentos fiscais eletrônicos destinados
+        /// </summary>
+        NFeDistribuicaoDFe,
+
+        /// <summary>
         /// Serviço não definido
         /// </summary>
         Nulo

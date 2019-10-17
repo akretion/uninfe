@@ -67,6 +67,11 @@ namespace NFe.Components.WEBFISCO_TECNOLOGIA
             MGMService.ConsultarNfsePorRps(file);
         }
 
+        public override void ConsultarXml(string file)
+        {
+            MGMService.ConsultarXml(file);
+        }
+
         #endregion Métodos
     }
 }

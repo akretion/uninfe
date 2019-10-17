@@ -14,8 +14,8 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\ABRASF\\nfse_v2_04.xsd",
                 Descricao = "XML de Lote RPS",
-                TagAssinatura = "Rps",
-                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagAssinatura = "",
+                TagAtributoId = "",
                 TagLoteAssinatura = "EnviarLoteRpsEnvio",
                 TagLoteAtributoId = "LoteRps",
                 TargetNameSpace = "http://nfewshomologacao.joinville.sc.gov.br"

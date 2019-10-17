@@ -130,9 +130,14 @@
     <UF>TO</UF>
     <ArqConfig>SVRS.xml</ArqConfig>
   </Arquivo>
-<Arquivo ID="21">
+  <Arquivo ID="21">
     <Nome>Maranhão</Nome>
     <UF>MA</UF>
     <ArqConfig>SVAN.xml</ArqConfig>
+  </Arquivo>
+  <Arquivo ID="91">
+    <Nome>Ambiente Nacional</Nome>
+    <UF>AN</UF>
+    <ArqConfig>AN.xml</ArqConfig>
   </Arquivo>
 </Configuracoes>

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 
 namespace Unimake.Business.DFe.Utility
 {
-    internal static class Converter
+    public static class Converter
     {
         /// <summary>
         /// Converte um valor vindo do XML em double 
@@ -35,5 +36,22 @@ namespace Unimake.Business.DFe.Utility
         {
             return (T)Enum.Parse(typeof(T), value, true);
         }
+
+        /// <summary>
+        /// Converter string para MemoryStream com  UTF8 Encoding
+        /// </summary>
+        /// <param name="contentConvert">Conteúdo a ser convertido</param>
+        /// <returns>Conteúdo convertido para MemoryStrem com UTF8 Encoding</returns>
+        public static MemoryStream StringToStreamUTF8(string contentConvert)
+        {
+            var byteArray = new byte[contentConvert.Length];
+            var encoding = new System.Text.UTF8Encoding();
+            byteArray = encoding.GetBytes(contentConvert);
+            var memoryStream = new MemoryStream(byteArray);
+            memoryStream.Seek(0, SeekOrigin.Begin);
+
+            return memoryStream;
+        }
+
     }
 }

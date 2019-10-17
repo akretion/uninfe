@@ -23,27 +23,27 @@ namespace NFe.Components.HBlumenauSC {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_INfseService", Namespace="http://tempuri.org/")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_INfseService", Namespace="http://www.sistema.com.br/Sistema.Ws.Nfse")]
     public partial class NfseService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback VersaoOperationCompleted;
         
         private System.Threading.SendOrPostCallback RecepcionarLoteRpsOperationCompleted;
         
-        private System.Threading.SendOrPostCallback ConsultarSituacaoLoteRpsOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ConsultarNfsePorRpsOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ConsultarNfseOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ConsultarLoteRpsOperationCompleted;
+        private System.Threading.SendOrPostCallback GerarNfseOperationCompleted;
         
         private System.Threading.SendOrPostCallback CancelarNfseOperationCompleted;
         
-        private System.Threading.SendOrPostCallback GerarNfseOperationCompleted;
+        private System.Threading.SendOrPostCallback ConsultarLoteRpsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ConsultarNfseRpsOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ConsultarNfseServicoPrestadoOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ConsultarNfseFaixaOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -90,22 +90,22 @@ namespace NFe.Components.HBlumenauSC {
         public event RecepcionarLoteRpsCompletedEventHandler RecepcionarLoteRpsCompleted;
         
         /// <remarks/>
-        public event ConsultarSituacaoLoteRpsCompletedEventHandler ConsultarSituacaoLoteRpsCompleted;
-        
-        /// <remarks/>
-        public event ConsultarNfsePorRpsCompletedEventHandler ConsultarNfsePorRpsCompleted;
-        
-        /// <remarks/>
-        public event ConsultarNfseCompletedEventHandler ConsultarNfseCompleted;
-        
-        /// <remarks/>
-        public event ConsultarLoteRpsCompletedEventHandler ConsultarLoteRpsCompleted;
+        public event GerarNfseCompletedEventHandler GerarNfseCompleted;
         
         /// <remarks/>
         public event CancelarNfseCompletedEventHandler CancelarNfseCompleted;
         
         /// <remarks/>
-        public event GerarNfseCompletedEventHandler GerarNfseCompleted;
+        public event ConsultarLoteRpsCompletedEventHandler ConsultarLoteRpsCompleted;
+        
+        /// <remarks/>
+        public event ConsultarNfseRpsCompletedEventHandler ConsultarNfseRpsCompleted;
+        
+        /// <remarks/>
+        public event ConsultarNfseServicoPrestadoCompletedEventHandler ConsultarNfseServicoPrestadoCompleted;
+        
+        /// <remarks/>
+        public event ConsultarNfseFaixaCompletedEventHandler ConsultarNfseFaixaCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/Versao", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -164,118 +164,31 @@ namespace NFe.Components.HBlumenauSC {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarSituacaoLoteRps", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ConsultarSituacaoLoteRpsResposta ConsultarSituacaoLoteRps(ConsultarSituacaoLoteRpsEnvio ConsultarSituacaoLoteRpsEnvio) {
-            object[] results = this.Invoke("ConsultarSituacaoLoteRps", new object[] {
-                        ConsultarSituacaoLoteRpsEnvio});
-            return ((ConsultarSituacaoLoteRpsResposta)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/GerarNfse", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public GerarNfseResposta GerarNfse(GerarNfseEnvio GerarNfseEnvio) {
+            object[] results = this.Invoke("GerarNfse", new object[] {
+                        GerarNfseEnvio});
+            return ((GerarNfseResposta)(results[0]));
         }
         
         /// <remarks/>
-        public void ConsultarSituacaoLoteRpsAsync(ConsultarSituacaoLoteRpsEnvio ConsultarSituacaoLoteRpsEnvio) {
-            this.ConsultarSituacaoLoteRpsAsync(ConsultarSituacaoLoteRpsEnvio, null);
+        public void GerarNfseAsync(GerarNfseEnvio GerarNfseEnvio) {
+            this.GerarNfseAsync(GerarNfseEnvio, null);
         }
         
         /// <remarks/>
-        public void ConsultarSituacaoLoteRpsAsync(ConsultarSituacaoLoteRpsEnvio ConsultarSituacaoLoteRpsEnvio, object userState) {
-            if ((this.ConsultarSituacaoLoteRpsOperationCompleted == null)) {
-                this.ConsultarSituacaoLoteRpsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarSituacaoLoteRpsOperationCompleted);
+        public void GerarNfseAsync(GerarNfseEnvio GerarNfseEnvio, object userState) {
+            if ((this.GerarNfseOperationCompleted == null)) {
+                this.GerarNfseOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGerarNfseOperationCompleted);
             }
-            this.InvokeAsync("ConsultarSituacaoLoteRps", new object[] {
-                        ConsultarSituacaoLoteRpsEnvio}, this.ConsultarSituacaoLoteRpsOperationCompleted, userState);
+            this.InvokeAsync("GerarNfse", new object[] {
+                        GerarNfseEnvio}, this.GerarNfseOperationCompleted, userState);
         }
         
-        private void OnConsultarSituacaoLoteRpsOperationCompleted(object arg) {
-            if ((this.ConsultarSituacaoLoteRpsCompleted != null)) {
+        private void OnGerarNfseOperationCompleted(object arg) {
+            if ((this.GerarNfseCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ConsultarSituacaoLoteRpsCompleted(this, new ConsultarSituacaoLoteRpsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarNfsePorRps", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ConsultarNfseRpsResposta ConsultarNfsePorRps(ConsultarNfseRpsEnvio ConsultarNfseRpsEnvio) {
-            object[] results = this.Invoke("ConsultarNfsePorRps", new object[] {
-                        ConsultarNfseRpsEnvio});
-            return ((ConsultarNfseRpsResposta)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ConsultarNfsePorRpsAsync(ConsultarNfseRpsEnvio ConsultarNfseRpsEnvio) {
-            this.ConsultarNfsePorRpsAsync(ConsultarNfseRpsEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void ConsultarNfsePorRpsAsync(ConsultarNfseRpsEnvio ConsultarNfseRpsEnvio, object userState) {
-            if ((this.ConsultarNfsePorRpsOperationCompleted == null)) {
-                this.ConsultarNfsePorRpsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarNfsePorRpsOperationCompleted);
-            }
-            this.InvokeAsync("ConsultarNfsePorRps", new object[] {
-                        ConsultarNfseRpsEnvio}, this.ConsultarNfsePorRpsOperationCompleted, userState);
-        }
-        
-        private void OnConsultarNfsePorRpsOperationCompleted(object arg) {
-            if ((this.ConsultarNfsePorRpsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ConsultarNfsePorRpsCompleted(this, new ConsultarNfsePorRpsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarNfse", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ConsultarNfseResposta ConsultarNfse(ConsultarNfseEnvio ConsultarNfseEnvio) {
-            object[] results = this.Invoke("ConsultarNfse", new object[] {
-                        ConsultarNfseEnvio});
-            return ((ConsultarNfseResposta)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ConsultarNfseAsync(ConsultarNfseEnvio ConsultarNfseEnvio) {
-            this.ConsultarNfseAsync(ConsultarNfseEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void ConsultarNfseAsync(ConsultarNfseEnvio ConsultarNfseEnvio, object userState) {
-            if ((this.ConsultarNfseOperationCompleted == null)) {
-                this.ConsultarNfseOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarNfseOperationCompleted);
-            }
-            this.InvokeAsync("ConsultarNfse", new object[] {
-                        ConsultarNfseEnvio}, this.ConsultarNfseOperationCompleted, userState);
-        }
-        
-        private void OnConsultarNfseOperationCompleted(object arg) {
-            if ((this.ConsultarNfseCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ConsultarNfseCompleted(this, new ConsultarNfseCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarLoteRps", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ConsultarLoteRpsResposta ConsultarLoteRps(ConsultarLoteRpsEnvio ConsultarLoteRpsEnvio) {
-            object[] results = this.Invoke("ConsultarLoteRps", new object[] {
-                        ConsultarLoteRpsEnvio});
-            return ((ConsultarLoteRpsResposta)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ConsultarLoteRpsAsync(ConsultarLoteRpsEnvio ConsultarLoteRpsEnvio) {
-            this.ConsultarLoteRpsAsync(ConsultarLoteRpsEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void ConsultarLoteRpsAsync(ConsultarLoteRpsEnvio ConsultarLoteRpsEnvio, object userState) {
-            if ((this.ConsultarLoteRpsOperationCompleted == null)) {
-                this.ConsultarLoteRpsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarLoteRpsOperationCompleted);
-            }
-            this.InvokeAsync("ConsultarLoteRps", new object[] {
-                        ConsultarLoteRpsEnvio}, this.ConsultarLoteRpsOperationCompleted, userState);
-        }
-        
-        private void OnConsultarLoteRpsOperationCompleted(object arg) {
-            if ((this.ConsultarLoteRpsCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ConsultarLoteRpsCompleted(this, new ConsultarLoteRpsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.GerarNfseCompleted(this, new GerarNfseCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -309,31 +222,119 @@ namespace NFe.Components.HBlumenauSC {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/GerarNfse", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GerarNfseResposta GerarNfse(GerarNfseEnvio GerarNfseEnvio) {
-            object[] results = this.Invoke("GerarNfse", new object[] {
-                        GerarNfseEnvio});
-            return ((GerarNfseResposta)(results[0]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarLoteRps", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ConsultarLoteRpsResposta ConsultarLoteRps(ConsultarLoteRpsEnvio ConsultarLoteRpsEnvio) {
+            object[] results = this.Invoke("ConsultarLoteRps", new object[] {
+                        ConsultarLoteRpsEnvio});
+            return ((ConsultarLoteRpsResposta)(results[0]));
         }
         
         /// <remarks/>
-        public void GerarNfseAsync(GerarNfseEnvio GerarNfseEnvio) {
-            this.GerarNfseAsync(GerarNfseEnvio, null);
+        public void ConsultarLoteRpsAsync(ConsultarLoteRpsEnvio ConsultarLoteRpsEnvio) {
+            this.ConsultarLoteRpsAsync(ConsultarLoteRpsEnvio, null);
         }
         
         /// <remarks/>
-        public void GerarNfseAsync(GerarNfseEnvio GerarNfseEnvio, object userState) {
-            if ((this.GerarNfseOperationCompleted == null)) {
-                this.GerarNfseOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGerarNfseOperationCompleted);
+        public void ConsultarLoteRpsAsync(ConsultarLoteRpsEnvio ConsultarLoteRpsEnvio, object userState) {
+            if ((this.ConsultarLoteRpsOperationCompleted == null)) {
+                this.ConsultarLoteRpsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarLoteRpsOperationCompleted);
             }
-            this.InvokeAsync("GerarNfse", new object[] {
-                        GerarNfseEnvio}, this.GerarNfseOperationCompleted, userState);
+            this.InvokeAsync("ConsultarLoteRps", new object[] {
+                        ConsultarLoteRpsEnvio}, this.ConsultarLoteRpsOperationCompleted, userState);
         }
         
-        private void OnGerarNfseOperationCompleted(object arg) {
-            if ((this.GerarNfseCompleted != null)) {
+        private void OnConsultarLoteRpsOperationCompleted(object arg) {
+            if ((this.ConsultarLoteRpsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GerarNfseCompleted(this, new GerarNfseCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.ConsultarLoteRpsCompleted(this, new ConsultarLoteRpsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarNfseRps", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ConsultarNfseRpsResposta ConsultarNfseRps(ConsultarNfseRpsEnvio ConsultarNfseRpsEnvio) {
+            object[] results = this.Invoke("ConsultarNfseRps", new object[] {
+                        ConsultarNfseRpsEnvio});
+            return ((ConsultarNfseRpsResposta)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ConsultarNfseRpsAsync(ConsultarNfseRpsEnvio ConsultarNfseRpsEnvio) {
+            this.ConsultarNfseRpsAsync(ConsultarNfseRpsEnvio, null);
+        }
+        
+        /// <remarks/>
+        public void ConsultarNfseRpsAsync(ConsultarNfseRpsEnvio ConsultarNfseRpsEnvio, object userState) {
+            if ((this.ConsultarNfseRpsOperationCompleted == null)) {
+                this.ConsultarNfseRpsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarNfseRpsOperationCompleted);
+            }
+            this.InvokeAsync("ConsultarNfseRps", new object[] {
+                        ConsultarNfseRpsEnvio}, this.ConsultarNfseRpsOperationCompleted, userState);
+        }
+        
+        private void OnConsultarNfseRpsOperationCompleted(object arg) {
+            if ((this.ConsultarNfseRpsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ConsultarNfseRpsCompleted(this, new ConsultarNfseRpsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarNfseServicoPresta" +
+            "do", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ConsultarNfseServicoPrestadoResposta ConsultarNfseServicoPrestado(ConsultarNfseServicoPrestadoEnvio ConsultarNfseServicoPrestadoEnvio) {
+            object[] results = this.Invoke("ConsultarNfseServicoPrestado", new object[] {
+                        ConsultarNfseServicoPrestadoEnvio});
+            return ((ConsultarNfseServicoPrestadoResposta)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ConsultarNfseServicoPrestadoAsync(ConsultarNfseServicoPrestadoEnvio ConsultarNfseServicoPrestadoEnvio) {
+            this.ConsultarNfseServicoPrestadoAsync(ConsultarNfseServicoPrestadoEnvio, null);
+        }
+        
+        /// <remarks/>
+        public void ConsultarNfseServicoPrestadoAsync(ConsultarNfseServicoPrestadoEnvio ConsultarNfseServicoPrestadoEnvio, object userState) {
+            if ((this.ConsultarNfseServicoPrestadoOperationCompleted == null)) {
+                this.ConsultarNfseServicoPrestadoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarNfseServicoPrestadoOperationCompleted);
+            }
+            this.InvokeAsync("ConsultarNfseServicoPrestado", new object[] {
+                        ConsultarNfseServicoPrestadoEnvio}, this.ConsultarNfseServicoPrestadoOperationCompleted, userState);
+        }
+        
+        private void OnConsultarNfseServicoPrestadoOperationCompleted(object arg) {
+            if ((this.ConsultarNfseServicoPrestadoCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ConsultarNfseServicoPrestadoCompleted(this, new ConsultarNfseServicoPrestadoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarNfseFaixa", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ConsultarNfseFaixaResposta ConsultarNfseFaixa(ConsultarNfseFaixaEnvio ConsultarNfseFaixaEnvio) {
+            object[] results = this.Invoke("ConsultarNfseFaixa", new object[] {
+                        ConsultarNfseFaixaEnvio});
+            return ((ConsultarNfseFaixaResposta)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ConsultarNfseFaixaAsync(ConsultarNfseFaixaEnvio ConsultarNfseFaixaEnvio) {
+            this.ConsultarNfseFaixaAsync(ConsultarNfseFaixaEnvio, null);
+        }
+        
+        /// <remarks/>
+        public void ConsultarNfseFaixaAsync(ConsultarNfseFaixaEnvio ConsultarNfseFaixaEnvio, object userState) {
+            if ((this.ConsultarNfseFaixaOperationCompleted == null)) {
+                this.ConsultarNfseFaixaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarNfseFaixaOperationCompleted);
+            }
+            this.InvokeAsync("ConsultarNfseFaixa", new object[] {
+                        ConsultarNfseFaixaEnvio}, this.ConsultarNfseFaixaOperationCompleted, userState);
+        }
+        
+        private void OnConsultarNfseFaixaOperationCompleted(object arg) {
+            if ((this.ConsultarNfseFaixaCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ConsultarNfseFaixaCompleted(this, new ConsultarNfseFaixaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -357,7 +358,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -391,7 +392,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -488,7 +489,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -525,7 +526,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd", IncludeInSchema=false)]
     public enum ItemChoiceType {
@@ -538,1178 +539,18 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcIdentNovaNfse {
-        
-        private tcIdentificacaoPrestador identificacaoPrestadorField;
-        
-        private string numeroField;
-        
-        private string serieField;
-        
-        private string codigoVerificacaoField;
-        
-        private System.DateTime dataEmissaoField;
-        
-        private string linkField;
-        
-        private string idField;
-        
-        /// <remarks/>
-        public tcIdentificacaoPrestador IdentificacaoPrestador {
-            get {
-                return this.identificacaoPrestadorField;
-            }
-            set {
-                this.identificacaoPrestadorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string Numero {
-            get {
-                return this.numeroField;
-            }
-            set {
-                this.numeroField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Serie {
-            get {
-                return this.serieField;
-            }
-            set {
-                this.serieField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CodigoVerificacao {
-            get {
-                return this.codigoVerificacaoField;
-            }
-            set {
-                this.codigoVerificacaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DataEmissao {
-            get {
-                return this.dataEmissaoField;
-            }
-            set {
-                this.dataEmissaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Link {
-            get {
-                return this.linkField;
-            }
-            set {
-                this.linkField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcIdentificacaoPrestador {
-        
-        private tcCpfCnpj cpfCnpjField;
-        
-        private string inscricaoMunicipalField;
-        
-        /// <remarks/>
-        public tcCpfCnpj CpfCnpj {
-            get {
-                return this.cpfCnpjField;
-            }
-            set {
-                this.cpfCnpjField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string InscricaoMunicipal {
-            get {
-                return this.inscricaoMunicipalField;
-            }
-            set {
-                this.inscricaoMunicipalField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcRespostaIdentNovaNfse {
-        
-        private tcIdentNovaNfse identificacaoNfseField;
-        
-        private SignatureType signatureField;
-        
-        /// <remarks/>
-        public tcIdentNovaNfse IdentificacaoNfse {
-            get {
-                return this.identificacaoNfseField;
-            }
-            set {
-                this.identificacaoNfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-        public SignatureType Signature {
-            get {
-                return this.signatureField;
-            }
-            set {
-                this.signatureField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class SignatureType {
-        
-        private SignedInfoType signedInfoField;
-        
-        private SignatureValueType signatureValueField;
-        
-        private KeyInfoType keyInfoField;
-        
-        private ObjectType[] objectField;
-        
-        private string idField;
-        
-        /// <remarks/>
-        public SignedInfoType SignedInfo {
-            get {
-                return this.signedInfoField;
-            }
-            set {
-                this.signedInfoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SignatureValueType SignatureValue {
-            get {
-                return this.signatureValueField;
-            }
-            set {
-                this.signatureValueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public KeyInfoType KeyInfo {
-            get {
-                return this.keyInfoField;
-            }
-            set {
-                this.keyInfoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Object")]
-        public ObjectType[] Object {
-            get {
-                return this.objectField;
-            }
-            set {
-                this.objectField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class SignedInfoType {
-        
-        private CanonicalizationMethodType canonicalizationMethodField;
-        
-        private SignatureMethodType signatureMethodField;
-        
-        private ReferenceType[] referenceField;
-        
-        private string idField;
-        
-        /// <remarks/>
-        public CanonicalizationMethodType CanonicalizationMethod {
-            get {
-                return this.canonicalizationMethodField;
-            }
-            set {
-                this.canonicalizationMethodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SignatureMethodType SignatureMethod {
-            get {
-                return this.signatureMethodField;
-            }
-            set {
-                this.signatureMethodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Reference")]
-        public ReferenceType[] Reference {
-            get {
-                return this.referenceField;
-            }
-            set {
-                this.referenceField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class CanonicalizationMethodType {
-        
-        private System.Xml.XmlNode[] anyField;
-        
-        private string algorithmField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any {
-            get {
-                return this.anyField;
-            }
-            set {
-                this.anyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Algorithm {
-            get {
-                return this.algorithmField;
-            }
-            set {
-                this.algorithmField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class SignatureMethodType {
-        
-        private string hMACOutputLengthField;
-        
-        private System.Xml.XmlNode[] anyField;
-        
-        private string algorithmField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
-        public string HMACOutputLength {
-            get {
-                return this.hMACOutputLengthField;
-            }
-            set {
-                this.hMACOutputLengthField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any {
-            get {
-                return this.anyField;
-            }
-            set {
-                this.anyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Algorithm {
-            get {
-                return this.algorithmField;
-            }
-            set {
-                this.algorithmField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class ReferenceType {
-        
-        private TransformType[] transformsField;
-        
-        private DigestMethodType digestMethodField;
-        
-        private byte[] digestValueField;
-        
-        private string idField;
-        
-        private string uRIField;
-        
-        private string typeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("Transform", IsNullable=false)]
-        public TransformType[] Transforms {
-            get {
-                return this.transformsField;
-            }
-            set {
-                this.transformsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public DigestMethodType DigestMethod {
-            get {
-                return this.digestMethodField;
-            }
-            set {
-                this.digestMethodField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] DigestValue {
-            get {
-                return this.digestValueField;
-            }
-            set {
-                this.digestValueField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string URI {
-            get {
-                return this.uRIField;
-            }
-            set {
-                this.uRIField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class TransformType {
-        
-        private object[] itemsField;
-        
-        private string[] textField;
-        
-        private string algorithmField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        [System.Xml.Serialization.XmlElementAttribute("XPath", typeof(string))]
-        public object[] Items {
-            get {
-                return this.itemsField;
-            }
-            set {
-                this.itemsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
-            get {
-                return this.textField;
-            }
-            set {
-                this.textField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Algorithm {
-            get {
-                return this.algorithmField;
-            }
-            set {
-                this.algorithmField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class DigestMethodType {
-        
-        private System.Xml.XmlNode[] anyField;
-        
-        private string algorithmField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any {
-            get {
-                return this.anyField;
-            }
-            set {
-                this.anyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Algorithm {
-            get {
-                return this.algorithmField;
-            }
-            set {
-                this.algorithmField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class SignatureValueType {
-        
-        private string idField;
-        
-        private byte[] valueField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute(DataType="base64Binary")]
-        public byte[] Value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class KeyInfoType {
-        
-        private object[] itemsField;
-        
-        private ItemsChoiceType2[] itemsElementNameField;
-        
-        private string[] textField;
-        
-        private string idField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        [System.Xml.Serialization.XmlElementAttribute("KeyName", typeof(string))]
-        [System.Xml.Serialization.XmlElementAttribute("KeyValue", typeof(KeyValueType))]
-        [System.Xml.Serialization.XmlElementAttribute("MgmtData", typeof(string))]
-        [System.Xml.Serialization.XmlElementAttribute("PGPData", typeof(PGPDataType))]
-        [System.Xml.Serialization.XmlElementAttribute("RetrievalMethod", typeof(RetrievalMethodType))]
-        [System.Xml.Serialization.XmlElementAttribute("SPKIData", typeof(SPKIDataType))]
-        [System.Xml.Serialization.XmlElementAttribute("X509Data", typeof(X509DataType))]
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
-        public object[] Items {
-            get {
-                return this.itemsField;
-            }
-            set {
-                this.itemsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemsChoiceType2[] ItemsElementName {
-            get {
-                return this.itemsElementNameField;
-            }
-            set {
-                this.itemsElementNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
-            get {
-                return this.textField;
-            }
-            set {
-                this.textField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class KeyValueType {
-        
-        private object itemField;
-        
-        private string[] textField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        [System.Xml.Serialization.XmlElementAttribute("DSAKeyValue", typeof(DSAKeyValueType))]
-        [System.Xml.Serialization.XmlElementAttribute("RSAKeyValue", typeof(RSAKeyValueType))]
-        public object Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
-            get {
-                return this.textField;
-            }
-            set {
-                this.textField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class DSAKeyValueType {
-        
-        private byte[] pField;
-        
-        private byte[] qField;
-        
-        private byte[] gField;
-        
-        private byte[] yField;
-        
-        private byte[] jField;
-        
-        private byte[] seedField;
-        
-        private byte[] pgenCounterField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] P {
-            get {
-                return this.pField;
-            }
-            set {
-                this.pField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Q {
-            get {
-                return this.qField;
-            }
-            set {
-                this.qField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] G {
-            get {
-                return this.gField;
-            }
-            set {
-                this.gField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Y {
-            get {
-                return this.yField;
-            }
-            set {
-                this.yField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] J {
-            get {
-                return this.jField;
-            }
-            set {
-                this.jField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Seed {
-            get {
-                return this.seedField;
-            }
-            set {
-                this.seedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] PgenCounter {
-            get {
-                return this.pgenCounterField;
-            }
-            set {
-                this.pgenCounterField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class RSAKeyValueType {
-        
-        private byte[] modulusField;
-        
-        private byte[] exponentField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Modulus {
-            get {
-                return this.modulusField;
-            }
-            set {
-                this.modulusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Exponent {
-            get {
-                return this.exponentField;
-            }
-            set {
-                this.exponentField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class PGPDataType {
-        
-        private object[] itemsField;
-        
-        private ItemsChoiceType[] itemsElementNameField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        [System.Xml.Serialization.XmlElementAttribute("PGPKeyID", typeof(byte[]), DataType="base64Binary")]
-        [System.Xml.Serialization.XmlElementAttribute("PGPKeyPacket", typeof(byte[]), DataType="base64Binary")]
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
-        public object[] Items {
-            get {
-                return this.itemsField;
-            }
-            set {
-                this.itemsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemsChoiceType[] ItemsElementName {
-            get {
-                return this.itemsElementNameField;
-            }
-            set {
-                this.itemsElementNameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#", IncludeInSchema=false)]
-    public enum ItemsChoiceType {
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("##any:")]
-        Item,
-        
-        /// <remarks/>
-        PGPKeyID,
-        
-        /// <remarks/>
-        PGPKeyPacket,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class RetrievalMethodType {
-        
-        private TransformType[] transformsField;
-        
-        private string uRIField;
-        
-        private string typeField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("Transform", IsNullable=false)]
-        public TransformType[] Transforms {
-            get {
-                return this.transformsField;
-            }
-            set {
-                this.transformsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string URI {
-            get {
-                return this.uRIField;
-            }
-            set {
-                this.uRIField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class SPKIDataType {
-        
-        private byte[][] sPKISexpField;
-        
-        private System.Xml.XmlElement anyField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SPKISexp", DataType="base64Binary")]
-        public byte[][] SPKISexp {
-            get {
-                return this.sPKISexpField;
-            }
-            set {
-                this.sPKISexpField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement Any {
-            get {
-                return this.anyField;
-            }
-            set {
-                this.anyField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class X509DataType {
-        
-        private object[] itemsField;
-        
-        private ItemsChoiceType1[] itemsElementNameField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        [System.Xml.Serialization.XmlElementAttribute("X509CRL", typeof(byte[]), DataType="base64Binary")]
-        [System.Xml.Serialization.XmlElementAttribute("X509Certificate", typeof(byte[]), DataType="base64Binary")]
-        [System.Xml.Serialization.XmlElementAttribute("X509IssuerSerial", typeof(X509IssuerSerialType))]
-        [System.Xml.Serialization.XmlElementAttribute("X509SKI", typeof(byte[]), DataType="base64Binary")]
-        [System.Xml.Serialization.XmlElementAttribute("X509SubjectName", typeof(string))]
-        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
-        public object[] Items {
-            get {
-                return this.itemsField;
-            }
-            set {
-                this.itemsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public ItemsChoiceType1[] ItemsElementName {
-            get {
-                return this.itemsElementNameField;
-            }
-            set {
-                this.itemsElementNameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class X509IssuerSerialType {
-        
-        private string x509IssuerNameField;
-        
-        private string x509SerialNumberField;
-        
-        /// <remarks/>
-        public string X509IssuerName {
-            get {
-                return this.x509IssuerNameField;
-            }
-            set {
-                this.x509IssuerNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
-        public string X509SerialNumber {
-            get {
-                return this.x509SerialNumberField;
-            }
-            set {
-                this.x509SerialNumberField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#", IncludeInSchema=false)]
-    public enum ItemsChoiceType1 {
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("##any:")]
-        Item,
-        
-        /// <remarks/>
-        X509CRL,
-        
-        /// <remarks/>
-        X509Certificate,
-        
-        /// <remarks/>
-        X509IssuerSerial,
-        
-        /// <remarks/>
-        X509SKI,
-        
-        /// <remarks/>
-        X509SubjectName,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#", IncludeInSchema=false)]
-    public enum ItemsChoiceType2 {
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("##any:")]
-        Item,
-        
-        /// <remarks/>
-        KeyName,
-        
-        /// <remarks/>
-        KeyValue,
-        
-        /// <remarks/>
-        MgmtData,
-        
-        /// <remarks/>
-        PGPData,
-        
-        /// <remarks/>
-        RetrievalMethod,
-        
-        /// <remarks/>
-        SPKIData,
-        
-        /// <remarks/>
-        X509Data,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-    public partial class ObjectType {
-        
-        private System.Xml.XmlNode[] anyField;
-        
-        private string idField;
-        
-        private string mimeTypeField;
-        
-        private string encodingField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any {
-            get {
-                return this.anyField;
-            }
-            set {
-                this.anyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string MimeType {
-            get {
-                return this.mimeTypeField;
-            }
-            set {
-                this.mimeTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
-        public string Encoding {
-            get {
-                return this.encodingField;
-            }
-            set {
-                this.encodingField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class GerarNfseResposta {
+    public partial class ConsultarNfseFaixaResposta {
         
         private object itemField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(GerarNfseRespostaListaMensagemRetorno))]
-        [System.Xml.Serialization.XmlElementAttribute("NovaNfse", typeof(tcRespostaIdentNovaNfse))]
+        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(ConsultarNfseFaixaRespostaListaMensagemRetorno))]
+        [System.Xml.Serialization.XmlElementAttribute("ListaNfse", typeof(ConsultarNfseFaixaRespostaListaNfse))]
         public object Item {
             get {
                 return this.itemField;
@@ -1721,12 +562,12 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class GerarNfseRespostaListaMensagemRetorno {
+    public partial class ConsultarNfseFaixaRespostaListaMensagemRetorno {
         
         private tcMensagemRetorno[] mensagemRetornoField;
         
@@ -1743,7 +584,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1788,28 +629,686 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class GerarNfseEnvio {
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class ConsultarNfseFaixaRespostaListaNfse {
         
-        private tcDeclaracaoPrestacaoServico rpsField;
+        private tcCompNfse[] compNfseField;
+        
+        private string proximaPaginaField;
         
         /// <remarks/>
-        public tcDeclaracaoPrestacaoServico Rps {
+        [System.Xml.Serialization.XmlElementAttribute("CompNfse")]
+        public tcCompNfse[] CompNfse {
             get {
-                return this.rpsField;
+                return this.compNfseField;
             }
             set {
-                this.rpsField = value;
+                this.compNfseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
+        public string ProximaPagina {
+            get {
+                return this.proximaPaginaField;
+            }
+            set {
+                this.proximaPaginaField = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcCompNfse {
+        
+        private tcNfse nfseField;
+        
+        private tcCancelamentoNfse nfseCancelamentoField;
+        
+        private tcSubstituicaoNfse nfseSubstituicaoField;
+        
+        /// <remarks/>
+        public tcNfse Nfse {
+            get {
+                return this.nfseField;
+            }
+            set {
+                this.nfseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcCancelamentoNfse NfseCancelamento {
+            get {
+                return this.nfseCancelamentoField;
+            }
+            set {
+                this.nfseCancelamentoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcSubstituicaoNfse NfseSubstituicao {
+            get {
+                return this.nfseSubstituicaoField;
+            }
+            set {
+                this.nfseSubstituicaoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcNfse {
+        
+        private tcInfNfse infNfseField;
+        
+        private SignatureType signatureField;
+        
+        private string versaoField;
+        
+        /// <remarks/>
+        public tcInfNfse InfNfse {
+            get {
+                return this.infNfseField;
+            }
+            set {
+                this.infNfseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+        public SignatureType Signature {
+            get {
+                return this.signatureField;
+            }
+            set {
+                this.signatureField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="token")]
+        public string versao {
+            get {
+                return this.versaoField;
+            }
+            set {
+                this.versaoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcInfNfse {
+        
+        private string numeroField;
+        
+        private string codigoVerificacaoField;
+        
+        private System.DateTime dataEmissaoField;
+        
+        private string nfseSubstituidaField;
+        
+        private string outrasInformacoesField;
+        
+        private tcValoresNfse valoresNfseField;
+        
+        private decimal valorCreditoField;
+        
+        private bool valorCreditoFieldSpecified;
+        
+        private tcDadosPrestador prestadorField;
+        
+        private tcIdentificacaoOrgaoGerador orgaoGeradorField;
+        
+        private tcDeclaracaoPrestacaoServico declaracaoPrestacaoServicoField;
+        
+        private string idField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
+        public string Numero {
+            get {
+                return this.numeroField;
+            }
+            set {
+                this.numeroField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CodigoVerificacao {
+            get {
+                return this.codigoVerificacaoField;
+            }
+            set {
+                this.codigoVerificacaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DataEmissao {
+            get {
+                return this.dataEmissaoField;
+            }
+            set {
+                this.dataEmissaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
+        public string NfseSubstituida {
+            get {
+                return this.nfseSubstituidaField;
+            }
+            set {
+                this.nfseSubstituidaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string OutrasInformacoes {
+            get {
+                return this.outrasInformacoesField;
+            }
+            set {
+                this.outrasInformacoesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcValoresNfse ValoresNfse {
+            get {
+                return this.valoresNfseField;
+            }
+            set {
+                this.valoresNfseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorCredito {
+            get {
+                return this.valorCreditoField;
+            }
+            set {
+                this.valorCreditoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorCreditoSpecified {
+            get {
+                return this.valorCreditoFieldSpecified;
+            }
+            set {
+                this.valorCreditoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcDadosPrestador Prestador {
+            get {
+                return this.prestadorField;
+            }
+            set {
+                this.prestadorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcIdentificacaoOrgaoGerador OrgaoGerador {
+            get {
+                return this.orgaoGeradorField;
+            }
+            set {
+                this.orgaoGeradorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcDeclaracaoPrestacaoServico DeclaracaoPrestacaoServico {
+            get {
+                return this.declaracaoPrestacaoServicoField;
+            }
+            set {
+                this.declaracaoPrestacaoServicoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcValoresNfse {
+        
+        private decimal baseCalculoField;
+        
+        private bool baseCalculoFieldSpecified;
+        
+        private decimal aliquotaField;
+        
+        private bool aliquotaFieldSpecified;
+        
+        private decimal valorIssField;
+        
+        private bool valorIssFieldSpecified;
+        
+        private decimal valorLiquidoNfseField;
+        
+        /// <remarks/>
+        public decimal BaseCalculo {
+            get {
+                return this.baseCalculoField;
+            }
+            set {
+                this.baseCalculoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool BaseCalculoSpecified {
+            get {
+                return this.baseCalculoFieldSpecified;
+            }
+            set {
+                this.baseCalculoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal Aliquota {
+            get {
+                return this.aliquotaField;
+            }
+            set {
+                this.aliquotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool AliquotaSpecified {
+            get {
+                return this.aliquotaFieldSpecified;
+            }
+            set {
+                this.aliquotaFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorIss {
+            get {
+                return this.valorIssField;
+            }
+            set {
+                this.valorIssField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorIssSpecified {
+            get {
+                return this.valorIssFieldSpecified;
+            }
+            set {
+                this.valorIssFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorLiquidoNfse {
+            get {
+                return this.valorLiquidoNfseField;
+            }
+            set {
+                this.valorLiquidoNfseField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcDadosPrestador {
+        
+        private tcIdentificacaoPrestador identificacaoPrestadorField;
+        
+        private string razaoSocialField;
+        
+        private string nomeFantasiaField;
+        
+        private tcEndereco enderecoField;
+        
+        private tcContato contatoField;
+        
+        /// <remarks/>
+        public tcIdentificacaoPrestador IdentificacaoPrestador {
+            get {
+                return this.identificacaoPrestadorField;
+            }
+            set {
+                this.identificacaoPrestadorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RazaoSocial {
+            get {
+                return this.razaoSocialField;
+            }
+            set {
+                this.razaoSocialField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string NomeFantasia {
+            get {
+                return this.nomeFantasiaField;
+            }
+            set {
+                this.nomeFantasiaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcEndereco Endereco {
+            get {
+                return this.enderecoField;
+            }
+            set {
+                this.enderecoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcContato Contato {
+            get {
+                return this.contatoField;
+            }
+            set {
+                this.contatoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcIdentificacaoPrestador {
+        
+        private tcCpfCnpj cpfCnpjField;
+        
+        private string inscricaoMunicipalField;
+        
+        /// <remarks/>
+        public tcCpfCnpj CpfCnpj {
+            get {
+                return this.cpfCnpjField;
+            }
+            set {
+                this.cpfCnpjField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string InscricaoMunicipal {
+            get {
+                return this.inscricaoMunicipalField;
+            }
+            set {
+                this.inscricaoMunicipalField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcEndereco {
+        
+        private string enderecoField;
+        
+        private string numeroField;
+        
+        private string complementoField;
+        
+        private string bairroField;
+        
+        private int codigoMunicipioField;
+        
+        private bool codigoMunicipioFieldSpecified;
+        
+        private string ufField;
+        
+        private int codigoPaisField;
+        
+        private bool codigoPaisFieldSpecified;
+        
+        private string cepField;
+        
+        /// <remarks/>
+        public string Endereco {
+            get {
+                return this.enderecoField;
+            }
+            set {
+                this.enderecoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Numero {
+            get {
+                return this.numeroField;
+            }
+            set {
+                this.numeroField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Complemento {
+            get {
+                return this.complementoField;
+            }
+            set {
+                this.complementoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Bairro {
+            get {
+                return this.bairroField;
+            }
+            set {
+                this.bairroField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int CodigoMunicipio {
+            get {
+                return this.codigoMunicipioField;
+            }
+            set {
+                this.codigoMunicipioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CodigoMunicipioSpecified {
+            get {
+                return this.codigoMunicipioFieldSpecified;
+            }
+            set {
+                this.codigoMunicipioFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Uf {
+            get {
+                return this.ufField;
+            }
+            set {
+                this.ufField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int CodigoPais {
+            get {
+                return this.codigoPaisField;
+            }
+            set {
+                this.codigoPaisField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CodigoPaisSpecified {
+            get {
+                return this.codigoPaisFieldSpecified;
+            }
+            set {
+                this.codigoPaisFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Cep {
+            get {
+                return this.cepField;
+            }
+            set {
+                this.cepField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcContato {
+        
+        private string telefoneField;
+        
+        private string emailField;
+        
+        /// <remarks/>
+        public string Telefone {
+            get {
+                return this.telefoneField;
+            }
+            set {
+                this.telefoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcIdentificacaoOrgaoGerador {
+        
+        private int codigoMunicipioField;
+        
+        private string ufField;
+        
+        /// <remarks/>
+        public int CodigoMunicipio {
+            get {
+                return this.codigoMunicipioField;
+            }
+            set {
+                this.codigoMunicipioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Uf {
+            get {
+                return this.ufField;
+            }
+            set {
+                this.ufField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1843,7 +1342,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1999,7 +1498,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2070,7 +1569,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2116,18 +1615,20 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcDadosServico {
         
-        private tcValores valoresField;
+        private tcValoresDeclaracaoServico valoresField;
         
         private sbyte issRetidoField;
         
-        private string responsavelRetencaoField;
+        private int responsavelRetencaoField;
+        
+        private bool responsavelRetencaoFieldSpecified;
         
         private string itemListaServicoField;
         
@@ -2147,6 +1648,8 @@ namespace NFe.Components.HBlumenauSC {
         
         private int codigoPaisField;
         
+        private bool codigoPaisFieldSpecified;
+        
         private sbyte exigibilidadeISSField;
         
         private int municipioIncidenciaField;
@@ -2156,7 +1659,7 @@ namespace NFe.Components.HBlumenauSC {
         private string numeroProcessoField;
         
         /// <remarks/>
-        public tcValores Valores {
+        public tcValoresDeclaracaoServico Valores {
             get {
                 return this.valoresField;
             }
@@ -2176,12 +1679,23 @@ namespace NFe.Components.HBlumenauSC {
         }
         
         /// <remarks/>
-        public string ResponsavelRetencao {
+        public int ResponsavelRetencao {
             get {
                 return this.responsavelRetencaoField;
             }
             set {
                 this.responsavelRetencaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ResponsavelRetencaoSpecified {
+            get {
+                return this.responsavelRetencaoFieldSpecified;
+            }
+            set {
+                this.responsavelRetencaoFieldSpecified = value;
             }
         }
         
@@ -2278,6 +1792,17 @@ namespace NFe.Components.HBlumenauSC {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CodigoPaisSpecified {
+            get {
+                return this.codigoPaisFieldSpecified;
+            }
+            set {
+                this.codigoPaisFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
         public sbyte ExigibilidadeISS {
             get {
                 return this.exigibilidadeISSField;
@@ -2320,12 +1845,12 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcValores {
+    public partial class tcValoresDeclaracaoServico {
         
         private decimal valorServicosField;
         
@@ -2358,6 +1883,8 @@ namespace NFe.Components.HBlumenauSC {
         private bool outrasRetencoesFieldSpecified;
         
         private decimal valTotTributosField;
+        
+        private bool valTotTributosFieldSpecified;
         
         private decimal valorIssField;
         
@@ -2543,6 +2070,17 @@ namespace NFe.Components.HBlumenauSC {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValTotTributosSpecified {
+            get {
+                return this.valTotTributosFieldSpecified;
+            }
+            set {
+                this.valTotTributosFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
         public decimal ValorIss {
             get {
                 return this.valorIssField;
@@ -2628,7 +2166,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2697,7 +2235,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2730,158 +2268,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcEndereco {
-        
-        private string enderecoField;
-        
-        private string numeroField;
-        
-        private string complementoField;
-        
-        private string bairroField;
-        
-        private int codigoMunicipioField;
-        
-        private bool codigoMunicipioFieldSpecified;
-        
-        private string ufField;
-        
-        private int codigoPaisField;
-        
-        private string cepField;
-        
-        /// <remarks/>
-        public string Endereco {
-            get {
-                return this.enderecoField;
-            }
-            set {
-                this.enderecoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Numero {
-            get {
-                return this.numeroField;
-            }
-            set {
-                this.numeroField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Complemento {
-            get {
-                return this.complementoField;
-            }
-            set {
-                this.complementoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Bairro {
-            get {
-                return this.bairroField;
-            }
-            set {
-                this.bairroField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int CodigoMunicipio {
-            get {
-                return this.codigoMunicipioField;
-            }
-            set {
-                this.codigoMunicipioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CodigoMunicipioSpecified {
-            get {
-                return this.codigoMunicipioFieldSpecified;
-            }
-            set {
-                this.codigoMunicipioFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Uf {
-            get {
-                return this.ufField;
-            }
-            set {
-                this.ufField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int CodigoPais {
-            get {
-                return this.codigoPaisField;
-            }
-            set {
-                this.codigoPaisField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Cep {
-            get {
-                return this.cepField;
-            }
-            set {
-                this.cepField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcContato {
-        
-        private string telefoneField;
-        
-        private string emailField;
-        
-        /// <remarks/>
-        public string Telefone {
-            get {
-                return this.telefoneField;
-            }
-            set {
-                this.telefoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2926,7 +2313,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2959,7 +2346,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2992,18 +2379,512 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class CancelarNfseResposta {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class SignatureType {
+        
+        private SignedInfoType signedInfoField;
+        
+        private SignatureValueType signatureValueField;
+        
+        private KeyInfoType keyInfoField;
+        
+        private ObjectType[] objectField;
+        
+        private string idField;
+        
+        /// <remarks/>
+        public SignedInfoType SignedInfo {
+            get {
+                return this.signedInfoField;
+            }
+            set {
+                this.signedInfoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SignatureValueType SignatureValue {
+            get {
+                return this.signatureValueField;
+            }
+            set {
+                this.signatureValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public KeyInfoType KeyInfo {
+            get {
+                return this.keyInfoField;
+            }
+            set {
+                this.keyInfoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Object")]
+        public ObjectType[] Object {
+            get {
+                return this.objectField;
+            }
+            set {
+                this.objectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+        public string Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class SignedInfoType {
+        
+        private CanonicalizationMethodType canonicalizationMethodField;
+        
+        private SignatureMethodType signatureMethodField;
+        
+        private ReferenceType[] referenceField;
+        
+        private string idField;
+        
+        /// <remarks/>
+        public CanonicalizationMethodType CanonicalizationMethod {
+            get {
+                return this.canonicalizationMethodField;
+            }
+            set {
+                this.canonicalizationMethodField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SignatureMethodType SignatureMethod {
+            get {
+                return this.signatureMethodField;
+            }
+            set {
+                this.signatureMethodField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Reference")]
+        public ReferenceType[] Reference {
+            get {
+                return this.referenceField;
+            }
+            set {
+                this.referenceField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+        public string Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class CanonicalizationMethodType {
+        
+        private System.Xml.XmlNode[] anyField;
+        
+        private string algorithmField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlNode[] Any {
+            get {
+                return this.anyField;
+            }
+            set {
+                this.anyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string Algorithm {
+            get {
+                return this.algorithmField;
+            }
+            set {
+                this.algorithmField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class SignatureMethodType {
+        
+        private string hMACOutputLengthField;
+        
+        private System.Xml.XmlNode[] anyField;
+        
+        private string algorithmField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+        public string HMACOutputLength {
+            get {
+                return this.hMACOutputLengthField;
+            }
+            set {
+                this.hMACOutputLengthField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlNode[] Any {
+            get {
+                return this.anyField;
+            }
+            set {
+                this.anyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string Algorithm {
+            get {
+                return this.algorithmField;
+            }
+            set {
+                this.algorithmField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class ReferenceType {
+        
+        private TransformType[] transformsField;
+        
+        private DigestMethodType digestMethodField;
+        
+        private byte[] digestValueField;
+        
+        private string idField;
+        
+        private string uRIField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("Transform", IsNullable=false)]
+        public TransformType[] Transforms {
+            get {
+                return this.transformsField;
+            }
+            set {
+                this.transformsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public DigestMethodType DigestMethod {
+            get {
+                return this.digestMethodField;
+            }
+            set {
+                this.digestMethodField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] DigestValue {
+            get {
+                return this.digestValueField;
+            }
+            set {
+                this.digestValueField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+        public string Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string URI {
+            get {
+                return this.uRIField;
+            }
+            set {
+                this.uRIField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class TransformType {
+        
+        private object[] itemsField;
+        
+        private string[] textField;
+        
+        private string algorithmField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        [System.Xml.Serialization.XmlElementAttribute("XPath", typeof(string))]
+        public object[] Items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                this.itemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string Algorithm {
+            get {
+                return this.algorithmField;
+            }
+            set {
+                this.algorithmField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class DigestMethodType {
+        
+        private System.Xml.XmlNode[] anyField;
+        
+        private string algorithmField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlNode[] Any {
+            get {
+                return this.anyField;
+            }
+            set {
+                this.anyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string Algorithm {
+            get {
+                return this.algorithmField;
+            }
+            set {
+                this.algorithmField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class SignatureValueType {
+        
+        private string idField;
+        
+        private byte[] valueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+        public string Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute(DataType="base64Binary")]
+        public byte[] Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class KeyInfoType {
+        
+        private object[] itemsField;
+        
+        private ItemsChoiceType2[] itemsElementNameField;
+        
+        private string[] textField;
+        
+        private string idField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        [System.Xml.Serialization.XmlElementAttribute("KeyName", typeof(string))]
+        [System.Xml.Serialization.XmlElementAttribute("KeyValue", typeof(KeyValueType))]
+        [System.Xml.Serialization.XmlElementAttribute("MgmtData", typeof(string))]
+        [System.Xml.Serialization.XmlElementAttribute("PGPData", typeof(PGPDataType))]
+        [System.Xml.Serialization.XmlElementAttribute("RetrievalMethod", typeof(RetrievalMethodType))]
+        [System.Xml.Serialization.XmlElementAttribute("SPKIData", typeof(SPKIDataType))]
+        [System.Xml.Serialization.XmlElementAttribute("X509Data", typeof(X509DataType))]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
+        public object[] Items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                this.itemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ItemsChoiceType2[] ItemsElementName {
+            get {
+                return this.itemsElementNameField;
+            }
+            set {
+                this.itemsElementNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+        public string Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class KeyValueType {
         
         private object itemField;
         
+        private string[] textField;
+        
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Cancelamento", typeof(tcCancelamentoNfse))]
-        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(CancelarNfseRespostaListaMensagemRetorno))]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        [System.Xml.Serialization.XmlElementAttribute("DSAKeyValue", typeof(DSAKeyValueType))]
+        [System.Xml.Serialization.XmlElementAttribute("RSAKeyValue", typeof(RSAKeyValueType))]
         public object Item {
             get {
                 return this.itemField;
@@ -3012,10 +2893,491 @@ namespace NFe.Components.HBlumenauSC {
                 this.itemField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class DSAKeyValueType {
+        
+        private byte[] pField;
+        
+        private byte[] qField;
+        
+        private byte[] gField;
+        
+        private byte[] yField;
+        
+        private byte[] jField;
+        
+        private byte[] seedField;
+        
+        private byte[] pgenCounterField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] P {
+            get {
+                return this.pField;
+            }
+            set {
+                this.pField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] Q {
+            get {
+                return this.qField;
+            }
+            set {
+                this.qField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] G {
+            get {
+                return this.gField;
+            }
+            set {
+                this.gField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] Y {
+            get {
+                return this.yField;
+            }
+            set {
+                this.yField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] J {
+            get {
+                return this.jField;
+            }
+            set {
+                this.jField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] Seed {
+            get {
+                return this.seedField;
+            }
+            set {
+                this.seedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] PgenCounter {
+            get {
+                return this.pgenCounterField;
+            }
+            set {
+                this.pgenCounterField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class RSAKeyValueType {
+        
+        private byte[] modulusField;
+        
+        private byte[] exponentField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] Modulus {
+            get {
+                return this.modulusField;
+            }
+            set {
+                this.modulusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
+        public byte[] Exponent {
+            get {
+                return this.exponentField;
+            }
+            set {
+                this.exponentField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class PGPDataType {
+        
+        private object[] itemsField;
+        
+        private ItemsChoiceType[] itemsElementNameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        [System.Xml.Serialization.XmlElementAttribute("PGPKeyID", typeof(byte[]), DataType="base64Binary")]
+        [System.Xml.Serialization.XmlElementAttribute("PGPKeyPacket", typeof(byte[]), DataType="base64Binary")]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
+        public object[] Items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                this.itemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ItemsChoiceType[] ItemsElementName {
+            get {
+                return this.itemsElementNameField;
+            }
+            set {
+                this.itemsElementNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#", IncludeInSchema=false)]
+    public enum ItemsChoiceType {
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("##any:")]
+        Item,
+        
+        /// <remarks/>
+        PGPKeyID,
+        
+        /// <remarks/>
+        PGPKeyPacket,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class RetrievalMethodType {
+        
+        private TransformType[] transformsField;
+        
+        private string uRIField;
+        
+        private string typeField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("Transform", IsNullable=false)]
+        public TransformType[] Transforms {
+            get {
+                return this.transformsField;
+            }
+            set {
+                this.transformsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string URI {
+            get {
+                return this.uRIField;
+            }
+            set {
+                this.uRIField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class SPKIDataType {
+        
+        private byte[][] sPKISexpField;
+        
+        private System.Xml.XmlElement anyField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("SPKISexp", DataType="base64Binary")]
+        public byte[][] SPKISexp {
+            get {
+                return this.sPKISexpField;
+            }
+            set {
+                this.sPKISexpField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement Any {
+            get {
+                return this.anyField;
+            }
+            set {
+                this.anyField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class X509DataType {
+        
+        private object[] itemsField;
+        
+        private ItemsChoiceType1[] itemsElementNameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        [System.Xml.Serialization.XmlElementAttribute("X509CRL", typeof(byte[]), DataType="base64Binary")]
+        [System.Xml.Serialization.XmlElementAttribute("X509Certificate", typeof(byte[]), DataType="base64Binary")]
+        [System.Xml.Serialization.XmlElementAttribute("X509IssuerSerial", typeof(X509IssuerSerialType))]
+        [System.Xml.Serialization.XmlElementAttribute("X509SKI", typeof(byte[]), DataType="base64Binary")]
+        [System.Xml.Serialization.XmlElementAttribute("X509SubjectName", typeof(string))]
+        [System.Xml.Serialization.XmlChoiceIdentifierAttribute("ItemsElementName")]
+        public object[] Items {
+            get {
+                return this.itemsField;
+            }
+            set {
+                this.itemsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ItemsElementName")]
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public ItemsChoiceType1[] ItemsElementName {
+            get {
+                return this.itemsElementNameField;
+            }
+            set {
+                this.itemsElementNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class X509IssuerSerialType {
+        
+        private string x509IssuerNameField;
+        
+        private string x509SerialNumberField;
+        
+        /// <remarks/>
+        public string X509IssuerName {
+            get {
+                return this.x509IssuerNameField;
+            }
+            set {
+                this.x509IssuerNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="integer")]
+        public string X509SerialNumber {
+            get {
+                return this.x509SerialNumberField;
+            }
+            set {
+                this.x509SerialNumberField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#", IncludeInSchema=false)]
+    public enum ItemsChoiceType1 {
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("##any:")]
+        Item,
+        
+        /// <remarks/>
+        X509CRL,
+        
+        /// <remarks/>
+        X509Certificate,
+        
+        /// <remarks/>
+        X509IssuerSerial,
+        
+        /// <remarks/>
+        X509SKI,
+        
+        /// <remarks/>
+        X509SubjectName,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#", IncludeInSchema=false)]
+    public enum ItemsChoiceType2 {
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("##any:")]
+        Item,
+        
+        /// <remarks/>
+        KeyName,
+        
+        /// <remarks/>
+        KeyValue,
+        
+        /// <remarks/>
+        MgmtData,
+        
+        /// <remarks/>
+        PGPData,
+        
+        /// <remarks/>
+        RetrievalMethod,
+        
+        /// <remarks/>
+        SPKIData,
+        
+        /// <remarks/>
+        X509Data,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    public partial class ObjectType {
+        
+        private System.Xml.XmlNode[] anyField;
+        
+        private string idField;
+        
+        private string mimeTypeField;
+        
+        private string encodingField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlNode[] Any {
+            get {
+                return this.anyField;
+            }
+            set {
+                this.anyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="ID")]
+        public string Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string MimeType {
+            get {
+                return this.mimeTypeField;
+            }
+            set {
+                this.mimeTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        public string Encoding {
+            get {
+                return this.encodingField;
+            }
+            set {
+                this.encodingField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3062,7 +3424,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3108,7 +3470,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3142,7 +3504,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3188,7 +3550,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3197,7 +3559,7 @@ namespace NFe.Components.HBlumenauSC {
         
         private string numeroField;
         
-        private string cnpjField;
+        private tcCpfCnpj cpfCnpjField;
         
         private string inscricaoMunicipalField;
         
@@ -3215,12 +3577,12 @@ namespace NFe.Components.HBlumenauSC {
         }
         
         /// <remarks/>
-        public string Cnpj {
+        public tcCpfCnpj CpfCnpj {
             get {
-                return this.cnpjField;
+                return this.cpfCnpjField;
             }
             set {
-                this.cnpjField = value;
+                this.cpfCnpjField = value;
             }
         }
         
@@ -3246,481 +3608,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class CancelarNfseRespostaListaMensagemRetorno {
-        
-        private tcMensagemRetorno[] mensagemRetornoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
-        public tcMensagemRetorno[] MensagemRetorno {
-            get {
-                return this.mensagemRetornoField;
-            }
-            set {
-                this.mensagemRetornoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class CancelarNfseEnvio {
-        
-        private tcPedidoCancelamento pedidoField;
-        
-        private SignatureType signatureField;
-        
-        /// <remarks/>
-        public tcPedidoCancelamento Pedido {
-            get {
-                return this.pedidoField;
-            }
-            set {
-                this.pedidoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-        public SignatureType Signature {
-            get {
-                return this.signatureField;
-            }
-            set {
-                this.signatureField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarLoteRpsResposta {
-        
-        private object itemField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(ConsultarLoteRpsRespostaListaMensagemRetorno))]
-        [System.Xml.Serialization.XmlElementAttribute("ListaNfse", typeof(ConsultarLoteRpsRespostaListaNfse))]
-        public object Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarLoteRpsRespostaListaMensagemRetorno {
-        
-        private tcMensagemRetorno[] mensagemRetornoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
-        public tcMensagemRetorno[] MensagemRetorno {
-            get {
-                return this.mensagemRetornoField;
-            }
-            set {
-                this.mensagemRetornoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarLoteRpsRespostaListaNfse {
-        
-        private tcCompNfse[] compNfseField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("CompNfse")]
-        public tcCompNfse[] CompNfse {
-            get {
-                return this.compNfseField;
-            }
-            set {
-                this.compNfseField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcCompNfse {
-        
-        private tcNfse nfseField;
-        
-        private tcCancelamentoNfse nfseCancelamentoField;
-        
-        private tcSubstituicaoNfse nfseSubstituicaoField;
-        
-        /// <remarks/>
-        public tcNfse Nfse {
-            get {
-                return this.nfseField;
-            }
-            set {
-                this.nfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcCancelamentoNfse NfseCancelamento {
-            get {
-                return this.nfseCancelamentoField;
-            }
-            set {
-                this.nfseCancelamentoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcSubstituicaoNfse NfseSubstituicao {
-            get {
-                return this.nfseSubstituicaoField;
-            }
-            set {
-                this.nfseSubstituicaoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcNfse {
-        
-        private tcInfNfse infNfseField;
-        
-        private SignatureType[] signatureField;
-        
-        private string versaoField;
-        
-        /// <remarks/>
-        public tcInfNfse InfNfse {
-            get {
-                return this.infNfseField;
-            }
-            set {
-                this.infNfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Signature", Namespace="http://www.w3.org/2000/09/xmldsig#")]
-        public SignatureType[] Signature {
-            get {
-                return this.signatureField;
-            }
-            set {
-                this.signatureField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="token")]
-        public string versao {
-            get {
-                return this.versaoField;
-            }
-            set {
-                this.versaoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcInfNfse {
-        
-        private string numeroField;
-        
-        private string codigoVerificacaoField;
-        
-        private System.DateTime dataEmissaoField;
-        
-        private string nfseSubstituidaField;
-        
-        private string outrasInformacoesField;
-        
-        private tcValores valoresNfseField;
-        
-        private decimal valorCreditoField;
-        
-        private bool valorCreditoFieldSpecified;
-        
-        private tcDadosPrestador prestadorField;
-        
-        private tcIdentificacaoOrgaoGerador orgaoGeradorField;
-        
-        private tcDeclaracaoPrestacaoServico declaracaoPrestacaoServicoField;
-        
-        private string idField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string Numero {
-            get {
-                return this.numeroField;
-            }
-            set {
-                this.numeroField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CodigoVerificacao {
-            get {
-                return this.codigoVerificacaoField;
-            }
-            set {
-                this.codigoVerificacaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DataEmissao {
-            get {
-                return this.dataEmissaoField;
-            }
-            set {
-                this.dataEmissaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string NfseSubstituida {
-            get {
-                return this.nfseSubstituidaField;
-            }
-            set {
-                this.nfseSubstituidaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string OutrasInformacoes {
-            get {
-                return this.outrasInformacoesField;
-            }
-            set {
-                this.outrasInformacoesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcValores ValoresNfse {
-            get {
-                return this.valoresNfseField;
-            }
-            set {
-                this.valoresNfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorCredito {
-            get {
-                return this.valorCreditoField;
-            }
-            set {
-                this.valorCreditoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorCreditoSpecified {
-            get {
-                return this.valorCreditoFieldSpecified;
-            }
-            set {
-                this.valorCreditoFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcDadosPrestador Prestador {
-            get {
-                return this.prestadorField;
-            }
-            set {
-                this.prestadorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcIdentificacaoOrgaoGerador OrgaoGerador {
-            get {
-                return this.orgaoGeradorField;
-            }
-            set {
-                this.orgaoGeradorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcDeclaracaoPrestacaoServico DeclaracaoPrestacaoServico {
-            get {
-                return this.declaracaoPrestacaoServicoField;
-            }
-            set {
-                this.declaracaoPrestacaoServicoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcDadosPrestador {
-        
-        private tcIdentificacaoPrestador identificacaoPrestadorField;
-        
-        private string razaoSocialField;
-        
-        private string nomeFantasiaField;
-        
-        private tcEndereco enderecoField;
-        
-        private tcContato contatoField;
-        
-        /// <remarks/>
-        public tcIdentificacaoPrestador IdentificacaoPrestador {
-            get {
-                return this.identificacaoPrestadorField;
-            }
-            set {
-                this.identificacaoPrestadorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RazaoSocial {
-            get {
-                return this.razaoSocialField;
-            }
-            set {
-                this.razaoSocialField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string NomeFantasia {
-            get {
-                return this.nomeFantasiaField;
-            }
-            set {
-                this.nomeFantasiaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcEndereco Endereco {
-            get {
-                return this.enderecoField;
-            }
-            set {
-                this.enderecoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcContato Contato {
-            get {
-                return this.contatoField;
-            }
-            set {
-                this.contatoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcIdentificacaoOrgaoGerador {
-        
-        private int codigoMunicipioField;
-        
-        private string ufField;
-        
-        /// <remarks/>
-        public int CodigoMunicipio {
-            get {
-                return this.codigoMunicipioField;
-            }
-            set {
-                this.codigoMunicipioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Uf {
-            get {
-                return this.ufField;
-            }
-            set {
-                this.ufField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3767,7 +3655,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3802,16 +3690,18 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarLoteRpsEnvio {
+    public partial class ConsultarNfseFaixaEnvio {
         
         private tcIdentificacaoPrestador prestadorField;
         
-        private string protocoloField;
+        private ConsultarNfseFaixaEnvioFaixa faixaField;
+        
+        private string paginaField;
         
         private SignatureType signatureField;
         
@@ -3826,12 +3716,23 @@ namespace NFe.Components.HBlumenauSC {
         }
         
         /// <remarks/>
-        public string Protocolo {
+        public ConsultarNfseFaixaEnvioFaixa Faixa {
             get {
-                return this.protocoloField;
+                return this.faixaField;
             }
             set {
-                this.protocoloField = value;
+                this.faixaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
+        public string Pagina {
+            get {
+                return this.paginaField;
+            }
+            set {
+                this.paginaField = value;
             }
         }
         
@@ -3848,18 +3749,53 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class ConsultarNfseFaixaEnvioFaixa {
+        
+        private string numeroNfseInicialField;
+        
+        private string numeroNfseFinalField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
+        public string NumeroNfseInicial {
+            get {
+                return this.numeroNfseInicialField;
+            }
+            set {
+                this.numeroNfseInicialField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
+        public string NumeroNfseFinal {
+            get {
+                return this.numeroNfseFinalField;
+            }
+            set {
+                this.numeroNfseFinalField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseResposta {
+    public partial class ConsultarNfseServicoPrestadoResposta {
         
         private object itemField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(ConsultarNfseRespostaListaMensagemRetorno))]
-        [System.Xml.Serialization.XmlElementAttribute("ListaNfse", typeof(ConsultarNfseRespostaListaNfse))]
+        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(ConsultarNfseServicoPrestadoRespostaListaMensagemRetorno))]
+        [System.Xml.Serialization.XmlElementAttribute("ListaNfse", typeof(ConsultarNfseServicoPrestadoRespostaListaNfse))]
         public object Item {
             get {
                 return this.itemField;
@@ -3871,12 +3807,12 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseRespostaListaMensagemRetorno {
+    public partial class ConsultarNfseServicoPrestadoRespostaListaMensagemRetorno {
         
         private tcMensagemRetorno[] mensagemRetornoField;
         
@@ -3893,14 +3829,16 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseRespostaListaNfse {
+    public partial class ConsultarNfseServicoPrestadoRespostaListaNfse {
         
         private tcCompNfse[] compNfseField;
+        
+        private string proximaPaginaField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("CompNfse")]
@@ -3912,25 +3850,38 @@ namespace NFe.Components.HBlumenauSC {
                 this.compNfseField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
+        public string ProximaPagina {
+            get {
+                return this.proximaPaginaField;
+            }
+            set {
+                this.proximaPaginaField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseEnvio {
+    public partial class ConsultarNfseServicoPrestadoEnvio {
         
         private tcIdentificacaoPrestador prestadorField;
         
         private string numeroNfseField;
         
-        private ConsultarNfseEnvioPeriodoEmissao periodoEmissaoField;
+        private object itemField;
         
         private tcIdentificacaoTomador tomadorField;
         
-        private tcDadosIntermediario intermediarioServicoField;
+        private tcIdentificacaoIntermediario intermediarioField;
+        
+        private string paginaField;
         
         private SignatureType signatureField;
         
@@ -3956,12 +3907,14 @@ namespace NFe.Components.HBlumenauSC {
         }
         
         /// <remarks/>
-        public ConsultarNfseEnvioPeriodoEmissao PeriodoEmissao {
+        [System.Xml.Serialization.XmlElementAttribute("PeriodoCompetencia", typeof(ConsultarNfseServicoPrestadoEnvioPeriodoCompetencia))]
+        [System.Xml.Serialization.XmlElementAttribute("PeriodoEmissao", typeof(ConsultarNfseServicoPrestadoEnvioPeriodoEmissao))]
+        public object Item {
             get {
-                return this.periodoEmissaoField;
+                return this.itemField;
             }
             set {
-                this.periodoEmissaoField = value;
+                this.itemField = value;
             }
         }
         
@@ -3976,12 +3929,23 @@ namespace NFe.Components.HBlumenauSC {
         }
         
         /// <remarks/>
-        public tcDadosIntermediario IntermediarioServico {
+        public tcIdentificacaoIntermediario Intermediario {
             get {
-                return this.intermediarioServicoField;
+                return this.intermediarioField;
             }
             set {
-                this.intermediarioServicoField = value;
+                this.intermediarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
+        public string Pagina {
+            get {
+                return this.paginaField;
+            }
+            set {
+                this.paginaField = value;
             }
         }
         
@@ -3998,12 +3962,12 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseEnvioPeriodoEmissao {
+    public partial class ConsultarNfseServicoPrestadoEnvioPeriodoCompetencia {
         
         private System.DateTime dataInicialField;
         
@@ -4033,7 +3997,42 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class ConsultarNfseServicoPrestadoEnvioPeriodoEmissao {
+        
+        private System.DateTime dataInicialField;
+        
+        private System.DateTime dataFinalField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+        public System.DateTime DataInicial {
+            get {
+                return this.dataInicialField;
+            }
+            set {
+                this.dataInicialField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+        public System.DateTime DataFinal {
+            get {
+                return this.dataFinalField;
+            }
+            set {
+                this.dataFinalField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4056,7 +4055,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4078,7 +4077,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4124,36 +4123,93 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarSituacaoLoteRpsResposta {
+    public partial class tcMensagemRetornoLote {
         
-        private object[] itemsField;
+        private tcIdentificacaoRps identificacaoRpsField;
+        
+        private string codigoField;
+        
+        private string mensagemField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(ConsultarSituacaoLoteRpsRespostaListaMensagemRetorno))]
-        [System.Xml.Serialization.XmlElementAttribute("NumeroLote", typeof(string), DataType="nonNegativeInteger")]
-        [System.Xml.Serialization.XmlElementAttribute("Situacao", typeof(sbyte))]
-        public object[] Items {
+        public tcIdentificacaoRps IdentificacaoRps {
             get {
-                return this.itemsField;
+                return this.identificacaoRpsField;
             }
             set {
-                this.itemsField = value;
+                this.identificacaoRpsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Codigo {
+            get {
+                return this.codigoField;
+            }
+            set {
+                this.codigoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Mensagem {
+            get {
+                return this.mensagemField;
+            }
+            set {
+                this.mensagemField = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class ConsultarLoteRpsResposta {
+        
+        private sbyte situacaoField;
+        
+        private object itemField;
+        
+        /// <remarks/>
+        public sbyte Situacao {
+            get {
+                return this.situacaoField;
+            }
+            set {
+                this.situacaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(ConsultarLoteRpsRespostaListaMensagemRetorno))]
+        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetornoLote", typeof(ConsultarLoteRpsRespostaListaMensagemRetornoLote))]
+        [System.Xml.Serialization.XmlElementAttribute("ListaNfse", typeof(ConsultarLoteRpsRespostaListaNfse))]
+        public object Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarSituacaoLoteRpsRespostaListaMensagemRetorno {
+    public partial class ConsultarLoteRpsRespostaListaMensagemRetorno {
         
         private tcMensagemRetorno[] mensagemRetornoField;
         
@@ -4170,12 +4226,69 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class ConsultarLoteRpsRespostaListaMensagemRetornoLote {
+        
+        private tcMensagemRetornoLote[] mensagemRetornoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
+        public tcMensagemRetornoLote[] MensagemRetorno {
+            get {
+                return this.mensagemRetornoField;
+            }
+            set {
+                this.mensagemRetornoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class ConsultarLoteRpsRespostaListaNfse {
+        
+        private tcCompNfse[] compNfseField;
+        
+        private tcMensagemRetorno[] listaMensagemAlertaRetornoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CompNfse")]
+        public tcCompNfse[] CompNfse {
+            get {
+                return this.compNfseField;
+            }
+            set {
+                this.compNfseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("MensagemRetorno", IsNullable=false)]
+        public tcMensagemRetorno[] ListaMensagemAlertaRetorno {
+            get {
+                return this.listaMensagemAlertaRetornoField;
+            }
+            set {
+                this.listaMensagemAlertaRetornoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarSituacaoLoteRpsEnvio {
+    public partial class ConsultarLoteRpsEnvio {
         
         private tcIdentificacaoPrestador prestadorField;
         
@@ -4216,7 +4329,194 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcRetCancelamento {
+        
+        private tcCancelamentoNfse nfseCancelamentoField;
+        
+        /// <remarks/>
+        public tcCancelamentoNfse NfseCancelamento {
+            get {
+                return this.nfseCancelamentoField;
+            }
+            set {
+                this.nfseCancelamentoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class CancelarNfseResposta {
+        
+        private object itemField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(CancelarNfseRespostaListaMensagemRetorno))]
+        [System.Xml.Serialization.XmlElementAttribute("RetCancelamento", typeof(tcRetCancelamento))]
+        public object Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class CancelarNfseRespostaListaMensagemRetorno {
+        
+        private tcMensagemRetorno[] mensagemRetornoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
+        public tcMensagemRetorno[] MensagemRetorno {
+            get {
+                return this.mensagemRetornoField;
+            }
+            set {
+                this.mensagemRetornoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class CancelarNfseEnvio {
+        
+        private tcPedidoCancelamento pedidoField;
+        
+        /// <remarks/>
+        public tcPedidoCancelamento Pedido {
+            get {
+                return this.pedidoField;
+            }
+            set {
+                this.pedidoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class GerarNfseResposta {
+        
+        private object itemField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(GerarNfseRespostaListaMensagemRetorno))]
+        [System.Xml.Serialization.XmlElementAttribute("ListaNfse", typeof(GerarNfseRespostaListaNfse))]
+        public object Item {
+            get {
+                return this.itemField;
+            }
+            set {
+                this.itemField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class GerarNfseRespostaListaMensagemRetorno {
+        
+        private tcMensagemRetorno[] mensagemRetornoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
+        public tcMensagemRetorno[] MensagemRetorno {
+            get {
+                return this.mensagemRetornoField;
+            }
+            set {
+                this.mensagemRetornoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class GerarNfseRespostaListaNfse {
+        
+        private tcCompNfse compNfseField;
+        
+        private tcMensagemRetorno[] listaMensagemAlertaRetornoField;
+        
+        /// <remarks/>
+        public tcCompNfse CompNfse {
+            get {
+                return this.compNfseField;
+            }
+            set {
+                this.compNfseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayItemAttribute("MensagemRetorno", IsNullable=false)]
+        public tcMensagemRetorno[] ListaMensagemAlertaRetorno {
+            get {
+                return this.listaMensagemAlertaRetornoField;
+            }
+            set {
+                this.listaMensagemAlertaRetornoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class GerarNfseEnvio {
+        
+        private tcDeclaracaoPrestacaoServico rpsField;
+        
+        /// <remarks/>
+        public tcDeclaracaoPrestacaoServico Rps {
+            get {
+                return this.rpsField;
+            }
+            set {
+                this.rpsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4256,7 +4556,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4278,7 +4578,7 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd", IncludeInSchema=false)]
     public enum ItemsChoiceType3 {
@@ -4297,11 +4597,11 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void VersaoCompletedEventHandler(object sender, VersaoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class VersaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4323,11 +4623,11 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void RecepcionarLoteRpsCompletedEventHandler(object sender, RecepcionarLoteRpsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class RecepcionarLoteRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4349,115 +4649,37 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void ConsultarSituacaoLoteRpsCompletedEventHandler(object sender, ConsultarSituacaoLoteRpsCompletedEventArgs e);
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    public delegate void GerarNfseCompletedEventHandler(object sender, GerarNfseCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ConsultarSituacaoLoteRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class GerarNfseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal ConsultarSituacaoLoteRpsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal GerarNfseCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public ConsultarSituacaoLoteRpsResposta Result {
+        public GerarNfseResposta Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((ConsultarSituacaoLoteRpsResposta)(this.results[0]));
+                return ((GerarNfseResposta)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void ConsultarNfsePorRpsCompletedEventHandler(object sender, ConsultarNfsePorRpsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ConsultarNfsePorRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ConsultarNfsePorRpsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public ConsultarNfseRpsResposta Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((ConsultarNfseRpsResposta)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void ConsultarNfseCompletedEventHandler(object sender, ConsultarNfseCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ConsultarNfseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ConsultarNfseCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public ConsultarNfseResposta Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((ConsultarNfseResposta)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void ConsultarLoteRpsCompletedEventHandler(object sender, ConsultarLoteRpsCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ConsultarLoteRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ConsultarLoteRpsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public ConsultarLoteRpsResposta Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((ConsultarLoteRpsResposta)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void CancelarNfseCompletedEventHandler(object sender, CancelarNfseCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CancelarNfseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -4479,27 +4701,105 @@ namespace NFe.Components.HBlumenauSC {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
-    public delegate void GerarNfseCompletedEventHandler(object sender, GerarNfseCompletedEventArgs e);
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    public delegate void ConsultarLoteRpsCompletedEventHandler(object sender, ConsultarLoteRpsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GerarNfseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class ConsultarLoteRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal GerarNfseCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal ConsultarLoteRpsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
         
         /// <remarks/>
-        public GerarNfseResposta Result {
+        public ConsultarLoteRpsResposta Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((GerarNfseResposta)(this.results[0]));
+                return ((ConsultarLoteRpsResposta)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    public delegate void ConsultarNfseRpsCompletedEventHandler(object sender, ConsultarNfseRpsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ConsultarNfseRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ConsultarNfseRpsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ConsultarNfseRpsResposta Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ConsultarNfseRpsResposta)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    public delegate void ConsultarNfseServicoPrestadoCompletedEventHandler(object sender, ConsultarNfseServicoPrestadoCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ConsultarNfseServicoPrestadoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ConsultarNfseServicoPrestadoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ConsultarNfseServicoPrestadoResposta Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ConsultarNfseServicoPrestadoResposta)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    public delegate void ConsultarNfseFaixaCompletedEventHandler(object sender, ConsultarNfseFaixaCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ConsultarNfseFaixaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ConsultarNfseFaixaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ConsultarNfseFaixaResposta Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ConsultarNfseFaixaResposta)(this.results[0]));
             }
         }
     }

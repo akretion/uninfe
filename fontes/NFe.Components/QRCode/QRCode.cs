@@ -285,7 +285,7 @@ namespace NFe.Components.QRCode
                     "?chCTe=" + chCTe +
                     "&amp;tpAmb=" + tpAmb;
 
-                if (tpEmis.Equals("2")) //Contingência
+                if (tpEmis.Equals("4") || tpEmis.Equals("5")) //Contingência EPEC ou FS-DA
                 {
                     linkQRCode += "&amp;sign=" + Criptografia.SignWithRSASHA1(certificado, chCTe);
                 }

@@ -26,20 +26,16 @@ namespace NFe.Components.PBlumenauSC {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_INfseService", Namespace="http://tempuri.org/")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_INfseService", Namespace="http://www.sistema.com.br/Sistema.Ws.Nfse")]
     public partial class NfseService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback VersaoOperationCompleted;
         
         private System.Threading.SendOrPostCallback RecepcionarLoteRpsOperationCompleted;
         
-        private System.Threading.SendOrPostCallback EnviarLoteRpsSincronoOperationCompleted;
-        
         private System.Threading.SendOrPostCallback GerarNfseOperationCompleted;
         
         private System.Threading.SendOrPostCallback CancelarNfseOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback SubstituirNfseOperationCompleted;
         
         private System.Threading.SendOrPostCallback ConsultarLoteRpsOperationCompleted;
         
@@ -47,21 +43,7 @@ namespace NFe.Components.PBlumenauSC {
         
         private System.Threading.SendOrPostCallback ConsultarNfseServicoPrestadoOperationCompleted;
         
-        private System.Threading.SendOrPostCallback ConsultarNfseServicoTomadoOperationCompleted;
-        
         private System.Threading.SendOrPostCallback ConsultarNfseFaixaOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GerarCfseOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ConsultarCfseOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback CancelarCfseOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback GerarCfseHomologacaoOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ConsultarCfseHomologacaoOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback CancelarCfseHomologacaoOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -108,16 +90,10 @@ namespace NFe.Components.PBlumenauSC {
         public event RecepcionarLoteRpsCompletedEventHandler RecepcionarLoteRpsCompleted;
         
         /// <remarks/>
-        public event EnviarLoteRpsSincronoCompletedEventHandler EnviarLoteRpsSincronoCompleted;
-        
-        /// <remarks/>
         public event GerarNfseCompletedEventHandler GerarNfseCompleted;
         
         /// <remarks/>
         public event CancelarNfseCompletedEventHandler CancelarNfseCompleted;
-        
-        /// <remarks/>
-        public event SubstituirNfseCompletedEventHandler SubstituirNfseCompleted;
         
         /// <remarks/>
         public event ConsultarLoteRpsCompletedEventHandler ConsultarLoteRpsCompleted;
@@ -129,28 +105,7 @@ namespace NFe.Components.PBlumenauSC {
         public event ConsultarNfseServicoPrestadoCompletedEventHandler ConsultarNfseServicoPrestadoCompleted;
         
         /// <remarks/>
-        public event ConsultarNfseServicoTomadoCompletedEventHandler ConsultarNfseServicoTomadoCompleted;
-        
-        /// <remarks/>
         public event ConsultarNfseFaixaCompletedEventHandler ConsultarNfseFaixaCompleted;
-        
-        /// <remarks/>
-        public event GerarCfseCompletedEventHandler GerarCfseCompleted;
-        
-        /// <remarks/>
-        public event ConsultarCfseCompletedEventHandler ConsultarCfseCompleted;
-        
-        /// <remarks/>
-        public event CancelarCfseCompletedEventHandler CancelarCfseCompleted;
-        
-        /// <remarks/>
-        public event GerarCfseHomologacaoCompletedEventHandler GerarCfseHomologacaoCompleted;
-        
-        /// <remarks/>
-        public event ConsultarCfseHomologacaoCompletedEventHandler ConsultarCfseHomologacaoCompleted;
-        
-        /// <remarks/>
-        public event CancelarCfseHomologacaoCompletedEventHandler CancelarCfseHomologacaoCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/Versao", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -209,35 +164,6 @@ namespace NFe.Components.PBlumenauSC {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/EnviarLoteRpsSincrono", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public EnviarLoteRpsSincronoResposta EnviarLoteRpsSincrono(EnviarLoteRpsSincronoEnvio EnviarLoteRpsSincronoEnvio) {
-            object[] results = this.Invoke("EnviarLoteRpsSincrono", new object[] {
-                        EnviarLoteRpsSincronoEnvio});
-            return ((EnviarLoteRpsSincronoResposta)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EnviarLoteRpsSincronoAsync(EnviarLoteRpsSincronoEnvio EnviarLoteRpsSincronoEnvio) {
-            this.EnviarLoteRpsSincronoAsync(EnviarLoteRpsSincronoEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void EnviarLoteRpsSincronoAsync(EnviarLoteRpsSincronoEnvio EnviarLoteRpsSincronoEnvio, object userState) {
-            if ((this.EnviarLoteRpsSincronoOperationCompleted == null)) {
-                this.EnviarLoteRpsSincronoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarLoteRpsSincronoOperationCompleted);
-            }
-            this.InvokeAsync("EnviarLoteRpsSincrono", new object[] {
-                        EnviarLoteRpsSincronoEnvio}, this.EnviarLoteRpsSincronoOperationCompleted, userState);
-        }
-        
-        private void OnEnviarLoteRpsSincronoOperationCompleted(object arg) {
-            if ((this.EnviarLoteRpsSincronoCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EnviarLoteRpsSincronoCompleted(this, new EnviarLoteRpsSincronoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/GerarNfse", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public GerarNfseResposta GerarNfse(GerarNfseEnvio GerarNfseEnvio) {
             object[] results = this.Invoke("GerarNfse", new object[] {
@@ -292,35 +218,6 @@ namespace NFe.Components.PBlumenauSC {
             if ((this.CancelarNfseCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.CancelarNfseCompleted(this, new CancelarNfseCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/SubstituirNfse", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public SubstituirNfseResposta SubstituirNfse(SubstituirNfseEnvio SubstituirNfseEnvio) {
-            object[] results = this.Invoke("SubstituirNfse", new object[] {
-                        SubstituirNfseEnvio});
-            return ((SubstituirNfseResposta)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void SubstituirNfseAsync(SubstituirNfseEnvio SubstituirNfseEnvio) {
-            this.SubstituirNfseAsync(SubstituirNfseEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void SubstituirNfseAsync(SubstituirNfseEnvio SubstituirNfseEnvio, object userState) {
-            if ((this.SubstituirNfseOperationCompleted == null)) {
-                this.SubstituirNfseOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSubstituirNfseOperationCompleted);
-            }
-            this.InvokeAsync("SubstituirNfse", new object[] {
-                        SubstituirNfseEnvio}, this.SubstituirNfseOperationCompleted, userState);
-        }
-        
-        private void OnSubstituirNfseOperationCompleted(object arg) {
-            if ((this.SubstituirNfseCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SubstituirNfseCompleted(this, new SubstituirNfseCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -413,36 +310,6 @@ namespace NFe.Components.PBlumenauSC {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarNfseServicoTomado" +
-            "", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ConsultarNfseServicoTomadoResposta ConsultarNfseServicoTomado(ConsultarNfseServicoTomadoEnvio ConsultarNfseServicoTomadoEnvio) {
-            object[] results = this.Invoke("ConsultarNfseServicoTomado", new object[] {
-                        ConsultarNfseServicoTomadoEnvio});
-            return ((ConsultarNfseServicoTomadoResposta)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ConsultarNfseServicoTomadoAsync(ConsultarNfseServicoTomadoEnvio ConsultarNfseServicoTomadoEnvio) {
-            this.ConsultarNfseServicoTomadoAsync(ConsultarNfseServicoTomadoEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void ConsultarNfseServicoTomadoAsync(ConsultarNfseServicoTomadoEnvio ConsultarNfseServicoTomadoEnvio, object userState) {
-            if ((this.ConsultarNfseServicoTomadoOperationCompleted == null)) {
-                this.ConsultarNfseServicoTomadoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarNfseServicoTomadoOperationCompleted);
-            }
-            this.InvokeAsync("ConsultarNfseServicoTomado", new object[] {
-                        ConsultarNfseServicoTomadoEnvio}, this.ConsultarNfseServicoTomadoOperationCompleted, userState);
-        }
-        
-        private void OnConsultarNfseServicoTomadoOperationCompleted(object arg) {
-            if ((this.ConsultarNfseServicoTomadoCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ConsultarNfseServicoTomadoCompleted(this, new ConsultarNfseServicoTomadoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarNfseFaixa", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public ConsultarNfseFaixaResposta ConsultarNfseFaixa(ConsultarNfseFaixaEnvio ConsultarNfseFaixaEnvio) {
             object[] results = this.Invoke("ConsultarNfseFaixa", new object[] {
@@ -468,180 +335,6 @@ namespace NFe.Components.PBlumenauSC {
             if ((this.ConsultarNfseFaixaCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ConsultarNfseFaixaCompleted(this, new ConsultarNfseFaixaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/GerarCfse", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GerarCfseResposta GerarCfse(GerarCfseEnvio GerarCfseEnvio) {
-            object[] results = this.Invoke("GerarCfse", new object[] {
-                        GerarCfseEnvio});
-            return ((GerarCfseResposta)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GerarCfseAsync(GerarCfseEnvio GerarCfseEnvio) {
-            this.GerarCfseAsync(GerarCfseEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void GerarCfseAsync(GerarCfseEnvio GerarCfseEnvio, object userState) {
-            if ((this.GerarCfseOperationCompleted == null)) {
-                this.GerarCfseOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGerarCfseOperationCompleted);
-            }
-            this.InvokeAsync("GerarCfse", new object[] {
-                        GerarCfseEnvio}, this.GerarCfseOperationCompleted, userState);
-        }
-        
-        private void OnGerarCfseOperationCompleted(object arg) {
-            if ((this.GerarCfseCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GerarCfseCompleted(this, new GerarCfseCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarCfse", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ConsultarCfseResposta ConsultarCfse(ConsultarCfseEnvio ConsultarCfseEnvio) {
-            object[] results = this.Invoke("ConsultarCfse", new object[] {
-                        ConsultarCfseEnvio});
-            return ((ConsultarCfseResposta)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ConsultarCfseAsync(ConsultarCfseEnvio ConsultarCfseEnvio) {
-            this.ConsultarCfseAsync(ConsultarCfseEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void ConsultarCfseAsync(ConsultarCfseEnvio ConsultarCfseEnvio, object userState) {
-            if ((this.ConsultarCfseOperationCompleted == null)) {
-                this.ConsultarCfseOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarCfseOperationCompleted);
-            }
-            this.InvokeAsync("ConsultarCfse", new object[] {
-                        ConsultarCfseEnvio}, this.ConsultarCfseOperationCompleted, userState);
-        }
-        
-        private void OnConsultarCfseOperationCompleted(object arg) {
-            if ((this.ConsultarCfseCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ConsultarCfseCompleted(this, new ConsultarCfseCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/CancelarCfse", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public CancelarCfseResposta CancelarCfse(CancelarCfseEnvio CancelarCfseEnvio) {
-            object[] results = this.Invoke("CancelarCfse", new object[] {
-                        CancelarCfseEnvio});
-            return ((CancelarCfseResposta)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void CancelarCfseAsync(CancelarCfseEnvio CancelarCfseEnvio) {
-            this.CancelarCfseAsync(CancelarCfseEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void CancelarCfseAsync(CancelarCfseEnvio CancelarCfseEnvio, object userState) {
-            if ((this.CancelarCfseOperationCompleted == null)) {
-                this.CancelarCfseOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCancelarCfseOperationCompleted);
-            }
-            this.InvokeAsync("CancelarCfse", new object[] {
-                        CancelarCfseEnvio}, this.CancelarCfseOperationCompleted, userState);
-        }
-        
-        private void OnCancelarCfseOperationCompleted(object arg) {
-            if ((this.CancelarCfseCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CancelarCfseCompleted(this, new CancelarCfseCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/GerarCfseHomologacao", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public GerarCfseResposta GerarCfseHomologacao(GerarCfseEnvioHomologacao GerarCfseHomologacaoEnvio) {
-            object[] results = this.Invoke("GerarCfseHomologacao", new object[] {
-                        GerarCfseHomologacaoEnvio});
-            return ((GerarCfseResposta)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GerarCfseHomologacaoAsync(GerarCfseEnvioHomologacao GerarCfseHomologacaoEnvio) {
-            this.GerarCfseHomologacaoAsync(GerarCfseHomologacaoEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void GerarCfseHomologacaoAsync(GerarCfseEnvioHomologacao GerarCfseHomologacaoEnvio, object userState) {
-            if ((this.GerarCfseHomologacaoOperationCompleted == null)) {
-                this.GerarCfseHomologacaoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGerarCfseHomologacaoOperationCompleted);
-            }
-            this.InvokeAsync("GerarCfseHomologacao", new object[] {
-                        GerarCfseHomologacaoEnvio}, this.GerarCfseHomologacaoOperationCompleted, userState);
-        }
-        
-        private void OnGerarCfseHomologacaoOperationCompleted(object arg) {
-            if ((this.GerarCfseHomologacaoCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GerarCfseHomologacaoCompleted(this, new GerarCfseHomologacaoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/ConsultarCfseHomologacao", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ConsultarCfseResposta ConsultarCfseHomologacao(ConsultarCfseEnvioHomologacao ConsultarCfseHomologacaoEnvio) {
-            object[] results = this.Invoke("ConsultarCfseHomologacao", new object[] {
-                        ConsultarCfseHomologacaoEnvio});
-            return ((ConsultarCfseResposta)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ConsultarCfseHomologacaoAsync(ConsultarCfseEnvioHomologacao ConsultarCfseHomologacaoEnvio) {
-            this.ConsultarCfseHomologacaoAsync(ConsultarCfseHomologacaoEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void ConsultarCfseHomologacaoAsync(ConsultarCfseEnvioHomologacao ConsultarCfseHomologacaoEnvio, object userState) {
-            if ((this.ConsultarCfseHomologacaoOperationCompleted == null)) {
-                this.ConsultarCfseHomologacaoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarCfseHomologacaoOperationCompleted);
-            }
-            this.InvokeAsync("ConsultarCfseHomologacao", new object[] {
-                        ConsultarCfseHomologacaoEnvio}, this.ConsultarCfseHomologacaoOperationCompleted, userState);
-        }
-        
-        private void OnConsultarCfseHomologacaoOperationCompleted(object arg) {
-            if ((this.ConsultarCfseHomologacaoCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ConsultarCfseHomologacaoCompleted(this, new ConsultarCfseHomologacaoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.sistema.com.br/Sistema.Ws.Nfse/INfseService/CancelarCfseHomologacao", RequestNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", ResponseNamespace="http://www.sistema.com.br/Sistema.Ws.Nfse", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public CancelarCfseResposta CancelarCfseHomologacao(CancelarCfseEnvioHomologacao CancelarCfseHomologacaoEnvio) {
-            object[] results = this.Invoke("CancelarCfseHomologacao", new object[] {
-                        CancelarCfseHomologacaoEnvio});
-            return ((CancelarCfseResposta)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void CancelarCfseHomologacaoAsync(CancelarCfseEnvioHomologacao CancelarCfseHomologacaoEnvio) {
-            this.CancelarCfseHomologacaoAsync(CancelarCfseHomologacaoEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void CancelarCfseHomologacaoAsync(CancelarCfseEnvioHomologacao CancelarCfseHomologacaoEnvio, object userState) {
-            if ((this.CancelarCfseHomologacaoOperationCompleted == null)) {
-                this.CancelarCfseHomologacaoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCancelarCfseHomologacaoOperationCompleted);
-            }
-            this.InvokeAsync("CancelarCfseHomologacao", new object[] {
-                        CancelarCfseHomologacaoEnvio}, this.CancelarCfseHomologacaoOperationCompleted, userState);
-        }
-        
-        private void OnCancelarCfseHomologacaoOperationCompleted(object arg) {
-            if ((this.CancelarCfseHomologacaoCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CancelarCfseHomologacaoCompleted(this, new CancelarCfseHomologacaoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -851,17 +544,41 @@ namespace NFe.Components.PBlumenauSC {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class CancelarCfseEnvioHomologacao {
+    public partial class ConsultarNfseFaixaResposta {
         
-        private tcPedidoCancelamentoCfse pedidoField;
+        private object itemField;
         
         /// <remarks/>
-        public tcPedidoCancelamentoCfse Pedido {
+        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(ConsultarNfseFaixaRespostaListaMensagemRetorno))]
+        [System.Xml.Serialization.XmlElementAttribute("ListaNfse", typeof(ConsultarNfseFaixaRespostaListaNfse))]
+        public object Item {
             get {
-                return this.pedidoField;
+                return this.itemField;
             }
             set {
-                this.pedidoField = value;
+                this.itemField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class ConsultarNfseFaixaRespostaListaMensagemRetorno {
+        
+        private tcMensagemRetorno[] mensagemRetornoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
+        public tcMensagemRetorno[] MensagemRetorno {
+            get {
+                return this.mensagemRetornoField;
+            }
+            set {
+                this.mensagemRetornoField = value;
             }
         }
     }
@@ -872,17 +589,76 @@ namespace NFe.Components.PBlumenauSC {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcPedidoCancelamentoCfse {
+    public partial class tcMensagemRetorno {
         
-        private tcInfPedidoCancelamentoCfse infPedidoCancelamentoField;
+        private string codigoField;
+        
+        private string mensagemField;
+        
+        private string correcaoField;
         
         /// <remarks/>
-        public tcInfPedidoCancelamentoCfse InfPedidoCancelamento {
+        public string Codigo {
             get {
-                return this.infPedidoCancelamentoField;
+                return this.codigoField;
             }
             set {
-                this.infPedidoCancelamentoField = value;
+                this.codigoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Mensagem {
+            get {
+                return this.mensagemField;
+            }
+            set {
+                this.mensagemField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Correcao {
+            get {
+                return this.correcaoField;
+            }
+            set {
+                this.correcaoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class ConsultarNfseFaixaRespostaListaNfse {
+        
+        private tcCompNfse[] compNfseField;
+        
+        private string proximaPaginaField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("CompNfse")]
+        public tcCompNfse[] CompNfse {
+            get {
+                return this.compNfseField;
+            }
+            set {
+                this.compNfseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
+        public string ProximaPagina {
+            get {
+                return this.proximaPaginaField;
+            }
+            set {
+                this.proximaPaginaField = value;
             }
         }
     }
@@ -893,44 +669,234 @@ namespace NFe.Components.PBlumenauSC {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcInfPedidoCancelamentoCfse {
+    public partial class tcCompNfse {
         
-        private tcIdentificacaoCfse identificacaoNfseField;
+        private tcNfse nfseField;
         
-        private sbyte codigoCancelamentoField;
+        private tcCancelamentoNfse nfseCancelamentoField;
         
-        private bool codigoCancelamentoFieldSpecified;
+        private tcSubstituicaoNfse nfseSubstituicaoField;
+        
+        /// <remarks/>
+        public tcNfse Nfse {
+            get {
+                return this.nfseField;
+            }
+            set {
+                this.nfseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcCancelamentoNfse NfseCancelamento {
+            get {
+                return this.nfseCancelamentoField;
+            }
+            set {
+                this.nfseCancelamentoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcSubstituicaoNfse NfseSubstituicao {
+            get {
+                return this.nfseSubstituicaoField;
+            }
+            set {
+                this.nfseSubstituicaoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcNfse {
+        
+        private tcInfNfse infNfseField;
+        
+        private SignatureType signatureField;
+        
+        private string versaoField;
+        
+        /// <remarks/>
+        public tcInfNfse InfNfse {
+            get {
+                return this.infNfseField;
+            }
+            set {
+                this.infNfseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+        public SignatureType Signature {
+            get {
+                return this.signatureField;
+            }
+            set {
+                this.signatureField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="token")]
+        public string versao {
+            get {
+                return this.versaoField;
+            }
+            set {
+                this.versaoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcInfNfse {
+        
+        private string numeroField;
+        
+        private string codigoVerificacaoField;
+        
+        private System.DateTime dataEmissaoField;
+        
+        private string nfseSubstituidaField;
+        
+        private string outrasInformacoesField;
+        
+        private tcValoresNfse valoresNfseField;
+        
+        private decimal valorCreditoField;
+        
+        private bool valorCreditoFieldSpecified;
+        
+        private tcDadosPrestador prestadorField;
+        
+        private tcIdentificacaoOrgaoGerador orgaoGeradorField;
+        
+        private tcDeclaracaoPrestacaoServico declaracaoPrestacaoServicoField;
         
         private string idField;
         
         /// <remarks/>
-        public tcIdentificacaoCfse IdentificacaoNfse {
+        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
+        public string Numero {
             get {
-                return this.identificacaoNfseField;
+                return this.numeroField;
             }
             set {
-                this.identificacaoNfseField = value;
+                this.numeroField = value;
             }
         }
         
         /// <remarks/>
-        public sbyte CodigoCancelamento {
+        public string CodigoVerificacao {
             get {
-                return this.codigoCancelamentoField;
+                return this.codigoVerificacaoField;
             }
             set {
-                this.codigoCancelamentoField = value;
+                this.codigoVerificacaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DataEmissao {
+            get {
+                return this.dataEmissaoField;
+            }
+            set {
+                this.dataEmissaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
+        public string NfseSubstituida {
+            get {
+                return this.nfseSubstituidaField;
+            }
+            set {
+                this.nfseSubstituidaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string OutrasInformacoes {
+            get {
+                return this.outrasInformacoesField;
+            }
+            set {
+                this.outrasInformacoesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcValoresNfse ValoresNfse {
+            get {
+                return this.valoresNfseField;
+            }
+            set {
+                this.valoresNfseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorCredito {
+            get {
+                return this.valorCreditoField;
+            }
+            set {
+                this.valorCreditoField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CodigoCancelamentoSpecified {
+        public bool ValorCreditoSpecified {
             get {
-                return this.codigoCancelamentoFieldSpecified;
+                return this.valorCreditoFieldSpecified;
             }
             set {
-                this.codigoCancelamentoFieldSpecified = value;
+                this.valorCreditoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcDadosPrestador Prestador {
+            get {
+                return this.prestadorField;
+            }
+            set {
+                this.prestadorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcIdentificacaoOrgaoGerador OrgaoGerador {
+            get {
+                return this.orgaoGeradorField;
+            }
+            set {
+                this.orgaoGeradorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcDeclaracaoPrestacaoServico DeclaracaoPrestacaoServico {
+            get {
+                return this.declaracaoPrestacaoServicoField;
+            }
+            set {
+                this.declaracaoPrestacaoServicoField = value;
             }
         }
         
@@ -952,54 +918,92 @@ namespace NFe.Components.PBlumenauSC {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcIdentificacaoCfse {
+    public partial class tcValoresNfse {
         
-        private string numeroField;
+        private decimal baseCalculoField;
         
-        private tcCpfCnpj cpfCnpjField;
+        private bool baseCalculoFieldSpecified;
         
-        private string inscricaoMunicipalField;
+        private decimal aliquotaField;
         
-        private int codigoMunicipioField;
+        private bool aliquotaFieldSpecified;
+        
+        private decimal valorIssField;
+        
+        private bool valorIssFieldSpecified;
+        
+        private decimal valorLiquidoNfseField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string Numero {
+        public decimal BaseCalculo {
             get {
-                return this.numeroField;
+                return this.baseCalculoField;
             }
             set {
-                this.numeroField = value;
+                this.baseCalculoField = value;
             }
         }
         
         /// <remarks/>
-        public tcCpfCnpj CpfCnpj {
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool BaseCalculoSpecified {
             get {
-                return this.cpfCnpjField;
+                return this.baseCalculoFieldSpecified;
             }
             set {
-                this.cpfCnpjField = value;
+                this.baseCalculoFieldSpecified = value;
             }
         }
         
         /// <remarks/>
-        public string InscricaoMunicipal {
+        public decimal Aliquota {
             get {
-                return this.inscricaoMunicipalField;
+                return this.aliquotaField;
             }
             set {
-                this.inscricaoMunicipalField = value;
+                this.aliquotaField = value;
             }
         }
         
         /// <remarks/>
-        public int CodigoMunicipio {
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool AliquotaSpecified {
             get {
-                return this.codigoMunicipioField;
+                return this.aliquotaFieldSpecified;
             }
             set {
-                this.codigoMunicipioField = value;
+                this.aliquotaFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorIss {
+            get {
+                return this.valorIssField;
+            }
+            set {
+                this.valorIssField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorIssSpecified {
+            get {
+                return this.valorIssFieldSpecified;
+            }
+            set {
+                this.valorIssFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorLiquidoNfse {
+            get {
+                return this.valorLiquidoNfseField;
+            }
+            set {
+                this.valorLiquidoNfseField = value;
             }
         }
     }
@@ -1010,30 +1014,65 @@ namespace NFe.Components.PBlumenauSC {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarCfseEnvioHomologacao {
+    public partial class tcDadosPrestador {
         
-        private tcIdentificacaoPrestador prestadorField;
+        private tcIdentificacaoPrestador identificacaoPrestadorField;
         
-        private string numeroCfseField;
+        private string razaoSocialField;
+        
+        private string nomeFantasiaField;
+        
+        private tcEndereco enderecoField;
+        
+        private tcContato contatoField;
         
         /// <remarks/>
-        public tcIdentificacaoPrestador Prestador {
+        public tcIdentificacaoPrestador IdentificacaoPrestador {
             get {
-                return this.prestadorField;
+                return this.identificacaoPrestadorField;
             }
             set {
-                this.prestadorField = value;
+                this.identificacaoPrestadorField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string NumeroCfse {
+        public string RazaoSocial {
             get {
-                return this.numeroCfseField;
+                return this.razaoSocialField;
             }
             set {
-                this.numeroCfseField = value;
+                this.razaoSocialField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string NomeFantasia {
+            get {
+                return this.nomeFantasiaField;
+            }
+            set {
+                this.nomeFantasiaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcEndereco Endereco {
+            get {
+                return this.enderecoField;
+            }
+            set {
+                this.enderecoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcContato Contato {
+            get {
+                return this.contatoField;
+            }
+            set {
+                this.contatoField = value;
             }
         }
     }
@@ -1077,583 +1116,127 @@ namespace NFe.Components.PBlumenauSC {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class GerarCfseEnvioHomologacao {
+    public partial class tcEndereco {
         
-        private tcDeclaracaoPrestacaoServicoCfse rpsField;
+        private string enderecoField;
         
-        /// <remarks/>
-        public tcDeclaracaoPrestacaoServicoCfse Rps {
-            get {
-                return this.rpsField;
-            }
-            set {
-                this.rpsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcDeclaracaoPrestacaoServicoCfse {
+        private string numeroField;
         
-        private tcInfDeclaracaoPrestacaoServicoCfse infDeclaracaoPrestacaoServicoCfseField;
+        private string complementoField;
+        
+        private string bairroField;
+        
+        private int codigoMunicipioField;
+        
+        private bool codigoMunicipioFieldSpecified;
+        
+        private string ufField;
+        
+        private int codigoPaisField;
+        
+        private bool codigoPaisFieldSpecified;
+        
+        private string cepField;
         
         /// <remarks/>
-        public tcInfDeclaracaoPrestacaoServicoCfse InfDeclaracaoPrestacaoServicoCfse {
+        public string Endereco {
             get {
-                return this.infDeclaracaoPrestacaoServicoCfseField;
+                return this.enderecoField;
             }
             set {
-                this.infDeclaracaoPrestacaoServicoCfseField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcInfDeclaracaoPrestacaoServicoCfse {
-        
-        private tcInfRpsCfse rpsField;
-        
-        private System.DateTime competenciaField;
-        
-        private tcDadosServicoCfse servicoField;
-        
-        private tcIdentificacaoPrestador prestadorField;
-        
-        private tcDadosTomadorCfse tomadorField;
-        
-        private string idField;
-        
-        /// <remarks/>
-        public tcInfRpsCfse Rps {
-            get {
-                return this.rpsField;
-            }
-            set {
-                this.rpsField = value;
+                this.enderecoField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime Competencia {
+        public string Numero {
             get {
-                return this.competenciaField;
+                return this.numeroField;
             }
             set {
-                this.competenciaField = value;
+                this.numeroField = value;
             }
         }
         
         /// <remarks/>
-        public tcDadosServicoCfse Servico {
+        public string Complemento {
             get {
-                return this.servicoField;
+                return this.complementoField;
             }
             set {
-                this.servicoField = value;
+                this.complementoField = value;
             }
         }
         
         /// <remarks/>
-        public tcIdentificacaoPrestador Prestador {
+        public string Bairro {
             get {
-                return this.prestadorField;
+                return this.bairroField;
             }
             set {
-                this.prestadorField = value;
+                this.bairroField = value;
             }
         }
         
         /// <remarks/>
-        public tcDadosTomadorCfse Tomador {
+        public int CodigoMunicipio {
             get {
-                return this.tomadorField;
+                return this.codigoMunicipioField;
             }
             set {
-                this.tomadorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcInfRpsCfse {
-        
-        private string serieField;
-        
-        private System.DateTime dataEmissaoField;
-        
-        private sbyte statusField;
-        
-        private string idField;
-        
-        /// <remarks/>
-        public string Serie {
-            get {
-                return this.serieField;
-            }
-            set {
-                this.serieField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime DataEmissao {
-            get {
-                return this.dataEmissaoField;
-            }
-            set {
-                this.dataEmissaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public sbyte Status {
-            get {
-                return this.statusField;
-            }
-            set {
-                this.statusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcDadosServicoCfse {
-        
-        private tcValoresDeclaracaoServicoCfse valoresField;
-        
-        private tcItemServicoCfse[] itensServicoField;
-        
-        /// <remarks/>
-        public tcValoresDeclaracaoServicoCfse Valores {
-            get {
-                return this.valoresField;
-            }
-            set {
-                this.valoresField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ItensServico")]
-        public tcItemServicoCfse[] ItensServico {
-            get {
-                return this.itensServicoField;
-            }
-            set {
-                this.itensServicoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcValoresDeclaracaoServicoCfse {
-        
-        private decimal valorServicosField;
-        
-        private decimal baseCalculoField;
-        
-        private decimal valorDeducoesField;
-        
-        private bool valorDeducoesFieldSpecified;
-        
-        private decimal valorIssField;
-        
-        private bool valorIssFieldSpecified;
-        
-        /// <remarks/>
-        public decimal ValorServicos {
-            get {
-                return this.valorServicosField;
-            }
-            set {
-                this.valorServicosField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal BaseCalculo {
-            get {
-                return this.baseCalculoField;
-            }
-            set {
-                this.baseCalculoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorDeducoes {
-            get {
-                return this.valorDeducoesField;
-            }
-            set {
-                this.valorDeducoesField = value;
+                this.codigoMunicipioField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorDeducoesSpecified {
+        public bool CodigoMunicipioSpecified {
             get {
-                return this.valorDeducoesFieldSpecified;
+                return this.codigoMunicipioFieldSpecified;
             }
             set {
-                this.valorDeducoesFieldSpecified = value;
+                this.codigoMunicipioFieldSpecified = value;
             }
         }
         
         /// <remarks/>
-        public decimal ValorIss {
+        public string Uf {
             get {
-                return this.valorIssField;
+                return this.ufField;
             }
             set {
-                this.valorIssField = value;
+                this.ufField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorIssSpecified {
+        public int CodigoPais {
             get {
-                return this.valorIssFieldSpecified;
+                return this.codigoPaisField;
             }
             set {
-                this.valorIssFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcItemServicoCfse {
-        
-        private string descricaoField;
-        
-        private int cnaeField;
-        
-        private bool cnaeFieldSpecified;
-        
-        private string atividadeField;
-        
-        private decimal quantidadeField;
-        
-        private bool quantidadeFieldSpecified;
-        
-        private decimal aliquotaField;
-        
-        private bool aliquotaFieldSpecified;
-        
-        private decimal valorUnitarioField;
-        
-        private bool valorUnitarioFieldSpecified;
-        
-        private decimal totalField;
-        
-        private bool totalFieldSpecified;
-        
-        private decimal valorDeducoesField;
-        
-        private bool valorDeducoesFieldSpecified;
-        
-        private decimal valorIssField;
-        
-        private bool valorIssFieldSpecified;
-        
-        /// <remarks/>
-        public string Descricao {
-            get {
-                return this.descricaoField;
-            }
-            set {
-                this.descricaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int Cnae {
-            get {
-                return this.cnaeField;
-            }
-            set {
-                this.cnaeField = value;
+                this.codigoPaisField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CnaeSpecified {
+        public bool CodigoPaisSpecified {
             get {
-                return this.cnaeFieldSpecified;
+                return this.codigoPaisFieldSpecified;
             }
             set {
-                this.cnaeFieldSpecified = value;
+                this.codigoPaisFieldSpecified = value;
             }
         }
         
         /// <remarks/>
-        public string Atividade {
+        public string Cep {
             get {
-                return this.atividadeField;
+                return this.cepField;
             }
             set {
-                this.atividadeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal Quantidade {
-            get {
-                return this.quantidadeField;
-            }
-            set {
-                this.quantidadeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool QuantidadeSpecified {
-            get {
-                return this.quantidadeFieldSpecified;
-            }
-            set {
-                this.quantidadeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal Aliquota {
-            get {
-                return this.aliquotaField;
-            }
-            set {
-                this.aliquotaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AliquotaSpecified {
-            get {
-                return this.aliquotaFieldSpecified;
-            }
-            set {
-                this.aliquotaFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorUnitario {
-            get {
-                return this.valorUnitarioField;
-            }
-            set {
-                this.valorUnitarioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorUnitarioSpecified {
-            get {
-                return this.valorUnitarioFieldSpecified;
-            }
-            set {
-                this.valorUnitarioFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal Total {
-            get {
-                return this.totalField;
-            }
-            set {
-                this.totalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TotalSpecified {
-            get {
-                return this.totalFieldSpecified;
-            }
-            set {
-                this.totalFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorDeducoes {
-            get {
-                return this.valorDeducoesField;
-            }
-            set {
-                this.valorDeducoesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorDeducoesSpecified {
-            get {
-                return this.valorDeducoesFieldSpecified;
-            }
-            set {
-                this.valorDeducoesFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorIss {
-            get {
-                return this.valorIssField;
-            }
-            set {
-                this.valorIssField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorIssSpecified {
-            get {
-                return this.valorIssFieldSpecified;
-            }
-            set {
-                this.valorIssFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcDadosTomadorCfse {
-        
-        private tcIdentificacaoTomadorCfse identificacaoTomadorField;
-        
-        private string razaoSocialField;
-        
-        private tcContato contatoField;
-        
-        /// <remarks/>
-        public tcIdentificacaoTomadorCfse IdentificacaoTomador {
-            get {
-                return this.identificacaoTomadorField;
-            }
-            set {
-                this.identificacaoTomadorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RazaoSocial {
-            get {
-                return this.razaoSocialField;
-            }
-            set {
-                this.razaoSocialField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcContato Contato {
-            get {
-                return this.contatoField;
-            }
-            set {
-                this.contatoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcIdentificacaoTomadorCfse {
-        
-        private string cpfField;
-        
-        private string inscricaoMunicipalField;
-        
-        /// <remarks/>
-        public string Cpf {
-            get {
-                return this.cpfField;
-            }
-            set {
-                this.cpfField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string InscricaoMunicipal {
-            get {
-                return this.inscricaoMunicipalField;
-            }
-            set {
-                this.inscricaoMunicipalField = value;
+                this.cepField = value;
             }
         }
     }
@@ -1697,17 +1280,29 @@ namespace NFe.Components.PBlumenauSC {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcRetCancelamentoCfse {
+    public partial class tcIdentificacaoOrgaoGerador {
         
-        private tcCancelamentoCfse cfseCancelamentoField;
+        private int codigoMunicipioField;
+        
+        private string ufField;
         
         /// <remarks/>
-        public tcCancelamentoCfse CfseCancelamento {
+        public int CodigoMunicipio {
             get {
-                return this.cfseCancelamentoField;
+                return this.codigoMunicipioField;
             }
             set {
-                this.cfseCancelamentoField = value;
+                this.codigoMunicipioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Uf {
+            get {
+                return this.ufField;
+            }
+            set {
+                this.ufField = value;
             }
         }
     }
@@ -1718,21 +1313,19 @@ namespace NFe.Components.PBlumenauSC {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcCancelamentoCfse {
+    public partial class tcDeclaracaoPrestacaoServico {
         
-        private tcConfirmacaoCancelamentoCfse confirmacaoField;
+        private tcInfDeclaracaoPrestacaoServico infDeclaracaoPrestacaoServicoField;
         
         private SignatureType signatureField;
         
-        private string versaoField;
-        
         /// <remarks/>
-        public tcConfirmacaoCancelamentoCfse Confirmacao {
+        public tcInfDeclaracaoPrestacaoServico InfDeclaracaoPrestacaoServico {
             get {
-                return this.confirmacaoField;
+                return this.infDeclaracaoPrestacaoServicoField;
             }
             set {
-                this.confirmacaoField = value;
+                this.infDeclaracaoPrestacaoServicoField = value;
             }
         }
         
@@ -1746,17 +1339,6 @@ namespace NFe.Components.PBlumenauSC {
                 this.signatureField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="token")]
-        public string versao {
-            get {
-                return this.versaoField;
-            }
-            set {
-                this.versaoField = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -1765,31 +1347,141 @@ namespace NFe.Components.PBlumenauSC {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcConfirmacaoCancelamentoCfse {
+    public partial class tcInfDeclaracaoPrestacaoServico {
         
-        private tcPedidoCancelamentoCfse pedidoField;
+        private tcInfRps rpsField;
         
-        private System.DateTime dataHoraField;
+        private System.DateTime competenciaField;
+        
+        private tcDadosServico servicoField;
+        
+        private tcIdentificacaoPrestador prestadorField;
+        
+        private tcDadosTomador tomadorField;
+        
+        private tcDadosIntermediario intermediarioField;
+        
+        private tcDadosConstrucaoCivil construcaoCivilField;
+        
+        private sbyte regimeEspecialTributacaoField;
+        
+        private bool regimeEspecialTributacaoFieldSpecified;
+        
+        private sbyte optanteSimplesNacionalField;
+        
+        private sbyte incentivoFiscalField;
         
         private string idField;
         
         /// <remarks/>
-        public tcPedidoCancelamentoCfse Pedido {
+        public tcInfRps Rps {
             get {
-                return this.pedidoField;
+                return this.rpsField;
             }
             set {
-                this.pedidoField = value;
+                this.rpsField = value;
             }
         }
         
         /// <remarks/>
-        public System.DateTime DataHora {
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+        public System.DateTime Competencia {
             get {
-                return this.dataHoraField;
+                return this.competenciaField;
             }
             set {
-                this.dataHoraField = value;
+                this.competenciaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcDadosServico Servico {
+            get {
+                return this.servicoField;
+            }
+            set {
+                this.servicoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcIdentificacaoPrestador Prestador {
+            get {
+                return this.prestadorField;
+            }
+            set {
+                this.prestadorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcDadosTomador Tomador {
+            get {
+                return this.tomadorField;
+            }
+            set {
+                this.tomadorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcDadosIntermediario Intermediario {
+            get {
+                return this.intermediarioField;
+            }
+            set {
+                this.intermediarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcDadosConstrucaoCivil ConstrucaoCivil {
+            get {
+                return this.construcaoCivilField;
+            }
+            set {
+                this.construcaoCivilField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public sbyte RegimeEspecialTributacao {
+            get {
+                return this.regimeEspecialTributacaoField;
+            }
+            set {
+                this.regimeEspecialTributacaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool RegimeEspecialTributacaoSpecified {
+            get {
+                return this.regimeEspecialTributacaoFieldSpecified;
+            }
+            set {
+                this.regimeEspecialTributacaoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public sbyte OptanteSimplesNacional {
+            get {
+                return this.optanteSimplesNacionalField;
+            }
+            set {
+                this.optanteSimplesNacionalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public sbyte IncentivoFiscal {
+            get {
+                return this.incentivoFiscalField;
+            }
+            set {
+                this.incentivoFiscalField = value;
             }
         }
         
@@ -1801,6 +1493,887 @@ namespace NFe.Components.PBlumenauSC {
             }
             set {
                 this.idField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcInfRps {
+        
+        private tcIdentificacaoRps identificacaoRpsField;
+        
+        private System.DateTime dataEmissaoField;
+        
+        private sbyte statusField;
+        
+        private tcIdentificacaoRps rpsSubstituidoField;
+        
+        private string idField;
+        
+        /// <remarks/>
+        public tcIdentificacaoRps IdentificacaoRps {
+            get {
+                return this.identificacaoRpsField;
+            }
+            set {
+                this.identificacaoRpsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
+        public System.DateTime DataEmissao {
+            get {
+                return this.dataEmissaoField;
+            }
+            set {
+                this.dataEmissaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public sbyte Status {
+            get {
+                return this.statusField;
+            }
+            set {
+                this.statusField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcIdentificacaoRps RpsSubstituido {
+            get {
+                return this.rpsSubstituidoField;
+            }
+            set {
+                this.rpsSubstituidoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcIdentificacaoRps {
+        
+        private string numeroField;
+        
+        private string serieField;
+        
+        private sbyte tipoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
+        public string Numero {
+            get {
+                return this.numeroField;
+            }
+            set {
+                this.numeroField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Serie {
+            get {
+                return this.serieField;
+            }
+            set {
+                this.serieField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public sbyte Tipo {
+            get {
+                return this.tipoField;
+            }
+            set {
+                this.tipoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcDadosServico {
+        
+        private tcValoresDeclaracaoServico valoresField;
+        
+        private sbyte issRetidoField;
+        
+        private int responsavelRetencaoField;
+        
+        private bool responsavelRetencaoFieldSpecified;
+        
+        private string itemListaServicoField;
+        
+        private int codigoCnaeField;
+        
+        private bool codigoCnaeFieldSpecified;
+        
+        private string codigoTributacaoMunicipioField;
+        
+        private string codigoNbsField;
+        
+        private string discriminacaoField;
+        
+        private int codigoMunicipioField;
+        
+        private bool codigoMunicipioFieldSpecified;
+        
+        private int codigoPaisField;
+        
+        private bool codigoPaisFieldSpecified;
+        
+        private sbyte exigibilidadeISSField;
+        
+        private int municipioIncidenciaField;
+        
+        private bool municipioIncidenciaFieldSpecified;
+        
+        private string numeroProcessoField;
+        
+        /// <remarks/>
+        public tcValoresDeclaracaoServico Valores {
+            get {
+                return this.valoresField;
+            }
+            set {
+                this.valoresField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public sbyte IssRetido {
+            get {
+                return this.issRetidoField;
+            }
+            set {
+                this.issRetidoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int ResponsavelRetencao {
+            get {
+                return this.responsavelRetencaoField;
+            }
+            set {
+                this.responsavelRetencaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ResponsavelRetencaoSpecified {
+            get {
+                return this.responsavelRetencaoFieldSpecified;
+            }
+            set {
+                this.responsavelRetencaoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ItemListaServico {
+            get {
+                return this.itemListaServicoField;
+            }
+            set {
+                this.itemListaServicoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int CodigoCnae {
+            get {
+                return this.codigoCnaeField;
+            }
+            set {
+                this.codigoCnaeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CodigoCnaeSpecified {
+            get {
+                return this.codigoCnaeFieldSpecified;
+            }
+            set {
+                this.codigoCnaeFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CodigoTributacaoMunicipio {
+            get {
+                return this.codigoTributacaoMunicipioField;
+            }
+            set {
+                this.codigoTributacaoMunicipioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CodigoNbs {
+            get {
+                return this.codigoNbsField;
+            }
+            set {
+                this.codigoNbsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Discriminacao {
+            get {
+                return this.discriminacaoField;
+            }
+            set {
+                this.discriminacaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int CodigoMunicipio {
+            get {
+                return this.codigoMunicipioField;
+            }
+            set {
+                this.codigoMunicipioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CodigoMunicipioSpecified {
+            get {
+                return this.codigoMunicipioFieldSpecified;
+            }
+            set {
+                this.codigoMunicipioFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int CodigoPais {
+            get {
+                return this.codigoPaisField;
+            }
+            set {
+                this.codigoPaisField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CodigoPaisSpecified {
+            get {
+                return this.codigoPaisFieldSpecified;
+            }
+            set {
+                this.codigoPaisFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public sbyte ExigibilidadeISS {
+            get {
+                return this.exigibilidadeISSField;
+            }
+            set {
+                this.exigibilidadeISSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int MunicipioIncidencia {
+            get {
+                return this.municipioIncidenciaField;
+            }
+            set {
+                this.municipioIncidenciaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool MunicipioIncidenciaSpecified {
+            get {
+                return this.municipioIncidenciaFieldSpecified;
+            }
+            set {
+                this.municipioIncidenciaFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string NumeroProcesso {
+            get {
+                return this.numeroProcessoField;
+            }
+            set {
+                this.numeroProcessoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcValoresDeclaracaoServico {
+        
+        private decimal valorServicosField;
+        
+        private decimal valorDeducoesField;
+        
+        private bool valorDeducoesFieldSpecified;
+        
+        private decimal valorPisField;
+        
+        private bool valorPisFieldSpecified;
+        
+        private decimal valorCofinsField;
+        
+        private bool valorCofinsFieldSpecified;
+        
+        private decimal valorInssField;
+        
+        private bool valorInssFieldSpecified;
+        
+        private decimal valorIrField;
+        
+        private bool valorIrFieldSpecified;
+        
+        private decimal valorCsllField;
+        
+        private bool valorCsllFieldSpecified;
+        
+        private decimal outrasRetencoesField;
+        
+        private bool outrasRetencoesFieldSpecified;
+        
+        private decimal valTotTributosField;
+        
+        private bool valTotTributosFieldSpecified;
+        
+        private decimal valorIssField;
+        
+        private bool valorIssFieldSpecified;
+        
+        private decimal aliquotaField;
+        
+        private bool aliquotaFieldSpecified;
+        
+        private decimal descontoIncondicionadoField;
+        
+        private bool descontoIncondicionadoFieldSpecified;
+        
+        private decimal descontoCondicionadoField;
+        
+        private bool descontoCondicionadoFieldSpecified;
+        
+        /// <remarks/>
+        public decimal ValorServicos {
+            get {
+                return this.valorServicosField;
+            }
+            set {
+                this.valorServicosField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorDeducoes {
+            get {
+                return this.valorDeducoesField;
+            }
+            set {
+                this.valorDeducoesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorDeducoesSpecified {
+            get {
+                return this.valorDeducoesFieldSpecified;
+            }
+            set {
+                this.valorDeducoesFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorPis {
+            get {
+                return this.valorPisField;
+            }
+            set {
+                this.valorPisField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorPisSpecified {
+            get {
+                return this.valorPisFieldSpecified;
+            }
+            set {
+                this.valorPisFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorCofins {
+            get {
+                return this.valorCofinsField;
+            }
+            set {
+                this.valorCofinsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorCofinsSpecified {
+            get {
+                return this.valorCofinsFieldSpecified;
+            }
+            set {
+                this.valorCofinsFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorInss {
+            get {
+                return this.valorInssField;
+            }
+            set {
+                this.valorInssField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorInssSpecified {
+            get {
+                return this.valorInssFieldSpecified;
+            }
+            set {
+                this.valorInssFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorIr {
+            get {
+                return this.valorIrField;
+            }
+            set {
+                this.valorIrField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorIrSpecified {
+            get {
+                return this.valorIrFieldSpecified;
+            }
+            set {
+                this.valorIrFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorCsll {
+            get {
+                return this.valorCsllField;
+            }
+            set {
+                this.valorCsllField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorCsllSpecified {
+            get {
+                return this.valorCsllFieldSpecified;
+            }
+            set {
+                this.valorCsllFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal OutrasRetencoes {
+            get {
+                return this.outrasRetencoesField;
+            }
+            set {
+                this.outrasRetencoesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool OutrasRetencoesSpecified {
+            get {
+                return this.outrasRetencoesFieldSpecified;
+            }
+            set {
+                this.outrasRetencoesFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValTotTributos {
+            get {
+                return this.valTotTributosField;
+            }
+            set {
+                this.valTotTributosField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValTotTributosSpecified {
+            get {
+                return this.valTotTributosFieldSpecified;
+            }
+            set {
+                this.valTotTributosFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorIss {
+            get {
+                return this.valorIssField;
+            }
+            set {
+                this.valorIssField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorIssSpecified {
+            get {
+                return this.valorIssFieldSpecified;
+            }
+            set {
+                this.valorIssFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal Aliquota {
+            get {
+                return this.aliquotaField;
+            }
+            set {
+                this.aliquotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool AliquotaSpecified {
+            get {
+                return this.aliquotaFieldSpecified;
+            }
+            set {
+                this.aliquotaFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal DescontoIncondicionado {
+            get {
+                return this.descontoIncondicionadoField;
+            }
+            set {
+                this.descontoIncondicionadoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DescontoIncondicionadoSpecified {
+            get {
+                return this.descontoIncondicionadoFieldSpecified;
+            }
+            set {
+                this.descontoIncondicionadoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal DescontoCondicionado {
+            get {
+                return this.descontoCondicionadoField;
+            }
+            set {
+                this.descontoCondicionadoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DescontoCondicionadoSpecified {
+            get {
+                return this.descontoCondicionadoFieldSpecified;
+            }
+            set {
+                this.descontoCondicionadoFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcDadosTomador {
+        
+        private tcIdentificacaoTomador identificacaoTomadorField;
+        
+        private string nifTomadorField;
+        
+        private string razaoSocialField;
+        
+        private tcEndereco enderecoField;
+        
+        private tcContato contatoField;
+        
+        /// <remarks/>
+        public tcIdentificacaoTomador IdentificacaoTomador {
+            get {
+                return this.identificacaoTomadorField;
+            }
+            set {
+                this.identificacaoTomadorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string NifTomador {
+            get {
+                return this.nifTomadorField;
+            }
+            set {
+                this.nifTomadorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RazaoSocial {
+            get {
+                return this.razaoSocialField;
+            }
+            set {
+                this.razaoSocialField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcEndereco Endereco {
+            get {
+                return this.enderecoField;
+            }
+            set {
+                this.enderecoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public tcContato Contato {
+            get {
+                return this.contatoField;
+            }
+            set {
+                this.contatoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcIdentificacaoTomador {
+        
+        private tcCpfCnpj cpfCnpjField;
+        
+        private string inscricaoMunicipalField;
+        
+        /// <remarks/>
+        public tcCpfCnpj CpfCnpj {
+            get {
+                return this.cpfCnpjField;
+            }
+            set {
+                this.cpfCnpjField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string InscricaoMunicipal {
+            get {
+                return this.inscricaoMunicipalField;
+            }
+            set {
+                this.inscricaoMunicipalField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcDadosIntermediario {
+        
+        private tcIdentificacaoIntermediario identificacaoIntermediarioField;
+        
+        private string razaoSocialField;
+        
+        private int codigoMunicipioField;
+        
+        /// <remarks/>
+        public tcIdentificacaoIntermediario IdentificacaoIntermediario {
+            get {
+                return this.identificacaoIntermediarioField;
+            }
+            set {
+                this.identificacaoIntermediarioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RazaoSocial {
+            get {
+                return this.razaoSocialField;
+            }
+            set {
+                this.razaoSocialField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int CodigoMunicipio {
+            get {
+                return this.codigoMunicipioField;
+            }
+            set {
+                this.codigoMunicipioField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcIdentificacaoIntermediario {
+        
+        private tcCpfCnpj cpfCnpjField;
+        
+        private string inscricaoMunicipalField;
+        
+        /// <remarks/>
+        public tcCpfCnpj CpfCnpj {
+            get {
+                return this.cpfCnpjField;
+            }
+            set {
+                this.cpfCnpjField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string InscricaoMunicipal {
+            get {
+                return this.inscricaoMunicipalField;
+            }
+            set {
+                this.inscricaoMunicipalField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcDadosConstrucaoCivil {
+        
+        private string codigoObraField;
+        
+        private string artField;
+        
+        /// <remarks/>
+        public string CodigoObra {
+            get {
+                return this.codigoObraField;
+            }
+            set {
+                this.codigoObraField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Art {
+            get {
+                return this.artField;
+            }
+            set {
+                this.artField = value;
             }
         }
     }
@@ -2809,2243 +3382,6 @@ namespace NFe.Components.PBlumenauSC {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class CancelarCfseResposta {
-        
-        private object itemField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(CancelarCfseRespostaListaMensagemRetorno))]
-        [System.Xml.Serialization.XmlElementAttribute("RetCancelamento", typeof(tcRetCancelamentoCfse))]
-        public object Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class CancelarCfseRespostaListaMensagemRetorno {
-        
-        private tcMensagemRetorno[] mensagemRetornoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
-        public tcMensagemRetorno[] MensagemRetorno {
-            get {
-                return this.mensagemRetornoField;
-            }
-            set {
-                this.mensagemRetornoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcMensagemRetorno {
-        
-        private string codigoField;
-        
-        private string mensagemField;
-        
-        private string correcaoField;
-        
-        /// <remarks/>
-        public string Codigo {
-            get {
-                return this.codigoField;
-            }
-            set {
-                this.codigoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Mensagem {
-            get {
-                return this.mensagemField;
-            }
-            set {
-                this.mensagemField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Correcao {
-            get {
-                return this.correcaoField;
-            }
-            set {
-                this.correcaoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class CancelarCfseEnvio {
-        
-        private tcPedidoCancelamentoCfse pedidoField;
-        
-        /// <remarks/>
-        public tcPedidoCancelamentoCfse Pedido {
-            get {
-                return this.pedidoField;
-            }
-            set {
-                this.pedidoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarCfseResposta {
-        
-        private object itemField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ListaCfse", typeof(ConsultarCfseRespostaListaCfse))]
-        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(ConsultarCfseRespostaListaMensagemRetorno))]
-        public object Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarCfseRespostaListaCfse {
-        
-        private tcCompCfse[] compNfseField;
-        
-        private string proximaPaginaField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("CompNfse")]
-        public tcCompCfse[] CompNfse {
-            get {
-                return this.compNfseField;
-            }
-            set {
-                this.compNfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string ProximaPagina {
-            get {
-                return this.proximaPaginaField;
-            }
-            set {
-                this.proximaPaginaField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcCompCfse {
-        
-        private tcCfse cfseField;
-        
-        private tcCancelamentoCfse nfseCancelamentoField;
-        
-        /// <remarks/>
-        public tcCfse Cfse {
-            get {
-                return this.cfseField;
-            }
-            set {
-                this.cfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcCancelamentoCfse NfseCancelamento {
-            get {
-                return this.nfseCancelamentoField;
-            }
-            set {
-                this.nfseCancelamentoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcCfse {
-        
-        private tcInfCfse infCfseField;
-        
-        private SignatureType signatureField;
-        
-        private string versaoField;
-        
-        /// <remarks/>
-        public tcInfCfse InfCfse {
-            get {
-                return this.infCfseField;
-            }
-            set {
-                this.infCfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-        public SignatureType Signature {
-            get {
-                return this.signatureField;
-            }
-            set {
-                this.signatureField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="token")]
-        public string versao {
-            get {
-                return this.versaoField;
-            }
-            set {
-                this.versaoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcInfCfse {
-        
-        private string numeroField;
-        
-        private string codigoVerificacaoField;
-        
-        private System.DateTime dataEmissaoField;
-        
-        private string outrasInformacoesField;
-        
-        private tcValoresCfse valoresCfseField;
-        
-        private tcDadosPrestador prestadorServicoField;
-        
-        private tcIdentificacaoOrgaoGerador orgaoGeradorField;
-        
-        private tcDeclaracaoPrestacaoServicoCfse declaracaoPrestacaoServicoField;
-        
-        private string idField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string Numero {
-            get {
-                return this.numeroField;
-            }
-            set {
-                this.numeroField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CodigoVerificacao {
-            get {
-                return this.codigoVerificacaoField;
-            }
-            set {
-                this.codigoVerificacaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DataEmissao {
-            get {
-                return this.dataEmissaoField;
-            }
-            set {
-                this.dataEmissaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string OutrasInformacoes {
-            get {
-                return this.outrasInformacoesField;
-            }
-            set {
-                this.outrasInformacoesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcValoresCfse ValoresCfse {
-            get {
-                return this.valoresCfseField;
-            }
-            set {
-                this.valoresCfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcDadosPrestador PrestadorServico {
-            get {
-                return this.prestadorServicoField;
-            }
-            set {
-                this.prestadorServicoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcIdentificacaoOrgaoGerador OrgaoGerador {
-            get {
-                return this.orgaoGeradorField;
-            }
-            set {
-                this.orgaoGeradorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcDeclaracaoPrestacaoServicoCfse DeclaracaoPrestacaoServico {
-            get {
-                return this.declaracaoPrestacaoServicoField;
-            }
-            set {
-                this.declaracaoPrestacaoServicoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcValoresCfse {
-        
-        private decimal baseCalculoField;
-        
-        private bool baseCalculoFieldSpecified;
-        
-        private decimal valorDeducaoField;
-        
-        private bool valorDeducaoFieldSpecified;
-        
-        private decimal valorIssField;
-        
-        private bool valorIssFieldSpecified;
-        
-        /// <remarks/>
-        public decimal BaseCalculo {
-            get {
-                return this.baseCalculoField;
-            }
-            set {
-                this.baseCalculoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool BaseCalculoSpecified {
-            get {
-                return this.baseCalculoFieldSpecified;
-            }
-            set {
-                this.baseCalculoFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorDeducao {
-            get {
-                return this.valorDeducaoField;
-            }
-            set {
-                this.valorDeducaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorDeducaoSpecified {
-            get {
-                return this.valorDeducaoFieldSpecified;
-            }
-            set {
-                this.valorDeducaoFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorIss {
-            get {
-                return this.valorIssField;
-            }
-            set {
-                this.valorIssField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorIssSpecified {
-            get {
-                return this.valorIssFieldSpecified;
-            }
-            set {
-                this.valorIssFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcDadosPrestador {
-        
-        private tcIdentificacaoPrestador identificacaoPrestadorField;
-        
-        private string razaoSocialField;
-        
-        private string nomeFantasiaField;
-        
-        private tcEndereco enderecoField;
-        
-        private tcContato contatoField;
-        
-        /// <remarks/>
-        public tcIdentificacaoPrestador IdentificacaoPrestador {
-            get {
-                return this.identificacaoPrestadorField;
-            }
-            set {
-                this.identificacaoPrestadorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RazaoSocial {
-            get {
-                return this.razaoSocialField;
-            }
-            set {
-                this.razaoSocialField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string NomeFantasia {
-            get {
-                return this.nomeFantasiaField;
-            }
-            set {
-                this.nomeFantasiaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcEndereco Endereco {
-            get {
-                return this.enderecoField;
-            }
-            set {
-                this.enderecoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcContato Contato {
-            get {
-                return this.contatoField;
-            }
-            set {
-                this.contatoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcEndereco {
-        
-        private string enderecoField;
-        
-        private string numeroField;
-        
-        private string complementoField;
-        
-        private string bairroField;
-        
-        private int codigoMunicipioField;
-        
-        private bool codigoMunicipioFieldSpecified;
-        
-        private string ufField;
-        
-        private string codigoPaisField;
-        
-        private string cepField;
-        
-        /// <remarks/>
-        public string Endereco {
-            get {
-                return this.enderecoField;
-            }
-            set {
-                this.enderecoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Numero {
-            get {
-                return this.numeroField;
-            }
-            set {
-                this.numeroField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Complemento {
-            get {
-                return this.complementoField;
-            }
-            set {
-                this.complementoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Bairro {
-            get {
-                return this.bairroField;
-            }
-            set {
-                this.bairroField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int CodigoMunicipio {
-            get {
-                return this.codigoMunicipioField;
-            }
-            set {
-                this.codigoMunicipioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CodigoMunicipioSpecified {
-            get {
-                return this.codigoMunicipioFieldSpecified;
-            }
-            set {
-                this.codigoMunicipioFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Uf {
-            get {
-                return this.ufField;
-            }
-            set {
-                this.ufField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CodigoPais {
-            get {
-                return this.codigoPaisField;
-            }
-            set {
-                this.codigoPaisField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Cep {
-            get {
-                return this.cepField;
-            }
-            set {
-                this.cepField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcIdentificacaoOrgaoGerador {
-        
-        private int codigoMunicipioField;
-        
-        private string ufField;
-        
-        /// <remarks/>
-        public int CodigoMunicipio {
-            get {
-                return this.codigoMunicipioField;
-            }
-            set {
-                this.codigoMunicipioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Uf {
-            get {
-                return this.ufField;
-            }
-            set {
-                this.ufField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarCfseRespostaListaMensagemRetorno {
-        
-        private tcMensagemRetorno[] mensagemRetornoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
-        public tcMensagemRetorno[] MensagemRetorno {
-            get {
-                return this.mensagemRetornoField;
-            }
-            set {
-                this.mensagemRetornoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarCfseEnvio {
-        
-        private tcIdentificacaoPrestador prestadorField;
-        
-        private string numeroCfseField;
-        
-        /// <remarks/>
-        public tcIdentificacaoPrestador Prestador {
-            get {
-                return this.prestadorField;
-            }
-            set {
-                this.prestadorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string NumeroCfse {
-            get {
-                return this.numeroCfseField;
-            }
-            set {
-                this.numeroCfseField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class GerarCfseResposta {
-        
-        private object itemField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ListaCfse", typeof(GerarCfseRespostaListaCfse))]
-        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(GerarCfseRespostaListaMensagemRetorno))]
-        public object Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class GerarCfseRespostaListaCfse {
-        
-        private tcCompCfse compCfseField;
-        
-        private tcMensagemRetorno[] listaMensagemAlertaRetornoField;
-        
-        /// <remarks/>
-        public tcCompCfse CompCfse {
-            get {
-                return this.compCfseField;
-            }
-            set {
-                this.compCfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("MensagemRetorno", IsNullable=false)]
-        public tcMensagemRetorno[] ListaMensagemAlertaRetorno {
-            get {
-                return this.listaMensagemAlertaRetornoField;
-            }
-            set {
-                this.listaMensagemAlertaRetornoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class GerarCfseRespostaListaMensagemRetorno {
-        
-        private tcMensagemRetorno[] mensagemRetornoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
-        public tcMensagemRetorno[] MensagemRetorno {
-            get {
-                return this.mensagemRetornoField;
-            }
-            set {
-                this.mensagemRetornoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class GerarCfseEnvio {
-        
-        private tcDeclaracaoPrestacaoServicoCfse rpsField;
-        
-        /// <remarks/>
-        public tcDeclaracaoPrestacaoServicoCfse Rps {
-            get {
-                return this.rpsField;
-            }
-            set {
-                this.rpsField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseFaixaResposta {
-        
-        private object itemField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(ConsultarNfseFaixaRespostaListaMensagemRetorno))]
-        [System.Xml.Serialization.XmlElementAttribute("ListaNfse", typeof(ConsultarNfseFaixaRespostaListaNfse))]
-        public object Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseFaixaRespostaListaMensagemRetorno {
-        
-        private tcMensagemRetorno[] mensagemRetornoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
-        public tcMensagemRetorno[] MensagemRetorno {
-            get {
-                return this.mensagemRetornoField;
-            }
-            set {
-                this.mensagemRetornoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseFaixaRespostaListaNfse {
-        
-        private tcCompNfse[] compNfseField;
-        
-        private string proximaPaginaField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("CompNfse")]
-        public tcCompNfse[] CompNfse {
-            get {
-                return this.compNfseField;
-            }
-            set {
-                this.compNfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string ProximaPagina {
-            get {
-                return this.proximaPaginaField;
-            }
-            set {
-                this.proximaPaginaField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcCompNfse {
-        
-        private tcNfse nfseField;
-        
-        private tcCancelamentoNfse nfseCancelamentoField;
-        
-        private tcSubstituicaoNfse nfseSubstituicaoField;
-        
-        /// <remarks/>
-        public tcNfse Nfse {
-            get {
-                return this.nfseField;
-            }
-            set {
-                this.nfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcCancelamentoNfse NfseCancelamento {
-            get {
-                return this.nfseCancelamentoField;
-            }
-            set {
-                this.nfseCancelamentoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcSubstituicaoNfse NfseSubstituicao {
-            get {
-                return this.nfseSubstituicaoField;
-            }
-            set {
-                this.nfseSubstituicaoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcNfse {
-        
-        private tcInfNfse infNfseField;
-        
-        private SignatureType signatureField;
-        
-        private string versaoField;
-        
-        /// <remarks/>
-        public tcInfNfse InfNfse {
-            get {
-                return this.infNfseField;
-            }
-            set {
-                this.infNfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-        public SignatureType Signature {
-            get {
-                return this.signatureField;
-            }
-            set {
-                this.signatureField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="token")]
-        public string versao {
-            get {
-                return this.versaoField;
-            }
-            set {
-                this.versaoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcInfNfse {
-        
-        private string numeroField;
-        
-        private string codigoVerificacaoField;
-        
-        private System.DateTime dataEmissaoField;
-        
-        private string nfseSubstituidaField;
-        
-        private string outrasInformacoesField;
-        
-        private tcValoresNfse valoresNfseField;
-        
-        private decimal valorCreditoField;
-        
-        private bool valorCreditoFieldSpecified;
-        
-        private tcDadosPrestador prestadorServicoField;
-        
-        private tcIdentificacaoOrgaoGerador orgaoGeradorField;
-        
-        private tcDeclaracaoPrestacaoServico declaracaoPrestacaoServicoField;
-        
-        private string idField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string Numero {
-            get {
-                return this.numeroField;
-            }
-            set {
-                this.numeroField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CodigoVerificacao {
-            get {
-                return this.codigoVerificacaoField;
-            }
-            set {
-                this.codigoVerificacaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DataEmissao {
-            get {
-                return this.dataEmissaoField;
-            }
-            set {
-                this.dataEmissaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string NfseSubstituida {
-            get {
-                return this.nfseSubstituidaField;
-            }
-            set {
-                this.nfseSubstituidaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string OutrasInformacoes {
-            get {
-                return this.outrasInformacoesField;
-            }
-            set {
-                this.outrasInformacoesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcValoresNfse ValoresNfse {
-            get {
-                return this.valoresNfseField;
-            }
-            set {
-                this.valoresNfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorCredito {
-            get {
-                return this.valorCreditoField;
-            }
-            set {
-                this.valorCreditoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorCreditoSpecified {
-            get {
-                return this.valorCreditoFieldSpecified;
-            }
-            set {
-                this.valorCreditoFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcDadosPrestador PrestadorServico {
-            get {
-                return this.prestadorServicoField;
-            }
-            set {
-                this.prestadorServicoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcIdentificacaoOrgaoGerador OrgaoGerador {
-            get {
-                return this.orgaoGeradorField;
-            }
-            set {
-                this.orgaoGeradorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcDeclaracaoPrestacaoServico DeclaracaoPrestacaoServico {
-            get {
-                return this.declaracaoPrestacaoServicoField;
-            }
-            set {
-                this.declaracaoPrestacaoServicoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcValoresNfse {
-        
-        private decimal baseCalculoField;
-        
-        private bool baseCalculoFieldSpecified;
-        
-        private decimal aliquotaField;
-        
-        private bool aliquotaFieldSpecified;
-        
-        private decimal valorIssField;
-        
-        private bool valorIssFieldSpecified;
-        
-        private decimal valorLiquidoNfseField;
-        
-        /// <remarks/>
-        public decimal BaseCalculo {
-            get {
-                return this.baseCalculoField;
-            }
-            set {
-                this.baseCalculoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool BaseCalculoSpecified {
-            get {
-                return this.baseCalculoFieldSpecified;
-            }
-            set {
-                this.baseCalculoFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal Aliquota {
-            get {
-                return this.aliquotaField;
-            }
-            set {
-                this.aliquotaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AliquotaSpecified {
-            get {
-                return this.aliquotaFieldSpecified;
-            }
-            set {
-                this.aliquotaFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorIss {
-            get {
-                return this.valorIssField;
-            }
-            set {
-                this.valorIssField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorIssSpecified {
-            get {
-                return this.valorIssFieldSpecified;
-            }
-            set {
-                this.valorIssFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorLiquidoNfse {
-            get {
-                return this.valorLiquidoNfseField;
-            }
-            set {
-                this.valorLiquidoNfseField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcDeclaracaoPrestacaoServico {
-        
-        private tcInfDeclaracaoPrestacaoServico infDeclaracaoPrestacaoServicoField;
-        
-        private SignatureType signatureField;
-        
-        /// <remarks/>
-        public tcInfDeclaracaoPrestacaoServico InfDeclaracaoPrestacaoServico {
-            get {
-                return this.infDeclaracaoPrestacaoServicoField;
-            }
-            set {
-                this.infDeclaracaoPrestacaoServicoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-        public SignatureType Signature {
-            get {
-                return this.signatureField;
-            }
-            set {
-                this.signatureField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcInfDeclaracaoPrestacaoServico {
-        
-        private tcInfRps rpsField;
-        
-        private System.DateTime competenciaField;
-        
-        private tcDadosServico servicoField;
-        
-        private tcIdentificacaoPrestador prestadorField;
-        
-        private tcDadosTomador tomadorField;
-        
-        private tcDadosIntermediario intermediarioField;
-        
-        private tcDadosConstrucaoCivil construcaoCivilField;
-        
-        private sbyte regimeEspecialTributacaoField;
-        
-        private bool regimeEspecialTributacaoFieldSpecified;
-        
-        private sbyte optanteSimplesNacionalField;
-        
-        private sbyte incentivoFiscalField;
-        
-        private string idField;
-        
-        /// <remarks/>
-        public tcInfRps Rps {
-            get {
-                return this.rpsField;
-            }
-            set {
-                this.rpsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime Competencia {
-            get {
-                return this.competenciaField;
-            }
-            set {
-                this.competenciaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcDadosServico Servico {
-            get {
-                return this.servicoField;
-            }
-            set {
-                this.servicoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcIdentificacaoPrestador Prestador {
-            get {
-                return this.prestadorField;
-            }
-            set {
-                this.prestadorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcDadosTomador Tomador {
-            get {
-                return this.tomadorField;
-            }
-            set {
-                this.tomadorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcDadosIntermediario Intermediario {
-            get {
-                return this.intermediarioField;
-            }
-            set {
-                this.intermediarioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcDadosConstrucaoCivil ConstrucaoCivil {
-            get {
-                return this.construcaoCivilField;
-            }
-            set {
-                this.construcaoCivilField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public sbyte RegimeEspecialTributacao {
-            get {
-                return this.regimeEspecialTributacaoField;
-            }
-            set {
-                this.regimeEspecialTributacaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RegimeEspecialTributacaoSpecified {
-            get {
-                return this.regimeEspecialTributacaoFieldSpecified;
-            }
-            set {
-                this.regimeEspecialTributacaoFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public sbyte OptanteSimplesNacional {
-            get {
-                return this.optanteSimplesNacionalField;
-            }
-            set {
-                this.optanteSimplesNacionalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public sbyte IncentivoFiscal {
-            get {
-                return this.incentivoFiscalField;
-            }
-            set {
-                this.incentivoFiscalField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcInfRps {
-        
-        private tcIdentificacaoRps identificacaoRpsField;
-        
-        private System.DateTime dataEmissaoField;
-        
-        private sbyte statusField;
-        
-        private tcIdentificacaoRps rpsSubstituidoField;
-        
-        private string idField;
-        
-        /// <remarks/>
-        public tcIdentificacaoRps IdentificacaoRps {
-            get {
-                return this.identificacaoRpsField;
-            }
-            set {
-                this.identificacaoRpsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime DataEmissao {
-            get {
-                return this.dataEmissaoField;
-            }
-            set {
-                this.dataEmissaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public sbyte Status {
-            get {
-                return this.statusField;
-            }
-            set {
-                this.statusField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcIdentificacaoRps RpsSubstituido {
-            get {
-                return this.rpsSubstituidoField;
-            }
-            set {
-                this.rpsSubstituidoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcIdentificacaoRps {
-        
-        private string numeroField;
-        
-        private string serieField;
-        
-        private sbyte tipoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string Numero {
-            get {
-                return this.numeroField;
-            }
-            set {
-                this.numeroField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Serie {
-            get {
-                return this.serieField;
-            }
-            set {
-                this.serieField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public sbyte Tipo {
-            get {
-                return this.tipoField;
-            }
-            set {
-                this.tipoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcDadosServico {
-        
-        private tcValoresDeclaracaoServico valoresField;
-        
-        private sbyte issRetidoField;
-        
-        private sbyte responsavelRetencaoField;
-        
-        private bool responsavelRetencaoFieldSpecified;
-        
-        private string itemListaServicoField;
-        
-        private int codigoCnaeField;
-        
-        private bool codigoCnaeFieldSpecified;
-        
-        private string codigoTributacaoMunicipioField;
-        
-        private string discriminacaoField;
-        
-        private int codigoMunicipioField;
-        
-        private string codigoPaisField;
-        
-        private sbyte exigibilidadeISSField;
-        
-        private int municipioIncidenciaField;
-        
-        private bool municipioIncidenciaFieldSpecified;
-        
-        private string numeroProcessoField;
-        
-        /// <remarks/>
-        public tcValoresDeclaracaoServico Valores {
-            get {
-                return this.valoresField;
-            }
-            set {
-                this.valoresField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public sbyte IssRetido {
-            get {
-                return this.issRetidoField;
-            }
-            set {
-                this.issRetidoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public sbyte ResponsavelRetencao {
-            get {
-                return this.responsavelRetencaoField;
-            }
-            set {
-                this.responsavelRetencaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ResponsavelRetencaoSpecified {
-            get {
-                return this.responsavelRetencaoFieldSpecified;
-            }
-            set {
-                this.responsavelRetencaoFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ItemListaServico {
-            get {
-                return this.itemListaServicoField;
-            }
-            set {
-                this.itemListaServicoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int CodigoCnae {
-            get {
-                return this.codigoCnaeField;
-            }
-            set {
-                this.codigoCnaeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CodigoCnaeSpecified {
-            get {
-                return this.codigoCnaeFieldSpecified;
-            }
-            set {
-                this.codigoCnaeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CodigoTributacaoMunicipio {
-            get {
-                return this.codigoTributacaoMunicipioField;
-            }
-            set {
-                this.codigoTributacaoMunicipioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Discriminacao {
-            get {
-                return this.discriminacaoField;
-            }
-            set {
-                this.discriminacaoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int CodigoMunicipio {
-            get {
-                return this.codigoMunicipioField;
-            }
-            set {
-                this.codigoMunicipioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CodigoPais {
-            get {
-                return this.codigoPaisField;
-            }
-            set {
-                this.codigoPaisField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public sbyte ExigibilidadeISS {
-            get {
-                return this.exigibilidadeISSField;
-            }
-            set {
-                this.exigibilidadeISSField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public int MunicipioIncidencia {
-            get {
-                return this.municipioIncidenciaField;
-            }
-            set {
-                this.municipioIncidenciaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool MunicipioIncidenciaSpecified {
-            get {
-                return this.municipioIncidenciaFieldSpecified;
-            }
-            set {
-                this.municipioIncidenciaFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string NumeroProcesso {
-            get {
-                return this.numeroProcessoField;
-            }
-            set {
-                this.numeroProcessoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcValoresDeclaracaoServico {
-        
-        private decimal valorServicosField;
-        
-        private decimal valorDeducoesField;
-        
-        private bool valorDeducoesFieldSpecified;
-        
-        private decimal valorPisField;
-        
-        private bool valorPisFieldSpecified;
-        
-        private decimal valorCofinsField;
-        
-        private bool valorCofinsFieldSpecified;
-        
-        private decimal valorInssField;
-        
-        private bool valorInssFieldSpecified;
-        
-        private decimal valorIrField;
-        
-        private bool valorIrFieldSpecified;
-        
-        private decimal valorCsllField;
-        
-        private bool valorCsllFieldSpecified;
-        
-        private decimal outrasRetencoesField;
-        
-        private bool outrasRetencoesFieldSpecified;
-        
-        private decimal valorIssField;
-        
-        private bool valorIssFieldSpecified;
-        
-        private decimal aliquotaField;
-        
-        private bool aliquotaFieldSpecified;
-        
-        private decimal descontoIncondicionadoField;
-        
-        private bool descontoIncondicionadoFieldSpecified;
-        
-        private decimal descontoCondicionadoField;
-        
-        private bool descontoCondicionadoFieldSpecified;
-        
-        /// <remarks/>
-        public decimal ValorServicos {
-            get {
-                return this.valorServicosField;
-            }
-            set {
-                this.valorServicosField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorDeducoes {
-            get {
-                return this.valorDeducoesField;
-            }
-            set {
-                this.valorDeducoesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorDeducoesSpecified {
-            get {
-                return this.valorDeducoesFieldSpecified;
-            }
-            set {
-                this.valorDeducoesFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorPis {
-            get {
-                return this.valorPisField;
-            }
-            set {
-                this.valorPisField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorPisSpecified {
-            get {
-                return this.valorPisFieldSpecified;
-            }
-            set {
-                this.valorPisFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorCofins {
-            get {
-                return this.valorCofinsField;
-            }
-            set {
-                this.valorCofinsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorCofinsSpecified {
-            get {
-                return this.valorCofinsFieldSpecified;
-            }
-            set {
-                this.valorCofinsFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorInss {
-            get {
-                return this.valorInssField;
-            }
-            set {
-                this.valorInssField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorInssSpecified {
-            get {
-                return this.valorInssFieldSpecified;
-            }
-            set {
-                this.valorInssFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorIr {
-            get {
-                return this.valorIrField;
-            }
-            set {
-                this.valorIrField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorIrSpecified {
-            get {
-                return this.valorIrFieldSpecified;
-            }
-            set {
-                this.valorIrFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorCsll {
-            get {
-                return this.valorCsllField;
-            }
-            set {
-                this.valorCsllField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorCsllSpecified {
-            get {
-                return this.valorCsllFieldSpecified;
-            }
-            set {
-                this.valorCsllFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal OutrasRetencoes {
-            get {
-                return this.outrasRetencoesField;
-            }
-            set {
-                this.outrasRetencoesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool OutrasRetencoesSpecified {
-            get {
-                return this.outrasRetencoesFieldSpecified;
-            }
-            set {
-                this.outrasRetencoesFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal ValorIss {
-            get {
-                return this.valorIssField;
-            }
-            set {
-                this.valorIssField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorIssSpecified {
-            get {
-                return this.valorIssFieldSpecified;
-            }
-            set {
-                this.valorIssFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal Aliquota {
-            get {
-                return this.aliquotaField;
-            }
-            set {
-                this.aliquotaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AliquotaSpecified {
-            get {
-                return this.aliquotaFieldSpecified;
-            }
-            set {
-                this.aliquotaFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal DescontoIncondicionado {
-            get {
-                return this.descontoIncondicionadoField;
-            }
-            set {
-                this.descontoIncondicionadoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DescontoIncondicionadoSpecified {
-            get {
-                return this.descontoIncondicionadoFieldSpecified;
-            }
-            set {
-                this.descontoIncondicionadoFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public decimal DescontoCondicionado {
-            get {
-                return this.descontoCondicionadoField;
-            }
-            set {
-                this.descontoCondicionadoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DescontoCondicionadoSpecified {
-            get {
-                return this.descontoCondicionadoFieldSpecified;
-            }
-            set {
-                this.descontoCondicionadoFieldSpecified = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcDadosTomador {
-        
-        private tcIdentificacaoTomador identificacaoTomadorField;
-        
-        private string razaoSocialField;
-        
-        private tcEndereco enderecoField;
-        
-        private tcContato contatoField;
-        
-        /// <remarks/>
-        public tcIdentificacaoTomador IdentificacaoTomador {
-            get {
-                return this.identificacaoTomadorField;
-            }
-            set {
-                this.identificacaoTomadorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RazaoSocial {
-            get {
-                return this.razaoSocialField;
-            }
-            set {
-                this.razaoSocialField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcEndereco Endereco {
-            get {
-                return this.enderecoField;
-            }
-            set {
-                this.enderecoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcContato Contato {
-            get {
-                return this.contatoField;
-            }
-            set {
-                this.contatoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcIdentificacaoTomador {
-        
-        private tcCpfCnpj cpfCnpjField;
-        
-        private string inscricaoMunicipalField;
-        
-        /// <remarks/>
-        public tcCpfCnpj CpfCnpj {
-            get {
-                return this.cpfCnpjField;
-            }
-            set {
-                this.cpfCnpjField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string InscricaoMunicipal {
-            get {
-                return this.inscricaoMunicipalField;
-            }
-            set {
-                this.inscricaoMunicipalField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcDadosIntermediario {
-        
-        private tcIdentificacaoIntermediario identificacaoIntermediarioField;
-        
-        private string razaoSocialField;
-        
-        /// <remarks/>
-        public tcIdentificacaoIntermediario IdentificacaoIntermediario {
-            get {
-                return this.identificacaoIntermediarioField;
-            }
-            set {
-                this.identificacaoIntermediarioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RazaoSocial {
-            get {
-                return this.razaoSocialField;
-            }
-            set {
-                this.razaoSocialField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcIdentificacaoIntermediario {
-        
-        private tcCpfCnpj cpfCnpjField;
-        
-        private string inscricaoMunicipalField;
-        
-        /// <remarks/>
-        public tcCpfCnpj CpfCnpj {
-            get {
-                return this.cpfCnpjField;
-            }
-            set {
-                this.cpfCnpjField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string InscricaoMunicipal {
-            get {
-                return this.inscricaoMunicipalField;
-            }
-            set {
-                this.inscricaoMunicipalField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcDadosConstrucaoCivil {
-        
-        private string codigoObraField;
-        
-        private string artField;
-        
-        /// <remarks/>
-        public string CodigoObra {
-            get {
-                return this.codigoObraField;
-            }
-            set {
-                this.codigoObraField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Art {
-            get {
-                return this.artField;
-            }
-            set {
-                this.artField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcCancelamentoNfse {
         
         private tcConfirmacaoCancelamento confirmacaoField;
@@ -5097,7 +3433,7 @@ namespace NFe.Components.PBlumenauSC {
         
         private tcPedidoCancelamento pedidoField;
         
-        private System.DateTime dataHoraField;
+        private System.DateTime dataHoraCancelamentoField;
         
         private string idField;
         
@@ -5112,12 +3448,12 @@ namespace NFe.Components.PBlumenauSC {
         }
         
         /// <remarks/>
-        public System.DateTime DataHora {
+        public System.DateTime DataHoraCancelamento {
             get {
-                return this.dataHoraField;
+                return this.dataHoraCancelamentoField;
             }
             set {
-                this.dataHoraField = value;
+                this.dataHoraCancelamentoField = value;
             }
         }
         
@@ -5177,9 +3513,7 @@ namespace NFe.Components.PBlumenauSC {
         
         private tcIdentificacaoNfse identificacaoNfseField;
         
-        private sbyte codigoCancelamentoField;
-        
-        private bool codigoCancelamentoFieldSpecified;
+        private string codigoCancelamentoField;
         
         private string idField;
         
@@ -5194,23 +3528,12 @@ namespace NFe.Components.PBlumenauSC {
         }
         
         /// <remarks/>
-        public sbyte CodigoCancelamento {
+        public string CodigoCancelamento {
             get {
                 return this.codigoCancelamentoField;
             }
             set {
                 this.codigoCancelamentoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CodigoCancelamentoSpecified {
-            get {
-                return this.codigoCancelamentoFieldSpecified;
-            }
-            set {
-                this.codigoCancelamentoFieldSpecified = value;
             }
         }
         
@@ -5380,6 +3703,8 @@ namespace NFe.Components.PBlumenauSC {
         
         private string paginaField;
         
+        private SignatureType signatureField;
+        
         /// <remarks/>
         public tcIdentificacaoPrestador Prestador {
             get {
@@ -5408,6 +3733,17 @@ namespace NFe.Components.PBlumenauSC {
             }
             set {
                 this.paginaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+        public SignatureType Signature {
+            get {
+                return this.signatureField;
+            }
+            set {
+                this.signatureField = value;
             }
         }
     }
@@ -5443,286 +3779,6 @@ namespace NFe.Components.PBlumenauSC {
             }
             set {
                 this.numeroNfseFinalField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseServicoTomadoResposta {
-        
-        private object itemField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(ConsultarNfseServicoTomadoRespostaListaMensagemRetorno))]
-        [System.Xml.Serialization.XmlElementAttribute("ListaNfse", typeof(ConsultarNfseServicoTomadoRespostaListaNfse))]
-        public object Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseServicoTomadoRespostaListaMensagemRetorno {
-        
-        private tcMensagemRetorno[] mensagemRetornoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
-        public tcMensagemRetorno[] MensagemRetorno {
-            get {
-                return this.mensagemRetornoField;
-            }
-            set {
-                this.mensagemRetornoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseServicoTomadoRespostaListaNfse {
-        
-        private tcCompNfse[] compNfseField;
-        
-        private string proximaPaginaField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("CompNfse")]
-        public tcCompNfse[] CompNfse {
-            get {
-                return this.compNfseField;
-            }
-            set {
-                this.compNfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string ProximaPagina {
-            get {
-                return this.proximaPaginaField;
-            }
-            set {
-                this.proximaPaginaField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcIdentificacaoConsulente {
-        
-        private tcCpfCnpj cpfCnpjField;
-        
-        private string inscricaoMunicipalField;
-        
-        /// <remarks/>
-        public tcCpfCnpj CpfCnpj {
-            get {
-                return this.cpfCnpjField;
-            }
-            set {
-                this.cpfCnpjField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string InscricaoMunicipal {
-            get {
-                return this.inscricaoMunicipalField;
-            }
-            set {
-                this.inscricaoMunicipalField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseServicoTomadoEnvio {
-        
-        private tcIdentificacaoConsulente consulenteField;
-        
-        private string numeroNfseField;
-        
-        private object itemField;
-        
-        private tcIdentificacaoPrestador prestadorField;
-        
-        private tcIdentificacaoTomador tomadorField;
-        
-        private tcIdentificacaoIntermediario intermediarioField;
-        
-        private string paginaField;
-        
-        /// <remarks/>
-        public tcIdentificacaoConsulente Consulente {
-            get {
-                return this.consulenteField;
-            }
-            set {
-                this.consulenteField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string NumeroNfse {
-            get {
-                return this.numeroNfseField;
-            }
-            set {
-                this.numeroNfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("PeriodoCompetencia", typeof(ConsultarNfseServicoTomadoEnvioPeriodoCompetencia))]
-        [System.Xml.Serialization.XmlElementAttribute("PeriodoEmissao", typeof(ConsultarNfseServicoTomadoEnvioPeriodoEmissao))]
-        public object Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcIdentificacaoPrestador Prestador {
-            get {
-                return this.prestadorField;
-            }
-            set {
-                this.prestadorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcIdentificacaoTomador Tomador {
-            get {
-                return this.tomadorField;
-            }
-            set {
-                this.tomadorField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcIdentificacaoIntermediario Intermediario {
-            get {
-                return this.intermediarioField;
-            }
-            set {
-                this.intermediarioField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string Pagina {
-            get {
-                return this.paginaField;
-            }
-            set {
-                this.paginaField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseServicoTomadoEnvioPeriodoCompetencia {
-        
-        private System.DateTime dataInicialField;
-        
-        private System.DateTime dataFinalField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime DataInicial {
-            get {
-                return this.dataInicialField;
-            }
-            set {
-                this.dataInicialField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime DataFinal {
-            get {
-                return this.dataFinalField;
-            }
-            set {
-                this.dataFinalField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfseServicoTomadoEnvioPeriodoEmissao {
-        
-        private System.DateTime dataInicialField;
-        
-        private System.DateTime dataFinalField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime DataInicial {
-            get {
-                return this.dataInicialField;
-            }
-            set {
-                this.dataInicialField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime DataFinal {
-            get {
-                return this.dataFinalField;
-            }
-            set {
-                this.dataFinalField = value;
             }
         }
     }
@@ -5827,6 +3883,8 @@ namespace NFe.Components.PBlumenauSC {
         
         private string paginaField;
         
+        private SignatureType signatureField;
+        
         /// <remarks/>
         public tcIdentificacaoPrestador Prestador {
             get {
@@ -5888,6 +3946,17 @@ namespace NFe.Components.PBlumenauSC {
             }
             set {
                 this.paginaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+        public SignatureType Signature {
+            get {
+                return this.signatureField;
+            }
+            set {
+                this.signatureField = value;
             }
         }
     }
@@ -6019,6 +4088,8 @@ namespace NFe.Components.PBlumenauSC {
         
         private tcIdentificacaoPrestador prestadorField;
         
+        private SignatureType signatureField;
+        
         /// <remarks/>
         public tcIdentificacaoRps IdentificacaoRps {
             get {
@@ -6036,6 +4107,62 @@ namespace NFe.Components.PBlumenauSC {
             }
             set {
                 this.prestadorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+        public SignatureType Signature {
+            get {
+                return this.signatureField;
+            }
+            set {
+                this.signatureField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcMensagemRetornoLote {
+        
+        private tcIdentificacaoRps identificacaoRpsField;
+        
+        private string codigoField;
+        
+        private string mensagemField;
+        
+        /// <remarks/>
+        public tcIdentificacaoRps IdentificacaoRps {
+            get {
+                return this.identificacaoRpsField;
+            }
+            set {
+                this.identificacaoRpsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Codigo {
+            get {
+                return this.codigoField;
+            }
+            set {
+                this.codigoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Mensagem {
+            get {
+                return this.mensagemField;
+            }
+            set {
+                this.mensagemField = value;
             }
         }
     }
@@ -6125,51 +4252,6 @@ namespace NFe.Components.PBlumenauSC {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class tcMensagemRetornoLote {
-        
-        private tcIdentificacaoRps identificacaoRpsField;
-        
-        private string codigoField;
-        
-        private string mensagemField;
-        
-        /// <remarks/>
-        public tcIdentificacaoRps IdentificacaoRps {
-            get {
-                return this.identificacaoRpsField;
-            }
-            set {
-                this.identificacaoRpsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Codigo {
-            get {
-                return this.codigoField;
-            }
-            set {
-                this.codigoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Mensagem {
-            get {
-                return this.mensagemField;
-            }
-            set {
-                this.mensagemField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class ConsultarLoteRpsRespostaListaNfse {
         
@@ -6212,6 +4294,8 @@ namespace NFe.Components.PBlumenauSC {
         
         private string protocoloField;
         
+        private SignatureType signatureField;
+        
         /// <remarks/>
         public tcIdentificacaoPrestador Prestador {
             get {
@@ -6231,162 +4315,6 @@ namespace NFe.Components.PBlumenauSC {
                 this.protocoloField = value;
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class SubstituirNfseResposta {
-        
-        private object itemField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(SubstituirNfseRespostaListaMensagemRetorno))]
-        [System.Xml.Serialization.XmlElementAttribute("RetSubstituicao", typeof(SubstituirNfseRespostaRetSubstituicao))]
-        public object Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class SubstituirNfseRespostaListaMensagemRetorno {
-        
-        private tcMensagemRetorno[] mensagemRetornoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
-        public tcMensagemRetorno[] MensagemRetorno {
-            get {
-                return this.mensagemRetornoField;
-            }
-            set {
-                this.mensagemRetornoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class SubstituirNfseRespostaRetSubstituicao {
-        
-        private SubstituirNfseRespostaRetSubstituicaoNfseSubstituida nfseSubstituidaField;
-        
-        private SubstituirNfseRespostaRetSubstituicaoNfseSubstituidora nfseSubstituidoraField;
-        
-        /// <remarks/>
-        public SubstituirNfseRespostaRetSubstituicaoNfseSubstituida NfseSubstituida {
-            get {
-                return this.nfseSubstituidaField;
-            }
-            set {
-                this.nfseSubstituidaField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public SubstituirNfseRespostaRetSubstituicaoNfseSubstituidora NfseSubstituidora {
-            get {
-                return this.nfseSubstituidoraField;
-            }
-            set {
-                this.nfseSubstituidoraField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class SubstituirNfseRespostaRetSubstituicaoNfseSubstituida {
-        
-        private tcCompNfse compNfseField;
-        
-        private tcMensagemRetorno[] listaMensagemAlertaRetornoField;
-        
-        /// <remarks/>
-        public tcCompNfse CompNfse {
-            get {
-                return this.compNfseField;
-            }
-            set {
-                this.compNfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("MensagemRetorno", IsNullable=false)]
-        public tcMensagemRetorno[] ListaMensagemAlertaRetorno {
-            get {
-                return this.listaMensagemAlertaRetornoField;
-            }
-            set {
-                this.listaMensagemAlertaRetornoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class SubstituirNfseRespostaRetSubstituicaoNfseSubstituidora {
-        
-        private tcCompNfse compNfseField;
-        
-        /// <remarks/>
-        public tcCompNfse CompNfse {
-            get {
-                return this.compNfseField;
-            }
-            set {
-                this.compNfseField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class SubstituirNfseEnvio {
-        
-        private SubstituirNfseEnvioSubstituicaoNfse substituicaoNfseField;
-        
-        private SignatureType signatureField;
-        
-        /// <remarks/>
-        public SubstituirNfseEnvioSubstituicaoNfse SubstituicaoNfse {
-            get {
-                return this.substituicaoNfseField;
-            }
-            set {
-                this.substituicaoNfseField = value;
-            }
-        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
@@ -6396,52 +4324,6 @@ namespace NFe.Components.PBlumenauSC {
             }
             set {
                 this.signatureField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class SubstituirNfseEnvioSubstituicaoNfse {
-        
-        private tcPedidoCancelamento pedidoField;
-        
-        private tcDeclaracaoPrestacaoServico rpsField;
-        
-        private string idField;
-        
-        /// <remarks/>
-        public tcPedidoCancelamento Pedido {
-            get {
-                return this.pedidoField;
-            }
-            set {
-                this.pedidoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public tcDeclaracaoPrestacaoServico Rps {
-            get {
-                return this.rpsField;
-            }
-            set {
-                this.rpsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
             }
         }
     }
@@ -6639,193 +4521,6 @@ namespace NFe.Components.PBlumenauSC {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class EnviarLoteRpsSincronoResposta {
-        
-        private string numeroLoteField;
-        
-        private System.DateTime dataRecebimentoField;
-        
-        private bool dataRecebimentoFieldSpecified;
-        
-        private string protocoloField;
-        
-        private object itemField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string NumeroLote {
-            get {
-                return this.numeroLoteField;
-            }
-            set {
-                this.numeroLoteField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public System.DateTime DataRecebimento {
-            get {
-                return this.dataRecebimentoField;
-            }
-            set {
-                this.dataRecebimentoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DataRecebimentoSpecified {
-            get {
-                return this.dataRecebimentoFieldSpecified;
-            }
-            set {
-                this.dataRecebimentoFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Protocolo {
-            get {
-                return this.protocoloField;
-            }
-            set {
-                this.protocoloField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetorno", typeof(EnviarLoteRpsSincronoRespostaListaMensagemRetorno))]
-        [System.Xml.Serialization.XmlElementAttribute("ListaMensagemRetornoLote", typeof(EnviarLoteRpsSincronoRespostaListaMensagemRetornoLote))]
-        [System.Xml.Serialization.XmlElementAttribute("ListaNfse", typeof(EnviarLoteRpsSincronoRespostaListaNfse))]
-        public object Item {
-            get {
-                return this.itemField;
-            }
-            set {
-                this.itemField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class EnviarLoteRpsSincronoRespostaListaMensagemRetorno {
-        
-        private tcMensagemRetorno[] mensagemRetornoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
-        public tcMensagemRetorno[] MensagemRetorno {
-            get {
-                return this.mensagemRetornoField;
-            }
-            set {
-                this.mensagemRetornoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class EnviarLoteRpsSincronoRespostaListaMensagemRetornoLote {
-        
-        private tcMensagemRetornoLote[] mensagemRetornoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MensagemRetorno")]
-        public tcMensagemRetornoLote[] MensagemRetorno {
-            get {
-                return this.mensagemRetornoField;
-            }
-            set {
-                this.mensagemRetornoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class EnviarLoteRpsSincronoRespostaListaNfse {
-        
-        private tcCompNfse[] compNfseField;
-        
-        private tcMensagemRetorno[] listaMensagemAlertaRetornoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("CompNfse")]
-        public tcCompNfse[] CompNfse {
-            get {
-                return this.compNfseField;
-            }
-            set {
-                this.compNfseField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("MensagemRetorno", IsNullable=false)]
-        public tcMensagemRetorno[] ListaMensagemAlertaRetorno {
-            get {
-                return this.listaMensagemAlertaRetornoField;
-            }
-            set {
-                this.listaMensagemAlertaRetornoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class EnviarLoteRpsSincronoEnvio {
-        
-        private tcLoteRps loteRpsField;
-        
-        private SignatureType signatureField;
-        
-        /// <remarks/>
-        public tcLoteRps LoteRps {
-            get {
-                return this.loteRpsField;
-            }
-            set {
-                this.loteRpsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-        public SignatureType Signature {
-            get {
-                return this.signatureField;
-            }
-            set {
-                this.signatureField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class EnviarLoteRpsResposta {
         
         private object[] itemsField;
@@ -6955,32 +4650,6 @@ namespace NFe.Components.PBlumenauSC {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    public delegate void EnviarLoteRpsSincronoCompletedEventHandler(object sender, EnviarLoteRpsSincronoCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EnviarLoteRpsSincronoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EnviarLoteRpsSincronoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public EnviarLoteRpsSincronoResposta Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((EnviarLoteRpsSincronoResposta)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void GerarNfseCompletedEventHandler(object sender, GerarNfseCompletedEventArgs e);
     
     /// <remarks/>
@@ -7027,32 +4696,6 @@ namespace NFe.Components.PBlumenauSC {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((CancelarNfseResposta)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    public delegate void SubstituirNfseCompletedEventHandler(object sender, SubstituirNfseCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SubstituirNfseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SubstituirNfseCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public SubstituirNfseResposta Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((SubstituirNfseResposta)(this.results[0]));
             }
         }
     }
@@ -7137,32 +4780,6 @@ namespace NFe.Components.PBlumenauSC {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    public delegate void ConsultarNfseServicoTomadoCompletedEventHandler(object sender, ConsultarNfseServicoTomadoCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ConsultarNfseServicoTomadoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ConsultarNfseServicoTomadoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public ConsultarNfseServicoTomadoResposta Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((ConsultarNfseServicoTomadoResposta)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ConsultarNfseFaixaCompletedEventHandler(object sender, ConsultarNfseFaixaCompletedEventArgs e);
     
     /// <remarks/>
@@ -7183,162 +4800,6 @@ namespace NFe.Components.PBlumenauSC {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((ConsultarNfseFaixaResposta)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    public delegate void GerarCfseCompletedEventHandler(object sender, GerarCfseCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GerarCfseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GerarCfseCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public GerarCfseResposta Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((GerarCfseResposta)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    public delegate void ConsultarCfseCompletedEventHandler(object sender, ConsultarCfseCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ConsultarCfseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ConsultarCfseCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public ConsultarCfseResposta Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((ConsultarCfseResposta)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    public delegate void CancelarCfseCompletedEventHandler(object sender, CancelarCfseCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CancelarCfseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal CancelarCfseCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public CancelarCfseResposta Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((CancelarCfseResposta)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    public delegate void GerarCfseHomologacaoCompletedEventHandler(object sender, GerarCfseHomologacaoCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GerarCfseHomologacaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GerarCfseHomologacaoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public GerarCfseResposta Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((GerarCfseResposta)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    public delegate void ConsultarCfseHomologacaoCompletedEventHandler(object sender, ConsultarCfseHomologacaoCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ConsultarCfseHomologacaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ConsultarCfseHomologacaoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public ConsultarCfseResposta Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((ConsultarCfseResposta)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    public delegate void CancelarCfseHomologacaoCompletedEventHandler(object sender, CancelarCfseHomologacaoCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CancelarCfseHomologacaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal CancelarCfseHomologacaoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public CancelarCfseResposta Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((CancelarCfseResposta)(this.results[0]));
             }
         }
     }

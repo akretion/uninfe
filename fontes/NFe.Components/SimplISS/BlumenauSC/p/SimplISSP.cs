@@ -17,7 +17,7 @@ namespace NFe.Components.SimplISS.BlumenauSC.p
         /// <summary>
         /// Namespace utilizada para deserialização do objeto
         /// </summary>
-        public override string NameSpaces => "http://www.sistema.com.br/Nfse/arquivos/nfse_3.xsd";
+        public override string NameSpaces => "http://www.abrasf.org.br/nfse.xsd";
         #endregion
 
         #region Construtores
@@ -41,12 +41,12 @@ namespace NFe.Components.SimplISS.BlumenauSC.p
         public override void EmiteNF(string file)
         {
             var envio = DeserializarObjeto<GerarNfseEnvio>(file);
+            GerarNfseResposta retorno = Service.GerarNfse(envio);
             var strResult = SerializarObjeto(Service.GerarNfse(envio));
 
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
                                           Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
-
-        }
+         }
 
         public override void CancelarNfse(string file)
         {
@@ -59,10 +59,10 @@ namespace NFe.Components.SimplISS.BlumenauSC.p
 
         public override void ConsultarLoteRps(string file)
         {
-            var envio = DeserializarObjeto<ConsultarLoteRpsEnvio>(file);
-            var strResult = SerializarObjeto(Service.ConsultarLoteRps(envio));
-            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
-                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
+        //    var envio = DeserializarObjeto<ConsultarLoteRpsEnvio>(file);
+        //    var strResult = SerializarObjeto(Service.ConsultarLoteRps(envio));
+        //    GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
+        //                                  Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -72,18 +72,18 @@ namespace NFe.Components.SimplISS.BlumenauSC.p
 
         public override void ConsultarNfse(string file)
         {
-            var envio = DeserializarObjeto<ConsultarNfseFaixaEnvio>(file);
-            var strResult = SerializarObjeto(Service.ConsultarNfseFaixa(envio));
-            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
-                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
+            //   var envio = DeserializarObjeto<ConsultarNfseFaixaEnvio>(file);
+            //   var strResult = SerializarObjeto(Service.ConsultarNfseFaixa(envio));
+            //   GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+            //                               Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)
         {
-            var envio = DeserializarObjeto<ConsultarNfseRpsEnvio>(file);
-            var strResult = SerializarObjeto(Service.ConsultarNfseRps(envio));
-            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
-                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
+            //var envio = DeserializarObjeto<ConsultarNfseRpsEnvio>(file);
+            //var strResult = SerializarObjeto(Service.ConsultarNfseRps(envio));
+            //GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
+            //                              Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
         #endregion
     }

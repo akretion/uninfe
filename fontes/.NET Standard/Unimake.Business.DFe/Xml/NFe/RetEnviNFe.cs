@@ -71,6 +71,9 @@ namespace Unimake.Business.DFe.Xml.NFe
 
     public class InfProt
     {
+        [XmlAttribute(AttributeName = "Id", DataType = "ID")]
+        public string Id { get; set; }
+
         [XmlElement("tpAmb")]
         public TipoAmbiente TpAmb { get; set; }
 
@@ -92,6 +95,9 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         [XmlElement("nProt")]
         public string NProt { get; set; }
+
+        [XmlElement("digVal")]
+        public string DigVal { get; set; }
 
         [XmlElement("cStat")]
         public int CStat { get; set; }

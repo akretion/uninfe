@@ -51,10 +51,15 @@ namespace NFe.Components.Coplan
                                 new MatupaMT.h.CoplanH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase :
                                 new MatupaMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
                             break;
-                        case 5107602: //Rondonópolis
+                        case 5107602: //Rondonópolis-MT
                             coplanService = tpAmb == TipoAmbiente.taHomologacao ?
                                 new HRondonopolisMT.h.CoplanH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase :
                                 new PRondonopolisMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
+                            break;
+                        case 5106422: //Peixoto de Azevedo-MT
+                            coplanService = tpAmb == TipoAmbiente.taHomologacao ?
+                                new HPeixotoAzevedoMT.h.CoplanH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase :
+                                new PPeixotoAzevedoMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
                             break;
 
                         default:
