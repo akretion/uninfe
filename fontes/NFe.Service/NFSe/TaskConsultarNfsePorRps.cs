@@ -168,6 +168,9 @@ namespace NFe.Service.NFSe
                                                         ConfiguracaoApp.ProxySenha,
                                                         ConfiguracaoApp.ProxyServidor);
 
+                        AssinaturaDigital adSimpliss = new AssinaturaDigital();
+                        adSimpliss.Assinar(NomeArquivoXML, emp, ler.oDadosPedSitNfseRps.cMunicipio);
+
                         simpliss.ConsultarNfsePorRps(NomeArquivoXML);
                         break;
 
@@ -231,7 +234,8 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.PORTALFACIL_ACTCON_202:
-                        cabecMsg = "<cabecalho><versaoDados>2.02</versaoDados></cabecalho>";
+                        if (ler.oDadosPedSitNfseRps.cMunicipio != 3169901)
+                            cabecMsg = "<cabecalho><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.PORTALFACIL_ACTCON:
@@ -339,6 +343,10 @@ namespace NFe.Service.NFSe
                                 case 5220454:
                                     pedLoteRps = new Components.PSenadorCanedoGO.nfseWS();
                                     break;
+
+                                case 3507506:
+                                    pedLoteRps = new Components.PBotucatuSP.nfseWS();
+                                    break;
                             }
                         }
                         else
@@ -363,7 +371,9 @@ namespace NFe.Service.NFSe
                             ler.oDadosPedSitNfseRps.cMunicipio == 4314423 ||
                             ler.oDadosPedSitNfseRps.cMunicipio == 3511102 ||
                             ler.oDadosPedSitNfseRps.cMunicipio == 3535804 ||
-                            ler.oDadosPedSitNfseRps.cMunicipio == 4306932)
+                            ler.oDadosPedSitNfseRps.cMunicipio == 4306932 ||
+                            ler.oDadosPedSitNfseRps.cMunicipio == 4322400 ||
+                            ler.oDadosPedSitNfseRps.cMunicipio == 4302808)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

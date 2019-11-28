@@ -7,339 +7,475 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\..\Unimake.DFe\Compilacao\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\..\Unimake.DFe\Compilacao\</OutputPath>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Servicos\NFe\Config\AM.xml" />
-    <None Remove="Servicos\NFe\Config\AN.xml" />
-    <None Remove="Servicos\NFe\Config\BA.xml" />
-    <None Remove="Servicos\NFe\Config\CE.xml" />
-    <None Remove="Servicos\NFe\Config\Config.xml" />
-    <None Remove="Servicos\NFe\Config\GO.xml" />
-    <None Remove="Servicos\NFe\Config\MG.xml" />
-    <None Remove="Servicos\NFe\Config\MS.xml" />
-    <None Remove="Servicos\NFe\Config\MT.xml" />
-    <None Remove="Servicos\NFe\Config\PE.xml" />
-    <None Remove="Servicos\NFe\Config\PR.xml" />
-    <None Remove="Servicos\NFe\Config\RS.xml" />
-    <None Remove="Servicos\NFe\Config\SP.xml" />
-    <None Remove="Servicos\NFe\Config\SVAN.xml" />
-    <None Remove="Servicos\NFe\Config\SVCAN.xml" />
-    <None Remove="Servicos\NFe\Config\SVCRS.xml" />
-    <None Remove="Servicos\NFe\Config\SVRS.xml" />
-    <None Remove="Xml\NFe\Schemas\CCe_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\confRecebto_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\consCad_v2.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\consReciNFe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\consSitNFe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\consStatServ_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\distDFeInt_v1.01.xsd" />
-    <None Remove="Xml\NFe\Schemas\e110110_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e110111_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e110112_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e111500_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e111501_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e111502_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e111503_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e210200_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e210210_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e210220_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e210240_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e411500_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e411501_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e411502_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\e411503_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\envCCe_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\envConfRecebto_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\envEventoCancNFe_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\envEventoCancSubst_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\enviNFe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\envRemIndus_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\eventoCancNFe_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\eventoCancSubst_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\eventoRemIndus_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\inutNFe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\leiauteCCe_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\leiauteConfRecebto_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\leiauteConsSitNFe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\leiauteConsStatServ_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\leiauteConsultaCadastro_v2.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\leiauteEventoCancNFe_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\leiauteEventoCancSubst_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\leiauteInutNFe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\leiauteNFe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\leiauteRemIndus_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\nfe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\procCCeNFe_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\procConfRecebtoNFe_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\procEventoCancNFe_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\procEventoCancSubst_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\procEventoNFe_v99.99.xsd" />
-    <None Remove="Xml\NFe\Schemas\procInutNFe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\procNFe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\procRemIndus_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\resEvento_v1.01.xsd" />
-    <None Remove="Xml\NFe\Schemas\resNFe_v1.01.xsd" />
-    <None Remove="Xml\NFe\Schemas\retConsCad_v2.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\retConsReciNFe_v2.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\retConsReciNFe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\retConsSitNFe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\retConsStatServ_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\retDistDFeInt_v1.01.xsd" />
-    <None Remove="Xml\NFe\Schemas\retEnvCCe_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\retEnvConfRecebto_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\retEnvEventoCancNFe_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\retEnvEventoCancSubst_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\retEnviNFe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\retEnvRemIndus_v1.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\retInutNFe_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\tiposBasico_v1.03.xsd" />
-    <None Remove="Xml\NFe\Schemas\tiposBasico_v4.00.xsd" />
-    <None Remove="Xml\NFe\Schemas\tiposDistDFe_v1.01.xsd" />
-    <None Remove="Xml\NFe\Schemas\xmldsig-core-schema_v1.01.xsd" />
+    <None Remove="Servicos\Config\NFCe\AC.xml" />
+    <None Remove="Servicos\Config\NFCe\AL.xml" />
+    <None Remove="Servicos\Config\NFCe\AM.xml" />
+    <None Remove="Servicos\Config\NFCe\AN.xml" />
+    <None Remove="Servicos\Config\NFCe\Ap.xml" />
+    <None Remove="Servicos\Config\NFCe\BA.xml" />
+    <None Remove="Servicos\Config\NFCe\CE.xml" />
+    <None Remove="Servicos\Config\NFCe\DF.xml" />
+    <None Remove="Servicos\Config\NFCe\ES.xml" />
+    <None Remove="Servicos\Config\NFCe\GO.xml" />
+    <None Remove="Servicos\Config\NFCe\MG.xml" />
+    <None Remove="Servicos\Config\NFCe\MS.xml" />
+    <None Remove="Servicos\Config\NFCe\MT.xml" />
+    <None Remove="Servicos\Config\NFCe\PB.xml" />
+    <None Remove="Servicos\Config\NFCe\PE.xml" />
+    <None Remove="Servicos\Config\NFCe\PI.xml" />
+    <None Remove="Servicos\Config\NFCe\PR.xml" />
+    <None Remove="Servicos\Config\NFCe\RJ.xml" />
+    <None Remove="Servicos\Config\NFCe\RN.xml" />
+    <None Remove="Servicos\Config\NFCe\RO.xml" />
+    <None Remove="Servicos\Config\NFCe\RR.xml" />
+    <None Remove="Servicos\Config\NFCe\RS.xml" />
+    <None Remove="Servicos\Config\NFCe\SE.xml" />
+    <None Remove="Servicos\Config\NFCe\SP.xml" />
+    <None Remove="Servicos\Config\NFCe\SVRS.xml" />
+    <None Remove="Servicos\Config\NFCe\TO.xml" />
+    <None Remove="Servicos\Config\NFe\AC.xml" />
+    <None Remove="Servicos\Config\NFe\AL.xml" />
+    <None Remove="Servicos\Config\NFe\AM.xml" />
+    <None Remove="Servicos\Config\NFe\AN.xml" />
+    <None Remove="Servicos\Config\NFe\AP.xml" />
+    <None Remove="Servicos\Config\NFe\BA.xml" />
+    <None Remove="Servicos\Config\NFe\CE.xml" />
+    <None Remove="Servicos\Config\NFe\Config.xml" />
+    <None Remove="Servicos\Config\NFe\DF.xml" />
+    <None Remove="Servicos\Config\NFe\ES.xml" />
+    <None Remove="Servicos\Config\NFe\GO.xml" />
+    <None Remove="Servicos\Config\NFe\MG.xml" />
+    <None Remove="Servicos\Config\NFe\MS.xml" />
+    <None Remove="Servicos\Config\NFe\MT.xml" />
+    <None Remove="Servicos\Config\NFe\PB.xml" />
+    <None Remove="Servicos\Config\NFe\PE.xml" />
+    <None Remove="Servicos\Config\NFe\PI.xml" />
+    <None Remove="Servicos\Config\NFe\PR.xml" />
+    <None Remove="Servicos\Config\NFe\RJ.xml" />
+    <None Remove="Servicos\Config\NFe\RN.xml" />
+    <None Remove="Servicos\Config\NFe\RO.xml" />
+    <None Remove="Servicos\Config\NFe\RR.xml" />
+    <None Remove="Servicos\Config\NFe\RS.xml" />
+    <None Remove="Servicos\Config\NFe\SC.xml" />
+    <None Remove="Servicos\Config\NFe\SE.xml" />
+    <None Remove="Servicos\Config\NFe\SP.xml" />
+    <None Remove="Servicos\Config\NFe\SVAN.xml" />
+    <None Remove="Servicos\Config\NFe\SVCAN.xml" />
+    <None Remove="Servicos\Config\NFe\SVCRS.xml" />
+    <None Remove="Servicos\Config\NFe\SVRS.xml" />
+    <None Remove="Servicos\Config\NFe\TO.xml" />
+    <None Remove="Xml\Schemas\CCe_v1.00.xsd" />
+    <None Remove="Xml\Schemas\confRecebto_v1.00.xsd" />
+    <None Remove="Xml\Schemas\consCad_v2.00.xsd" />
+    <None Remove="Xml\Schemas\consReciNFe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\consSitNFe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\consStatServ_v4.00.xsd" />
+    <None Remove="Xml\Schemas\distDFeInt_v1.01.xsd" />
+    <None Remove="Xml\Schemas\e110110_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e110111_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e110112_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e111500_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e111501_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e111502_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e111503_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e210200_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e210210_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e210220_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e210240_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e411500_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e411501_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e411502_v1.00.xsd" />
+    <None Remove="Xml\Schemas\e411503_v1.00.xsd" />
+    <None Remove="Xml\Schemas\envCCe_v1.00.xsd" />
+    <None Remove="Xml\Schemas\envConfRecebto_v1.00.xsd" />
+    <None Remove="Xml\Schemas\envEventoCancNFe_v1.00.xsd" />
+    <None Remove="Xml\Schemas\envEventoCancSubst_v1.00.xsd" />
+    <None Remove="Xml\Schemas\enviNFe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\envRemIndus_v1.00.xsd" />
+    <None Remove="Xml\Schemas\eventoCancNFe_v1.00.xsd" />
+    <None Remove="Xml\Schemas\eventoCancSubst_v1.00.xsd" />
+    <None Remove="Xml\Schemas\eventoRemIndus_v1.00.xsd" />
+    <None Remove="Xml\Schemas\inutNFe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\leiauteCCe_v1.00.xsd" />
+    <None Remove="Xml\Schemas\leiauteConfRecebto_v1.00.xsd" />
+    <None Remove="Xml\Schemas\leiauteConsSitNFe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\leiauteConsStatServ_v4.00.xsd" />
+    <None Remove="Xml\Schemas\leiauteConsultaCadastro_v2.00.xsd" />
+    <None Remove="Xml\Schemas\leiauteEventoCancNFe_v1.00.xsd" />
+    <None Remove="Xml\Schemas\leiauteEventoCancSubst_v1.00.xsd" />
+    <None Remove="Xml\Schemas\leiauteInutNFe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\leiauteNFe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\leiauteRemIndus_v1.00.xsd" />
+    <None Remove="Xml\Schemas\nfe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\procCCeNFe_v1.00.xsd" />
+    <None Remove="Xml\Schemas\procConfRecebtoNFe_v1.00.xsd" />
+    <None Remove="Xml\Schemas\procEventoCancNFe_v1.00.xsd" />
+    <None Remove="Xml\Schemas\procEventoCancSubst_v1.00.xsd" />
+    <None Remove="Xml\Schemas\procEventoNFe_v99.99.xsd" />
+    <None Remove="Xml\Schemas\procInutNFe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\procNFe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\procRemIndus_v1.00.xsd" />
+    <None Remove="Xml\Schemas\resEvento_v1.01.xsd" />
+    <None Remove="Xml\Schemas\resNFe_v1.01.xsd" />
+    <None Remove="Xml\Schemas\retConsCad_v2.00.xsd" />
+    <None Remove="Xml\Schemas\retConsReciNFe_v2.00.xsd" />
+    <None Remove="Xml\Schemas\retConsReciNFe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\retConsSitNFe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\retConsStatServ_v4.00.xsd" />
+    <None Remove="Xml\Schemas\retDistDFeInt_v1.01.xsd" />
+    <None Remove="Xml\Schemas\retEnvCCe_v1.00.xsd" />
+    <None Remove="Xml\Schemas\retEnvConfRecebto_v1.00.xsd" />
+    <None Remove="Xml\Schemas\retEnvEventoCancNFe_v1.00.xsd" />
+    <None Remove="Xml\Schemas\retEnvEventoCancSubst_v1.00.xsd" />
+    <None Remove="Xml\Schemas\retEnviNFe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\retEnvRemIndus_v1.00.xsd" />
+    <None Remove="Xml\Schemas\retInutNFe_v4.00.xsd" />
+    <None Remove="Xml\Schemas\tiposBasico_v1.03.xsd" />
+    <None Remove="Xml\Schemas\tiposBasico_v4.00.xsd" />
+    <None Remove="Xml\Schemas\tiposDistDFe_v1.01.xsd" />
+    <None Remove="Xml\Schemas\xmldsig-core-schema_v1.01.xsd" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Servicos\NFe\Config\AM.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\RJ.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\BA.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\TO.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\CE.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\SE.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\Config.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\RR.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\GO.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\RO.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\MG.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\RN.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\MS.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\PI.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\MT.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\PB.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\PE.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\ES.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\AN.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\DF.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\PR.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\AP.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\RS.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\AL.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\SP.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\AM.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\SVAN.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\AC.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\SVCAN.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\BA.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\SVCRS.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\CE.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Servicos\NFe\Config\SVRS.xml">
+    <EmbeddedResource Include="Servicos\Config\NFCe\GO.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\CCe_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFCe\MG.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\confRecebto_v1.00.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\consCad_v2.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFCe\MS.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\consReciNFe_v4.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFCe\MT.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\consSitNFe_v4.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFCe\PE.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\consStatServ_v4.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFCe\PR.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\distDFeInt_v1.01.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\e110110_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFCe\RS.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\e110111_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFCe\SP.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\e110112_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFCe\SVRS.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\e111500_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\AC.xml" />
+    <EmbeddedResource Include="Servicos\Config\NFe\AL.xml" />
+    <EmbeddedResource Include="Servicos\Config\NFe\AM.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\e111501_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\AP.xml" />
+    <EmbeddedResource Include="Servicos\Config\NFe\BA.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\e111502_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\CE.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\e111503_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\Config.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\e210200_v1.00.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\e210210_v1.00.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\e210220_v1.00.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\e210240_v1.00.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\e411500_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\DF.xml" />
+    <EmbeddedResource Include="Servicos\Config\NFe\ES.xml" />
+    <EmbeddedResource Include="Servicos\Config\NFe\GO.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\e411501_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\MG.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\e411502_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\MS.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\e411503_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\MT.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\envCCe_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\PB.xml" />
+    <EmbeddedResource Include="Servicos\Config\NFe\PE.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\envConfRecebto_v1.00.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\envEventoCancNFe_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\AN.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\envEventoCancSubst_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\PI.xml" />
+    <EmbeddedResource Include="Servicos\Config\NFe\PR.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\enviNFe_v4.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\RJ.xml" />
+    <EmbeddedResource Include="Servicos\Config\NFe\RN.xml" />
+    <EmbeddedResource Include="Servicos\Config\NFe\RO.xml" />
+    <EmbeddedResource Include="Servicos\Config\NFe\RR.xml" />
+    <EmbeddedResource Include="Servicos\Config\NFe\RS.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\envRemIndus_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\SC.xml" />
+    <EmbeddedResource Include="Servicos\Config\NFe\SE.xml" />
+    <EmbeddedResource Include="Servicos\Config\NFe\SP.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\eventoCancNFe_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\SVAN.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\eventoCancSubst_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\SVCAN.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\eventoRemIndus_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\SVCRS.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\inutNFe_v4.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\SVRS.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\leiauteCCe_v1.00.xsd">
+    <EmbeddedResource Include="Servicos\Config\NFe\TO.xml" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\CCe_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\leiauteConfRecebto_v1.00.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\leiauteConsSitNFe_v4.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\confRecebto_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\consCad_v2.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\leiauteConsStatServ_v4.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\consReciNFe_v4.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\leiauteConsultaCadastro_v2.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\consSitNFe_v4.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\leiauteEventoCancNFe_v1.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\consStatServ_v4.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\leiauteEventoCancSubst_v1.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\distDFeInt_v1.01.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\e110110_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\leiauteInutNFe_v4.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\e110111_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\leiauteNFe_v4.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\e110112_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\leiauteRemIndus_v1.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\e111500_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\nfe_v4.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\e111501_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\procCCeNFe_v1.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\e111502_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\procConfRecebtoNFe_v1.00.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\procEventoCancNFe_v1.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\e111503_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\procEventoCancSubst_v1.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\e210200_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\e210210_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\e210220_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\e210240_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\e411500_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\procEventoNFe_v99.99.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\e411501_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\procInutNFe_v4.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\e411502_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\procNFe_v4.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\e411503_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\procRemIndus_v1.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\envCCe_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\resEvento_v1.01.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\resNFe_v1.01.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\retConsCad_v2.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\envConfRecebto_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\envEventoCancNFe_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\retConsReciNFe_v2.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\envEventoCancSubst_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\retConsReciNFe_v4.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\enviNFe_v4.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\retConsSitNFe_v4.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\envRemIndus_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\retConsStatServ_v4.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\eventoCancNFe_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\retDistDFeInt_v1.01.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\retEnvCCe_v1.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\eventoCancSubst_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\retEnvConfRecebto_v1.00.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\retEnvEventoCancNFe_v1.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\eventoRemIndus_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\retEnvEventoCancSubst_v1.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\inutNFe_v4.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\retEnviNFe_v4.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\leiauteCCe_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\retEnvRemIndus_v1.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\leiauteConfRecebto_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\leiauteConsSitNFe_v4.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\retInutNFe_v4.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\leiauteConsStatServ_v4.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\tiposBasico_v1.03.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\leiauteConsultaCadastro_v2.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\tiposBasico_v4.00.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\leiauteEventoCancNFe_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Xml\NFe\Schemas\tiposDistDFe_v1.01.xsd" />
-    <EmbeddedResource Include="Xml\NFe\Schemas\xmldsig-core-schema_v1.01.xsd">
+    <EmbeddedResource Include="Xml\Schemas\NFe\leiauteEventoCancSubst_v1.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\leiauteInutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\leiauteNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\leiauteRemIndus_v1.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\nfe_v4.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\procCCeNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\procConfRecebtoNFe_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\procEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\procEventoCancSubst_v1.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\procEventoNFe_v99.99.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\procInutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\procNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\procRemIndus_v1.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\resEvento_v1.01.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\resNFe_v1.01.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\retConsCad_v2.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\retConsReciNFe_v2.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\retConsReciNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\retConsSitNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\retConsStatServ_v4.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\retDistDFeInt_v1.01.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\retEnvCCe_v1.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\retEnvConfRecebto_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\retEnvEventoCancNFe_v1.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\retEnvEventoCancSubst_v1.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\retEnviNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\retEnvRemIndus_v1.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\retInutNFe_v4.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\tiposBasico_v1.03.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\tiposBasico_v4.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\NFe\tiposDistDFe_v1.01.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\NFe\xmldsig-core-schema_v1.01.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.7">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
     <PackageReference Include="System.Security.Cryptography.Xml" Version="4.6.0" />
   </ItemGroup>

@@ -41,7 +41,6 @@ namespace NFe.Components.SimplISS.BlumenauSC.p
         public override void EmiteNF(string file)
         {
             var envio = DeserializarObjeto<GerarNfseEnvio>(file);
-            GerarNfseResposta retorno = Service.GerarNfse(envio);
             var strResult = SerializarObjeto(Service.GerarNfse(envio));
 
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
@@ -80,10 +79,10 @@ namespace NFe.Components.SimplISS.BlumenauSC.p
 
         public override void ConsultarNfsePorRps(string file)
         {
-            //var envio = DeserializarObjeto<ConsultarNfseRpsEnvio>(file);
-            //var strResult = SerializarObjeto(Service.ConsultarNfseRps(envio));
-            //GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
-            //                              Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
+            var envio = DeserializarObjeto<ConsultarNfseRpsEnvio>(file);
+            var strResult = SerializarObjeto(Service.ConsultarNfseRps(envio));
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML,System.Text.Encoding.UTF8);
         }
         #endregion
     }

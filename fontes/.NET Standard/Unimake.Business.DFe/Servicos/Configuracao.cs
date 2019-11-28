@@ -163,6 +163,36 @@ namespace Unimake.Business.DFe.Servicos
         ///    Deixe o conteúdo em branco para utilizar um soap padrão.
         /// </example>
         public string WebSoapString { get; set; }
+
+        /// <summary>
+        /// URL para consulta do DFe (NFCe e CTe) via QRCode no ambiente de homologação
+        /// </summary>
+        public string UrlQrCodeHomologacao { get; set; }
+
+        /// <summary>
+        /// URL para consulta do DFe (NFCe e CTe) via QRCode no ambiente de produção
+        /// </summary>
+        public string UrlQrCodeProducao { get; set; }
+
+        /// <summary>
+        /// URL para consulta do DFe (NFCe e CTe) manualmente no ambiente de homologação
+        /// </summary>
+        public string UrlChaveHomologacao { get; set; }
+
+        /// <summary>
+        /// URL para consulta do DFe (NFCe e CTe) manualmente no ambiente de produção
+        /// </summary>
+        public string UrlChaveProducao { get; set; }
+
+        /// <summary>
+        /// CSC = Código de segurança do contribuinte. Utilizado para criar o QRCode da NFCe
+        /// </summary>
+        public string CSC { get; set; }
+
+        /// <summary>
+        /// IDToken do CSC (Código de segurança do contribuinte). Utilizado para criar o QRCode da NFCe
+        /// </summary>
+        public int CSCIDToken { get; set; }
     }
 
     /// <summary>

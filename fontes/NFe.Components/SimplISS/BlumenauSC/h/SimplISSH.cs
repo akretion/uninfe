@@ -86,10 +86,10 @@ namespace NFe.Components.SimplISS.BlumenauSC.h
 
         public override void ConsultarNfsePorRps(string file)
         {
-            //var envio = DeserializarObjeto<ConsultarNfseRpsEnvio>(file);
-            //var strResult = SerializarObjeto(Service.ConsultarNfsePorRps(envio));
-            //GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
-            //                              Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
+            var envio = DeserializarObjeto<ConsultarNfseRpsEnvio>(file);
+            var strResult = SerializarObjeto(Service.ConsultarNfseRps(envio));
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML ,System.Text.Encoding.UTF8);
         }
 
         #endregion

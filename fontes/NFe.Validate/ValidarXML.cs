@@ -17,7 +17,6 @@ namespace NFe.Validate
     {
         #region Construtores
 
-
         public ValidarXML(string arquivoXML, int UFCod, bool soValidar)
         {
             TipoArqXml = new TipoArquivoXML(arquivoXML, UFCod, soValidar);
@@ -26,6 +25,18 @@ namespace NFe.Validate
         public ValidarXML(XmlDocument conteudoXML, int UFCod, bool soValidar)
         {
             TipoArqXml = new TipoArquivoXML("", conteudoXML, UFCod, soValidar);
+        }
+
+        /// <summary>
+        /// Construtor somente para gravar um XML de retorno de erro de validação, não use este construtor para fins de validação pois vai faltar conteúdo para outro fim.
+        /// </summary>
+        /// <param name="Arquivo"></param>
+        /// <param name="cStat"></param>
+        /// <param name="xMotivo"></param>
+        public ValidarXML(string arquivo, string xMotivo)
+        {
+            GravarXMLRetornoValidacao(arquivo, "5", xMotivo);
+            new Auxiliar().MoveArqErro(arquivo);
         }
 
         #endregion Construtores
@@ -50,7 +61,9 @@ namespace NFe.Validate
         public void EncryptAssinatura(string arquivoXML)
         {
             if (TipoArqXml.cArquivoSchema.Contains("DSF\\SJCSP"))
+            {
                 return;
+            }
 
             if (TipoArqXml.cArquivoSchema.Contains("PAULISTANA") ||
                 TipoArqXml.cArquivoSchema.Contains("BLUMENAU") ||
@@ -59,26 +72,26 @@ namespace NFe.Validate
                 if (arquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, StringComparison.InvariantCultureIgnoreCase) ||
                     arquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    bool found = false;
-                    bool bSave = false;
-                    string sh1 = "";
-                    XmlDocument doc = new XmlDocument();
+                    var found = false;
+                    var bSave = false;
+                    var sh1 = "";
+                    var doc = new XmlDocument();
                     doc.Load(arquivoXML);
 
                     if (arquivoXML.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML, StringComparison.InvariantCultureIgnoreCase))
                     {
                         const string Assinatura = "Assinatura";
 
-                        XmlNodeList rpsList = doc.GetElementsByTagName("RPS");
+                        var rpsList = doc.GetElementsByTagName("RPS");
                         foreach (XmlNode rpsNode in rpsList)
                         {
-                            XmlElement rpsElement = (XmlElement)rpsNode;
+                            var rpsElement = (XmlElement)rpsNode;
 
                             if (rpsElement.GetElementsByTagName(Assinatura).Count != 0)
                             {
                                 found = true;
                                 //Encryptar a tag Assinatura
-                                int len = TipoArqXml.cArquivoSchema.Contains("DSF") ? 94 : 86;
+                                var len = TipoArqXml.cArquivoSchema.Contains("DSF") ? 94 : 86;
                                 if (rpsElement.GetElementsByTagName(Assinatura)[0].InnerText.Length == len)    //jah assinado?
                                 {
                                     bSave = true;
@@ -110,10 +123,10 @@ namespace NFe.Validate
                     {
                         const string AssinaturaCancelamento = "AssinaturaCancelamento";
 
-                        XmlNodeList detalheList = doc.GetElementsByTagName("Detalhe");
+                        var detalheList = doc.GetElementsByTagName("Detalhe");
                         foreach (XmlNode detalheNode in detalheList)
                         {
-                            XmlElement detalheElement = (XmlElement)detalheNode;
+                            var detalheElement = (XmlElement)detalheNode;
 
                             if (detalheElement.GetElementsByTagName(AssinaturaCancelamento).Count != 0)
                             {
@@ -158,11 +171,11 @@ namespace NFe.Validate
         /// <param name="nsSchema">Namespace contendo a URL do schema</param>
         private void Validar(string rotaArqXML)
         {
-            bool lArqXML = File.Exists(rotaArqXML);
+            var lArqXML = File.Exists(rotaArqXML);
 
             if (File.Exists(rotaArqXML))
             {
-                XmlDocument doc = new XmlDocument();
+                var doc = new XmlDocument();
                 try
                 {
                     doc.Load(rotaArqXML);
@@ -190,7 +203,7 @@ namespace NFe.Validate
             Retorno = 0;
             RetornoString = "";
 
-            bool temXSD = !string.IsNullOrEmpty(TipoArqXml.cArquivoSchema);
+            var temXSD = !string.IsNullOrEmpty(TipoArqXml.cArquivoSchema);
 
             if (File.Exists(TipoArqXml.cArquivoSchema))
             {
@@ -202,17 +215,17 @@ namespace NFe.Validate
 
                     EncryptAssinatura(rotaArqXML);    //danasa: 12/2013
 
-                    XmlReaderSettings settings = new XmlReaderSettings
+                    var settings = new XmlReaderSettings
                     {
                         ValidationType = ValidationType.Schema
                     };
 
-                    XmlSchemaSet schemas = new XmlSchemaSet();
+                    var schemas = new XmlSchemaSet();
                     settings.Schemas = schemas;
 
                     /* Se dentro do XSD houver referência a outros XSDs externos, pode ser necessário ter certas permissões para localizá-lo.
                      * Usa um "Resolver" com as credencias-padrão para obter esse recurso externo. */
-                    XmlUrlResolver resolver = new XmlUrlResolver
+                    var resolver = new XmlUrlResolver
                     {
                         Credentials = System.Net.CredentialCache.DefaultCredentials
                     };
@@ -290,7 +303,7 @@ namespace NFe.Validate
         /// </returns>
         public string ValidarArqXML(string arquivo)
         {
-            string cRetorna = "";
+            var cRetorna = "";
 
             if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
             {
@@ -324,7 +337,7 @@ namespace NFe.Validate
         /// </returns>
         public string ValidarArqXML(XmlDocument conteudoXML, string arquivo)
         {
-            string cRetorna = "";
+            var cRetorna = "";
 
             if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
             {
@@ -359,12 +372,12 @@ namespace NFe.Validate
         /// <date>28/05/2009</date>
         public void ValidarAssinarXML(string Arquivo)
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
-            bool Assinou = true;
+            var Assinou = true;
 
             //Assinar o XML se tiver tag para assinar
-            AssinaturaDigital oAD = new AssinaturaDigital();
+            var oAD = new AssinaturaDigital();
 
             XmlDocument conteudoXML = null;
 
@@ -373,7 +386,7 @@ namespace NFe.Validate
                 conteudoXML = new XmlDocument();
                 conteudoXML.Load(Arquivo);
 
-                RespTecnico respTecnico = new RespTecnico(Empresas.Configuracoes[emp].RespTecCNPJ,
+                var respTecnico = new RespTecnico(Empresas.Configuracoes[emp].RespTecCNPJ,
                     Empresas.Configuracoes[emp].RespTecXContato,
                     Empresas.Configuracoes[emp].RespTecEmail,
                     Empresas.Configuracoes[emp].RespTecTelefone,
@@ -435,10 +448,10 @@ namespace NFe.Validate
                     {
                         conteudoXML.Load(Arquivo);
 
-                        QRCodeNFCe qrCode = new QRCodeNFCe(conteudoXML);
+                        var qrCode = new QRCodeNFCe(conteudoXML);
 
                         string url;
-                        string versao = string.Empty;
+                        var versao = string.Empty;
                         if (((XmlElement)conteudoXML.GetElementsByTagName(conteudoXML.DocumentElement.Name)[0]).Attributes[TpcnResources.versao.ToString()] != null)
                         {
                             versao = ((XmlElement)conteudoXML.GetElementsByTagName(conteudoXML.DocumentElement.Name)[0]).Attributes[TpcnResources.versao.ToString()].Value;
@@ -457,11 +470,11 @@ namespace NFe.Validate
                             url = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCe;
                         }
 
-                        string linkUFManual = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeMH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeM;
+                        var linkUFManual = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ? Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeMH : Empresas.Configuracoes[emp].URLConsultaDFe.UrlNFCeM;
 
                         qrCode.GerarLinkConsulta(url, Empresas.Configuracoes[emp].IdentificadorCSC, Empresas.Configuracoes[emp].TokenCSC, linkUFManual);
 
-                        StreamWriter sw = File.CreateText(Arquivo);
+                        var sw = File.CreateText(Arquivo);
                         sw.Write(conteudoXML.OuterXml);
                         sw.Close();
                     }
@@ -472,10 +485,10 @@ namespace NFe.Validate
                 {
                     conteudoXML.Load(Arquivo);
 
-                    QRCodeMDFe qrCodeMDFe = new QRCodeMDFe(conteudoXML);
+                    var qrCodeMDFe = new QRCodeMDFe(conteudoXML);
                     qrCodeMDFe.MontarLinkQRCode(Empresas.Configuracoes[emp].X509Certificado);
 
-                    StreamWriter sw = File.CreateText(Arquivo);
+                    var sw = File.CreateText(Arquivo);
                     sw.Write(conteudoXML.OuterXml);
                     sw.Close();
                 }
@@ -483,14 +496,14 @@ namespace NFe.Validate
                 {
                     conteudoXML.Load(Arquivo);
 
-                    string urlCte = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ?
+                    var urlCte = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ?
                         Empresas.Configuracoes[emp].URLConsultaDFe.UrlCTeQrCodeH :
                         Empresas.Configuracoes[emp].URLConsultaDFe.UrlCTeQrCodeP;
 
-                    QRCodeCTe qrCodeCTe = new QRCodeCTe(conteudoXML, urlCte);
+                    var qrCodeCTe = new QRCodeCTe(conteudoXML, urlCte);
                     qrCodeCTe.MontarLinkQRCode(Empresas.Configuracoes[emp].X509Certificado);
 
-                    StreamWriter sw = File.CreateText(Arquivo);
+                    var sw = File.CreateText(Arquivo);
                     sw.Write(conteudoXML.OuterXml);
                     sw.Close();
                 }
@@ -514,7 +527,7 @@ namespace NFe.Validate
                                 Directory.CreateDirectory(Empresas.Configuracoes[emp].PastaValidado);
                             }
 
-                            string ArquivoNovo = Empresas.Configuracoes[emp].PastaValidado + "\\" + Path.GetFileName(Arquivo);
+                            var ArquivoNovo = Empresas.Configuracoes[emp].PastaValidado + "\\" + Path.GetFileName(Arquivo);
 
                             Functions.Move(Arquivo, ArquivoNovo);
 
@@ -569,50 +582,49 @@ namespace NFe.Validate
         /// <summary>
         /// Na tentativa de somente validar ou assinar o XML se encontrar um erro vai ser retornado um XML para o ERP
         /// </summary>
-        /// <param name="Arquivo">Nome do arquivo XML validado</param>
+        /// <param name="arquivo">Nome do arquivo XML validado</param>
         /// <param name="PastaXMLRetorno">Pasta de retorno para ser gravado o XML</param>
         /// <param name="cStat">Status da validação</param>
         /// <param name="xMotivo">Status descritivo da validação</param>
         /// <by>Wandrey Mundin Ferreira</by>
         /// <date>28/05/2009</date>
-        private void GravarXMLRetornoValidacao(string Arquivo, string cStat, string xMotivo)
+        private void GravarXMLRetornoValidacao(string arquivo, string cStat, string xMotivo)
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             //Definir o nome do arquivo de retorno
-            string ArquivoRetorno = Functions.ExtrairNomeArq(Arquivo, ".xml") + "-ret.xml";
+            var arquivoRetorno = Functions.ExtrairNomeArq(arquivo, ".xml") + "-ret.xml";
 
-            XDocument xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
+            var xml = new XDocument(new XDeclaration("1.0", "utf-8", null),
                 new XElement("Validacao",
                 new XElement(TpcnResources.cStat.ToString(), cStat),
                 new XElement(TpcnResources.xMotivo.ToString(), xMotivo)));
-            xml.Save(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + ArquivoRetorno);
+            xml.Save(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + arquivoRetorno);
         }
 
         #endregion GravarXMLRetornoValidacao()
 
         public void ValidarInformacaoContingencia(XmlDocument conteudoXML)
         {
-            string tipoServico = conteudoXML.DocumentElement.Name;
+            var tipoServico = conteudoXML.DocumentElement.Name;
 
             if (!string.IsNullOrEmpty(tipoServico))
             {
                 if (tipoServico.Equals("NFe") || tipoServico.Equals("CTe"))
                 {
-                    string tipoEmissao = conteudoXML.GetElementsByTagName("tpEmis")[0]?.InnerText;
+                    var tipoEmissao = conteudoXML.GetElementsByTagName("tpEmis")[0]?.InnerText;
 
                     if (!string.IsNullOrEmpty(tipoEmissao))
                     {
-                        TipoEmissao tpEmissao = (TipoEmissao)Convert.ToInt32(tipoEmissao);
+                        var tpEmissao = (TipoEmissao)Convert.ToInt32(tipoEmissao);
 
                         switch (tpEmissao)
                         {
                             case TipoEmissao.teFS:
-                            case TipoEmissao.teEPEC:
                             case TipoEmissao.teFSDA:
                             case TipoEmissao.teOffLine:
-                                string dhCont = conteudoXML.GetElementsByTagName("dhCont")[0]?.InnerText;
-                                string xJust = conteudoXML.GetElementsByTagName("xJust")[0]?.InnerText;
+                                var dhCont = conteudoXML.GetElementsByTagName("dhCont")[0]?.InnerText;
+                                var xJust = conteudoXML.GetElementsByTagName("xJust")[0]?.InnerText;
 
                                 if (string.IsNullOrEmpty(dhCont) || string.IsNullOrEmpty(xJust))
                                 {

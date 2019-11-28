@@ -2,22 +2,55 @@
 {
     public class WSSoap
     {
-        private string _EnderecoWeb = "";
-        public string EnderecoWeb { get => _EnderecoWeb; set => _EnderecoWeb = value; }
+        #region Private Fields
 
-        private string _ActionWeb = "";
-        public string ActionWeb { get => _ActionWeb; set => _ActionWeb = value; }
+        private string _ActionWeb;
+        private string _ContentType;
+        private string _EnderecoWeb;
+        private string _SoapString;
+        private string _TagRetorno;
+        private string _VersaoSoap;
 
-        private string _VersaoSoap = "soap12";
-        public string VersaoSoap { get => _VersaoSoap; set => _VersaoSoap = value; }
+        #endregion Private Fields
 
-        private string _TagRetorno = "nfeResultMsg";
-        public string TagRetorno { get => _TagRetorno; set => _TagRetorno = value; }
+        #region Public Properties
 
-        private string _ContentType = "application/soap+xml; charset=utf-8;";
-        public string ContentType { get => _ContentType; set => _ContentType = value; }
+        public string ActionWeb
+        {
+            get => _ActionWeb;
+            set => _ActionWeb = value;
+        }
 
-        private string _SoapString = "";
-        public string SoapString { get => _SoapString; set => _SoapString = value; }
+        public string ContentType
+        {
+            get => string.IsNullOrWhiteSpace(_ContentType) ? (_ContentType = "application/soap+xml; charset=utf-8;") : _ContentType;
+            set => _ContentType = value;
+        }
+
+        public string EnderecoWeb
+        {
+            get => _EnderecoWeb;
+            set => _EnderecoWeb = value;
+        }
+
+        public string SoapString
+        {
+            get => _SoapString;
+            set => _SoapString = value;
+        }
+
+        public string TagRetorno
+        {
+            get => string.IsNullOrWhiteSpace(_TagRetorno) ? (_TagRetorno = "nfeResultMsg") : _TagRetorno;
+            set => _TagRetorno = value;
+        }
+
+        public string VersaoSoap
+        {
+            get => string.IsNullOrWhiteSpace(_VersaoSoap) ? (_VersaoSoap = "soap12") : _VersaoSoap;
+            set => _VersaoSoap = value;
+        }
+
+        #endregion Public Properties
     }
 }

@@ -126,8 +126,23 @@ namespace NFSe.Components
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
             #endregion
+
+            #region XML de Consulta de NFSe por Rps
+
+            SchemaXML.InfSchemas.Add("NFSE-SIMPLISS-4202404-ConsultarNfseRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "XML de Consulta de NFSe por Rps",
+                TagAssinatura = "ConsultarNfseRpsEnvio",
+                TagAtributoId = "IdentificacaoRps",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion XML de Consulta de NFSe por Rps
+
             #endregion
-          
+
         }
     }
 }

@@ -12,9 +12,30 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// <summary>
         /// Definir configurações
         /// </summary>
-        protected override void DefinirConfiguracao() =>
+        protected override void DefinirConfiguracao()
+        {
             //Definir a pasta onde fica o schema do XML
-            Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.SchemaPasta;
+            switch (Configuracoes.TipoDFe)
+            {
+                case DFE.NFe:
+                    Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaNFe;
+                    break;
+
+                case DFE.NFCe:
+                    Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaNFCe;
+                    break;
+
+                case DFE.CTe:
+                    break;
+                case DFE.MDFe:
+                    break;
+                case DFE.NFSe:
+                    break;
+                case DFE.SAT:
+                    break;
+            }
+            
+        }
 
         /// <summary>
         /// Validar o XML
@@ -45,6 +66,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         #endregion Public Constructors
 
         #region Public Methods
+
 
         /// <summary>
         /// Executar o serviço

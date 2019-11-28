@@ -65,7 +65,19 @@ namespace NFe.Components.Fiorilli
                             case 3544004: //Rio das Pedras-SP
                                 fiorilliService = new RioPedrasSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
-                            
+
+                            case 3539400: //Piratininga-SP
+                                fiorilliService = new PiratiningaSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 3516705: //Garça-SP
+                                fiorilliService = new GarcaSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 3514502: //Duartina-SP
+                                fiorilliService = new DuartinaSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -126,6 +138,18 @@ namespace NFe.Components.Fiorilli
 
                             case 3500501: //Águas de Lindóia - SP
                                 fiorilliService = new AguasDeLindoiaSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 3539400: //Piratininga-SP
+                                fiorilliService = new PiratiningaSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 3516705:
+                                fiorilliService = new GarcaSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 3514502: //Duartina-SP
+                                fiorilliService = new DuartinaSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             default:

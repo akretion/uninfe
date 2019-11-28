@@ -17,7 +17,7 @@ namespace NFe.Components.FISSLEX.LucasDoRioVerdeMT.p
             get
             {
                 return "FISS-LEX";
-            }
+            } 
         }
 
         private string ProxyUser = "";
@@ -68,8 +68,7 @@ namespace NFe.Components.FISSLEX.LucasDoRioVerdeMT.p
             }
 
             #endregion Definições de proxy
-
-            ConsultarSituacaoLoteRpsEnvio envio = DeserializarObjeto<ConsultarSituacaoLoteRpsEnvio>(file);
+            ConsultarSituacaoLoteRpsEnvio envio = ReadXML<ConsultarSituacaoLoteRpsEnvio>(file);
             string strResult = SerializarObjeto(ServiceConsultarSituacaoLoteRps.Execute(envio));
 
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML,

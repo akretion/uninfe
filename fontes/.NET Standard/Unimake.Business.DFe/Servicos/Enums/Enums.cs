@@ -2727,5 +2727,5 @@ namespace Unimake.Business.DFe.Servicos
         UsoRestrito = 1
     }
 
-    #endregion
+    #endregion   
 }

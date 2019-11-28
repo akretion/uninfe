@@ -83,6 +83,10 @@ namespace NFe.Components.GovDigital
                                 govDigitalService = new HVargemGrandePaulistaSP.NfseServiceImplVgpService();
                                 break;
 
+                            case 3130101: //Igarapé-MG
+                                govDigitalService = new HIgarapeMG.NfseServiceImplVgpService();
+                                break;
+
                             default:
                                 break;
                         }
@@ -144,6 +148,10 @@ namespace NFe.Components.GovDigital
 
                             case 3556453: //Vargem Grande Paulista-SP
                                 govDigitalService = new PVargemGrandePaulistaSP.NfseServiceImplVgpService();
+                                break;
+
+                            case 3130101: //Igarapé-MG
+                                govDigitalService = new PIgarapeMG.NfseServiceImplVgpService();
                                 break;
 
                             default:

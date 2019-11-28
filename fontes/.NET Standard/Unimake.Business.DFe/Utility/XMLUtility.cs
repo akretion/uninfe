@@ -37,10 +37,15 @@ namespace Unimake.Business.DFe.Utility
         /// <summary>
         /// Gerar o dígito da chave da NFe, CTe, MDFe ou NFCe
         /// </summary>
-        /// <param name="chave">Chave (sem o dígito) para efetuar o cálculo do dígito verificador</param>
+        /// <param name="chave">Chave do DFe (sem o dígito) que deve ser calculado o dígito verificador.</param>
         /// <returns>Dígito verificador</returns>
         public static int CalcularDVChave(string chave)
         {
+            if (chave is null)
+            {
+                throw new ArgumentNullException(nameof(chave));
+            }
+
             int i, j, Digito;
             const string PESO = "4329876543298765432987654329876543298765432";
 
@@ -145,8 +150,13 @@ namespace Unimake.Business.DFe.Utility
         /// <param name="objeto">Objeto a ser serializado</param>
         /// <param name="nameSpaces">Namespaces a serem adicionados no XML</param>
         /// <returns>XML</returns>
-        public static XmlDocument Serializar(object obj, List<TNameSpace> nameSpaces = null)
+        public static XmlDocument Serializar(object objeto, List<TNameSpace> nameSpaces = null)
         {
+            if (objeto is null)
+            {
+                throw new ArgumentNullException(nameof(objeto));
+            }
+
             var ns = new XmlSerializerNamespaces();
             if (nameSpaces != null)
             {
@@ -156,11 +166,11 @@ namespace Unimake.Business.DFe.Utility
                 }
             }
 
-            var xmlSerializer = new XmlSerializer(obj.GetType());
+            var xmlSerializer = new XmlSerializer(objeto.GetType());
             var doc = new XmlDocument();
             using (StringWriter textWriter = new Utf8StringWriter())
             {
-                xmlSerializer.Serialize(textWriter, obj, ns);
+                xmlSerializer.Serialize(textWriter, objeto, ns);
                 doc.LoadXml(textWriter.ToString());
             }
 
@@ -175,6 +185,11 @@ namespace Unimake.Business.DFe.Utility
         /// <returns>Conteúdo da tag</returns>
         public static string TagRead(XmlElement xmlElement, string tagName)
         {
+            if (xmlElement is null)
+            {
+                throw new ArgumentNullException(nameof(xmlElement));
+            }
+
             var content = string.Empty;
 
             if (xmlElement.GetElementsByTagName(tagName).Count != 0)
@@ -183,6 +198,22 @@ namespace Unimake.Business.DFe.Utility
             }
 
             return content;
+        }
+
+        /// <summary>
+        /// Busca o nome de uma determinada TAG em um Elemento do XML para ver se existe, se existir retorna seu conteúdo da TAG.
+        /// </summary>
+        /// <param name="xmlElement">Elemento do XML onde será pesquisado o Nome da TAG</param>
+        /// <param name="tagName">Nome da Tag que será pesquisado</param>
+        /// <returns>Conteúdo da tag</returns>
+        public static bool TagExist(XmlElement xmlElement, string tagName)
+        {
+            if (xmlElement is null)
+            {
+                throw new ArgumentNullException(nameof(xmlElement));
+            }
+
+            return xmlElement.GetElementsByTagName(tagName).Count != 0;
         }
 
         #endregion Public Methods

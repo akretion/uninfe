@@ -1412,6 +1412,7 @@ namespace NFe.Service
                     break;
 
                 case Servicos.DFeEnviar:
+                case Servicos.CTeDistribuicaoDFe:
 
                     #region Servicos.EnviarDFe
 
@@ -1481,6 +1482,23 @@ namespace NFe.Service
                                         XmlElement ret1 = (XmlElement)envres.Item(0);
                                         chNFe = Functions.LerTag(ret1, NFe.Components.TpcnResources.chNFe.ToString(), false);
                                         ConteudoRetorno += "resNFe;" + NSU + ";" + chNFe + ";";
+                                    }
+                                    else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("procEventoCTe"))
+                                    {
+                                        XmlNodeList envres = docres.GetElementsByTagName("procEventoCTe");
+                                        XmlElement ret1 = (XmlElement)envres.Item(0);
+                                        chNFe = Functions.LerTag(ret1, NFe.Components.TpcnResources.chCTe.ToString(), false);
+                                        int nSeqEvento = Convert.ToInt32("0" + Functions.LerTag(ret1, NFe.Components.TpcnResources.nSeqEvento.ToString(), false));
+                                        ConvertTxt.tpEventos tpEvento = (ConvertTxt.tpEventos)Convert.ToInt32("0" + Functions.LerTag(ret1, NFe.Components.TpcnResources.tpEvento.ToString(), false));
+
+                                        ConteudoRetorno += "procEventoCTe;" + NSU + ";" + chNFe + ";" + tpEvento.ToString() + ";" + nSeqEvento.ToString("00");
+                                    }
+                                    else if (ret.ChildNodes[n].Attributes["schema"].InnerText.StartsWith("procCTe"))
+                                    {
+                                        XmlNodeList envres = docres.GetElementsByTagName("cteProc");
+                                        XmlElement ret1 = (XmlElement)envres.Item(0);
+                                        chNFe = Functions.LerTag(ret1, NFe.Components.TpcnResources.chCTe.ToString(), false);
+                                        ConteudoRetorno += "procCTe;" + NSU + ";" + chNFe + ";";
                                     }
                                     ConteudoRetorno += "\r\n";
                                 }

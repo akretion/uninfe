@@ -66,8 +66,10 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
             if (Configuracoes.SchemasEspecificos.Count > 0)
             {
-                schemaArquivo = Configuracoes.SchemasEspecificos[((int)xml.Evento[0].InfEvento.TpEvento).ToString()].SchemaArquivo;
-                schemaArquivoEspecifico = Configuracoes.SchemasEspecificos[((int)xml.Evento[0].InfEvento.TpEvento).ToString()].SchemaArquivoEspecifico;
+                var tpEvento = ((int)xml.Evento[0].InfEvento.TpEvento);
+
+                schemaArquivo = Configuracoes.SchemasEspecificos[tpEvento.ToString()].SchemaArquivo;
+                schemaArquivoEspecifico = Configuracoes.SchemasEspecificos[tpEvento.ToString()].SchemaArquivoEspecifico;
             }
 
             #region Validar o XML geral
@@ -113,15 +115,10 @@ namespace Unimake.Business.DFe.Servicos.NFe
                                 break;
 
                             case TipoEventoNFe.ManifestacaoConfirmacaoOperacao:
-                                break;
-
                             case TipoEventoNFe.ManifestacaoCienciaOperacao:
-                                break;
-
                             case TipoEventoNFe.ManifestacaoDesconhecimentoOperacao:
-                                break;
-
                             case TipoEventoNFe.ManifestacaoOperacaoNaoRealizada:
+                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoManif>((DetEventoManif)xml.Evento[i].InfEvento.DetEvento).OuterXml);
                                 break;
 
                             default:

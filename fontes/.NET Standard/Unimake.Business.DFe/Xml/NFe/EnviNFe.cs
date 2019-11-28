@@ -41,7 +41,6 @@ namespace Unimake.Business.DFe.Xml.NFe
 
             return xmlDoc;
         }
-
     }
 
     [Serializable()]
@@ -52,7 +51,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         public InfNFe[] InfNFe { get; set; }
 
         [XmlElement("infNFeSupl")]
-        public InfNFeSupl[] InfNFeSupl { get; set; }
+        public InfNFeSupl InfNFeSupl { get; set; }
 
         [XmlElement(ElementName = "Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
         public Signature Signature { get; set; }
@@ -126,38 +125,41 @@ namespace Unimake.Business.DFe.Xml.NFe
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(IdField))
-                {
-                    if (Ide.Chave?.Length != 44)
-                    {
-                        Ide.Chave = ((int)Ide.CUF).ToString() +
-                            Ide.DhEmi.ToString("yyMM") +
-                            (string.IsNullOrWhiteSpace(Emit.CNPJ) ? Emit.CPF?.PadLeft(14, '0') : Emit.CNPJ.PadLeft(14, '0')) +
-                            ((int)Ide.Mod).ToString().PadLeft(2, '0') +
-                            Ide.Serie.ToString().PadLeft(3, '0') +
-                            Ide.NNF.ToString().PadLeft(9, '0') +
-                            ((int)Ide.TpEmis).ToString() +
-                            Ide.CNF.PadLeft(8, '0');
-
-                        Ide.CDV = Utility.XMLUtility.CalcularDVChave(Ide.Chave);
-                        Ide.Chave += Ide.CDV.ToString();
-                    }
-                }
-                else
-                {
-                    if (IdField.Substring(0, 3).ToUpper() == "NFE")
-                    {
-                        Ide.Chave = IdField.Substring(3);
-                    }
-                    else
-                    {
-                        Ide.Chave = IdField;
-                    }
-                }
-
-                return "NFe" + Ide.Chave;
+                IdField = "NFe" + Chave;
+                return IdField;
             }
-            set => IdField = value;
+            set
+            {
+                IdField = value;
+            }
+        }
+
+        private string ChaveField;
+
+        [XmlIgnore]
+        public string Chave
+        {
+            get
+            {
+                ChaveField = ((int)Ide.CUF).ToString() +
+                    Ide.DhEmi.ToString("yyMM") +
+                    (string.IsNullOrWhiteSpace(Emit.CNPJ) ? Emit.CPF?.PadLeft(14, '0') : Emit.CNPJ.PadLeft(14, '0')) +
+                    ((int)Ide.Mod).ToString().PadLeft(2, '0') +
+                    Ide.Serie.ToString().PadLeft(3, '0') +
+                    Ide.NNF.ToString().PadLeft(9, '0') +
+                    ((int)Ide.TpEmis).ToString() +
+                    Ide.CNF.PadLeft(8, '0');
+
+                Ide.CDV = Utility.XMLUtility.CalcularDVChave(ChaveField);
+
+                ChaveField += Ide.CDV.ToString();
+
+                return ChaveField;
+            }
+            set
+            {
+                throw new Exception("Não é permitido atribuir valor para a propriedade Chave. Ela é calculada automaticamente.");
+            }
         }
     }
 
@@ -287,9 +289,6 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("NFref")]
         public NFref[] NFref { get; set; }
 
-        [XmlIgnore]
-        public string Chave { get; set; }
-
         #region ShouldSerialize
 
         public bool ShouldSerializeDhContField()
@@ -300,6 +299,11 @@ namespace Unimake.Business.DFe.Xml.NFe
         public bool ShouldSerializeXJust()
         {
             return !string.IsNullOrWhiteSpace(XJust);
+        }
+
+        public bool ShouldSerializeDhSaiEntField()
+        {
+            return DhSaiEnt > DateTime.MinValue;
         }
 
         #endregion

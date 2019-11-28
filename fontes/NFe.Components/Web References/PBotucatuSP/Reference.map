@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://gestaopublica.botucatu.bsit-br.com.br/integracao/services/nfseWS?wsdl=nfseWS.wsdl" filename="nfseWS.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="file:///C:/Projetos/uninfe/trunk/fontes/NFe.Components.Wsdl/NFse/WSDL/Producao/PBotucatuSP-BSITBR.wsdl" filename="nfseWS0.wsdl" />
+  </Results>
+</DiscoveryClientResultsFile>

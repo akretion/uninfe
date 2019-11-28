@@ -49,11 +49,11 @@ namespace Unimake.Business.DFe.Security
 
                 if (conteudoXML.GetElementsByTagName(tagAssinatura).Count == 0)
                 {
-                    throw new Exception("A tag de assinatura " + tagAssinatura.Trim() + " não existe no XML. (Código do Erro: 5)");
+                    throw new Exception("A tag para assinatura " + tagAssinatura.Trim() + " não existe no XML. (Código do Erro: 5)");
                 }
                 else if (conteudoXML.GetElementsByTagName(tagAtributoId).Count == 0)
                 {
-                    throw new Exception("A tag de assinatura " + tagAtributoId.Trim() + " não existe no XML. (Código do Erro: 4)");
+                    throw new Exception("A tag contendo o ID para assinatura " + tagAtributoId.Trim() + " não existe no XML. (Código do Erro: 4)");
                 }
                 else
                 {

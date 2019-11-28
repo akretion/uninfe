@@ -9,7 +9,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
     {
         #region Private Fields
 
-        private EnviNFe EnviNFe;
+        protected EnviNFe EnviNFe;
 
         #endregion Private Fields
 
@@ -115,8 +115,12 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// </summary>
         public override void Executar()
         {
-            new AssinaturaDigital().Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id");
-            EnviNFe = EnviNFe.LerXML<EnviNFe>(ConteudoXML);
+            if (Configuracoes.TipoDFe == DFE.NFe)
+            {
+                new AssinaturaDigital().Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id");
+                EnviNFe = EnviNFe.LerXML<EnviNFe>(ConteudoXML);
+            }
+
 
             base.Executar();
         }

@@ -484,7 +484,11 @@ namespace NFe.UI.Formularios
                            ufCod == 4104907 /*Castro-PR*/ ||
                            ufCod == 3505302 /*Barra Bonita-SP/*/ ||
                            ufCod == 4202404 /*Blumenau-SC*/ ||
-                           ufCod == 3520004 /*Igaraçu do Tietê-SP*/;
+                           ufCod == 3520004 /*Igaraçu do Tietê-SP*/ ||
+                           ufCod == 3539400 /*Piratininga-SP*/ ||
+                           ufCod == 3516705 /*Garça-SP*/ ||
+                           ufCod == 3514502 /*Duartina-SP*/ ||
+                           ufCod == 3526902 /* Limeira-SP*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }

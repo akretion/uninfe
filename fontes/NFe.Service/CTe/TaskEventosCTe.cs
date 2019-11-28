@@ -39,19 +39,26 @@ namespace NFe.Service
                 //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir tpEmis
                 int tpEmis = dadosEnvEvento.eventos[0].tpEmis;
 
+
+                //Pegar o estado da chave, pois na cOrgao pode vir o estado 91 - Wandrey 22/08/2012
+                int cOrgao = dadosEnvEvento.eventos[0].cOrgao;
+                int ufParaWS = cOrgao;
+                int cUF = cOrgao;
+
                 //Se for carta de correção eletrônica, só aceita envio no ambiente normal.
                 if (dadosEnvEvento.eventos[0].tpEvento == ((int)ConvertTxt.tpEventos.tpEvCCe).ToString())
                 {
                     tpEmis = (int)TipoEmissao.teNormal;
                 }
 
-                //Pegar o estado da chave, pois na cOrgao pode vir o estado 91 - Wandrey 22/08/2012
-                int cOrgao = dadosEnvEvento.eventos[0].cOrgao;
-                int ufParaWS = cOrgao;
-
                 //Se o cOrgao for igual a 91 tenho que mudar a ufParaWS para que na hora de buscar o WSDL para conectar ao serviço, ele consiga encontrar. Wandrey 23/01/2013
                 if (cOrgao == 91)
                     ufParaWS = Convert.ToInt32(dadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
+
+                if (dadosEnvEvento.eventos[0].tpEvento == ((int)ConvertTxt.tpEventos.tpEvEPECCTe).ToString())
+                {
+                    cUF = Convert.ToInt32(dadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
+                }
 
                 //Definir o objeto do WebService
                 WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ufParaWS, dadosEnvEvento.eventos[0].tpAmb, tpEmis, 0);
@@ -60,7 +67,7 @@ namespace NFe.Service
                 object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico, tpEmis));
 
-                wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), cOrgao.ToString());
+                wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), cUF.ToString());
                 wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosEnvEvento.versao);
 
                 //Criar objeto da classe de assinatura digital

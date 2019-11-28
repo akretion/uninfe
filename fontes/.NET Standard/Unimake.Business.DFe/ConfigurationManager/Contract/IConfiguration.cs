@@ -6,7 +6,11 @@
 
         string ArquivoConfigGeral { get; }
         string PastaArqConfig { get; }
-        string SchemaPasta { get; }
+        string PastaArqConfigNFe { get; }
+        string PastaArqConfigNFCe { get; }
+        string PastaSchema { get; }
+        string PastaSchemaNFe { get; }
+        string PastaSchemaNFCe { get; }
 
         #endregion Public Properties
     }

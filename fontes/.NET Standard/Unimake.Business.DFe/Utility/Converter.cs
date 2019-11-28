@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Unimake.Business.DFe.Utility
 {
@@ -51,6 +53,65 @@ namespace Unimake.Business.DFe.Utility
             memoryStream.Seek(0, SeekOrigin.Begin);
 
             return memoryStream;
+        }
+
+        /// <summary>
+        /// Calcular o valor hexadecimal de uma string
+        /// </summary>
+        /// <param name="input">Valor a ser convertido</param>
+        /// <returns>Valor convertido em hexadecimal</returns>
+        public static string ToHexadecimal(string input)
+        {
+            var hexOutput = "";
+            var values = input.ToCharArray();
+            foreach (var letter in values)
+            {
+                // Get the integral value of the character.
+                var value = Convert.ToInt32(letter);
+
+                // Convert the decimal value to a hexadecimal value in string form.
+                hexOutput += string.Format("{0:x}", value);
+            }
+
+            return hexOutput;
+        }
+
+        /// <summary>
+        /// Converte conteúdo para HSA1HashData
+        /// </summary>
+        /// <param name="data">Conteudo a ser convertido</param>
+        /// <returns>Conteúdo convertido para SH1HashData</returns>
+        public static string ToSHA1HashData(string data)
+        {
+            return ToSHA1HashData(data, false);
+        }
+
+        /// <summary>
+        /// Converte conteúdo para HSA1HashData
+        /// </summary>
+        /// <param name="data">Conteudo a ser convertido</param>
+        /// <param name="toUpper">Resultado todo em maiúsculo?</param>
+        /// <returns>Conteúdo convertido para SH1HashData</returns>
+        public static string ToSHA1HashData(string data, bool toUpper)
+        {
+            using (HashAlgorithm algorithm = new SHA1CryptoServiceProvider())
+            {
+                var buffer = algorithm.ComputeHash(Encoding.ASCII.GetBytes(data));
+                var builder = new StringBuilder(buffer.Length);
+                foreach (var num in buffer)
+                {
+                    if (toUpper)
+                    {
+                        builder.Append(num.ToString("X2"));
+                    }
+                    else
+                    {
+                        builder.Append(num.ToString("x2"));
+                    }
+                }
+
+                return builder.ToString();
+            }
         }
 
     }

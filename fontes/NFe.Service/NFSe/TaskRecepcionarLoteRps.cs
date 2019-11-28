@@ -25,6 +25,8 @@ using NFSe.Components;
 using System;
 using System.IO;
 using NFe.Components.WEBFISCO_TECNOLOGIA;
+using System.Security.Cryptography.X509Certificates;
+using System.Xml;
 #if _fw46
 using System.ServiceModel;
 using static NFe.Components.Security.SOAPSecurity;
@@ -162,7 +164,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.CANOAS_RS:
                         cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
                         break;
-               
+
                     case PadroesNFSe.BHISS:
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"1.00\"><versaoDados >1.00</versaoDados ></cabecalho>";
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.BHISS);
@@ -187,7 +189,7 @@ namespace NFe.Service.NFSe
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
                         //if (oDadosEnvLoteRps.tpAmb == 1)
-                            envLoteRps = new Components.PSaoPauloSP.LoteNFe();
+                        envLoteRps = new Components.PSaoPauloSP.LoteNFe();
                         //else
                         //    throw new Exception("Município de São Paulo-SP não dispõe de ambiente de homologação para envio de NFS-e em teste.");
 
@@ -221,6 +223,10 @@ namespace NFe.Service.NFSe
 
                                 case 5220454:
                                     envLoteRps = new Components.PSenadorCanedoGO.nfseWS();
+                                    break;
+
+                                case 3507506:
+                                    envLoteRps = new Components.PBotucatuSP.nfseWS();
                                     break;
                             }
                         }
@@ -258,7 +264,8 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.PORTALFACIL_ACTCON_202:
-                        cabecMsg = "<cabecalho><versaoDados>2.02</versaoDados></cabecalho>";
+                        if (oDadosEnvLoteRps.cMunicipio != 3169901)
+                            cabecMsg = "<cabecalho><versaoDados>2.02</versaoDados></cabecalho>";
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.PORTALFACIL_ACTCON_202);
                         break;
 
@@ -581,7 +588,9 @@ namespace NFe.Service.NFSe
                             oDadosEnvLoteRps.cMunicipio == 4314423 ||
                             oDadosEnvLoteRps.cMunicipio == 3511102 ||
                             oDadosEnvLoteRps.cMunicipio == 3535804 ||
-                            oDadosEnvLoteRps.cMunicipio == 4306932)
+                            oDadosEnvLoteRps.cMunicipio == 4306932 ||
+                            oDadosEnvLoteRps.cMunicipio == 4322400 ||
+                            oDadosEnvLoteRps.cMunicipio == 4302808)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -662,7 +671,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.SOFTPLAN:
                         Components.SOFTPLAN.SOFTPLAN softplan = new Components.SOFTPLAN.SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                        Empresas.Configuracoes[emp].TokenNFse, 
+                                                        Empresas.Configuracoes[emp].TokenNFse,
                                                         Empresas.Configuracoes[emp].TokenNFSeExpire,
                                                         Empresas.Configuracoes[emp].UsuarioWS,
                                                         Empresas.Configuracoes[emp].SenhaWS,
@@ -696,7 +705,7 @@ namespace NFe.Service.NFSe
                                                                                         softplan.TokenExpire,
                                                                                         Empresas.Configuracoes[emp].CNPJ);
                         }
-                        
+
                         break;
 
                     #endregion SOFTPLAN
@@ -799,7 +808,7 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho versao=\"2.03\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.03</versaoDados></cabecalho>";
                         break;
 
-                    case PadroesNFSe.SISPMJP:                        
+                    case PadroesNFSe.SISPMJP:
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.SISPMJP);
                         cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" ><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
@@ -809,13 +818,14 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho versao=\"2.04\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.04</versaoDados></cabecalho>";
                         break;
 
-                    case PadroesNFSe.D2TI:                 
+                    case PadroesNFSe.D2TI:
                         cabecMsg = "<cabecalhoNfseLote xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.ctaconsult.com/nfse\"><versao>1.00</versao><ambiente>2</ambiente></cabecalhoNfseLote>";
                         break;
 
                     case PadroesNFSe.IIBRASIL:
                         Servico = Servicos.NFSeGerarNfse;
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.04\"><versaoDados>2.04</versaoDados></cabecalho>";
+                        GerarTagIntegracao(Empresas.Configuracoes[emp].SenhaWS);
                         break;
 
 
@@ -878,8 +888,48 @@ namespace NFe.Service.NFSe
                 }
             }
         }
+        private void GerarTagIntegracao(string token)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(NomeArquivoXML);
+            string conteudoXML, integridade;
+            conteudoXML = doc.OuterXml;
+            conteudoXML = conteudoXML.Replace("/[^\"x20-\"x7E]+/", conteudoXML);
+            conteudoXML = conteudoXML.Replace("/[ ]+/", conteudoXML);
+            conteudoXML = conteudoXML.Replace(" ", conteudoXML);
+            integridade = Criptografia.GerarRSASHA512(conteudoXML + token);
 
-#region EncryptAssinatura()
+            foreach (object item in ConteudoXML)
+            {
+                if (typeof(XmlElement) == item.GetType())
+                {
+                    XmlNode gerarNfseEnvio = (XmlElement)ConteudoXML.GetElementsByTagName("GerarNfseEnvio")[0];
+                    XmlNode tagintegridade = ConteudoXML.CreateElement("Integridade", ConteudoXML.DocumentElement.NamespaceURI);
+
+                    tagintegridade.InnerXml = (integridade.Trim()).Trim();
+
+                    gerarNfseEnvio.AppendChild(tagintegridade);
+
+                    break;
+                }
+            }
+            try
+            {
+                // Atualizar a string do XML já assinada
+                string StringXMLAssinado = conteudoXML;
+
+                // Gravar o XML Assinado no HD
+                StreamWriter SW_2 = File.CreateText(NomeArquivoXML);
+                SW_2.Write(StringXMLAssinado);
+                SW_2.Close();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        #region EncryptAssinatura()
 
         /// <summary>
         /// Encriptar a tag Assinatura quando for município de Blumenau - SC
@@ -891,9 +941,9 @@ namespace NFe.Service.NFSe
             val.EncryptAssinatura(NomeArquivoXML);
         }
 
-#endregion EncryptAssinatura()
+        #endregion EncryptAssinatura()
 
-#region EnvLoteRps()
+        #region EnvLoteRps()
 
         /// <summary>
         /// Fazer a leitura do conteúdo do XML de lote rps e disponibiliza o conteúdo em um objeto para analise
@@ -914,6 +964,6 @@ namespace NFe.Service.NFSe
             //}
         }
 
-#endregion EnvLoteRps()
+        #endregion EnvLoteRps()
     }
 }

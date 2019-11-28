@@ -1,5 +1,7 @@
-﻿using System.Xml;
+﻿using System.IO;
+using System.Xml;
 using Unimake.Business.DFe.ConfigurationManager;
+using Unimake.Business.DFe.Utility;
 
 namespace Unimake.Business.DFe.Servicos
 {
@@ -11,7 +13,23 @@ namespace Unimake.Business.DFe.Servicos
         /// Definir o nome da tag que contem as propriedades de acordo com o serviço que está sendo executado
         /// </summary>
         /// <returns>Nome da tag</returns>
-        private string DefinirNomeTag() => GetType().Name;
+        private string DefinirNomeTag()
+        {
+            return GetType().Name;
+        }
+
+        private string GetConfigFile(XmlElement elementArquivos)
+        {
+            var configTipo = Configuracoes.TipoDFe.ToString();
+            var arqConfig = elementArquivos.GetElementsByTagName("ArqConfig")[0].InnerText;
+
+            if (arqConfig.Contains(configTipo + "/"))
+            {
+                return Path.Combine(CurrentConfig.PastaArqConfig, arqConfig);
+            }
+
+            return Path.Combine(CurrentConfig.PastaArqConfig, configTipo, arqConfig);
+        }
 
         /// <summary>
         /// Efetua a leitura do XML que contem configurações específicas de cada webservice e atribui o conteúdo nas propriedades do objeto "Configuracoes"
@@ -21,51 +39,160 @@ namespace Unimake.Business.DFe.Servicos
             var doc = new XmlDocument();
             doc.Load(xmlConfigEspecifico);
 
+            #region Leitura do XML herdado, quando tem herança.
+
+            if (doc.GetElementsByTagName("Heranca")[0] != null)
+            {
+                var arqConfigHeranca =
+                    Path.Combine(CurrentConfig.PastaArqConfig,
+                    Configuracoes.TipoDFe.ToString(),
+                    doc.GetElementsByTagName("Heranca")[0].InnerText);
+
+                doc.Load(arqConfigHeranca);
+                LerConfig(doc);
+
+                doc.Load(xmlConfigEspecifico);
+            }
+
+            #endregion
+
+            LerConfig(doc);
+        }
+
+        /// <summary>
+        /// Ler as configurações do XML
+        /// </summary>
+        /// <param name="doc">Documento XML</param>
+        private void LerConfig(XmlDocument doc)
+        {
             var listServicos = doc.GetElementsByTagName("Servicos");
-            foreach(var nodeServicos in listServicos)
+            foreach (var nodeServicos in listServicos)
             {
                 var elementServicos = (XmlElement)nodeServicos;
 
-                if(elementServicos.GetAttribute("ID") == Configuracoes.TipoDFe.ToString())
+                if (elementServicos.GetAttribute("ID") == Configuracoes.TipoDFe.ToString())
                 {
                     var nomeTagServico = DefinirNomeTag();
 
                     var listPropriedades = elementServicos.GetElementsByTagName(nomeTagServico);
 
-                    foreach(var nodePropridades in listPropriedades)
+                    foreach (var nodePropridades in listPropriedades)
                     {
                         var elementPropriedades = (XmlElement)nodePropridades;
-                        if(elementPropriedades.GetAttribute("versao") == Configuracoes.SchemaVersao)
+                        if (elementPropriedades.GetAttribute("versao") == Configuracoes.SchemaVersao)
                         {
-                            Configuracoes.Descricao = elementPropriedades.GetElementsByTagName("Descricao")[0].InnerText;
-                            Configuracoes.WebActionHomologacao = elementPropriedades.GetElementsByTagName("WebActionHomologacao")[0].InnerText;
-                            Configuracoes.WebActionProducao = elementPropriedades.GetElementsByTagName("WebActionProducao")[0].InnerText;
-                            Configuracoes.WebEnderecoHomologacao = elementPropriedades.GetElementsByTagName("WebEnderecoHomologacao")[0].InnerText;
-                            Configuracoes.WebEnderecoProducao = elementPropriedades.GetElementsByTagName("WebEnderecoProducao")[0].InnerText;
-                            Configuracoes.WebContentType = elementPropriedades.GetElementsByTagName("WebContentType")[0].InnerText;
-                            Configuracoes.WebSoapString = elementPropriedades.GetElementsByTagName("WebSoapString")[0].InnerText;
-                            Configuracoes.WebSoapVersion = elementPropriedades.GetElementsByTagName("WebSoapVersion")[0].InnerText;
-                            Configuracoes.WebTagRetorno = elementPropriedades.GetElementsByTagName("WebTagRetorno")[0].InnerText;
-                            Configuracoes.TargetNS = elementPropriedades.GetElementsByTagName("TargetNS")[0].InnerText;
-                            Configuracoes.SchemaVersao = elementPropriedades.GetElementsByTagName("SchemaVersao")[0].InnerText;
-                            Configuracoes.SchemaArquivo = elementPropriedades.GetElementsByTagName("SchemaArquivo")[0].InnerText.Replace("{0}", Configuracoes.SchemaVersao);
-                            Configuracoes.TagAssinatura = elementPropriedades.GetElementsByTagName("TagAssinatura")[0].InnerText;
-                            Configuracoes.TagAtributoID = elementPropriedades.GetElementsByTagName("TagAtributoID")[0].InnerText;
-                            Configuracoes.TagLoteAssinatura = elementPropriedades.GetElementsByTagName("TagLoteAssinatura")[0].InnerText;
-                            Configuracoes.TagLoteAtributoID = elementPropriedades.GetElementsByTagName("TagLoteAtributoID")[0].InnerText;
+                            if (XMLUtility.TagExist(elementPropriedades, "Descricao"))
+                            {
+                                Configuracoes.Descricao = XMLUtility.TagRead(elementPropriedades, "Descricao");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "WebActionHomologacao"))
+                            {
+                                Configuracoes.WebActionHomologacao = XMLUtility.TagRead(elementPropriedades, "WebActionHomologacao");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "WebActionProducao"))
+                            {
+                                Configuracoes.WebActionProducao = XMLUtility.TagRead(elementPropriedades, "WebActionProducao");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "WebEnderecoHomologacao"))
+                            {
+                                Configuracoes.WebEnderecoHomologacao = XMLUtility.TagRead(elementPropriedades, "WebEnderecoHomologacao");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "WebEnderecoProducao"))
+                            {
+                                Configuracoes.WebEnderecoProducao = XMLUtility.TagRead(elementPropriedades, "WebEnderecoProducao");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "WebContentType"))
+                            {
+                                Configuracoes.WebContentType = XMLUtility.TagRead(elementPropriedades, "WebContentType");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "WebSoapString"))
+                            {
+                                Configuracoes.WebSoapString = XMLUtility.TagRead(elementPropriedades, "WebSoapString");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "WebSoapVersion"))
+                            {
+                                Configuracoes.WebSoapVersion = XMLUtility.TagRead(elementPropriedades, "WebSoapVersion");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "WebTagRetorno"))
+                            {
+                                Configuracoes.WebTagRetorno = XMLUtility.TagRead(elementPropriedades, "WebTagRetorno");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "TargetNS"))
+                            {
+                                Configuracoes.TargetNS = XMLUtility.TagRead(elementPropriedades, "TargetNS");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "SchemaVersao"))
+                            {
+                                Configuracoes.SchemaVersao = XMLUtility.TagRead(elementPropriedades, "SchemaVersao");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "SchemaArquivo"))
+                            {
+                                Configuracoes.SchemaArquivo = XMLUtility.TagRead(elementPropriedades, "SchemaArquivo").Replace("{0}", Configuracoes.SchemaVersao);
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "TagAssinatura"))
+                            {
+                                Configuracoes.TagAssinatura = XMLUtility.TagRead(elementPropriedades, "TagAssinatura");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "TagAtributoID"))
+                            {
+                                Configuracoes.TagAtributoID = XMLUtility.TagRead(elementPropriedades, "TagAtributoID");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "TagLoteAssinatura"))
+                            {
+                                Configuracoes.TagLoteAssinatura = XMLUtility.TagRead(elementPropriedades, "TagLoteAssinatura");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "TagLoteAtributoID"))
+                            {
+                                Configuracoes.TagLoteAtributoID = XMLUtility.TagRead(elementPropriedades, "TagLoteAtributoID");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "UrlQrCodeHomologacao"))
+                            {
+                                Configuracoes.UrlQrCodeHomologacao = XMLUtility.TagRead(elementPropriedades, "UrlQrCodeHomologacao");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "UrlQrCodeProducao"))
+                            {
+                                Configuracoes.UrlQrCodeProducao = XMLUtility.TagRead(elementPropriedades, "UrlQrCodeProducao");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "UrlChaveHomologacao"))
+                            {
+                                Configuracoes.UrlChaveHomologacao = XMLUtility.TagRead(elementPropriedades, "UrlChaveHomologacao");
+                            }
+
+                            if (XMLUtility.TagExist(elementPropriedades, "UrlChaveProducao"))
+                            {
+                                Configuracoes.UrlChaveProducao = XMLUtility.TagRead(elementPropriedades, "UrlChaveProducao");
+                            }
 
                             //Verificar se existem schemas específicos de validação
-                            if(elementPropriedades.GetElementsByTagName("SchemasEspecificos")[0] != null)
+                            if (XMLUtility.TagExist(elementPropriedades, "SchemasEspecificos"))
                             {
                                 var listSchemasEspecificios = elementPropriedades.GetElementsByTagName("SchemasEspecificos");
 
-                                foreach(var nodeSchemasEspecificos in listSchemasEspecificios)
+                                foreach (var nodeSchemasEspecificos in listSchemasEspecificios)
                                 {
                                     var elemenSchemasEspecificos = (XmlElement)nodeSchemasEspecificos;
 
                                     var listTipo = elemenSchemasEspecificos.GetElementsByTagName("Tipo");
 
-                                    foreach(var nodeTipo in listTipo)
+                                    foreach (var nodeTipo in listTipo)
                                     {
                                         var elementTipo = (XmlElement)nodeTipo;
                                         var idSchemaEspecifico = elementTipo.GetElementsByTagName("ID")[0].InnerText;
@@ -118,7 +245,7 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         protected internal void Inicializar()
         {
-            if(!Configuracoes.Definida)
+            if (!Configuracoes.Definida)
             {
                 DefinirConfiguracao();
                 LerXmlConfigGeral();
@@ -135,24 +262,25 @@ namespace Unimake.Business.DFe.Servicos
 
             var listConfiguracoes = doc.GetElementsByTagName("Configuracoes");
 
-            foreach(XmlNode nodeConfiguracoes in listConfiguracoes)
+            foreach (XmlNode nodeConfiguracoes in listConfiguracoes)
             {
                 var elementConfiguracoes = (XmlElement)nodeConfiguracoes;
                 var listArquivos = elementConfiguracoes.GetElementsByTagName("Arquivo");
 
-                foreach(var nodeArquivos in listArquivos)
+                foreach (var nodeArquivos in listArquivos)
                 {
                     var elementArquivos = (XmlElement)nodeArquivos;
 
-                    if(elementArquivos.GetAttribute("ID") == Configuracoes.CodigoUF.ToString())
+                    if (elementArquivos.GetAttribute("ID") != Configuracoes.CodigoUF.ToString())
                     {
-                        Configuracoes.Nome = elementArquivos.GetElementsByTagName("Nome")[0].InnerText;
-                        Configuracoes.NomeUF = elementArquivos.GetElementsByTagName("UF")[0].InnerText;
-
-                        LerXmlConfigEspecifico(CurrentConfig.PastaArqConfig + elementArquivos.GetElementsByTagName("ArqConfig")[0].InnerText);
-
-                        break;
+                        continue;
                     }
+
+                    Configuracoes.Nome = elementArquivos.GetElementsByTagName("Nome")[0].InnerText;
+                    Configuracoes.NomeUF = elementArquivos.GetElementsByTagName("UF")[0].InnerText;
+                    LerXmlConfigEspecifico(GetConfigFile(elementArquivos));
+
+                    break;
                 }
             }
         }

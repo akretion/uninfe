@@ -81,6 +81,7 @@
             "DIMEP",
             "ELGIN",
             "ELGIN_II",
+            "ELGIN_SMART",
             "EPSON",
             "EMULADOR",
             "NITERE",

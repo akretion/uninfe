@@ -1352,8 +1352,9 @@ namespace NFe.Service
                     validar.ValidarAssinarXML(arquivo);
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                new ValidarXML(arquivo, "Ocorreu um erro ao assinar o XML: " + ex.Message);
             }
         }
 

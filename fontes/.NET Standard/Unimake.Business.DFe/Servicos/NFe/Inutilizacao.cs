@@ -15,7 +15,8 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// </summary>
         protected override void DefinirConfiguracao()
         {
-            InutNFe xml = InutNFe;
+            var xml = new InutNFe();
+            xml = xml.LerXML<InutNFe>(ConteudoXML);
 
             if (!Configuracoes.Definida)
             {
@@ -82,9 +83,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         private InutNFe InutNFe;
 
-        public Inutilizacao(InutNFe inutNFe, Configuracao configuracao) : this(inutNFe.GerarXML(), configuracao)
-        {
-            InutNFe = inutNFe;
-        }
+        public Inutilizacao(InutNFe inutNFe, Configuracao configuracao)
+            : this(inutNFe.GerarXML(), configuracao) => InutNFe = inutNFe;
     }
 }

@@ -833,28 +833,30 @@ namespace NFe.Settings
             bool ehNFCe = (modelo == "65");
             string WSDL = string.Empty;
 
-            switch ((NFe.Components.TipoEmissao)tipoEmissao)
+            switch ((TipoEmissao)tipoEmissao)
             {
-                case NFe.Components.TipoEmissao.teSVCRS:
+                case TipoEmissao.teSVCRS:
                     CodigoUF = 902;
                     break;
 
-                case NFe.Components.TipoEmissao.teSVCSP:
+                case TipoEmissao.teSVCSP:
                     CodigoUF = 903;
                     break;
 
-                case NFe.Components.TipoEmissao.teSVCAN:
+                case TipoEmissao.teSVCAN:
                     CodigoUF = 904;
                     break;
 
-                case NFe.Components.TipoEmissao.teEPEC:
+                case TipoEmissao.teEPEC:
                     switch (servico)
                     {
                         case Servicos.EventoEPEC:
-                            if (CodigoUF == 35 && ehNFCe) //Se for NFCe em São Paulo, tem um ambiente para EPEC exclusivo.
-                                CodigoUF = 906;
-                            else
-                                CodigoUF = 905;
+                            //Se for NFCe em São Paulo, tem um ambiente para EPEC exclusivo.
+                            CodigoUF = (CodigoUF == 35 && ehNFCe ? 906 : 905);
+                            break;
+
+                        case Servicos.CTeRecepcaoEvento:
+                            CodigoUF = (CodigoUF == 43 ? 902 : 903);
                             break;
                     }
                     break;

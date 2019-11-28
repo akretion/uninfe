@@ -191,6 +191,15 @@ namespace NFe.Components
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4202404-";
                                 break;
 
+                            case 4322400: //Uruguaiana-RS
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4322400-";
+                                break;
+
+                            case 4302808: //Caçapava do Sul-RS 
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4302808-";
+                                break;
+
+
                             default:
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                                 break;

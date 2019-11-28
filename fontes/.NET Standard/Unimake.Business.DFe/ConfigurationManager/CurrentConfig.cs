@@ -10,11 +10,17 @@ namespace Unimake.Business.DFe.ConfigurationManager
 
         #endregion Private Fields
 
+        #region Public Properties
+
+        public static Servicos.DFE DFE { get; set; }
+
+        #endregion
+
         #region Private Methods
 
         private static IConfiguration GetConfiguration()
         {
-            if(_configuration == null)
+            if (_configuration == null)
                 _configuration = ConfigurationService.GetFactory()?.Build() ?? new Configuration();
 
             return _configuration;
@@ -26,7 +32,11 @@ namespace Unimake.Business.DFe.ConfigurationManager
 
         public static string ArquivoConfigGeral => GetConfiguration().ArquivoConfigGeral;
         public static string PastaArqConfig => GetConfiguration().PastaArqConfig;
-        public static string SchemaPasta => GetConfiguration().SchemaPasta;
+        public static string PastaArqConfigNFe => GetConfiguration().PastaArqConfigNFe;
+        public static string PastaArqConfigNFCe => GetConfiguration().PastaArqConfigNFCe;
+        public static string PastaSchema => GetConfiguration().PastaSchema;
+        public static string PastaSchemaNFe => GetConfiguration().PastaSchemaNFe;
+        public static string PastaSchemaNFCe => GetConfiguration().PastaSchemaNFCe;
 
         #endregion Public Properties
     }

@@ -125,25 +125,25 @@
     <When Condition="'$(Configuration)|$(Platform)' == 'Release46_x86|x86'">
       <ItemGroup>
         <Reference Include="Unimake.SAT">
-          <HintPath>..\packages\Unimake.SAT.20191007.1001.0\lib\net462\x64\Unimake.SAT.dll</HintPath>
+          <HintPath>..\packages\Unimake.SAT.20191120.902.0\lib\net462\x64\Unimake.SAT.dll</HintPath>
         </Reference>
       </ItemGroup>
     </When>
     <When Condition="'$(Configuration)|$(Platform)' == 'Release46_x64|x64'">
       <ItemGroup>
         <Reference Include="Unimake.SAT">
-          <HintPath>..\packages\Unimake.SAT.20191007.1001.0\lib\net462\x64\Unimake.SAT.dll</HintPath>
+          <HintPath>..\packages\Unimake.SAT.20191120.902.0\lib\net462\x64\Unimake.SAT.dll</HintPath>
         </Reference>
       </ItemGroup>
     </When>
     <Otherwise>
       <ItemGroup>
         <Reference Include="Unimake.SAT">
-          <HintPath>..\packages\Unimake.SAT.20191007.1001.0\lib\net462\AnyCPU\Unimake.SAT.dll</HintPath>
+          <HintPath>..\packages\Unimake.SAT.20191120.902.0\lib\net462\AnyCPU\Unimake.SAT.dll</HintPath>
           <Private>True</Private>
         </Reference>
       </ItemGroup>
-    </Otherwise>
+    </Otherwise>  
   </Choose>
   <ItemGroup>
     <Compile Include="Program.cs" />

@@ -345,6 +345,48 @@ namespace NFSe.Components
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
             });
             #endregion XML de lote RPS - Entre-Ijuís - RS
+
+            #region XML de lote RPS - Uruguaiana-RS
+
+            SchemaXML.InfSchemas.Add("NFSE-PRONIN-4322400-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfRps",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+
+                //Tag = "EnviarLoteRpsEnvio",
+                //ID = SchemaXML.InfSchemas.Count + 1,
+                //ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
+                //Descricao = "XML de Lote RPS",
+                //TagAssinatura = "Rps",
+                //TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                //TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                //TagLoteAtributoId = "LoteRps",
+                //TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion XML de lote RPS - Uruguaiana-RS
+
+            #region XML de lote RPS - Caçapava do Sul-RS
+
+            SchemaXML.InfSchemas.Add("NFSE-PRONIN-4302808-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion XML de lote RPS - Caçapava do Sul-RS
         }
     }
 }

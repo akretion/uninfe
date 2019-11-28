@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Unimake.Business.DFe": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Windows\\System32\\cscript.exe",
+      "commandLineArgs": "/x \"Z:\\uninfe\\trunk\\fontes\\.NET Standard\\Unimake.Business.DFe\\Interop\\ConsultarStatus.vbs\"",
+      "nativeDebugging": false
+    }
+  }
+}

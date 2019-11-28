@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using NFe.Components.Abstract;
+using NFe.Components.HCianortePR;
+using System;
 using System.Reflection;
-using System.Text;
 using System.Xml;
-using System.Xml.Serialization;
-using NFe.Components.Abstract;
-using NFe.Components.br.com.sigiss.cianorte.p;
 
 namespace NFe.Components.SigCorp.CianortePR.h
 {
     public class SigCorpH : EmiteNFSeBase
     {
         WebServiceSigISS service = new WebServiceSigISS();
+
         public override string NameSpaces
         {
             get
@@ -22,45 +18,67 @@ namespace NFe.Components.SigCorp.CianortePR.h
             }
         }
 
-        #region constrututores
+        #region construtores
+
         public SigCorpH(TipoAmbiente tpAmb, string pastaRetorno)
             : base(tpAmb, pastaRetorno)
         {
-
         }
-        #endregion
+
+        #endregion construtores
 
         #region Métodos
+
         public override void EmiteNF(string file)
         {
-           throw new Exceptions.ServicoInexistenteException();
+            tcDescricaoRps oTcDescricaoRps = ReadXML<tcDescricaoRps>(file);
+            tcEstruturaDescricaoErros[] tcErros = null;
+            tcRetornoNota result = service.GerarNota(oTcDescricaoRps, out tcErros);
+            string strResult = base.CreateXML(result, tcErros);
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
         {
-            throw new Exceptions.ServicoInexistenteException();
+            tcDadosCancelaNota oTcDadosCancela = ReadXML<tcDadosCancelaNota>(file);
+            tcEstruturaDescricaoErros[] tcErros = null;
+            tcRetornoNota result = service.CancelarNota(oTcDadosCancela, out tcErros);
+            string strResult = base.CreateXML(result, tcErros);
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
         {
-            throw new Exceptions.ServicoInexistenteException();
+            tcDadosConsultaNota oTcDadosConsultaNota = ReadXML<tcDadosConsultaNota>(file);
+            tcEstruturaDescricaoErros[] tcErros = null;
+
+            tcRetornoNota result = service.ConsultarNotaValida(oTcDadosConsultaNota, out tcErros);
+            string strResult = base.CreateXML(result, tcErros);
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
         {
             throw new Exceptions.ServicoInexistenteException();
         }
-
         public override void ConsultarNfse(string file)
         {
-            throw new Exceptions.ServicoInexistenteException();
+            tcDadosPrestador oTcDadosPrestador = ReadXML<tcDadosPrestador>(file);
+            tcEstruturaDescricaoErros[] tcErros = null;
+            tcDadosNota result = service.ConsultarNotaPrestador(oTcDadosPrestador, NumeroNota(file, "ConsultarNotaPrestador"), "", out tcErros);
+            string strResult = base.CreateXML(result, tcErros);
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)
         {
             throw new Exceptions.ServicoInexistenteException();
         }
-        
+
         private T ReadXML<T>(string file)
             where T : new()
         {
@@ -104,12 +122,11 @@ namespace NFe.Components.SigCorp.CianortePR.h
                 {
                     if (n.Name.Equals("Nota"))
                     {
-                        nNumeroNota = Convert.ToInt32(n.InnerText);
+                        nNumeroNota = Convert.ToInt32("0" + n.InnerText);
                         break;
                     }
                 }
             }
-
             return nNumeroNota;
         }
 
@@ -117,12 +134,13 @@ namespace NFe.Components.SigCorp.CianortePR.h
         {
             PropertyInfo pi = result.GetType().GetProperty(propertyName);
 
-            if (pi != null)
+            if (pi != null && !String.IsNullOrEmpty(value.ToString()))
             {
                 value = Convert.ChangeType(value, pi.PropertyType);
                 pi.SetValue(result, value, null);
             }
         }
-        #endregion
+
+        #endregion Métodos
     }
 }

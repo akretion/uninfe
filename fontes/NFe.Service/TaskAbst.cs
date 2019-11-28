@@ -3245,7 +3245,9 @@ namespace NFe.Service
                         cMunicipio == 4314423 ||
                         cMunicipio == 3511102 ||
                         cMunicipio == 3535804 ||
-                        cMunicipio == 4306932)
+                        cMunicipio == 4306932 ||
+                        cMunicipio == 4322400 ||
+                        cMunicipio == 4302808)
                     {
                         retorno = false;
                     }

@@ -13,7 +13,7 @@ namespace Unimake.Security.Platform
         /// Abre a tela de dialogo do windows para seleção do certificado digital
         /// </summary>
         /// <returns>Retorna a coleção de certificados digitais</returns>
-        public X509Certificate2Collection AbrirTelaSelecao()
+        public static X509Certificate2Collection AbrirTelaSelecao()
         {
             var store = new X509Store("MY", StoreLocation.CurrentUser);
             store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
@@ -30,7 +30,7 @@ namespace Unimake.Security.Platform
         /// </summary>
         /// <param name="serialNumberOrThumbPrint">Serial number ou Thumb print do certificado digital a ser utilizado na localização</param>
         /// <returns>Certificado digital</returns>
-        public X509Certificate2 BuscarCertificadoDigital(string serialNumberOrThumbPrint)
+        public static X509Certificate2 BuscarCertificadoDigital(string serialNumberOrThumbPrint)
         {
             var x509Cert = new X509Certificate2();
             var store = new X509Store("MY", StoreLocation.CurrentUser);
@@ -41,12 +41,12 @@ namespace Unimake.Security.Platform
 
             //Primeiro tento encontrar pelo thumbprint
             var collection3 = collection2.Find(X509FindType.FindByThumbprint, serialNumberOrThumbPrint, false);
-            if(collection3.Count <= 0)
+            if (collection3.Count <= 0)
             {
                 //Se não encontrou pelo thumbprint tento pelo SerialNumber pegando o mesmo thumbprint que veio no arquivo de configurações para ver se não encontro.
                 collection3 = collection2.Find(X509FindType.FindBySerialNumber, serialNumberOrThumbPrint, false);
 
-                if(collection3.Count <= 0)
+                if (collection3.Count <= 0)
                 {
                     throw new Exception("Certificado digital informado não foi localizado no repositório do windows.");
                 }
@@ -63,11 +63,11 @@ namespace Unimake.Security.Platform
         /// <param name="certificadoDigital">Caminho do certificado digital. Ex. c:\certificados\certificado.pfx</param>
         /// <param name="senha">Senha utilizada para instalar o arquivo .pfx</param>
         /// <returns>Certificado Digital</returns>
-        public X509Certificate2 CarregarCertificadoDigitalA1(string certificadoDigital, string senha)
+        public static X509Certificate2 CarregarCertificadoDigitalA1(string certificadoDigital, string senha)
         {
             var x509Cert = new X509Certificate2();
 
-            using(var fs = new FileStream(certificadoDigital, FileMode.Open, FileAccess.Read))
+            using (var fs = new FileStream(certificadoDigital, FileMode.Open, FileAccess.Read))
             {
                 var buffer = new byte[fs.Length];
                 fs.Read(buffer, 0, buffer.Length);
@@ -83,7 +83,10 @@ namespace Unimake.Security.Platform
         /// <param name="bytes">Bytes do certificado para carga do mesmo</param>
         /// <param name="senha">Senha utilizada para instalar o certificado, será usada para carga do mesmo</param>
         /// <returns>Certificado Digital</returns>
-        public X509Certificate2 CarregarCertificadoDigitalA1(byte[] bytes, string senha) => new X509Certificate2(bytes, senha);
+        public static X509Certificate2 CarregarCertificadoDigitalA1(byte[] bytes, string senha)
+        {
+            return new X509Certificate2(bytes, senha);
+        }
 
         /// <summary>
         /// Executa tela com os certificados digitais instalados para seleção do usuário
@@ -93,7 +96,7 @@ namespace Unimake.Security.Platform
         {
             var scollection = AbrirTelaSelecao();
 
-            if(scollection.Count > 0)
+            if (scollection.Count > 0)
             {
                 return scollection[0];
             }
@@ -104,15 +107,15 @@ namespace Unimake.Security.Platform
         /// <summary>
         /// Converte o arquivo do certificado em um array de bytes
         /// </summary>
-        /// <param name="arquivo"></param>
+        /// <param name="arquivo">Nome do arquivo</param>
         /// <returns>Array de bytes do arquivo do certificado</returns>
-        public byte[] ToByteArray(string arquivo)
+        public static byte[] ToByteArray(string arquivo)
         {
             byte[] result = null;
 
-            using(Stream responseStream = new FileStream(arquivo, FileMode.Open))
+            using (Stream responseStream = new FileStream(arquivo, FileMode.Open))
             {
-                using(var memoryStream = new MemoryStream())
+                using (var memoryStream = new MemoryStream())
                 {
                     responseStream.CopyTo(memoryStream);
                     result = memoryStream.ToArray();
@@ -127,16 +130,16 @@ namespace Unimake.Security.Platform
         /// </summary>
         /// <param name="certificado">Certificado digital</param>
         /// <returns>true = Certificado vencido</returns>
-        public bool Vencido(X509Certificate2 certificado)
+        public static bool Vencido(X509Certificate2 certificado)
         {
             var retorna = false;
 
-            if(certificado == null)
+            if (certificado == null)
             {
                 throw new ExceptionCertificadoDigital();
             }
 
-            if(DateTime.Compare(DateTime.Now, certificado.NotAfter) > 0)
+            if (DateTime.Compare(DateTime.Now, certificado.NotAfter) > 0)
             {
                 retorna = true;
             }

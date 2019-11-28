@@ -174,7 +174,9 @@ namespace NFe.Components
                                     cMunicipio == 4314423 ||
                                     cMunicipio == 3511102 ||
                                     cMunicipio == 3535804 ||
-                                    cMunicipio == 4306932)
+                                    cMunicipio == 4306932 ||
+                                    cMunicipio == 4322400 ||
+                                    cMunicipio == 4302808)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -193,7 +195,9 @@ namespace NFe.Components
                                     cMunicipio == 4314423 ||
                                     cMunicipio == 3511102 ||
                                     cMunicipio == 3535804 || 
-                                    cMunicipio == 4306932)
+                                    cMunicipio == 4306932 ||
+                                    cMunicipio == 4322400 ||
+                                    cMunicipio == 4302808)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -209,7 +213,9 @@ namespace NFe.Components
                                     cMunicipio == 4314423 ||
                                     cMunicipio == 3511102 ||
                                     cMunicipio == 3535804 ||
-                                    cMunicipio == 4306932)
+                                    cMunicipio == 4306932 ||
+                                    cMunicipio == 4322400 ||
+                                    cMunicipio == 4302808)
                                     return "BasicHttpBinding_INFSEConsultas";
                                 else
                                     return "basic_INFSEConsultas";
@@ -536,8 +542,7 @@ namespace NFe.Components
 #endif
             if (cUF.ToString().Length >= 7) //Somente para muncípios, não pode fazer para Estados
             {
-                string cUFs = "3106200 / "; // Belo Horizonte
-                cUFs += "2910800 / "; //Feira de Santana
+                string cUFs = "2910800 / "; //Feira de Santana
 
                 if (cUFs.Contains(cUF.ToString()))
                 {

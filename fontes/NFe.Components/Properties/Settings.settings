@@ -8,9 +8,6 @@
     <Setting Name="NFe_Components_br_gov_rs_erechim_nfse_www_p_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://www.nfse.erechim.rs.gov.br:8182/NfseService/NfseService</Value>
     </Setting>
-    <Setting Name="NFe_Components_br_com_sigiss_botucatu_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://botucatu.sigiss.com.br:443/botucatu/ws/sigiss_ws.php</Value>
-    </Setting>
     <Setting Name="NFe_Components_br_net_taquarituba_fiorilli_p_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://fiorilli.taquarituba.net.br/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
@@ -158,9 +155,6 @@
     <Setting Name="NFe_Components_br_gov_pr_curitiba_pilotoisscuritiba_h_WS_x0020___x0020_NFS_e_x0020_V1_0_0_1" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://pilotoisscuritiba.curitiba.pr.gov.br/nfse_ws/nfsews.asmx</Value>
     </Setting>
-    <Setting Name="NFe_Components_br_com_sigiss_igarape_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://igarape.sigiss.com.br:443/igarape/ws/sigiss_ws.php</Value>
-    </Setting>
     <Setting Name="NFe_Components_br_com_consist_patosdeminas_h_eISSWService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://200.162.29.193:8082/axis2/services/eISSWService.eISSWServiceHttpSoap11Endpoint/</Value>
     </Setting>
@@ -169,9 +163,6 @@
     </Setting>
     <Setting Name="NFe_Components_br_com_el_colatina_p_RpsServiceService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://nfse00.el.com.br:19080/nfse_es_colatina/RpsService</Value>
-    </Setting>
-    <Setting Name="NFe_Components_br_com_sigiss_testeigarape_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://testeigarape.sigiss.com.br:443/testeigarape/ws/sigiss_ws.php</Value>
     </Setting>
     <Setting Name="NFe_Components_br_com_sigiss_riogrande_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://riogrande.sigiss.com.br:443/riogrande/ws/sigiss_ws.php</Value>
@@ -277,9 +268,6 @@
     </Setting>
     <Setting Name="NFe_Components_PNovaMutumMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://www.gp.srv.br/tributario_novamutum/servlet/anfse_web_service</Value>
-    </Setting>
-    <Setting Name="NFe_Components_br_com_sigiss_botucatu_h_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://testebotucatu.sigiss.com.br:443/botucatu/ws/sigiss_ws.php</Value>
     </Setting>
     <Setting Name="NFe_Components_HMacapaAP_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
@@ -748,6 +736,42 @@
     </Setting>
     <Setting Name="NFe_Components_HPeixotoAzevedoMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://www.gp.srv.br/tributario_homologacao/servlet/anfse_web_service</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HCianortePR_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://testecianorte.sigiss.com.br:443/testecianorte/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HPiratiningaSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPiratiningaSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://179.127.59.251:5661/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PUruguaianaRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://uruguaiana-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCacapavaDoSulRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://200.237.90.22:8082/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HIgarapeMG_NfseServiceImplVgpService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.homolog.govdigital.com.br/ws/vgp</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PIgarapeMG_NfseServiceImplVgpService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.govdigital.com.br/ws/vgp</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HGarcaSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PGarcaSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://179.96.132.27:2014/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HDuartinaSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PDuartinaSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://186.224.0.62:5661/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PBotucatuSP_nfseWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://gestaopublica.botucatu.bsit-br.com.br/integracao/services/nfseWS</Value>
     </Setting>
   </Settings>
 </SettingsFile>
