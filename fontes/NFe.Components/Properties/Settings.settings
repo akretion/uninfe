@@ -773,5 +773,98 @@
     <Setting Name="NFe_Components_PBotucatuSP_nfseWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://gestaopublica.botucatu.bsit-br.com.br/integracao/services/nfseWS</Value>
     </Setting>
+    <Setting Name="NFe_Components_HAlvaresMachadoSP_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nfse.alvaresmachado.sp.gov.br/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PAlvaresMachadoSP_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nfse.alvaresmachado.sp.gov.br/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HOuroFinoMG_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_POuroFinoMG_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://189.126.224.190:5661/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HXangrilaRS_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PXangrilaRS_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://168.196.181.66:8080/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPaulistaPE_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/paulista/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPaulistaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/paulista/WSNFSE.ConsultarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPaulistaPE_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/paulista/WSNFSE.ConsultarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPaulistaPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/paulista/WSNFSE.ConsultarNfsePorRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPaulistaPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/paulista/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPaulistaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/paulista/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HPaulistaPE_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testepau/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HPaulistaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testepau/WSNFSE.ConsultarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HPaulistaPE_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testepau/WSNFSE.ConsultarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HPaulistaPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testepau/WSNFSE.ConsultarNfsePorRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HPaulistaPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testepau/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HPaulistaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testepau/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PMossoroRN_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/mossoro/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PMossoroRN_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/mossoro/WSNFSE.ConsultarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PMossoroRN_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/mossoro/WSNFSE.ConsultarNfsePorRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PMossoroRN_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/mossoro/WSNFSE.ConsultarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PMossoroRN_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/mossoro/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PMossoroRN_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/mossoro/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HMossoroRN_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testemos/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HMossoroRN_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testemos/WSNFSE.ConsultarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HMossoroRN_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testemos/WSNFSE.ConsultarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HMossoroRN_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testemos/WSNFSE.ConsultarNfsePorRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HMossoroRN_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testemos/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HMossoroRN_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testemos/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_LoandaPR_NfsePortService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://200.2.100.110:8080/WebEloWS/nfseService</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -1,24 +1,26 @@
-﻿using System.Xml;
+﻿using System.Runtime.InteropServices;
+using System.Xml;
 using Unimake.Business.DFe.Security;
 using Unimake.Business.DFe.Utility;
 using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
+    [ComVisible(true)]
     public class Autorizacao: ServicoBase
     {
-        #region Private Fields
-
-        protected EnviNFe EnviNFe;
-
-        #endregion Private Fields
-
         #region Private Constructors
 
         private Autorizacao(XmlDocument conteudoXML, Configuracao configuracao)
                     : base(conteudoXML, configuracao) { }
 
         #endregion Private Constructors
+
+        #region Protected Properties
+
+        protected EnviNFe EnviNFe { get; set; }
+
+        #endregion Protected Properties
 
         #region Protected Methods
 
@@ -99,8 +101,13 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Constructors
 
+        public Autorizacao()
+            : base()
+        {
+        }
+
         public Autorizacao(EnviNFe enviNFe, Configuracao configuracao)
-                            : this(enviNFe.GerarXML(), configuracao)
+                            : this(enviNFe?.GerarXML() ?? throw new System.ArgumentNullException(nameof(enviNFe)), configuracao)
         {
             EnviNFe = enviNFe;
             Inicializar();
@@ -115,12 +122,11 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// </summary>
         public override void Executar()
         {
-            if (Configuracoes.TipoDFe == DFE.NFe)
+            if(Configuracoes.TipoDFe == DFE.NFe)
             {
                 new AssinaturaDigital().Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id");
                 EnviNFe = EnviNFe.LerXML<EnviNFe>(ConteudoXML);
             }
-
 
             base.Executar();
         }

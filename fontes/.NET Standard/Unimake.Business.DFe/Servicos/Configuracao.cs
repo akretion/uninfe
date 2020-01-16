@@ -93,7 +93,7 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// Certificado digital
         /// </summary>
-        public X509Certificate2 CertificadoDigital;
+        public X509Certificate2 CertificadoDigital { get; set; }
 
         /// <summary>
         /// Endereço WebService do ambiente de homologação

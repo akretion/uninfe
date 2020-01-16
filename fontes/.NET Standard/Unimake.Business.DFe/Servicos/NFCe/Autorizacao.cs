@@ -4,7 +4,7 @@ using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFCe
 {
-    public class Autorizacao : NFe.Autorizacao
+    public class Autorizacao: NFe.Autorizacao
     {
         public Autorizacao(EnviNFe enviNFe, Configuracao configuracao)
                       : base(enviNFe, configuracao) { }
@@ -24,9 +24,9 @@ namespace Unimake.Business.DFe.Servicos.NFCe
         /// </summary>
         private void MontarQrCode()
         {
-            for (var i = 0; i < EnviNFe.NFe.Length; i++)
+            for(var i = 0; i < EnviNFe.NFe.Count; i++)
             {
-                if (EnviNFe.NFe[i].InfNFeSupl == null)
+                if(EnviNFe.NFe[i].InfNFeSupl == null)
                 {
                     EnviNFe.NFe[i].InfNFeSupl = new InfNFeSupl();
 
@@ -34,7 +34,7 @@ namespace Unimake.Business.DFe.Servicos.NFCe
                     var urlChave = (Configuracoes.TipoAmbiente == TipoAmbiente.Homologacao ? Configuracoes.UrlChaveHomologacao : Configuracoes.UrlChaveProducao);
                     var paramLinkQRCode = string.Empty;
 
-                    if (EnviNFe.NFe[i].InfNFe[0].Ide.TpEmis == TipoEmissao.ContingenciaOffLine)
+                    if(EnviNFe.NFe[i].InfNFe[0].Ide.TpEmis == TipoEmissao.ContingenciaOffLine)
                     {
                         paramLinkQRCode = EnviNFe.NFe[i].InfNFe[0].Chave + "|" +
                             "2" + "|" +
@@ -52,7 +52,7 @@ namespace Unimake.Business.DFe.Servicos.NFCe
                             Configuracoes.CSCIDToken.ToString();
                     }
 
-                    string hashQRCode = Converter.ToSHA1HashData(paramLinkQRCode.Trim() + Configuracoes.CSC, true);
+                    var hashQRCode = Converter.ToSHA1HashData(paramLinkQRCode.Trim() + Configuracoes.CSC, true);
 
                     EnviNFe.NFe[i].InfNFeSupl.QrCode = urlQrCode + "?p=" + paramLinkQRCode.Trim() + "|" + hashQRCode.Trim();
                     EnviNFe.NFe[i].InfNFeSupl.UrlChave = urlChave;

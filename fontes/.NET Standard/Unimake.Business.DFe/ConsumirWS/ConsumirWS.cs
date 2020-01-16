@@ -41,7 +41,7 @@ namespace Unimake.Business.DFe
             try
             {
                 Uri urlpost = new Uri(soap.EnderecoWeb);
-                string soapXML = EnveloparXML(soap, "", xml.OuterXml);
+                string soapXML = EnveloparXML(soap, xml.OuterXml);
                 byte[] buffer2 = Encoding.UTF8.GetBytes(soapXML);
 
                 ServicePointManager.Expect100Continue = false;
@@ -88,17 +88,9 @@ namespace Unimake.Business.DFe
         /// <param name="xmlHeader">string do XML a ser enviado no cabeçalho do soap</param>
         /// <param name="xmlBody">string do XML a ser enviado no corpo do soap</param>
         /// <returns>string do envelope (soap)</returns>
-        private static string EnveloparXML(WSSoap soap, string xmlHeader, string xmlBody)
+        private static string EnveloparXML(WSSoap soap, string xmlBody)
         {
             string retorna = string.Empty;
-
-            if (!string.IsNullOrEmpty(xmlHeader))
-            {
-                if (xmlHeader.IndexOf("?>") >= 0)
-                {
-                    xmlHeader = xmlHeader.Substring(xmlHeader.IndexOf("?>") + 2);
-                }
-            }
 
             if (xmlBody.IndexOf("?>") >= 0)
             {
@@ -106,26 +98,7 @@ namespace Unimake.Business.DFe
             }
 
             retorna = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
-
-            if (!string.IsNullOrEmpty(soap.SoapString))
-            {
-                //Soap string definido nas configurações
-                retorna += soap.SoapString.Replace("{xmlHeader}", xmlHeader).Replace("{ActionWeb}", soap.ActionWeb).Replace("{xmlBody}", xmlBody);
-            }
-            else
-            {
-                //Soap string default
-                retorna += "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">";
-                retorna += "<soap:Header>";
-                retorna += xmlHeader;
-                retorna += "</soap:Header>";
-                retorna += "<soap:Body>";
-                retorna += "<nfeDadosMsg xmlns=\"" + soap.ActionWeb + "\">";
-                retorna += xmlBody;
-                retorna += "</nfeDadosMsg>";
-                retorna += "</soap:Body>";
-                retorna += "</soap:Envelope>";
-            }
+            retorna += soap.SoapString.Replace("{xmlBody}", xmlBody);
 
             return retorna;
         }

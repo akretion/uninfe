@@ -46,8 +46,6 @@ namespace NFe.Service.NFSe
                 switch (padraoNFSe)
                 {
                     case PadroesNFSe.PUBLIC_SOFT:
-                        if (oDadosPedURLNfse.cMunicipio.Equals(2610707))
-                            cabecMsg = "N9M=";
                         break;
                 }
 

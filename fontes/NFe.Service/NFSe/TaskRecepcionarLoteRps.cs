@@ -27,6 +27,8 @@ using System.IO;
 using NFe.Components.WEBFISCO_TECNOLOGIA;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
+using System.Text.RegularExpressions;
+using NFe.Components.Elotech;
 #if _fw46
 using System.ServiceModel;
 using static NFe.Components.Security.SOAPSecurity;
@@ -590,7 +592,8 @@ namespace NFe.Service.NFSe
                             oDadosEnvLoteRps.cMunicipio == 3535804 ||
                             oDadosEnvLoteRps.cMunicipio == 4306932 ||
                             oDadosEnvLoteRps.cMunicipio == 4322400 ||
-                            oDadosEnvLoteRps.cMunicipio == 4302808)
+                            oDadosEnvLoteRps.cMunicipio == 4302808 ||
+							oDadosEnvLoteRps.cMunicipio == 3501301)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -778,11 +781,6 @@ namespace NFe.Service.NFSe
 #endif
 
                     case PadroesNFSe.PUBLIC_SOFT:
-                        if (oDadosEnvLoteRps.cMunicipio.Equals(2610707))
-                        {
-                            Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.PUBLIC_SOFT);
-                            cabecMsg = "N9M=";
-                        }
                         break;
 
                     case PadroesNFSe.MEGASOFT:
@@ -828,8 +826,6 @@ namespace NFe.Service.NFSe
                         GerarTagIntegracao(Empresas.Configuracoes[emp].SenhaWS);
                         break;
 
-
-
                     case PadroesNFSe.WEBFISCO_TECNOLOGIA:
                         WEBFISCO_TECNOLOGIA webTecnologia = new WEBFISCO_TECNOLOGIA((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                            Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -837,6 +833,18 @@ namespace NFe.Service.NFSe
                                            Empresas.Configuracoes[emp].UsuarioWS,
                                            Empresas.Configuracoes[emp].SenhaWS);
                         webTecnologia.EmiteNF(NomeArquivoXML);
+                        break;
+
+                    case PadroesNFSe.ELOTECH:
+                        Elotech elotech = new Elotech((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            oDadosEnvLoteRps.cMunicipio,
+                            ConfiguracaoApp.ProxyUsuario,
+                            ConfiguracaoApp.ProxySenha,
+                            ConfiguracaoApp.ProxyServidor,
+                            Empresas.Configuracoes[emp].X509Certificado);
+
+                        elotech.EmiteNF(NomeArquivoXML);
                         break;
                 }
 
@@ -889,14 +897,13 @@ namespace NFe.Service.NFSe
             }
         }
         private void GerarTagIntegracao(string token)
-        {
+       {
             XmlDocument doc = new XmlDocument();
             doc.Load(NomeArquivoXML);
             string conteudoXML, integridade;
             conteudoXML = doc.OuterXml;
-            conteudoXML = conteudoXML.Replace("/[^\"x20-\"x7E]+/", conteudoXML);
-            conteudoXML = conteudoXML.Replace("/[ ]+/", conteudoXML);
-            conteudoXML = conteudoXML.Replace(" ", conteudoXML);
+            conteudoXML =  Regex.Replace(conteudoXML, "/[^\x20-\x7E]+/", "");
+            conteudoXML = Regex.Replace(conteudoXML, "/[ ]+/", "");
             integridade = Criptografia.GerarRSASHA512(conteudoXML + token);
 
             foreach (object item in ConteudoXML)
@@ -909,6 +916,8 @@ namespace NFe.Service.NFSe
                     tagintegridade.InnerXml = (integridade.Trim()).Trim();
 
                     gerarNfseEnvio.AppendChild(tagintegridade);
+
+                    conteudoXML = gerarNfseEnvio.OuterXml;
 
                     break;
                 }

@@ -1,0 +1,293 @@
+{
+  "runtimeTarget": {
+    "name": ".NETStandard,Version=v2.0/",
+    "signature": "585801a528b90205d14d01fa8acc2955db00183f"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETStandard,Version=v2.0": {},
+    ".NETStandard,Version=v2.0/": {
+      "Unimake.Business.DFe/1.0.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.6.0",
+          "Microsoft.CodeAnalysis.FxCopAnalyzers": "2.9.7",
+          "NETStandard.Library": "2.0.3",
+          "System.Security.Cryptography.Xml": "4.6.0",
+          "Unimake.Security.Platform": "1.0.0"
+        },
+        "runtime": {
+          "Unimake.Business.DFe.dll": {}
+        }
+      },
+      "Microsoft.CodeAnalysis.FxCopAnalyzers/2.9.7": {
+        "dependencies": {
+          "Microsoft.CodeAnalysis.VersionCheckAnalyzer": "2.9.7",
+          "Microsoft.CodeQuality.Analyzers": "2.9.7",
+          "Microsoft.NetCore.Analyzers": "2.9.7",
+          "Microsoft.NetFramework.Analyzers": "2.9.7"
+        }
+      },
+      "Microsoft.CodeAnalysis.VersionCheckAnalyzer/2.9.7": {},
+      "Microsoft.CodeQuality.Analyzers/2.9.7": {},
+      "Microsoft.CSharp/4.6.0": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.CSharp.dll": {
+            "assemblyVersion": "4.0.4.0",
+            "fileVersion": "4.700.19.46214"
+          }
+        }
+      },
+      "Microsoft.NetCore.Analyzers/2.9.7": {},
+      "Microsoft.NETCore.Platforms/1.1.0": {},
+      "Microsoft.NetFramework.Analyzers/2.9.7": {},
+      "NETStandard.Library/2.0.3": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "System.Buffers/4.5.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Buffers.dll": {
+            "assemblyVersion": "4.0.3.0",
+            "fileVersion": "4.6.26515.6"
+          }
+        }
+      },
+      "System.Memory/4.5.3": {
+        "dependencies": {
+          "System.Buffers": "4.5.0",
+          "System.Numerics.Vectors": "4.4.0",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Memory.dll": {
+            "assemblyVersion": "4.0.1.1",
+            "fileVersion": "4.6.27617.2"
+          }
+        }
+      },
+      "System.Numerics.Vectors/4.4.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Numerics.Vectors.dll": {
+            "assemblyVersion": "4.1.3.0",
+            "fileVersion": "4.6.25519.3"
+          }
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+        "runtime": {
+          "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {
+            "assemblyVersion": "4.0.4.1",
+            "fileVersion": "4.6.26919.2"
+          }
+        }
+      },
+      "System.Security.AccessControl/4.6.0": {
+        "dependencies": {
+          "System.Security.Principal.Windows": "4.6.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Security.AccessControl.dll": {
+            "assemblyVersion": "4.1.2.0",
+            "fileVersion": "4.700.19.46214"
+          }
+        }
+      },
+      "System.Security.Cryptography.Cng/4.6.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Cryptography.Cng.dll": {
+            "assemblyVersion": "4.3.0.0",
+            "fileVersion": "4.700.19.46214"
+          }
+        }
+      },
+      "System.Security.Cryptography.Pkcs/4.6.0": {
+        "dependencies": {
+          "System.Buffers": "4.5.0",
+          "System.Memory": "4.5.3",
+          "System.Security.Cryptography.Cng": "4.6.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll": {
+            "assemblyVersion": "4.0.4.0",
+            "fileVersion": "4.700.19.46214"
+          }
+        }
+      },
+      "System.Security.Cryptography.Xml/4.6.0": {
+        "dependencies": {
+          "System.Security.Cryptography.Pkcs": "4.6.0",
+          "System.Security.Permissions": "4.6.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Cryptography.Xml.dll": {
+            "assemblyVersion": "4.0.2.0",
+            "fileVersion": "4.700.19.46214"
+          }
+        }
+      },
+      "System.Security.Permissions/4.6.0": {
+        "dependencies": {
+          "System.Security.AccessControl": "4.6.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Permissions.dll": {
+            "assemblyVersion": "4.0.2.0",
+            "fileVersion": "4.700.19.46214"
+          }
+        }
+      },
+      "System.Security.Principal.Windows/4.6.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Principal.Windows.dll": {
+            "assemblyVersion": "4.1.2.0",
+            "fileVersion": "4.700.19.46214"
+          }
+        }
+      },
+      "Unimake.Security.Platform/1.0.0": {
+        "runtime": {
+          "Unimake.Security.Platform.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Unimake.Business.DFe/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.CodeAnalysis.FxCopAnalyzers/2.9.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/WbA9NXJmd7LW4ERe1v9YVRlpp0nnEMV5ne0ydnKT3/RMLzTt9AZjghuL6u3eSclyhcSI/mW/B4uPv2cAr4PXg==",
+      "path": "microsoft.codeanalysis.fxcopanalyzers/2.9.7",
+      "hashPath": "microsoft.codeanalysis.fxcopanalyzers.2.9.7.nupkg.sha512"
+    },
+    "Microsoft.CodeAnalysis.VersionCheckAnalyzer/2.9.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ePzHjOnn2EJCYubovr+lVPfkOx7yXjF9pNzE2TSZgAAC4zE4fNAL2HU/f+AoJWP0oQH1hohkApwfZPS+I82ynQ==",
+      "path": "microsoft.codeanalysis.versioncheckanalyzer/2.9.7",
+      "hashPath": "microsoft.codeanalysis.versioncheckanalyzer.2.9.7.nupkg.sha512"
+    },
+    "Microsoft.CodeQuality.Analyzers/2.9.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gl+jYeGvFxET/FUL/gNMKMxb3/p3NKUofBpGS+wYna8Jphbm2Tx6DDZaqPcpcNpabZKzPAvezzmtW7EILTbZtA==",
+      "path": "microsoft.codequality.analyzers/2.9.7",
+      "hashPath": "microsoft.codequality.analyzers.2.9.7.nupkg.sha512"
+    },
+    "Microsoft.CSharp/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kxn3M2rnAGy5N5DgcIwcE8QTePWU/XiYcQVzn9HqTls2NKluVzVSmVWRjK7OUPWbljCXuZxHyhEz9kPRIQeXow==",
+      "path": "microsoft.csharp/4.6.0",
+      "hashPath": "microsoft.csharp.4.6.0.nupkg.sha512"
+    },
+    "Microsoft.NetCore.Analyzers/2.9.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NYQOi5n+36rVuh+Yh6UabkzH5lNaji+OIArnzbY1jUp+u2CL9A7DatJGrh7u/VOZJICVFR3UgVKobm0CLbIcRg==",
+      "path": "microsoft.netcore.analyzers/2.9.7",
+      "hashPath": "microsoft.netcore.analyzers.2.9.7.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Platforms/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
+      "path": "microsoft.netcore.platforms/1.1.0",
+      "hashPath": "microsoft.netcore.platforms.1.1.0.nupkg.sha512"
+    },
+    "Microsoft.NetFramework.Analyzers/2.9.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sC+Vt/m60axfe0jr8K3iXMXSwNhCp8jMJyn8gRMo9HDg2Nr7PpVGcNxqIt1rRbRiE6Lwqp8lo8AlFekHxvUCOg==",
+      "path": "microsoft.netframework.analyzers/2.9.7",
+      "hashPath": "microsoft.netframework.analyzers.2.9.7.nupkg.sha512"
+    },
+    "NETStandard.Library/2.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
+      "path": "netstandard.library/2.0.3",
+      "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
+    },
+    "System.Buffers/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pL2ChpaRRWI/p4LXyy4RgeWlYF2sgfj/pnVMvBqwNFr5cXg7CXNnWZWxrOONLg8VGdFB8oB+EG2Qw4MLgTOe+A==",
+      "path": "system.buffers/4.5.0",
+      "hashPath": "system.buffers.4.5.0.nupkg.sha512"
+    },
+    "System.Memory/4.5.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
+      "path": "system.memory/4.5.3",
+      "hashPath": "system.memory.4.5.3.nupkg.sha512"
+    },
+    "System.Numerics.Vectors/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UiLzLW+Lw6HLed1Hcg+8jSRttrbuXv7DANVj0DkL9g6EnnzbL75EB7EWsw5uRbhxd/4YdG8li5XizGWepmG3PQ==",
+      "path": "system.numerics.vectors/4.4.0",
+      "hashPath": "system.numerics.vectors.4.4.0.nupkg.sha512"
+    },
+    "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wprSFgext8cwqymChhrBLu62LMg/1u92bU+VOwyfBimSPVFXtsNqEWC92Pf9ofzJFlk4IHmJA75EDJn1b2goAQ==",
+      "path": "system.runtime.compilerservices.unsafe/4.5.2",
+      "hashPath": "system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512"
+    },
+    "System.Security.AccessControl/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gmlk6khICtVhiUnVBBtlsH0H/5QFDqhTZgtpp3AX14wWE6OIE+BX95NLD+X4AolXnIy/oXpNNmXYnsNfW1KuDQ==",
+      "path": "system.security.accesscontrol/4.6.0",
+      "hashPath": "system.security.accesscontrol.4.6.0.nupkg.sha512"
+    },
+    "System.Security.Cryptography.Cng/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aa7yPkf0Xnto7ABWc6jj/aC5wopVYDqHLxZKuUban63gNJeiA2Zml+H6CFvaXerCHoo6xWn2CK9dfnzGyZ/XRQ==",
+      "path": "system.security.cryptography.cng/4.6.0",
+      "hashPath": "system.security.cryptography.cng.4.6.0.nupkg.sha512"
+    },
+    "System.Security.Cryptography.Pkcs/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LoYMH8gD6hlx0pWKFUUqQEhC5YQsWaq3drPkK+ksj55PT1s+K5r0yYGb3rU+F1oVoe17DYBI/CHs68KwtcWSkg==",
+      "path": "system.security.cryptography.pkcs/4.6.0",
+      "hashPath": "system.security.cryptography.pkcs.4.6.0.nupkg.sha512"
+    },
+    "System.Security.Cryptography.Xml/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-w6ylJavI8DwyFvwAw7gIdnOvpI0HTzSFWHpmRsL3VAEY1D1RdXIYbpuu5P1nAcyl5vN1Gb0lx3iWxDowzSM0/g==",
+      "path": "system.security.cryptography.xml/4.6.0",
+      "hashPath": "system.security.cryptography.xml.4.6.0.nupkg.sha512"
+    },
+    "System.Security.Permissions/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-W3Uxog9KCZAmGYsOFHgJnb7L2q+SDbxS3vGnFHmErUnXuIjWYpIh1KVTlua7qmPdrlRCkAcTF9dImv+jciBPOQ==",
+      "path": "system.security.permissions/4.6.0",
+      "hashPath": "system.security.permissions.4.6.0.nupkg.sha512"
+    },
+    "System.Security.Principal.Windows/4.6.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Mdukseovp0YIGaz16FMH6nbfgZkrCFOJbtXQptv0aeBO9h775Ilb9+TDwLVTKikoW7y7CY7lpoXl9zmZ5G3ndA==",
+      "path": "system.security.principal.windows/4.6.0",
+      "hashPath": "system.security.principal.windows.4.6.0.nupkg.sha512"
+    },
+    "Unimake.Security.Platform/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

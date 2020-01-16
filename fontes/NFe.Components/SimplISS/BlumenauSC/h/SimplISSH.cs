@@ -53,19 +53,19 @@ namespace NFe.Components.SimplISS.BlumenauSC.h
 
         public override void CancelarNfse(string file)
         {
-            //var envio = DeserializarObjeto<CancelarNfseEnvio>(file);
-            //var strResult = SerializarObjeto(Service.CancelarNfse(envio));
+            var envio = DeserializarObjeto<CancelarNfseEnvio>(file);
+            var strResult = SerializarObjeto(Service.CancelarNfse(envio));
 
-            //GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
-            //                              Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
         public override void ConsultarLoteRps(string file)
         {
-            //var envio = DeserializarObjeto<ConsultarLoteRpsEnvio>(file);
-            //var strResult = SerializarObjeto(Service.ConsultarLoteRps(envio));
-            //GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
-            //                              Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
+            var envio = DeserializarObjeto<ConsultarLoteRpsEnvio>(file);
+            var strResult = SerializarObjeto(Service.ConsultarLoteRps(envio));
+            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
         }
 
         public override void ConsultarSituacaoLoteRps(string file)
@@ -89,7 +89,7 @@ namespace NFe.Components.SimplISS.BlumenauSC.h
             var envio = DeserializarObjeto<ConsultarNfseRpsEnvio>(file);
             var strResult = SerializarObjeto(Service.ConsultarNfseRps(envio));
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
-                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML ,System.Text.Encoding.UTF8);
+                                          Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML, System.Text.Encoding.UTF8);
         }
 
         #endregion

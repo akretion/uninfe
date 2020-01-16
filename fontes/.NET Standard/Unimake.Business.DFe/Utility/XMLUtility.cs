@@ -58,7 +58,6 @@ namespace Unimake.Business.DFe.Utility
             else
             {
                 j = 0;
-                Digito = -1;
                 try
                 {
                     for (i = 0; i < 43; ++i)

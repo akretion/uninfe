@@ -2344,11 +2344,6 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HFormigaMG-WebISS.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\schemas\NFSe\ELOTECH\nfse_v1_2.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PFormigaMG-WebISS.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -2453,14 +2448,6 @@
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPatosDeMinasMG-Consist.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPatosDeMinasMG-Consist.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PDuquedeCaxiasRJ-TIPLAN.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PBiriguiSP-WSEntrada.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PBiriguiSP-WSSaida.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PBiriguiSP-WSUtil.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\schemas\NFSe\GOIANIA\xmldsig-core-schema20020212.xsd">
@@ -3993,8 +3980,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HViscondeRioBrancoMG-SH3.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PViscondeRioBrancoMG-SH3.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPalmasTO-WebISS.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PPalmasTO-WebISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HVacariRS-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PVacariRS-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PIconhaES-EL.wsdl" />
@@ -4206,8 +4191,6 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HBarrosoMG-SH3.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaIguacuRJ-DFSLoteRps.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PNovaIguacuRJ-DFSLoteRps.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNiteroiRJ-TIPLAN.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PNiteroiRJ-TIPLAN.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\TIPLAN\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4601,6 +4584,50 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HItanhangaMT-WEBISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HUbaMG-PORTALFACIL_ACTCON.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PBotucatuSP-BSITBR.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PAlvaresMachadoSP-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HAlvaresMachadoSP-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PIpatingaMG-PORTALFACIL_ACTCON.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HIpatingaMG-PORTALFACIL_ACTCON.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPalmasTO-WebISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPalmasTO-WebISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBiriguiSP-WSEntrada.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBiriguiSP-WSSaida.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PBiriguiSP-WSUtil.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HOuroFinoMG-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\POuroFinoMG-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HXangrilaRS-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PXangrilaRS-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaulistaPE-CancelarNfse-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaulistaPE-ConsultarLoteRps-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaulistaPE-ConsultarNfse-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaulistaPE-ConsultarNfsePorRps-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaulistaPE-ConsultarSituacaoLoteRps-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaulistaPE-RecepcionarLoteRps-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaulistaPE-CancelarNfse-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaulistaPE-ConsultarLoteRps-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaulistaPE-ConsultarNfse-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaulistaPE-ConsultarNfsePorRps-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaulistaPE-ConsultarSituacaoLoteRps-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaulistaPE-RecepcionarLoteRps-TINUS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HDuquedeCaxiasRJ-ISSNET.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PDuquedeCaxiasRJ-ISSNET.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMossoroRN_TINUS_CancelarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMossoroRN_TINUS_ConsultarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMossoroRN_TINUS_ConsultarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMossoroRN_TINUS_ConsultarNfsePorRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMossoroRN_TINUS_ConsultarSituacaoLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMossoroRN_TINUS_RecepcionarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMossoroRN_TINUS_CancelarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMossoroRN_TINUS_ConsultarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMossoroRN_TINUS_ConsultarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMossoroRN_TINUS_ConsultarNfsePorRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMossoroRN_TINUS_ConsultarSituacaoLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMossoroRN_TINUS_RecepcionarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\ELOTECH\nfse_v2_03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HLoandaPR-Elotech.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PLoandaPR-Elotech.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

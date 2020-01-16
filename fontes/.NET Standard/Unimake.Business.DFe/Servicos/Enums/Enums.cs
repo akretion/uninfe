@@ -50,6 +50,29 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         NFeDistribuicaoDFe,
 
+        #endregion
+
+        #region CTe
+
+        /// <summary>
+        /// Consulta status serviço NFe/NFCe
+        /// </summary>
+        CTeStatusServico,
+
+        /// <summary>
+        /// Consulta protocolo do CTe
+        /// </summary>
+        CTeConsultaProtocolo,
+
+        /// <summary>
+        /// Inutilização de números do Conhecimetno de Transporte Eletrônico (CTe)
+        /// </summary>
+        CTeInutilizacao,
+
+        #endregion
+
+        #region Gerais
+
         /// <summary>
         /// Serviço não definido
         /// </summary>

@@ -18,6 +18,7 @@ using NFe.Components.SimplISS;
 using NFe.Components.SystemPro;
 using NFe.Components.Tinus;
 using NFe.Components.Simple;
+using NFe.Components.Elotech;
 using NFe.Settings;
 using NFe.Validate;
 using NFSe.Components;
@@ -502,7 +503,8 @@ namespace NFe.Service.NFSe
                             oDadosPedCanNfse.cMunicipio == 3535804 ||
                             oDadosPedCanNfse.cMunicipio == 4306932 ||
                             oDadosPedCanNfse.cMunicipio == 4322400 ||
-                            oDadosPedCanNfse.cMunicipio == 4302808)
+                            oDadosPedCanNfse.cMunicipio == 4302808 ||
+							oDadosPedCanNfse.cMunicipio == 3501301)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -683,8 +685,6 @@ namespace NFe.Service.NFSe
 #endif
 
                     case PadroesNFSe.PUBLIC_SOFT:
-                        if (oDadosPedCanNfse.cMunicipio.Equals(2610707))
-                            cabecMsg = "N9M=";
                         break;
 
                     case PadroesNFSe.SIMPLE:
@@ -733,6 +733,17 @@ namespace NFe.Service.NFSe
                         webTecnologia.CancelarNfse(NomeArquivoXML);
                         break;
 
+                    case PadroesNFSe.ELOTECH:
+                        Elotech elotech = new Elotech((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                oDadosPedCanNfse.cMunicipio,
+                                ConfiguracaoApp.ProxyUsuario,
+                                ConfiguracaoApp.ProxySenha,
+                                ConfiguracaoApp.ProxyServidor,
+                                Empresas.Configuracoes[emp].X509Certificado);
+
+                        elotech.CancelarNfse(NomeArquivoXML);
+                        break;
                 }
 
                 if (IsInvocar(padraoNFSe, Servico, Empresas.Configuracoes[emp].UnidadeFederativaCodigo))

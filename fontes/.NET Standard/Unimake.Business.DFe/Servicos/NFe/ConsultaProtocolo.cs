@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Xml;
 using Unimake.Business.DFe.Utility;
 using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
-    public class ConsultaProtocolo : ServicoBase
+    [ComVisible(true)]
+    public class ConsultaProtocolo: ServicoBase
     {
         #region Private Constructors
 
         private ConsultaProtocolo(XmlDocument conteudoXML, Configuracao configuracao)
                             : base(conteudoXML, configuracao) { }
 
-        #endregion Public Constructors
+        #endregion Private Constructors
 
         #region Protected Methods
 
@@ -21,10 +23,10 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// </summary>
         protected override void DefinirConfiguracao()
         {
-            ConsSitNFe xml = new ConsSitNFe();
+            var xml = new ConsSitNFe();
             xml = xml.LerXML<ConsSitNFe>(ConteudoXML);
 
-            if (!Configuracoes.Definida)
+            if(!Configuracoes.Definida)
             {
                 Configuracoes.Servico = Servico.NFeConsultaProtocolo;
                 Configuracoes.CodigoUF = Convert.ToInt32(xml.ChNFe.Substring(0, 2));
@@ -38,11 +40,13 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #endregion Protected Methods
 
+        #region Public Properties
+
         public RetConsSitNFe Result
         {
             get
             {
-                if (!string.IsNullOrWhiteSpace(RetornoWSString))
+                if(!string.IsNullOrWhiteSpace(RetornoWSString))
                 {
                     return XMLUtility.Deserializar<RetConsSitNFe>(RetornoWSXML);
                 }
@@ -55,13 +59,24 @@ namespace Unimake.Business.DFe.Servicos.NFe
             }
         }
 
-        public ConsultaProtocolo(ConsSitNFe consSitNFe, Configuracao configuracao)
-            : this(consSitNFe.GerarXML(), configuracao) { }
+        #endregion Public Properties
 
-        public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML)
+        #region Public Constructors
+
+        public ConsultaProtocolo()
+            : base()
         {
-            throw new System.Exception("Não existe XML de distribuição para consulta de protocolo.");
         }
 
+        public ConsultaProtocolo(ConsSitNFe consSitNFe, Configuracao configuracao)
+            : this(consSitNFe?.GerarXML() ?? throw new ArgumentNullException(nameof(consSitNFe)), configuracao) { }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML) => throw new System.Exception("Não existe XML de distribuição para consulta de protocolo.");
+
+        #endregion Public Methods
     }
 }

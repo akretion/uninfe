@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
+using System.Xml;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 
@@ -46,5 +48,11 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         [XmlElement("chNFe")]
         public string ChNFe { get; set; }
+
+        [XmlElement("protNFe")]
+        public ProtNFe ProtNFe { get; set; }
+
+        [XmlElement("procEventoNFe")]
+        public ProcEventoNFe[] procEventoNFe { get; set; }
     }
 }

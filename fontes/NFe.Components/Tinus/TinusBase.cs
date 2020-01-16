@@ -39,6 +39,14 @@ namespace NFe.Components.Tinus
                                 tinusService = new SaoJoseDoRibamarMA.h.TinusH(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
+                            case 2610707: // //Paulista-PE
+                                tinusService = new PaulistaPE.h.TinusH(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 2408003: //Mossoró-RN
+                                tinusService = new MossoroRN.h.TinusH(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -59,6 +67,14 @@ namespace NFe.Components.Tinus
 
                             case 2503209: //Cabedelo-PB
                                 tinusService = new CabedeloPB.p.TinusP(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 2610707: //Paulista-PE
+                                tinusService = new PaulistaPE.p.TinusP(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 2408003: //Mossoró-RN
+                                tinusService = new MossoroRN.p.TinusP(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             default:

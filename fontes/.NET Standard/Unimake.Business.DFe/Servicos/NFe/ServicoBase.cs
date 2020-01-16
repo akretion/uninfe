@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
 
@@ -15,7 +16,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         protected override void DefinirConfiguracao()
         {
             //Definir a pasta onde fica o schema do XML
-            switch (Configuracoes.TipoDFe)
+            switch(Configuracoes.TipoDFe)
             {
                 case DFE.NFe:
                     Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaNFe;
@@ -26,15 +27,18 @@ namespace Unimake.Business.DFe.Servicos.NFe
                     break;
 
                 case DFE.CTe:
+                    Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaCTe;
                     break;
+
                 case DFE.MDFe:
                     break;
+
                 case DFE.NFSe:
                     break;
+
                 case DFE.SAT:
                     break;
             }
-            
         }
 
         /// <summary>
@@ -55,6 +59,11 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Constructors
 
+        public ServicoBase()
+            : base()
+        {
+        }
+
         /// <summary>
         /// Construtor
         /// </summary>
@@ -67,29 +76,13 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Methods
 
-
         /// <summary>
         /// Executar o serviço
         /// </summary>
         public override void Executar()
         {
             XmlValidar();
-
-            var soap = new WSSoap
-            {
-                EnderecoWeb = (Configuracoes.TipoAmbiente == TipoAmbiente.Producao ? Configuracoes.WebEnderecoProducao : Configuracoes.WebEnderecoHomologacao),
-                ActionWeb = (Configuracoes.TipoAmbiente == TipoAmbiente.Producao ? Configuracoes.WebActionProducao : Configuracoes.WebActionHomologacao),
-                TagRetorno = Configuracoes.WebTagRetorno,
-                VersaoSoap = Configuracoes.WebSoapVersion,
-                SoapString = Configuracoes.WebSoapString,
-                ContentType = Configuracoes.WebContentType
-            };
-
-            var consumirWS = new ConsumirWS();
-            consumirWS.ExecutarServico(ConteudoXML, soap, Configuracoes.CertificadoDigital);
-
-            RetornoWSString = consumirWS.RetornoServicoString;
-            RetornoWSXML = consumirWS.RetornoServicoXML;
+            base.Executar();
         }
 
         /// <summary>
@@ -124,6 +117,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// <param name="value">Conteúdo a ser gravado no stream</param>
         /// <param name="stream">Stream que vai receber o conteúdo do XML</param>
         /// <param name="encoding">Define o encodingo do stream, caso não informado ,será usado o UTF8</param>
+        [ComVisible(false)]
         public virtual void GravarXmlDistribuicao(Stream stream,
                                                   string value,
                                                   Encoding encoding = null)
@@ -138,7 +132,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
                 throw new ArgumentNullException(nameof(value));
             }
 
-            if(encoding is null)
+            if(encoding == null)
             {
                 encoding = Encoding.UTF8;
             }

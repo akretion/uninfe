@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>7.3</LangVersion>
+    <AssemblyVersion>2020.01.16.1022</AssemblyVersion>
+    <FileVersion>2020.01.16.1022</FileVersion>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -17,6 +20,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Servicos\Config\CTe\Config.xml" />
+    <None Remove="Servicos\Config\CTe\PR.xml" />
     <None Remove="Servicos\Config\NFCe\AC.xml" />
     <None Remove="Servicos\Config\NFCe\AL.xml" />
     <None Remove="Servicos\Config\NFCe\AM.xml" />
@@ -24,6 +29,7 @@
     <None Remove="Servicos\Config\NFCe\Ap.xml" />
     <None Remove="Servicos\Config\NFCe\BA.xml" />
     <None Remove="Servicos\Config\NFCe\CE.xml" />
+    <None Remove="Servicos\Config\NFCe\Config.xml" />
     <None Remove="Servicos\Config\NFCe\DF.xml" />
     <None Remove="Servicos\Config\NFCe\ES.xml" />
     <None Remove="Servicos\Config\NFCe\GO.xml" />
@@ -80,6 +86,50 @@
     <None Remove="Xml\Schemas\consReciNFe_v4.00.xsd" />
     <None Remove="Xml\Schemas\consSitNFe_v4.00.xsd" />
     <None Remove="Xml\Schemas\consStatServ_v4.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\cancCTeTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\consReciCTeTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\consReciCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\consSitCTeTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\consSitCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\consStatServCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\consStatServTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\cteModalAereo_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\cteModalAquaviario_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\cteModalDutoviario_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\cteModalFerroviario_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\cteModalRodoviarioOS_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\cteModalRodoviario_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\cteMultiModal_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\cteOS_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\cteTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\cte_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\enviCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\evCancCECTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\evCancCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\evCCeCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\evCECTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\eventoCTeTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\eventoCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\evEPECCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\evGTV_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\evPrestDesacordo_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\evRegMultimodal_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\inutCTeTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\inutCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\procCTeOS_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\procCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\procEventoCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\procInutCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\retConsReciCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\retConsSitCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\retConsStatServCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\retCTeOS_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\retCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\retEnviCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\retEventoCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\retInutCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\tiposGeralCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\xmldsig-core-schema_v1.01.xsd" />
     <None Remove="Xml\Schemas\distDFeInt_v1.01.xsd" />
     <None Remove="Xml\Schemas\e110110_v1.00.xsd" />
     <None Remove="Xml\Schemas\e110111_v1.00.xsd" />
@@ -147,6 +197,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Servicos\Config\CTe\Config.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTe\PR.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\NFCe\Config.xml" />
     <EmbeddedResource Include="Servicos\Config\NFCe\RJ.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -237,6 +292,7 @@
     <EmbeddedResource Include="Servicos\Config\Config.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\NFe\Config.xml" />
     <EmbeddedResource Include="Servicos\Config\NFe\DF.xml" />
     <EmbeddedResource Include="Servicos\Config\NFe\ES.xml" />
     <EmbeddedResource Include="Servicos\Config\NFe\GO.xml">
@@ -287,6 +343,50 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Servicos\Config\NFe\TO.xml" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\cancCTeTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\consReciCTeTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\consReciCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\consSitCTeTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\consSitCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\consStatServCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\consStatServTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\cteModalAereo_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\cteModalAquaviario_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\cteModalDutoviario_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\cteModalFerroviario_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\cteModalRodoviarioOS_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\cteModalRodoviario_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\cteMultiModal_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\cteOS_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\cteTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\cte_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\enviCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\evCancCECTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\evCancCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\evCCeCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\evCECTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\eventoCTeTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\eventoCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\evEPECCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\evGTV_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\evPrestDesacordo_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\evRegMultimodal_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\inutCTeTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\inutCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\procCTeOS_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\procCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\procEventoCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\procInutCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\retConsReciCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\retConsSitCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\retConsStatServCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\retCTeOS_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\retCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\retEnviCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\retEventoCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\retInutCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\tiposGeralCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\xmldsig-core-schema_v1.01.xsd" />
     <EmbeddedResource Include="Xml\Schemas\NFe\CCe_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -472,12 +572,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.7">
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.4.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
-    <PackageReference Include="System.Security.Cryptography.Xml" Version="4.6.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.VersionCheckAnalyzer" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>

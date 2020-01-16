@@ -15,11 +15,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unimake.Business.DFe", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteDLL_Unimake.Business.DFe", "..\..\..\testes\TesteDLL_Unimake.Business.DFe\TesteDLL_Unimake.Business.DFe.csproj", "{C1A11D75-79A5-4D01-B125-D891A0C047F3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interop", "Interop", "{C8BD7B00-523E-40DF-95EC-53C6DB51FA61}"
-	ProjectSection(SolutionItems) = preProject
-		..\.NET Standard\Unimake.Business.DFe\Interop\TestDLL.vbs = ..\.NET Standard\Unimake.Business.DFe\Interop\TestDLL.vbs
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

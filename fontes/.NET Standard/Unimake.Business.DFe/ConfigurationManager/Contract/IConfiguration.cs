@@ -4,13 +4,16 @@
     {
         #region Public Properties
 
+        string ArquivoConfigPadrao { get; }
         string ArquivoConfigGeral { get; }
         string PastaArqConfig { get; }
-        string PastaArqConfigNFe { get; }
         string PastaArqConfigNFCe { get; }
+        string PastaArqConfigNFe { get; }
+        string PastaArqConfigCTe { get; }
         string PastaSchema { get; }
-        string PastaSchemaNFe { get; }
         string PastaSchemaNFCe { get; }
+        string PastaSchemaNFe { get; }
+        string PastaSchemaCTe { get; }
 
         #endregion Public Properties
     }

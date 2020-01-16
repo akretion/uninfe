@@ -1104,8 +1104,7 @@ namespace NFe.Service
                     switch (servico)
                     {
                         case Servicos.NFSeConsultarLoteRps:
-                            if (cMunicipio.Equals(3301702) ||
-                                cMunicipio.Equals(3300407) ||
+                            if (cMunicipio.Equals(3300407) ||
                                 cMunicipio.Equals(3304003) ||
                                 cMunicipio.Equals(2611606) ||
                                 cMunicipio.Equals(3300100))
@@ -1132,8 +1131,7 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultarPorRps:
-                            if (cMunicipio.Equals(3301702) ||
-                                cMunicipio.Equals(3300407) ||
+                            if (cMunicipio.Equals(3300407) ||
                                 cMunicipio.Equals(3304003) ||
                                 cMunicipio.Equals(2611606) ||
                                 cMunicipio.Equals(3300100))
@@ -1148,8 +1146,7 @@ namespace NFe.Service
                             break;
 
                         case Servicos.NFSeConsultarSituacaoLoteRps:
-                            if (cMunicipio.Equals(3301702) ||
-                                cMunicipio.Equals(3300407) ||
+                            if (cMunicipio.Equals(3300407) ||
                                 cMunicipio.Equals(3304003) ||
                                 cMunicipio.Equals(2611606) ||
                                 cMunicipio.Equals(3300100))
@@ -3247,7 +3244,8 @@ namespace NFe.Service
                         cMunicipio == 3535804 ||
                         cMunicipio == 4306932 ||
                         cMunicipio == 4322400 ||
-                        cMunicipio == 4302808)
+                        cMunicipio == 4302808 ||
+						cMunicipio == 3501301)
                     {
                         retorno = false;
                     }

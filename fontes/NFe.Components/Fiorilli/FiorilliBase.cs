@@ -78,6 +78,14 @@ namespace NFe.Components.Fiorilli
                                 fiorilliService = new DuartinaSP.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
+                            case 3146008://Ouro Fino-MG
+                                fiorilliService = new OuroFinoMG.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 4323804://Xangri-la-RS
+                                fiorilliService = new XangrilaRS.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -150,6 +158,14 @@ namespace NFe.Components.Fiorilli
 
                             case 3514502: //Duartina-SP
                                 fiorilliService = new DuartinaSP.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 3146008://Ouro Fino-MG
+                                fiorilliService = new OuroFinoMG.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 4323804://Xangri-la-RS
+                                fiorilliService = new XangrilaRS.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             default:

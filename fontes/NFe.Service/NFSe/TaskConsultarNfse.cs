@@ -435,7 +435,8 @@ namespace NFe.Service.NFSe
                             oDadosPedSitNfse.cMunicipio == 3535804 ||
                             oDadosPedSitNfse.cMunicipio == 4306932 ||
                             oDadosPedSitNfse.cMunicipio == 4322400 ||
-                            oDadosPedSitNfse.cMunicipio == 4302808)
+                            oDadosPedSitNfse.cMunicipio == 4302808 ||
+							oDadosPedSitNfse.cMunicipio == 3501301)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -556,8 +557,6 @@ namespace NFe.Service.NFSe
 #endif
 
                     case PadroesNFSe.PUBLIC_SOFT:
-                        if (oDadosPedSitNfse.cMunicipio.Equals(2610707))
-                            cabecMsg = "N9M=";
                         break;
 
                     case PadroesNFSe.SIMPLE:

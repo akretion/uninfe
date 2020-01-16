@@ -488,7 +488,9 @@ namespace NFe.UI.Formularios
                            ufCod == 3539400 /*Piratininga-SP*/ ||
                            ufCod == 3516705 /*Garça-SP*/ ||
                            ufCod == 3514502 /*Duartina-SP*/ ||
-                           ufCod == 3526902 /* Limeira-SP*/;
+                           ufCod == 3526902 /* Limeira-SP*/||
+                           ufCod == 3146008 /*Ouro Fino-MG*/||
+                           ufCod == 4323804 /*Xangri-la-RS*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }

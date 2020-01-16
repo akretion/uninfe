@@ -1853,6 +1853,13 @@ namespace NFe.Settings
                 {
                     emp = CadastrarEmpresa(cArquivoXml, emp);
 
+                    ///
+                    /// danasa - 12/2019
+                    /// Salva o serviço porque se o usuario informar novamente a tag->Servico 
+                    /// e esta tag for diferente da tag->Servico da chave, evitamos erro
+                    /// 
+                    var currServico = Empresas.Configuracoes[emp].Servico;
+
                     if (Path.GetExtension(cArquivoXml).ToLower() == ".txt")
                     {
                         #region Formato TXT
@@ -1992,6 +1999,8 @@ namespace NFe.Settings
 
                         #endregion Formato XML
                     }
+                    Empresas.Configuracoes[emp].Servico = currServico;
+
                     if (lEncontrouTag)
                     {
                         if (ConfiguracaoApp.Proxy &&

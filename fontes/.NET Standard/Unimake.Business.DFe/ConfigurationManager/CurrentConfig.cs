@@ -1,4 +1,5 @@
 ﻿using Unimake.Business.DFe.ConfigurationManager.Contract;
+using Unimake.Business.DFe.Utility;
 
 namespace Unimake.Business.DFe.ConfigurationManager
 {
@@ -10,18 +11,15 @@ namespace Unimake.Business.DFe.ConfigurationManager
 
         #endregion Private Fields
 
-        #region Public Properties
-
-        public static Servicos.DFE DFE { get; set; }
-
-        #endregion
-
         #region Private Methods
 
         private static IConfiguration GetConfiguration()
         {
-            if (_configuration == null)
+            if(_configuration == null)
+            {
                 _configuration = ConfigurationService.GetFactory()?.Build() ?? new Configuration();
+                new LoadEmbeddedResource().Load();
+            }
 
             return _configuration;
         }
@@ -30,13 +28,17 @@ namespace Unimake.Business.DFe.ConfigurationManager
 
         #region Public Properties
 
+        public static string ArquivoConfigPadrao => GetConfiguration().ArquivoConfigPadrao;
         public static string ArquivoConfigGeral => GetConfiguration().ArquivoConfigGeral;
         public static string PastaArqConfig => GetConfiguration().PastaArqConfig;
-        public static string PastaArqConfigNFe => GetConfiguration().PastaArqConfigNFe;
         public static string PastaArqConfigNFCe => GetConfiguration().PastaArqConfigNFCe;
+        public static string PastaArqConfigNFe => GetConfiguration().PastaArqConfigNFe;
+        public static string PastaArqConfigCTe => GetConfiguration().PastaArqConfigCTe;
         public static string PastaSchema => GetConfiguration().PastaSchema;
-        public static string PastaSchemaNFe => GetConfiguration().PastaSchemaNFe;
         public static string PastaSchemaNFCe => GetConfiguration().PastaSchemaNFCe;
+        public static string PastaSchemaNFe => GetConfiguration().PastaSchemaNFe;
+        public static string PastaSchemaCTe => GetConfiguration().PastaSchemaCTe;
+        public static Servicos.DFE DFE { get; set; }
 
         #endregion Public Properties
     }

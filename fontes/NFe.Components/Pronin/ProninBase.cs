@@ -89,6 +89,11 @@ namespace NFe.Components.Pronin
                                 proninService = new CacapavaDoSulRS.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
+					       case 3501301: //Álvares Machado-SP
+                                proninService = new AlvaresMachadoSP.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -175,7 +180,9 @@ namespace NFe.Components.Pronin
                                 proninService = new CacapavaDoSulRS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
-
+							case 3501301: //Álvares Machado-SP
+                               proninService = new AlvaresMachadoSP.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+						       break;
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

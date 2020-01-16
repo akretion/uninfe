@@ -1,10 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using Unimake.Security.Platform.Exceptions;
 
 namespace Unimake.Security.Platform
 {
+    [ClassInterface(ClassInterfaceType.AutoDual)]
+    [ProgId("Unimake.Security.Platform.CertificadoDigital")]
+    [ComVisible(true)]
     public class CertificadoDigital
     {
         #region Public Methods

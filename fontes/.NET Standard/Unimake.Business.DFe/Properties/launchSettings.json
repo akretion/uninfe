@@ -2,8 +2,7 @@
   "profiles": {
     "Unimake.Business.DFe": {
       "commandName": "Executable",
-      "executablePath": "C:\\Windows\\System32\\cscript.exe",
-      "commandLineArgs": "/x \"Z:\\uninfe\\trunk\\fontes\\.NET Standard\\Unimake.Business.DFe\\Interop\\ConsultarStatus.vbs\"",
+      "executablePath": "Z:\\uninfe\\trunk\\fontes\\Unimake.DFe\\Interop\\VB6\\Unimake.DFe_InteropTest.exeÖ",
       "nativeDebugging": false
     }
   }

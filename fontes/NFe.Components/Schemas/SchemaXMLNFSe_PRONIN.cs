@@ -1,4 +1,4 @@
-﻿using NFe.Components;
+﻿ using NFe.Components;
 
 namespace NFSe.Components
 {
@@ -355,7 +355,7 @@ namespace NFSe.Components
                 ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
                 Descricao = "XML de Lote RPS",
                 TagAssinatura = "Rps",
-                TagAtributoId = "InfRps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
                 TagLoteAssinatura = "EnviarLoteRpsEnvio",
                 TagLoteAtributoId = "LoteRps",
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"

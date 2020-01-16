@@ -368,6 +368,21 @@
 
             #endregion Aquaviário
 
+            #region Multimodal
+
+            SchemaXML.InfSchemas.Add("NFE-multimodal-CTe", new InfSchema()
+            {
+                Tag = "aquav",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "CTe\\cteMultiModal_v{0}.xsd",
+                Descricao = "XML de CTe - Multi Modal",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = NFeStrConstants.NAME_SPACE_CTE
+            });
+
+            #endregion Multimodal
+
             #endregion Schemas Modal
 
             #endregion CTe

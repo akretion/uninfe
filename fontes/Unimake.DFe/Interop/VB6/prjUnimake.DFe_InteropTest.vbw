@@ -1,0 +1,7 @@
+frmMain = 78, 78, 289, 1292, , 52, 52, 530, 1266, C
+Utility = 130, 130, 341, 1344, 
+ConsultarStatus = 149, 476, 560, 1690, C
+SelecionarCertificado = 156, 156, 367, 1370, C
+ConsultarSituacao = 104, 104, 515, 1318, C
+Config = 130, 130, 341, 1344, C
+AutorizarNFe = 286, 286, 764, 1500, 

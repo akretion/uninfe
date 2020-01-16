@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 
 namespace Unimake.Business.DFe.Xml.NFe
 {
+    [ComVisible(true)]
     [XmlRoot("consStatServ", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
-    public class ConsStatServ : XMLBase
+    public class ConsStatServ: XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }

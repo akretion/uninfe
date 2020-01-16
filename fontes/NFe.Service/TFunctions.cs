@@ -646,6 +646,7 @@ namespace NFe.Service
                 bool denegada = false;
                 bool temCancelamento = false;
                 bool isEPEC = false;
+                bool cancelamentoNfe = false;
 
                 if (!File.Exists(nomeArquivoRecebido))
                     throw new Exception(string.Format(erroMsg, nomeArquivoRecebido, ""));
@@ -807,6 +808,7 @@ namespace NFe.Service
 
                                             default:
                                                 tipo = "nfe";
+                                                cancelamentoNfe = true;
                                                 cl = (XmlElement)doc.GetElementsByTagName(TpcnResources.chNFe.ToString())[0];
                                                 break;
                                         }
@@ -1010,9 +1012,9 @@ namespace NFe.Service
                         nfer.ReadFromXml(arqProcNFe);
                         fEmail = nfer.nfe.dest.email;
 
-                        if (tipo == "")
+                        if (tipo == "" || cancelamentoNfe)
                         {
-                            if (doc.GetElementsByTagName(TpcnResources.tpImp.ToString())[0].InnerText.Equals("3"))
+                            if (nfer.nfe.ide.tpImp == ConvertTxt.TpcnTipoImpressao.tiDANFESimplificado)
                             {
                                 //DANFE simplificado
                                 tipo = "ds";

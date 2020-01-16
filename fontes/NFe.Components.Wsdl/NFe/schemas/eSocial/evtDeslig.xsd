@@ -1102,7 +1102,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="codCateg" minOccurs="0">
+      <xs:element name="codCateg">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Código da Categoria</xs:documentation>
@@ -1112,7 +1112,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:element>
-      <xs:element name="vlrRemunOE" minOccurs="0">
+      <xs:element name="vlrRemunOE">
         <xs:simpleType>
           <xs:annotation>
             <xs:documentation>Valor da remuneração recebida pelo trabalhador</xs:documentation>
