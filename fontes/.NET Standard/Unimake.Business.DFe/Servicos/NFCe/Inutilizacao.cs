@@ -2,11 +2,19 @@
 
 namespace Unimake.Business.DFe.Servicos.NFCe
 {
-    public class Inutilizacao : NFe.Inutilizacao
+    public class Inutilizacao: NFe.Inutilizacao
     {
-        public Inutilizacao(InutNFe inutNFe, Configuracao configuracao) 
+        #region Public Constructors
+
+        public Inutilizacao(InutNFe inutNFe, Configuracao configuracao)
             : base(inutNFe, configuracao)
         {
         }
+
+        public Inutilizacao()
+        {
+        }
+
+        #endregion Public Constructors
     }
 }

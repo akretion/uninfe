@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Xml;
+using Unimake.Business.DFe.Servicos.Interop;
 using Unimake.Business.DFe.Utility;
 using Unimake.Business.DFe.Xml.CTe;
 
 namespace Unimake.Business.DFe.Servicos.CTe
 {
-    public class ConsultaProtocolo : ServicoBase
+    public class ConsultaProtocolo: ServicoBase, IInteropService<ConsSitCTe>
     {
-        #region Private Constructors
-
-        private ConsultaProtocolo(XmlDocument conteudoXML, Configuracao configuracao)
-                            : base(conteudoXML, configuracao) { }
-
-        #endregion Public Constructors
-
         #region Protected Methods
 
         /// <summary>
@@ -21,10 +14,10 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// </summary>
         protected override void DefinirConfiguracao()
         {
-            ConsSitCTe xml = new ConsSitCTe();
+            var xml = new ConsSitCTe();
             xml = xml.LerXML<ConsSitCTe>(ConteudoXML);
 
-            if (!Configuracoes.Definida)
+            if(!Configuracoes.Definida)
             {
                 Configuracoes.Servico = Servico.CTeConsultaProtocolo;
                 Configuracoes.CodigoUF = Convert.ToInt32(xml.ChCTe.Substring(0, 2));
@@ -38,11 +31,13 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
         #endregion Protected Methods
 
+        #region Public Properties
+
         public RetConsSitCTe Result
         {
             get
             {
-                if (!string.IsNullOrWhiteSpace(RetornoWSString))
+                if(!string.IsNullOrWhiteSpace(RetornoWSString))
                 {
                     return XMLUtility.Deserializar<RetConsSitCTe>(RetornoWSXML);
                 }
@@ -55,13 +50,29 @@ namespace Unimake.Business.DFe.Servicos.CTe
             }
         }
 
-        public ConsultaProtocolo(ConsSitCTe consSitCTe, Configuracao configuracao)
-            : this(consSitCTe.GerarXML(), configuracao) { }
+        #endregion Public Properties
 
-        public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML)
+        #region Public Constructors
+
+        public ConsultaProtocolo(ConsSitCTe consSitCTe, Configuracao configuracao)
+            : base(consSitCTe?.GerarXML() ?? throw new ArgumentNullException(nameof(consSitCTe)), configuracao) { }
+
+        public ConsultaProtocolo()
         {
-            throw new System.Exception("Não existe XML de distribuição para consulta de protocolo.");
         }
 
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        public void Executar(ConsSitCTe consSitCTe, Configuracao configuracao)
+        {
+            PrepararServico(consSitCTe?.GerarXML() ?? throw new ArgumentNullException(nameof(consSitCTe)), configuracao);
+            Executar();
+        }
+
+        public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML) => throw new System.Exception("Não existe XML de distribuição para consulta de protocolo.");
+
+        #endregion Public Methods
     }
 }

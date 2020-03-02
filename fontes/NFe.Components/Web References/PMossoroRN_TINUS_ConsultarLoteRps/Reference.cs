@@ -13,3109 +13,3796 @@
 // 
 #pragma warning disable 1591
 
-namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps {
+namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
+{
     using System;
     using System.Web.Services;
     using System.Diagnostics;
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
-    
-    
+
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    ////[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="ConsultarLoteRpsSoap", Namespace="http://www.tinus.com.br")]
-    public partial class ConsultarLoteRps : System.Web.Services.Protocols.SoapHttpClientProtocol {
-        
+    [System.Web.Services.WebServiceBindingAttribute(Name = "ConsultarLoteRpsSoap", Namespace = "http://www.tinus.com.br")]
+    public partial class ConsultarLoteRps: System.Web.Services.Protocols.SoapHttpClientProtocol
+    {
+
         private System.Threading.SendOrPostCallback CallConsultarLoteRpsOperationCompleted;
-        
+
         private System.Threading.SendOrPostCallback TestOperationCompleted;
-        
+
         private System.Threading.SendOrPostCallback TesteRetornoOperationCompleted;
-        
+
         private bool useDefaultCredentialsSetExplicitly;
-        
+
         /// <remarks/>
-        public ConsultarLoteRps() {
+        public ConsultarLoteRps()
+        {
             this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_PMossoroRN_TINUS_ConsultarLoteRps_ConsultarLoteRps;
-            if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
+            if((this.IsLocalFileSystemWebService(this.Url) == true))
+            {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
             }
-            else {
+            else
+            {
                 this.useDefaultCredentialsSetExplicitly = true;
             }
         }
-        
-        public new string Url {
-            get {
+
+        public new string Url
+        {
+            get
+            {
                 return base.Url;
             }
-            set {
-                if ((((this.IsLocalFileSystemWebService(base.Url) == true) 
-                            && (this.useDefaultCredentialsSetExplicitly == false)) 
-                            && (this.IsLocalFileSystemWebService(value) == false))) {
+            set
+            {
+                if((((this.IsLocalFileSystemWebService(base.Url) == true)
+                            && (this.useDefaultCredentialsSetExplicitly == false))
+                            && (this.IsLocalFileSystemWebService(value) == false)))
+                {
                     base.UseDefaultCredentials = false;
                 }
                 base.Url = value;
             }
         }
-        
-        public new bool UseDefaultCredentials {
-            get {
+
+        public new bool UseDefaultCredentials
+        {
+            get
+            {
                 return base.UseDefaultCredentials;
             }
-            set {
+            set
+            {
                 base.UseDefaultCredentials = value;
                 this.useDefaultCredentialsSetExplicitly = true;
             }
         }
-        
+
         /// <remarks/>
         public event CallConsultarLoteRpsCompletedEventHandler CallConsultarLoteRpsCompleted;
-        
+
         /// <remarks/>
         public event TestCompletedEventHandler TestCompleted;
-        
+
         /// <remarks/>
         public event TesteRetornoCompletedEventHandler TesteRetornoCompleted;
-        
+
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.tinus.com.br/WSNFSE.ConsultarLoteRps.ConsultarLoteRps", RequestElementName="ConsultarLoteRps", RequestNamespace="http://www.tinus.com.br", ResponseElementName="ConsultarLoteRpsResponse", ResponseNamespace="http://www.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.tinus.com.br/WSNFSE.ConsultarLoteRps.ConsultarLoteRps", RequestElementName = "ConsultarLoteRps", RequestNamespace = "http://www.tinus.com.br", ResponseElementName = "ConsultarLoteRpsResponse", ResponseNamespace = "http://www.tinus.com.br", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("ConsultarLoteRpsResult")]
-        public ConsultarLoteRpsResposta CallConsultarLoteRps(ConsultarLoteRpsEnvio Arg) {
+        public ConsultarLoteRpsResposta CallConsultarLoteRps(ConsultarLoteRpsEnvio Arg)
+        {
             object[] results = this.Invoke("CallConsultarLoteRps", new object[] {
                         Arg});
             return ((ConsultarLoteRpsResposta)(results[0]));
         }
-        
+
         /// <remarks/>
-        public void CallConsultarLoteRpsAsync(ConsultarLoteRpsEnvio Arg) {
+        public void CallConsultarLoteRpsAsync(ConsultarLoteRpsEnvio Arg)
+        {
             this.CallConsultarLoteRpsAsync(Arg, null);
         }
-        
+
         /// <remarks/>
-        public void CallConsultarLoteRpsAsync(ConsultarLoteRpsEnvio Arg, object userState) {
-            if ((this.CallConsultarLoteRpsOperationCompleted == null)) {
+        public void CallConsultarLoteRpsAsync(ConsultarLoteRpsEnvio Arg, object userState)
+        {
+            if((this.CallConsultarLoteRpsOperationCompleted == null))
+            {
                 this.CallConsultarLoteRpsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallConsultarLoteRpsOperationCompleted);
             }
             this.InvokeAsync("CallConsultarLoteRps", new object[] {
                         Arg}, this.CallConsultarLoteRpsOperationCompleted, userState);
         }
-        
-        private void OnCallConsultarLoteRpsOperationCompleted(object arg) {
-            if ((this.CallConsultarLoteRpsCompleted != null)) {
+
+        private void OnCallConsultarLoteRpsOperationCompleted(object arg)
+        {
+            if((this.CallConsultarLoteRpsCompleted != null))
+            {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.CallConsultarLoteRpsCompleted(this, new CallConsultarLoteRpsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
-        
+
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.tinus.com.br/WSNFSE.ConsultarLoteRps.Test", RequestNamespace="http://www.tinus.com.br", ResponseNamespace="http://www.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public string Test() {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.tinus.com.br/WSNFSE.ConsultarLoteRps.Test", RequestNamespace = "http://www.tinus.com.br", ResponseNamespace = "http://www.tinus.com.br", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public string Test()
+        {
             object[] results = this.Invoke("Test", new object[0]);
             return ((string)(results[0]));
         }
-        
+
         /// <remarks/>
-        public void TestAsync() {
+        public void TestAsync()
+        {
             this.TestAsync(null);
         }
-        
+
         /// <remarks/>
-        public void TestAsync(object userState) {
-            if ((this.TestOperationCompleted == null)) {
+        public void TestAsync(object userState)
+        {
+            if((this.TestOperationCompleted == null))
+            {
                 this.TestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTestOperationCompleted);
             }
             this.InvokeAsync("Test", new object[0], this.TestOperationCompleted, userState);
         }
-        
-        private void OnTestOperationCompleted(object arg) {
-            if ((this.TestCompleted != null)) {
+
+        private void OnTestOperationCompleted(object arg)
+        {
+            if((this.TestCompleted != null))
+            {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.TestCompleted(this, new TestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
-        
+
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.tinus.com.br/WSNFSE.ConsultarLoteRps.TesteRetorno", RequestNamespace="http://www.tinus.com.br", ResponseNamespace="http://www.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public ConsultarLoteRpsResposta TesteRetorno() {
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.tinus.com.br/WSNFSE.ConsultarLoteRps.TesteRetorno", RequestNamespace = "http://www.tinus.com.br", ResponseNamespace = "http://www.tinus.com.br", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public ConsultarLoteRpsResposta TesteRetorno()
+        {
             object[] results = this.Invoke("TesteRetorno", new object[0]);
             return ((ConsultarLoteRpsResposta)(results[0]));
         }
-        
+
         /// <remarks/>
-        public void TesteRetornoAsync() {
+        public void TesteRetornoAsync()
+        {
             this.TesteRetornoAsync(null);
         }
-        
+
         /// <remarks/>
-        public void TesteRetornoAsync(object userState) {
-            if ((this.TesteRetornoOperationCompleted == null)) {
+        public void TesteRetornoAsync(object userState)
+        {
+            if((this.TesteRetornoOperationCompleted == null))
+            {
                 this.TesteRetornoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTesteRetornoOperationCompleted);
             }
             this.InvokeAsync("TesteRetorno", new object[0], this.TesteRetornoOperationCompleted, userState);
         }
-        
-        private void OnTesteRetornoOperationCompleted(object arg) {
-            if ((this.TesteRetornoCompleted != null)) {
+
+        private void OnTesteRetornoOperationCompleted(object arg)
+        {
+            if((this.TesteRetornoCompleted != null))
+            {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.TesteRetornoCompleted(this, new TesteRetornoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
-        
+
         /// <remarks/>
-        public new void CancelAsync(object userState) {
+        public new void CancelAsync(object userState)
+        {
             base.CancelAsync(userState);
         }
-        
-        private bool IsLocalFileSystemWebService(string url) {
-            if (((url == null) 
-                        || (url == string.Empty))) {
+
+        private bool IsLocalFileSystemWebService(string url)
+        {
+            if(((url == null)
+                        || (url == string.Empty)))
+            {
                 return false;
             }
             System.Uri wsUri = new System.Uri(url);
-            if (((wsUri.Port >= 1024) 
-                        && (string.Compare(wsUri.Host, "localHost", System.StringComparison.OrdinalIgnoreCase) == 0))) {
+            if(((wsUri.Port >= 1024)
+                        && (string.Compare(wsUri.Host, "localHost", System.StringComparison.OrdinalIgnoreCase) == 0)))
+            {
                 return true;
             }
             return false;
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class ConsultarLoteRpsEnvio {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class ConsultarLoteRpsEnvio
+    {
+
         private tcIdentificacaoPrestador prestadorField;
-        
+
         private string protocoloField;
-        
+
         /// <remarks/>
-        public tcIdentificacaoPrestador Prestador {
-            get {
+        public tcIdentificacaoPrestador Prestador
+        {
+            get
+            {
                 return this.prestadorField;
             }
-            set {
+            set
+            {
                 this.prestadorField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Protocolo {
-            get {
+        public string Protocolo
+        {
+            get
+            {
                 return this.protocoloField;
             }
-            set {
+            set
+            {
                 this.protocoloField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcIdentificacaoPrestador {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcIdentificacaoPrestador
+    {
+
         private string cnpjField;
-        
+
         private string inscricaoMunicipalField;
-        
+
         /// <remarks/>
-        public string Cnpj {
-            get {
+        public string Cnpj
+        {
+            get
+            {
                 return this.cnpjField;
             }
-            set {
+            set
+            {
                 this.cnpjField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string InscricaoMunicipal {
-            get {
+        public string InscricaoMunicipal
+        {
+            get
+            {
                 return this.inscricaoMunicipalField;
             }
-            set {
+            set
+            {
                 this.inscricaoMunicipalField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcMensagemRetorno {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcMensagemRetorno
+    {
+
         private string codigoField;
-        
+
         private string mensagemField;
-        
+
         private string correcaoField;
-        
+
         /// <remarks/>
-        public string Codigo {
-            get {
+        public string Codigo
+        {
+            get
+            {
                 return this.codigoField;
             }
-            set {
+            set
+            {
                 this.codigoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Mensagem {
-            get {
+        public string Mensagem
+        {
+            get
+            {
                 return this.mensagemField;
             }
-            set {
+            set
+            {
                 this.mensagemField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Correcao {
-            get {
+        public string Correcao
+        {
+            get
+            {
                 return this.correcaoField;
             }
-            set {
+            set
+            {
                 this.correcaoField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcInfSubstituicaoNfse {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcInfSubstituicaoNfse
+    {
+
         private string nfseSubstituidoraField;
-        
+
         private string idField;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string NfseSubstituidora {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        public string NfseSubstituidora
+        {
+            get
+            {
                 return this.nfseSubstituidoraField;
             }
-            set {
+            set
+            {
                 this.nfseSubstituidoraField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
-            get {
+        public string id
+        {
+            get
+            {
                 return this.idField;
             }
-            set {
+            set
+            {
                 this.idField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcSubstituicaoNfse {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcSubstituicaoNfse
+    {
+
         private tcInfSubstituicaoNfse substituicaoNfseField;
-        
+
         private SignatureType[] signatureField;
-        
+
         /// <remarks/>
-        public tcInfSubstituicaoNfse SubstituicaoNfse {
-            get {
+        public tcInfSubstituicaoNfse SubstituicaoNfse
+        {
+            get
+            {
                 return this.substituicaoNfseField;
             }
-            set {
+            set
+            {
                 this.substituicaoNfseField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Signature", Namespace="http://www.w3.org/2000/09/xmldsig#")]
-        public SignatureType[] Signature {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+        public SignatureType[] Signature
+        {
+            get
+            {
                 return this.signatureField;
             }
-            set {
+            set
+            {
                 this.signatureField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class SignatureType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class SignatureType
+    {
+
         private SignedInfoType signedInfoField;
-        
+
         private SignatureValueType signatureValueField;
-        
+
         private KeyInfoType keyInfoField;
-        
+
         private ObjectType[] objectField;
-        
+
         private string idField;
-        
+
         /// <remarks/>
-        public SignedInfoType SignedInfo {
-            get {
+        public SignedInfoType SignedInfo
+        {
+            get
+            {
                 return this.signedInfoField;
             }
-            set {
+            set
+            {
                 this.signedInfoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public SignatureValueType SignatureValue {
-            get {
+        public SignatureValueType SignatureValue
+        {
+            get
+            {
                 return this.signatureValueField;
             }
-            set {
+            set
+            {
                 this.signatureValueField = value;
             }
         }
-        
+
         /// <remarks/>
-        public KeyInfoType KeyInfo {
-            get {
+        public KeyInfoType KeyInfo
+        {
+            get
+            {
                 return this.keyInfoField;
             }
-            set {
+            set
+            {
                 this.keyInfoField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Object", IsNullable=true)]
-        public ObjectType[] Object {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("Object", IsNullable = true)]
+        public ObjectType[] Object
+        {
+            get
+            {
                 return this.objectField;
             }
-            set {
+            set
+            {
                 this.objectField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
+        public string Id
+        {
+            get
+            {
                 return this.idField;
             }
-            set {
+            set
+            {
                 this.idField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class SignedInfoType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class SignedInfoType
+    {
+
         private CanonicalizationMethodType canonicalizationMethodField;
-        
+
         private SignatureMethodType signatureMethodField;
-        
+
         private ReferenceType[] referenceField;
-        
+
         private string idField;
-        
+
         /// <remarks/>
-        public CanonicalizationMethodType CanonicalizationMethod {
-            get {
+        public CanonicalizationMethodType CanonicalizationMethod
+        {
+            get
+            {
                 return this.canonicalizationMethodField;
             }
-            set {
+            set
+            {
                 this.canonicalizationMethodField = value;
             }
         }
-        
+
         /// <remarks/>
-        public SignatureMethodType SignatureMethod {
-            get {
+        public SignatureMethodType SignatureMethod
+        {
+            get
+            {
                 return this.signatureMethodField;
             }
-            set {
+            set
+            {
                 this.signatureMethodField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("Reference")]
-        public ReferenceType[] Reference {
-            get {
+        public ReferenceType[] Reference
+        {
+            get
+            {
                 return this.referenceField;
             }
-            set {
+            set
+            {
                 this.referenceField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
+        public string Id
+        {
+            get
+            {
                 return this.idField;
             }
-            set {
+            set
+            {
                 this.idField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class CanonicalizationMethodType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class CanonicalizationMethodType
+    {
+
         private string algorithmField;
-        
+
         private string valueField;
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Algorithm {
-            get {
+        public string Algorithm
+        {
+            get
+            {
                 return this.algorithmField;
             }
-            set {
+            set
+            {
                 this.algorithmField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value {
-            get {
+        public string Value
+        {
+            get
+            {
                 return this.valueField;
             }
-            set {
+            set
+            {
                 this.valueField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class SignatureMethodType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class SignatureMethodType
+    {
+
         private long hMACOutputLengthField;
-        
+
         private bool hMACOutputLengthFieldSpecified;
-        
+
         private string[] textField;
-        
+
         private string algorithmField;
-        
+
         /// <remarks/>
-        public long HMACOutputLength {
-            get {
+        public long HMACOutputLength
+        {
+            get
+            {
                 return this.hMACOutputLengthField;
             }
-            set {
+            set
+            {
                 this.hMACOutputLengthField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool HMACOutputLengthSpecified {
-            get {
+        public bool HMACOutputLengthSpecified
+        {
+            get
+            {
                 return this.hMACOutputLengthFieldSpecified;
             }
-            set {
+            set
+            {
                 this.hMACOutputLengthFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
-            get {
+        public string[] Text
+        {
+            get
+            {
                 return this.textField;
             }
-            set {
+            set
+            {
                 this.textField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Algorithm {
-            get {
+        public string Algorithm
+        {
+            get
+            {
                 return this.algorithmField;
             }
-            set {
+            set
+            {
                 this.algorithmField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class ReferenceType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class ReferenceType
+    {
+
         private TransformType[] transformsField;
-        
+
         private DigestMethodType digestMethodField;
-        
+
         private byte[] digestValueField;
-        
+
         private string idField;
-        
+
         private string uRIField;
-        
+
         private string typeField;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("Transform", IsNullable=false)]
-        public TransformType[] Transforms {
-            get {
+        [System.Xml.Serialization.XmlArrayItemAttribute("Transform", IsNullable = false)]
+        public TransformType[] Transforms
+        {
+            get
+            {
                 return this.transformsField;
             }
-            set {
+            set
+            {
                 this.transformsField = value;
             }
         }
-        
+
         /// <remarks/>
-        public DigestMethodType DigestMethod {
-            get {
+        public DigestMethodType DigestMethod
+        {
+            get
+            {
                 return this.digestMethodField;
             }
-            set {
+            set
+            {
                 this.digestMethodField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] DigestValue {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] DigestValue
+        {
+            get
+            {
                 return this.digestValueField;
             }
-            set {
+            set
+            {
                 this.digestValueField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
+        public string Id
+        {
+            get
+            {
                 return this.idField;
             }
-            set {
+            set
+            {
                 this.idField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string URI {
-            get {
+        public string URI
+        {
+            get
+            {
                 return this.uRIField;
             }
-            set {
+            set
+            {
                 this.uRIField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Type {
-            get {
+        public string Type
+        {
+            get
+            {
                 return this.typeField;
             }
-            set {
+            set
+            {
                 this.typeField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class TransformType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class TransformType
+    {
+
         private System.Xml.XmlNode[] anyField;
-        
+
         private string[] xPathField;
-        
+
         private string algorithmField;
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any {
-            get {
+        public System.Xml.XmlNode[] Any
+        {
+            get
+            {
                 return this.anyField;
             }
-            set {
+            set
+            {
                 this.anyField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("XPath", IsNullable=true)]
-        public string[] XPath {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("XPath", IsNullable = true)]
+        public string[] XPath
+        {
+            get
+            {
                 return this.xPathField;
             }
-            set {
+            set
+            {
                 this.xPathField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Algorithm {
-            get {
+        public string Algorithm
+        {
+            get
+            {
                 return this.algorithmField;
             }
-            set {
+            set
+            {
                 this.algorithmField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class DigestMethodType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class DigestMethodType
+    {
+
         private string algorithmField;
-        
+
         private string valueField;
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Algorithm {
-            get {
+        public string Algorithm
+        {
+            get
+            {
                 return this.algorithmField;
             }
-            set {
+            set
+            {
                 this.algorithmField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value {
-            get {
+        public string Value
+        {
+            get
+            {
                 return this.valueField;
             }
-            set {
+            set
+            {
                 this.valueField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class SignatureValueType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class SignatureValueType
+    {
+
         private string idField;
-        
+
         private byte[] valueField;
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
+        public string Id
+        {
+            get
+            {
                 return this.idField;
             }
-            set {
+            set
+            {
                 this.idField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute(DataType="base64Binary")]
-        public byte[] Value {
-            get {
+        [System.Xml.Serialization.XmlTextAttribute(DataType = "base64Binary")]
+        public byte[] Value
+        {
+            get
+            {
                 return this.valueField;
             }
-            set {
+            set
+            {
                 this.valueField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class KeyInfoType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class KeyInfoType
+    {
+
         private string[] keyNameField;
-        
+
         private KeyValueType[] keyValueField;
-        
+
         private RetrievalMethodType[] retrievalMethodField;
-        
+
         private X509DataType[] x509DataField;
-        
+
         private PGPDataType[] pGPDataField;
-        
+
         private SPKIDataType[] sPKIDataField;
-        
+
         private string[] mgmtDataField;
-        
+
         private System.Xml.XmlNode[] anyField;
-        
+
         private string idField;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("KeyName", IsNullable=true)]
-        public string[] KeyName {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("KeyName", IsNullable = true)]
+        public string[] KeyName
+        {
+            get
+            {
                 return this.keyNameField;
             }
-            set {
+            set
+            {
                 this.keyNameField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("KeyValue", IsNullable=true)]
-        public KeyValueType[] KeyValue {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("KeyValue", IsNullable = true)]
+        public KeyValueType[] KeyValue
+        {
+            get
+            {
                 return this.keyValueField;
             }
-            set {
+            set
+            {
                 this.keyValueField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("RetrievalMethod", IsNullable=true)]
-        public RetrievalMethodType[] RetrievalMethod {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("RetrievalMethod", IsNullable = true)]
+        public RetrievalMethodType[] RetrievalMethod
+        {
+            get
+            {
                 return this.retrievalMethodField;
             }
-            set {
+            set
+            {
                 this.retrievalMethodField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("X509Data", IsNullable=true)]
-        public X509DataType[] X509Data {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("X509Data", IsNullable = true)]
+        public X509DataType[] X509Data
+        {
+            get
+            {
                 return this.x509DataField;
             }
-            set {
+            set
+            {
                 this.x509DataField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("PGPData", IsNullable=true)]
-        public PGPDataType[] PGPData {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("PGPData", IsNullable = true)]
+        public PGPDataType[] PGPData
+        {
+            get
+            {
                 return this.pGPDataField;
             }
-            set {
+            set
+            {
                 this.pGPDataField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SPKIData", IsNullable=true)]
-        public SPKIDataType[] SPKIData {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("SPKIData", IsNullable = true)]
+        public SPKIDataType[] SPKIData
+        {
+            get
+            {
                 return this.sPKIDataField;
             }
-            set {
+            set
+            {
                 this.sPKIDataField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("MgmtData", IsNullable=true)]
-        public string[] MgmtData {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("MgmtData", IsNullable = true)]
+        public string[] MgmtData
+        {
+            get
+            {
                 return this.mgmtDataField;
             }
-            set {
+            set
+            {
                 this.mgmtDataField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any {
-            get {
+        public System.Xml.XmlNode[] Any
+        {
+            get
+            {
                 return this.anyField;
             }
-            set {
+            set
+            {
                 this.anyField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
+        public string Id
+        {
+            get
+            {
                 return this.idField;
             }
-            set {
+            set
+            {
                 this.idField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class KeyValueType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class KeyValueType
+    {
+
         private DSAKeyValueType dSAKeyValueField;
-        
+
         private RSAKeyValueType rSAKeyValueField;
-        
+
         private System.Xml.XmlNode[] anyField;
-        
+
         /// <remarks/>
-        public DSAKeyValueType DSAKeyValue {
-            get {
+        public DSAKeyValueType DSAKeyValue
+        {
+            get
+            {
                 return this.dSAKeyValueField;
             }
-            set {
+            set
+            {
                 this.dSAKeyValueField = value;
             }
         }
-        
+
         /// <remarks/>
-        public RSAKeyValueType RSAKeyValue {
-            get {
+        public RSAKeyValueType RSAKeyValue
+        {
+            get
+            {
                 return this.rSAKeyValueField;
             }
-            set {
+            set
+            {
                 this.rSAKeyValueField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any {
-            get {
+        public System.Xml.XmlNode[] Any
+        {
+            get
+            {
                 return this.anyField;
             }
-            set {
+            set
+            {
                 this.anyField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class DSAKeyValueType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class DSAKeyValueType
+    {
+
         private byte[] pField;
-        
+
         private byte[] qField;
-        
+
         private byte[] gField;
-        
+
         private byte[] yField;
-        
+
         private byte[] jField;
-        
+
         private byte[] seedField;
-        
+
         private byte[] pgenCounterField;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] P {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] P
+        {
+            get
+            {
                 return this.pField;
             }
-            set {
+            set
+            {
                 this.pField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Q {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] Q
+        {
+            get
+            {
                 return this.qField;
             }
-            set {
+            set
+            {
                 this.qField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] G {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] G
+        {
+            get
+            {
                 return this.gField;
             }
-            set {
+            set
+            {
                 this.gField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Y {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] Y
+        {
+            get
+            {
                 return this.yField;
             }
-            set {
+            set
+            {
                 this.yField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] J {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] J
+        {
+            get
+            {
                 return this.jField;
             }
-            set {
+            set
+            {
                 this.jField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Seed {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] Seed
+        {
+            get
+            {
                 return this.seedField;
             }
-            set {
+            set
+            {
                 this.seedField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] PgenCounter {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] PgenCounter
+        {
+            get
+            {
                 return this.pgenCounterField;
             }
-            set {
+            set
+            {
                 this.pgenCounterField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class RSAKeyValueType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class RSAKeyValueType
+    {
+
         private byte[] modulusField;
-        
+
         private byte[] exponentField;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Modulus {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] Modulus
+        {
+            get
+            {
                 return this.modulusField;
             }
-            set {
+            set
+            {
                 this.modulusField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary")]
-        public byte[] Exponent {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary")]
+        public byte[] Exponent
+        {
+            get
+            {
                 return this.exponentField;
             }
-            set {
+            set
+            {
                 this.exponentField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class RetrievalMethodType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class RetrievalMethodType
+    {
+
         private TransformType[] transformsField;
-        
+
         private string uRIField;
-        
+
         private string typeField;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("Transform", IsNullable=false)]
-        public TransformType[] Transforms {
-            get {
+        [System.Xml.Serialization.XmlArrayItemAttribute("Transform", IsNullable = false)]
+        public TransformType[] Transforms
+        {
+            get
+            {
                 return this.transformsField;
             }
-            set {
+            set
+            {
                 this.transformsField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string URI {
-            get {
+        public string URI
+        {
+            get
+            {
                 return this.uRIField;
             }
-            set {
+            set
+            {
                 this.uRIField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Type {
-            get {
+        public string Type
+        {
+            get
+            {
                 return this.typeField;
             }
-            set {
+            set
+            {
                 this.typeField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class X509DataType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class X509DataType
+    {
+
         private X509IssuerSerialType[] x509IssuerSerialField;
-        
+
         private byte[][] x509SKIField;
-        
+
         private string[] x509SubjectNameField;
-        
+
         private byte[][] x509CertificateField;
-        
+
         private byte[][] x509CRLField;
-        
+
         private System.Xml.XmlElement[] anyField;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("X509IssuerSerial", IsNullable=true)]
-        public X509IssuerSerialType[] X509IssuerSerial {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("X509IssuerSerial", IsNullable = true)]
+        public X509IssuerSerialType[] X509IssuerSerial
+        {
+            get
+            {
                 return this.x509IssuerSerialField;
             }
-            set {
+            set
+            {
                 this.x509IssuerSerialField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("X509SKI", DataType="base64Binary", IsNullable=true)]
-        public byte[][] X509SKI {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("X509SKI", DataType = "base64Binary", IsNullable = true)]
+        public byte[][] X509SKI
+        {
+            get
+            {
                 return this.x509SKIField;
             }
-            set {
+            set
+            {
                 this.x509SKIField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("X509SubjectName", IsNullable=true)]
-        public string[] X509SubjectName {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("X509SubjectName", IsNullable = true)]
+        public string[] X509SubjectName
+        {
+            get
+            {
                 return this.x509SubjectNameField;
             }
-            set {
+            set
+            {
                 this.x509SubjectNameField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("X509Certificate", DataType="base64Binary", IsNullable=true)]
-        public byte[][] X509Certificate {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("X509Certificate", DataType = "base64Binary", IsNullable = true)]
+        public byte[][] X509Certificate
+        {
+            get
+            {
                 return this.x509CertificateField;
             }
-            set {
+            set
+            {
                 this.x509CertificateField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("X509CRL", DataType="base64Binary", IsNullable=true)]
-        public byte[][] X509CRL {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("X509CRL", DataType = "base64Binary", IsNullable = true)]
+        public byte[][] X509CRL
+        {
+            get
+            {
                 return this.x509CRLField;
             }
-            set {
+            set
+            {
                 this.x509CRLField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
-            get {
+        public System.Xml.XmlElement[] Any
+        {
+            get
+            {
                 return this.anyField;
             }
-            set {
+            set
+            {
                 this.anyField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class X509IssuerSerialType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class X509IssuerSerialType
+    {
+
         private string x509IssuerNameField;
-        
+
         private long x509SerialNumberField;
-        
+
         /// <remarks/>
-        public string X509IssuerName {
-            get {
+        public string X509IssuerName
+        {
+            get
+            {
                 return this.x509IssuerNameField;
             }
-            set {
+            set
+            {
                 this.x509IssuerNameField = value;
             }
         }
-        
+
         /// <remarks/>
-        public long X509SerialNumber {
-            get {
+        public long X509SerialNumber
+        {
+            get
+            {
                 return this.x509SerialNumberField;
             }
-            set {
+            set
+            {
                 this.x509SerialNumberField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class PGPDataType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class PGPDataType
+    {
+
         private byte[] pGPKeyIDField;
-        
+
         private byte[] pGPKeyPacketField;
-        
+
         private System.Xml.XmlElement[] anyField;
-        
+
         private byte[] pGPKeyPacket1Field;
-        
+
         private System.Xml.XmlElement[] any1Field;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary", Order=0)]
-        public byte[] PGPKeyID {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary", Order = 0)]
+        public byte[] PGPKeyID
+        {
+            get
+            {
                 return this.pGPKeyIDField;
             }
-            set {
+            set
+            {
                 this.pGPKeyIDField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="base64Binary", Order=1)]
-        public byte[] PGPKeyPacket {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "base64Binary", Order = 1)]
+        public byte[] PGPKeyPacket
+        {
+            get
+            {
                 return this.pGPKeyPacketField;
             }
-            set {
+            set
+            {
                 this.pGPKeyPacketField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=2)]
-        public System.Xml.XmlElement[] Any {
-            get {
+        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 2)]
+        public System.Xml.XmlElement[] Any
+        {
+            get
+            {
                 return this.anyField;
             }
-            set {
+            set
+            {
                 this.anyField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("PGPKeyPacket", DataType="base64Binary", Order=3)]
-        public byte[] PGPKeyPacket1 {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("PGPKeyPacket", DataType = "base64Binary", Order = 3)]
+        public byte[] PGPKeyPacket1
+        {
+            get
+            {
                 return this.pGPKeyPacket1Field;
             }
-            set {
+            set
+            {
                 this.pGPKeyPacket1Field = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute(Order=4)]
-        public System.Xml.XmlElement[] Any1 {
-            get {
+        [System.Xml.Serialization.XmlAnyElementAttribute(Order = 4)]
+        public System.Xml.XmlElement[] Any1
+        {
+            get
+            {
                 return this.any1Field;
             }
-            set {
+            set
+            {
                 this.any1Field = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class SPKIDataType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class SPKIDataType
+    {
+
         private byte[][] sPKISexpField;
-        
+
         private System.Xml.XmlElement[] anyField;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("SPKISexp", DataType="base64Binary")]
-        public byte[][] SPKISexp {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute("SPKISexp", DataType = "base64Binary")]
+        public byte[][] SPKISexp
+        {
+            get
+            {
                 return this.sPKISexpField;
             }
-            set {
+            set
+            {
                 this.sPKISexpField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
-            get {
+        public System.Xml.XmlElement[] Any
+        {
+            get
+            {
                 return this.anyField;
             }
-            set {
+            set
+            {
                 this.anyField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class ObjectType {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class ObjectType
+    {
+
         private string idField;
-        
+
         private string mimeTypeField;
-        
+
         private string encodingField;
-        
+
         private string valueField;
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
-            get {
+        public string Id
+        {
+            get
+            {
                 return this.idField;
             }
-            set {
+            set
+            {
                 this.idField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string MimeType {
-            get {
+        public string MimeType
+        {
+            get
+            {
                 return this.mimeTypeField;
             }
-            set {
+            set
+            {
                 this.mimeTypeField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Encoding {
-            get {
+        public string Encoding
+        {
+            get
+            {
                 return this.encodingField;
             }
-            set {
+            set
+            {
                 this.encodingField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value {
-            get {
+        public string Value
+        {
+            get
+            {
                 return this.valueField;
             }
-            set {
+            set
+            {
                 this.valueField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcIdentificacaoNfse {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcIdentificacaoNfse
+    {
+
         private string numeroField;
-        
+
         private string cnpjField;
-        
+
         private string inscricaoMunicipalField;
-        
+
         private int codigoMunicipioField;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string Numero {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        public string Numero
+        {
+            get
+            {
                 return this.numeroField;
             }
-            set {
+            set
+            {
                 this.numeroField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Cnpj {
-            get {
+        public string Cnpj
+        {
+            get
+            {
                 return this.cnpjField;
             }
-            set {
+            set
+            {
                 this.cnpjField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string InscricaoMunicipal {
-            get {
+        public string InscricaoMunicipal
+        {
+            get
+            {
                 return this.inscricaoMunicipalField;
             }
-            set {
+            set
+            {
                 this.inscricaoMunicipalField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int CodigoMunicipio {
-            get {
+        public int CodigoMunicipio
+        {
+            get
+            {
                 return this.codigoMunicipioField;
             }
-            set {
+            set
+            {
                 this.codigoMunicipioField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcInfPedidoCancelamento {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcInfPedidoCancelamento
+    {
+
         private tcIdentificacaoNfse identificacaoNfseField;
-        
+
         private string codigoCancelamentoField;
-        
+
         private string idField;
-        
+
         /// <remarks/>
-        public tcIdentificacaoNfse IdentificacaoNfse {
-            get {
+        public tcIdentificacaoNfse IdentificacaoNfse
+        {
+            get
+            {
                 return this.identificacaoNfseField;
             }
-            set {
+            set
+            {
                 this.identificacaoNfseField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string CodigoCancelamento {
-            get {
+        public string CodigoCancelamento
+        {
+            get
+            {
                 return this.codigoCancelamentoField;
             }
-            set {
+            set
+            {
                 this.codigoCancelamentoField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
-            get {
+        public string id
+        {
+            get
+            {
                 return this.idField;
             }
-            set {
+            set
+            {
                 this.idField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcPedidoCancelamento {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcPedidoCancelamento
+    {
+
         private tcInfPedidoCancelamento infPedidoCancelamentoField;
-        
+
         private SignatureType signatureField;
-        
+
         /// <remarks/>
-        public tcInfPedidoCancelamento InfPedidoCancelamento {
-            get {
+        public tcInfPedidoCancelamento InfPedidoCancelamento
+        {
+            get
+            {
                 return this.infPedidoCancelamentoField;
             }
-            set {
+            set
+            {
                 this.infPedidoCancelamentoField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-        public SignatureType Signature {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+        public SignatureType Signature
+        {
+            get
+            {
                 return this.signatureField;
             }
-            set {
+            set
+            {
                 this.signatureField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcConfirmacaoCancelamento {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcConfirmacaoCancelamento
+    {
+
         private tcPedidoCancelamento pedidoField;
-        
+
         private System.DateTime dataHoraCancelamentoField;
-        
+
         private string idField;
-        
+
         /// <remarks/>
-        public tcPedidoCancelamento Pedido {
-            get {
+        public tcPedidoCancelamento Pedido
+        {
+            get
+            {
                 return this.pedidoField;
             }
-            set {
+            set
+            {
                 this.pedidoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public System.DateTime DataHoraCancelamento {
-            get {
+        public System.DateTime DataHoraCancelamento
+        {
+            get
+            {
                 return this.dataHoraCancelamentoField;
             }
-            set {
+            set
+            {
                 this.dataHoraCancelamentoField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
-            get {
+        public string id
+        {
+            get
+            {
                 return this.idField;
             }
-            set {
+            set
+            {
                 this.idField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcCancelamentoNfse {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcCancelamentoNfse
+    {
+
         private tcConfirmacaoCancelamento confirmacaoField;
-        
+
         private SignatureType signatureField;
-        
+
         /// <remarks/>
-        public tcConfirmacaoCancelamento Confirmacao {
-            get {
+        public tcConfirmacaoCancelamento Confirmacao
+        {
+            get
+            {
                 return this.confirmacaoField;
             }
-            set {
+            set
+            {
                 this.confirmacaoField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
-        public SignatureType Signature {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+        public SignatureType Signature
+        {
+            get
+            {
                 return this.signatureField;
             }
-            set {
+            set
+            {
                 this.signatureField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcDadosConstrucaoCivil {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcDadosConstrucaoCivil
+    {
+
         private string codigoObraField;
-        
+
         private string artField;
-        
+
         /// <remarks/>
-        public string CodigoObra {
-            get {
+        public string CodigoObra
+        {
+            get
+            {
                 return this.codigoObraField;
             }
-            set {
+            set
+            {
                 this.codigoObraField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Art {
-            get {
+        public string Art
+        {
+            get
+            {
                 return this.artField;
             }
-            set {
+            set
+            {
                 this.artField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcIdentificacaoOrgaoGerador {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcIdentificacaoOrgaoGerador
+    {
+
         private int codigoMunicipioField;
-        
+
         private string ufField;
-        
+
         /// <remarks/>
-        public int CodigoMunicipio {
-            get {
+        public int CodigoMunicipio
+        {
+            get
+            {
                 return this.codigoMunicipioField;
             }
-            set {
+            set
+            {
                 this.codigoMunicipioField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Uf {
-            get {
+        public string Uf
+        {
+            get
+            {
                 return this.ufField;
             }
-            set {
+            set
+            {
                 this.ufField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcIdentificacaoIntermediarioServico {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcIdentificacaoIntermediarioServico
+    {
+
         private string razaoSocialField;
-        
+
         private tcCpfCnpj cpfCnpjField;
-        
+
         private string inscricaoMunicipalField;
-        
+
         /// <remarks/>
-        public string RazaoSocial {
-            get {
+        public string RazaoSocial
+        {
+            get
+            {
                 return this.razaoSocialField;
             }
-            set {
+            set
+            {
                 this.razaoSocialField = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcCpfCnpj CpfCnpj {
-            get {
+        public tcCpfCnpj CpfCnpj
+        {
+            get
+            {
                 return this.cpfCnpjField;
             }
-            set {
+            set
+            {
                 this.cpfCnpjField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string InscricaoMunicipal {
-            get {
+        public string InscricaoMunicipal
+        {
+            get
+            {
                 return this.inscricaoMunicipalField;
             }
-            set {
+            set
+            {
                 this.inscricaoMunicipalField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcCpfCnpj {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcCpfCnpj
+    {
+
         private string cpfField;
-        
+
         private string cnpjField;
-        
+
         /// <remarks/>
-        public string Cpf {
-            get {
+        public string Cpf
+        {
+            get
+            {
                 return this.cpfField;
             }
-            set {
+            set
+            {
                 this.cpfField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Cnpj {
-            get {
+        public string Cnpj
+        {
+            get
+            {
                 return this.cnpjField;
             }
-            set {
+            set
+            {
                 this.cnpjField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcIdentificacaoTomador {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcIdentificacaoTomador
+    {
+
         private tcCpfCnpj cpfCnpjField;
-        
+
         private string inscricaoMunicipalField;
-        
+
         /// <remarks/>
-        public tcCpfCnpj CpfCnpj {
-            get {
+        public tcCpfCnpj CpfCnpj
+        {
+            get
+            {
                 return this.cpfCnpjField;
             }
-            set {
+            set
+            {
                 this.cpfCnpjField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string InscricaoMunicipal {
-            get {
+        public string InscricaoMunicipal
+        {
+            get
+            {
                 return this.inscricaoMunicipalField;
             }
-            set {
+            set
+            {
                 this.inscricaoMunicipalField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcDadosTomador {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcDadosTomador
+    {
+
         private tcIdentificacaoTomador identificacaoTomadorField;
-        
+
         private string razaoSocialField;
-        
+
         private tcEndereco enderecoField;
-        
+
         private tcContato contatoField;
-        
+
         /// <remarks/>
-        public tcIdentificacaoTomador IdentificacaoTomador {
-            get {
+        public tcIdentificacaoTomador IdentificacaoTomador
+        {
+            get
+            {
                 return this.identificacaoTomadorField;
             }
-            set {
+            set
+            {
                 this.identificacaoTomadorField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string RazaoSocial {
-            get {
+        public string RazaoSocial
+        {
+            get
+            {
                 return this.razaoSocialField;
             }
-            set {
+            set
+            {
                 this.razaoSocialField = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcEndereco Endereco {
-            get {
+        public tcEndereco Endereco
+        {
+            get
+            {
                 return this.enderecoField;
             }
-            set {
+            set
+            {
                 this.enderecoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcContato Contato {
-            get {
+        public tcContato Contato
+        {
+            get
+            {
                 return this.contatoField;
             }
-            set {
+            set
+            {
                 this.contatoField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcEndereco {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcEndereco
+    {
+
         private string enderecoField;
-        
+
         private string numeroField;
-        
+
         private string complementoField;
-        
+
         private string bairroField;
-        
+
         private int codigoMunicipioField;
-        
+
         private bool codigoMunicipioFieldSpecified;
-        
+
         private string ufField;
-        
+
         private int cepField;
-        
+
         private bool cepFieldSpecified;
-        
+
         /// <remarks/>
-        public string Endereco {
-            get {
+        public string Endereco
+        {
+            get
+            {
                 return this.enderecoField;
             }
-            set {
+            set
+            {
                 this.enderecoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Numero {
-            get {
+        public string Numero
+        {
+            get
+            {
                 return this.numeroField;
             }
-            set {
+            set
+            {
                 this.numeroField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Complemento {
-            get {
+        public string Complemento
+        {
+            get
+            {
                 return this.complementoField;
             }
-            set {
+            set
+            {
                 this.complementoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Bairro {
-            get {
+        public string Bairro
+        {
+            get
+            {
                 return this.bairroField;
             }
-            set {
+            set
+            {
                 this.bairroField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int CodigoMunicipio {
-            get {
+        public int CodigoMunicipio
+        {
+            get
+            {
                 return this.codigoMunicipioField;
             }
-            set {
+            set
+            {
                 this.codigoMunicipioField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CodigoMunicipioSpecified {
-            get {
+        public bool CodigoMunicipioSpecified
+        {
+            get
+            {
                 return this.codigoMunicipioFieldSpecified;
             }
-            set {
+            set
+            {
                 this.codigoMunicipioFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Uf {
-            get {
+        public string Uf
+        {
+            get
+            {
                 return this.ufField;
             }
-            set {
+            set
+            {
                 this.ufField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int Cep {
-            get {
+        public int Cep
+        {
+            get
+            {
                 return this.cepField;
             }
-            set {
+            set
+            {
                 this.cepField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CepSpecified {
-            get {
+        public bool CepSpecified
+        {
+            get
+            {
                 return this.cepFieldSpecified;
             }
-            set {
+            set
+            {
                 this.cepFieldSpecified = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcContato {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcContato
+    {
+
         private string telefoneField;
-        
+
         private string emailField;
-        
+
         /// <remarks/>
-        public string Telefone {
-            get {
+        public string Telefone
+        {
+            get
+            {
                 return this.telefoneField;
             }
-            set {
+            set
+            {
                 this.telefoneField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Email {
-            get {
+        public string Email
+        {
+            get
+            {
                 return this.emailField;
             }
-            set {
+            set
+            {
                 this.emailField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcDadosPrestador {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcDadosPrestador
+    {
+
         private tcIdentificacaoPrestador identificacaoPrestadorField;
-        
+
         private string razaoSocialField;
-        
+
         private string nomeFantasiaField;
-        
+
         private tcEndereco enderecoField;
-        
+
         private tcContato contatoField;
-        
+
         /// <remarks/>
-        public tcIdentificacaoPrestador IdentificacaoPrestador {
-            get {
+        public tcIdentificacaoPrestador IdentificacaoPrestador
+        {
+            get
+            {
                 return this.identificacaoPrestadorField;
             }
-            set {
+            set
+            {
                 this.identificacaoPrestadorField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string RazaoSocial {
-            get {
+        public string RazaoSocial
+        {
+            get
+            {
                 return this.razaoSocialField;
             }
-            set {
+            set
+            {
                 this.razaoSocialField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string NomeFantasia {
-            get {
+        public string NomeFantasia
+        {
+            get
+            {
                 return this.nomeFantasiaField;
             }
-            set {
+            set
+            {
                 this.nomeFantasiaField = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcEndereco Endereco {
-            get {
+        public tcEndereco Endereco
+        {
+            get
+            {
                 return this.enderecoField;
             }
-            set {
+            set
+            {
                 this.enderecoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcContato Contato {
-            get {
+        public tcContato Contato
+        {
+            get
+            {
                 return this.contatoField;
             }
-            set {
+            set
+            {
                 this.contatoField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcValores {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcValores
+    {
+
         private decimal valorServicosField;
-        
+
         private decimal valorDeducoesField;
-        
+
         private bool valorDeducoesFieldSpecified;
-        
+
         private decimal valorPisField;
-        
+
         private bool valorPisFieldSpecified;
-        
+
         private decimal valorCofinsField;
-        
+
         private bool valorCofinsFieldSpecified;
-        
+
         private decimal valorInssField;
-        
+
         private bool valorInssFieldSpecified;
-        
+
         private decimal valorIrField;
-        
+
         private bool valorIrFieldSpecified;
-        
+
         private decimal valorCsllField;
-        
+
         private bool valorCsllFieldSpecified;
-        
+
         private sbyte issRetidoField;
-        
+
         private decimal valorIssField;
-        
+
         private bool valorIssFieldSpecified;
-        
+
         private decimal valorIssRetidoField;
-        
+
         private bool valorIssRetidoFieldSpecified;
-        
+
         private decimal outrasRetencoesField;
-        
+
         private bool outrasRetencoesFieldSpecified;
-        
+
         private decimal baseCalculoField;
-        
+
         private bool baseCalculoFieldSpecified;
-        
+
         private decimal aliquotaField;
-        
+
         private bool aliquotaFieldSpecified;
-        
+
         private decimal valorLiquidoNfseField;
-        
+
         private bool valorLiquidoNfseFieldSpecified;
-        
+
         private decimal descontoIncondicionadoField;
-        
+
         private bool descontoIncondicionadoFieldSpecified;
-        
+
         private decimal descontoCondicionadoField;
-        
+
         private bool descontoCondicionadoFieldSpecified;
-        
+
         /// <remarks/>
-        public decimal ValorServicos {
-            get {
+        public decimal ValorServicos
+        {
+            get
+            {
                 return this.valorServicosField;
             }
-            set {
+            set
+            {
                 this.valorServicosField = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal ValorDeducoes {
-            get {
+        public decimal ValorDeducoes
+        {
+            get
+            {
                 return this.valorDeducoesField;
             }
-            set {
+            set
+            {
                 this.valorDeducoesField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorDeducoesSpecified {
-            get {
+        public bool ValorDeducoesSpecified
+        {
+            get
+            {
                 return this.valorDeducoesFieldSpecified;
             }
-            set {
+            set
+            {
                 this.valorDeducoesFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal ValorPis {
-            get {
+        public decimal ValorPis
+        {
+            get
+            {
                 return this.valorPisField;
             }
-            set {
+            set
+            {
                 this.valorPisField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorPisSpecified {
-            get {
+        public bool ValorPisSpecified
+        {
+            get
+            {
                 return this.valorPisFieldSpecified;
             }
-            set {
+            set
+            {
                 this.valorPisFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal ValorCofins {
-            get {
+        public decimal ValorCofins
+        {
+            get
+            {
                 return this.valorCofinsField;
             }
-            set {
+            set
+            {
                 this.valorCofinsField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorCofinsSpecified {
-            get {
+        public bool ValorCofinsSpecified
+        {
+            get
+            {
                 return this.valorCofinsFieldSpecified;
             }
-            set {
+            set
+            {
                 this.valorCofinsFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal ValorInss {
-            get {
+        public decimal ValorInss
+        {
+            get
+            {
                 return this.valorInssField;
             }
-            set {
+            set
+            {
                 this.valorInssField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorInssSpecified {
-            get {
+        public bool ValorInssSpecified
+        {
+            get
+            {
                 return this.valorInssFieldSpecified;
             }
-            set {
+            set
+            {
                 this.valorInssFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal ValorIr {
-            get {
+        public decimal ValorIr
+        {
+            get
+            {
                 return this.valorIrField;
             }
-            set {
+            set
+            {
                 this.valorIrField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorIrSpecified {
-            get {
+        public bool ValorIrSpecified
+        {
+            get
+            {
                 return this.valorIrFieldSpecified;
             }
-            set {
+            set
+            {
                 this.valorIrFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal ValorCsll {
-            get {
+        public decimal ValorCsll
+        {
+            get
+            {
                 return this.valorCsllField;
             }
-            set {
+            set
+            {
                 this.valorCsllField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorCsllSpecified {
-            get {
+        public bool ValorCsllSpecified
+        {
+            get
+            {
                 return this.valorCsllFieldSpecified;
             }
-            set {
+            set
+            {
                 this.valorCsllFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public sbyte IssRetido {
-            get {
+        public sbyte IssRetido
+        {
+            get
+            {
                 return this.issRetidoField;
             }
-            set {
+            set
+            {
                 this.issRetidoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal ValorIss {
-            get {
+        public decimal ValorIss
+        {
+            get
+            {
                 return this.valorIssField;
             }
-            set {
+            set
+            {
                 this.valorIssField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorIssSpecified {
-            get {
+        public bool ValorIssSpecified
+        {
+            get
+            {
                 return this.valorIssFieldSpecified;
             }
-            set {
+            set
+            {
                 this.valorIssFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal ValorIssRetido {
-            get {
+        public decimal ValorIssRetido
+        {
+            get
+            {
                 return this.valorIssRetidoField;
             }
-            set {
+            set
+            {
                 this.valorIssRetidoField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorIssRetidoSpecified {
-            get {
+        public bool ValorIssRetidoSpecified
+        {
+            get
+            {
                 return this.valorIssRetidoFieldSpecified;
             }
-            set {
+            set
+            {
                 this.valorIssRetidoFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal OutrasRetencoes {
-            get {
+        public decimal OutrasRetencoes
+        {
+            get
+            {
                 return this.outrasRetencoesField;
             }
-            set {
+            set
+            {
                 this.outrasRetencoesField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool OutrasRetencoesSpecified {
-            get {
+        public bool OutrasRetencoesSpecified
+        {
+            get
+            {
                 return this.outrasRetencoesFieldSpecified;
             }
-            set {
+            set
+            {
                 this.outrasRetencoesFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal BaseCalculo {
-            get {
+        public decimal BaseCalculo
+        {
+            get
+            {
                 return this.baseCalculoField;
             }
-            set {
+            set
+            {
                 this.baseCalculoField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool BaseCalculoSpecified {
-            get {
+        public bool BaseCalculoSpecified
+        {
+            get
+            {
                 return this.baseCalculoFieldSpecified;
             }
-            set {
+            set
+            {
                 this.baseCalculoFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal Aliquota {
-            get {
+        public decimal Aliquota
+        {
+            get
+            {
                 return this.aliquotaField;
             }
-            set {
+            set
+            {
                 this.aliquotaField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool AliquotaSpecified {
-            get {
+        public bool AliquotaSpecified
+        {
+            get
+            {
                 return this.aliquotaFieldSpecified;
             }
-            set {
+            set
+            {
                 this.aliquotaFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal ValorLiquidoNfse {
-            get {
+        public decimal ValorLiquidoNfse
+        {
+            get
+            {
                 return this.valorLiquidoNfseField;
             }
-            set {
+            set
+            {
                 this.valorLiquidoNfseField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorLiquidoNfseSpecified {
-            get {
+        public bool ValorLiquidoNfseSpecified
+        {
+            get
+            {
                 return this.valorLiquidoNfseFieldSpecified;
             }
-            set {
+            set
+            {
                 this.valorLiquidoNfseFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal DescontoIncondicionado {
-            get {
+        public decimal DescontoIncondicionado
+        {
+            get
+            {
                 return this.descontoIncondicionadoField;
             }
-            set {
+            set
+            {
                 this.descontoIncondicionadoField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DescontoIncondicionadoSpecified {
-            get {
+        public bool DescontoIncondicionadoSpecified
+        {
+            get
+            {
                 return this.descontoIncondicionadoFieldSpecified;
             }
-            set {
+            set
+            {
                 this.descontoIncondicionadoFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal DescontoCondicionado {
-            get {
+        public decimal DescontoCondicionado
+        {
+            get
+            {
                 return this.descontoCondicionadoField;
             }
-            set {
+            set
+            {
                 this.descontoCondicionadoField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DescontoCondicionadoSpecified {
-            get {
+        public bool DescontoCondicionadoSpecified
+        {
+            get
+            {
                 return this.descontoCondicionadoFieldSpecified;
             }
-            set {
+            set
+            {
                 this.descontoCondicionadoFieldSpecified = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcDadosServico {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcDadosServico
+    {
+
         private tcValores valoresField;
-        
+
         private string itemListaServicoField;
-        
+
         private int codigoCnaeField;
-        
+
         private bool codigoCnaeFieldSpecified;
-        
+
         private string codigoTributacaoMunicipioField;
-        
+
         private string discriminacaoField;
-        
+
         private int codigoMunicipioField;
-        
+
         /// <remarks/>
-        public tcValores Valores {
-            get {
+        public tcValores Valores
+        {
+            get
+            {
                 return this.valoresField;
             }
-            set {
+            set
+            {
                 this.valoresField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string ItemListaServico {
-            get {
+        public string ItemListaServico
+        {
+            get
+            {
                 return this.itemListaServicoField;
             }
-            set {
+            set
+            {
                 this.itemListaServicoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int CodigoCnae {
-            get {
+        public int CodigoCnae
+        {
+            get
+            {
                 return this.codigoCnaeField;
             }
-            set {
+            set
+            {
                 this.codigoCnaeField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CodigoCnaeSpecified {
-            get {
+        public bool CodigoCnaeSpecified
+        {
+            get
+            {
                 return this.codigoCnaeFieldSpecified;
             }
-            set {
+            set
+            {
                 this.codigoCnaeFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public string CodigoTributacaoMunicipio {
-            get {
+        public string CodigoTributacaoMunicipio
+        {
+            get
+            {
                 return this.codigoTributacaoMunicipioField;
             }
-            set {
+            set
+            {
                 this.codigoTributacaoMunicipioField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Discriminacao {
-            get {
+        public string Discriminacao
+        {
+            get
+            {
                 return this.discriminacaoField;
             }
-            set {
+            set
+            {
                 this.discriminacaoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public int CodigoMunicipio {
-            get {
+        public int CodigoMunicipio
+        {
+            get
+            {
                 return this.codigoMunicipioField;
             }
-            set {
+            set
+            {
                 this.codigoMunicipioField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcIdentificacaoRps {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcIdentificacaoRps
+    {
+
         private string numeroField;
-        
+
         private string serieField;
-        
+
         private sbyte tipoField;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string Numero {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        public string Numero
+        {
+            get
+            {
                 return this.numeroField;
             }
-            set {
+            set
+            {
                 this.numeroField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string Serie {
-            get {
+        public string Serie
+        {
+            get
+            {
                 return this.serieField;
             }
-            set {
+            set
+            {
                 this.serieField = value;
             }
         }
-        
+
         /// <remarks/>
-        public sbyte Tipo {
-            get {
+        public sbyte Tipo
+        {
+            get
+            {
                 return this.tipoField;
             }
-            set {
+            set
+            {
                 this.tipoField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcInfNfse {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcInfNfse
+    {
+
         private string numeroField;
-        
+
         private string codigoVerificacaoField;
-        
+
         private System.DateTime dataEmissaoField;
-        
+
         private tcIdentificacaoRps identificacaoRpsField;
-        
+
         private System.DateTime dataEmissaoRpsField;
-        
+
         private bool dataEmissaoRpsFieldSpecified;
-        
+
         private sbyte naturezaOperacaoField;
-        
+
         private sbyte regimeEspecialTributacaoField;
-        
+
         private bool regimeEspecialTributacaoFieldSpecified;
-        
+
         private sbyte optanteSimplesNacionalField;
-        
+
         private sbyte incentivadorCulturalField;
-        
-        private System.DateTime competenciaField;
-        
+
+        private string competenciaField;
+
         private string nfseSubstituidaField;
-        
+
         private string outrasInformacoesField;
-        
+
         private tcDadosServico servicoField;
-        
+
         private decimal valorCreditoField;
-        
+
         private bool valorCreditoFieldSpecified;
-        
+
         private tcDadosPrestador prestadorServicoField;
-        
+
         private tcDadosTomador tomadorServicoField;
-        
+
         private tcIdentificacaoIntermediarioServico intermediarioServicoField;
-        
+
         private tcIdentificacaoOrgaoGerador orgaoGeradorField;
-        
+
         private tcDadosConstrucaoCivil contrucaoCivilField;
-        
+
         private string idField;
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string Numero {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        public string Numero
+        {
+            get
+            {
                 return this.numeroField;
             }
-            set {
+            set
+            {
                 this.numeroField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string CodigoVerificacao {
-            get {
+        public string CodigoVerificacao
+        {
+            get
+            {
                 return this.codigoVerificacaoField;
             }
-            set {
+            set
+            {
                 this.codigoVerificacaoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public System.DateTime DataEmissao {
-            get {
+        public System.DateTime DataEmissao
+        {
+            get
+            {
                 return this.dataEmissaoField;
             }
-            set {
+            set
+            {
                 this.dataEmissaoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcIdentificacaoRps IdentificacaoRps {
-            get {
+        public tcIdentificacaoRps IdentificacaoRps
+        {
+            get
+            {
                 return this.identificacaoRpsField;
             }
-            set {
+            set
+            {
                 this.identificacaoRpsField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="date")]
-        public System.DateTime DataEmissaoRps {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
+        public System.DateTime DataEmissaoRps
+        {
+            get
+            {
                 return this.dataEmissaoRpsField;
             }
-            set {
+            set
+            {
                 this.dataEmissaoRpsField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DataEmissaoRpsSpecified {
-            get {
+        public bool DataEmissaoRpsSpecified
+        {
+            get
+            {
                 return this.dataEmissaoRpsFieldSpecified;
             }
-            set {
+            set
+            {
                 this.dataEmissaoRpsFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public sbyte NaturezaOperacao {
-            get {
+        public sbyte NaturezaOperacao
+        {
+            get
+            {
                 return this.naturezaOperacaoField;
             }
-            set {
+            set
+            {
                 this.naturezaOperacaoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public sbyte RegimeEspecialTributacao {
-            get {
+        public sbyte RegimeEspecialTributacao
+        {
+            get
+            {
                 return this.regimeEspecialTributacaoField;
             }
-            set {
+            set
+            {
                 this.regimeEspecialTributacaoField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool RegimeEspecialTributacaoSpecified {
-            get {
+        public bool RegimeEspecialTributacaoSpecified
+        {
+            get
+            {
                 return this.regimeEspecialTributacaoFieldSpecified;
             }
-            set {
+            set
+            {
                 this.regimeEspecialTributacaoFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public sbyte OptanteSimplesNacional {
-            get {
+        public sbyte OptanteSimplesNacional
+        {
+            get
+            {
                 return this.optanteSimplesNacionalField;
             }
-            set {
+            set
+            {
                 this.optanteSimplesNacionalField = value;
             }
         }
-        
+
         /// <remarks/>
-        public sbyte IncentivadorCultural {
-            get {
+        public sbyte IncentivadorCultural
+        {
+            get
+            {
                 return this.incentivadorCulturalField;
             }
-            set {
+            set
+            {
                 this.incentivadorCulturalField = value;
             }
         }
-        
+
         /// <remarks/>
-        public System.DateTime Competencia {
-            get {
+        public string Competencia
+        {
+            get
+            {
                 return this.competenciaField;
             }
-            set {
+            set
+            {
                 this.competenciaField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType="nonNegativeInteger")]
-        public string NfseSubstituida {
-            get {
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "nonNegativeInteger")]
+        public string NfseSubstituida
+        {
+            get
+            {
                 return this.nfseSubstituidaField;
             }
-            set {
+            set
+            {
                 this.nfseSubstituidaField = value;
             }
         }
-        
+
         /// <remarks/>
-        public string OutrasInformacoes {
-            get {
+        public string OutrasInformacoes
+        {
+            get
+            {
                 return this.outrasInformacoesField;
             }
-            set {
+            set
+            {
                 this.outrasInformacoesField = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcDadosServico Servico {
-            get {
+        public tcDadosServico Servico
+        {
+            get
+            {
                 return this.servicoField;
             }
-            set {
+            set
+            {
                 this.servicoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public decimal ValorCredito {
-            get {
+        public decimal ValorCredito
+        {
+            get
+            {
                 return this.valorCreditoField;
             }
-            set {
+            set
+            {
                 this.valorCreditoField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ValorCreditoSpecified {
-            get {
+        public bool ValorCreditoSpecified
+        {
+            get
+            {
                 return this.valorCreditoFieldSpecified;
             }
-            set {
+            set
+            {
                 this.valorCreditoFieldSpecified = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcDadosPrestador PrestadorServico {
-            get {
+        public tcDadosPrestador PrestadorServico
+        {
+            get
+            {
                 return this.prestadorServicoField;
             }
-            set {
+            set
+            {
                 this.prestadorServicoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcDadosTomador TomadorServico {
-            get {
+        public tcDadosTomador TomadorServico
+        {
+            get
+            {
                 return this.tomadorServicoField;
             }
-            set {
+            set
+            {
                 this.tomadorServicoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcIdentificacaoIntermediarioServico IntermediarioServico {
-            get {
+        public tcIdentificacaoIntermediarioServico IntermediarioServico
+        {
+            get
+            {
                 return this.intermediarioServicoField;
             }
-            set {
+            set
+            {
                 this.intermediarioServicoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcIdentificacaoOrgaoGerador OrgaoGerador {
-            get {
+        public tcIdentificacaoOrgaoGerador OrgaoGerador
+        {
+            get
+            {
                 return this.orgaoGeradorField;
             }
-            set {
+            set
+            {
                 this.orgaoGeradorField = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcDadosConstrucaoCivil ContrucaoCivil {
-            get {
+        public tcDadosConstrucaoCivil ContrucaoCivil
+        {
+            get
+            {
                 return this.contrucaoCivilField;
             }
-            set {
+            set
+            {
                 this.contrucaoCivilField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
-            get {
+        public string id
+        {
+            get
+            {
                 return this.idField;
             }
-            set {
+            set
+            {
                 this.idField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcNfse {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcNfse
+    {
+
         private tcInfNfse infNfseField;
-        
+
         private SignatureType[] signatureField;
-        
+
         /// <remarks/>
-        public tcInfNfse InfNfse {
-            get {
+        public tcInfNfse InfNfse
+        {
+            get
+            {
                 return this.infNfseField;
             }
-            set {
+            set
+            {
                 this.infNfseField = value;
             }
         }
-        
+
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Signature", Namespace="http://www.w3.org/2000/09/xmldsig#")]
-        public SignatureType[] Signature {
-            get {
+        /* No retorno da consulta não é necessário a assinatura.
+           Caso seja necessário, tenho uma linda gambiarra que resolverá o problema.
+
+            (╯°□°）╯︵ ┻┻
+
+        */
+        [XmlIgnore]
+        public SignatureType[] Signature
+        {
+            get
+            {
                 return this.signatureField;
             }
-            set {
+            set
+            {
                 this.signatureField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class tcCompNfse {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class tcCompNfse
+    {
+
         private tcNfse nfseField;
-        
+
         private tcCancelamentoNfse nfseCancelamentoField;
-        
+
         private tcSubstituicaoNfse nfseSubstituicaoField;
-        
+
         /// <remarks/>
-        public tcNfse Nfse {
-            get {
+        public tcNfse Nfse
+        {
+            get
+            {
                 return this.nfseField;
             }
-            set {
+            set
+            {
                 this.nfseField = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcCancelamentoNfse NfseCancelamento {
-            get {
+        public tcCancelamentoNfse NfseCancelamento
+        {
+            get
+            {
                 return this.nfseCancelamentoField;
             }
-            set {
+            set
+            {
                 this.nfseCancelamentoField = value;
             }
         }
-        
+
         /// <remarks/>
-        public tcSubstituicaoNfse NfseSubstituicao {
-            get {
+        public tcSubstituicaoNfse NfseSubstituicao
+        {
+            get
+            {
                 return this.nfseSubstituicaoField;
             }
-            set {
+            set
+            {
                 this.nfseSubstituicaoField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
-    public partial class ConsultarLoteRpsResposta {
-        
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
+    public partial class ConsultarLoteRpsResposta
+    {
+
         private tcCompNfse[] listaNfseField;
-        
+
         private tcMensagemRetorno[] listaMensagemRetornoField;
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("CompNfse")]
-        public tcCompNfse[] ListaNfse {
-            get {
+        public tcCompNfse[] ListaNfse
+        {
+            get
+            {
                 return this.listaNfseField;
             }
-            set {
+            set
+            {
                 this.listaNfseField = value;
             }
         }
-        
+
         /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("MensagemRetorno")]
-        public tcMensagemRetorno[] ListaMensagemRetorno {
-            get {
+        public tcMensagemRetorno[] ListaMensagemRetorno
+        {
+            get
+            {
                 return this.listaMensagemRetornoField;
             }
-            set {
+            set
+            {
                 this.listaMensagemRetornoField = value;
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void CallConsultarLoteRpsCompletedEventHandler(object sender, CallConsultarLoteRpsCompletedEventArgs e);
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CallConsultarLoteRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
+    public partial class CallConsultarLoteRpsCompletedEventArgs: System.ComponentModel.AsyncCompletedEventArgs
+    {
+
         private object[] results;
-        
-        internal CallConsultarLoteRpsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
+
+        internal CallConsultarLoteRpsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+                base(exception, cancelled, userState)
+        {
             this.results = results;
         }
-        
+
         /// <remarks/>
-        public ConsultarLoteRpsResposta Result {
-            get {
+        public ConsultarLoteRpsResposta Result
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((ConsultarLoteRpsResposta)(this.results[0]));
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void TestCompletedEventHandler(object sender, TestCompletedEventArgs e);
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class TestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
+    public partial class TestCompletedEventArgs: System.ComponentModel.AsyncCompletedEventArgs
+    {
+
         private object[] results;
-        
-        internal TestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
+
+        internal TestCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+                base(exception, cancelled, userState)
+        {
             this.results = results;
         }
-        
+
         /// <remarks/>
-        public string Result {
-            get {
+        public string Result
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
             }
         }
     }
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void TesteRetornoCompletedEventHandler(object sender, TesteRetornoCompletedEventArgs e);
-    
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    //[System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class TesteRetornoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
+    public partial class TesteRetornoCompletedEventArgs: System.ComponentModel.AsyncCompletedEventArgs
+    {
+
         private object[] results;
-        
-        internal TesteRetornoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
+
+        internal TesteRetornoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) :
+                base(exception, cancelled, userState)
+        {
             this.results = results;
         }
-        
+
         /// <remarks/>
-        public ConsultarLoteRpsResposta Result {
-            get {
+        public ConsultarLoteRpsResposta Result
+        {
+            get
+            {
                 this.RaiseExceptionIfNecessary();
                 return ((ConsultarLoteRpsResposta)(this.results[0]));
             }

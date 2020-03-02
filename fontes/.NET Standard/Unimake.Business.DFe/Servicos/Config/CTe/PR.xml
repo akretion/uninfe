@@ -53,18 +53,19 @@
       <TagLoteAssinatura></TagLoteAssinatura>
       <TagLoteAtributoID></TagLoteAtributoID>
     </ConsultaCadastro>
-    <RecepcaoEvento versao="1.00">
+    <RecepcaoEvento versao="3.00">
       <Descricao>Recepcao de eventos</Descricao>
-      <WebEnderecoHomologacao>https://homologacao.nfe.sefa.pr.gov.br/nfe/NFeRecepcaoEvento4</WebEnderecoHomologacao>
-      <WebEnderecoProducao>https://nfe.sefa.pr.gov.br/nfe/NFeRecepcaoEvento4</WebEnderecoProducao>
-      <WebActionHomologacao>http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico</WebActionHomologacao>
-      <WebActionProducao>http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico</WebActionProducao>
+      <WebEnderecoHomologacao>https://homologacao.cte.fazenda.pr.gov.br/cte/CteRecepcaoEvento</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://cte.fazenda.pr.gov.br/cte/CteRecepcaoEvento</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcaoEvento</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcaoEvento</WebActionProducao>
+      <WebTagRetorno>cteRecepcaoEventoResult</WebTagRetorno>
       <SchemaArquivo></SchemaArquivo>
       <SchemasEspecificos>
         <Tipo>
           <ID>110111</ID>
-          <SchemaArquivo>envEventoCancNFe_v{0}.xsd</SchemaArquivo>
-          <SchemaArquivoEspecifico>e110111_v{0}.xsd</SchemaArquivoEspecifico>
+          <SchemaArquivo>eventoCTe_v3.00.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>evCancCTe_v3.00.xsd</SchemaArquivoEspecifico>
         </Tipo>
         <Tipo>
           <ID>110112</ID>
@@ -77,7 +78,7 @@
           <SchemaArquivoEspecifico>e110110_v{0}.xsd</SchemaArquivoEspecifico>
         </Tipo>
       </SchemasEspecificos>
-      <TagAssinatura>evento</TagAssinatura>
+      <TagAssinatura>eventoCTe</TagAssinatura>
       <TagAtributoID>infEvento</TagAtributoID>
       <TagLoteAssinatura></TagLoteAssinatura>
       <TagLoteAtributoID></TagLoteAtributoID>
@@ -96,11 +97,12 @@
     </Autorizacao>
     <RetAutorizacao versao="3.00">
       <Descricao>Consulta recibo do conhecimento de transporte eletrônico</Descricao>
-      <WebEnderecoHomologacao>https://homologacao.nfe.sefa.pr.gov.br/nfe/NFeRetAutorizacao4?wsdl</WebEnderecoHomologacao>
-      <WebEnderecoProducao>https://nfe.sefa.pr.gov.br/nfe/NFeRetAutorizacao4?wsdl</WebEnderecoProducao>
-      <WebActionHomologacao>http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico</WebActionHomologacao>
-      <WebActionProducao>http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico</WebActionProducao>
-      <SchemaArquivo>consReciNFe_v{0}.xsd</SchemaArquivo>
+      <WebEnderecoHomologacao>https://homologacao.cte.fazenda.pr.gov.br/cte/CteRetRecepcao</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://cte.fazenda.pr.gov.br/cte/CteRetRecepcao</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/cte/wsdl/CteRetRecepcao</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/cte/wsdl/CteRetRecepcao</WebActionProducao>
+      <WebTagRetorno>cteRetRecepcaoResult</WebTagRetorno>
+      <SchemaArquivo>consReciCTe_v3.00.xsd</SchemaArquivo>
       <TagAssinatura></TagAssinatura>
       <TagAtributoID></TagAtributoID>
       <TagLoteAssinatura></TagLoteAssinatura>

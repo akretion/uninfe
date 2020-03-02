@@ -1,20 +1,14 @@
-﻿using System.Runtime.InteropServices;
-using System.Xml;
+﻿using System;
+using System.Runtime.InteropServices;
+using Unimake.Business.DFe.Servicos.Interop;
 using Unimake.Business.DFe.Utility;
 using Unimake.Business.DFe.Xml.CTe;
 
 namespace Unimake.Business.DFe.Servicos.CTe
 {
     [ComVisible(true)]
-    public class StatusServico: ServicoBase
+    public class StatusServico: ServicoBase, IInteropService<ConsStatServCte>
     {
-        #region Private Constructors
-
-        private StatusServico(XmlDocument conteudoXML, Configuracao configuracao)
-            : base(conteudoXML, configuracao) { }
-
-        #endregion Private Constructors
-
         #region Protected Methods
 
         /// <summary>
@@ -64,13 +58,17 @@ namespace Unimake.Business.DFe.Servicos.CTe
                     : base() { }
 
         public StatusServico(ConsStatServCte consStatServCte, Configuracao configuracao)
-                    : this(consStatServCte?.GerarXML(), configuracao) { }
+                    : base(consStatServCte?.GerarXML() ?? throw new ArgumentNullException(nameof(consStatServCte)), configuracao) { }
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public override void Executar() => base.Executar();
+        public void Executar(ConsStatServCte consStatServCte, Configuracao configuracao)
+        {
+            PrepararServico(consStatServCte?.GerarXML() ?? throw new ArgumentNullException(nameof(consStatServCte)), configuracao);
+            Executar();
+        }
 
         public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML) => throw new System.Exception("Não existe XML de distribuição para consulta status do serviço.");
 

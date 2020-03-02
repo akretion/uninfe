@@ -3,11 +3,29 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
+using Unimake.Business.DFe.Security;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
     public abstract class ServicoBase: Servicos.ServicoBase
     {
+        #region Protected Constructors
+
+        protected ServicoBase()
+            : base()
+        {
+        }
+
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+        /// <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        protected ServicoBase(XmlDocument conteudoXML, Configuracao configuracao)
+            : base(conteudoXML, configuracao) { }
+
+        #endregion Protected Constructors
+
         #region Protected Methods
 
         /// <summary>
@@ -31,6 +49,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
                     break;
 
                 case DFE.MDFe:
+                    Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaMDFe;
                     break;
 
                 case DFE.NFSe:
@@ -57,31 +76,24 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #endregion Protected Methods
 
-        #region Public Constructors
-
-        public ServicoBase()
-            : base()
-        {
-        }
-
-        /// <summary>
-        /// Construtor
-        /// </summary>
-        /// <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
-        /// <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
-        public ServicoBase(XmlDocument conteudoXML, Configuracao configuracao)
-            : base(conteudoXML, configuracao) { }
-
-        #endregion Public Constructors
-
         #region Public Methods
 
         /// <summary>
         /// Executar o serviço
         /// </summary>
+        [ComVisible(false)]
         public override void Executar()
         {
+            if(!string.IsNullOrWhiteSpace(Configuracoes.TagAssinatura) &&
+               !AssinaturaDigital.EstaAssinado(ConteudoXML, Configuracoes.TagAssinatura))
+            {
+                AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id");
+            }
+
+            AjustarXMLAposAssinado();
+
             XmlValidar();
+
             base.Executar();
         }
 

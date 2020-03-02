@@ -43,7 +43,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             return xmlDoc;
         }
 
-        public void SetNFe(NFe nfe)
+        public void AddNFe(NFe nfe)
         {
             if(NFe == null)
             {
@@ -67,7 +67,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement(ElementName = "Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
         public Signature Signature { get; set; }
 
-        public void SetInfNFe(InfNFe infNFe)
+        public void AddInfNFe(InfNFe infNFe)
         {
             if(InfNFe == null)
             {
@@ -247,7 +247,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("dhEmi")]
         public string DhEmiField
         {
-            get => DhEmi.ToString("yyyy-MM-ddTHH:mm:ssK");
+            get => DhEmi.ToString("yyyy-MM-ddTHH:mm:sszzz");
             set => DhEmi = DateTime.Parse(value);
         }
 
@@ -257,7 +257,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("dhSaiEnt")]
         public string DhSaiEntField
         {
-            get => DhSaiEnt.ToString("yyyy-MM-ddTHH:mm:ssK");
+            get => DhSaiEnt.ToString("yyyy-MM-ddTHH:mm:sszzz");
             set => DhSaiEnt = DateTime.Parse(value);
         }
 
@@ -303,7 +303,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("dhCont")]
         public string DhContField
         {
-            get => DhCont.ToString("yyyy-MM-ddTHH:mm:ssK");
+            get => DhCont.ToString("yyyy-MM-ddTHH:mm:sszzz");
             set => DhCont = DateTime.Parse(value);
         }
 
@@ -806,8 +806,8 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         [XmlIgnore]
         public double VProd { get; set; }
-        [XmlElement("vProd")]
 
+        [XmlElement("vProd")]
         public string VProdField
         {
             get => VProd.ToString("F2", CultureInfo.InvariantCulture);
@@ -2213,6 +2213,16 @@ namespace Unimake.Business.DFe.Xml.NFe
         }
 
         [XmlIgnore]
+        public double VICMSSubstituto { get; set; }
+
+        [XmlElement("vICMSSubstituto")]
+        public string VICMSSubstitutoField
+        {
+            get => VICMSSubstituto.ToString("F2", CultureInfo.InvariantCulture);
+            set => VICMSSubstituto = Utility.Converter.ToDouble(value);
+        }
+
+        [XmlIgnore]
         public double VICMSSTRet { get; set; }
 
         [XmlElement("vICMSSTRet")]
@@ -2303,6 +2313,8 @@ namespace Unimake.Business.DFe.Xml.NFe
         public bool ShouldSerializeVBCSTRetField() => VBCSTRet > 0;
 
         public bool ShouldSerializePSTField() => PST > 0;
+
+        public bool ShouldSerializeVICMSSubstitutoField() => VICMSSubstituto > 0;
 
         public bool ShouldSerializeVICMSSTRetField() => VICMSSTRet > 0;
 
@@ -3310,10 +3322,10 @@ namespace Unimake.Business.DFe.Xml.NFe
         }
 
         [XmlIgnore]
-        public ModalidadeBaseCalculoICMSST ModBCSTField { get; set; }
+        public ModalidadeBaseCalculoICMSST? ModBCSTField { get; set; }
 
         [XmlElement("modBCST")]
-        public ModalidadeBaseCalculoICMSST ModBCST
+        public ModalidadeBaseCalculoICMSST? ModBCST
         {
             get => ModBCSTField;
 
@@ -3442,7 +3454,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         public bool ShouldSerializeVICMSField() => VICMS > 0;
 
-        public bool ShouldSerializeModBCST() => Enum.IsDefined(typeof(ModalidadeBaseCalculoICMSST), ModBCST);
+        public bool ShouldSerializeModBCST() => ModBCST != null;
 
         public bool ShouldSerializePMVASTField() => PMVAST > 0;
 
@@ -5041,7 +5053,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         public string Balsa { get; set; }
 
         [XmlElement("vol")]
-        public Vol[] Vol { get; set; }
+        public List<Vol> Vol { get; set; } = new List<Vol>();
 
         #region ShouldSerialize
 
@@ -5050,6 +5062,16 @@ namespace Unimake.Business.DFe.Xml.NFe
         public bool ShouldSerializeBalsa() => !string.IsNullOrWhiteSpace(Balsa);
 
         #endregion
+
+        public void AddVol(Vol vol)
+        {
+            if(Vol == null)
+            {
+                Vol = new List<Vol>();
+            }
+
+            Vol.Add(vol);
+        }
     }
 
     [Serializable()]
@@ -5245,7 +5267,18 @@ namespace Unimake.Business.DFe.Xml.NFe
         public Fat Fat { get; set; }
 
         [XmlElement("dup")]
-        public Dup[] Dup { get; set; }
+        public List<Dup> Dup { get; set; } = new List<Dup>();
+
+
+        public void AddDup(Dup dup)
+        {
+            if(Dup == null)
+            {
+                Dup = new List<Dup>();
+            }
+
+            Dup.Add(dup);
+        }
     }
 
     [Serializable()]
@@ -5319,7 +5352,7 @@ namespace Unimake.Business.DFe.Xml.NFe
     public class Pag
     {
         [XmlElement("detPag")]
-        public DetPag[] DetPag { get; set; }
+        public List<DetPag> DetPag { get; set; } = new List<DetPag>();
 
         [XmlIgnore]
         public double VTroco { get; set; }
@@ -5329,6 +5362,22 @@ namespace Unimake.Business.DFe.Xml.NFe
         {
             get => VTroco.ToString("F2", CultureInfo.InvariantCulture);
             set => VTroco = Utility.Converter.ToDouble(value);
+        }
+
+        #region ShouldSerialize
+
+        public bool ShouldSerializeVTrocoField() => VTroco > 0;
+
+        #endregion ShouldSerialize
+
+        public void AddDetPag(DetPag detPag)
+        {
+            if(DetPag == null)
+            {
+                DetPag = new List<DetPag>();
+            }
+
+            DetPag.Add(detPag);
         }
     }
 
@@ -5356,6 +5405,8 @@ namespace Unimake.Business.DFe.Xml.NFe
         public Card Card { get; set; }
 
         public bool ShouldSerializeIndPag() => IndPag != null;
+
+        public void SetIndPag(IndicadorPagamento indicadorPagamento) => IndPag = indicadorPagamento;
     }
 
     [Serializable()]

@@ -12,7 +12,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         public string Versao { get; set; }
 
         [XmlElement("infInut")]
-        public InutNFeInfInut InfInut = new InutNFeInfInut();
+        public InutNFeInfInut InfInut { get; set; } = new InutNFeInfInut();
 
         [XmlElement(ElementName = "Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
         public Signature Signature { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 
@@ -33,10 +34,20 @@ namespace Unimake.Business.DFe.Xml.NFe
         public string XMotivo { get; set; }
 
         [XmlElement("retEvento", Order = 6)]
-        public RetEvento[] RetEvento { get; set; }
+        public List<RetEvento> RetEvento { get; set; } = new List<RetEvento>();
 
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }
+
+        public RetEvento GetEvento(int index)
+        {
+            if((RetEvento?.Count ?? 0) == 0)
+            {
+                return default;
+            }
+
+            return RetEvento[index];
+        }
     }
 
     [Serializable()]
@@ -106,7 +117,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("dhRegEvento", Order = 12)]
         public string DhRegEventoField
         {
-            get => DhRegEvento.ToString("yyyy-MM-ddTHH:mm:ssK");
+            get => DhRegEvento.ToString("yyyy-MM-ddTHH:mm:sszzz");
             set => DhRegEvento = DateTime.Parse(value);
         }
 
@@ -115,15 +126,9 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeCNPJDest()
-        {
-            return !string.IsNullOrWhiteSpace(CNPJDest);
-        }
+        public bool ShouldSerializeCNPJDest() => !string.IsNullOrWhiteSpace(CNPJDest);
 
-        public bool ShouldSerializeCPFDest()
-        {
-            return !string.IsNullOrWhiteSpace(CPFDest);
-        }
+        public bool ShouldSerializeCPFDest() => !string.IsNullOrWhiteSpace(CPFDest);
 
         #endregion
     }

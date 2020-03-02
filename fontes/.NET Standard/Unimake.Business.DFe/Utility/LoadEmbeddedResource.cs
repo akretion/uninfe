@@ -67,6 +67,9 @@ namespace Unimake.Business.DFe.Utility
                 resourcePath = "Unimake.Business.DFe.Xml.Schemas.CTe.";
                 ExtrairRecurso(resourcePath, ref resources, assembly, CurrentConfig.PastaSchemaCTe);
 
+                resourcePath = "Unimake.Business.DFe.Xml.Schemas.MDFe.";
+                ExtrairRecurso(resourcePath, ref resources, assembly, CurrentConfig.PastaSchemaMDFe);
+
                 resourcePath = "Unimake.Business.DFe.Xml.Schemas.";
                 ExtrairRecurso(resourcePath, ref resources, assembly, CurrentConfig.PastaSchema);
 
@@ -87,6 +90,9 @@ namespace Unimake.Business.DFe.Utility
 
                 resourcePath = "Unimake.Business.DFe.Servicos.Config.CTe.";
                 ExtrairRecurso(resourcePath, ref resources, assembly, CurrentConfig.PastaArqConfigCTe);
+
+                resourcePath = "Unimake.Business.DFe.Servicos.Config.MDFe.";
+                ExtrairRecurso(resourcePath, ref resources, assembly, CurrentConfig.PastaArqConfigMDFe);
 
                 resourcePath = "Unimake.Business.DFe.Servicos.Config.";
                 ExtrairRecurso(resourcePath, ref resources, assembly, CurrentConfig.PastaArqConfig);

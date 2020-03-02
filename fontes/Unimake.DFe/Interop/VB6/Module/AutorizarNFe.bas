@@ -1,25 +1,23 @@
-Attribute VB_Name = "AutorizarNFe"
+Attribute VB_Name = "AutorizaNFe"
 Option Explicit
 Public Sub AutorizarNFe()
 On Error GoTo erro
-Dim enviNFe
-Dim autorizacao
+Dim EnviNFe
+Dim Autorizacao
 
-frmMain.ClearLog
+Log.ClearLog
 
-Set enviNFe = CreateObject("Unimake.Business.DFe.Xml.NFe.EnviNFe")
-enviNFe.Versao = "4.00"
-enviNFe.IdLote = "000000000000001"
-enviNFe.IndSinc = 1
-enviNFe.SetNFe GetNFe()
+Set EnviNFe = CreateObject("Unimake.Business.DFe.Xml.NFe.EnviNFe")
+EnviNFe.Versao = "4.00"
+EnviNFe.IdLote = "000000000000001"
+EnviNFe.IndSinc = 1
+EnviNFe.SetNFe GetNFe()
 
-Set autorizacao = CreateObject("Unimake.Business.DFe.Servicos.NFe.Autorizacao")
-autorizacao.SetXML enviNFe.GerarXML()
-autorizacao.Inicializar (Config.InicializarConfiguracao())
-autorizacao.Executar
+Set Autorizacao = CreateObject("Unimake.Business.DFe.Servicos.NFe.Autorizacao")
+Autorizacao.Executar (EnviNFe), (Config.InicializarConfiguracao(NFe))
 
-frmMain.EscreveLog autorizacao.RetornoWSString
-frmMain.EscreveLog autorizacao.result.XMotivo
+Log.EscreveLog Autorizacao.RetornoWSString, True
+Log.EscreveLog Autorizacao.result.XMotivo, False
 
 Exit Sub
 erro:
@@ -28,10 +26,10 @@ Utility.TrapException
 End Sub
 
 Function GetNFe()
-Dim nfe
-Set nfe = CreateObject("Unimake.Business.DFe.Xml.NFe.NFe")
-nfe.SetInfNFe GetInfNFe()
-Set GetNFe = nfe
+Dim NFe
+Set NFe = CreateObject("Unimake.Business.DFe.Xml.NFe.NFe")
+NFe.SetInfNFe GetInfNFe()
+Set GetNFe = NFe
 End Function
 
                         
@@ -56,7 +54,7 @@ Function GetIde()
 Dim result
 Set result = CreateObject("Unimake.Business.DFe.Xml.NFe.Ide")
 With result
-    .CUF = 41
+    .CUF = CUF
     .NatOp = "VENDA PRODUC.DO ESTABELEC"
     .Mod = 55
     .Serie = 1
@@ -68,7 +66,7 @@ With result
     .CMunFG = 4118402
     .TpImp = 1
     .TpEmis = 1
-    .TpAmb = 2
+    .TpAmb = TpAmb
     .FinNFe = 1
     .IndFinal = 1
     .IndPres = 9
@@ -140,48 +138,124 @@ Set GetDest = result
 End Function
 
 Function GetTotal()
-Dim result
+Dim result, ICMSTot
 Set result = CreateObject("Unimake.Business.DFe.Xml.NFe.Total")
+Set ICMSTot = CreateObject("Unimake.Business.DFe.Xml.NFe.ICMSTot")
+With ICMSTot
+    .VBC = 0
+    .VICMS = 0
+    .VICMSDeson = 0
+    .VFCP = 0
+    .VBCST = 0
+    .VST = 0
+    .VFCPST = 0
+    .VFCPSTRet = 0
+    .VProd = 140.3
+    .VFrete = 0
+    .VSeg = 0
+    .VDesc = 0
+    .VII = 0
+    .VIPI = 0
+    .VIPIDevol = 0
+    .VPIS = 0
+    .VCOFINS = 0
+    .VOutro = 0
+    .VNF = 140.3
+    .VTotTrib = 12.63
+End With
+Set result.ICMSTot = ICMSTot
+
 Set GetTotal = result
 End Function
 
 Function GetTransp()
-Dim result
+Dim result, Transporta, Vol
 Set result = CreateObject("Unimake.Business.DFe.Xml.NFe.Transp")
+Set Transporta = CreateObject("Unimake.Business.DFe.Xml.NFe.Transporta")
+Set Vol = CreateObject("Unimake.Business.DFe.Xml.NFe.Vol")
+
+With Transporta
+    .XNome = "RETIRADO PELO CLIENTE"
+    .XEnder = "RUA RIO DE JANEIRO"
+    .XMun = "POCOS DE CALDAS"
+    .UF = 31
+End With
+ 
+With Vol
+    .QVol = 2
+    .Esp = "VOLUMES"
+    .Marca = "CAIXAS"
+    .PesoL = 0#
+    .PesoB = 0#
+End With
+
+result.ModFrete = 1
+Set result.Transporta = Transporta
+result.AddVol (Vol)
+
 Set GetTransp = result
 End Function
 
 Function GetCobr()
-Dim result
+Dim result, Dup, Fat
 Set result = CreateObject("Unimake.Business.DFe.Xml.NFe.Cobr")
+Set Dup = CreateObject("Unimake.Business.DFe.Xml.NFe.Dup")
+Set Fat = CreateObject("Unimake.Business.DFe.Xml.NFe.Fat")
+
+With Fat
+    .NFat = "151342"
+    .VOrig = 140.3
+    .VDesc = 0
+    .VLiq = 140.3
+End With
+Set result.Fat = Fat
+
+With Dup
+    .NDup = "001"
+    .DVenc = Now
+    .VDup = 140.3
+End With
+result.AddDup (Dup)
+    
 Set GetCobr = result
 End Function
 
 Function GetPag()
-Dim result
+Dim result, DetPag
 Set result = CreateObject("Unimake.Business.DFe.Xml.NFe.Pag")
+Set DetPag = CreateObject("Unimake.Business.DFe.Xml.NFe.DetPag")
+
+With DetPag
+    .TPag = 15
+    .VPag = 140.3
+End With
+DetPag.SetIndPag 1
+
+result.AddDetPag (DetPag)
 Set GetPag = result
 End Function
 
 Function GetInfAdic()
 Dim result
 Set result = CreateObject("Unimake.Business.DFe.Xml.NFe.InfAdic")
+result.InfCpl = ";Trib aprox: Federal Estadual Municipal ; Trib aprox: Federal Estadual Municipal Fonte: ;"
 Set GetInfAdic = result
 End Function
 
 Function GetInfRespTec()
 Dim result
 Set result = CreateObject("Unimake.Business.DFe.Xml.NFe.InfRespTec")
+With result
+    .CNPJ = "05413671000106"
+    .XContato = "Oduvaldo de Oliveira"
+    .Email = "oduvaldo@visualsistemas.net"
+    .Fone = "3537215351"
+End With
 Set GetInfRespTec = result
 End Function
 
 Function GetDet()
-Dim result
-Dim Prod
-Dim Imposto
-Dim ICMS, ICMSSN101
-Dim PIS, PISOutr
-Dim COFINS, COFINSOutr
+Dim result, Prod, Imposto, ICMS, ICMSSN101, PIS, PISOutr, COFINS, COFINSOutr
 
 Set result = CreateObject("Unimake.Business.DFe.Xml.NFe.Det")
 result.NItem = 1
@@ -195,16 +269,17 @@ With Prod
     .CFOP = "6101"
     .UCom = "LU"
     .QCom = 1#
-    .VUnCom = 84.9
-    .VProd = 84.9
+    .VUnCom = 140.3
+    .VProd = 140.3
     .CEANTrib = "SEM GTIN"
     .UTrib = "LU"
     .QTrib = 1#
-    .VUnTrib = 84.9
+    .VUnTrib = 140.3
     .IndTot = 1
     .XPed = "300474"
     .NItemPed = 1
 End With
+Set result.Prod = Prod
 
 Set Imposto = CreateObject("Unimake.Business.DFe.Xml.NFe.Imposto")
 Imposto.VTotTrib = 12.63
@@ -246,6 +321,7 @@ End With
 
 Set COFINS.COFINSOutr = COFINSOutr
 Set Imposto.COFINS = COFINS
+Set result.Imposto = Imposto
 
 Set GetDet = result
 End Function

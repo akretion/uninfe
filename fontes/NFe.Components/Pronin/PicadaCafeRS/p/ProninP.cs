@@ -1,11 +1,11 @@
 ﻿using NFe.Components.Abstract;
-using NFe.Components.PPicadaCafeRS;
+using NFe.Components.PPicadaCafe;
 using System;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 
-namespace NFe.Components.Pronin.PicadaCafeRS.p
+namespace NFe.Components.Pronin.PicadaCafe.p
 {
     public class ProninP : EmiteNFSeBase
     {
@@ -36,8 +36,8 @@ namespace NFe.Components.Pronin.PicadaCafeRS.p
             ServiceConsultas.ClientCertificates.Add(certificado);
 
             Cabecalho cabecMsg = new Cabecalho();
-            cabecMsg.versao = "1.00";
-            cabecMsg.versaoDados = "1.00";
+            cabecMsg.versao = "2.03 ";
+            cabecMsg.versaoDados = "2.03";
 
             ServiceGeracao.cabecalho = cabecMsg;
             ServiceConsultas.cabecalho = cabecMsg;

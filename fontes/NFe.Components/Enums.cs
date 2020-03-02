@@ -997,9 +997,9 @@ namespace NFe.Components
         PUBLICA,
 
         /// <summary>
-        /// Padrão BSIT-BR
+        /// Padrão BSIT-BR / SIGEP
         /// </summary>
-        [Description("BSIT-BR")]
+        [Description("BSIT-BR / SIGEP")]
         BSITBR,
 
         /// <summary>

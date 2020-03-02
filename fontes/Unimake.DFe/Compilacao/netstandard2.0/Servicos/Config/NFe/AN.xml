@@ -39,13 +39,11 @@
       <TargetNS></TargetNS>
     </RecepcaoEvento>
     <DistribuicaoDFe versao="1.01">
-      <Descricao>Consulta da relação de documentos fiscais eletrônicos destinados</Descricao>
+      <Descricao>Consulta da relação de documentos fiscais eletrônicos destinados - NFe</Descricao>
       <WebEnderecoHomologacao>https://hom.nfe.fazenda.gov.br/NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx</WebEnderecoHomologacao>
       <WebEnderecoProducao>https://www1.nfe.fazenda.gov.br/NFeDistribuicaoDFe/NFeDistribuicaoDFe.asmx</WebEnderecoProducao>
       <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeDistribuicaoDFe/nfeDistDFeInteresse</WebActionHomologacao>
       <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/NFeDistribuicaoDFe/nfeDistDFeInteresse</WebActionProducao>
-      <WebSoapString><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:nfed="http://www.portalfiscal.inf.br/nfe/wsdl/NFeDistribuicaoDFe"><soap:Header/><soap:Body><nfed:nfeDistDFeInteresse><nfed:nfeDadosMsg>{xmlBody}</nfed:nfeDadosMsg></nfed:nfeDistDFeInteresse></soap:Body></soap:Envelope>]]></WebSoapString>
-      <WebTagRetorno>nfeDistDFeInteresseResult</WebTagRetorno>
       <SchemaArquivo>distDFeInt_v{0}.xsd</SchemaArquivo>
       <SchemaVersao>1.01</SchemaVersao>
       <TagAssinatura></TagAssinatura>

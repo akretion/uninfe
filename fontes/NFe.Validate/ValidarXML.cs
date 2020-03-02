@@ -58,12 +58,11 @@ namespace NFe.Validate
         /// <summary>
         /// Encriptar a tag Assinatura quando for município de Blumenau - SC
         /// </summary>
-        public void EncryptAssinatura(string arquivoXML)
+        /// 
+        public bool EncryptAssinatura(string arquivoXML)
         {
             if (TipoArqXml.cArquivoSchema.Contains("DSF\\SJCSP"))
-            {
-                return;
-            }
+                return false;
 
             if (TipoArqXml.cArquivoSchema.Contains("PAULISTANA") ||
                 TipoArqXml.cArquivoSchema.Contains("BLUMENAU") ||
@@ -156,9 +155,11 @@ namespace NFe.Validate
                     if (bSave)
                     {
                         doc.Save(arquivoXML);
+                        return true;
                     }
                 }
             }
+            return false;
         }
 
         #endregion EncryptAssinatura()
@@ -393,11 +394,14 @@ namespace NFe.Validate
                     Empresas.Configuracoes[emp].RespTecIdCSRT,
                     Empresas.Configuracoes[emp].RespTecCSRT);
 
-                respTecnico.AdicionarResponsavelTecnico(conteudoXML);
+                bool salvaXML = respTecnico.AdicionarResponsavelTecnico(conteudoXML);
+                if (salvaXML)
+                    conteudoXML.Save(Arquivo);
 
                 if (TipoArqXml.nRetornoTipoArq >= 1 && TipoArqXml.nRetornoTipoArq <= SchemaXML.MaxID)
                 {
-                    EncryptAssinatura(Arquivo);
+                    if (EncryptAssinatura(Arquivo))
+                        conteudoXML.Load(Arquivo);
 
                     if (TipoArqXml.TargetNameSpace.Contains("envioLoteEventos") && TipoArqXml.TargetNameSpace.Contains("reinf")) //Lote de eventos do EFDReinf
                     {

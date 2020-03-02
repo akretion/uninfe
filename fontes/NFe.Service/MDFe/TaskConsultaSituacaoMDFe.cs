@@ -249,6 +249,7 @@ namespace NFe.Service
 
                     #region Nota fiscal autorizada
 
+                    case "132": //Encerramento de MDF-e homologado
                     case "100": //Autorizado o uso da NFe
                         XmlNodeList infConsSitList = retConsSitElemento.GetElementsByTagName("infProt");
                         if (infConsSitList != null)

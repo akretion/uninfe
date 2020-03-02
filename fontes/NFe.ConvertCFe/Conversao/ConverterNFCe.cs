@@ -163,6 +163,19 @@ namespace NFe.SAT.Conversao
 
                                 listObsFisco.Add(obsFisco);
                             }
+                            
+                            if (((XmlElement)itensDet).GetElementsByTagName("cProdANP") != null && DadosEmpresa.VersaoLayoutSAT == "0.08")
+                            {                                
+                                string cProdANP = ((XmlElement)itensDet).GetElementsByTagName("cProdANP")[0].InnerText;
+                                if (!string.IsNullOrEmpty(cProdANP) )
+                                {
+                                    envCFeCFeInfCFeDetProdObsFiscoDet obsFisco = new envCFeCFeInfCFeDetProdObsFiscoDet();
+                                    obsFisco.xCampoDet = "Cod. Produto ANP";
+                                    obsFisco.xTextoDet = cProdANP;
+
+                                    listObsFisco.Add(obsFisco);
+                                }
+                            }
 
                             det.prod = new envCFeCFeInfCFeDetProd
                             {
@@ -176,7 +189,7 @@ namespace NFe.SAT.Conversao
                                 vUnCom = GetXML(itensDet.ChildNodes, "vUnCom"),
                                 vDesc = GetXML(itensDet.ChildNodes, "vDesc"),
                                 indRegra = "A",
-                                obsFiscoDet = listObsFisco
+                                obsFiscoDet = listObsFisco,
                             };
 
                             if (!string.IsNullOrEmpty(CEST) && DadosEmpresa.VersaoLayoutSAT == "0.08")
@@ -332,6 +345,7 @@ namespace NFe.SAT.Conversao
                             CST = GetXML(tag.ChildNodes, "CST"),
                             pPIS = GetXML(tag.ChildNodes, "pPIS"),
                             vBC = GetXML(tag.ChildNodes, "vBC"),
+                            vPIS = GetXML(tag.ChildNodes, "vPIS"),
                         };
 
                         SetProperrty(result, "Item", PISAliq);
@@ -571,7 +585,7 @@ namespace NFe.SAT.Conversao
             {
                 result = GetValueXML("dest", "CPF");
 
-                if (DadosEmpresa.VersaoLayoutSAT == "0.08") 
+                if (DadosEmpresa.VersaoLayoutSAT == "0.08" && !String.IsNullOrEmpty(result)) 
                     result = result.PadLeft(11, '0');
             }
 

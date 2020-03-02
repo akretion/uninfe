@@ -28,7 +28,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("dhResp")]
         public string DhRespField
         {
-            get => DhResp.ToString("yyyy-MM-ddTHH:mm:ssK");
+            get => DhResp.ToString("yyyy-MM-ddTHH:mm:sszzz");
             set => DhResp = DateTime.Parse(value);
         }
 

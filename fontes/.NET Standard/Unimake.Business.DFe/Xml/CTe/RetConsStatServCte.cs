@@ -7,7 +7,7 @@ namespace Unimake.Business.DFe.Xml.CTe
     [XmlRoot("retConsStatServCte", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
     public class RetConsStatServCte : XMLBase
     {
-        private const string FormatDate = "yyyy-MM-ddTHH:mm:ssK";
+        private const string FormatDate = "yyyy-MM-ddTHH:mm:sszzz";
 
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }

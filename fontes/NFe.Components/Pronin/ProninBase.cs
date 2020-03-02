@@ -66,7 +66,7 @@ namespace NFe.Components.Pronin
                                 break;
 
                             case 4314423: //Picada Café-RS
-                                proninService = new PicadaCafeRS.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                proninService = new PicadaCafe.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
                             case 3511102: //Catanduva-SP
@@ -93,6 +93,9 @@ namespace NFe.Components.Pronin
                                 proninService = new AlvaresMachadoSP.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
+                            case 4300109: //Agudo-RS
+                                proninService = new AgudoRS.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
 
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
@@ -156,8 +159,8 @@ namespace NFe.Components.Pronin
                                 proninService = new NaviraiMS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
-                            case 4314423: //Picada Café-RS
-                                proninService = new PicadaCafeRS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                            case 4314423://Picada Café-RS
+                                proninService = new PicadaCafe.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
                             case 3511102: //Catanduva-SP 
@@ -183,6 +186,10 @@ namespace NFe.Components.Pronin
 							case 3501301: //Álvares Machado-SP
                                proninService = new AlvaresMachadoSP.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
 						       break;
+
+                            case 4300109: //Agudo-RS
+                                proninService = new AgudoRS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

@@ -486,7 +486,7 @@ namespace NFe.Service
                             break;
 
                         case Servicos.UniNFeAlterarConfiguracoes:
-                            ReconfigurarUniNFe(arquivo, emp);
+                            ReconfigurarUniNFe(arquivo);
                             break;
 
                         case Servicos.UniNFeConsultaGeral:
@@ -1461,8 +1461,6 @@ namespace NFe.Service
         /// <param name="arquivo">Arquivo a ser tratado</param>
         protected void GerarChaveNFe(string arquivo)
         {
-            Auxiliar oAux = new Auxiliar();
-
             FileInfo fi = new FileInfo(arquivo);
 
             // processa arquivos XML
@@ -1640,15 +1638,14 @@ namespace NFe.Service
         private void GravarXMLDadosCertificado(string ArquivoXml)
         {
             int emp = Empresas.FindEmpresaByThread();
-            string sArqRetorno = string.Empty;
-
             Auxiliar oAux = new Auxiliar();
             bool somenteConfigGeral = false;
 
-            if (Path.GetDirectoryName(ArquivoXml).ToLower() == Components.Propriedade.PastaGeralTemporaria.ToLower())
+            string sArqRetorno;
+            if(Path.GetDirectoryName(ArquivoXml).ToLower() == Components.Propriedade.PastaGeralTemporaria.ToLower())
             {
                 somenteConfigGeral = true;
-                if (Path.GetExtension(ArquivoXml).ToLower() == ".txt")
+                if(Path.GetExtension(ArquivoXml).ToLower() == ".txt")
                 {
                     sArqRetorno = Propriedade.PastaGeralRetorno + "\\" +
                                   Functions.ExtrairNomeArq(ArquivoXml, Propriedade.Extensao(Propriedade.TipoEnvio.ConsInf).EnvioTXT) +
@@ -1663,7 +1660,7 @@ namespace NFe.Service
             }
             else
             {
-                if (Path.GetExtension(ArquivoXml).ToLower() == ".txt")
+                if(Path.GetExtension(ArquivoXml).ToLower() == ".txt")
                 {
                     sArqRetorno = Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" +
                                   Functions.ExtrairNomeArq(ArquivoXml, Propriedade.Extensao(Propriedade.TipoEnvio.ConsInf).EnvioTXT) +
@@ -1714,7 +1711,7 @@ namespace NFe.Service
         /// Reconfigura o UniNFe, gravando as novas informações na tela de configuração
         /// </summary>
         /// <param name="cArquivo">Nome do arquivo XML contendo as novas configurações</param>
-        protected void ReconfigurarUniNFe(string cArquivo, int emp)
+        protected void ReconfigurarUniNFe(string cArquivo)
         {
             try
             {
@@ -1778,8 +1775,7 @@ namespace NFe.Service
                 {
                     //Atualizar a tag da data e hora da ultima consulta do recibo aumentando 180 segundos (3 minutos) para evitar consumo indevido
                     fluxoNfe.AtualizarDPedRec(reciboCons.nRec, DateTime.Now.AddSeconds(180));
-
-                    XmlDocument dadosXMLRec = (XmlDocument)tipoServico.InvokeMember("XmlPedRec", BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec, reciboCons.versao, reciboCons.mod });
+                    _ = (XmlDocument)tipoServico.InvokeMember("XmlPedRec", BindingFlags.InvokeMethod, null, nfe, new object[] { empresa, reciboCons.nRec, reciboCons.versao, reciboCons.mod });
 
                     //TODO: WANDREY - não apague o código abaixo, de futuro eu vou tentar utilizar ele, pois não quero mais gravar o XML de consulta do recibo na pasta e processar direto, por hora não consigo por conta do código da empresa no nome da thread.
                     /*
@@ -2191,7 +2187,6 @@ namespace NFe.Service
                         continue;
                     }
 
-                    string nomeArquivo = Empresas.Configuracoes[i].CNPJ + "_NSU.xml";
                     GerarXML gerarXML = new GerarXML(i);
                     gerarXML.XMLDistribuicaoDFe(Servicos.DFeEnviar, Empresas.Configuracoes[i].AmbienteCodigo, Empresas.Configuracoes[i].UnidadeFederativaCodigo, "1.01", Empresas.Configuracoes[i].CNPJ, "000000000000000");
 

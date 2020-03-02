@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Xml;
 using Unimake.Business.DFe.ConfigurationManager;
+using Unimake.Business.DFe.Security;
 using Unimake.Business.DFe.Utility;
 using Unimake.Business.DFe.Xml;
 
@@ -11,6 +12,12 @@ namespace Unimake.Business.DFe.Servicos
     [ComVisible(true)]
     public abstract class ServicoBase
     {
+        #region Private Fields
+
+        private XmlDocument _conteudoXML;
+
+        #endregion Private Fields
+
         #region Private Methods
 
         /// <summary>
@@ -38,7 +45,10 @@ namespace Unimake.Business.DFe.Servicos
         /// <param name="doc">Documento XML</param>
         private void LerConfig(XmlDocument doc)
         {
-            LerConfigPadrao();
+            if(doc.GetElementsByTagName("Servicos")[0] != null)
+            {
+                LerConfigPadrao();
+            }
 
             var listServicos = doc.GetElementsByTagName("Servicos");
             foreach(var nodeServicos in listServicos)
@@ -181,8 +191,6 @@ namespace Unimake.Business.DFe.Servicos
                                     }
                                 }
                             }
-
-                            SubstituirValorSoapString();
                         }
                     }
 
@@ -198,6 +206,8 @@ namespace Unimake.Business.DFe.Servicos
             {
                 throw new System.Exception("Não foi localizado o arquivo de configuração padrão do serviço de " + Configuracoes.TipoDFe.ToString() + ".\r\n\r\n" + arqConfig);
             }
+
+            var achouConfigVersao = false;
 
             var xmlDoc = new XmlDocument();
             xmlDoc.Load(arqConfig);
@@ -216,6 +226,7 @@ namespace Unimake.Business.DFe.Servicos
 
                     if(elementVersao.GetAttribute("ID") == Configuracoes.SchemaVersao)
                     {
+                        achouConfigVersao = true;
                         if(XMLUtility.TagExist(elementVersao, "WebContentType"))
                         {
                             Configuracoes.WebContentType = XMLUtility.TagRead(elementVersao, "WebContentType");
@@ -250,6 +261,11 @@ namespace Unimake.Business.DFe.Servicos
                     }
                 }
             }
+
+            if(!achouConfigVersao)
+            {
+                throw new Exception("Não foi localizado as configurações para a versão de schema " + Configuracoes.SchemaVersao + " no arquivo de configuração padrão do serviço de " + Configuracoes.TipoDFe.ToString() + ".\r\n\r\n" + arqConfig);
+            }
         }
 
         /// <summary>
@@ -278,6 +294,8 @@ namespace Unimake.Business.DFe.Servicos
             #endregion Leitura do XML herdado, quando tem herança.
 
             LerConfig(doc);
+
+            SubstituirValorSoapString();
         }
 
         /// <summary>
@@ -294,16 +312,63 @@ namespace Unimake.Business.DFe.Servicos
 
         #region Protected Properties
 
-        protected XmlDocument ConteudoXML { get; set; }
+        /// <summary>
+        /// Conteúdo do XML, pode ou não estar assinado. Esta propriedade é utilizada em tempo de processamento.
+        /// Utilize as propriedades ConteudoXMLOriginal ou ConteudoXMLAssinado para recuperar o que você deseja fora da classe.
+        /// </summary>
+        protected XmlDocument
+            ConteudoXML
+        {
+            get => _conteudoXML;
+            set
+            {
+                if(ConteudoXMLOriginal == null)
+                {
+                    ConteudoXMLOriginal = new XmlDocument();
+                    ConteudoXMLOriginal.LoadXml(value?.OuterXml);
+                }
+
+                _conteudoXML = value;
+            }
+        }
 
         #endregion Protected Properties
 
+        #region Protected Constructors
+
+        protected ServicoBase()
+        {
+        }
+
+        protected ServicoBase(XmlDocument conteudoXML, Configuracao configuracao)
+                    : this() => PrepararServico(conteudoXML, configuracao);
+
+        #endregion Protected Constructors
+
         #region Protected Methods
+
+        /// <summary>
+        /// Este método é uma possibilidade de fazer ajustes no XML depois de assinado, pois ele é executado assim que a assinatura é feita. Basta implementar ele nas heranças.
+        /// </summary>
+        protected virtual void AjustarXMLAposAssinado() { }
 
         /// <summary>
         /// Defini o valor das propriedades do objeto "Configuracoes"
         /// </summary>
         protected abstract void DefinirConfiguracao();
+
+        protected void PrepararServico(XmlDocument conteudoXML, Configuracao configuracao)
+        {
+            if(configuracao == null)
+            {
+                throw new ArgumentNullException(nameof(configuracao));
+            }
+
+            Configuracoes = configuracao;
+            ConteudoXML = conteudoXML ?? throw new ArgumentNullException(nameof(conteudoXML));
+            Inicializar();
+            System.Diagnostics.Trace.WriteLine(ConteudoXML?.InnerXml, "Unimake.DFe");
+        }
 
         /// <summary>
         /// Método para validar o schema do XML
@@ -332,30 +397,33 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         protected internal void LerXmlConfigGeral()
         {
-            var doc = new XmlDocument();
-            doc.Load(CurrentConfig.ArquivoConfigGeral);
-
-            var listConfiguracoes = doc.GetElementsByTagName("Configuracoes");
-
-            foreach(XmlNode nodeConfiguracoes in listConfiguracoes)
+            if(Configuracoes.CodigoUF != 0)
             {
-                var elementConfiguracoes = (XmlElement)nodeConfiguracoes;
-                var listArquivos = elementConfiguracoes.GetElementsByTagName("Arquivo");
+                var doc = new XmlDocument();
+                doc.Load(CurrentConfig.ArquivoConfigGeral);
 
-                foreach(var nodeArquivos in listArquivos)
+                var listConfiguracoes = doc.GetElementsByTagName("Configuracoes");
+
+                foreach(XmlNode nodeConfiguracoes in listConfiguracoes)
                 {
-                    var elementArquivos = (XmlElement)nodeArquivos;
+                    var elementConfiguracoes = (XmlElement)nodeConfiguracoes;
+                    var listArquivos = elementConfiguracoes.GetElementsByTagName("Arquivo");
 
-                    if(elementArquivos.GetAttribute("ID") != Configuracoes.CodigoUF.ToString())
+                    foreach(var nodeArquivos in listArquivos)
                     {
-                        continue;
+                        var elementArquivos = (XmlElement)nodeArquivos;
+
+                        if(elementArquivos.GetAttribute("ID") != Configuracoes.CodigoUF.ToString())
+                        {
+                            continue;
+                        }
+
+                        Configuracoes.Nome = elementArquivos.GetElementsByTagName("Nome")[0].InnerText;
+                        Configuracoes.NomeUF = elementArquivos.GetElementsByTagName("UF")[0].InnerText;
+                        LerXmlConfigEspecifico(GetConfigFile(elementArquivos));
+
+                        break;
                     }
-
-                    Configuracoes.Nome = elementArquivos.GetElementsByTagName("Nome")[0].InnerText;
-                    Configuracoes.NomeUF = elementArquivos.GetElementsByTagName("UF")[0].InnerText;
-                    LerXmlConfigEspecifico(GetConfigFile(elementArquivos));
-
-                    break;
                 }
             }
         }
@@ -365,6 +433,39 @@ namespace Unimake.Business.DFe.Servicos
         #region Public Properties
 
         public Configuracao Configuracoes { get; set; }
+
+        /// <summary>
+        /// Conteúdo do XML assinado, quando o mesmo possui assinatura, caso contrário, o conteúdo será o mesmo da propriedade ConteudoXMLOriginal.
+        /// </summary>
+        public XmlDocument ConteudoXMLAssinado
+        {
+            get
+            {
+                var result = new XmlDocument();
+
+                if(AssinaturaDigital.EstaAssinado(ConteudoXML, Configuracoes.TagAssinatura))
+                {
+                    AjustarXMLAposAssinado();
+
+                    result.LoadXml(ConteudoXML.InnerXml);
+                }
+                else
+                {
+                    AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id", true);
+
+                    AjustarXMLAposAssinado();
+
+                    result.LoadXml(ConteudoXML.OuterXml);
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Conteúdo do XML original, para os que tem assinatura este está sem. Original conforme foi criado.
+        /// </summary>
+        public XmlDocument ConteudoXMLOriginal { get; private set; }
 
         public string RetornoWSString { get; set; }
 
@@ -376,20 +477,6 @@ namespace Unimake.Business.DFe.Servicos
 
         static ServicoBase() => AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolver.AssemblyResolve;
 
-        public ServicoBase()
-        {
-        }
-
-        public ServicoBase(XmlDocument conteudoXML, Configuracao configuracao)
-        {
-            Configuracoes = configuracao;
-            ConteudoXML = conteudoXML;
-
-            Inicializar();
-
-            System.Diagnostics.Trace.WriteLine(ConteudoXML?.InnerXml, "Unimake.DFe");
-        }
-
         #endregion Public Constructors
 
         #region Public Methods
@@ -397,8 +484,17 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// Executar o serviço para consumir o webservice
         /// </summary>
+        [ComVisible(false)]
         public virtual void Executar()
         {
+            if(!string.IsNullOrWhiteSpace(Configuracoes.TagAssinatura) &&
+               !AssinaturaDigital.EstaAssinado(ConteudoXML, Configuracoes.TagAssinatura))
+            {
+                AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id");
+
+                AjustarXMLAposAssinado();
+            }
+
             var soap = new WSSoap
             {
                 EnderecoWeb = (Configuracoes.TipoAmbiente == TipoAmbiente.Producao ? Configuracoes.WebEnderecoProducao : Configuracoes.WebEnderecoHomologacao),
@@ -423,15 +519,6 @@ namespace Unimake.Business.DFe.Servicos
         /// <param name="nomeArquivo">Nome do arquivo a ser gravado no HD</param>
         /// <param name="conteudoXML">String contendo o conteúdo do XML a ser gravado no HD</param>
         public abstract void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML);
-
-        [ComVisible(true)]
-        public void Inicializar(Configuracao configuracoes)
-        {
-            Configuracoes = configuracoes ?? throw new System.ArgumentNullException(nameof(configuracoes));
-            Inicializar();
-        }
-
-        public void SetXML(XmlDocument xml) => ConteudoXML = xml;
 
         #endregion Public Methods
     }

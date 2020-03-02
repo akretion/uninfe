@@ -12,6 +12,9 @@ namespace Unimake.Business.DFe.Xml.CTe
         [XmlElement("infProt")]
         public InfProt InfProt { get; set; }
 
+        [XmlElement("infFisco")]
+        public InfFisco infFisco { get; set; }
+
         [XmlElement(ElementName = "Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
         public Signature Signature { get; set; }
     }
@@ -36,7 +39,7 @@ namespace Unimake.Business.DFe.Xml.CTe
         [XmlElement("dhRecbto")]
         public string DhRecbtoField
         {
-            get => DhRecbto.ToString("yyyy-MM-ddTHH:mm:ssK");
+            get => DhRecbto.ToString("yyyy-MM-ddTHH:mm:sszzz");
             set => DhRecbto = DateTime.Parse(value);
         }
 
@@ -51,7 +54,10 @@ namespace Unimake.Business.DFe.Xml.CTe
 
         [XmlElement("xMotivo")]
         public string XMotivo { get; set; }
+    }
 
+    public class InfFisco
+    {
         [XmlElement("cMsg")]
         public string CMsg { get; set; }
 

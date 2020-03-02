@@ -3,28 +3,12 @@ Begin VB.Form frmMain
    Caption         =   "Unimake.DFe Interop Tests"
    ClientHeight    =   11850
    ClientLeft      =   60
-   ClientTop       =   405
+   ClientTop       =   705
    ClientWidth     =   11580
    LinkTopic       =   "Form1"
    ScaleHeight     =   11850
    ScaleWidth      =   11580
    StartUpPosition =   2  'CenterScreen
-   Begin VB.CommandButton cmdAutorizarNFe 
-      Caption         =   "Autorizar NF-e"
-      Height          =   375
-      Left            =   240
-      TabIndex        =   5
-      Top             =   1320
-      Width           =   1575
-   End
-   Begin VB.CommandButton cmdConsultarSituacaoNFe 
-      Caption         =   "Consultar Situacao"
-      Height          =   375
-      Left            =   240
-      TabIndex        =   4
-      Top             =   840
-      Width           =   1575
-   End
    Begin VB.TextBox txtLog 
       BorderStyle     =   0  'None
       BeginProperty Font 
@@ -36,31 +20,16 @@ Begin VB.Form frmMain
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   4215
-      Left            =   600
-      MultiLine       =   -1  'True
-      TabIndex        =   2
-      Top             =   5160
-      Width           =   8175
-   End
-   Begin VB.CommandButton cmdConsultarStatusNFe 
-      Caption         =   "Consultar Status"
-      Height          =   375
-      Left            =   240
-      TabIndex        =   0
-      Top             =   360
-      Width           =   1575
-   End
-   Begin VB.Frame Frame1 
-      Caption         =   "NF-e"
       Height          =   2895
-      Left            =   120
-      TabIndex        =   1
-      Top             =   0
-      Width           =   1815
+      Left            =   3720
+      MultiLine       =   -1  'True
+      TabIndex        =   0
+      Top             =   5760
+      Width           =   3135
    End
    Begin VB.Label lblLog 
       Alignment       =   2  'Center
+      BackStyle       =   0  'Transparent
       Caption         =   "LOG"
       BeginProperty Font 
          Name            =   "MS Sans Serif"
@@ -72,17 +41,122 @@ Begin VB.Form frmMain
          Strikethrough   =   0   'False
       EndProperty
       Height          =   195
-      Left            =   2040
-      TabIndex        =   3
-      Top             =   3120
+      Left            =   3480
+      TabIndex        =   1
+      Top             =   0
       Width           =   4335
    End
    Begin VB.Line ln 
       BorderWidth     =   2
       X1              =   0
       X2              =   11535
-      Y1              =   3480
-      Y2              =   3495
+      Y1              =   240
+      Y2              =   255
+   End
+   Begin VB.Menu mnuCTe 
+      Caption         =   "CT-e"
+      Begin VB.Menu mnuCTe_Consultas 
+         Caption         =   "Consultas"
+         Begin VB.Menu mnuCTe_ConsultarSituacao 
+            Caption         =   "Consultar Situação"
+         End
+         Begin VB.Menu mnuCTe_ConsultarStatus 
+            Caption         =   "Consultar Status"
+         End
+         Begin VB.Menu mnuCTe_ConsultaCadastroContribuinte 
+            Caption         =   "Cadastro de Contribuinte"
+         End
+         Begin VB.Menu mnuCTe_Distribuicao 
+            Caption         =   "Distribuição"
+         End
+      End
+      Begin VB.Menu mnuCTe_Inutilizar 
+         Caption         =   "Inutilizar"
+      End
+   End
+   Begin VB.Menu mnuNFCe 
+      Caption         =   "NFC-e"
+      Begin VB.Menu mnuNFCe_Consultas 
+         Caption         =   "Consultas"
+         Begin VB.Menu mnuNFCe_ConsultarRecibo 
+            Caption         =   "Consultar Recibo"
+         End
+         Begin VB.Menu mnuNFCe_ConsultarStatus 
+            Caption         =   "Consultar Status"
+         End
+         Begin VB.Menu mnuNFCe_ConsultarSituacao 
+            Caption         =   "Consultar Situação"
+         End
+         Begin VB.Menu mnuNFCe_ConsultarContribuinte 
+            Caption         =   "Consultar Contribuinte"
+         End
+      End
+      Begin VB.Menu mnuNFCe_ 
+         Caption         =   "Eventos"
+         Begin VB.Menu mnuNFCe_CCe 
+            Caption         =   "Carta de Correção"
+         End
+      End
+      Begin VB.Menu mnuNFCe_Autorizar 
+         Caption         =   "Autorizar"
+      End
+      Begin VB.Menu mnuNFCe_Cancelamento 
+         Caption         =   "Cancelamento"
+      End
+      Begin VB.Menu mnuNFCe_Inutilizar 
+         Caption         =   "Inutilizar Números"
+      End
+   End
+   Begin VB.Menu mnuNFe 
+      Caption         =   "NF-e"
+      Begin VB.Menu mnuNFe_Consultas 
+         Caption         =   "Consultas"
+         Begin VB.Menu mnuNFe_ConsultarSituacao 
+            Caption         =   "Consultar Situação"
+         End
+         Begin VB.Menu mnuNFe_ConsultarStatus 
+            Caption         =   "Consultar Status"
+         End
+         Begin VB.Menu mnuNFe_ConsultarRecibo 
+            Caption         =   "Consultar Recibo"
+         End
+         Begin VB.Menu mnuNFe_ConsultarCadastro 
+            Caption         =   "Consultar Cadastro"
+         End
+         Begin VB.Menu mnuNFe_Distribuicao 
+            Caption         =   "Consultar Distribuicao"
+         End
+      End
+      Begin VB.Menu mnuNFe_Eventos 
+         Caption         =   "Eventos"
+         Begin VB.Menu mnuNFe_Manifestar 
+            Caption         =   "Manifestação"
+         End
+         Begin VB.Menu mnuNFe_EvtCCe 
+            Caption         =   "Evento de Carta de Correção"
+         End
+      End
+      Begin VB.Menu mnuNFe_Autorizar 
+         Caption         =   "Autorizar NF-e"
+      End
+      Begin VB.Menu mnuNFe_Cancelar 
+         Caption         =   "Cancelar NFe"
+      End
+      Begin VB.Menu mnuNFe_Inutilizar 
+         Caption         =   "Inutilizar Números"
+      End
+   End
+   Begin VB.Menu mnuMDFe 
+      Caption         =   "MDF-e"
+      Begin VB.Menu mnuMDFe_Consultas 
+         Caption         =   "Consultas"
+         Begin VB.Menu mnuMDFe_ConsultarSituacao 
+            Caption         =   "Consultar Situação"
+         End
+         Begin VB.Menu mnuMDFe_ConsultarStatus 
+            Caption         =   "Consultar Status"
+         End
+      End
    End
 End
 Attribute VB_Name = "frmMain"
@@ -90,34 +164,126 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Option Explicit
 
-Private Sub cmdAutorizarNFe_Click()
-AutorizarNFe.AutorizarNFe
-End Sub
-
-Private Sub cmdConsultarSituacaoNFe_Click()
-ConsultarSituacao.ConsultarSituacao
-End Sub
-
-Private Sub cmdConsultarStatusNFe_Click()
-ConsultarStatus.ConsultarStatus
+Private Sub Form_Load()
+Log.SetFrmMain Me
 End Sub
 
 Private Sub Form_Resize()
 lblLog.Left = 1
-txtLog.Left = 1
+txtLog.Left = 100
 lblLog.Width = Width
 ln.X2 = Width
-txtLog.Width = Width - 1
+txtLog.Width = Width - 300
 txtLog.Top = ln.Y1 + 50
 txtLog.Height = Height - txtLog.Top
 End Sub
 
-Public Static Sub EscreveLog(ByVal log As String)
-txtLog.Text = txtLog.Text & vbCrLf & " <<< " & Now & " >>>" & vbCrLf & log
+Public Sub EscreveLog(ByVal Log As String)
+txtLog.Text = txtLog.Text & vbCrLf & " <<< " & Now & " >>>" & vbCrLf & Log
 End Sub
 
-Public Static Sub ClearLog()
+Public Sub ClearLog()
 txtLog.Text = ""
 End Sub
 
+Private Sub mnuCTe_ConsultaCadastroContribuinte_Click()
+ConsultarContribuinteCTe
+End Sub
+
+Private Sub mnuCTe_ConsultarSituacao_Click()
+ConsultarSituacaoCTe
+End Sub
+
+Private Sub mnuCTe_ConsultarStatus_Click()
+ConsultarStatusCTe
+End Sub
+
+Private Sub mnuCTe_Distribuicao_Click()
+ConsultarDistribuicaoCTe
+End Sub
+
+Private Sub mnuCTe_Inutilizar_Click()
+InutilizarNumeroCTe
+End Sub
+
+Private Sub mnuMDFe_ConsultarSituacao_Click()
+ConsultarSituacaoMDFe
+End Sub
+
+Private Sub mnuMDFe_ConsultarStatus_Click()
+ConsultarStatusMDFe
+End Sub
+
+Private Sub mnuNFCe_Autorizar_Click()
+AutorizarNFCe
+End Sub
+
+Private Sub mnuNFCe_Cancelamento_Click()
+CancelarNFCe
+End Sub
+
+Private Sub mnuNFCe_CCe_Click()
+EnviarEventoCCENFe
+End Sub
+
+Private Sub mnuNFCe_ConsultarContribuinte_Click()
+ConsultarContribuinteNFCe
+End Sub
+
+Private Sub mnuNFCe_ConsultarRecibo_Click()
+ConsultarReciboNFCe
+End Sub
+
+Private Sub mnuNFCe_ConsultarSituacao_Click()
+ConsultarSituacaoNFe
+End Sub
+
+Private Sub mnuNFCe_ConsultarStatus_Click()
+ConsultarStatusNFCe
+End Sub
+
+Private Sub mnuNFCe_Inutilizar_Click()
+InutilizarNumeroNFCe
+End Sub
+
+Private Sub mnuNFe_Autorizar_Click()
+AutorizarNFe
+End Sub
+
+Private Sub mnuNFe_Cancelar_Click()
+CancelarNFe
+End Sub
+
+Private Sub mnuNFe_ConsultarCadastro_Click()
+ConsultarContribuinteNFe
+End Sub
+
+Private Sub mnuNFe_ConsultarRecibo_Click()
+ConsultarReciboNFe
+End Sub
+
+Private Sub mnuNFe_ConsultarSituacao_Click()
+ConsultarSituacaoNFe
+End Sub
+
+Private Sub mnuNFe_ConsultarStatus_Click()
+ConsultarStatus
+End Sub
+
+Private Sub mnuNFe_Distribuicao_Click()
+ConsultarDistribuicaoNFe
+End Sub
+
+Private Sub mnuNFe_EvtCCe_Click()
+EnviarEventoCCENFe
+End Sub
+
+Private Sub mnuNFe_Inutilizar_Click()
+InutilizarNumeroNFe
+End Sub
+
+Private Sub mnuNFe_Manifestar_Click()
+ManifestarNFe
+End Sub

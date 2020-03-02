@@ -720,16 +720,16 @@ namespace NFe.Settings
                     {
                         XmlElement configElemento = (XmlElement)configNode;
 
-                        Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlEnvio, "Pasta onde serão gravados os arquivos XML´s a serem enviados individualmente para os WebServices", true);
-                        Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlRetorno, "Pasta onde serão gravados os arquivos XML´s de retorno dos WebServices", true);
-                        Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlErro, "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa do envio", true);
-                        Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaValidar, "Pasta onde serão gravados os arquivos XML´s a serem somente validados", true);
+                        Empresas.VerificaPasta(this, configElemento, NFeStrConstants.PastaXmlEnvio, "Pasta onde serão gravados os arquivos XML´s a serem enviados individualmente para os WebServices", true);
+                        Empresas.VerificaPasta(this, configElemento, NFeStrConstants.PastaXmlRetorno, "Pasta onde serão gravados os arquivos XML´s de retorno dos WebServices", true);
+                        Empresas.VerificaPasta(this, configElemento, NFeStrConstants.PastaXmlErro, "Pasta para arquivamento temporário dos XML´s que apresentaram erro na tentativa do envio", true);
+                        Empresas.VerificaPasta(this, configElemento, NFeStrConstants.PastaValidar, "Pasta onde serão gravados os arquivos XML´s a serem somente validados", true);
                         if (Servico != TipoAplicativo.Nfse)
                         {
-                            Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlEnviado, "Pasta onde serão gravados os arquivos XML´s enviados", true);
-                            Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaXmlEmLote, "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para os WebServices", false);
-                            Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaBackup, "Pasta para Backup dos XML´s enviados", false);
-                            Empresas.verificaPasta(this, configElemento, NFeStrConstants.PastaDownloadNFeDest, "Pasta onde serão gravados os arquivos XML´s de download de NFe de destinatários e eventos de terceiros", false);
+                            Empresas.VerificaPasta(this, configElemento, NFeStrConstants.PastaXmlEnviado, "Pasta onde serão gravados os arquivos XML´s enviados", true);
+                            Empresas.VerificaPasta(this, configElemento, NFeStrConstants.PastaXmlEmLote, "Pasta onde serão gravados os arquivos XML´s de NF-e a serem enviadas em lote para os WebServices", false);
+                            Empresas.VerificaPasta(this, configElemento, NFeStrConstants.PastaBackup, "Pasta para Backup dos XML´s enviados", false);
+                            Empresas.VerificaPasta(this, configElemento, NFeStrConstants.PastaDownloadNFeDest, "Pasta onde serão gravados os arquivos XML´s de download de NFe de destinatários e eventos de terceiros", false);
                         }
                     }
                 }

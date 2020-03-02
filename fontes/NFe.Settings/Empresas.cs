@@ -187,7 +187,7 @@ namespace NFe.Settings
                                 /// nao acessar o metodo Auxiliar.GravarArqErroERP(string Arquivo, string Erro) já que nela tem a pesquisa da empresa
                                 /// com base em "int emp = Empresas.FindEmpresaByThread();" e neste ponto ainda não foi criada
                                 /// as thread's
-                                cArqErro = CriaArquivoDeErro(empresa, cArqErro);
+                                cArqErro = CriaArquivoDeErro(empresa);
 
                                 //Grava arquivo de ERRO para o ERP
                                 File.WriteAllText(cArqErro, ex.Message);//, Encoding.Default);
@@ -206,7 +206,7 @@ namespace NFe.Settings
                                 {
                                     if (cArqErro == null)
                                     {
-                                        cArqErro = CriaArquivoDeErro(empresa, cArqErro);
+                                        cArqErro = CriaArquivoDeErro(empresa);
                                     }
                                     //Grava arquivo de ERRO para o ERP
                                     File.AppendAllText(cArqErro, "Erros de diretorios:\r\n\r\n" + Empresas.ErroCaminhoDiretorio, Encoding.Default);
@@ -239,8 +239,10 @@ namespace NFe.Settings
             return null;
         }
 
-        private static string CriaArquivoDeErro(Empresa empresa, string cArqErro)
+        private static string CriaArquivoDeErro(Empresa empresa)
         {
+            string cArqErro;
+
             if (string.IsNullOrEmpty(empresa.PastaXmlRetorno))
                 cArqErro = Path.Combine(Propriedade.PastaGeralRetorno, string.Format(Propriedade.NomeArqERRUniNFe, DateTime.Now.ToString("yyyyMMddTHHmmss")));
             else
@@ -370,7 +372,7 @@ namespace NFe.Settings
                 X509Store store = new X509Store("MY", StoreLocation.CurrentUser);
                 store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
                 X509Certificate2Collection collection = (X509Certificate2Collection)store.Certificates;
-                X509Certificate2Collection collection1 = null;
+                X509Certificate2Collection collection1;
                 if (!string.IsNullOrEmpty(empresa.CertificadoDigitalThumbPrint))
                     collection1 = (X509Certificate2Collection)collection.Find(X509FindType.FindByThumbprint, empresa.CertificadoDigitalThumbPrint, false);
                 else
@@ -493,7 +495,7 @@ namespace NFe.Settings
         #endregion
 
         #region verificaPasta
-        public static void verificaPasta(Empresa empresa, XmlElement configElemento, string tagName, string descricao, bool isObrigatoria)
+        public static void VerificaPasta(Empresa empresa, XmlElement configElemento, string tagName, string descricao, bool isObrigatoria)
         {
             XmlNode node = configElemento.GetElementsByTagName(tagName)[0];
             if (node != null)

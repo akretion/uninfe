@@ -821,8 +821,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Producao\PBeloHorizonteMG-BHISS.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFeiradeSantanaBA_WebISS.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PFeiradeSantanaBA_WebISS.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\WEBISS\servico_cancelar_nfse_envio.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -2460,8 +2458,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PColatinaES-EL.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PRecifePE-ABRASF.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HRioGrandeRS-sigiss.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPicadaCafe-PRONIN.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PPicadaCafe-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PRioGrandeRS-sigiss.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -4052,7 +4048,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSerafinaCorreaRS-FIORILLI.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PSerafinaCorreaRS-FIORILLI.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HBomDespachoMG-WebISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PBomDespachoMG-WebISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPelotas_RS.wsdl" />
@@ -4628,6 +4623,34 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HLoandaPR-Elotech.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PLoandaPR-Elotech.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaSerranaMG-SIGCORP_SIGISS_203.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaSerranaMG-SIGCORP_SIGISS_203.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFeiradeSantanaBA_WebISS_202.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PFeiradeSantanaBA_WebISS_202.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTapejaraRS-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTapejaraRS-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTapejaraRS-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTapejaraRS-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTapejaraRS-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTapejaraRS-ConsultaNFSeServicosTomadosIntermediados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTapejaraRS-ConsultaSequenciaLoteNotaRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HTapejaraRS-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTapejaraRS-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTapejaraRs-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTapejaraRS-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTapejaraRS-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTapejaraRS-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTapejaraRS-ConsultaNFSeServicosTomadosIntermediados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTapejaraRS-ConsultaSequenciaLoteNotaRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PTapejaraRS-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PJataiGO-BSITBR.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PAgudoRS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HAgudoRS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCampinaGrandePB-WebISS_202.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCampinaGrandePB-WebISS_202.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPicadaCafe-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPicadaCafe-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSerafinaCorreaRS-FIORILLI.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

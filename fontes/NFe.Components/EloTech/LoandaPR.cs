@@ -1,5 +1,5 @@
 ﻿using NFe.Components.Abstract;
-using NFe.Components.WSLoandaPR;
+using NFe.Components.EloTech.WS;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -7,23 +7,31 @@ using System.Xml;
 
 namespace NFe.Components.Elotech
 {
-    public class LoandaPR : EmiteNFSeBase
+    public class LoandaPR: EmiteNFSeBase
     {
-        private readonly NfsePortService Servico = new NfsePortService();
+        #region Private Fields
 
-        public override string NameSpaces => "http://shad.elotech.com.br/schemas/iss/nfse_v2_03.xsd";
+        private readonly ElotechService Servico = new ElotechService("http://200.2.100.110:8080/WebEloWS/nfse203.wsdl");
 
-        #region construtores
+        #endregion Private Fields
 
-        public LoandaPR(TipoAmbiente tpAmb, string pastaRetorno, string usuarioProxy, string senhaProxy, string domainProxy, X509Certificate certificado)
-            : base(tpAmb, pastaRetorno)
+        #region Private Methods
+
+        private string EnviarLoteRps(string file)
         {
-            ServicePointManager.ServerCertificateValidationCallback = MyCertHandler;
-            Servico.Proxy = WebRequest.DefaultWebProxy;
-            Servico.Proxy.Credentials = new NetworkCredential(usuarioProxy, senhaProxy);
-            Servico.Credentials = new NetworkCredential(senhaProxy, senhaProxy);
-            Servico.ClientCertificates.Add(certificado);
+            var enviarLoteRpsResposta = Servico.EnviarLoteRps(file);
+            var strResult = SerializarObjeto(enviarLoteRpsResposta);
+
+            return strResult;
         }
+
+        //private string EnviarLoteRpsSincrono(string file)
+        //{
+        //    var enviarLoteRpsSincronoResposta = Servico.EnviarLoteRpsSincrono(file);
+        //    var strResult = SerializarObjeto(enviarLoteRpsSincronoResposta);
+
+        //    return strResult;
+        //}
 
         /// <summary>
         /// Identificamos falha no certificado o do servidor, então temos que ignorar os erros
@@ -33,73 +41,42 @@ namespace NFe.Components.Elotech
         /// <param name="chain"></param>
         /// <param name="sslPolicyErrors"></param>
         /// <returns></returns>
-        private bool MyCertHandler(object sender, X509Certificate certificate, X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors)
+        private bool MyCertHandler(object sender, X509Certificate certificate, X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors) => true;
+
+        #endregion Private Methods
+
+        #region Public Properties
+
+        public override string NameSpaces { get; }
+
+        #endregion Public Properties
+
+        #region Public Constructors
+
+        public LoandaPR(TipoAmbiente tpAmb, string pastaRetorno, string usuarioProxy, string senhaProxy, string proxyDomain, X509Certificate certificado)
+                                    : base(tpAmb, pastaRetorno)
         {
-            return true;
+            ServicePointManager.ServerCertificateValidationCallback = MyCertHandler;
+            Servico.Proxy = WebRequest.DefaultWebProxy;
+            Servico.Proxy.Credentials = new NetworkCredential(usuarioProxy, senhaProxy);
+            Servico.Credentials = new NetworkCredential(senhaProxy, senhaProxy);
+            Servico.Certificate = new X509Certificate2(certificado);
+            Servico.ProxyDomain = proxyDomain;
         }
 
-        #endregion construtores
+        #endregion Public Constructors
 
-        #region Métodos
-
-        public override void EmiteNF(string file)
-        {
-            var strResult = string.Empty;
-
-            var doc = new XmlDocument();
-            doc.Load(file);
-
-            switch (doc.DocumentElement.Name)
-            {
-                case "EnviarLoteRpsEnvio":
-                    strResult = EnviarLoteRps(file);
-                    break;
-
-                case "EnviarLoteRpsSincronoEnvio":
-                    strResult = EnviarLoteRpsSincrono(file);
-                    break;
-            }
-
-            GerarRetorno(file, strResult,
-                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
-                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML,
-                Encoding.UTF8);
-        }
-
-        private string EnviarLoteRps(string file)
-        {
-            var enviarLoteRpsEnvio = new EnviarLoteRpsEnvio();
-            enviarLoteRpsEnvio = DeserializarObjeto<EnviarLoteRpsEnvio>(file);
-
-            var enviarLoteRpsResposta = Servico.EnviarLoteRps(enviarLoteRpsEnvio);
-            var strResult = SerializarObjeto(enviarLoteRpsResposta);
-
-            return strResult;
-        }
-
-        private string EnviarLoteRpsSincrono(string file)
-        {
-            var enviarLoteRpsSincronoEnvio = new EnviarLoteRpsSincronoEnvio();
-            enviarLoteRpsSincronoEnvio = DeserializarObjeto<EnviarLoteRpsSincronoEnvio>(file);
-
-            var enviarLoteRpsSincronoResposta = Servico.EnviarLoteRpsSincrono(enviarLoteRpsSincronoEnvio);
-            var strResult = SerializarObjeto(enviarLoteRpsSincronoResposta);
-
-            return strResult;
-        }
+        #region Public Methods
 
         public override void CancelarNfse(string file)
         {
-            var cancelarNfseEnvio = new CancelarNfseEnvio();
-            cancelarNfseEnvio = DeserializarObjeto<CancelarNfseEnvio>(file);
+            //var cancelarNfseResposta = Servico.CancelarNfse(file);
+            //var strResult = SerializarObjeto(cancelarNfseResposta);
 
-            var cancelarNfseResposta = Servico.CancelarNfse(cancelarNfseEnvio);
-            var strResult = SerializarObjeto(cancelarNfseResposta);
-
-            GerarRetorno(file, strResult,
-                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
-                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML,
-                Encoding.UTF8);
+            //GerarRetorno(file, strResult,
+            //    Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+            //    Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML,
+            //    Encoding.UTF8);
         }
 
         public override void ConsultarLoteRps(string file)
@@ -109,15 +86,6 @@ namespace NFe.Components.Elotech
             //string result = ServiceConsultas.ConsultarLoteRps(doc.InnerXml);
             //GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
             //                            Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
-        }
-
-        public override void ConsultarSituacaoLoteRps(string file)
-        {
-            //XmlDocument doc = new XmlDocument();
-            //doc.Load(file);
-            //string result = ServiceConsultas.ConsultarSituacaoLoteRps(doc.InnerXml);
-            //GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML,
-            //                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).RetornoXML);
         }
 
         public override void ConsultarNfse(string file)
@@ -138,6 +106,39 @@ namespace NFe.Components.Elotech
             //                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
 
-        #endregion Métodos
+        public override void ConsultarSituacaoLoteRps(string file)
+        {
+            //XmlDocument doc = new XmlDocument();
+            //doc.Load(file);
+            //string result = ServiceConsultas.ConsultarSituacaoLoteRps(doc.InnerXml);
+            //GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML,
+            //                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).RetornoXML);
+        }
+
+        public override void EmiteNF(string file)
+        {
+            var strResult = string.Empty;
+
+            var doc = new XmlDocument();
+            doc.Load(file);
+
+            switch(doc.DocumentElement.Name)
+            {
+                case "EnviarLoteRpsEnvio":
+                    strResult = EnviarLoteRps(file);
+                    break;
+
+                //case "EnviarLoteRpsSincronoEnvio":
+                //    strResult = EnviarLoteRpsSincrono(file);
+                //    break;
+            }
+
+            GerarRetorno(file, strResult,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML,
+                Encoding.UTF8);
+        }
+
+        #endregion Public Methods
     }
 }

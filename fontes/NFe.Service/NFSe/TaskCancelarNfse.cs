@@ -396,6 +396,10 @@ namespace NFe.Service.NFSe
                                 case 3507506:
                                     pedCanNfse = new Components.PBotucatuSP.nfseWS();
                                     break;
+
+                                case 5211909:
+                                    pedCanNfse = new Components.PJataiGO.nfseWS();
+                                    break;
                             }
                         }
                         else
@@ -504,7 +508,8 @@ namespace NFe.Service.NFSe
                             oDadosPedCanNfse.cMunicipio == 4306932 ||
                             oDadosPedCanNfse.cMunicipio == 4322400 ||
                             oDadosPedCanNfse.cMunicipio == 4302808 ||
-							oDadosPedCanNfse.cMunicipio == 3501301)
+                            oDadosPedCanNfse.cMunicipio == 3501301 ||
+                            oDadosPedCanNfse.cMunicipio == 4300109)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

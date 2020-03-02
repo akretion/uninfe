@@ -5,7 +5,11 @@ using Unimake.Business.DFe.Servicos;
 namespace Unimake.Business.DFe.Xml.NFe
 {
     [XmlRoot("ConsCad", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
-    public class ConsCad : XMLBase
+    public class ConsCad : ConsCadBase
+    {
+    }
+
+    public class ConsCadBase : XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }

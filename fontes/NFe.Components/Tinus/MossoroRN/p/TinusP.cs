@@ -8,6 +8,7 @@ using NFe.Components.PMossoroRN_TINUS_ConsultarSituacaoLoteRps;
 using NFe.Components.PMossoroRN_TINUS_RecepcionarLoteRps;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 
 namespace NFe.Components.Tinus.MossoroRN.p
 {
@@ -73,7 +74,11 @@ namespace NFe.Components.Tinus.MossoroRN.p
             DefinirProxy<ConsultarLoteRps>(Service);
 
             ConsultarLoteRpsEnvio envio = DeserializarObjeto<ConsultarLoteRpsEnvio>(file);
-            string strResult = SerializarObjeto(Service.CallConsultarLoteRps(envio));
+            ConsultarLoteRpsResposta resposta = new ConsultarLoteRpsResposta();
+
+            resposta = Service.CallConsultarLoteRps(envio);
+
+            string strResult = SerializarObjeto(resposta);
 
             GerarRetorno(file,
                 strResult,

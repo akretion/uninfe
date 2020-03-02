@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>7.3</LangVersion>
-    <AssemblyVersion>2020.01.16.1022</AssemblyVersion>
-    <FileVersion>2020.01.16.1022</FileVersion>
+    <AssemblyVersion>2020.01.17.1501</AssemblyVersion>
+    <FileVersion>2020.01.17.1501</FileVersion>
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
 
@@ -20,8 +20,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Servicos\Config\CTe\AN.xml" />
     <None Remove="Servicos\Config\CTe\Config.xml" />
     <None Remove="Servicos\Config\CTe\PR.xml" />
+    <None Remove="Servicos\Config\MDFe\AC.xml" />
+    <None Remove="Servicos\Config\MDFe\AL.xml" />
+    <None Remove="Servicos\Config\MDFe\AM.xml" />
+    <None Remove="Servicos\Config\MDFe\AP.xml" />
+    <None Remove="Servicos\Config\MDFe\BA.xml" />
+    <None Remove="Servicos\Config\MDFe\CE.xml" />
+    <None Remove="Servicos\Config\MDFe\Config.xml" />
+    <None Remove="Servicos\Config\MDFe\DF.xml" />
+    <None Remove="Servicos\Config\MDFe\ES.xml" />
+    <None Remove="Servicos\Config\MDFe\GO.xml" />
+    <None Remove="Servicos\Config\MDFe\MG.xml" />
+    <None Remove="Servicos\Config\MDFe\MS.xml" />
+    <None Remove="Servicos\Config\MDFe\MT.xml" />
+    <None Remove="Servicos\Config\MDFe\PB.xml" />
+    <None Remove="Servicos\Config\MDFe\PE.xml" />
+    <None Remove="Servicos\Config\MDFe\PI.xml" />
+    <None Remove="Servicos\Config\MDFe\PR.xml" />
+    <None Remove="Servicos\Config\MDFe\RJ.xml" />
+    <None Remove="Servicos\Config\MDFe\RN.xml" />
+    <None Remove="Servicos\Config\MDFe\RO.xml" />
+    <None Remove="Servicos\Config\MDFe\RR.xml" />
+    <None Remove="Servicos\Config\MDFe\RS.xml" />
+    <None Remove="Servicos\Config\MDFe\SC.xml" />
+    <None Remove="Servicos\Config\MDFe\SE.xml" />
+    <None Remove="Servicos\Config\MDFe\SP.xml" />
+    <None Remove="Servicos\Config\MDFe\SVRS.xml" />
+    <None Remove="Servicos\Config\MDFe\TO.xml" />
     <None Remove="Servicos\Config\NFCe\AC.xml" />
     <None Remove="Servicos\Config\NFCe\AL.xml" />
     <None Remove="Servicos\Config\NFCe\AM.xml" />
@@ -87,6 +115,7 @@
     <None Remove="Xml\Schemas\consSitNFe_v4.00.xsd" />
     <None Remove="Xml\Schemas\consStatServ_v4.00.xsd" />
     <None Remove="Xml\Schemas\CTe\cancCTeTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\consCad_v2.00.xsd" />
     <None Remove="Xml\Schemas\CTe\consReciCTeTiposBasico_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\consReciCTe_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\consSitCTeTiposBasico_v3.00.xsd" />
@@ -103,6 +132,7 @@
     <None Remove="Xml\Schemas\CTe\cteOS_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\cteTiposBasico_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\cte_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\distDFeInt_v1.00.xsd" />
     <None Remove="Xml\Schemas\CTe\enviCTe_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\evCancCECTe_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\evCancCTe_v3.00.xsd" />
@@ -116,18 +146,23 @@
     <None Remove="Xml\Schemas\CTe\evRegMultimodal_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\inutCTeTiposBasico_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\inutCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\leiauteConsultaCadastro_v2.00.xsd" />
     <None Remove="Xml\Schemas\CTe\procCTeOS_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\procCTe_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\procEventoCTe_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\procInutCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\retConsCad_v2.00.xsd" />
     <None Remove="Xml\Schemas\CTe\retConsReciCTe_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\retConsSitCTe_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\retConsStatServCTe_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\retCTeOS_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\retCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\retDistDFeInt_v1.00.xsd" />
     <None Remove="Xml\Schemas\CTe\retEnviCTe_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\retEventoCTe_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\retInutCTe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\CTe\tiposBasico_v1.03.xsd" />
+    <None Remove="Xml\Schemas\CTe\tiposDistDFe_v1.00.xsd" />
     <None Remove="Xml\Schemas\CTe\tiposGeralCTe_v3.00.xsd" />
     <None Remove="Xml\Schemas\CTe\xmldsig-core-schema_v1.01.xsd" />
     <None Remove="Xml\Schemas\distDFeInt_v1.01.xsd" />
@@ -166,6 +201,45 @@
     <None Remove="Xml\Schemas\leiauteInutNFe_v4.00.xsd" />
     <None Remove="Xml\Schemas\leiauteNFe_v4.00.xsd" />
     <None Remove="Xml\Schemas\leiauteRemIndus_v1.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\consMDFeNaoEncTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\consMDFeNaoEnc_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\consReciMDFeTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\consReciMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\consSitMDFeTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\consSitMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\consStatServMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\consStatServTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\distMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\enviMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\evCancMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\evEncMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\eventoMDFeTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\eventoMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\evIncCondutorMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\evInclusaoDFeMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\evPagtoOperMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\leiauteDistMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\mdfeConsultaDFeTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\mdfeConsultaDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\mdfeModalAereo_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\mdfeModalAquaviario_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\mdfeModalFerroviario_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\mdfeModalRodoviario_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\mdfeTiposBasico_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\mdfe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\procEventoMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\procMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\retConsMDFeNaoEnc_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\retConsReciMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\retConsSitMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\retConsStatServMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\retDistMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\retEnviMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\retEventoMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\retMDFeConsultaDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\retMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\tiposGeralMDFe_v3.00.xsd" />
+    <None Remove="Xml\Schemas\MDFe\xmldsig-core-schema_v1.01.xsd" />
     <None Remove="Xml\Schemas\nfe_v4.00.xsd" />
     <None Remove="Xml\Schemas\procCCeNFe_v1.00.xsd" />
     <None Remove="Xml\Schemas\procConfRecebtoNFe_v1.00.xsd" />
@@ -197,10 +271,62 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Servicos\Config\CTe\AN.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Servicos\Config\CTe\Config.xml" />
     <EmbeddedResource Include="Servicos\Config\CTe\PR.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\MDFe\AC.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\AL.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\AM.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\MDFe\AP.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\BA.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\MDFe\CE.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\MDFe\Config.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\DF.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\ES.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\GO.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\MDFe\MG.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\MDFe\MS.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\MDFe\MT.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\MDFe\PB.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\PE.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\MDFe\PI.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\PR.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\RJ.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\RN.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\RO.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\RR.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\RS.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\MDFe\SC.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\SE.xml" />
+    <EmbeddedResource Include="Servicos\Config\MDFe\SP.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\MDFe\SVRS.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\MDFe\TO.xml" />
     <EmbeddedResource Include="Servicos\Config\NFCe\Config.xml" />
     <EmbeddedResource Include="Servicos\Config\NFCe\RJ.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -344,6 +470,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Servicos\Config\NFe\TO.xml" />
     <EmbeddedResource Include="Xml\Schemas\CTe\cancCTeTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\consCad_v2.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Xml\Schemas\CTe\consReciCTeTiposBasico_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\consReciCTe_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\consSitCTeTiposBasico_v3.00.xsd" />
@@ -360,6 +489,7 @@
     <EmbeddedResource Include="Xml\Schemas\CTe\cteOS_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\cteTiposBasico_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\cte_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\distDFeInt_v1.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\enviCTe_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\evCancCECTe_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\evCancCTe_v3.00.xsd" />
@@ -373,20 +503,70 @@
     <EmbeddedResource Include="Xml\Schemas\CTe\evRegMultimodal_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\inutCTeTiposBasico_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\inutCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\leiauteConsultaCadastro_v2.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Xml\Schemas\CTe\procCTeOS_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\procCTe_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\procEventoCTe_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\procInutCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\retConsCad_v2.00.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Xml\Schemas\CTe\retConsReciCTe_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\retConsSitCTe_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\retConsStatServCTe_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\retCTeOS_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\retCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\retDistDFeInt_v1.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\retEnviCTe_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\retEventoCTe_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\retInutCTe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\CTe\tiposBasico_v1.03.xsd">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Xml\Schemas\CTe\tiposDistDFe_v1.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\tiposGeralCTe_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\xmldsig-core-schema_v1.01.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\consMDFeNaoEncTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\consMDFeNaoEnc_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\consReciMDFeTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\consReciMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\consSitMDFeTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\consSitMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\consStatServMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\consStatServTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\distMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\enviMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\evCancMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\evEncMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\eventoMDFeTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\eventoMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\evIncCondutorMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\evInclusaoDFeMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\evPagtoOperMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\leiauteDistMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\mdfeConsultaDFeTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\mdfeConsultaDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\mdfeModalAereo_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\mdfeModalAquaviario_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\mdfeModalFerroviario_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\mdfeModalRodoviario_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\mdfeTiposBasico_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\mdfe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\procEventoMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\procMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\retConsMDFeNaoEnc_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\retConsReciMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\retConsSitMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\retConsStatServMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\retDistMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\retEnviMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\retEventoMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\retMDFeConsultaDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\retMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\tiposGeralMDFe_v3.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\MDFe\xmldsig-core-schema_v1.01.xsd" />
     <EmbeddedResource Include="Xml\Schemas\NFe\CCe_v1.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -572,19 +752,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.4.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.VersionCheckAnalyzer" Version="2.9.8">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeQuality.Analyzers" Version="2.9.8">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.0" />
   </ItemGroup>
@@ -594,7 +761,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command=":: Enquanto a gente não colocar no nuget, manter este carinha aqui,&#xD;&#xA;:: pois ele copia todo o conteúdo pro ERP.Net.&#xD;&#xA;:: Estamos fazendo muitas alterações.&#xD;&#xA;$(SolutionDir)Post-Build.bat" />
+    <Exec Command=":: Enquanto a gente não colocar no nuget, manter este carinha aqui,&#xD;&#xA;:: pois ele copia todo o conteúdo pro ERP.Net.&#xD;&#xA;:: Estamos fazendo muitas alterações.&#xD;&#xA;$(SolutionDir)Post-Build.bat" IgnoreExitCode="true" />
   </Target>
 
 </Project>

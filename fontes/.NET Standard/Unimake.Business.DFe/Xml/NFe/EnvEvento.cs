@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using System.Xml;
@@ -11,14 +12,14 @@ namespace Unimake.Business.DFe.Xml.NFe
 {
     [Serializable()]
     [XmlRoot("envEvento", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
-    public class EnvEvento : XMLBase
+    public class EnvEvento: XMLBase
     {
         #region Private Methods
 
         private void SignEvent(Evento evento, XmlElement xmlEl)
         {
             var signature = xmlEl.GetElementsByTagName("Signature")[0];
-            if (signature != null)
+            if(signature != null)
             {
                 var signatureEvento = new XmlDocument();
 
@@ -32,7 +33,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         #region Public Properties
 
         [XmlElement("evento", Order = 2)]
-        public Evento[] Evento { get; set; }
+        public List<Evento> Evento { get; set; } = new List<Evento>();
 
         [XmlElement("idLote", Order = 1)]
         public string IdLote { get; set; }
@@ -44,6 +45,16 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region Public Methods
 
+        public void AddEvento(Evento evento)
+        {
+            if(Evento == null)
+            {
+                Evento = new List<Evento>();
+            }
+
+            Evento.Add(evento);
+        }
+
         public override XmlDocument GerarXML()
         {
             var xmlDocument = base.GerarXML();
@@ -52,7 +63,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
             var attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
 
-            for (var i = 0; i < xmlDocument.GetElementsByTagName("evento").Count; i++)
+            for(var i = 0; i < xmlDocument.GetElementsByTagName("evento").Count; i++)
             {
                 var xmlElement = (XmlElement)xmlDocument.GetElementsByTagName("evento")[i];
                 xmlElement.SetAttribute("xmlns", attribute.Namespace);
@@ -65,7 +76,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         public override T LerXML<T>(XmlDocument doc)
         {
-            if (typeof(T) != typeof(EnvEvento))
+            if(typeof(T) != typeof(EnvEvento))
             {
                 throw new InvalidCastException($"Cannot cast type '{typeof(T).Name}' into type '{typeof(EnvEvento).Name}'.");
             }
@@ -74,13 +85,11 @@ namespace Unimake.Business.DFe.Xml.NFe
 
             var eventos = doc.GetElementsByTagName("evento");
 
-            if ((eventos?.Count ?? 0) > 0)
+            if((eventos?.Count ?? 0) > 0)
             {
-                retornar.Evento = new Evento[eventos.Count];
+                retornar.Evento = new List<Evento>();
 
-                var index = 0;
-
-                foreach (XmlElement xmlEl in eventos)
+                foreach(XmlElement xmlEl in eventos)
                 {
                     var xml = new StringBuilder();
                     xml.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
@@ -90,7 +99,7 @@ namespace Unimake.Business.DFe.Xml.NFe
                     var envEvt = XMLUtility.Deserializar<EnvEvento>(xml.ToString());
                     var evt = envEvt.Evento[0];
                     SignEvent(evt, xmlEl);
-                    retornar.Evento[index++] = evt;
+                    retornar.Evento.Add(evt);
                 }
             }
 
@@ -155,7 +164,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => _detEvento;
             set
             {
-                switch (TpEvento)
+                switch(TpEvento)
                 {
                     case 0:
                         _detEvento = value;
@@ -194,7 +203,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("dhEvento", Order = 5)]
         public string DhEventoField
         {
-            get => DhEvento.ToString("yyyy-MM-ddTHH:mm:ssK");
+            get => DhEvento.ToString("yyyy-MM-ddTHH:mm:sszzz");
             set => DhEvento = DateTime.Parse(value);
         }
 
@@ -225,24 +234,15 @@ namespace Unimake.Business.DFe.Xml.NFe
         {
         }
 
-        public InfEvento(EventoDetalhe detEvento)
-        {
-            DetEvento = detEvento ?? throw new ArgumentNullException(nameof(detEvento));
-        }
+        public InfEvento(EventoDetalhe detEvento) => DetEvento = detEvento ?? throw new ArgumentNullException(nameof(detEvento));
 
         #endregion Public Constructors
 
         #region Public Methods
 
-        public bool ShouldSerializeCNPJ()
-        {
-            return !string.IsNullOrWhiteSpace(CNPJ);
-        }
+        public bool ShouldSerializeCNPJ() => !string.IsNullOrWhiteSpace(CNPJ);
 
-        public bool ShouldSerializeCPF()
-        {
-            return !string.IsNullOrWhiteSpace(CPF);
-        }
+        public bool ShouldSerializeCPF() => !string.IsNullOrWhiteSpace(CPF);
 
         #endregion Public Methods
     }
@@ -250,7 +250,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
     [XmlInclude(typeof(DetEventoCanc))]
     [XmlInclude(typeof(DetEventoCCE))]
-    public class EventoDetalhe : IXmlSerializable
+    public class EventoDetalhe: IXmlSerializable
     {
         #region Internal Properties
 
@@ -262,7 +262,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         internal virtual void ProcessReader()
         {
-            if (XmlReader == null)
+            if(XmlReader == null)
             {
                 return;
             }
@@ -270,24 +270,24 @@ namespace Unimake.Business.DFe.Xml.NFe
             var pi = default(PropertyInfo);
             var type = GetType();
 
-            if (XmlReader.HasAttributes)
+            if(XmlReader.HasAttributes)
             {
-                if (XmlReader.GetAttribute("versao") != "")
+                if(XmlReader.GetAttribute("versao") != "")
                 {
                     pi = type.GetProperty("versao", BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
                     pi?.SetValue(this, XmlReader.GetAttribute("versao"));
                 }
             }
 
-            while (XmlReader.Read())
+            while(XmlReader.Read())
             {
-                if (XmlReader.NodeType == XmlNodeType.Element)
+                if(XmlReader.NodeType == XmlNodeType.Element)
                 {
                     pi = type.GetProperty(XmlReader.Name, BindingFlags.Public |
                                                           BindingFlags.Instance |
                                                           BindingFlags.IgnoreCase);
                 }
-                else if (XmlReader.NodeType == XmlNodeType.Text)
+                else if(XmlReader.NodeType == XmlNodeType.Text)
                 {
                     pi?.SetValue(this, XmlReader.Value);
                 }
@@ -308,34 +308,22 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #region Public Methods
 
-        public XmlSchema GetSchema()
-        {
-            return default;
-        }
+        public XmlSchema GetSchema() => default;
 
-        public void ReadXml(XmlReader reader)
-        {
-            XmlReader = reader;
-        }
+        public void ReadXml(XmlReader reader) => XmlReader = reader;
 
-        public virtual void WriteXml(XmlWriter writer)
-        {
-            writer.WriteAttributeString("versao", Versao);
-        }
+        public virtual void WriteXml(XmlWriter writer) => writer.WriteAttributeString("versao", Versao);
 
         #endregion Public Methods
     }
 
     [Serializable]
     [XmlRoot(ElementName = "detEvento")]
-    public class DetEventoCanc : EventoDetalhe
+    public class DetEventoCanc: EventoDetalhe
     {
         #region Internal Methods
 
-        internal override void ProcessReader()
-        {
-            base.ProcessReader();
-        }
+        internal override void ProcessReader() => base.ProcessReader();
 
         #endregion Internal Methods
 
@@ -369,14 +357,11 @@ namespace Unimake.Business.DFe.Xml.NFe
 
     [Serializable]
     [XmlRoot(ElementName = "detEvento")]
-    public class DetEventoCCE : EventoDetalhe
+    public class DetEventoCCE: EventoDetalhe
     {
         #region Internal Methods
 
-        internal override void ProcessReader()
-        {
-            base.ProcessReader();
-        }
+        internal override void ProcessReader() => base.ProcessReader();
 
         #endregion Internal Methods
 
@@ -407,14 +392,11 @@ namespace Unimake.Business.DFe.Xml.NFe
 
     [Serializable]
     [XmlRoot(ElementName = "detEvento")]
-    public class DetEventoManif : EventoDetalhe
+    public class DetEventoManif: EventoDetalhe
     {
         #region Internal Methods
 
-        internal override void ProcessReader()
-        {
-            base.ProcessReader();
-        }
+        internal override void ProcessReader() => base.ProcessReader();
 
         #endregion Internal Methods
 
@@ -431,7 +413,7 @@ namespace Unimake.Business.DFe.Xml.NFe
             get => DescEventoField;
             set
             {
-                if (!value.Equals("Ciencia da Operacao") &&
+                if(!value.Equals("Ciencia da Operacao") &&
                     !value.Equals("Confirmacao da Operacao") &&
                     !value.Equals("Desconhecimento da Operacao") &&
                     !value.Equals("Operacao nao Realizada"))
@@ -456,7 +438,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         {
             base.WriteXml(writer);
 
-            if (string.IsNullOrWhiteSpace(XJust) ||
+            if(string.IsNullOrWhiteSpace(XJust) ||
                 DescEvento.Equals("Ciencia da Operacao") ||
                 DescEvento.Equals("Confirmacao da Operacao"))
             {

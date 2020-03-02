@@ -1,11 +1,11 @@
 ﻿using NFe.Components.Abstract;
-using NFe.Components.HPicadaCafeRS;
+using NFe.Components.HPicadaCafe;
 using System;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 
-namespace NFe.Components.Pronin.PicadaCafeRS.h
+namespace NFe.Components.Pronin.PicadaCafe.h
 {
     public class ProninH : EmiteNFSeBase
     {

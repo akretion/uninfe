@@ -347,6 +347,10 @@ namespace NFe.Service.NFSe
                                 case 3507506:
                                     pedLoteRps = new Components.PBotucatuSP.nfseWS();
                                     break;
+
+                                case 5211909:
+                                    pedLoteRps = new Components.PJataiGO.nfseWS();
+                                    break;
                             }
                         }
                         else
@@ -374,7 +378,8 @@ namespace NFe.Service.NFSe
                             ler.oDadosPedSitNfseRps.cMunicipio == 4306932 ||
                             ler.oDadosPedSitNfseRps.cMunicipio == 4322400 ||
                             ler.oDadosPedSitNfseRps.cMunicipio == 4302808 ||
-							ler.oDadosPedSitNfseRps.cMunicipio == 3501301)
+							ler.oDadosPedSitNfseRps.cMunicipio == 3501301 ||
+							ler.oDadosPedSitNfseRps.cMunicipio == 4300109)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

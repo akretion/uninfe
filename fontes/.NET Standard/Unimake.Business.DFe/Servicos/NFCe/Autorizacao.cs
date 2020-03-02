@@ -1,23 +1,11 @@
-﻿using Unimake.Business.DFe.Security;
-using Unimake.Business.DFe.Utility;
+﻿using Unimake.Business.DFe.Utility;
 using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFCe
 {
     public class Autorizacao: NFe.Autorizacao
     {
-        public Autorizacao(EnviNFe enviNFe, Configuracao configuracao)
-                      : base(enviNFe, configuracao) { }
-
-        public override void Executar()
-        {
-            new AssinaturaDigital().Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id");
-            EnviNFe = EnviNFe.LerXML<EnviNFe>(ConteudoXML);
-
-            MontarQrCode();
-
-            base.Executar();
-        }
+        #region Private Methods
 
         /// <summary>
         /// Definir as propriedades do QRCode e Link da consulta manual da NFCe
@@ -26,13 +14,15 @@ namespace Unimake.Business.DFe.Servicos.NFCe
         {
             for(var i = 0; i < EnviNFe.NFe.Count; i++)
             {
+                EnviNFe = new EnviNFe().LerXML<EnviNFe>(ConteudoXML);
+
                 if(EnviNFe.NFe[i].InfNFeSupl == null)
                 {
                     EnviNFe.NFe[i].InfNFeSupl = new InfNFeSupl();
 
                     var urlQrCode = (Configuracoes.TipoAmbiente == TipoAmbiente.Homologacao ? Configuracoes.UrlQrCodeHomologacao : Configuracoes.UrlQrCodeProducao);
                     var urlChave = (Configuracoes.TipoAmbiente == TipoAmbiente.Homologacao ? Configuracoes.UrlChaveHomologacao : Configuracoes.UrlChaveProducao);
-                    var paramLinkQRCode = string.Empty;
+                    string paramLinkQRCode;
 
                     if(EnviNFe.NFe[i].InfNFe[0].Ide.TpEmis == TipoEmissao.ContingenciaOffLine)
                     {
@@ -62,5 +52,33 @@ namespace Unimake.Business.DFe.Servicos.NFCe
             //Atualizar a propriedade do XML da NFCe novamente com o conteúdo atual já a tag de QRCode e link de consulta
             ConteudoXML = EnviNFe.GerarXML();
         }
+
+        #endregion Private Methods
+
+        #region Protected Methods
+
+        /// <summary>
+        /// Efetuar um Ajustse no XML da NFCe logo depois de assinado
+        /// </summary>
+        protected override void AjustarXMLAposAssinado()
+        {
+            MontarQrCode();
+            base.AjustarXMLAposAssinado();
+        }
+
+        #endregion Protected Methods
+
+        #region Public Constructors
+
+        public Autorizacao(EnviNFe enviNFe, Configuracao configuracao)
+                                      : base(enviNFe, configuracao)
+        {
+        }
+
+        public Autorizacao()
+        {
+        }
+
+        #endregion Public Constructors
     }
 }

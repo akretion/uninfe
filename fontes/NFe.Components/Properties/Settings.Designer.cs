@@ -1163,16 +1163,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://portal.serafinacorrea.rs.gov.br:8081/IssWeb-ejb/IssWebWS/IssWebWS")]
-        public string NFe_Components_PSerafinaCorreaRS_IssWebWS {
-            get {
-                return ((string)(this["NFe_Components_PSerafinaCorreaRS_IssWebWS"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS")]
         public string NFe_Components_HSerafinaCorreaRS_IssWebWS {
             get {
@@ -2063,27 +2053,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://portal.picadacafe.rs.gov.br:8383/NFSe.Portal.Integracao.teste/Services.svc" +
-            "")]
-        public string NFe_Components_HPicadaCafeRS_NFSeIntegracao {
-            get {
-                return ((string)(this["NFe_Components_HPicadaCafeRS_NFSeIntegracao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://portal.picadacafe.rs.gov.br:8383/NFSe.Portal.Integracao/Services.svc")]
-        public string NFe_Components_PPicadaCafeRS_NFSeIntegracao {
-            get {
-                return ((string)(this["NFe_Components_PPicadaCafeRS_NFSeIntegracao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://nfse.catanduva.sp.gov.br/NFSe.Portal.Integracao.Teste/Services.svc")]
         public string NFe_Components_HCatanduvaSP_NFSeIntegracao {
             get {
@@ -2936,6 +2905,67 @@ namespace NFe.Components.Properties {
         public string NFe_Components_LoandaPR_NfsePortService {
             get {
                 return ((string)(this["NFe_Components_LoandaPR_NfsePortService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://gestaopublica.jatai.bsit-br.com.br/integracao/services/nfseWS")]
+        public string NFe_Components_PJataiGO_nfseWS {
+            get {
+                return ((string)(this["NFe_Components_PJataiGO_nfseWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://agudo-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PAgudoRS_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PAgudoRS_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://agudo-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.svc")]
+        public string NFe_Components_HAgudoRS_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_HAgudoRS_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://picadacafe-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.s" +
+            "vc")]
+        public string NFe_Components_HPicadaCafe_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_HPicadaCafe_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://picadacafe-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PPicadaCafe_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PPicadaCafe_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://177.20.225.197:8081/IssWeb-ejb/IssWebWS/IssWebWS")]
+        public string NFe_Components_PSerafinaCorreaRS_IssWebWS {
+            get {
+                return ((string)(this["NFe_Components_PSerafinaCorreaRS_IssWebWS"]));
             }
         }
     }

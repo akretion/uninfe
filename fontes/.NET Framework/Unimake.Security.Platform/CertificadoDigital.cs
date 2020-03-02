@@ -11,6 +11,13 @@ namespace Unimake.Security.Platform
     [ComVisible(true)]
     public class CertificadoDigital
     {
+        #region Public Constructors
+        public CertificadoDigital()
+        {
+        }
+
+        #endregion Public Constructors
+
         #region Public Methods
 
         /// <summary>
@@ -22,7 +29,7 @@ namespace Unimake.Security.Platform
             var store = new X509Store("MY", StoreLocation.CurrentUser);
             store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
             var collection = store.Certificates;
-            var collection1 = collection.Find(X509FindType.FindByTimeValid, DateTime.Now, false);
+            _ = collection.Find(X509FindType.FindByTimeValid, DateTime.Now, false);
             var collection2 = collection.Find(X509FindType.FindByKeyUsage, X509KeyUsageFlags.DigitalSignature, false);
             var scollection = X509Certificate2UI.SelectFromCollection(collection2, "Certificado(s) digital(is) disponível(is)", "Selecione o certificado digital para uso no aplicativo", X509SelectionFlag.SingleSelection);
 
@@ -45,12 +52,12 @@ namespace Unimake.Security.Platform
 
             //Primeiro tento encontrar pelo thumbprint
             var collection3 = collection2.Find(X509FindType.FindByThumbprint, serialNumberOrThumbPrint, false);
-            if (collection3.Count <= 0)
+            if(collection3.Count <= 0)
             {
                 //Se não encontrou pelo thumbprint tento pelo SerialNumber pegando o mesmo thumbprint que veio no arquivo de configurações para ver se não encontro.
                 collection3 = collection2.Find(X509FindType.FindBySerialNumber, serialNumberOrThumbPrint, false);
 
-                if (collection3.Count <= 0)
+                if(collection3.Count <= 0)
                 {
                     throw new Exception("Certificado digital informado não foi localizado no repositório do windows.");
                 }
@@ -71,7 +78,7 @@ namespace Unimake.Security.Platform
         {
             var x509Cert = new X509Certificate2();
 
-            using (var fs = new FileStream(certificadoDigital, FileMode.Open, FileAccess.Read))
+            using(var fs = new FileStream(certificadoDigital, FileMode.Open, FileAccess.Read))
             {
                 var buffer = new byte[fs.Length];
                 fs.Read(buffer, 0, buffer.Length);
@@ -93,22 +100,6 @@ namespace Unimake.Security.Platform
         }
 
         /// <summary>
-        /// Executa tela com os certificados digitais instalados para seleção do usuário
-        /// </summary>
-        /// <returns>Retorna o certificado digital (null se nenhum certificado foi selecionado ou se o certificado selecionado está com alguma falha)</returns>
-        public X509Certificate2 Selecionar()
-        {
-            var scollection = AbrirTelaSelecao();
-
-            if (scollection.Count > 0)
-            {
-                return scollection[0];
-            }
-
-            return null;
-        }
-
-        /// <summary>
         /// Converte o arquivo do certificado em um array de bytes
         /// </summary>
         /// <param name="arquivo">Nome do arquivo</param>
@@ -117,9 +108,9 @@ namespace Unimake.Security.Platform
         {
             byte[] result = null;
 
-            using (Stream responseStream = new FileStream(arquivo, FileMode.Open))
+            using(Stream responseStream = new FileStream(arquivo, FileMode.Open))
             {
-                using (var memoryStream = new MemoryStream())
+                using(var memoryStream = new MemoryStream())
                 {
                     responseStream.CopyTo(memoryStream);
                     result = memoryStream.ToArray();
@@ -138,17 +129,33 @@ namespace Unimake.Security.Platform
         {
             var retorna = false;
 
-            if (certificado == null)
+            if(certificado == null)
             {
                 throw new ExceptionCertificadoDigital();
             }
 
-            if (DateTime.Compare(DateTime.Now, certificado.NotAfter) > 0)
+            if(DateTime.Compare(DateTime.Now, certificado.NotAfter) > 0)
             {
                 retorna = true;
             }
 
             return retorna;
+        }
+
+        /// <summary>
+        /// Executa tela com os certificados digitais instalados para seleção do usuário
+        /// </summary>
+        /// <returns>Retorna o certificado digital (null se nenhum certificado foi selecionado ou se o certificado selecionado está com alguma falha)</returns>
+        public X509Certificate2 Selecionar()
+        {
+            var scollection = AbrirTelaSelecao();
+
+            if(scollection.Count > 0)
+            {
+                return scollection[0];
+            }
+
+            return null;
         }
 
         #endregion Public Methods

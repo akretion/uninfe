@@ -338,9 +338,6 @@
     <Setting Name="NFe_Components_PPotirendabaSPPotirendabaSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://191.243.12.90:5661/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
-    <Setting Name="NFe_Components_PSerafinaCorreaRS_IssWebWS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://portal.serafinacorrea.rs.gov.br:8081/IssWeb-ejb/IssWebWS/IssWebWS</Value>
-    </Setting>
     <Setting Name="NFe_Components_HSerafinaCorreaRS_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
@@ -605,12 +602,6 @@
     <Setting Name="NFe_Components_PVianaES_RpsServiceService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://es-viana-pm-nfs.cloud.el.com.br:80/RpsService</Value>
     </Setting>
-    <Setting Name="NFe_Components_HPicadaCafeRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://portal.picadacafe.rs.gov.br:8383/NFSe.Portal.Integracao.teste/Services.svc</Value>
-    </Setting>
-    <Setting Name="NFe_Components_PPicadaCafeRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://portal.picadacafe.rs.gov.br:8383/NFSe.Portal.Integracao/Services.svc</Value>
-    </Setting>
     <Setting Name="NFe_Components_HCatanduvaSP_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://nfse.catanduva.sp.gov.br/NFSe.Portal.Integracao.Teste/Services.svc</Value>
     </Setting>
@@ -865,6 +856,24 @@
     </Setting>
     <Setting Name="NFe_Components_LoandaPR_NfsePortService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://200.2.100.110:8080/WebEloWS/nfseService</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PJataiGO_nfseWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://gestaopublica.jatai.bsit-br.com.br/integracao/services/nfseWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PAgudoRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://agudo-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HAgudoRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://agudo-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HPicadaCafe_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://picadacafe-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPicadaCafe_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://picadacafe-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSerafinaCorreaRS_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://177.20.225.197:8081/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
   </Settings>
 </SettingsFile>

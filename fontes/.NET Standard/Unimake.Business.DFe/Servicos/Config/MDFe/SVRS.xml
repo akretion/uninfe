@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuracoes>
+  <SVC>SVCRS</SVC>  
+  <Servicos ID="MDFe">
+    <StatusServico versao="3.00">
+      <Descricao>Consulta situação do serviço de manifesto eletrônico de documentos fiscais</Descricao>
+      <WebEnderecoHomologacao>https://mdfe-homologacao.svrs.rs.gov.br/ws/MDFeStatusServico/MDFeStatusServico.asmx</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://mdfe.svrs.rs.gov.br/ws/MDFeStatusServico/MDFeStatusServico.asmx</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/mdfe/wsdl/MDFeStatusServico</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/mdfe/wsdl/MDFeStatusServico</WebActionProducao>
+      <WebTagRetorno>mdfeStatusServicoMDFResult</WebTagRetorno>
+      <SchemaArquivo>consStatServMDFe_v{0}.xsd</SchemaArquivo>
+      <TagAssinatura></TagAssinatura>
+      <TagAtributoID></TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+    </StatusServico>
+    <ConsultaProtocolo versao="3.00">
+      <Descricao>Consulta situação do manifesto eletrônico de documentos fiscais</Descricao>
+      <WebEnderecoHomologacao>https://mdfe-homologacao.svrs.rs.gov.br/ws/MDFeConsulta/MDFeConsulta.asmx</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://mdfe.svrs.rs.gov.br/ws/MDFeConsulta/MDFeConsulta.asmx</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/mdfe/wsdl/MDFeConsulta</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/mdfe/wsdl/MDFeConsulta</WebActionProducao>
+      <WebTagRetorno>mdfeConsultaMDFResult</WebTagRetorno>
+      <SchemaArquivo>consSitMDFe_v{0}.xsd</SchemaArquivo>
+      <TagAssinatura></TagAssinatura>
+      <TagAtributoID></TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+    </ConsultaProtocolo>
+    <ConsultaCadastro versao="2.00">
+      <Descricao>Consulta cadastro do contribuinte</Descricao>
+      <WebEnderecoHomologacao>https://nfe.sefa.pr.gov.br/nfe/CadConsultaCadastro4</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://nfe.sefa.pr.gov.br/nfe/CadConsultaCadastro4</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico</WebActionProducao>
+      <SchemaArquivo>consCad_v{0}.xsd</SchemaArquivo>
+      <TagAssinatura></TagAssinatura>
+      <TagAtributoID></TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+    </ConsultaCadastro>
+    <RecepcaoEvento versao="1.00">
+      <Descricao>Recepcao de eventos</Descricao>
+      <WebEnderecoHomologacao>https://homologacao.nfe.sefa.pr.gov.br/nfe/NFeRecepcaoEvento4</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://nfe.sefa.pr.gov.br/nfe/NFeRecepcaoEvento4</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico</WebActionProducao>
+      <SchemaArquivo></SchemaArquivo>
+      <SchemasEspecificos>
+        <Tipo>
+          <ID>110111</ID>
+          <SchemaArquivo>envEventoCancNFe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>e110111_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+        <Tipo>
+          <ID>110112</ID>
+          <SchemaArquivo>envEventoCancNFe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>e110112_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+        <Tipo>
+          <ID>110110</ID>
+          <SchemaArquivo>CCe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>e110110_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+      </SchemasEspecificos>
+      <TagAssinatura>evento</TagAssinatura>
+      <TagAtributoID>infEvento</TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+    </RecepcaoEvento>
+    <Autorizacao versao="3.00">
+      <Descricao>Autorização do MDFe</Descricao>
+      <WebEnderecoHomologacao>https://homologacao.nfe.sefa.pr.gov.br/nfe/NFeAutorizacao4</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://nfe.sefa.pr.gov.br/nfe/NFeAutorizacao4</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/cte/wsdl/CteStatusServico</WebActionProducao>
+      <SchemaArquivo>enviNFe_v{0}.xsd</SchemaArquivo>
+      <TagAssinatura>NFe</TagAssinatura>
+      <TagAtributoID>infNFe</TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+    </Autorizacao>
+    <RetAutorizacao versao="3.00">
+      <Descricao>Consulta recibo do manifesto eletrônico de documentos fiscais</Descricao>
+      <WebEnderecoHomologacao>https://mdfe-homologacao.svrs.rs.gov.br/ws/MDFeRetRecepcao/MDFeRetRecepcao.asmx</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://mdfe.svrs.rs.gov.br/ws/MDFeRetRecepcao/MDFeRetRecepcao.asmx</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/mdfe/wsdl/MDFeRetRecepcao</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/mdfe/wsdl/MDFeRetRecepcao</WebActionProducao>
+      <WebTagRetorno>mdfeRetRecepcaoResult</WebTagRetorno>
+      <SchemaArquivo>consReciMDFe_v{0}.xsd</SchemaArquivo>
+      <TagAssinatura></TagAssinatura>
+      <TagAtributoID></TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+    </RetAutorizacao>
+  </Servicos>
+</Configuracoes>

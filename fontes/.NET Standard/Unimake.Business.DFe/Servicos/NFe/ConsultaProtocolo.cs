@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Xml;
+using Unimake.Business.DFe.Servicos.Interop;
 using Unimake.Business.DFe.Utility;
 using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
-    [ComVisible(true)]
-    public class ConsultaProtocolo: ServicoBase
+    public class ConsultaProtocolo: ServicoBase, IInteropService<ConsSitNFe>
     {
-        #region Private Constructors
-
-        private ConsultaProtocolo(XmlDocument conteudoXML, Configuracao configuracao)
-                            : base(conteudoXML, configuracao) { }
-
-        #endregion Private Constructors
-
         #region Protected Methods
 
         /// <summary>
@@ -69,11 +61,18 @@ namespace Unimake.Business.DFe.Servicos.NFe
         }
 
         public ConsultaProtocolo(ConsSitNFe consSitNFe, Configuracao configuracao)
-            : this(consSitNFe?.GerarXML() ?? throw new ArgumentNullException(nameof(consSitNFe)), configuracao) { }
+            : base(consSitNFe?.GerarXML() ?? throw new ArgumentNullException(nameof(consSitNFe)), configuracao) { }
 
         #endregion Public Constructors
 
         #region Public Methods
+
+        [ComVisible(true)]
+        public void Executar(ConsSitNFe consSitNFe, Configuracao configuracao)
+        {
+            PrepararServico(consSitNFe?.GerarXML() ?? throw new ArgumentNullException(nameof(consSitNFe)), configuracao);
+            Executar();
+        }
 
         public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML) => throw new System.Exception("Não existe XML de distribuição para consulta de protocolo.");
 

@@ -193,18 +193,18 @@ namespace NFe.Components
             return result;
         }
 
-        public static string GerarRSASHA512(String value)
+        public static string GerarRSASHA512(string value, bool lower = false)
         {
-            SHA512 sha512 = SHA512Managed.Create();
-            byte[] bytes = Encoding.UTF8.GetBytes(value);
-            byte[] hash = sha512.ComputeHash(bytes);
-         
-            StringBuilder result = new StringBuilder();
-            for (int i = 0; i < hash.Length; i++)
+            var sha512 = SHA512.Create();
+            var bytes = Encoding.UTF8.GetBytes(value);
+            var hash = sha512.ComputeHash(bytes);
+
+            var result = new StringBuilder();
+            for(var i = 0; i < hash.Length; i++)
             {
-                result.Append(hash[i].ToString("X2"));
+                result.Append(hash[i].ToString($"{(lower ? "x" : "X")}2"));
             }
-                                    
+
             return result.ToString();
         }
 

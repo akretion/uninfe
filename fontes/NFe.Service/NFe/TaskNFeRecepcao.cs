@@ -215,7 +215,7 @@ namespace NFe.Service
             XmlDocument xml = new XmlDocument();
             xml.Load(Functions.StringXmlToStream(strXml));
 
-            XmlNodeList retEnviNFeList = retEnviNFeList = xml.GetElementsByTagName("retEnviNFe");
+            XmlNodeList retEnviNFeList = xml.GetElementsByTagName("retEnviNFe");
 
             foreach (XmlNode retEnviNFeNode in retEnviNFeList)
             {

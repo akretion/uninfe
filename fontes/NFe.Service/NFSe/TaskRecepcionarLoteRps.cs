@@ -230,6 +230,10 @@ namespace NFe.Service.NFSe
                                 case 3507506:
                                     envLoteRps = new Components.PBotucatuSP.nfseWS();
                                     break;
+
+                                case 5211909:
+                                    envLoteRps = new Components.PJataiGO.nfseWS();
+                                    break;
                             }
                         }
                         else
@@ -593,7 +597,8 @@ namespace NFe.Service.NFSe
                             oDadosEnvLoteRps.cMunicipio == 4306932 ||
                             oDadosEnvLoteRps.cMunicipio == 4322400 ||
                             oDadosEnvLoteRps.cMunicipio == 4302808 ||
-							oDadosEnvLoteRps.cMunicipio == 3501301)
+							oDadosEnvLoteRps.cMunicipio == 3501301 ||
+							oDadosEnvLoteRps.cMunicipio == 4300109)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -901,10 +906,10 @@ namespace NFe.Service.NFSe
             XmlDocument doc = new XmlDocument();
             doc.Load(NomeArquivoXML);
             string conteudoXML, integridade;
-            conteudoXML = doc.OuterXml;
-            conteudoXML =  Regex.Replace(conteudoXML, "/[^\x20-\x7E]+/", "");
-            conteudoXML = Regex.Replace(conteudoXML, "/[ ]+/", "");
-            integridade = Criptografia.GerarRSASHA512(conteudoXML + token);
+            conteudoXML = doc.GetElementsByTagName("Rps")[0].OuterXml;
+            conteudoXML = Regex.Replace(conteudoXML, "[^\x20-\x7E]+", "");
+            conteudoXML = Regex.Replace(conteudoXML, "[ ]+", "");
+            integridade = Criptografia.GerarRSASHA512(conteudoXML + token, true);
 
             foreach (object item in ConteudoXML)
             {

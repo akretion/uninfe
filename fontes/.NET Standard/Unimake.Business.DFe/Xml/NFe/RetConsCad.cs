@@ -50,7 +50,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("dhCons")]
         public string DhConsField
         {
-            get => DhCons.ToString("yyyy-MM-ddTHH:mm:ssK");
+            get => DhCons.ToString("yyyy-MM-ddTHH:mm:sszzz");
             set => DhCons = DateTime.Parse(value);
         }
 

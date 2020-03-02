@@ -46,7 +46,7 @@ namespace Unimake.Business.DFe.Servicos
         NFeAutorizacao,
 
         /// <summary>
-        /// Envio do XML de consulta dos documentos fiscais eletrônicos destinados
+        /// Envio do XML de consulta dos documentos fiscais eletrônicos destinados - NFe
         /// </summary>
         NFeDistribuicaoDFe,
 
@@ -55,7 +55,7 @@ namespace Unimake.Business.DFe.Servicos
         #region CTe
 
         /// <summary>
-        /// Consulta status serviço NFe/NFCe
+        /// Consulta status serviço CTe
         /// </summary>
         CTeStatusServico,
 
@@ -68,6 +68,34 @@ namespace Unimake.Business.DFe.Servicos
         /// Inutilização de números do Conhecimetno de Transporte Eletrônico (CTe)
         /// </summary>
         CTeInutilizacao,
+
+        /// <summary>
+        /// Envio do XML de consulta dos documentos fiscais eletrônicos destinados - CTe
+        /// </summary>
+        CTeDistribuicaoDFe,
+
+        /// <summary>
+        /// Consulta recibo CTe
+        /// </summary>
+        CTeConsultaRecibo,
+        #endregion
+
+        #region MDFe
+
+        /// <summary>
+        /// Consulta status serviço MDFe
+        /// </summary>
+        MDFeStatusServico,
+
+        /// <summary>
+        /// Consulta protocolo do MDFe
+        /// </summary>
+        MDFeConsultaProtocolo,
+
+        /// <summary>
+        /// Consulta recibo MDFe
+        /// </summary>
+        MDFeConsultaRecibo,
 
         #endregion
 
@@ -377,6 +405,22 @@ namespace Unimake.Business.DFe.Servicos
 
     #endregion
 
+    #region TipoEventoCTe
+
+    /// <summary>
+    /// Tipos de eventos do CTe
+    /// </summary>
+    public enum TipoEventoCTe
+    {
+        /// <summary>
+        /// Cancelamento CTe (110111)
+        /// </summary>
+        [XmlEnum("110111")]
+        Cancelamento = 110111,
+    }
+
+    #endregion
+
     #region SimNao
 
     /// <summary>
@@ -385,10 +429,10 @@ namespace Unimake.Business.DFe.Servicos
     public enum SimNao
     {
         /// <summary>
-        /// Não (9)
+        /// Não (0)
         /// </summary>
         [XmlEnum("0")]
-        Não = 0,
+        Nao = 0,
 
         /// <summary>
         /// Sim (1)
@@ -494,6 +538,28 @@ namespace Unimake.Business.DFe.Servicos
 
     #endregion
 
+    #region FormatoImpressaoDACTE
+
+    /// <summary>
+    /// Formato de impressão do DACTE
+    /// </summary>
+    public enum FormatoImpressaoDACTE
+    {
+        /// <summary>
+        /// 1=Retrato
+        /// </summary>
+        [XmlEnum("1")]
+        NormalRetrato = 1,
+
+        /// <summary>
+        /// 2=Paisagem
+        /// </summary>
+        [XmlEnum("2")]
+        NormalPaisagem = 2
+    }
+
+    #endregion
+
     #region TipoEmissao
 
     /// <summary>
@@ -536,6 +602,12 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("7")]
         ContingenciaSVCRS = 7,
+
+
+        /// <summary>
+        /// 8=Contingência SVC-SP (SEFAZ Virtual de Contingência de SP);
+        /// </summary>
+        ContingenciaSVCSP = 8,
 
         /// <summary>
         /// 9=Contingência off-line da NFC-e
@@ -629,7 +701,7 @@ namespace Unimake.Business.DFe.Servicos
     #region ProcessoEmissao
 
     /// <summary>
-    /// Processo de emissão do DFe (NFe, NFCe, etc...)
+    /// Processo de emissão do DFe (NFe, NFCe, CTe, etc...)
     /// </summary>
     public enum ProcessoEmissao
     {
@@ -691,7 +763,8 @@ namespace Unimake.Business.DFe.Servicos
     #region IndicadorIEDestinatario
 
     /// <summary>
-    /// Indicador da IE do Destinatário
+    /// No caso de NFe e NFCe = Indicador da IE do Destinatário
+    /// No caso de CTe = Indicador da IE do toma3 ou toma4
     /// </summary>
     public enum IndicadorIEDestinatario
     {
@@ -2653,7 +2726,6 @@ namespace Unimake.Business.DFe.Servicos
 
     #endregion
 
-
     #region CondicaoVeiculo
 
     /// <summary>
@@ -2681,7 +2753,6 @@ namespace Unimake.Business.DFe.Servicos
     }
 
     #endregion
-
 
     #region TipoRestricaoVeiculo
 
@@ -2729,7 +2800,6 @@ namespace Unimake.Business.DFe.Servicos
 
     #endregion
 
-
     #region TipoArma
 
     /// <summary>
@@ -2750,5 +2820,509 @@ namespace Unimake.Business.DFe.Servicos
         UsoRestrito = 1
     }
 
-    #endregion   
+    #endregion
+
+    #region Tipo de CTe
+
+    /// <summary>
+    /// Tipo de CTe
+    /// </summary>
+    public enum TipoCTe
+    {
+        /// <summary>
+        /// 1=CTe Normal
+        /// </summary>
+        [XmlEnum("0")]
+        Normal = 0,
+
+        /// <summary>
+        /// 2=CTe de complemento de valores
+        /// </summary>
+        [XmlEnum("1")]
+        Complementar = 1,
+
+        /// <summary>
+        /// 3=CTe de Anulação
+        /// </summary>
+        [XmlEnum("2")]
+        Anulacao = 2,
+
+        /// <summary>
+        /// 3=CTe de Substituição
+        /// </summary>
+        [XmlEnum("3")]
+        Substituicao = 3
+    }
+
+    #endregion
+
+    #region Modalidades de transportes do CTe
+
+    /// <summary>
+    /// Modalidade de transportes do CTe
+    /// </summary>
+    public enum ModalidadeTransporteCTe
+    {
+        /// <summary>
+        /// 01 - Rodoviário
+        /// </summary>
+        [XmlEnum("01")]
+        Rodoviario = 01,
+
+        /// <summary>
+        /// 02 - Aéreo
+        /// </summary>
+        [XmlEnum("02")]
+        Aereo = 02,
+
+        /// <summary>
+        /// 03 - Aquaviário
+        /// </summary>
+        [XmlEnum("03")]
+        Aquaviario = 03,
+
+        /// <summary>
+        /// 04 - Ferroviário
+        /// </summary>
+        [XmlEnum("04")]
+        Ferroviario = 04,
+
+        /// <summary>
+        /// 05 - Dutoviário
+        /// </summary>
+        [XmlEnum("05")]
+        Dutoviario = 05,
+
+        /// <summary>
+        /// 06 - Multimodal
+        /// </summary>
+        [XmlEnum("06")]
+        Multimodal = 06
+    }
+    #endregion
+
+    #region Tipo Serviço CTe
+
+    /// <summary>
+    /// Tipos de serviços do CTe
+    /// </summary>
+    public enum TipoServicoCTe
+    {
+        /// <summary>
+        /// 0 = Normal
+        /// </summary>
+        [XmlEnum("0")]
+        Normal = 0,
+
+        /// <summary>
+        /// 1 = Subcontratação
+        /// </summary>
+        [XmlEnum("1")]
+        Subcontratacao = 1,
+
+        /// <summary>
+        /// 2 = Redespacho
+        /// </summary>
+        [XmlEnum("2")]
+        Redespacho = 2,
+
+        /// <summary>
+        /// 3 = Redespacho Intermediário
+        /// </summary>
+        [XmlEnum("3")]
+        RedespachoIntermediario = 3,
+
+        /// <summary>
+        /// 4 = ServicoVinculadoMultimodal
+        /// </summary>
+        [XmlEnum("4")]
+        ServicoVinculadoMultimodal = 4
+    }
+
+    #endregion
+
+    #region TomadorServicoCTe
+
+    /// <summary>
+    /// Tomador do serviço do CTe
+    /// </summary>
+    public enum TomadorServicoCTe
+    {
+        /// <summary>
+        /// 0 - Remetente
+        /// </summary>
+        [XmlEnum("0")]
+        Remetente = 0,
+
+        /// <summary>
+        /// 1 - Expedidor
+        /// </summary>
+        [XmlEnum("1")]
+        Expedidor = 1,
+
+        /// <summary>
+        /// 2 - Recebedor
+        /// </summary>
+        [XmlEnum("2")]
+        Recebedor = 2,
+
+        /// <summary>
+        /// 3 - Destinatário
+        /// </summary>
+        [XmlEnum("3")]
+        Destinatario = 3,
+
+        /// <summary>
+        /// 4 - Outros
+        /// </summary>
+        [XmlEnum("4")]
+        Outros = 4
+    }
+
+    #endregion
+
+    #region Tipo Período Entrega (CTe)
+
+    /// <summary>
+    /// Tipo Período Entrega (CTe)
+    /// </summary>
+    public enum TipoPeriodoEntregaCTe
+    {
+        /// <summary>
+        /// 0 - Sem data definida
+        /// </summary>
+        [XmlEnum("0")]
+        SemDataDefinida = 0,
+
+        /// <summary>
+        /// 1 - Na data
+        /// </summary>
+        [XmlEnum("1")]
+        NaData = 1,
+
+        /// <summary>
+        /// 2 - Até a data
+        /// </summary>
+        [XmlEnum("2")]
+        AteAData = 2,
+
+        /// <summary>
+        /// 3 - A partir da data
+        /// </summary>
+        [XmlEnum("3")]
+        APartirDaData = 3,
+
+        /// <summary>
+        /// 4 - No período
+        /// </summary>
+        [XmlEnum("4")]
+        NoPeriodo = 4
+    }
+
+    #endregion
+
+    #region Tipo de Hora de Entrega (CTe)
+
+    /// <summary>
+    /// Tipo de Hora de Entrega (CTe)
+    /// </summary>
+    public enum TipoHoraEntregaCTe
+    {
+        /// <summary>
+        /// 0 - Sem hora definida
+        /// </summary>
+        [XmlEnum("0")]
+        SemHoraDefinida = 0,
+
+        /// <summary>
+        /// 1 - No horário
+        /// </summary>
+        [XmlEnum("1")]
+        NoHorario = 1,
+
+        /// <summary>
+        /// 2 - Até o horário
+        /// </summary>
+        [XmlEnum("2")]
+        AteOHorario = 2,
+
+        /// <summary>
+        /// 3 - A partir do horário
+        /// </summary>
+        [XmlEnum("3")]
+        APartirDoHorario = 3,
+
+        /// <summary>
+        /// 4 - No intervalo de tempo
+        /// </summary>
+        [XmlEnum("4")]
+        NoIntervaloTempo = 4
+    }
+
+    #endregion
+
+    #region Código da Unidade de Medida - CTe
+
+    /// <summary>
+    /// Código da Unidade de Medida - CTe
+    /// </summary>
+    public enum CodigoUnidadeMedidaCTe
+    {
+        /// <summary>
+        /// 00-M3
+        /// </summary>
+        [XmlEnum("00")]
+        M3 = 0,
+
+        /// <summary>
+        /// 01-KG
+        /// </summary>
+        [XmlEnum("01")]
+        KG = 1,
+
+        /// <summary>
+        /// 02-TON
+        /// </summary>
+        [XmlEnum("02")]
+        TON = 2,
+
+        /// <summary>
+        /// 03-UNIDADE
+        /// </summary>
+        [XmlEnum("03")]
+        UNIDADE = 3,
+
+        /// <summary>
+        /// 04-LITROS
+        /// </summary>
+        [XmlEnum("04")]
+        LITROS = 4,
+
+        /// <summary>
+        /// 05-MMBTU
+        /// </summary>
+        [XmlEnum("05")]
+        MMBTU = 5
+    }
+
+    #endregion
+
+    #region ModeloNF
+
+    /// <summary>
+    /// Modelos da Nota Fiscal
+    /// </summary>
+    public enum ModeloNF
+    {
+        /// <summary>
+        /// 01 - NF Modelo 01/1A e Avulsa
+        /// </summary>
+        [XmlEnum("01")]
+        NF = 1,
+
+        /// <summary>
+        /// 02 - NF de Produtor
+        /// </summary>
+        [XmlEnum("04")]
+        NFProdutor = 4
+    }
+
+    #endregion
+
+    #region TipoUnidadeCargaCTe
+
+    /// <summary>
+    /// Tipo da Unidade de Carga - CTe
+    /// </summary>
+    public enum TipoUnidadeCargaCTe
+    {
+        /// <summary>
+        /// 1 - Container
+        /// </summary>
+        [XmlEnum("1")]
+        Container = 1,
+        /// <summary>
+        /// 2 - ULD
+        /// </summary>
+        [XmlEnum("2")]
+        ULD = 2,
+        /// <summary>
+        /// 3 - Pallet
+        /// </summary>
+        [XmlEnum("3")]
+        Pallet = 3,
+        /// <summary>
+        /// 4 - Outros
+        /// </summary>
+        [XmlEnum("4")]
+        Outros = 4
+    }
+
+    #endregion
+
+    #region TipoUnidadeTransporteCTe
+
+    /// <summary>
+    /// Tipo da Unidade de Carta - CTe
+    /// </summary>
+    public enum TipoUnidadeTransporteCTe
+    {
+        /// <summary>
+        /// 1 - Rodoviário Tração
+        /// </summary>
+        [XmlEnum("1")]
+        RodoviarioTracao = 1,
+
+        /// <summary>
+        /// 2 - Rodoviário Reboque
+        /// </summary>
+        [XmlEnum("2")]
+        RodoviarioReboque = 2,
+
+        /// <summary>
+        /// 3 - Navio
+        /// </summary>
+        [XmlEnum("3")]
+        Navio = 3,
+
+        /// <summary>
+        /// 4 - Balsa
+        /// </summary>
+        [XmlEnum("4")]
+        Balsa = 4,
+
+        /// <summary>
+        /// 5 - Aeronave
+        /// </summary>
+        [XmlEnum("5")]
+        Aeronave = 5,
+
+        /// <summary>
+        /// 6 - Vagão
+        /// </summary>
+        [XmlEnum("6")]
+        Vagao = 6,
+
+        /// <summary>
+        /// 7 - Outros
+        /// </summary>
+        [XmlEnum("7")]
+        Outros = 7
+    }
+
+    #endregion
+
+    #region TipoDocumentoOriginarioCTe
+
+    /// <summary>
+    /// Tipo de Documento Originário - CTe
+    /// </summary>
+    public enum TipoDocumentoOriginarioCTe
+    {
+        /// <summary>
+        /// 00 - Declaração
+        /// </summary>
+        [XmlEnum("00")]
+        Declaracao = 0,
+
+        /// <summary>
+        /// 10 - Dutoviário
+        /// </summary>
+        [XmlEnum("10")]
+        Dutoviario = 10,
+
+        /// <summary>
+        /// 59 - CF-e SAT
+        /// </summary>
+        [XmlEnum("59")]
+        CFeSAT = 59,
+
+        /// <summary>
+        /// 65 - NFC-e
+        /// </summary>
+        [XmlEnum("65")]
+        NFCe = 65,
+
+        /// <summary>
+        /// 99 - Outros
+        /// </summary>
+        [XmlEnum("99")]
+        Outros = 99
+    }
+
+    #endregion
+    
+    #region TipoDocumentoTransporteAnteriorCTe
+
+    /// <summary>
+    /// Tipo do documento de Transporte Anterior - CTe
+    /// </summary>
+    public enum TipoDocumentoTransporteAnteriorCTe
+    {
+        /// <summary>
+        /// 07-ATRE
+        /// </summary>
+        [XmlEnum("07")]
+        ATRE = 07,
+
+        /// <summary>
+        /// 08-DTA (Despacho de Transito Aduaneiro)
+        /// </summary>
+        [XmlEnum("08")]
+        DTA = 08,
+
+        /// <summary>
+        /// 09-Conhecimento Aéreo Internacional
+        /// </summary>
+        [XmlEnum("09")]
+        ConhecimentoAereoInternacional = 09,
+
+        /// <summary>
+        /// 10 – Conhecimento - Carta de Porte Internacional
+        /// </summary>
+        [XmlEnum("10")]
+        ConhecimentoCartaDePorteInternacional = 10,
+
+        /// <summary>
+        /// 11 – Conhecimento Avulso
+        /// </summary>
+        [XmlEnum("11")]
+        ConhecimentoAvulso = 11,
+
+        /// <summary>
+        /// 12-TIF (Transporte Internacional Ferroviário)
+        /// </summary>
+        [XmlEnum("12")]
+        TIF = 12,
+
+        /// <summary>
+        /// 13-BL (Bill of Lading)
+        /// </summary>
+        [XmlEnum("13")]
+        BL = 13
+    }
+
+    #endregion
+
+    #region Indicador Negociável
+
+    /// <summary>
+    /// Indicador Negociável - CTe
+    /// </summary>
+    public enum IndicadorNegociavelCTe
+    {
+        /// <summary>
+        /// 0 - Não negociável
+        /// </summary>
+        [XmlEnum("0")]
+        NaoNegociavel = 0,
+
+        /// <summary>
+        /// 1 - Negociável
+        /// </summary>
+        [XmlEnum("1")]
+        Negociavel = 1
+    }
+
+    #endregion
 }

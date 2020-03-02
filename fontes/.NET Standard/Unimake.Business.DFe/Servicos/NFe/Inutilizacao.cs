@@ -1,14 +1,19 @@
-﻿using System.Xml;
-using Unimake.Business.DFe.Security;
+﻿using System.Runtime.InteropServices;
+using Unimake.Business.DFe.Servicos.Interop;
 using Unimake.Business.DFe.Utility;
 using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
-    public class Inutilizacao : ServicoBase
+    public class Inutilizacao: ServicoBase, IInteropService<InutNFe>
     {
-        private Inutilizacao(XmlDocument conteudoXML, Configuracao configuracao)
-            : base(conteudoXML, configuracao) { }
+        #region Private Properties
+
+        private InutNFe InutNFe => new InutNFe().LerXML<InutNFe>(ConteudoXML);
+
+        #endregion Private Properties
+
+        #region Protected Methods
 
         /// <summary>
         /// Definir o valor de algumas das propriedades do objeto "Configuracoes"
@@ -18,7 +23,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
             var xml = new InutNFe();
             xml = xml.LerXML<InutNFe>(ConteudoXML);
 
-            if (!Configuracoes.Definida)
+            if(!Configuracoes.Definida)
             {
                 Configuracoes.Servico = Servico.NFeInutilizacao;
                 Configuracoes.CodigoUF = (int)xml.InfInut.CUF;
@@ -31,31 +36,25 @@ namespace Unimake.Business.DFe.Servicos.NFe
             }
         }
 
-        /// <summary>
-        /// Executar o serviço
-        /// </summary>
-        public override void Executar()
-        {
-            new AssinaturaDigital().Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id");
-            InutNFe = InutNFe.LerXML<InutNFe>(ConteudoXML);
+        #endregion Protected Methods
 
-            base.Executar();
-        }
+        #region Public Properties
 
         /// <summary>
-        /// Gravar o XML de distribuição em uma pasta no HD
+        /// Propriedade contendo o XML da inutilização com o protocolo de autorização anexado
         /// </summary>
-        /// <param name="pasta">Pasta onde deve ser gravado o XML</param>
-        public void GravarXmlDistribuicao(string pasta)
+        public ProcInutNFe ProcInutNFeResult => new ProcInutNFe
         {
-            GravarXmlDistribuicao(pasta, ProcInutNFeResult.NomeArquivoDistribuicao, ProcInutNFeResult.GerarXML().OuterXml);
-        }
+            Versao = InutNFe.Versao,
+            InutNFe = InutNFe,
+            RetInutNFe = Result
+        };
 
         public RetInutNFe Result
         {
             get
             {
-                if (!string.IsNullOrWhiteSpace(RetornoWSString))
+                if(!string.IsNullOrWhiteSpace(RetornoWSString))
                 {
                     return XMLUtility.Deserializar<RetInutNFe>(RetornoWSXML);
                 }
@@ -71,19 +70,34 @@ namespace Unimake.Business.DFe.Servicos.NFe
             }
         }
 
-        /// <summary>
-        /// Propriedade contendo o XML da inutilização com o protocolo de autorização anexado
-        /// </summary>
-        public ProcInutNFe ProcInutNFeResult => new ProcInutNFe
-        {
-            Versao = InutNFe.Versao,
-            InutNFe = InutNFe,
-            RetInutNFe = Result
-        };
+        #endregion Public Properties
 
-        private InutNFe InutNFe;
+        #region Public Constructors
 
         public Inutilizacao(InutNFe inutNFe, Configuracao configuracao)
-            : this(inutNFe.GerarXML(), configuracao) => InutNFe = inutNFe;
+                    : base(inutNFe?.GerarXML() ?? throw new System.ArgumentNullException(nameof(inutNFe)), configuracao) { }
+
+        public Inutilizacao()
+        {
+        }
+
+        #endregion Public Constructors
+
+        #region Public Methods
+
+        [ComVisible(true)]
+        public void Executar(InutNFe inutNFe, Configuracao configuracao)
+        {
+            PrepararServico(inutNFe?.GerarXML() ?? throw new System.ArgumentNullException(nameof(inutNFe)), configuracao);
+            Executar();
+        }
+
+        /// <summary>
+        /// Gravar o XML de distribuição em uma pasta no HD
+        /// </summary>
+        /// <param name="pasta">Pasta onde deve ser gravado o XML</param>
+        public void GravarXmlDistribuicao(string pasta) => GravarXmlDistribuicao(pasta, ProcInutNFeResult.NomeArquivoDistribuicao, ProcInutNFeResult.GerarXML().OuterXml);
+
+        #endregion Public Methods
     }
 }
