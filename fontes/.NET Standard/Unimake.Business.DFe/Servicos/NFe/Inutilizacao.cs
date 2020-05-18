@@ -98,6 +98,12 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// <param name="pasta">Pasta onde deve ser gravado o XML</param>
         public void GravarXmlDistribuicao(string pasta) => GravarXmlDistribuicao(pasta, ProcInutNFeResult.NomeArquivoDistribuicao, ProcInutNFeResult.GerarXML().OuterXml);
 
+        /// <summary>
+        /// Grava o XML de dsitribuição no stream
+        /// </summary>
+        /// <param name="stream">Stream que vai receber o XML de distribuição</param>
+        public void GravarXmlDistribuicao(System.IO.Stream stream) => GravarXmlDistribuicao(stream, ProcInutNFeResult.GerarXML().OuterXml);
+
         #endregion Public Methods
     }
 }

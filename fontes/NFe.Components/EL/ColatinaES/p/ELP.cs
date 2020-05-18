@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Remoting;
-using System.Text;
 using System.Xml;
-using System.Xml.Serialization;
 using NFe.Components.Abstract;
-using NFe.Components.br.com.el.colatina.p;
-using System.Xml.Linq;
+using NFe.Components.PColatinaES;
 using System.Net;
 
 namespace NFe.Components.EL.ColatinaES.p

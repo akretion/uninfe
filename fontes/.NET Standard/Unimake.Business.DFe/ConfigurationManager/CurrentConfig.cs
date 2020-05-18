@@ -40,7 +40,7 @@ namespace Unimake.Business.DFe.ConfigurationManager
         public static string PastaSchemaNFe => GetConfiguration().PastaSchemaNFe;
         public static string PastaSchemaCTe => GetConfiguration().PastaSchemaCTe;
         public static string PastaSchemaMDFe => GetConfiguration().PastaSchemaMDFe;
-        public static Servicos.DFE DFE { get; set; }
+        public static Servicos.TipoDFe DFE { get; set; }
 
         #endregion Public Properties
     }

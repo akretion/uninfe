@@ -138,8 +138,8 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\GINFES_SJP\\servico_consultar_lote_rps_envio_v03.xsd",
                 Descricao = "XML de Consulta de Lote RPS",
-                TagAssinatura = "",
-                TagAtributoId = "",
+                TagAssinatura = "ConsultarLoteRpsEnvio",
+                TagAtributoId = "ConsultarLoteRpsEnvio",
                 TargetNameSpace = "http://nfe.sjp.pr.gov.br/servico_consultar_lote_rps_envio_v03.xsd"
             });
             #endregion
@@ -164,8 +164,8 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\GINFES_SJP\\servico_consultar_situacao_lote_rps_envio_v03.xsd",
                 Descricao = "XML de Consulta da Situacao do Lote RPS",
-                TagAssinatura = "",
-                TagAtributoId = "",
+                TagAssinatura = "ConsultarSituacaoLoteRpsEnvio",
+                TagAtributoId = "ConsultarSituacaoLoteRpsEnvio",
                 TargetNameSpace = "http://nfe.sjp.pr.gov.br/servico_consultar_situacao_lote_rps_envio_v03.xsd"
             });
             #endregion

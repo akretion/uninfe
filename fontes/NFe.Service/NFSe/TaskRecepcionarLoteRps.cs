@@ -598,7 +598,8 @@ namespace NFe.Service.NFSe
                             oDadosEnvLoteRps.cMunicipio == 4322400 ||
                             oDadosEnvLoteRps.cMunicipio == 4302808 ||
 							oDadosEnvLoteRps.cMunicipio == 3501301 ||
-							oDadosEnvLoteRps.cMunicipio == 4300109)
+							oDadosEnvLoteRps.cMunicipio == 4300109 ||
+                            oDadosEnvLoteRps.cMunicipio == 4124053)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -763,6 +764,10 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
 
+                    case PadroesNFSe.PUBLICA:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.PUBLICA);
+                        break;
+
                     case PadroesNFSe.E_RECEITA:
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.E_RECEITA);
                         cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
@@ -787,7 +792,7 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.PUBLIC_SOFT:
                         break;
-
+                 
                     case PadroesNFSe.MEGASOFT:
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.MEGASOFT);
                         cabecMsg = "<cabecalho versao=\"1.00\" xmlns=\"http://megasoftarrecadanet.com.br/xsd/nfse_v01.xsd\"><versaoDados>1.00</versaoDados></cabecalho>";
@@ -850,6 +855,10 @@ namespace NFe.Service.NFSe
                             Empresas.Configuracoes[emp].X509Certificado);
 
                         elotech.EmiteNF(NomeArquivoXML);
+                        break;
+
+                    case PadroesNFSe.SYSMAR:
+                        Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.SYSMAR);
                         break;
                 }
 

@@ -161,9 +161,6 @@
     <Setting Name="NFe_Components_br_com_consist_patosdeminas_p_eISSWService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://200.162.29.193:8080/axis2/services/eISSWService.eISSWServiceHttpSoap11Endpoint/</Value>
     </Setting>
-    <Setting Name="NFe_Components_br_com_el_colatina_p_RpsServiceService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://nfse00.el.com.br:19080/nfse_es_colatina/RpsService</Value>
-    </Setting>
     <Setting Name="NFe_Components_br_com_sigiss_riogrande_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://riogrande.sigiss.com.br:443/riogrande/ws/sigiss_ws.php</Value>
     </Setting>
@@ -358,9 +355,6 @@
     </Setting>
     <Setting Name="NFe_Components_PParaguacuPaulistaSP_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://wsparaguacupaulista.simplissweb.com.br/nfseservice.svc</Value>
-    </Setting>
-    <Setting Name="NFe_Components_PCosmopolisSP_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://187.63.32.18:98/NFSe.Portal.Integracao/Services.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_PGuarantaNorteMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://www.gp.srv.br/tributario_guarantadonorte/servlet/anfse_web_service</Value>
@@ -874,6 +868,36 @@
     </Setting>
     <Setting Name="NFe_Components_PSerafinaCorreaRS_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://177.20.225.197:8081/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSantaTerezinhaItaipuPR_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://nfse.stitaipu.pr.gov.br/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCosmopolisSP_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://18.230.49.230/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSaoJoseRibamarMA_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/saojosederibamar/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSaoJoseRibamarMA_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/saojosederibamar/WSNFSE.ConsultarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSaoJoseRibamarMA_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/saojosederibamar/WSNFSE.ConsultarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSaoJoseRibamarMA_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/saojosederibamar/WSNFSE.ConsultarNfsePorRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSaoJoseRibamarMA_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/saojosederibamar/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSaoJoseRibamarMA_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/saojosederibamar/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HUruguaianaRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://uruguaiana-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PColatinaES_RpsServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://es-colatina-pm-nfs.cloud.el.com.br:80/RpsService</Value>
     </Setting>
   </Settings>
 </SettingsFile>

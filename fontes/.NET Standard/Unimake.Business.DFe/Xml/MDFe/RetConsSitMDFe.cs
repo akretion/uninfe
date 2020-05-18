@@ -5,7 +5,7 @@ using Unimake.Business.DFe.Servicos;
 namespace Unimake.Business.DFe.Xml.MDFe
 {
     [XmlRoot("retConsSitMDFe", Namespace = "http://www.portalfiscal.inf.br/mdfe", IsNullable = false)]
-    public class RetConsSitMDFe : XMLBase
+    public class RetConsSitMDFe: XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }
@@ -45,12 +45,10 @@ namespace Unimake.Business.DFe.Xml.MDFe
         [XmlElement("chMDFe")]
         public string ChMDFe { get; set; }
 
-        //TODO: Wandrey - Quando montar o ProtMDFe tem que voltar aqui e finalizar       
-        //[XmlElement("protMDFe")]
-        //public ProtMDFe ProtMDFe { get; set; }
+        [XmlElement("protMDFe")]
+        public ProtMDFe ProtMDFe { get; set; }
 
-        //TODO: Wandrey - Quando montar o ProcEventoMDFe tem que voltar aqui e finalizar       
-        //[XmlElement("procEventoMDFe")]
-        //public ProcEventoMDFe[] procEventoMDFe { get; set; }
+        [XmlElement("procEventoMDFe")]
+        public ProcEventoMDFe[] ProcEventoMDFe { get; set; }
     }
 }

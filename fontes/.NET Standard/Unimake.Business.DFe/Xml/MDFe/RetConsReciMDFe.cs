@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 
@@ -52,8 +53,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
             }
         }
 
-        //TODO: Wandrey - Retornar neste ponto quando criar a ProtMDFe para encerrar
-        //[XmlElement("protMDFe")]
-        //public ProtMDFe[] ProtMDFe { get; set; }
+        [XmlElement("protMDFe")]
+        public List<ProtMDFe> ProtMDFe { get; set; }
     }
 }

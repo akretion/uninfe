@@ -1,5 +1,6 @@
 ﻿using NFe.Certificado;
 using NFe.Components;
+using NFe.Components.SystemPro;
 using NFe.Settings;
 using System;
 using System.IO;
@@ -10,7 +11,7 @@ using static NFe.Components.Security.SOAPSecurity;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskSubstituirNfse : TaskAbst
+    public class TaskSubstituirNfse: TaskAbst
     {
         public TaskSubstituirNfse(string arquivo)
         {
@@ -31,7 +32,7 @@ namespace NFe.Service.NFSe
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             try
             {
@@ -42,18 +43,20 @@ namespace NFe.Service.NFSe
                 dadosXML = new DadosPedSitNfse(emp);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(dadosXML.cMunicipio);
+                var padraoNFSe = Functions.PadraoNFSe(dadosXML.cMunicipio);
                 WebServiceProxy wsProxy = null;
                 object pedSubstNfse = null;
 
-                if (IsUtilizaCompilacaoWs(padraoNFSe))
+                if(IsUtilizaCompilacaoWs(padraoNFSe))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosXML.cMunicipio, dadosXML.tpAmb, dadosXML.tpEmis, padraoNFSe, dadosXML.cMunicipio);
                     pedSubstNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 }
-                string cabecMsg = "";
+                var cabecMsg = "";
 
-                switch (padraoNFSe)
+                var securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosXML.cMunicipio, dadosXML.tpAmb, dadosXML.tpEmis, padraoNFSe, Servico);
+
+                switch(padraoNFSe)
                 {
                     case PadroesNFSe.AVMB_ASTEN:
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.AVMB_ASTEN);
@@ -61,7 +64,7 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
-                        if (dadosXML.tpAmb == 2)
+                        if(dadosXML.tpAmb == 2)
                         {
                             pedSubstNfse = new Components.HPelotasRS.INfseservice();
                         }
@@ -107,32 +110,43 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.IIBRASIL:
                         cabecMsg = "<cabecalho xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.04\"><versaoDados>2.04</versaoDados></cabecalho>";
                         break;
+
+                    case PadroesNFSe.SYSTEMPRO:
+                        var syspro = new SystemPro((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado, dadosXML.cMunicipio);
+                        var ad = new AssinaturaDigital();
+                        ad.Assinar(NomeArquivoXML, emp, dadosXML.cMunicipio);
+
+                        syspro.SubstituirNfse(NomeArquivoXML);
+                        break;
                 }
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosXML.cMunicipio, dadosXML.tpAmb, dadosXML.tpEmis, padraoNFSe, Servico);
-
-                //Assinar o XML
-                AssinaturaDigital ad = new AssinaturaDigital();
-                ad.Assinar(NomeArquivoXML, emp, dadosXML.cMunicipio);
-
-                //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.InvocarNFSe(wsProxy, pedSubstNfse, NomeMetodoWS(Servico, dadosXML.cMunicipio), cabecMsg, this,
-                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSubstNfse).EnvioXML,
-                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSubstNfse).RetornoXML,
-                    padraoNFSe, Servico, securityProtocolType);
-
-                ///
-                /// grava o arquivo no FTP
-                string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                    Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSubstNfse).EnvioXML) +
-                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSubstNfse).RetornoXML);
-
-                if (File.Exists(filenameFTP))
+                if(IsInvocar(padraoNFSe, Servico, Empresas.Configuracoes[emp].UnidadeFederativaCodigo))
                 {
-                    new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
+
+                    //Assinar o XML
+                    var ad = new AssinaturaDigital();
+                    ad.Assinar(NomeArquivoXML, emp, dadosXML.cMunicipio);
+
+                    //Invocar o método que envia o XML para o SEFAZ
+                    oInvocarObj.InvocarNFSe(wsProxy, pedSubstNfse, NomeMetodoWS(Servico, dadosXML.cMunicipio), cabecMsg, this,
+                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSubstNfse).EnvioXML,
+                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSubstNfse).RetornoXML,
+                        padraoNFSe, Servico, securityProtocolType);
+
+                    ///
+                    /// grava o arquivo no FTP
+                    var filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
+                        Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSubstNfse).EnvioXML) +
+                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSubstNfse).RetornoXML);
+
+                    if(File.Exists(filenameFTP))
+                    {
+                        new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
+                    }
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {

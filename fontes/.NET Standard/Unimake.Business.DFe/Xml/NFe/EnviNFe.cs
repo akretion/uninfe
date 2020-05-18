@@ -56,6 +56,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
     [Serializable()]
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/nfe")]
+    [XmlRoot("NFe", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
     public class NFe
     {
         [XmlElement("infNFe")]
@@ -1191,7 +1192,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("vPart")]
         public string VPartField
         {
-            get => VPart.ToString("F4", CultureInfo.InvariantCulture);
+            get => VPart.ToString("F2", CultureInfo.InvariantCulture);
             set => VPart = Utility.Converter.ToDouble(value);
         }
 
@@ -1928,7 +1929,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("vICMSST")]
         public string VICMSSTField
         {
-            get => VICMSST.ToString("F4", CultureInfo.InvariantCulture);
+            get => VICMSST.ToString("F2", CultureInfo.InvariantCulture);
             set => VICMSST = Utility.Converter.ToDouble(value);
         }
 
@@ -4481,7 +4482,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("vFCPUFDest")]
         public string VFCPUFDestField
         {
-            get => VFCPUFDest.ToString("F4", CultureInfo.InvariantCulture);
+            get => VFCPUFDest.ToString("F2", CultureInfo.InvariantCulture);
             set => VFCPUFDest = Utility.Converter.ToDouble(value);
         }
 
@@ -5044,7 +5045,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         public VeicTransp VeicTransp { get; set; }
 
         [XmlElement("reboque")]
-        public Reboque Reboque { get; set; }
+        public List<Reboque> Reboque { get; set; }
 
         [XmlElement("vagao")]
         public string Vagao { get; set; }
@@ -5062,6 +5063,16 @@ namespace Unimake.Business.DFe.Xml.NFe
         public bool ShouldSerializeBalsa() => !string.IsNullOrWhiteSpace(Balsa);
 
         #endregion
+
+        public void AddReboque(Reboque reboque)
+        {
+            if(Reboque == null)
+            {
+                Reboque = new List<Reboque>();
+            }
+
+            Reboque.Add(reboque);
+        }
 
         public void AddVol(Vol vol)
         {
@@ -5190,6 +5201,7 @@ namespace Unimake.Business.DFe.Xml.NFe
     [Serializable()]
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/nfe")]
     public class VeicTransp: VeiculoBase { }
+
     [Serializable()]
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/nfe")]
     public class Reboque: VeiculoBase { }

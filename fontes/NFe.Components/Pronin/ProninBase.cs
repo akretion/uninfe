@@ -190,6 +190,11 @@ namespace NFe.Components.Pronin
                             case 4300109: //Agudo-RS
                                 proninService = new AgudoRS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
+
+                            case 4124053://Santa Terezinha de Itaipu-Pr
+                                proninService = new SantaTerezinhaItaipuPR.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

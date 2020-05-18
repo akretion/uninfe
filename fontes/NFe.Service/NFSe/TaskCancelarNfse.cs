@@ -509,7 +509,8 @@ namespace NFe.Service.NFSe
                             oDadosPedCanNfse.cMunicipio == 4322400 ||
                             oDadosPedCanNfse.cMunicipio == 4302808 ||
                             oDadosPedCanNfse.cMunicipio == 3501301 ||
-                            oDadosPedCanNfse.cMunicipio == 4300109)
+                            oDadosPedCanNfse.cMunicipio == 4300109 ||
+                            oDadosPedCanNfse.cMunicipio == 4124053)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -634,6 +635,49 @@ namespace NFe.Service.NFSe
                         break;
 
                     #endregion SOFTPLAN
+
+                    #region AGILI
+                    case PadroesNFSe.AGILI:
+                        Components.AGILI.AGILI agili = new Components.AGILI.AGILI((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                          Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                          Empresas.Configuracoes[emp].TokenNFse,
+                                          Empresas.Configuracoes[emp].TokenNFSeExpire,
+                                          Empresas.Configuracoes[emp].UsuarioWS,
+                                          Empresas.Configuracoes[emp].SenhaWS,
+                                          Empresas.Configuracoes[emp].ClientID,
+                                          Empresas.Configuracoes[emp].ClientSecret);
+
+                        AssinaturaDigital agiliAssinatura = new AssinaturaDigital();
+                        agiliAssinatura.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
+
+                        // Validar o Arquivo XML
+                        ValidarXML AgiliValidar = new ValidarXML(NomeArquivoXML, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
+                        string validacaoAgili = AgiliValidar.ValidarArqXML(NomeArquivoXML);
+                        if (validacaoAgili != "")
+                            throw new Exception(validacaoAgili);
+
+                        if (ConfiguracaoApp.Proxy)
+                            agili.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
+
+                        AssinaturaDigital AgiliAss = new AssinaturaDigital();
+                        AgiliAss.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio, AlgorithmType.Sha256);
+
+                        agili.CancelarNfse(NomeArquivoXML);
+
+                        if (Empresas.Configuracoes[emp].TokenNFse != agili.Token)
+                        {
+                            Empresas.Configuracoes[emp].SalvarConfiguracoesNFSeSoftplan(agili.Usuario,
+                                                                                        agili.Senha,
+                                                                                        agili.ClientID,
+                                                                                        agili.ClientSecret,
+                                                                                        agili.Token,
+                                                                                        agili.TokenExpire,
+                                                                                        Empresas.Configuracoes[emp].CNPJ);
+                        }
+
+                        break;
+
+                    #endregion AGILI
 
 #endif
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
@@ -20,6 +21,26 @@ namespace Unimake.Business.DFe.Xml.CTe
         [XmlElement("CTe")]
         public List<CTe> CTe { get; set; }
 
+        public override XmlDocument GerarXML()
+        {
+            var xmlDoc = base.GerarXML();
+
+            foreach(var nodeEnvCTe in xmlDoc.GetElementsByTagName("enviCTe"))
+            {
+                var elemEnvCTe = (XmlElement)nodeEnvCTe;
+
+                foreach(var nodeCTe in elemEnvCTe.GetElementsByTagName("CTe"))
+                {
+                    var elemCTe = (XmlElement)nodeCTe;
+
+                    var attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
+                    elemCTe.SetAttribute("xmlns", attribute.Namespace);
+                }
+            }
+
+            return xmlDoc;
+        }
+
         #region Add (List - Interop)
 
         public void AddCTe(CTe cte)
@@ -37,30 +58,17 @@ namespace Unimake.Business.DFe.Xml.CTe
 
     [Serializable()]
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]
+    [XmlRoot("CTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
     public class CTe
     {
         [XmlElement("infCte")]
-        public List<InfCTe> InfCTe { get; set; }
+        public InfCTe InfCTe { get; set; }
 
         [XmlElement("infCTeSupl")]
         public InfCTeSupl InfCTeSupl { get; set; }
 
         [XmlElement(ElementName = "Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
         public Signature Signature { get; set; }
-
-        #region Add (List - Interop)
-
-        public void AddInfCTe(InfCTe infCTe)
-        {
-            if(InfCTe == null)
-            {
-                InfCTe = new List<InfCTe>();
-            }
-
-            InfCTe.Add(infCTe);
-        }
-
-        #endregion
     }
 
     [Serializable()]
@@ -290,15 +298,8 @@ namespace Unimake.Business.DFe.Xml.CTe
         [XmlElement("xMunEnv")]
         public string XMunEnv { get; set; }
 
-        [XmlIgnore]
-        public UFBrasil UFEnv { get; set; }
-
         [XmlElement("UFEnv")]
-        public int UFEnvField
-        {
-            get => (int)UFEnv;
-            set => UFEnv = (UFBrasil)Enum.Parse(typeof(UFBrasil), value.ToString());
-        }
+        public UFBrasil UFEnv { get; set; }
 
         [XmlElement("modal")]
         public ModalidadeTransporteCTe Modal { get; set; }
@@ -2093,7 +2094,7 @@ namespace Unimake.Business.DFe.Xml.CTe
     public class InfUnidCarga
     {
         [XmlElement("tpUnidCarga")]
-        public virtual TipoUnidadeCargaCTe TpUnidCarga { get; set; }
+        public virtual TipoUnidadeCarga TpUnidCarga { get; set; }
 
         [XmlElement("idUnidCarga")]
         public string IdUnidCarga { get; set; }
@@ -2145,7 +2146,7 @@ namespace Unimake.Business.DFe.Xml.CTe
     public class InfUnidTransp
     {
         [XmlElement("tpUnidTransp")]
-        public virtual TipoUnidadeTransporteCTe TpUnidTransp { get; set; }
+        public virtual TipoUnidadeTransporte TpUnidTransp { get; set; }
 
         [XmlElement("idUnidTransp")]
         public string IdUnidTransp { get; set; }
@@ -2856,7 +2857,7 @@ namespace Unimake.Business.DFe.Xml.CTe
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]
     public class RefNF
     {
-        private string ModField;
+        private readonly string ModField;
 
         [XmlElement("CNPJ")]
         public string CNPJ { get; set; }
@@ -2920,7 +2921,7 @@ namespace Unimake.Business.DFe.Xml.CTe
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]
     public class InfGlobalizado
     {
-        private string XObsField;
+        private readonly string XObsField;
 
         [XmlElement("xObs")]
         public string XObs
@@ -3081,8 +3082,6 @@ namespace Unimake.Business.DFe.Xml.CTe
         [XmlElement("qrCodCTe")]
         public string QrCodCTe { get; set; }
     }
-
-
 
     //[Serializable()]
     //[XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]

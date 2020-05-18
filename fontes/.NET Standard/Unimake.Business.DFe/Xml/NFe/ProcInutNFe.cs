@@ -7,34 +7,50 @@ namespace Unimake.Business.DFe.Xml.NFe
 {
     [Serializable()]
     [XmlRoot("procInutNFe", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
-    public class ProcInutNFe : XMLBase
+    public class ProcInutNFe: XMLBase
     {
-        [XmlAttribute(AttributeName = "versao", DataType = "token")]
-        public string Versao { get; set; }
+        #region Public Fields
 
-        [XmlElement("inutNFe")]
+        public const string ExtensaoDoArquivo = "-procinutnfe.xml";
+
+        #endregion Public Fields
+
+        #region Public Properties
+
+        [XmlElement("inutNFe", Order = 0)]
         public InutNFe InutNFe { get; set; }
-
-        [XmlElement("retInutNFe")]
-        public RetInutNFe RetInutNFe { get; set; }
 
         /// <summary>
         /// Nome do arquivo de distribuição
         /// </summary>
         [XmlIgnore]
-        public string NomeArquivoDistribuicao => InutNFe.InfInut.Id.Substring(2, InutNFe.InfInut.Id.Length - 2) + "-procinutnfe.xml";
+        public string NomeArquivoDistribuicao => MontarNomeArquivo(InutNFe.InfInut.Id);
+
+        [XmlElement("retInutNFe", Order = 1)]
+        public RetInutNFe RetInutNFe { get; set; }
+
+        [XmlAttribute(AttributeName = "versao", DataType = "token")]
+        public string Versao { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         public override XmlDocument GerarXML()
         {
-            XmlDocument xmlDocument = base.GerarXML();
+            var xmlDocument = base.GerarXML();
 
-            XmlRootAttribute attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
-            XmlElement xmlElementNFe = (XmlElement)xmlDocument.GetElementsByTagName("inutNFe")[0];
+            var attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
+            var xmlElementNFe = (XmlElement)xmlDocument.GetElementsByTagName("inutNFe")[0];
             xmlElementNFe.SetAttribute("xmlns", attribute.Namespace);
-            XmlElement xmlElementProtNFe = (XmlElement)xmlDocument.GetElementsByTagName("retInutNFe")[0];
+            var xmlElementProtNFe = (XmlElement)xmlDocument.GetElementsByTagName("retInutNFe")[0];
             xmlElementProtNFe.SetAttribute("xmlns", attribute.Namespace);
 
             return xmlDocument;
         }
+
+        public string MontarNomeArquivo(string id) => id.Substring(2, id.Length - 2) + ExtensaoDoArquivo;
+
+        #endregion Public Methods
     }
 }

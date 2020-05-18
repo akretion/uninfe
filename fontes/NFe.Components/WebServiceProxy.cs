@@ -178,7 +178,8 @@ namespace NFe.Components
                                     cMunicipio == 4322400 ||
                                     cMunicipio == 4302808 ||
                                     cMunicipio == 3501301 ||
-                                    cMunicipio == 4300109)
+                                    cMunicipio == 4300109 ||
+                                    cMunicipio == 4124053)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -201,7 +202,8 @@ namespace NFe.Components
                                     cMunicipio == 4322400 ||
                                     cMunicipio == 4302808 ||
                                     cMunicipio == 3501301 ||
-                                    cMunicipio == 4300109)
+                                    cMunicipio == 4300109 ||
+                                    cMunicipio == 4124053)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -221,7 +223,8 @@ namespace NFe.Components
                                     cMunicipio == 4322400 ||
                                     cMunicipio == 4302808 ||
                                     cMunicipio == 3501301 ||
-                                    cMunicipio == 4300109)
+                                    cMunicipio == 4300109 ||
+                                    cMunicipio == 4124053)
                                     return "BasicHttpBinding_INFSEConsultas";
                                 else
                                     return "basic_INFSEConsultas";

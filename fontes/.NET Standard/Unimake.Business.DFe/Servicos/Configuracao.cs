@@ -43,7 +43,7 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// Tipo do Documento Fiscal Eletrônico (DF-e)
         /// </summary>
-        public DFE TipoDFe { get; set; }
+        public TipoDFe TipoDFe { get; set; }
 
         /// <summary>
         /// Pasta do arquivo de schema de validação do XML

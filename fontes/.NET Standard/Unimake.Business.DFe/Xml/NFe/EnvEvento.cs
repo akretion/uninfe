@@ -186,6 +186,9 @@ namespace Unimake.Business.DFe.Xml.NFe
                         break;
 
                     case TipoEventoNFe.CancelamentoPorSubstituicao:
+                        _detEvento = new DetEventoCancSubst();
+                        break;
+
                     case TipoEventoNFe.EPEC:
                     case TipoEventoNFe.PedidoProrrogacao:
                     default:
@@ -247,14 +250,35 @@ namespace Unimake.Business.DFe.Xml.NFe
         #endregion Public Methods
     }
 
-
     [XmlInclude(typeof(DetEventoCanc))]
     [XmlInclude(typeof(DetEventoCCE))]
+    [XmlInclude(typeof(DetEventoCancSubst))]
     public class EventoDetalhe: IXmlSerializable
     {
         #region Internal Properties
 
         internal XmlReader XmlReader { get; set; }
+
+        private static readonly List<string> hasField = new List<string>
+        {
+            "COrgaoAutor",
+        };
+
+        private bool SetLocalValue(Type type)
+        {
+            var pi = GetPropertyInfo(type);
+            if(pi == null)
+            {
+                return false;
+            }
+
+            SetValue(pi);
+            return true;
+        }
+
+        private static readonly BindingFlags bindingFlags = BindingFlags.Public |
+            BindingFlags.Instance |
+            BindingFlags.IgnoreCase;
 
         #endregion Internal Properties
 
@@ -281,17 +305,29 @@ namespace Unimake.Business.DFe.Xml.NFe
 
             while(XmlReader.Read())
             {
-                if(XmlReader.NodeType == XmlNodeType.Element)
+
+                if(XmlReader.NodeType != XmlNodeType.Element)
                 {
-                    pi = type.GetProperty(XmlReader.Name, BindingFlags.Public |
-                                                          BindingFlags.Instance |
-                                                          BindingFlags.IgnoreCase);
+                    continue;
                 }
-                else if(XmlReader.NodeType == XmlNodeType.Text)
+
+                if(SetLocalValue(type) &&
+                   XmlReader.NodeType == XmlNodeType.Element)
                 {
-                    pi?.SetValue(this, XmlReader.Value);
+                    SetLocalValue(type);
                 }
             }
+        }
+
+        internal virtual void SetValue(PropertyInfo pi) =>
+            pi?.SetValue(this, Converter.ToAny(pi.PropertyType, XmlReader.GetValue<object>(XmlReader.Name)));
+
+        protected internal PropertyInfo GetPropertyInfo(Type type)
+        {
+            var pi = hasField.Exists(w => w.ToLower() == XmlReader.Name.ToLower()) ?
+                                type.GetProperty(XmlReader.Name + "Field", bindingFlags) :
+                                type.GetProperty(XmlReader.Name, bindingFlags);
+            return pi;
         }
 
         #endregion Internal Methods
@@ -350,6 +386,66 @@ namespace Unimake.Business.DFe.Xml.NFe
             <descEvento>{DescEvento}</descEvento>
             <nProt>{NProt}</nProt>
             <xJust>{XJust}</xJust>");
+        }
+
+        #endregion Public Methods
+    }
+
+    [Serializable]
+    [XmlRoot(ElementName = "detEvento")]
+    public class DetEventoCancSubst: EventoDetalhe
+    {
+        #region Internal Methods
+
+        internal override void ProcessReader() => base.ProcessReader();
+
+        #endregion Internal Methods
+
+        #region Public Properties
+
+        [XmlElement("descEvento", Order = 0)]
+        public override string DescEvento { get; set; } = "Cancelamento por substituicao";
+
+        [XmlIgnore]
+        public UFBrasil COrgaoAutor { get; set; }
+
+        [XmlElement("cOrgaoAutor", Order = 1)]
+        public string COrgaoAutorField
+        {
+            get => ((int)COrgaoAutor).ToString();
+            set => COrgaoAutor = Converter.ToAny<UFBrasil>(value);
+        }
+
+        [XmlElement("tpAutor", Order = 2)]
+        public TipoAutorCancelamentoSubstituicaoNFCe TpAutor { get; set; }
+
+        [XmlElement("verAplic", Order = 3)]
+        public string VerAplic { get; set; }
+
+        [XmlElement("nProt", Order = 4)]
+        public string NProt { get; set; }
+
+        [XmlElement("xJust", Order = 5)]
+        public string XJust { get; set; }
+
+        [XmlElement("chNFeRef", Order = 6)]
+        public string ChNFeRef { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+
+            writer.WriteRaw($@"<descEvento>{DescEvento}</descEvento>" +
+                $@"<cOrgaoAutor>{(int)COrgaoAutor}</cOrgaoAutor>" +
+                $@"<tpAutor>{(int)TpAutor}</tpAutor>" +
+                $@"<verAplic>{VerAplic}</verAplic>" +
+                $@"<nProt>{NProt}</nProt>" +
+                $@"<xJust>{XJust}</xJust>" +
+                $@"<chNFeRef>{ChNFeRef}</chNFeRef>");
         }
 
         #endregion Public Methods
@@ -452,5 +548,4 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         #endregion Public Methods
     }
-
 }

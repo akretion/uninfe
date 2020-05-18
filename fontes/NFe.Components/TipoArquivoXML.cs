@@ -209,7 +209,11 @@ namespace NFe.Components
 
                             case 4300109: //Agudo-RS
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4300109-";
-                                break;    
+                                break;
+
+                            case 4124053: //Santa Terezinha de Itaipu-PR
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4124053-";
+                                break;
 
                             default:
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";

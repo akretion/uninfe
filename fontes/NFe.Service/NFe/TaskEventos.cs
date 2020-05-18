@@ -747,6 +747,7 @@ namespace NFe.Service
                             break;
 
                         case ConvertTxt.tpEventos.tpEvEncerramentoMDFe:
+                        case ConvertTxt.tpEventos.tpEvPagamentoOperacaoMDFe:
                         case ConvertTxt.tpEventos.tpEvInclusaoCondutor:
                         case ConvertTxt.tpEventos.tpEvRegistroPassagem:
                         case ConvertTxt.tpEventos.tpEvRegistroPassagemBRid:

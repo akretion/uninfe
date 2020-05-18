@@ -8,16 +8,10 @@ using Unimake.Business.DFe.Xml.CTe;
 namespace Unimake.Business.DFe.Servicos.CTe
 {
     [ComVisible(true)]
-    public class RecepcaoEvento : ServicoBase
+    public class RecepcaoEvento: ServicoBase
     {
         #region Private Fields
-        private EventoCTe EventoCTe
-        {
-            get
-            {
-                return new EventoCTe().LerXML<EventoCTe>(ConteudoXML);
-            }
-        }
+        private EventoCTe EventoCTe => new EventoCTe().LerXML<EventoCTe>(ConteudoXML);
 
         #endregion Private Fields
 
@@ -35,7 +29,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
             var validar = new ValidarSchema();
             validar.Validar(xml, Path.Combine(Configuracoes.SchemaPasta, schemaArquivo), targetNS);
 
-            if (!validar.Success)
+            if(!validar.Success)
             {
                 throw new Exception(validar.ErrorMessage);
             }
@@ -53,7 +47,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
             var xml = new EventoCTe();
             xml = xml.LerXML<EventoCTe>(ConteudoXML);
 
-            if (!Configuracoes.Definida)
+            if(!Configuracoes.Definida)
             {
                 Configuracoes.CodigoUF = (int)xml.InfEvento.COrgao;
                 Configuracoes.TipoAmbiente = xml.InfEvento.TpAmb;
@@ -70,12 +64,19 @@ namespace Unimake.Business.DFe.Servicos.CTe
             var schemaArquivo = string.Empty;
             var schemaArquivoEspecifico = string.Empty;
 
-            if (Configuracoes.SchemasEspecificos.Count > 0)
+            if(Configuracoes.SchemasEspecificos.Count > 0)
             {
                 var tpEvento = ((int)xml.InfEvento.TpEvento);
 
-                schemaArquivo = Configuracoes.SchemasEspecificos[tpEvento.ToString()].SchemaArquivo;
-                schemaArquivoEspecifico = Configuracoes.SchemasEspecificos[tpEvento.ToString()].SchemaArquivoEspecifico;
+                try
+                {
+                    schemaArquivo = Configuracoes.SchemasEspecificos[tpEvento.ToString()].SchemaArquivo;
+                    schemaArquivoEspecifico = Configuracoes.SchemasEspecificos[tpEvento.ToString()].SchemaArquivoEspecifico;
+                }
+                catch
+                {
+                    throw new Exception("Não foi possível localizar no arquivo de configuração a definição do schema do modal específico do evento " + tpEvento.ToString() + ".");
+                }
             }
 
             #region Validar o XML geral
@@ -87,45 +88,41 @@ namespace Unimake.Business.DFe.Servicos.CTe
             #region Validar a parte específica de cada evento
 
             var listEvento = ConteudoXML.GetElementsByTagName("eventoCTe");
-            for (var i = 0; i < listEvento.Count; i++)
+            for(var i = 0; i < listEvento.Count; i++)
             {
                 var elementEvento = (XmlElement)listEvento[i];
 
-                if (elementEvento.GetElementsByTagName("infEvento")[0] != null)
+                if(elementEvento.GetElementsByTagName("infEvento")[0] != null)
                 {
                     var elementInfEvento = (XmlElement)elementEvento.GetElementsByTagName("infEvento")[0];
-                    if (elementInfEvento.GetElementsByTagName("tpEvento")[0] != null)
+                    if(elementInfEvento.GetElementsByTagName("tpEvento")[0] != null)
                     {
                         var tpEvento = elementInfEvento.GetElementsByTagName("tpEvento")[0].InnerText;
 
                         var tipoEventoCTe = (TipoEventoCTe)Enum.Parse(typeof(TipoEventoCTe), tpEvento);
 
                         var xmlEspecifico = new XmlDocument();
-                        switch (tipoEventoCTe)
+                        switch(tipoEventoCTe)
                         {
-                            //case TipoEventoCTe.CartaCorrecao:
-                            //    xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCCE>((DetEventoCCE)xml.Evento[i].InfEvento.DetEvento).OuterXml);
-                            //    break;
-
                             case TipoEventoCTe.Cancelamento:
                                 xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCanc>((DetEventoCanc)xml.InfEvento.DetEvento).OuterXml);
                                 break;
 
-                            //case TipoEventoCTe.CancelamentoPorSubstituicao:
-                            //    break;
+                            case TipoEventoCTe.ComprovanteEntrega:
+                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCompEntrega>((DetEventoCompEntrega)xml.InfEvento.DetEvento).OuterXml);
+                                break;
 
-                            //case TipoEventoCTe.EPEC:
-                            //    break;
+                            case TipoEventoCTe.CancelamentoComprovanteEntrega:
+                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCancCompEntrega>((DetEventoCancCompEntrega)xml.InfEvento.DetEvento).OuterXml);
+                                break;
 
-                            //case TipoEventoCTe.PedidoProrrogacao:
-                            //    break;
+                            case TipoEventoCTe.CartaCorrecao:
+                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCCE>((DetEventoCCE)xml.InfEvento.DetEvento).OuterXml);
+                                break;
 
-                            //case TipoEventoCTe.ManifestacaoConfirmacaoOperacao:
-                            //case TipoEventoCTe.ManifestacaoCienciaOperacao:
-                            //case TipoEventoCTe.ManifestacaoDesconhecimentoOperacao:
-                            //case TipoEventoCTe.ManifestacaoOperacaoNaoRealizada:
-                            //    xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoManif>((DetEventoManif)xml.Evento[i].InfEvento.DetEvento).OuterXml);
-                            //    break;
+                            case TipoEventoCTe.PrestDesacordo:
+                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoPrestDesacordo>((DetEventoPrestDesacordo)xml.InfEvento.DetEvento).OuterXml);
+                                break;
 
                             default:
                                 throw new Exception("Não foi possível identificar o tipo de evento.");
@@ -157,7 +154,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
         {
             get
             {
-                if (!string.IsNullOrWhiteSpace(RetornoWSString))
+                if(!string.IsNullOrWhiteSpace(RetornoWSString))
                 {
                     return XMLUtility.Deserializar<RetEventoCTe>(RetornoWSXML);
                 }
@@ -198,7 +195,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
         [ComVisible(true)]
         public void Executar(EventoCTe envEvento, Configuracao configuracao)
         {
-            if (envEvento == null)
+            if(envEvento == null)
             {
                 throw new ArgumentNullException(nameof(envEvento));
             }
@@ -212,19 +209,13 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// Gravar o XML de distribuição em uma pasta no HD
         /// </summary>
         /// <param name="pasta">Pasta onde deve ser gravado o XML</param>
-        public void GravarXmlDistribuicao(string pasta)
-        {
-            GravarXmlDistribuicao(pasta, ProcEventoCTeResult.NomeArquivoDistribuicao, ProcEventoCTeResult.GerarXML().OuterXml);
-        }
+        public void GravarXmlDistribuicao(string pasta) => GravarXmlDistribuicao(pasta, ProcEventoCTeResult.NomeArquivoDistribuicao, ProcEventoCTeResult.GerarXML().OuterXml);
 
         /// <summary>
         /// Grava o XML de dsitribuição no stream
         /// </summary>
         /// <param name="stream">Stream que vai receber o XML de distribuição</param>
-        public void GravarXmlDistribuicao(Stream stream)
-        {
-            GravarXmlDistribuicao(stream, ProcEventoCTeResult.GerarXML().OuterXml);
-        }
+        public void GravarXmlDistribuicao(Stream stream) => GravarXmlDistribuicao(stream, ProcEventoCTeResult.GerarXML().OuterXml);
 
         #endregion Public Methods
     }

@@ -89,6 +89,19 @@ namespace NFSe.Components
                 TargetNameSpace = "http://www.publica.inf.br"
             });
             #endregion
+
+            #region XML de lote RPS
+            SchemaXML.InfSchemas.Add("NFSE-PUBLICA-GerarNfseEnvio", new InfSchema()
+            {
+                Tag = "GerarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                //ArquivoXSD = "NFSe\\PUBLICA\\schema_nfse_v03.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfRps",
+                TargetNameSpace = "http://www.publica.inf.br"
+            });
+            #endregion
         }
     }
 }

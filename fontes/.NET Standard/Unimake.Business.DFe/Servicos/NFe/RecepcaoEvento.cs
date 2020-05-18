@@ -100,6 +100,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
                                 break;
 
                             case TipoEventoNFe.CancelamentoPorSubstituicao:
+                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCancSubst>((DetEventoCancSubst)xml.Evento[i].InfEvento.DetEvento).OuterXml);
                                 break;
 
                             case TipoEventoNFe.EPEC:

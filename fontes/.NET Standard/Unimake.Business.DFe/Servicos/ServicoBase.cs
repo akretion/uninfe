@@ -40,15 +40,39 @@ namespace Unimake.Business.DFe.Servicos
         }
 
         /// <summary>
+        /// Verifica se o XML está assinado, se não estiver assina. Só faz isso para XMLs que tem tag de assinatura, demais ele mantem como está, sem assinar.
+        /// </summary>
+        /// <param name="tagAssinatura">Tag de assinatura</param>
+        private void VerificarAssinarXML(string tagAssinatura)
+        {
+            if(!string.IsNullOrWhiteSpace(tagAssinatura))
+            {
+                if(AssinaturaDigital.EstaAssinado(ConteudoXML, tagAssinatura))
+                {
+                    AjustarXMLAposAssinado();
+                }
+                else
+                {
+                    AssinaturaDigital.Assinar(ConteudoXML, tagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id", true);
+
+                    AjustarXMLAposAssinado();
+                }
+            }
+        }
+
+        /// <summary>
         /// Ler as configurações do XML
         /// </summary>
         /// <param name="doc">Documento XML</param>
-        private void LerConfig(XmlDocument doc)
+        /// <param name="arqConfig">Caminho/Nome do arquivo de configuração</param>
+        private void LerConfig(XmlDocument doc, string arqConfig)
         {
             if(doc.GetElementsByTagName("Servicos")[0] != null)
             {
                 LerConfigPadrao();
             }
+
+            var achouConfigVersao = false;
 
             var listServicos = doc.GetElementsByTagName("Servicos");
             foreach(var nodeServicos in listServicos)
@@ -66,6 +90,8 @@ namespace Unimake.Business.DFe.Servicos
                         var elementPropriedades = (XmlElement)nodePropridades;
                         if(elementPropriedades.GetAttribute("versao") == Configuracoes.SchemaVersao)
                         {
+                            achouConfigVersao = true;
+
                             if(XMLUtility.TagExist(elementPropriedades, "Descricao"))
                             {
                                 Configuracoes.Descricao = XMLUtility.TagRead(elementPropriedades, "Descricao");
@@ -197,6 +223,19 @@ namespace Unimake.Business.DFe.Servicos
                     break;
                 }
             }
+
+            if(Configuracoes.TipoAmbiente == TipoAmbiente.Homologacao && string.IsNullOrWhiteSpace(Configuracoes.WebEnderecoHomologacao))
+            {
+                throw new Exception(Configuracoes.Nome + " não disponibiliza o serviço de " + Configuracoes.Servico.GetAttributeDescription() + " para o ambiente de homologação.");
+            }
+            else if(Configuracoes.TipoAmbiente == TipoAmbiente.Producao && string.IsNullOrWhiteSpace(Configuracoes.WebEnderecoProducao))
+            {
+                throw new Exception(Configuracoes.Nome + " não disponibiliza o serviço de " + Configuracoes.Servico.GetAttributeDescription() + " para o ambiente de produção.");
+            }
+            else if(!achouConfigVersao)
+            {
+                throw new Exception("Não foi localizado as configurações para a versão de schema " + Configuracoes.SchemaVersao + " no arquivo de configuração do serviço de " + Configuracoes.TipoDFe.ToString() + ".\r\n\r\n" + arqConfig);
+            }
         }
 
         private void LerConfigPadrao()
@@ -278,6 +317,8 @@ namespace Unimake.Business.DFe.Servicos
 
             #region Leitura do XML herdado, quando tem herança.
 
+            var temHeranca = false;
+
             if(doc.GetElementsByTagName("Heranca")[0] != null)
             {
                 var arqConfigHeranca =
@@ -285,15 +326,27 @@ namespace Unimake.Business.DFe.Servicos
                     Configuracoes.TipoDFe.ToString(),
                     doc.GetElementsByTagName("Heranca")[0].InnerText);
 
+                temHeranca = true;
+
                 doc.Load(arqConfigHeranca);
-                LerConfig(doc);
+                LerConfig(doc, arqConfigHeranca);
 
                 doc.Load(xmlConfigEspecifico);
             }
 
             #endregion Leitura do XML herdado, quando tem herança.
 
-            LerConfig(doc);
+            try
+            {
+                LerConfig(doc, xmlConfigEspecifico);
+            }
+            catch
+            {
+                if(!temHeranca) //Se tem herança pode ser que não encontre configuração específica, então não pode retornar a exceção lançada neste ponto.
+                {
+                    throw;
+                }
+            }
 
             SubstituirValorSoapString();
         }
@@ -441,24 +494,10 @@ namespace Unimake.Business.DFe.Servicos
         {
             get
             {
-                var result = new XmlDocument();
+                VerificarAssinarXML(Configuracoes.TagAssinatura);
+                VerificarAssinarXML(Configuracoes.TagLoteAssinatura);
 
-                if(AssinaturaDigital.EstaAssinado(ConteudoXML, Configuracoes.TagAssinatura))
-                {
-                    AjustarXMLAposAssinado();
-
-                    result.LoadXml(ConteudoXML.InnerXml);
-                }
-                else
-                {
-                    AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id", true);
-
-                    AjustarXMLAposAssinado();
-
-                    result.LoadXml(ConteudoXML.OuterXml);
-                }
-
-                return result;
+                return ConteudoXML;
             }
         }
 

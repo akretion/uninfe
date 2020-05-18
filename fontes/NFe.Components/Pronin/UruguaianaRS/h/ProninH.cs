@@ -1,5 +1,5 @@
 ﻿using NFe.Components.Abstract;
-using NFe.Components.PUruguaianaRS;
+using NFe.Components.HUruguaianaRS;
 using System;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
@@ -37,8 +37,8 @@ namespace NFe.Components.Pronin.Uruguaiana.h
             ServiceConsultas.ClientCertificates.Add(certificado);
 
             Cabecalho cabecMsg = new Cabecalho();
-            cabecMsg.versao = "1.00";
-            cabecMsg.versaoDados = "1.00";
+            cabecMsg.versao = "2.03";
+            cabecMsg.versaoDados = "2.03";
 
             ServiceGeracao.cabecalho = cabecMsg;
             ServiceConsultas.cabecalho = cabecMsg;

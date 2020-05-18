@@ -1,4 +1,5 @@
 VERSION 5.00
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Begin VB.Form frmMain 
    Caption         =   "Unimake.DFe Interop Tests"
    ClientHeight    =   11850
@@ -9,6 +10,13 @@ Begin VB.Form frmMain
    ScaleHeight     =   11850
    ScaleWidth      =   11580
    StartUpPosition =   2  'CenterScreen
+   Begin MSComDlg.CommonDialog OpenFileDialog 
+      Left            =   840
+      Top             =   10200
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
+   End
    Begin VB.TextBox txtLog 
       BorderStyle     =   0  'None
       BeginProperty Font 
@@ -158,6 +166,15 @@ Begin VB.Form frmMain
          End
       End
    End
+   Begin VB.Menu mnuCertificado 
+      Caption         =   "Certificado"
+      Begin VB.Menu mnuCertificadoSelecionar 
+         Caption         =   "Selecionar"
+      End
+      Begin VB.Menu mnuCertificadoSelecionarArquivo 
+         Caption         =   "Selecionar de Arquivo"
+      End
+   End
 End
 Attribute VB_Name = "frmMain"
 Attribute VB_GlobalNameSpace = False
@@ -186,6 +203,22 @@ End Sub
 
 Public Sub ClearLog()
 txtLog.Text = ""
+End Sub
+
+Private Sub mnuCertificadoSelecionar_Click()
+Dim certificado
+Set certificado = SelecionarCertificado.SelecionarCertificado
+MsgBox "Certificado selecionado", vbInformation + vbOKOnly, "Aviso"
+End Sub
+
+Private Sub mnuCertificadoSelecionarArquivo_Click()
+On Error GoTo erro
+Dim certificado
+Set certificado = SelecionarCertificado.SelecionarCertificadoDeArquivo
+MsgBox "Certificado selecionado", vbInformation + vbOKOnly, "Aviso"
+Exit Sub
+erro:
+MsgBox Err.Description, vbCritical + vbOKOnly, "Erro ao selecionar o certificado"
 End Sub
 
 Private Sub mnuCTe_ConsultaCadastroContribuinte_Click()

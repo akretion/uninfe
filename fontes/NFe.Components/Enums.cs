@@ -1172,7 +1172,18 @@ namespace NFe.Components
         /// Padrão WEBFISCO_TECNOLOGIA
         /// </summary>
         [Description("WEBFISCO_TECNOLOGIA")]
-        WEBFISCO_TECNOLOGIA
+        WEBFISCO_TECNOLOGIA,
+        /// <summary>
+        /// Padrão SYSMAR
+        /// </summary>
+        [Description("SYSMAR")]
+        SYSMAR,
+         /// <summary>
+         /// Padrão AGILI
+         /// </summary>
+        [Description("AGILI")]
+        AGILI
+
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
     }

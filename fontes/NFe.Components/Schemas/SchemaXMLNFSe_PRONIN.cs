@@ -1,4 +1,4 @@
-﻿ using NFe.Components;
+﻿using NFe.Components;
 
 namespace NFSe.Components
 {
@@ -388,7 +388,6 @@ namespace NFSe.Components
             });
             #endregion XML de lote RPS - Caçapava do Sul-RS
 
-
             #region XML de lote RPS - Agudo - RS
 
             SchemaXML.InfSchemas.Add("NFSE-PRONIN-4300109-EnviarLoteRpsEnvio", new InfSchema()
@@ -404,6 +403,22 @@ namespace NFSe.Components
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
             });
             #endregion XML de lote RPS - Agudo - RS
+
+            #region XML de lote RPS - Santa Terezinha de Itaipu - PR
+
+            SchemaXML.InfSchemas.Add("NFSE-PRONIN-4124053-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion XML de lote RPS - Santa Terezinha de Itaipu - PR
         }
     }
 }

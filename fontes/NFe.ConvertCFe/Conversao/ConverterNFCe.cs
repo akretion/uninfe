@@ -163,8 +163,8 @@ namespace NFe.SAT.Conversao
 
                                 listObsFisco.Add(obsFisco);
                             }
-                            
-                            if (((XmlElement)itensDet).GetElementsByTagName("cProdANP") != null && DadosEmpresa.VersaoLayoutSAT == "0.08")
+
+                            if (((XmlElement)itensDet).GetElementsByTagName("cProdANP").Count != 0 && DadosEmpresa.VersaoLayoutSAT == "0.08")
                             {                                
                                 string cProdANP = ((XmlElement)itensDet).GetElementsByTagName("cProdANP")[0].InnerText;
                                 if (!string.IsNullOrEmpty(cProdANP) )

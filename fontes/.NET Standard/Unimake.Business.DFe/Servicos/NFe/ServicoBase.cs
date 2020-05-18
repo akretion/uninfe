@@ -36,26 +36,26 @@ namespace Unimake.Business.DFe.Servicos.NFe
             //Definir a pasta onde fica o schema do XML
             switch(Configuracoes.TipoDFe)
             {
-                case DFE.NFe:
+                case TipoDFe.NFe:
                     Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaNFe;
                     break;
 
-                case DFE.NFCe:
+                case TipoDFe.NFCe:
                     Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaNFCe;
                     break;
 
-                case DFE.CTe:
+                case TipoDFe.CTe:
                     Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaCTe;
                     break;
 
-                case DFE.MDFe:
+                case TipoDFe.MDFe:
                     Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaMDFe;
                     break;
 
-                case DFE.NFSe:
+                case TipoDFe.NFSe:
                     break;
 
-                case DFE.SAT:
+                case TipoDFe.SAT:
                     break;
             }
         }

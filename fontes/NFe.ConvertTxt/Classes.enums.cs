@@ -303,7 +303,9 @@ namespace NFe.ConvertTxt
         [Description("Fisco Resposta ao Cancelamento de Prorrogação 1º prazo")]
         tpEvFiscoRespCancPedProrrogacao_ICMS_1 = 411502,
         [Description("Fisco Resposta ao Cancelamento de Prorrogação 2º prazo")]
-        tpEvFiscoRespCancPedProrrogacao_ICMS_2 = 411503
+        tpEvFiscoRespCancPedProrrogacao_ICMS_2 = 411503,
+        [Description("Pagamento Operação MDF-e")]
+        tpEvPagamentoOperacaoMDFe = 110116
     }
 
     public enum TpcnTipoAutor

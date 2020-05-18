@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.ComponentModel;
+using System.Xml.Serialization;
 
 namespace Unimake.Business.DFe.Servicos
 {
@@ -13,41 +14,49 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// Consulta status serviço NFe/NFCe
         /// </summary>
+        [Description("Consulta status do serviço da NFe/NFCe")]
         NFeStatusServico,
 
         /// <summary>
         /// Consulta protocolo da NFe/NFCe
         /// </summary>
+        [Description("Consulta situação da NFe/NFCe")]
         NFeConsultaProtocolo,
 
         /// <summary>
         /// Consulta recibo NFe/NFCe
         /// </summary>
+        [Description("Consulta recibo da NFe/NFCe")]
         NFeConsultaRecibo,
 
         /// <summary>
         /// Inutilização de números da nota fiscal eletrônica
         /// </summary>
+        [Description("Inutilização de números da NFe/NFCE")]
         NFeInutilizacao,
 
         /// <summary>
         /// Consulta cadastro do contribuinte
         /// </summary>
+        [Description("Consulta cadastro de contribuinte")]
         NFeConsultaCadastro,
 
         /// <summary>
         /// Envio de Eventos (Cancelamento, CCe, EPEC, etc...)
         /// </summary>
+        [Description("Envio de eventos da NFe/NFCe")]
         NFeRecepcaoEvento,
 
         /// <summary>
         /// Envio do XML de lote de NFe/NFCe
         /// </summary>
+        [Description("Autorização da NFe/NFCe")]
         NFeAutorizacao,
 
         /// <summary>
         /// Envio do XML de consulta dos documentos fiscais eletrônicos destinados - NFe
         /// </summary>
+        [Description("Distribuição de documentos fiscais eletrônicos da NFe")]
         NFeDistribuicaoDFe,
 
         #endregion
@@ -57,27 +66,38 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// Consulta status serviço CTe
         /// </summary>
+        [Description("Consulta status do serviço do CTe")]
         CTeStatusServico,
 
         /// <summary>
         /// Consulta protocolo do CTe
         /// </summary>
+        [Description("Consulta situação do CTe")] 
         CTeConsultaProtocolo,
 
         /// <summary>
         /// Inutilização de números do Conhecimetno de Transporte Eletrônico (CTe)
         /// </summary>
+        [Description("Inutilização de números do CTe")]
         CTeInutilizacao,
 
         /// <summary>
         /// Envio do XML de consulta dos documentos fiscais eletrônicos destinados - CTe
         /// </summary>
+        [Description("Distribuição de documentos fiscais eletrônicos do CTe")]
         CTeDistribuicaoDFe,
 
         /// <summary>
         /// Consulta recibo CTe
         /// </summary>
+        [Description("Consulta recibo do CTe")]
         CTeConsultaRecibo,
+
+        /// <summary>
+        /// Envio do XML de CTe
+        /// </summary>
+        [Description("Autorização do CTe")]
+        CTeAutorizacao,
         #endregion
 
         #region MDFe
@@ -85,17 +105,32 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// Consulta status serviço MDFe
         /// </summary>
+        [Description("Consulta status do serviço do MDFe")]
         MDFeStatusServico,
 
         /// <summary>
         /// Consulta protocolo do MDFe
         /// </summary>
+        [Description("Consulta situação do MDFe")]
         MDFeConsultaProtocolo,
 
         /// <summary>
         /// Consulta recibo MDFe
         /// </summary>
+        [Description("Consulta recibo do MDFe")]
         MDFeConsultaRecibo,
+
+        /// <summary>
+        /// Consulta MDFe não encerrado
+        /// </summary>
+        [Description("Consulta de MDFe´s não encerrados")]
+        MDFeConsultaNaoEnc,
+
+        /// <summary>
+        /// Envio do XML de MDFe
+        /// </summary>
+        [Description("Autorização do MDFe")]
+        MDFeAutorizacao,
 
         #endregion
 
@@ -114,7 +149,7 @@ namespace Unimake.Business.DFe.Servicos
     /// <summary>
     /// Tipos de DFe´s existentes
     /// </summary>
-    public enum DFE
+    public enum TipoDFe
     {
         /// <summary>
         /// NF-e - Nota Fiscal Eletrônica
@@ -139,7 +174,15 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// CFe-SAT - Sistema Autenticador e Transmissor de Cupons Fiscais Eletrônicos
         /// </summary>
-        SAT
+        SAT,
+        /// <summary>
+        /// Conhecimento de Transporte Eletrônico para Outros Serviços
+        /// </summary>
+        CTeOS,
+        /// <summary>
+        /// Cupom Fiscal Eletrônico
+        /// </summary>
+        CFe
     }
     #endregion       
 
@@ -293,7 +336,12 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// Ambiente Nacional - AN (91)
         /// </summary>
-        AN = 91
+        AN = 91,
+
+        /// <summary>
+        /// Não definido (0)
+        /// </summary>
+        NaoDefinido = 0
     }
 
     #endregion
@@ -325,21 +373,25 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("55")]
         NFe = 55,
+
         /// <summary>
         /// NFC-e (Modelo: 65)
         /// </summary>
         [XmlEnum("65")]
         NFCe = 65,
+
         /// <summary>
         /// CT-e (Modelo: 57)
         /// </summary>
         [XmlEnum("57")]
         CTe = 57,
+
         /// <summary>
         /// MDF-e (Modelo: 58)
         /// </summary>
         [XmlEnum("58")]
         MDFe = 58,
+
         /// <summary>
         /// CTeOS (Modelo: 67)
         /// </summary>
@@ -413,10 +465,68 @@ namespace Unimake.Business.DFe.Servicos
     public enum TipoEventoCTe
     {
         /// <summary>
+        /// Carta de Correção CTe (110110)
+        /// </summary>
+        [XmlEnum("110110")]
+        CartaCorrecao = 110110,
+
+        /// <summary>
         /// Cancelamento CTe (110111)
         /// </summary>
         [XmlEnum("110111")]
         Cancelamento = 110111,
+
+        /// <summary>
+        /// Comprovante de Entrega do CTe (110180)
+        /// </summary>
+        [XmlEnum("110180")]
+        ComprovanteEntrega = 110180,
+
+        /// <summary>
+        /// Cancelamento Comprovante de Entrega do CTe (110181)
+        /// </summary>
+        [XmlEnum("110181")]
+        CancelamentoComprovanteEntrega = 110181,
+
+        /// <summary>
+        /// Prestação de serviço em desacordo CTe (610110)
+        /// </summary>
+        [XmlEnum("610110")]
+        PrestDesacordo = 610110
+    }
+
+    #endregion
+
+    #region TipoEventoMDFe
+
+    /// <summary>
+    /// Tipos de eventos do MDFe
+    /// </summary>
+    public enum TipoEventoMDFe
+    {
+        /// <summary>
+        /// Cancelamento de MDFe (110111)
+        /// </summary>
+        [XmlEnum("110111")]
+        Cancelamento = 110111,
+
+        /// <summary>
+        /// Encerramento de MDFe (110112)
+        /// </summary>
+        [XmlEnum("110112")]
+        Encerramento = 110112,
+
+        /// <summary>
+        /// Inclusão de Condutor no MDFe (110114)
+        /// </summary>
+        [XmlEnum("110114")]
+        InclusaoCondutor = 110114,
+
+        /// <summary>
+        /// Inclusão de DFe no MDFe (110115)
+        /// </summary>
+        [XmlEnum("110115")]
+        InclusaoDFe = 110115
     }
 
     #endregion
@@ -580,10 +690,10 @@ namespace Unimake.Business.DFe.Servicos
         ContingenciaFSIA = 2,
 
         /// <summary>
-        /// 4=Contingência DPEC (Declaração Prévia da Emissão em Contingência);
+        /// 4=Contingência EPEC (Evento Prévio de Emissão em Contingência)
         /// </summary>
         [XmlEnum("4")]
-        ContingenciaDPEC = 4,
+        ContingenciaEPEC = 4,
 
         /// <summary>
         /// 5=Contingência FS-DA, com impressão do DANFE em formulário de segurança;
@@ -1349,8 +1459,11 @@ namespace Unimake.Business.DFe.Servicos
 
     #endregion
 
-    #region IndicadorPagamento
+    #region Indicador de Forma de Pagamento
 
+    /// <summary>
+    /// Indicador de Forma de Pagamento
+    /// </summary>
     public enum IndicadorPagamento
     {
         /// <summary>
@@ -3129,12 +3242,12 @@ namespace Unimake.Business.DFe.Servicos
 
     #endregion
 
-    #region TipoUnidadeCargaCTe
+    #region TipoUnidadeCarga
 
     /// <summary>
-    /// Tipo da Unidade de Carga - CTe
+    /// Tipo da Unidade de Carga - CTe e MDFe
     /// </summary>
-    public enum TipoUnidadeCargaCTe
+    public enum TipoUnidadeCarga
     {
         /// <summary>
         /// 1 - Container
@@ -3160,12 +3273,12 @@ namespace Unimake.Business.DFe.Servicos
 
     #endregion
 
-    #region TipoUnidadeTransporteCTe
+    #region TipoUnidadeTransporte
 
     /// <summary>
-    /// Tipo da Unidade de Carta - CTe
+    /// Tipo da Unidade de Carta - CTe e MDFe
     /// </summary>
-    public enum TipoUnidadeTransporteCTe
+    public enum TipoUnidadeTransporte
     {
         /// <summary>
         /// 1 - Rodoviário Tração
@@ -3251,7 +3364,7 @@ namespace Unimake.Business.DFe.Servicos
     }
 
     #endregion
-    
+
     #region TipoDocumentoTransporteAnteriorCTe
 
     /// <summary>
@@ -3322,6 +3435,448 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("1")]
         Negociavel = 1
+    }
+
+    #endregion
+
+    #region Tipo Autor do Cancelamento por Substituição da NFCe
+
+    /// <summary>
+    /// Tipo Autor do Cancelamento por Substituição da NFCe
+    /// </summary>
+    public enum TipoAutorCancelamentoSubstituicaoNFCe
+    {
+        /// <summary>
+        /// 1 - Empresa Emitente
+        /// </summary>
+        [XmlEnum("1")]
+        EmpresaEmitente = 1,
+
+        /// <summary>
+        /// 2 - Empresa destinatária
+        /// </summary>
+        [XmlEnum("2")]
+        EmpresaDestinataria = 2,
+
+        /// <summary>
+        /// 3 - Empresa
+        /// </summary>
+        [XmlEnum("3")]
+        Empresa = 3,
+
+        /// <summary>
+        /// 5 - Fisco,
+        /// </summary>
+        [XmlEnum("5")]
+        Fisco = 5,
+
+        /// <summary>
+        /// 6 - RFB,
+        /// </summary>
+        [XmlEnum("6")]
+        RFB = 6,
+
+        /// <summary>
+        /// 9 - Outros Órgãos
+        /// </summary>
+        [XmlEnum("9")]
+        OutrosOrgaos = 9
+    }
+
+    #endregion
+
+    #region Tipo de Emitente do MDFe
+
+    /// <summary>
+    /// Tipo de emitente do MDFe
+    /// </summary>
+    public enum TipoEmitenteMDFe
+    {
+        /// <summary>
+        /// 1 = Prestador de serviço de transporte
+        /// </summary>
+        [XmlEnum("1")]
+        PrestadorServicoTransporte = 1,
+
+        /// <summary>
+        /// Trasportador de Carga Própria
+        /// </summary>
+        [XmlEnum("2")]
+        TransportadorCargaPropria = 2,
+
+        /// <summary>
+        /// Prestador de serviço de transporte que emitirá CT-e Globalizado.
+        /// </summary>
+        [XmlEnum("3")]
+        PrestadorServicoTransporteCteGlobalizado = 3
+    }
+
+    #endregion
+
+    #region Tipo do Transportador para o MDFe
+
+    /// <summary>
+    /// Tipo de transportador para o MDFe
+    /// </summary>
+    public enum TipoTransportadorMDFe
+    {
+        /// <summary>
+        /// 1 = ETC (Empresas de Transporte de Cargas)
+        /// </summary>
+        [XmlEnum("1")]
+        ETC = 1,
+
+        /// <summary>
+        /// 2 = TAC (Transportador Autônomo de Carga)
+        /// </summary>
+        [XmlEnum("2")]
+        TAC = 2,
+
+        /// <summary>
+        /// 3 = CTC (Cooperativa de Transporte de Cargas)
+        /// </summary>
+        [XmlEnum("3")]
+        CTC = 3
+    }
+
+    #endregion
+
+    #region Modalidades de transportes do MDFe
+
+    /// <summary>
+    /// Modalidade de transportes do MDFe
+    /// </summary>
+    public enum ModalidadeTransporteMDFe
+    {
+        /// <summary>
+        /// 1 - Rodoviário
+        /// </summary>
+        [XmlEnum("1")]
+        Rodoviario = 1,
+
+        /// <summary>
+        /// 2 - Aéreo
+        /// </summary>
+        [XmlEnum("2")]
+        Aereo = 2,
+
+        /// <summary>
+        /// 3 - Aquaviário
+        /// </summary>
+        [XmlEnum("3")]
+        Aquaviario = 3,
+
+        /// <summary>
+        /// 4 - Ferroviário
+        /// </summary>
+        [XmlEnum("4")]
+        Ferroviario = 4
+    }
+
+    #endregion
+
+    #region Responsavel pelo Seguro - MDFe
+
+    /// <summary>
+    /// Responsável pelo Seguro do MDFe
+    /// </summary>
+    public enum ResponsavelSeguroMDFe
+    {
+        /// <summary>
+        /// 1 - Emitente do MDF-e
+        /// </summary>
+        [XmlEnum("1")]
+        EmitenteMDFe = 1,
+
+        /// <summary>
+        /// 2 - Responsável pela contratação do serviço de transporte (contratante)
+        /// </summary>
+        [XmlEnum("2")]
+        ContratanteServicoTransporte = 2
+    }
+
+    #endregion
+
+    #region Tipo da Carga MDFe
+
+    /// <summary>
+    /// Tipo de Carga para o MDFe
+    /// </summary>
+    public enum TipoCargaMDFe
+    {
+        /// <summary>
+        /// 01 - Granel sólido
+        /// </summary>
+        [XmlEnum("01")]
+        GranelSolido = 1,
+
+        /// <summary>
+        /// 02 - Granel líquido
+        /// </summary>
+        [XmlEnum("02")]
+        GranelLiquido = 2,
+
+        /// <summary>
+        /// 03 - Frigorificada
+        /// </summary>
+        [XmlEnum("03")]
+        Frigorificada = 3,
+
+        /// <summary>
+        /// 04 - Conteinerizada
+        /// </summary>
+        [XmlEnum("04")]
+        Conteinerizada = 4,
+
+        /// <summary>
+        /// 05 - Carga Geral
+        /// </summary>
+        [XmlEnum("05")]
+        CargaGeral = 5,
+
+        /// <summary>
+        /// 06 - Neogranel
+        /// </summary>
+        [XmlEnum("06")]
+        Neogranel = 6,
+
+        /// <summary>
+        /// 07 - Perigosa (granel sólido)
+        /// </summary>
+        [XmlEnum("07")]
+        PerigosaGranelSolido = 7,
+
+        /// <summary>
+        /// 08 - Perigosa (granel líquido)
+        /// </summary>
+        [XmlEnum("08")]
+        PerigosaGranelLiquido = 8,
+
+        /// <summary>
+        /// 09 - Perigosa (carga frigorificada)
+        /// </summary>
+        [XmlEnum("09")]
+        PerigosaFrigorificada = 9,
+
+        /// <summary>
+        /// 10 - Perigosa (conteinerizada)
+        /// </summary>
+        [XmlEnum("10")]
+        PerigosaConteinerizada = 10,
+
+        /// <summary>
+        /// 11 - Perigosa (carga geral)
+        /// </summary>
+        [XmlEnum("11")]
+        PerigosaCargaGeral = 11
+    }
+
+    #endregion
+
+    #region Código da Unidade de Medida - MDFe
+
+    /// <summary>
+    /// Código da Unidade de Medida - MDFe
+    /// </summary>
+    public enum CodigoUnidadeMedidaMDFe
+    {
+        /// <summary>
+        /// 01-KG
+        /// </summary>
+        [XmlEnum("01")]
+        KG = 1,
+
+        /// <summary>
+        /// 02-TON
+        /// </summary>
+        [XmlEnum("02")]
+        TON = 2
+    }
+
+    #endregion
+
+    #region Tipo do Componente do MDFe
+
+    /// <summary>
+    /// Tipo do componente para o MDFe
+    /// </summary>
+    public enum TipoComponenteMDFe
+    {
+        /// <summary>
+        /// 01 = Vale Pedágio
+        /// </summary>
+        [XmlEnum("01")]
+        ValePedagio = 1,
+
+        /// <summary>
+        /// 02 = Impostos, Taxas e Contribuições
+        /// </summary>
+        [XmlEnum("02")]
+        ImpostosTaxasContribuicoes = 2,
+
+        /// <summary>
+        /// 03 = Despesas (Bancárias, Meios de pagamento, Outras)
+        /// </summary>
+        [XmlEnum("03")]
+        Despesas = 3,
+
+        /// <summary>
+        /// 99 = Outras
+        /// </summary>
+        [XmlEnum("99")]
+        Outros = 99
+    }
+
+    #endregion
+
+    #region Tipo Proprietário para MDFe
+
+    /// <summary>
+    /// Tipo do proprietário para o MDFe
+    /// </summary>
+    public enum TipoProprietarioMDFe
+    {
+        /// <summary>
+        /// 0 = TAC - Agregado
+        /// </summary>
+        [XmlEnum("0")]
+        TACAgregado = 0,
+
+        /// <summary>
+        /// 1 = TAC - Independente
+        /// </summary>
+        [XmlEnum("1")]
+        TACIndependente = 1,
+
+        /// <summary>
+        /// 2 = Outros
+        /// </summary>
+        [XmlEnum("2")]
+        Outros = 2,
+
+        /// <summary>
+        /// 99999 = Não definido, utilizar nos casos que não deseja enviar o valor na tag.
+        /// </summary>
+        NaoDefinido = 99999
+    }
+
+    #endregion
+
+    #region Tipo de Rodado para o MDFe
+
+    /// <summary>
+    /// Tipo de Rodado para o MDFe
+    /// </summary>
+    public enum TipoRodado
+    {
+        /// <summary>
+        /// 01 - Truck
+        /// </summary>
+        [XmlEnum("01")]
+        Truck = 1,
+
+        /// <summary>
+        /// 02 - Toco
+        /// </summary>
+        [XmlEnum("02")]
+        Toco = 2,
+
+        /// <summary>
+        /// 03 - Cavalo Mecânico
+        /// </summary>
+        [XmlEnum("03")]
+        CavaloMecanico = 3,
+
+        /// <summary>
+        /// 04 - VAN
+        /// </summary>
+        [XmlEnum("04")]
+        VAN = 4,
+
+        /// <summary>
+        /// 05 - Utilitário
+        /// </summary>
+        [XmlEnum("05")]
+        Utilitario = 5,
+
+        /// <summary>
+        /// 06 - Outros
+        /// </summary>
+        [XmlEnum("06")]
+        Outros = 6
+    }
+
+    #endregion
+
+    #region Tipo de Carroceira para o MDFe
+
+    /// <summary>
+    /// Tipo de Carroceria para o MDFe
+    /// </summary>
+    public enum TipoCarroceriaMDFe
+    {
+        /// <summary>
+        /// 00 - Não aplicável
+        /// </summary>
+        [XmlEnum("00")]
+        NaoAplicavel = 0,
+
+        /// <summary>
+        /// 01 - Aberta
+        /// </summary>
+        [XmlEnum("01")]
+        Aberta = 1,
+
+        /// <summary>
+        /// 02 - Fechada/Bau
+        /// </summary>
+        [XmlEnum("02")]
+        FechadaBau = 2,
+
+        /// <summary>
+        /// 03 - Granelera
+        /// </summary>
+        [XmlEnum("03")]
+        Granelera = 3,
+
+        /// <summary>
+        /// 04 - Porta Container
+        /// </summary>
+        [XmlEnum("04")]
+        PortaContainer = 4,
+
+        /// <summary>
+        /// 05 - Sider
+        /// </summary>
+        [XmlEnum("05")]
+        Sider = 5
+    }
+
+    #endregion
+
+    #region Tipo de Navegação para o MDFe
+
+    /// <summary>
+    /// Tipo de Navegação para o MDFe
+    /// </summary>
+    public enum TipoNavegacaoMDFe
+    {
+        /// <summary>
+        /// 0 - Interior
+        /// </summary>
+        [XmlEnum("0")]
+        Interior = 0,
+
+        /// <summary>
+        /// 1 - Cabotagem
+        /// </summary>
+        [XmlEnum("1")]
+        Cabotagem = 1,
+
+        /// <summary>
+        /// 99999 = Não definido, utilizar nos casos que não deseja enviar o valor na tag.
+        /// </summary>
+        NaoDefinido = 99999
     }
 
     #endregion

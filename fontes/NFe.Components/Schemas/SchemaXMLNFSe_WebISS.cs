@@ -167,9 +167,9 @@ namespace NFSe.Components
 
             #region Consulta NFSe por período
 
-            SchemaXML.InfSchemas.Add("NFSE-WEBISS_202-ConsultarNfseEnvio", new InfSchema()
+            SchemaXML.InfSchemas.Add("NFSE-WEBISS_202-ConsultarNfseServicoPrestadoEnvio", new InfSchema()
             {
-                Tag = "ConsultarNfseEnvio",
+                Tag = "ConsultarNfseServicoPrestadoEnvio",
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "",
                 Descricao = "XML de Consulta da NFSe por período",

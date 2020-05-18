@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://187.63.32.18:98/NFSe.Portal.Integracao/Services.svc?wsdl" filename="NFSeIntegracao.wsdl" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://187.63.32.18:98/NFSe.Portal.Integracao/Services.svc?xsd=xsd1" filename="Services.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="http://187.63.32.18:98/NFSe.Portal.Integracao/Services.svc?xsd=xsd0" filename="Services0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="file:///C:/projetos/uninfe/trunk/fontes/NFe.Components.Wsdl/NFse/WSDL/Producao/PCosmopolisSP-PRONIN.wsdl" filename="NFSeIntegracao.wsdl" />
   </Results>
 </DiscoveryClientResultsFile>

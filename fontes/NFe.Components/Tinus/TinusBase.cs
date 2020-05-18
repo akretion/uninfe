@@ -77,6 +77,10 @@ namespace NFe.Components.Tinus
                                 tinusService = new MossoroRN.p.TinusP(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
+                            case 2111201: //São José do Ribamar-MA
+                                tinusService = new SaoJoseDoRibamarMA.p.TinusP(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

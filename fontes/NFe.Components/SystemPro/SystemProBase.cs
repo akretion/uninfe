@@ -1,27 +1,24 @@
 ﻿using NFe.Components.Abstract;
-using System;
 using System.IO;
-using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 
 namespace NFe.Components.SystemPro
 {
-    public abstract class SystemProBase : EmiteNFSeBase
+    public abstract class SystemProBase: EmiteNFSeBase
     {
         #region locais/ protegidos
 
-        int CodMun = 0;
-
-        object systemProService;
+        private int CodMun = 0;
+        private object systemProService;
         protected object SystemProService
         {
             get
             {
-                if (systemProService == null)
+                if(systemProService == null)
                 {
-                    if (tpAmb == TipoAmbiente.taHomologacao)
+                    if(tpAmb == TipoAmbiente.taHomologacao)
                     {
-                        switch (CodMun)
+                        switch(CodMun)
                         {
                             case 4307005:
                                 systemProService = new br.gov.rs.erechim.nfse.www.h.NfseService_Homolog();
@@ -38,7 +35,7 @@ namespace NFe.Components.SystemPro
                     }
                     else
                     {
-                        switch (CodMun)
+                        switch(CodMun)
                         {
                             case 4307005:
                                 systemProService = new br.gov.rs.erechim.nfse.www.p.NfseService();
@@ -64,8 +61,8 @@ namespace NFe.Components.SystemPro
         private void AddClientCertificates()
         {
             X509CertificateCollection certificates = null;
-            Type t = systemProService.GetType();
-            PropertyInfo pi = t.GetProperty("ClientCertificates");
+            var t = systemProService.GetType();
+            var pi = t.GetProperty("ClientCertificates");
             certificates = pi.GetValue(systemProService, null) as X509CertificateCollection;
             certificates.Add(Certificate);
         }
@@ -94,49 +91,50 @@ namespace NFe.Components.SystemPro
 
         public override void EmiteNF(string file)
         {
-            string strResult = Invoke("EnviarLoteRpsSincrono", new[] { NfseCabecMsg, ReaderXML(file) });
+            var strResult = Invoke("EnviarLoteRpsSincrono", new[] { NfseCabecMsg, ReaderXML(file) });
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
         }
 
         public override void CancelarNfse(string file)
         {
-            string strResult = Invoke("CancelarNfse", new[] { NfseCabecMsg, ReaderXML(file) });
-            GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
-                                            Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
+            var strResult = Invoke("CancelarNfse", new[] { NfseCabecMsg, ReaderXML(file) });
+            GerarRetorno(file, strResult,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
-        public override void ConsultarLoteRps(string file)
+        public void SubstituirNfse(string file)
         {
-            throw new Exceptions.ServicoInexistenteException();
+            var strResult = Invoke("SubstituirNfse", new[] { NfseCabecMsg, ReaderXML(file) });
+            GerarRetorno(file, strResult,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
         }
 
-        public override void ConsultarSituacaoLoteRps(string file)
-        {
-            throw new Exceptions.ServicoInexistenteException();
-        }
+
+        public override void ConsultarLoteRps(string file) => throw new Exceptions.ServicoInexistenteException();
+
+        public override void ConsultarSituacaoLoteRps(string file) => throw new Exceptions.ServicoInexistenteException();
 
         public override void ConsultarNfse(string file)
         {
-            string strResult = Invoke("ConsultarNfseFaixa", new[] { NfseCabecMsg, ReaderXML(file) });
+            var strResult = Invoke("ConsultarNfseFaixa", new[] { NfseCabecMsg, ReaderXML(file) });
             GerarRetorno(file, strResult, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
                                             Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
-        public override void ConsultarNfsePorRps(string file)
-        {
-            throw new Exceptions.ServicoInexistenteException();
-        }
+        public override void ConsultarNfsePorRps(string file) => throw new Exceptions.ServicoInexistenteException();
 
         #endregion Métodos
 
         #region invoke
 
-        string Invoke(string methodName, params object[] _params)
+        private string Invoke(string methodName, params object[] _params)
         {
             object result = "";
-            Type t = SystemProService.GetType();
-            MethodInfo mi = t.GetMethod(methodName);
+            var t = SystemProService.GetType();
+            var mi = t.GetMethod(methodName);
             result = mi.Invoke(SystemProService, _params);
             return result.ToString();
         }
@@ -147,12 +145,12 @@ namespace NFe.Components.SystemPro
 
         private string ReaderXML(string file)
         {
-            string result = "";
+            var result = "";
 
-            using (StreamReader reader = new StreamReader(file))
+            using(var reader = new StreamReader(file))
             {
                 string line;
-                while ((line = reader.ReadLine()) != null)
+                while((line = reader.ReadLine()) != null)
                 {
                     result += line;
                 }

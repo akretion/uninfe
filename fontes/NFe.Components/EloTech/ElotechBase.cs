@@ -25,6 +25,10 @@ namespace NFe.Components.Elotech
                             elotechService = new LoandaPR(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                             break;
 
+                        case 4110706: //Irati-PR
+                            elotechService = new IratiPR(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                            break;
+
                         default:
                             throw new Exceptions.ServicoInexistenteException();
                     }

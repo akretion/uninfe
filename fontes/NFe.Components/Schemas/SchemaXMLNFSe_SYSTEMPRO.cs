@@ -50,6 +50,25 @@ namespace NFSe.Components
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
             #endregion
+
+            #region Substituir Nfse
+
+            SchemaXML.InfSchemas.Add("NFSE-SYSTEMPRO-SubstituirNfseEnvio", new InfSchema()
+            {
+                Tag = "SubstituirNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ABRASF\\nfse_v2_01.xsd",
+                Descricao = "XML de Substituição de NFSe",
+                TagAssinatura0 = "Pedido",
+                TagAtributoId0 = "InfPedidoCancelamento",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagLoteAssinatura = "SubstituirNfseEnvio",
+                TagLoteAtributoId = "SubstituicaoNfse",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
+
+            #endregion Substituir Nfse
         }
     }
 }

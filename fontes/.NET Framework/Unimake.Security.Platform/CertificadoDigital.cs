@@ -12,6 +12,7 @@ namespace Unimake.Security.Platform
     public class CertificadoDigital
     {
         #region Public Constructors
+
         public CertificadoDigital()
         {
         }
@@ -24,7 +25,7 @@ namespace Unimake.Security.Platform
         /// Abre a tela de dialogo do windows para seleção do certificado digital
         /// </summary>
         /// <returns>Retorna a coleção de certificados digitais</returns>
-        public static X509Certificate2Collection AbrirTelaSelecao()
+        public X509Certificate2Collection AbrirTelaSelecao()
         {
             var store = new X509Store("MY", StoreLocation.CurrentUser);
             store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly);
@@ -41,7 +42,7 @@ namespace Unimake.Security.Platform
         /// </summary>
         /// <param name="serialNumberOrThumbPrint">Serial number ou Thumb print do certificado digital a ser utilizado na localização</param>
         /// <returns>Certificado digital</returns>
-        public static X509Certificate2 BuscarCertificadoDigital(string serialNumberOrThumbPrint)
+        public X509Certificate2 BuscarCertificadoDigital(string serialNumberOrThumbPrint)
         {
             var x509Cert = new X509Certificate2();
             var store = new X509Store("MY", StoreLocation.CurrentUser);
@@ -69,16 +70,46 @@ namespace Unimake.Security.Platform
         }
 
         /// <summary>
+        /// Carrega o certificado digital pelos bytes do certificado
+        /// </summary>
+        /// <param name="bytes">Bytes do certificado para carga do mesmo</param>
+        /// <param name="senha">Senha utilizada para instalar o certificado, será usada para carga do mesmo</param>
+        /// <returns>Certificado Digital</returns>
+        [ComVisible(false)] // *** ATENÇÃO ***
+                            // Se passar este método para visible true, 
+                            // tem que renomear o segundo método, pois o interop não aceita sobrecarga
+                            // em algumas linguagens
+        public X509Certificate2 CarregarCertificadoDigitalA1(byte[] bytes, string senha) => new X509Certificate2(bytes, senha);
+
+        /// <summary>
         /// Carrega o certificado digital A1 direto do arquivo .PFX
         /// </summary>
-        /// <param name="certificadoDigital">Caminho do certificado digital. Ex. c:\certificados\certificado.pfx</param>
+        /// <param name="caminho">Caminho do certificado digital. Ex. c:\certificados\certificado.pfx</param>
         /// <param name="senha">Senha utilizada para instalar o arquivo .pfx</param>
         /// <returns>Certificado Digital</returns>
-        public static X509Certificate2 CarregarCertificadoDigitalA1(string certificadoDigital, string senha)
+        [return: MarshalAs(UnmanagedType.IDispatch)]
+        public X509Certificate2 CarregarCertificadoDigitalA1(string caminho, string senha)
         {
+            if(string.IsNullOrWhiteSpace(caminho))
+            {
+                throw new CarregarCertificadoException("O caminho do arquivo é requerido");
+            }
+
+            var fi = new FileInfo(caminho);
+
+            if(!fi.Exists)
+            {
+                throw new CarregarCertificadoException($"O arquivo '{caminho}' não pode ser acessado ou não existe.");
+            }
+
+            if(string.IsNullOrWhiteSpace(senha))
+            {
+                throw new CarregarCertificadoException("A senha é requerida");
+            }
+
             var x509Cert = new X509Certificate2();
 
-            using(var fs = new FileStream(certificadoDigital, FileMode.Open, FileAccess.Read))
+            using(var fs = fi.OpenRead())
             {
                 var buffer = new byte[fs.Length];
                 fs.Read(buffer, 0, buffer.Length);
@@ -89,14 +120,20 @@ namespace Unimake.Security.Platform
         }
 
         /// <summary>
-        /// Carrega o certificado digital pelos bytes do certificado
+        /// Executa tela com os certificados digitais instalados para seleção do usuário
         /// </summary>
-        /// <param name="bytes">Bytes do certificado para carga do mesmo</param>
-        /// <param name="senha">Senha utilizada para instalar o certificado, será usada para carga do mesmo</param>
-        /// <returns>Certificado Digital</returns>
-        public static X509Certificate2 CarregarCertificadoDigitalA1(byte[] bytes, string senha)
+        /// <returns>Retorna o certificado digital (null se nenhum certificado foi selecionado ou se o certificado selecionado está com alguma falha)</returns>
+        [return: MarshalAs(UnmanagedType.IDispatch)]
+        public X509Certificate2 Selecionar()
         {
-            return new X509Certificate2(bytes, senha);
+            var scollection = AbrirTelaSelecao();
+
+            if(scollection.Count > 0)
+            {
+                return scollection[0];
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -104,7 +141,7 @@ namespace Unimake.Security.Platform
         /// </summary>
         /// <param name="arquivo">Nome do arquivo</param>
         /// <returns>Array de bytes do arquivo do certificado</returns>
-        public static byte[] ToByteArray(string arquivo)
+        public byte[] ToByteArray(string arquivo)
         {
             byte[] result = null;
 
@@ -125,13 +162,13 @@ namespace Unimake.Security.Platform
         /// </summary>
         /// <param name="certificado">Certificado digital</param>
         /// <returns>true = Certificado vencido</returns>
-        public static bool Vencido(X509Certificate2 certificado)
+        public bool Vencido(X509Certificate2 certificado)
         {
             var retorna = false;
 
             if(certificado == null)
             {
-                throw new ExceptionCertificadoDigital();
+                throw new CertificadoDigitalException();
             }
 
             if(DateTime.Compare(DateTime.Now, certificado.NotAfter) > 0)
@@ -140,22 +177,6 @@ namespace Unimake.Security.Platform
             }
 
             return retorna;
-        }
-
-        /// <summary>
-        /// Executa tela com os certificados digitais instalados para seleção do usuário
-        /// </summary>
-        /// <returns>Retorna o certificado digital (null se nenhum certificado foi selecionado ou se o certificado selecionado está com alguma falha)</returns>
-        public X509Certificate2 Selecionar()
-        {
-            var scollection = AbrirTelaSelecao();
-
-            if(scollection.Count > 0)
-            {
-                return scollection[0];
-            }
-
-            return null;
         }
 
         #endregion Public Methods

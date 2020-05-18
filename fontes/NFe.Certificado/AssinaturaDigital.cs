@@ -43,10 +43,7 @@ namespace NFe.Certificado
             string tagAtributoId,
             X509Certificate2 x509Cert,
             int empresa,
-            AlgorithmType algorithmType = AlgorithmType.Sha1, bool comURI = true)
-        {
-            Assinar(new XmlDocument(), arqXMLAssinar, tagAssinatura, tagAtributoId, x509Cert, empresa, algorithmType, comURI);
-        }
+            AlgorithmType algorithmType = AlgorithmType.Sha1, bool comURI = true) => Assinar(new XmlDocument(), arqXMLAssinar, tagAssinatura, tagAtributoId, x509Cert, empresa, algorithmType, comURI);
 
         private void Assinar(XmlDocument conteudoXML,
             string arqXMLAssinar,
@@ -58,7 +55,7 @@ namespace NFe.Certificado
         {
             conteudoXML.PreserveWhitespace = true;
 
-            if (string.IsNullOrEmpty(conteudoXML.InnerText))
+            if(string.IsNullOrEmpty(conteudoXML.InnerText))
             {
                 conteudoXML = new XmlDocument();
 
@@ -77,10 +74,10 @@ namespace NFe.Certificado
             try
             {
                 // Atualizar a string do XML já assinada
-                string StringXMLAssinado = conteudoXML.OuterXml;
+                var StringXMLAssinado = conteudoXML.OuterXml;
 
                 // Gravar o XML Assinado no HD
-                StreamWriter SW_2 = File.CreateText(arqXMLAssinar);
+                var SW_2 = File.CreateText(arqXMLAssinar);
                 SW_2.Write(StringXMLAssinado);
                 SW_2.Close();
             }
@@ -113,40 +110,53 @@ namespace NFe.Certificado
             AlgorithmType algorithmType,
             bool comURI)
         {
+            #region São José dos Pinhais
+
+            if(Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 4125506 && tagAssinatura.Equals(tagAtributoId))
+            {
+                AssinarJSP(conteudoXML, tagAssinatura, tagAtributoId, x509Cert, empresa, algorithmType, comURI);
+
+                return;
+            }
+
+            #endregion
+
             try
             {
-                if (x509Cert == null)
+                if(x509Cert == null)
+                {
                     throw new ExceptionCertificadoDigital(ErroPadrao.CertificadoNaoEncontrado);
+                }
 
-                if (conteudoXML.GetElementsByTagName(tagAssinatura).Count == 0)
+                if(conteudoXML.GetElementsByTagName(tagAssinatura).Count == 0)
                 {
                     throw new Exception("A tag de assinatura " + tagAssinatura.Trim() + " não existe no XML. (Código do Erro: 5)");
                 }
-                else if (conteudoXML.GetElementsByTagName(tagAtributoId).Count == 0)
+                else if(conteudoXML.GetElementsByTagName(tagAtributoId).Count == 0)
                 {
                     throw new Exception("A tag de assinatura " + tagAtributoId.Trim() + " não existe no XML. (Código do Erro: 4)");
                 }
                 // Existe mais de uma tag a ser assinada
                 else
                 {
-                    XmlNodeList lists = conteudoXML.GetElementsByTagName(tagAssinatura);
+                    var lists = conteudoXML.GetElementsByTagName(tagAssinatura);
                     XmlNode listRPS = null;
+
 
                     /// Esta condição foi feita especificamente para prefeitura de Governador Valadares pois o AtribudoID e o Elemento assinado devem possuir o mesmo nome.
                     /// Talvez tenha que ser reavaliado.
-
                     #region Governador Valadares
 
-                    if (tagAssinatura.Equals(tagAtributoId) && Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 3127701)
+                    if(tagAssinatura.Equals(tagAtributoId) && (Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 3127701))
                     {
-                        foreach (XmlNode item in lists)
+                        foreach(XmlNode item in lists)
                         {
-                            if (listRPS == null)
+                            if(listRPS == null)
                             {
                                 listRPS = item;
                             }
 
-                            if (item.Name.Equals(tagAssinatura))
+                            if(item.Name.Equals(tagAssinatura))
                             {
                                 lists = item.ChildNodes;
                                 break;
@@ -156,38 +166,42 @@ namespace NFe.Certificado
 
                     #endregion Governador Valadares
 
-                    foreach (XmlNode nodes in lists)
+                    foreach(XmlNode nodes in lists)
                     {
-                        foreach (XmlNode childNodes in nodes.ChildNodes)
+                        foreach(XmlNode childNodes in nodes.ChildNodes)
                         {
-                            if (!childNodes.Name.Equals(tagAtributoId))
+                            if(!childNodes.Name.Equals(tagAtributoId))
+                            {
                                 continue;
+                            }
 
                             // Create a reference to be signed
-                            Reference reference = new Reference();
-                            reference.Uri = "";
+                            var reference = new Reference
+                            {
+                                Uri = ""
+                            };
 
                             // pega o uri que deve ser assinada
-                            XmlElement childElemen = (XmlElement)childNodes;
+                            var childElemen = (XmlElement)childNodes;
 
-                            if (comURI)
+                            if(comURI)
                             {
-                                if (childElemen.GetAttributeNode("Id") != null)
+                                if(childElemen.GetAttributeNode("Id") != null)
                                 {
                                     reference.Uri = "#" + childElemen.GetAttributeNode("Id").Value;
                                 }
-                                else if (childElemen.GetAttributeNode("id") != null)
+                                else if(childElemen.GetAttributeNode("id") != null)
                                 {
                                     reference.Uri = "#" + childElemen.GetAttributeNode("id").Value;
                                 }
                             }
 
                             // Create a SignedXml object.
-                            SignedXml signedXml = new SignedXml(conteudoXML);
+                            var signedXml = new SignedXml(conteudoXML);
 
 #if _fw46
                             //A3
-                            if (!String.IsNullOrEmpty(Empresas.Configuracoes[empresa].CertificadoPIN) &&
+                            if(!string.IsNullOrEmpty(Empresas.Configuracoes[empresa].CertificadoPIN) &&
                                 clsX509Certificate2Extension.IsA3(x509Cert) &&
                                 !Empresas.Configuracoes[empresa].CertificadoPINCarregado)
                             {
@@ -195,14 +209,14 @@ namespace NFe.Certificado
                                 Empresas.Configuracoes[empresa].CertificadoPINCarregado = true;
                             }
 
-                            if (algorithmType.Equals(AlgorithmType.Sha256))
+                            if(algorithmType.Equals(AlgorithmType.Sha256))
                             {
                                 signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
                                 signedXml.SigningKey = x509Cert.GetRSAPrivateKey();
                             }
 #endif
 
-                            if (algorithmType.Equals(AlgorithmType.Sha1))
+                            if(algorithmType.Equals(AlgorithmType.Sha1))
                             {
                                 signedXml.SigningKey = x509Cert.PrivateKey;
                                 signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
@@ -217,14 +231,14 @@ namespace NFe.Certificado
                             signedXml.AddReference(reference);
 
 #if _fw46
-                            if (algorithmType.Equals(AlgorithmType.Sha256))
+                            if(algorithmType.Equals(AlgorithmType.Sha256))
                             {
                                 reference.DigestMethod = "http://www.w3.org/2001/04/xmlenc#sha256";
                             }
 #endif
 
                             // Create a new KeyInfo object
-                            KeyInfo keyInfo = new KeyInfo();
+                            var keyInfo = new KeyInfo();
 
                             // Load the certificate into a KeyInfoX509Data object
                             // and add it to the KeyInfo object.
@@ -236,9 +250,9 @@ namespace NFe.Certificado
 
                             // Get the XML representation of the signature and save
                             // it to an XmlElement object.
-                            XmlElement xmlDigitalSignature = signedXml.GetXml();
+                            var xmlDigitalSignature = signedXml.GetXml();
 
-                            if (tagAssinatura.Equals(tagAtributoId) && Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 3127701)
+                            if(tagAssinatura.Equals(tagAtributoId) && Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 3127701)
                             {
                                 ///Desenvolvido especificamente para prefeitura de governador valadares
                                 listRPS.AppendChild(conteudoXML.ImportNode(xmlDigitalSignature, true));
@@ -252,7 +266,7 @@ namespace NFe.Certificado
                     }
                 }
             }
-            catch (CryptographicException ex)
+            catch(CryptographicException ex)
             {
                 #region #10316
 
@@ -264,11 +278,13 @@ namespace NFe.Certificado
 
                 AssinaturaValida = false;
 
-                if (clsX509Certificate2Extension.IsA3(x509Cert))
+                if(clsX509Certificate2Extension.IsA3(x509Cert))
                 {
                     x509Cert = Empresas.ResetCertificado(empresa);
-                    if (!TesteCertificado)
+                    if(!TesteCertificado)
+                    {
                         throw new Exception("O certificado deverá ser reiniciado.\r\n Retire o certificado.\r\nAguarde o LED terminar de piscar.\r\n Recoloque o certificado e informe o PIN novamente.\r\n" + ex.ToString());// #12342 concatenar com a mensagem original
+                    }
                 }
                 else
                 {
@@ -285,11 +301,11 @@ namespace NFe.Certificado
 
         public RSACryptoServiceProvider LerDispositivo(string PIN, int providerType, string provider)
         {
-            CspParameters csp = new CspParameters(providerType, provider);
+            var csp = new CspParameters(providerType, provider);
 
-            SecureString ss = new SecureString();
-            char[] PINs = PIN.ToCharArray();
-            foreach (char a in PINs)
+            var ss = new SecureString();
+            var PINs = PIN.ToCharArray();
+            foreach(var a in PINs)
             {
                 ss.AppendChar(a);
             }
@@ -300,9 +316,11 @@ namespace NFe.Certificado
 
             // Initialize an RSACryptoServiceProvider object using
             // the CspParameters object.
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(csp);
-            //rsa.PersistKeyInCsp = false; //importante, senão ele lota o certificado de chaves!
-            rsa.PersistKeyInCsp = false;
+            var rsa = new RSACryptoServiceProvider(csp)
+            {
+                //rsa.PersistKeyInCsp = false; //importante, senão ele lota o certificado de chaves!
+                PersistKeyInCsp = false
+            };
             rsa.ToXmlString(false);
             return rsa;
         }
@@ -316,33 +334,38 @@ namespace NFe.Certificado
         /// <param name="emp">Código da empresa</param>
         /// <param name="UFCod">Codigo da UF</param>
         /// <param name="algorithmType">Tipo de algoritimo para assinatura do XML.</param>
-        public void Assinar(string arqXMLAssinar, int emp, int UFCod, AlgorithmType algorithmType = AlgorithmType.Sha1, bool comURI = true)
-        {
-            Assinar(new XmlDocument(), arqXMLAssinar, emp, UFCod, algorithmType, comURI);
-        }
+        public void Assinar(string arqXMLAssinar, int emp, int UFCod, AlgorithmType algorithmType = AlgorithmType.Sha1, bool comURI = true) => Assinar(new XmlDocument(), arqXMLAssinar, emp, UFCod, algorithmType, comURI);
 
         public void Assinar(XmlDocument conteudoXML, string arqXMLAssinar, int emp, int UFCod, AlgorithmType algorithmType = AlgorithmType.Sha1, bool comURI = true)
         {
-            if (Empresas.Configuracoes[emp].UsaCertificado)
+            if(Empresas.Configuracoes[emp].UsaCertificado)
             {
-                TipoArquivoXML v = new TipoArquivoXML(arqXMLAssinar, UFCod, false);
+                var v = new TipoArquivoXML(arqXMLAssinar, UFCod, false);
 
-                if (!string.IsNullOrEmpty(v.TagAssinatura0))
+                if(!string.IsNullOrEmpty(v.TagAssinatura0))
                 {
-                    if (!Assinado(arqXMLAssinar, v.TagAssinatura0))
+                    if(!Assinado(arqXMLAssinar, v.TagAssinatura0))
+                    {
                         Assinar(conteudoXML, arqXMLAssinar, v.TagAssinatura0, v.TagAtributoId0, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
+                    }
                 }
 
-                if (!string.IsNullOrEmpty(v.TagAssinatura))
+                if(!string.IsNullOrEmpty(v.TagAssinatura))
                 {
-                    if (!Assinado(arqXMLAssinar, v.TagAssinatura))
+                    if(!Assinado(arqXMLAssinar, v.TagAssinatura))
+                    {
                         Assinar(conteudoXML, arqXMLAssinar, v.TagAssinatura, v.TagAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
+                    }
                 }
 
                 //Assinar o lote
-                if (!string.IsNullOrEmpty(v.TagLoteAssinatura))
-                    if (!Assinado(arqXMLAssinar, v.TagLoteAssinatura))
+                if(!string.IsNullOrEmpty(v.TagLoteAssinatura))
+                {
+                    if(!Assinado(arqXMLAssinar, v.TagLoteAssinatura))
+                    {
                         Assinar(conteudoXML, arqXMLAssinar, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
+                    }
+                }
             }
         }
 
@@ -359,20 +382,26 @@ namespace NFe.Certificado
         /// <param name="algorithmType">Tipo de algoritimo para assinatura do XML.</param>
         public void Assinar(XmlDocument conteudoXML, int emp, int UFCod, AlgorithmType algorithmType = AlgorithmType.Sha1, bool comURI = true)
         {
-            if (Empresas.Configuracoes[emp].UsaCertificado)
+            if(Empresas.Configuracoes[emp].UsaCertificado)
             {
-                TipoArquivoXML v = new TipoArquivoXML("", conteudoXML, UFCod, false);
+                var v = new TipoArquivoXML("", conteudoXML, UFCod, false);
 
-                if (!string.IsNullOrEmpty(v.TagAssinatura))
+                if(!string.IsNullOrEmpty(v.TagAssinatura))
                 {
-                    if (!Assinado(conteudoXML, v.TagAssinatura))
+                    if(!Assinado(conteudoXML, v.TagAssinatura))
+                    {
                         Assinar(conteudoXML, v.TagAssinatura, v.TagAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
+                    }
                 }
 
                 //Assinar o lote
-                if (!string.IsNullOrEmpty(v.TagLoteAssinatura))
-                    if (!Assinado(conteudoXML, v.TagLoteAssinatura))
+                if(!string.IsNullOrEmpty(v.TagLoteAssinatura))
+                {
+                    if(!Assinado(conteudoXML, v.TagLoteAssinatura))
+                    {
                         Assinar(conteudoXML, v.TagLoteAssinatura, v.TagLoteAtributoId, Empresas.Configuracoes[emp].X509Certificado, emp, algorithmType, comURI);
+                    }
+                }
             }
         }
 
@@ -385,29 +414,29 @@ namespace NFe.Certificado
         /// <param name="emp">Código da empresa das configurações</param>
         public void AssinarLoteESocial(XmlDocument conteudoXML, int emp)
         {
-            XmlNodeList envioLoteEventosNodeList = conteudoXML.GetElementsByTagName("envioLoteEventos");
+            var envioLoteEventosNodeList = conteudoXML.GetElementsByTagName("envioLoteEventos");
 
-            foreach (XmlNode envioLoteEventosNode in envioLoteEventosNodeList)
+            foreach(XmlNode envioLoteEventosNode in envioLoteEventosNodeList)
             {
-                XmlElement envioLoteEventosElement = (XmlElement)envioLoteEventosNode;
-                XmlNodeList eventosNodeList = conteudoXML.GetElementsByTagName("eventos");
+                var envioLoteEventosElement = (XmlElement)envioLoteEventosNode;
+                var eventosNodeList = conteudoXML.GetElementsByTagName("eventos");
 
-                foreach (XmlNode eventosNode in eventosNodeList)
+                foreach(XmlNode eventosNode in eventosNodeList)
                 {
-                    XmlElement eventosNodeElement = (XmlElement)eventosNode;
-                    XmlNodeList eventoNodeList = conteudoXML.GetElementsByTagName("evento");
+                    var eventosNodeElement = (XmlElement)eventosNode;
+                    var eventoNodeList = conteudoXML.GetElementsByTagName("evento");
 
-                    foreach (XmlNode eventoNode in eventoNodeList)
+                    foreach(XmlNode eventoNode in eventoNodeList)
                     {
-                        XmlElement eventoElement = (XmlElement)eventoNode;
-                        XmlNodeList eSocialNodeList = eventoElement.GetElementsByTagName("eSocial");
+                        var eventoElement = (XmlElement)eventoNode;
+                        var eSocialNodeList = eventoElement.GetElementsByTagName("eSocial");
 
-                        XmlDocument xmlDoc = new XmlDocument();
+                        var xmlDoc = new XmlDocument();
                         xmlDoc.LoadXml(eSocialNodeList[0].OuterXml);
 
                         Assinar(xmlDoc, emp, 991, AlgorithmType.Sha256, false);
 
-                        XmlNode newNode = xmlDoc.ChildNodes[0];
+                        var newNode = xmlDoc.ChildNodes[0];
                         eventoNode.RemoveChild(eSocialNodeList[0]);
                         eventoNode.AppendChild(conteudoXML.ImportNode(xmlDoc.DocumentElement, true));
                     }
@@ -419,16 +448,16 @@ namespace NFe.Certificado
         {
             try
             {
-                XmlDocument doc = new XmlDocument();
+                var doc = new XmlDocument();
                 doc.Load(arquivoXML);
 
                 AssinarLoteESocial(doc, emp);
 
                 // Atualizar a string do XML já assinada
-                string StringXMLAssinado = doc.OuterXml;
+                var StringXMLAssinado = doc.OuterXml;
 
                 // Gravar o XML Assinado no HD
-                StreamWriter SW_2 = File.CreateText(arquivoXML);
+                var SW_2 = File.CreateText(arquivoXML);
                 SW_2.Write(StringXMLAssinado);
                 SW_2.Close();
             }
@@ -449,24 +478,24 @@ namespace NFe.Certificado
         /// <param name="emp">Código da empresa das configurações</param>
         public void AssinarLoteEFDReinf(XmlDocument conteudoXML, int emp)
         {
-            XmlNodeList loteNodeList = conteudoXML.GetElementsByTagName("loteEventos");
+            var loteNodeList = conteudoXML.GetElementsByTagName("loteEventos");
 
-            foreach (XmlNode loteEventosNode in loteNodeList)
+            foreach(XmlNode loteEventosNode in loteNodeList)
             {
-                XmlElement loteEventosElement = (XmlElement)loteEventosNode;
-                XmlNodeList eventoNodeList = conteudoXML.GetElementsByTagName("evento");
+                var loteEventosElement = (XmlElement)loteEventosNode;
+                var eventoNodeList = conteudoXML.GetElementsByTagName("evento");
 
-                foreach (XmlNode eventoNode in eventoNodeList)
+                foreach(XmlNode eventoNode in eventoNodeList)
                 {
-                    XmlElement eventoElement = (XmlElement)eventoNode;
-                    XmlNodeList reinfNodeList = eventoElement.GetElementsByTagName("Reinf");
+                    var eventoElement = (XmlElement)eventoNode;
+                    var reinfNodeList = eventoElement.GetElementsByTagName("Reinf");
 
-                    XmlDocument xmlDoc = new XmlDocument();
+                    var xmlDoc = new XmlDocument();
                     xmlDoc.LoadXml(reinfNodeList[0].OuterXml);
 
                     Assinar(xmlDoc, emp, 991, AlgorithmType.Sha256, true);
 
-                    XmlNode newNode = xmlDoc.ChildNodes[0];
+                    var newNode = xmlDoc.ChildNodes[0];
                     eventoNode.RemoveChild(reinfNodeList[0]);
                     eventoNode.AppendChild(conteudoXML.ImportNode(xmlDoc.DocumentElement, true));
                 }
@@ -477,16 +506,16 @@ namespace NFe.Certificado
         {
             try
             {
-                XmlDocument doc = new XmlDocument();
+                var doc = new XmlDocument();
                 doc.Load(arquivoXML);
 
                 AssinarLoteEFDReinf(doc, emp);
 
                 // Atualizar a string do XML já assinada
-                string StringXMLAssinado = doc.OuterXml;
+                var StringXMLAssinado = doc.OuterXml;
 
                 // Gravar o XML Assinado no HD
-                StreamWriter SW_2 = File.CreateText(arquivoXML);
+                var SW_2 = File.CreateText(arquivoXML);
                 SW_2.Write(StringXMLAssinado);
                 SW_2.Close();
             }
@@ -502,15 +531,15 @@ namespace NFe.Certificado
 
         public void CarregarPIN(int emp, string arqXML, Servicos servico)
         {
-            if (Empresas.Configuracoes[emp].UsaCertificado)
+            if(Empresas.Configuracoes[emp].UsaCertificado)
             {
-                if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].CertificadoPIN) &&
+                if(!string.IsNullOrEmpty(Empresas.Configuracoes[emp].CertificadoPIN) &&
                     Empresas.Configuracoes[emp].X509Certificado.IsA3() &&
                     !Empresas.Configuracoes[emp].CertificadoPINCarregado)
                 {
-                    string tempFile = "";
+                    var tempFile = "";
 
-                    switch (servico)
+                    switch(servico)
                     {
                         case Servicos.ConsultaCadastroContribuinte:
                             tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML) + "__" + Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML;
@@ -534,8 +563,10 @@ namespace NFe.Certificado
                             break;
                     }
 
-                    if (tempFile != "" && File.Exists(tempFile))
+                    if(tempFile != "" && File.Exists(tempFile))
+                    {
                         File.Delete(tempFile);
+                    }
                 }
             }
         }
@@ -547,7 +578,7 @@ namespace NFe.Certificado
             int codEmp,
             string pin)
         {
-            string _pin = pin;
+            var _pin = pin;
 
             AssinaturaValida = true;
             try
@@ -571,10 +602,10 @@ namespace NFe.Certificado
         /// <returns>true = Já está assinado</returns>
         private bool Assinado(string arqXML, string tagAssinatura)
         {
-            bool retorno = false;
+            var retorno = false;
             try
             {
-                XmlDocument doc = new XmlDocument();
+                var doc = new XmlDocument();
                 doc.Load(arqXML);
 
                 retorno = Assinado(doc, tagAssinatura);
@@ -596,12 +627,14 @@ namespace NFe.Certificado
         /// <returns>true = Já está assinado</returns>
         private bool Assinado(XmlDocument conteudoXML, string tagAssinatura)
         {
-            bool retorno = false;
+            var retorno = false;
 
             try
             {
-                if (conteudoXML.GetElementsByTagName(tagAssinatura)[0].LastChild.Name == "Signature")
+                if(conteudoXML.GetElementsByTagName(tagAssinatura)[0].LastChild.Name == "Signature")
+                {
                     retorno = true;
+                }
             }
             catch { }
 
@@ -609,5 +642,153 @@ namespace NFe.Certificado
         }
 
         #endregion Assinado()
+
+        #region Assinar XML de consulta. Específico para município de São José dos Pinhais
+
+        private void AssinarJSP(XmlDocument conteudoXML,
+            string tagAssinatura,
+            string tagAtributoId,
+            X509Certificate2 x509Cert,
+            int empresa,
+            AlgorithmType algorithmType,
+            bool comURI)
+        {
+
+            try
+            {
+                if(x509Cert == null)
+                {
+                    throw new ExceptionCertificadoDigital(ErroPadrao.CertificadoNaoEncontrado);
+                }
+
+                if(conteudoXML.GetElementsByTagName(tagAssinatura).Count == 0)
+                {
+                    throw new Exception("A tag de assinatura " + tagAssinatura.Trim() + " não existe no XML. (Código do Erro: 5)");
+                }
+                else if(conteudoXML.GetElementsByTagName(tagAtributoId).Count == 0)
+                {
+                    throw new Exception("A tag de assinatura " + tagAtributoId.Trim() + " não existe no XML. (Código do Erro: 4)");
+                }
+                // Existe mais de uma tag a ser assinada
+                else
+                {
+                    XmlNode nodes = conteudoXML.GetElementsByTagName(tagAssinatura)[0];
+                    XmlNode childNodes = nodes;
+
+                    // Create a reference to be signed
+                    var reference = new Reference
+                    {
+                        Uri = ""
+                    };
+
+                    // pega o uri que deve ser assinada
+                    var childElemen = (XmlElement)childNodes;
+
+                    if(comURI)
+                    {
+                        if(childElemen.GetAttributeNode("Id") != null)
+                        {
+                            reference.Uri = "#" + childElemen.GetAttributeNode("Id").Value;
+                        }
+                        else if(childElemen.GetAttributeNode("id") != null)
+                        {
+                            reference.Uri = "#" + childElemen.GetAttributeNode("id").Value;
+                        }
+                    }
+
+                    // Create a SignedXml object.
+                    var signedXml = new SignedXml(conteudoXML);
+
+#if _fw46
+                    //A3
+                    if(!string.IsNullOrEmpty(Empresas.Configuracoes[empresa].CertificadoPIN) &&
+                        clsX509Certificate2Extension.IsA3(x509Cert) &&
+                        !Empresas.Configuracoes[empresa].CertificadoPINCarregado)
+                    {
+                        x509Cert.SetPinPrivateKey(Empresas.Configuracoes[empresa].CertificadoPIN);
+                        Empresas.Configuracoes[empresa].CertificadoPINCarregado = true;
+                    }
+
+                    if(algorithmType.Equals(AlgorithmType.Sha256))
+                    {
+                        signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
+                        signedXml.SigningKey = x509Cert.GetRSAPrivateKey();
+                    }
+#endif
+
+                    if(algorithmType.Equals(AlgorithmType.Sha1))
+                    {
+                        signedXml.SigningKey = x509Cert.PrivateKey;
+                        signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2000/09/xmldsig#rsa-sha1";
+                        reference.DigestMethod = "http://www.w3.org/2000/09/xmldsig#sha1";
+                    }
+
+                    // Add an enveloped transformation to the reference.
+                    reference.AddTransform(new XmlDsigEnvelopedSignatureTransform());
+                    reference.AddTransform(new XmlDsigC14NTransform());
+
+                    // Add the reference to the SignedXml object.
+                    signedXml.AddReference(reference);
+
+#if _fw46
+                    if(algorithmType.Equals(AlgorithmType.Sha256))
+                    {
+                        reference.DigestMethod = "http://www.w3.org/2001/04/xmlenc#sha256";
+                    }
+#endif
+
+                    // Create a new KeyInfo object
+                    var keyInfo = new KeyInfo();
+
+                    // Load the certificate into a KeyInfoX509Data object
+                    // and add it to the KeyInfo object.
+                    keyInfo.AddClause(new KeyInfoX509Data(x509Cert));
+
+                    // Add the KeyInfo object to the SignedXml object.
+                    signedXml.KeyInfo = keyInfo;
+                    signedXml.ComputeSignature();
+
+                    // Get the XML representation of the signature and save
+                    // it to an XmlElement object.
+                    var xmlDigitalSignature = signedXml.GetXml();
+
+                    // Gravar o elemento no documento XML
+                    nodes.AppendChild(conteudoXML.ImportNode(xmlDigitalSignature, true));
+                }
+            }
+            catch(CryptographicException ex)
+            {
+                #region #10316
+
+                /*
+                 * Solução para o problema do certificado do tipo A3
+                 * Marcelo
+                 * 29/07/2013
+                 */
+
+                AssinaturaValida = false;
+
+                if(clsX509Certificate2Extension.IsA3(x509Cert))
+                {
+                    x509Cert = Empresas.ResetCertificado(empresa);
+                    if(!TesteCertificado)
+                    {
+                        throw new Exception("O certificado deverá ser reiniciado.\r\n Retire o certificado.\r\nAguarde o LED terminar de piscar.\r\n Recoloque o certificado e informe o PIN novamente.\r\n" + ex.ToString());// #12342 concatenar com a mensagem original
+                    }
+                }
+                else
+                {
+                    throw;
+                }
+
+                #endregion #10316
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        #endregion
     }
 }

@@ -20,8 +20,9 @@ namespace NFe.Components.HJoinvilleSC {
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
-    
-    
+    using NFe.Components.SoapExtender;
+
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -90,6 +91,7 @@ namespace NFe.Components.HJoinvilleSC {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("https://nfemwshomologacao.joinville.sc.gov.br/EnviarLoteRpsEnvio", RequestElementName="EnviarLoteRpsEnvio", RequestNamespace="https://nfemwshomologacao.joinville.sc.gov.br", ResponseElementName="EnviarLoteRpsEnvioResponse", ResponseNamespace="https://nfemwshomologacao.joinville.sc.gov.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("EnviarLoteRpsResposta", IsNullable=true)]
+        [SoapExtender]
         public EnviarLoteRpsResposta RecepcionarLoteRps(System.Xml.XmlNode LoteRps, System.Xml.XmlNode Signature) {
             object[] results = this.Invoke("RecepcionarLoteRps", new object[] {
                         LoteRps,
