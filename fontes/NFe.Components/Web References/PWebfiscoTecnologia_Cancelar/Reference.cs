@@ -23,10 +23,10 @@ namespace NFe.Components.PWebfiscoTecnologia_Cancelar {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="webserviceBinding", Namespace="http://201.16.156.170/issqn/wservice/wsnfecancela.php")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="webserviceBinding", Namespace="http://187.32.116.170/issqn/wservice/wsnfecancela.php")]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(CancelaNfe))]
     public partial class webservice : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
@@ -74,7 +74,7 @@ namespace NFe.Components.PWebfiscoTecnologia_Cancelar {
         public event CancelaNfeCompletedEventHandler CancelaNfeCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfecancela.php/CancelaNfe", RequestNamespace="", ResponseNamespace="")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfecancela.php/CancelaNfe", RequestNamespace="", ResponseNamespace="")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
         public CancelaNfe[] CancelaNfe(string usuario, string pass, string prf, string usr, string ctr, string tipo, string obs) {
             object[] results = this.Invoke("CancelaNfe", new object[] {
@@ -135,11 +135,11 @@ namespace NFe.Components.PWebfiscoTecnologia_Cancelar {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://201.16.156.170/issqn/wservice/wsnfecancela.php")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://187.32.116.170/issqn/wservice/wsnfecancela.php")]
     public partial class CancelaNfe {
         
         private string okkField;
@@ -156,11 +156,11 @@ namespace NFe.Components.PWebfiscoTecnologia_Cancelar {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void CancelaNfeCompletedEventHandler(object sender, CancelaNfeCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CancelaNfeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

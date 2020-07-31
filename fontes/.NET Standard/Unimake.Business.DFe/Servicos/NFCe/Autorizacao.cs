@@ -58,7 +58,7 @@ namespace Unimake.Business.DFe.Servicos.NFCe
         #region Protected Methods
 
         /// <summary>
-        /// Efetuar um Ajustse no XML da NFCe logo depois de assinado
+        /// Efetuar um ajuste no XML da NFCe logo depois de assinado
         /// </summary>
         protected override void AjustarXMLAposAssinado()
         {

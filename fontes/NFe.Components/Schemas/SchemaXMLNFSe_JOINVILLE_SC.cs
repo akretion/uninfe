@@ -91,8 +91,8 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\ABRASF\\nfse_v2_04.xsd",
                 Descricao = "XML de Cancelamento da NFS-e",
-                TagAssinatura = "",
-                TagAtributoId = "",
+                TagAssinatura = "Pedido",
+                TagAtributoId = "InfPedidoCancelamento",
                 TargetNameSpace = "http://nfewshomologacao.joinville.sc.gov.br"
             });
 

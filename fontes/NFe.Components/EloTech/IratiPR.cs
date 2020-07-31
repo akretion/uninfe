@@ -12,7 +12,8 @@ namespace NFe.Components.Elotech
     {
         #region Private Fields
 
-        private readonly ElotechService Servico = new ElotechService("http://tributos.irati.pr.gov.br:9800/WSIss/nfse203.wsdl");
+//        private readonly ElotechService Servico = new ElotechService("http://tributos.irati.pr.gov.br:9800/WSIss/nfse203.wsdl");
+        private readonly ElotechService Servico = new ElotechService("http://tributos.irati.pr.gov.br:8090/WSIss/nfse_v1_2.wsdl");        
 
         #endregion Private Fields
 
@@ -26,13 +27,13 @@ namespace NFe.Components.Elotech
             return strResult;
         }
 
-        //private string EnviarLoteRpsSincrono(string file)
-        //{
-        //    var enviarLoteRpsSincronoResposta = Servico.EnviarLoteRpsSincrono(file);
-        //    var strResult = SerializarObjeto(enviarLoteRpsSincronoResposta);
+        private string EnviarLoteRpsSincrono(string file)
+        {
+            var enviarLoteRpsSincronoResposta = Servico.EnviarLoteRpsSincrono(file);
+            var strResult = SerializarObjeto(enviarLoteRpsSincronoResposta);
 
-        //    return strResult;
-        //}
+            return strResult;
+        }
 
         /// <summary>
         /// Identificamos falha no certificado o do servidor, então temos que ignorar os erros
@@ -131,9 +132,9 @@ namespace NFe.Components.Elotech
                         strResult = EnviarLoteRps(file);
                         break;
 
-                        //case "EnviarLoteRpsSincronoEnvio":
-                        //    strResult = EnviarLoteRpsSincrono(file);
-                        //    break;
+                    case "EnviarLoteRpsSincronoEnvio":
+                        strResult = EnviarLoteRpsSincrono(file);
+                        break;
                 }
 
                 GerarRetorno(file, strResult,

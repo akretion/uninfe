@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configuracoes>
-  <SVC>SVCAN</SVC>
   <Heranca>SVSP.xml</Heranca>
 </Configuracoes>

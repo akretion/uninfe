@@ -113,6 +113,12 @@ namespace NFSe.Components
 
                 case 4104907: //Castro-PR
                     return 7495;
+
+                case 4104808: //Cascavel-PR
+                    return 74934;
+
+                case 4303103: //Cachoeirinha-SC
+                    return 85618;
             }
 
             return 0;
@@ -155,7 +161,12 @@ namespace NFSe.Components
         }
 
         public override void ConsultarNfsePorRps(string file)
-        { }
+        {
+            string result = EnviaXML(file);
+
+            GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
+        }
 
         private string EnviaXML(string file)
         {

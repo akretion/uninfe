@@ -1293,6 +1293,8 @@ namespace NFe.Settings
             }
             xml.Add(empresasele);
             xml.Save(Propriedade.NomeArqEmpresas);
+            xml.Save(Propriedade.PastaExecutavel + "\\UniNfeEmpresa2.xml");
+            xml.Save(Propriedade.PastaExecutavel + "\\UniNfeEmpresa3.xml");
         }
 
         #endregion Gravar XML com as empresas cadastradas
@@ -1768,7 +1770,7 @@ namespace NFe.Settings
                         if (validou && empresa.PastaConfigUniDanfe.Trim() != string.Empty)
                         {
                             //Verificar a existência o arquivo de configuração
-                            if (!File.Exists(empresa.PastaConfigUniDanfe + "\\dados\\config.tps"))
+                            if (!File.Exists(empresa.PastaConfigUniDanfe + "\\dados\\ConfigBD.tps"))
                             {
                                 erro = "O arquivo de configuração do UniDANFe não foi localizado na pasta informada." + xNomeCNPJ;
                                 validou = false;

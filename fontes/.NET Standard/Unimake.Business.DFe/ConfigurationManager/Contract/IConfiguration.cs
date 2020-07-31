@@ -10,11 +10,13 @@
         string PastaArqConfigNFCe { get; }
         string PastaArqConfigNFe { get; }
         string PastaArqConfigCTe { get; }
+        string PastaArqConfigCTeOS { get; }
         string PastaArqConfigMDFe { get; }
         string PastaSchema { get; }
         string PastaSchemaNFCe { get; }
         string PastaSchemaNFe { get; }
         string PastaSchemaCTe { get; }
+        string PastaSchemaCTeOS { get; }
         string PastaSchemaMDFe { get; }
 
         #endregion Public Properties

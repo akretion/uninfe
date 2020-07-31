@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Xml;
 using Unimake.Business.DFe.Servicos.Interop;
 using Unimake.Business.DFe.Utility;
 using Unimake.Business.DFe.Xml.CTe;
@@ -36,6 +38,23 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
             //Atualizar a propriedade do XML do CTe novamente com o conteúdo atual já a tag de QRCode e link de consulta
             ConteudoXML = EnviCTe.GerarXML();
+        }
+
+        /// <summary>
+        /// Validar o XML do CTe e também o Modal específico
+        /// </summary>
+        /// <param name="xml">XML a ser validado</param>
+        /// <param name="schemaArquivo">Nome do arquivo de schemas para ser utilizado na validação</param>
+        /// <param name="targetNS">Namespace a ser utilizado na validação</param>
+        private void ValidarXMLCTe(XmlDocument xml, string schemaArquivo, string targetNS)
+        {
+            var validar = new ValidarSchema();
+            validar.Validar(xml, Path.Combine(Configuracoes.SchemaPasta, schemaArquivo), targetNS);
+
+            if(!validar.Success)
+            {
+                throw new Exception(validar.ErrorMessage);
+            }
         }
 
         #region Private Fields
@@ -92,6 +111,68 @@ namespace Unimake.Business.DFe.Servicos.CTe
             base.AjustarXMLAposAssinado();
         }
 
+        protected override void XmlValidar()
+        {
+            var xml = EnviCTe;
+
+            if(Configuracoes.SchemasEspecificos.Count > 0)
+            {
+                var schemaArquivo = string.Empty;
+                var schemaArquivoEspecifico = string.Empty;
+
+                for(var i = 0; i < xml.CTe.Count; i++)
+                {
+                    var modal = (int)xml.CTe[i].InfCTe.Ide.Modal;
+
+                    schemaArquivo = Configuracoes.SchemasEspecificos[modal.ToString()].SchemaArquivo;
+                    schemaArquivoEspecifico = Configuracoes.SchemasEspecificos[modal.ToString()].SchemaArquivoEspecifico;
+
+                    #region Validar o XML geral
+
+                    ValidarXMLCTe(ConteudoXML, schemaArquivo, Configuracoes.TargetNS);
+
+                    #endregion Validar o XML geral
+
+                    #region Validar a parte específica de modal do CTe
+
+                    var xmlEspecifico = new XmlDocument();
+                    switch(xml.CTe[i].InfCTe.Ide.Modal)
+                    {
+                        case ModalidadeTransporteCTe.Rodoviario:
+                            xmlEspecifico.LoadXml(XMLUtility.Serializar<Rodo>(xml.CTe[i].InfCTe.InfCTeNorm.InfModal.Rodo).OuterXml);
+                            goto default;
+
+                        case ModalidadeTransporteCTe.Aereo:
+                            xmlEspecifico.LoadXml(XMLUtility.Serializar<Aereo>(xml.CTe[i].InfCTe.InfCTeNorm.InfModal.Aereo).OuterXml);
+                            goto default;
+
+                        case ModalidadeTransporteCTe.Aquaviario:
+                            xmlEspecifico.LoadXml(XMLUtility.Serializar<Aquav>(xml.CTe[i].InfCTe.InfCTeNorm.InfModal.Aquav).OuterXml);
+                            goto default;
+
+                        case ModalidadeTransporteCTe.Ferroviario:
+                            xmlEspecifico.LoadXml(XMLUtility.Serializar<Ferrov>(xml.CTe[i].InfCTe.InfCTeNorm.InfModal.Ferrov).OuterXml);
+                            goto default;
+
+                        case ModalidadeTransporteCTe.Dutoviario:
+                            xmlEspecifico.LoadXml(XMLUtility.Serializar<Duto>(xml.CTe[i].InfCTe.InfCTeNorm.InfModal.Duto).OuterXml);
+                            goto default;
+
+                        case ModalidadeTransporteCTe.Multimodal:
+                            xmlEspecifico.LoadXml(XMLUtility.Serializar<MultiModal>(xml.CTe[i].InfCTe.InfCTeNorm.InfModal.MultiModal).OuterXml);
+                            goto default;
+
+                        default:
+                            ValidarXMLCTe(xmlEspecifico, schemaArquivoEspecifico, Configuracoes.TargetNS);
+                            break;
+                    }
+
+                    #endregion Validar a parte específica de cada evento
+
+                }
+            }
+        }
+
         #endregion Protected Methods
 
         #region Public Properties
@@ -104,18 +185,18 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// <summary>
         /// Propriedade com o conteúdo retornado da consulta situção do CTe
         /// </summary>
-        public List<RetConsSitCTe> RetConsSitCTe = new List<RetConsSitCTe>();
+        public List<RetConsSitCTe> RetConsSitCTes = new List<RetConsSitCTe>();
 
         /// <summary>
-        /// Propriedade contendo o XML da CTe com o protocolo de autorização anexado
+        /// Propriedade contendo o XML da CTe com o protocolo de autorização anexado - Envio Assincrono
         /// </summary>
-        public Dictionary<string, CteProc> CteProcResult
+        public Dictionary<string, CteProc> CteProcResults
         {
             get
             {
-                if(RetConsReciCTe == null && RetConsSitCTe.Count <= 0)
+                if(RetConsReciCTe == null && RetConsSitCTes.Count <= 0)
                 {
-                    throw new Exception("Defina o conteúdo da Propriedade RetConsReciCTe ou RetConsSitCte, sem a definição de uma delas não é possível obter o conteúdo da CteProcResult.");
+                    throw new Exception("Defina o conteúdo da Propriedade RetConsReciCTe ou RetConsSitCte, sem a definição de uma delas não é possível obter o conteúdo da CteProcResults.");
                 }
 
                 for(var i = 0; i < EnviCTe.CTe.Count; i++)
@@ -152,11 +233,11 @@ namespace Unimake.Business.DFe.Servicos.CTe
                         }
                         #endregion
                     }
-                    else if(RetConsSitCTe.Count > 0)
+                    else if(RetConsSitCTes.Count > 0)
                     {
                         #region Resultado do envio do CT-e através da consulta situação
 
-                        foreach(var item in RetConsSitCTe)
+                        foreach(var item in RetConsSitCTes)
                         {
                             if(item != null && item.ProtCTe != null)
                             {
@@ -184,18 +265,25 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
                     if(CteProcs.ContainsKey(EnviCTe.CTe[i].InfCTe.Chave))
                     {
-                        CteProcs[EnviCTe.CTe[i].InfCTe.Chave].ProtCTe = protCTe ;
+                        CteProcs[EnviCTe.CTe[i].InfCTe.Chave].ProtCTe = protCTe;
                     }
                     else
                     {
-                        CteProcs.Add(EnviCTe.CTe[i].InfCTe.Chave, 
+                        //Se por algum motivo não tiver assinado, só vou forçar atualizar o ConteudoXML para ficar correto na hora de gerar o arquivo de distribuição. Pode estar sem assinar no caso do desenvolvedor estar forçando gerar o XML já autorizado a partir de uma consulta situação da NFe, caso tenha perdido na tentativa do primeiro envio.
+                        if(EnviCTe.CTe[i].Signature == null)
+                        {
+                            ConteudoXML = ConteudoXMLAssinado;
+                            AjustarXMLAposAssinado();
+                        }
+
+                        CteProcs.Add(EnviCTe.CTe[i].InfCTe.Chave,
                             new CteProc
                             {
                                 Versao = EnviCTe.Versao,
                                 CTe = EnviCTe.CTe[i],
                                 ProtCTe = protCTe
                             });
-                    }                    
+                    }
                 }
 
                 return CteProcs;
@@ -270,7 +358,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// <param name="pasta">Pasta onde deve ser gravado o XML</param>
         public void GravarXmlDistribuicao(string pasta)
         {
-            foreach(var item in CteProcResult)
+            foreach(var item in CteProcResults)
             {
                 if(item.Value.ProtCTe != null)
                 {
@@ -285,7 +373,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// <param name="stream">Stream que vai receber o XML de distribuição</param>
         public void GravarXmlDistribuicao(System.IO.Stream stream)
         {
-            foreach(var item in CteProcResult)
+            foreach(var item in CteProcResults)
             {
                 if(item.Value.ProtCTe != null)
                 {

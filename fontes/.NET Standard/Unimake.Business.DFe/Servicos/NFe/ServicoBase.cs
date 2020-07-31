@@ -45,6 +45,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
                     break;
 
                 case TipoDFe.CTe:
+                case TipoDFe.CTeOS:
                     Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaCTe;
                     break;
 
@@ -87,7 +88,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
             if(!string.IsNullOrWhiteSpace(Configuracoes.TagAssinatura) &&
                !AssinaturaDigital.EstaAssinado(ConteudoXML, Configuracoes.TagAssinatura))
             {
-                AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id");
+                AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, Configuracoes.CertificadoA3PIN, "Id");
             }
 
             AjustarXMLAposAssinado();

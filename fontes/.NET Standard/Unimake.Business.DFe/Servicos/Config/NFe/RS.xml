@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configuracoes>
-  <SVC>SVCAN</SVC>
   <Servicos ID="NFe">
     <StatusServico versao="4.00">
       <Descricao>Consulta situação do serviço da nota fiscal eletrônica</Descricao>

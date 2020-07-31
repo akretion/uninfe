@@ -96,6 +96,11 @@ namespace Unimake.Business.DFe.Servicos
         public X509Certificate2 CertificadoDigital { get; set; }
 
         /// <summary>
+        /// PIN do certificado A3. Informe esta propriedade para não precisar digitar o PIN manualmente.
+        /// </summary>
+        public string CertificadoA3PIN { get; set; }
+
+        /// <summary>
         /// Endereço WebService do ambiente de homologação
         /// </summary>
         public string WebEnderecoHomologacao { get; set; }

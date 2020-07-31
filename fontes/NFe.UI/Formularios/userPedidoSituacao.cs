@@ -101,7 +101,11 @@ namespace NFe.UI
                         txtCNPJ.Text = uninfeDummy.FmtCnpjCpf(Empresas.Configuracoes[Emp].CNPJ, true);
 
                         //Posicionar o elemento da combo tipo de emissão
-                        this.cbEmissao.SelectedValue = Empresas.Configuracoes[this.Emp].tpEmis;
+                        if(Empresas.Configuracoes[this.Emp].tpEmis == 1 || Empresas.Configuracoes[this.Emp].tpEmis == 6 ||
+                            Empresas.Configuracoes[this.Emp].tpEmis == 7 || Empresas.Configuracoes[this.Emp].tpEmis == 8)
+                        {
+                            this.cbEmissao.SelectedValue = Empresas.Configuracoes[this.Emp].tpEmis;
+                        }
 
                         this.ChangeVersao(Empresas.Configuracoes[this.Emp].Servico);
 
@@ -245,7 +249,7 @@ namespace NFe.UI
                         case TipoAplicativo.NFCe:
                             if (tpEmis != TipoEmissao.teNormal)
                                 throw new Exception("NFC-e só dispõe do tipo de emissão Normal.");
-                            break;
+                        break;
                     }
                 }
 

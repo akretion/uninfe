@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configuracoes>
-  <SVC>SVCAN</SVC>
   <Servicos ID="NFe">
     <RecepcaoEvento versao="1.00">
       <Descricao>Recepcao de eventos</Descricao>

@@ -104,6 +104,13 @@ namespace NFe.Service.NFSe
                         if (ConfiguracaoApp.Proxy)
                             ipm.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
 
+                        if(oDadosEnvLoteRps.cMunicipio == 4303103 || oDadosEnvLoteRps.cMunicipio == 4104808)
+                        {
+                            AssinaturaDigital adIPM = new AssinaturaDigital();
+                            //adIPM.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
+                            adIPM.Assinar(NomeArquivoXML, "nfse", "nfse", Empresas.Configuracoes[emp].X509Certificado, emp);
+                        }
+
                         ipm.EmiteNF(NomeArquivoXML);
                         break;
 
@@ -599,7 +606,8 @@ namespace NFe.Service.NFSe
                             oDadosEnvLoteRps.cMunicipio == 4302808 ||
 							oDadosEnvLoteRps.cMunicipio == 3501301 ||
 							oDadosEnvLoteRps.cMunicipio == 4300109 ||
-                            oDadosEnvLoteRps.cMunicipio == 4124053)
+                            oDadosEnvLoteRps.cMunicipio == 4124053 ||
+                            oDadosEnvLoteRps.cMunicipio == 4101408)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

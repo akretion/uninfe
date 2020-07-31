@@ -52,6 +52,7 @@
             this.cbIndSincMDFe.TabIndex = 1;
             this.cbIndSincMDFe.Text = "Enviar o MDF-e utilizando o processo síncrono";
             this.cbIndSincMDFe.UseSelectable = true;
+            this.cbIndSincMDFe.Visible = false;
             this.cbIndSincMDFe.CheckedChanged += new System.EventHandler(this.cbIndSincMDFe_CheckedChanged);
             // 
             // userConfiguracao_outrasconfiguracoes

@@ -195,6 +195,10 @@ namespace NFe.Components.Pronin
                                 proninService = new SantaTerezinhaItaipuPR.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
+                            case 4101408://Apucarana - PR
+                                proninService = new ApucaranaPR.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

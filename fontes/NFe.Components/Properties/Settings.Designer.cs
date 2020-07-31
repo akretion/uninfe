@@ -2154,8 +2154,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfe_teste_homologacao." +
-            "php")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfe_teste_homologacao.php")]
         public string NFe_Components_HBarraBonitaSP_webservice {
             get {
                 return ((string)(this["NFe_Components_HBarraBonitaSP_webservice"]));
@@ -2165,7 +2164,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfeenvia.php")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeenvia.php")]
         public string NFe_Components_PBarraBonitaSP_Enviar_webservice {
             get {
                 return ((string)(this["NFe_Components_PBarraBonitaSP_Enviar_webservice"]));
@@ -2175,7 +2174,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfecancela.php")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfecancela.php")]
         public string NFe_Components_PBarraBonitaSP_Cancelar_webservice {
             get {
                 return ((string)(this["NFe_Components_PBarraBonitaSP_Cancelar_webservice"]));
@@ -2185,7 +2184,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfeconsulta.php")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsulta.php")]
         public string NFe_Components_PBarraBonitaSP_ConsultarNfe_webservice {
             get {
                 return ((string)(this["NFe_Components_PBarraBonitaSP_ConsultarNfe_webservice"]));
@@ -2285,7 +2284,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfeconsultaxml.php")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsultaxml.php")]
         public string NFe_Components_PWebFiscoTecnologia_ConsultarXml_webservice {
             get {
                 return ((string)(this["NFe_Components_PWebFiscoTecnologia_ConsultarXml_webservice"]));
@@ -2356,7 +2355,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.homolog.govdigital.com.br/ws/vgp")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.homolog.nfe-cidades.com.br/ws/vgp")]
         public string NFe_Components_HVargemGrandePaulistaSP_NfseServiceImplVgpService {
             get {
                 return ((string)(this["NFe_Components_HVargemGrandePaulistaSP_NfseServiceImplVgpService"]));
@@ -2366,7 +2365,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.govdigital.com.br/ws/vgp")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe-cidades.com.br/ws/vgp")]
         public string NFe_Components_PVargemGrandePaulistaSP_NfseServiceImplVgpService {
             get {
                 return ((string)(this["NFe_Components_PVargemGrandePaulistaSP_NfseServiceImplVgpService"]));
@@ -3048,6 +3047,16 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PColatinaES_RpsServiceService {
             get {
                 return ((string)(this["NFe_Components_PColatinaES_RpsServiceService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://cetil.apucarana.pr.gov.br/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PApucaranaPR_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PApucaranaPR_NFSeIntegracao"]));
             }
         }
     }

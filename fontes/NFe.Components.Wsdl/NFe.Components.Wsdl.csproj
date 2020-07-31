@@ -633,12 +633,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PISSOnLineApucarana.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HISSOnLineApucarana.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFse\schemas\NFSe\ISSNET\servico_consultar_url_visualizacao_nfse_envio.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -689,18 +683,6 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\GIF\xmldsig-core-schema_v1.01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaCachoerinhaRSCancelamento.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaCachoerinhaRSConsulta.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HThemaCachoerinhaRSRemessa.wsdl">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaCachoerinhaRSCancelamento.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaCachoerinhaRSConsulta.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PThemaCachoerinhaRSRemessa.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HISSNet.wsdl" />
@@ -2583,10 +2565,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNFeRecepcaoEvento_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeRetAutorizacao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeStatusServico_C.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HVoltaRedondaRJ-SIMPLISS.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PVoltaRedondaRJ-SIMPLISS.wsdl">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HVenancioAires-NFSEcancelamento.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HVenancioAires-NFSEconsulta.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HVenancioAires-NFSEremessa.wsdl" />
@@ -3760,6 +3738,21 @@
     <EmbeddedResource Include="NFe\schemas\CTe\retCTe_v3.00.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\DFe\distDFeInt_v1.35.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\DFe\resEvento_v1.35.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\DFe\resNFe_v1.35.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\DFe\retDistDFeInt_v1.35.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\DFe\tiposBasico_v1.03.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -4686,6 +4679,34 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PFarroupilhaRS-ConsultaNFSeServicosTomadosIntermediados.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PFarroupilhaRS-ConsultaSequenciaLoteNotaRPS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PFarroupilhaRS-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HVoltaRedondaRJ-ISSNET.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PVoltaRedondaRJ-ISSNET.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HBiriguiSP-WSEntrada.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HBiriguiSP-WSSaida.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HBiriguiSP-WSUtil.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HIbiuna-CECAM.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PIbiuna-CECAM.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaveramaRS-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaveramaRS-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaveramaRS-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaveramaRS-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaveramaRS-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaveramaRS-ConsultaNFSeServicosTomadosIntermediados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaveramaRS-CancelamentoNFSe.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaveramaRS-ConsultaLoteRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaveramaRS-ConsultaNFSePorFaixa.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaveramaRS-ConsultaNFSePorRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaveramaRS-ConsultaNFSeServicosTomadosIntermediados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaveramaRS-ConsultaNFSeServicosPrestados.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaveramaRS-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaveramaRS-EnvioLoteRPSSincrono.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPaveramaRS-ConsultaSequenciaLoteNotaRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPaveramaRS-ConsultaSequenciaLoteNotaRPS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PApucaranaPR-PRONIN.WSDL" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoPedroDaAldeira-MODERNIZACAO_PUBLICA.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoPedroDaAldeira-MODERNIZACAO_PUBLICA.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PFeiradeSantanaBA_WebISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HFeiradeSantanaBA_WebISS.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

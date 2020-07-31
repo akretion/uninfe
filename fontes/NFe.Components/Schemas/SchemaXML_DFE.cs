@@ -47,6 +47,19 @@ namespace NFe.Components
                 TargetNameSpace = string.Empty
             });
             #endregion
+
+            #region Distribuição de DFe´s
+            SchemaXML.InfSchemas.Add("NFE-1.35-distDFeInt", new InfSchema()
+            {
+                Tag = "distDFeInt",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "DFe\\distDFeInt_v1.35.xsd",
+                Descricao = "XML de consulta de documentos fiscais eletrônicos (NFe)",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = string.Empty
+            });
+            #endregion
         }
     }
 }

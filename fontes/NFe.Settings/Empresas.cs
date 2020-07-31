@@ -84,7 +84,7 @@ namespace NFe.Settings
 
                         if (!String.IsNullOrEmpty(fileLock))
                         {
-                            throw new Components.Exceptions.AppJaExecutando("Já existe uma instância do UniNFe em Execução que atende a conjunto de pastas: " + 
+                            throw new Components.Exceptions.AppJaExecutando("Já existe uma instância do UniNFe em Execução que atende a conjunto de pastas: " +
                                 dir + " (*Incluindo subdiretórios).\r\n\r\n" +
                                 "Nome da estação que está executando: " + fileName.Replace(Propriedade.NomeAplicacao + "-", "").Replace(".lock", ""));
                         }
@@ -144,9 +144,45 @@ namespace NFe.Settings
 
             if (File.Exists(Propriedade.NomeArqEmpresas))
             {
+
+                XElement axml = null;
+                for (int i = 0; i <= 1; i++)
+                {
+                    try
+                    {
+                        axml = XElement.Load(Propriedade.NomeArqEmpresas);
+                        break;
+                    }
+                    catch
+                    {
+                        if (File.Exists(Propriedade.PastaExecutavel + "\\UniNfeEmpresa2.xml") &&
+                            File.OpenText(Propriedade.PastaExecutavel + "\\UniNfeEmpresa2.xml").ReadLine() != null)
+                        {
+                            File.Copy(Propriedade.PastaExecutavel + "\\UniNfeEmpresa2.xml", Propriedade.NomeArqEmpresas, true);
+                            continue;
+                        }
+
+                        else if (File.Exists(Propriedade.PastaExecutavel + "\\UniNfeEmpresa3.xml") &&
+                                File.OpenText(Propriedade.PastaExecutavel + "\\UniNfeEmpresa3.xml").ReadLine() != null)
+                        {
+                            File.Copy(Propriedade.PastaExecutavel + "\\UniNfeEmpresa3.xml", Propriedade.NomeArqEmpresas, true);
+                            continue;
+                        }
+                        throw;
+                    }
+                }
+
                 try
                 {
-                    XElement axml = XElement.Load(Propriedade.NomeArqEmpresas);
+                    if (!File.Exists(Propriedade.PastaExecutavel + "\\UniNfeEmpresa2.xml"))
+                    {
+                        File.Copy(Propriedade.NomeArqEmpresas, Propriedade.PastaExecutavel + "\\UniNfeEmpresa2.xml", true);
+                    }
+                    if (!File.Exists(Propriedade.PastaExecutavel + "\\UniNfeEmpresa3.xml"))
+                    {
+                        File.Copy(Propriedade.NomeArqEmpresas, Propriedade.PastaExecutavel + "\\UniNfeEmpresa3.xml", true);
+                    }
+                    
                     var b1 = axml.Descendants(NFeStrConstants.Registro);
                     foreach (var item in b1)
                     {
@@ -221,6 +257,7 @@ namespace NFe.Settings
                 {
                     throw;
                 }
+
             }
             if (!Empresas.ExisteErroDiretorio)
                 Empresas.CriarPasta(false);

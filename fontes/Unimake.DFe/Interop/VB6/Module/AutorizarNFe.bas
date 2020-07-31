@@ -1,6 +1,6 @@
-Attribute VB_Name = "AutorizaNFe"
+Attribute VB_Name = "ServicosNFe"
 Option Explicit
-Public Sub AutorizarNFe()
+Public Sub AutorizarPorArquivoNFe()
 On Error GoTo erro
 Dim EnviNFe
 Dim Autorizacao
@@ -11,7 +11,7 @@ Set EnviNFe = CreateObject("Unimake.Business.DFe.Xml.NFe.EnviNFe")
 EnviNFe.Versao = "4.00"
 EnviNFe.IdLote = "000000000000001"
 EnviNFe.IndSinc = 1
-EnviNFe.SetNFe GetNFe()
+EnviNFe.AddNFe (GetFromFileNFe())
 
 Set Autorizacao = CreateObject("Unimake.Business.DFe.Servicos.NFe.Autorizacao")
 Autorizacao.Executar (EnviNFe), (Config.InicializarConfiguracao(NFe))
@@ -24,6 +24,39 @@ erro:
 Utility.TrapException
 
 End Sub
+
+
+
+Public Sub AutorizarNFe()
+On Error GoTo erro
+Dim EnviNFe
+Dim Autorizacao
+
+Log.ClearLog
+
+Set EnviNFe = CreateObject("Unimake.Business.DFe.Xml.NFe.EnviNFe")
+EnviNFe.Versao = "4.00"
+EnviNFe.IdLote = "000000000000001"
+EnviNFe.IndSinc = 1
+EnviNFe.AddNFe GetNFe()
+
+Set Autorizacao = CreateObject("Unimake.Business.DFe.Servicos.NFe.Autorizacao")
+Autorizacao.Executar (EnviNFe), (Config.InicializarConfiguracao(NFe))
+
+Log.EscreveLog Autorizacao.RetornoWSString, True
+Log.EscreveLog Autorizacao.result.XMotivo, False
+
+Exit Sub
+erro:
+Utility.TrapException
+
+End Sub
+
+
+Function GetFromFileNFe()
+Dim NFe: Set NFe = CreateObject("Unimake.Business.DFe.Xml.NFe.NFe")
+Set GetFromFileNFe = NFe.LoadFromFile("Z:\uninfe\exemplos\Antigos\NFe e NFCe 3.10\NFCe\51140499999999999999650010000000121123456788-nfe.xml")
+End Function
 
 Function GetNFe()
 Dim NFe

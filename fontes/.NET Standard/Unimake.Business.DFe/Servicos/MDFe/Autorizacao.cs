@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Xml;
@@ -126,13 +125,13 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         /// <summary>
         /// Propriedade contendo o XML da MDFe com o protocolo de autorização anexado
         /// </summary>
-        public Dictionary<string, MdfeProc> MDFeProcResult
+        public Dictionary<string, MdfeProc> MDFeProcResults
         {
             get
             {
                 if(RetConsReciMDFe == null && RetConsSitMDFe.Count <= 0)
                 {
-                    throw new Exception("Defina o conteúdo da Propriedade RetConsReciMDFe ou RetConsSitMDFe, sem a definição de uma delas não é possível obter o conteúdo da MDFeProcResult.");
+                    throw new Exception("Defina o conteúdo da Propriedade RetConsReciMDFe ou RetConsSitMDFe, sem a definição de uma delas não é possível obter o conteúdo da MDFeProcResults.");
                 }
 
                 ProtMDFe protMDFe = null;
@@ -190,6 +189,13 @@ namespace Unimake.Business.DFe.Servicos.MDFe
                 }
                 else
                 {
+                    //Se por algum motivo não tiver assinado, só vou forçar atualizar o ConteudoXML para ficar correto na hora de gerar o arquivo de distribuição. Pode estar sem assinar no caso do desenvolvedor estar forçando gerar o XML já autorizado a partir de uma consulta situação da NFe, caso tenha perdido na tentativa do primeiro envio.
+                    if(EnviMDFe.MDFe.Signature == null)
+                    {
+                        ConteudoXML = ConteudoXMLAssinado;
+                        AjustarXMLAposAssinado();
+                    }
+
                     MdfeProcs.Add(EnviMDFe.MDFe.InfMDFe.Chave,
                         new MdfeProc
                         {
@@ -290,25 +296,25 @@ namespace Unimake.Business.DFe.Servicos.MDFe
             switch(xml.MDFe.InfMDFe.Ide.Modal)
             {
                 case ModalidadeTransporteMDFe.Rodoviario:
-                    xmlEspecifico.LoadXml(XMLUtility.Serializar<Rodo>((Rodo)xml.MDFe.InfMDFe.InfModal.Rodo).OuterXml);
+                    xmlEspecifico.LoadXml(XMLUtility.Serializar<Rodo>(xml.MDFe.InfMDFe.InfModal.Rodo).OuterXml);
                     goto default;
 
                 case ModalidadeTransporteMDFe.Aereo:
-                    xmlEspecifico.LoadXml(XMLUtility.Serializar<Aereo>((Aereo)xml.MDFe.InfMDFe.InfModal.Aereo).OuterXml);
+                    xmlEspecifico.LoadXml(XMLUtility.Serializar<Aereo>(xml.MDFe.InfMDFe.InfModal.Aereo).OuterXml);
                     goto default;
 
                 case ModalidadeTransporteMDFe.Aquaviario:
-                    xmlEspecifico.LoadXml(XMLUtility.Serializar<Aquav>((Aquav)xml.MDFe.InfMDFe.InfModal.Aquav).OuterXml);
+                    xmlEspecifico.LoadXml(XMLUtility.Serializar<Aquav>(xml.MDFe.InfMDFe.InfModal.Aquav).OuterXml);
                     goto default;
 
                 case ModalidadeTransporteMDFe.Ferroviario:
-                    xmlEspecifico.LoadXml(XMLUtility.Serializar<Ferrov>((Ferrov)xml.MDFe.InfMDFe.InfModal.Ferrov).OuterXml);
+                    xmlEspecifico.LoadXml(XMLUtility.Serializar<Ferrov>(xml.MDFe.InfMDFe.InfModal.Ferrov).OuterXml);
                     goto default;
 
                 default:
                     ValidarXMLMDFe(xmlEspecifico, schemaArquivoEspecifico, Configuracoes.TargetNS);
                     break;
-             
+
             }
 
             #endregion Validar a parte específica de cada evento
@@ -327,7 +333,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         /// <param name="pasta">Pasta onde deve ser gravado o XML</param>
         public void GravarXmlDistribuicao(string pasta)
         {
-            foreach(var item in MDFeProcResult)
+            foreach(var item in MDFeProcResults)
             {
                 if(item.Value.ProtMDFe != null)
                 {
@@ -342,7 +348,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         /// <param name="stream">Stream que vai receber o XML de distribuição</param>
         public void GravarXmlDistribuicao(System.IO.Stream stream)
         {
-            foreach(var item in MDFeProcResult)
+            foreach(var item in MDFeProcResults)
             {
                 if(item.Value.ProtMDFe != null)
                 {

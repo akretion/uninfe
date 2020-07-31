@@ -23,10 +23,10 @@ namespace NFe.Components.PWebfiscoTecnologia_ConsultarNfe {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="webserviceBinding", Namespace="http://201.16.156.170/issqn/wservice/wsnfeconsulta.php")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="webserviceBinding", Namespace="http://187.32.116.170/issqn/wservice/wsnfeconsulta.php")]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(ConsultaNfe))]
     public partial class webservice : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
@@ -74,8 +74,8 @@ namespace NFe.Components.PWebfiscoTecnologia_ConsultarNfe {
         public event ConsultaNfeCompletedEventHandler ConsultaNfeCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsulta.php/ConsultaNf" +
-            "e", RequestNamespace="", ResponseNamespace="")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsulta.php/ConsultaNfe" +
+            "", RequestNamespace="", ResponseNamespace="")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
         public ConsultaNfe[] ConsultaNfe(string usuario, string pass, string prf, string usr, string ctr, string tipo) {
             object[] results = this.Invoke("ConsultaNfe", new object[] {
@@ -134,11 +134,11 @@ namespace NFe.Components.PWebfiscoTecnologia_ConsultarNfe {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://201.16.156.170/issqn/wservice/wsnfeconsulta.php")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://187.32.116.170/issqn/wservice/wsnfeconsulta.php")]
     public partial class ConsultaNfe {
         
         private string okkField;
@@ -155,11 +155,11 @@ namespace NFe.Components.PWebfiscoTecnologia_ConsultarNfe {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ConsultaNfeCompletedEventHandler(object sender, ConsultaNfeCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3761.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultaNfeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

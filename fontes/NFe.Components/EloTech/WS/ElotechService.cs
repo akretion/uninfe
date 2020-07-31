@@ -216,6 +216,12 @@ namespace NFe.Components.EloTech.WS
             }
         }
 
+        internal ElotechServiceResult EnviarLoteRpsSincrono(string file)
+        {
+            return EnviarLoteRps(file);
+        }
+
+
         #endregion Internal Methods
 
         #region Public Properties

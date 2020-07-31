@@ -41,7 +41,7 @@ namespace NFe.Components.WEBFISCO_TECNOLOGIA.BarraBonitaSP.p
             oXml.Load(reader);
             reader.Close();
 
-            Array result = envioService.EnvNfe(Login, Senha,
+            var result = envioService.EnvNfe(Login, Senha,
                 XmlDocumentUtilities.GetValue<string>(oXml, "prf"),
                 XmlDocumentUtilities.GetValue<string>(oXml, "usr"),
                 XmlDocumentUtilities.GetValue<string>(oXml, "ctr"),

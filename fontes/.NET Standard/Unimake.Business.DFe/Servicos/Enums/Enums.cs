@@ -72,7 +72,7 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// Consulta protocolo do CTe
         /// </summary>
-        [Description("Consulta situação do CTe")] 
+        [Description("Consulta situação do CTe")]
         CTeConsultaProtocolo,
 
         /// <summary>
@@ -98,6 +98,12 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [Description("Autorização do CTe")]
         CTeAutorizacao,
+
+        /// <summary>
+        /// Envio do XML de CTeOS
+        /// </summary>
+        [Description("Autorização do CTeOS")]
+        CTeAutorizacaoOS,
         #endregion
 
         #region MDFe
@@ -164,6 +170,10 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         CTe,
         /// <summary>
+        /// CT-e - Conhecimento de Transporte Eletrônico para Outros Serviços
+        /// </summary>
+        CTeOS,
+        /// <summary>
         /// MDF-e - Manifesto Eletrônico de Documentos Fiscais
         /// </summary>
         MDFe,
@@ -175,10 +185,6 @@ namespace Unimake.Business.DFe.Servicos
         /// CFe-SAT - Sistema Autenticador e Transmissor de Cupons Fiscais Eletrônicos
         /// </summary>
         SAT,
-        /// <summary>
-        /// Conhecimento de Transporte Eletrônico para Outros Serviços
-        /// </summary>
-        CTeOS,
         /// <summary>
         /// Cupom Fiscal Eletrônico
         /// </summary>
@@ -688,6 +694,12 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("2")]
         ContingenciaFSIA = 2,
+
+        /// <summary>
+        /// 3=Regime Especial NFF (Nota Fiscal Fácil)
+        /// </summary>
+        [XmlEnum("3")]
+        RegimeEspecialNFF,
 
         /// <summary>
         /// 4=Contingência EPEC (Evento Prévio de Emissão em Contingência)
@@ -1437,6 +1449,12 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("13")]
         ValeCombustivel = 13,
+
+        /// <summary>
+        /// 14=Duplicata Mercantil (Não existe mais este numerador no padrão da SEFAZ, foi retirado na Nota Técnica 2016.002 - v 1.61. Mantemos no enum para manter compatilidade em casos de importação de XMLs antigos (B2B) que possuem este valor na tag <tPag>.)
+        /// </summary>
+        [XmlEnum("14")]
+        DuplicataMercantil = 14,
 
         /// <summary>
         /// 15=Boleto Bancário
@@ -2790,27 +2808,27 @@ namespace Unimake.Business.DFe.Servicos
     /// </summary>
     public enum TipoOperacaoVeicNovo
     {
-        /// <sumary>
+        /// <summary>
         /// 1=Venda concessionária,
-        /// </sumary>
+        /// </summary>
         [XmlEnum("1")]
         VendaConcessionaria = 1,
 
-        /// <sumary>
+        /// <summary>
         /// 2=Faturamento direto para consumidor final
-        /// </sumary>
+        /// </summary>
         [XmlEnum("2")]
         FaturamentoDiretoConsumidorfinal = 2,
 
-        /// <sumary>
+        /// <summary>
         /// 3=Venda direta para grandes consumidores (frotista, governo, etc...)
-        /// </sumary>
+        /// </summary>
         [XmlEnum("3")]
         VendaDiretaGrandesConsumidores = 3,
 
-        /// <sumary>
+        /// <summary>
         /// 0=Outros
-        /// </sumary>
+        /// </summary>
         [XmlEnum("0")]
         Outros = 0
     }
@@ -2874,39 +2892,39 @@ namespace Unimake.Business.DFe.Servicos
     /// </summary>
     public enum TipoRestricaoVeiculo
     {
-        /// <sumary>
+        /// <summary>
         /// 0=Não há
-        /// </sumary>
+        /// </summary>
         [XmlEnum("0")]
         NaoHa = 0,
 
-        /// <sumary>
+        /// <summary>
         /// 1=Alienação Fiduciária
-        /// </sumary>
+        /// </summary>
         [XmlEnum("1")]
         AlienacaoFiduciaria = 1,
 
-        /// <sumary>
+        /// <summary>
         /// 2=Arrendamento Mercantil
-        /// </sumary>
+        /// </summary>
         [XmlEnum("2")]
         ArrendamentoMercantil = 2,
 
-        /// <sumary>
+        /// <summary>
         /// 3=Reserva de Domínio
-        /// </sumary>
+        /// </summary>
         [XmlEnum("3")]
         ReservaDominio = 3,
 
-        /// <sumary>
+        /// <summary>
         /// 4=Penhor de Veículos
-        /// </sumary>
+        /// </summary>
         [XmlEnum("4")]
         PenhorVeiculos = 4,
 
-        /// <sumary>
+        /// <summary>
         /// 9=Outras
-        /// </sumary>
+        /// </summary>
         [XmlEnum("9")]
         Outras = 9
     }
@@ -3050,6 +3068,34 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("4")]
         ServicoVinculadoMultimodal = 4
+    }
+
+    #endregion
+
+    #region Tipo Serviço CTeOS
+
+    /// <summary>
+    /// Tipos de serviços do CTeOS
+    /// </summary>
+    public enum TipoServicoCTeOS
+    {
+        /// <summary>
+        /// 6 = Transporte de Pessoas
+        /// </summary>
+        [XmlEnum("6")]
+        TransportePessoas = 6,
+
+        /// <summary>
+        /// 7 = Transporte de Valores
+        /// </summary>
+        [XmlEnum("7")]
+        TransporteValores = 7,
+
+        /// <summary>
+        /// 8 = Excesso de Bagagem
+        /// </summary>
+        [XmlEnum("8")]
+        ExcessoBagagem = 8
     }
 
     #endregion
@@ -3597,6 +3643,28 @@ namespace Unimake.Business.DFe.Servicos
 
     #endregion
 
+    #region Responsavel pelo Seguro - CTeOS
+
+    /// <summary>
+    /// Responsável pelo Seguro do CTeOS
+    /// </summary>
+    public enum ResponsavelSeguroCTeOS
+    {
+        /// <summary>
+        /// 4 - Emitente do CT-e OS
+        /// </summary>
+        [XmlEnum("4")]
+        EmitenteCTeOS = 4,
+
+        /// <summary>
+        /// 5 - Tomador de Serviço
+        /// </summary>
+        [XmlEnum("5")]
+        TomadorServico = 5
+    }
+
+    #endregion
+
     #region Tipo da Carga MDFe
 
     /// <summary>
@@ -3854,12 +3922,12 @@ namespace Unimake.Business.DFe.Servicos
 
     #endregion
 
-    #region Tipo de Navegação para o MDFe
+    #region Tipo de Navegação para o CTe e MDFe
 
     /// <summary>
-    /// Tipo de Navegação para o MDFe
+    /// Tipo de Navegação para o CTe e MDFe
     /// </summary>
-    public enum TipoNavegacaoMDFe
+    public enum TipoNavegacao
     {
         /// <summary>
         /// 0 - Interior
@@ -3877,6 +3945,264 @@ namespace Unimake.Business.DFe.Servicos
         /// 99999 = Não definido, utilizar nos casos que não deseja enviar o valor na tag.
         /// </summary>
         NaoDefinido = 99999
+    }
+
+    #endregion
+
+    #region Tipo de Fretamento para o CTeOS
+
+    /// <summary>
+    /// Tipo de fretamento para o CTeOS
+    /// </summary>
+    public enum TipoFretamentoCTeOS
+    {
+        /// <summary>
+        /// 1 - Eventual
+        /// </summary>
+        [XmlEnum("1")]
+        Eventual = 1,
+
+        /// <summary>
+        /// 2 - Contínuo
+        /// </summary>
+        [XmlEnum("2")]
+        Continuo = 2
+    }
+
+    #endregion
+
+    #region 
+
+    /// <summary>
+    /// Informações de manuseio CTe - Modal Aereo
+    /// </summary>
+    public enum InformacaoManuseioCTe
+    {
+        /// <summary>
+        /// 01 - certificado do expedidor para embarque de animal vivo
+        /// </summary>
+        [XmlEnum("01")]
+        CertificadoExpedidorEmbarqueAnimalVivo = 01,
+
+        /// <summary>
+        /// 02 - artigo perigoso conforme Declaração do Expedidor anexa
+        /// </summary>
+        [XmlEnum("02")]
+        ArtigoPerigosoConformeDeclaracaoExpedidor = 02,
+
+        /// <summary>
+        /// 03 - somente em aeronave cargueira
+        /// </summary>
+        [XmlEnum("03")]
+        SomenteAeronaveCargueira = 03,
+
+        /// <summary>
+        /// 04 - artigo perigoso - declaração do expedidor não requerida
+        /// </summary>
+        [XmlEnum("04")]
+        ArtigoPerigosoDeclaracaoExpedidorNaoRequerida = 04,
+
+        /// <summary>
+        /// 05 - artigo perigoso em quantidade isenta
+        /// </summary>
+        [XmlEnum("05")]
+        ArtigoPerigosoQuantidadeIsenta = 05,
+
+        /// <summary>
+        /// 06 - gelo seco para refrigeração (especificar no campo observações a quantidade)
+        /// </summary>
+        [XmlEnum("06")]
+        GeloSecoRefrigeracao = 06,
+
+        /// <summary>
+        /// 07 - não restrito (especificar a Disposição Especial no campo observações)
+        /// </summary>
+        [XmlEnum("07")]
+        NaoRestrito = 07,
+
+        /// <summary>
+        /// 08 - artigo perigoso em carga consolidada (especificar a quantidade no campo observações)
+        /// </summary>
+        [XmlEnum("08")]
+        ArtigoPerigosoCargaConsolidada = 08,
+
+        /// <summary>
+        /// 09 - autorização da autoridade governamental anexa (especificar no campo observações)
+        /// </summary>
+        [XmlEnum("09")]
+        AutorizacaoAutoridadeGovernamental = 09,
+
+        /// <summary>
+        /// 10 – baterias de íons de lítio em conformidade com a Seção II da PI965 – CAO
+        /// </summary>
+        [XmlEnum("10")]
+        BateriasIonsLitioSecaoIIdaPI965 = 10,
+
+        /// <summary>
+        /// 11 - baterias de íons de lítio em conformidade com a Seção II da PI966
+        /// </summary>
+        [XmlEnum("11")]
+        BateriasIonsLitioSecaoIIdaPI966 = 11,
+
+        /// <summary>
+        /// 12 - baterias de íons de lítio em conformidade com a Seção II da PI967
+        /// </summary>
+        [XmlEnum("12")]
+        BateriasIonsLitioSecaoIIdaPI967 = 12,
+
+        /// <summary>
+        /// 13 – baterias de metal lítio em conformidade com a Seção II da PI968 — CAO
+        /// </summary>
+        [XmlEnum("13")]
+        BateriasMetalLitioSecaoIIdaPI968 = 13,
+
+        /// <summary>
+        /// 14 - baterias de metal lítio em conformidade com a Seção II da PI969
+        /// </summary>
+        [XmlEnum("14")]
+        BateriasMetalLitioSecaoIIdaPI969 = 14,
+
+        /// <summary>
+        /// 15 - baterias de metal lítio em conformidade com a Seção II da PI970
+        /// </summary>
+        [XmlEnum("15")]
+        BateriasMetalLitioSecaoIIdaPI970 = 15,
+
+        /// <summary>
+        /// 99 - outro (especificar no campo observações) 
+        /// </summary>
+        [XmlEnum("99")]
+        Outro = 99
+    }
+
+    #endregion
+
+    #region Unidade de Medida de Artigos Perigosos - CTe
+
+    /// <summary>
+    /// Unidade de Medida de Artigos Perigosos - CTe
+    /// </summary>
+    public enum UnidadeMedidaArtigoPerigoso
+    {
+        /// <summary>
+        /// 1-KG
+        /// </summary>
+        [XmlEnum("1")]
+        KG = 1,
+
+        /// <summary>
+        /// 2-KG G (quilograma bruto)
+        /// </summary>
+        [XmlEnum("2")]
+        KGG = 2,
+
+        /// <summary>
+        /// 3-Litros
+        /// </summary>
+        [XmlEnum("3")]
+        Litros = 3,
+
+        /// <summary>
+        /// 4-TI (Índice de transporte para radioativos)
+        /// </summary>
+        [XmlEnum("4")]
+        TI = 4,
+
+        /// <summary>
+        /// 5- Unidades (apenas para artigos perigosos medidos em unidades que não se enquadram nos itens acima. Exemplo: baterias, celulares, equipamentos, veículos, dentre outros)
+        /// </summary>
+        [XmlEnum("5")]
+        Unidades = 5
+    }
+
+    #endregion
+
+    #region Direção
+
+    /// <summary>
+    /// Direção - CTe
+    /// </summary>
+    public enum DirecaoCTe
+    {
+        /// <summary>
+        /// N - Norte
+        /// </summary>
+        [XmlEnum("N")]
+        Norte = 0,
+
+        /// <summary>
+        /// L - Leste
+        /// </summary>
+        [XmlEnum("L")]
+        Leste = 1,
+
+        /// <summary>
+        /// S - Sul
+        /// </summary>
+        [XmlEnum("S")]
+        Sul = 2,
+
+        /// <summary>
+        /// O - Oeste
+        /// </summary>
+        [XmlEnum("O")]
+        Oeste = 3
+    }
+
+    #endregion
+
+    #region Tipo de Tráfego - CTe
+
+    /// <summary>
+    /// Tipo de tráfego para o CTe
+    /// </summary>
+    public enum TipoTrafegoCTe
+    {
+        /// <summary>
+        /// 0-Próprio
+        /// </summary>
+        [XmlEnum("0")]
+        Proprio = 0,
+
+        /// <summary>
+        /// 1-Mútuo
+        /// </summary>
+        [XmlEnum("1")]
+        Mutuo = 1,
+
+        /// <summary>
+        /// 2-Rodoferrovio
+        /// </summary>
+        [XmlEnum("2")]
+        Rodoferroviario = 2,
+
+        /// <summary>
+        /// 3-Rodoviário
+        /// </summary>
+        [XmlEnum("3")]
+        Rodoviario = 3
+    }
+
+    #endregion
+
+    #region Responsável pelo Faturamento CTe
+
+    /// <summary>
+    /// "Responsável pelo Faturamento" ou "Ferrovia Emitente do CTe"
+    /// </summary>
+    public enum FerroviaCTe
+    {
+        /// <summary>
+        /// 1 - Ferrovia de Origem
+        /// </summary>
+        [XmlEnum("1")]
+        FerroviaOrigem = 1,
+        
+        /// <summary>
+        /// Ferrovia de Destino
+        /// </summary>
+        [XmlEnum("2")]
+        FerroviaDestino = 2
     }
 
     #endregion

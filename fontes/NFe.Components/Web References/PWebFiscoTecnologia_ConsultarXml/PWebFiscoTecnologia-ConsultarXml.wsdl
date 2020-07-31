@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://201.16.156.170/issqn/wservice/wsnfeconsultaxml.php" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://201.16.156.170/issqn/wservice/wsnfeconsultaxml.php" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://187.32.116.170/issqn/wservice/wsnfeconsultaxml.php" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://187.32.116.170/issqn/wservice/wsnfeconsultaxml.php" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <xsd:schema targetNamespace="http://201.16.156.170/issqn/wservice/wsnfeconsultaxml.php">
+    <xsd:schema targetNamespace="http://187.32.116.170/issqn/wservice/wsnfeconsultaxml.php">
       <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
       <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
       <xsd:complexType name="StrConsultaNfe">
@@ -123,7 +123,7 @@
   <wsdl:binding name="webserviceBinding" type="tns:webservicePortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
     <wsdl:operation name="ConsultaNfe">
-      <soap:operation soapAction="https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsultaxml.php/ConsultaNfe" style="rpc" />
+      <soap:operation soapAction="http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsultaxml.php/ConsultaNfe" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
@@ -134,7 +134,7 @@
   </wsdl:binding>
   <wsdl:service name="webservice">
     <wsdl:port name="webservicePort" binding="tns:webserviceBinding">
-      <soap:address location="https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfeconsultaxml.php" />
+      <soap:address location="http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsultaxml.php" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

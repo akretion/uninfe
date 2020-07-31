@@ -633,16 +633,16 @@
       <Value Profile="(Default)">https://nfemws.joinville.sc.gov.br/NotaFiscal/Servicos.asmx</Value>
     </Setting>
     <Setting Name="NFe_Components_HBarraBonitaSP_webservice" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfe_teste_homologacao.php</Value>
+      <Value Profile="(Default)">http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfe_teste_homologacao.php</Value>
     </Setting>
     <Setting Name="NFe_Components_PBarraBonitaSP_Enviar_webservice" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfeenvia.php</Value>
+      <Value Profile="(Default)">http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeenvia.php</Value>
     </Setting>
     <Setting Name="NFe_Components_PBarraBonitaSP_Cancelar_webservice" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfecancela.php</Value>
+      <Value Profile="(Default)">http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfecancela.php</Value>
     </Setting>
     <Setting Name="NFe_Components_PBarraBonitaSP_ConsultarNfe_webservice" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfeconsulta.php</Value>
+      <Value Profile="(Default)">http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsulta.php</Value>
     </Setting>
     <Setting Name="NFe_Components_HIlheusBA_Nfse" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://lftributos.metropolisweb.com.br:9090/webservicenfse/nfse/services</Value>
@@ -672,7 +672,7 @@
       <Value Profile="(Default)">https://sistema.pmestacao.com.br:8182/NfseService/NfseService</Value>
     </Setting>
     <Setting Name="NFe_Components_PWebFiscoTecnologia_ConsultarXml_webservice" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://www.webfiscotecnologia.com.br:443/issqn/wservice/wsnfeconsultaxml.php</Value>
+      <Value Profile="(Default)">http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsultaxml.php</Value>
     </Setting>
     <Setting Name="NFe_Components_HSaoJoseRibamarMA_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://www2.tinus.com.br/csp/testesjr/WSNFSE.CancelarNfse.cls</Value>
@@ -693,10 +693,10 @@
       <Value Profile="(Default)">http://www2.tinus.com.br/csp/testesjr/WSNFSE.RecepcionarLoteRps.cls</Value>
     </Setting>
     <Setting Name="NFe_Components_HVargemGrandePaulistaSP_NfseServiceImplVgpService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://ws.homolog.govdigital.com.br/ws/vgp</Value>
+      <Value Profile="(Default)">https://ws.homolog.nfe-cidades.com.br/ws/vgp</Value>
     </Setting>
     <Setting Name="NFe_Components_PVargemGrandePaulistaSP_NfseServiceImplVgpService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://ws.govdigital.com.br/ws/vgp</Value>
+      <Value Profile="(Default)">https://ws.nfe-cidades.com.br/ws/vgp</Value>
     </Setting>
     <Setting Name="NFe_Components_PCabedeloPB_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://www2.tinus.com.br/csp/testecbd/WSNFSE.CancelarNfse.cls</Value>
@@ -898,6 +898,9 @@
     </Setting>
     <Setting Name="NFe_Components_PColatinaES_RpsServiceService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://es-colatina-pm-nfs.cloud.el.com.br:80/RpsService</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PApucaranaPR_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://cetil.apucarana.pr.gov.br/NFSe.Portal.Integracao/Services.svc</Value>
     </Setting>
   </Settings>
 </SettingsFile>

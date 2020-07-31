@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 
 namespace Unimake.Business.DFe.Xml.MDFe
 {
     [XmlRoot("retConsSitMDFe", Namespace = "http://www.portalfiscal.inf.br/mdfe", IsNullable = false)]
-    public class RetConsSitMDFe: XMLBase
+    public class RetConsSitMDFe : XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }
@@ -49,6 +50,6 @@ namespace Unimake.Business.DFe.Xml.MDFe
         public ProtMDFe ProtMDFe { get; set; }
 
         [XmlElement("procEventoMDFe")]
-        public ProcEventoMDFe[] ProcEventoMDFe { get; set; }
+        public List<ProcEventoMDFe> ProcEventoMDFe { get; set; }
     }
 }

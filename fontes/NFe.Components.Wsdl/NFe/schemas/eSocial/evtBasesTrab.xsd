@@ -310,7 +310,7 @@
                                     </xs:sequence>
                                   </xs:complexType>
                                 </xs:element>
-                                <xs:element name="infoPerRef" minOccurs="0" maxOccurs="unbounded">
+                                <xs:element name="infoPerRef" maxOccurs="unbounded">
                                   <xs:annotation>
                                     <xs:documentation>Informações de remuneração por período de referência</xs:documentation>
                                   </xs:annotation>

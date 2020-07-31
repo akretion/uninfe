@@ -7,19 +7,32 @@ namespace Unimake.Business.DFe.Xml.MDFe
 {
     [Serializable()]
     [XmlRoot("mdfeProc", Namespace = "http://www.portalfiscal.inf.br/mdfe", IsNullable = false)]
-    public class MdfeProc : XMLBase
+    public class MdfeProc: XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }
-
-        [XmlAttribute(AttributeName = "ipTransmissor", DataType = "token")]
-        public string IpTransmissor { get; set; }
 
         [XmlElement("MDFe")]
         public MDFe MDFe { get; set; }
 
         [XmlElement("protMDFe")]
         public ProtMDFe ProtMDFe { get; set; }
+
+        [XmlElement("ipTransmissor")]
+        public string IpTransmissor { get; set; }
+
+        [XmlElement("nPortaCon")]
+        public int NPortaCon { get; set; }
+
+        [XmlIgnore]
+        public DateTime DhConexao { get; set; }
+
+        [XmlElement("dhConexao")]
+        public string DhConexaoField
+        {
+            get => DhConexao.ToString("yyyy-MM-ddTHH:mm:sszzz");
+            set => DhConexao = DateTime.Parse(value);
+        }
 
         /// <summary>
         /// Nome do arquivo de distribuição
@@ -29,7 +42,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
         {
             get
             {
-                switch (ProtMDFe.InfProt.CStat)
+                switch(ProtMDFe.InfProt.CStat)
                 {
                     case 110: //Uso Denegado
                     case 205: //NF-e está denegada na base de dados da SEFAZ [nRec:999999999999999]
@@ -48,12 +61,12 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
         public override XmlDocument GerarXML()
         {
-            XmlDocument xmlDocument = base.GerarXML();
+            var xmlDocument = base.GerarXML();
 
-            XmlRootAttribute attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
-            XmlElement xmlElementMDFe = (XmlElement)xmlDocument.GetElementsByTagName("MDFe")[0];
+            var attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
+            var xmlElementMDFe = (XmlElement)xmlDocument.GetElementsByTagName("MDFe")[0];
             xmlElementMDFe.SetAttribute("xmlns", attribute.Namespace);
-            XmlElement xmlElementProtMDFe = (XmlElement)xmlDocument.GetElementsByTagName("protMDFe")[0];
+            var xmlElementProtMDFe = (XmlElement)xmlDocument.GetElementsByTagName("protMDFe")[0];
             xmlElementProtMDFe.SetAttribute("xmlns", attribute.Namespace);
 
             return xmlDocument;

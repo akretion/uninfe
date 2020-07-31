@@ -53,7 +53,7 @@ namespace Unimake.Business.DFe.Servicos
                 }
                 else
                 {
-                    AssinaturaDigital.Assinar(ConteudoXML, tagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id", true);
+                    AssinaturaDigital.Assinar(ConteudoXML, tagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, Configuracoes.CertificadoA3PIN, "Id", true);
 
                     AjustarXMLAposAssinado();
                 }
@@ -315,36 +315,73 @@ namespace Unimake.Business.DFe.Servicos
             var doc = new XmlDocument();
             doc.Load(xmlConfigEspecifico);
 
-            #region Leitura do XML herdado, quando tem herança.
 
-            var temHeranca = false;
+            #region Leitura do XML do SVC - Sistema Virtual de Contingência
 
-            if(doc.GetElementsByTagName("Heranca")[0] != null)
+            var svc = false;
+            var arqConfigSVC = string.Empty;
+
+            switch(Configuracoes.TipoEmissao)
             {
-                var arqConfigHeranca =
-                    Path.Combine(CurrentConfig.PastaArqConfig,
-                    Configuracoes.TipoDFe.ToString(),
-                    doc.GetElementsByTagName("Heranca")[0].InnerText);
+                case TipoEmissao.ContingenciaSVCRS:
+                    svc = true;
+                    arqConfigSVC = Path.Combine(CurrentConfig.PastaArqConfig, Configuracoes.TipoDFe.ToString(), (Configuracoes.TipoDFe == TipoDFe.NFe ? "SVCRS.xml" : "SVRS.xml"));
+                    goto default;
 
-                temHeranca = true;
+                case TipoEmissao.ContingenciaSVCAN:
+                    svc = true;
+                    arqConfigSVC = Path.Combine(CurrentConfig.PastaArqConfig, Configuracoes.TipoDFe.ToString(), "SVCAN.xml");
+                    goto default;
 
-                doc.Load(arqConfigHeranca);
-                LerConfig(doc, arqConfigHeranca);
+                case TipoEmissao.ContingenciaSVCSP:
+                    svc = true;
+                    arqConfigSVC = Path.Combine(CurrentConfig.PastaArqConfig, Configuracoes.TipoDFe.ToString(), "SVSP.xml");
+                    goto default;
 
-                doc.Load(xmlConfigEspecifico);
+                default:
+                    if(svc)
+                    {
+                        doc.Load(arqConfigSVC);
+                        LerConfig(doc, arqConfigSVC);
+                    }
+                    break;
             }
 
-            #endregion Leitura do XML herdado, quando tem herança.
+            #endregion
 
-            try
+            if(!svc)
             {
-                LerConfig(doc, xmlConfigEspecifico);
-            }
-            catch
-            {
-                if(!temHeranca) //Se tem herança pode ser que não encontre configuração específica, então não pode retornar a exceção lançada neste ponto.
+                #region Leitura do XML herdado, quando tem herança.
+
+                var temHeranca = false;
+
+                if(doc.GetElementsByTagName("Heranca")[0] != null)
                 {
-                    throw;
+                    var arqConfigHeranca =
+                        Path.Combine(CurrentConfig.PastaArqConfig,
+                        Configuracoes.TipoDFe.ToString(),
+                        doc.GetElementsByTagName("Heranca")[0].InnerText);
+
+                    temHeranca = true;
+
+                    doc.Load(arqConfigHeranca);
+                    LerConfig(doc, arqConfigHeranca);
+
+                    doc.Load(xmlConfigEspecifico);
+                }
+
+                #endregion Leitura do XML herdado, quando tem herança.
+
+                try
+                {
+                    LerConfig(doc, xmlConfigEspecifico);
+                }
+                catch
+                {
+                    if(!temHeranca) //Se tem herança pode ser que não encontre configuração específica, então não pode retornar a exceção lançada neste ponto.
+                    {
+                        throw;
+                    }
                 }
             }
 
@@ -529,7 +566,7 @@ namespace Unimake.Business.DFe.Servicos
             if(!string.IsNullOrWhiteSpace(Configuracoes.TagAssinatura) &&
                !AssinaturaDigital.EstaAssinado(ConteudoXML, Configuracoes.TagAssinatura))
             {
-                AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "", "Id");
+                AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, Configuracoes.CertificadoA3PIN, "Id");
 
                 AjustarXMLAposAssinado();
             }

@@ -38,7 +38,7 @@ namespace NFe.Certificado
         /// Autor: Wandrey Mundin Ferreira
         /// Data: 04/06/2008
         /// </remarks>
-        private void Assinar(string arqXMLAssinar,
+        public void Assinar(string arqXMLAssinar,
             string tagAssinatura,
             string tagAtributoId,
             X509Certificate2 x509Cert,
@@ -112,7 +112,10 @@ namespace NFe.Certificado
         {
             #region São José dos Pinhais
 
-            if(Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 4125506 && tagAssinatura.Equals(tagAtributoId))
+            if((Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 4125506 ||
+                Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 4303103 ||
+                Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 4104808) && 
+                tagAssinatura.Equals(tagAtributoId))
             {
                 AssinarJSP(conteudoXML, tagAssinatura, tagAtributoId, x509Cert, empresa, algorithmType, comURI);
 

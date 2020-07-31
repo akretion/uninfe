@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 
@@ -47,7 +48,7 @@ namespace Unimake.Business.DFe.Xml.NFe
     public class LoteDistDFeInt
     {
         [XmlElement("docZip")]
-        public DocZip[] DocZip { get; set; }
+        public List<DocZip> DocZip { get; set; }
     }
 
     [XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/nfe")]

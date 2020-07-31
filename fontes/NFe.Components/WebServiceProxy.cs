@@ -179,7 +179,8 @@ namespace NFe.Components
                                     cMunicipio == 4302808 ||
                                     cMunicipio == 3501301 ||
                                     cMunicipio == 4300109 ||
-                                    cMunicipio == 4124053)
+                                    cMunicipio == 4124053 ||
+                                    cMunicipio == 4101408)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -203,7 +204,8 @@ namespace NFe.Components
                                     cMunicipio == 4302808 ||
                                     cMunicipio == 3501301 ||
                                     cMunicipio == 4300109 ||
-                                    cMunicipio == 4124053)
+                                    cMunicipio == 4124053 ||
+                                    cMunicipio == 4101408)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -224,7 +226,8 @@ namespace NFe.Components
                                     cMunicipio == 4302808 ||
                                     cMunicipio == 3501301 ||
                                     cMunicipio == 4300109 ||
-                                    cMunicipio == 4124053)
+                                    cMunicipio == 4124053 ||
+                                    cMunicipio == 4101408)
                                     return "BasicHttpBinding_INFSEConsultas";
                                 else
                                     return "basic_INFSEConsultas";
@@ -549,15 +552,15 @@ namespace NFe.Components
 #else
             SecurityProtocolType securityProtocolType = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
 #endif
-            if (cUF.ToString().Length >= 7) //Somente para muncípios, não pode fazer para Estados
-            {
-                string cUFs = "2910800 / "; //Feira de Santana
+            //if (cUF.ToString().Length >= 7) //Somente para muncípios, não pode fazer para Estados
+            //{
+            //    string cUFs = "2910800 / "; //Feira de Santana
 
-                if (cUFs.Contains(cUF.ToString()))
-                {
-                    securityProtocolType = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
-                }
-            }
+            //    if (cUFs.Contains(cUF.ToString()))
+            //    {
+            //        securityProtocolType = SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
+            //    }
+            //}
 
             return securityProtocolType;
         }

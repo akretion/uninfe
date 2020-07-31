@@ -20,6 +20,35 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Servicos\Config\CTeOS\AC.xml" />
+    <None Remove="Servicos\Config\CTeOS\AL.xml" />
+    <None Remove="Servicos\Config\CTeOS\AM.xml" />
+    <None Remove="Servicos\Config\CTeOS\AP.xml" />
+    <None Remove="Servicos\Config\CTeOS\BA.xml" />
+    <None Remove="Servicos\Config\CTeOS\CE.xml" />
+    <None Remove="Servicos\Config\CTeOS\Config.xml" />
+    <None Remove="Servicos\Config\CTeOS\DF.xml" />
+    <None Remove="Servicos\Config\CTeOS\ES.xml" />
+    <None Remove="Servicos\Config\CTeOS\GO.xml" />
+    <None Remove="Servicos\Config\CTeOS\MA.xml" />
+    <None Remove="Servicos\Config\CTeOS\MG.xml" />
+    <None Remove="Servicos\Config\CTeOS\MS.xml" />
+    <None Remove="Servicos\Config\CTeOS\MT.xml" />
+    <None Remove="Servicos\Config\CTeOS\PA.xml" />
+    <None Remove="Servicos\Config\CTeOS\PB.xml" />
+    <None Remove="Servicos\Config\CTeOS\PE.xml" />
+    <None Remove="Servicos\Config\CTeOS\PI.xml" />
+    <None Remove="Servicos\Config\CTeOS\PR.xml" />
+    <None Remove="Servicos\Config\CTeOS\RJ.xml" />
+    <None Remove="Servicos\Config\CTeOS\RN.xml" />
+    <None Remove="Servicos\Config\CTeOS\RO.xml" />
+    <None Remove="Servicos\Config\CTeOS\RR.xml" />
+    <None Remove="Servicos\Config\CTeOS\RS.xml" />
+    <None Remove="Servicos\Config\CTeOS\SC.xml" />
+    <None Remove="Servicos\Config\CTeOS\SP.xml" />
+    <None Remove="Servicos\Config\CTeOS\SVRS.xml" />
+    <None Remove="Servicos\Config\CTeOS\SVSP.xml" />
+    <None Remove="Servicos\Config\CTeOS\TO.xml" />
     <None Remove="Servicos\Config\CTe\AC.xml" />
     <None Remove="Servicos\Config\CTe\AL.xml" />
     <None Remove="Servicos\Config\CTe\AM.xml" />
@@ -32,6 +61,9 @@
     <None Remove="Servicos\Config\CTe\ES.xml" />
     <None Remove="Servicos\Config\CTe\GO.xml" />
     <None Remove="Servicos\Config\CTe\MA.xml" />
+    <None Remove="Servicos\Config\CTe\MG.xml" />
+    <None Remove="Servicos\Config\CTe\MS.xml" />
+    <None Remove="Servicos\Config\CTe\MT.xml" />
     <None Remove="Servicos\Config\CTe\PA.xml" />
     <None Remove="Servicos\Config\CTe\PB.xml" />
     <None Remove="Servicos\Config\CTe\PE.xml" />
@@ -41,7 +73,9 @@
     <None Remove="Servicos\Config\CTe\RN.xml" />
     <None Remove="Servicos\Config\CTe\RO.xml" />
     <None Remove="Servicos\Config\CTe\RR.xml" />
+    <None Remove="Servicos\Config\CTe\RS.xml" />
     <None Remove="Servicos\Config\CTe\SC.xml" />
+    <None Remove="Servicos\Config\CTe\SP.xml" />
     <None Remove="Servicos\Config\CTe\SVRS.xml" />
     <None Remove="Servicos\Config\CTe\SVSP.xml" />
     <None Remove="Servicos\Config\CTe\TO.xml" />
@@ -293,7 +327,65 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\AC.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\AL.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\AM.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\AP.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\BA.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\CE.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\Config.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\DF.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\ES.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\GO.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\MA.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\MG.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\MS.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\MT.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\PA.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\PB.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\PE.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\PI.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\PR.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\RJ.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\RN.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\RO.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\RR.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\RS.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\SC.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTeOS\SP.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\SVRS.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\SVSP.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTeOS\TO.xml" />
     <EmbeddedResource Include="Servicos\Config\CTe\AP.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTe\MS.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Servicos\Config\CTe\PA.xml" />
     <EmbeddedResource Include="Servicos\Config\CTe\MA.xml" />
     <EmbeddedResource Include="Servicos\Config\CTe\AC.xml" />
@@ -326,6 +418,18 @@
     <EmbeddedResource Include="Servicos\Config\CTe\RO.xml" />
     <EmbeddedResource Include="Servicos\Config\CTe\RR.xml" />
     <EmbeddedResource Include="Servicos\Config\CTe\SC.xml" />
+    <EmbeddedResource Include="Servicos\Config\CTe\MT.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTe\MG.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTe\RS.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\CTe\SP.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Servicos\Config\CTe\SVSP.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>

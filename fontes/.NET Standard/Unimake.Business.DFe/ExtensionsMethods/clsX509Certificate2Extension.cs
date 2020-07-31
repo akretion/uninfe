@@ -28,10 +28,10 @@ namespace Unimake.Business.DFe.Security
                 throw new ArgumentNullException("certificado == null!");
             }
 
-            RSACryptoServiceProvider key = (RSACryptoServiceProvider)certificado.PrivateKey;
+            var key = (RSACryptoServiceProvider)certificado.PrivateKey;
 
-            IntPtr ProviderHandle = IntPtr.Zero;
-            byte[] PinBuffer = Encoding.ASCII.GetBytes(pinPassword);
+            var ProviderHandle = IntPtr.Zero;
+            var PinBuffer = Encoding.ASCII.GetBytes(pinPassword);
 
             //Não é necessário descarregar o handle
             SafeNativeMethods.Execute(() => SafeNativeMethods.CryptAcquireContext(
@@ -63,9 +63,11 @@ namespace Unimake.Business.DFe.Security
         public static bool IsA3(this X509Certificate2 x509cert)
         {
             if (x509cert == null)
+            {
                 return false;
+            }
 
-            bool result = false;
+            var result = false;
 
             try
             {
@@ -73,7 +75,9 @@ namespace Unimake.Business.DFe.Security
                 {
                     if (service.CspKeyContainerInfo.Removable &&
                     service.CspKeyContainerInfo.HardwareDevice)
+                    {
                         result = true;
+                    }
                 }
             }
             catch

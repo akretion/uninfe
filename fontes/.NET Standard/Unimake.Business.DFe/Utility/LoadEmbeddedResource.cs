@@ -91,6 +91,9 @@ namespace Unimake.Business.DFe.Utility
                 resourcePath = "Unimake.Business.DFe.Servicos.Config.CTe.";
                 ExtrairRecurso(resourcePath, ref resources, assembly, CurrentConfig.PastaArqConfigCTe);
 
+                resourcePath = "Unimake.Business.DFe.Servicos.Config.CTeOS.";
+                ExtrairRecurso(resourcePath, ref resources, assembly, CurrentConfig.PastaArqConfigCTeOS);
+
                 resourcePath = "Unimake.Business.DFe.Servicos.Config.MDFe.";
                 ExtrairRecurso(resourcePath, ref resources, assembly, CurrentConfig.PastaArqConfigMDFe);
 

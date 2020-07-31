@@ -111,6 +111,22 @@ namespace NFe.Service.NFSe
 
                     #endregion Betha
 
+                    case PadroesNFSe.IPM:
+
+                        //código da cidade da receita federal, este arquivo pode ser encontrado em ~\uninfe\doc\Codigos_Cidades_Receita_Federal.xls</para>
+                        //O código da cidade está hardcoded pois ainda está sendo usado apenas para campo mourão
+                        IPM ipm = new IPM((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                          Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                          Empresas.Configuracoes[emp].UsuarioWS,
+                                          Empresas.Configuracoes[emp].SenhaWS,
+                                          ler.oDadosPedSitNfseRps.cMunicipio);
+
+                        if (ConfiguracaoApp.Proxy)
+                            ipm.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
+                                            
+                        ipm.ConsultarNfsePorRps(NomeArquivoXML);
+                        break;
+
                     case PadroesNFSe.ABACO:
                     case PadroesNFSe.CANOAS_RS:
                         cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";
@@ -380,7 +396,8 @@ namespace NFe.Service.NFSe
                             ler.oDadosPedSitNfseRps.cMunicipio == 4302808 ||
 							ler.oDadosPedSitNfseRps.cMunicipio == 3501301 ||
 							ler.oDadosPedSitNfseRps.cMunicipio == 4300109 ||
-                            ler.oDadosPedSitNfseRps.cMunicipio == 4124053)
+                            ler.oDadosPedSitNfseRps.cMunicipio == 4124053 ||
+                            ler.oDadosPedSitNfseRps.cMunicipio == 4101408)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

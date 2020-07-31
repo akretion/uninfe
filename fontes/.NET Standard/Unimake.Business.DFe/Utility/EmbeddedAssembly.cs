@@ -16,7 +16,7 @@ namespace Unimake.Business.DFe.Utility
         {
             var sha = new SHA1CryptoServiceProvider();
 
-            using(var stream = File.OpenRead(filename))
+            using (var stream = File.OpenRead(filename))
             {
                 return BitConverter.ToString(sha.ComputeHash(stream));
             }
@@ -35,10 +35,10 @@ namespace Unimake.Business.DFe.Utility
         {
             byte[] ba = null;
 
-            using(var stm = currentAssembly.GetManifestResourceStream(embeddedResource))
+            using (var stm = currentAssembly.GetManifestResourceStream(embeddedResource))
             {
                 // Either the file is not existed or it is not mark as embedded resource
-                if(stm == null)
+                if (stm == null)
                 {
                     return false;
                 }
@@ -51,7 +51,7 @@ namespace Unimake.Business.DFe.Utility
             var fileExist = false;
             var fileHash = "";
 
-            using(var sha1 = new SHA1CryptoServiceProvider())
+            using (var sha1 = new SHA1CryptoServiceProvider())
             {
                 // Get the hash value from embedded DLL/assembly
                 fileHash = BitConverter.ToString(sha1.ComputeHash(ba));
@@ -63,7 +63,7 @@ namespace Unimake.Business.DFe.Utility
             }
 
             // Create the file on disk
-            if(!fileExist ||
+            if (!fileExist ||
                (overwrite && GetFileHash(fullFileName) != fileHash))
             {
                 CreateFile(fullFileName, ba);
@@ -81,7 +81,7 @@ namespace Unimake.Business.DFe.Utility
             {
                 File.WriteAllBytes(fullFileName, ba);
             }
-            catch(IOException)
+            catch (IOException)
             {
                 //nada
             }

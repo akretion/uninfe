@@ -278,7 +278,7 @@ namespace NFe.Components
                                     }
                                 }
                             }
-                            else if (conteudoXML.DocumentElement.Name.Equals("distDFeInt") && versao.Equals("1.01"))
+                            else if (conteudoXML.DocumentElement.Name.Equals("distDFeInt") && (versao.Equals("1.01") || versao.Equals("1.35")))
                                 versaoXML = "-" + versao;
 
                             if (string.IsNullOrEmpty(padraoNFSe))

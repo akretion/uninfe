@@ -466,8 +466,7 @@ namespace NFe.UI.Formularios
 
         private void HabilitaUsuarioSenhaWS(int ufCod)
         {
-            bool visible = ufCod == 4101408 /*Apucarana*/ ||
-                           ufCod == 3502804 /*Araçatuba*/||
+            bool visible = ufCod == 3502804 /*Araçatuba*/||
                            ufCod == 4104303 /*Campo Mourão*/||
                            ufCod == 4104204 /*Campo Largo*/||
                            ufCod == 3537305 /*Penapolis*/||
@@ -486,7 +485,6 @@ namespace NFe.UI.Formularios
                            ufCod == 3541406 /*Presidente Prudente-SP*/||
                            ufCod == 4217808 /*Taió-SC*/||
                            ufCod == 4101101 /*Andirá-PR*/||
-                           ufCod == 3306305 /*Volta Redonda-RJ*/||
                            ufCod == 3522802 /*Itaporanga-SP*/||
                            ufCod == 4201307 /*Araquari-SC*/||
                            ufCod == 3205002 /*Serra-ES*/||
@@ -545,10 +543,12 @@ namespace NFe.UI.Formularios
                            ufCod == 3539400 /*Piratininga-SP*/ ||
                            ufCod == 3516705 /*Garça-SP*/ ||
                            ufCod == 3514502 /*Duartina-SP*/ ||
-                           ufCod == 3526902 /* Limeira-SP*/||
+                           ufCod == 3526902 /*Limeira-SP*/||
                            ufCod == 3146008 /*Ouro Fino-MG*/||
                            ufCod == 4323804 /*Xangri-la-RS*/||
-                           ufCod == 5107925 /*Sorriso-MT*/;
+                           ufCod == 5107925 /*Sorriso-MT*/ ||
+                           ufCod == 4104808 /*Cascavel-PR*/ ||
+                           ufCod == 4303103 /*Cachoeirinha-RS*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }

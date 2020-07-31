@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 
@@ -56,6 +57,6 @@ namespace Unimake.Business.DFe.Xml.NFe
         public string CMsg { get; set; }
 
         [XmlElement("protNFe")]
-        public ProtNFe[] ProtNFe { get; set; }
+        public List<ProtNFe> ProtNFe { get; set; }
     }
 }

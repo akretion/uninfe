@@ -33,25 +33,25 @@ namespace NFe.Service
                 Servicos servico = Servicos.Nulo;
                 try
                 {
-                    if (emp == -1)
+                    if(emp == -1)
                     {
                         ValidarExtensao(arquivo);
                     }
 
                     // Só vou validar a extensão em homologação, pois depois que o desenvolvedor fez toda a integração, acredito que ele não vá mais gerar extensões erradas, com isso evito ficar validando todas as vezes arquivos corretos. Wandrey 17/09/2016
-                    else if (Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao)
+                    else if(Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao)
                     {
                         ValidarExtensao(arquivo);
                     }
 
                     servico = DefinirTipoServico(emp, arquivo);
 
-                    if (servico == Servicos.Nulo)
+                    if(servico == Servicos.Nulo)
                     {
                         throw new Exception("Não pode identificar o tipo de serviço baseado no arquivo " + arquivo);
                     }
 
-                    switch (servico)
+                    switch(servico)
                     {
                         #region NFS-e
 
@@ -199,7 +199,7 @@ namespace NFe.Service
                             SATProxy enviaVenda = new SATProxy(Servicos.SATEnviarDadosVenda, Empresas.Configuracoes[emp], arquivo);
                             enviaVenda.Enviar();
                             string xmlVenda = enviaVenda.SaveResponse();
-                            if (!string.IsNullOrEmpty(xmlVenda))
+                            if(!string.IsNullOrEmpty(xmlVenda))
                             {
                                 string strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                     PastaEnviados.Autorizados.ToString() + "\\" +
@@ -207,8 +207,9 @@ namespace NFe.Service
                                     Path.GetFileName(xmlVenda);
 
                                 TFunctions.MoverArquivo(xmlVenda, PastaEnviados.Autorizados);
+                                new GerarXML(emp).XmlParaFTP(emp, strArquivoDist); //Mover para FTP
 
-                                if (!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaExeUniDanfe))
+                                if(!string.IsNullOrEmpty(Empresas.Configuracoes[emp].PastaExeUniDanfe))
                                 {
                                     TFunctions.ExecutaUniDanfe(strArquivoDist, DateTime.Now, Empresas.Configuracoes[emp]);
                                 }
@@ -227,7 +228,7 @@ namespace NFe.Service
                             cancela.Enviar();
                             string xmlCancelamento = cancela.SaveResponse();
 
-                            if (!string.IsNullOrEmpty(xmlCancelamento))
+                            if(!string.IsNullOrEmpty(xmlCancelamento))
                             {
                                 string strArquivoDist = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                                     PastaEnviados.Autorizados.ToString() + "\\" +
@@ -478,7 +479,7 @@ namespace NFe.Service
 
                     #region Serviços em comum
 
-                    switch (servico)
+                    switch(servico)
                     {
                         case Servicos.AssinarValidar:
                             CertVencido(emp);
@@ -520,17 +521,17 @@ namespace NFe.Service
 
                     #endregion Serviços em comum
                 }
-                catch (ExceptionSemInternet ex)
+                catch(ExceptionSemInternet ex)
                 {
                     GravaErroERP(arquivo, servico, ex, ex.ErrorCode);
                 }
-                catch (ExceptionCertificadoDigital ex)
+                catch(ExceptionCertificadoDigital ex)
                 {
                     GravaErroERP(arquivo, servico, ex, ex.ErrorCode);
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
-                    switch (servico)
+                    switch(servico)
                     {
                         case Servicos.SATConsultar:
                         case Servicos.SATEnviarDadosVenda:
@@ -561,37 +562,37 @@ namespace NFe.Service
         {
             bool extOk = false;
             string extensoes = "";
-            foreach (Propriedade.TipoEnvio item in Enum.GetValues(typeof(Propriedade.TipoEnvio)))
+            foreach(Propriedade.TipoEnvio item in Enum.GetValues(typeof(Propriedade.TipoEnvio)))
             {
                 Propriedade.ExtensaoClass EXT = Propriedade.Extensao(item);
 
-                if (extensoes != "")
+                if(extensoes != "")
                 {
                     extensoes += ", ";
                 }
 
                 extensoes += EXT.EnvioXML;
 
-                if (arquivo.EndsWith(EXT.EnvioXML, StringComparison.InvariantCultureIgnoreCase))
+                if(arquivo.EndsWith(EXT.EnvioXML, StringComparison.InvariantCultureIgnoreCase))
                 {
                     extOk = true;
                     break;
                 }
-                if (!string.IsNullOrEmpty(EXT.EnvioTXT))
+                if(!string.IsNullOrEmpty(EXT.EnvioTXT))
                 {
                     extensoes += (EXT.descricao != "" ? " ou " : ", ") + EXT.EnvioTXT;
-                    if (arquivo.EndsWith(EXT.EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
+                    if(arquivo.EndsWith(EXT.EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
                     {
                         extOk = true;
                         break;
                     }
                 }
-                if (EXT.descricao != "")
+                if(EXT.descricao != "")
                 {
                     extensoes += ": \"" + EXT.descricao + "\"\r\n";
                 }
             }
-            if (!extOk)
+            if(!extOk)
             {
                 throw new Exception("Não pode identificar o tipo de arquivo baseado no arquivo '" + arquivo + "'\r\nExtensões permitidas: " + extensoes);
             }
@@ -609,36 +610,36 @@ namespace NFe.Service
 
             #region Serviços que funcionam tanto na pasta Geral como na pasta da Empresa
 
-            if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsCertificado).EnvioXML) >= 0)
+            if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsCertificado).EnvioXML) >= 0)
             {
                 tipoServico = Servicos.UniNFeConsultaGeral;
             }
-            else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).EnvioXML) >= 0 ||
+            else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).EnvioXML) >= 0 ||
                      arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.AltCon).EnvioTXT) >= 0)
             {
                 tipoServico = Servicos.UniNFeAlterarConfiguracoes;
             }
-            else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).EnvioXML) >= 0 ||
+            else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).EnvioXML) >= 0 ||
                      arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).EnvioTXT) >= 0)
             {
                 tipoServico = Servicos.WSExiste;
             }
-            else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).EnvioXML) >= 0 ||
+            else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).EnvioXML) >= 0 ||
                      arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvImpressaoDanfe).EnvioTXT) >= 0)
             {
                 tipoServico = Servicos.DANFEImpressao;
             }
-            else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).EnvioXML) >= 0 ||
+            else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).EnvioXML) >= 0 ||
                      arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDanfeReport).EnvioTXT) >= 0)
             {
                 tipoServico = Servicos.DANFERelatorio;
             }
-            else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.Update).EnvioXML) >= 0 ||
+            else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.Update).EnvioXML) >= 0 ||
                      arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.Update).EnvioTXT) >= 0)
             {
                 tipoServico = Servicos.UniNFeUpdate;
             }
-            else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsInf).EnvioXML) >= 0 ||
+            else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsInf).EnvioXML) >= 0 ||
                      arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsInf).EnvioTXT) >= 0)
             {
                 tipoServico = Servicos.UniNFeConsultaInformacoes;
@@ -648,12 +649,12 @@ namespace NFe.Service
 
             else
             {
-                if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaContingencia.ToLower()) >= 0)
+                if(arq.IndexOf(Empresas.Configuracoes[empresa].PastaContingencia.ToLower()) >= 0)
                 {
                     tipoServico = Servicos.DANFEImpressao_Contingencia;
                 }
                 else
-                    if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaValidar.ToLower()) >= 0)
+                    if(arq.IndexOf(Empresas.Configuracoes[empresa].PastaValidar.ToLower()) >= 0)
                 {
                     tipoServico = Servicos.AssinarValidar;
                 }
@@ -663,65 +664,65 @@ namespace NFe.Service
                     string pastaArq = ConfiguracaoApp.RemoveEndSlash(infArq.DirectoryName).ToLower().Trim();
                     string pastaLote = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[empresa].PastaXmlEmLote).ToLower().Trim();
                     string pastaEnvio = ConfiguracaoApp.RemoveEndSlash(Empresas.Configuracoes[empresa].PastaXmlEnvio).ToLower().Trim();
-                    if (pastaArq.EndsWith("\\temp"))
+                    if(pastaArq.EndsWith("\\temp"))
                     {
                         pastaArq = Path.GetDirectoryName(pastaArq);
                     }
 
                     #region Arquivos com extensão txt (Somente NFe tem TXT)
 
-                    if (fullPath.ToLower().EndsWith(".txt"))
+                    if(fullPath.ToLower().EndsWith(".txt"))
                     {
-                        if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioTXT) >= 0)
+                        if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioTXT) >= 0)
                         {
                             tipoServico = Servicos.NFePedidoConsultaSituacao;
                         }
-                        else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioTXT) >= 0)
+                        else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioTXT) >= 0)
                         {
                             tipoServico = Servicos.NFeConsultaStatusServico;
                         }
-                        else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioTXT) >= 0)
+                        else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioTXT) >= 0)
                         {
                             tipoServico = Servicos.ConsultaCadastroContribuinte;
                         }
-                        else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioTXT) >= 0)
+                        else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioTXT) >= 0)
                         {
                             tipoServico = Servicos.NFeInutilizarNumeros;
                         }
-                        else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioTXT) >= 0)
+                        else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioTXT) >= 0)
                         {
                             tipoServico = Servicos.NFeConverterTXTparaXML;
                         }
-                        else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.GerarChaveNFe).EnvioTXT) >= 0)
+                        else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.GerarChaveNFe).EnvioTXT) >= 0)
                         {
                             tipoServico = Servicos.NFeGerarChave;
                         }
-                        else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).EnvioTXT) >= 0)
+                        else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvWSExiste).EnvioTXT) >= 0)
                         {
                             tipoServico = Servicos.WSExiste;
                         }
-                        else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsInf).EnvioTXT) >= 0)
+                        else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsInf).EnvioTXT) >= 0)
                         {
                             tipoServico = Servicos.UniNFeConsultaInformacoes;
                         }
-                        else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioTXT) >= 0 ||
+                        else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioTXT) >= 0 ||
                                 arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioTXT) >= 0 ||
                                 arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioTXT) >= 0 ||
                                 arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioTXT) >= 0)
                         {
                             tipoServico = Servicos.EventoRecepcao;
                         }
-                        else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioTXT) >= 0)
+                        else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioTXT) >= 0)
                         {
                             tipoServico = Servicos.DFeEnviar;
                         }
-                        else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioTXT) >= 0)
+                        else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioTXT) >= 0)
                         {
                             tipoServico = Servicos.CTeDistribuicaoDFe;
                         }
-                        else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioTXT) >= 0)
+                        else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.MontarLote).EnvioTXT) >= 0)
                         {
-                            if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
+                            if(arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                             {
                                 tipoServico = Servicos.NFeMontarLoteVarias;
                             }
@@ -738,14 +739,14 @@ namespace NFe.Service
                         XmlDocument doc = new XmlDocument();
                         doc.Load(fullPath);
 
-                        switch (doc.DocumentElement.Name)
+                        switch(doc.DocumentElement.Name)
                         {
                             #region DFe
 
                             case "distDFeInt":
                                 tipoServico = Servicos.DFeEnviar;
 
-                                if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioXML) >= 0)
+                                if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.CTeDistribuicaoDFe;
                                 }
@@ -764,11 +765,11 @@ namespace NFe.Service
                                 break;
 
                             case "MDFe":
-                                if (pastaArq == pastaLote)
+                                if(pastaArq == pastaLote)
                                 {
                                     tipoServico = Servicos.MDFeAssinarValidarEnvioEmLote;
                                 }
-                                else if (pastaArq == pastaEnvio)
+                                else if(pastaArq == pastaEnvio)
                                 {
                                     tipoServico = Servicos.MDFeMontarLoteUm;
                                 }
@@ -788,7 +789,7 @@ namespace NFe.Service
                                 break;
 
                             case "MontarLoteMDFe":
-                                if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
+                                if(arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                                 {
                                     tipoServico = Servicos.MDFeMontarLoteVarios;
                                 }
@@ -807,11 +808,11 @@ namespace NFe.Service
                                 break;
 
                             case "CTe":
-                                if (pastaArq == pastaLote)
+                                if(pastaArq == pastaLote)
                                 {
                                     tipoServico = Servicos.CTeAssinarValidarEnvioEmLote;
                                 }
-                                else if (pastaArq == pastaEnvio)
+                                else if(pastaArq == pastaEnvio)
                                 {
                                     tipoServico = Servicos.CTeMontarLoteUm;
                                 }
@@ -839,7 +840,7 @@ namespace NFe.Service
                                 break;
 
                             case "MontarLoteCTe":
-                                if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
+                                if(arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                                 {
                                     tipoServico = Servicos.CTeMontarLoteVarios;
                                 }
@@ -858,16 +859,16 @@ namespace NFe.Service
                                 break;
 
                             case "NFe":
-                                if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConverterSAT).EnvioXML) >= 0)
+                                if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConverterSAT).EnvioXML) >= 0)
                                 {
                                     goto default;
                                 }
 
-                                if (pastaArq == pastaLote)
+                                if(pastaArq == pastaLote)
                                 {
                                     tipoServico = Servicos.NFeAssinarValidarEnvioEmLote;
                                 }
-                                else if (pastaArq == pastaEnvio)
+                                else if(pastaArq == pastaEnvio)
                                 {
                                     tipoServico = Servicos.NFeMontarLoteUma;
                                 }
@@ -899,7 +900,7 @@ namespace NFe.Service
                                 break;
 
                             case "MontarLoteNFe":
-                                if (arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
+                                if(arq.IndexOf(Empresas.Configuracoes[empresa].PastaXmlEmLote.ToLower().Trim()) >= 0)
                                 {
                                     tipoServico = Servicos.NFeMontarLoteVarias;
                                 }
@@ -922,7 +923,7 @@ namespace NFe.Service
                             #region EFDReinf
 
                             case "Reinf":
-                                switch (doc.DocumentElement.LastChild.Name)
+                                switch(doc.DocumentElement.LastChild.Name)
                                 {
                                     case "ConsultaInformacoesConsolidadas":
                                         tipoServico = Servicos.ConsultarLoteReinf;
@@ -949,7 +950,7 @@ namespace NFe.Service
                             #region eSocial
 
                             case "eSocial":
-                                switch (doc.DocumentElement.LastChild.Name)
+                                switch(doc.DocumentElement.LastChild.Name)
                                 {
                                     case "consultaLoteEventos":
                                         tipoServico = Servicos.ConsultarLoteeSocial;
@@ -990,71 +991,71 @@ namespace NFe.Service
 
                                 #region NFS-e
 
-                                if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML) >= 0)
+                                if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeConsultarLoteRps;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeCancelar;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeConsultarSituacaoLoteRps;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeRecepcionarLoteRps;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeConsultar;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeConsultarPorRps;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedURLNFSe).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedURLNFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeConsultarURL;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedURLNFSeSerie).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedURLNFSeSerie).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeConsultarURLSerie;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePNG).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePNG).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeConsultarNFSePNG;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedInuNFSe).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedInuNFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeInutilizarNFSe;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePDF).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeConsultarNFSePDF;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeObterNotaFiscal;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSeqLoteNotaRPS).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSeqLoteNotaRPS).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeConsultaSequenciaLoteNotaRPS;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSubstNfse).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSubstNfse).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeSubstituirNfse;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRec).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRec).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeConsultarNFSeRecebidas;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeTom).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeTom).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeConsultarNFSeTomados;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedStaNFse).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedStaNFse).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.NFSeConsultarStatusNota;
                                 }
@@ -1063,35 +1064,35 @@ namespace NFe.Service
 
                                 #region CFS-e
 
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteCFSe).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteCFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.RecepcionarLoteCfse;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedCanCFSe).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedCanCFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.CancelarCfse;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteCFSe).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteCFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.ConsultarLoteCfse;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitCFSe).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSitCFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.ConsultarCfse;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvConfigTermCFSe).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvConfigTermCFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.ConfigurarTerminalCfse;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvInfManutCFSe).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvInfManutCFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.EnviarInformeManutencaoCfse;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvInfSemMovCFSe).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnvInfSemMovCFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.InformeTrasmissaoSemMovimentoCfse;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsDadosCadCFSe).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsDadosCadCFSe).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.ConsultarDadosCadastroCfse;
                                 }
@@ -1100,59 +1101,59 @@ namespace NFe.Service
 
                                 #region SAT/CFe
 
-                                if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarSAT).EnvioXML) >= 0)
+                                if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATConsultar;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ExtrairLogsSAT).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ExtrairLogsSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATExtrairLogs;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.TesteFimAFimSAT).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.TesteFimAFimSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATTesteFimAFim;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarStatusOperacionalSAT).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarStatusOperacionalSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATConsultarStatusOperacional;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.TrocarCodigoDeAtivacaoSAT).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.TrocarCodigoDeAtivacaoSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATTrocarCodigoDeAtivacao;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnviarDadosVendaSAT).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.EnviarDadosVendaSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATEnviarDadosVenda;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConverterSAT).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConverterSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATConverterNFCe;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.CancelarUltimaVendaSAT).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.CancelarUltimaVendaSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATCancelarUltimaVenda;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConfigurarInterfaceDeRedeSAT).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConfigurarInterfaceDeRedeSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATConfigurarInterfaceDeRede;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.AssociarAssinaturaSAT).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.AssociarAssinaturaSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATAssociarAssinatura;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.BloquearSAT).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.BloquearSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATBloquear;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.AtivarSAT).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.AtivarSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATAtivar;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.DesbloquearSAT).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.DesbloquearSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATDesbloquear;
                                 }
-                                else if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarNumeroSessaoSAT).EnvioXML) >= 0)
+                                else if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsultarNumeroSessaoSAT).EnvioXML) >= 0)
                                 {
                                     tipoServico = Servicos.SATConsultarNumeroSessao;
                                 }
@@ -1239,9 +1240,9 @@ namespace NFe.Service
                 Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlErro, Path.GetFileName(Path.ChangeExtension(arquivo, ".xml"))));
                 Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlErro, Path.GetFileName(arquivo)));
 
-                if (arquivo.EndsWith(".txt", StringComparison.InvariantCultureIgnoreCase))
+                if(arquivo.EndsWith(".txt", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
+                    if(arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
                     {
                         #region DFe
 
@@ -1253,7 +1254,7 @@ namespace NFe.Service
                         #endregion DFe
                     }
 
-                    if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
+                    if(arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
                     {
                         #region DFe
 
@@ -1265,7 +1266,7 @@ namespace NFe.Service
                         #endregion DFe
                     }
 
-                    if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
+                    if(arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
                     {
                         #region Consulta ao cadastro de contribuinte
 
@@ -1276,34 +1277,34 @@ namespace NFe.Service
                         #endregion Consulta ao cadastro de contribuinte
                     }
 
-                    if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
+                    if(arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.NFe).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
                     {
                         new ConverterTXT(arquivo);
                     }
 
-                    if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioTXT, StringComparison.InvariantCultureIgnoreCase) ||
+                    if(arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioTXT, StringComparison.InvariantCultureIgnoreCase) ||
                         arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioTXT, StringComparison.InvariantCultureIgnoreCase) ||
                         arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioTXT, StringComparison.InvariantCultureIgnoreCase) ||
                         arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
                     {
                         #region Eventos
 
-                        if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
+                        if(arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
                         {
                             Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioTXT) + Propriedade.ExtRetorno.retEnvCCe_ERR));
                         }
 
-                        if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
+                        if(arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
                         {
                             Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioTXT) + Propriedade.ExtRetorno.retCancelamento_ERR));
                         }
 
-                        if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
+                        if(arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
                         {
                             Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioTXT) + Propriedade.ExtRetorno.retManifestacao_ERR));
                         }
 
-                        if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
+                        if(arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
                         {
                             Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioTXT) + Propriedade.ExtRetorno.Eve_ERR));
                         }
@@ -1313,7 +1314,7 @@ namespace NFe.Service
                         #endregion Eventos
                     }
 
-                    if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
+                    if(arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
                     {
                         #region Inutilizacao
 
@@ -1324,13 +1325,13 @@ namespace NFe.Service
                         #endregion Inutilizacao
                     }
 
-                    if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
+                    if(arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioTXT, StringComparison.InvariantCultureIgnoreCase))
                     {
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioTXT) + Propriedade.ExtRetorno.Sta_ERR));
                         DirecionarArquivo(emp, false, false, arquivo, new TaskNFeConsultaStatus(arquivo));
                     }
 
-                    if (arquivo.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioTXT) >= 0)
+                    if(arquivo.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioTXT) >= 0)
                     {
                         Functions.DeletarArquivo(Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno, Functions.ExtrairNomeArq(arquivo, Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioTXT) + Propriedade.ExtRetorno.Sit_ERR));
                         DirecionarArquivo(emp, false, false, arquivo, new TaskNFeConsultaSituacao(arquivo));
@@ -1338,7 +1339,7 @@ namespace NFe.Service
                 }
                 else
                 {
-                    if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML, StringComparison.InvariantCultureIgnoreCase) ||
+                    if(arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML, StringComparison.InvariantCultureIgnoreCase) ||
                         arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML, StringComparison.InvariantCultureIgnoreCase) ||
                         arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML, StringComparison.InvariantCultureIgnoreCase) ||
                         arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML, StringComparison.InvariantCultureIgnoreCase) ||
@@ -1352,7 +1353,7 @@ namespace NFe.Service
                     validar.ValidarAssinarXML(arquivo);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 new ValidarXML(arquivo, "Ocorreu um erro ao assinar o XML: " + ex.Message);
             }
@@ -1407,7 +1408,7 @@ namespace NFe.Service
         {
             Thread.Sleep(600000); // 10 minutos para executar a primeira vez para evitar apagar arquivo que estava na pasta de envio e foi para a temp
 
-            while (true)
+            while(true)
             {
                 ExecutaLimpeza();
 
@@ -1426,11 +1427,11 @@ namespace NFe.Service
         {
             bool hasAll = false;
 
-            while (true)
+            while(true)
             {
-                for (int i = 0; i < Empresas.Configuracoes.Count; i++)
+                for(int i = 0; i < Empresas.Configuracoes.Count; i++)
                 {
-                    if (Empresas.Configuracoes[i].Servico == TipoAplicativo.Nfse)
+                    if(Empresas.Configuracoes[i].Servico == TipoAplicativo.Nfse)
                     {
                         continue;
                     }
@@ -1440,7 +1441,7 @@ namespace NFe.Service
 
                     hasAll = true;
                 }
-                if (hasAll)
+                if(hasAll)
                 {
                     Thread.Sleep(720000); //Dorme por 12 minutos, para atender o problema do consumo indevido da SEFAZ
                 }
@@ -1464,7 +1465,7 @@ namespace NFe.Service
             FileInfo fi = new FileInfo(arquivo);
 
             // processa arquivos XML
-            if (fi.Extension.ToLower() == ".xml")
+            if(fi.Extension.ToLower() == ".xml")
             {
                 new NFeW().GerarChaveNFe(arquivo, true);
             }
@@ -1486,13 +1487,13 @@ namespace NFe.Service
         /// <param name="nfe">Objeto da classe servico NFe</param>
         public void GerarXMLPedRec(object nfe)
         {
-            while (true)
+            while(true)
             {
-                for (int i = 0; i < Empresas.Configuracoes.Count; i++)
+                for(int i = 0; i < Empresas.Configuracoes.Count; i++)
                 {
                     Empresa empresa = Empresas.Configuracoes[i];
 
-                    if (!string.IsNullOrEmpty(empresa.PastaEmpresa) && empresa.Servico != TipoAplicativo.Nfse)
+                    if(!string.IsNullOrEmpty(empresa.PastaEmpresa) && empresa.Servico != TipoAplicativo.Nfse)
                     {
                         GerarXMLPedRec(i, nfe);
                     }
@@ -1520,12 +1521,12 @@ namespace NFe.Service
         {
             try
             {
-                if (veCertificado)
+                if(veCertificado)
                 {
                     CertVencido(emp);
                 }
 
-                if (veConexao)
+                if(veConexao)
                 {
                     IsConnectedToInternet();
                 }
@@ -1533,11 +1534,11 @@ namespace NFe.Service
                 //Processa ou envia o XML
                 EnviarArquivo(emp, arquivo, taskClass, "Execute");
             }
-            catch (ExceptionCertificadoDigital ex)
+            catch(ExceptionCertificadoDigital ex)
             {
                 throw ex;
             }
-            catch (ExceptionSemInternet ex)
+            catch(ExceptionSemInternet ex)
             {
                 throw ex;
             }
@@ -1579,9 +1580,9 @@ namespace NFe.Service
             tipoServico.InvokeMember("NomeArquivoXML", BindingFlags.SetProperty, null, nfe, new object[] { arquivo });
 
             bool doExecute = arquivo.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0;
-            if (!doExecute)
+            if(!doExecute)
             {
-                if (Empresas.Configuracoes[emp].tpEmis != (int)TipoEmissao.teFS &&
+                if(Empresas.Configuracoes[emp].tpEmis != (int)TipoEmissao.teFS &&
                     Empresas.Configuracoes[emp].tpEmis != (int)TipoEmissao.teFSDA &&
                     Empresas.Configuracoes[emp].tpEmis != (int)TipoEmissao.teOffLine &&
                     Empresas.Configuracoes[emp].tpEmis != (int)TipoEmissao.teEPEC) //Confingência em formulário de segurança e EPEC não envia na hora, tem que aguardar voltar para normal.
@@ -1590,7 +1591,7 @@ namespace NFe.Service
                 }
                 else
                 {
-                    if (nfe is TaskDFeRecepcao ||
+                    if(nfe is TaskDFeRecepcao ||
                         nfe is TaskNFeRetRecepcao ||
                         nfe is TaskNFeConsultaStatus ||
                         nfe is TaskNFeConsultaSituacao ||
@@ -1619,7 +1620,7 @@ namespace NFe.Service
                     }
                 }
             }
-            if (doExecute)
+            if(doExecute)
             {
                 tipoServico.InvokeMember(metodo, BindingFlags.InvokeMethod, null, nfe, null);
             }
@@ -1683,14 +1684,14 @@ namespace NFe.Service
                 oArquivo.Delete();
 
                 oArquivo = new FileInfo(sArqRetorno);
-                if (oArquivo.Exists)
+                if(oArquivo.Exists)
                 {
                     oArquivo.Delete();
                 }
 
                 app.GravarXMLInformacoes(sArqRetorno, somenteConfigGeral);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {
@@ -1751,27 +1752,27 @@ namespace NFe.Service
 
             Type tipoServico = nfe.GetType();
 
-            for (int i = 0; i < recibos.Count; i++)
+            for(int i = 0; i < recibos.Count; i++)
             {
                 ReciboCons reciboCons = recibos[i];
                 int tempoConsulta = reciboCons.tMed;
 
-                if (tempoConsulta > 30)
+                if(tempoConsulta > 30)
                 {
                     tempoConsulta = 30; //Tempo previsto no manual da SEFAZ, isso foi feito pq o ambiente SVAN está retornando na consulta recibo, tempo superior a 160, mas não está com problema, é erro no calculo deste tempo. Wandrey
                 }
 
-                if (tempoConsulta < Empresas.Configuracoes[empresa].TempoConsulta)
+                if(tempoConsulta < Empresas.Configuracoes[empresa].TempoConsulta)
                 {
                     tempoConsulta = Empresas.Configuracoes[empresa].TempoConsulta;
                 }
 
-                if (tempoConsulta < 3)
+                if(tempoConsulta < 3)
                 {
                     tempoConsulta = 3;
                 }
 
-                if (DateTime.Now.Subtract(reciboCons.dPedRec).Seconds >= tempoConsulta)
+                if(DateTime.Now.Subtract(reciboCons.dPedRec).Seconds >= tempoConsulta)
                 {
                     //Atualizar a tag da data e hora da ultima consulta do recibo aumentando 180 segundos (3 minutos) para evitar consumo indevido
                     fluxoNfe.AtualizarDPedRec(reciboCons.nRec, DateTime.Now.AddSeconds(180));
@@ -1809,19 +1810,19 @@ namespace NFe.Service
         /// <by>http://desenvolvedores.net/marcelo</by>
         private void ExecutaLimpeza()
         {
-            lock (this)
+            lock(this)
             {
                 //Limpar conteúdo da pasta de LOG, mas manter 60 dias de informação
                 Limpar(-1, Propriedade.PastaLog, "", 60);
 
-                for (int i = 0; i < Empresas.Configuracoes.Count; i++)
+                for(int i = 0; i < Empresas.Configuracoes.Count; i++)
                 {
                     //Limpar conteúdo da pasta temp que fica dentro da pasta de envio de cada empresa a cada 10 dias
                     Limpar(i, Empresas.Configuracoes[i].PastaXmlEnvio, "temp", 10);
                     Limpar(i, Empresas.Configuracoes[i].PastaValidar, "temp", 10);   //danasa 12/8/2011
                     Limpar(i, Empresas.Configuracoes[i].PastaXmlEmLote, "temp", 10);   //Wandrey 05/10/2011
 
-                    if (Empresas.Configuracoes[i].DiasLimpeza == 0)
+                    if(Empresas.Configuracoes[i].DiasLimpeza == 0)
                     {
                         continue;
                     }
@@ -1844,22 +1845,22 @@ namespace NFe.Service
         private void Limpar(int empresa, string diretorio, string subdir, int diasLimpeza)
         {
             // danasa 27-2-2011
-            if (diasLimpeza == 0 || string.IsNullOrEmpty(diretorio))
+            if(diasLimpeza == 0 || string.IsNullOrEmpty(diretorio))
             {
                 return;
             }
 
-            if (!Directory.Exists(diretorio))
+            if(!Directory.Exists(diretorio))
             {
                 return;   //danasa 12/8/2011
             }
 
-            if (!string.IsNullOrEmpty(subdir))
+            if(!string.IsNullOrEmpty(subdir))
             {
                 diretorio += "\\" + subdir;
             }
 
-            if (!Directory.Exists(diretorio))
+            if(!Directory.Exists(diretorio))
             {
                 return;   //danasa 12/8/2011
             }
@@ -1870,12 +1871,12 @@ namespace NFe.Service
                 string[] files = Directory.GetFiles(diretorio, "*.*", SearchOption.AllDirectories);
                 DateTime UltimaData = DateTime.Today.AddDays(-diasLimpeza);
 
-                foreach (string file in files)
+                foreach(string file in files)
                 {
                     FileInfo fi = new FileInfo(file);
 
                     //usar a última data de acesso, e não a data de criação
-                    if (fi.LastWriteTime <= UltimaData)
+                    if(fi.LastWriteTime <= UltimaData)
                     {
                         try
                         {
@@ -1889,9 +1890,9 @@ namespace NFe.Service
                     Application.DoEvents();
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                if (empresa >= 0 && Empresas.Configuracoes.Count > 0)
+                if(empresa >= 0 && Empresas.Configuracoes.Count > 0)
                 {
                     Functions.WriteLog(Empresas.Configuracoes[empresa].Nome + "\r\n" + ex.Message, false, true, Empresas.Configuracoes[empresa].CNPJ);
                 }
@@ -1915,7 +1916,7 @@ namespace NFe.Service
         /// </remarks>
         protected void CertVencido(int emp)
         {
-            if (new CertificadoDigital().Vencido(emp))
+            if(new CertificadoDigital().Vencido(emp))
             {
                 throw new ExceptionCertificadoDigital(ErroPadrao.CertificadoVencido, "(" + Empresas.Configuracoes[emp].X509Certificado.NotBefore.ToString() + " a " + Empresas.Configuracoes[emp].X509Certificado.NotAfter.ToString() + ")");
             }
@@ -1934,9 +1935,9 @@ namespace NFe.Service
         protected void IsConnectedToInternet()
         {
             //Verificar antes se tem conexão com a internet, se não tiver já gera uma exceção no padrão já esperado pelo ERP
-            if (ConfiguracaoApp.ChecarConexaoInternet)
+            if(ConfiguracaoApp.ChecarConexaoInternet)
             {
-                if (!Functions.IsConnectedToInternet())
+                if(!Functions.IsConnectedToInternet())
                 {
                     throw new ExceptionSemInternet(ErroPadrao.FalhaInternet);
                 }
@@ -1959,7 +1960,7 @@ namespace NFe.Service
             string extRetERR = string.Empty;
             string extRet = string.Empty;
 
-            switch (servico)
+            switch(servico)
             {
                 #region NFe / CTe / MDFe
 
@@ -2116,7 +2117,7 @@ namespace NFe.Service
                 #endregion Diversos
 
                 default:
-                    if (arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML))
+                    if(arquivo.EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML))
                     {
                         extRet = Propriedade.Extensao(Propriedade.TipoEnvio.PedSit).EnvioXML;
                         extRetERR = Propriedade.ExtRetorno.Sit_ERR;
@@ -2130,7 +2131,7 @@ namespace NFe.Service
                     }
                     break;
             }
-            if (!string.IsNullOrEmpty(extRet))
+            if(!string.IsNullOrEmpty(extRet))
             {
                 try
                 {
@@ -2153,7 +2154,7 @@ namespace NFe.Service
         {
             string arq = arquivo.ToLower().Trim();
 
-            if (arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsCertificado).EnvioXML) >= 0)
+            if(arq.IndexOf(Propriedade.Extensao(Propriedade.TipoEnvio.ConsCertificado).EnvioXML) >= 0)
             {
                 ConsultaCertificados(arquivo);
             }
@@ -2176,11 +2177,11 @@ namespace NFe.Service
         {
             bool hasAll = false;
 
-            while (true)
+            while(true)
             {
-                for (int i = 0; i < Empresas.Configuracoes.Count; i++)
+                for(int i = 0; i < Empresas.Configuracoes.Count; i++)
                 {
-                    if (Empresas.Configuracoes[i].Servico != TipoAplicativo.Nfe &&
+                    if(Empresas.Configuracoes[i].Servico != TipoAplicativo.Nfe &&
                         Empresas.Configuracoes[i].Servico != TipoAplicativo.Cte &&
                         Empresas.Configuracoes[i].Servico != TipoAplicativo.Todos)
                     {
@@ -2192,7 +2193,7 @@ namespace NFe.Service
 
                     hasAll = true;
                 }
-                if (hasAll)
+                if(hasAll)
                 {
                     Thread.Sleep(720000); //Dorme por 12 minutos, para atender o problema do consumo indevido da SEFAZ
                 }
@@ -2211,7 +2212,7 @@ namespace NFe.Service
         {
             IWebProxy result = null;
 
-            if (ConfiguracaoApp.Proxy)
+            if(ConfiguracaoApp.Proxy)
             {
                 result = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor,
                     ConfiguracaoApp.ProxyUsuario,

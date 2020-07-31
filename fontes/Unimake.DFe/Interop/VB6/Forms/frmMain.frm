@@ -61,25 +61,46 @@ Begin VB.Form frmMain
       Y1              =   240
       Y2              =   255
    End
-   Begin VB.Menu mnuCTe 
-      Caption         =   "CT-e"
-      Begin VB.Menu mnuCTe_Consultas 
+   Begin VB.Menu mnuNFe 
+      Caption         =   "NF-e"
+      Begin VB.Menu mnuNFe_Consultas 
          Caption         =   "Consultas"
-         Begin VB.Menu mnuCTe_ConsultarSituacao 
+         Begin VB.Menu mnuNFe_ConsultarSituacao 
             Caption         =   "Consultar Situação"
          End
-         Begin VB.Menu mnuCTe_ConsultarStatus 
+         Begin VB.Menu mnuNFe_ConsultarStatus 
             Caption         =   "Consultar Status"
          End
-         Begin VB.Menu mnuCTe_ConsultaCadastroContribuinte 
-            Caption         =   "Cadastro de Contribuinte"
+         Begin VB.Menu mnuNFe_ConsultarRecibo 
+            Caption         =   "Consultar Recibo"
          End
-         Begin VB.Menu mnuCTe_Distribuicao 
-            Caption         =   "Distribuição"
+         Begin VB.Menu mnuNFe_ConsultarCadastro 
+            Caption         =   "Consultar Cadastro"
+         End
+         Begin VB.Menu mnuNFe_Distribuicao 
+            Caption         =   "Consultar Distribuição"
          End
       End
-      Begin VB.Menu mnuCTe_Inutilizar 
-         Caption         =   "Inutilizar"
+      Begin VB.Menu mnuNFe_Eventos 
+         Caption         =   "Eventos"
+         Begin VB.Menu mnuNFe_Manifestar 
+            Caption         =   "Manifestação"
+         End
+         Begin VB.Menu mnuNFe_EvtCCe 
+            Caption         =   "Evento de Carta de Correção"
+         End
+      End
+      Begin VB.Menu mnuNFe_Autorizar 
+         Caption         =   "Autorizar NF-e"
+      End
+      Begin VB.Menu mnuNFe_Cancelar 
+         Caption         =   "Cancelar NFe"
+      End
+      Begin VB.Menu mnuNFe_Inutilizar 
+         Caption         =   "Inutilizar Números"
+      End
+      Begin VB.Menu mnuNFe_AutorizarPorArquivo 
+         Caption         =   "Autorizar por arquivo"
       End
    End
    Begin VB.Menu mnuNFCe 
@@ -115,43 +136,25 @@ Begin VB.Form frmMain
          Caption         =   "Inutilizar Números"
       End
    End
-   Begin VB.Menu mnuNFe 
-      Caption         =   "NF-e"
-      Begin VB.Menu mnuNFe_Consultas 
+   Begin VB.Menu mnuCTe 
+      Caption         =   "CT-e"
+      Begin VB.Menu mnuCTe_Consultas 
          Caption         =   "Consultas"
-         Begin VB.Menu mnuNFe_ConsultarSituacao 
+         Begin VB.Menu mnuCTe_ConsultarSituacao 
             Caption         =   "Consultar Situação"
          End
-         Begin VB.Menu mnuNFe_ConsultarStatus 
+         Begin VB.Menu mnuCTe_ConsultarStatus 
             Caption         =   "Consultar Status"
          End
-         Begin VB.Menu mnuNFe_ConsultarRecibo 
-            Caption         =   "Consultar Recibo"
+         Begin VB.Menu mnuCTe_ConsultaCadastroContribuinte 
+            Caption         =   "Cadastro de Contribuinte"
          End
-         Begin VB.Menu mnuNFe_ConsultarCadastro 
-            Caption         =   "Consultar Cadastro"
-         End
-         Begin VB.Menu mnuNFe_Distribuicao 
-            Caption         =   "Consultar Distribuicao"
+         Begin VB.Menu mnuCTe_Distribuicao 
+            Caption         =   "Distribuição"
          End
       End
-      Begin VB.Menu mnuNFe_Eventos 
-         Caption         =   "Eventos"
-         Begin VB.Menu mnuNFe_Manifestar 
-            Caption         =   "Manifestação"
-         End
-         Begin VB.Menu mnuNFe_EvtCCe 
-            Caption         =   "Evento de Carta de Correção"
-         End
-      End
-      Begin VB.Menu mnuNFe_Autorizar 
-         Caption         =   "Autorizar NF-e"
-      End
-      Begin VB.Menu mnuNFe_Cancelar 
-         Caption         =   "Cancelar NFe"
-      End
-      Begin VB.Menu mnuNFe_Inutilizar 
-         Caption         =   "Inutilizar Números"
+      Begin VB.Menu mnuCTe_Inutilizar 
+         Caption         =   "Inutilizar"
       End
    End
    Begin VB.Menu mnuMDFe 
@@ -283,6 +286,10 @@ End Sub
 
 Private Sub mnuNFe_Autorizar_Click()
 AutorizarNFe
+End Sub
+
+Private Sub mnuNFe_AutorizarPorArquivo_Click()
+AutorizarPorArquivoNFe
 End Sub
 
 Private Sub mnuNFe_Cancelar_Click()

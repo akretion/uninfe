@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configuracoes>
-  <SVC>SVCRS</SVC>
   <Servicos ID="MDFe">
     <StatusServico versao="3.00">
       <Descricao>Consulta situação do serviço de manifesto eletrônico de documentos fiscais</Descricao>
@@ -96,7 +95,7 @@
         <Tipo>
           <ID>3</ID>
           <SchemaArquivo>enviMDFe_v{0}.xsd</SchemaArquivo>
-          <SchemaArquivoEspecifico>mdfeModalAereo_v{0}.xsd</SchemaArquivoEspecifico>
+          <SchemaArquivoEspecifico>mdfeModalAquaviario_v{0}.xsd</SchemaArquivoEspecifico>
         </Tipo>
         <Tipo>
           <ID>4</ID>

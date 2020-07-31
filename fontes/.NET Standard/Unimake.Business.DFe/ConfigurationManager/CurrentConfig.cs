@@ -34,11 +34,13 @@ namespace Unimake.Business.DFe.ConfigurationManager
         public static string PastaArqConfigNFCe => GetConfiguration().PastaArqConfigNFCe;
         public static string PastaArqConfigNFe => GetConfiguration().PastaArqConfigNFe;
         public static string PastaArqConfigCTe => GetConfiguration().PastaArqConfigCTe;
+        public static string PastaArqConfigCTeOS => GetConfiguration().PastaArqConfigCTeOS;
         public static string PastaArqConfigMDFe => GetConfiguration().PastaArqConfigMDFe;
         public static string PastaSchema => GetConfiguration().PastaSchema;
         public static string PastaSchemaNFCe => GetConfiguration().PastaSchemaNFCe;
         public static string PastaSchemaNFe => GetConfiguration().PastaSchemaNFe;
         public static string PastaSchemaCTe => GetConfiguration().PastaSchemaCTe;
+        public static string PastaSchemaCTeOS => GetConfiguration().PastaSchemaCTeOS;
         public static string PastaSchemaMDFe => GetConfiguration().PastaSchemaMDFe;
         public static Servicos.TipoDFe DFE { get; set; }
 

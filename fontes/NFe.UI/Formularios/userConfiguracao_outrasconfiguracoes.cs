@@ -14,7 +14,7 @@ namespace NFe.UI.Formularios
     public partial class userConfiguracao_outrasconfiguracoes : MetroFramework.Controls.MetroUserControl
     {
         public event EventHandler changeEvent;
-        
+
 
         private Settings.Empresa empresa;
         public userConfiguracao_outrasconfiguracoes()
@@ -28,7 +28,7 @@ namespace NFe.UI.Formularios
             uninfeDummy.ClearControls(this, true, false);
             chkSalvarXMLDistribuicao.Checked = empresa.SalvarSomenteXMLDistribuicao;
             cbIndSincMDFe.Checked = empresa.IndSincMDFe;
-            Configurar(empresa);    
+            Configurar(empresa);
         }
 
         public void Validar(bool salvando = true)
@@ -76,7 +76,7 @@ namespace NFe.UI.Formularios
                     break;
                 case TipoAplicativo.Todos:
                 case TipoAplicativo.MDFe:
-                    cbIndSincMDFe.Visible = true;
+                    cbIndSincMDFe.Visible = false;
                     break;
             }
         }

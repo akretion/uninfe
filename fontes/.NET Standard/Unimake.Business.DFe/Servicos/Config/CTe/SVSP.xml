@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Configuracoes>
-  <SVC>SVCRS</SVC>  
   <Servicos ID="CTe">
     <StatusServico versao="3.00">
       <Descricao>Consulta situação do serviço de conhecimento de transporte eletrônico</Descricao>
@@ -28,19 +27,19 @@
       <TagLoteAssinatura></TagLoteAssinatura>
       <TagLoteAtributoID></TagLoteAtributoID>
     </ConsultaProtocolo>
-	  <Inutilizacao versao="3.00">
-		  <Descricao>Inutilização de números do conhecimento de transporte eletrônico</Descricao>
-		  <WebEnderecoHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteInutilizacao.asmx</WebEnderecoHomologacao>
-		  <WebEnderecoProducao>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteInutilizacao.asmx</WebEnderecoProducao>
-		  <WebActionHomologacao>http://www.portalfiscal.inf.br/cte/wsdl/CteInutilizacao</WebActionHomologacao>
-		  <WebActionProducao>http://www.portalfiscal.inf.br/cte/wsdl/CteInutilizacao</WebActionProducao>
-		  <WebTagRetorno>cteInutilizacaoCTResult</WebTagRetorno>
-		  <SchemaArquivo>inutCTe_v{0}.xsd</SchemaArquivo>
-		  <TagAssinatura>inutCTe</TagAssinatura>
-		  <TagAtributoID>infInut</TagAtributoID>
-		  <TagLoteAssinatura></TagLoteAssinatura>
-		  <TagLoteAtributoID></TagLoteAtributoID>
-	  </Inutilizacao>
+    <Inutilizacao versao="3.00">
+      <Descricao>Inutilização de números do conhecimento de transporte eletrônico</Descricao>
+      <WebEnderecoHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/cteInutilizacao.asmx</WebEnderecoHomologacao>
+      <WebEnderecoProducao>https://nfe.fazenda.sp.gov.br/cteWEB/services/cteInutilizacao.asmx</WebEnderecoProducao>
+      <WebActionHomologacao>http://www.portalfiscal.inf.br/cte/wsdl/CteInutilizacao</WebActionHomologacao>
+      <WebActionProducao>http://www.portalfiscal.inf.br/cte/wsdl/CteInutilizacao</WebActionProducao>
+      <WebTagRetorno>cteInutilizacaoCTResult</WebTagRetorno>
+      <SchemaArquivo>inutCTe_v{0}.xsd</SchemaArquivo>
+      <TagAssinatura>inutCTe</TagAssinatura>
+      <TagAtributoID>infInut</TagAtributoID>
+      <TagLoteAssinatura></TagLoteAssinatura>
+      <TagLoteAtributoID></TagLoteAtributoID>
+    </Inutilizacao>
     <ConsultaCadastro versao="2.00">
       <Descricao>Consulta cadastro do contribuinte</Descricao>
       <WebEnderecoHomologacao></WebEnderecoHomologacao>
@@ -55,7 +54,7 @@
     </ConsultaCadastro>
     <RecepcaoEvento versao="3.00">
       <Descricao>Recepcao de eventos</Descricao>
-	  <WebEnderecoHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/CteRecepcaoEvento.asmx</WebEnderecoHomologacao>
+      <WebEnderecoHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/cteWEB/services/CteRecepcaoEvento.asmx</WebEnderecoHomologacao>
       <WebEnderecoProducao>https://nfe.fazenda.sp.gov.br/cteWEB/services/CteRecepcaoEvento.asmx</WebEnderecoProducao>
       <WebActionHomologacao>http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcaoEvento</WebActionHomologacao>
       <WebActionProducao>http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcaoEvento</WebActionProducao>
@@ -100,13 +99,44 @@
       <WebActionHomologacao>http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao</WebActionHomologacao>
       <WebActionProducao>http://www.portalfiscal.inf.br/cte/wsdl/CteRecepcao</WebActionProducao>
       <WebTagRetorno>cteRecepcaoLoteResult</WebTagRetorno>
-      <SchemaArquivo>enviCTe_v{0}.xsd</SchemaArquivo>
+      <SchemasEspecificos>
+        <Tipo>
+          <ID>1</ID>
+          <SchemaArquivo>enviCTe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>cteModalRodoviarioOS_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+        <Tipo>
+          <ID>2</ID>
+          <SchemaArquivo>enviCTe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>cteModalAereo_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+        <Tipo>
+          <ID>3</ID>
+          <SchemaArquivo>enviCTe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>cteModalAquaviario_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+        <Tipo>
+          <ID>4</ID>
+          <SchemaArquivo>enviCTe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>cteModalFerroviario_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+        <Tipo>
+          <ID>5</ID>
+          <SchemaArquivo>enviCTe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>cteModalDutoviario_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+        <Tipo>
+          <ID>6</ID>
+          <SchemaArquivo>enviCTe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>cteMultiModal_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+      </SchemasEspecificos>
       <TagAssinatura>CTe</TagAssinatura>
       <TagAtributoID>infCte</TagAtributoID>
       <TagLoteAssinatura></TagLoteAssinatura>
       <TagLoteAtributoID></TagLoteAtributoID>
-      <UrlQrCodeHomologacao>https://nfe.fazenda.sp.gov.br/CTeConsulta/qrCode</UrlQrCodeHomologacao>
-      <UrlQrCodeProducao>https://homologacao.nfe.fazenda.sp.gov.br/CTeConsulta/qrCode</UrlQrCodeProducao>
+      <UrlQrCodeHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/CTeConsulta/qrCode</UrlQrCodeHomologacao>
+      <UrlQrCodeProducao>https://nfe.fazenda.sp.gov.br/CTeConsulta/qrCode</UrlQrCodeProducao>
     </Autorizacao>
     <RetAutorizacao versao="3.00">
       <Descricao>Consulta recibo do conhecimento de transporte eletrônico</Descricao>
@@ -115,7 +145,7 @@
       <WebActionHomologacao>http://www.portalfiscal.inf.br/cte/wsdl/CteRetRecepcao</WebActionHomologacao>
       <WebActionProducao>http://www.portalfiscal.inf.br/cte/wsdl/CteRetRecepcao</WebActionProducao>
       <WebTagRetorno>cteRetRecepcaoResult</WebTagRetorno>
-      <SchemaArquivo>consReciCTe_v3.00.xsd</SchemaArquivo>
+      <SchemaArquivo>consReciCTe_v{0}.xsd</SchemaArquivo>
       <TagAssinatura></TagAssinatura>
       <TagAtributoID></TagAtributoID>
       <TagLoteAssinatura></TagLoteAssinatura>

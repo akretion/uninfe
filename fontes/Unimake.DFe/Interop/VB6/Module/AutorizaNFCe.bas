@@ -1,4 +1,4 @@
-Attribute VB_Name = "AutorizaNFCe"
+Attribute VB_Name = "ServicosNFCe"
 Option Explicit
 Public Sub AutorizarNFCe()
 On Error GoTo erro

@@ -2,8 +2,11 @@
 using NFe.Validate;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Security.Cryptography;
+using System.Threading;
 using System.Xml;
 using Unimake.SAT.Servico.Envio;
 
@@ -165,9 +168,9 @@ namespace NFe.SAT.Conversao
                             }
 
                             if (((XmlElement)itensDet).GetElementsByTagName("cProdANP").Count != 0 && DadosEmpresa.VersaoLayoutSAT == "0.08")
-                            {                                
+                            {
                                 string cProdANP = ((XmlElement)itensDet).GetElementsByTagName("cProdANP")[0].InnerText;
-                                if (!string.IsNullOrEmpty(cProdANP) )
+                                if (!string.IsNullOrEmpty(cProdANP))
                                 {
                                     envCFeCFeInfCFeDetProdObsFiscoDet obsFisco = new envCFeCFeInfCFeDetProdObsFiscoDet();
                                     obsFisco.xCampoDet = "Cod. Produto ANP";
@@ -343,9 +346,8 @@ namespace NFe.SAT.Conversao
                         envCFeCFeInfCFeDetImpostoPISPISAliq PISAliq = new envCFeCFeInfCFeDetImpostoPISPISAliq
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
-                            pPIS = GetXML(tag.ChildNodes, "pPIS"),
+                            pPIS = ConverterPercentual(GetXML(tag.ChildNodes, "pPIS")),
                             vBC = GetXML(tag.ChildNodes, "vBC"),
-                            vPIS = GetXML(tag.ChildNodes, "vPIS"),
                         };
 
                         SetProperrty(result, "Item", PISAliq);
@@ -369,8 +371,7 @@ namespace NFe.SAT.Conversao
                     #region PISOutr
 
                     case "PISOutr":
-                        string pPis = GetXML(tag.ChildNodes, "pPIS");
-                        pPis = String.Format("{0:N4}", Convert.ToDouble(pPis)).Replace(",", ".");
+                        string pPis = ConverterPercentual(GetXML(tag.ChildNodes, "pPIS"));
                         envCFeCFeInfCFeDetImpostoPISPISOutr PISOutr = new envCFeCFeInfCFeDetImpostoPISPISOutr
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
@@ -388,7 +389,6 @@ namespace NFe.SAT.Conversao
                                 ItemsChoiceType.qBCProd,
                                 ItemsChoiceType.vAliqProd
                             },
-                            vPIS = GetXMLZero(tag.ChildNodes, "vPIS")
                         };
 
                         SetProperrty(result, "Item", PISOutr);
@@ -429,8 +429,8 @@ namespace NFe.SAT.Conversao
                         envCFeCFeInfCFeDetImpostoCOFINSCOFINSAliq COFINSAliq = new envCFeCFeInfCFeDetImpostoCOFINSCOFINSAliq
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
-                            pCOFINS = GetXML(tag.ChildNodes, "pCOFINS"),
-                            vBC = GetXML(tag.ChildNodes, "vBC")
+                            pCOFINS = ConverterPercentual(GetXML(tag.ChildNodes, "pCOFINS")),
+                            vBC = GetXML(tag.ChildNodes, "vBC"),
                         };
                         SetProperrty(result, "Item", COFINSAliq);
                         break;
@@ -452,8 +452,7 @@ namespace NFe.SAT.Conversao
                     #region COFINSOutr
 
                     case "COFINSOutr":
-                        string pCofins = GetXML(tag.ChildNodes, "pCOFINS");
-                        pCofins = String.Format("{0:N4}", Convert.ToDouble(pCofins)).Replace(",", ".");
+                        string pCofins = ConverterPercentual(GetXML(tag.ChildNodes, "pCOFINS"));
                         envCFeCFeInfCFeDetImpostoCOFINSCOFINSOutr COFINSOutr = new envCFeCFeInfCFeDetImpostoCOFINSCOFINSOutr
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
@@ -471,7 +470,6 @@ namespace NFe.SAT.Conversao
                                 ItemsChoiceType2.qBCProd,
                                 ItemsChoiceType2.vAliqProd
                             },
-                            vCOFINS = GetXMLZero(tag.ChildNodes, "vCOFINS")
                         };
                         SetProperrty(result, "Item", COFINSOutr);
                         break;
@@ -585,7 +583,7 @@ namespace NFe.SAT.Conversao
             {
                 result = GetValueXML("dest", "CPF");
 
-                if (DadosEmpresa.VersaoLayoutSAT == "0.08" && !String.IsNullOrEmpty(result)) 
+                if (DadosEmpresa.VersaoLayoutSAT == "0.08" && !String.IsNullOrEmpty(result))
                     result = result.PadLeft(11, '0');
             }
 
@@ -670,6 +668,33 @@ namespace NFe.SAT.Conversao
             {
                 throw new Exception(cResultadoValidacao);
             }
+        }
+
+        private double ToDouble(object value)
+        {
+            if (value == null)
+            {
+                //TODO: Marcelo >>> Vai retornar zero por padrão mesmo?
+                return 0;
+            }
+
+            double.TryParse(value.ToString(),
+                            NumberStyles.Number,
+                            CultureInfo.InvariantCulture,
+                            out var result);
+            return result;
+        }
+
+        private string ConverterPercentual(string perc)
+        {
+            string retorno = perc;
+            double percConv = ToDouble(perc);  
+            if (percConv >= 1 || percConv.Equals(0.65))
+            {
+                percConv = percConv / 100;
+                retorno = String.Format("{0:N4}", percConv ).Replace(",", ".");
+            }
+            return retorno;
         }
     }
 }
