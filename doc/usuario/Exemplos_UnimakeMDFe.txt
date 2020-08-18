@@ -1,0 +1,473 @@
+// ---------------------------------------------------------------------------------------------------------
+// Acessando certificado digital:
+// ---------------------------------------------------------------------------------------------------------
+
+CertificadoDigital cert = new CertificadoDigital();
+X509Certificate2 CertificadoSelecionado = cert.Selecionar();
+
+// ---------------------------------------------------------------------------------------------------------
+// Convertendo certificado digital A1 para Bytes para arquivar em base de dados
+// ---------------------------------------------------------------------------------------------------------
+var certificadoDigital = new CertificadoDigital();
+var bytes = certificadoDigital.ToByteArray(path);
+
+// ---------------------------------------------------------------------------------------------------------
+// Convertendo certificado digital de Bytes para X509Certificate2 para fazer uso do mesmo
+// ---------------------------------------------------------------------------------------------------------
+X509Certificate2 CertificadoSelecionado = certificadoDigital.CarregarCertificadoDigitalA1(bytes, password);
+
+// ---------------------------------------------------------------------------------------------------------
+//Enviando XML para consultar Status
+// ---------------------------------------------------------------------------------------------------------
+
+try
+{
+    var xml = new ConsStatServMDFe
+    {
+        Versao = "3.00",
+        TpAmb = TipoAmbiente.Homologacao
+    };
+
+    var configuracao = new Configuracao
+    {
+        TipoDFe = TipoDFe.MDFe,
+        CodigoUF = (int)UFBrasil.PR,
+        CertificadoDigital = CertificadoSelecionado
+    };
+
+    var statusServico = new Unimake.Business.DFe.Servicos.MDFe.StatusServico(xml, configuracao);
+    statusServico.Executar();
+    MessageBox.Show(statusServico.RetornoWSString);
+    MessageBox.Show(statusServico.Result.XMotivo);
+}
+catch(Exception ex)
+{
+    CatchException(ex);
+}
+
+// ---------------------------------------------------------------------------------------------------------
+//Enviando XML de consulta situação da MDFe
+// ---------------------------------------------------------------------------------------------------------
+
+try
+{
+    var xml = new ConsSitMDFe
+    {
+        Versao = "3.00",
+        TpAmb = TipoAmbiente.Homologacao,
+        ChMDFe = "41170701761135000132570010000186931903758906"
+    };
+
+    var configuracao = new Configuracao
+    {
+        TipoDFe = TipoDFe.MDFe,
+        CertificadoDigital = CertificadoSelecionado
+    };
+
+    var consultaProtocolo = new Unimake.Business.DFe.Servicos.MDFe.ConsultaProtocolo(xml, configuracao);
+    consultaProtocolo.Executar();
+
+    MessageBox.Show(consultaProtocolo.RetornoWSString);
+    MessageBox.Show(consultaProtocolo.Result.XMotivo);
+}
+catch(Exception ex)
+{
+    CatchException(ex);
+}
+
+// ---------------------------------------------------------------------------------------------------------
+//Enviando XML de consulta recibo do lote de MDFe enviado
+// ---------------------------------------------------------------------------------------------------------
+
+try
+{
+    var xml = new ConsReciMDFe
+    {
+        Versao = "3.00",
+        TpAmb = TipoAmbiente.Homologacao,
+        NRec = "410000007934162"
+    };
+
+    var configuracao = new Configuracao
+    {
+        TipoDFe = TipoDFe.MDFe,
+        CertificadoDigital = CertificadoSelecionado
+    };
+
+    var retAutorizacao = new Unimake.Business.DFe.Servicos.MDFe.RetAutorizacao(xml, configuracao);
+    retAutorizacao.Executar();
+    MessageBox.Show(retAutorizacao.RetornoWSString);
+    MessageBox.Show(retAutorizacao.Result.XMotivo);
+}
+catch(Exception ex)
+{
+    CatchException(ex);
+}
+
+// ---------------------------------------------------------------------------------------------------------
+//Enviando XML de eventos
+// ---------------------------------------------------------------------------------------------------------
+
+try
+{
+    var xml = new EventoMDFe
+    {
+        Versao = "3.00",
+        InfEvento = new Unimake.Business.DFe.Xml.MDFe.InfEvento(new Unimake.Business.DFe.Xml.MDFe.DetEventoCanc
+        {
+            NProt = "141200000007987",
+            VersaoEvento = "3.00",
+            XJust = "Justificativa para cancelamento da MDFe de teste"
+        })
+        {
+            COrgao = UFBrasil.PR,
+            ChMDFe = "41200210859283000185570010000005671227070615",
+            CNPJ = "10859283000185",
+            DhEvento = DateTime.Now,
+            TpEvento = TipoEventoMDFe.Cancelamento,
+            NSeqEvento = 1,
+            TpAmb = TipoAmbiente.Homologacao
+        }
+    };
+
+    var configuracao = new Configuracao
+    {
+        TipoDFe = TipoDFe.MDFe,
+        CertificadoDigital = CertificadoSelecionado
+    };
+
+
+    var recepcaoEvento = new Unimake.Business.DFe.Servicos.MDFe.RecepcaoEvento(xml, configuracao);
+
+    recepcaoEvento.Executar();
+    MessageBox.Show(recepcaoEvento.RetornoWSString);
+    MessageBox.Show(recepcaoEvento.Result.InfEvento.XMotivo);
+
+    //Gravar o XML de distribuição se a inutilização foi homologada
+    switch(recepcaoEvento.Result.InfEvento.CStat)
+    {
+        case 134: //Recebido pelo Sistema de Registro de Eventos, com vinculação do evento no respectivo CT-e com situação diferente de Autorizada.
+        case 135: //Recebido pelo Sistema de Registro de Eventos, com vinculação do evento no respetivo CTe.
+        case 136: //Recebido pelo Sistema de Registro de Eventos – vinculação do evento ao respectivo CT-e prejudicado.
+            recepcaoEvento.GravarXmlDistribuicao(@"c:\testecte\");
+            break;
+
+        default:
+            //Quando o evento é rejeitado pela Sefaz.
+            break;
+    }
+}
+catch(Exception ex)
+{
+    CatchException(ex);
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// Enviando XML da MDFe
+// ---------------------------------------------------------------------------------------------------------
+
+try
+{
+    #region CriarMDFe
+
+    var xml = new EnviMDFe
+    {
+        Versao = "3.00",
+        IdLote = "000000000000001",
+        MDFe = new MDFe
+        {
+
+            InfMDFe = new InfMDFe
+            {
+                Versao = "3.00",
+
+                Ide = new Unimake.Business.DFe.Xml.MDFe.Ide
+                {
+                    CUF = UFBrasil.PR,
+                    TpAmb = TipoAmbiente.Homologacao,
+                    TpEmit = TipoEmitenteMDFe.PrestadorServicoTransporte,
+                    Mod = ModeloDFe.MDFe,
+                    Serie = 1,
+                    NMDF = 861,
+                    CMDF = "01722067",
+                    Modal = ModalidadeTransporteMDFe.Rodoviario,
+                    DhEmi = DateTime.Now,
+                    TpEmis = TipoEmissao.Normal,
+                    ProcEmi = ProcessoEmissao.AplicativoContribuinte,
+                    VerProc = "UNICO V8.0",
+                    UFIni = UFBrasil.PR,
+                    UFFim = UFBrasil.SP,
+                    InfMunCarrega = new List<InfMunCarrega>
+                    {
+                        new InfMunCarrega
+                        {
+                            CMunCarrega = 4118402,
+                            XMunCarrega = "PARANAVAI"
+
+                        }
+                    },
+                    DhIniViagem = DateTime.Now,
+
+                },
+                Emit = new Unimake.Business.DFe.Xml.MDFe.Emit
+                {
+                    CNPJ = "31905001000109",
+                    IE = "9079649730",
+                    XNome = "EXATUS MOVEIS EIRELI",
+                    XFant = "EXATUS MOVEIS",
+                    EnderEmit = new Unimake.Business.DFe.Xml.MDFe.EnderEmit
+                    {
+                        XLgr = "RUA JOAQUIM F. DE SOUZA",
+                        Nro = "01112",
+                        XBairro = "VILA TEREZINHA",
+                        CMun = 4118402,
+                        XMun = "PARANAVAI",
+                        CEP = "87706675",
+                        UF = UFBrasil.PR,
+                        Fone = "04434237530",
+                    },
+                },
+                InfModal = new Unimake.Business.DFe.Xml.MDFe.InfModal
+                {
+                    VersaoModal = "3.00",
+                    Rodo = new Unimake.Business.DFe.Xml.MDFe.Rodo
+                    {
+                        InfANTT = new InfANTT
+                        {
+                            RNTRC = "44957333",
+                            InfContratante = new List<InfContratante>
+                            {
+                                new InfContratante
+                                {
+                                    CNPJ = "80568835000181"
+                                },
+                                new InfContratante
+                                {
+                                    CNPJ = "10197843000183"
+                                }
+                            }
+                        },
+                        VeicTracao = new VeicTracao
+                        {
+                            CInt = "AXF8500",
+                            Placa = "AXF8500",
+                            Tara = 0,
+                            CapKG = 5000,
+                            Prop = new Unimake.Business.DFe.Xml.MDFe.Prop
+                            {
+                                CNPJ = "31905001000109",
+                                RNTRC = "44957333",
+                                XNome = "EXATUS MOVEIS EIRELI",
+                                IE = "9079649730",
+                                UF = UFBrasil.PR,
+                                TpProp = TipoProprietarioMDFe.Outros
+                            },
+                            Condutor = new List<Condutor>
+                            {
+                                new Condutor
+                                {
+                                    XNome = "ADEMILSON LOPES DE SOUZA",
+                                    CPF = "27056461832"
+                                }
+                            },
+                            TpRod = TipoRodado.Toco,
+                            TpCar = TipoCarroceriaMDFe.FechadaBau,
+                            UF = UFBrasil.PR
+                        },
+                    }
+                },
+                InfDoc = new InfDocInfMDFe
+                {
+                    InfMunDescarga = new List<InfMunDescarga>
+                    {
+                        new InfMunDescarga
+                        {
+                            CMunDescarga = 3505708,
+                            XMunDescarga = "BARUERI",
+                            InfCTe = new List<InfMunDescargaInfCTe>
+                            {
+                                new InfMunDescargaInfCTe
+                                {
+                                    ChCTe = "41200531905001000109570010000009551708222466"
+                                },
+                                new InfMunDescargaInfCTe
+                                {
+                                    ChCTe = "41200531905001000109570010000009561308222474"
+                                }
+                            }
+                        },
+                        new InfMunDescarga
+                        {
+                            CMunDescarga = 3550308,
+                            XMunDescarga = "SAO PAULO",
+                            InfCTe = new List<InfMunDescargaInfCTe>
+                            {
+                                new InfMunDescargaInfCTe
+                                {
+                                    ChCTe = "41200531905001000109570010000009581608222490"
+                                }
+                            }
+                        }
+                    }
+                },
+                ProdPred = new ProdPred
+                {
+                    TpCarga = TipoCargaMDFe.CargaGeral,
+                    XProd = "TESTE DE PRODUTO PREDOMINANTE",
+                    InfLotacao = new InfLotacao
+                    {
+                        InfLocalCarrega = new InfLocalCarrega
+                        {
+                            CEP = "87302080"
+                        },
+                        InfLocalDescarrega = new InfLocalDescarrega
+                        {
+                            CEP = "25650208"
+                        }
+                    }
+                },
+                Seg = new List<Unimake.Business.DFe.Xml.MDFe.Seg>
+                {
+                    new Unimake.Business.DFe.Xml.MDFe.Seg
+                    {
+                        InfResp = new InfResp
+                        {
+                            RespSeg = ResponsavelSeguroMDFe.EmitenteMDFe,
+                            CNPJ = "31905001000109"
+                        },
+                        InfSeg = new Unimake.Business.DFe.Xml.MDFe.InfSeg
+                        {
+                            XSeg = "PORTO SEGURO",
+                            CNPJ = "61198164000160"
+                        },
+                        NApol = "053179456362",
+                        NAver = new List<string>
+                        {
+                            {
+                                "0000000000000000000000000000000000000000"
+                            },
+                            {
+                                "0000000000000000000000000000000000000001"
+                            },
+                        }
+                    }
+                },
+                Tot = new Tot
+                {
+                    QCTe = 3,
+                    VCarga = 56599.09,
+                    CUnid = CodigoUnidadeMedidaMDFe.KG,
+                    QCarga = 2879.00
+                },
+                InfAdic = new Unimake.Business.DFe.Xml.MDFe.InfAdic
+                {
+                    InfCpl = "DATA/HORA PREVISTA PARA O INICO DA VIAGEM: 10/08/2020 as 08:00"
+                },
+                InfRespTec = new Unimake.Business.DFe.Xml.MDFe.InfRespTec
+                {
+                    CNPJ = "06117473000150",
+                    XContato = "Wandrey Mundin Ferreira",
+                    Email = "wandrey@unimake.com.br",
+                    Fone = "04431414900",
+                },
+            },
+        },
+    };
+
+    #endregion CriarMDFe
+
+    var configuracao = new Configuracao
+    {
+        TipoDFe = TipoDFe.MDFe,
+        CertificadoDigital = CertificadoSelecionado
+    };
+
+    var autorizacao = new Unimake.Business.DFe.Servicos.MDFe.Autorizacao(xml, configuracao);
+    autorizacao.Executar();
+    MessageBox.Show(autorizacao.RetornoWSString);
+
+    if(autorizacao.Result != null)
+    {
+        MessageBox.Show(autorizacao.Result.XMotivo);
+
+        if(autorizacao.Result.CStat == 103) //103 = Lote Recebido com Sucesso
+        {
+            // Finalizar através da consulta do recibo.
+            var xmlRec = new ConsReciMDFe
+            {
+                Versao = "3.00",
+                TpAmb = TipoAmbiente.Homologacao,
+                NRec = autorizacao.Result.InfRec.NRec
+            };
+
+            var configRec = new Configuracao
+            {
+                TipoDFe = TipoDFe.MDFe,
+                CertificadoDigital = CertificadoSelecionado
+            };
+
+            var retAutorizacao = new Unimake.Business.DFe.Servicos.MDFe.RetAutorizacao(xmlRec, configRec);
+            retAutorizacao.Executar();
+
+            autorizacao.RetConsReciMDFe = retAutorizacao.Result;
+            autorizacao.GravarXmlDistribuicao(@"c:\testenfe\");
+
+            //Simulação da finalização do CTe através da consulta situação
+            autorizacao.RetConsReciMDFe = null; //Zerar para conseguir testar
+
+            var xmlSit = new ConsSitMDFe
+            {
+                Versao = "3.00",
+                TpAmb = TipoAmbiente.Homologacao,
+                ChMDFe = xml.MDFe.InfMDFe.Chave
+            };
+
+            var configSit = new Configuracao
+            {
+                TipoDFe = TipoDFe.MDFe,
+                CertificadoDigital = CertificadoSelecionado
+            };
+
+            var consultaProtocolo = new Unimake.Business.DFe.Servicos.MDFe.ConsultaProtocolo(xmlSit, configSit);
+            consultaProtocolo.Executar();
+
+            autorizacao.RetConsSitMDFe.Add(consultaProtocolo.Result);
+            autorizacao.GravarXmlDistribuicao(@"c:\testenfe\");
+        }
+    }
+}
+catch(Exception ex)
+{
+    CatchException(ex);
+}
+
+// ---------------------------------------------------------------------------------------------------------
+// Enviando a consulta MDFe Não Encerrados
+// ---------------------------------------------------------------------------------------------------------
+
+try
+{
+    var xml = new ConsMDFeNaoEnc
+    {
+        Versao = "3.00",
+        TpAmb = TipoAmbiente.Homologacao,
+        XServ = "CONSULTAR NÃO ENCERRADOS",
+        CNPJ = "10859283000185"
+    };
+
+    var configuracao = new Configuracao
+    {
+        TipoDFe = TipoDFe.MDFe,
+        CodigoUF = (int)UFBrasil.PR,
+        CertificadoDigital = CertificadoSelecionado
+    };
+
+    var consNaoEnc = new Unimake.Business.DFe.Servicos.MDFe.ConsNaoEnc(xml, configuracao);
+    consNaoEnc.Executar();
+    MessageBox.Show(consNaoEnc.RetornoWSString);
+    MessageBox.Show(consNaoEnc.Result.XMotivo);
+}
+catch(Exception ex)
+{
+    CatchException(ex);
+}

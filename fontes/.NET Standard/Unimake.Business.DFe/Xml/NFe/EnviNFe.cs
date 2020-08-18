@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
@@ -81,8 +82,8 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         public NFe LoadFromFile(string filename)
         {
-            var doc = new XmlDocument();
-            doc.Load(filename);
+            var doc = new XmlDocument();            
+            doc.LoadXml(System.IO.File.ReadAllText(filename, Encoding.UTF8));
             return Utility.XMLUtility.Deserializar<NFe>(doc);
         }
     }
@@ -1444,11 +1445,11 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("ICMS")]
         public List<ICMS> ICMS { get; set; }
 
-        [XmlElement("II")]
-        public List<II> II { get; set; }
-
         [XmlElement("IPI")]
         public IPI IPI { get; set; }
+
+        [XmlElement("II")]
+        public List<II> II { get; set; }
 
         [XmlElement("ISSQN")]
         public List<ISSQN> ISSQN { get; set; }
@@ -3650,7 +3651,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         public string CSelo { get; set; }
 
         [XmlElement("qSelo")]
-        public double QSelo { get; set; }
+        public Int32? QSelo { get; set; }
 
         [XmlElement("cEnq")]
         public string CEnq { get; set; }
@@ -3667,7 +3668,7 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         public bool ShouldSerializeCSelo() => !string.IsNullOrWhiteSpace(CSelo);
 
-        public bool ShouldSerializeQSelo() => QSelo > 0;
+        public bool ShouldSerializeQSelo() => QSelo != null;
 
         #endregion
     }

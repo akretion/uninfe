@@ -902,5 +902,68 @@
     <Setting Name="NFe_Components_PApucaranaPR_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://cetil.apucarana.pr.gov.br/NFSe.Portal.Integracao/Services.svc</Value>
     </Setting>
+    <Setting Name="NFe_Components_HOlindaPE_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testeoli/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HOlindaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testeoli/WSNFSE.ConsultarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HOlindaPE_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testeoli/WSNFSE.ConsultarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HOlindaPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testeoli/WSNFSE.ConsultarNfsePorRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HOlindaPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testeoli/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HOlindaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testeoli/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_POlindaPE_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/olinda/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_POlindaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/olinda/WSNFSE.ConsultarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_POlindaPE_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/olinda/WSNFSE.ConsultarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_POlindaPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/olinda/WSNFSE.ConsultarNfsePorRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_POlindaPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/olinda/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_POlindaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.tinus.com.br/csp/olinda/WSNFSE.RecepcionarLoteRps.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PDivinopolisMG_NfseServiceImplDivService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.nfe-cidades.com.br/ws/div</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HDivinopolisMG_NfseServiceImplDivService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ws.homolog.nfe-cidades.com.br/ws/div</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HNilopolisRJ_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nilopolis.sigiss.com.br:443/testenilopolis/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PNilopolisRJ_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nilopolis.sigiss.com.br:443/nilopolis/ws/sigiss_ws.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HIjuiRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PIjuiRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PPiumaES_RpsServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://es-piuma-pm-nfs.cloud.el.com.br:80/RpsService</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSaoJoaoBoaVistaSP_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://wssaojoao.simplissweb.com.br/nfseservice.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PVargemGrandeDoSulSP_NfseService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://wsvargemgrandedosul.simplissweb.com.br/nfseservice.svc</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

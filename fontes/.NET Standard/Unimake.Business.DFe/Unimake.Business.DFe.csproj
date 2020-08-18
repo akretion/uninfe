@@ -79,6 +79,9 @@
     <None Remove="Servicos\Config\CTe\SVRS.xml" />
     <None Remove="Servicos\Config\CTe\SVSP.xml" />
     <None Remove="Servicos\Config\CTe\TO.xml" />
+    <None Remove="Servicos\Config\GNRE\Config.xml" />
+    <None Remove="Servicos\Config\GNRE\GNRE.xml" />
+    <None Remove="Servicos\Config\GNRE\PR.xml" />
     <None Remove="Servicos\Config\MDFe\AC.xml" />
     <None Remove="Servicos\Config\MDFe\AL.xml" />
     <None Remove="Servicos\Config\MDFe\AM.xml" />
@@ -164,6 +167,19 @@
     <None Remove="Servicos\Config\NFe\SVCRS.xml" />
     <None Remove="Servicos\Config\NFe\SVRS.xml" />
     <None Remove="Servicos\Config\NFe\TO.xml" />
+    <None Remove="Xml\Schemas\GNRE\cabecMsg_v1.00.xsd" />
+    <None Remove="Xml\Schemas\GNRE\config_uf_v1.00.xsd" />
+    <None Remove="Xml\Schemas\GNRE\consulta_config_uf_v1.00.xsd" />
+    <None Remove="Xml\Schemas\GNRE\dados_gnre_v1.00.xsd" />
+    <None Remove="Xml\Schemas\GNRE\dados_gnre_v2.00.xsd" />
+    <None Remove="Xml\Schemas\GNRE\lote_gnre_consulta_v1.00.xsd" />
+    <None Remove="Xml\Schemas\GNRE\lote_gnre_recibo_v1.00.xsd" />
+    <None Remove="Xml\Schemas\GNRE\lote_gnre_result_v1.00.xsd" />
+    <None Remove="Xml\Schemas\GNRE\lote_gnre_result_v2.00.xsd" />
+    <None Remove="Xml\Schemas\GNRE\lote_gnre_v1.00.xsd" />
+    <None Remove="Xml\Schemas\GNRE\lote_gnre_v2.00.xsd" />
+    <None Remove="Xml\Schemas\GNRE\tiposBasicoGNRE_v1.00.xsd" />
+    <None Remove="Xml\Schemas\GNRE\tiposBasicoGNRE_v2.00.xsd" />
     <None Remove="Xml\Schemas\CCe_v1.00.xsd" />
     <None Remove="Xml\Schemas\confRecebto_v1.00.xsd" />
     <None Remove="Xml\Schemas\consCad_v2.00.xsd" />
@@ -440,6 +456,11 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Servicos\Config\CTe\TO.xml" />
+    <EmbeddedResource Include="Servicos\Config\GNRE\Config.xml" />
+    <EmbeddedResource Include="Servicos\Config\GNRE\GNRE.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Servicos\Config\GNRE\PR.xml" />
     <EmbeddedResource Include="Servicos\Config\MDFe\AC.xml" />
     <EmbeddedResource Include="Servicos\Config\MDFe\AL.xml" />
     <EmbeddedResource Include="Servicos\Config\MDFe\AM.xml">
@@ -631,6 +652,19 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Servicos\Config\NFe\TO.xml" />
+    <EmbeddedResource Include="Xml\Schemas\GNRE\cabecMsg_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\GNRE\config_uf_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\GNRE\consulta_config_uf_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\GNRE\dados_gnre_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\GNRE\dados_gnre_v2.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\GNRE\lote_gnre_consulta_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\GNRE\lote_gnre_recibo_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\GNRE\lote_gnre_result_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\GNRE\lote_gnre_result_v2.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\GNRE\lote_gnre_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\GNRE\lote_gnre_v2.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\GNRE\tiposBasicoGNRE_v1.00.xsd" />
+    <EmbeddedResource Include="Xml\Schemas\GNRE\tiposBasicoGNRE_v2.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\cancCTeTiposBasico_v3.00.xsd" />
     <EmbeddedResource Include="Xml\Schemas\CTe\consCad_v2.00.xsd">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -921,9 +955,5 @@
   <ItemGroup>
     <ProjectReference Include="..\..\.NET Framework\Unimake.Security.Platform\Unimake.Security.Platform.csproj" />
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command=":: Enquanto a gente não colocar no nuget, manter este carinha aqui,&#xD;&#xA;:: pois ele copia todo o conteúdo pro ERP.Net.&#xD;&#xA;:: Estamos fazendo muitas alterações.&#xD;&#xA;$(SolutionDir)Post-Build.bat" IgnoreExitCode="true" />
-  </Target>
 
 </Project>

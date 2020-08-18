@@ -419,6 +419,23 @@ namespace NFSe.Components
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
             });
             #endregion XML de lote RPS - Santa Terezinha de Itaipu - PR
+
+            #region XML de lote RPS - Ijuí - RS
+
+            SchemaXML.InfSchemas.Add("NFSE-PRONIN-4310207-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TagLoteAssinatura = "",
+                TagLoteAtributoId = "",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion XML de lote RPS - Ijuí - RS
+         
         }
     }
 }

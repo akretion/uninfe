@@ -46,11 +46,6 @@ namespace Unimake.Business.DFe.Servicos
         public TipoDFe TipoDFe { get; set; }
 
         /// <summary>
-        /// Pasta do arquivo de schema de validação do XML
-        /// </summary>
-        public string SchemaPasta { get; set; }
-
-        /// <summary>
         /// Nome do arquivo de schema para validação do XML
         /// </summary>
         public string SchemaArquivo { get; set; }

@@ -140,6 +140,12 @@ namespace Unimake.Business.DFe.Servicos
 
         #endregion
 
+        #region GNRE
+
+        GNREConsultaConfigUF,
+
+        #endregion
+
         #region Gerais
 
         /// <summary>
@@ -188,7 +194,11 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// Cupom Fiscal Eletrônico
         /// </summary>
-        CFe
+        CFe,
+        /// <summary>
+        /// GNRE - Guia Nacional de Recolhimento de Tributos Estaduais
+        /// </summary>
+        GNRE
     }
     #endregion       
 
@@ -4197,7 +4207,7 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("1")]
         FerroviaOrigem = 1,
-        
+
         /// <summary>
         /// Ferrovia de Destino
         /// </summary>
@@ -4206,4 +4216,319 @@ namespace Unimake.Business.DFe.Servicos
     }
 
     #endregion
+
+    #region Campos GNRE
+
+    /// <summary>
+    /// Campos GNRE
+    /// </summary>
+    public enum CamposGNRE
+    {
+        c01_UfFavorecida,
+        c02_receita,
+        c25_detalhamentoReceita,
+        c26_produto,
+        c27_tipoIdentificacaoEmitente,
+        c03_idContribuinteEmitente,
+        c28_tipoDocOrigem,
+        c04_docOrigem,
+        c06_valorPrincipal,
+        c07_atualizacaoMonetaria,
+        c08_juros,
+        c09_multa,
+        c10_valorTotal,
+        c14_dataVencimento,
+        c33_dataPagamento,
+        c29_dataLimitePagamento,
+        c15_convenio,
+        c16_razaoSocialEmitente,
+        c17_inscricaoEstadualEmitente,
+        c18_enderecoEmitente,
+        c19_municipioEmitente,
+        c20_ufEnderecoEmitente,
+        c21_cepEmitente,
+        c22_telefoneEmitente,
+        c34_tipoIdentificacaoDestinatario,
+        c35_idContribuinteDestinatario,
+        c36_inscricaoEstadualDestinatario,
+        c37_razaoSocialDestinatario,
+        c38_municipioDestinatario,
+        c30_nossoNumero,
+        c05_referencia,
+        periodo,
+        mes,
+        ano,
+        parcela,
+        c39_campoExtra1,
+        c40_campoExtra2,
+        c41_campoExtra3,
+        c39_camposExtras,
+        campoExtra,
+        codigo,
+        tipo,
+        valor,
+        c42_identificadorGuia
+    }
+
+    #endregion
+
+    #region Campos GNRE 2
+
+    /// <summary>
+    /// Campos GNRE 2
+    /// </summary>
+    public enum CamposGNRE2
+    {
+        ufFavorecida,
+        contribuinteEmitente,
+        contribuinteEmitente_identificacao,
+        contribuinteEmitente_identificacao_CNPJ,
+        contribuinteEmitente_identificacao_CPF,
+        contribuinteEmitente_identificacao_IE,
+        contribuinteEmitente_razaoSocial,
+        contribuinteEmitente_endereco,
+        contribuinteEmitente_municipio,
+        contribuinteEmitente_uf,
+        contribuinteEmitente_cep,
+        contribuinteEmitente_telefone,
+        itensGNRE,
+        item,
+        item_receita,
+        item_detalhamentoReceita,
+        item_documentoOrigem,
+        item_produto,
+        item_referencia,
+        item_referencia_periodo,
+        item_referencia_mes,
+        item_referencia_ano,
+        item_referencia_parcela,
+        item_dataVencimento,
+        item_valorPrincipal,
+        item_valorPrincipalFecp,
+        item_valorAtualizacaoMonetaria,
+        item_valorAtualizacaoMonetariaFecp,
+        item_valorJuros,
+        item_valorJurosFecp,
+        item_valorMulta,
+        item_valorMultaFecp,
+        item_valorTotal,
+        item_valorTotalFecp,
+        item_convenio,
+        item_contribuinteDestinatario,
+        item_contribuinteDestinatario_identificacao,
+        item_contribuinteDestinatario_identificacao_CNPJ,
+        item_contribuinteDestinatario_identificacao_CPF,
+        item_contribuinteDestinatario_identificacao_IE,
+        item_contribuinteDestinatario_razaoSocial,
+        item_contribuinteDestinatario_municipio,
+        item_camposExtras,
+        item_camposExtras_campoExtra,
+        item_camposExtras_campoExtra_codigo,
+        item_camposExtras_campoExtra_valor,
+        valorGNRE,
+        dataPagamento,
+        identificadorGuia,
+        dataLimitePagamento,
+        informacoesComplementares,
+        informacoesComplementares_informacao,
+        nossoNumero,
+        dadosPagamento,
+        dadosPagamento_data,
+        dadosPagamento_autenticacao,
+        dadosPagamento_banco,
+        dadosPagamento_agencia,
+        linhaDigitavel,
+    }
+
+    #endregion
+
+    #region SimNaoLetra
+
+    /// <summary>
+    /// Sim ou Não (S ou N)
+    /// </summary>
+    public enum SimNaoLetra
+    {
+        /// <summary>
+        /// Não (0 ou N)
+        /// </summary>
+        [XmlEnum("N")]
+        Nao = 0,
+
+        /// <summary>
+        /// Sim (1 ou N)
+        /// </summary>
+        [XmlEnum("S")]
+        Sim = 1
+    }
+
+    #endregion
+
+    #region SimNaoOpcionalLetra
+
+    /// <summary>
+    /// Sim ou Não (S ou N)
+    /// </summary>
+    public enum SimNaoOpcionalLetra
+    {
+        /// <summary>
+        /// Não (0 ou N)
+        /// </summary>
+        [XmlEnum("N")]
+        Nao = 0,
+
+        /// <summary>
+        /// Sim (1 ou N)
+        /// </summary>
+        [XmlEnum("S")]
+        Sim = 1,
+
+        /// <summary>
+        /// Opcional (2 ou O)
+        /// </summary>
+        [XmlEnum("O")]
+        Opcional = 2
+    }
+
+    #endregion
+
+
+    #region TipoCampoExtraGNRE
+
+    /// <summary>
+    /// Tipo dos campos extras da GNRE
+    /// </summary>
+    public enum TipoCampoExtraGNRE
+    {
+        /// <summary>
+        /// T - Texto
+        /// </summary>
+        [XmlEnum("T")]
+        Texto = 0,
+
+        /// <summary>
+        /// N - Numérico
+        /// </summary>
+        [XmlEnum("N")]
+        Numerico = 1,
+
+        /// <summary>
+        /// D - Data
+        /// </summary>
+        [XmlEnum("D")]
+        Data = 2
+    }
+
+    #endregion
+
+    #region Meses do Ano
+
+    /// <summary>
+    /// Meses do ano
+    /// </summary>
+    public enum Meses
+    {
+        /// <summary>
+        /// 01 - Janeiro
+        /// </summary>
+        [XmlEnum("01")]
+        Janeiro = 1,
+
+        /// <summary>
+        /// 02 - Fevereiro
+        /// </summary>
+        [XmlEnum("02")]
+        Fevereiro = 2,
+
+        /// <summary>
+        /// 03 - Março
+        /// </summary>
+        [XmlEnum("03")]
+        Marco = 3,
+
+        /// <summary>
+        /// 04 - Abril
+        /// </summary>
+        [XmlEnum("04")]
+        Abril = 4,
+
+        /// <summary>
+        /// 05 - Maio
+        /// </summary>
+        [XmlEnum("05")]
+        Maio = 5,
+
+        /// <summary>
+        /// 06 - Junho
+        /// </summary>
+        [XmlEnum("06")]
+        Junho = 6,
+
+        /// <summary>
+        /// 07 - Julho
+        /// </summary>
+        [XmlEnum("07")]
+        Julho = 7,
+
+        /// <summary>
+        /// 08 - Agosto
+        /// </summary>
+        [XmlEnum("08")]
+        Agosto = 8,
+
+        /// <summary>
+        /// 09 - Setembro
+        /// </summary>
+        [XmlEnum("09")]
+        Setembro = 9,
+
+        /// <summary>
+        /// 10 - Outubro
+        /// </summary>
+        [XmlEnum("10")]
+        Outubro = 10,
+
+        /// <summary>
+        /// 11 - Novembro
+        /// </summary>
+        [XmlEnum("11")]
+        Novembro = 11,
+
+        /// <summary>
+        /// 12 - Dezembro
+        /// </summary>
+        [XmlEnum("12")]
+        Dezembro = 12
+    }
+
+    #endregion
+
+    #region Tipos de GNRE
+
+    /// <summary>
+    /// Tipos de Guias da GNRE
+    /// </summary>
+    public enum TipoGuiaGNRE
+    {
+        /// <summary>
+        /// 0 - Guia Simples
+        /// </summary>
+        [XmlEnum("0")]
+        Simples = 0,
+
+        /// <summary>
+        /// 1 - Guia com Múltiplos Documentos de Origem
+        /// </summary>
+        [XmlEnum("1")]
+        MultiplosDocumentosOrigem = 1,
+
+        /// <summary>
+        /// 2 - Guia com Múltiplas Receitas
+        /// </summary>
+        [XmlEnum("2")]
+        MultiplasReceitas = 2
+    }
+
+    #endregion
 }
+

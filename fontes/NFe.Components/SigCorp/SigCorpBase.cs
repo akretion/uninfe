@@ -55,6 +55,10 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new PetropolisRJ.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
+                            case 3303203: //Nilópolis-RJ
+                                sigCorpService = new NilopolisRJ.h.SigCorpH(tpAmb, PastaRetorno);
+                                break;
+
                             default:
                                 throw new Exception("Município não possui ambiente de homologação (padrão SIGCORP/SIGISS).");
                         }
@@ -103,6 +107,10 @@ namespace NFe.Components.SigCorp
 
                             case 3303906: //Petrópolis-RJ
                                 sigCorpService = new PetropolisRJ.p.SigCorpP(tpAmb, PastaRetorno);
+                                break;
+
+                            case 3303203: //Nilópolis-RJ
+                                sigCorpService = new NilopolisRJ.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             default:

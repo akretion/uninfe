@@ -29,7 +29,7 @@ namespace NFe.Components.GovDigital
                         switch (CodigoMun)
                         {
                             case 3122306: // Divinópolis-MG
-                                govDigitalService = new br.com.govdigital.homolog1.NfseServiceImplDivService();
+                                govDigitalService = new HDivinopolisMG.NfseServiceImplDivService();
                                 break;
 
                             case 3151800: //Pocos de caldas-MG
@@ -96,7 +96,7 @@ namespace NFe.Components.GovDigital
                         switch (CodigoMun)
                         {
                             case 3122306: // Divinópolis-MG
-                                govDigitalService = new br.com.govdigital.ws.NfseServiceImplDivService();
+                                govDigitalService = new PDivinopolisMG.NfseServiceImplDivService();
                                 break;
 
                             case 3151800: //Pocos de caldas-MG

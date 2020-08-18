@@ -12,7 +12,7 @@ namespace NFe.Components.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.6.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -3057,6 +3057,216 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PApucaranaPR_NFSeIntegracao {
             get {
                 return ((string)(this["NFe_Components_PApucaranaPR_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www2.tinus.com.br/csp/testeoli/WSNFSE.CancelarNfse.cls")]
+        public string NFe_Components_HOlindaPE_TINUS_CancelarNfse_CancelarNfse {
+            get {
+                return ((string)(this["NFe_Components_HOlindaPE_TINUS_CancelarNfse_CancelarNfse"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www2.tinus.com.br/csp/testeoli/WSNFSE.ConsultarLoteRps.cls")]
+        public string NFe_Components_HOlindaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps {
+            get {
+                return ((string)(this["NFe_Components_HOlindaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www2.tinus.com.br/csp/testeoli/WSNFSE.ConsultarNfse.cls")]
+        public string NFe_Components_HOlindaPE_TINUS_ConsultarNfse_ConsultarNfse {
+            get {
+                return ((string)(this["NFe_Components_HOlindaPE_TINUS_ConsultarNfse_ConsultarNfse"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www2.tinus.com.br/csp/testeoli/WSNFSE.ConsultarNfsePorRps.cls")]
+        public string NFe_Components_HOlindaPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps {
+            get {
+                return ((string)(this["NFe_Components_HOlindaPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www2.tinus.com.br/csp/testeoli/WSNFSE.ConsultarSituacaoLoteRps.cls")]
+        public string NFe_Components_HOlindaPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps {
+            get {
+                return ((string)(this["NFe_Components_HOlindaPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www2.tinus.com.br/csp/testeoli/WSNFSE.RecepcionarLoteRps.cls")]
+        public string NFe_Components_HOlindaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps {
+            get {
+                return ((string)(this["NFe_Components_HOlindaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tinus.com.br/csp/olinda/WSNFSE.CancelarNfse.cls")]
+        public string NFe_Components_POlindaPE_TINUS_CancelarNfse_CancelarNfse {
+            get {
+                return ((string)(this["NFe_Components_POlindaPE_TINUS_CancelarNfse_CancelarNfse"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tinus.com.br/csp/olinda/WSNFSE.ConsultarLoteRps.cls")]
+        public string NFe_Components_POlindaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps {
+            get {
+                return ((string)(this["NFe_Components_POlindaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tinus.com.br/csp/olinda/WSNFSE.ConsultarNfse.cls")]
+        public string NFe_Components_POlindaPE_TINUS_ConsultarNfse_ConsultarNfse {
+            get {
+                return ((string)(this["NFe_Components_POlindaPE_TINUS_ConsultarNfse_ConsultarNfse"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tinus.com.br/csp/olinda/WSNFSE.ConsultarNfsePorRps.cls")]
+        public string NFe_Components_POlindaPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps {
+            get {
+                return ((string)(this["NFe_Components_POlindaPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tinus.com.br/csp/olinda/WSNFSE.ConsultarSituacaoLoteRps.cls")]
+        public string NFe_Components_POlindaPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps {
+            get {
+                return ((string)(this["NFe_Components_POlindaPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.tinus.com.br/csp/olinda/WSNFSE.RecepcionarLoteRps.cls")]
+        public string NFe_Components_POlindaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps {
+            get {
+                return ((string)(this["NFe_Components_POlindaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe-cidades.com.br/ws/div")]
+        public string NFe_Components_PDivinopolisMG_NfseServiceImplDivService {
+            get {
+                return ((string)(this["NFe_Components_PDivinopolisMG_NfseServiceImplDivService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.homolog.nfe-cidades.com.br/ws/div")]
+        public string NFe_Components_HDivinopolisMG_NfseServiceImplDivService {
+            get {
+                return ((string)(this["NFe_Components_HDivinopolisMG_NfseServiceImplDivService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nilopolis.sigiss.com.br:443/testenilopolis/ws/sigiss_ws.php")]
+        public string NFe_Components_HNilopolisRJ_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_HNilopolisRJ_WebService_SigISS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nilopolis.sigiss.com.br:443/nilopolis/ws/sigiss_ws.php")]
+        public string NFe_Components_PNilopolisRJ_WebService_SigISS {
+            get {
+                return ((string)(this["NFe_Components_PNilopolisRJ_WebService_SigISS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.svc")]
+        public string NFe_Components_HIjuiRS_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_HIjuiRS_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PIjuiRS_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PIjuiRS_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://es-piuma-pm-nfs.cloud.el.com.br:80/RpsService")]
+        public string NFe_Components_PPiumaES_RpsServiceService {
+            get {
+                return ((string)(this["NFe_Components_PPiumaES_RpsServiceService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://wssaojoao.simplissweb.com.br/nfseservice.svc")]
+        public string NFe_Components_PSaoJoaoBoaVistaSP_NfseService {
+            get {
+                return ((string)(this["NFe_Components_PSaoJoaoBoaVistaSP_NfseService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://wsvargemgrandedosul.simplissweb.com.br/nfseservice.svc")]
+        public string NFe_Components_PVargemGrandeDoSulSP_NfseService {
+            get {
+                return ((string)(this["NFe_Components_PVargemGrandeDoSulSP_NfseService"]));
             }
         }
     }

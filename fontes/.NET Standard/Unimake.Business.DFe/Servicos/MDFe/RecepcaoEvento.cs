@@ -33,9 +33,9 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         private void ValidarXMLEvento(XmlDocument xml, string schemaArquivo, string targetNS)
         {
             var validar = new ValidarSchema();
-            validar.Validar(xml, Path.Combine(Configuracoes.SchemaPasta, schemaArquivo), targetNS);
+            validar.Validar(xml, Configuracoes.TipoDFe.ToString() + "." + Configuracoes.SchemaArquivo, targetNS);
 
-            if (!validar.Success)
+            if(!validar.Success)
             {
                 throw new Exception(validar.ErrorMessage);
             }

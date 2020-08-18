@@ -547,8 +547,12 @@ namespace NFe.UI.Formularios
                            ufCod == 3146008 /*Ouro Fino-MG*/||
                            ufCod == 4323804 /*Xangri-la-RS*/||
                            ufCod == 5107925 /*Sorriso-MT*/ ||
+						   ufCod == 3549102 /*São João da Boa Vista-SP*/ ||
+                           ufCod == 3556404 /*Vargem Grande do Sul-SP*/ ||
+
                            ufCod == 4104808 /*Cascavel-PR*/ ||
-                           ufCod == 4303103 /*Cachoeirinha-RS*/;
+                           ufCod == 4303103 /*Cachoeirinha-RS*/ ||
+                           ufCod == 3204203 /*Piuma-ES*/;
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }
@@ -581,7 +585,7 @@ namespace NFe.UI.Formularios
                     txtClientSecret.Visible = true;
                 }
                 //Se o município for Sorriso, temos que demonstrar os campos: ClientID e Client Secret
-                if (edtCodMun.Text.Equals("5107925"))
+               else if (edtCodMun.Text.Equals("5107925"))
                 {
                     lblClienteID.Visible = true;
                     lblClientSecret.Visible = true;

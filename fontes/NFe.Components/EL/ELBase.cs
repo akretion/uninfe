@@ -60,6 +60,10 @@ namespace NFe.Components.EL
                                 elService = new Viana.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
                                 break;
 
+                            case 3204203: //Piuma-ES
+                                elService = new Piuma.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

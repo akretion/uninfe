@@ -602,6 +602,7 @@ namespace NFe.Service.NFSe
                             oDadosEnvLoteRps.cMunicipio == 3511102 ||
                             oDadosEnvLoteRps.cMunicipio == 3535804 ||
                             oDadosEnvLoteRps.cMunicipio == 4306932 ||
+                            oDadosEnvLoteRps.cMunicipio == 4310207 ||
                             oDadosEnvLoteRps.cMunicipio == 4322400 ||
                             oDadosEnvLoteRps.cMunicipio == 4302808 ||
 							oDadosEnvLoteRps.cMunicipio == 3501301 ||
@@ -835,7 +836,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.D2TI:
-                        cabecMsg = "<cabecalhoNfseLote xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.ctaconsult.com/nfse\"><versao>1.00</versao><ambiente>2</ambiente></cabecalhoNfseLote>";
+                        cabecMsg = "<cabecalhoNfseLote xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.ctaconsult.com/nfse\"><versao>1.00</versao><ambiente>" + Empresas.Configuracoes[emp].AmbienteCodigo + "</ambiente></cabecalhoNfseLote>";
                         break;
 
                     case PadroesNFSe.IIBRASIL:

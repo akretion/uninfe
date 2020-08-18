@@ -798,7 +798,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MDFe\HMDFeRetRecepcao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MDFe\HMDFeStatusServico.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaSantaRitaRS-Dueto.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HIjuiRS-Dueto.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HBeloHorizonteMG-BHISS.wsdl">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -2067,18 +2066,12 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PPresidentePrudenteSP-SIMPLISS.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HDivinopolisMG-GOVDigital.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFse\schemas\NFSe\GOVDIGITAL\nfse.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\schemas\NFSe\GOVDIGITAL\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PDivinopolisMG-GOVDigital.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SVRS\HSVRSNFeAutorizacao_C.wsdl" />
@@ -4504,7 +4497,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSantanaLivramentoRS-DBSELLER.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSantanaLivramentoRS-DBSELLER.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PIjuiRS-Dueto.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HJoinvilleSC.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PJoinvilleSC.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoJoseDosCamposSP.wsdl" />
@@ -4707,6 +4699,29 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PSaoPedroDaAldeira-MODERNIZACAO_PUBLICA.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PFeiradeSantanaBA_WebISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HFeiradeSantanaBA_WebISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PRibeiraoPretoSP-ISSNET.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HRibeiraoPretoSP-ISSNET.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\POlindaPE_TINUS_CancelarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\POlindaPE_TINUS_ConsultarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\POlindaPE_TINUS_ConsultarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\POlindaPE_TINUS_ConsultarNfsePorRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\POlindaPE_TINUS_ConsultarSituacaoLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\POlindaPE_TINUS_RecepcionarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HOlindaPE_TINUS_CancelarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HOlindaPE_TINUS_ConsultarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HOlindaPE_TINUS_ConsultarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HOlindaPE_TINUS_ConsultarNfsePorRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HOlindaPE_TINUS_ConsultarSituacaoLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HOlindaPE_TINUS_RecepcionarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HDivinopolisMG-GOVDigital.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PDivinopolisMG-GOVDigital.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PNilopolisRJ_SIGCORP_SIGISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNilopolisRJ_SIGCORP_SIGISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HIjuiRS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPiumaES-EL.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoJoaoBoaVistaSP-SIMPLISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PVargemGrandeDoSulSP-SIMPLISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PIjuiRS-PRONIN.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

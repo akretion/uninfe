@@ -31,35 +31,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// <summary>
         /// Definir configurações
         /// </summary>
-        protected override void DefinirConfiguracao()
-        {
-            //Definir a pasta onde fica o schema do XML
-            switch(Configuracoes.TipoDFe)
-            {
-                case TipoDFe.NFe:
-                    Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaNFe;
-                    break;
-
-                case TipoDFe.NFCe:
-                    Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaNFCe;
-                    break;
-
-                case TipoDFe.CTe:
-                case TipoDFe.CTeOS:
-                    Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaCTe;
-                    break;
-
-                case TipoDFe.MDFe:
-                    Configuracoes.SchemaPasta = ConfigurationManager.CurrentConfig.PastaSchemaMDFe;
-                    break;
-
-                case TipoDFe.NFSe:
-                    break;
-
-                case TipoDFe.SAT:
-                    break;
-            }
-        }
+        protected override void DefinirConfiguracao() { }
 
         /// <summary>
         /// Validar o XML
@@ -67,7 +39,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         protected override void XmlValidar()
         {
             var validar = new ValidarSchema();
-            validar.Validar(ConteudoXML, Path.Combine(Configuracoes.SchemaPasta, Configuracoes.SchemaArquivo), Configuracoes.TargetNS);
+            validar.Validar(ConteudoXML, Configuracoes.TipoDFe.ToString() + "." + Configuracoes.SchemaArquivo, Configuracoes.TargetNS);
 
             if(!validar.Success)
             {

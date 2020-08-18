@@ -756,7 +756,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.D2TI:
-                        cabecMsg = "<cabecalhoCancelamentoNfseLote xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.ctaconsult.com/nfse\"><versao>1.00</versao><ambiente>2</ambiente></cabecalhoCancelamentoNfseLote>";
+                        cabecMsg = "<cabecalhoCancelamentoNfseLote xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.ctaconsult.com/nfse\"><versao>1.00</versao><ambiente>" + Empresas.Configuracoes[emp].AmbienteCodigo + "</ambiente></cabecalhoCancelamentoNfseLote>";
                         break;
 
                     case PadroesNFSe.IIBRASIL:

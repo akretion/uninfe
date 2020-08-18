@@ -56,7 +56,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         private void ValidarXMLMDFe(XmlDocument xml, string schemaArquivo, string targetNS)
         {
             var validar = new ValidarSchema();
-            validar.Validar(xml, Path.Combine(Configuracoes.SchemaPasta, schemaArquivo), targetNS);
+            validar.Validar(xml, Configuracoes.TipoDFe.ToString() + "." + Configuracoes.SchemaArquivo, targetNS);
 
             if(!validar.Success)
             {

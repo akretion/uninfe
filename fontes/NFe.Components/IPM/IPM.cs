@@ -177,13 +177,26 @@ namespace NFSe.Components
                 Proxy = Proxy
             })
             {
-                //                                                                                                    informe 1 para retorno em xml
-                result = post.PostForm("http://sync.nfs-e.net/datacenter/include/nfw/importa_nfw/nfw_import_upload.php?eletron=1", new Dictionary<string, string> {
+                if (Cidade == 74934)
+                {
+                    //                                                                                                    informe 1 para retorno em xml
+                    result = post.PostForm("http://sync-pr.nfs-e.net/datacenter/include/nfw/importa_nfw/nfw_import_upload.php?eletron=1", new Dictionary<string, string> {
                      {"login", Usuario  },  //CPF/CNPJ, sem separadores}
                      {"senha", Senha},      //Senha de acesso ao sistema: www.nfse.
                      {"cidade", Cidade.ToString()},   //Código da cidade na receita federal (TOM), pesquisei o código em http://www.ekwbrasil.com.br/municipio.php3.
                      {"f1", file}           //Endereço físico do arquivo
                 });
+                }
+                else
+                {
+                    //                                                                                                    informe 1 para retorno em xml
+                    result = post.PostForm("http://sync.nfs-e.net/datacenter/include/nfw/importa_nfw/nfw_import_upload.php?eletron=1", new Dictionary<string, string> {
+                     {"login", Usuario  },  //CPF/CNPJ, sem separadores}
+                     {"senha", Senha},      //Senha de acesso ao sistema: www.nfse.
+                     {"cidade", Cidade.ToString()},   //Código da cidade na receita federal (TOM), pesquisei o código em http://www.ekwbrasil.com.br/municipio.php3.
+                     {"f1", file}           //Endereço físico do arquivo
+                });
+                }
             }
 
             return result;
