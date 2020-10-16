@@ -222,54 +222,6 @@
   <wsdl:message name="EntregarDeclaracaoResponse_Headers">
     <wsdl:part name="cabecalho" element="tns:cabecalho" />
   </wsdl:message>
-  <wsdl:message name="EnviarLoteDeclaracaoNotaReceive">
-    <wsdl:part name="parameters" element="tns:EnviarLoteDeclaracaoNotaReceive" />
-  </wsdl:message>
-  <wsdl:message name="EnviarLoteDeclaracaoNotaReceive_Headers">
-    <wsdl:part name="cabecalho" element="tns:cabecalho" />
-  </wsdl:message>
-  <wsdl:message name="EnviarLoteDeclaracaoNotaResponse">
-    <wsdl:part name="parameters" element="tns:EnviarLoteDeclaracaoNotaResponse" />
-  </wsdl:message>
-  <wsdl:message name="EnviarLoteDeclaracaoNotaResponse_Headers">
-    <wsdl:part name="cabecalho" element="tns:cabecalho" />
-  </wsdl:message>
-  <wsdl:message name="ConsultarLoteDeclaracaoNota">
-    <wsdl:part name="parameters" element="tns:ConsultarLoteDeclaracaoNota" />
-  </wsdl:message>
-  <wsdl:message name="ConsultarLoteDeclaracaoNota_Headers">
-    <wsdl:part name="cabecalho" element="tns:cabecalho" />
-  </wsdl:message>
-  <wsdl:message name="ConsultarLoteDeclaracaoNotaResponse">
-    <wsdl:part name="parameters" element="tns:ConsultarLoteDeclaracaoNotaResponse" />
-  </wsdl:message>
-  <wsdl:message name="ConsultarLoteDeclaracaoNotaResponse_Headers">
-    <wsdl:part name="cabecalho" element="tns:cabecalho" />
-  </wsdl:message>
-  <wsdl:message name="EnviarRegimeApuracao">
-    <wsdl:part name="parameters" element="tns:EnviarRegimeApuracao" />
-  </wsdl:message>
-  <wsdl:message name="EnviarRegimeApuracao_Headers">
-    <wsdl:part name="cabecalho" element="tns:cabecalho" />
-  </wsdl:message>
-  <wsdl:message name="EnviarRegimeApuracaoResponse">
-    <wsdl:part name="parameters" element="tns:EnviarRegimeApuracaoResponse" />
-  </wsdl:message>
-  <wsdl:message name="EnviarRegimeApuracaoResponse_Headers">
-    <wsdl:part name="cabecalho" element="tns:cabecalho" />
-  </wsdl:message>
-  <wsdl:message name="EnviarReceitaBrutaAcumulada">
-    <wsdl:part name="parameters" element="tns:EnviarReceitaBrutaAcumulada" />
-  </wsdl:message>
-  <wsdl:message name="EnviarReceitaBrutaAcumulada_Headers">
-    <wsdl:part name="cabecalho" element="tns:cabecalho" />
-  </wsdl:message>
-  <wsdl:message name="EnviarReceitaBrutaAcumuladaResponse">
-    <wsdl:part name="parameters" element="tns:EnviarReceitaBrutaAcumuladaResponse" />
-  </wsdl:message>
-  <wsdl:message name="EnviarReceitaBrutaAcumuladaResponse_Headers">
-    <wsdl:part name="cabecalho" element="tns:cabecalho" />
-  </wsdl:message>
   <wsdl:message name="INFSeIntegracaoDEISS_ConsultarNFSeDEISS_InputMessage">
     <wsdl:part name="parameters" element="tns:ConsultarNFSeDEISS" />
   </wsdl:message>
@@ -293,18 +245,6 @@
   </wsdl:message>
   <wsdl:message name="INFSeIntegracaoDEISS_ConsultarTodasNotasPorPeriodo_OutputMessage">
     <wsdl:part name="parameters" element="tns:ConsultarTodasNotasPorPeriodoResponse" />
-  </wsdl:message>
-  <wsdl:message name="WebServiceReceive">
-    <wsdl:part name="parameters" element="tns:WebServiceReceive" />
-  </wsdl:message>
-  <wsdl:message name="WebServiceReceive_Headers">
-    <wsdl:part name="Cabecalho" element="tns:Cabecalho" />
-  </wsdl:message>
-  <wsdl:message name="WebServiceResponse">
-    <wsdl:part name="parameters" element="tns:WebServiceResponse" />
-  </wsdl:message>
-  <wsdl:message name="WebServiceResponse_Headers">
-    <wsdl:part name="Cabecalho" element="tns:Cabecalho" />
   </wsdl:message>
   <wsdl:portType name="INFSEConsultas">
     <wsdl:operation name="ConsultarSituacaoLoteRps">
@@ -381,26 +321,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/INFSEGeracao/EntregarDeclaracao" name="EntregarDeclaracao" message="tns:EntregarDeclaracao" />
       <wsdl:output wsaw:Action="http://tempuri.org/INFSEGeracao/EntregarDeclaracaoResponse" name="EntregarDeclaracaoResponse" message="tns:EntregarDeclaracaoResponse" />
     </wsdl:operation>
-    <wsdl:operation name="EnviarLoteDeclaracaoNota">
-      <wsdl:input wsaw:Action="http://tempuri.org/INFSEGeracao/EnviarLoteDeclaracaoNota" name="EnviarLoteDeclaracaoNotaReceive" message="tns:EnviarLoteDeclaracaoNotaReceive" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INFSEGeracao/EnviarLoteDeclaracaoNotaResponse" name="EnviarLoteDeclaracaoNotaResponse" message="tns:EnviarLoteDeclaracaoNotaResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="EntregarDeclaracaoNota">
-      <wsdl:input wsaw:Action="http://tempuri.org/INFSEGeracao/EntregarDeclaracaoNota" name="EntregarDeclaracao" message="tns:EntregarDeclaracao" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INFSEGeracao/EntregarDeclaracaoNotaResponse" name="EntregarDeclaracaoResponse" message="tns:EntregarDeclaracaoResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="ConsultarDeclaracaoNota">
-      <wsdl:input wsaw:Action="http://tempuri.org/INFSEGeracao/ConsultarDeclaracaoNota" name="ConsultarLoteDeclaracaoNota" message="tns:ConsultarLoteDeclaracaoNota" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INFSEGeracao/ConsultarDeclaracaoNotaResponse" name="ConsultarLoteDeclaracaoNotaResponse" message="tns:ConsultarLoteDeclaracaoNotaResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="EnviarRegimeApuracao">
-      <wsdl:input wsaw:Action="http://tempuri.org/INFSEGeracao/EnviarRegimeApuracao" name="EnviarRegimeApuracao" message="tns:EnviarRegimeApuracao" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INFSEGeracao/EnviarRegimeApuracaoResponse" name="EnviarRegimeApuracaoResponse" message="tns:EnviarRegimeApuracaoResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="EnviarReceitaBrutaAcumulada">
-      <wsdl:input wsaw:Action="http://tempuri.org/INFSEGeracao/EnviarReceitaBrutaAcumulada" name="EnviarReceitaBrutaAcumulada" message="tns:EnviarReceitaBrutaAcumulada" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INFSEGeracao/EnviarReceitaBrutaAcumuladaResponse" name="EnviarReceitaBrutaAcumuladaResponse" message="tns:EnviarReceitaBrutaAcumuladaResponse" />
-    </wsdl:operation>
   </wsdl:portType>
   <wsdl:portType name="INFSeIntegracaoDEISS">
     <wsdl:operation name="ConsultarNFSeDEISS">
@@ -418,40 +338,6 @@
     <wsdl:operation name="ConsultarTodasNotasPorPeriodo">
       <wsdl:input wsaw:Action="http://tempuri.org/INFSeIntegracaoDEISS/ConsultarTodasNotasPorPeriodo" message="tns:INFSeIntegracaoDEISS_ConsultarTodasNotasPorPeriodo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/INFSeIntegracaoDEISS/ConsultarTodasNotasPorPeriodoResponse" message="tns:INFSeIntegracaoDEISS_ConsultarTodasNotasPorPeriodo_OutputMessage" />
-    </wsdl:operation>
-  </wsdl:portType>
-  <wsdl:portType name="INFSeDeclaracao">
-    <wsdl:operation name="EnviarDeclaracaoAbertura">
-      <wsdl:input wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoAbertura" name="WebServiceReceive" message="tns:WebServiceReceive" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoAberturaResponse" name="WebServiceResponse" message="tns:WebServiceResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="ConsultarProtocoloDeclaracao">
-      <wsdl:input wsaw:Action="http://tempuri.org/INFSeDeclaracao/ConsultarProtocoloDeclaracao" name="WebServiceReceive" message="tns:WebServiceReceive" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INFSeDeclaracao/ConsultarProtocoloDeclaracaoResponse" name="WebServiceResponse" message="tns:WebServiceResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="EnviarDeclaracaoNumeracaoInutilizado">
-      <wsdl:input wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoNumeracaoInutilizado" name="WebServiceReceive" message="tns:WebServiceReceive" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoNumeracaoInutilizadoResponse" name="WebServiceResponse" message="tns:WebServiceResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="EnviarDeclaracaoSimplificada">
-      <wsdl:input wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoSimplificada" name="WebServiceReceive" message="tns:WebServiceReceive" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoSimplificadaResponse" name="WebServiceResponse" message="tns:WebServiceResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="EnviarDeclaracaoNota">
-      <wsdl:input wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoNota" name="WebServiceReceive" message="tns:WebServiceReceive" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoNotaResponse" name="WebServiceResponse" message="tns:WebServiceResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="EnviarDeclaracaoNotaConsulta">
-      <wsdl:input wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoNotaConsulta" name="WebServiceReceive" message="tns:WebServiceReceive" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoNotaConsultaResponse" name="WebServiceResponse" message="tns:WebServiceResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="EnviarDeclaracaoEntrega">
-      <wsdl:input wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoEntrega" name="WebServiceReceive" message="tns:WebServiceReceive" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoEntregaResponse" name="WebServiceResponse" message="tns:WebServiceResponse" />
-    </wsdl:operation>
-    <wsdl:operation name="EnviarDeclaracaoPlanoContas">
-      <wsdl:input wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoPlanoContas" name="WebServiceReceive" message="tns:WebServiceReceive" />
-      <wsdl:output wsaw:Action="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoPlanoContasResponse" name="WebServiceResponse" message="tns:WebServiceResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_INFSEConsultas" type="tns:INFSEConsultas">
@@ -657,61 +543,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="EnviarLoteDeclaracaoNota">
-      <soap:operation soapAction="http://tempuri.org/INFSEGeracao/EnviarLoteDeclaracaoNota" style="document" />
-      <wsdl:input name="EnviarLoteDeclaracaoNotaReceive">
-        <soap:header message="tns:EnviarLoteDeclaracaoNotaReceive_Headers" part="cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="EnviarLoteDeclaracaoNotaResponse">
-        <soap:header message="tns:EnviarLoteDeclaracaoNotaResponse_Headers" part="cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EntregarDeclaracaoNota">
-      <soap:operation soapAction="http://tempuri.org/INFSEGeracao/EntregarDeclaracaoNota" style="document" />
-      <wsdl:input name="EntregarDeclaracao">
-        <soap:header message="tns:EntregarDeclaracao_Headers" part="cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="EntregarDeclaracaoResponse">
-        <soap:header message="tns:EntregarDeclaracaoResponse_Headers" part="cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ConsultarDeclaracaoNota">
-      <soap:operation soapAction="http://tempuri.org/INFSEGeracao/ConsultarDeclaracaoNota" style="document" />
-      <wsdl:input name="ConsultarLoteDeclaracaoNota">
-        <soap:header message="tns:ConsultarLoteDeclaracaoNota_Headers" part="cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="ConsultarLoteDeclaracaoNotaResponse">
-        <soap:header message="tns:ConsultarLoteDeclaracaoNotaResponse_Headers" part="cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EnviarRegimeApuracao">
-      <soap:operation soapAction="http://tempuri.org/INFSEGeracao/EnviarRegimeApuracao" style="document" />
-      <wsdl:input name="EnviarRegimeApuracao">
-        <soap:header message="tns:EnviarRegimeApuracao_Headers" part="cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="EnviarRegimeApuracaoResponse">
-        <soap:header message="tns:EnviarRegimeApuracaoResponse_Headers" part="cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EnviarReceitaBrutaAcumulada">
-      <soap:operation soapAction="http://tempuri.org/INFSEGeracao/EnviarReceitaBrutaAcumulada" style="document" />
-      <wsdl:input name="EnviarReceitaBrutaAcumulada">
-        <soap:header message="tns:EnviarReceitaBrutaAcumulada_Headers" part="cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="EnviarReceitaBrutaAcumuladaResponse">
-        <soap:header message="tns:EnviarReceitaBrutaAcumuladaResponse_Headers" part="cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_INFSeIntegracaoDEISS" type="tns:INFSeIntegracaoDEISS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -752,97 +583,6 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="BasicHttpBinding_INFSeDeclaracao" type="tns:INFSeDeclaracao">
-    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="EnviarDeclaracaoAbertura">
-      <soap:operation soapAction="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoAbertura" style="document" />
-      <wsdl:input name="WebServiceReceive">
-        <soap:header message="tns:WebServiceReceive_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="WebServiceResponse">
-        <soap:header message="tns:WebServiceResponse_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ConsultarProtocoloDeclaracao">
-      <soap:operation soapAction="http://tempuri.org/INFSeDeclaracao/ConsultarProtocoloDeclaracao" style="document" />
-      <wsdl:input name="WebServiceReceive">
-        <soap:header message="tns:WebServiceReceive_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="WebServiceResponse">
-        <soap:header message="tns:WebServiceResponse_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EnviarDeclaracaoNumeracaoInutilizado">
-      <soap:operation soapAction="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoNumeracaoInutilizado" style="document" />
-      <wsdl:input name="WebServiceReceive">
-        <soap:header message="tns:WebServiceReceive_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="WebServiceResponse">
-        <soap:header message="tns:WebServiceResponse_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EnviarDeclaracaoSimplificada">
-      <soap:operation soapAction="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoSimplificada" style="document" />
-      <wsdl:input name="WebServiceReceive">
-        <soap:header message="tns:WebServiceReceive_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="WebServiceResponse">
-        <soap:header message="tns:WebServiceResponse_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EnviarDeclaracaoNota">
-      <soap:operation soapAction="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoNota" style="document" />
-      <wsdl:input name="WebServiceReceive">
-        <soap:header message="tns:WebServiceReceive_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="WebServiceResponse">
-        <soap:header message="tns:WebServiceResponse_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EnviarDeclaracaoNotaConsulta">
-      <soap:operation soapAction="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoNotaConsulta" style="document" />
-      <wsdl:input name="WebServiceReceive">
-        <soap:header message="tns:WebServiceReceive_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="WebServiceResponse">
-        <soap:header message="tns:WebServiceResponse_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EnviarDeclaracaoEntrega">
-      <soap:operation soapAction="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoEntrega" style="document" />
-      <wsdl:input name="WebServiceReceive">
-        <soap:header message="tns:WebServiceReceive_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="WebServiceResponse">
-        <soap:header message="tns:WebServiceResponse_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EnviarDeclaracaoPlanoContas">
-      <soap:operation soapAction="http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoPlanoContas" style="document" />
-      <wsdl:input name="WebServiceReceive">
-        <soap:header message="tns:WebServiceReceive_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output name="WebServiceResponse">
-        <soap:header message="tns:WebServiceResponse_Headers" part="Cabecalho" use="literal" />
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
   <wsdl:service name="NFSeIntegracao">
     <wsdl:port name="BasicHttpBinding_INFSEConsultas" binding="tns:BasicHttpBinding_INFSEConsultas">
       <soap:address location="http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc" />
@@ -851,9 +591,6 @@
       <soap:address location="http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc" />
     </wsdl:port>
     <wsdl:port name="BasicHttpBinding_INFSeIntegracaoDEISS" binding="tns:BasicHttpBinding_INFSeIntegracaoDEISS">
-      <soap:address location="http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc" />
-    </wsdl:port>
-    <wsdl:port name="BasicHttpBinding_INFSeDeclaracao" binding="tns:BasicHttpBinding_INFSeDeclaracao">
       <soap:address location="http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc" />
     </wsdl:port>
   </wsdl:service>

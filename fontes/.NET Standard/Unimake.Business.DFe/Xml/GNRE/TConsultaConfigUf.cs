@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Dynamic;
 using System.Runtime.InteropServices;
 using System.Xml;

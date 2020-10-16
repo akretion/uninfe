@@ -49,7 +49,7 @@
   </wsdl:binding>
   <wsdl:service name="webservice">
     <wsdl:port name="webservicePort" binding="tns:webserviceBinding">
-      <soap:address location="http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsulta.php" />
+      <soap:address location="https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsulta.php" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

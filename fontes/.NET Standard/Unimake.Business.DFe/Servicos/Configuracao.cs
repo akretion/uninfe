@@ -3,6 +3,9 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Unimake.Business.DFe.Servicos
 {
+    /// <summary>
+    /// Classe das configurações para conexão e envio dos XMLs para os webservices
+    /// </summary>
     public class Configuracao
     {
         /// <summary>

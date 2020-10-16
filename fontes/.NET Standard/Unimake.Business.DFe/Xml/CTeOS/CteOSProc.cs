@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
@@ -12,14 +14,27 @@ namespace Unimake.Business.DFe.Xml.CTeOS
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }
 
-        [XmlAttribute(AttributeName = "ipTransmissor", DataType = "token")]
-        public string IpTransmissor { get; set; }
-
         [XmlElement("CTeOS")]
         public CTeOS CTeOS { get; set; }
 
         [XmlElement("protCTe")]
         public Xml.CTe.ProtCTe ProtCTe { get; set; }
+
+        [XmlAttribute("ipTransmissor")]
+        public string IpTransmissor { get; set; }
+
+        [XmlAttribute("nPortaCon")]
+        public int NPortaCon { get; set; }
+
+        [XmlIgnore]
+        public DateTime DhConexao { get; set; }
+
+        [XmlAttribute("dhConexao")]
+        public string DhConexaoField
+        {
+            get => DhConexao.ToString("yyyy-MM-ddTHH:mm:sszzz");
+            set => DhConexao = DateTime.Parse(value);
+        }
 
         /// <summary>
         /// Nome do arquivo de distribuição

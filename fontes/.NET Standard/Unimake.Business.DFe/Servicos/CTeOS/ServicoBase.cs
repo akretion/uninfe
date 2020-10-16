@@ -4,6 +4,9 @@ using System.Xml;
 
 namespace Unimake.Business.DFe.Servicos.CTeOS
 {
+    /// <summary>
+    /// Classe base para consumo dos webservices do CTeOS
+    /// </summary>
     [ComVisible(true)]
     public abstract class ServicoBase: NFe.ServicoBase
     {
@@ -17,6 +20,9 @@ namespace Unimake.Business.DFe.Servicos.CTeOS
         public ServicoBase(XmlDocument conteudoXML, Configuracao configuracao)
             : base(conteudoXML, configuracao) { }
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public ServicoBase()
             : base()
         {

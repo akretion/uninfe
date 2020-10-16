@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;

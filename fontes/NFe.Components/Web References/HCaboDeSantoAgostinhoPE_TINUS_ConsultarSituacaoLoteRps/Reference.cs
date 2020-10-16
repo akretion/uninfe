@@ -13,7 +13,8 @@
 // 
 #pragma warning disable 1591
 
-namespace NFe.Components.HCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps {
+namespace NFe.Components.HCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps
+{
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -23,7 +24,7 @@ namespace NFe.Components.HCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps 
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ConsultarSituacaoLoteRpsSoap", Namespace="http://www2.tinus.com.br")]
@@ -37,7 +38,7 @@ namespace NFe.Components.HCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps 
         
         /// <remarks/>
         public ConsultarSituacaoLoteRps() {
-            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_HCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps;
+            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_HOlindaPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -155,7 +156,7 @@ namespace NFe.Components.HCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps 
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -188,7 +189,7 @@ namespace NFe.Components.HCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps 
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -221,7 +222,7 @@ namespace NFe.Components.HCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps 
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -266,7 +267,7 @@ namespace NFe.Components.HCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps 
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -326,11 +327,11 @@ namespace NFe.Components.HCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps 
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void CallConsultarSituacaoLoteRpsCompletedEventHandler(object sender, CallConsultarSituacaoLoteRpsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CallConsultarSituacaoLoteRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -352,11 +353,11 @@ namespace NFe.Components.HCaboDeSantoAgostinhoPE_TINUS_ConsultarSituacaoLoteRps 
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void TestCompletedEventHandler(object sender, TestCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

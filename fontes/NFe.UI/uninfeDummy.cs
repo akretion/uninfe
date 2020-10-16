@@ -122,6 +122,7 @@ namespace NFe.UI
                 list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.EFDReinfeSocial, EnumHelper.GetDescription(TipoAplicativo.EFDReinfeSocial)));
                 list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.EFDReinf, EnumHelper.GetDescription(TipoAplicativo.EFDReinf)));
                 list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.eSocial, EnumHelper.GetDescription(TipoAplicativo.eSocial)));
+                list.Add(new KeyValuePair<int, string>((int)TipoAplicativo.GNRE, EnumHelper.GetDescription(TipoAplicativo.GNRE)));
 #endif
             }
 

@@ -546,6 +546,10 @@ namespace NFe.UI
                     case TipoAplicativo.EFDReinfeSocial:
                         uce_cert.Validar();
                         break;
+
+                    case TipoAplicativo.GNRE:
+                        goto default;
+
                     case TipoAplicativo.Nfe:
                     case TipoAplicativo.NFCe:
                     case TipoAplicativo.Cte:
@@ -557,6 +561,7 @@ namespace NFe.UI
                         uce_resptecnico.Validar();
                         uce_outrasconfiguracoes.Validar();
                         break;
+
                     default:
                         uce_cert.Validar();
                         uce_ftp.Validar();

@@ -5,6 +5,9 @@ using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
+    /// <summary>
+    /// Enviar o XML de inutilização de NFe para o webservice
+    /// </summary>
     public class Inutilizacao: ServicoBase, IInteropService<InutNFe>
     {
         #region Private Properties
@@ -50,6 +53,9 @@ namespace Unimake.Business.DFe.Servicos.NFe
             RetInutNFe = Result
         };
 
+        /// <summary>
+        /// Conteúdo retornado pelo webservice depois do envio do XML
+        /// </summary>
         public RetInutNFe Result
         {
             get
@@ -74,9 +80,17 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="inutNFe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         public Inutilizacao(InutNFe inutNFe, Configuracao configuracao)
                     : base(inutNFe?.GerarXML() ?? throw new System.ArgumentNullException(nameof(inutNFe)), configuracao) { }
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public Inutilizacao()
         {
         }
@@ -85,6 +99,11 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Methods
 
+        /// <summary>
+        /// Executa o serviço: Assina o XML, valida e envia para o webservice
+        /// </summary>
+        /// <param name="inutNFe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         [ComVisible(true)]
         public void Executar(InutNFe inutNFe, Configuracao configuracao)
         {

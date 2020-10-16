@@ -3,6 +3,9 @@ using System.ComponentModel;
 
 namespace Unimake.Business.DFe
 {
+    /// <summary>
+    /// Extensão da Classe Enums
+    /// </summary>
     public static class EnumsExtension
     {
         #region Public Methods

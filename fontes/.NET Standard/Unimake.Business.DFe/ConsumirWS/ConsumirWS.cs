@@ -8,10 +8,16 @@ using System.Xml;
 
 namespace Unimake.Business.DFe
 {
+    /// <summary>
+    /// Classe para consumir webservices
+    /// </summary>
     public class ConsumirWS
     {
         #region Private Fields
 
+        /// <summary>
+        /// Objeto para leitura de cookies
+        /// </summary>
         private readonly CookieContainer cookies = new CookieContainer();
 
         #endregion Private Fields
@@ -22,19 +28,16 @@ namespace Unimake.Business.DFe
         /// Criar o envelope (SOAP) para envio ao webservice
         /// </summary>
         /// <param name="soap">Soap</param>
-        /// <param name="xmlHeader">string do XML a ser enviado no cabeçalho do soap</param>
         /// <param name="xmlBody">string do XML a ser enviado no corpo do soap</param>
         /// <returns>string do envelope (soap)</returns>
         private static string EnveloparXML(WSSoap soap, string xmlBody)
         {
-            var retorna = string.Empty;
-
             if(xmlBody.IndexOf("?>") >= 0)
             {
                 xmlBody = xmlBody.Substring(xmlBody.IndexOf("?>") + 2);
             }
 
-            retorna = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+            var retorna = "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
             retorna += soap.SoapString.Replace("{xmlBody}", xmlBody);
 
             return retorna;
@@ -116,7 +119,15 @@ namespace Unimake.Business.DFe
             }
         }
 
-        public bool RetornoValidacao(object sender,
+        /// <summary>
+        /// Efetua validações do certificado - Por hora retorna sempre true, ou seja, não estamos validando nada.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="certificate">Certificado digital</param>
+        /// <param name="chain">X509Chain</param>
+        /// <param name="sslPolicyErros">Políticas de Erros SSL</param>
+        /// <returns>True = Tudo ok na validação - False = Problemas na validação</returns>
+        private bool RetornoValidacao(object sender,
            X509Certificate certificate,
            X509Chain chain,
            SslPolicyErrors sslPolicyErros) => true;

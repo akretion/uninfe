@@ -63,7 +63,7 @@
             this.edtCNPJ.PasswordChar = '\0';
             this.edtCNPJ.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.edtCNPJ.SelectedText = "";
-            this.edtCNPJ.Size = new System.Drawing.Size(138, 22);
+            this.edtCNPJ.Size = new System.Drawing.Size(238, 22);
             this.edtCNPJ.TabIndex = 3;
             this.edtCNPJ.Text = "Normal Textbox";
             this.edtCNPJ.UseSelectable = true;
@@ -109,7 +109,7 @@
             this.cbServico.Location = new System.Drawing.Point(11, 130);
             this.cbServico.MaxDropDownItems = 15;
             this.cbServico.Name = "cbServico";
-            this.cbServico.Size = new System.Drawing.Size(300, 25);
+            this.cbServico.Size = new System.Drawing.Size(514, 25);
             this.cbServico.TabIndex = 7;
             this.cbServico.UseSelectable = true;
             // 

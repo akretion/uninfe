@@ -4,10 +4,19 @@ using System.Reflection;
 
 namespace Unimake.Business.DFe.Xml
 {
+    /// <summary>
+    /// Resolve as referências dos assemblies e ignora as versões
+    /// </summary>
     public static class AssemblyResolver
     {
         #region Public Methods
 
+        /// <summary>
+        /// Resolve o assembly em questão ignorando a versão do mesmo
+        /// </summary>
+        /// <param name="sender">Objeto que iniciou o evento</param>
+        /// <param name="args">Argumento que dispõe a versão esperada, assembly requerido e nome do assembly</param>
+        /// <returns></returns>
         public static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
         {
             FileInfo fileInfo;

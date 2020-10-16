@@ -8,6 +8,9 @@ using Unimake.Business.DFe.Xml.CTeOS;
 
 namespace Unimake.Business.DFe.Servicos.CTeOS
 {
+    /// <summary>
+    /// Envio do XML de CTeOS para webservice
+    /// </summary>
     public class Autorizacao: ServicoBase, IInteropService<Xml.CTeOS.CTeOS>
     {
         private void MontarQrCode()
@@ -45,6 +48,9 @@ namespace Unimake.Business.DFe.Servicos.CTeOS
 
         #region Protected Properties
 
+        /// <summary>
+        /// Objeto do XML do CTe-OS
+        /// </summary>
         public Xml.CTeOS.CTeOS CTeOS
         {
             get => _cteOS ?? (_cteOS = new Xml.CTeOS.CTeOS().LerXML<Xml.CTeOS.CTeOS>(ConteudoXML));
@@ -179,6 +185,9 @@ namespace Unimake.Business.DFe.Servicos.CTeOS
             }
         }
 
+        /// <summary>
+        /// Conteúdo retornado pelo webservice depois do envio do XML
+        /// </summary>
         public RetCTeOS Result
         {
             get
@@ -200,9 +209,17 @@ namespace Unimake.Business.DFe.Servicos.CTeOS
 
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public Autorizacao()
             : base() => CteOSProcs.Clear();
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="cteOS">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         public Autorizacao(Xml.CTeOS.CTeOS cteOS, Configuracao configuracao)
             : base(cteOS?.GerarXML() ?? throw new ArgumentNullException(nameof(cteOS)), configuracao)
         {
@@ -234,6 +251,11 @@ namespace Unimake.Business.DFe.Servicos.CTeOS
             base.Executar();
         }
 
+        /// <summary>
+        /// Executa o serviço: Assina o XML, valida e envia para o webservice
+        /// </summary>
+        /// <param name="cteOS">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         [ComVisible(true)]
         public void Executar(Xml.CTeOS.CTeOS cteOS, Configuracao configuracao)
         {

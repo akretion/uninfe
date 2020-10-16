@@ -7,6 +7,9 @@ using System.Xml.Schema;
 
 namespace Unimake.Business.DFe
 {
+    /// <summary>
+    /// Validador de schemas de XML (XML x XSD)
+    /// </summary>
     public class ValidarSchema
     {
         #region Private Properties
@@ -20,6 +23,11 @@ namespace Unimake.Business.DFe
 
         #region Private Methods
 
+        /// <summary>
+        /// Extrair recursos (XSD) da DLL para efetuar a validação do XML
+        /// </summary>
+        /// <param name="arqSchema">Arquivo XSD a ser extraido</param>
+        /// <returns>Retorna os schemas a serem utilizados na validação</returns>
         private IEnumerable<XmlSchema> ExtractSchemasResource(string arqSchema)
         {
             var files = new List<string>();
@@ -87,6 +95,11 @@ namespace Unimake.Business.DFe
             }
         }
 
+        /// <summary>
+        /// Converte String para Stream
+        /// </summary>
+        /// <param name="s">Conteúdo a ser convertido</param>
+        /// <returns>Retorna Stream do conteúdo informado para o método</returns>
         private static Stream GenerateStreamFromString(string s)
         {
             var stream = new MemoryStream();
@@ -97,9 +110,19 @@ namespace Unimake.Business.DFe
             return stream;
         }
 
+        /// <summary>
+        /// Evento Executado em tempo de validação para retorno de erros
+        /// </summary>
+        /// <param name="sender">Object sender</param>
+        /// <param name="e">Argumentos</param>
         private void Reader_ValidationEventHandler(object sender, ValidationEventArgs e) =>
             ErroValidacao += "Linha: " + e.Exception.LineNumber + " Coluna: " + e.Exception.LinePosition + " Erro: " + e.Exception.Message + "\r\n";
 
+        /// <summary>
+        /// Validar XML
+        /// </summary>
+        /// <param name="conteudoXML">Conteúdo do XML as ser validado</param>
+        /// <param name="settings">Parâmetros para validação</param>
         private void ValidateXMLAgainstSchema(XmlDocument conteudoXML, XmlReaderSettings settings)
         {
             using(var xmlReader = XmlReader.Create(new StringReader(conteudoXML.OuterXml), settings))
@@ -185,7 +208,7 @@ namespace Unimake.Business.DFe
                 };
                 settings.XmlResolver = resolver;
 
-                if(targetNS != string.Empty)
+                if(!string.IsNullOrWhiteSpace(targetNS))
                 {
                     foreach(var schema in ExtractSchemasResource(arqSchema))
                     {

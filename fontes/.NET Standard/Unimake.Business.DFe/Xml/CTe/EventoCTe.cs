@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -46,7 +48,7 @@ namespace Unimake.Business.DFe.Xml.CTe
 
     [Serializable]
     [XmlRoot(ElementName = "detEvento")]
-    public class DetEventoPrestDesacordo : EventoDetalhe
+    public class DetEventoPrestDesacordo: EventoDetalhe
     {
         #region Public Properties
 
@@ -752,12 +754,6 @@ namespace Unimake.Business.DFe.Xml.CTe
 
         #region Public Properties
 
-        [XmlElement("chCTe", Order = 3)]
-        public string ChCTe { get; set; }
-
-        [XmlElement("CNPJ", Order = 2)]
-        public string CNPJ { get; set; }
-
         [XmlIgnore]
         public UFBrasil COrgao { get; set; }
 
@@ -768,7 +764,35 @@ namespace Unimake.Business.DFe.Xml.CTe
             set => COrgao = (UFBrasil)Enum.Parse(typeof(UFBrasil), value.ToString());
         }
 
-        [XmlElement("detEvento", Order = 7)]
+        [XmlElement("tpAmb", Order = 1)]
+        public TipoAmbiente TpAmb { get; set; }
+
+        [XmlElement("CNPJ", Order = 2)]
+        public string CNPJ { get; set; }
+
+        [XmlElement("CPF", Order = 3)]
+        public string CPF { get; set; }
+
+        [XmlElement("chCTe", Order = 4)]
+        public string ChCTe { get; set; }
+
+        [XmlIgnore]
+        public DateTime DhEvento { get; set; }
+
+        [XmlElement("dhEvento", Order = 5)]
+        public string DhEventoField
+        {
+            get => DhEvento.ToString("yyyy-MM-ddTHH:mm:sszzz");
+            set => DhEvento = DateTime.Parse(value);
+        }
+
+        [XmlElement("tpEvento", Order = 6)]
+        public TipoEventoCTe TpEvento { get; set; }
+
+        [XmlElement("nSeqEvento", Order = 7)]
+        public int NSeqEvento { get; set; }
+
+        [XmlElement("detEvento", Order = 8)]
         public EventoDetalhe DetEvento
         {
             get => _detEvento;
@@ -809,15 +833,8 @@ namespace Unimake.Business.DFe.Xml.CTe
             }
         }
 
-        [XmlIgnore]
-        public DateTime DhEvento { get; set; }
-
-        [XmlElement("dhEvento", Order = 4)]
-        public string DhEventoField
-        {
-            get => DhEvento.ToString("yyyy-MM-ddTHH:mm:sszzz");
-            set => DhEvento = DateTime.Parse(value);
-        }
+        [XmlElement("infSolicNFF", Order = 9)]
+        public InfSolicNFF InfSolicNFF { get; set; }
 
         [XmlAttribute(DataType = "ID", AttributeName = "Id")]
         public string Id
@@ -826,22 +843,11 @@ namespace Unimake.Business.DFe.Xml.CTe
             set => _ = value;
         }
 
-        [XmlElement("nSeqEvento", Order = 6)]
-        public int NSeqEvento { get; set; }
-
-        [XmlElement("tpAmb", Order = 1)]
-        public TipoAmbiente TpAmb { get; set; }
-
-        [XmlElement("tpEvento", Order = 5)]
-        public TipoEventoCTe TpEvento { get; set; }
-
         #endregion Public Properties
 
         #region Public Constructors
 
-        public InfEvento()
-        {
-        }
+        public InfEvento() { }
 
         public InfEvento(EventoDetalhe detEvento) => DetEvento = detEvento ?? throw new ArgumentNullException(nameof(detEvento));
 

@@ -12,7 +12,7 @@ namespace NFe.Components.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -186,7 +186,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://isscuritiba.curitiba.pr.gov.br/Iss.NfseWebService/nfsews.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://srv2-isscuritiba.curitiba.pr.gov.br/Iss.NfseWebService/nfsews.asmx")]
         public string NFe_Components_br_gov_egoverne_isscuritiba_curitiba_p_WS_x0020___x0020_NFS_e_x0020_V1_0_0_1 {
             get {
                 return ((string)(this["NFe_Components_br_gov_egoverne_isscuritiba_curitiba_p_WS_x0020___x0020_NFS_e_x002" +
@@ -324,26 +324,6 @@ namespace NFe.Components.Properties {
             get {
                 return ((string)(this["NFe_Components_br_com_fisslex_demo_aws_consultarsituacaoloterps_h_WS_ConsultarSit" +
                     "uacaoLoteRps"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.govdigital.com.br:443/ws/pocos")]
-        public string NFe_Components_br_com_govdigital_ws_pocos_p_NfseServiceImplPocosService {
-            get {
-                return ((string)(this["NFe_Components_br_com_govdigital_ws_pocos_p_NfseServiceImplPocosService"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://homolog.govdigital.com.br:443/ws/pocos")]
-        public string NFe_Components_br_com_govdigital_homolog_pocos_h_NfseServiceImplPocosService {
-            get {
-                return ((string)(this["NFe_Components_br_com_govdigital_homolog_pocos_h_NfseServiceImplPocosService"]));
             }
         }
         
@@ -1893,16 +1873,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://canedo.bsit-br.com.br/integracao/services/nfseWS")]
-        public string NFe_Components_PSenadorCanedoGO_nfseWS {
-            get {
-                return ((string)(this["NFe_Components_PSenadorCanedoGO_nfseWS"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://191.209.11.231:5661/IssWeb-ejb/IssWebWS/IssWebWS")]
         public string NFe_Components_br_com_fiorilli_aguasdelindoiasp_p_IssWebWS {
             get {
@@ -2154,7 +2124,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfe_teste_homologacao.php")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfe_teste_homologacao.php")]
         public string NFe_Components_HBarraBonitaSP_webservice {
             get {
                 return ((string)(this["NFe_Components_HBarraBonitaSP_webservice"]));
@@ -2164,7 +2134,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeenvia.php")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeenvia.php")]
         public string NFe_Components_PBarraBonitaSP_Enviar_webservice {
             get {
                 return ((string)(this["NFe_Components_PBarraBonitaSP_Enviar_webservice"]));
@@ -2174,7 +2144,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfecancela.php")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfecancela.php")]
         public string NFe_Components_PBarraBonitaSP_Cancelar_webservice {
             get {
                 return ((string)(this["NFe_Components_PBarraBonitaSP_Cancelar_webservice"]));
@@ -2184,7 +2154,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsulta.php")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsulta.php")]
         public string NFe_Components_PBarraBonitaSP_ConsultarNfe_webservice {
             get {
                 return ((string)(this["NFe_Components_PBarraBonitaSP_ConsultarNfe_webservice"]));
@@ -2284,7 +2254,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsultaxml.php")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeconsultaxml.php")]
         public string NFe_Components_PWebFiscoTecnologia_ConsultarXml_webservice {
             get {
                 return ((string)(this["NFe_Components_PWebFiscoTecnologia_ConsultarXml_webservice"]));
@@ -3267,6 +3237,36 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PVargemGrandeDoSulSP_NfseService {
             get {
                 return ((string)(this["NFe_Components_PVargemGrandeDoSulSP_NfseService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.nfe-cidades.com.br/ws/pocos")]
+        public string NFe_Components_PPocosdeCaldasMG_NfseServiceImplPocosService {
+            get {
+                return ((string)(this["NFe_Components_PPocosdeCaldasMG_NfseServiceImplPocosService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://ws.homolog.nfe-cidades.com.br/ws/pocos")]
+        public string NFe_Components_HPocosdeCaldasMG_NfseServiceImplPocosService {
+            get {
+                return ((string)(this["NFe_Components_HPocosdeCaldasMG_NfseServiceImplPocosService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://gestaopublica.canedo.bsit-br.com.br/integracao/services/nfseWS")]
+        public string NFe_Components_PSenadorCanedoGO_nfseWS {
+            get {
+                return ((string)(this["NFe_Components_PSenadorCanedoGO_nfseWS"]));
             }
         }
     }

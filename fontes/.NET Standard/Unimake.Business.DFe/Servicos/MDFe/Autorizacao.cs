@@ -9,6 +9,9 @@ using Unimake.Business.DFe.Xml.MDFe;
 
 namespace Unimake.Business.DFe.Servicos.MDFe
 {
+    /// <summary>
+    /// Enviar o XML de MDFe para o webservice
+    /// </summary>
     public class Autorizacao: ServicoBase, IInteropService<EnviMDFe>
     {
         #region Private Fields
@@ -56,7 +59,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         private void ValidarXMLMDFe(XmlDocument xml, string schemaArquivo, string targetNS)
         {
             var validar = new ValidarSchema();
-            validar.Validar(xml, Configuracoes.TipoDFe.ToString() + "." + Configuracoes.SchemaArquivo, targetNS);
+            validar.Validar(xml, Configuracoes.TipoDFe.ToString() + "." + schemaArquivo, targetNS);
 
             if(!validar.Success)
             {
@@ -116,6 +119,9 @@ namespace Unimake.Business.DFe.Servicos.MDFe
 
         #region Public Properties
 
+        /// <summary>
+        /// Objeto do XML do MDFe
+        /// </summary>
         public EnviMDFe EnviMDFe
         {
             get => _enviMDFe ?? (_enviMDFe = new EnviMDFe().LerXML<EnviMDFe>(ConteudoXML));
@@ -209,6 +215,9 @@ namespace Unimake.Business.DFe.Servicos.MDFe
             }
         }
 
+        /// <summary>
+        /// Conteúdo retornado pelo webservice depois do envio do XML
+        /// </summary>
         public RetEnviMDFe Result
         {
             get
@@ -235,9 +244,17 @@ namespace Unimake.Business.DFe.Servicos.MDFe
 
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public Autorizacao()
             : base() => MdfeProcs.Clear();
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="enviMDFe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         public Autorizacao(EnviMDFe enviMDFe, Configuracao configuracao)
             : base(enviMDFe?.GerarXML() ?? throw new ArgumentNullException(nameof(enviMDFe)), configuracao)
         {
@@ -269,6 +286,9 @@ namespace Unimake.Business.DFe.Servicos.MDFe
             base.Executar();
         }
 
+        /// <summary>
+        /// Validar o XML
+        /// </summary>
         protected override void XmlValidar()
         {
             var xml = EnviMDFe;
@@ -320,6 +340,11 @@ namespace Unimake.Business.DFe.Servicos.MDFe
             #endregion Validar a parte específica de cada evento
         }
 
+        /// <summary>
+        /// Executa o serviço: Assina o XML, valida e envia para o webservice
+        /// </summary>
+        /// <param name="enviMDFe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         [ComVisible(true)]
         public void Executar(EnviMDFe enviMDFe, Configuracao configuracao)
         {

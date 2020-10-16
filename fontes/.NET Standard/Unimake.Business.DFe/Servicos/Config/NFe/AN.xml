@@ -35,7 +35,6 @@
       <TagAtributoID>infEvento</TagAtributoID>
       <TagLoteAssinatura></TagLoteAssinatura>
       <TagLoteAtributoID></TagLoteAtributoID>
-      <TargetNS></TargetNS>
     </RecepcaoEvento>
     <DistribuicaoDFe versao="1.01">
       <Descricao>Consulta da relação de documentos fiscais eletrônicos destinados - NFe</Descricao>

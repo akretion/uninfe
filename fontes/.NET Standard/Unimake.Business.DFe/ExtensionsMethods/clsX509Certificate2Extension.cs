@@ -23,7 +23,7 @@ namespace Unimake.Business.DFe.Security
         /// <param name="pinPassword">O Pin Code / Senha / Password</param>
         public static void SetPinPrivateKey(this X509Certificate2 certificado, string pinPassword)
         {
-            if (certificado == null)
+            if(certificado == null)
             {
                 throw new ArgumentNullException("certificado == null!");
             }
@@ -35,24 +35,23 @@ namespace Unimake.Business.DFe.Security
 
             //Não é necessário descarregar o handle
             SafeNativeMethods.Execute(() => SafeNativeMethods.CryptAcquireContext(
-                                                ref ProviderHandle,
-                                                key.CspKeyContainerInfo.KeyContainerName,
-                                                key.CspKeyContainerInfo.ProviderName,
-                                                key.CspKeyContainerInfo.ProviderType,
-                                                SafeNativeMethods.CryptContextFlags.Silent)
-                                      );
+                ref ProviderHandle,
+                key.CspKeyContainerInfo.KeyContainerName,
+                key.CspKeyContainerInfo.ProviderName,
+                key.CspKeyContainerInfo.ProviderType,
+                SafeNativeMethods.CryptContextFlags.Silent));
+
             SafeNativeMethods.Execute(() => SafeNativeMethods.CryptSetProvParam(
-                                                ProviderHandle,
-                                                SafeNativeMethods.CryptParameter.KeyExchangePin,
-                                                PinBuffer,
-                                                0)
-                                      );
+                ProviderHandle,
+                SafeNativeMethods.CryptParameter.KeyExchangePin,
+                PinBuffer,
+                0));
+
             SafeNativeMethods.Execute(() => SafeNativeMethods.CertSetCertificateContextProperty(
-                                           certificado.Handle,
-                                           SafeNativeMethods.CertificateProperty.CryptoProviderHandle,
-                                           0,
-                                           ProviderHandle)
-                                      );
+                certificado.Handle,
+                SafeNativeMethods.CertificateProperty.CryptoProviderHandle,
+                0,
+                ProviderHandle));
         }
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace Unimake.Business.DFe.Security
         /// <returns>true = É um certificado A3</returns>
         public static bool IsA3(this X509Certificate2 x509cert)
         {
-            if (x509cert == null)
+            if(x509cert == null)
             {
                 return false;
             }
@@ -71,9 +70,9 @@ namespace Unimake.Business.DFe.Security
 
             try
             {
-                if (x509cert.PrivateKey is RSACryptoServiceProvider service)
+                if(x509cert.PrivateKey is RSACryptoServiceProvider service)
                 {
-                    if (service.CspKeyContainerInfo.Removable &&
+                    if(service.CspKeyContainerInfo.Removable &&
                     service.CspKeyContainerInfo.HardwareDevice)
                     {
                         result = true;
@@ -96,18 +95,27 @@ namespace Unimake.Business.DFe.Security
     /// </summary>
     internal static class SafeNativeMethods
     {
+        /// <summary>
+        /// Sinalizadores/Flags de contexto para a criptografia
+        /// </summary>
         internal enum CryptContextFlags
         {
             None = 0,
             Silent = 0x40
         }
 
+        /// <summary>
+        /// Propriedades do certificado
+        /// </summary>
         internal enum CertificateProperty
         {
             None = 0,
             CryptoProviderHandle = 0x1
         }
 
+        /// <summary>
+        /// Parâmetros para criptografia
+        /// </summary>
         internal enum CryptParameter
         {
             None = 0,
@@ -138,13 +146,18 @@ namespace Unimake.Business.DFe.Security
             IntPtr pvData
             );
 
+        /// <summary>
+        /// Executar funções para criptografia/descriptografia do PIN do certificado
+        /// </summary>
+        /// <param name="action">Ação/função a ser executada</param>
         public static void Execute(Func<bool> action)
         {
-            if (!action())
+            if(!action())
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
         }
     }
+
     #endregion
 }

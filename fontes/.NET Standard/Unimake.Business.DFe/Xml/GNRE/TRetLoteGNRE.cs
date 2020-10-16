@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Serialization;
@@ -9,7 +11,7 @@ namespace Unimake.Business.DFe.Xml.GNRE
     [ComVisible(true)]
     [Serializable()]
     [XmlRoot("TRetLote_GNRE", Namespace = "http://www.gnre.pe.gov.br", IsNullable = false)]
-    public class TRetLoteGNRE
+    public class TRetLoteGNRE: XMLBase
     {
         [XmlElement("ambiente")]
         public TipoAmbiente Ambiente { get; set; }

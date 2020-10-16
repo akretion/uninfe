@@ -9,10 +9,19 @@ using System.Text;
 
 namespace Unimake.Business.DFe.Utility
 {
+    /// <summary>
+    /// Classe para conversão de objetos
+    /// </summary>
     public static class Converter
     {
         #region Private Methods
 
+        /// <summary>
+        /// Converter tipo de um objeto
+        /// </summary>
+        /// <param name="value">Para qual tipo converter o conteúdo do objeto</param>
+        /// <param name="conversionType">Para qual tipo converter o conteúdo do objeto</param>
+        /// <returns>Conteúdo do objeto convertido para o tipo informado</returns>
         private static object ChangeType(object value, Type conversionType)
         {
             if(value == null)
@@ -101,8 +110,20 @@ namespace Unimake.Business.DFe.Utility
             return memoryStream;
         }
 
+        /// <summary>
+        /// Tenta converter qualquer objeto passado em value para o tipo esperado em T
+        /// </summary>
+        /// <typeparam name="T">Tipo esperado para conversão</typeparam>
+        /// <param name="value">Valor que deverá ser convertido</param>
+        /// <returns>Value convertido em T</returns>
         public static T ToAny<T>(object value) => (T)ToAny(typeof(T), value);
 
+        /// <summary>
+        /// Converter tipo de um objeto
+        /// </summary>
+        /// <param name="t">Para qual tipo converter o conteúdo do objeto</param>
+        /// <param name="value">Conteúdo do objeto a ser convertido</param>
+        /// <returns>Conteúdo do objeto convertido para o tipo informado</returns>
         public static object ToAny(Type t, object value)
         {
             var result = default(object);
@@ -138,10 +159,10 @@ namespace Unimake.Business.DFe.Utility
         }
 
         /// <summary>
-        /// Converte um valor vindo do XML em double
+        /// Converte um valor do objeto em double
         /// </summary>
-        /// <param name="value">valor para conversão</param>
-        /// <returns></returns>
+        /// <param name="value">valor a ser convertido</param>
+        /// <returns>Valor convertido para double</returns>
         public static double ToDouble(object value)
         {
             if(value == null)

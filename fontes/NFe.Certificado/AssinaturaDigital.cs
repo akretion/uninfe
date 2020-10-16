@@ -562,6 +562,18 @@ namespace NFe.Certificado
                             Assinar(tempFile, "consSitNFe", "xServ", Empresas.Configuracoes[emp].X509Certificado, emp);
                             break;
 
+                        case Servicos.DFeEnviar:
+                            tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML) + "__" + Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFe).EnvioXML;
+                            File.Copy(arqXML, tempFile, true);
+                            Assinar(tempFile, "distDFeInt", "CNPJ", Empresas.Configuracoes[emp].X509Certificado, emp);
+                            break;
+
+                        case Servicos.CTeDistribuicaoDFe:
+                            tempFile = Functions.ExtraiPastaNomeArq(arqXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioXML) + "__" + Propriedade.Extensao(Propriedade.TipoEnvio.EnvDFeCTe).EnvioXML;
+                            File.Copy(arqXML, tempFile, true);
+                            Assinar(tempFile, "distDFeInt", "CNPJ", Empresas.Configuracoes[emp].X509Certificado, emp);
+                            break;
+
                         default:
                             break;
                     }

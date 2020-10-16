@@ -141,8 +141,21 @@ namespace Unimake.Business.DFe.Servicos
         #endregion
 
         #region GNRE
-
+        /// <summary>
+        /// GNRE - Consultar Configurações da UF
+        /// </summary>
+        [Description("GNRE - Consultar Configurações da UF")]
         GNREConsultaConfigUF,
+        /// <summary>
+        /// GNRE - Consultar Resultado do Lote de GNRE enviado
+        /// </summary>
+        [Description("Consultar Resultado do Lote de GNRE enviado")]
+        GNREConsultaResultadoLote,
+        /// <summary>
+        /// GNRE - Enviar Lote de GNRE
+        /// </summary>
+        [Description("Enviar Lote de GNRE")]
+        GNRELoteRecepcao,
 
         #endregion
 
@@ -349,10 +362,30 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         TO = 17,
 
+        ///<summary>
+        /// SUFRAMA (90)
+        /// </summary>
+        SUFRAMA = 90,
+
         /// <summary>
-        /// Ambiente Nacional - AN (91)
+        /// RFB - Ambiente Nacional - AN (91)
         /// </summary>
         AN = 91,
+
+        /// <summary>
+        /// SVCRS - Servico Virtual de Contingência do Rio Grande do Sul (94)
+        /// </summary>
+        SVCRS = 94,
+
+        /// <summary>
+        /// SVCRS - Servico Virtual de Contingência de São Paulo (95)
+        /// </summary>
+        SVCSP = 95,
+
+        /// <summary>
+        /// Sincronização de chaves do estado do Rio Grande do Sul com o Sistema Virtual de São Paulo (96)
+        /// </summary>
+        SincChavesRSparaSVSP = 96,
 
         /// <summary>
         /// Não definido (0)
@@ -369,8 +402,14 @@ namespace Unimake.Business.DFe.Servicos
     /// </summary>
     public enum TipoAmbiente
     {
+        /// <summary>
+        /// Ambiente de Produção
+        /// </summary>
         [XmlEnum("1")]
         Producao = 1,
+        /// <summary>
+        /// Ambiente de Homologação
+        /// </summary>
         [XmlEnum("2")]
         Homologacao = 2
     }
@@ -1245,6 +1284,9 @@ namespace Unimake.Business.DFe.Servicos
 
     #region MotivoDesoneracaoICMS
 
+    /// <summary>
+    /// Motivos para Desoneração do ICMS
+    /// </summary>
     public enum MotivoDesoneracaoICMS
     {
         /// <summary>
@@ -1270,6 +1312,9 @@ namespace Unimake.Business.DFe.Servicos
 
     #region ModalidadeFrete
 
+    /// <summary>
+    /// Modalidades de Frete
+    /// </summary>
     public enum ModalidadeFrete
     {
         /// <summary>
@@ -1404,6 +1449,9 @@ namespace Unimake.Business.DFe.Servicos
 
     #region MeioPagamento
 
+    /// <summary>
+    /// Meios de pagamentos
+    /// </summary>
     public enum MeioPagamento
     {
         /// <summary>
@@ -1461,7 +1509,7 @@ namespace Unimake.Business.DFe.Servicos
         ValeCombustivel = 13,
 
         /// <summary>
-        /// 14=Duplicata Mercantil (Não existe mais este numerador no padrão da SEFAZ, foi retirado na Nota Técnica 2016.002 - v 1.61. Mantemos no enum para manter compatilidade em casos de importação de XMLs antigos (B2B) que possuem este valor na tag <tPag>.)
+        /// 14=Duplicata Mercantil (Não existe mais este numerador no padrão da SEFAZ, foi retirado na Nota Técnica 2016.002 - v 1.61. Mantemos no enum para manter compatilidade em casos de importação de XMLs antigos (B2B) que possuem este valor na tag tPag.)
         /// </summary>
         [XmlEnum("14")]
         DuplicataMercantil = 14,
@@ -4224,49 +4272,268 @@ namespace Unimake.Business.DFe.Servicos
     /// </summary>
     public enum CamposGNRE
     {
+        /// <summary>
+        /// c01_UfFavorecida
+        /// </summary>
+        [XmlEnum("c01_UfFavorecida")]
         c01_UfFavorecida,
+
+        /// <summary>
+        /// c02_receita
+        /// </summary>
+        [XmlEnum("c02_receita")]
         c02_receita,
+
+        /// <summary>
+        /// c25_detalhamentoReceita
+        /// </summary>
+        [XmlEnum("c25_detalhamentoReceita")]
         c25_detalhamentoReceita,
+
+        /// <summary>
+        /// c26_produto
+        /// </summary>
+        [XmlEnum("c26_produto")]
         c26_produto,
+
+        /// <summary>
+        /// c27_tipoIdentificacaoEmitente
+        /// </summary>
+        [XmlEnum("c27_tipoIdentificacaoEmitente")]
         c27_tipoIdentificacaoEmitente,
+
+        /// <summary>
+        /// c03_idContribuinteEmitente
+        /// </summary>
+        [XmlEnum("c03_idContribuinteEmitente")]
         c03_idContribuinteEmitente,
+
+        /// <summary>
+        /// c28_tipoDocOrigem
+        /// </summary>
+        [XmlEnum("c28_tipoDocOrigem")]
         c28_tipoDocOrigem,
+
+        /// <summary>
+        /// c04_docOrigem
+        /// </summary>
+        [XmlEnum("c04_docOrigem")]
         c04_docOrigem,
+
+        /// <summary>
+        /// c06_valorPrincipal
+        /// </summary>
+        [XmlEnum("c06_valorPrincipal")]
         c06_valorPrincipal,
+
+        /// <summary>
+        /// c07_atualizacaoMonetaria
+        /// </summary>
+        [XmlEnum("c07_atualizacaoMonetaria")]
         c07_atualizacaoMonetaria,
+
+        /// <summary>
+        /// c08_juros
+        /// </summary>
+        [XmlEnum("c08_juros")]
         c08_juros,
+
+        /// <summary>
+        /// c09_multa
+        /// </summary>
+        [XmlEnum("c09_multa")]
         c09_multa,
+
+        /// <summary>
+        /// c10_valorTotal
+        /// </summary>
+        [XmlEnum("c10_valorTotal")]
         c10_valorTotal,
+
+        /// <summary>
+        /// c14_dataVencimento
+        /// </summary>
+        [XmlEnum("c14_dataVencimento")]
         c14_dataVencimento,
+
+        /// <summary>
+        /// c33_dataPagamento
+        /// </summary>
+        [XmlEnum("c33_dataPagamento")]
         c33_dataPagamento,
+
+        /// <summary>
+        /// c29_dataLimitePagamento
+        /// </summary>
+        [XmlEnum("c29_dataLimitePagamento")]
         c29_dataLimitePagamento,
+
+        /// <summary>
+        /// c15_convenio
+        /// </summary>
+        [XmlEnum("c15_convenio")]
         c15_convenio,
+
+        /// <summary>
+        /// c16_razaoSocialEmitente
+        /// </summary>
+        [XmlEnum("c16_razaoSocialEmitente")]
         c16_razaoSocialEmitente,
+
+        /// <summary>
+        /// c17_inscricaoEstadualEmitente
+        /// </summary>
+        [XmlEnum("c17_inscricaoEstadualEmitente")]
         c17_inscricaoEstadualEmitente,
+
+        /// <summary>
+        /// c18_enderecoEmitente
+        /// </summary>
+        [XmlEnum("c18_enderecoEmitente")]
         c18_enderecoEmitente,
+
+        /// <summary>
+        /// c19_municipioEmitente
+        /// </summary>
+        [XmlEnum("c19_municipioEmitente")]
         c19_municipioEmitente,
+
+        /// <summary>
+        /// c20_ufEnderecoEmitente
+        /// </summary>
+        [XmlEnum("c20_ufEnderecoEmitente")]
         c20_ufEnderecoEmitente,
+
+        /// <summary>
+        /// c21_cepEmitente
+        /// </summary>
+        [XmlEnum("c21_cepEmitente")]
         c21_cepEmitente,
+
+        /// <summary>
+        /// c22_telefoneEmitente
+        /// </summary>
+        [XmlEnum("c22_telefoneEmitente")]
         c22_telefoneEmitente,
+
+        /// <summary>
+        /// c34_tipoIdentificacaoDestinatario
+        /// </summary>
+        [XmlEnum("c34_tipoIdentificacaoDestinatario")]
         c34_tipoIdentificacaoDestinatario,
+
+        /// <summary>
+        /// c35_idContribuinteDestinatario
+        /// </summary>
+        [XmlEnum("c35_idContribuinteDestinatario")]
         c35_idContribuinteDestinatario,
+
+        /// <summary>
+        /// c36_inscricaoEstadualDestinatario
+        /// </summary>
+        [XmlEnum("c36_inscricaoEstadualDestinatario")]
         c36_inscricaoEstadualDestinatario,
+
+        /// <summary>
+        /// c37_razaoSocialDestinatario
+        /// </summary>
+        [XmlEnum("c37_razaoSocialDestinatario")]
         c37_razaoSocialDestinatario,
+
+        /// <summary>
+        /// c38_municipioDestinatario
+        /// </summary>
+        [XmlEnum("c38_municipioDestinatario")]
         c38_municipioDestinatario,
+
+        /// <summary>
+        /// c30_nossoNumero
+        /// </summary>
+        [XmlEnum("c30_nossoNumero")]
         c30_nossoNumero,
+
+        /// <summary>
+        /// c05_referencia
+        /// </summary>
+        [XmlEnum("c05_referencia")]
         c05_referencia,
+
+        /// <summary>
+        /// periodo
+        /// </summary>
+        [XmlEnum("periodo")]
         periodo,
+
+        /// <summary>
+        /// mes
+        /// </summary>
+        [XmlEnum("mes")]
         mes,
+
+        /// <summary>
+        /// ano
+        /// </summary>
+        [XmlEnum("ano")]
         ano,
+
+        /// <summary>
+        /// parcela
+        /// </summary>
+        [XmlEnum("parcela")]
         parcela,
+
+        /// <summary>
+        /// c39_campoExtra1
+        /// </summary>
+        [XmlEnum("c39_campoExtra1")]
         c39_campoExtra1,
+
+        /// <summary>
+        /// c40_campoExtra2
+        /// </summary>
+        [XmlEnum("c40_campoExtra2")]
         c40_campoExtra2,
+
+        /// <summary>
+        /// c41_campoExtra3
+        /// </summary>
+        [XmlEnum("c41_campoExtra3")]
         c41_campoExtra3,
+
+        /// <summary>
+        /// c39_camposExtras
+        /// </summary>
+        [XmlEnum("c39_camposExtras")]
         c39_camposExtras,
+
+        /// <summary>
+        /// campoExtra
+        /// </summary>
+        [XmlEnum("campoExtra")]
         campoExtra,
+
+        /// <summary>
+        /// codigo
+        /// </summary>
+        [XmlEnum("codigo")]
         codigo,
+
+        /// <summary>
+        /// tipo
+        /// </summary>
+        [XmlEnum("tipo")]
         tipo,
+
+        /// <summary>
+        /// valor
+        /// </summary>
+        [XmlEnum("valor")]
         valor,
+
+        /// <summary>
+        /// c42_identificadorGui
+        /// </summary>
+        [XmlEnum("c42_identificadorGuia")]
         c42_identificadorGuia
     }
 
@@ -4279,65 +4546,242 @@ namespace Unimake.Business.DFe.Servicos
     /// </summary>
     public enum CamposGNRE2
     {
+        /// <summary>
+        /// ufFavorecida
+        /// </summary>        
         ufFavorecida,
+        /// <summary>
+        /// contribuinteEmitente
+        /// </summary>        
         contribuinteEmitente,
+        /// <summary>
+        /// contribuinteEmitente_identificacao
+        /// </summary>        
         contribuinteEmitente_identificacao,
-        contribuinteEmitente_identificacao_CNPJ,
+        /// <summary>
+        /// contribuinteEmitente_identificacao_CPF
+        /// </summary>        
         contribuinteEmitente_identificacao_CPF,
+        /// <summary>
+        /// contribuinteEmitente_identificacao_CNPJ
+        /// </summary>        
+        contribuinteEmitente_identificacao_CNPJ,
+        /// <summary>
+        /// contribuinteEmitente_identificacao_IE
+        /// </summary>        
         contribuinteEmitente_identificacao_IE,
+        /// <summary>
+        /// contribuinteEmitente_razaoSocial
+        /// </summary>        
         contribuinteEmitente_razaoSocial,
+        /// <summary>
+        /// contribuinteEmitente_endereco
+        /// </summary>        
         contribuinteEmitente_endereco,
+        /// <summary>
+        /// contribuinteEmitente_municipio
+        /// </summary>        
         contribuinteEmitente_municipio,
+        /// <summary>
+        /// contribuinteEmitente_uf
+        /// </summary>        
         contribuinteEmitente_uf,
+        /// <summary>
+        /// contribuinteEmitente_cep
+        /// </summary>        
         contribuinteEmitente_cep,
+        /// <summary>
+        /// contribuinteEmitente_telefone
+        /// </summary>        
         contribuinteEmitente_telefone,
+        /// <summary>
+        /// itensGNRE
+        /// </summary>        
         itensGNRE,
+        /// <summary>
+        /// item
+        /// </summary>        
         item,
+        /// <summary>
+        /// item_receita
+        /// </summary>        
         item_receita,
+        /// <summary>
+        /// item_detalhamentoReceita
+        /// </summary>        
         item_detalhamentoReceita,
+        /// <summary>
+        /// item_documentoOrigem
+        /// </summary>        
         item_documentoOrigem,
+        /// <summary>
+        /// item_produto
+        /// </summary>        
         item_produto,
+        /// <summary>
+        /// item_referencia
+        /// </summary>        
         item_referencia,
+        /// <summary>
+        /// item_referencia_periodo
+        /// </summary>        
         item_referencia_periodo,
+        /// <summary>
+        /// item_referencia_mes
+        /// </summary>        
         item_referencia_mes,
+        /// <summary>
+        /// item_referencia_ano
+        /// </summary>        
         item_referencia_ano,
+        /// <summary>
+        /// item_referencia_parcela
+        /// </summary>        
         item_referencia_parcela,
+        /// <summary>
+        /// item_dataVencimento
+        /// </summary>        
         item_dataVencimento,
+        /// <summary>
+        /// item_valorPrincipal
+        /// </summary>        
         item_valorPrincipal,
+        /// <summary>
+        /// item_valorPrincipalFecp
+        /// </summary>        
         item_valorPrincipalFecp,
+        /// <summary>
+        /// item_valorAtualizacaoMonetaria
+        /// </summary>        
         item_valorAtualizacaoMonetaria,
+        /// <summary>
+        /// item_valorAtualizacaoMonetariaFecp
+        /// </summary>        
         item_valorAtualizacaoMonetariaFecp,
+        /// <summary>
+        /// item_valorJuros
+        /// </summary>        
         item_valorJuros,
+        /// <summary>
+        /// item_valorJurosFecp
+        /// </summary>        
         item_valorJurosFecp,
+        /// <summary>
+        /// item_valorMulta
+        /// </summary>        
         item_valorMulta,
+        /// <summary>
+        /// item_valorMultaFecp
+        /// </summary>        
         item_valorMultaFecp,
+        /// <summary>
+        /// item_valorTotal
+        /// </summary>        
         item_valorTotal,
+        /// <summary>
+        /// item_valorTotalFecp
+        /// </summary>        
         item_valorTotalFecp,
+        /// <summary>
+        /// item_convenio
+        /// </summary>        
         item_convenio,
+        /// <summary>
+        /// item_contribuinteDestinatario
+        /// </summary>        
         item_contribuinteDestinatario,
+        /// <summary>
+        /// item_contribuinteDestinatario_identificacao
+        /// </summary>        
         item_contribuinteDestinatario_identificacao,
+        /// <summary>
+        /// item_contribuinteDestinatario_identificacao_CNPJ
+        /// </summary>        
         item_contribuinteDestinatario_identificacao_CNPJ,
+        /// <summary>
+        /// item_contribuinteDestinatario_identificacao_CPF
+        /// </summary>        
         item_contribuinteDestinatario_identificacao_CPF,
+        /// <summary>
+        /// item_contribuinteDestinatario_identificacao_IE
+        /// </summary>        
         item_contribuinteDestinatario_identificacao_IE,
+        /// <summary>
+        /// item_contribuinteDestinatario_razaoSocial
+        /// </summary>        
         item_contribuinteDestinatario_razaoSocial,
+        /// <summary>
+        /// item_contribuinteDestinatario_municipio
+        /// </summary>        
         item_contribuinteDestinatario_municipio,
+        /// <summary>
+        /// item_camposExtras
+        /// </summary>        
         item_camposExtras,
+        /// <summary>
+        /// item_camposExtras_campoExtra
+        /// </summary>        
         item_camposExtras_campoExtra,
+        /// <summary>
+        /// item_camposExtras_campoExtra_codigo
+        /// </summary>        
         item_camposExtras_campoExtra_codigo,
+        /// <summary>
+        /// item_camposExtras_campoExtra_valor
+        /// </summary>        
         item_camposExtras_campoExtra_valor,
+        /// <summary>
+        /// valorGNRE
+        /// </summary>        
         valorGNRE,
+        /// <summary>
+        /// dataPagamento
+        /// </summary>        
         dataPagamento,
+        /// <summary>
+        /// identificadorGuia
+        /// </summary>        
         identificadorGuia,
+        /// <summary>
+        /// dataLimitePagamento
+        /// </summary>        
         dataLimitePagamento,
+        /// <summary>
+        /// informacoesComplementares
+        /// </summary>        
         informacoesComplementares,
+        /// <summary>
+        /// informacoesComplementares_informacao
+        /// </summary>        
         informacoesComplementares_informacao,
+        /// <summary>
+        /// nossoNumero
+        /// </summary>        
         nossoNumero,
+        /// <summary>
+        /// dadosPagamento
+        /// </summary>        
         dadosPagamento,
+        /// <summary>
+        /// dadosPagamento_data
+        /// </summary>        
         dadosPagamento_data,
+        /// <summary>
+        /// dadosPagamento_autenticacao
+        /// </summary>        
         dadosPagamento_autenticacao,
+        /// <summary>
+        /// dadosPagamento_banco
+        /// </summary>        
         dadosPagamento_banco,
+        /// <summary>
+        /// dadosPagamento_agencia
+        /// </summary>        
         dadosPagamento_agencia,
-        linhaDigitavel,
+        /// <summary>
+        /// linhaDigitavel
+        /// </summary>        
+        linhaDigitavel
     }
 
     #endregion
@@ -4391,7 +4835,6 @@ namespace Unimake.Business.DFe.Servicos
     }
 
     #endregion
-
 
     #region TipoCampoExtraGNRE
 
@@ -4527,6 +4970,40 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("2")]
         MultiplasReceitas = 2
+    }
+
+    #endregion
+
+    #region Situação Guia GNRE
+
+    /// <summary>
+    /// Situação da Guia GNRE
+    /// </summary>
+    public enum SituacaoGuiaGNRE
+    {
+        /// <summary>
+        /// 0 - Processada com Sucesso
+        /// </summary>
+        [XmlEnum("0")]
+        ProcessadaComSucesso = 0,
+
+        /// <summary>
+        /// 1 - Invalidada pelo Portal
+        /// </summary>
+        [XmlEnum("1")]
+        InvalidadaPeloPortal = 1,
+
+        /// <summary>
+        /// 2 - Invalidada pela UF
+        /// </summary>
+        [XmlEnum("2")]
+        InvalidadaPelaUF = 2,
+
+        /// <summary>
+        /// 3 - Erro de comunicação
+        /// </summary>
+        [XmlEnum("3")]
+        ErroDeComunicacao = 3
     }
 
     #endregion

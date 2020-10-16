@@ -125,6 +125,10 @@ namespace uninfe
                     }
                 }
 
+                //Vamos forçar a carregar o dicionário com as extensões padrões do UniNFe antes de carregar as threads dos serviços para evitar erro com a chave principal do dicionário,
+                //caso duas threads tentem carregar ao mesmo tempo.
+                Propriedade.Extensao(NFe.Components.Propriedade.TipoEnvio.AltCon);
+                
                 Application.Run(new NFe.UI.Form_Main());
             }
 #if DEBUG

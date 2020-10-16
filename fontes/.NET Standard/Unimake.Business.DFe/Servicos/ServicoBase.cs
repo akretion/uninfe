@@ -9,6 +9,9 @@ using Unimake.Business.DFe.Xml;
 
 namespace Unimake.Business.DFe.Servicos
 {
+    /// <summary>
+    /// Classe base abastrata para elaboração dos serviços dos documentos fiscais eletrônicos (NFe, NFCe, MDFe, NFSe, CTe, GNRE, etc...)
+    /// </summary>
     [ComVisible(true)]
     public abstract class ServicoBase
     {
@@ -42,8 +45,8 @@ namespace Unimake.Business.DFe.Servicos
         /// <summary>
         /// Retorna o nome do arquivo de configurações específicas do estado, município, etc...
         /// </summary>
-        /// <param name="elementArquivos">Elemento de XML que tem o nome do arquivo de configuração.</param>
-        /// <returns></returns>
+        /// <param name="arqConfig">Arquivo de configuração</param>
+        /// <returns>Retorna Namespace + Nome do arquivo de configuração de serviços</returns>
         private string GetConfigFile(string arqConfig) => NamespaceConfig + arqConfig;
 
         /// <summary>
@@ -433,10 +436,18 @@ namespace Unimake.Business.DFe.Servicos
 
         #region Protected Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         protected ServicoBase()
         {
         }
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="conteudoXML">Conteúdo do XML a ser enviado para o webservice</param>
+        /// <param name="configuracao">Configurações a serem utilizadas para conexão e envio do XML para o webservice</param>
         protected ServicoBase(XmlDocument conteudoXML, Configuracao configuracao)
                     : this() => PrepararServico(conteudoXML, configuracao);
 
@@ -454,6 +465,11 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         protected abstract void DefinirConfiguracao();
 
+        /// <summary>
+        /// Preparar o ambiente para consumir o serviço
+        /// </summary>
+        /// <param name="conteudoXML">XML que será enviado para o webservice</param>
+        /// <param name="configuracao">Configurações que serão utilizadas para conexão e envio do XML para o webservice</param>
         protected void PrepararServico(XmlDocument conteudoXML, Configuracao configuracao)
         {
             if(configuracao == null)
@@ -468,9 +484,14 @@ namespace Unimake.Business.DFe.Servicos
         }
 
         /// <summary>
-        /// Método para validar o schema do XML
+        /// Validar o schema do XML
         /// </summary>
         protected abstract void XmlValidar();
+
+        /// <summary>
+        /// Validar o conteúdo das tags do XML, alguns validações manuais que o schema não faz. Vamos implementando novas regras na medida da necessidade de cada serviço.
+        /// </summary>
+        protected abstract void XmlValidarConteudo();
 
         #endregion Protected Methods
 
@@ -529,6 +550,9 @@ namespace Unimake.Business.DFe.Servicos
 
         #region Public Properties
 
+        /// <summary>
+        /// Configurações diversas para consumir os serviços
+        /// </summary>
         public Configuracao Configuracoes { get; set; }
 
         /// <summary>
@@ -550,8 +574,14 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         public XmlDocument ConteudoXMLOriginal { get; private set; }
 
+        /// <summary>
+        /// String do XML retornado pelo WebService
+        /// </summary>
         public string RetornoWSString { get; set; }
 
+        /// <summary>
+        /// XML retornado pelo Webservice
+        /// </summary>
         public XmlDocument RetornoWSXML { get; set; }
 
         #endregion Public Properties

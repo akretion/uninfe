@@ -7,17 +7,26 @@ using Unimake.Business.DFe.Utility;
 
 namespace Unimake.Business.DFe.Xml
 {
+    /// <summary>
+    /// Classe Base para criação de classes de serialização de XML
+    /// </summary>
     [ComVisible(true)]
     public abstract class XMLBase
     {
         #region Protected Properties
 
+        /// <summary>
+        /// Lista de NameSpaces
+        /// </summary>
         protected List<XMLUtility.TNameSpace> NameSpaces { get; }
 
         #endregion Protected Properties
 
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor base
+        /// </summary>
         public XMLBase()
         {
             var attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
@@ -34,8 +43,6 @@ namespace Unimake.Business.DFe.Xml
         /// <summary>
         /// Serializar o objeto (Converte o objeto para XML)
         /// </summary>
-        /// <typeparam name="T">Tipo do objeto</typeparam>
-        /// <param name="retorno">Objeto a ser serializado</param>
         /// <returns>String contendo o XML</returns>
         public virtual XmlDocument GerarXML() => XMLUtility.Serializar(this, NameSpaces);
 

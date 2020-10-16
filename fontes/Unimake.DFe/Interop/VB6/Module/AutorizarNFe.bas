@@ -61,7 +61,7 @@ End Function
 Function GetNFe()
 Dim NFe
 Set NFe = CreateObject("Unimake.Business.DFe.Xml.NFe.NFe")
-NFe.SetInfNFe GetInfNFe()
+NFe.AddInfNFe GetInfNFe()
 Set GetNFe = NFe
 End Function
 

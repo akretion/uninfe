@@ -8,24 +8,42 @@ using Unimake.Business.DFe.Servicos;
 
 namespace Unimake.Business.DFe.Utility
 {
+    /// <summary>
+    /// Utilitários diversos para trabalhar com XML
+    /// </summary>
     public static class XMLUtility
     {
         #region Public Classes
 
+        /// <summary>
+        /// Tipo Namespace
+        /// </summary>
         public class TNameSpace
         {
             #region Public Properties
 
+            /// <summary>
+            /// Conteúdo do Namespace
+            /// </summary>
             public string NS { get; set; }
+            /// <summary>
+            /// Prefixo do Namespace
+            /// </summary>
             public string Prefix { get; set; }
 
             #endregion Public Properties
         }
 
-        public class Utf8StringWriter : StringWriter
+        /// <summary>
+        /// Implementa um StringWriter para gravar informações em uma cadeia de caracteres. As informações são armazenadas em um StringBuilder subjacente.
+        /// </summary>
+        public class Utf8StringWriter: StringWriter
         {
             #region Public Properties
 
+            /// <summary>
+            /// Sobrecrever o Encoding para deixar como padrão o UTF8
+            /// </summary>
             public override Encoding Encoding => Encoding.UTF8;
 
             #endregion Public Properties
@@ -42,7 +60,7 @@ namespace Unimake.Business.DFe.Utility
         /// <returns>Dígito verificador</returns>
         public static int CalcularDVChave(string chave)
         {
-            if (chave is null)
+            if(chave is null)
             {
                 throw new ArgumentNullException(nameof(chave));
             }
@@ -52,7 +70,7 @@ namespace Unimake.Business.DFe.Utility
 
             chave = chave.Replace("NFe", "");
 
-            if (chave.Length != 43)
+            if(chave.Length != 43)
             {
                 throw new Exception(string.Format("Erro na composição da chave [{0}] para obter o dígito verificador.", chave) + Environment.NewLine);
             }
@@ -61,13 +79,13 @@ namespace Unimake.Business.DFe.Utility
                 j = 0;
                 try
                 {
-                    for (i = 0; i < 43; ++i)
+                    for(i = 0; i < 43; ++i)
                     {
                         j += Convert.ToInt32(chave.Substring(i, 1)) * Convert.ToInt32(PESO.Substring(i, 1));
                     }
 
                     Digito = 11 - (j % 11);
-                    if ((j % 11) < 2)
+                    if((j % 11) < 2)
                     {
                         Digito = 0;
                     }
@@ -77,7 +95,7 @@ namespace Unimake.Business.DFe.Utility
                     Digito = -1;
                 }
 
-                if (Digito == -1)
+                if(Digito == -1)
                 {
                     throw new Exception(string.Format("Erro no cálculo do dígito verificador da chave [{0}].", chave) + Environment.NewLine);
                 }
@@ -109,33 +127,43 @@ namespace Unimake.Business.DFe.Utility
         public static T Deserializar<T>(XmlDocument doc)
             where T : new() => Deserializar<T>(doc.OuterXml);
 
+        /// <summary>
+        /// Detectar qual o tipo de documento fiscal eletrônico do XML
+        /// </summary>
+        /// <param name="xml">XML a ser analisado</param>
+        /// <returns>Retorna o tipo do documento eletrônico</returns>
         public static TipoDFe DetectDFeType(XmlDocument xml) => DetectDFeType(xml.OuterXml);
 
+        /// <summary>
+        /// Detectar qual o tipo de documento fiscal eletrônico do XML
+        /// </summary>
+        /// <param name="xml">XML a ser analisado</param>
+        /// <returns>Retorna o tipo do documento eletrônico</returns>
         public static TipoDFe DetectDFeType(string xml)
         {
             var tipoDFe = TipoDFe.NFe;
 
-            if (xml.Contains("<mod>55</mod>"))
+            if(xml.Contains("<mod>55</mod>"))
             {
                 tipoDFe = TipoDFe.NFe;
             }
-            else if (xml.Contains("<mod>65</mod>"))
+            else if(xml.Contains("<mod>65</mod>"))
             {
                 tipoDFe = TipoDFe.NFCe;
             }
-            else if (xml.Contains("<mod>57</mod>"))
+            else if(xml.Contains("<mod>57</mod>"))
             {
                 tipoDFe = TipoDFe.CTe;
             }
-            else if (xml.Contains("<mod>67</mod>"))
+            else if(xml.Contains("<mod>67</mod>"))
             {
                 tipoDFe = TipoDFe.CTe;
             }
-            else if (xml.Contains("infMDFe"))
+            else if(xml.Contains("infMDFe"))
             {
                 tipoDFe = TipoDFe.MDFe;
             }
-            else if (xml.Contains("infCFe"))
+            else if(xml.Contains("infCFe"))
             {
                 tipoDFe = TipoDFe.CFe;
             }
@@ -152,7 +180,7 @@ namespace Unimake.Business.DFe.Utility
         {
             var retorno = 0;
 
-            while (retorno == 0)
+            while(retorno == 0)
             {
                 var rnd = new Random(numeroNF);
 
@@ -162,13 +190,24 @@ namespace Unimake.Business.DFe.Utility
             return retorno;
         }
 
+        /// <summary>
+        /// Busca o número da chave do Documento Fiscal Eletrônico no XML do Documento Fiscal Eletrônico
+        /// </summary>
+        /// <param name="xml">Conteúdo do XML para busca da chave</param>
+        /// <returns>Chave do DFe (Documento Fiscal Eletrônico = NFe, NFCe, CTe, etc...)</returns>
         public static string GetChaveDFe(string xml) => GetChaveDFe(xml, DetectDFeType(xml));
 
+        /// <summary>
+        /// Busca o número da chave do Documento Fiscal Eletrônico no XML do Documento Fiscal Eletrônico
+        /// </summary>
+        /// <param name="xml">Conteúdo do XML para busca da chave</param>
+        /// <param name="typeDFe">Tipo do DFe</param>
+        /// <returns>Chave do DFe (Documento Fiscal Eletrônico = NFe, NFCe, CTe, etc...)</returns>
         public static string GetChaveDFe(string xml, TipoDFe typeDFe)
         {
             var typeString = "";
 
-            switch (typeDFe)
+            switch(typeDFe)
             {
                 case TipoDFe.NFe:
                 case TipoDFe.NFCe:
@@ -190,7 +229,7 @@ namespace Unimake.Business.DFe.Utility
 
             var pedacinhos = xml.Split(new string[] { $"Id=\"{typeString}" }, StringSplitOptions.None);
 
-            if (pedacinhos.Length < 1)
+            if(pedacinhos.Length < 1)
             {
                 return default;
             }
@@ -216,15 +255,15 @@ namespace Unimake.Business.DFe.Utility
         /// <returns>XML</returns>
         public static XmlDocument Serializar(object objeto, List<TNameSpace> nameSpaces = null)
         {
-            if (objeto is null)
+            if(objeto is null)
             {
                 throw new ArgumentNullException(nameof(objeto));
             }
 
             var ns = new XmlSerializerNamespaces();
-            if (nameSpaces != null)
+            if(nameSpaces != null)
             {
-                for (var i = 0; i < nameSpaces.Count; i++)
+                for(var i = 0; i < nameSpaces.Count; i++)
                 {
                     ns.Add(nameSpaces[i].Prefix, nameSpaces[i].NS);
                 }
@@ -232,7 +271,7 @@ namespace Unimake.Business.DFe.Utility
 
             var xmlSerializer = new XmlSerializer(objeto.GetType());
             var doc = new XmlDocument();
-            using (StringWriter textWriter = new Utf8StringWriter())
+            using(StringWriter textWriter = new Utf8StringWriter())
             {
                 xmlSerializer.Serialize(textWriter, objeto, ns);
                 doc.LoadXml(textWriter.ToString());
@@ -249,7 +288,7 @@ namespace Unimake.Business.DFe.Utility
         /// <returns>Conteúdo da tag</returns>
         public static bool TagExist(XmlElement xmlElement, string tagName)
         {
-            if (xmlElement is null)
+            if(xmlElement is null)
             {
                 throw new ArgumentNullException(nameof(xmlElement));
             }
@@ -265,14 +304,14 @@ namespace Unimake.Business.DFe.Utility
         /// <returns>Conteúdo da tag</returns>
         public static string TagRead(XmlElement xmlElement, string tagName)
         {
-            if (xmlElement is null)
+            if(xmlElement is null)
             {
                 throw new ArgumentNullException(nameof(xmlElement));
             }
 
             var content = string.Empty;
 
-            if (xmlElement.GetElementsByTagName(tagName).Count != 0)
+            if(xmlElement.GetElementsByTagName(tagName).Count != 0)
             {
                 content = xmlElement.GetElementsByTagName(tagName)[0].InnerText;
             }

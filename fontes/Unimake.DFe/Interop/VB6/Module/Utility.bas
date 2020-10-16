@@ -10,9 +10,9 @@ Public Sub TrapException()
     Log.EscreveLog "==========================", False
 End Sub
 
-Public Function DirExists()
+Public Function DirExists(ByVal path As String)
 On Error GoTo erro
-    If GetAttr(Path) And vbDirectory Then
+    If GetAttr(path) And vbDirectory Then
         DirExists = True
     Else
         DirExists = False

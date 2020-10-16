@@ -27,7 +27,7 @@ If (RecepcaoEvento.result.CStat = 128) Then ''128 = Lote de evento processado co
                         
     Select Case CStat
         Case 135, 136, 155
-            RecepcaoEvento.GravarXmlDistribuicao "D:\temp\"
+            RecepcaoEvento.GravarXmlDistribuicao "C:\temp\"
         Case Else ''Evento rejeitado
             Log.EscreveLog "Evento rejeitado", False
     End Select

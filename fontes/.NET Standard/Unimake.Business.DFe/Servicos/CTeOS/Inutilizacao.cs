@@ -5,15 +5,26 @@ using Unimake.Business.DFe.Xml.CTe;
 
 namespace Unimake.Business.DFe.Servicos.CTeOS
 {
+    /// <summary>
+    /// Envio do XML de Inutilização do CTeOS para o webservice
+    /// </summary>
     public class Inutilizacao: CTe.Inutilizacao
     {
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="inutCTe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         public Inutilizacao(InutCTe inutCTe, Configuracao configuracao)
             : base(inutCTe, configuracao)
         {
         }
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public Inutilizacao()
         {
         }

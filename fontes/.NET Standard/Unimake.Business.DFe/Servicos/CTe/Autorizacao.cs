@@ -9,6 +9,9 @@ using Unimake.Business.DFe.Xml.CTe;
 
 namespace Unimake.Business.DFe.Servicos.CTe
 {
+    /// <summary>
+    /// Envio do XML de lote de CTe para o WebService
+    /// </summary>
     public class Autorizacao: ServicoBase, IInteropService<EnviCTe>
     {
         private void MontarQrCode()
@@ -49,7 +52,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
         private void ValidarXMLCTe(XmlDocument xml, string schemaArquivo, string targetNS)
         {
             var validar = new ValidarSchema();
-            validar.Validar(xml, Configuracoes.TipoDFe.ToString() + "." + Configuracoes.SchemaArquivo, targetNS);
+            validar.Validar(xml, Configuracoes.TipoDFe.ToString() + "." + schemaArquivo, targetNS);
 
             if(!validar.Success)
             {
@@ -66,6 +69,9 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
         #region Protected Properties
 
+        /// <summary>
+        /// Objeto do XML do CTe
+        /// </summary>
         public EnviCTe EnviCTe
         {
             get => _enviCTe ?? (_enviCTe = new EnviCTe().LerXML<EnviCTe>(ConteudoXML));
@@ -111,21 +117,21 @@ namespace Unimake.Business.DFe.Servicos.CTe
             base.AjustarXMLAposAssinado();
         }
 
+        /// <summary>
+        /// Validar o XML
+        /// </summary>
         protected override void XmlValidar()
         {
             var xml = EnviCTe;
 
             if(Configuracoes.SchemasEspecificos.Count > 0)
             {
-                var schemaArquivo = string.Empty;
-                var schemaArquivoEspecifico = string.Empty;
-
                 for(var i = 0; i < xml.CTe.Count; i++)
                 {
                     var modal = (int)xml.CTe[i].InfCTe.Ide.Modal;
 
-                    schemaArquivo = Configuracoes.SchemasEspecificos[modal.ToString()].SchemaArquivo;
-                    schemaArquivoEspecifico = Configuracoes.SchemasEspecificos[modal.ToString()].SchemaArquivoEspecifico;
+                    var schemaArquivo = Configuracoes.SchemasEspecificos[modal.ToString()].SchemaArquivo;
+                    var schemaArquivoEspecifico = Configuracoes.SchemasEspecificos[modal.ToString()].SchemaArquivoEspecifico;
 
                     #region Validar o XML geral
 
@@ -290,6 +296,9 @@ namespace Unimake.Business.DFe.Servicos.CTe
             }
         }
 
+        /// <summary>
+        /// Conteúdo retornado pelo webservice depois do envio do XML
+        /// </summary>
         public RetEnviCTe Result
         {
             get
@@ -311,9 +320,17 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public Autorizacao()
             : base() => CteProcs.Clear();
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="enviCTe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         public Autorizacao(EnviCTe enviCTe, Configuracao configuracao)
             : base(enviCTe?.GerarXML() ?? throw new ArgumentNullException(nameof(enviCTe)), configuracao)
         {
@@ -345,6 +362,11 @@ namespace Unimake.Business.DFe.Servicos.CTe
             base.Executar();
         }
 
+        /// <summary>
+        /// Executa o serviço: Assina o XML, valida e envia para o webservice
+        /// </summary>
+        /// <param name="enviCTe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         [ComVisible(true)]
         public void Executar(EnviCTe enviCTe, Configuracao configuracao)
         {

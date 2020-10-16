@@ -1,4 +1,11 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+#if INTEROP
+// The result of the expression is always the same since a value of this type is never equal to 'null'
+#pragma warning disable CS0472 
+#endif
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
@@ -291,8 +298,13 @@ namespace Unimake.Business.DFe.Xml.CTeOS
         [XmlElement("xMunIni")]
         public string XMunIni { get; set; }
 
+#if INTEROP
+        [XmlElement("UFIni")]
+        public UFBrasil UFIni { get; set; }
+#else
         [XmlElement("UFIni")]
         public UFBrasil? UFIni { get; set; }
+#endif
 
         [XmlElement("cMunFim")]
         public string CMunFim { get; set; }
@@ -300,8 +312,13 @@ namespace Unimake.Business.DFe.Xml.CTeOS
         [XmlElement("xMunFim")]
         public string XMunFim { get; set; }
 
+#if INTEROP
+        [XmlElement("UFFim")]
+        public UFBrasil UFFim { get; set; }
+#else
         [XmlElement("UFFim")]
         public UFBrasil? UFFim { get; set; }
+#endif
 
         [XmlElement("infPercurso")]
         public List<InfPercurso> InfPercurso { get; set; }
@@ -520,8 +537,6 @@ namespace Unimake.Business.DFe.Xml.CTeOS
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]
     public class Toma
     {
-        private TomadorServicoCTe TomaField;
-
         [XmlElement("CNPJ")]
         public string CNPJ { get; set; }
 
@@ -1196,12 +1211,14 @@ namespace Unimake.Business.DFe.Xml.CTeOS
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]
     public class InfDocRef
     {
+        [XmlElement("chBPe")]
+        public string ChBPe { get; set; }
+
         [XmlElement("nDoc")]
         public string NDoc { get; set; }
 
         [XmlElement("serie")]
         public string Serie { get; set; }
-
 
         [XmlElement("subserie")]
         public string Subserie { get; set; }
@@ -1225,7 +1242,6 @@ namespace Unimake.Business.DFe.Xml.CTeOS
             get => VDoc.ToString("F4", CultureInfo.InvariantCulture);
             set => VDoc = Utility.Converter.ToDouble(value);
         }
-
 
         #region ShouldSerialize
 
@@ -1297,8 +1313,6 @@ namespace Unimake.Business.DFe.Xml.CTeOS
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]
     public class RefNF
     {
-        private readonly string ModField;
-
         [XmlElement("CNPJ")]
         public string CNPJ { get; set; }
 

@@ -7,6 +7,9 @@ using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
+    /// <summary>
+    /// Enviar o XML de NFe para o webservice
+    /// </summary>
     public class Autorizacao: ServicoBase, IInteropService<EnviNFe>
     {
         #region Private Fields
@@ -18,6 +21,9 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Protected Properties
 
+        /// <summary>
+        /// Objeto do XML da NFe
+        /// </summary>
         public EnviNFe EnviNFe
         {
             get => _enviNFe ?? (_enviNFe = new EnviNFe().LerXML<EnviNFe>(ConteudoXML));
@@ -54,6 +60,9 @@ namespace Unimake.Business.DFe.Servicos.NFe
             }
         }
 
+        /// <summary>
+        /// Efetuar ajustes diversos no XML após o mesmo ter sido assinado.
+        /// </summary>
         protected override void AjustarXMLAposAssinado() => EnviNFe = new EnviNFe().LerXML<EnviNFe>(ConteudoXML);
 
         #endregion Protected Methods
@@ -214,6 +223,9 @@ namespace Unimake.Business.DFe.Servicos.NFe
             }
         }
 
+        /// <summary>
+        /// Conteúdo retornado pelo webservice depois do envio do XML
+        /// </summary>
         public RetEnviNFe Result
         {
             get
@@ -235,11 +247,19 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public Autorizacao()
             : base()
         {
         }
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="enviNFe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         public Autorizacao(EnviNFe enviNFe, Configuracao configuracao)
             : base(enviNFe?.GerarXML() ?? throw new ArgumentNullException(nameof(enviNFe)), configuracao) => Inicializar();
 
@@ -266,6 +286,11 @@ namespace Unimake.Business.DFe.Servicos.NFe
             base.Executar();
         }
 
+        /// <summary>
+        /// Executa o serviço: Assina o XML, valida e envia para o webservice
+        /// </summary>
+        /// <param name="enviNFe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         [ComVisible(true)]
         public void Executar(EnviNFe enviNFe, Configuracao configuracao)
         {

@@ -1,4 +1,5 @@
-﻿using NFe.Components;
+﻿using NFe.Certificado;
+using NFe.Components;
 using NFe.Settings;
 using System;
 using System.Collections.Generic;
@@ -91,6 +92,8 @@ namespace NFe.Service
                     System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(991, _distDFeInt.tpAmb, 1, Servico);
 
                     object oConsNFDestEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+
+                    new AssinaturaDigital().CarregarPIN(emp, NomeArquivoXML, Servico);
 
                     //Invocar o método que envia o XML para o SEFAZ
                     oInvocarObj.Invocar(wsProxy,

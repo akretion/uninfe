@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -262,7 +264,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
         #region Public Properties
 
         [XmlElement("descEvento", Order = 0)]
-        public override string DescEvento { get; set; } = "Inclusao Condutor";
+        public override string DescEvento { get; set; } = "“Inclusao DF-e";
 
         [XmlElement("nProt", Order = 1)]
         public string NProt { get; set; }
@@ -277,9 +279,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
         public List<InfDoc> InfDoc { get; set; } = new List<InfDoc>();
 
         #endregion Public Properties
-
     }
-
 
     [Serializable]
     [XmlRoot(ElementName = "infDoc")]
@@ -353,7 +353,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
             writer.WriteRaw($@"<evEncMDFe>
                 <descEvento>{DescEvento}</descEvento>
-                <nprot>{NProt}</nprot>
+                <nProt>{NProt}</nProt>
                 <dtEnc>{DtEncField}</dtEnc>
                 <cUF>{CUFField}</cUF>
                 <cMun>{CMun}</cMun>
@@ -454,7 +454,33 @@ namespace Unimake.Business.DFe.Xml.MDFe
     [XmlInclude(typeof(DetEventoIncDFeMDFe))]
     public class EventoDetalhe: IXmlSerializable
     {
+        #region Private Fields
+
+        private static readonly BindingFlags bindingFlags = BindingFlags.Public |
+                                                            BindingFlags.Instance |
+                                                            BindingFlags.IgnoreCase;
+
+        private static readonly List<string> hasField = new List<string>
+        {
+            "DtEnc",
+            "CUF"
+        };
+
+        #endregion Private Fields
+
         #region Private Methods
+
+        private bool SetLocalValue(Type type)
+        {
+            var pi = GetPropertyInfo(type);
+            if(pi == null)
+            {
+                return false;
+            }
+
+            SetValue(pi);
+            return true;
+        }
 
         private void SetPropertyValue(string attributeName)
         {
@@ -462,9 +488,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
             if(XmlReader.GetAttribute(attributeName) != "")
             {
-                pi = GetType().GetProperty(attributeName, BindingFlags.Public |
-                                                          BindingFlags.Instance |
-                                                          BindingFlags.IgnoreCase);
+                pi = GetType().GetProperty(attributeName, bindingFlags);
                 if(!(pi?.CanWrite ?? false))
                 {
                     return;
@@ -475,6 +499,18 @@ namespace Unimake.Business.DFe.Xml.MDFe
         }
 
         #endregion Private Methods
+
+        #region Protected Internal Methods
+
+        protected internal PropertyInfo GetPropertyInfo(Type type)
+        {
+            var pi = hasField.Exists(w => w.ToLower() == XmlReader.Name.ToLower()) ?
+                                type.GetProperty(XmlReader.Name + "Field", bindingFlags) :
+                                type.GetProperty(XmlReader.Name, bindingFlags);
+            return pi;
+        }
+
+        #endregion Protected Internal Methods
 
         #region Internal Properties
 
@@ -490,8 +526,6 @@ namespace Unimake.Business.DFe.Xml.MDFe
             {
                 return;
             }
-
-            var pi = default(PropertyInfo);
             var type = GetType();
 
             SetPropertyValue("versao");
@@ -499,20 +533,19 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
             while(XmlReader.Read())
             {
-                if(XmlReader.NodeType == XmlNodeType.Element)
+                if(XmlReader.NodeType != XmlNodeType.Element)
                 {
-                    pi = type.GetProperty(XmlReader.Name, BindingFlags.Public |
-                                                          BindingFlags.Instance |
-                                                          BindingFlags.IgnoreCase);
+                    continue;
                 }
-                else if(XmlReader.NodeType == XmlNodeType.Text)
+
+                if(SetLocalValue(type) && XmlReader.NodeType == XmlNodeType.Element)
                 {
-                    pi?.SetValue(this, XmlReader.Value);
+                    SetLocalValue(type);
                 }
             }
         }
 
-        internal virtual void SetValue(PropertyInfo pi) => pi?.SetValue(this, XmlReader.GetValue<object>(XmlReader.Name));
+        internal virtual void SetValue(PropertyInfo pi) => pi?.SetValue(this, XmlReader.GetValue<object>(XmlReader.Name, pi));
         #endregion Internal Methods
 
         #region Public Properties
@@ -586,6 +619,10 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
                     case TipoEventoMDFe.InclusaoCondutor:
                         _detEvento = new DetEventoIncCondutor();
+                        break;
+
+                    case TipoEventoMDFe.Encerramento:
+                        _detEvento = new DetEventoEncMDFe();
                         break;
 
                     case TipoEventoMDFe.InclusaoDFe:

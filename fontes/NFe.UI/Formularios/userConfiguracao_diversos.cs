@@ -774,6 +774,38 @@ namespace NFe.UI.Formularios
                     udDiasLimpeza.Location = new System.Drawing.Point(3, 166);
                     break;
 
+                case TipoAplicativo.GNRE:
+                    labelUF.Visible = true;
+                    labelUF.Text = "Unidade Federativa (UF)";
+                    comboBox_UF.Visible = true;
+                    cboDiretorioSalvarComo.Visible = true;
+                    lbl_DiretorioSalvarComo.Visible = true;
+
+                    comboBox_tpEmis.Visible = false;
+                    udTempoConsulta.Visible = false;
+                    checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Visible = false;
+                    checkBoxGravarEventosDeTerceiros.Visible = false;
+                    checkBoxGravarEventosNaPastaEnviadosNFe.Visible = false;
+                    checkBoxRetornoNFETxt.Visible = false;
+                    cbIndSinc.Visible = false;
+                    grpQRCode.Visible = false;
+                    metroLabel11.Visible = false;
+                    lbl_udTempoConsulta.Visible = false;
+                    labelUF.Visible = false;
+                    lbl_CodMun.Visible = false;
+                    edtCodMun.Visible = false;
+                    edtPadrao.Visible = false;
+                    lbl_Padrao.Visible = false;
+                    lblClienteID.Visible = false;
+                    lblClientSecret.Visible = false;
+                    txtClienteID.Visible = false;
+                    txtClientSecret.Visible = false;
+                    checkBoxArqNSU.Visible = false;
+                    checkBoxValidarDigestValue.Visible = false;
+                    lbl_udDiasLimpeza.Location = new System.Drawing.Point(3, 147);
+                    udDiasLimpeza.Location = new System.Drawing.Point(3, 166);
+                    break;
+
                 default:
                     labelUF.Visible = true;
                     labelUF.Text = "Unidade Federativa (UF)";

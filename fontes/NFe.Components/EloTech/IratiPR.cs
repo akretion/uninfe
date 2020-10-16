@@ -12,8 +12,7 @@ namespace NFe.Components.Elotech
     {
         #region Private Fields
 
-//        private readonly ElotechService Servico = new ElotechService("http://tributos.irati.pr.gov.br:9800/WSIss/nfse203.wsdl");
-        private readonly ElotechService Servico = new ElotechService("http://tributos.irati.pr.gov.br:8090/WSIss/nfse_v1_2.wsdl");        
+        private readonly ElotechService Servico = new ElotechService("https://irati.iss.elotech.com.br/iss-ws/nfse203.wsdl");                                                                     
 
         #endregion Private Fields
 

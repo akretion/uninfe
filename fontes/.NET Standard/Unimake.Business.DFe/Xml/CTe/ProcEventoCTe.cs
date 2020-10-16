@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
@@ -17,7 +19,23 @@ namespace Unimake.Business.DFe.Xml.CTe
 
         [XmlElement("retEventoCTe")]
         public RetEventoCTe RetEventoCTe { get; set; }
-         
+
+        [XmlAttribute("ipTransmissor")]
+        public string IpTransmissor { get; set; }
+
+        [XmlAttribute("nPortaCon")]
+        public int NPortaCon { get; set; }
+
+        [XmlIgnore]
+        public DateTime DhConexao { get; set; }
+
+        [XmlAttribute("dhConexao")]
+        public string DhConexaoField
+        {
+            get => DhConexao.ToString("yyyy-MM-ddTHH:mm:sszzz");
+            set => DhConexao = DateTime.Parse(value);
+        }
+
         /// <summary>
         /// Nome do arquivo de distribuição
         /// </summary>

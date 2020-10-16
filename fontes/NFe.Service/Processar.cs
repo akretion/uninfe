@@ -13,6 +13,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using System.Net;
+using NFe.Service.GNRE;
 
 #if _fw46
 
@@ -474,7 +475,18 @@ namespace NFe.Service
                             DirecionarArquivo(emp, true, true, arquivo, new TaskDownloadEventoseSocial(arquivo));
                             break;
 
-                            #endregion eSocial
+                        #endregion eSocial
+
+                        #region GNRE
+                        case Servicos.ConsultaResultadoLoteGNRE:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskConsultaResultadoLoteGNRE(arquivo));
+                            break;
+
+                        case Servicos.LoteRecepcaoGNRE:
+                            DirecionarArquivo(emp, true, true, arquivo, new TaskLoteRecepcaoGNRE(arquivo));
+                            break;
+                            #endregion
+
                     }
 
                     #region Serviços em comum
@@ -978,6 +990,18 @@ namespace NFe.Service
                                 break;
 
                             #endregion eSocial
+
+                            #region GNRE
+
+                            case "TConsLote_GNRE":
+                                tipoServico = Servicos.ConsultaResultadoLoteGNRE;
+                                break;
+
+                            case "TLote_GNRE":
+                                tipoServico = Servicos.LoteRecepcaoGNRE;
+                                break;
+
+                            #endregion
 
                             #region Geral
 
@@ -1614,7 +1638,9 @@ namespace NFe.Service
                         nfe is TaskConsultarLoteeSocial ||
                         nfe is TaskConsultarLoteReinf ||
                         nfe is TaskConsultarIdentificadoresEventoseSocial ||
-                        nfe is TaskDownloadEventoseSocial)
+                        nfe is TaskDownloadEventoseSocial ||
+                        nfe is TaskConsultaResultadoLoteGNRE ||
+                        nfe is TaskLoteRecepcaoGNRE)
                     {
                         doExecute = true;
                     }

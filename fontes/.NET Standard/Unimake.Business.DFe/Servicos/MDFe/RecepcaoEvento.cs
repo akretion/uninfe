@@ -7,6 +7,9 @@ using Unimake.Business.DFe.Xml.MDFe;
 
 namespace Unimake.Business.DFe.Servicos.MDFe
 {
+    /// <summary>
+    /// Enviar o XML de eventos do MDFe para o webservice
+    /// </summary>
     [ComVisible(true)]
     public class RecepcaoEvento : ServicoBase
     {
@@ -33,7 +36,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         private void ValidarXMLEvento(XmlDocument xml, string schemaArquivo, string targetNS)
         {
             var validar = new ValidarSchema();
-            validar.Validar(xml, Configuracoes.TipoDFe.ToString() + "." + Configuracoes.SchemaArquivo, targetNS);
+            validar.Validar(xml, Configuracoes.TipoDFe.ToString() + "." + schemaArquivo, targetNS);
 
             if(!validar.Success)
             {
@@ -63,6 +66,9 @@ namespace Unimake.Business.DFe.Servicos.MDFe
             }
         }
 
+        /// <summary>
+        /// Validar o XML
+        /// </summary>
         protected override void XmlValidar()
         {
             var xml = EventoMDFe;
@@ -119,6 +125,10 @@ namespace Unimake.Business.DFe.Servicos.MDFe
                                 xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoIncDFeMDFe>((DetEventoIncDFeMDFe)xml.InfEvento.DetEvento).OuterXml);
                                 break;
 
+                            case TipoEventoMDFe.Encerramento:
+                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoEncMDFe>((DetEventoEncMDFe)xml.InfEvento.DetEvento).OuterXml);
+                                break;
+
                             //case TipoEventoMDFe.CancelamentoPorSubstituicao:
                             //    break;
 
@@ -154,6 +164,9 @@ namespace Unimake.Business.DFe.Servicos.MDFe
             RetEventoMDFe = Result
         };
 
+        /// <summary>
+        /// Conteúdo retornado pelo webservice depois do envio do XML
+        /// </summary>
         public RetEventoMDFe Result
         {
             get
@@ -179,9 +192,17 @@ namespace Unimake.Business.DFe.Servicos.MDFe
 
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="envEvento">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         public RecepcaoEvento(EventoMDFe envEvento, Configuracao configuracao)
             : this(envEvento?.GerarXML() ?? throw new ArgumentNullException(nameof(envEvento)), configuracao) { }
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public RecepcaoEvento()
         {
         }
@@ -196,6 +217,11 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         [ComVisible(false)]
         public override void Executar() => base.Executar();
 
+        /// <summary>
+        /// Executa o serviço: Assina o XML, valida e envia para o webservice
+        /// </summary>
+        /// <param name="envEvento">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         [ComVisible(true)]
         public void Executar(EventoMDFe envEvento, Configuracao configuracao)
         {

@@ -1,4 +1,6 @@
-﻿using System.Xml;
+﻿#pragma warning disable CS1591
+
+using System.Xml;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://canedo.bsit-br.com.br/integracao/services/nfseWS?wsdl=nfseWS.wsdl" filename="nfseWS.wsdl" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="file:///C:/Projetos/UniNFe/trunk/fontes/NFe.Components.Wsdl/NFse/WSDL/Producao/PSenadorCanedoGO-BSITBR.wsdl" filename="nfseWS0.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="file:///C:/projetos/uninfe/trunk/fontes/NFe.Components.Wsdl/NFse/WSDL/Producao/PSenadorCanedoGO-BSITBR.wsdl" filename="nfseWS.wsdl" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="http://gestaopublica.canedo.bsit-br.com.br/integracao/services/nfseWS?wsdl=nfseWS.wsdl" filename="nfseWS0.wsdl" />
   </Results>
 </DiscoveryClientResultsFile>

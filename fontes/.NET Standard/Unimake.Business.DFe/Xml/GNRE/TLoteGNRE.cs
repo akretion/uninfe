@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.InteropServices;
@@ -11,7 +13,7 @@ namespace Unimake.Business.DFe.Xml.GNRE
     [ComVisible(true)]
     [Serializable()]
     [XmlRoot("TLote_GNRE", Namespace = "http://www.gnre.pe.gov.br", IsNullable = false)]
-    public class TLoteGNRE
+    public class TLoteGNRE : XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; } = "2.00";
@@ -232,7 +234,7 @@ namespace Unimake.Business.DFe.Xml.GNRE
     [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
     public class Referencia
     {
-        private int PeriodoField;
+        private int? PeriodoField;
 
         [XmlElement("periodo")]
         public int? Periodo
@@ -244,6 +246,8 @@ namespace Unimake.Business.DFe.Xml.GNRE
                 {
                     throw new Exception("Conteúdo da tag <periodo> da tag <referencia> inválido! Conteúdos aceitos: 0 a 5.");
                 }
+
+                PeriodoField = value;
             }
         }
 
@@ -273,8 +277,15 @@ namespace Unimake.Business.DFe.Xml.GNRE
         [XmlAttribute("tipo")]
         public ItemValorTipo Tipo { get; set; }
 
+        [XmlIgnore]
+        public double ValorOriginal { get; set; }
+
         [XmlText()]
-        public string Value { get; set; }
+        public string Value
+        {
+            get => ValorOriginal.ToString("F2", CultureInfo.InvariantCulture);
+            set => ValorOriginal = Utility.Converter.ToDouble(value);
+        }
 
         public enum ItemValorTipo
         {

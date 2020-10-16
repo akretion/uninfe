@@ -6,6 +6,9 @@ using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
+    /// <summary>
+    /// Enviar o XML de consulta recibo do lote de NFe para o webservice
+    /// </summary>
     public class RetAutorizacao: ServicoBase, IInteropService<ConsReciNFe>
     {
         #region Protected Methods
@@ -32,6 +35,9 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Properties
 
+        /// <summary>
+        /// Conteúdo retornado pelo webservice depois do envio do XML
+        /// </summary>
         public RetConsReciNFe Result
         {
             get
@@ -53,10 +59,18 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public RetAutorizacao()
         {
         }
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="consReciNFe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         public RetAutorizacao(ConsReciNFe consReciNFe, Configuracao configuracao)
             : base(consReciNFe?.GerarXML() ?? throw new ArgumentNullException(nameof(consReciNFe)), configuracao) { }
 
@@ -64,6 +78,11 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Methods
 
+        /// <summary>
+        /// Executa o serviço: Assina o XML, valida e envia para o webservice
+        /// </summary>
+        /// <param name="consReciNFe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         [ComVisible(true)]
         public void Executar(ConsReciNFe consReciNFe, Configuracao configuracao)
         {
@@ -71,6 +90,12 @@ namespace Unimake.Business.DFe.Servicos.NFe
             Executar();
         }
 
+        /// <summary>
+        /// Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).
+        /// </summary>
+        /// <param name="pasta">Pasta onde é para ser gravado do XML</param>
+        /// <param name="nomeArquivo">Nome para o arquivo XML</param>
+        /// <param name="conteudoXML">Conteúdo do XML</param>
         public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML) =>
             throw new Exception("Não existe XML de distribuição para consulta do recibo de lote.");
 

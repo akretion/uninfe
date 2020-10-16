@@ -5,7 +5,7 @@ Public Sub ConsultarDistribuicaoCTe()
 On Error GoTo erro
 Dim DistDFeInt, DistNSU, DistribuicaoDFe
 Dim nsu     As String: nsu = "000000000000000"
-Dim folder  As String: folder = "D:\temp\uninfe" ''<<<altere para um paste existente em sua máquina
+Dim folder  As String: folder = "C:\temp\uninfe" ''<<<altere para um paste existente em sua máquina
 
 Log.ClearLog
 

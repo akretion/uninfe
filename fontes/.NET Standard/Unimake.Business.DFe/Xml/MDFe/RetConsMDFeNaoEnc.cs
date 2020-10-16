@@ -1,11 +1,14 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 
 namespace Unimake.Business.DFe.Xml.MDFe
 {
-   [XmlRoot("retConsMDFeNaoEnc", Namespace = "http://www.portalfiscal.inf.br/mdfe", IsNullable = false)]
-    public class RetConsMDFeNaoEnc : XMLBase
+    [XmlRoot("retConsMDFeNaoEnc", Namespace = "http://www.portalfiscal.inf.br/mdfe", IsNullable = false)]
+    public class RetConsMDFeNaoEnc: XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }
@@ -31,10 +34,27 @@ namespace Unimake.Business.DFe.Xml.MDFe
             get => (int)CUF;
             set => CUF = (UFBrasil)Enum.Parse(typeof(UFBrasil), value.ToString());
         }
-        
+
         [XmlElement("infMDFe")]
-        public RetConsMDFeNaoEncInfMDFe InfMDFe { get; set; }
+        public List<RetConsMDFeNaoEncInfMDFe> InfMDFe { get; set; }
+
+        #region Add (List - Interop)
+
+        public void AddInfMDFe(RetConsMDFeNaoEncInfMDFe infMDFe)
+        {
+            if(InfMDFe == null)
+            {
+                InfMDFe = new List<RetConsMDFeNaoEncInfMDFe>();
+            }
+
+            InfMDFe.Add(infMDFe);
+        }
+
+        #endregion
     }
+
+    [Serializable()]
+    [XmlType(Namespace = "http://www.portalfiscal.inf.br/mdfe")]
     public class RetConsMDFeNaoEncInfMDFe
     {
         [XmlElement("chMDFe")]
@@ -43,5 +63,4 @@ namespace Unimake.Business.DFe.Xml.MDFe
         [XmlElement("nProt")]
         public string NProt { get; set; }
     }
-
 }

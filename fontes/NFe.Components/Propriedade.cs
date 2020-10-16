@@ -402,7 +402,12 @@ namespace NFe.Components
             eSocial_loteevt,
             eSocial_consloteevt,
             eSocial_considevt,
-            eSocial_downevt
+            eSocial_downevt,
+
+            ///
+            /// GNRE
+            ///
+            GNRE
         }
 
         private static Dictionary<TipoEnvio, ExtensaoClass> ListaExtensoes = new Dictionary<TipoEnvio, ExtensaoClass>();
@@ -864,7 +869,7 @@ namespace NFe.Components
                     "-ped-rec.xml", "",
                     "-pro-rec.xml", "",
                     "",
-                    "Pedido do recibo da NFe/NFCe"));
+                    "Pedido do recibo da NFe, NFCe, CTe, MDFe e GNRE"));
 
                 ListaExtensoes.Add(TipoEnvio.PedSit, new ExtensaoClass(
                     "-ped-sit.xml", "-ped-sit.txt",
@@ -909,6 +914,16 @@ namespace NFe.Components
                     "Consulta de DFe (CTe)"));
 
                 #endregion Extensões em comum entre NFe, CTe e MDF-e
+
+                #region GNRE
+
+                ListaExtensoes.Add(TipoEnvio.GNRE, new ExtensaoClass(
+                    "-gnre.xml", "",
+                    "-ret-gnre.xml", "",
+                    "",
+                    "Envio do lote de GNRE"));
+
+                #endregion
 
                 #region Exporadicos
 

@@ -7,10 +7,16 @@ using Unimake.Business.DFe.Security;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
+    /// <summary>
+    /// Classe base para os serviços da NFe
+    /// </summary>
     public abstract class ServicoBase: Servicos.ServicoBase
     {
         #region Protected Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         protected ServicoBase()
             : base()
         {
@@ -38,6 +44,8 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// </summary>
         protected override void XmlValidar()
         {
+            XmlValidarConteudo(); // Efetuar a validação antes de validar schema para evitar alguns erros que não ficam claros para o desenvolvedor.
+
             var validar = new ValidarSchema();
             validar.Validar(ConteudoXML, Configuracoes.TipoDFe.ToString() + "." + Configuracoes.SchemaArquivo, Configuracoes.TargetNS);
 
@@ -46,6 +54,11 @@ namespace Unimake.Business.DFe.Servicos.NFe
                 throw new Exception(validar.ErrorMessage);
             }
         }
+
+        /// <summary>
+        /// Validar, o conteúdo das tags do XML, alguns validações manuais que o schema não faz. Vamos implementando novas regras na medida da necessidade de cada serviço.
+        /// </summary>
+        protected override void XmlValidarConteudo() { }
 
         #endregion Protected Methods
 

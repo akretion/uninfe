@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Xml;
@@ -30,8 +32,74 @@ namespace Unimake.Business.DFe.Xml.GNRE
         [XmlElement("receitas")]
         public List<Receitas> Receitas { get; set; }
 
-        [XmlElement("detalhamentosReceita")]
-        public List<DetalhamentosReceita> DetalhamentosReceita { get; set; }
+        #region Add - Interop
+
+        public void AddReceitas(Receitas receitas)
+        {
+            if(Receitas == null)
+            {
+                Receitas = new List<Receitas>();
+            }
+
+            Receitas.Add(receitas);
+        }
+
+        #endregion
+    }
+
+    [Serializable()]
+    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
+    public class SituacaoConsulta
+    {
+        [XmlElement("codigo")]
+        public string Codigo { get; set; }
+
+        [XmlElement("descricao")]
+        public string Descricao { get; set; }
+    }
+
+    [Serializable()]
+    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
+    public class ExigeUfFavorecida
+    {
+        [XmlAttribute("campo")]
+        public virtual CamposGNRE Campo { get; set; } = CamposGNRE.c01_UfFavorecida;
+
+        [XmlText()]
+        public SimNaoLetra Value { get; set; }
+    }
+
+    [Serializable()]
+    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
+    public class ExigeReceita: ExigeUfFavorecida
+    {
+        [XmlAttribute("campo")]
+        public override CamposGNRE Campo { get; set; } = CamposGNRE.c02_receita;
+    }
+
+    [Serializable()]
+    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
+    public class Receitas
+    {
+        [XmlElement("receita")]
+        public ReceitaConfigUF Receita { get; set; }
+    }
+
+    [Serializable()]
+    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
+    public class ReceitaConfigUF
+    {
+        [XmlAttribute("codigo")]
+        public string Codigo { get; set; }
+
+        [XmlAttribute("descricao")]
+        public string Descricao { get; set; }
+
+        [XmlElement("exigeContribuinteEmitente")]
+        public SimNaoLetra ExigeContribuinteEmitente { get; set; }
+
+        [XmlElement("exigeDetalhamentoReceita")]
+        public ExigeDetalhamentoReceita ExigeDetalhamentoReceita { get; set; }
 
         [XmlElement("exigeProduto")]
         public ExigeProduto ExigeProduto { get; set; }
@@ -86,26 +154,6 @@ namespace Unimake.Business.DFe.Xml.GNRE
 
         #region Add - Interop
 
-        public void AddReceitas(Receitas receitas)
-        {
-            if(Receitas == null)
-            {
-                Receitas = new List<Receitas>();
-            }
-
-            Receitas.Add(receitas);
-        }
-
-        public void AddDetalhamentosReceita(DetalhamentosReceita detalhamentosReceita)
-        {
-            if(DetalhamentosReceita == null)
-            {
-                DetalhamentosReceita = new List<DetalhamentosReceita>();
-            }
-
-            DetalhamentosReceita.Add(detalhamentosReceita);
-        }
-
         public void AddProdutos(Produtos produtos)
         {
             if(Produtos == null)
@@ -152,47 +200,6 @@ namespace Unimake.Business.DFe.Xml.GNRE
 
     [Serializable()]
     [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
-    public class SituacaoConsulta
-    {
-        [XmlElement("codigo")]
-        public string Codigo { get; set; }
-
-        [XmlElement("descricao")]
-        public string Descricao { get; set; }
-    }
-
-    [Serializable()]
-    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
-    public class ExigeUfFavorecida
-    {
-        [XmlAttribute("campo")]
-        public virtual CamposGNRE Campo { get; set; } = CamposGNRE.c01_UfFavorecida;
-
-        [XmlText()]
-        public SimNaoLetra Value { get; set; }
-    }
-
-    [Serializable()]
-    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
-    public class ExigeReceita: ExigeUfFavorecida
-    {
-        [XmlAttribute("campo")]
-        public override CamposGNRE Campo { get; set; } = CamposGNRE.c02_receita;
-    }
-
-    [Serializable()]
-    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
-    public class Receitas
-    {
-        [XmlAttribute("exigeContribuinteEmitente")]
-        public SimNaoLetra ExigeContribuinteEmitente { get; set; }
-
-        [XmlAttribute("exigeDetalhamentoReceita")]
-        public ExigeDetalhamentoReceita ExigeDetalhamentoReceita { get; set; }
-    }
-
-    [Serializable()]
-    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
     public class ExigeDetalhamentoReceita
     {
         [XmlAttribute("campo")]
@@ -204,18 +211,6 @@ namespace Unimake.Business.DFe.Xml.GNRE
         [XmlText()]
         public SimNaoLetra Value { get; set; }
     }
-
-    [Serializable()]
-    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
-    public class DetalhamentosReceita
-    {
-        [XmlElement("detalhamentoReceita")]
-        public DetalhamentoReceita DetalhamentoReceita { get; set; }
-    }
-
-    [Serializable()]
-    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
-    public class DetalhamentoReceita: SituacaoConsulta { }
 
     [Serializable()]
     [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
@@ -238,7 +233,7 @@ namespace Unimake.Business.DFe.Xml.GNRE
 
     [Serializable()]
     [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
-    public class Produto: DetalhamentoReceita { }
+    public class Produto: SituacaoConsulta { }
 
     [Serializable()]
     [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
@@ -261,7 +256,15 @@ namespace Unimake.Business.DFe.Xml.GNRE
 
     [Serializable()]
     [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
-    public class PeriodosApuracao: SituacaoConsulta { }
+    public class PeriodosApuracao
+    {
+        [XmlElement("periodoApuracao")]
+        public PeriodoApuracao PeriodoApuracao { get; set; }
+    }
+
+    [Serializable()]
+    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
+    public class PeriodoApuracao: SituacaoConsulta { }
 
     [Serializable()]
     [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
@@ -390,21 +393,7 @@ namespace Unimake.Business.DFe.Xml.GNRE
     public class CamposAdicionais
     {
         [XmlElement("campoAdicional")]
-        public List<CampoAdicional> CampoAdicional { get; set; }
-
-        #region Add - Interop
-
-        public void AddCampoAdicional(CampoAdicional campoAdicional)
-        {
-            if(CampoAdicional == null)
-            {
-                CampoAdicional = new List<CampoAdicional>();
-            }
-
-            CampoAdicional.Add(campoAdicional);
-        }
-
-        #endregion
+        public CampoAdicional CampoAdicional { get; set; }
     }
 
     [Serializable()]

@@ -5,14 +5,13 @@ Public Sub ConsultarDistribuicaoNFe()
 On Error GoTo erro
 Dim DistDFeInt, DistNSU, DistribuicaoDFe
 Dim nsu     As String: nsu = "000000000000000"
-Dim folder  As String: folder = "D:\temp\uninfe" ''<<<altere para um paste existente em sua máquina
+Dim folder  As String: folder = "C:\temp\uninfe" ''<<<altere para um paste existente em sua máquina
 
 Log.ClearLog
 
 Set DistDFeInt = CreateObject("Unimake.Business.DFe.xml.NFe.DistDFeInt")
 Set DistNSU = CreateObject("Unimake.Business.DFe.xml.NFe.DistNSU")
 Set DistribuicaoDFe = CreateObject("Unimake.Business.DFe.Servicos.NFe.DistribuicaoDFe")
-
 
 Do While True
     Log.EscreveLog "Aguarde, consultando NSU número " & nsu, False

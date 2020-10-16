@@ -33,7 +33,7 @@ namespace NFe.Components.GovDigital
                                 break;
 
                             case 3151800: //Pocos de caldas-MG
-                                govDigitalService = new br.com.govdigital.homolog.pocos.h.NfseServiceImplPocosService();
+                                govDigitalService = new HPocosdeCaldasMG.NfseServiceImplPocosService();
                                 break;
 
                             case 3147006: //Paracatu-MG
@@ -100,7 +100,7 @@ namespace NFe.Components.GovDigital
                                 break;
 
                             case 3151800: //Pocos de caldas-MG
-                                govDigitalService = new br.com.govdigital.ws.pocos.p.NfseServiceImplPocosService();
+                                govDigitalService = new PPocosdeCaldasMG.NfseServiceImplPocosService();
                                 break;
 
                             case 3147006: //Paracatu-MG

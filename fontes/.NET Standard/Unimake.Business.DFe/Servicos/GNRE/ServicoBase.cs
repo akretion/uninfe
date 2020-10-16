@@ -3,6 +3,9 @@ using System.Xml;
 
 namespace Unimake.Business.DFe.Servicos.GNRE
 {
+    /// <summary>
+    /// Classe base para os serviços da GNRE
+    /// </summary>
     [ComVisible(true)]
     public abstract class ServicoBase: NFe.ServicoBase
     {
@@ -16,6 +19,9 @@ namespace Unimake.Business.DFe.Servicos.GNRE
         public ServicoBase(XmlDocument conteudoXML, Configuracao configuracao)
             : base(conteudoXML, configuracao) { }
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public ServicoBase()
             : base()
         {

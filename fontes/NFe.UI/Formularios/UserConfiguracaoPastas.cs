@@ -340,6 +340,7 @@ namespace NFe.UI.Formularios
                 case TipoAplicativo.EFDReinf:
                 case TipoAplicativo.eSocial:
                 case TipoAplicativo.EFDReinfeSocial:
+                case TipoAplicativo.GNRE:
                     textBox_PastaXmlEmLote.Visible = false;
                     lbl_textBox_PastaLote.Visible = false;
                     textBox_PastaDownloadNFeDest.Visible = false;

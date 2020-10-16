@@ -1,4 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿#pragma warning disable CS1591
+
+using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 
 namespace Unimake.Business.DFe.Xml.MDFe

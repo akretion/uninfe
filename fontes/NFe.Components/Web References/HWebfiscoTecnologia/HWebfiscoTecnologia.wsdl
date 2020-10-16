@@ -150,7 +150,7 @@
   </wsdl:binding>
   <wsdl:service name="webservice">
     <wsdl:port name="webservicePort" binding="tns:webserviceBinding">
-      <soap:address location="http://www.webfiscotecnologia.com.br/issqn/wservice/wsnfe_teste_homologacao.php" />
+      <soap:address location="https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfe_teste_homologacao.php" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -11,7 +11,7 @@ Set EnviNFe = CreateObject("Unimake.Business.DFe.Xml.NFe.EnviNFe")
 EnviNFe.Versao = "4.00"
 EnviNFe.IdLote = "000000000000001"
 EnviNFe.IndSinc = 1
-EnviNFe.SetNFe GetNFCe()
+EnviNFe.AddNFe GetNFCe()
 
 Set Autorizacao = CreateObject("Unimake.Business.DFe.Servicos.NFCe.Autorizacao")
 Set localConfig = Config.InicializarConfiguracao(NFCe)
@@ -32,7 +32,7 @@ End Sub
 Function GetNFCe()
 Dim NFe
 Set NFe = CreateObject("Unimake.Business.DFe.Xml.NFe.NFe")
-NFe.SetInfNFe GetInfNFe()
+NFe.AddInfNFe GetInfNFe()
 Set GetNFCe = NFe
 End Function
 

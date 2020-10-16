@@ -4,6 +4,9 @@ using Unimake.Business.DFe.Xml.CTe;
 
 namespace Unimake.Business.DFe.Servicos.CTe
 {
+    /// <summary>
+    /// Envio do XML de inutilização de CTe para o WebService
+    /// </summary>
     public class Inutilizacao: ServicoBase, IInteropService<InutCTe>
     {
         #region Protected Methods
@@ -53,6 +56,9 @@ namespace Unimake.Business.DFe.Servicos.CTe
             }
         }
 
+        /// <summary>
+        /// Conteúdo retornado pelo webservice depois do envio do XML
+        /// </summary>
         public RetInutCTe Result
         {
             get
@@ -77,10 +83,18 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public Inutilizacao()
         {
         }
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="inutCTe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         public Inutilizacao(InutCTe inutCTe, Configuracao configuracao)
                     : base(inutCTe?.GerarXML() ?? throw new System.ArgumentNullException(nameof(inutCTe)), configuracao) { }
 
@@ -88,6 +102,11 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
         #region Public Methods
 
+        /// <summary>
+        /// Executa o serviço: Assina o XML, valida e envia para o webservice
+        /// </summary>
+        /// <param name="inutCTe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         public void Executar(InutCTe inutCTe, Configuracao configuracao)
         {
             PrepararServico(inutCTe?.GerarXML() ?? throw new System.ArgumentNullException(nameof(inutCTe)), configuracao);

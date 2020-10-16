@@ -8,7 +8,7 @@ using Unimake.Security.Exceptions;
 namespace Unimake.Business.DFe.Security
 {
     /// <summary>
-    /// Classe para fazer assinatura digital de XMLs
+    /// Classe para realizar assinatura digital de XMLs
     /// </summary>
     public static class AssinaturaDigital
     {
@@ -25,6 +25,7 @@ namespace Unimake.Business.DFe.Security
         /// <param name="definirURI">Define o Reference.URI na assinatura</param>
         /// <param name="pinCertificado">PIN do certificado digital, quando do tipo A3</param>
         /// <param name="idAttributeName">Nome do atributo que tem o ID para assinatura. Se nada for passado o sistema vai tentar buscar o nome Id ou id, se não encontrar, não vai criar a URI Reference na assinatura com ID.</param>
+        /// <param name="verificaAssinatura">Verificar se já existe assinatura no XML, se sim e existir o método não vai assinar o XML.</param>
         public static void Assinar(XmlDocument conteudoXML,
             string tagAssinatura,
             string tagAtributoId,
@@ -183,11 +184,25 @@ namespace Unimake.Business.DFe.Security
         #endregion Public Methods
     }
 
+    /// <summary>
+    /// Tipo de algoritimo para assinatura digital
+    /// </summary>
     public enum AlgorithmType
     {
+        /// <summary>
+        /// Tipo de Algorítimo Sha1
+        /// </summary>
         Sha1,
+        /// <summary>
+        /// Tipo de Algorítimo Sha256
+        /// </summary>
         Sha256
     }
 
+    /// <summary>
+    /// Delegate
+    /// </summary>
+    /// <param name="sender">Sender</param>
+    /// <param name="args">Argumentos</param>
     public delegate void CryptographicExceptionHandler(object sender, EventArgs args);
 }

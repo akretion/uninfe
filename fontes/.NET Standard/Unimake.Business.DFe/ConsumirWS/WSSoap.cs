@@ -1,5 +1,8 @@
 ﻿namespace Unimake.Business.DFe
 {
+    /// <summary>
+    /// Classe para definição de parâmetros do SOAP dos Webservices
+    /// </summary>
     public class WSSoap
     {
         #region Private Fields
@@ -15,36 +18,54 @@
 
         #region Public Properties
 
+        /// <summary>
+        /// Web Action - Endereço com a ação/método que será executado no webservice
+        /// </summary>
         public string ActionWeb
         {
             get => _ActionWeb;
             set => _ActionWeb = value;
         }
 
+        /// <summary>
+        /// Content Type - Tipo do conteúdo do SOAP
+        /// </summary>
         public string ContentType
         {
             get => string.IsNullOrWhiteSpace(_ContentType) ? (_ContentType = "application/soap+xml; charset=utf-8;") : _ContentType;
             set => _ContentType = value;
         }
 
+        /// <summary>
+        /// Endereço do Webservice
+        /// </summary>
         public string EnderecoWeb
         {
             get => _EnderecoWeb;
             set => _EnderecoWeb = value;
         }
 
+        /// <summary>
+        /// String do SOAP
+        /// </summary>
         public string SoapString
         {
             get => _SoapString;
             set => _SoapString = value;
         }
 
+        /// <summary>
+        /// Nome da tag de retorno de conteúdo que é devolvido pelo WebService
+        /// </summary>
         public string TagRetorno
         {
             get => string.IsNullOrWhiteSpace(_TagRetorno) ? (_TagRetorno = "nfeResultMsg") : _TagRetorno;
             set => _TagRetorno = value;
         }
 
+        /// <summary>
+        /// Versão do SOAP
+        /// </summary>
         public string VersaoSoap
         {
             get => string.IsNullOrWhiteSpace(_VersaoSoap) ? (_VersaoSoap = "soap12") : _VersaoSoap;

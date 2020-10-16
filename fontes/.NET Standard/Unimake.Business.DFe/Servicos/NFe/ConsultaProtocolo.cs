@@ -6,6 +6,9 @@ using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
+    /// <summary>
+    /// Enviar o XML de consulta protocolo da NFe para o webservice
+    /// </summary>
     public class ConsultaProtocolo: ServicoBase, IInteropService<ConsSitNFe>
     {
         #region Protected Methods
@@ -34,6 +37,9 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Properties
 
+        /// <summary>
+        /// Conteúdo retornado pelo webservice depois do envio do XML
+        /// </summary>
         public RetConsSitNFe Result
         {
             get
@@ -55,11 +61,19 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public ConsultaProtocolo()
             : base()
         {
         }
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="consSitNFe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         public ConsultaProtocolo(ConsSitNFe consSitNFe, Configuracao configuracao)
             : base(consSitNFe?.GerarXML() ?? throw new ArgumentNullException(nameof(consSitNFe)), configuracao) { }
 
@@ -67,6 +81,11 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Methods
 
+        /// <summary>
+        /// Executa o serviço: Assina o XML, valida e envia para o webservice
+        /// </summary>
+        /// <param name="consSitNFe">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         [ComVisible(true)]
         public void Executar(ConsSitNFe consSitNFe, Configuracao configuracao)
         {
@@ -74,6 +93,12 @@ namespace Unimake.Business.DFe.Servicos.NFe
             Executar();
         }
 
+        /// <summary>
+        /// Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).
+        /// </summary>
+        /// <param name="pasta">Pasta onde é para ser gravado do XML</param>
+        /// <param name="nomeArquivo">Nome para o arquivo XML</param>
+        /// <param name="conteudoXML">Conteúdo do XML</param>
         public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML) => throw new System.Exception("Não existe XML de distribuição para consulta de protocolo.");
 
         #endregion Public Methods

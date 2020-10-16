@@ -7,6 +7,9 @@ using Unimake.Business.DFe.Xml.CTe;
 
 namespace Unimake.Business.DFe.Servicos.CTe
 {
+    /// <summary>
+    /// Envio do XML de eventos do CTe para o WebService
+    /// </summary>
     [ComVisible(true)]
     public class RecepcaoEvento: ServicoBase
     {
@@ -27,7 +30,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
         private void ValidarXMLEvento(XmlDocument xml, string schemaArquivo, string targetNS)
         {
             var validar = new ValidarSchema();
-            validar.Validar(xml, Configuracoes.TipoDFe.ToString() + "." + Configuracoes.SchemaArquivo, targetNS);
+            validar.Validar(xml, Configuracoes.TipoDFe.ToString() + "." + schemaArquivo, targetNS);
 
             if(!validar.Success)
             {
@@ -57,6 +60,9 @@ namespace Unimake.Business.DFe.Servicos.CTe
             }
         }
 
+        /// <summary>
+        /// Validar o XML
+        /// </summary>
         protected override void XmlValidar()
         {
             var xml = EventoCTe;
@@ -150,6 +156,9 @@ namespace Unimake.Business.DFe.Servicos.CTe
             RetEventoCTe = Result
         };
 
+        /// <summary>
+        /// Conteúdo retornado pelo webservice depois do envio do XML
+        /// </summary>
         public RetEventoCTe Result
         {
             get
@@ -175,9 +184,17 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="envEvento">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         public RecepcaoEvento(EventoCTe envEvento, Configuracao configuracao)
             : this(envEvento?.GerarXML() ?? throw new ArgumentNullException(nameof(envEvento)), configuracao) { }
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public RecepcaoEvento()
         {
         }
@@ -192,6 +209,11 @@ namespace Unimake.Business.DFe.Servicos.CTe
         [ComVisible(false)]
         public override void Executar() => base.Executar();
 
+        /// <summary>
+        /// Executa o serviço: Assina o XML, valida e envia para o webservice
+        /// </summary>
+        /// <param name="envEvento">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         [ComVisible(true)]
         public void Executar(EventoCTe envEvento, Configuracao configuracao)
         {

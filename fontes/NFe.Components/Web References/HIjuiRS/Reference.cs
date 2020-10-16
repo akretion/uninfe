@@ -23,7 +23,7 @@ namespace NFe.Components.HIjuiRS {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_INFSEConsultas", Namespace="http://tempuri.org/")]
@@ -379,7 +379,7 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_INFSEGeracao", Namespace="http://tempuri.org/")]
@@ -406,16 +406,6 @@ namespace NFe.Components.HIjuiRS {
         private System.Threading.SendOrPostCallback EnviarLoteDeclaracaoOperationCompleted;
         
         private System.Threading.SendOrPostCallback EntregarDeclaracaoOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback EnviarLoteDeclaracaoNotaOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback EntregarDeclaracaoNotaOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ConsultarDeclaracaoNotaOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback EnviarRegimeApuracaoOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback EnviarReceitaBrutaAcumuladaOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -493,21 +483,6 @@ namespace NFe.Components.HIjuiRS {
         
         /// <remarks/>
         public event EntregarDeclaracaoCompletedEventHandler EntregarDeclaracaoCompleted;
-        
-        /// <remarks/>
-        public event EnviarLoteDeclaracaoNotaCompletedEventHandler EnviarLoteDeclaracaoNotaCompleted;
-        
-        /// <remarks/>
-        public event EntregarDeclaracaoNotaCompletedEventHandler EntregarDeclaracaoNotaCompleted;
-        
-        /// <remarks/>
-        public event ConsultarDeclaracaoNotaCompletedEventHandler ConsultarDeclaracaoNotaCompleted;
-        
-        /// <remarks/>
-        public event EnviarRegimeApuracaoCompletedEventHandler EnviarRegimeApuracaoCompleted;
-        
-        /// <remarks/>
-        public event EnviarReceitaBrutaAcumuladaCompletedEventHandler EnviarReceitaBrutaAcumuladaCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapHeaderAttribute("cabecalho", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
@@ -816,161 +791,6 @@ namespace NFe.Components.HIjuiRS {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("cabecalho", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INFSEGeracao/EnviarLoteDeclaracaoNota", RequestElementName="EnviarLoteDeclaracaoNotaReceive", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("EnviarLoteDeclaracaoNotaResponseResult")]
-        public string EnviarLoteDeclaracaoNota(string xmlEnvio) {
-            object[] results = this.Invoke("EnviarLoteDeclaracaoNota", new object[] {
-                        xmlEnvio});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EnviarLoteDeclaracaoNotaAsync(string xmlEnvio) {
-            this.EnviarLoteDeclaracaoNotaAsync(xmlEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void EnviarLoteDeclaracaoNotaAsync(string xmlEnvio, object userState) {
-            if ((this.EnviarLoteDeclaracaoNotaOperationCompleted == null)) {
-                this.EnviarLoteDeclaracaoNotaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarLoteDeclaracaoNotaOperationCompleted);
-            }
-            this.InvokeAsync("EnviarLoteDeclaracaoNota", new object[] {
-                        xmlEnvio}, this.EnviarLoteDeclaracaoNotaOperationCompleted, userState);
-        }
-        
-        private void OnEnviarLoteDeclaracaoNotaOperationCompleted(object arg) {
-            if ((this.EnviarLoteDeclaracaoNotaCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EnviarLoteDeclaracaoNotaCompleted(this, new EnviarLoteDeclaracaoNotaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("cabecalho", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INFSEGeracao/EntregarDeclaracaoNota", RequestElementName="EntregarDeclaracao", RequestNamespace="http://tempuri.org/", ResponseElementName="EntregarDeclaracaoResponse", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("EntregarDeclaracaoResponseResult")]
-        public string EntregarDeclaracaoNota(string xmlEnvio) {
-            object[] results = this.Invoke("EntregarDeclaracaoNota", new object[] {
-                        xmlEnvio});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EntregarDeclaracaoNotaAsync(string xmlEnvio) {
-            this.EntregarDeclaracaoNotaAsync(xmlEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void EntregarDeclaracaoNotaAsync(string xmlEnvio, object userState) {
-            if ((this.EntregarDeclaracaoNotaOperationCompleted == null)) {
-                this.EntregarDeclaracaoNotaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEntregarDeclaracaoNotaOperationCompleted);
-            }
-            this.InvokeAsync("EntregarDeclaracaoNota", new object[] {
-                        xmlEnvio}, this.EntregarDeclaracaoNotaOperationCompleted, userState);
-        }
-        
-        private void OnEntregarDeclaracaoNotaOperationCompleted(object arg) {
-            if ((this.EntregarDeclaracaoNotaCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EntregarDeclaracaoNotaCompleted(this, new EntregarDeclaracaoNotaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("cabecalho", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INFSEGeracao/ConsultarDeclaracaoNota", RequestElementName="ConsultarLoteDeclaracaoNota", RequestNamespace="http://tempuri.org/", ResponseElementName="ConsultarLoteDeclaracaoNotaResponse", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("ConsultarLoteDeclaracaoNotaResponseResult")]
-        public string ConsultarDeclaracaoNota(string xmlEnvio) {
-            object[] results = this.Invoke("ConsultarDeclaracaoNota", new object[] {
-                        xmlEnvio});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ConsultarDeclaracaoNotaAsync(string xmlEnvio) {
-            this.ConsultarDeclaracaoNotaAsync(xmlEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void ConsultarDeclaracaoNotaAsync(string xmlEnvio, object userState) {
-            if ((this.ConsultarDeclaracaoNotaOperationCompleted == null)) {
-                this.ConsultarDeclaracaoNotaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarDeclaracaoNotaOperationCompleted);
-            }
-            this.InvokeAsync("ConsultarDeclaracaoNota", new object[] {
-                        xmlEnvio}, this.ConsultarDeclaracaoNotaOperationCompleted, userState);
-        }
-        
-        private void OnConsultarDeclaracaoNotaOperationCompleted(object arg) {
-            if ((this.ConsultarDeclaracaoNotaCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ConsultarDeclaracaoNotaCompleted(this, new ConsultarDeclaracaoNotaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("cabecalho", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INFSEGeracao/EnviarRegimeApuracao", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("EnviarRegimeApuracaoResponseResult")]
-        public string EnviarRegimeApuracao(string xmlEnvio) {
-            object[] results = this.Invoke("EnviarRegimeApuracao", new object[] {
-                        xmlEnvio});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EnviarRegimeApuracaoAsync(string xmlEnvio) {
-            this.EnviarRegimeApuracaoAsync(xmlEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void EnviarRegimeApuracaoAsync(string xmlEnvio, object userState) {
-            if ((this.EnviarRegimeApuracaoOperationCompleted == null)) {
-                this.EnviarRegimeApuracaoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarRegimeApuracaoOperationCompleted);
-            }
-            this.InvokeAsync("EnviarRegimeApuracao", new object[] {
-                        xmlEnvio}, this.EnviarRegimeApuracaoOperationCompleted, userState);
-        }
-        
-        private void OnEnviarRegimeApuracaoOperationCompleted(object arg) {
-            if ((this.EnviarRegimeApuracaoCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EnviarRegimeApuracaoCompleted(this, new EnviarRegimeApuracaoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("cabecalho", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INFSEGeracao/EnviarReceitaBrutaAcumulada", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("EnviarReceitaBrutaAcumuladaResponseResult")]
-        public string EnviarReceitaBrutaAcumulada(string xmlEnvio) {
-            object[] results = this.Invoke("EnviarReceitaBrutaAcumulada", new object[] {
-                        xmlEnvio});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EnviarReceitaBrutaAcumuladaAsync(string xmlEnvio) {
-            this.EnviarReceitaBrutaAcumuladaAsync(xmlEnvio, null);
-        }
-        
-        /// <remarks/>
-        public void EnviarReceitaBrutaAcumuladaAsync(string xmlEnvio, object userState) {
-            if ((this.EnviarReceitaBrutaAcumuladaOperationCompleted == null)) {
-                this.EnviarReceitaBrutaAcumuladaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarReceitaBrutaAcumuladaOperationCompleted);
-            }
-            this.InvokeAsync("EnviarReceitaBrutaAcumulada", new object[] {
-                        xmlEnvio}, this.EnviarReceitaBrutaAcumuladaOperationCompleted, userState);
-        }
-        
-        private void OnEnviarReceitaBrutaAcumuladaOperationCompleted(object arg) {
-            if ((this.EnviarReceitaBrutaAcumuladaCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EnviarReceitaBrutaAcumuladaCompleted(this, new EnviarReceitaBrutaAcumuladaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -990,7 +810,7 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_INFSeIntegracaoDEISS", Namespace="http://tempuri.org/")]
@@ -1194,375 +1014,12 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_INFSeDeclaracao", Namespace="http://tempuri.org/")]
-    public partial class BasicHttpBinding_INFSeDeclaracao : System.Web.Services.Protocols.SoapHttpClientProtocol {
-        
-        private Cabecalho cabecalhoValueField;
-        
-        private System.Threading.SendOrPostCallback EnviarDeclaracaoAberturaOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback ConsultarProtocoloDeclaracaoOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback EnviarDeclaracaoNumeracaoInutilizadoOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback EnviarDeclaracaoSimplificadaOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback EnviarDeclaracaoNotaOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback EnviarDeclaracaoNotaConsultaOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback EnviarDeclaracaoEntregaOperationCompleted;
-        
-        private System.Threading.SendOrPostCallback EnviarDeclaracaoPlanoContasOperationCompleted;
-        
-        private bool useDefaultCredentialsSetExplicitly;
-        
-        /// <remarks/>
-        public BasicHttpBinding_INFSeDeclaracao() {
-            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_HIjuiRS_NFSeIntegracao;
-            if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
-                this.UseDefaultCredentials = true;
-                this.useDefaultCredentialsSetExplicitly = false;
-            }
-            else {
-                this.useDefaultCredentialsSetExplicitly = true;
-            }
-        }
-        
-        public Cabecalho CabecalhoValue {
-            get {
-                return this.cabecalhoValueField;
-            }
-            set {
-                this.cabecalhoValueField = value;
-            }
-        }
-        
-        public new string Url {
-            get {
-                return base.Url;
-            }
-            set {
-                if ((((this.IsLocalFileSystemWebService(base.Url) == true) 
-                            && (this.useDefaultCredentialsSetExplicitly == false)) 
-                            && (this.IsLocalFileSystemWebService(value) == false))) {
-                    base.UseDefaultCredentials = false;
-                }
-                base.Url = value;
-            }
-        }
-        
-        public new bool UseDefaultCredentials {
-            get {
-                return base.UseDefaultCredentials;
-            }
-            set {
-                base.UseDefaultCredentials = value;
-                this.useDefaultCredentialsSetExplicitly = true;
-            }
-        }
-        
-        /// <remarks/>
-        public event EnviarDeclaracaoAberturaCompletedEventHandler EnviarDeclaracaoAberturaCompleted;
-        
-        /// <remarks/>
-        public event ConsultarProtocoloDeclaracaoCompletedEventHandler ConsultarProtocoloDeclaracaoCompleted;
-        
-        /// <remarks/>
-        public event EnviarDeclaracaoNumeracaoInutilizadoCompletedEventHandler EnviarDeclaracaoNumeracaoInutilizadoCompleted;
-        
-        /// <remarks/>
-        public event EnviarDeclaracaoSimplificadaCompletedEventHandler EnviarDeclaracaoSimplificadaCompleted;
-        
-        /// <remarks/>
-        public event EnviarDeclaracaoNotaCompletedEventHandler EnviarDeclaracaoNotaCompleted;
-        
-        /// <remarks/>
-        public event EnviarDeclaracaoNotaConsultaCompletedEventHandler EnviarDeclaracaoNotaConsultaCompleted;
-        
-        /// <remarks/>
-        public event EnviarDeclaracaoEntregaCompletedEventHandler EnviarDeclaracaoEntregaCompleted;
-        
-        /// <remarks/>
-        public event EnviarDeclaracaoPlanoContasCompletedEventHandler EnviarDeclaracaoPlanoContasCompleted;
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CabecalhoValue", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoAbertura", RequestElementName="WebServiceReceive", RequestNamespace="http://tempuri.org/", ResponseElementName="WebServiceResponse", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("response")]
-        public string EnviarDeclaracaoAbertura(string receive) {
-            object[] results = this.Invoke("EnviarDeclaracaoAbertura", new object[] {
-                        receive});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoAberturaAsync(string receive) {
-            this.EnviarDeclaracaoAberturaAsync(receive, null);
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoAberturaAsync(string receive, object userState) {
-            if ((this.EnviarDeclaracaoAberturaOperationCompleted == null)) {
-                this.EnviarDeclaracaoAberturaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarDeclaracaoAberturaOperationCompleted);
-            }
-            this.InvokeAsync("EnviarDeclaracaoAbertura", new object[] {
-                        receive}, this.EnviarDeclaracaoAberturaOperationCompleted, userState);
-        }
-        
-        private void OnEnviarDeclaracaoAberturaOperationCompleted(object arg) {
-            if ((this.EnviarDeclaracaoAberturaCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EnviarDeclaracaoAberturaCompleted(this, new EnviarDeclaracaoAberturaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CabecalhoValue", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INFSeDeclaracao/ConsultarProtocoloDeclaracao", RequestElementName="WebServiceReceive", RequestNamespace="http://tempuri.org/", ResponseElementName="WebServiceResponse", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("response")]
-        public string ConsultarProtocoloDeclaracao(string receive) {
-            object[] results = this.Invoke("ConsultarProtocoloDeclaracao", new object[] {
-                        receive});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void ConsultarProtocoloDeclaracaoAsync(string receive) {
-            this.ConsultarProtocoloDeclaracaoAsync(receive, null);
-        }
-        
-        /// <remarks/>
-        public void ConsultarProtocoloDeclaracaoAsync(string receive, object userState) {
-            if ((this.ConsultarProtocoloDeclaracaoOperationCompleted == null)) {
-                this.ConsultarProtocoloDeclaracaoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarProtocoloDeclaracaoOperationCompleted);
-            }
-            this.InvokeAsync("ConsultarProtocoloDeclaracao", new object[] {
-                        receive}, this.ConsultarProtocoloDeclaracaoOperationCompleted, userState);
-        }
-        
-        private void OnConsultarProtocoloDeclaracaoOperationCompleted(object arg) {
-            if ((this.ConsultarProtocoloDeclaracaoCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.ConsultarProtocoloDeclaracaoCompleted(this, new ConsultarProtocoloDeclaracaoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CabecalhoValue", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoNumeracaoInutilizado", RequestElementName="WebServiceReceive", RequestNamespace="http://tempuri.org/", ResponseElementName="WebServiceResponse", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("response")]
-        public string EnviarDeclaracaoNumeracaoInutilizado(string receive) {
-            object[] results = this.Invoke("EnviarDeclaracaoNumeracaoInutilizado", new object[] {
-                        receive});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoNumeracaoInutilizadoAsync(string receive) {
-            this.EnviarDeclaracaoNumeracaoInutilizadoAsync(receive, null);
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoNumeracaoInutilizadoAsync(string receive, object userState) {
-            if ((this.EnviarDeclaracaoNumeracaoInutilizadoOperationCompleted == null)) {
-                this.EnviarDeclaracaoNumeracaoInutilizadoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarDeclaracaoNumeracaoInutilizadoOperationCompleted);
-            }
-            this.InvokeAsync("EnviarDeclaracaoNumeracaoInutilizado", new object[] {
-                        receive}, this.EnviarDeclaracaoNumeracaoInutilizadoOperationCompleted, userState);
-        }
-        
-        private void OnEnviarDeclaracaoNumeracaoInutilizadoOperationCompleted(object arg) {
-            if ((this.EnviarDeclaracaoNumeracaoInutilizadoCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EnviarDeclaracaoNumeracaoInutilizadoCompleted(this, new EnviarDeclaracaoNumeracaoInutilizadoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CabecalhoValue", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoSimplificada", RequestElementName="WebServiceReceive", RequestNamespace="http://tempuri.org/", ResponseElementName="WebServiceResponse", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("response")]
-        public string EnviarDeclaracaoSimplificada(string receive) {
-            object[] results = this.Invoke("EnviarDeclaracaoSimplificada", new object[] {
-                        receive});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoSimplificadaAsync(string receive) {
-            this.EnviarDeclaracaoSimplificadaAsync(receive, null);
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoSimplificadaAsync(string receive, object userState) {
-            if ((this.EnviarDeclaracaoSimplificadaOperationCompleted == null)) {
-                this.EnviarDeclaracaoSimplificadaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarDeclaracaoSimplificadaOperationCompleted);
-            }
-            this.InvokeAsync("EnviarDeclaracaoSimplificada", new object[] {
-                        receive}, this.EnviarDeclaracaoSimplificadaOperationCompleted, userState);
-        }
-        
-        private void OnEnviarDeclaracaoSimplificadaOperationCompleted(object arg) {
-            if ((this.EnviarDeclaracaoSimplificadaCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EnviarDeclaracaoSimplificadaCompleted(this, new EnviarDeclaracaoSimplificadaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CabecalhoValue", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoNota", RequestElementName="WebServiceReceive", RequestNamespace="http://tempuri.org/", ResponseElementName="WebServiceResponse", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("response")]
-        public string EnviarDeclaracaoNota(string receive) {
-            object[] results = this.Invoke("EnviarDeclaracaoNota", new object[] {
-                        receive});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoNotaAsync(string receive) {
-            this.EnviarDeclaracaoNotaAsync(receive, null);
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoNotaAsync(string receive, object userState) {
-            if ((this.EnviarDeclaracaoNotaOperationCompleted == null)) {
-                this.EnviarDeclaracaoNotaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarDeclaracaoNotaOperationCompleted);
-            }
-            this.InvokeAsync("EnviarDeclaracaoNota", new object[] {
-                        receive}, this.EnviarDeclaracaoNotaOperationCompleted, userState);
-        }
-        
-        private void OnEnviarDeclaracaoNotaOperationCompleted(object arg) {
-            if ((this.EnviarDeclaracaoNotaCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EnviarDeclaracaoNotaCompleted(this, new EnviarDeclaracaoNotaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CabecalhoValue", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoNotaConsulta", RequestElementName="WebServiceReceive", RequestNamespace="http://tempuri.org/", ResponseElementName="WebServiceResponse", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("response")]
-        public string EnviarDeclaracaoNotaConsulta(string receive) {
-            object[] results = this.Invoke("EnviarDeclaracaoNotaConsulta", new object[] {
-                        receive});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoNotaConsultaAsync(string receive) {
-            this.EnviarDeclaracaoNotaConsultaAsync(receive, null);
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoNotaConsultaAsync(string receive, object userState) {
-            if ((this.EnviarDeclaracaoNotaConsultaOperationCompleted == null)) {
-                this.EnviarDeclaracaoNotaConsultaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarDeclaracaoNotaConsultaOperationCompleted);
-            }
-            this.InvokeAsync("EnviarDeclaracaoNotaConsulta", new object[] {
-                        receive}, this.EnviarDeclaracaoNotaConsultaOperationCompleted, userState);
-        }
-        
-        private void OnEnviarDeclaracaoNotaConsultaOperationCompleted(object arg) {
-            if ((this.EnviarDeclaracaoNotaConsultaCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EnviarDeclaracaoNotaConsultaCompleted(this, new EnviarDeclaracaoNotaConsultaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CabecalhoValue", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoEntrega", RequestElementName="WebServiceReceive", RequestNamespace="http://tempuri.org/", ResponseElementName="WebServiceResponse", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("response")]
-        public string EnviarDeclaracaoEntrega(string receive) {
-            object[] results = this.Invoke("EnviarDeclaracaoEntrega", new object[] {
-                        receive});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoEntregaAsync(string receive) {
-            this.EnviarDeclaracaoEntregaAsync(receive, null);
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoEntregaAsync(string receive, object userState) {
-            if ((this.EnviarDeclaracaoEntregaOperationCompleted == null)) {
-                this.EnviarDeclaracaoEntregaOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarDeclaracaoEntregaOperationCompleted);
-            }
-            this.InvokeAsync("EnviarDeclaracaoEntrega", new object[] {
-                        receive}, this.EnviarDeclaracaoEntregaOperationCompleted, userState);
-        }
-        
-        private void OnEnviarDeclaracaoEntregaOperationCompleted(object arg) {
-            if ((this.EnviarDeclaracaoEntregaCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EnviarDeclaracaoEntregaCompleted(this, new EnviarDeclaracaoEntregaCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapHeaderAttribute("CabecalhoValue", Direction=System.Web.Services.Protocols.SoapHeaderDirection.InOut)]
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INFSeDeclaracao/EnviarDeclaracaoPlanoContas", RequestElementName="WebServiceReceive", RequestNamespace="http://tempuri.org/", ResponseElementName="WebServiceResponse", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("response")]
-        public string EnviarDeclaracaoPlanoContas(string receive) {
-            object[] results = this.Invoke("EnviarDeclaracaoPlanoContas", new object[] {
-                        receive});
-            return ((string)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoPlanoContasAsync(string receive) {
-            this.EnviarDeclaracaoPlanoContasAsync(receive, null);
-        }
-        
-        /// <remarks/>
-        public void EnviarDeclaracaoPlanoContasAsync(string receive, object userState) {
-            if ((this.EnviarDeclaracaoPlanoContasOperationCompleted == null)) {
-                this.EnviarDeclaracaoPlanoContasOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEnviarDeclaracaoPlanoContasOperationCompleted);
-            }
-            this.InvokeAsync("EnviarDeclaracaoPlanoContas", new object[] {
-                        receive}, this.EnviarDeclaracaoPlanoContasOperationCompleted, userState);
-        }
-        
-        private void OnEnviarDeclaracaoPlanoContasOperationCompleted(object arg) {
-            if ((this.EnviarDeclaracaoPlanoContasCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.EnviarDeclaracaoPlanoContasCompleted(this, new EnviarDeclaracaoPlanoContasCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        public new void CancelAsync(object userState) {
-            base.CancelAsync(userState);
-        }
-        
-        private bool IsLocalFileSystemWebService(string url) {
-            if (((url == null) 
-                        || (url == string.Empty))) {
-                return false;
-            }
-            System.Uri wsUri = new System.Uri(url);
-            if (((wsUri.Port >= 1024) 
-                        && (string.Compare(wsUri.Host, "localHost", System.StringComparison.OrdinalIgnoreCase) == 0))) {
-                return true;
-            }
-            return false;
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://tempuri.org/")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace="http://tempuri.org/", IsNullable=false)]
+    [System.Xml.Serialization.XmlRootAttribute("cabecalho", Namespace="http://tempuri.org/", IsNullable=false)]
     public partial class Cabecalho : System.Web.Services.Protocols.SoapHeader {
         
         private string versaoDadosField;
@@ -1592,11 +1049,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ConsultarSituacaoLoteRpsCompletedEventHandler(object sender, ConsultarSituacaoLoteRpsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultarSituacaoLoteRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1618,11 +1075,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ConsultarNfsePorRpsCompletedEventHandler(object sender, ConsultarNfsePorRpsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultarNfsePorRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1644,11 +1101,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ConsultarLoteRpsCompletedEventHandler(object sender, ConsultarLoteRpsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultarLoteRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1670,11 +1127,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ConsultarNfseCompletedEventHandler(object sender, ConsultarNfseCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultarNfseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1696,11 +1153,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ConsultarNfseServicoPrestadoCompletedEventHandler(object sender, ConsultarNfseServicoPrestadoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultarNfseServicoPrestadoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1722,11 +1179,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ConsultarNfseServicoTomadoCompletedEventHandler(object sender, ConsultarNfseServicoTomadoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultarNfseServicoTomadoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1748,11 +1205,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ConsultarNfsePorFaixaCompletedEventHandler(object sender, ConsultarNfsePorFaixaCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultarNfsePorFaixaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1774,11 +1231,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ConsultarCartaCorrecaoCompletedEventHandler(object sender, ConsultarCartaCorrecaoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultarCartaCorrecaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1800,11 +1257,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void RecepcionarLoteRpsCompletedEventHandler(object sender, RecepcionarLoteRpsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class RecepcionarLoteRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1826,11 +1283,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void EnviarLoteRpsSincronoCompletedEventHandler(object sender, EnviarLoteRpsSincronoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EnviarLoteRpsSincronoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1852,11 +1309,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void GerarNfseCompletedEventHandler(object sender, GerarNfseCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GerarNfseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1878,11 +1335,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void CancelarNfseCompletedEventHandler(object sender, CancelarNfseCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CancelarNfseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1904,11 +1361,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void SubstituirNfseCompletedEventHandler(object sender, SubstituirNfseCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SubstituirNfseCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1930,11 +1387,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void GerarCartaCorrecaoCompletedEventHandler(object sender, GerarCartaCorrecaoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GerarCartaCorrecaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1956,11 +1413,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void CancelarCartaCorrecaoCompletedEventHandler(object sender, CancelarCartaCorrecaoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CancelarCartaCorrecaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1982,11 +1439,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void GerarManifestacaoCompletedEventHandler(object sender, GerarManifestacaoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GerarManifestacaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2008,11 +1465,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void EnviarLoteDeclaracaoCompletedEventHandler(object sender, EnviarLoteDeclaracaoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EnviarLoteDeclaracaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2034,11 +1491,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void EntregarDeclaracaoCompletedEventHandler(object sender, EntregarDeclaracaoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EntregarDeclaracaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2060,141 +1517,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void EnviarLoteDeclaracaoNotaCompletedEventHandler(object sender, EnviarLoteDeclaracaoNotaCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EnviarLoteDeclaracaoNotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EnviarLoteDeclaracaoNotaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void EntregarDeclaracaoNotaCompletedEventHandler(object sender, EntregarDeclaracaoNotaCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EntregarDeclaracaoNotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EntregarDeclaracaoNotaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void ConsultarDeclaracaoNotaCompletedEventHandler(object sender, ConsultarDeclaracaoNotaCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ConsultarDeclaracaoNotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ConsultarDeclaracaoNotaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void EnviarRegimeApuracaoCompletedEventHandler(object sender, EnviarRegimeApuracaoCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EnviarRegimeApuracaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EnviarRegimeApuracaoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void EnviarReceitaBrutaAcumuladaCompletedEventHandler(object sender, EnviarReceitaBrutaAcumuladaCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EnviarReceitaBrutaAcumuladaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EnviarReceitaBrutaAcumuladaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ConsultarNFSeDEISSCompletedEventHandler(object sender, ConsultarNFSeDEISSCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultarNFSeDEISSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2216,11 +1543,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ObterNotasDEISSCompletedEventHandler(object sender, ObterNotasDEISSCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ObterNotasDEISSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2242,11 +1569,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ConsultarNotasFaltantesNFSeDEISSCompletedEventHandler(object sender, ConsultarNotasFaltantesNFSeDEISSCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultarNotasFaltantesNFSeDEISSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2268,11 +1595,11 @@ namespace NFe.Components.HIjuiRS {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     public delegate void ConsultarTodasNotasPorPeriodoCompletedEventHandler(object sender, ConsultarTodasNotasPorPeriodoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ConsultarTodasNotasPorPeriodoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2280,214 +1607,6 @@ namespace NFe.Components.HIjuiRS {
         private object[] results;
         
         internal ConsultarTodasNotasPorPeriodoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void EnviarDeclaracaoAberturaCompletedEventHandler(object sender, EnviarDeclaracaoAberturaCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EnviarDeclaracaoAberturaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EnviarDeclaracaoAberturaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void ConsultarProtocoloDeclaracaoCompletedEventHandler(object sender, ConsultarProtocoloDeclaracaoCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class ConsultarProtocoloDeclaracaoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal ConsultarProtocoloDeclaracaoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void EnviarDeclaracaoNumeracaoInutilizadoCompletedEventHandler(object sender, EnviarDeclaracaoNumeracaoInutilizadoCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EnviarDeclaracaoNumeracaoInutilizadoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EnviarDeclaracaoNumeracaoInutilizadoCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void EnviarDeclaracaoSimplificadaCompletedEventHandler(object sender, EnviarDeclaracaoSimplificadaCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EnviarDeclaracaoSimplificadaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EnviarDeclaracaoSimplificadaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void EnviarDeclaracaoNotaCompletedEventHandler(object sender, EnviarDeclaracaoNotaCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EnviarDeclaracaoNotaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EnviarDeclaracaoNotaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void EnviarDeclaracaoNotaConsultaCompletedEventHandler(object sender, EnviarDeclaracaoNotaConsultaCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EnviarDeclaracaoNotaConsultaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EnviarDeclaracaoNotaConsultaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void EnviarDeclaracaoEntregaCompletedEventHandler(object sender, EnviarDeclaracaoEntregaCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EnviarDeclaracaoEntregaCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EnviarDeclaracaoEntregaCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public string Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void EnviarDeclaracaoPlanoContasCompletedEventHandler(object sender, EnviarDeclaracaoPlanoContasCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class EnviarDeclaracaoPlanoContasCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal EnviarDeclaracaoPlanoContasCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

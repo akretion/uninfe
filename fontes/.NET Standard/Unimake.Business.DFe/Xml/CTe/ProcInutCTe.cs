@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
@@ -7,7 +9,7 @@ namespace Unimake.Business.DFe.Xml.CTe
 {
     [Serializable()]
     [XmlRoot("procInutCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
-    public class ProcInutCTe : XMLBase
+    public class ProcInutCTe: XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }
@@ -17,6 +19,22 @@ namespace Unimake.Business.DFe.Xml.CTe
 
         [XmlElement("retInutCTe")]
         public RetInutCTe RetInutCTe { get; set; }
+
+        [XmlAttribute("ipTransmissor")]
+        public string IpTransmissor { get; set; }
+
+        [XmlAttribute("nPortaCon")]
+        public int NPortaCon { get; set; }
+
+        [XmlIgnore]
+        public DateTime DhConexao { get; set; }
+
+        [XmlAttribute("dhConexao")]
+        public string DhConexaoField
+        {
+            get => DhConexao.ToString("yyyy-MM-ddTHH:mm:sszzz");
+            set => DhConexao = DateTime.Parse(value);
+        }
 
         /// <summary>
         /// Nome do arquivo de distribuição

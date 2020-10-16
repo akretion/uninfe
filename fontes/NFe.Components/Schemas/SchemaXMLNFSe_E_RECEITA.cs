@@ -107,7 +107,7 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\E_RECEITA\\nfse v2 02.xsd",
                 Descricao = "XML de Lote RPS - Sincrono",
-                TagAssinatura = "GerarNfseEnvio",
+                TagAssinatura = "Rps",
                 TagAtributoId = "InfDeclaracaoPrestacaoServico",
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });

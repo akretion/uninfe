@@ -264,6 +264,7 @@ namespace NFe.Settings
                     if (File.Exists(emp.NomeArquivoConfig))
                     {
                         if (sonfe && (servico.Equals(TipoAplicativo.Nfse.ToString()) ||
+                                      servico.Equals(TipoAplicativo.GNRE.ToString()) || 
                                       servico.Equals(TipoAplicativo.eSocial.ToString()) ||
                                       servico.Equals(TipoAplicativo.EFDReinf.ToString()) ||
                                       servico.Equals(TipoAplicativo.EFDReinfeSocial.ToString())))

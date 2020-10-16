@@ -7,6 +7,9 @@ using Unimake.Business.DFe.Xml.CTe;
 
 namespace Unimake.Business.DFe.Servicos.CTe
 {
+    /// <summary>
+    /// Envio do XML de consulta dos CTe´s destinados para o WebService
+    /// </summary>
     public class DistribuicaoDFe: ServicoBase, IInteropService<DistDFeInt>
     {
         #region Protected Methods
@@ -34,6 +37,9 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
         #region Public Properties
 
+        /// <summary>
+        /// Conteúdo retornado pelo webservice depois do envio do XML
+        /// </summary>
         public RetDistDFeInt Result
         {
             get
@@ -55,9 +61,17 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="distDFeInt">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         public DistribuicaoDFe(DistDFeInt distDFeInt, Configuracao configuracao)
                     : base(distDFeInt?.GerarXML() ?? throw new NotImplementedException(nameof(distDFeInt)), configuracao) { }
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public DistribuicaoDFe()
         {
         }
@@ -66,6 +80,11 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
         #region Public Methods
 
+        /// <summary>
+        /// Executa o serviço: Assina o XML, valida e envia para o webservice
+        /// </summary>
+        /// <param name="distDFeInt">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         [ComVisible(true)]
         public void Executar(DistDFeInt distDFeInt, Configuracao configuracao)
         {
@@ -73,14 +92,19 @@ namespace Unimake.Business.DFe.Servicos.CTe
             Executar();
         }
 
+        /// <summary>
+        /// Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).
+        /// </summary>
+        /// <param name="pasta">Pasta onde é para ser gravado do XML</param>
+        /// <param name="nomeArquivo">Nome para o arquivo XML</param>
+        /// <param name="conteudoXML">Conteúdo do XML</param>
         public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML) => throw new Exception("Não existe XML de distribuição para consulta de documentos fiscais eletrônicos destinados.");
 
         /// <summary>
         /// Gravar os XML contidos no DocZIP da consulta em uma pasta no HD
         /// </summary>
         /// <param name="folder">Nome da pasta onde é para salvar os XML</param>
-        /// <param name="saveXMLResumo">Salvar os arquivos de resumo da CTe e Eventos da CTe?</param>
-        public void GravarXMLDocZIP(string folder, bool saveXMLResumo)
+        public void GravarXMLDocZIP(string folder)
         {
             foreach(var item in Result.LoteDistDFeInt.DocZip)
             {

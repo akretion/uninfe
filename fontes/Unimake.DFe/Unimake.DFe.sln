@@ -9,28 +9,35 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Net Standard", ".Net Stand
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{D10FBE56-68C9-4634-BBB1-FE112414512C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unimake.Security.Platform", "..\.NET Framework\Unimake.Security.Platform\Unimake.Security.Platform.csproj", "{C57F555F-3C39-45D3-B759-8091C9304882}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unimake.Security.Platform", "..\.NET Framework\Unimake.Security.Platform\Unimake.Security.Platform.csproj", "{C57F555F-3C39-45D3-B759-8091C9304882}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unimake.Business.DFe", "..\.NET Standard\Unimake.Business.DFe\Unimake.Business.DFe.csproj", "{4CCF76AA-892C-4357-8A7C-2375BEEBD86A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteDLL_Unimake.Business.DFe", "..\..\..\testes\TesteDLL_Unimake.Business.DFe\TesteDLL_Unimake.Business.DFe.csproj", "{C1A11D75-79A5-4D01-B125-D891A0C047F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TesteDLL_Unimake.Business.DFe", "..\..\..\testes\TesteDLL_Unimake.Business.DFe\TesteDLL_Unimake.Business.DFe.csproj", "{C1A11D75-79A5-4D01-B125-D891A0C047F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		INTEROP_Release|Any CPU = INTEROP_Release|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C57F555F-3C39-45D3-B759-8091C9304882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C57F555F-3C39-45D3-B759-8091C9304882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C57F555F-3C39-45D3-B759-8091C9304882}.INTEROP_Release|Any CPU.ActiveCfg = INTEROP_Release|Any CPU
+		{C57F555F-3C39-45D3-B759-8091C9304882}.INTEROP_Release|Any CPU.Build.0 = INTEROP_Release|Any CPU
 		{C57F555F-3C39-45D3-B759-8091C9304882}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C57F555F-3C39-45D3-B759-8091C9304882}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4CCF76AA-892C-4357-8A7C-2375BEEBD86A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4CCF76AA-892C-4357-8A7C-2375BEEBD86A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CCF76AA-892C-4357-8A7C-2375BEEBD86A}.INTEROP_Release|Any CPU.ActiveCfg = INTEROP_Release|Any CPU
+		{4CCF76AA-892C-4357-8A7C-2375BEEBD86A}.INTEROP_Release|Any CPU.Build.0 = INTEROP_Release|Any CPU
 		{4CCF76AA-892C-4357-8A7C-2375BEEBD86A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CCF76AA-892C-4357-8A7C-2375BEEBD86A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C1A11D75-79A5-4D01-B125-D891A0C047F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1A11D75-79A5-4D01-B125-D891A0C047F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1A11D75-79A5-4D01-B125-D891A0C047F3}.INTEROP_Release|Any CPU.ActiveCfg = INTEROP_Release|Any CPU
+		{C1A11D75-79A5-4D01-B125-D891A0C047F3}.INTEROP_Release|Any CPU.Build.0 = INTEROP_Release|Any CPU
 		{C1A11D75-79A5-4D01-B125-D891A0C047F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1A11D75-79A5-4D01-B125-D891A0C047F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection

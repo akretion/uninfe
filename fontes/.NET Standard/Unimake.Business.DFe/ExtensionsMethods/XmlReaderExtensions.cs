@@ -1,12 +1,24 @@
-﻿using System.Xml;
+﻿using System.Reflection;
+using System.Xml;
 
 namespace Unimake.Business.DFe
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class XmlReaderExtensions
     {
         #region Public Methods
 
-        public static T GetValue<T>(this XmlReader reader, string name)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="reader"></param>
+        /// <param name="name"></param>
+        /// <param name="propertyInfo"></param>
+        /// <returns></returns>
+        public static T GetValue<T>(this XmlReader reader, string name, PropertyInfo propertyInfo = null)
         {
             T result = default;
 
@@ -26,7 +38,15 @@ namespace Unimake.Business.DFe
 
                 if(reader.HasValue)
                 {
-                    result = Utility.Converter.ToAny<T>(reader.Value);
+                    if(propertyInfo != null)
+                    {
+                        result = (T)Utility.Converter.ToAny(propertyInfo.PropertyType, reader.Value);
+                    }
+                    else
+                    {
+                        result = Utility.Converter.ToAny<T>(reader.Value);
+                    }
+
                     break;
                 }
             } while(reader.Read());

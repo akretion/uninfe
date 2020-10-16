@@ -532,6 +532,20 @@ namespace NFe.Components
 
         #endregion eSocial
 
+        #region GNRE
+
+        /// <summary>
+        /// Envio da consulta do resultado do lote da GNRE pelo número do recibo
+        /// </summary>
+        ConsultaResultadoLoteGNRE,
+
+        /// <summary>
+        /// Envio do lote da GNRE
+        /// </summary>
+        LoteRecepcaoGNRE,
+
+        #endregion
+
         /// <summary>
         /// Nulo / Nenhum serviço em execução
         /// </summary>
@@ -545,16 +559,15 @@ namespace NFe.Components
     public enum TipoAplicativo
     {
         /// <summary>
-        /// Aplicativo ou serviços para processamento dos XMLs da NF-e e NFC-e
+        /// Aplicativo ou serviços para processamento dos XMLs da NF-e, NFC-e e GNRE
         /// </summary>
-        ///
-        [Description("NF-e e NFC-e")]
+        [Description("NF-e, NFC-e e GNRE")]
         Nfe = 0,
 
         /// <summary>
-        /// Aplicativo ou serviços para processamento dos XMLs do CT-e
+        /// Aplicativo ou serviços para processamento dos XMLs do CT-e e GNRE
         /// </summary>
-        [Description("CT-e")]
+        [Description("CT-e e GNRE")]
         Cte = 1,
 
         /// <summary>
@@ -564,7 +577,7 @@ namespace NFe.Components
         Nfse = 2,
 
         /// <summary>
-        /// Aplicativo ou serviços para processamento dos XMLs do MDF-e
+        /// Aplicativo ou serviços para processamento dos XMLs do MDF-e e GNRE
         /// </summary>
         [Description("MDF-e")]
         MDFe = 3,
@@ -599,9 +612,15 @@ namespace NFe.Components
         [Description("EFD Reinf e eSocial")]
         EFDReinfeSocial = 8,
 
+        /// <summary>
+        /// Aplicativo ou serviços para processamento dos XMLs da GNRE
+        /// </summary>
+        [Description("GNRE")]
+        GNRE = 9,
+
 #if _fw46
 
-        [Description("NF-e, NFC-e, CT-e, MDF-e, EFD Reinf e eSocial")]
+        [Description("NF-e, NFC-e, CT-e, MDF-e, GNRE, EFD Reinf e eSocial")]
         Todos = 10,
 
 #else

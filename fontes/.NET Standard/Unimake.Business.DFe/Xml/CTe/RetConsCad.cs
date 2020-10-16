@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CS1591
+
+using System;
 using System.Xml.Serialization;
 
 namespace Unimake.Business.DFe.Xml.CTe

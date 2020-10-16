@@ -9,6 +9,9 @@ using Unimake.Business.DFe.Xml.NFe;
 
 namespace Unimake.Business.DFe.Servicos.NFe
 {
+    /// <summary>
+    /// Enviar o XML de eventos da NFe para o webservice
+    /// </summary>
     public class RecepcaoEvento : ServicoBase, IInteropService<EnvEvento>
     {
         #region Private Properties
@@ -22,7 +25,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         private void ValidarXMLEvento(XmlDocument xml, string schemaArquivo, string targetNS)
         {
             var validar = new ValidarSchema();
-            validar.Validar(xml, (Configuracoes.TipoDFe == TipoDFe.NFCe ? TipoDFe.NFe : Configuracoes.TipoDFe).ToString() + "." + Configuracoes.SchemaArquivo, targetNS);
+            validar.Validar(xml, (Configuracoes.TipoDFe == TipoDFe.NFCe ? TipoDFe.NFe : Configuracoes.TipoDFe).ToString() + "." + schemaArquivo, targetNS);
 
             if(!validar.Success)
             {
@@ -52,8 +55,13 @@ namespace Unimake.Business.DFe.Servicos.NFe
             }
         }
 
+        /// <summary>
+        /// Validar o XML
+        /// </summary>
         protected override void XmlValidar()
         {
+            XmlValidarConteudo(); // Efetuar a validação antes de validar schema para evitar alguns erros que não ficam claros para o desenvolvedor.
+
             var xml = EnvEvento;
 
             var schemaArquivo = string.Empty;
@@ -129,6 +137,31 @@ namespace Unimake.Business.DFe.Servicos.NFe
             #endregion Validar a parte específica de cada evento
         }
 
+        /// <summary>
+        /// Validar o conteúdo das tags do XML, alguns validações manuais que o schema não faz. Vamos implementando novas regras na medida da necessidade de cada serviço.
+        /// </summary>
+        protected override void XmlValidarConteudo()
+        {
+            base.XmlValidarConteudo();
+
+            var xml = EnvEvento;
+
+            var tpEvento = xml.Evento[0].InfEvento.TpEvento;
+
+            switch(tpEvento)
+            {
+                case TipoEventoNFe.ManifestacaoCienciaOperacao:
+                case TipoEventoNFe.ManifestacaoConfirmacaoOperacao:
+                case TipoEventoNFe.ManifestacaoDesconhecimentoOperacao:
+                case TipoEventoNFe.ManifestacaoOperacaoNaoRealizada:
+                    if (xml.Evento[0].InfEvento.COrgao != UFBrasil.AN)
+                    {
+                        throw new Exception("Conteúdo da tag <cOrgao> inválido. Para eventos de manifestação do destinatário o conteúdo da tag <cOrgao> deve igual a 91.");
+                    }
+                    break;
+            }
+        }
+
         #endregion Protected Methods
 
         #region Public Properties
@@ -156,6 +189,9 @@ namespace Unimake.Business.DFe.Servicos.NFe
             }
         }
 
+        /// <summary>
+        /// Conteúdo retornado pelo webservice depois do envio do XML
+        /// </summary>
         public RetEnvEvento Result
         {
             get
@@ -177,9 +213,17 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Constructors
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
+        /// <param name="envEvento">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         public RecepcaoEvento(EnvEvento envEvento, Configuracao configuracao)
             : base(envEvento?.GerarXML() ?? throw new ArgumentNullException(nameof(envEvento)), configuracao) { }
 
+        /// <summary>
+        /// Construtor
+        /// </summary>
         public RecepcaoEvento()
         {
         }
@@ -188,6 +232,11 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Methods
 
+        /// <summary>
+        /// Executa o serviço: Assina o XML, valida e envia para o webservice
+        /// </summary>
+        /// <param name="envEvento">Objeto contendo o XML a ser enviado</param>
+        /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         [ComVisible(true)]
         public void Executar(EnvEvento envEvento, Configuracao configuracao)
         {
