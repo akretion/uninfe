@@ -887,6 +887,10 @@ namespace NFe.Service
                         case Servicos.NFSeRecepcionarLoteRps:
                             retorna = "RecepcionarLoteRps";
                             break;
+
+                        case Servicos.NFSeSubstituirNfse:
+                            retorna = "SubstituirNfse";
+                            break;
                     }
                     break;
 
@@ -2122,6 +2126,47 @@ namespace NFe.Service
 
                 #endregion MODERNIZACAO_PUBLICA
 
+                #region GEISWEB
+
+                case PadroesNFSe.GEISWEB:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelaNfse";
+                            break;
+
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfsePorFaixa";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+
+                        case Servicos.NFSeSubstituirNfse:
+                            retorna = "SubstituirNfse";
+                            break;
+                    }
+                    break;
+
+                #endregion GEISWEB
+
                 #region E_RECEITA
 
                 case PadroesNFSe.E_RECEITA:
@@ -2554,7 +2599,55 @@ namespace NFe.Service
                             break;
                     }
                     break;
-                    #endregion SYSMAR
+                #endregion SYSMAR
+
+                #region RLZ_INFORMATICA_02
+                case PadroesNFSe.RLZ_INFORMATICA_02:
+                    switch (servico)
+                    {
+                        case Servicos.NFSeRecepcionarLoteRps:
+                            retorna = "RecepcionarLoteRps";
+                            break;
+
+                        case Servicos.NFSeRecepcionarLoteRpsSincrono:
+                            retorna = "RecepcionarLoteRpsSincrono";
+                            break;
+
+                        case Servicos.NFSeGerarNfse:
+                            retorna = "GerarNfse";
+                            break;
+
+                        case Servicos.NFSeCancelar:
+                            retorna = "CancelarNfse";
+                            break;
+
+                        case Servicos.NFSeConsultarLoteRps:
+                            retorna = "ConsultarLoteRps";
+                            break;
+
+                        case Servicos.NFSeConsultarPorRps:
+                            retorna = "ConsultarNfsePorRps";
+                            break;
+
+                        case Servicos.NFSeConsultar:
+                            retorna = "ConsultarNfsePorFaixa";
+                            break;
+
+                        case Servicos.NFSeConsultarSituacaoLoteRps:
+                            retorna = "ConsultarLoteNotasFiscais";
+                            break;
+
+                        case Servicos.NFSeConsultarURL:
+                            retorna = "";
+                            break;
+
+                        case Servicos.NFSeConsultarURLSerie:
+                            retorna = "";
+                            break;
+                    }
+                    break;
+
+                    #endregion RLZ_INFORMATICA_02
             }
             return retorna;
         }
@@ -3299,7 +3392,8 @@ namespace NFe.Service
                         cMunicipio == 3501301 ||
                         cMunicipio == 4300109 ||
                         cMunicipio == 4124053 ||
-                        cMunicipio == 4101408)
+                        cMunicipio == 4101408 ||
+                        cMunicipio == 3550407)
                     {
                         retorno = false;
                     }
@@ -3337,6 +3431,8 @@ namespace NFe.Service
                 case PadroesNFSe.SIMPLE:
                 case PadroesNFSe.WEBFISCO_TECNOLOGIA:
                 case PadroesNFSe.AGILI:
+                case PadroesNFSe.GEISWEB:
+                case PadroesNFSe.CENTI:
                     retorno = false;
                     break;
 
@@ -3436,6 +3532,7 @@ namespace NFe.Service
                 case PadroesNFSe.IIBRASIL:
                 case PadroesNFSe.SYSMAR:
                 case PadroesNFSe.PUBLICA:
+                case PadroesNFSe.RLZ_INFORMATICA_02:
                     if (servico == Servicos.NFSeRecepcionarLoteRps)
                     {
                         switch (doc.DocumentElement.Name)

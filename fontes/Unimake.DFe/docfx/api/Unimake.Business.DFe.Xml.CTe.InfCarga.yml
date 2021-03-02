@@ -1,0 +1,857 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga
+  commentId: T:Unimake.Business.DFe.Xml.CTe.InfCarga
+  id: InfCarga
+  parent: Unimake.Business.DFe.Xml.CTe
+  children:
+  - Unimake.Business.DFe.Xml.CTe.InfCarga.AddInfQ(Unimake.Business.DFe.Xml.CTe.InfQ)
+  - Unimake.Business.DFe.Xml.CTe.InfCarga.InfQ
+  - Unimake.Business.DFe.Xml.CTe.InfCarga.ProPred
+  - Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaAverbField
+  - Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaField
+  - Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeXOutCat
+  - Unimake.Business.DFe.Xml.CTe.InfCarga.VCarga
+  - Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverb
+  - Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverbField
+  - Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaField
+  - Unimake.Business.DFe.Xml.CTe.InfCarga.XOutCat
+  langs:
+  - csharp
+  - vb
+  name: InfCarga
+  nameWithType: InfCarga
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga
+  type: Class
+  source:
+    id: InfCarga
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1851
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class InfCarga
+    content.vb: >-
+      <Serializable>
+
+      Public Class InfCarga
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.VCarga
+  commentId: P:Unimake.Business.DFe.Xml.CTe.InfCarga.VCarga
+  id: VCarga
+  parent: Unimake.Business.DFe.Xml.CTe.InfCarga
+  langs:
+  - csharp
+  - vb
+  name: VCarga
+  nameWithType: InfCarga.VCarga
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.VCarga
+  type: Property
+  source:
+    id: VCarga
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1855
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double VCarga { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VCarga As Double
+  overload: Unimake.Business.DFe.Xml.CTe.InfCarga.VCarga*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaField
+  id: VCargaField
+  parent: Unimake.Business.DFe.Xml.CTe.InfCarga
+  langs:
+  - csharp
+  - vb
+  name: VCargaField
+  nameWithType: InfCarga.VCargaField
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaField
+  type: Property
+  source:
+    id: VCargaField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1858
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string VCargaField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VCargaField As String
+  overload: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.ProPred
+  commentId: P:Unimake.Business.DFe.Xml.CTe.InfCarga.ProPred
+  id: ProPred
+  parent: Unimake.Business.DFe.Xml.CTe.InfCarga
+  langs:
+  - csharp
+  - vb
+  name: ProPred
+  nameWithType: InfCarga.ProPred
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.ProPred
+  type: Property
+  source:
+    id: ProPred
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1865
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string ProPred { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ProPred As String
+  overload: Unimake.Business.DFe.Xml.CTe.InfCarga.ProPred*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.XOutCat
+  commentId: P:Unimake.Business.DFe.Xml.CTe.InfCarga.XOutCat
+  id: XOutCat
+  parent: Unimake.Business.DFe.Xml.CTe.InfCarga
+  langs:
+  - csharp
+  - vb
+  name: XOutCat
+  nameWithType: InfCarga.XOutCat
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.XOutCat
+  type: Property
+  source:
+    id: XOutCat
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1868
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string XOutCat { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XOutCat As String
+  overload: Unimake.Business.DFe.Xml.CTe.InfCarga.XOutCat*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.InfQ
+  commentId: P:Unimake.Business.DFe.Xml.CTe.InfCarga.InfQ
+  id: InfQ
+  parent: Unimake.Business.DFe.Xml.CTe.InfCarga
+  langs:
+  - csharp
+  - vb
+  name: InfQ
+  nameWithType: InfCarga.InfQ
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.InfQ
+  type: Property
+  source:
+    id: InfQ
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1871
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public List<InfQ> InfQ { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.CTe.InfQ}
+    content.vb: Public Property InfQ As List(Of InfQ)
+  overload: Unimake.Business.DFe.Xml.CTe.InfCarga.InfQ*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverb
+  commentId: P:Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverb
+  id: VCargaAverb
+  parent: Unimake.Business.DFe.Xml.CTe.InfCarga
+  langs:
+  - csharp
+  - vb
+  name: VCargaAverb
+  nameWithType: InfCarga.VCargaAverb
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverb
+  type: Property
+  source:
+    id: VCargaAverb
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1874
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double VCargaAverb { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VCargaAverb As Double
+  overload: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverb*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverbField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverbField
+  id: VCargaAverbField
+  parent: Unimake.Business.DFe.Xml.CTe.InfCarga
+  langs:
+  - csharp
+  - vb
+  name: VCargaAverbField
+  nameWithType: InfCarga.VCargaAverbField
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverbField
+  type: Property
+  source:
+    id: VCargaAverbField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1877
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string VCargaAverbField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VCargaAverbField As String
+  overload: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverbField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.AddInfQ(Unimake.Business.DFe.Xml.CTe.InfQ)
+  commentId: M:Unimake.Business.DFe.Xml.CTe.InfCarga.AddInfQ(Unimake.Business.DFe.Xml.CTe.InfQ)
+  id: AddInfQ(Unimake.Business.DFe.Xml.CTe.InfQ)
+  parent: Unimake.Business.DFe.Xml.CTe.InfCarga
+  langs:
+  - csharp
+  - vb
+  name: AddInfQ(InfQ)
+  nameWithType: InfCarga.AddInfQ(InfQ)
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.AddInfQ(Unimake.Business.DFe.Xml.CTe.InfQ)
+  type: Method
+  source:
+    id: AddInfQ
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1886
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public void AddInfQ(InfQ infq)
+    parameters:
+    - id: infq
+      type: Unimake.Business.DFe.Xml.CTe.InfQ
+    content.vb: Public Sub AddInfQ(infq As InfQ)
+  overload: Unimake.Business.DFe.Xml.CTe.InfCarga.AddInfQ*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaField
+  commentId: M:Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaField
+  id: ShouldSerializeVCargaField
+  parent: Unimake.Business.DFe.Xml.CTe.InfCarga
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeVCargaField()
+  nameWithType: InfCarga.ShouldSerializeVCargaField()
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaField()
+  type: Method
+  source:
+    id: ShouldSerializeVCargaField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1900
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public bool ShouldSerializeVCargaField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeVCargaField As Boolean
+  overload: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeXOutCat
+  commentId: M:Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeXOutCat
+  id: ShouldSerializeXOutCat
+  parent: Unimake.Business.DFe.Xml.CTe.InfCarga
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeXOutCat()
+  nameWithType: InfCarga.ShouldSerializeXOutCat()
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeXOutCat()
+  type: Method
+  source:
+    id: ShouldSerializeXOutCat
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1901
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public bool ShouldSerializeXOutCat()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeXOutCat As Boolean
+  overload: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeXOutCat*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaAverbField
+  commentId: M:Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaAverbField
+  id: ShouldSerializeVCargaAverbField
+  parent: Unimake.Business.DFe.Xml.CTe.InfCarga
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeVCargaAverbField()
+  nameWithType: InfCarga.ShouldSerializeVCargaAverbField()
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaAverbField()
+  type: Method
+  source:
+    id: ShouldSerializeVCargaAverbField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1902
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public bool ShouldSerializeVCargaAverbField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeVCargaAverbField As Boolean
+  overload: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaAverbField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.VCarga*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCarga.VCarga
+  name: VCarga
+  nameWithType: InfCarga.VCarga
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.VCarga
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaField
+  name: VCargaField
+  nameWithType: InfCarga.VCargaField
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaField
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.ProPred*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCarga.ProPred
+  name: ProPred
+  nameWithType: InfCarga.ProPred
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.ProPred
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.XOutCat*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCarga.XOutCat
+  name: XOutCat
+  nameWithType: InfCarga.XOutCat
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.XOutCat
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.InfQ*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCarga.InfQ
+  name: InfQ
+  nameWithType: InfCarga.InfQ
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.InfQ
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.CTe.InfQ}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.CTe.InfQ}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<InfQ>
+  nameWithType: List<InfQ>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.CTe.InfQ>
+  nameWithType.vb: List(Of InfQ)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.CTe.InfQ)
+  name.vb: List(Of InfQ)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.CTe.InfQ
+    name: InfQ
+    nameWithType: InfQ
+    fullName: Unimake.Business.DFe.Xml.CTe.InfQ
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.CTe.InfQ
+    name: InfQ
+    nameWithType: InfQ
+    fullName: Unimake.Business.DFe.Xml.CTe.InfQ
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverb*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverb
+  name: VCargaAverb
+  nameWithType: InfCarga.VCargaAverb
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverb
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverbField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverbField
+  name: VCargaAverbField
+  nameWithType: InfCarga.VCargaAverbField
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.VCargaAverbField
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.AddInfQ*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCarga.AddInfQ
+  name: AddInfQ
+  nameWithType: InfCarga.AddInfQ
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.AddInfQ
+- uid: Unimake.Business.DFe.Xml.CTe.InfQ
+  commentId: T:Unimake.Business.DFe.Xml.CTe.InfQ
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: InfQ
+  nameWithType: InfQ
+  fullName: Unimake.Business.DFe.Xml.CTe.InfQ
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaField
+  name: ShouldSerializeVCargaField
+  nameWithType: InfCarga.ShouldSerializeVCargaField
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaField
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeXOutCat*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeXOutCat
+  name: ShouldSerializeXOutCat
+  nameWithType: InfCarga.ShouldSerializeXOutCat
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeXOutCat
+- uid: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaAverbField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaAverbField
+  name: ShouldSerializeVCargaAverbField
+  nameWithType: InfCarga.ShouldSerializeVCargaAverbField
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCarga.ShouldSerializeVCargaAverbField

@@ -1,0 +1,963 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag
+  commentId: T:Unimake.Business.DFe.Xml.MDFe.InfPag
+  id: InfPag
+  parent: Unimake.Business.DFe.Xml.MDFe
+  children:
+  - Unimake.Business.DFe.Xml.MDFe.InfPag.AddComp(Unimake.Business.DFe.Xml.MDFe.Comp)
+  - Unimake.Business.DFe.Xml.MDFe.InfPag.AddInfPrazo(Unimake.Business.DFe.Xml.MDFe.InfPrazo)
+  - Unimake.Business.DFe.Xml.MDFe.InfPag.Comp
+  - Unimake.Business.DFe.Xml.MDFe.InfPag.IndPag
+  - Unimake.Business.DFe.Xml.MDFe.InfPag.InfBanc
+  - Unimake.Business.DFe.Xml.MDFe.InfPag.InfPrazo
+  - Unimake.Business.DFe.Xml.MDFe.InfPag.VContrato
+  - Unimake.Business.DFe.Xml.MDFe.InfPag.VContratoField
+  langs:
+  - csharp
+  - vb
+  name: InfPag
+  nameWithType: InfPag
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag
+  type: Class
+  source:
+    id: InfPag
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 661
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class InfPag : InfContratante
+    content.vb: >-
+      <Serializable>
+
+      Public Class InfPag
+          Inherits InfContratante
+  inheritance:
+  - System.Object
+  - Unimake.Business.DFe.Xml.MDFe.InfContratante
+  inheritedMembers:
+  - Unimake.Business.DFe.Xml.MDFe.InfContratante.XNome
+  - Unimake.Business.DFe.Xml.MDFe.InfContratante.CNPJ
+  - Unimake.Business.DFe.Xml.MDFe.InfContratante.CPF
+  - Unimake.Business.DFe.Xml.MDFe.InfContratante.IdEstrangeiro
+  - Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCNPJ
+  - Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCPF
+  - Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeXNome
+  - Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeIdEstrangeiro
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.Comp
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfPag.Comp
+  id: Comp
+  parent: Unimake.Business.DFe.Xml.MDFe.InfPag
+  langs:
+  - csharp
+  - vb
+  name: Comp
+  nameWithType: InfPag.Comp
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.Comp
+  type: Property
+  source:
+    id: Comp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 665
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public List<Comp> Comp { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.Comp}
+    content.vb: Public Property Comp As List(Of Comp)
+  overload: Unimake.Business.DFe.Xml.MDFe.InfPag.Comp*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.VContrato
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfPag.VContrato
+  id: VContrato
+  parent: Unimake.Business.DFe.Xml.MDFe.InfPag
+  langs:
+  - csharp
+  - vb
+  name: VContrato
+  nameWithType: InfPag.VContrato
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.VContrato
+  type: Property
+  source:
+    id: VContrato
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 668
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public double VContrato { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VContrato As Double
+  overload: Unimake.Business.DFe.Xml.MDFe.InfPag.VContrato*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.VContratoField
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfPag.VContratoField
+  id: VContratoField
+  parent: Unimake.Business.DFe.Xml.MDFe.InfPag
+  langs:
+  - csharp
+  - vb
+  name: VContratoField
+  nameWithType: InfPag.VContratoField
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.VContratoField
+  type: Property
+  source:
+    id: VContratoField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 671
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public string VContratoField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VContratoField As String
+  overload: Unimake.Business.DFe.Xml.MDFe.InfPag.VContratoField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.IndPag
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfPag.IndPag
+  id: IndPag
+  parent: Unimake.Business.DFe.Xml.MDFe.InfPag
+  langs:
+  - csharp
+  - vb
+  name: IndPag
+  nameWithType: InfPag.IndPag
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.IndPag
+  type: Property
+  source:
+    id: IndPag
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 678
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public IndicadorPagamento IndPag { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.IndicadorPagamento
+    content.vb: Public Property IndPag As IndicadorPagamento
+  overload: Unimake.Business.DFe.Xml.MDFe.InfPag.IndPag*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.InfPrazo
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfPag.InfPrazo
+  id: InfPrazo
+  parent: Unimake.Business.DFe.Xml.MDFe.InfPag
+  langs:
+  - csharp
+  - vb
+  name: InfPrazo
+  nameWithType: InfPag.InfPrazo
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.InfPrazo
+  type: Property
+  source:
+    id: InfPrazo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 681
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public List<InfPrazo> InfPrazo { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.InfPrazo}
+    content.vb: Public Property InfPrazo As List(Of InfPrazo)
+  overload: Unimake.Business.DFe.Xml.MDFe.InfPag.InfPrazo*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.InfBanc
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfPag.InfBanc
+  id: InfBanc
+  parent: Unimake.Business.DFe.Xml.MDFe.InfPag
+  langs:
+  - csharp
+  - vb
+  name: InfBanc
+  nameWithType: InfPag.InfBanc
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.InfBanc
+  type: Property
+  source:
+    id: InfBanc
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 684
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public InfBanc InfBanc { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.MDFe.InfBanc
+    content.vb: Public Property InfBanc As InfBanc
+  overload: Unimake.Business.DFe.Xml.MDFe.InfPag.InfBanc*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.AddComp(Unimake.Business.DFe.Xml.MDFe.Comp)
+  commentId: M:Unimake.Business.DFe.Xml.MDFe.InfPag.AddComp(Unimake.Business.DFe.Xml.MDFe.Comp)
+  id: AddComp(Unimake.Business.DFe.Xml.MDFe.Comp)
+  parent: Unimake.Business.DFe.Xml.MDFe.InfPag
+  langs:
+  - csharp
+  - vb
+  name: AddComp(Comp)
+  nameWithType: InfPag.AddComp(Comp)
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.AddComp(Unimake.Business.DFe.Xml.MDFe.Comp)
+  type: Method
+  source:
+    id: AddComp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 689
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public void AddComp(Comp comp)
+    parameters:
+    - id: comp
+      type: Unimake.Business.DFe.Xml.MDFe.Comp
+    content.vb: Public Sub AddComp(comp As Comp)
+  overload: Unimake.Business.DFe.Xml.MDFe.InfPag.AddComp*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.AddInfPrazo(Unimake.Business.DFe.Xml.MDFe.InfPrazo)
+  commentId: M:Unimake.Business.DFe.Xml.MDFe.InfPag.AddInfPrazo(Unimake.Business.DFe.Xml.MDFe.InfPrazo)
+  id: AddInfPrazo(Unimake.Business.DFe.Xml.MDFe.InfPrazo)
+  parent: Unimake.Business.DFe.Xml.MDFe.InfPag
+  langs:
+  - csharp
+  - vb
+  name: AddInfPrazo(InfPrazo)
+  nameWithType: InfPag.AddInfPrazo(InfPrazo)
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.AddInfPrazo(Unimake.Business.DFe.Xml.MDFe.InfPrazo)
+  type: Method
+  source:
+    id: AddInfPrazo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 699
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public void AddInfPrazo(InfPrazo infprazo)
+    parameters:
+    - id: infprazo
+      type: Unimake.Business.DFe.Xml.MDFe.InfPrazo
+    content.vb: Public Sub AddInfPrazo(infprazo As InfPrazo)
+  overload: Unimake.Business.DFe.Xml.MDFe.InfPag.AddInfPrazo*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.MDFe
+  commentId: N:Unimake.Business.DFe.Xml.MDFe
+  name: Unimake.Business.DFe.Xml.MDFe
+  nameWithType: Unimake.Business.DFe.Xml.MDFe
+  fullName: Unimake.Business.DFe.Xml.MDFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Unimake.Business.DFe.Xml.MDFe.InfContratante
+  commentId: T:Unimake.Business.DFe.Xml.MDFe.InfContratante
+  parent: Unimake.Business.DFe.Xml.MDFe
+  name: InfContratante
+  nameWithType: InfContratante
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante
+- uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.XNome
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfContratante.XNome
+  parent: Unimake.Business.DFe.Xml.MDFe.InfContratante
+  name: XNome
+  nameWithType: InfContratante.XNome
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.XNome
+- uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.CNPJ
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfContratante.CNPJ
+  parent: Unimake.Business.DFe.Xml.MDFe.InfContratante
+  name: CNPJ
+  nameWithType: InfContratante.CNPJ
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.CNPJ
+- uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.CPF
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfContratante.CPF
+  parent: Unimake.Business.DFe.Xml.MDFe.InfContratante
+  name: CPF
+  nameWithType: InfContratante.CPF
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.CPF
+- uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.IdEstrangeiro
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfContratante.IdEstrangeiro
+  parent: Unimake.Business.DFe.Xml.MDFe.InfContratante
+  name: IdEstrangeiro
+  nameWithType: InfContratante.IdEstrangeiro
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.IdEstrangeiro
+- uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCNPJ
+  commentId: M:Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCNPJ
+  parent: Unimake.Business.DFe.Xml.MDFe.InfContratante
+  name: ShouldSerializeCNPJ()
+  nameWithType: InfContratante.ShouldSerializeCNPJ()
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCNPJ()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCNPJ
+    name: ShouldSerializeCNPJ
+    nameWithType: InfContratante.ShouldSerializeCNPJ
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCNPJ
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCNPJ
+    name: ShouldSerializeCNPJ
+    nameWithType: InfContratante.ShouldSerializeCNPJ
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCNPJ
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCPF
+  commentId: M:Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCPF
+  parent: Unimake.Business.DFe.Xml.MDFe.InfContratante
+  name: ShouldSerializeCPF()
+  nameWithType: InfContratante.ShouldSerializeCPF()
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCPF()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCPF
+    name: ShouldSerializeCPF
+    nameWithType: InfContratante.ShouldSerializeCPF
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCPF
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCPF
+    name: ShouldSerializeCPF
+    nameWithType: InfContratante.ShouldSerializeCPF
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeCPF
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeXNome
+  commentId: M:Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeXNome
+  parent: Unimake.Business.DFe.Xml.MDFe.InfContratante
+  name: ShouldSerializeXNome()
+  nameWithType: InfContratante.ShouldSerializeXNome()
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeXNome()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeXNome
+    name: ShouldSerializeXNome
+    nameWithType: InfContratante.ShouldSerializeXNome
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeXNome
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeXNome
+    name: ShouldSerializeXNome
+    nameWithType: InfContratante.ShouldSerializeXNome
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeXNome
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeIdEstrangeiro
+  commentId: M:Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeIdEstrangeiro
+  parent: Unimake.Business.DFe.Xml.MDFe.InfContratante
+  name: ShouldSerializeIdEstrangeiro()
+  nameWithType: InfContratante.ShouldSerializeIdEstrangeiro()
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeIdEstrangeiro()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeIdEstrangeiro
+    name: ShouldSerializeIdEstrangeiro
+    nameWithType: InfContratante.ShouldSerializeIdEstrangeiro
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeIdEstrangeiro
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeIdEstrangeiro
+    name: ShouldSerializeIdEstrangeiro
+    nameWithType: InfContratante.ShouldSerializeIdEstrangeiro
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante.ShouldSerializeIdEstrangeiro
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.Comp*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfPag.Comp
+  name: Comp
+  nameWithType: InfPag.Comp
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.Comp
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.Comp}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.Comp}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<Comp>
+  nameWithType: List<Comp>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.MDFe.Comp>
+  nameWithType.vb: List(Of Comp)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.MDFe.Comp)
+  name.vb: List(Of Comp)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.MDFe.Comp
+    name: Comp
+    nameWithType: Comp
+    fullName: Unimake.Business.DFe.Xml.MDFe.Comp
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.MDFe.Comp
+    name: Comp
+    nameWithType: Comp
+    fullName: Unimake.Business.DFe.Xml.MDFe.Comp
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.VContrato*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfPag.VContrato
+  name: VContrato
+  nameWithType: InfPag.VContrato
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.VContrato
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.VContratoField*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfPag.VContratoField
+  name: VContratoField
+  nameWithType: InfPag.VContratoField
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.VContratoField
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.IndPag*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfPag.IndPag
+  name: IndPag
+  nameWithType: InfPag.IndPag
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.IndPag
+- uid: Unimake.Business.DFe.Servicos.IndicadorPagamento
+  commentId: T:Unimake.Business.DFe.Servicos.IndicadorPagamento
+  parent: Unimake.Business.DFe.Servicos
+  name: IndicadorPagamento
+  nameWithType: IndicadorPagamento
+  fullName: Unimake.Business.DFe.Servicos.IndicadorPagamento
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.InfPrazo*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfPag.InfPrazo
+  name: InfPrazo
+  nameWithType: InfPag.InfPrazo
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.InfPrazo
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.InfPrazo}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.InfPrazo}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<InfPrazo>
+  nameWithType: List<InfPrazo>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.MDFe.InfPrazo>
+  nameWithType.vb: List(Of InfPrazo)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.MDFe.InfPrazo)
+  name.vb: List(Of InfPrazo)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfPrazo
+    name: InfPrazo
+    nameWithType: InfPrazo
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfPrazo
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfPrazo
+    name: InfPrazo
+    nameWithType: InfPrazo
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfPrazo
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.InfBanc*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfPag.InfBanc
+  name: InfBanc
+  nameWithType: InfPag.InfBanc
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.InfBanc
+- uid: Unimake.Business.DFe.Xml.MDFe.InfBanc
+  commentId: T:Unimake.Business.DFe.Xml.MDFe.InfBanc
+  parent: Unimake.Business.DFe.Xml.MDFe
+  name: InfBanc
+  nameWithType: InfBanc
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfBanc
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.AddComp*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfPag.AddComp
+  name: AddComp
+  nameWithType: InfPag.AddComp
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.AddComp
+- uid: Unimake.Business.DFe.Xml.MDFe.Comp
+  commentId: T:Unimake.Business.DFe.Xml.MDFe.Comp
+  parent: Unimake.Business.DFe.Xml.MDFe
+  name: Comp
+  nameWithType: Comp
+  fullName: Unimake.Business.DFe.Xml.MDFe.Comp
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag.AddInfPrazo*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfPag.AddInfPrazo
+  name: AddInfPrazo
+  nameWithType: InfPag.AddInfPrazo
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag.AddInfPrazo
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPrazo
+  commentId: T:Unimake.Business.DFe.Xml.MDFe.InfPrazo
+  parent: Unimake.Business.DFe.Xml.MDFe
+  name: InfPrazo
+  nameWithType: InfPrazo
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPrazo

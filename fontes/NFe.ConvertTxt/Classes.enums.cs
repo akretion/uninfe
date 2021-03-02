@@ -64,6 +64,15 @@ namespace NFe.ConvertTxt
         [Description("Operação não presencial, outros")]
         pcOutros = 9
     }
+
+    public enum TpcnIntermediario
+    {
+        [Description("0=Operação sem intermediador (em site ou plataforma própria)")]
+        OperacaoSemIntermediador = 0,
+        [Description("1=Operação em site ou plataforma de terceiros (intermediadores / marketplace) ")]
+        OperacaoSiteOuTerceiro = 1
+    }
+
     public enum TpcnFormaPagamento {
         [Description("01=Dinheiro")]
         fpDinheiro=1, 
@@ -87,6 +96,14 @@ namespace NFe.ConvertTxt
         //fpDulicataMercantil = 14,
         [Description("15=Boleto Bancário")]
         fpBoletoBancario = 15,
+        [Description("16=Depósito Bancário")]
+        DepositoBancario = 16,
+        [Description("17=Pagamento Instantâneo (PIX)")]
+        PagamentoInstantaneoPIX = 17,
+        [Description("18=Transferência bancária, Carteira Digital")]
+        TransferenciaBancaria = 18,
+        [Description("19=Programa de fidelidade, Cashback, Crédito Virtual")]
+        ProgramaFidelidade = 19,
         [Description("90=Sem pagamento")]
         fpSemPagamento=90,
         [Description("99 =Outros")]        fpOutro=99

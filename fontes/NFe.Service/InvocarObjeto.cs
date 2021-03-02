@@ -893,6 +893,10 @@ namespace NFe.Service
 #endif
                     break;
 
+                case PadroesNFSe.GEISWEB:
+                    strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { docXML.OuterXml });
+                    break;
+
                 default:
 
                     #region Demais padrões

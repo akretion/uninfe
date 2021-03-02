@@ -264,7 +264,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
         #region Public Properties
 
         [XmlElement("descEvento", Order = 0)]
-        public override string DescEvento { get; set; } = "“Inclusao DF-e";
+        public override string DescEvento { get; set; } = "Inclusao DF-e";
 
         [XmlElement("nProt", Order = 1)]
         public string NProt { get; set; }
@@ -293,19 +293,6 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
         [XmlElement("chNFe", Order = 2)]
         public string ChNFe { get; set; }
-    }
-
-
-    [Serializable]
-    [XmlRoot(ElementName = "detEvento")]
-    public class DetEventoCCE: EventoDetalhe
-    {
-    }
-
-    [Serializable]
-    [XmlRoot(ElementName = "detEvento")]
-    public class DetEventoManif: EventoDetalhe
-    {
     }
 
     [Serializable]
@@ -449,7 +436,6 @@ namespace Unimake.Business.DFe.Xml.MDFe
     }
 
     [XmlInclude(typeof(DetEventoCanc))]
-    [XmlInclude(typeof(DetEventoCCE))]
     [XmlInclude(typeof(DetEventoIncCondutor))]
     [XmlInclude(typeof(DetEventoIncDFeMDFe))]
     public class EventoDetalhe: IXmlSerializable

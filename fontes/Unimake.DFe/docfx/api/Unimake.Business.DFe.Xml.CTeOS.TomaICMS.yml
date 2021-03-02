@@ -1,0 +1,471 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTeOS.TomaICMS
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.TomaICMS
+  id: TomaICMS
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  children:
+  - Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefCte
+  - Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNF
+  - Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNFe
+  langs:
+  - csharp
+  - vb
+  name: TomaICMS
+  nameWithType: TomaICMS
+  fullName: Unimake.Business.DFe.Xml.CTeOS.TomaICMS
+  type: Class
+  source:
+    id: TomaICMS
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 1297
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class TomaICMS
+    content.vb: >-
+      <Serializable>
+
+      Public Class TomaICMS
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNFe
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNFe
+  id: RefNFe
+  parent: Unimake.Business.DFe.Xml.CTeOS.TomaICMS
+  langs:
+  - csharp
+  - vb
+  name: RefNFe
+  nameWithType: TomaICMS.RefNFe
+  fullName: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNFe
+  type: Property
+  source:
+    id: RefNFe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 1301
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public string RefNFe { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RefNFe As String
+  overload: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNFe*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNF
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNF
+  id: RefNF
+  parent: Unimake.Business.DFe.Xml.CTeOS.TomaICMS
+  langs:
+  - csharp
+  - vb
+  name: RefNF
+  nameWithType: TomaICMS.RefNF
+  fullName: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNF
+  type: Property
+  source:
+    id: RefNF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 1304
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public RefNF RefNF { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.RefNF
+    content.vb: Public Property RefNF As RefNF
+  overload: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefCte
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefCte
+  id: RefCte
+  parent: Unimake.Business.DFe.Xml.CTeOS.TomaICMS
+  langs:
+  - csharp
+  - vb
+  name: RefCte
+  nameWithType: TomaICMS.RefCte
+  fullName: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefCte
+  type: Property
+  source:
+    id: RefCte
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 1307
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public string RefCte { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RefCte As String
+  overload: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefCte*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTeOS
+  commentId: N:Unimake.Business.DFe.Xml.CTeOS
+  name: Unimake.Business.DFe.Xml.CTeOS
+  nameWithType: Unimake.Business.DFe.Xml.CTeOS
+  fullName: Unimake.Business.DFe.Xml.CTeOS
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNFe*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNFe
+  name: RefNFe
+  nameWithType: TomaICMS.RefNFe
+  fullName: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNFe
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNF*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNF
+  name: RefNF
+  nameWithType: TomaICMS.RefNF
+  fullName: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefNF
+- uid: Unimake.Business.DFe.Xml.CTeOS.RefNF
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.RefNF
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: RefNF
+  nameWithType: RefNF
+  fullName: Unimake.Business.DFe.Xml.CTeOS.RefNF
+- uid: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefCte*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefCte
+  name: RefCte
+  nameWithType: TomaICMS.RefCte
+  fullName: Unimake.Business.DFe.Xml.CTeOS.TomaICMS.RefCte

@@ -192,7 +192,7 @@ namespace NFe.Components.PCamboriuSC
 
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace = "http://tempuri.org", ResponseNamespace = "http://tempuri.org", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Nota[] ConsultaNotaporRPS(int iCMC, string sLogin, string sSenha, int iRPS, string sCPFCNPJ, [System.Xml.Serialization.XmlElementAttribute(DataType = "date")] System.DateTime dDataRecibo)
+        public Nota[] ConsultaNotaporRPS(int iCMC, string sLogin, string sSenha, int iRPS, string sCPFCNPJ, string dDataRecibo)
         {
 
             object[] results = this.Invoke("ConsultaNotaporRPS", new object[] {
@@ -207,7 +207,7 @@ namespace NFe.Components.PCamboriuSC
 
 
         /// <remarks/>
-        public void ConsultaNotaporRPSAsync(int iCMC, string sLogin, string sSenha, int iRPS, string sCPFCNPJ, System.DateTime dDataRecibo)
+        public void ConsultaNotaporRPSAsync(int iCMC, string sLogin, string sSenha, int iRPS, string sCPFCNPJ, string dDataRecibo)
         {
 
             this.ConsultaNotaporRPSAsync(iCMC, sLogin, sSenha, iRPS, sCPFCNPJ, dDataRecibo, null);
@@ -215,7 +215,7 @@ namespace NFe.Components.PCamboriuSC
 
 
         /// <remarks/>
-        public void ConsultaNotaporRPSAsync(int iCMC, string sLogin, string sSenha, int iRPS, string sCPFCNPJ, System.DateTime dDataRecibo, object userState)
+        public void ConsultaNotaporRPSAsync(int iCMC, string sLogin, string sSenha, int iRPS, string sCPFCNPJ, string dDataRecibo, object userState)
         {
 
             if ((this.ConsultaNotaporRPSOperationCompleted == null))
@@ -247,7 +247,7 @@ namespace NFe.Components.PCamboriuSC
 
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", RequestNamespace = "http://tempuri.org", ResponseNamespace = "http://tempuri.org", Use = System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle = System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Nota[] ListarNotas(int iCMC, string sLogin, string sSenha, [System.Xml.Serialization.XmlElementAttribute(DataType = "date")] System.DateTime dDataInicial, [System.Xml.Serialization.XmlElementAttribute(DataType = "date")] System.DateTime dDataFinal, string sCPFCNPJ)
+        public Nota[] ListarNotas(int iCMC, string sLogin, string sSenha, string dDataInicial, string dDataFinal, string sCPFCNPJ)
         {
 
             object[] results = this.Invoke("ListarNotas", new object[] {
@@ -262,7 +262,7 @@ namespace NFe.Components.PCamboriuSC
 
 
         /// <remarks/>
-        public void ListarNotasAsync(int iCMC, string sLogin, string sSenha, System.DateTime dDataInicial, System.DateTime dDataFinal, string sCPFCNPJ)
+        public void ListarNotasAsync(int iCMC, string sLogin, string sSenha, string dDataInicial, string dDataFinal, string sCPFCNPJ)
         {
 
             this.ListarNotasAsync(iCMC, sLogin, sSenha, dDataInicial, dDataFinal, sCPFCNPJ, null);
@@ -270,7 +270,7 @@ namespace NFe.Components.PCamboriuSC
 
 
         /// <remarks/>
-        public void ListarNotasAsync(int iCMC, string sLogin, string sSenha, System.DateTime dDataInicial, System.DateTime dDataFinal, string sCPFCNPJ, object userState)
+        public void ListarNotasAsync(int iCMC, string sLogin, string sSenha, string dDataInicial, string dDataFinal, string sCPFCNPJ, object userState)
         {
 
             if ((this.ListarNotasOperationCompleted == null))
@@ -530,7 +530,7 @@ namespace NFe.Components.PCamboriuSC
         private string sSenhaField;
         private int iRPSField;
         private string sCPFCNPJField;
-        private System.DateTime dDataReciboField;
+        private string dDataReciboField;
 
         /// <remarks/>
         public int iCMC
@@ -596,10 +596,8 @@ namespace NFe.Components.PCamboriuSC
                 this.sCPFCNPJField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
-        public System.DateTime dDataRecibo
+                
+        public string dDataRecibo
         {
             get
             {
@@ -731,7 +729,7 @@ namespace NFe.Components.PCamboriuSC
         private int iReciboField;
 
 
-        private System.DateTime dDataReciboField;
+        private string dDataReciboField;
 
 
         private int iNotaField;
@@ -879,8 +877,7 @@ namespace NFe.Components.PCamboriuSC
 
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
-        public System.DateTime dDataRecibo
+        public string dDataRecibo
         {
             get
             {
@@ -1692,7 +1689,7 @@ namespace NFe.Components.PCamboriuSC
 
         private string sSerieCancField;
 
-        private System.DateTime dDataCancelamentoField;
+        private string dDataCancelamentoField;
 
         private string sMotivoCancField;
 
@@ -1749,8 +1746,7 @@ namespace NFe.Components.PCamboriuSC
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
-        public System.DateTime dDataCancelamento
+        public string dDataCancelamento
         {
             get
             {

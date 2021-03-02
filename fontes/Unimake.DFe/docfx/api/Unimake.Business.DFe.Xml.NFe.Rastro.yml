@@ -1,0 +1,705 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Rastro
+  id: Rastro
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.Rastro.CAgreg
+  - Unimake.Business.DFe.Xml.NFe.Rastro.DFab
+  - Unimake.Business.DFe.Xml.NFe.Rastro.DFabField
+  - Unimake.Business.DFe.Xml.NFe.Rastro.DVal
+  - Unimake.Business.DFe.Xml.NFe.Rastro.DValField
+  - Unimake.Business.DFe.Xml.NFe.Rastro.NLote
+  - Unimake.Business.DFe.Xml.NFe.Rastro.QLote
+  - Unimake.Business.DFe.Xml.NFe.Rastro.QLoteField
+  - Unimake.Business.DFe.Xml.NFe.Rastro.ShouldSerializeCAgreg
+  langs:
+  - csharp
+  - vb
+  name: Rastro
+  nameWithType: Rastro
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro
+  type: Class
+  source:
+    id: Rastro
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 1117
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class Rastro
+    content.vb: >-
+      <Serializable>
+
+      Public Class Rastro
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.NLote
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Rastro.NLote
+  id: NLote
+  parent: Unimake.Business.DFe.Xml.NFe.Rastro
+  langs:
+  - csharp
+  - vb
+  name: NLote
+  nameWithType: Rastro.NLote
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.NLote
+  type: Property
+  source:
+    id: NLote
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 1121
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string NLote { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property NLote As String
+  overload: Unimake.Business.DFe.Xml.NFe.Rastro.NLote*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.QLote
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Rastro.QLote
+  id: QLote
+  parent: Unimake.Business.DFe.Xml.NFe.Rastro
+  langs:
+  - csharp
+  - vb
+  name: QLote
+  nameWithType: Rastro.QLote
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.QLote
+  type: Property
+  source:
+    id: QLote
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 1124
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double QLote { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property QLote As Double
+  overload: Unimake.Business.DFe.Xml.NFe.Rastro.QLote*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.QLoteField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Rastro.QLoteField
+  id: QLoteField
+  parent: Unimake.Business.DFe.Xml.NFe.Rastro
+  langs:
+  - csharp
+  - vb
+  name: QLoteField
+  nameWithType: Rastro.QLoteField
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.QLoteField
+  type: Property
+  source:
+    id: QLoteField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 1127
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string QLoteField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property QLoteField As String
+  overload: Unimake.Business.DFe.Xml.NFe.Rastro.QLoteField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.DFab
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Rastro.DFab
+  id: DFab
+  parent: Unimake.Business.DFe.Xml.NFe.Rastro
+  langs:
+  - csharp
+  - vb
+  name: DFab
+  nameWithType: Rastro.DFab
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.DFab
+  type: Property
+  source:
+    id: DFab
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 1134
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public DateTime DFab { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DFab As Date
+  overload: Unimake.Business.DFe.Xml.NFe.Rastro.DFab*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.DFabField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Rastro.DFabField
+  id: DFabField
+  parent: Unimake.Business.DFe.Xml.NFe.Rastro
+  langs:
+  - csharp
+  - vb
+  name: DFabField
+  nameWithType: Rastro.DFabField
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.DFabField
+  type: Property
+  source:
+    id: DFabField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 1137
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string DFabField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DFabField As String
+  overload: Unimake.Business.DFe.Xml.NFe.Rastro.DFabField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.DVal
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Rastro.DVal
+  id: DVal
+  parent: Unimake.Business.DFe.Xml.NFe.Rastro
+  langs:
+  - csharp
+  - vb
+  name: DVal
+  nameWithType: Rastro.DVal
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.DVal
+  type: Property
+  source:
+    id: DVal
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 1144
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public DateTime DVal { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DVal As Date
+  overload: Unimake.Business.DFe.Xml.NFe.Rastro.DVal*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.DValField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Rastro.DValField
+  id: DValField
+  parent: Unimake.Business.DFe.Xml.NFe.Rastro
+  langs:
+  - csharp
+  - vb
+  name: DValField
+  nameWithType: Rastro.DValField
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.DValField
+  type: Property
+  source:
+    id: DValField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 1147
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string DValField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DValField As String
+  overload: Unimake.Business.DFe.Xml.NFe.Rastro.DValField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.CAgreg
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Rastro.CAgreg
+  id: CAgreg
+  parent: Unimake.Business.DFe.Xml.NFe.Rastro
+  langs:
+  - csharp
+  - vb
+  name: CAgreg
+  nameWithType: Rastro.CAgreg
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.CAgreg
+  type: Property
+  source:
+    id: CAgreg
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 1154
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CAgreg { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CAgreg As String
+  overload: Unimake.Business.DFe.Xml.NFe.Rastro.CAgreg*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.ShouldSerializeCAgreg
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Rastro.ShouldSerializeCAgreg
+  id: ShouldSerializeCAgreg
+  parent: Unimake.Business.DFe.Xml.NFe.Rastro
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeCAgreg()
+  nameWithType: Rastro.ShouldSerializeCAgreg()
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.ShouldSerializeCAgreg()
+  type: Method
+  source:
+    id: ShouldSerializeCAgreg
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 1159
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeCAgreg()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeCAgreg As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Rastro.ShouldSerializeCAgreg*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.NLote*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Rastro.NLote
+  name: NLote
+  nameWithType: Rastro.NLote
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.NLote
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.QLote*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Rastro.QLote
+  name: QLote
+  nameWithType: Rastro.QLote
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.QLote
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.QLoteField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Rastro.QLoteField
+  name: QLoteField
+  nameWithType: Rastro.QLoteField
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.QLoteField
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.DFab*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Rastro.DFab
+  name: DFab
+  nameWithType: Rastro.DFab
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.DFab
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.DFabField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Rastro.DFabField
+  name: DFabField
+  nameWithType: Rastro.DFabField
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.DFabField
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.DVal*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Rastro.DVal
+  name: DVal
+  nameWithType: Rastro.DVal
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.DVal
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.DValField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Rastro.DValField
+  name: DValField
+  nameWithType: Rastro.DValField
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.DValField
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.CAgreg*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Rastro.CAgreg
+  name: CAgreg
+  nameWithType: Rastro.CAgreg
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.CAgreg
+- uid: Unimake.Business.DFe.Xml.NFe.Rastro.ShouldSerializeCAgreg*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Rastro.ShouldSerializeCAgreg
+  name: ShouldSerializeCAgreg
+  nameWithType: Rastro.ShouldSerializeCAgreg
+  fullName: Unimake.Business.DFe.Xml.NFe.Rastro.ShouldSerializeCAgreg
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean

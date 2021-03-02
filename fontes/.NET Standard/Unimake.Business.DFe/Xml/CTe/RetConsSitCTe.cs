@@ -38,20 +38,31 @@ namespace Unimake.Business.DFe.Xml.CTe
         [XmlElement("protCTe")]
         public ProtCTe ProtCTe { get; set; }
 
-        [XmlElement("procEventoCTe")]
-        public List<ProcEventoCTe> ProcEventoCTe { get; set; }
+        //TODO WANDREY: Resolver esta encrenca - TO RESOLVENDO AQUI AGORA!!!
+        //[XmlElement("procEventoCTe")]
+        //public List<ProcEventoCTe> ProcEventoCTe { get; set; }
+
+        [XmlArrayItem(typeof(ProcEventoCTe<InfEventoCanc>))]
+        [XmlArrayItem(typeof(ProcEventoCTe<InfEventoEPEC>))]
+        [XmlArrayItem(typeof(ProcEventoCTe<InfEventoCCe>))]
+        [XmlArrayItem(typeof(ProcEventoCTe<InfEventoCancCompEntrega>))]
+        [XmlArrayItem(typeof(ProcEventoCTe<InfEventoCompEntrega>))]
+        [XmlArrayItem(typeof(ProcEventoCTe<InfEventoPrestDesacordo>))]
+        [XmlArrayItem(typeof(ProcEventoCTe<InfEvento>))]
+        public List<XMLBase> ProcEventoCTe { get; set; }
 
         #region Add (List - Interop)
 
-        public void AddProcEventoCTe(ProcEventoCTe procEventoCTe)
-        {
-            if(ProcEventoCTe == null)
-            {
-                ProcEventoCTe = new List<ProcEventoCTe>();
-            }
+        //TODO WANDREY: Resolver esta encrenca
+        //public void AddProcEventoCTe(ProcEventoCTe procEventoCTe)
+        //{
+        //    if(ProcEventoCTe == null)
+        //    {
+        //        ProcEventoCTe = new List<ProcEventoCTe>();
+        //    }
 
-            ProcEventoCTe.Add(procEventoCTe);
-        }
+        //    ProcEventoCTe.Add(procEventoCTe);
+        //}
 
         #endregion
     }

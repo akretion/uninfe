@@ -66,7 +66,22 @@ namespace NFe.Components.Pronin.ViamaoRS.h
             XmlDocument doc = new XmlDocument();
             doc.Load(file);
 
-            string result = ServiceGeracao.RecepcionarLoteRps(doc.InnerXml);
+            string result = "";
+
+            switch (doc.DocumentElement.Name)
+            {
+                case "GerarNfseEnvio":
+                    result = ServiceGeracao.GerarNfse(doc.InnerXml);
+                    break;
+                case "EnviarLoteRpsSincronoEnvio":
+                    result = ServiceGeracao.EnviarLoteRpsSincrono(doc.InnerXml);
+                    break;
+                case "EnviarLoteRpsEnvio":
+                    result = ServiceGeracao.RecepcionarLoteRps(doc.InnerXml);
+                    break;
+            }
+
+            //string result = ServiceGeracao.RecepcionarLoteRps(doc.InnerXml);
 
             GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
@@ -115,6 +130,15 @@ namespace NFe.Components.Pronin.ViamaoRS.h
             string result = ServiceConsultas.ConsultarNfsePorRps(doc.InnerXml);
             GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
                                         Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
+        }
+
+        public override void SubstituirNfse(string file)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(file);
+            string result = ServiceGeracao.SubstituirNfse(doc.InnerXml);
+            GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedSubstNfse).EnvioXML,
+                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSubstNfse).RetornoXML);
         }
 
         #endregion Métodos

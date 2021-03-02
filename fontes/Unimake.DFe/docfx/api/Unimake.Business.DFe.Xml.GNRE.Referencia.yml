@@ -1,0 +1,770 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia
+  commentId: T:Unimake.Business.DFe.Xml.GNRE.Referencia
+  id: Referencia
+  parent: Unimake.Business.DFe.Xml.GNRE
+  children:
+  - Unimake.Business.DFe.Xml.GNRE.Referencia.Ano
+  - Unimake.Business.DFe.Xml.GNRE.Referencia.Mes
+  - Unimake.Business.DFe.Xml.GNRE.Referencia.Parcela
+  - Unimake.Business.DFe.Xml.GNRE.Referencia.Periodo
+  - Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeAno
+  - Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeMes
+  - Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeParcela
+  - Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializePeriodo
+  langs:
+  - csharp
+  - vb
+  name: Referencia
+  nameWithType: Referencia
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia
+  type: Class
+  source:
+    id: Referencia
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 232
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class Referencia
+    content.vb: >-
+      <Serializable>
+
+      Public Class Referencia
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.Periodo
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.Referencia.Periodo
+  id: Periodo
+  parent: Unimake.Business.DFe.Xml.GNRE.Referencia
+  langs:
+  - csharp
+  - vb
+  name: Periodo
+  nameWithType: Referencia.Periodo
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.Periodo
+  type: Property
+  source:
+    id: Periodo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 238
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public int? Periodo { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int32}
+    content.vb: Public Property Periodo As Integer?
+  overload: Unimake.Business.DFe.Xml.GNRE.Referencia.Periodo*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.Mes
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.Referencia.Mes
+  id: Mes
+  parent: Unimake.Business.DFe.Xml.GNRE.Referencia
+  langs:
+  - csharp
+  - vb
+  name: Mes
+  nameWithType: Referencia.Mes
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.Mes
+  type: Property
+  source:
+    id: Mes
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 253
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public Meses? Mes { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{Unimake.Business.DFe.Servicos.Meses}
+    content.vb: Public Property Mes As Meses?
+  overload: Unimake.Business.DFe.Xml.GNRE.Referencia.Mes*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.Ano
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.Referencia.Ano
+  id: Ano
+  parent: Unimake.Business.DFe.Xml.GNRE.Referencia
+  langs:
+  - csharp
+  - vb
+  name: Ano
+  nameWithType: Referencia.Ano
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.Ano
+  type: Property
+  source:
+    id: Ano
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 256
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public string Ano { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Ano As String
+  overload: Unimake.Business.DFe.Xml.GNRE.Referencia.Ano*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.Parcela
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.Referencia.Parcela
+  id: Parcela
+  parent: Unimake.Business.DFe.Xml.GNRE.Referencia
+  langs:
+  - csharp
+  - vb
+  name: Parcela
+  nameWithType: Referencia.Parcela
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.Parcela
+  type: Property
+  source:
+    id: Parcela
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 259
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public string Parcela { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Parcela As String
+  overload: Unimake.Business.DFe.Xml.GNRE.Referencia.Parcela*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializePeriodo
+  commentId: M:Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializePeriodo
+  id: ShouldSerializePeriodo
+  parent: Unimake.Business.DFe.Xml.GNRE.Referencia
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializePeriodo()
+  nameWithType: Referencia.ShouldSerializePeriodo()
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializePeriodo()
+  type: Method
+  source:
+    id: ShouldSerializePeriodo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 264
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public bool ShouldSerializePeriodo()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializePeriodo As Boolean
+  overload: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializePeriodo*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeMes
+  commentId: M:Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeMes
+  id: ShouldSerializeMes
+  parent: Unimake.Business.DFe.Xml.GNRE.Referencia
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeMes()
+  nameWithType: Referencia.ShouldSerializeMes()
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeMes()
+  type: Method
+  source:
+    id: ShouldSerializeMes
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 265
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public bool ShouldSerializeMes()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeMes As Boolean
+  overload: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeMes*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeAno
+  commentId: M:Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeAno
+  id: ShouldSerializeAno
+  parent: Unimake.Business.DFe.Xml.GNRE.Referencia
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeAno()
+  nameWithType: Referencia.ShouldSerializeAno()
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeAno()
+  type: Method
+  source:
+    id: ShouldSerializeAno
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 266
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public bool ShouldSerializeAno()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeAno As Boolean
+  overload: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeAno*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeParcela
+  commentId: M:Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeParcela
+  id: ShouldSerializeParcela
+  parent: Unimake.Business.DFe.Xml.GNRE.Referencia
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeParcela()
+  nameWithType: Referencia.ShouldSerializeParcela()
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeParcela()
+  type: Method
+  source:
+    id: ShouldSerializeParcela
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 267
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public bool ShouldSerializeParcela()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeParcela As Boolean
+  overload: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeParcela*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.GNRE
+  commentId: N:Unimake.Business.DFe.Xml.GNRE
+  name: Unimake.Business.DFe.Xml.GNRE
+  nameWithType: Unimake.Business.DFe.Xml.GNRE
+  fullName: Unimake.Business.DFe.Xml.GNRE
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.Periodo*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.Referencia.Periodo
+  name: Periodo
+  nameWithType: Referencia.Periodo
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.Periodo
+- uid: System.Nullable{System.Int32}
+  commentId: T:System.Nullable{System.Int32}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<Int32>
+  nameWithType: Nullable<Int32>
+  fullName: System.Nullable<System.Int32>
+  nameWithType.vb: Nullable(Of Int32)
+  fullName.vb: System.Nullable(Of System.Int32)
+  name.vb: Nullable(Of Int32)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.Mes*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.Referencia.Mes
+  name: Mes
+  nameWithType: Referencia.Mes
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.Mes
+- uid: System.Nullable{Unimake.Business.DFe.Servicos.Meses}
+  commentId: T:System.Nullable{Unimake.Business.DFe.Servicos.Meses}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<Meses>
+  nameWithType: Nullable<Meses>
+  fullName: System.Nullable<Unimake.Business.DFe.Servicos.Meses>
+  nameWithType.vb: Nullable(Of Meses)
+  fullName.vb: System.Nullable(Of Unimake.Business.DFe.Servicos.Meses)
+  name.vb: Nullable(Of Meses)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Servicos.Meses
+    name: Meses
+    nameWithType: Meses
+    fullName: Unimake.Business.DFe.Servicos.Meses
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Servicos.Meses
+    name: Meses
+    nameWithType: Meses
+    fullName: Unimake.Business.DFe.Servicos.Meses
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.Ano*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.Referencia.Ano
+  name: Ano
+  nameWithType: Referencia.Ano
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.Ano
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.Parcela*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.Referencia.Parcela
+  name: Parcela
+  nameWithType: Referencia.Parcela
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.Parcela
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializePeriodo*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializePeriodo
+  name: ShouldSerializePeriodo
+  nameWithType: Referencia.ShouldSerializePeriodo
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializePeriodo
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeMes*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeMes
+  name: ShouldSerializeMes
+  nameWithType: Referencia.ShouldSerializeMes
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeMes
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeAno*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeAno
+  name: ShouldSerializeAno
+  nameWithType: Referencia.ShouldSerializeAno
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeAno
+- uid: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeParcela*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeParcela
+  name: ShouldSerializeParcela
+  nameWithType: Referencia.ShouldSerializeParcela
+  fullName: Unimake.Business.DFe.Xml.GNRE.Referencia.ShouldSerializeParcela

@@ -432,7 +432,7 @@ namespace NFe.Components
 
                 ListaExtensoes.Add(TipoEnvio.ConsCertificado, new ExtensaoClass(
                     "-cons-certificado.xml", "",
-                    "uninfe-ret-cons-certificado.xml", "",
+                    "-ret-cons-certificado.xml", "",
                     "",
                     "Consulta aos certificados instalados"));
 

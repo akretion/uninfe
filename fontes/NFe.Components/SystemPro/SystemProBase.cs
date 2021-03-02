@@ -31,6 +31,10 @@ namespace NFe.Components.SystemPro
                             case 4307559:
                                 systemProService = new HEstacaoRS.NfseService_Homolog();
                                 break;
+
+                            case 4303806:
+                                systemProService = new HCampinasDoSul.NfseService_Homolog();
+                                break;
                         }
                     }
                     else
@@ -47,6 +51,10 @@ namespace NFe.Components.SystemPro
 
                             case 4307559:
                                 systemProService = new PEstacaoRS.NfseService();
+                                break;
+
+                            case 4303806:
+                                systemProService = new PCampinasDoSul.NfseService();
                                 break;
                         }
                     }

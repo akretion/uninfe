@@ -1,0 +1,1095 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  commentId: T:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  id: InfEventoRetEvento
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ChNFe
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CNPJDest
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgao
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgaoField
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CPFDest
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CStat
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEvento
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEventoField
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.EmailDest
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.Id
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NProt
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NSeqEvento
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCNPJDest
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCPFDest
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpAmb
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpEvento
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.VerAplic
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XEvento
+  - Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XMotivo
+  langs:
+  - csharp
+  - vb
+  name: InfEventoRetEvento
+  nameWithType: InfEventoRetEvento
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  type: Class
+  source:
+    id: InfEventoRetEvento
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 65
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class InfEventoRetEvento
+    content.vb: >-
+      <Serializable>
+
+      Public Class InfEventoRetEvento
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.Id
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.Id
+  id: Id
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: InfEventoRetEvento.Id
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.Id
+  type: Property
+  source:
+    id: Id
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 69
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string Id { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Id As String
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.Id*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpAmb
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpAmb
+  id: TpAmb
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: TpAmb
+  nameWithType: InfEventoRetEvento.TpAmb
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpAmb
+  type: Property
+  source:
+    id: TpAmb
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 72
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public TipoAmbiente TpAmb { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoAmbiente
+    content.vb: Public Property TpAmb As TipoAmbiente
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpAmb*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.VerAplic
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.VerAplic
+  id: VerAplic
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: VerAplic
+  nameWithType: InfEventoRetEvento.VerAplic
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.VerAplic
+  type: Property
+  source:
+    id: VerAplic
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 75
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VerAplic { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VerAplic As String
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.VerAplic*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgao
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgao
+  id: COrgao
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: COrgao
+  nameWithType: InfEventoRetEvento.COrgao
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgao
+  type: Property
+  source:
+    id: COrgao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 78
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public UFBrasil COrgao { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.UFBrasil
+    content.vb: Public Property COrgao As UFBrasil
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgao*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgaoField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgaoField
+  id: COrgaoField
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: COrgaoField
+  nameWithType: InfEventoRetEvento.COrgaoField
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgaoField
+  type: Property
+  source:
+    id: COrgaoField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 81
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public int COrgaoField { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property COrgaoField As Integer
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgaoField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CStat
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CStat
+  id: CStat
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: CStat
+  nameWithType: InfEventoRetEvento.CStat
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CStat
+  type: Property
+  source:
+    id: CStat
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 88
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public int CStat { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property CStat As Integer
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CStat*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XMotivo
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XMotivo
+  id: XMotivo
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: XMotivo
+  nameWithType: InfEventoRetEvento.XMotivo
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XMotivo
+  type: Property
+  source:
+    id: XMotivo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 91
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string XMotivo { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XMotivo As String
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XMotivo*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ChNFe
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ChNFe
+  id: ChNFe
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: ChNFe
+  nameWithType: InfEventoRetEvento.ChNFe
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ChNFe
+  type: Property
+  source:
+    id: ChNFe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 94
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string ChNFe { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ChNFe As String
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ChNFe*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpEvento
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpEvento
+  id: TpEvento
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: TpEvento
+  nameWithType: InfEventoRetEvento.TpEvento
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpEvento
+  type: Property
+  source:
+    id: TpEvento
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 97
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public TipoEventoNFe TpEvento { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoEventoNFe
+    content.vb: Public Property TpEvento As TipoEventoNFe
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpEvento*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XEvento
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XEvento
+  id: XEvento
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: XEvento
+  nameWithType: InfEventoRetEvento.XEvento
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XEvento
+  type: Property
+  source:
+    id: XEvento
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 100
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string XEvento { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XEvento As String
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XEvento*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NSeqEvento
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NSeqEvento
+  id: NSeqEvento
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: NSeqEvento
+  nameWithType: InfEventoRetEvento.NSeqEvento
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NSeqEvento
+  type: Property
+  source:
+    id: NSeqEvento
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 103
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public int NSeqEvento { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property NSeqEvento As Integer
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NSeqEvento*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CNPJDest
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CNPJDest
+  id: CNPJDest
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: CNPJDest
+  nameWithType: InfEventoRetEvento.CNPJDest
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CNPJDest
+  type: Property
+  source:
+    id: CNPJDest
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 106
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CNPJDest { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CNPJDest As String
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CNPJDest*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CPFDest
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CPFDest
+  id: CPFDest
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: CPFDest
+  nameWithType: InfEventoRetEvento.CPFDest
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CPFDest
+  type: Property
+  source:
+    id: CPFDest
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 109
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CPFDest { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CPFDest As String
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CPFDest*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.EmailDest
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.EmailDest
+  id: EmailDest
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: EmailDest
+  nameWithType: InfEventoRetEvento.EmailDest
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.EmailDest
+  type: Property
+  source:
+    id: EmailDest
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 112
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string EmailDest { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property EmailDest As String
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.EmailDest*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEvento
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEvento
+  id: DhRegEvento
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: DhRegEvento
+  nameWithType: InfEventoRetEvento.DhRegEvento
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEvento
+  type: Property
+  source:
+    id: DhRegEvento
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 115
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public DateTime DhRegEvento { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DhRegEvento As Date
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEvento*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEventoField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEventoField
+  id: DhRegEventoField
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: DhRegEventoField
+  nameWithType: InfEventoRetEvento.DhRegEventoField
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEventoField
+  type: Property
+  source:
+    id: DhRegEventoField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 118
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string DhRegEventoField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DhRegEventoField As String
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEventoField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NProt
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NProt
+  id: NProt
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: NProt
+  nameWithType: InfEventoRetEvento.NProt
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NProt
+  type: Property
+  source:
+    id: NProt
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 125
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string NProt { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property NProt As String
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NProt*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCNPJDest
+  commentId: M:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCNPJDest
+  id: ShouldSerializeCNPJDest
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeCNPJDest()
+  nameWithType: InfEventoRetEvento.ShouldSerializeCNPJDest()
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCNPJDest()
+  type: Method
+  source:
+    id: ShouldSerializeCNPJDest
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 130
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeCNPJDest()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeCNPJDest As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCNPJDest*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCPFDest
+  commentId: M:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCPFDest
+  id: ShouldSerializeCPFDest
+  parent: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeCPFDest()
+  nameWithType: InfEventoRetEvento.ShouldSerializeCPFDest()
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCPFDest()
+  type: Method
+  source:
+    id: ShouldSerializeCPFDest
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\RetEnvEvento.cs
+    startLine: 132
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeCPFDest()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeCPFDest As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCPFDest*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.Id*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.Id
+  name: Id
+  nameWithType: InfEventoRetEvento.Id
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.Id
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpAmb*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpAmb
+  name: TpAmb
+  nameWithType: InfEventoRetEvento.TpAmb
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpAmb
+- uid: Unimake.Business.DFe.Servicos.TipoAmbiente
+  commentId: T:Unimake.Business.DFe.Servicos.TipoAmbiente
+  parent: Unimake.Business.DFe.Servicos
+  name: TipoAmbiente
+  nameWithType: TipoAmbiente
+  fullName: Unimake.Business.DFe.Servicos.TipoAmbiente
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.VerAplic*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.VerAplic
+  name: VerAplic
+  nameWithType: InfEventoRetEvento.VerAplic
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.VerAplic
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgao*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgao
+  name: COrgao
+  nameWithType: InfEventoRetEvento.COrgao
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgao
+- uid: Unimake.Business.DFe.Servicos.UFBrasil
+  commentId: T:Unimake.Business.DFe.Servicos.UFBrasil
+  parent: Unimake.Business.DFe.Servicos
+  name: UFBrasil
+  nameWithType: UFBrasil
+  fullName: Unimake.Business.DFe.Servicos.UFBrasil
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgaoField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgaoField
+  name: COrgaoField
+  nameWithType: InfEventoRetEvento.COrgaoField
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.COrgaoField
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CStat*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CStat
+  name: CStat
+  nameWithType: InfEventoRetEvento.CStat
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CStat
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XMotivo*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XMotivo
+  name: XMotivo
+  nameWithType: InfEventoRetEvento.XMotivo
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XMotivo
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ChNFe*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ChNFe
+  name: ChNFe
+  nameWithType: InfEventoRetEvento.ChNFe
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ChNFe
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpEvento*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpEvento
+  name: TpEvento
+  nameWithType: InfEventoRetEvento.TpEvento
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.TpEvento
+- uid: Unimake.Business.DFe.Servicos.TipoEventoNFe
+  commentId: T:Unimake.Business.DFe.Servicos.TipoEventoNFe
+  parent: Unimake.Business.DFe.Servicos
+  name: TipoEventoNFe
+  nameWithType: TipoEventoNFe
+  fullName: Unimake.Business.DFe.Servicos.TipoEventoNFe
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XEvento*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XEvento
+  name: XEvento
+  nameWithType: InfEventoRetEvento.XEvento
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.XEvento
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NSeqEvento*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NSeqEvento
+  name: NSeqEvento
+  nameWithType: InfEventoRetEvento.NSeqEvento
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NSeqEvento
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CNPJDest*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CNPJDest
+  name: CNPJDest
+  nameWithType: InfEventoRetEvento.CNPJDest
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CNPJDest
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CPFDest*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CPFDest
+  name: CPFDest
+  nameWithType: InfEventoRetEvento.CPFDest
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.CPFDest
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.EmailDest*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.EmailDest
+  name: EmailDest
+  nameWithType: InfEventoRetEvento.EmailDest
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.EmailDest
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEvento*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEvento
+  name: DhRegEvento
+  nameWithType: InfEventoRetEvento.DhRegEvento
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEvento
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEventoField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEventoField
+  name: DhRegEventoField
+  nameWithType: InfEventoRetEvento.DhRegEventoField
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.DhRegEventoField
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NProt*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NProt
+  name: NProt
+  nameWithType: InfEventoRetEvento.NProt
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.NProt
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCNPJDest*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCNPJDest
+  name: ShouldSerializeCNPJDest
+  nameWithType: InfEventoRetEvento.ShouldSerializeCNPJDest
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCNPJDest
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCPFDest*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCPFDest
+  name: ShouldSerializeCPFDest
+  nameWithType: InfEventoRetEvento.ShouldSerializeCPFDest
+  fullName: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento.ShouldSerializeCPFDest

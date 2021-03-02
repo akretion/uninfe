@@ -1,0 +1,64 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.MDFe
+  commentId: N:Unimake.Business.DFe.Servicos.MDFe
+  id: Unimake.Business.DFe.Servicos.MDFe
+  children:
+  - Unimake.Business.DFe.Servicos.MDFe.Autorizacao
+  - Unimake.Business.DFe.Servicos.MDFe.ConsNaoEnc
+  - Unimake.Business.DFe.Servicos.MDFe.ConsultaProtocolo
+  - Unimake.Business.DFe.Servicos.MDFe.RecepcaoEvento
+  - Unimake.Business.DFe.Servicos.MDFe.RetAutorizacao
+  - Unimake.Business.DFe.Servicos.MDFe.ServicoBase
+  - Unimake.Business.DFe.Servicos.MDFe.StatusServico
+  langs:
+  - csharp
+  - vb
+  name: Unimake.Business.DFe.Servicos.MDFe
+  nameWithType: Unimake.Business.DFe.Servicos.MDFe
+  fullName: Unimake.Business.DFe.Servicos.MDFe
+  type: Namespace
+  assemblies:
+  - Unimake.Business.DFe
+references:
+- uid: Unimake.Business.DFe.Servicos.MDFe.Autorizacao
+  commentId: T:Unimake.Business.DFe.Servicos.MDFe.Autorizacao
+  name: Autorizacao
+  nameWithType: Autorizacao
+  fullName: Unimake.Business.DFe.Servicos.MDFe.Autorizacao
+- uid: Unimake.Business.DFe.Servicos.MDFe.ConsNaoEnc
+  commentId: T:Unimake.Business.DFe.Servicos.MDFe.ConsNaoEnc
+  name: ConsNaoEnc
+  nameWithType: ConsNaoEnc
+  fullName: Unimake.Business.DFe.Servicos.MDFe.ConsNaoEnc
+- uid: Unimake.Business.DFe.Servicos.MDFe.ConsultaProtocolo
+  commentId: T:Unimake.Business.DFe.Servicos.MDFe.ConsultaProtocolo
+  name: ConsultaProtocolo
+  nameWithType: ConsultaProtocolo
+  fullName: Unimake.Business.DFe.Servicos.MDFe.ConsultaProtocolo
+- uid: Unimake.Business.DFe.Servicos.MDFe.RecepcaoEvento
+  commentId: T:Unimake.Business.DFe.Servicos.MDFe.RecepcaoEvento
+  name: RecepcaoEvento
+  nameWithType: RecepcaoEvento
+  fullName: Unimake.Business.DFe.Servicos.MDFe.RecepcaoEvento
+- uid: Unimake.Business.DFe.Servicos.MDFe.RetAutorizacao
+  commentId: T:Unimake.Business.DFe.Servicos.MDFe.RetAutorizacao
+  name: RetAutorizacao
+  nameWithType: RetAutorizacao
+  fullName: Unimake.Business.DFe.Servicos.MDFe.RetAutorizacao
+- uid: Unimake.Business.DFe.Servicos.MDFe.ServicoBase
+  commentId: T:Unimake.Business.DFe.Servicos.MDFe.ServicoBase
+  parent: Unimake.Business.DFe.Servicos.MDFe
+  name: ServicoBase
+  nameWithType: ServicoBase
+  fullName: Unimake.Business.DFe.Servicos.MDFe.ServicoBase
+- uid: Unimake.Business.DFe.Servicos.MDFe.StatusServico
+  commentId: T:Unimake.Business.DFe.Servicos.MDFe.StatusServico
+  name: StatusServico
+  nameWithType: StatusServico
+  fullName: Unimake.Business.DFe.Servicos.MDFe.StatusServico
+- uid: Unimake.Business.DFe.Servicos.MDFe
+  commentId: N:Unimake.Business.DFe.Servicos.MDFe
+  name: Unimake.Business.DFe.Servicos.MDFe
+  nameWithType: Unimake.Business.DFe.Servicos.MDFe
+  fullName: Unimake.Business.DFe.Servicos.MDFe

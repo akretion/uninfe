@@ -1,0 +1,630 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente
+  commentId: T:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente
+  id: ContribuinteEmitente
+  parent: Unimake.Business.DFe.Xml.GNRE
+  children:
+  - Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.CEP
+  - Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Endereco
+  - Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Identificacao
+  - Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Municipio
+  - Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.RazaoSocial
+  - Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Telefone
+  - Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.UF
+  langs:
+  - csharp
+  - vb
+  name: ContribuinteEmitente
+  nameWithType: ContribuinteEmitente
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente
+  type: Class
+  source:
+    id: ContribuinteEmitente
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 76
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class ContribuinteEmitente
+    content.vb: >-
+      <Serializable>
+
+      Public Class ContribuinteEmitente
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Identificacao
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Identificacao
+  id: Identificacao
+  parent: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente
+  langs:
+  - csharp
+  - vb
+  name: Identificacao
+  nameWithType: ContribuinteEmitente.Identificacao
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Identificacao
+  type: Property
+  source:
+    id: Identificacao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 80
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public Identificacao Identificacao { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.GNRE.Identificacao
+    content.vb: Public Property Identificacao As Identificacao
+  overload: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Identificacao*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.RazaoSocial
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.RazaoSocial
+  id: RazaoSocial
+  parent: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente
+  langs:
+  - csharp
+  - vb
+  name: RazaoSocial
+  nameWithType: ContribuinteEmitente.RazaoSocial
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.RazaoSocial
+  type: Property
+  source:
+    id: RazaoSocial
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 83
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public string RazaoSocial { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RazaoSocial As String
+  overload: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.RazaoSocial*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Endereco
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Endereco
+  id: Endereco
+  parent: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente
+  langs:
+  - csharp
+  - vb
+  name: Endereco
+  nameWithType: ContribuinteEmitente.Endereco
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Endereco
+  type: Property
+  source:
+    id: Endereco
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 86
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public string Endereco { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Endereco As String
+  overload: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Endereco*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Municipio
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Municipio
+  id: Municipio
+  parent: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente
+  langs:
+  - csharp
+  - vb
+  name: Municipio
+  nameWithType: ContribuinteEmitente.Municipio
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Municipio
+  type: Property
+  source:
+    id: Municipio
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 89
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public string Municipio { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Municipio As String
+  overload: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Municipio*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.UF
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.UF
+  id: UF
+  parent: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente
+  langs:
+  - csharp
+  - vb
+  name: UF
+  nameWithType: ContribuinteEmitente.UF
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.UF
+  type: Property
+  source:
+    id: UF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 92
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public UFBrasil UF { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.UFBrasil
+    content.vb: Public Property UF As UFBrasil
+  overload: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.UF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.CEP
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.CEP
+  id: CEP
+  parent: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente
+  langs:
+  - csharp
+  - vb
+  name: CEP
+  nameWithType: ContribuinteEmitente.CEP
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.CEP
+  type: Property
+  source:
+    id: CEP
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 95
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public string CEP { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CEP As String
+  overload: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.CEP*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Telefone
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Telefone
+  id: Telefone
+  parent: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente
+  langs:
+  - csharp
+  - vb
+  name: Telefone
+  nameWithType: ContribuinteEmitente.Telefone
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Telefone
+  type: Property
+  source:
+    id: Telefone
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TLoteGNRE.cs
+    startLine: 98
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public string Telefone { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Telefone As String
+  overload: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Telefone*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.GNRE
+  commentId: N:Unimake.Business.DFe.Xml.GNRE
+  name: Unimake.Business.DFe.Xml.GNRE
+  nameWithType: Unimake.Business.DFe.Xml.GNRE
+  fullName: Unimake.Business.DFe.Xml.GNRE
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Identificacao*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Identificacao
+  name: Identificacao
+  nameWithType: ContribuinteEmitente.Identificacao
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Identificacao
+- uid: Unimake.Business.DFe.Xml.GNRE.Identificacao
+  commentId: T:Unimake.Business.DFe.Xml.GNRE.Identificacao
+  parent: Unimake.Business.DFe.Xml.GNRE
+  name: Identificacao
+  nameWithType: Identificacao
+  fullName: Unimake.Business.DFe.Xml.GNRE.Identificacao
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.RazaoSocial*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.RazaoSocial
+  name: RazaoSocial
+  nameWithType: ContribuinteEmitente.RazaoSocial
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.RazaoSocial
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Endereco*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Endereco
+  name: Endereco
+  nameWithType: ContribuinteEmitente.Endereco
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Endereco
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Municipio*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Municipio
+  name: Municipio
+  nameWithType: ContribuinteEmitente.Municipio
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Municipio
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.UF*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.UF
+  name: UF
+  nameWithType: ContribuinteEmitente.UF
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.UF
+- uid: Unimake.Business.DFe.Servicos.UFBrasil
+  commentId: T:Unimake.Business.DFe.Servicos.UFBrasil
+  parent: Unimake.Business.DFe.Servicos
+  name: UFBrasil
+  nameWithType: UFBrasil
+  fullName: Unimake.Business.DFe.Servicos.UFBrasil
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.CEP*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.CEP
+  name: CEP
+  nameWithType: ContribuinteEmitente.CEP
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.CEP
+- uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Telefone*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Telefone
+  name: Telefone
+  nameWithType: ContribuinteEmitente.Telefone
+  fullName: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente.Telefone

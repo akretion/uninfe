@@ -90,6 +90,12 @@ namespace Unimake.Business.DFe
                 httpWebRequest.ClientCertificates.Add(certificado);
                 httpWebRequest.ContentLength = buffer2.Length;
 
+                //Definir dados para conexão com proxy
+                if(soap.Proxy != null)
+                {
+                    httpWebRequest.Proxy = soap.Proxy;
+                }
+
                 var postData = httpWebRequest.GetRequestStream();
                 postData.Write(buffer2, 0, buffer2.Length);
                 postData.Close();
@@ -119,6 +125,8 @@ namespace Unimake.Business.DFe
             }
         }
 
+        #endregion Public Methods
+
         /// <summary>
         /// Efetua validações do certificado - Por hora retorna sempre true, ou seja, não estamos validando nada.
         /// </summary>
@@ -131,7 +139,5 @@ namespace Unimake.Business.DFe
            X509Certificate certificate,
            X509Chain chain,
            SslPolicyErrors sslPolicyErros) => true;
-
-        #endregion Public Methods
     }
 }

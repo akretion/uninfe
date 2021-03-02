@@ -1,0 +1,1319 @@
+### YamlMime:TableOfContent
+- uid: System
+  name: System
+  items:
+  - uid: System.StringExtensions
+    name: StringExtensions
+- uid: Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  items:
+  - uid: Unimake.Business.DFe.Configuration
+    name: Configuration
+  - uid: Unimake.Business.DFe.ConsumirWS
+    name: ConsumirWS
+  - uid: Unimake.Business.DFe.EnumsExtension
+    name: EnumsExtension
+  - uid: Unimake.Business.DFe.ValidarSchema
+    name: ValidarSchema
+  - uid: Unimake.Business.DFe.WSSoap
+    name: WSSoap
+  - uid: Unimake.Business.DFe.XmlReaderExtensions
+    name: XmlReaderExtensions
+- uid: Unimake.Business.DFe.Security
+  name: Unimake.Business.DFe.Security
+  items:
+  - uid: Unimake.Business.DFe.Security.AlgorithmType
+    name: AlgorithmType
+  - uid: Unimake.Business.DFe.Security.AssinaturaDigital
+    name: AssinaturaDigital
+  - uid: Unimake.Business.DFe.Security.ClsX509Certificate2Extension
+    name: ClsX509Certificate2Extension
+  - uid: Unimake.Business.DFe.Security.CryptographicExceptionHandler
+    name: CryptographicExceptionHandler
+- uid: Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  items:
+  - uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+    name: BandeiraOperadoraCartao
+  - uid: Unimake.Business.DFe.Servicos.CamposGNRE
+    name: CamposGNRE
+  - uid: Unimake.Business.DFe.Servicos.CamposGNRE2
+    name: CamposGNRE2
+  - uid: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+    name: CodigoRegimeEspecialTributacao
+  - uid: Unimake.Business.DFe.Servicos.CodigoUnidadeMedidaCTe
+    name: CodigoUnidadeMedidaCTe
+  - uid: Unimake.Business.DFe.Servicos.CodigoUnidadeMedidaMDFe
+    name: CodigoUnidadeMedidaMDFe
+  - uid: Unimake.Business.DFe.Servicos.CondicaoVeiculo
+    name: CondicaoVeiculo
+  - uid: Unimake.Business.DFe.Servicos.CondicaoVIN
+    name: CondicaoVIN
+  - uid: Unimake.Business.DFe.Servicos.Configuracao
+    name: Configuracao
+  - uid: Unimake.Business.DFe.Servicos.CRT
+    name: CRT
+  - uid: Unimake.Business.DFe.Servicos.DestinoOperacao
+    name: DestinoOperacao
+  - uid: Unimake.Business.DFe.Servicos.DirecaoCTe
+    name: DirecaoCTe
+  - uid: Unimake.Business.DFe.Servicos.FerroviaCTe
+    name: FerroviaCTe
+  - uid: Unimake.Business.DFe.Servicos.FinalidadeNFe
+    name: FinalidadeNFe
+  - uid: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao
+    name: FormaImportacaoIntermediacao
+  - uid: Unimake.Business.DFe.Servicos.FormatoImpressaoDACTE
+    name: FormatoImpressaoDACTE
+  - uid: Unimake.Business.DFe.Servicos.FormatoImpressaoDANFE
+    name: FormatoImpressaoDANFE
+  - uid: Unimake.Business.DFe.Servicos.IndicadorEscalaRelevante
+    name: IndicadorEscalaRelevante
+  - uid: Unimake.Business.DFe.Servicos.IndicadorExigibilidadeISSQN
+    name: IndicadorExigibilidadeISSQN
+  - uid: Unimake.Business.DFe.Servicos.IndicadorIEDestinatario
+    name: IndicadorIEDestinatario
+  - uid: Unimake.Business.DFe.Servicos.IndicadorNegociavelCTe
+    name: IndicadorNegociavelCTe
+  - uid: Unimake.Business.DFe.Servicos.IndicadorOrigemProcesso
+    name: IndicadorOrigemProcesso
+  - uid: Unimake.Business.DFe.Servicos.IndicadorPagamento
+    name: IndicadorPagamento
+  - uid: Unimake.Business.DFe.Servicos.IndicadorPresenca
+    name: IndicadorPresenca
+  - uid: Unimake.Business.DFe.Servicos.InformacaoManuseioCTe
+    name: InformacaoManuseioCTe
+  - uid: Unimake.Business.DFe.Servicos.ListaServicoISSQN
+    name: ListaServicoISSQN
+  - uid: Unimake.Business.DFe.Servicos.MeioPagamento
+    name: MeioPagamento
+  - uid: Unimake.Business.DFe.Servicos.Meses
+    name: Meses
+  - uid: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+    name: ModalidadeBaseCalculoICMS
+  - uid: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMSST
+    name: ModalidadeBaseCalculoICMSST
+  - uid: Unimake.Business.DFe.Servicos.ModalidadeFrete
+    name: ModalidadeFrete
+  - uid: Unimake.Business.DFe.Servicos.ModalidadeTransporteCTe
+    name: ModalidadeTransporteCTe
+  - uid: Unimake.Business.DFe.Servicos.ModalidadeTransporteMDFe
+    name: ModalidadeTransporteMDFe
+  - uid: Unimake.Business.DFe.Servicos.ModeloDFe
+    name: ModeloDFe
+  - uid: Unimake.Business.DFe.Servicos.ModeloNF
+    name: ModeloNF
+  - uid: Unimake.Business.DFe.Servicos.MotivoDesoneracaoICMS
+    name: MotivoDesoneracaoICMS
+  - uid: Unimake.Business.DFe.Servicos.OrigemMercadoria
+    name: OrigemMercadoria
+  - uid: Unimake.Business.DFe.Servicos.ProcessoEmissao
+    name: ProcessoEmissao
+  - uid: Unimake.Business.DFe.Servicos.ResponsavelSeguroCTeOS
+    name: ResponsavelSeguroCTeOS
+  - uid: Unimake.Business.DFe.Servicos.ResponsavelSeguroMDFe
+    name: ResponsavelSeguroMDFe
+  - uid: Unimake.Business.DFe.Servicos.SchemaEspecifico
+    name: SchemaEspecifico
+  - uid: Unimake.Business.DFe.Servicos.Servico
+    name: Servico
+  - uid: Unimake.Business.DFe.Servicos.ServicoBase
+    name: ServicoBase
+  - uid: Unimake.Business.DFe.Servicos.SimNao
+    name: SimNao
+  - uid: Unimake.Business.DFe.Servicos.SimNaoLetra
+    name: SimNaoLetra
+  - uid: Unimake.Business.DFe.Servicos.SimNaoOpcionalLetra
+    name: SimNaoOpcionalLetra
+  - uid: Unimake.Business.DFe.Servicos.SituacaoGuiaGNRE
+    name: SituacaoGuiaGNRE
+  - uid: Unimake.Business.DFe.Servicos.TipoAmbiente
+    name: TipoAmbiente
+  - uid: Unimake.Business.DFe.Servicos.TipoArma
+    name: TipoArma
+  - uid: Unimake.Business.DFe.Servicos.TipoAutorCancelamentoSubstituicaoNFCe
+    name: TipoAutorCancelamentoSubstituicaoNFCe
+  - uid: Unimake.Business.DFe.Servicos.TipoCampoExtraGNRE
+    name: TipoCampoExtraGNRE
+  - uid: Unimake.Business.DFe.Servicos.TipoCargaMDFe
+    name: TipoCargaMDFe
+  - uid: Unimake.Business.DFe.Servicos.TipoCarroceriaMDFe
+    name: TipoCarroceriaMDFe
+  - uid: Unimake.Business.DFe.Servicos.TipoComponenteMDFe
+    name: TipoComponenteMDFe
+  - uid: Unimake.Business.DFe.Servicos.TipoCTe
+    name: TipoCTe
+  - uid: Unimake.Business.DFe.Servicos.TipoDFe
+    name: TipoDFe
+  - uid: Unimake.Business.DFe.Servicos.TipoDocumentoOriginarioCTe
+    name: TipoDocumentoOriginarioCTe
+  - uid: Unimake.Business.DFe.Servicos.TipoDocumentoTransporteAnteriorCTe
+    name: TipoDocumentoTransporteAnteriorCTe
+  - uid: Unimake.Business.DFe.Servicos.TipoEmissao
+    name: TipoEmissao
+  - uid: Unimake.Business.DFe.Servicos.TipoEmitenteMDFe
+    name: TipoEmitenteMDFe
+  - uid: Unimake.Business.DFe.Servicos.TipoEventoCTe
+    name: TipoEventoCTe
+  - uid: Unimake.Business.DFe.Servicos.TipoEventoMDFe
+    name: TipoEventoMDFe
+  - uid: Unimake.Business.DFe.Servicos.TipoEventoNFe
+    name: TipoEventoNFe
+  - uid: Unimake.Business.DFe.Servicos.TipoFretamentoCTeOS
+    name: TipoFretamentoCTeOS
+  - uid: Unimake.Business.DFe.Servicos.TipoGuiaGNRE
+    name: TipoGuiaGNRE
+  - uid: Unimake.Business.DFe.Servicos.TipoHoraEntregaCTe
+    name: TipoHoraEntregaCTe
+  - uid: Unimake.Business.DFe.Servicos.TipoIntegracaoPagamento
+    name: TipoIntegracaoPagamento
+  - uid: Unimake.Business.DFe.Servicos.TipoNavegacao
+    name: TipoNavegacao
+  - uid: Unimake.Business.DFe.Servicos.TipoOperacao
+    name: TipoOperacao
+  - uid: Unimake.Business.DFe.Servicos.TipoOperacaoVeicNovo
+    name: TipoOperacaoVeicNovo
+  - uid: Unimake.Business.DFe.Servicos.TipoPeriodoEntregaCTe
+    name: TipoPeriodoEntregaCTe
+  - uid: Unimake.Business.DFe.Servicos.TipoProprietarioMDFe
+    name: TipoProprietarioMDFe
+  - uid: Unimake.Business.DFe.Servicos.TipoRestricaoVeiculo
+    name: TipoRestricaoVeiculo
+  - uid: Unimake.Business.DFe.Servicos.TipoRodado
+    name: TipoRodado
+  - uid: Unimake.Business.DFe.Servicos.TipoServicoCTe
+    name: TipoServicoCTe
+  - uid: Unimake.Business.DFe.Servicos.TipoServicoCTeOS
+    name: TipoServicoCTeOS
+  - uid: Unimake.Business.DFe.Servicos.TipoTrafegoCTe
+    name: TipoTrafegoCTe
+  - uid: Unimake.Business.DFe.Servicos.TipoTransportadorMDFe
+    name: TipoTransportadorMDFe
+  - uid: Unimake.Business.DFe.Servicos.TipoUnidadeCarga
+    name: TipoUnidadeCarga
+  - uid: Unimake.Business.DFe.Servicos.TipoUnidadeTransporte
+    name: TipoUnidadeTransporte
+  - uid: Unimake.Business.DFe.Servicos.TomadorServicoCTe
+    name: TomadorServicoCTe
+  - uid: Unimake.Business.DFe.Servicos.UFBrasil
+    name: UFBrasil
+  - uid: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+    name: UnidadeMedidaArtigoPerigoso
+  - uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+    name: ViaTransporteInternacional
+- uid: Unimake.Business.DFe.Servicos.CTe
+  name: Unimake.Business.DFe.Servicos.CTe
+  items:
+  - uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+    name: Autorizacao
+  - uid: Unimake.Business.DFe.Servicos.CTe.ConsultaCadastro
+    name: ConsultaCadastro
+  - uid: Unimake.Business.DFe.Servicos.CTe.ConsultaProtocolo
+    name: ConsultaProtocolo
+  - uid: Unimake.Business.DFe.Servicos.CTe.DistribuicaoDFe
+    name: DistribuicaoDFe
+  - uid: Unimake.Business.DFe.Servicos.CTe.Inutilizacao
+    name: Inutilizacao
+  - uid: Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento
+    name: RecepcaoEvento
+  - uid: Unimake.Business.DFe.Servicos.CTe.RetAutorizacao
+    name: RetAutorizacao
+  - uid: Unimake.Business.DFe.Servicos.CTe.ServicoBase
+    name: ServicoBase
+  - uid: Unimake.Business.DFe.Servicos.CTe.StatusServico
+    name: StatusServico
+- uid: Unimake.Business.DFe.Servicos.CTeOS
+  name: Unimake.Business.DFe.Servicos.CTeOS
+  items:
+  - uid: Unimake.Business.DFe.Servicos.CTeOS.Autorizacao
+    name: Autorizacao
+  - uid: Unimake.Business.DFe.Servicos.CTeOS.ConsultaCadastro
+    name: ConsultaCadastro
+  - uid: Unimake.Business.DFe.Servicos.CTeOS.ConsultaProtocolo
+    name: ConsultaProtocolo
+  - uid: Unimake.Business.DFe.Servicos.CTeOS.Inutilizacao
+    name: Inutilizacao
+  - uid: Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento
+    name: RecepcaoEvento
+  - uid: Unimake.Business.DFe.Servicos.CTeOS.ServicoBase
+    name: ServicoBase
+  - uid: Unimake.Business.DFe.Servicos.CTeOS.StatusServico
+    name: StatusServico
+- uid: Unimake.Business.DFe.Servicos.GNRE
+  name: Unimake.Business.DFe.Servicos.GNRE
+  items:
+  - uid: Unimake.Business.DFe.Servicos.GNRE.ConsultaConfigUF
+    name: ConsultaConfigUF
+  - uid: Unimake.Business.DFe.Servicos.GNRE.ConsultaResultadoLote
+    name: ConsultaResultadoLote
+  - uid: Unimake.Business.DFe.Servicos.GNRE.LoteRecepcao
+    name: LoteRecepcao
+  - uid: Unimake.Business.DFe.Servicos.GNRE.ServicoBase
+    name: ServicoBase
+- uid: Unimake.Business.DFe.Servicos.Interop
+  name: Unimake.Business.DFe.Servicos.Interop
+  items:
+  - uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1
+    name: IInteropService<TInteropType>
+    name.vb: IInteropService(Of TInteropType)
+- uid: Unimake.Business.DFe.Servicos.MDFe
+  name: Unimake.Business.DFe.Servicos.MDFe
+  items:
+  - uid: Unimake.Business.DFe.Servicos.MDFe.Autorizacao
+    name: Autorizacao
+  - uid: Unimake.Business.DFe.Servicos.MDFe.ConsNaoEnc
+    name: ConsNaoEnc
+  - uid: Unimake.Business.DFe.Servicos.MDFe.ConsultaProtocolo
+    name: ConsultaProtocolo
+  - uid: Unimake.Business.DFe.Servicos.MDFe.RecepcaoEvento
+    name: RecepcaoEvento
+  - uid: Unimake.Business.DFe.Servicos.MDFe.RetAutorizacao
+    name: RetAutorizacao
+  - uid: Unimake.Business.DFe.Servicos.MDFe.ServicoBase
+    name: ServicoBase
+  - uid: Unimake.Business.DFe.Servicos.MDFe.StatusServico
+    name: StatusServico
+- uid: Unimake.Business.DFe.Servicos.NFCe
+  name: Unimake.Business.DFe.Servicos.NFCe
+  items:
+  - uid: Unimake.Business.DFe.Servicos.NFCe.Autorizacao
+    name: Autorizacao
+  - uid: Unimake.Business.DFe.Servicos.NFCe.ConsultaCadastro
+    name: ConsultaCadastro
+  - uid: Unimake.Business.DFe.Servicos.NFCe.ConsultaProtocolo
+    name: ConsultaProtocolo
+  - uid: Unimake.Business.DFe.Servicos.NFCe.Inutilizacao
+    name: Inutilizacao
+  - uid: Unimake.Business.DFe.Servicos.NFCe.RecepcaoEvento
+    name: RecepcaoEvento
+  - uid: Unimake.Business.DFe.Servicos.NFCe.RetAutorizacao
+    name: RetAutorizacao
+  - uid: Unimake.Business.DFe.Servicos.NFCe.StatusServico
+    name: StatusServico
+- uid: Unimake.Business.DFe.Servicos.NFe
+  name: Unimake.Business.DFe.Servicos.NFe
+  items:
+  - uid: Unimake.Business.DFe.Servicos.NFe.Autorizacao
+    name: Autorizacao
+  - uid: Unimake.Business.DFe.Servicos.NFe.ConsultaCadastro
+    name: ConsultaCadastro
+  - uid: Unimake.Business.DFe.Servicos.NFe.ConsultaProtocolo
+    name: ConsultaProtocolo
+  - uid: Unimake.Business.DFe.Servicos.NFe.DistribuicaoDFe
+    name: DistribuicaoDFe
+  - uid: Unimake.Business.DFe.Servicos.NFe.Inutilizacao
+    name: Inutilizacao
+  - uid: Unimake.Business.DFe.Servicos.NFe.RecepcaoEvento
+    name: RecepcaoEvento
+  - uid: Unimake.Business.DFe.Servicos.NFe.RetAutorizacao
+    name: RetAutorizacao
+  - uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase
+    name: ServicoBase
+  - uid: Unimake.Business.DFe.Servicos.NFe.StatusServico
+    name: StatusServico
+- uid: Unimake.Business.DFe.Utility
+  name: Unimake.Business.DFe.Utility
+  items:
+  - uid: Unimake.Business.DFe.Utility.Certificate
+    name: Certificate
+  - uid: Unimake.Business.DFe.Utility.Compress
+    name: Compress
+  - uid: Unimake.Business.DFe.Utility.Converter
+    name: Converter
+  - uid: Unimake.Business.DFe.Utility.Proxy
+    name: Proxy
+  - uid: Unimake.Business.DFe.Utility.XMLUtility
+    name: XMLUtility
+  - uid: Unimake.Business.DFe.Utility.XMLUtility.TNameSpace
+    name: XMLUtility.TNameSpace
+  - uid: Unimake.Business.DFe.Utility.XMLUtility.Utf8StringWriter
+    name: XMLUtility.Utf8StringWriter
+- uid: Unimake.Business.DFe.Xml
+  name: Unimake.Business.DFe.Xml
+  items:
+  - uid: Unimake.Business.DFe.Xml.AssemblyResolver
+    name: AssemblyResolver
+  - uid: Unimake.Business.DFe.Xml.CanonicalizationMethod
+    name: CanonicalizationMethod
+  - uid: Unimake.Business.DFe.Xml.DigestMethod
+    name: DigestMethod
+  - uid: Unimake.Business.DFe.Xml.KeyInfo
+    name: KeyInfo
+  - uid: Unimake.Business.DFe.Xml.Reference
+    name: Reference
+  - uid: Unimake.Business.DFe.Xml.Signature
+    name: Signature
+  - uid: Unimake.Business.DFe.Xml.SignatureMethod
+    name: SignatureMethod
+  - uid: Unimake.Business.DFe.Xml.SignedInfo
+    name: SignedInfo
+  - uid: Unimake.Business.DFe.Xml.Transform
+    name: Transform
+  - uid: Unimake.Business.DFe.Xml.Transforms
+    name: Transforms
+  - uid: Unimake.Business.DFe.Xml.X509Data
+    name: X509Data
+  - uid: Unimake.Business.DFe.Xml.XMLBase
+    name: XMLBase
+- uid: Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  items:
+  - uid: Unimake.Business.DFe.Xml.CTe.Aereo
+    name: Aereo
+  - uid: Unimake.Business.DFe.Xml.CTe.Aquav
+    name: Aquav
+  - uid: Unimake.Business.DFe.Xml.CTe.AutXML
+    name: AutXML
+  - uid: Unimake.Business.DFe.Xml.CTe.Balsa
+    name: Balsa
+  - uid: Unimake.Business.DFe.Xml.CTe.Cobr
+    name: Cobr
+  - uid: Unimake.Business.DFe.Xml.CTe.ComData
+    name: ComData
+  - uid: Unimake.Business.DFe.Xml.CTe.ComHora
+    name: ComHora
+  - uid: Unimake.Business.DFe.Xml.CTe.Comp
+    name: Comp
+  - uid: Unimake.Business.DFe.Xml.CTe.Compl
+    name: Compl
+  - uid: Unimake.Business.DFe.Xml.CTe.ConsCad
+    name: ConsCad
+  - uid: Unimake.Business.DFe.Xml.CTe.ConsNSU
+    name: ConsNSU
+  - uid: Unimake.Business.DFe.Xml.CTe.ConsReciCTe
+    name: ConsReciCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.ConsSitCTe
+    name: ConsSitCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.ConsStatServCte
+    name: ConsStatServCte
+  - uid: Unimake.Business.DFe.Xml.CTe.CTe
+    name: CTe
+  - uid: Unimake.Business.DFe.Xml.CTe.CteProc
+    name: CteProc
+  - uid: Unimake.Business.DFe.Xml.CTe.Dest
+    name: Dest
+  - uid: Unimake.Business.DFe.Xml.CTe.DetCont
+    name: DetCont
+  - uid: Unimake.Business.DFe.Xml.CTe.DetContInfDoc
+    name: DetContInfDoc
+  - uid: Unimake.Business.DFe.Xml.CTe.DetContInfDocInfNF
+    name: DetContInfDocInfNF
+  - uid: Unimake.Business.DFe.Xml.CTe.DetContInfDocInfNFe
+    name: DetContInfDocInfNFe
+  - uid: Unimake.Business.DFe.Xml.CTe.DetEventoCanc
+    name: DetEventoCanc
+  - uid: Unimake.Business.DFe.Xml.CTe.DetEventoCancCompEntrega
+    name: DetEventoCancCompEntrega
+  - uid: Unimake.Business.DFe.Xml.CTe.DetEventoCCE
+    name: DetEventoCCE
+  - uid: Unimake.Business.DFe.Xml.CTe.DetEventoCompEntrega
+    name: DetEventoCompEntrega
+  - uid: Unimake.Business.DFe.Xml.CTe.DetEventoPrestDesacordo
+    name: DetEventoPrestDesacordo
+  - uid: Unimake.Business.DFe.Xml.CTe.DistDFeInt
+    name: DistDFeInt
+  - uid: Unimake.Business.DFe.Xml.CTe.DistNSU
+    name: DistNSU
+  - uid: Unimake.Business.DFe.Xml.CTe.DocAnt
+    name: DocAnt
+  - uid: Unimake.Business.DFe.Xml.CTe.DocZip
+    name: DocZip
+  - uid: Unimake.Business.DFe.Xml.CTe.Dup
+    name: Dup
+  - uid: Unimake.Business.DFe.Xml.CTe.Duto
+    name: Duto
+  - uid: Unimake.Business.DFe.Xml.CTe.EmiDocAnt
+    name: EmiDocAnt
+  - uid: Unimake.Business.DFe.Xml.CTe.EmiOcc
+    name: EmiOcc
+  - uid: Unimake.Business.DFe.Xml.CTe.Emit
+    name: Emit
+  - uid: Unimake.Business.DFe.Xml.CTe.EnderDest
+    name: EnderDest
+  - uid: Unimake.Business.DFe.Xml.CTe.EnderEmit
+    name: EnderEmit
+  - uid: Unimake.Business.DFe.Xml.CTe.EnderExped
+    name: EnderExped
+  - uid: Unimake.Business.DFe.Xml.CTe.EnderFerro
+    name: EnderFerro
+  - uid: Unimake.Business.DFe.Xml.CTe.EnderReceb
+    name: EnderReceb
+  - uid: Unimake.Business.DFe.Xml.CTe.EnderReme
+    name: EnderReme
+  - uid: Unimake.Business.DFe.Xml.CTe.EnderToma
+    name: EnderToma
+  - uid: Unimake.Business.DFe.Xml.CTe.Entrega
+    name: Entrega
+  - uid: Unimake.Business.DFe.Xml.CTe.EnviCTe
+    name: EnviCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.EventoCCeCTe
+    name: EventoCCeCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.EventoCECTe
+    name: EventoCECTe
+  - uid: Unimake.Business.DFe.Xml.CTe.EventoCTe
+    name: EventoCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe
+    name: EventoDetalhe
+  - uid: Unimake.Business.DFe.Xml.CTe.Exped
+    name: Exped
+  - uid: Unimake.Business.DFe.Xml.CTe.Fat
+    name: Fat
+  - uid: Unimake.Business.DFe.Xml.CTe.FerroEnv
+    name: FerroEnv
+  - uid: Unimake.Business.DFe.Xml.CTe.Ferrov
+    name: Ferrov
+  - uid: Unimake.Business.DFe.Xml.CTe.Fluxo
+    name: Fluxo
+  - uid: Unimake.Business.DFe.Xml.CTe.ICMS
+    name: ICMS
+  - uid: Unimake.Business.DFe.Xml.CTe.ICMS00
+    name: ICMS00
+  - uid: Unimake.Business.DFe.Xml.CTe.ICMS20
+    name: ICMS20
+  - uid: Unimake.Business.DFe.Xml.CTe.ICMS45
+    name: ICMS45
+  - uid: Unimake.Business.DFe.Xml.CTe.ICMS60
+    name: ICMS60
+  - uid: Unimake.Business.DFe.Xml.CTe.ICMS90
+    name: ICMS90
+  - uid: Unimake.Business.DFe.Xml.CTe.ICMSOutraUF
+    name: ICMSOutraUF
+  - uid: Unimake.Business.DFe.Xml.CTe.ICMSSN
+    name: ICMSSN
+  - uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+    name: ICMSUFFim
+  - uid: Unimake.Business.DFe.Xml.CTe.IdDocAnt
+    name: IdDocAnt
+  - uid: Unimake.Business.DFe.Xml.CTe.IdDocAntEle
+    name: IdDocAntEle
+  - uid: Unimake.Business.DFe.Xml.CTe.IdDocAntPap
+    name: IdDocAntPap
+  - uid: Unimake.Business.DFe.Xml.CTe.Ide
+    name: Ide
+  - uid: Unimake.Business.DFe.Xml.CTe.Imp
+    name: Imp
+  - uid: Unimake.Business.DFe.Xml.CTe.InfCarga
+    name: InfCarga
+  - uid: Unimake.Business.DFe.Xml.CTe.InfCorrecao
+    name: InfCorrecao
+  - uid: Unimake.Business.DFe.Xml.CTe.InfCTe
+    name: InfCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.InfCteAnu
+    name: InfCteAnu
+  - uid: Unimake.Business.DFe.Xml.CTe.InfCteComp
+    name: InfCteComp
+  - uid: Unimake.Business.DFe.Xml.CTe.InfCTeMultimodal
+    name: InfCTeMultimodal
+  - uid: Unimake.Business.DFe.Xml.CTe.InfCTeNorm
+    name: InfCTeNorm
+  - uid: Unimake.Business.DFe.Xml.CTe.InfCteSub
+    name: InfCteSub
+  - uid: Unimake.Business.DFe.Xml.CTe.InfCTeSupl
+    name: InfCTeSupl
+  - uid: Unimake.Business.DFe.Xml.CTe.InfDoc
+    name: InfDoc
+  - uid: Unimake.Business.DFe.Xml.CTe.InfEntrega
+    name: InfEntrega
+  - uid: Unimake.Business.DFe.Xml.CTe.InfEvento
+    name: InfEvento
+  - uid: Unimake.Business.DFe.Xml.CTe.InfFisco
+    name: InfFisco
+  - uid: Unimake.Business.DFe.Xml.CTe.InfGlobalizado
+    name: InfGlobalizado
+  - uid: Unimake.Business.DFe.Xml.CTe.InfInut
+    name: InfInut
+  - uid: Unimake.Business.DFe.Xml.CTe.InfModal
+    name: InfModal
+  - uid: Unimake.Business.DFe.Xml.CTe.InfNF
+    name: InfNF
+  - uid: Unimake.Business.DFe.Xml.CTe.InfNFe
+    name: InfNFe
+  - uid: Unimake.Business.DFe.Xml.CTe.InfOutros
+    name: InfOutros
+  - uid: Unimake.Business.DFe.Xml.CTe.InfProt
+    name: InfProt
+  - uid: Unimake.Business.DFe.Xml.CTe.InfQ
+    name: InfQ
+  - uid: Unimake.Business.DFe.Xml.CTe.InfRespTec
+    name: InfRespTec
+  - uid: Unimake.Business.DFe.Xml.CTe.InfSeg
+    name: InfSeg
+  - uid: Unimake.Business.DFe.Xml.CTe.InfServVinc
+    name: InfServVinc
+  - uid: Unimake.Business.DFe.Xml.CTe.InfSolicNFF
+    name: InfSolicNFF
+  - uid: Unimake.Business.DFe.Xml.CTe.InfTotAP
+    name: InfTotAP
+  - uid: Unimake.Business.DFe.Xml.CTe.InfUnidCarga
+    name: InfUnidCarga
+  - uid: Unimake.Business.DFe.Xml.CTe.InfUnidTransp
+    name: InfUnidTransp
+  - uid: Unimake.Business.DFe.Xml.CTe.InutCTe
+    name: InutCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.InutCTeInfInut
+    name: InutCTeInfInut
+  - uid: Unimake.Business.DFe.Xml.CTe.Lacre
+    name: Lacre
+  - uid: Unimake.Business.DFe.Xml.CTe.LacUnidCarga
+    name: LacUnidCarga
+  - uid: Unimake.Business.DFe.Xml.CTe.LacUnidTransp
+    name: LacUnidTransp
+  - uid: Unimake.Business.DFe.Xml.CTe.LoteDistDFeInt
+    name: LoteDistDFeInt
+  - uid: Unimake.Business.DFe.Xml.CTe.MultiModal
+    name: MultiModal
+  - uid: Unimake.Business.DFe.Xml.CTe.NatCarga
+    name: NatCarga
+  - uid: Unimake.Business.DFe.Xml.CTe.NoInter
+    name: NoInter
+  - uid: Unimake.Business.DFe.Xml.CTe.NoPeriodo
+    name: NoPeriodo
+  - uid: Unimake.Business.DFe.Xml.CTe.ObsCont
+    name: ObsCont
+  - uid: Unimake.Business.DFe.Xml.CTe.ObsFisco
+    name: ObsFisco
+  - uid: Unimake.Business.DFe.Xml.CTe.Occ
+    name: Occ
+  - uid: Unimake.Business.DFe.Xml.CTe.Pass
+    name: Pass
+  - uid: Unimake.Business.DFe.Xml.CTe.Peri
+    name: Peri
+  - uid: Unimake.Business.DFe.Xml.CTe.ProcEventoCTe
+    name: ProcEventoCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.ProcInutCTe
+    name: ProcInutCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.ProtCTe
+    name: ProtCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.Receb
+    name: Receb
+  - uid: Unimake.Business.DFe.Xml.CTe.RefNF
+    name: RefNF
+  - uid: Unimake.Business.DFe.Xml.CTe.Rem
+    name: Rem
+  - uid: Unimake.Business.DFe.Xml.CTe.RetConsCad
+    name: RetConsCad
+  - uid: Unimake.Business.DFe.Xml.CTe.RetConsReciCTe
+    name: RetConsReciCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.RetConsSitCTe
+    name: RetConsSitCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+    name: RetConsStatServCte
+  - uid: Unimake.Business.DFe.Xml.CTe.RetDistDFeInt
+    name: RetDistDFeInt
+  - uid: Unimake.Business.DFe.Xml.CTe.RetEnviCTe
+    name: RetEnviCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.RetEnviCTeInfRec
+    name: RetEnviCTeInfRec
+  - uid: Unimake.Business.DFe.Xml.CTe.RetEventoCTe
+    name: RetEventoCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.RetEventoCTeInfEvento
+    name: RetEventoCTeInfEvento
+  - uid: Unimake.Business.DFe.Xml.CTe.RetInutCTe
+    name: RetInutCTe
+  - uid: Unimake.Business.DFe.Xml.CTe.Rodo
+    name: Rodo
+  - uid: Unimake.Business.DFe.Xml.CTe.Seg
+    name: Seg
+  - uid: Unimake.Business.DFe.Xml.CTe.SemData
+    name: SemData
+  - uid: Unimake.Business.DFe.Xml.CTe.SemHora
+    name: SemHora
+  - uid: Unimake.Business.DFe.Xml.CTe.Tarifa
+    name: Tarifa
+  - uid: Unimake.Business.DFe.Xml.CTe.Toma3
+    name: Toma3
+  - uid: Unimake.Business.DFe.Xml.CTe.Toma4
+    name: Toma4
+  - uid: Unimake.Business.DFe.Xml.CTe.TomaICMS
+    name: TomaICMS
+  - uid: Unimake.Business.DFe.Xml.CTe.TrafMut
+    name: TrafMut
+  - uid: Unimake.Business.DFe.Xml.CTe.VeicNovos
+    name: VeicNovos
+  - uid: Unimake.Business.DFe.Xml.CTe.VPrest
+    name: VPrest
+- uid: Unimake.Business.DFe.Xml.CTeOS
+  name: Unimake.Business.DFe.Xml.CTeOS
+  items:
+  - uid: Unimake.Business.DFe.Xml.CTeOS.AutXML
+    name: AutXML
+  - uid: Unimake.Business.DFe.Xml.CTeOS.Cobr
+    name: Cobr
+  - uid: Unimake.Business.DFe.Xml.CTeOS.Comp
+    name: Comp
+  - uid: Unimake.Business.DFe.Xml.CTeOS.Compl
+    name: Compl
+  - uid: Unimake.Business.DFe.Xml.CTeOS.CTeOS
+    name: CTeOS
+  - uid: Unimake.Business.DFe.Xml.CTeOS.CteOSProc
+    name: CteOSProc
+  - uid: Unimake.Business.DFe.Xml.CTeOS.Dup
+    name: Dup
+  - uid: Unimake.Business.DFe.Xml.CTeOS.Emit
+    name: Emit
+  - uid: Unimake.Business.DFe.Xml.CTeOS.EnderEmit
+    name: EnderEmit
+  - uid: Unimake.Business.DFe.Xml.CTeOS.EnderToma
+    name: EnderToma
+  - uid: Unimake.Business.DFe.Xml.CTeOS.Fat
+    name: Fat
+  - uid: Unimake.Business.DFe.Xml.CTeOS.ICMS
+    name: ICMS
+  - uid: Unimake.Business.DFe.Xml.CTeOS.ICMS00
+    name: ICMS00
+  - uid: Unimake.Business.DFe.Xml.CTeOS.ICMS20
+    name: ICMS20
+  - uid: Unimake.Business.DFe.Xml.CTeOS.ICMS45
+    name: ICMS45
+  - uid: Unimake.Business.DFe.Xml.CTeOS.ICMS90
+    name: ICMS90
+  - uid: Unimake.Business.DFe.Xml.CTeOS.ICMSOutraUF
+    name: ICMSOutraUF
+  - uid: Unimake.Business.DFe.Xml.CTeOS.ICMSSN
+    name: ICMSSN
+  - uid: Unimake.Business.DFe.Xml.CTeOS.ICMSUFFim
+    name: ICMSUFFim
+  - uid: Unimake.Business.DFe.Xml.CTeOS.Ide
+    name: Ide
+  - uid: Unimake.Business.DFe.Xml.CTeOS.Imp
+    name: Imp
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+    name: InfCTe
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfCteAnu
+    name: InfCteAnu
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfCteComp
+    name: InfCteComp
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfCTeNorm
+    name: InfCTeNorm
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfCteSub
+    name: InfCteSub
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfCTeSupl
+    name: InfCTeSupl
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfDocRef
+    name: InfDocRef
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfFretamento
+    name: InfFretamento
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfModal
+    name: InfModal
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfPercurso
+    name: InfPercurso
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfQ
+    name: InfQ
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfRespTec
+    name: InfRespTec
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfServico
+    name: InfServico
+  - uid: Unimake.Business.DFe.Xml.CTeOS.InfTribFed
+    name: InfTribFed
+  - uid: Unimake.Business.DFe.Xml.CTeOS.ObsCont
+    name: ObsCont
+  - uid: Unimake.Business.DFe.Xml.CTeOS.ObsFisco
+    name: ObsFisco
+  - uid: Unimake.Business.DFe.Xml.CTeOS.Prop
+    name: Prop
+  - uid: Unimake.Business.DFe.Xml.CTeOS.RefNF
+    name: RefNF
+  - uid: Unimake.Business.DFe.Xml.CTeOS.RetCTeOS
+    name: RetCTeOS
+  - uid: Unimake.Business.DFe.Xml.CTeOS.RodoOS
+    name: RodoOS
+  - uid: Unimake.Business.DFe.Xml.CTeOS.Seg
+    name: Seg
+  - uid: Unimake.Business.DFe.Xml.CTeOS.Toma
+    name: Toma
+  - uid: Unimake.Business.DFe.Xml.CTeOS.TomaICMS
+    name: TomaICMS
+  - uid: Unimake.Business.DFe.Xml.CTeOS.Veic
+    name: Veic
+  - uid: Unimake.Business.DFe.Xml.CTeOS.VPrest
+    name: VPrest
+- uid: Unimake.Business.DFe.Xml.GNRE
+  name: Unimake.Business.DFe.Xml.GNRE
+  items:
+  - uid: Unimake.Business.DFe.Xml.GNRE.CampoAdicional
+    name: CampoAdicional
+  - uid: Unimake.Business.DFe.Xml.GNRE.CampoExtra
+    name: CampoExtra
+  - uid: Unimake.Business.DFe.Xml.GNRE.CamposAdicionais
+    name: CamposAdicionais
+  - uid: Unimake.Business.DFe.Xml.GNRE.CamposExtras
+    name: CamposExtras
+  - uid: Unimake.Business.DFe.Xml.GNRE.Codigo
+    name: Codigo
+  - uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteDestinatario
+    name: ContribuinteDestinatario
+  - uid: Unimake.Business.DFe.Xml.GNRE.ContribuinteEmitente
+    name: ContribuinteEmitente
+  - uid: Unimake.Business.DFe.Xml.GNRE.DocumentoOrigem
+    name: DocumentoOrigem
+  - uid: Unimake.Business.DFe.Xml.GNRE.ExigeCamposAdicionais
+    name: ExigeCamposAdicionais
+  - uid: Unimake.Business.DFe.Xml.GNRE.ExigeConvenio
+    name: ExigeConvenio
+  - uid: Unimake.Business.DFe.Xml.GNRE.ExigeDataPagamento
+    name: ExigeDataPagamento
+  - uid: Unimake.Business.DFe.Xml.GNRE.ExigeDataVencimento
+    name: ExigeDataVencimento
+  - uid: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita
+    name: ExigeDetalhamentoReceita
+  - uid: Unimake.Business.DFe.Xml.GNRE.ExigeDocumentoOrigem
+    name: ExigeDocumentoOrigem
+  - uid: Unimake.Business.DFe.Xml.GNRE.ExigeParcela
+    name: ExigeParcela
+  - uid: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao
+    name: ExigePeriodoApuracao
+  - uid: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoReferencia
+    name: ExigePeriodoReferencia
+  - uid: Unimake.Business.DFe.Xml.GNRE.ExigeProduto
+    name: ExigeProduto
+  - uid: Unimake.Business.DFe.Xml.GNRE.ExigeReceita
+    name: ExigeReceita
+  - uid: Unimake.Business.DFe.Xml.GNRE.ExigeUfFavorecida
+    name: ExigeUfFavorecida
+  - uid: Unimake.Business.DFe.Xml.GNRE.ExigeValorFecp
+    name: ExigeValorFecp
+  - uid: Unimake.Business.DFe.Xml.GNRE.Guias
+    name: Guias
+  - uid: Unimake.Business.DFe.Xml.GNRE.Identificacao
+    name: Identificacao
+  - uid: Unimake.Business.DFe.Xml.GNRE.Item
+    name: Item
+  - uid: Unimake.Business.DFe.Xml.GNRE.ItensGNRE
+    name: ItensGNRE
+  - uid: Unimake.Business.DFe.Xml.GNRE.MotivosRejeicao
+    name: MotivosRejeicao
+  - uid: Unimake.Business.DFe.Xml.GNRE.PeriodoApuracao
+    name: PeriodoApuracao
+  - uid: Unimake.Business.DFe.Xml.GNRE.PeriodosApuracao
+    name: PeriodosApuracao
+  - uid: Unimake.Business.DFe.Xml.GNRE.Produto
+    name: Produto
+  - uid: Unimake.Business.DFe.Xml.GNRE.Produtos
+    name: Produtos
+  - uid: Unimake.Business.DFe.Xml.GNRE.Receita
+    name: Receita
+  - uid: Unimake.Business.DFe.Xml.GNRE.ReceitaConfigUF
+    name: ReceitaConfigUF
+  - uid: Unimake.Business.DFe.Xml.GNRE.Receitas
+    name: Receitas
+  - uid: Unimake.Business.DFe.Xml.GNRE.Recibo
+    name: Recibo
+  - uid: Unimake.Business.DFe.Xml.GNRE.Referencia
+    name: Referencia
+  - uid: Unimake.Business.DFe.Xml.GNRE.Resultado
+    name: Resultado
+  - uid: Unimake.Business.DFe.Xml.GNRE.SituacaoConsulta
+    name: SituacaoConsulta
+  - uid: Unimake.Business.DFe.Xml.GNRE.SituacaoProcess
+    name: SituacaoProcess
+  - uid: Unimake.Business.DFe.Xml.GNRE.SituacaoRecepcao
+    name: SituacaoRecepcao
+  - uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf
+    name: TConfigUf
+  - uid: Unimake.Business.DFe.Xml.GNRE.TConsLoteGNRE
+    name: TConsLoteGNRE
+  - uid: Unimake.Business.DFe.Xml.GNRE.TConsultaConfigUf
+    name: TConsultaConfigUf
+  - uid: Unimake.Business.DFe.Xml.GNRE.TDadosGNRE
+    name: TDadosGNRE
+  - uid: Unimake.Business.DFe.Xml.GNRE.Tipo
+    name: Tipo
+  - uid: Unimake.Business.DFe.Xml.GNRE.TipoDocumentoOrigem
+    name: TipoDocumentoOrigem
+  - uid: Unimake.Business.DFe.Xml.GNRE.TiposDocumentosOrigem
+    name: TiposDocumentosOrigem
+  - uid: Unimake.Business.DFe.Xml.GNRE.TLoteGNRE
+    name: TLoteGNRE
+  - uid: Unimake.Business.DFe.Xml.GNRE.TResultLoteGNRE
+    name: TResultLoteGNRE
+  - uid: Unimake.Business.DFe.Xml.GNRE.TRetLoteGNRE
+    name: TRetLoteGNRE
+  - uid: Unimake.Business.DFe.Xml.GNRE.Valor
+    name: Valor
+  - uid: Unimake.Business.DFe.Xml.GNRE.Valor.ItemValorTipo
+    name: Valor.ItemValorTipo
+  - uid: Unimake.Business.DFe.Xml.GNRE.ValorExigido
+    name: ValorExigido
+  - uid: Unimake.Business.DFe.Xml.GNRE.VersoesXmlCampoAdicional
+    name: VersoesXmlCampoAdicional
+  - uid: Unimake.Business.DFe.Xml.GNRE.VersoesXmlDocOrigem
+    name: VersoesXmlDocOrigem
+- uid: Unimake.Business.DFe.Xml.MDFe
+  name: Unimake.Business.DFe.Xml.MDFe
+  items:
+  - uid: Unimake.Business.DFe.Xml.MDFe.Aereo
+    name: Aereo
+  - uid: Unimake.Business.DFe.Xml.MDFe.Aquav
+    name: Aquav
+  - uid: Unimake.Business.DFe.Xml.MDFe.AutXML
+    name: AutXML
+  - uid: Unimake.Business.DFe.Xml.MDFe.Comp
+    name: Comp
+  - uid: Unimake.Business.DFe.Xml.MDFe.Condutor
+    name: Condutor
+  - uid: Unimake.Business.DFe.Xml.MDFe.CondutorMDFe
+    name: CondutorMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.ConsMDFeNaoEnc
+    name: ConsMDFeNaoEnc
+  - uid: Unimake.Business.DFe.Xml.MDFe.ConsReciMDFe
+    name: ConsReciMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.ConsSitMDFe
+    name: ConsSitMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.ConsStatServMDFe
+    name: ConsStatServMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.DetEventoCanc
+    name: DetEventoCanc
+  - uid: Unimake.Business.DFe.Xml.MDFe.DetEventoCCE
+    name: DetEventoCCE
+  - uid: Unimake.Business.DFe.Xml.MDFe.DetEventoEncMDFe
+    name: DetEventoEncMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.DetEventoIncCondutor
+    name: DetEventoIncCondutor
+  - uid: Unimake.Business.DFe.Xml.MDFe.DetEventoIncDFeMDFe
+    name: DetEventoIncDFeMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.DetEventoManif
+    name: DetEventoManif
+  - uid: Unimake.Business.DFe.Xml.MDFe.Emit
+    name: Emit
+  - uid: Unimake.Business.DFe.Xml.MDFe.EnderEmit
+    name: EnderEmit
+  - uid: Unimake.Business.DFe.Xml.MDFe.EnviMDFe
+    name: EnviMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.EventoDetalhe
+    name: EventoDetalhe
+  - uid: Unimake.Business.DFe.Xml.MDFe.EventoIncCondutor
+    name: EventoIncCondutor
+  - uid: Unimake.Business.DFe.Xml.MDFe.EventoIncDFeMDFe
+    name: EventoIncDFeMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.EventoMDFe
+    name: EventoMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.Ferrov
+    name: Ferrov
+  - uid: Unimake.Business.DFe.Xml.MDFe.Ide
+    name: Ide
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfAdic
+    name: InfAdic
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfANTT
+    name: InfANTT
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfBanc
+    name: InfBanc
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfCIOT
+    name: InfCIOT
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfContratante
+    name: InfContratante
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfDoc
+    name: InfDoc
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfDocInfMDFe
+    name: InfDocInfMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfEmbComb
+    name: InfEmbComb
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial
+    name: InfEntregaParcial
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfEvento
+    name: InfEvento
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfFisco
+    name: InfFisco
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfLocalCarrega
+    name: InfLocalCarrega
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfLocalDescarrega
+    name: InfLocalDescarrega
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfLotacao
+    name: InfLotacao
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfMDFe
+    name: InfMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfMDFeSupl
+    name: InfMDFeSupl
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfModal
+    name: InfModal
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfMunCarrega
+    name: InfMunCarrega
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfMunDescarga
+    name: InfMunDescarga
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfMunDescargaInfCTe
+    name: InfMunDescargaInfCTe
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfMunDescargaInfMDFeTransp
+    name: InfMunDescargaInfMDFeTransp
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfMunDescargaInfNFe
+    name: InfMunDescargaInfNFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfPag
+    name: InfPag
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfPercurso
+    name: InfPercurso
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfPrazo
+    name: InfPrazo
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfProt
+    name: InfProt
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfResp
+    name: InfResp
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfRespTec
+    name: InfRespTec
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfSeg
+    name: InfSeg
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfTermCarreg
+    name: InfTermCarreg
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfTermDescarreg
+    name: InfTermDescarreg
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfUnidCarga
+    name: InfUnidCarga
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfUnidCargaVazia
+    name: InfUnidCargaVazia
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfUnidTransp
+    name: InfUnidTransp
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfUnidTranspVazia
+    name: InfUnidTranspVazia
+  - uid: Unimake.Business.DFe.Xml.MDFe.Lacre
+    name: Lacre
+  - uid: Unimake.Business.DFe.Xml.MDFe.LacRodo
+    name: LacRodo
+  - uid: Unimake.Business.DFe.Xml.MDFe.LacUnidCarga
+    name: LacUnidCarga
+  - uid: Unimake.Business.DFe.Xml.MDFe.LacUnidTransp
+    name: LacUnidTransp
+  - uid: Unimake.Business.DFe.Xml.MDFe.MDFe
+    name: MDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.MdfeProc
+    name: MdfeProc
+  - uid: Unimake.Business.DFe.Xml.MDFe.Peri
+    name: Peri
+  - uid: Unimake.Business.DFe.Xml.MDFe.ProcEventoMDFe
+    name: ProcEventoMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.ProdPred
+    name: ProdPred
+  - uid: Unimake.Business.DFe.Xml.MDFe.Prop
+    name: Prop
+  - uid: Unimake.Business.DFe.Xml.MDFe.ProtMDFe
+    name: ProtMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.RetConsMDFeNaoEnc
+    name: RetConsMDFeNaoEnc
+  - uid: Unimake.Business.DFe.Xml.MDFe.RetConsMDFeNaoEncInfMDFe
+    name: RetConsMDFeNaoEncInfMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.RetConsReciMDFe
+    name: RetConsReciMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.RetConsSitMDFe
+    name: RetConsSitMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.RetConsStatServMDFe
+    name: RetConsStatServMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.RetEnviMDFe
+    name: RetEnviMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.RetEnviMDFeInfRec
+    name: RetEnviMDFeInfRec
+  - uid: Unimake.Business.DFe.Xml.MDFe.RetEventoMDFe
+    name: RetEventoMDFe
+  - uid: Unimake.Business.DFe.Xml.MDFe.RetEventoMDFeInfEvento
+    name: RetEventoMDFeInfEvento
+  - uid: Unimake.Business.DFe.Xml.MDFe.Rodo
+    name: Rodo
+  - uid: Unimake.Business.DFe.Xml.MDFe.Seg
+    name: Seg
+  - uid: Unimake.Business.DFe.Xml.MDFe.Tot
+    name: Tot
+  - uid: Unimake.Business.DFe.Xml.MDFe.Trem
+    name: Trem
+  - uid: Unimake.Business.DFe.Xml.MDFe.Vag
+    name: Vag
+  - uid: Unimake.Business.DFe.Xml.MDFe.ValePed
+    name: ValePed
+  - uid: Unimake.Business.DFe.Xml.MDFe.VeicReboque
+    name: VeicReboque
+  - uid: Unimake.Business.DFe.Xml.MDFe.VeicTracao
+    name: VeicTracao
+- uid: Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  items:
+  - uid: Unimake.Business.DFe.Xml.NFe.Adi
+    name: Adi
+  - uid: Unimake.Business.DFe.Xml.NFe.Arma
+    name: Arma
+  - uid: Unimake.Business.DFe.Xml.NFe.AutXML
+    name: AutXML
+  - uid: Unimake.Business.DFe.Xml.NFe.Avulsa
+    name: Avulsa
+  - uid: Unimake.Business.DFe.Xml.NFe.Cana
+    name: Cana
+  - uid: Unimake.Business.DFe.Xml.NFe.Card
+    name: Card
+  - uid: Unimake.Business.DFe.Xml.NFe.CIDE
+    name: CIDE
+  - uid: Unimake.Business.DFe.Xml.NFe.Cobr
+    name: Cobr
+  - uid: Unimake.Business.DFe.Xml.NFe.COFINS
+    name: COFINS
+  - uid: Unimake.Business.DFe.Xml.NFe.COFINSAliq
+    name: COFINSAliq
+  - uid: Unimake.Business.DFe.Xml.NFe.COFINSNT
+    name: COFINSNT
+  - uid: Unimake.Business.DFe.Xml.NFe.COFINSOutr
+    name: COFINSOutr
+  - uid: Unimake.Business.DFe.Xml.NFe.COFINSQtde
+    name: COFINSQtde
+  - uid: Unimake.Business.DFe.Xml.NFe.COFINSST
+    name: COFINSST
+  - uid: Unimake.Business.DFe.Xml.NFe.Comb
+    name: Comb
+  - uid: Unimake.Business.DFe.Xml.NFe.Compra
+    name: Compra
+  - uid: Unimake.Business.DFe.Xml.NFe.ConsCad
+    name: ConsCad
+  - uid: Unimake.Business.DFe.Xml.NFe.ConsCadBase
+    name: ConsCadBase
+  - uid: Unimake.Business.DFe.Xml.NFe.ConsChNFe
+    name: ConsChNFe
+  - uid: Unimake.Business.DFe.Xml.NFe.ConsNSU
+    name: ConsNSU
+  - uid: Unimake.Business.DFe.Xml.NFe.ConsReciNFe
+    name: ConsReciNFe
+  - uid: Unimake.Business.DFe.Xml.NFe.ConsSitNFe
+    name: ConsSitNFe
+  - uid: Unimake.Business.DFe.Xml.NFe.ConsStatServ
+    name: ConsStatServ
+  - uid: Unimake.Business.DFe.Xml.NFe.Deduc
+    name: Deduc
+  - uid: Unimake.Business.DFe.Xml.NFe.Dest
+    name: Dest
+  - uid: Unimake.Business.DFe.Xml.NFe.Det
+    name: Det
+  - uid: Unimake.Business.DFe.Xml.NFe.DetEventoCanc
+    name: DetEventoCanc
+  - uid: Unimake.Business.DFe.Xml.NFe.DetEventoCancSubst
+    name: DetEventoCancSubst
+  - uid: Unimake.Business.DFe.Xml.NFe.DetEventoCCE
+    name: DetEventoCCE
+  - uid: Unimake.Business.DFe.Xml.NFe.DetEventoManif
+    name: DetEventoManif
+  - uid: Unimake.Business.DFe.Xml.NFe.DetExport
+    name: DetExport
+  - uid: Unimake.Business.DFe.Xml.NFe.DetPag
+    name: DetPag
+  - uid: Unimake.Business.DFe.Xml.NFe.DI
+    name: DI
+  - uid: Unimake.Business.DFe.Xml.NFe.DistDFeInt
+    name: DistDFeInt
+  - uid: Unimake.Business.DFe.Xml.NFe.DistNSU
+    name: DistNSU
+  - uid: Unimake.Business.DFe.Xml.NFe.DocZip
+    name: DocZip
+  - uid: Unimake.Business.DFe.Xml.NFe.Dup
+    name: Dup
+  - uid: Unimake.Business.DFe.Xml.NFe.Emit
+    name: Emit
+  - uid: Unimake.Business.DFe.Xml.NFe.Encerrante
+    name: Encerrante
+  - uid: Unimake.Business.DFe.Xml.NFe.Ender
+    name: Ender
+  - uid: Unimake.Business.DFe.Xml.NFe.EnderDest
+    name: EnderDest
+  - uid: Unimake.Business.DFe.Xml.NFe.EnderEmit
+    name: EnderEmit
+  - uid: Unimake.Business.DFe.Xml.NFe.Entrega
+    name: Entrega
+  - uid: Unimake.Business.DFe.Xml.NFe.EnvEvento
+    name: EnvEvento
+  - uid: Unimake.Business.DFe.Xml.NFe.EnviNFe
+    name: EnviNFe
+  - uid: Unimake.Business.DFe.Xml.NFe.Evento
+    name: Evento
+  - uid: Unimake.Business.DFe.Xml.NFe.EventoDetalhe
+    name: EventoDetalhe
+  - uid: Unimake.Business.DFe.Xml.NFe.Exporta
+    name: Exporta
+  - uid: Unimake.Business.DFe.Xml.NFe.ExportInd
+    name: ExportInd
+  - uid: Unimake.Business.DFe.Xml.NFe.Fat
+    name: Fat
+  - uid: Unimake.Business.DFe.Xml.NFe.ForDia
+    name: ForDia
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMS
+    name: ICMS
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMS00
+    name: ICMS00
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMS10
+    name: ICMS10
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMS20
+    name: ICMS20
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMS30
+    name: ICMS30
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMS40
+    name: ICMS40
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMS51
+    name: ICMS51
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMS60
+    name: ICMS60
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMS70
+    name: ICMS70
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMS90
+    name: ICMS90
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMSPart
+    name: ICMSPart
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101
+    name: ICMSSN101
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMSSN102
+    name: ICMSSN102
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMSSN103
+    name: ICMSSN103
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMSSN201
+    name: ICMSSN201
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMSSN202
+    name: ICMSSN202
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMSSN300
+    name: ICMSSN300
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMSSN400
+    name: ICMSSN400
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMSSN500
+    name: ICMSSN500
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+    name: ICMSSN900
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMSST
+    name: ICMSST
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMSTot
+    name: ICMSTot
+  - uid: Unimake.Business.DFe.Xml.NFe.ICMSUFDest
+    name: ICMSUFDest
+  - uid: Unimake.Business.DFe.Xml.NFe.Ide
+    name: Ide
+  - uid: Unimake.Business.DFe.Xml.NFe.II
+    name: II
+  - uid: Unimake.Business.DFe.Xml.NFe.Imposto
+    name: Imposto
+  - uid: Unimake.Business.DFe.Xml.NFe.ImpostoDevol
+    name: ImpostoDevol
+  - uid: Unimake.Business.DFe.Xml.NFe.InfAdic
+    name: InfAdic
+  - uid: Unimake.Business.DFe.Xml.NFe.InfCad
+    name: InfCad
+  - uid: Unimake.Business.DFe.Xml.NFe.InfCons
+    name: InfCons
+  - uid: Unimake.Business.DFe.Xml.NFe.InfConsRetorno
+    name: InfConsRetorno
+  - uid: Unimake.Business.DFe.Xml.NFe.InfEvento
+    name: InfEvento
+  - uid: Unimake.Business.DFe.Xml.NFe.InfEventoRetEvento
+    name: InfEventoRetEvento
+  - uid: Unimake.Business.DFe.Xml.NFe.InfInut
+    name: InfInut
+  - uid: Unimake.Business.DFe.Xml.NFe.InfNFe
+    name: InfNFe
+  - uid: Unimake.Business.DFe.Xml.NFe.InfNFeSupl
+    name: InfNFeSupl
+  - uid: Unimake.Business.DFe.Xml.NFe.InfProt
+    name: InfProt
+  - uid: Unimake.Business.DFe.Xml.NFe.InfRespTec
+    name: InfRespTec
+  - uid: Unimake.Business.DFe.Xml.NFe.InutNFe
+    name: InutNFe
+  - uid: Unimake.Business.DFe.Xml.NFe.InutNFeInfInut
+    name: InutNFeInfInut
+  - uid: Unimake.Business.DFe.Xml.NFe.IPI
+    name: IPI
+  - uid: Unimake.Business.DFe.Xml.NFe.IPIDevol
+    name: IPIDevol
+  - uid: Unimake.Business.DFe.Xml.NFe.IPINT
+    name: IPINT
+  - uid: Unimake.Business.DFe.Xml.NFe.IPITrib
+    name: IPITrib
+  - uid: Unimake.Business.DFe.Xml.NFe.ISSQN
+    name: ISSQN
+  - uid: Unimake.Business.DFe.Xml.NFe.ISSQNtot
+    name: ISSQNtot
+  - uid: Unimake.Business.DFe.Xml.NFe.Lacres
+    name: Lacres
+  - uid: Unimake.Business.DFe.Xml.NFe.LocalBase
+    name: LocalBase
+  - uid: Unimake.Business.DFe.Xml.NFe.LoteDistDFeInt
+    name: LoteDistDFeInt
+  - uid: Unimake.Business.DFe.Xml.NFe.Med
+    name: Med
+  - uid: Unimake.Business.DFe.Xml.NFe.NFe
+    name: NFe
+  - uid: Unimake.Business.DFe.Xml.NFe.NfeProc
+    name: NfeProc
+  - uid: Unimake.Business.DFe.Xml.NFe.NFref
+    name: NFref
+  - uid: Unimake.Business.DFe.Xml.NFe.ObsCont
+    name: ObsCont
+  - uid: Unimake.Business.DFe.Xml.NFe.ObsFisco
+    name: ObsFisco
+  - uid: Unimake.Business.DFe.Xml.NFe.Pag
+    name: Pag
+  - uid: Unimake.Business.DFe.Xml.NFe.PIS
+    name: PIS
+  - uid: Unimake.Business.DFe.Xml.NFe.PISAliq
+    name: PISAliq
+  - uid: Unimake.Business.DFe.Xml.NFe.PISNT
+    name: PISNT
+  - uid: Unimake.Business.DFe.Xml.NFe.PISOutr
+    name: PISOutr
+  - uid: Unimake.Business.DFe.Xml.NFe.PISQtde
+    name: PISQtde
+  - uid: Unimake.Business.DFe.Xml.NFe.PISST
+    name: PISST
+  - uid: Unimake.Business.DFe.Xml.NFe.ProcEventoNFe
+    name: ProcEventoNFe
+  - uid: Unimake.Business.DFe.Xml.NFe.ProcInutNFe
+    name: ProcInutNFe
+  - uid: Unimake.Business.DFe.Xml.NFe.ProcRef
+    name: ProcRef
+  - uid: Unimake.Business.DFe.Xml.NFe.Prod
+    name: Prod
+  - uid: Unimake.Business.DFe.Xml.NFe.ProtNFe
+    name: ProtNFe
+  - uid: Unimake.Business.DFe.Xml.NFe.Rastro
+    name: Rastro
+  - uid: Unimake.Business.DFe.Xml.NFe.Reboque
+    name: Reboque
+  - uid: Unimake.Business.DFe.Xml.NFe.RetConsCad
+    name: RetConsCad
+  - uid: Unimake.Business.DFe.Xml.NFe.RetConsReciNFe
+    name: RetConsReciNFe
+  - uid: Unimake.Business.DFe.Xml.NFe.RetConsSitNFe
+    name: RetConsSitNFe
+  - uid: Unimake.Business.DFe.Xml.NFe.RetConsStatServ
+    name: RetConsStatServ
+  - uid: Unimake.Business.DFe.Xml.NFe.RetDistDFeInt
+    name: RetDistDFeInt
+  - uid: Unimake.Business.DFe.Xml.NFe.RetEnvEvento
+    name: RetEnvEvento
+  - uid: Unimake.Business.DFe.Xml.NFe.RetEnviNFe
+    name: RetEnviNFe
+  - uid: Unimake.Business.DFe.Xml.NFe.RetEnviNFeInfRec
+    name: RetEnviNFeInfRec
+  - uid: Unimake.Business.DFe.Xml.NFe.RetEvento
+    name: RetEvento
+  - uid: Unimake.Business.DFe.Xml.NFe.RetInutNFe
+    name: RetInutNFe
+  - uid: Unimake.Business.DFe.Xml.NFe.Retirada
+    name: Retirada
+  - uid: Unimake.Business.DFe.Xml.NFe.RetTransp
+    name: RetTransp
+  - uid: Unimake.Business.DFe.Xml.NFe.RetTrib
+    name: RetTrib
+  - uid: Unimake.Business.DFe.Xml.NFe.Total
+    name: Total
+  - uid: Unimake.Business.DFe.Xml.NFe.Transp
+    name: Transp
+  - uid: Unimake.Business.DFe.Xml.NFe.Transporta
+    name: Transporta
+  - uid: Unimake.Business.DFe.Xml.NFe.VeicProd
+    name: VeicProd
+  - uid: Unimake.Business.DFe.Xml.NFe.VeicTransp
+    name: VeicTransp
+  - uid: Unimake.Business.DFe.Xml.NFe.VeiculoBase
+    name: VeiculoBase
+  - uid: Unimake.Business.DFe.Xml.NFe.Vol
+    name: Vol
+- uid: Unimake.Security.Exceptions
+  name: Unimake.Security.Exceptions
+  items:
+  - uid: Unimake.Security.Exceptions.ExceptionCertificadoDigital
+    name: ExceptionCertificadoDigital
+- uid: Unimake.Security.Platform
+  name: Unimake.Security.Platform
+  items:
+  - uid: Unimake.Security.Platform.CertificadoDigital
+    name: CertificadoDigital
+- uid: Unimake.Security.Platform.Exceptions
+  name: Unimake.Security.Platform.Exceptions
+  items:
+  - uid: Unimake.Security.Platform.Exceptions.CarregarCertificadoException
+    name: CarregarCertificadoException
+  - uid: Unimake.Security.Platform.Exceptions.CertificadoDigitalException
+    name: CertificadoDigitalException

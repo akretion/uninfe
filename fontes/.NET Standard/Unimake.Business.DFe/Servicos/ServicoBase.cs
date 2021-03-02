@@ -28,7 +28,7 @@ namespace Unimake.Business.DFe.Servicos
         /// Definir o nome da tag que contem as propriedades de acordo com o serviço que está sendo executado
         /// </summary>
         /// <returns>Nome da tag</returns>
-        private string DefinirNomeTag() => GetType().Name;
+        private string DefinirNomeTag() => GetType().Name.Replace("`1", "");
 
         /// <summary>
         /// Namespace onde estão contidos os XMLs de configurações embutidos na DLL por tipo de documento (NFe, NFCe, CTe, etc...)
@@ -408,6 +408,11 @@ namespace Unimake.Business.DFe.Servicos
             Configuracoes.WebSoapString = Configuracoes.WebSoapString.Replace("{versaoDados}", Configuracoes.SchemaVersao);
         }
 
+        /// <summary>
+        /// Forçar carregar o PIN do certificado A3 em casos de XML que não tem assinatura
+        /// </summary>
+        private void CarregarPINA3() => new Certificate().CarregarPINA3(Configuracoes.CertificadoDigital, Configuracoes.CertificadoA3PIN);
+
         #endregion Private Methods
 
         #region Protected Properties
@@ -506,8 +511,10 @@ namespace Unimake.Business.DFe.Servicos
             if(!Configuracoes.Definida)
             {
                 DefinirConfiguracao();
-                LerXmlConfigGeral();
             }
+
+            //Esta linha tem que ficar fora do if acima, pois tem que carregar esta parte, independente, pois o que é carregado sempre é automático. Mudar isso, vai gerar falha no UNINFE, principalmente no envio dos eventos, onde eu defino as configurações manualmente. Wandrey 07/12/2020
+            LerXmlConfigGeral();
         }
 
         /// <summary>
@@ -600,12 +607,17 @@ namespace Unimake.Business.DFe.Servicos
         [ComVisible(false)]
         public virtual void Executar()
         {
-            if(!string.IsNullOrWhiteSpace(Configuracoes.TagAssinatura) &&
-               !AssinaturaDigital.EstaAssinado(ConteudoXML, Configuracoes.TagAssinatura))
+            if(!string.IsNullOrWhiteSpace(Configuracoes.TagAssinatura))
             {
-                AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, Configuracoes.CertificadoA3PIN, "Id");
-
-                AjustarXMLAposAssinado();
+                if(!AssinaturaDigital.EstaAssinado(ConteudoXML, Configuracoes.TagAssinatura))
+                {
+                    AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, Configuracoes.CertificadoA3PIN, "Id");
+                    AjustarXMLAposAssinado();
+                }
+            }
+            else if(!string.IsNullOrWhiteSpace(Configuracoes.CertificadoA3PIN))
+            {
+                CarregarPINA3();
             }
 
             var soap = new WSSoap
@@ -615,7 +627,10 @@ namespace Unimake.Business.DFe.Servicos
                 TagRetorno = Configuracoes.WebTagRetorno,
                 VersaoSoap = Configuracoes.WebSoapVersion,
                 SoapString = Configuracoes.WebSoapString,
-                ContentType = Configuracoes.WebContentType
+                ContentType = Configuracoes.WebContentType,
+                Proxy = (Configuracoes.HasProxy ? Proxy.DefinirServidor(Configuracoes.ProxyAutoDetect,
+                                                                        Configuracoes.ProxyUser,
+                                                                        Configuracoes.ProxyPassword) : null)
             };
 
             var consumirWS = new ConsumirWS();

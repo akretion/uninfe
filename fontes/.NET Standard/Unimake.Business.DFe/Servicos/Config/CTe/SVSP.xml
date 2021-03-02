@@ -86,6 +86,11 @@
           <SchemaArquivo>eventoCTe_v{0}.xsd</SchemaArquivo>
           <SchemaArquivoEspecifico>evPrestDesacordo_v{0}.xsd</SchemaArquivoEspecifico>
         </Tipo>
+        <Tipo>
+          <ID>110113</ID>
+          <SchemaArquivo>eventoCTe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>evEPECCTe_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
       </SchemasEspecificos>
       <TagAssinatura>eventoCTe</TagAssinatura>
       <TagAtributoID>infEvento</TagAtributoID>

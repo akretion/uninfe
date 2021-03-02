@@ -26,6 +26,7 @@ namespace Unimake.Business.DFe.Utility
             /// Conteúdo do Namespace
             /// </summary>
             public string NS { get; set; }
+
             /// <summary>
             /// Prefixo do Namespace
             /// </summary>
@@ -54,6 +55,137 @@ namespace Unimake.Business.DFe.Utility
         #region Public Methods
 
         /// <summary>
+        /// Executa uma verificação simples para garantir que a chave do DFe (NFe, CTe, MDfe, NFCe, CTeOS) é valida, se tiver erros retorna exceção.
+        /// </summary>
+        /// <param name="chave">Chave do DFe a ser verificada</param>
+        /// <example>
+        /// try
+        /// {
+        ///     XMLUtility.ChecarChaveDFe("41201280568835000181570010000004841004185096");
+        /// }
+        /// catch(Exception ex)
+        /// {
+        ///     //Se chave tiver algum erro, vai retornar uma exceção.
+        ///     MessageBox.Show(ex.Message);
+        /// }
+        /// </example>
+        public static void ChecarChaveDFe(string chave)
+        {
+            #region Verificar o tamanho da chave
+
+            if(chave.Length != 44)
+            {
+                throw new Exception("Tamanho da chave do documento fiscal eletrônico está diferente de 44 dígitos. Chave deve ter exatamente 44 dígitos.");
+            }
+
+            #endregion
+
+            #region Verificar se o mês da emissão da nota da chave é válida
+
+            var mes = Convert.ToInt32(chave.Substring(4, 2));
+
+            if(mes < 1 || mes > 12)
+            {
+                throw new Exception("Mês da data de emissão, do documento fiscal eletrônico, que compõe a chave, está incorreto. Mês informado: " + mes.ToString() + ". Meses permitidos: 01 a 12.");
+            }
+
+            #endregion
+
+            #region Verificar se o modelo da chave é válido
+
+            var modeloDFe = Convert.ToInt32(chave.Substring(20, 2));
+            var tipoEnum = typeof(ModeloDFe);
+            if(!Enum.IsDefined(tipoEnum, modeloDFe))
+            {
+                var modeloPermitido = string.Empty;
+
+                foreach(var item in tipoEnum.GetFields())
+                {
+                    if(Attribute.GetCustomAttribute(item, typeof(XmlEnumAttribute)) is XmlEnumAttribute attribute)
+                    {
+                        if(!string.IsNullOrEmpty(modeloPermitido))
+                        {
+                            modeloPermitido += ", ";
+                        }
+
+                        modeloPermitido += attribute.Name;
+                    }
+                }
+
+                throw new Exception("Modelo, do documento fiscal eletrônico, que compõe a chave, está incorreto. Modelo informado: " + modeloDFe.ToString() + ". Modelos permitidos: " + modeloPermitido + ".");
+            }
+
+            #endregion
+
+            #region Verificar se o tipo de emissão da chave é válido
+
+            var tpEmis = Convert.ToInt32(chave.Substring(34, 1));
+            tipoEnum = typeof(TipoEmissao);
+            if (!Enum.IsDefined(tipoEnum, tpEmis))
+            {
+                var tipoPermitido = string.Empty;
+
+                foreach(var item in tipoEnum.GetFields())
+                {
+                    if(Attribute.GetCustomAttribute(item, typeof(XmlEnumAttribute)) is XmlEnumAttribute attribute)
+                    {
+                        if(!string.IsNullOrEmpty(tipoPermitido))
+                        {
+                            tipoPermitido += ", ";
+                        }
+
+                        tipoPermitido += attribute.Name;
+                    }
+                }
+
+                throw new Exception("Tipo de emissão, do documento fiscal eletrônico, que compõe a chave, está incorreto. Tipo informado: " + tpEmis.ToString() + ". Tipos permitidos: " + tipoPermitido + ".");
+            }
+
+            #endregion
+
+            #region Verificar se a UF da chave é válida
+
+            var cUF = Convert.ToInt32(chave.Substring(0, 2));
+            tipoEnum = typeof(UFBrasil);
+
+            if(!Enum.IsDefined(tipoEnum, cUF) || cUF >= 90 || cUF == 0)
+            {
+                var cufPermitido = string.Empty;
+
+                foreach(var item in Enum.GetValues(tipoEnum))
+                {
+                    UFBrasil ufBrasil = (UFBrasil)Enum.Parse(typeof(UFBrasil), item.ToString());
+                    var uf = (int)ufBrasil;
+
+                    if(uf > 0 && uf< 90)
+                    {
+                        if(!string.IsNullOrEmpty(cufPermitido))
+                        {
+                            cufPermitido += ", ";
+                        }
+
+                        cufPermitido += uf.ToString();
+                    }
+                }
+
+                throw new Exception("Código da UF, do documento fiscal eletrônico, que compõe a chave, está incorreto. Código informado: " + cUF.ToString() + ". Códigos permitidos: " + cufPermitido + ".");
+            }
+
+            #endregion
+
+            #region Verificar se o dígito verificador está correto
+
+            var digitoCalc = XMLUtility.CalcularDVChave(chave.Substring(0, 43));
+            var digitoInf = chave.Substring(43, 1);
+            if (digitoCalc != Convert.ToInt32(digitoInf))
+            {
+                throw new Exception("Dígito verificador, do documento fiscal eletrônico, que compõe a chave, está incorreto. Dígito informado: " + digitoInf + ". Dígito calculado: " + digitoCalc.ToString() + ".");
+            }
+
+            #endregion
+        }
+
+        /// <summary>
         /// Gerar o dígito da chave da NFe, CTe, MDFe ou NFCe
         /// </summary>
         /// <param name="chave">Chave do DFe (sem o dígito) que deve ser calculado o dígito verificador.</param>
@@ -68,7 +200,7 @@ namespace Unimake.Business.DFe.Utility
             int i, j, Digito;
             const string PESO = "4329876543298765432987654329876543298765432";
 
-            chave = chave.Replace("NFe", "");
+            chave = chave.Replace("NFe", "").Replace("CTe", "").Replace("MDFe", "");
 
             if(chave.Length != 43)
             {
@@ -141,7 +273,7 @@ namespace Unimake.Business.DFe.Utility
         /// <returns>Retorna o tipo do documento eletrônico</returns>
         public static TipoDFe DetectDFeType(string xml)
         {
-            var tipoDFe = TipoDFe.NFe;
+            var tipoDFe = TipoDFe.Desconhecido;
 
             if(xml.Contains("<mod>55</mod>"))
             {
@@ -157,7 +289,7 @@ namespace Unimake.Business.DFe.Utility
             }
             else if(xml.Contains("<mod>67</mod>"))
             {
-                tipoDFe = TipoDFe.CTe;
+                tipoDFe = TipoDFe.CTeOS;
             }
             else if(xml.Contains("infMDFe"))
             {
@@ -169,6 +301,201 @@ namespace Unimake.Business.DFe.Utility
             }
 
             return tipoDFe;
+        }
+
+        /// <summary>
+        /// Retorna o tipo de documento fiscal com base no XML de evento.
+        /// </summary>
+        /// <param name="xml">XML válido de evento.</param>
+        /// <returns></returns>
+        public static TipoDFe DetectEventByDFeType(string xml)
+        {
+            var tipoDFe = TipoDFe.Desconhecido;
+            var tagId = "<infEvento Id=\"ID";
+
+            if(!xml.Contains(tagId))
+            {
+                return tipoDFe;
+            }
+
+            var pos = xml.IndexOf(tagId);
+            pos += tagId.Length + 26;
+            var modelo = xml.Substring(pos, 2);
+
+            switch(modelo)
+            {
+                case "55":
+                    tipoDFe = TipoDFe.NFe;
+                    break;
+
+                case "57":
+                    tipoDFe = TipoDFe.CTe;
+                    break;
+
+                case "58":
+                    tipoDFe = TipoDFe.MDFe;
+                    break;
+
+                case "65":
+                    tipoDFe = TipoDFe.NFCe;
+                    break;
+
+                case "67":
+                    tipoDFe = TipoDFe.CTeOS;
+                    break;
+            }
+
+            return tipoDFe;
+        }
+
+        /// <summary>
+        /// Detectar qual o tipo de evento do CT-e.
+        /// </summary>
+        /// <param name="xml">XML a ser analisado</param>
+        /// <returns>Retorna o tipo do evento do CT-e</returns>
+        public static TipoEventoCTe DetectEventoCTeType(XmlDocument xml) => DetectEventoCTeType(xml.OuterXml);
+
+        /// <summary>
+        /// Detectar qual o tipo de evento do CT-e.
+        /// </summary>
+        /// <param name="xml">XML a ser analisado</param>
+        /// <returns>Retorna o tipo do evento do CT-e</returns>
+        public static TipoEventoCTe DetectEventoCTeType(string xml)
+        {
+            var tipoEventoCTe = TipoEventoCTe.Desconhecido;
+
+            if(DetectEventByDFeType(xml) == TipoDFe.Desconhecido)
+            {
+                return tipoEventoCTe;
+            }
+
+            if(xml.Contains("<tpEvento>110110</tpEvento>"))
+            {
+                tipoEventoCTe = TipoEventoCTe.CartaCorrecao;
+            }
+            else if(xml.Contains("<tpEvento>110111</tpEvento>"))
+            {
+                tipoEventoCTe = TipoEventoCTe.Cancelamento;
+            }
+            else if(xml.Contains("<tpEvento>110180</tpEvento>"))
+            {
+                tipoEventoCTe = TipoEventoCTe.ComprovanteEntrega;
+            }
+            else if(xml.Contains("<tpEvento>110181</tpEvento>"))
+            {
+                tipoEventoCTe = TipoEventoCTe.CancelamentoComprovanteEntrega;
+            }
+            else if(xml.Contains("<tpEvento>610110</tpEvento>"))
+            {
+                tipoEventoCTe = TipoEventoCTe.PrestDesacordo;
+            }
+            else if(xml.Contains("<tpEvento>310620</tpEvento>"))
+            {
+                tipoEventoCTe = TipoEventoCTe.RegistroPassagem;
+            }
+            return tipoEventoCTe;
+        }
+
+        /// <summary>
+        /// Detectar qual o tipo de evento do MDF-e.
+        /// </summary>
+        /// <param name="xml">XML a ser analisado</param>
+        /// <returns>Retorna o tipo do evento do MDF-e</returns>
+        public static TipoEventoMDFe DetectEventoMDFeType(XmlDocument xml) => DetectEventoMDFeType(xml.OuterXml);
+
+        /// <summary>
+        /// Detectar qual o tipo de evento do MDF-e.
+        /// </summary>
+        /// <param name="xml">XML a ser analisado</param>
+        /// <returns>Retorna o tipo do evento do MDF-e</returns>
+        public static TipoEventoMDFe DetectEventoMDFeType(string xml)
+        {
+            var tipoEventoMDFe = TipoEventoMDFe.Desconhecido;
+
+            if(DetectEventByDFeType(xml) == TipoDFe.Desconhecido)
+            {
+                return tipoEventoMDFe;
+            }
+
+            if(xml.Contains("<tpEvento>110111</tpEvento>"))
+            {
+                tipoEventoMDFe = TipoEventoMDFe.Cancelamento;
+            }
+            else if(xml.Contains("<tpEvento>110112</tpEvento>"))
+            {
+                tipoEventoMDFe = TipoEventoMDFe.Encerramento;
+            }
+            else if(xml.Contains("<tpEvento>110114</tpEvento>"))
+            {
+                tipoEventoMDFe = TipoEventoMDFe.InclusaoCondutor;
+            }
+            else if(xml.Contains("<tpEvento>110115</tpEvento>"))
+            {
+                tipoEventoMDFe = TipoEventoMDFe.InclusaoDFe;
+            }
+
+            return tipoEventoMDFe;
+        }
+
+        /// <summary>
+        /// Detectar qual o tipo de evento do dodocumento fiscal eletrônico do XML
+        /// </summary>
+        /// <param name="xml">XML a ser analisado</param>
+        /// <returns>Retorna o tipo do evento do documento eletrônico</returns>
+        public static TipoEventoNFe DetectEventoNFeType(XmlDocument xml) => DetectEventoNFeType(xml.OuterXml);
+
+        /// <summary>
+        /// Detectar qual o tipo de evento do documento fiscal eletrônico do XML
+        /// </summary>
+        /// <param name="xml">XML a ser analisado</param>
+        /// <returns>Retorna o tipo do evento do documento eletrônico</returns>
+        public static TipoEventoNFe DetectEventoNFeType(string xml)
+        {
+            var tipoEventoNFe = TipoEventoNFe.Desconhecido;
+
+            if(DetectEventByDFeType(xml) == TipoDFe.Desconhecido)
+            {
+                return tipoEventoNFe;
+            }
+
+            if(xml.Contains("<tpEvento>110110</tpEvento>"))
+            {
+                tipoEventoNFe = TipoEventoNFe.CartaCorrecao;
+            }
+            else if(xml.Contains("<tpEvento>110111</tpEvento>"))
+            {
+                tipoEventoNFe = TipoEventoNFe.Cancelamento;
+            }
+            else if(xml.Contains("<tpEvento>110112</tpEvento>"))
+            {
+                tipoEventoNFe = TipoEventoNFe.CancelamentoPorSubstituicao;
+            }
+            else if(xml.Contains("<tpEvento>110140</tpEvento>"))
+            {
+                tipoEventoNFe = TipoEventoNFe.EPEC;
+            }
+            else if(xml.Contains("<tpEvento>111500</tpEvento>"))
+            {
+                tipoEventoNFe = TipoEventoNFe.PedidoProrrogacao;
+            }
+            else if(xml.Contains("<tpEvento>210200</tpEvento>"))
+            {
+                tipoEventoNFe = TipoEventoNFe.ManifestacaoConfirmacaoOperacao;
+            }
+            else if(xml.Contains("<tpEvento>210210</tpEvento>"))
+            {
+                tipoEventoNFe = TipoEventoNFe.ManifestacaoCienciaOperacao;
+            }
+            else if(xml.Contains("<tpEvento>210220</tpEvento>"))
+            {
+                tipoEventoNFe = TipoEventoNFe.ManifestacaoDesconhecimentoOperacao;
+            }
+            else if(xml.Contains("<tpEvento>210240</tpEvento>"))
+            {
+                tipoEventoNFe = TipoEventoNFe.ManifestacaoOperacaoNaoRealizada;
+            }
+
+            return tipoEventoNFe;
         }
 
         /// <summary>
@@ -215,6 +542,7 @@ namespace Unimake.Business.DFe.Utility
                     break;
 
                 case TipoDFe.CTe:
+                case TipoDFe.CTeOS:
                     typeString = "CTe";
                     break;
 
@@ -228,6 +556,170 @@ namespace Unimake.Business.DFe.Utility
             }
 
             var pedacinhos = xml.Split(new string[] { $"Id=\"{typeString}" }, StringSplitOptions.None);
+
+            if(pedacinhos.Length < 1)
+            {
+                return default;
+            }
+
+            return pedacinhos[1].Substring(0, 44);
+        }
+
+        /// <summary>
+        /// Busca o número da chave do do evento do CT-e
+        /// </summary>
+        /// <param name="xml">Conteúdo do XML para busca da chave</param>
+        /// <returns>Chave do evento do CT-e</returns>
+        public static string GetChaveEventoCTe(string xml) => GetChaveEventoCTe(xml, DetectEventoCTeType(xml));
+
+        /// <summary>
+        /// Busca o número da chave do do evento do CT-e
+        /// </summary>
+        /// <param name="xml">Conteúdo do XML para busca da chave</param>
+        /// <returns>Chave do evento do CT-e</returns>
+        public static string GetChaveEventoCTe(string xml, TipoEventoCTe typeEventoCTe)
+        {
+            var typeString = "";
+
+            switch(typeEventoCTe)
+            {
+                case TipoEventoCTe.CartaCorrecao:
+                    typeString = "110110";
+                    break;
+
+                case TipoEventoCTe.Cancelamento:
+                    typeString = "110111";
+                    break;
+
+                case TipoEventoCTe.ComprovanteEntrega:
+                    typeString = "110180";
+                    break;
+
+                case TipoEventoCTe.CancelamentoComprovanteEntrega:
+                    typeString = "110181";
+                    break;
+
+                case TipoEventoCTe.PrestDesacordo:
+                    typeString = "610110";
+                    break;
+
+                case TipoEventoCTe.RegistroPassagem:
+                    typeString = "310620";
+                    break;
+            }
+
+            var pedacinhos = xml.Split(new string[] { $"Id=\"ID{typeString}" }, StringSplitOptions.None);
+
+            if(pedacinhos.Length < 1)
+            {
+                return default;
+            }
+
+            return pedacinhos[1].Substring(0, 44);
+        }
+
+        /// <summary>
+        /// Busca o número da chave do do evento do MDF-e
+        /// </summary>
+        /// <param name="xml">Conteúdo do XML para busca da chave</param>
+        /// <returns>Chave do evento do MDF-e</returns>
+        public static string GetChaveEventoMDFe(string xml) => GetChaveEventoMDFe(xml, DetectEventoMDFeType(xml));
+
+        /// <summary>
+        /// Busca o número da chave do do evento do MDF-e
+        /// </summary>
+        /// <param name="xml">Conteúdo do XML para busca da chave</param>
+        /// <returns>Chave do evento do MDF-e</returns>
+        public static string GetChaveEventoMDFe(string xml, TipoEventoMDFe typeEventoMDFe)
+        {
+            var typeString = "";
+
+            switch(typeEventoMDFe)
+            {
+                case TipoEventoMDFe.Cancelamento:
+                    typeString = "110111";
+                    break;
+
+                case TipoEventoMDFe.Encerramento:
+                    typeString = "110112";
+                    break;
+
+                case TipoEventoMDFe.InclusaoCondutor:
+                    typeString = "110114";
+                    break;
+
+                case TipoEventoMDFe.InclusaoDFe:
+                    typeString = "110115";
+                    break;
+            }
+
+            var pedacinhos = xml.Split(new string[] { $"Id=\"ID{typeString}" }, StringSplitOptions.None);
+
+            if(pedacinhos.Length < 1)
+            {
+                return default;
+            }
+
+            return pedacinhos[1].Substring(0, 44);
+        }
+
+        /// <summary>
+        /// Busca o número da chave do Documento Fiscal Eletrônico no XML do Documento Fiscal Eletrônico
+        /// </summary>
+        /// <param name="xml">Conteúdo do XML para busca da chave</param>
+        /// <returns>Chave do DFe (Documento Fiscal Eletrônico = NFe, NFCe, CTe, etc...)</returns>
+        public static string GetChaveEventoNFe(string xml) => GetChaveEventoNFe(xml, DetectEventoNFeType(xml));
+
+        /// <summary>
+        /// Busca o número da chave do Documento Fiscal Eletrônico no XML do Documento Fiscal Eletrônico
+        /// </summary>
+        /// <param name="xml">Conteúdo do XML para busca da chave</param>
+        /// <param name="typeEventoDFe">Tipo do Evento DFe</param>
+        /// <returns>Chave do evento do DFe (Documento Fiscal Eletrônico = NFe, NFCe, CTe, etc...)</returns>
+        public static string GetChaveEventoNFe(string xml, TipoEventoNFe typeEventoDFe)
+        {
+            var typeString = "";
+
+            switch(typeEventoDFe)
+            {
+                case TipoEventoNFe.CartaCorrecao:
+                    typeString = "110110";
+                    break;
+
+                case TipoEventoNFe.Cancelamento:
+                    typeString = "110111";
+                    break;
+
+                case TipoEventoNFe.CancelamentoPorSubstituicao:
+                    typeString = "110112";
+                    break;
+
+                case TipoEventoNFe.EPEC:
+                    typeString = "110140";
+                    break;
+
+                case TipoEventoNFe.PedidoProrrogacao:
+                    typeString = "111500";
+                    break;
+
+                case TipoEventoNFe.ManifestacaoConfirmacaoOperacao:
+                    typeString = "210200";
+                    break;
+
+                case TipoEventoNFe.ManifestacaoCienciaOperacao:
+                    typeString = "210210";
+                    break;
+
+                case TipoEventoNFe.ManifestacaoDesconhecimentoOperacao:
+                    typeString = "210220";
+                    break;
+
+                case TipoEventoNFe.ManifestacaoOperacaoNaoRealizada:
+                    typeString = "210240";
+                    break;
+            }
+
+            var pedacinhos = xml.Split(new string[] { $"Id=\"ID{typeString}" }, StringSplitOptions.None);
 
             if(pedacinhos.Length < 1)
             {

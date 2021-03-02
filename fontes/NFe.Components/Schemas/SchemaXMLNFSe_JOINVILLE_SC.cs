@@ -18,7 +18,7 @@ namespace NFSe.Components
                 TagAtributoId = "InfDeclaracaoPrestacaoServico",
                 TagLoteAssinatura = "EnviarLoteRpsEnvio",
                 TagLoteAtributoId = "LoteRps",
-                TargetNameSpace = "http://nfewshomologacao.joinville.sc.gov.br"
+                TargetNameSpace = ""
             });
 
             #endregion XML de lote RPS
@@ -33,7 +33,7 @@ namespace NFSe.Components
                 Descricao = "XML de Consulta de Lote RPS",
                 TagAssinatura = "",
                 TagAtributoId = "",
-                TargetNameSpace = "http://nfewshomologacao.joinville.sc.gov.br"
+                TargetNameSpace = ""
             });
 
             #endregion XML de Consulta de Lote RPS
@@ -48,7 +48,7 @@ namespace NFSe.Components
                 Descricao = "XML de Consulta da NFSe por RPS",
                 TagAssinatura = "",
                 TagAtributoId = "",
-                TargetNameSpace = "http://nfewshomologacao.joinville.sc.gov.br"
+                TargetNameSpace = ""
             });
 
             #endregion Consulta NFSe por Rps
@@ -63,7 +63,7 @@ namespace NFSe.Components
                 Descricao = "XML de Consulta da NFSe por período",
                 TagAssinatura = "",
                 TagAtributoId = "",
-                TargetNameSpace = "http://nfewshomologacao.joinville.sc.gov.br"
+                TargetNameSpace = ""
             });
 
             #endregion Consulta NFSe
@@ -78,7 +78,7 @@ namespace NFSe.Components
                 Descricao = "XML de Consulta Situação do Lote RPS",
                 TagAssinatura = "",
                 TagAtributoId = "",
-                TargetNameSpace = "http://nfewshomologacao.joinville.sc.gov.br"
+                TargetNameSpace = ""
             });
 
             #endregion XML de Consulta de NFSe por Faixa
@@ -93,7 +93,7 @@ namespace NFSe.Components
                 Descricao = "XML de Cancelamento da NFS-e",
                 TagAssinatura = "Pedido",
                 TagAtributoId = "InfPedidoCancelamento",
-                TargetNameSpace = "http://nfewshomologacao.joinville.sc.gov.br"
+                TargetNameSpace = ""
             });
 
             #endregion XML de Cancelamento de NFS-e

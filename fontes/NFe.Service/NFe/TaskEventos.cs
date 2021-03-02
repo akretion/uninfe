@@ -1,14 +1,14 @@
-﻿using NFe.Certificado;
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.Settings;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using Unimake.Business.DFe.Servicos;
+using Unimake.Business.DFe.Xml.NFe;
 
 namespace NFe.Service
 {
-    public class TaskNFeEventos : TaskAbst
+    public class TaskNFeEventos: TaskAbst
     {
         public TaskNFeEventos(string arquivo)
         {
@@ -17,7 +17,7 @@ namespace NFe.Service
             dadosEnvEvento = new DadosenvEvento();
 
             NomeArquivoXML = arquivo;
-            if (vXmlNfeDadosMsgEhXML)
+            if(vXmlNfeDadosMsgEhXML)
             {
                 ConteudoXML.PreserveWhitespace = false;
                 ConteudoXML.Load(arquivo);
@@ -35,16 +35,16 @@ namespace NFe.Service
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             try
             {
-                //Ler o XML para pegar parâmetros de envio
                 EnvEvento(emp, dadosEnvEvento);
+                ValidaEvento(emp, dadosEnvEvento);
 
-                string currentEvento = dadosEnvEvento.eventos[0].tpEvento;
+                var currentEvento = dadosEnvEvento.eventos[0].tpEvento;
                 // mudei para aqui caso haja erro e qdo for gravar o arquivo de erro precisamos saber qual o servico
-                switch (EnumHelper.StringToEnum<ConvertTxt.tpEventos>(currentEvento))
+                switch(EnumHelper.StringToEnum<ConvertTxt.tpEventos>(currentEvento))
                 {
                     case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
                     case ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe:
@@ -74,123 +74,108 @@ namespace NFe.Service
                         Servico = Servicos.EventoManifestacaoDest;
                         break;
                 }
-                ValidaEvento(emp, dadosEnvEvento);
 
-                //Pegar o estado da chave, pois na cOrgao pode vir o estado 91 - Wandreuy 22/08/2012
-                int cOrgao = dadosEnvEvento.eventos[0].cOrgao;
-                //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir tpEmis
-                int tpEmis = this.dadosEnvEvento.eventos[0].tpEmis; //Convert.ToInt32(this.dadosEnvEvento.eventos[0].chNFe.Substring(34, 1));
-                int ufParaWS = cOrgao;
-
-                //Se o cOrgao for igual a 91 tenho que mudar a ufParaWS para que na hora de buscar o WSDL para conectar ao serviço, ele consiga encontrar. Wandrey 23/01/2013
-                if (cOrgao == 91)
-                    ufParaWS = Convert.ToInt32(dadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
-
-                switch (Servico)
+                if(vXmlNfeDadosMsgEhXML)
                 {
-                    case Servicos.EventoCancelamento:
-                        switch ((TipoEmissao)tpEmis)
-                        {
-                            case TipoEmissao.teSVCAN:
-                            case TipoEmissao.teSVCRS:
-                            case TipoEmissao.teSVCSP:
-                            case TipoEmissao.teNormal:
-                                //Se a nota fiscal foi emitida em ambiente NORMAL, o cancelamento tem que ir para o ambiente normal ou gera uma rejeição. Wandrey 15/02/2013
-                                break;
+                    var xml = new EnvEvento();
+                    xml = Unimake.Business.DFe.Utility.XMLUtility.Deserializar<EnvEvento>(ConteudoXML);
 
-                            default:
-                                //Os demais tipos de emissão tem que sempre ir para o ambiente NORMAL. Wandrey 22/02/2013
-                                tpEmis = (int)TipoEmissao.teNormal;
-                                break;
-                        }
-                        break;
+                    var ehNFCe = xml.Evento[0].InfEvento.ChNFe.Substring(20, 2) == "65";
+                    var tpEmis = dadosEnvEvento.eventos[0].tpEmis;
 
-                    case Servicos.EventoCCe:
-                        //CCe só existe no ambiente Normal. Wandrey 22/04/2013
-                        tpEmis = (int)TipoEmissao.teNormal;
-                        break;
-                }
-
-                if (vXmlNfeDadosMsgEhXML)
-                {
-                    //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(
-                        Servico,
-                        emp,
-                        ufParaWS,
-                        dadosEnvEvento.eventos[0].tpAmb,
-                        tpEmis,
-                        string.Empty,
-                        dadosEnvEvento.eventos[0].mod,
-                        0);
-
-                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(ufParaWS, dadosEnvEvento.eventos[0].tpAmb, tpEmis, Servico);
-
-                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                    string xmlExtEnvio = string.Empty;
-                    string xmlExtRetorno = string.Empty;
-
-                    object oCabecMsg = null;
-                    //Criei o try para deixar compativel a versão 3.10 com a 4.0
-                    try
+                    switch(Servico)
                     {
-                        oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico));
-                        wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), cOrgao.ToString());
-                        wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), NFe.ConvertTxt.versoes.VersaoXMLEvento);
+                        case Servicos.EventoCancelamento:
+                            switch((Components.TipoEmissao)tpEmis)
+                            {
+                                case Components.TipoEmissao.teSVCAN:
+                                case Components.TipoEmissao.teSVCRS:
+                                case Components.TipoEmissao.teSVCSP:
+                                case Components.TipoEmissao.teNormal:
+                                    //Se a nota fiscal foi emitida em ambiente NORMAL, o cancelamento tem que ir para o ambiente normal ou gera uma rejeição. Wandrey 15/02/2013
+                                    break;
+
+                                default:
+                                    //Os demais tipos de emissão tem que sempre ir para o ambiente NORMAL. Wandrey 22/02/2013
+                                    tpEmis = (int)Components.TipoEmissao.teNormal;
+                                    break;
+                            }
+                            break;
+
+                        case Servicos.EventoCCe:
+                            //CCe só existe no ambiente Normal. Wandrey 22/04/2013
+                            tpEmis = (int)Components.TipoEmissao.teNormal;
+                            break;
                     }
-                    catch { }
 
-                    if (novaNomenclatura)
+                    var configuracao = new Configuracao
                     {
-                        xmlExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML.Replace(".xml", "");
-                        xmlExtRetorno = Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).RetornoXML.Replace(".xml", "");
+                        TipoDFe = (ehNFCe ? TipoDFe.NFCe : TipoDFe.NFe),
+                        TipoEmissao = (Unimake.Business.DFe.Servicos.TipoEmissao)tpEmis,
+                        CertificadoDigital = Empresas.Configuracoes[emp].X509Certificado
+                    };
+
+                    if(ehNFCe)
+                    {
+                        var recepcaoEvento = new Unimake.Business.DFe.Servicos.NFCe.RecepcaoEvento(xml, configuracao);
+                        recepcaoEvento.Executar();
+
+                        vStrXmlRetorno = recepcaoEvento.RetornoWSString;
                     }
                     else
                     {
-                        switch (Servico)
+                        var recepcaoEvento = new Unimake.Business.DFe.Servicos.NFe.RecepcaoEvento(xml, configuracao);
+                        recepcaoEvento.Executar();
+
+                        vStrXmlRetorno = recepcaoEvento.RetornoWSString;
+                    }
+
+                    var xmlExtEnvio = string.Empty;
+                    var xmlExtRetorno = string.Empty;
+
+                    if(novaNomenclatura)
+                    {
+                        xmlExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML;
+                        xmlExtRetorno = Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).RetornoXML;
+                    }
+                    else
+                    {
+                        switch(Servico)
                         {
                             case Servicos.EventoCCe:
-                                xmlExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML.Replace(".xml", "");
-                                xmlExtRetorno = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).RetornoXML.Replace(".xml", "");
+                                xmlExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML;
+                                xmlExtRetorno = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).RetornoXML;
                                 break;
 
                             case Servicos.EventoCancelamento:
-                                xmlExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML.Replace(".xml", "");
-                                xmlExtRetorno = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).RetornoXML.Replace(".xml", "");
+                                xmlExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML;
+                                xmlExtRetorno = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).RetornoXML;
                                 break;
 
                             default:
-                                xmlExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML.Replace(".xml", "");
-                                xmlExtRetorno = Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).RetornoXML.Replace(".xml", "");
+                                xmlExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML;
+                                xmlExtRetorno = Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).RetornoXML;
                                 break;
                         }
                     }
 
-                    //Criar objeto da classe de assinatura digital
-                    AssinaturaDigital oAD = new AssinaturaDigital();
+                    XmlRetorno(xmlExtEnvio, xmlExtRetorno);
 
-                    //Assinar o XML
-                    oAD.Assinar(ConteudoXML, emp, cOrgao);
-
-                    oInvocarObj.Invocar(wsProxy, oRecepcaoEvento, wsProxy.NomeMetodoWS[0], oCabecMsg, this, xmlExtEnvio, xmlExtRetorno, true, securityProtocolType);
-
-                    //Ler o retorno
                     LerRetornoEvento(emp);
                 }
                 else
                 {
                     // Gerar o XML de eventos a partir do TXT gerado pelo ERP
-                    string xmlFileExt = string.Empty;
-                    string xmlFileExtTXT = string.Empty;
-                    if (novaNomenclatura)
+                    var xmlFileExt = string.Empty;
+                    var xmlFileExtTXT = string.Empty;
+                    if(novaNomenclatura)
                     {
                         xmlFileExt = Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML;
                         xmlFileExtTXT = Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioTXT;
                     }
                     else
                     {
-                        switch (Servico)
+                        switch(Servico)
                         {
                             case Servicos.EventoCCe:
                                 xmlFileExt = Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML;
@@ -208,24 +193,25 @@ namespace NFe.Service
                                 break;
                         }
                     }
-                    string f = Functions.ExtrairNomeArq(NomeArquivoXML, xmlFileExtTXT) + xmlFileExt;
+                    var f = Functions.ExtrairNomeArq(NomeArquivoXML, xmlFileExtTXT) + xmlFileExt;
 
-                    if (NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    if(NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
                     {
                         f = Path.Combine(Empresas.Configuracoes[emp].PastaValidar, f);
                     }
+
                     oGerarXML.EnvioEvento(f, dadosEnvEvento);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    string ExtRet = string.Empty;
-                    string ExtRetorno = string.Empty;
+                    var ExtRet = string.Empty;
+                    var ExtRetorno = string.Empty;
 
-                    if (novaNomenclatura)
+                    if(novaNomenclatura)
                     {
                         ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML :
                                                         Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioTXT;
@@ -233,23 +219,27 @@ namespace NFe.Service
                     }
                     else
                     {
-                        if (Servico == Servicos.Nulo)
+                        if(Servico == Servicos.Nulo)
                         {
                             // pode ter vindo de um txt e houve erro
-                            if (NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML) ||
+                            if(NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML) ||
                                 NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioTXT))
+                            {
                                 Servico = Servicos.EventoCCe;
-                            else
-                                if (NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML) ||
-                                    NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioTXT))
+                            }
+                            else if(NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioXML) ||
+                                NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvManifestacao).EnvioTXT))
+                            {
                                 Servico = Servicos.EventoManifestacaoDest;
-                            else
-                                    if (NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML) ||
-                                        NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioTXT))
+                            }
+                            else if(NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioXML) ||
+                                NomeArquivoXML.ToLower().EndsWith(Propriedade.Extensao(Propriedade.TipoEnvio.EnvCancelamento).EnvioTXT))
+                            {
                                 Servico = Servicos.EventoCancelamento;
+                            }
                         }
 
-                        switch (Servico)
+                        switch(Servico)
                         {
                             case Servicos.EventoCCe:
                                 ExtRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.EnvCCe).EnvioXML :
@@ -274,7 +264,7 @@ namespace NFe.Service
                         }
                     }
 
-                    if (ExtRetorno != string.Empty)
+                    if(ExtRetorno != string.Empty)
                     {
                         TFunctions.GravarArqErroServico(NomeArquivoXML, ExtRet, ExtRetorno, ex);
                     }
@@ -313,7 +303,7 @@ namespace NFe.Service
             ///
             /// danasa 6/2011
             ///
-            if (Path.GetExtension(NomeArquivoXML).ToLower() == ".txt")
+            if(Path.GetExtension(NomeArquivoXML).ToLower() == ".txt")
             {
                 #region --txt
 
@@ -507,17 +497,20 @@ namespace NFe.Service
                 ///respCancPedido.justStatus|
                 ///respCancPedido.justStaOutra|
 
-                List<string> cLinhas = Functions.LerArquivo(NomeArquivoXML);
+                var cLinhas = Functions.LerArquivo(NomeArquivoXML);
                 ProrrogacaoICMS lpcICMS = null;
                 ItemPedido itemPedido = null;
                 const string err0 = "Informe a linha \"respPedido.itemPedido.numItem\"";
 
-                foreach (string cTexto in cLinhas)
+                foreach(var cTexto in cLinhas)
                 {
-                    string[] dados = cTexto.Split(new char[] { '|' });
-                    if (dados.Length == 1) continue;
+                    var dados = cTexto.Split(new char[] { '|' });
+                    if(dados.Length == 1)
+                    {
+                        continue;
+                    }
 
-                    switch (dados[0].ToLower())
+                    switch(dados[0].ToLower())
                     {
                         case "idlote":
                             this.dadosEnvEvento.idLote = dados[1].Trim();
@@ -600,7 +593,11 @@ namespace NFe.Service
                             break;
 
                         case "itempedido.qtdeitem":
-                            if (lpcICMS == null) throw new Exception("Informe a linha \"itemPedido.numItem\"");
+                            if(lpcICMS == null)
+                            {
+                                throw new Exception("Informe a linha \"itemPedido.numItem\"");
+                            }
+
                             lpcICMS.qtdeItem = dados[1].Trim();
                             lpcICMS = null;
                             break;
@@ -625,19 +622,31 @@ namespace NFe.Service
                             break;
 
                         case "resppedido.itempedido.statpedido":
-                            if (itemPedido == null) throw new Exception(err0);
+                            if(itemPedido == null)
+                            {
+                                throw new Exception(err0);
+                            }
+
                             itemPedido.statPedido = Convert.ToInt32("0" + dados[1].Trim());
                             break;
 
                         case "resppedido.itempedido.juststatus":
-                            if (itemPedido == null) throw new Exception(err0);
+                            if(itemPedido == null)
+                            {
+                                throw new Exception(err0);
+                            }
+
                             itemPedido.justStatus = Convert.ToInt32("0" + dados[1].Trim());
                             break;
 
                         case "resppedido.itempedido.juststaoutra":
-                            if (!string.IsNullOrEmpty(dados[1].Trim()))
+                            if(!string.IsNullOrEmpty(dados[1].Trim()))
                             {
-                                if (itemPedido == null) throw new Exception(err0);
+                                if(itemPedido == null)
+                                {
+                                    throw new Exception(err0);
+                                }
+
                                 itemPedido.justStaOutra = dados[1].Trim();
                             }
                             break;
@@ -731,10 +740,10 @@ namespace NFe.Service
                             break;
                     }
                 }
-                foreach (Evento evento in this.dadosEnvEvento.eventos)
+                foreach(var evento in this.dadosEnvEvento.eventos)
                 {
-                    ConvertTxt.tpEventos tpe = EnumHelper.StringToEnum<ConvertTxt.tpEventos>(evento.tpEvento);
-                    switch (tpe)
+                    var tpe = EnumHelper.StringToEnum<ConvertTxt.tpEventos>(evento.tpEvento);
+                    switch(tpe)
                     {
                         case ConvertTxt.tpEventos.tpEvEPEC:
                         case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
@@ -755,45 +764,70 @@ namespace NFe.Service
 
                         case ConvertTxt.tpEventos.tpEvPedProrrogacao_ICMS_1: //pedido de prorrogacao 1
                         case ConvertTxt.tpEventos.tpEvPedProrrogacao_ICMS_2: //pedido de prorrogacao 2
-                            if (string.IsNullOrEmpty(evento.descEvento))
+                            if(string.IsNullOrEmpty(evento.descEvento))
+                            {
                                 evento.descEvento = "Pedido de Prorrogacao";
+                            }
+
                             break;
 
                         case ConvertTxt.tpEventos.tpEvCancPedProrrogacao_ICMS_1: //pedido de cancelamento 1
                         case ConvertTxt.tpEventos.tpEvCancPedProrrogacao_ICMS_2: //pedido de cancelamento 2
-                            if (string.IsNullOrEmpty(evento.descEvento))
+                            if(string.IsNullOrEmpty(evento.descEvento))
+                            {
                                 evento.descEvento = "Cancelamento de Pedido de Prorrogacao";
+                            }
+
                             break;
 
                         case ConvertTxt.tpEventos.tpEvFiscoRespPedProrrogacao_ICMS_1:
                         case ConvertTxt.tpEventos.tpEvFiscoRespPedProrrogacao_ICMS_2:
                         case ConvertTxt.tpEventos.tpEvFiscoRespCancPedProrrogacao_ICMS_1:
                         case ConvertTxt.tpEventos.tpEvFiscoRespCancPedProrrogacao_ICMS_2:
-                            if (string.IsNullOrEmpty(evento.descEvento))
+                            if(string.IsNullOrEmpty(evento.descEvento))
+                            {
                                 evento.descEvento = "Fisco – Prorrogacao ICMS remessa para industrializacao";
+                            }
+
                             break;
                     }
-                    if (string.IsNullOrEmpty(evento.descEvento)) evento.descEvento = EnumHelper.GetDescription(tpe);
+                    if(string.IsNullOrEmpty(evento.descEvento))
+                    {
+                        evento.descEvento = EnumHelper.GetDescription(tpe);
+                    }
 
-                    if (string.IsNullOrEmpty(evento.verEvento))
+                    if(string.IsNullOrEmpty(evento.verEvento))
+                    {
                         evento.verEvento = "1.00";
+                    }
 
-                    if (evento.nSeqEvento == 0)
+                    if(evento.nSeqEvento == 0)
+                    {
                         evento.nSeqEvento = 1;
+                    }
 
-                    if (evento.tpAmb == 0)
+                    if(evento.tpAmb == 0)
+                    {
                         evento.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
+                    }
 
-                    if (evento.cOrgao == 0)
+                    if(evento.cOrgao == 0)
+                    {
                         evento.cOrgao = Convert.ToInt32(evento.chNFe.Substring(0, 2));
+                    }
 
-                    if (evento.tpEmis == 0)
+                    if(evento.tpEmis == 0)
+                    {
                         evento.tpEmis = Convert.ToInt32(evento.chNFe.Substring(34, 1));
+                    }
 
-                    if (string.IsNullOrEmpty(evento.Id))
+                    if(string.IsNullOrEmpty(evento.Id))
+                    {
                         evento.Id = TpcnResources.ID.ToString() + evento.tpEvento + evento.chNFe + evento.nSeqEvento.ToString("00");
+                    }
 
-                    if (string.IsNullOrEmpty(evento.xCondUso))
+                    if(string.IsNullOrEmpty(evento.xCondUso))
+                    {
                         evento.xCondUso =
                             "A Carta de Correcao e disciplinada pelo paragrafo 1o-A do art. 7o do Convenio S/N, " +
                             "de 15 de dezembro de 1970 e pode ser utilizada para regularizacao de erro ocorrido na emissao de " +
@@ -801,6 +835,7 @@ namespace NFe.Service
                             "valor do imposto tais como: base de calculo, aliquota, diferenca de preco, quantidade, valor da " +
                             "operacao ou da prestacao; II - a correcao de dados cadastrais que implique mudanca do remetente " +
                             "ou do destinatario; III - a data de emissao ou de saida.";
+                    }
                 }
 
                 #endregion --txt
@@ -839,52 +874,52 @@ namespace NFe.Service
 
         private void LerRetornoEvento(int emp)
         {
-            XmlDocument docEventoOriginal = ConteudoXML;
-            bool autorizou = false;
+            var docEventoOriginal = ConteudoXML;
+            var autorizou = false;
 
             // <<<UTF8 -> tem acentuacao no retorno
-            XmlDocument doc = new XmlDocument();
+            var doc = new XmlDocument();
             doc.Load(Functions.StringXmlToStreamUTF8(vStrXmlRetorno));
             //doc.Load(@"C:\Users\wandrey\Downloads\51160417625687000153550010001224661001224662-ret-env-canc (1).xml");
 
-            XmlNodeList retEnvRetornoList = doc.GetElementsByTagName("retEnvEvento");
+            var retEnvRetornoList = doc.GetElementsByTagName("retEnvEvento");
 
-            foreach (XmlNode retConsSitNode in retEnvRetornoList)
+            foreach(XmlNode retConsSitNode in retEnvRetornoList)
             {
-                XmlElement retConsSitElemento = (XmlElement)retConsSitNode;
+                var retConsSitElemento = (XmlElement)retConsSitNode;
 
                 //Pegar o status de retorno da NFe que está sendo consultada a situação
                 var cStatCons = string.Empty;
-                if (retConsSitElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0] != null)
+                if(retConsSitElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0] != null)
                 {
                     cStatCons = retConsSitElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
                 }
-                switch (cStatCons)
+                switch(cStatCons)
                 {
                     case "128": //Lote de Evento Processado
                         {
-                            XmlNodeList envEventosList = doc.GetElementsByTagName("retEvento");
-                            for (int i = 0; i < envEventosList.Count; ++i)
+                            var envEventosList = doc.GetElementsByTagName("retEvento");
+                            for(var i = 0; i < envEventosList.Count; ++i)
                             {
-                                XmlElement eleRetorno = envEventosList.Item(i) as XmlElement;
+                                var eleRetorno = envEventosList.Item(i) as XmlElement;
                                 cStatCons = eleRetorno.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
-                                if (cStatCons == "135" || cStatCons == "136" || cStatCons == "155")
+                                if(cStatCons == "135" || cStatCons == "136" || cStatCons == "155")
                                 {
-                                    string chNFe = eleRetorno.GetElementsByTagName(TpcnResources.chNFe.ToString())[0].InnerText;
-                                    Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName(TpcnResources.nSeqEvento.ToString())[0].InnerText);
-                                    ConvertTxt.tpEventos tpEvento = EnumHelper.StringToEnum<ConvertTxt.tpEventos>(eleRetorno.GetElementsByTagName(TpcnResources.tpEvento.ToString())[0].InnerText);
-                                    string Id = TpcnResources.ID.ToString() + ((Int32)tpEvento).ToString("000000") + chNFe + nSeqEvento.ToString("00");
+                                    var chNFe = eleRetorno.GetElementsByTagName(TpcnResources.chNFe.ToString())[0].InnerText;
+                                    var nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName(TpcnResources.nSeqEvento.ToString())[0].InnerText);
+                                    var tpEvento = EnumHelper.StringToEnum<ConvertTxt.tpEventos>(eleRetorno.GetElementsByTagName(TpcnResources.tpEvento.ToString())[0].InnerText);
+                                    var Id = TpcnResources.ID.ToString() + ((int)tpEvento).ToString("000000") + chNFe + nSeqEvento.ToString("00");
                                     ///
                                     ///procura no Xml de envio pelo Id retornado
                                     ///nao sei se a Sefaz retorna na ordem em que foi enviado, então é melhor pesquisar
-                                    foreach (XmlNode env in docEventoOriginal.GetElementsByTagName("infEvento"))
+                                    foreach(XmlNode env in docEventoOriginal.GetElementsByTagName("infEvento"))
                                     {
-                                        string Idd = env.Attributes.GetNamedItem(TpcnResources.Id.ToString()).Value;
-                                        if (Idd == Id)
+                                        var Idd = env.Attributes.GetNamedItem(TpcnResources.Id.ToString()).Value;
+                                        if(Idd == Id)
                                         {
                                             autorizou = true;
 
-                                            DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName(TpcnResources.dhRegEvento.ToString())[0].InnerText);
+                                            var dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName(TpcnResources.dhRegEvento.ToString())[0].InnerText);
 
                                             ///
                                             /// Gerar o arquivo XML de distribuição do evento
@@ -895,8 +930,8 @@ namespace NFe.Service
                                                                     dhRegEvento,
                                                                     true);
 
-                                            switch (tpEvento)
-                                            {   
+                                            switch(tpEvento)
+                                            {
                                                 case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
                                                 case ConvertTxt.tpEventos.tpEvCancelamentoSubstituicaoNFCe:
                                                 case ConvertTxt.tpEventos.tpEvCCe:
@@ -904,23 +939,26 @@ namespace NFe.Service
                                                     {
                                                         TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, Empresas.Configuracoes[emp]);
                                                     }
-                                                    catch (Exception ex)
+                                                    catch(Exception ex)
                                                     {
                                                         Auxiliar.WriteLog("TaskNFeEventos: " + ex.Message, false);
                                                     }
                                                     break;
 
                                                 case ConvertTxt.tpEventos.tpEvEPEC:
-                                                    if (cStatCons == "136")
+                                                    if(cStatCons == "136")
+                                                    {
                                                         //Evento autorizado sem vinculação do evento à respectiva NF-e
                                                         try
                                                         {
                                                             TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, Empresas.Configuracoes[emp]);
                                                         }
-                                                        catch (Exception ex)
+                                                        catch(Exception ex)
                                                         {
                                                             Auxiliar.WriteLog("TaskNFeEventos: " + ex.Message, false);
                                                         }
+                                                    }
+
                                                     break;
                                             }
                                             break;
@@ -933,8 +971,10 @@ namespace NFe.Service
                 }
             }
 
-            if (!autorizou)
+            if(!autorizou)
+            {
                 oAux.MoveArqErro(NomeArquivoXML);
+            }
         }
 
         #endregion LerRetornoEvento

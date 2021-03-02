@@ -1,0 +1,570 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  commentId: T:Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  id: ViaTransporteInternacional
+  parent: Unimake.Business.DFe.Servicos
+  children:
+  - Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Aerea
+  - Unimake.Business.DFe.Servicos.ViaTransporteInternacional.CondutoRedeTransmissao
+  - Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Courier
+  - Unimake.Business.DFe.Servicos.ViaTransporteInternacional.EntradaSaidaFicta
+  - Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Ferroviaria
+  - Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Fluvial
+  - Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Handcarry
+  - Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Lacustre
+  - Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Maritima
+  - Unimake.Business.DFe.Servicos.ViaTransporteInternacional.MeiosProprios
+  - Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Postal
+  - Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Rodoviaria
+  langs:
+  - csharp
+  - vb
+  name: ViaTransporteInternacional
+  nameWithType: ViaTransporteInternacional
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  type: Enum
+  source:
+    id: ViaTransporteInternacional
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 989
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nVia Transporte Internacional Informada na Declaração de Importação\n"
+  example: []
+  syntax:
+    content: public enum ViaTransporteInternacional
+    content.vb: Public Enum ViaTransporteInternacional
+  extensionMethods:
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Maritima
+  commentId: F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Maritima
+  id: Maritima
+  parent: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  langs:
+  - csharp
+  - vb
+  name: Maritima
+  nameWithType: ViaTransporteInternacional.Maritima
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Maritima
+  type: Field
+  source:
+    id: Maritima
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 994
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n1=Marítima\n"
+  example: []
+  syntax:
+    content: Maritima = 1
+    return:
+      type: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Fluvial
+  commentId: F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Fluvial
+  id: Fluvial
+  parent: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  langs:
+  - csharp
+  - vb
+  name: Fluvial
+  nameWithType: ViaTransporteInternacional.Fluvial
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Fluvial
+  type: Field
+  source:
+    id: Fluvial
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1000
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n2=Fluvial\n"
+  example: []
+  syntax:
+    content: Fluvial = 2
+    return:
+      type: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Lacustre
+  commentId: F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Lacustre
+  id: Lacustre
+  parent: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  langs:
+  - csharp
+  - vb
+  name: Lacustre
+  nameWithType: ViaTransporteInternacional.Lacustre
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Lacustre
+  type: Field
+  source:
+    id: Lacustre
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1006
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n3=Lacustre\n"
+  example: []
+  syntax:
+    content: Lacustre = 3
+    return:
+      type: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Aerea
+  commentId: F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Aerea
+  id: Aerea
+  parent: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  langs:
+  - csharp
+  - vb
+  name: Aerea
+  nameWithType: ViaTransporteInternacional.Aerea
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Aerea
+  type: Field
+  source:
+    id: Aerea
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1012
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n4=Aérea\n"
+  example: []
+  syntax:
+    content: Aerea = 4
+    return:
+      type: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Postal
+  commentId: F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Postal
+  id: Postal
+  parent: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  langs:
+  - csharp
+  - vb
+  name: Postal
+  nameWithType: ViaTransporteInternacional.Postal
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Postal
+  type: Field
+  source:
+    id: Postal
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1018
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n5=Postal\n"
+  example: []
+  syntax:
+    content: Postal = 5
+    return:
+      type: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Ferroviaria
+  commentId: F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Ferroviaria
+  id: Ferroviaria
+  parent: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  langs:
+  - csharp
+  - vb
+  name: Ferroviaria
+  nameWithType: ViaTransporteInternacional.Ferroviaria
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Ferroviaria
+  type: Field
+  source:
+    id: Ferroviaria
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1024
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n6=Ferroviária\n"
+  example: []
+  syntax:
+    content: Ferroviaria = 6
+    return:
+      type: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Rodoviaria
+  commentId: F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Rodoviaria
+  id: Rodoviaria
+  parent: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  langs:
+  - csharp
+  - vb
+  name: Rodoviaria
+  nameWithType: ViaTransporteInternacional.Rodoviaria
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Rodoviaria
+  type: Field
+  source:
+    id: Rodoviaria
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1030
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n7=Rodoviária\n"
+  example: []
+  syntax:
+    content: Rodoviaria = 7
+    return:
+      type: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.CondutoRedeTransmissao
+  commentId: F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.CondutoRedeTransmissao
+  id: CondutoRedeTransmissao
+  parent: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  langs:
+  - csharp
+  - vb
+  name: CondutoRedeTransmissao
+  nameWithType: ViaTransporteInternacional.CondutoRedeTransmissao
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.CondutoRedeTransmissao
+  type: Field
+  source:
+    id: CondutoRedeTransmissao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1036
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n8=Conduto / Rede Transmissão\n"
+  example: []
+  syntax:
+    content: CondutoRedeTransmissao = 8
+    return:
+      type: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.MeiosProprios
+  commentId: F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.MeiosProprios
+  id: MeiosProprios
+  parent: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  langs:
+  - csharp
+  - vb
+  name: MeiosProprios
+  nameWithType: ViaTransporteInternacional.MeiosProprios
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.MeiosProprios
+  type: Field
+  source:
+    id: MeiosProprios
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1042
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n9=Meios Próprios\n"
+  example: []
+  syntax:
+    content: MeiosProprios = 9
+    return:
+      type: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.EntradaSaidaFicta
+  commentId: F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.EntradaSaidaFicta
+  id: EntradaSaidaFicta
+  parent: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  langs:
+  - csharp
+  - vb
+  name: EntradaSaidaFicta
+  nameWithType: ViaTransporteInternacional.EntradaSaidaFicta
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.EntradaSaidaFicta
+  type: Field
+  source:
+    id: EntradaSaidaFicta
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1048
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n10=Entrada / Saída ficta\n"
+  example: []
+  syntax:
+    content: EntradaSaidaFicta = 10
+    return:
+      type: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Courier
+  commentId: F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Courier
+  id: Courier
+  parent: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  langs:
+  - csharp
+  - vb
+  name: Courier
+  nameWithType: ViaTransporteInternacional.Courier
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Courier
+  type: Field
+  source:
+    id: Courier
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1054
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n11=Courier\n"
+  example: []
+  syntax:
+    content: Courier = 11
+    return:
+      type: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Handcarry
+  commentId: F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Handcarry
+  id: Handcarry
+  parent: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  langs:
+  - csharp
+  - vb
+  name: Handcarry
+  nameWithType: ViaTransporteInternacional.Handcarry
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Handcarry
+  type: Field
+  source:
+    id: Handcarry
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1060
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n12=Handcarry\n"
+  example: []
+  syntax:
+    content: Handcarry = 12
+    return:
+      type: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  name: GetAttribute<T>()
+  nameWithType: EnumsExtension.GetAttribute<T>()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>()
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)()
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)()
+  name.vb: GetAttribute(Of T)()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  name: GetAttributeDescription()
+  nameWithType: EnumsExtension.GetAttributeDescription()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  isExternal: true
+  name: GetAttribute<T>(Enum)
+  nameWithType: EnumsExtension.GetAttribute<T>(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>(System.Enum)
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)(Enum)
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)(System.Enum)
+  name.vb: GetAttribute(Of T)(Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  isExternal: true
+  name: GetAttributeDescription(Enum)
+  nameWithType: EnumsExtension.GetAttributeDescription(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+- uid: Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  commentId: T:Unimake.Business.DFe.Servicos.ViaTransporteInternacional
+  parent: Unimake.Business.DFe.Servicos
+  name: ViaTransporteInternacional
+  nameWithType: ViaTransporteInternacional
+  fullName: Unimake.Business.DFe.Servicos.ViaTransporteInternacional

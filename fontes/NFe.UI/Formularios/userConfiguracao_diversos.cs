@@ -200,6 +200,7 @@ namespace NFe.UI.Formularios
                     empresa.TokenNFse = result.TokenNFse;
                     empresa.TokenNFSeExpire = result.TokenNFSeExpire;
                 }
+
 #endif
 
                 HabilitaUsuarioSenhaWS(this.empresa.UnidadeFederativaCodigo);
@@ -473,7 +474,6 @@ namespace NFe.UI.Formularios
                            ufCod == 4309209 /*Gravataí*/||
                            ufCod == 3201308 /*Cariacica*/||
                            ufCod == 3538709 /*Piracicaba*/||
-                           ufCod == 2930709 /*Simões Filho*/||
                            ufCod == 3553807 /*Taquarituba*/||
                            ufCod == 3512902 /*Cosmorama*/||
                            ufCod == 3515004 /*Embu das Artes*/||
@@ -547,12 +547,16 @@ namespace NFe.UI.Formularios
                            ufCod == 3146008 /*Ouro Fino-MG*/||
                            ufCod == 4323804 /*Xangri-la-RS*/||
                            ufCod == 5107925 /*Sorriso-MT*/ ||
-						   ufCod == 3549102 /*São João da Boa Vista-SP*/ ||
+                           ufCod == 3549102 /*São João da Boa Vista-SP*/ ||
                            ufCod == 3556404 /*Vargem Grande do Sul-SP*/ ||
-
                            ufCod == 4104808 /*Cascavel-PR*/ ||
                            ufCod == 4303103 /*Cachoeirinha-RS*/ ||
-                           ufCod == 3204203 /*Piuma-ES*/;
+                           ufCod == 3204203 /*Piuma-ES*/ ||
+                           ufCod == 1502152 /*Canaã dos Carajás-PA*/ ||
+                           ufCod == 4114609 /*Marechal Cândido Rondon-PR*/ ||
+                           ufCod == 5207402 /*Edéia-GO*/ ||
+                           ufCod == 4115200 /*Maringá-PR*/ ;
+
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;
         }

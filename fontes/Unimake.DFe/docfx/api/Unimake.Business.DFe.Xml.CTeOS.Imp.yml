@@ -1,0 +1,676 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.Imp
+  id: Imp
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  children:
+  - Unimake.Business.DFe.Xml.CTeOS.Imp.ICMS
+  - Unimake.Business.DFe.Xml.CTeOS.Imp.ICMSUFFim
+  - Unimake.Business.DFe.Xml.CTeOS.Imp.InfAdFisco
+  - Unimake.Business.DFe.Xml.CTeOS.Imp.InfTribFed
+  - Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeInfAdFisco
+  - Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeVTotTribField
+  - Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTrib
+  - Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTribField
+  langs:
+  - csharp
+  - vb
+  name: Imp
+  nameWithType: Imp
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp
+  type: Class
+  source:
+    id: Imp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 688
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class Imp
+    content.vb: >-
+      <Serializable>
+
+      Public Class Imp
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.ICMS
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.Imp.ICMS
+  id: ICMS
+  parent: Unimake.Business.DFe.Xml.CTeOS.Imp
+  langs:
+  - csharp
+  - vb
+  name: ICMS
+  nameWithType: Imp.ICMS
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.ICMS
+  type: Property
+  source:
+    id: ICMS
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 692
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public ICMS ICMS { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.ICMS
+    content.vb: Public Property ICMS As ICMS
+  overload: Unimake.Business.DFe.Xml.CTeOS.Imp.ICMS*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTrib
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTrib
+  id: VTotTrib
+  parent: Unimake.Business.DFe.Xml.CTeOS.Imp
+  langs:
+  - csharp
+  - vb
+  name: VTotTrib
+  nameWithType: Imp.VTotTrib
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTrib
+  type: Property
+  source:
+    id: VTotTrib
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 695
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public double VTotTrib { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VTotTrib As Double
+  overload: Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTrib*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTribField
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTribField
+  id: VTotTribField
+  parent: Unimake.Business.DFe.Xml.CTeOS.Imp
+  langs:
+  - csharp
+  - vb
+  name: VTotTribField
+  nameWithType: Imp.VTotTribField
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTribField
+  type: Property
+  source:
+    id: VTotTribField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 698
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public string VTotTribField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VTotTribField As String
+  overload: Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTribField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.InfAdFisco
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.Imp.InfAdFisco
+  id: InfAdFisco
+  parent: Unimake.Business.DFe.Xml.CTeOS.Imp
+  langs:
+  - csharp
+  - vb
+  name: InfAdFisco
+  nameWithType: Imp.InfAdFisco
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.InfAdFisco
+  type: Property
+  source:
+    id: InfAdFisco
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 705
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public string InfAdFisco { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property InfAdFisco As String
+  overload: Unimake.Business.DFe.Xml.CTeOS.Imp.InfAdFisco*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.ICMSUFFim
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.Imp.ICMSUFFim
+  id: ICMSUFFim
+  parent: Unimake.Business.DFe.Xml.CTeOS.Imp
+  langs:
+  - csharp
+  - vb
+  name: ICMSUFFim
+  nameWithType: Imp.ICMSUFFim
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.ICMSUFFim
+  type: Property
+  source:
+    id: ICMSUFFim
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 708
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public ICMSUFFim ICMSUFFim { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.ICMSUFFim
+    content.vb: Public Property ICMSUFFim As ICMSUFFim
+  overload: Unimake.Business.DFe.Xml.CTeOS.Imp.ICMSUFFim*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.InfTribFed
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.Imp.InfTribFed
+  id: InfTribFed
+  parent: Unimake.Business.DFe.Xml.CTeOS.Imp
+  langs:
+  - csharp
+  - vb
+  name: InfTribFed
+  nameWithType: Imp.InfTribFed
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.InfTribFed
+  type: Property
+  source:
+    id: InfTribFed
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 711
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public InfTribFed InfTribFed { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.InfTribFed
+    content.vb: Public Property InfTribFed As InfTribFed
+  overload: Unimake.Business.DFe.Xml.CTeOS.Imp.InfTribFed*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeVTotTribField
+  commentId: M:Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeVTotTribField
+  id: ShouldSerializeVTotTribField
+  parent: Unimake.Business.DFe.Xml.CTeOS.Imp
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeVTotTribField()
+  nameWithType: Imp.ShouldSerializeVTotTribField()
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeVTotTribField()
+  type: Method
+  source:
+    id: ShouldSerializeVTotTribField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 716
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public bool ShouldSerializeVTotTribField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeVTotTribField As Boolean
+  overload: Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeVTotTribField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeInfAdFisco
+  commentId: M:Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeInfAdFisco
+  id: ShouldSerializeInfAdFisco
+  parent: Unimake.Business.DFe.Xml.CTeOS.Imp
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeInfAdFisco()
+  nameWithType: Imp.ShouldSerializeInfAdFisco()
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeInfAdFisco()
+  type: Method
+  source:
+    id: ShouldSerializeInfAdFisco
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 718
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public bool ShouldSerializeInfAdFisco()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeInfAdFisco As Boolean
+  overload: Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeInfAdFisco*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTeOS
+  commentId: N:Unimake.Business.DFe.Xml.CTeOS
+  name: Unimake.Business.DFe.Xml.CTeOS
+  nameWithType: Unimake.Business.DFe.Xml.CTeOS
+  fullName: Unimake.Business.DFe.Xml.CTeOS
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.ICMS*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.Imp.ICMS
+  name: ICMS
+  nameWithType: Imp.ICMS
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.ICMS
+- uid: Unimake.Business.DFe.Xml.CTeOS.ICMS
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.ICMS
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: ICMS
+  nameWithType: ICMS
+  fullName: Unimake.Business.DFe.Xml.CTeOS.ICMS
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTrib*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTrib
+  name: VTotTrib
+  nameWithType: Imp.VTotTrib
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTrib
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTribField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTribField
+  name: VTotTribField
+  nameWithType: Imp.VTotTribField
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.VTotTribField
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.InfAdFisco*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.Imp.InfAdFisco
+  name: InfAdFisco
+  nameWithType: Imp.InfAdFisco
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.InfAdFisco
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.ICMSUFFim*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.Imp.ICMSUFFim
+  name: ICMSUFFim
+  nameWithType: Imp.ICMSUFFim
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.ICMSUFFim
+- uid: Unimake.Business.DFe.Xml.CTeOS.ICMSUFFim
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.ICMSUFFim
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: ICMSUFFim
+  nameWithType: ICMSUFFim
+  fullName: Unimake.Business.DFe.Xml.CTeOS.ICMSUFFim
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.InfTribFed*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.Imp.InfTribFed
+  name: InfTribFed
+  nameWithType: Imp.InfTribFed
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.InfTribFed
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfTribFed
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.InfTribFed
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: InfTribFed
+  nameWithType: InfTribFed
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfTribFed
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeVTotTribField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeVTotTribField
+  name: ShouldSerializeVTotTribField
+  nameWithType: Imp.ShouldSerializeVTotTribField
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeVTotTribField
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeInfAdFisco*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeInfAdFisco
+  name: ShouldSerializeInfAdFisco
+  nameWithType: Imp.ShouldSerializeInfAdFisco
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp.ShouldSerializeInfAdFisco

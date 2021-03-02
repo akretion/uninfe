@@ -8,7 +8,7 @@ namespace Unimake.Business.DFe.Servicos.CTeOS
     /// Envio do XML de eventos do CTeOS para o WebService
     /// </summary>
     [ComVisible(true)]
-    public class RecepcaoEvento: CTe.RecepcaoEvento
+    public class RecepcaoEvento<TDetalheEvento>: CTe.RecepcaoEvento<TDetalheEvento>
     {
         #region Public Constructors
 
@@ -17,7 +17,7 @@ namespace Unimake.Business.DFe.Servicos.CTeOS
         /// </summary>
         /// <param name="envEvento">Objeto contendo o XML a ser enviado</param>
         /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
-        public RecepcaoEvento(EventoCTe envEvento, Configuracao configuracao)
+        public RecepcaoEvento(EventoCTe<TDetalheEvento> envEvento, Configuracao configuracao)
             : base(envEvento, configuracao) { }
 
         /// <summary>

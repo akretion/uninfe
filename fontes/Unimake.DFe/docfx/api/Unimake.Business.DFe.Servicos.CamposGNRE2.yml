@@ -1,0 +1,2027 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2
+  commentId: T:Unimake.Business.DFe.Servicos.CamposGNRE2
+  id: CamposGNRE2
+  parent: Unimake.Business.DFe.Servicos
+  children:
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_cep
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_endereco
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao_CNPJ
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao_CPF
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao_IE
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_municipio
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_razaoSocial
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_telefone
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_uf
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_agencia
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_autenticacao
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_banco
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_data
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.dataLimitePagamento
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.dataPagamento
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.identificadorGuia
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.informacoesComplementares
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.informacoesComplementares_informacao
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras_campoExtra
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras_campoExtra_codigo
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras_campoExtra_valor
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao_CNPJ
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao_CPF
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao_IE
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_municipio
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_razaoSocial
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_convenio
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_dataVencimento
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_detalhamentoReceita
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_documentoOrigem
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_produto
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_receita
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_ano
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_mes
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_parcela
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_periodo
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorAtualizacaoMonetaria
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorAtualizacaoMonetariaFecp
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorJuros
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorJurosFecp
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorMulta
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorMultaFecp
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorPrincipal
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorPrincipalFecp
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorTotal
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorTotalFecp
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.itensGNRE
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.linhaDigitavel
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.nossoNumero
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.ufFavorecida
+  - Unimake.Business.DFe.Servicos.CamposGNRE2.valorGNRE
+  langs:
+  - csharp
+  - vb
+  name: CamposGNRE2
+  nameWithType: CamposGNRE2
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2
+  type: Enum
+  source:
+    id: CamposGNRE2
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4546
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nCampos GNRE 2\n"
+  example: []
+  syntax:
+    content: public enum CamposGNRE2
+    content.vb: Public Enum CamposGNRE2
+  extensionMethods:
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.ufFavorecida
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.ufFavorecida
+  id: ufFavorecida
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: ufFavorecida
+  nameWithType: CamposGNRE2.ufFavorecida
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.ufFavorecida
+  type: Field
+  source:
+    id: ufFavorecida
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4551
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nufFavorecida\n"
+  example: []
+  syntax:
+    content: ufFavorecida = 0
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente
+  id: contribuinteEmitente
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: contribuinteEmitente
+  nameWithType: CamposGNRE2.contribuinteEmitente
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente
+  type: Field
+  source:
+    id: contribuinteEmitente
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4555
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ncontribuinteEmitente\n"
+  example: []
+  syntax:
+    content: contribuinteEmitente = 1
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao
+  id: contribuinteEmitente_identificacao
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: contribuinteEmitente_identificacao
+  nameWithType: CamposGNRE2.contribuinteEmitente_identificacao
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao
+  type: Field
+  source:
+    id: contribuinteEmitente_identificacao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4559
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ncontribuinteEmitente_identificacao\n"
+  example: []
+  syntax:
+    content: contribuinteEmitente_identificacao = 2
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao_CPF
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao_CPF
+  id: contribuinteEmitente_identificacao_CPF
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: contribuinteEmitente_identificacao_CPF
+  nameWithType: CamposGNRE2.contribuinteEmitente_identificacao_CPF
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao_CPF
+  type: Field
+  source:
+    id: contribuinteEmitente_identificacao_CPF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4563
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ncontribuinteEmitente_identificacao_CPF\n"
+  example: []
+  syntax:
+    content: contribuinteEmitente_identificacao_CPF = 3
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao_CNPJ
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao_CNPJ
+  id: contribuinteEmitente_identificacao_CNPJ
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: contribuinteEmitente_identificacao_CNPJ
+  nameWithType: CamposGNRE2.contribuinteEmitente_identificacao_CNPJ
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao_CNPJ
+  type: Field
+  source:
+    id: contribuinteEmitente_identificacao_CNPJ
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4567
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ncontribuinteEmitente_identificacao_CNPJ\n"
+  example: []
+  syntax:
+    content: contribuinteEmitente_identificacao_CNPJ = 4
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao_IE
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao_IE
+  id: contribuinteEmitente_identificacao_IE
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: contribuinteEmitente_identificacao_IE
+  nameWithType: CamposGNRE2.contribuinteEmitente_identificacao_IE
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_identificacao_IE
+  type: Field
+  source:
+    id: contribuinteEmitente_identificacao_IE
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4571
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ncontribuinteEmitente_identificacao_IE\n"
+  example: []
+  syntax:
+    content: contribuinteEmitente_identificacao_IE = 5
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_razaoSocial
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_razaoSocial
+  id: contribuinteEmitente_razaoSocial
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: contribuinteEmitente_razaoSocial
+  nameWithType: CamposGNRE2.contribuinteEmitente_razaoSocial
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_razaoSocial
+  type: Field
+  source:
+    id: contribuinteEmitente_razaoSocial
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4575
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ncontribuinteEmitente_razaoSocial\n"
+  example: []
+  syntax:
+    content: contribuinteEmitente_razaoSocial = 6
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_endereco
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_endereco
+  id: contribuinteEmitente_endereco
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: contribuinteEmitente_endereco
+  nameWithType: CamposGNRE2.contribuinteEmitente_endereco
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_endereco
+  type: Field
+  source:
+    id: contribuinteEmitente_endereco
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4579
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ncontribuinteEmitente_endereco\n"
+  example: []
+  syntax:
+    content: contribuinteEmitente_endereco = 7
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_municipio
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_municipio
+  id: contribuinteEmitente_municipio
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: contribuinteEmitente_municipio
+  nameWithType: CamposGNRE2.contribuinteEmitente_municipio
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_municipio
+  type: Field
+  source:
+    id: contribuinteEmitente_municipio
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4583
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ncontribuinteEmitente_municipio\n"
+  example: []
+  syntax:
+    content: contribuinteEmitente_municipio = 8
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_uf
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_uf
+  id: contribuinteEmitente_uf
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: contribuinteEmitente_uf
+  nameWithType: CamposGNRE2.contribuinteEmitente_uf
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_uf
+  type: Field
+  source:
+    id: contribuinteEmitente_uf
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4587
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ncontribuinteEmitente_uf\n"
+  example: []
+  syntax:
+    content: contribuinteEmitente_uf = 9
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_cep
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_cep
+  id: contribuinteEmitente_cep
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: contribuinteEmitente_cep
+  nameWithType: CamposGNRE2.contribuinteEmitente_cep
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_cep
+  type: Field
+  source:
+    id: contribuinteEmitente_cep
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4591
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ncontribuinteEmitente_cep\n"
+  example: []
+  syntax:
+    content: contribuinteEmitente_cep = 10
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_telefone
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_telefone
+  id: contribuinteEmitente_telefone
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: contribuinteEmitente_telefone
+  nameWithType: CamposGNRE2.contribuinteEmitente_telefone
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.contribuinteEmitente_telefone
+  type: Field
+  source:
+    id: contribuinteEmitente_telefone
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4595
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ncontribuinteEmitente_telefone\n"
+  example: []
+  syntax:
+    content: contribuinteEmitente_telefone = 11
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.itensGNRE
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.itensGNRE
+  id: itensGNRE
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: itensGNRE
+  nameWithType: CamposGNRE2.itensGNRE
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.itensGNRE
+  type: Field
+  source:
+    id: itensGNRE
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4599
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitensGNRE\n"
+  example: []
+  syntax:
+    content: itensGNRE = 12
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item
+  id: item
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item
+  nameWithType: CamposGNRE2.item
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item
+  type: Field
+  source:
+    id: item
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4603
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem\n"
+  example: []
+  syntax:
+    content: item = 13
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_receita
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_receita
+  id: item_receita
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_receita
+  nameWithType: CamposGNRE2.item_receita
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_receita
+  type: Field
+  source:
+    id: item_receita
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4607
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_receita\n"
+  example: []
+  syntax:
+    content: item_receita = 14
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_detalhamentoReceita
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_detalhamentoReceita
+  id: item_detalhamentoReceita
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_detalhamentoReceita
+  nameWithType: CamposGNRE2.item_detalhamentoReceita
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_detalhamentoReceita
+  type: Field
+  source:
+    id: item_detalhamentoReceita
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4611
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_detalhamentoReceita\n"
+  example: []
+  syntax:
+    content: item_detalhamentoReceita = 15
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_documentoOrigem
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_documentoOrigem
+  id: item_documentoOrigem
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_documentoOrigem
+  nameWithType: CamposGNRE2.item_documentoOrigem
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_documentoOrigem
+  type: Field
+  source:
+    id: item_documentoOrigem
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4615
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_documentoOrigem\n"
+  example: []
+  syntax:
+    content: item_documentoOrigem = 16
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_produto
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_produto
+  id: item_produto
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_produto
+  nameWithType: CamposGNRE2.item_produto
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_produto
+  type: Field
+  source:
+    id: item_produto
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4619
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_produto\n"
+  example: []
+  syntax:
+    content: item_produto = 17
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia
+  id: item_referencia
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_referencia
+  nameWithType: CamposGNRE2.item_referencia
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia
+  type: Field
+  source:
+    id: item_referencia
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4623
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_referencia\n"
+  example: []
+  syntax:
+    content: item_referencia = 18
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_periodo
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_periodo
+  id: item_referencia_periodo
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_referencia_periodo
+  nameWithType: CamposGNRE2.item_referencia_periodo
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_periodo
+  type: Field
+  source:
+    id: item_referencia_periodo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4627
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_referencia_periodo\n"
+  example: []
+  syntax:
+    content: item_referencia_periodo = 19
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_mes
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_mes
+  id: item_referencia_mes
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_referencia_mes
+  nameWithType: CamposGNRE2.item_referencia_mes
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_mes
+  type: Field
+  source:
+    id: item_referencia_mes
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4631
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_referencia_mes\n"
+  example: []
+  syntax:
+    content: item_referencia_mes = 20
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_ano
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_ano
+  id: item_referencia_ano
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_referencia_ano
+  nameWithType: CamposGNRE2.item_referencia_ano
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_ano
+  type: Field
+  source:
+    id: item_referencia_ano
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4635
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_referencia_ano\n"
+  example: []
+  syntax:
+    content: item_referencia_ano = 21
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_parcela
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_parcela
+  id: item_referencia_parcela
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_referencia_parcela
+  nameWithType: CamposGNRE2.item_referencia_parcela
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_referencia_parcela
+  type: Field
+  source:
+    id: item_referencia_parcela
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4639
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_referencia_parcela\n"
+  example: []
+  syntax:
+    content: item_referencia_parcela = 22
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_dataVencimento
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_dataVencimento
+  id: item_dataVencimento
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_dataVencimento
+  nameWithType: CamposGNRE2.item_dataVencimento
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_dataVencimento
+  type: Field
+  source:
+    id: item_dataVencimento
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4643
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_dataVencimento\n"
+  example: []
+  syntax:
+    content: item_dataVencimento = 23
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorPrincipal
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorPrincipal
+  id: item_valorPrincipal
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_valorPrincipal
+  nameWithType: CamposGNRE2.item_valorPrincipal
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorPrincipal
+  type: Field
+  source:
+    id: item_valorPrincipal
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4647
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_valorPrincipal\n"
+  example: []
+  syntax:
+    content: item_valorPrincipal = 24
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorPrincipalFecp
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorPrincipalFecp
+  id: item_valorPrincipalFecp
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_valorPrincipalFecp
+  nameWithType: CamposGNRE2.item_valorPrincipalFecp
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorPrincipalFecp
+  type: Field
+  source:
+    id: item_valorPrincipalFecp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4651
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_valorPrincipalFecp\n"
+  example: []
+  syntax:
+    content: item_valorPrincipalFecp = 25
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorAtualizacaoMonetaria
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorAtualizacaoMonetaria
+  id: item_valorAtualizacaoMonetaria
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_valorAtualizacaoMonetaria
+  nameWithType: CamposGNRE2.item_valorAtualizacaoMonetaria
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorAtualizacaoMonetaria
+  type: Field
+  source:
+    id: item_valorAtualizacaoMonetaria
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4655
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_valorAtualizacaoMonetaria\n"
+  example: []
+  syntax:
+    content: item_valorAtualizacaoMonetaria = 26
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorAtualizacaoMonetariaFecp
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorAtualizacaoMonetariaFecp
+  id: item_valorAtualizacaoMonetariaFecp
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_valorAtualizacaoMonetariaFecp
+  nameWithType: CamposGNRE2.item_valorAtualizacaoMonetariaFecp
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorAtualizacaoMonetariaFecp
+  type: Field
+  source:
+    id: item_valorAtualizacaoMonetariaFecp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4659
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_valorAtualizacaoMonetariaFecp\n"
+  example: []
+  syntax:
+    content: item_valorAtualizacaoMonetariaFecp = 27
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorJuros
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorJuros
+  id: item_valorJuros
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_valorJuros
+  nameWithType: CamposGNRE2.item_valorJuros
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorJuros
+  type: Field
+  source:
+    id: item_valorJuros
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4663
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_valorJuros\n"
+  example: []
+  syntax:
+    content: item_valorJuros = 28
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorJurosFecp
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorJurosFecp
+  id: item_valorJurosFecp
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_valorJurosFecp
+  nameWithType: CamposGNRE2.item_valorJurosFecp
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorJurosFecp
+  type: Field
+  source:
+    id: item_valorJurosFecp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4667
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_valorJurosFecp\n"
+  example: []
+  syntax:
+    content: item_valorJurosFecp = 29
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorMulta
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorMulta
+  id: item_valorMulta
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_valorMulta
+  nameWithType: CamposGNRE2.item_valorMulta
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorMulta
+  type: Field
+  source:
+    id: item_valorMulta
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4671
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_valorMulta\n"
+  example: []
+  syntax:
+    content: item_valorMulta = 30
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorMultaFecp
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorMultaFecp
+  id: item_valorMultaFecp
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_valorMultaFecp
+  nameWithType: CamposGNRE2.item_valorMultaFecp
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorMultaFecp
+  type: Field
+  source:
+    id: item_valorMultaFecp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4675
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_valorMultaFecp\n"
+  example: []
+  syntax:
+    content: item_valorMultaFecp = 31
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorTotal
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorTotal
+  id: item_valorTotal
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_valorTotal
+  nameWithType: CamposGNRE2.item_valorTotal
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorTotal
+  type: Field
+  source:
+    id: item_valorTotal
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4679
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_valorTotal\n"
+  example: []
+  syntax:
+    content: item_valorTotal = 32
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorTotalFecp
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorTotalFecp
+  id: item_valorTotalFecp
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_valorTotalFecp
+  nameWithType: CamposGNRE2.item_valorTotalFecp
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_valorTotalFecp
+  type: Field
+  source:
+    id: item_valorTotalFecp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4683
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_valorTotalFecp\n"
+  example: []
+  syntax:
+    content: item_valorTotalFecp = 33
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_convenio
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_convenio
+  id: item_convenio
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_convenio
+  nameWithType: CamposGNRE2.item_convenio
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_convenio
+  type: Field
+  source:
+    id: item_convenio
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4687
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_convenio\n"
+  example: []
+  syntax:
+    content: item_convenio = 34
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario
+  id: item_contribuinteDestinatario
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_contribuinteDestinatario
+  nameWithType: CamposGNRE2.item_contribuinteDestinatario
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario
+  type: Field
+  source:
+    id: item_contribuinteDestinatario
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4691
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_contribuinteDestinatario\n"
+  example: []
+  syntax:
+    content: item_contribuinteDestinatario = 35
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao
+  id: item_contribuinteDestinatario_identificacao
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_contribuinteDestinatario_identificacao
+  nameWithType: CamposGNRE2.item_contribuinteDestinatario_identificacao
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao
+  type: Field
+  source:
+    id: item_contribuinteDestinatario_identificacao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4695
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_contribuinteDestinatario_identificacao\n"
+  example: []
+  syntax:
+    content: item_contribuinteDestinatario_identificacao = 36
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao_CNPJ
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao_CNPJ
+  id: item_contribuinteDestinatario_identificacao_CNPJ
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_contribuinteDestinatario_identificacao_CNPJ
+  nameWithType: CamposGNRE2.item_contribuinteDestinatario_identificacao_CNPJ
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao_CNPJ
+  type: Field
+  source:
+    id: item_contribuinteDestinatario_identificacao_CNPJ
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4699
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_contribuinteDestinatario_identificacao_CNPJ\n"
+  example: []
+  syntax:
+    content: item_contribuinteDestinatario_identificacao_CNPJ = 37
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao_CPF
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao_CPF
+  id: item_contribuinteDestinatario_identificacao_CPF
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_contribuinteDestinatario_identificacao_CPF
+  nameWithType: CamposGNRE2.item_contribuinteDestinatario_identificacao_CPF
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao_CPF
+  type: Field
+  source:
+    id: item_contribuinteDestinatario_identificacao_CPF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4703
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_contribuinteDestinatario_identificacao_CPF\n"
+  example: []
+  syntax:
+    content: item_contribuinteDestinatario_identificacao_CPF = 38
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao_IE
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao_IE
+  id: item_contribuinteDestinatario_identificacao_IE
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_contribuinteDestinatario_identificacao_IE
+  nameWithType: CamposGNRE2.item_contribuinteDestinatario_identificacao_IE
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_identificacao_IE
+  type: Field
+  source:
+    id: item_contribuinteDestinatario_identificacao_IE
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4707
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_contribuinteDestinatario_identificacao_IE\n"
+  example: []
+  syntax:
+    content: item_contribuinteDestinatario_identificacao_IE = 39
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_razaoSocial
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_razaoSocial
+  id: item_contribuinteDestinatario_razaoSocial
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_contribuinteDestinatario_razaoSocial
+  nameWithType: CamposGNRE2.item_contribuinteDestinatario_razaoSocial
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_razaoSocial
+  type: Field
+  source:
+    id: item_contribuinteDestinatario_razaoSocial
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4711
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_contribuinteDestinatario_razaoSocial\n"
+  example: []
+  syntax:
+    content: item_contribuinteDestinatario_razaoSocial = 40
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_municipio
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_municipio
+  id: item_contribuinteDestinatario_municipio
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_contribuinteDestinatario_municipio
+  nameWithType: CamposGNRE2.item_contribuinteDestinatario_municipio
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_contribuinteDestinatario_municipio
+  type: Field
+  source:
+    id: item_contribuinteDestinatario_municipio
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4715
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_contribuinteDestinatario_municipio\n"
+  example: []
+  syntax:
+    content: item_contribuinteDestinatario_municipio = 41
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras
+  id: item_camposExtras
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_camposExtras
+  nameWithType: CamposGNRE2.item_camposExtras
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras
+  type: Field
+  source:
+    id: item_camposExtras
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4719
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_camposExtras\n"
+  example: []
+  syntax:
+    content: item_camposExtras = 42
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras_campoExtra
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras_campoExtra
+  id: item_camposExtras_campoExtra
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_camposExtras_campoExtra
+  nameWithType: CamposGNRE2.item_camposExtras_campoExtra
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras_campoExtra
+  type: Field
+  source:
+    id: item_camposExtras_campoExtra
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4723
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_camposExtras_campoExtra\n"
+  example: []
+  syntax:
+    content: item_camposExtras_campoExtra = 43
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras_campoExtra_codigo
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras_campoExtra_codigo
+  id: item_camposExtras_campoExtra_codigo
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_camposExtras_campoExtra_codigo
+  nameWithType: CamposGNRE2.item_camposExtras_campoExtra_codigo
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras_campoExtra_codigo
+  type: Field
+  source:
+    id: item_camposExtras_campoExtra_codigo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4727
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_camposExtras_campoExtra_codigo\n"
+  example: []
+  syntax:
+    content: item_camposExtras_campoExtra_codigo = 44
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras_campoExtra_valor
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras_campoExtra_valor
+  id: item_camposExtras_campoExtra_valor
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: item_camposExtras_campoExtra_valor
+  nameWithType: CamposGNRE2.item_camposExtras_campoExtra_valor
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.item_camposExtras_campoExtra_valor
+  type: Field
+  source:
+    id: item_camposExtras_campoExtra_valor
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4731
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nitem_camposExtras_campoExtra_valor\n"
+  example: []
+  syntax:
+    content: item_camposExtras_campoExtra_valor = 45
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.valorGNRE
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.valorGNRE
+  id: valorGNRE
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: valorGNRE
+  nameWithType: CamposGNRE2.valorGNRE
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.valorGNRE
+  type: Field
+  source:
+    id: valorGNRE
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4735
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nvalorGNRE\n"
+  example: []
+  syntax:
+    content: valorGNRE = 46
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.dataPagamento
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.dataPagamento
+  id: dataPagamento
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: dataPagamento
+  nameWithType: CamposGNRE2.dataPagamento
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.dataPagamento
+  type: Field
+  source:
+    id: dataPagamento
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4739
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ndataPagamento\n"
+  example: []
+  syntax:
+    content: dataPagamento = 47
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.identificadorGuia
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.identificadorGuia
+  id: identificadorGuia
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: identificadorGuia
+  nameWithType: CamposGNRE2.identificadorGuia
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.identificadorGuia
+  type: Field
+  source:
+    id: identificadorGuia
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4743
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nidentificadorGuia\n"
+  example: []
+  syntax:
+    content: identificadorGuia = 48
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.dataLimitePagamento
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.dataLimitePagamento
+  id: dataLimitePagamento
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: dataLimitePagamento
+  nameWithType: CamposGNRE2.dataLimitePagamento
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.dataLimitePagamento
+  type: Field
+  source:
+    id: dataLimitePagamento
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4747
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ndataLimitePagamento\n"
+  example: []
+  syntax:
+    content: dataLimitePagamento = 49
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.informacoesComplementares
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.informacoesComplementares
+  id: informacoesComplementares
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: informacoesComplementares
+  nameWithType: CamposGNRE2.informacoesComplementares
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.informacoesComplementares
+  type: Field
+  source:
+    id: informacoesComplementares
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4751
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ninformacoesComplementares\n"
+  example: []
+  syntax:
+    content: informacoesComplementares = 50
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.informacoesComplementares_informacao
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.informacoesComplementares_informacao
+  id: informacoesComplementares_informacao
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: informacoesComplementares_informacao
+  nameWithType: CamposGNRE2.informacoesComplementares_informacao
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.informacoesComplementares_informacao
+  type: Field
+  source:
+    id: informacoesComplementares_informacao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4755
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ninformacoesComplementares_informacao\n"
+  example: []
+  syntax:
+    content: informacoesComplementares_informacao = 51
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.nossoNumero
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.nossoNumero
+  id: nossoNumero
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: nossoNumero
+  nameWithType: CamposGNRE2.nossoNumero
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.nossoNumero
+  type: Field
+  source:
+    id: nossoNumero
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4759
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nnossoNumero\n"
+  example: []
+  syntax:
+    content: nossoNumero = 52
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento
+  id: dadosPagamento
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: dadosPagamento
+  nameWithType: CamposGNRE2.dadosPagamento
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento
+  type: Field
+  source:
+    id: dadosPagamento
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4763
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ndadosPagamento\n"
+  example: []
+  syntax:
+    content: dadosPagamento = 53
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_data
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_data
+  id: dadosPagamento_data
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: dadosPagamento_data
+  nameWithType: CamposGNRE2.dadosPagamento_data
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_data
+  type: Field
+  source:
+    id: dadosPagamento_data
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4767
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ndadosPagamento_data\n"
+  example: []
+  syntax:
+    content: dadosPagamento_data = 54
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_autenticacao
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_autenticacao
+  id: dadosPagamento_autenticacao
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: dadosPagamento_autenticacao
+  nameWithType: CamposGNRE2.dadosPagamento_autenticacao
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_autenticacao
+  type: Field
+  source:
+    id: dadosPagamento_autenticacao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4771
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ndadosPagamento_autenticacao\n"
+  example: []
+  syntax:
+    content: dadosPagamento_autenticacao = 55
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_banco
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_banco
+  id: dadosPagamento_banco
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: dadosPagamento_banco
+  nameWithType: CamposGNRE2.dadosPagamento_banco
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_banco
+  type: Field
+  source:
+    id: dadosPagamento_banco
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4775
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ndadosPagamento_banco\n"
+  example: []
+  syntax:
+    content: dadosPagamento_banco = 56
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_agencia
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_agencia
+  id: dadosPagamento_agencia
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: dadosPagamento_agencia
+  nameWithType: CamposGNRE2.dadosPagamento_agencia
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.dadosPagamento_agencia
+  type: Field
+  source:
+    id: dadosPagamento_agencia
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4779
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\ndadosPagamento_agencia\n"
+  example: []
+  syntax:
+    content: dadosPagamento_agencia = 57
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2.linhaDigitavel
+  commentId: F:Unimake.Business.DFe.Servicos.CamposGNRE2.linhaDigitavel
+  id: linhaDigitavel
+  parent: Unimake.Business.DFe.Servicos.CamposGNRE2
+  langs:
+  - csharp
+  - vb
+  name: linhaDigitavel
+  nameWithType: CamposGNRE2.linhaDigitavel
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2.linhaDigitavel
+  type: Field
+  source:
+    id: linhaDigitavel
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4783
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nlinhaDigitavel\n"
+  example: []
+  syntax:
+    content: linhaDigitavel = 58
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  name: GetAttribute<T>()
+  nameWithType: EnumsExtension.GetAttribute<T>()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>()
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)()
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)()
+  name.vb: GetAttribute(Of T)()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  name: GetAttributeDescription()
+  nameWithType: EnumsExtension.GetAttributeDescription()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  isExternal: true
+  name: GetAttribute<T>(Enum)
+  nameWithType: EnumsExtension.GetAttribute<T>(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>(System.Enum)
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)(Enum)
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)(System.Enum)
+  name.vb: GetAttribute(Of T)(Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  isExternal: true
+  name: GetAttributeDescription(Enum)
+  nameWithType: EnumsExtension.GetAttributeDescription(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2
+  commentId: T:Unimake.Business.DFe.Servicos.CamposGNRE2
+  parent: Unimake.Business.DFe.Servicos
+  name: CamposGNRE2
+  nameWithType: CamposGNRE2
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2

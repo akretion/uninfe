@@ -1,0 +1,674 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTe.VPrest
+  commentId: T:Unimake.Business.DFe.Xml.CTe.VPrest
+  id: VPrest
+  parent: Unimake.Business.DFe.Xml.CTe
+  children:
+  - Unimake.Business.DFe.Xml.CTe.VPrest.AddComp(Unimake.Business.DFe.Xml.CTe.Comp)
+  - Unimake.Business.DFe.Xml.CTe.VPrest.Comp
+  - Unimake.Business.DFe.Xml.CTe.VPrest.VRec
+  - Unimake.Business.DFe.Xml.CTe.VPrest.VRecField
+  - Unimake.Business.DFe.Xml.CTe.VPrest.VTPrest
+  - Unimake.Business.DFe.Xml.CTe.VPrest.VTPrestField
+  langs:
+  - csharp
+  - vb
+  name: VPrest
+  nameWithType: VPrest
+  fullName: Unimake.Business.DFe.Xml.CTe.VPrest
+  type: Class
+  source:
+    id: VPrest
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1309
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class VPrest
+    content.vb: >-
+      <Serializable>
+
+      Public Class VPrest
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTe.VPrest.VTPrest
+  commentId: P:Unimake.Business.DFe.Xml.CTe.VPrest.VTPrest
+  id: VTPrest
+  parent: Unimake.Business.DFe.Xml.CTe.VPrest
+  langs:
+  - csharp
+  - vb
+  name: VTPrest
+  nameWithType: VPrest.VTPrest
+  fullName: Unimake.Business.DFe.Xml.CTe.VPrest.VTPrest
+  type: Property
+  source:
+    id: VTPrest
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1313
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double VTPrest { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VTPrest As Double
+  overload: Unimake.Business.DFe.Xml.CTe.VPrest.VTPrest*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.VPrest.VTPrestField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.VPrest.VTPrestField
+  id: VTPrestField
+  parent: Unimake.Business.DFe.Xml.CTe.VPrest
+  langs:
+  - csharp
+  - vb
+  name: VTPrestField
+  nameWithType: VPrest.VTPrestField
+  fullName: Unimake.Business.DFe.Xml.CTe.VPrest.VTPrestField
+  type: Property
+  source:
+    id: VTPrestField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1316
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string VTPrestField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VTPrestField As String
+  overload: Unimake.Business.DFe.Xml.CTe.VPrest.VTPrestField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.VPrest.VRec
+  commentId: P:Unimake.Business.DFe.Xml.CTe.VPrest.VRec
+  id: VRec
+  parent: Unimake.Business.DFe.Xml.CTe.VPrest
+  langs:
+  - csharp
+  - vb
+  name: VRec
+  nameWithType: VPrest.VRec
+  fullName: Unimake.Business.DFe.Xml.CTe.VPrest.VRec
+  type: Property
+  source:
+    id: VRec
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1323
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double VRec { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VRec As Double
+  overload: Unimake.Business.DFe.Xml.CTe.VPrest.VRec*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.VPrest.VRecField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.VPrest.VRecField
+  id: VRecField
+  parent: Unimake.Business.DFe.Xml.CTe.VPrest
+  langs:
+  - csharp
+  - vb
+  name: VRecField
+  nameWithType: VPrest.VRecField
+  fullName: Unimake.Business.DFe.Xml.CTe.VPrest.VRecField
+  type: Property
+  source:
+    id: VRecField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1326
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string VRecField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VRecField As String
+  overload: Unimake.Business.DFe.Xml.CTe.VPrest.VRecField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.VPrest.Comp
+  commentId: P:Unimake.Business.DFe.Xml.CTe.VPrest.Comp
+  id: Comp
+  parent: Unimake.Business.DFe.Xml.CTe.VPrest
+  langs:
+  - csharp
+  - vb
+  name: Comp
+  nameWithType: VPrest.Comp
+  fullName: Unimake.Business.DFe.Xml.CTe.VPrest.Comp
+  type: Property
+  source:
+    id: Comp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1333
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public List<Comp> Comp { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.CTe.Comp}
+    content.vb: Public Property Comp As List(Of Comp)
+  overload: Unimake.Business.DFe.Xml.CTe.VPrest.Comp*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.VPrest.AddComp(Unimake.Business.DFe.Xml.CTe.Comp)
+  commentId: M:Unimake.Business.DFe.Xml.CTe.VPrest.AddComp(Unimake.Business.DFe.Xml.CTe.Comp)
+  id: AddComp(Unimake.Business.DFe.Xml.CTe.Comp)
+  parent: Unimake.Business.DFe.Xml.CTe.VPrest
+  langs:
+  - csharp
+  - vb
+  name: AddComp(Comp)
+  nameWithType: VPrest.AddComp(Comp)
+  fullName: Unimake.Business.DFe.Xml.CTe.VPrest.AddComp(Unimake.Business.DFe.Xml.CTe.Comp)
+  type: Method
+  source:
+    id: AddComp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1338
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public void AddComp(Comp comp)
+    parameters:
+    - id: comp
+      type: Unimake.Business.DFe.Xml.CTe.Comp
+    content.vb: Public Sub AddComp(comp As Comp)
+  overload: Unimake.Business.DFe.Xml.CTe.VPrest.AddComp*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.CTe.VPrest.VTPrest*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.VPrest.VTPrest
+  name: VTPrest
+  nameWithType: VPrest.VTPrest
+  fullName: Unimake.Business.DFe.Xml.CTe.VPrest.VTPrest
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.CTe.VPrest.VTPrestField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.VPrest.VTPrestField
+  name: VTPrestField
+  nameWithType: VPrest.VTPrestField
+  fullName: Unimake.Business.DFe.Xml.CTe.VPrest.VTPrestField
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTe.VPrest.VRec*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.VPrest.VRec
+  name: VRec
+  nameWithType: VPrest.VRec
+  fullName: Unimake.Business.DFe.Xml.CTe.VPrest.VRec
+- uid: Unimake.Business.DFe.Xml.CTe.VPrest.VRecField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.VPrest.VRecField
+  name: VRecField
+  nameWithType: VPrest.VRecField
+  fullName: Unimake.Business.DFe.Xml.CTe.VPrest.VRecField
+- uid: Unimake.Business.DFe.Xml.CTe.VPrest.Comp*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.VPrest.Comp
+  name: Comp
+  nameWithType: VPrest.Comp
+  fullName: Unimake.Business.DFe.Xml.CTe.VPrest.Comp
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.CTe.Comp}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.CTe.Comp}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<Comp>
+  nameWithType: List<Comp>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.CTe.Comp>
+  nameWithType.vb: List(Of Comp)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.CTe.Comp)
+  name.vb: List(Of Comp)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.CTe.Comp
+    name: Comp
+    nameWithType: Comp
+    fullName: Unimake.Business.DFe.Xml.CTe.Comp
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.CTe.Comp
+    name: Comp
+    nameWithType: Comp
+    fullName: Unimake.Business.DFe.Xml.CTe.Comp
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Unimake.Business.DFe.Xml.CTe.VPrest.AddComp*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.VPrest.AddComp
+  name: AddComp
+  nameWithType: VPrest.AddComp
+  fullName: Unimake.Business.DFe.Xml.CTe.VPrest.AddComp
+- uid: Unimake.Business.DFe.Xml.CTe.Comp
+  commentId: T:Unimake.Business.DFe.Xml.CTe.Comp
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: Comp
+  nameWithType: Comp
+  fullName: Unimake.Business.DFe.Xml.CTe.Comp

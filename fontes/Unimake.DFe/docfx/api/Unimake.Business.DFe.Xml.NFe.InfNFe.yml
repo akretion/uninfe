@@ -1,0 +1,1356 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe
+  commentId: T:Unimake.Business.DFe.Xml.NFe.InfNFe
+  id: InfNFe
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.AddDet(Unimake.Business.DFe.Xml.NFe.Det)
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.AutXML
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Avulsa
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Cana
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Chave
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Cobr
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Compra
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Dest
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Det
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Emit
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Entrega
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Exporta
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Id
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Ide
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.InfAdic
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.InfRespTec
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Pag
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Retirada
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Total
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Transp
+  - Unimake.Business.DFe.Xml.NFe.InfNFe.Versao
+  langs:
+  - csharp
+  - vb
+  name: InfNFe
+  nameWithType: InfNFe
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe
+  type: Class
+  source:
+    id: InfNFe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 97
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class InfNFe
+    content.vb: >-
+      <Serializable>
+
+      Public Class InfNFe
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Versao
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Versao
+  id: Versao
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Versao
+  nameWithType: InfNFe.Versao
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Versao
+  type: Property
+  source:
+    id: Versao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 103
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string Versao { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Versao As String
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Versao*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Ide
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Ide
+  id: Ide
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Ide
+  nameWithType: InfNFe.Ide
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Ide
+  type: Property
+  source:
+    id: Ide
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 106
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public Ide Ide { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.Ide
+    content.vb: Public Property Ide As Ide
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Ide*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Emit
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Emit
+  id: Emit
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Emit
+  nameWithType: InfNFe.Emit
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Emit
+  type: Property
+  source:
+    id: Emit
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 109
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public Emit Emit { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.Emit
+    content.vb: Public Property Emit As Emit
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Emit*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Avulsa
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Avulsa
+  id: Avulsa
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Avulsa
+  nameWithType: InfNFe.Avulsa
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Avulsa
+  type: Property
+  source:
+    id: Avulsa
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 115
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  summary: "\nEsta tag é de uso exclusivo do FISCO, não precisa gerar nada, só temos ela para caso de alguma necessidade de deserialização.\n"
+  example: []
+  syntax:
+    content: public Avulsa Avulsa { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.Avulsa
+    content.vb: Public Property Avulsa As Avulsa
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Avulsa*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Dest
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Dest
+  id: Dest
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Dest
+  nameWithType: InfNFe.Dest
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Dest
+  type: Property
+  source:
+    id: Dest
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 118
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public Dest Dest { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.Dest
+    content.vb: Public Property Dest As Dest
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Dest*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Retirada
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Retirada
+  id: Retirada
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Retirada
+  nameWithType: InfNFe.Retirada
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Retirada
+  type: Property
+  source:
+    id: Retirada
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 121
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public Retirada Retirada { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.Retirada
+    content.vb: Public Property Retirada As Retirada
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Retirada*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Entrega
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Entrega
+  id: Entrega
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Entrega
+  nameWithType: InfNFe.Entrega
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Entrega
+  type: Property
+  source:
+    id: Entrega
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 124
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public Entrega Entrega { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.Entrega
+    content.vb: Public Property Entrega As Entrega
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Entrega*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.AutXML
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.AutXML
+  id: AutXML
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: AutXML
+  nameWithType: InfNFe.AutXML
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.AutXML
+  type: Property
+  source:
+    id: AutXML
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 127
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public List<AutXML> AutXML { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.NFe.AutXML}
+    content.vb: Public Property AutXML As List(Of AutXML)
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.AutXML*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Det
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Det
+  id: Det
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Det
+  nameWithType: InfNFe.Det
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Det
+  type: Property
+  source:
+    id: Det
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 130
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public List<Det> Det { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.NFe.Det}
+    content.vb: Public Property Det As List(Of Det)
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Det*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Total
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Total
+  id: Total
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Total
+  nameWithType: InfNFe.Total
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Total
+  type: Property
+  source:
+    id: Total
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 133
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public Total Total { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.Total
+    content.vb: Public Property Total As Total
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Total*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Transp
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Transp
+  id: Transp
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Transp
+  nameWithType: InfNFe.Transp
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Transp
+  type: Property
+  source:
+    id: Transp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 136
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public Transp Transp { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.Transp
+    content.vb: Public Property Transp As Transp
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Transp*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Cobr
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Cobr
+  id: Cobr
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Cobr
+  nameWithType: InfNFe.Cobr
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Cobr
+  type: Property
+  source:
+    id: Cobr
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 139
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public Cobr Cobr { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.Cobr
+    content.vb: Public Property Cobr As Cobr
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Cobr*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Pag
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Pag
+  id: Pag
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Pag
+  nameWithType: InfNFe.Pag
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Pag
+  type: Property
+  source:
+    id: Pag
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 142
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public Pag Pag { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.Pag
+    content.vb: Public Property Pag As Pag
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Pag*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.InfAdic
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.InfAdic
+  id: InfAdic
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: InfAdic
+  nameWithType: InfNFe.InfAdic
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.InfAdic
+  type: Property
+  source:
+    id: InfAdic
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 145
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public InfAdic InfAdic { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.InfAdic
+    content.vb: Public Property InfAdic As InfAdic
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.InfAdic*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Exporta
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Exporta
+  id: Exporta
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Exporta
+  nameWithType: InfNFe.Exporta
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Exporta
+  type: Property
+  source:
+    id: Exporta
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 148
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public Exporta Exporta { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.Exporta
+    content.vb: Public Property Exporta As Exporta
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Exporta*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Compra
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Compra
+  id: Compra
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Compra
+  nameWithType: InfNFe.Compra
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Compra
+  type: Property
+  source:
+    id: Compra
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 151
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public Compra Compra { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.Compra
+    content.vb: Public Property Compra As Compra
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Compra*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Cana
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Cana
+  id: Cana
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Cana
+  nameWithType: InfNFe.Cana
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Cana
+  type: Property
+  source:
+    id: Cana
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 154
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public Cana Cana { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.Cana
+    content.vb: Public Property Cana As Cana
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Cana*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.InfRespTec
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.InfRespTec
+  id: InfRespTec
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: InfRespTec
+  nameWithType: InfNFe.InfRespTec
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.InfRespTec
+  type: Property
+  source:
+    id: InfRespTec
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 157
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public InfRespTec InfRespTec { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.InfRespTec
+    content.vb: Public Property InfRespTec As InfRespTec
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.InfRespTec*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Id
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Id
+  id: Id
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: InfNFe.Id
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Id
+  type: Property
+  source:
+    id: Id
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 160
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string Id { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Id As String
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Id*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Chave
+  commentId: P:Unimake.Business.DFe.Xml.NFe.InfNFe.Chave
+  id: Chave
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: Chave
+  nameWithType: InfNFe.Chave
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Chave
+  type: Property
+  source:
+    id: Chave
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 173
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string Chave { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Chave As String
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.Chave*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.AddDet(Unimake.Business.DFe.Xml.NFe.Det)
+  commentId: M:Unimake.Business.DFe.Xml.NFe.InfNFe.AddDet(Unimake.Business.DFe.Xml.NFe.Det)
+  id: AddDet(Unimake.Business.DFe.Xml.NFe.Det)
+  parent: Unimake.Business.DFe.Xml.NFe.InfNFe
+  langs:
+  - csharp
+  - vb
+  name: AddDet(Det)
+  nameWithType: InfNFe.AddDet(Det)
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.AddDet(Unimake.Business.DFe.Xml.NFe.Det)
+  type: Method
+  source:
+    id: AddDet
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 196
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public void AddDet(Det det)
+    parameters:
+    - id: det
+      type: Unimake.Business.DFe.Xml.NFe.Det
+    content.vb: Public Sub AddDet(det As Det)
+  overload: Unimake.Business.DFe.Xml.NFe.InfNFe.AddDet*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Versao*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Versao
+  name: Versao
+  nameWithType: InfNFe.Versao
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Versao
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Ide*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Ide
+  name: Ide
+  nameWithType: InfNFe.Ide
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Ide
+- uid: Unimake.Business.DFe.Xml.NFe.Ide
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Ide
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Ide
+  nameWithType: Ide
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Emit*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Emit
+  name: Emit
+  nameWithType: InfNFe.Emit
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Emit
+- uid: Unimake.Business.DFe.Xml.NFe.Emit
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Emit
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Emit
+  nameWithType: Emit
+  fullName: Unimake.Business.DFe.Xml.NFe.Emit
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Avulsa*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Avulsa
+  name: Avulsa
+  nameWithType: InfNFe.Avulsa
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Avulsa
+- uid: Unimake.Business.DFe.Xml.NFe.Avulsa
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Avulsa
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Avulsa
+  nameWithType: Avulsa
+  fullName: Unimake.Business.DFe.Xml.NFe.Avulsa
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Dest*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Dest
+  name: Dest
+  nameWithType: InfNFe.Dest
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Dest
+- uid: Unimake.Business.DFe.Xml.NFe.Dest
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Dest
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Dest
+  nameWithType: Dest
+  fullName: Unimake.Business.DFe.Xml.NFe.Dest
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Retirada*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Retirada
+  name: Retirada
+  nameWithType: InfNFe.Retirada
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Retirada
+- uid: Unimake.Business.DFe.Xml.NFe.Retirada
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Retirada
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Retirada
+  nameWithType: Retirada
+  fullName: Unimake.Business.DFe.Xml.NFe.Retirada
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Entrega*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Entrega
+  name: Entrega
+  nameWithType: InfNFe.Entrega
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Entrega
+- uid: Unimake.Business.DFe.Xml.NFe.Entrega
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Entrega
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Entrega
+  nameWithType: Entrega
+  fullName: Unimake.Business.DFe.Xml.NFe.Entrega
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.AutXML*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.AutXML
+  name: AutXML
+  nameWithType: InfNFe.AutXML
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.AutXML
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.NFe.AutXML}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.NFe.AutXML}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<AutXML>
+  nameWithType: List<AutXML>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.NFe.AutXML>
+  nameWithType.vb: List(Of AutXML)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.NFe.AutXML)
+  name.vb: List(Of AutXML)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.NFe.AutXML
+    name: AutXML
+    nameWithType: AutXML
+    fullName: Unimake.Business.DFe.Xml.NFe.AutXML
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.NFe.AutXML
+    name: AutXML
+    nameWithType: AutXML
+    fullName: Unimake.Business.DFe.Xml.NFe.AutXML
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Det*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Det
+  name: Det
+  nameWithType: InfNFe.Det
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Det
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.NFe.Det}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.NFe.Det}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<Det>
+  nameWithType: List<Det>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.NFe.Det>
+  nameWithType.vb: List(Of Det)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.NFe.Det)
+  name.vb: List(Of Det)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.NFe.Det
+    name: Det
+    nameWithType: Det
+    fullName: Unimake.Business.DFe.Xml.NFe.Det
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.NFe.Det
+    name: Det
+    nameWithType: Det
+    fullName: Unimake.Business.DFe.Xml.NFe.Det
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Total*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Total
+  name: Total
+  nameWithType: InfNFe.Total
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Total
+- uid: Unimake.Business.DFe.Xml.NFe.Total
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Total
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Total
+  nameWithType: Total
+  fullName: Unimake.Business.DFe.Xml.NFe.Total
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Transp*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Transp
+  name: Transp
+  nameWithType: InfNFe.Transp
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Transp
+- uid: Unimake.Business.DFe.Xml.NFe.Transp
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Transp
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Transp
+  nameWithType: Transp
+  fullName: Unimake.Business.DFe.Xml.NFe.Transp
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Cobr*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Cobr
+  name: Cobr
+  nameWithType: InfNFe.Cobr
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Cobr
+- uid: Unimake.Business.DFe.Xml.NFe.Cobr
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Cobr
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Cobr
+  nameWithType: Cobr
+  fullName: Unimake.Business.DFe.Xml.NFe.Cobr
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Pag*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Pag
+  name: Pag
+  nameWithType: InfNFe.Pag
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Pag
+- uid: Unimake.Business.DFe.Xml.NFe.Pag
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Pag
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Pag
+  nameWithType: Pag
+  fullName: Unimake.Business.DFe.Xml.NFe.Pag
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.InfAdic*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.InfAdic
+  name: InfAdic
+  nameWithType: InfNFe.InfAdic
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.InfAdic
+- uid: Unimake.Business.DFe.Xml.NFe.InfAdic
+  commentId: T:Unimake.Business.DFe.Xml.NFe.InfAdic
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: InfAdic
+  nameWithType: InfAdic
+  fullName: Unimake.Business.DFe.Xml.NFe.InfAdic
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Exporta*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Exporta
+  name: Exporta
+  nameWithType: InfNFe.Exporta
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Exporta
+- uid: Unimake.Business.DFe.Xml.NFe.Exporta
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Exporta
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Exporta
+  nameWithType: Exporta
+  fullName: Unimake.Business.DFe.Xml.NFe.Exporta
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Compra*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Compra
+  name: Compra
+  nameWithType: InfNFe.Compra
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Compra
+- uid: Unimake.Business.DFe.Xml.NFe.Compra
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Compra
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Compra
+  nameWithType: Compra
+  fullName: Unimake.Business.DFe.Xml.NFe.Compra
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Cana*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Cana
+  name: Cana
+  nameWithType: InfNFe.Cana
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Cana
+- uid: Unimake.Business.DFe.Xml.NFe.Cana
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Cana
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Cana
+  nameWithType: Cana
+  fullName: Unimake.Business.DFe.Xml.NFe.Cana
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.InfRespTec*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.InfRespTec
+  name: InfRespTec
+  nameWithType: InfNFe.InfRespTec
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.InfRespTec
+- uid: Unimake.Business.DFe.Xml.NFe.InfRespTec
+  commentId: T:Unimake.Business.DFe.Xml.NFe.InfRespTec
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: InfRespTec
+  nameWithType: InfRespTec
+  fullName: Unimake.Business.DFe.Xml.NFe.InfRespTec
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Id*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Id
+  name: Id
+  nameWithType: InfNFe.Id
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Id
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.Chave*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.Chave
+  name: Chave
+  nameWithType: InfNFe.Chave
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.Chave
+- uid: Unimake.Business.DFe.Xml.NFe.InfNFe.AddDet*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.InfNFe.AddDet
+  name: AddDet
+  nameWithType: InfNFe.AddDet
+  fullName: Unimake.Business.DFe.Xml.NFe.InfNFe.AddDet
+- uid: Unimake.Business.DFe.Xml.NFe.Det
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Det
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: Det
+  nameWithType: Det
+  fullName: Unimake.Business.DFe.Xml.NFe.Det

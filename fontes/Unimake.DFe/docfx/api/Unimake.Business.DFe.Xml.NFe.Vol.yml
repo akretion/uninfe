@@ -1,0 +1,992 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.Vol
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Vol
+  id: Vol
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.Vol.Esp
+  - Unimake.Business.DFe.Xml.NFe.Vol.Lacres
+  - Unimake.Business.DFe.Xml.NFe.Vol.Marca
+  - Unimake.Business.DFe.Xml.NFe.Vol.NVol
+  - Unimake.Business.DFe.Xml.NFe.Vol.PesoB
+  - Unimake.Business.DFe.Xml.NFe.Vol.PesoBField
+  - Unimake.Business.DFe.Xml.NFe.Vol.PesoL
+  - Unimake.Business.DFe.Xml.NFe.Vol.PesoLField
+  - Unimake.Business.DFe.Xml.NFe.Vol.QVol
+  - Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeEsp
+  - Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeMarca
+  - Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeNVol
+  - Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoBField
+  - Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoLField
+  - Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeQVol
+  langs:
+  - csharp
+  - vb
+  name: Vol
+  nameWithType: Vol
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol
+  type: Class
+  source:
+    id: Vol
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5340
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class Vol
+    content.vb: >-
+      <Serializable>
+
+      Public Class Vol
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.QVol
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Vol.QVol
+  id: QVol
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: QVol
+  nameWithType: Vol.QVol
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.QVol
+  type: Property
+  source:
+    id: QVol
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5344
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double QVol { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property QVol As Double
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.QVol*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.Esp
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Vol.Esp
+  id: Esp
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: Esp
+  nameWithType: Vol.Esp
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.Esp
+  type: Property
+  source:
+    id: Esp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5347
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string Esp { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Esp As String
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.Esp*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.Marca
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Vol.Marca
+  id: Marca
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: Marca
+  nameWithType: Vol.Marca
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.Marca
+  type: Property
+  source:
+    id: Marca
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5350
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string Marca { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Marca As String
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.Marca*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.NVol
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Vol.NVol
+  id: NVol
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: NVol
+  nameWithType: Vol.NVol
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.NVol
+  type: Property
+  source:
+    id: NVol
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5353
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string NVol { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property NVol As String
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.NVol*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.PesoL
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Vol.PesoL
+  id: PesoL
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: PesoL
+  nameWithType: Vol.PesoL
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.PesoL
+  type: Property
+  source:
+    id: PesoL
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5356
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double PesoL { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PesoL As Double
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.PesoL*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.PesoLField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Vol.PesoLField
+  id: PesoLField
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: PesoLField
+  nameWithType: Vol.PesoLField
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.PesoLField
+  type: Property
+  source:
+    id: PesoLField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5359
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string PesoLField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PesoLField As String
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.PesoLField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.PesoB
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Vol.PesoB
+  id: PesoB
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: PesoB
+  nameWithType: Vol.PesoB
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.PesoB
+  type: Property
+  source:
+    id: PesoB
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5366
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double PesoB { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PesoB As Double
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.PesoB*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.PesoBField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Vol.PesoBField
+  id: PesoBField
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: PesoBField
+  nameWithType: Vol.PesoBField
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.PesoBField
+  type: Property
+  source:
+    id: PesoBField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5369
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string PesoBField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PesoBField As String
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.PesoBField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.Lacres
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Vol.Lacres
+  id: Lacres
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: Lacres
+  nameWithType: Vol.Lacres
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.Lacres
+  type: Property
+  source:
+    id: Lacres
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5376
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public List<Lacres> Lacres { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.NFe.Lacres}
+    content.vb: Public Property Lacres As List(Of Lacres)
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.Lacres*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeEsp
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeEsp
+  id: ShouldSerializeEsp
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeEsp()
+  nameWithType: Vol.ShouldSerializeEsp()
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeEsp()
+  type: Method
+  source:
+    id: ShouldSerializeEsp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5381
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeEsp()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeEsp As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeEsp*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeMarca
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeMarca
+  id: ShouldSerializeMarca
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeMarca()
+  nameWithType: Vol.ShouldSerializeMarca()
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeMarca()
+  type: Method
+  source:
+    id: ShouldSerializeMarca
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5383
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeMarca()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeMarca As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeMarca*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeNVol
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeNVol
+  id: ShouldSerializeNVol
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeNVol()
+  nameWithType: Vol.ShouldSerializeNVol()
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeNVol()
+  type: Method
+  source:
+    id: ShouldSerializeNVol
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5385
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeNVol()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeNVol As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeNVol*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeQVol
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeQVol
+  id: ShouldSerializeQVol
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeQVol()
+  nameWithType: Vol.ShouldSerializeQVol()
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeQVol()
+  type: Method
+  source:
+    id: ShouldSerializeQVol
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5387
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeQVol()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeQVol As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeQVol*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoLField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoLField
+  id: ShouldSerializePesoLField
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializePesoLField()
+  nameWithType: Vol.ShouldSerializePesoLField()
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoLField()
+  type: Method
+  source:
+    id: ShouldSerializePesoLField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5389
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializePesoLField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializePesoLField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoLField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoBField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoBField
+  id: ShouldSerializePesoBField
+  parent: Unimake.Business.DFe.Xml.NFe.Vol
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializePesoBField()
+  nameWithType: Vol.ShouldSerializePesoBField()
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoBField()
+  type: Method
+  source:
+    id: ShouldSerializePesoBField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5391
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializePesoBField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializePesoBField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoBField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.QVol*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.QVol
+  name: QVol
+  nameWithType: Vol.QVol
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.QVol
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.Esp*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.Esp
+  name: Esp
+  nameWithType: Vol.Esp
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.Esp
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.Marca*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.Marca
+  name: Marca
+  nameWithType: Vol.Marca
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.Marca
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.NVol*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.NVol
+  name: NVol
+  nameWithType: Vol.NVol
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.NVol
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.PesoL*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.PesoL
+  name: PesoL
+  nameWithType: Vol.PesoL
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.PesoL
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.PesoLField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.PesoLField
+  name: PesoLField
+  nameWithType: Vol.PesoLField
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.PesoLField
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.PesoB*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.PesoB
+  name: PesoB
+  nameWithType: Vol.PesoB
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.PesoB
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.PesoBField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.PesoBField
+  name: PesoBField
+  nameWithType: Vol.PesoBField
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.PesoBField
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.Lacres*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.Lacres
+  name: Lacres
+  nameWithType: Vol.Lacres
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.Lacres
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.NFe.Lacres}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.NFe.Lacres}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<Lacres>
+  nameWithType: List<Lacres>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.NFe.Lacres>
+  nameWithType.vb: List(Of Lacres)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.NFe.Lacres)
+  name.vb: List(Of Lacres)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.NFe.Lacres
+    name: Lacres
+    nameWithType: Lacres
+    fullName: Unimake.Business.DFe.Xml.NFe.Lacres
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.NFe.Lacres
+    name: Lacres
+    nameWithType: Lacres
+    fullName: Unimake.Business.DFe.Xml.NFe.Lacres
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeEsp*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeEsp
+  name: ShouldSerializeEsp
+  nameWithType: Vol.ShouldSerializeEsp
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeEsp
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeMarca*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeMarca
+  name: ShouldSerializeMarca
+  nameWithType: Vol.ShouldSerializeMarca
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeMarca
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeNVol*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeNVol
+  name: ShouldSerializeNVol
+  nameWithType: Vol.ShouldSerializeNVol
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeNVol
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeQVol*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeQVol
+  name: ShouldSerializeQVol
+  nameWithType: Vol.ShouldSerializeQVol
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializeQVol
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoLField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoLField
+  name: ShouldSerializePesoLField
+  nameWithType: Vol.ShouldSerializePesoLField
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoLField
+- uid: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoBField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoBField
+  name: ShouldSerializePesoBField
+  nameWithType: Vol.ShouldSerializePesoBField
+  fullName: Unimake.Business.DFe.Xml.NFe.Vol.ShouldSerializePesoBField

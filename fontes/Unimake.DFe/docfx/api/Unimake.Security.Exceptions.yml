@@ -1,0 +1,22 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Security.Exceptions
+  commentId: N:Unimake.Security.Exceptions
+  id: Unimake.Security.Exceptions
+  children:
+  - Unimake.Security.Exceptions.ExceptionCertificadoDigital
+  langs:
+  - csharp
+  - vb
+  name: Unimake.Security.Exceptions
+  nameWithType: Unimake.Security.Exceptions
+  fullName: Unimake.Security.Exceptions
+  type: Namespace
+  assemblies:
+  - Unimake.Business.DFe
+references:
+- uid: Unimake.Security.Exceptions.ExceptionCertificadoDigital
+  commentId: T:Unimake.Security.Exceptions.ExceptionCertificadoDigital
+  name: ExceptionCertificadoDigital
+  nameWithType: ExceptionCertificadoDigital
+  fullName: Unimake.Security.Exceptions.ExceptionCertificadoDigital

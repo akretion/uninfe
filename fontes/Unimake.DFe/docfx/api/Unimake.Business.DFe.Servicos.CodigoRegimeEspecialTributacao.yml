@@ -1,0 +1,384 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  commentId: T:Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  id: CodigoRegimeEspecialTributacao
+  parent: Unimake.Business.DFe.Servicos
+  children:
+  - Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.Cooperativa
+  - Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.Estimativa
+  - Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.MicroempresaMunicipal
+  - Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.MicroEmpresarioEmpresaPequenoPorte
+  - Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.MicroEmpresarioIndividual
+  - Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.SociedadeProfissionais
+  langs:
+  - csharp
+  - vb
+  name: CodigoRegimeEspecialTributacao
+  nameWithType: CodigoRegimeEspecialTributacao
+  fullName: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  type: Enum
+  source:
+    id: CodigoRegimeEspecialTributacao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 2820
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nCódigos de Regime Especial de Tributação - Utilizado na prestação de serviços (ISSQN)\n"
+  example: []
+  syntax:
+    content: public enum CodigoRegimeEspecialTributacao
+    content.vb: Public Enum CodigoRegimeEspecialTributacao
+  extensionMethods:
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.MicroempresaMunicipal
+  commentId: F:Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.MicroempresaMunicipal
+  id: MicroempresaMunicipal
+  parent: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  langs:
+  - csharp
+  - vb
+  name: MicroempresaMunicipal
+  nameWithType: CodigoRegimeEspecialTributacao.MicroempresaMunicipal
+  fullName: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.MicroempresaMunicipal
+  type: Field
+  source:
+    id: MicroempresaMunicipal
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 2825
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n1=Microempresa Municipal,\n"
+  example: []
+  syntax:
+    content: MicroempresaMunicipal = 1
+    return:
+      type: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.Estimativa
+  commentId: F:Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.Estimativa
+  id: Estimativa
+  parent: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  langs:
+  - csharp
+  - vb
+  name: Estimativa
+  nameWithType: CodigoRegimeEspecialTributacao.Estimativa
+  fullName: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.Estimativa
+  type: Field
+  source:
+    id: Estimativa
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 2831
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n2=Estimativa,\n"
+  example: []
+  syntax:
+    content: Estimativa = 2
+    return:
+      type: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.SociedadeProfissionais
+  commentId: F:Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.SociedadeProfissionais
+  id: SociedadeProfissionais
+  parent: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  langs:
+  - csharp
+  - vb
+  name: SociedadeProfissionais
+  nameWithType: CodigoRegimeEspecialTributacao.SociedadeProfissionais
+  fullName: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.SociedadeProfissionais
+  type: Field
+  source:
+    id: SociedadeProfissionais
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 2837
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n3=Sociedade de Profissionais,\n"
+  example: []
+  syntax:
+    content: SociedadeProfissionais = 3
+    return:
+      type: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.Cooperativa
+  commentId: F:Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.Cooperativa
+  id: Cooperativa
+  parent: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  langs:
+  - csharp
+  - vb
+  name: Cooperativa
+  nameWithType: CodigoRegimeEspecialTributacao.Cooperativa
+  fullName: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.Cooperativa
+  type: Field
+  source:
+    id: Cooperativa
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 2843
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n4=Cooperativa,\n"
+  example: []
+  syntax:
+    content: Cooperativa = 4
+    return:
+      type: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.MicroEmpresarioIndividual
+  commentId: F:Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.MicroEmpresarioIndividual
+  id: MicroEmpresarioIndividual
+  parent: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  langs:
+  - csharp
+  - vb
+  name: MicroEmpresarioIndividual
+  nameWithType: CodigoRegimeEspecialTributacao.MicroEmpresarioIndividual
+  fullName: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.MicroEmpresarioIndividual
+  type: Field
+  source:
+    id: MicroEmpresarioIndividual
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 2849
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n5=Microempresário Individual (MEI),\n"
+  example: []
+  syntax:
+    content: MicroEmpresarioIndividual = 5
+    return:
+      type: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.MicroEmpresarioEmpresaPequenoPorte
+  commentId: F:Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.MicroEmpresarioEmpresaPequenoPorte
+  id: MicroEmpresarioEmpresaPequenoPorte
+  parent: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  langs:
+  - csharp
+  - vb
+  name: MicroEmpresarioEmpresaPequenoPorte
+  nameWithType: CodigoRegimeEspecialTributacao.MicroEmpresarioEmpresaPequenoPorte
+  fullName: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao.MicroEmpresarioEmpresaPequenoPorte
+  type: Field
+  source:
+    id: MicroEmpresarioEmpresaPequenoPorte
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 2855
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n6=Microempresário e Empresa de Pequeno Porte (ME/EPP)\n"
+  example: []
+  syntax:
+    content: MicroEmpresarioEmpresaPequenoPorte = 6
+    return:
+      type: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  name: GetAttribute<T>()
+  nameWithType: EnumsExtension.GetAttribute<T>()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>()
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)()
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)()
+  name.vb: GetAttribute(Of T)()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  name: GetAttributeDescription()
+  nameWithType: EnumsExtension.GetAttributeDescription()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  isExternal: true
+  name: GetAttribute<T>(Enum)
+  nameWithType: EnumsExtension.GetAttribute<T>(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>(System.Enum)
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)(Enum)
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)(System.Enum)
+  name.vb: GetAttribute(Of T)(Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  isExternal: true
+  name: GetAttributeDescription(Enum)
+  nameWithType: EnumsExtension.GetAttributeDescription(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+- uid: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  commentId: T:Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao
+  parent: Unimake.Business.DFe.Servicos
+  name: CodigoRegimeEspecialTributacao
+  nameWithType: CodigoRegimeEspecialTributacao
+  fullName: Unimake.Business.DFe.Servicos.CodigoRegimeEspecialTributacao

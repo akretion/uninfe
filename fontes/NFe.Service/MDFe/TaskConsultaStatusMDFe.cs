@@ -1,13 +1,15 @@
 ﻿using NFe.Components;
 using NFe.Settings;
 using System;
+using Unimake.Business.DFe.Servicos;
+using Unimake.Business.DFe.Xml.MDFe;
 
 namespace NFe.Service
 {
     /// <summary>
     /// Classe para consultar status do serviço do MDFe
     /// </summary>
-    public class TaskMDFeConsultaStatus : TaskAbst
+    public class TaskMDFeConsultaStatus: TaskAbst
     {
         public TaskMDFeConsultaStatus(string arquivo)
         {
@@ -33,41 +35,45 @@ namespace NFe.Service
         /// </summary>
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             try
             {
                 dadosPedSta = new DadosPedSta();
-                //Ler o XML para pegar parâmetros de envio
                 PedSta(emp, dadosPedSta);
 
-                //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, 0);
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, Servico);
+                var xml = new ConsStatServMDFe();
+                xml = Unimake.Business.DFe.Utility.XMLUtility.Deserializar<ConsStatServMDFe>(ConteudoXML);
 
-                //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                var statusServico = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                var cabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSta.cUF, Servico));
+                var configuracao = new Configuracao
+                {
+                    TipoDFe = TipoDFe.MDFe,
+                    CodigoUF = dadosPedSta.cUF,
+                    CertificadoDigital = Empresas.Configuracoes[emp].X509Certificado
+                };
 
-                //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(cabecMsg, TpcnResources.cUF.ToString(), dadosPedSta.cUF.ToString());
-                wsProxy.SetProp(cabecMsg, TpcnResources.versaoDados.ToString(), dadosPedSta.versao);
+                if(ConfiguracaoApp.Proxy)
+                {
+                    configuracao.HasProxy = true;
+                    configuracao.ProxyAutoDetect = ConfiguracaoApp.DetectarConfiguracaoProxyAuto;
+                    configuracao.ProxyUser = ConfiguracaoApp.ProxyUsuario;
+                    configuracao.ProxyPassword = ConfiguracaoApp.ProxySenha;
+                }
 
-                //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy, statusServico, wsProxy.NomeMetodoWS[0], cabecMsg, this,
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML,
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML,
-                                    true,
-                                    securityProtocolType);
+                var statusServico = new Unimake.Business.DFe.Servicos.MDFe.StatusServico(xml, configuracao);
+                statusServico.Executar();
+
+                vStrXmlRetorno = statusServico.RetornoWSString;
+                XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
                     TFunctions.GravarArqErroServico(NomeArquivoXML,
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML,
-                                    Propriedade.ExtRetorno.Sta_ERR, ex);
+                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML,
+                        Propriedade.ExtRetorno.Sta_ERR, ex);
                 }
                 catch
                 {

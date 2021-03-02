@@ -11,10 +11,10 @@ namespace Unimake.Business.DFe.Servicos.CTe
     /// Envio do XML de eventos do CTe para o WebService
     /// </summary>
     [ComVisible(true)]
-    public class RecepcaoEvento: ServicoBase
+    public class RecepcaoEvento<TDetalheEvento>: ServicoBase
     {
         #region Private Fields
-        private EventoCTe EventoCTe => new EventoCTe().LerXML<EventoCTe>(ConteudoXML);
+        private EventoCTe<TDetalheEvento> EventoCTe => new EventoCTe<TDetalheEvento>().LerXML<EventoCTe<TDetalheEvento>>(ConteudoXML);
 
         #endregion Private Fields
 
@@ -47,13 +47,13 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// </summary>
         protected override void DefinirConfiguracao()
         {
-            var xml = new EventoCTe();
-            xml = xml.LerXML<EventoCTe>(ConteudoXML);
+            var xml = new EventoCTe<TDetalheEvento>();
+            xml = xml.LerXML<EventoCTe<TDetalheEvento>>(ConteudoXML);
 
             if(!Configuracoes.Definida)
             {
-                Configuracoes.CodigoUF = (int)xml.InfEvento.COrgao;
-                Configuracoes.TipoAmbiente = xml.InfEvento.TpAmb;
+                Configuracoes.CodigoUF = (int)((IInfEvento)xml.InfEvento).COrgao;
+                Configuracoes.TipoAmbiente = ((IInfEvento)xml.InfEvento).TpAmb;
                 Configuracoes.SchemaVersao = xml.Versao;
 
                 base.DefinirConfiguracao();
@@ -72,7 +72,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
             if(Configuracoes.SchemasEspecificos.Count > 0)
             {
-                var tpEvento = ((int)xml.InfEvento.TpEvento);
+                var tpEvento = ((int)((IInfEvento)xml.InfEvento).TpEvento);
 
                 try
                 {
@@ -93,50 +93,15 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
             #region Validar a parte específica de cada evento
 
-            var listEvento = ConteudoXML.GetElementsByTagName("eventoCTe");
-            for(var i = 0; i < listEvento.Count; i++)
+            if(ConteudoXML.GetElementsByTagName("detEvento")[0] != null)
             {
-                var elementEvento = (XmlElement)listEvento[i];
-
-                if(elementEvento.GetElementsByTagName("infEvento")[0] != null)
-                {
-                    var elementInfEvento = (XmlElement)elementEvento.GetElementsByTagName("infEvento")[0];
-                    if(elementInfEvento.GetElementsByTagName("tpEvento")[0] != null)
-                    {
-                        var tpEvento = elementInfEvento.GetElementsByTagName("tpEvento")[0].InnerText;
-
-                        var tipoEventoCTe = (TipoEventoCTe)Enum.Parse(typeof(TipoEventoCTe), tpEvento);
-
-                        var xmlEspecifico = new XmlDocument();
-                        switch(tipoEventoCTe)
-                        {
-                            case TipoEventoCTe.Cancelamento:
-                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCanc>((DetEventoCanc)xml.InfEvento.DetEvento).OuterXml);
-                                break;
-
-                            case TipoEventoCTe.ComprovanteEntrega:
-                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCompEntrega>((DetEventoCompEntrega)xml.InfEvento.DetEvento).OuterXml);
-                                break;
-
-                            case TipoEventoCTe.CancelamentoComprovanteEntrega:
-                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCancCompEntrega>((DetEventoCancCompEntrega)xml.InfEvento.DetEvento).OuterXml);
-                                break;
-
-                            case TipoEventoCTe.CartaCorrecao:
-                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCCE>((DetEventoCCE)xml.InfEvento.DetEvento).OuterXml);
-                                break;
-
-                            case TipoEventoCTe.PrestDesacordo:
-                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoPrestDesacordo>((DetEventoPrestDesacordo)xml.InfEvento.DetEvento).OuterXml);
-                                break;
-
-                            default:
-                                throw new Exception("Não foi possível identificar o tipo de evento.");
-                        }
-
-                        ValidarXMLEvento(xmlEspecifico, schemaArquivoEspecifico, Configuracoes.TargetNS);
-                    }
-                }
+                var xmlEspecifico = new XmlDocument();
+                xmlEspecifico.LoadXml(ConteudoXML.GetElementsByTagName(ConteudoXML.GetElementsByTagName("detEvento")[0].FirstChild.Name)[0].OuterXml);
+                ValidarXMLEvento(xmlEspecifico, schemaArquivoEspecifico, Configuracoes.TargetNS);
+            }
+            else
+            {
+                throw new Exception("Não foi possível localizar o detalhamento do evento. Tag (detEvento).");
             }
 
             #endregion Validar a parte específica de cada evento
@@ -149,7 +114,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// <summary>
         /// Propriedade contendo o XML do evento com o protocolo de autorização anexado
         /// </summary>
-        public ProcEventoCTe ProcEventoCTeResult => new ProcEventoCTe
+        public ProcEventoCTe<TDetalheEvento> ProcEventoCTeResult => new ProcEventoCTe<TDetalheEvento>
         {
             Versao = EventoCTe.Versao,
             EventoCTe = EventoCTe,
@@ -189,7 +154,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// </summary>
         /// <param name="envEvento">Objeto contendo o XML a ser enviado</param>
         /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
-        public RecepcaoEvento(EventoCTe envEvento, Configuracao configuracao)
+        public RecepcaoEvento(EventoCTe<TDetalheEvento> envEvento, Configuracao configuracao)
             : this(envEvento?.GerarXML() ?? throw new ArgumentNullException(nameof(envEvento)), configuracao) { }
 
         /// <summary>
@@ -215,7 +180,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// <param name="envEvento">Objeto contendo o XML a ser enviado</param>
         /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         [ComVisible(true)]
-        public void Executar(EventoCTe envEvento, Configuracao configuracao)
+        public void Executar(EventoCTe<TDetalheEvento> envEvento, Configuracao configuracao)
         {
             if(envEvento == null)
             {

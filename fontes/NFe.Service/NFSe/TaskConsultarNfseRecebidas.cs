@@ -48,6 +48,12 @@ namespace NFe.Service.NFSe
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(dadosXML.cMunicipio);
                 WebServiceProxy wsProxy = null;
                 object pedConsNfseRecebidas = null;
+                if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].CertificadoPIN))
+                {
+                    new Unimake.Business.DFe.Utility.Certificate().CarregarPINA3(Empresas.Configuracoes[emp].X509Certificado, Empresas.Configuracoes[emp].CertificadoPIN);
+                }
+
+
 
                 if (IsUtilizaCompilacaoWs(padraoNFSe))
                 {

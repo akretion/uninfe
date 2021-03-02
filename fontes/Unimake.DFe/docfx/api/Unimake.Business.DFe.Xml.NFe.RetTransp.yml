@@ -1,0 +1,738 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp
+  commentId: T:Unimake.Business.DFe.Xml.NFe.RetTransp
+  id: RetTransp
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.RetTransp.CFOP
+  - Unimake.Business.DFe.Xml.NFe.RetTransp.CMunFG
+  - Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRet
+  - Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRetField
+  - Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRet
+  - Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRetField
+  - Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRet
+  - Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRetRetField
+  - Unimake.Business.DFe.Xml.NFe.RetTransp.VServ
+  - Unimake.Business.DFe.Xml.NFe.RetTransp.VServField
+  langs:
+  - csharp
+  - vb
+  name: RetTransp
+  nameWithType: RetTransp
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp
+  type: Class
+  source:
+    id: RetTransp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5263
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class RetTransp
+    content.vb: >-
+      <Serializable>
+
+      Public Class RetTransp
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.VServ
+  commentId: P:Unimake.Business.DFe.Xml.NFe.RetTransp.VServ
+  id: VServ
+  parent: Unimake.Business.DFe.Xml.NFe.RetTransp
+  langs:
+  - csharp
+  - vb
+  name: VServ
+  nameWithType: RetTransp.VServ
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.VServ
+  type: Property
+  source:
+    id: VServ
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5267
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VServ { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VServ As Double
+  overload: Unimake.Business.DFe.Xml.NFe.RetTransp.VServ*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.VServField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.RetTransp.VServField
+  id: VServField
+  parent: Unimake.Business.DFe.Xml.NFe.RetTransp
+  langs:
+  - csharp
+  - vb
+  name: VServField
+  nameWithType: RetTransp.VServField
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.VServField
+  type: Property
+  source:
+    id: VServField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5270
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VServField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VServField As String
+  overload: Unimake.Business.DFe.Xml.NFe.RetTransp.VServField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRet
+  commentId: P:Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRet
+  id: VBCRet
+  parent: Unimake.Business.DFe.Xml.NFe.RetTransp
+  langs:
+  - csharp
+  - vb
+  name: VBCRet
+  nameWithType: RetTransp.VBCRet
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRet
+  type: Property
+  source:
+    id: VBCRet
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5277
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VBCRet { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VBCRet As Double
+  overload: Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRet*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRetField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRetField
+  id: VBCRetField
+  parent: Unimake.Business.DFe.Xml.NFe.RetTransp
+  langs:
+  - csharp
+  - vb
+  name: VBCRetField
+  nameWithType: RetTransp.VBCRetField
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRetField
+  type: Property
+  source:
+    id: VBCRetField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5280
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VBCRetField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VBCRetField As String
+  overload: Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRetField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRet
+  commentId: P:Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRet
+  id: PICMSRet
+  parent: Unimake.Business.DFe.Xml.NFe.RetTransp
+  langs:
+  - csharp
+  - vb
+  name: PICMSRet
+  nameWithType: RetTransp.PICMSRet
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRet
+  type: Property
+  source:
+    id: PICMSRet
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5287
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double PICMSRet { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PICMSRet As Double
+  overload: Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRet*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRetField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRetField
+  id: PICMSRetField
+  parent: Unimake.Business.DFe.Xml.NFe.RetTransp
+  langs:
+  - csharp
+  - vb
+  name: PICMSRetField
+  nameWithType: RetTransp.PICMSRetField
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRetField
+  type: Property
+  source:
+    id: PICMSRetField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5290
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string PICMSRetField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PICMSRetField As String
+  overload: Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRetField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRet
+  commentId: P:Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRet
+  id: VICMSRet
+  parent: Unimake.Business.DFe.Xml.NFe.RetTransp
+  langs:
+  - csharp
+  - vb
+  name: VICMSRet
+  nameWithType: RetTransp.VICMSRet
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRet
+  type: Property
+  source:
+    id: VICMSRet
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5297
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VICMSRet { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VICMSRet As Double
+  overload: Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRet*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRetRetField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRetRetField
+  id: VICMSRetRetField
+  parent: Unimake.Business.DFe.Xml.NFe.RetTransp
+  langs:
+  - csharp
+  - vb
+  name: VICMSRetRetField
+  nameWithType: RetTransp.VICMSRetRetField
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRetRetField
+  type: Property
+  source:
+    id: VICMSRetRetField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5300
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VICMSRetRetField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VICMSRetRetField As String
+  overload: Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRetRetField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.CFOP
+  commentId: P:Unimake.Business.DFe.Xml.NFe.RetTransp.CFOP
+  id: CFOP
+  parent: Unimake.Business.DFe.Xml.NFe.RetTransp
+  langs:
+  - csharp
+  - vb
+  name: CFOP
+  nameWithType: RetTransp.CFOP
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.CFOP
+  type: Property
+  source:
+    id: CFOP
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5307
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CFOP { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CFOP As String
+  overload: Unimake.Business.DFe.Xml.NFe.RetTransp.CFOP*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.CMunFG
+  commentId: P:Unimake.Business.DFe.Xml.NFe.RetTransp.CMunFG
+  id: CMunFG
+  parent: Unimake.Business.DFe.Xml.NFe.RetTransp
+  langs:
+  - csharp
+  - vb
+  name: CMunFG
+  nameWithType: RetTransp.CMunFG
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.CMunFG
+  type: Property
+  source:
+    id: CMunFG
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5310
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public int CMunFG { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property CMunFG As Integer
+  overload: Unimake.Business.DFe.Xml.NFe.RetTransp.CMunFG*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.VServ*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.RetTransp.VServ
+  name: VServ
+  nameWithType: RetTransp.VServ
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.VServ
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.VServField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.RetTransp.VServField
+  name: VServField
+  nameWithType: RetTransp.VServField
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.VServField
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRet*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRet
+  name: VBCRet
+  nameWithType: RetTransp.VBCRet
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRet
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRetField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRetField
+  name: VBCRetField
+  nameWithType: RetTransp.VBCRetField
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.VBCRetField
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRet*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRet
+  name: PICMSRet
+  nameWithType: RetTransp.PICMSRet
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRet
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRetField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRetField
+  name: PICMSRetField
+  nameWithType: RetTransp.PICMSRetField
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.PICMSRetField
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRet*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRet
+  name: VICMSRet
+  nameWithType: RetTransp.VICMSRet
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRet
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRetRetField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRetRetField
+  name: VICMSRetRetField
+  nameWithType: RetTransp.VICMSRetRetField
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.VICMSRetRetField
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.CFOP*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.RetTransp.CFOP
+  name: CFOP
+  nameWithType: RetTransp.CFOP
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.CFOP
+- uid: Unimake.Business.DFe.Xml.NFe.RetTransp.CMunFG*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.RetTransp.CMunFG
+  name: CMunFG
+  nameWithType: RetTransp.CMunFG
+  fullName: Unimake.Business.DFe.Xml.NFe.RetTransp.CMunFG
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32

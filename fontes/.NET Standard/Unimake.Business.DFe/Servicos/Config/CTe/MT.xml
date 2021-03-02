@@ -40,18 +40,18 @@
       <TagLoteAssinatura></TagLoteAssinatura>
       <TagLoteAtributoID></TagLoteAtributoID>
     </Inutilizacao>
-    <ConsultaCadastro versao="2.00">
-      <Descricao>Consulta cadastro do contribuinte</Descricao>
-      <WebEnderecoHomologacao></WebEnderecoHomologacao>
-      <WebEnderecoProducao></WebEnderecoProducao>
-      <WebActionHomologacao></WebActionHomologacao>
-      <WebActionProducao></WebActionProducao>
-      <SchemaArquivo>consCad_v{0}.xsd</SchemaArquivo>
-      <TagAssinatura></TagAssinatura>
-      <TagAtributoID></TagAtributoID>
-      <TagLoteAssinatura></TagLoteAssinatura>
-      <TagLoteAtributoID></TagLoteAtributoID>
-    </ConsultaCadastro>
+	  <ConsultaCadastro versao="2.00">
+		  <Descricao>Consulta cadastro do contribuinte</Descricao>
+		  <WebEnderecoHomologacao>https://nfe.sefaz.mt.gov.br/nfews/v2/services/CadConsultaCadastro4</WebEnderecoHomologacao>
+		  <WebEnderecoProducao>https://nfe.sefaz.mt.gov.br/nfews/v2/services/CadConsultaCadastro4</WebEnderecoProducao>
+		  <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4/consultaCadastro</WebActionHomologacao>
+		  <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4/consultaCadastro</WebActionProducao>
+		  <SchemaArquivo>consCad_v{0}.xsd</SchemaArquivo>
+		  <TagAssinatura></TagAssinatura>
+		  <TagAtributoID></TagAtributoID>
+		  <TagLoteAssinatura></TagLoteAssinatura>
+		  <TagLoteAtributoID></TagLoteAtributoID>
+	  </ConsultaCadastro>
     <RecepcaoEvento versao="3.00">
       <Descricao>Recepcao de eventos</Descricao>
       <WebEnderecoHomologacao>https://homologacao.sefaz.mt.gov.br/ctews2/services/CteRecepcaoEvento?wsdl</WebEnderecoHomologacao>

@@ -1,0 +1,1060 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  id: InfCTe
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  children:
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.AddAutXML(Unimake.Business.DFe.Xml.CTeOS.AutXML)
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.AutXML
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.Chave
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.Compl
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.Emit
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.Id
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.Ide
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.Imp
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteAnu
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteComp
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCTeNorm
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfRespTec
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.Toma
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.Versao
+  - Unimake.Business.DFe.Xml.CTeOS.InfCTe.VPrest
+  langs:
+  - csharp
+  - vb
+  name: InfCTe
+  nameWithType: InfCTe
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  type: Class
+  source:
+    id: InfCTe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 50
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class InfCTe
+    content.vb: >-
+      <Serializable>
+
+      Public Class InfCTe
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Versao
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Versao
+  id: Versao
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: Versao
+  nameWithType: InfCTe.Versao
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Versao
+  type: Property
+  source:
+    id: Versao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 56
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public string Versao { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Versao As String
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Versao*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Ide
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Ide
+  id: Ide
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: Ide
+  nameWithType: InfCTe.Ide
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Ide
+  type: Property
+  source:
+    id: Ide
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 59
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public Ide Ide { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.Ide
+    content.vb: Public Property Ide As Ide
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Ide*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Compl
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Compl
+  id: Compl
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: Compl
+  nameWithType: InfCTe.Compl
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Compl
+  type: Property
+  source:
+    id: Compl
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 62
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public Compl Compl { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.Compl
+    content.vb: Public Property Compl As Compl
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Compl*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Emit
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Emit
+  id: Emit
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: Emit
+  nameWithType: InfCTe.Emit
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Emit
+  type: Property
+  source:
+    id: Emit
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 65
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public Emit Emit { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.Emit
+    content.vb: Public Property Emit As Emit
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Emit*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Toma
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Toma
+  id: Toma
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: Toma
+  nameWithType: InfCTe.Toma
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Toma
+  type: Property
+  source:
+    id: Toma
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 68
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public Toma Toma { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.Toma
+    content.vb: Public Property Toma As Toma
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Toma*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.VPrest
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.VPrest
+  id: VPrest
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: VPrest
+  nameWithType: InfCTe.VPrest
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.VPrest
+  type: Property
+  source:
+    id: VPrest
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 71
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public VPrest VPrest { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.VPrest
+    content.vb: Public Property VPrest As VPrest
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.VPrest*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Imp
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Imp
+  id: Imp
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: Imp
+  nameWithType: InfCTe.Imp
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Imp
+  type: Property
+  source:
+    id: Imp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 74
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public Imp Imp { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.Imp
+    content.vb: Public Property Imp As Imp
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Imp*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCTeNorm
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCTeNorm
+  id: InfCTeNorm
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: InfCTeNorm
+  nameWithType: InfCTe.InfCTeNorm
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCTeNorm
+  type: Property
+  source:
+    id: InfCTeNorm
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 77
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public InfCTeNorm InfCTeNorm { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.InfCTeNorm
+    content.vb: Public Property InfCTeNorm As InfCTeNorm
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCTeNorm*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteComp
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteComp
+  id: InfCteComp
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: InfCteComp
+  nameWithType: InfCTe.InfCteComp
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteComp
+  type: Property
+  source:
+    id: InfCteComp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 80
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public InfCteComp InfCteComp { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.InfCteComp
+    content.vb: Public Property InfCteComp As InfCteComp
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteComp*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteAnu
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteAnu
+  id: InfCteAnu
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: InfCteAnu
+  nameWithType: InfCTe.InfCteAnu
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteAnu
+  type: Property
+  source:
+    id: InfCteAnu
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 83
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public InfCteAnu InfCteAnu { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.InfCteAnu
+    content.vb: Public Property InfCteAnu As InfCteAnu
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteAnu*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.AutXML
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.AutXML
+  id: AutXML
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: AutXML
+  nameWithType: InfCTe.AutXML
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.AutXML
+  type: Property
+  source:
+    id: AutXML
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 86
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public List<AutXML> AutXML { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.CTeOS.AutXML}
+    content.vb: Public Property AutXML As List(Of AutXML)
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.AutXML*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfRespTec
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfRespTec
+  id: InfRespTec
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: InfRespTec
+  nameWithType: InfCTe.InfRespTec
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfRespTec
+  type: Property
+  source:
+    id: InfRespTec
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 89
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public InfRespTec InfRespTec { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTeOS.InfRespTec
+    content.vb: Public Property InfRespTec As InfRespTec
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfRespTec*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Id
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Id
+  id: Id
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: InfCTe.Id
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Id
+  type: Property
+  source:
+    id: Id
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 92
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public string Id { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Id As String
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Id*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Chave
+  commentId: P:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Chave
+  id: Chave
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: Chave
+  nameWithType: InfCTe.Chave
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Chave
+  type: Property
+  source:
+    id: Chave
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 105
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public string Chave { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Chave As String
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Chave*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.AddAutXML(Unimake.Business.DFe.Xml.CTeOS.AutXML)
+  commentId: M:Unimake.Business.DFe.Xml.CTeOS.InfCTe.AddAutXML(Unimake.Business.DFe.Xml.CTeOS.AutXML)
+  id: AddAutXML(Unimake.Business.DFe.Xml.CTeOS.AutXML)
+  parent: Unimake.Business.DFe.Xml.CTeOS.InfCTe
+  langs:
+  - csharp
+  - vb
+  name: AddAutXML(AutXML)
+  nameWithType: InfCTe.AddAutXML(AutXML)
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.AddAutXML(Unimake.Business.DFe.Xml.CTeOS.AutXML)
+  type: Method
+  source:
+    id: AddAutXML
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTeOS\CTeOS.cs
+    startLine: 130
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTeOS
+  syntax:
+    content: public void AddAutXML(AutXML autxml)
+    parameters:
+    - id: autxml
+      type: Unimake.Business.DFe.Xml.CTeOS.AutXML
+    content.vb: Public Sub AddAutXML(autxml As AutXML)
+  overload: Unimake.Business.DFe.Xml.CTeOS.InfCTe.AddAutXML*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTeOS
+  commentId: N:Unimake.Business.DFe.Xml.CTeOS
+  name: Unimake.Business.DFe.Xml.CTeOS
+  nameWithType: Unimake.Business.DFe.Xml.CTeOS
+  fullName: Unimake.Business.DFe.Xml.CTeOS
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Versao*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Versao
+  name: Versao
+  nameWithType: InfCTe.Versao
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Versao
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Ide*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Ide
+  name: Ide
+  nameWithType: InfCTe.Ide
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Ide
+- uid: Unimake.Business.DFe.Xml.CTeOS.Ide
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.Ide
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: Ide
+  nameWithType: Ide
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Ide
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Compl*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Compl
+  name: Compl
+  nameWithType: InfCTe.Compl
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Compl
+- uid: Unimake.Business.DFe.Xml.CTeOS.Compl
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.Compl
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: Compl
+  nameWithType: Compl
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Compl
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Emit*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Emit
+  name: Emit
+  nameWithType: InfCTe.Emit
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Emit
+- uid: Unimake.Business.DFe.Xml.CTeOS.Emit
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.Emit
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: Emit
+  nameWithType: Emit
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Emit
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Toma*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Toma
+  name: Toma
+  nameWithType: InfCTe.Toma
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Toma
+- uid: Unimake.Business.DFe.Xml.CTeOS.Toma
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.Toma
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: Toma
+  nameWithType: Toma
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Toma
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.VPrest*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.VPrest
+  name: VPrest
+  nameWithType: InfCTe.VPrest
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.VPrest
+- uid: Unimake.Business.DFe.Xml.CTeOS.VPrest
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.VPrest
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: VPrest
+  nameWithType: VPrest
+  fullName: Unimake.Business.DFe.Xml.CTeOS.VPrest
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Imp*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Imp
+  name: Imp
+  nameWithType: InfCTe.Imp
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Imp
+- uid: Unimake.Business.DFe.Xml.CTeOS.Imp
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.Imp
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: Imp
+  nameWithType: Imp
+  fullName: Unimake.Business.DFe.Xml.CTeOS.Imp
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCTeNorm*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCTeNorm
+  name: InfCTeNorm
+  nameWithType: InfCTe.InfCTeNorm
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCTeNorm
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTeNorm
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.InfCTeNorm
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: InfCTeNorm
+  nameWithType: InfCTeNorm
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTeNorm
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteComp*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteComp
+  name: InfCteComp
+  nameWithType: InfCTe.InfCteComp
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteComp
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCteComp
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.InfCteComp
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: InfCteComp
+  nameWithType: InfCteComp
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCteComp
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteAnu*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteAnu
+  name: InfCteAnu
+  nameWithType: InfCTe.InfCteAnu
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfCteAnu
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCteAnu
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.InfCteAnu
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: InfCteAnu
+  nameWithType: InfCteAnu
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCteAnu
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.AutXML*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.AutXML
+  name: AutXML
+  nameWithType: InfCTe.AutXML
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.AutXML
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.CTeOS.AutXML}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.CTeOS.AutXML}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<AutXML>
+  nameWithType: List<AutXML>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.CTeOS.AutXML>
+  nameWithType.vb: List(Of AutXML)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.CTeOS.AutXML)
+  name.vb: List(Of AutXML)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.CTeOS.AutXML
+    name: AutXML
+    nameWithType: AutXML
+    fullName: Unimake.Business.DFe.Xml.CTeOS.AutXML
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.CTeOS.AutXML
+    name: AutXML
+    nameWithType: AutXML
+    fullName: Unimake.Business.DFe.Xml.CTeOS.AutXML
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfRespTec*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfRespTec
+  name: InfRespTec
+  nameWithType: InfCTe.InfRespTec
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.InfRespTec
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfRespTec
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.InfRespTec
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: InfRespTec
+  nameWithType: InfRespTec
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfRespTec
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Id*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Id
+  name: Id
+  nameWithType: InfCTe.Id
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Id
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Chave*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.Chave
+  name: Chave
+  nameWithType: InfCTe.Chave
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.Chave
+- uid: Unimake.Business.DFe.Xml.CTeOS.InfCTe.AddAutXML*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTeOS.InfCTe.AddAutXML
+  name: AddAutXML
+  nameWithType: InfCTe.AddAutXML
+  fullName: Unimake.Business.DFe.Xml.CTeOS.InfCTe.AddAutXML
+- uid: Unimake.Business.DFe.Xml.CTeOS.AutXML
+  commentId: T:Unimake.Business.DFe.Xml.CTeOS.AutXML
+  parent: Unimake.Business.DFe.Xml.CTeOS
+  name: AutXML
+  nameWithType: AutXML
+  fullName: Unimake.Business.DFe.Xml.CTeOS.AutXML

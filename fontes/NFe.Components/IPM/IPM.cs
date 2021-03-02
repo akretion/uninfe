@@ -119,6 +119,9 @@ namespace NFSe.Components
 
                 case 4303103: //Cachoeirinha-SC
                     return 85618;
+
+                case 4114609: //Marechal Cândido Rondon-PR
+                    return 7683;
             }
 
             return 0;
@@ -177,7 +180,7 @@ namespace NFSe.Components
                 Proxy = Proxy
             })
             {
-                if (Cidade == 74934)
+                if (Cidade == 74934 || Cidade == 4104808)
                 {
                     //                                                                                                    informe 1 para retorno em xml
                     result = post.PostForm("http://sync-pr.nfs-e.net/datacenter/include/nfw/importa_nfw/nfw_import_upload.php?eletron=1", new Dictionary<string, string> {

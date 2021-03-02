@@ -1,0 +1,628 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.Card
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Card
+  id: Card
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.Card.CAut
+  - Unimake.Business.DFe.Xml.NFe.Card.CNPJ
+  - Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCAut
+  - Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCNPJ
+  - Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeTBand
+  - Unimake.Business.DFe.Xml.NFe.Card.TBand
+  - Unimake.Business.DFe.Xml.NFe.Card.TpIntegra
+  langs:
+  - csharp
+  - vb
+  name: Card
+  nameWithType: Card
+  fullName: Unimake.Business.DFe.Xml.NFe.Card
+  type: Class
+  source:
+    id: Card
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5562
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class Card
+    content.vb: >-
+      <Serializable>
+
+      Public Class Card
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.Card.TpIntegra
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Card.TpIntegra
+  id: TpIntegra
+  parent: Unimake.Business.DFe.Xml.NFe.Card
+  langs:
+  - csharp
+  - vb
+  name: TpIntegra
+  nameWithType: Card.TpIntegra
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.TpIntegra
+  type: Property
+  source:
+    id: TpIntegra
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5566
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public TipoIntegracaoPagamento TpIntegra { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoIntegracaoPagamento
+    content.vb: Public Property TpIntegra As TipoIntegracaoPagamento
+  overload: Unimake.Business.DFe.Xml.NFe.Card.TpIntegra*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Card.CNPJ
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Card.CNPJ
+  id: CNPJ
+  parent: Unimake.Business.DFe.Xml.NFe.Card
+  langs:
+  - csharp
+  - vb
+  name: CNPJ
+  nameWithType: Card.CNPJ
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.CNPJ
+  type: Property
+  source:
+    id: CNPJ
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5569
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CNPJ { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CNPJ As String
+  overload: Unimake.Business.DFe.Xml.NFe.Card.CNPJ*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Card.TBand
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Card.TBand
+  id: TBand
+  parent: Unimake.Business.DFe.Xml.NFe.Card
+  langs:
+  - csharp
+  - vb
+  name: TBand
+  nameWithType: Card.TBand
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.TBand
+  type: Property
+  source:
+    id: TBand
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5572
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public BandeiraOperadoraCartao TBand { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+    content.vb: Public Property TBand As BandeiraOperadoraCartao
+  overload: Unimake.Business.DFe.Xml.NFe.Card.TBand*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Card.CAut
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Card.CAut
+  id: CAut
+  parent: Unimake.Business.DFe.Xml.NFe.Card
+  langs:
+  - csharp
+  - vb
+  name: CAut
+  nameWithType: Card.CAut
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.CAut
+  type: Property
+  source:
+    id: CAut
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5575
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CAut { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CAut As String
+  overload: Unimake.Business.DFe.Xml.NFe.Card.CAut*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCNPJ
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCNPJ
+  id: ShouldSerializeCNPJ
+  parent: Unimake.Business.DFe.Xml.NFe.Card
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeCNPJ()
+  nameWithType: Card.ShouldSerializeCNPJ()
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCNPJ()
+  type: Method
+  source:
+    id: ShouldSerializeCNPJ
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5580
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeCNPJ()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeCNPJ As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCNPJ*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeTBand
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeTBand
+  id: ShouldSerializeTBand
+  parent: Unimake.Business.DFe.Xml.NFe.Card
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeTBand()
+  nameWithType: Card.ShouldSerializeTBand()
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeTBand()
+  type: Method
+  source:
+    id: ShouldSerializeTBand
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5582
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeTBand()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeTBand As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeTBand*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCAut
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCAut
+  id: ShouldSerializeCAut
+  parent: Unimake.Business.DFe.Xml.NFe.Card
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeCAut()
+  nameWithType: Card.ShouldSerializeCAut()
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCAut()
+  type: Method
+  source:
+    id: ShouldSerializeCAut
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5584
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeCAut()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeCAut As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCAut*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.Card.TpIntegra*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Card.TpIntegra
+  name: TpIntegra
+  nameWithType: Card.TpIntegra
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.TpIntegra
+- uid: Unimake.Business.DFe.Servicos.TipoIntegracaoPagamento
+  commentId: T:Unimake.Business.DFe.Servicos.TipoIntegracaoPagamento
+  parent: Unimake.Business.DFe.Servicos
+  name: TipoIntegracaoPagamento
+  nameWithType: TipoIntegracaoPagamento
+  fullName: Unimake.Business.DFe.Servicos.TipoIntegracaoPagamento
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: Unimake.Business.DFe.Xml.NFe.Card.CNPJ*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Card.CNPJ
+  name: CNPJ
+  nameWithType: Card.CNPJ
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.CNPJ
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.Card.TBand*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Card.TBand
+  name: TBand
+  nameWithType: Card.TBand
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.TBand
+- uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  commentId: T:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  parent: Unimake.Business.DFe.Servicos
+  name: BandeiraOperadoraCartao
+  nameWithType: BandeiraOperadoraCartao
+  fullName: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+- uid: Unimake.Business.DFe.Xml.NFe.Card.CAut*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Card.CAut
+  name: CAut
+  nameWithType: Card.CAut
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.CAut
+- uid: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCNPJ*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCNPJ
+  name: ShouldSerializeCNPJ
+  nameWithType: Card.ShouldSerializeCNPJ
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCNPJ
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeTBand*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeTBand
+  name: ShouldSerializeTBand
+  nameWithType: Card.ShouldSerializeTBand
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeTBand
+- uid: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCAut*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCAut
+  name: ShouldSerializeCAut
+  nameWithType: Card.ShouldSerializeCAut
+  fullName: Unimake.Business.DFe.Xml.NFe.Card.ShouldSerializeCAut

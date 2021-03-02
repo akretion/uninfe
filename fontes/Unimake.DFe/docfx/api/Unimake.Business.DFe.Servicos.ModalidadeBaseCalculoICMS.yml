@@ -1,0 +1,322 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  commentId: T:Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  id: ModalidadeBaseCalculoICMS
+  parent: Unimake.Business.DFe.Servicos
+  children:
+  - Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.MargemValorAgregado
+  - Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.Pauta
+  - Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.PrecoTabeladoMaximo
+  - Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.ValorOperacao
+  langs:
+  - csharp
+  - vb
+  name: ModalidadeBaseCalculoICMS
+  nameWithType: ModalidadeBaseCalculoICMS
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  type: Enum
+  source:
+    id: ModalidadeBaseCalculoICMS
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1163
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nModalidades de determinação da Base de Cálculo do ICMS\n"
+  example: []
+  syntax:
+    content: public enum ModalidadeBaseCalculoICMS
+    content.vb: Public Enum ModalidadeBaseCalculoICMS
+  extensionMethods:
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.MargemValorAgregado
+  commentId: F:Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.MargemValorAgregado
+  id: MargemValorAgregado
+  parent: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  langs:
+  - csharp
+  - vb
+  name: MargemValorAgregado
+  nameWithType: ModalidadeBaseCalculoICMS.MargemValorAgregado
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.MargemValorAgregado
+  type: Field
+  source:
+    id: MargemValorAgregado
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1168
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n0=Margem Valor Agregado (%)\n"
+  example: []
+  syntax:
+    content: MargemValorAgregado = 0
+    return:
+      type: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.Pauta
+  commentId: F:Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.Pauta
+  id: Pauta
+  parent: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  langs:
+  - csharp
+  - vb
+  name: Pauta
+  nameWithType: ModalidadeBaseCalculoICMS.Pauta
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.Pauta
+  type: Field
+  source:
+    id: Pauta
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1174
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n1=Pauta (Valor)\n"
+  example: []
+  syntax:
+    content: Pauta = 1
+    return:
+      type: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.PrecoTabeladoMaximo
+  commentId: F:Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.PrecoTabeladoMaximo
+  id: PrecoTabeladoMaximo
+  parent: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  langs:
+  - csharp
+  - vb
+  name: PrecoTabeladoMaximo
+  nameWithType: ModalidadeBaseCalculoICMS.PrecoTabeladoMaximo
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.PrecoTabeladoMaximo
+  type: Field
+  source:
+    id: PrecoTabeladoMaximo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1180
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n2=Preço Tabelado Máx. (valor)\n"
+  example: []
+  syntax:
+    content: PrecoTabeladoMaximo = 2
+    return:
+      type: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.ValorOperacao
+  commentId: F:Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.ValorOperacao
+  id: ValorOperacao
+  parent: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  langs:
+  - csharp
+  - vb
+  name: ValorOperacao
+  nameWithType: ModalidadeBaseCalculoICMS.ValorOperacao
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS.ValorOperacao
+  type: Field
+  source:
+    id: ValorOperacao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1186
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n3=Valor da operação\n"
+  example: []
+  syntax:
+    content: ValorOperacao = 3
+    return:
+      type: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  name: GetAttribute<T>()
+  nameWithType: EnumsExtension.GetAttribute<T>()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>()
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)()
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)()
+  name.vb: GetAttribute(Of T)()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  name: GetAttributeDescription()
+  nameWithType: EnumsExtension.GetAttributeDescription()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  isExternal: true
+  name: GetAttribute<T>(Enum)
+  nameWithType: EnumsExtension.GetAttribute<T>(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>(System.Enum)
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)(Enum)
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)(System.Enum)
+  name.vb: GetAttribute(Of T)(Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  isExternal: true
+  name: GetAttributeDescription(Enum)
+  nameWithType: EnumsExtension.GetAttributeDescription(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+- uid: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  commentId: T:Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  parent: Unimake.Business.DFe.Servicos
+  name: ModalidadeBaseCalculoICMS
+  nameWithType: ModalidadeBaseCalculoICMS
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS

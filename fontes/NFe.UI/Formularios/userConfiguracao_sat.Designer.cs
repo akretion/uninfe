@@ -45,6 +45,8 @@
             this.txtNumeroCaixa = new MetroFramework.Controls.MetroTextBox();
             this.lblVersaoLayout = new MetroFramework.Controls.MetroLabel();
             this.comboVersaoLayout = new MetroFramework.Controls.MetroComboBox();
+            this.lblTipoConversao = new MetroFramework.Controls.MetroLabel();
+            this.comboTipoConversao = new MetroFramework.Controls.MetroComboBox();
             this.SuspendLayout();
             // 
             // metroLabel39
@@ -196,7 +198,7 @@
             // 
             this.lblRegTribISSQN.AutoSize = true;
             this.lblRegTribISSQN.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblRegTribISSQN.Location = new System.Drawing.Point(327, 135);
+            this.lblRegTribISSQN.Location = new System.Drawing.Point(329, 135);
             this.lblRegTribISSQN.Name = "lblRegTribISSQN";
             this.lblRegTribISSQN.Size = new System.Drawing.Size(135, 15);
             this.lblRegTribISSQN.TabIndex = 61;
@@ -206,11 +208,11 @@
             // 
             this.lblIndRatISSQN.AutoSize = true;
             this.lblIndRatISSQN.FontSize = MetroFramework.MetroLabelSize.Small;
-            this.lblIndRatISSQN.Location = new System.Drawing.Point(327, 187);
+            this.lblIndRatISSQN.Location = new System.Drawing.Point(329, 185);
             this.lblIndRatISSQN.Name = "lblIndRatISSQN";
-            this.lblIndRatISSQN.Size = new System.Drawing.Size(264, 15);
+            this.lblIndRatISSQN.Size = new System.Drawing.Size(261, 15);
             this.lblIndRatISSQN.TabIndex = 62;
-            this.lblIndRatISSQN.Text = " Desconto subtotal rateado entre itens com ISSQN:";
+            this.lblIndRatISSQN.Text = "Desconto subtotal rateado entre itens com ISSQN:";
             // 
             // lblNumeroCaixa
             // 
@@ -254,18 +256,45 @@
             this.comboVersaoLayout.Items.AddRange(new object[] {
             "0.07",
             "0.08"});
-            this.comboVersaoLayout.Location = new System.Drawing.Point(331, 255);
+            this.comboVersaoLayout.Location = new System.Drawing.Point(329, 255);
             this.comboVersaoLayout.Name = "comboVersaoLayout";
             this.comboVersaoLayout.Size = new System.Drawing.Size(288, 25);
             this.comboVersaoLayout.TabIndex = 65;
             this.comboVersaoLayout.UseSelectable = true;
             this.comboVersaoLayout.SelectedIndexChanged += new System.EventHandler(this.ComboVersaoLayout_SelectedIndexChanged);
             // 
+            // lblTipoConversao
+            // 
+            this.lblTipoConversao.AutoSize = true;
+            this.lblTipoConversao.FontSize = MetroFramework.MetroLabelSize.Small;
+            this.lblTipoConversao.Location = new System.Drawing.Point(329, 283);
+            this.lblTipoConversao.Name = "lblTipoConversao";
+            this.lblTipoConversao.Size = new System.Drawing.Size(104, 15);
+            this.lblTipoConversao.TabIndex = 68;
+            this.lblTipoConversao.Text = "Tipo de Conversão:";
+            // 
+            // comboTipoConversao
+            // 
+            this.comboTipoConversao.FontSize = MetroFramework.MetroComboBoxSize.Small;
+            this.comboTipoConversao.FormattingEnabled = true;
+            this.comboTipoConversao.ItemHeight = 19;
+            this.comboTipoConversao.Items.AddRange(new object[] {
+            "Truncamento",
+            "Arredondamento"});
+            this.comboTipoConversao.Location = new System.Drawing.Point(329, 301);
+            this.comboTipoConversao.Name = "comboTipoConversao";
+            this.comboTipoConversao.Size = new System.Drawing.Size(288, 25);
+            this.comboTipoConversao.TabIndex = 67;
+            this.comboTipoConversao.UseSelectable = true;
+            this.comboTipoConversao.SelectedIndexChanged += new System.EventHandler(this.comboTipoConversao_SelectedIndexChanged);
+            // 
             // userConfiguracao_sat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.lblTipoConversao);
+            this.Controls.Add(this.comboTipoConversao);
             this.Controls.Add(this.lblVersaoLayout);
             this.Controls.Add(this.comboVersaoLayout);
             this.Controls.Add(this.lblNumeroCaixa);
@@ -284,7 +313,7 @@
             this.Controls.Add(this.metroLabel39);
             this.Controls.Add(this.metroLabel38);
             this.Name = "userConfiguracao_sat";
-            this.Size = new System.Drawing.Size(638, 284);
+            this.Size = new System.Drawing.Size(638, 333);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -308,5 +337,7 @@
         private MetroFramework.Controls.MetroTextBox txtNumeroCaixa;
         private MetroFramework.Controls.MetroLabel lblVersaoLayout;
         private MetroFramework.Controls.MetroComboBox comboVersaoLayout;
+        private MetroFramework.Controls.MetroLabel lblTipoConversao;
+        private MetroFramework.Controls.MetroComboBox comboTipoConversao;
     }
 }

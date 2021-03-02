@@ -25,7 +25,7 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='INTEROP_Release|AnyCPU'">
 		<OutputPath>..\..\Unimake.DFe\Compilacao\INTEROP_Release</OutputPath>
 		<GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-		<DocumentationFile>..\..\Unimake.DFe\Compilacao\INEROP_Release\Unimake.Business.DFe.xml</DocumentationFile>
+		<DocumentationFile>..\..\Unimake.DFe\Compilacao\INTEROP_Release\Unimake.Business.DFe.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='INTEROP_Release|netstandard2.0|AnyCPU'">
@@ -68,6 +68,7 @@
 		<None Remove="Servicos\Config\CTeOS\RR.xml" />
 		<None Remove="Servicos\Config\CTeOS\RS.xml" />
 		<None Remove="Servicos\Config\CTeOS\SC.xml" />
+		<None Remove="Servicos\Config\CTeOS\SE.xml" />
 		<None Remove="Servicos\Config\CTeOS\SP.xml" />
 		<None Remove="Servicos\Config\CTeOS\SVRS.xml" />
 		<None Remove="Servicos\Config\CTeOS\SVSP.xml" />
@@ -98,6 +99,7 @@
 		<None Remove="Servicos\Config\CTe\RR.xml" />
 		<None Remove="Servicos\Config\CTe\RS.xml" />
 		<None Remove="Servicos\Config\CTe\SC.xml" />
+		<None Remove="Servicos\Config\CTe\SE.xml" />
 		<None Remove="Servicos\Config\CTe\SP.xml" />
 		<None Remove="Servicos\Config\CTe\SVRS.xml" />
 		<None Remove="Servicos\Config\CTe\SVSP.xml" />
@@ -115,6 +117,7 @@
 		<None Remove="Servicos\Config\MDFe\DF.xml" />
 		<None Remove="Servicos\Config\MDFe\ES.xml" />
 		<None Remove="Servicos\Config\MDFe\GO.xml" />
+		<None Remove="Servicos\Config\MDFe\MA.xml" />
 		<None Remove="Servicos\Config\MDFe\MG.xml" />
 		<None Remove="Servicos\Config\MDFe\MS.xml" />
 		<None Remove="Servicos\Config\MDFe\MT.xml" />
@@ -143,6 +146,7 @@
 		<None Remove="Servicos\Config\NFCe\DF.xml" />
 		<None Remove="Servicos\Config\NFCe\ES.xml" />
 		<None Remove="Servicos\Config\NFCe\GO.xml" />
+		<None Remove="Servicos\Config\NFCe\MA.xml" />
 		<None Remove="Servicos\Config\NFCe\MG.xml" />
 		<None Remove="Servicos\Config\NFCe\MS.xml" />
 		<None Remove="Servicos\Config\NFCe\MT.xml" />
@@ -155,6 +159,7 @@
 		<None Remove="Servicos\Config\NFCe\RO.xml" />
 		<None Remove="Servicos\Config\NFCe\RR.xml" />
 		<None Remove="Servicos\Config\NFCe\RS.xml" />
+		<None Remove="Servicos\Config\NFCe\SC.xml" />
 		<None Remove="Servicos\Config\NFCe\SE.xml" />
 		<None Remove="Servicos\Config\NFCe\SP.xml" />
 		<None Remove="Servicos\Config\NFCe\SVRS.xml" />
@@ -170,6 +175,7 @@
 		<None Remove="Servicos\Config\NFe\DF.xml" />
 		<None Remove="Servicos\Config\NFe\ES.xml" />
 		<None Remove="Servicos\Config\NFe\GO.xml" />
+		<None Remove="Servicos\Config\NFe\MA.xml" />
 		<None Remove="Servicos\Config\NFe\MG.xml" />
 		<None Remove="Servicos\Config\NFe\MS.xml" />
 		<None Remove="Servicos\Config\NFe\MT.xml" />
@@ -338,6 +344,14 @@
 		<None Remove="Xml\Schemas\MDFe\retMDFe_v3.00.xsd" />
 		<None Remove="Xml\Schemas\MDFe\tiposGeralMDFe_v3.00.xsd" />
 		<None Remove="Xml\Schemas\MDFe\xmldsig-core-schema_v1.01.xsd" />
+		<None Remove="Xml\Schemas\NFe\e110140_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\envEPEC_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\EPEC_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\eventoEPEC_v0.01.xsd" />
+		<None Remove="Xml\Schemas\NFe\leiauteEPEC_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\procEPEC_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\retEnvEPEC_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\retEventoEPEC_v0.01.xsd" />
 		<None Remove="Xml\Schemas\nfe_v4.00.xsd" />
 		<None Remove="Xml\Schemas\procCCeNFe_v1.00.xsd" />
 		<None Remove="Xml\Schemas\procConfRecebtoNFe_v1.00.xsd" />
@@ -414,6 +428,7 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Servicos\Config\CTeOS\SC.xml" />
+		<EmbeddedResource Include="Servicos\Config\CTeOS\SE.xml" />
 		<EmbeddedResource Include="Servicos\Config\CTeOS\SP.xml">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -469,6 +484,7 @@
 		<EmbeddedResource Include="Servicos\Config\CTe\RS.xml">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Servicos\Config\CTe\SE.xml" />
 		<EmbeddedResource Include="Servicos\Config\CTe\SP.xml">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -505,6 +521,7 @@
 		<EmbeddedResource Include="Servicos\Config\MDFe\GO.xml">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Servicos\Config\MDFe\MA.xml" />
 		<EmbeddedResource Include="Servicos\Config\MDFe\MG.xml">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -537,9 +554,11 @@
 		</EmbeddedResource>
 		<EmbeddedResource Include="Servicos\Config\MDFe\TO.xml" />
 		<EmbeddedResource Include="Servicos\Config\NFCe\Config.xml" />
+		<EmbeddedResource Include="Servicos\Config\NFCe\MA.xml" />
 		<EmbeddedResource Include="Servicos\Config\NFCe\RJ.xml">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Servicos\Config\NFCe\SC.xml" />
 		<EmbeddedResource Include="Servicos\Config\NFCe\TO.xml">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -612,6 +631,7 @@
 		<EmbeddedResource Include="Servicos\Config\NFCe\SVRS.xml">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Servicos\Config\NFe\MA.xml" />
 		<EmbeddedResource Include="Servicos\Config\NFe\AC.xml" />
 		<EmbeddedResource Include="Servicos\Config\NFe\AL.xml" />
 		<EmbeddedResource Include="Servicos\Config\NFe\AM.xml">
@@ -818,6 +838,7 @@
 		<EmbeddedResource Include="Xml\Schemas\NFe\e110112_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Xml\Schemas\NFe\e110140_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\e111500_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -850,6 +871,7 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Xml\Schemas\NFe\envConfRecebto_v1.00.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFe\envEPEC_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\envEventoCancNFe_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -862,12 +884,14 @@
 		<EmbeddedResource Include="Xml\Schemas\NFe\envRemIndus_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Xml\Schemas\NFe\EPEC_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\eventoCancNFe_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Xml\Schemas\NFe\eventoCancSubst_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Xml\Schemas\NFe\eventoEPEC_v0.01.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\eventoRemIndus_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -887,6 +911,7 @@
 		<EmbeddedResource Include="Xml\Schemas\NFe\leiauteConsultaCadastro_v2.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Xml\Schemas\NFe\leiauteEPEC_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\leiauteEventoCancNFe_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -909,6 +934,7 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Xml\Schemas\NFe\procConfRecebtoNFe_v1.00.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFe\procEPEC_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\procEventoCancNFe_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -949,6 +975,7 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Xml\Schemas\NFe\retEnvConfRecebto_v1.00.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFe\retEnvEPEC_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\retEnvEventoCancNFe_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -961,6 +988,7 @@
 		<EmbeddedResource Include="Xml\Schemas\NFe\retEnvRemIndus_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Xml\Schemas\NFe\retEventoEPEC_v0.01.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\retInutNFe_v4.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -978,7 +1006,8 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="System.Security.Cryptography.Xml" Version="5.0.0" />
 	</ItemGroup>
 
 </Project>

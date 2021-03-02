@@ -55,15 +55,13 @@ Source: "..\fontes\Unimake.DFe\Interop\VB6\VB6.rar"; DestDir: "{app}\Exemplo_VB6
 ;Registrar
 Source: "Register_UnimakeDFe.bat"; DestDir: "{app}"; Flags: ignoreversion
 ;.netstandard
-Source: "Z:\uninfe\trunk\fontes\Unimake.DFe\Compilacao\INTEROP_Release\netstandard2.0\Unimake.Business.DFe.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\fontes\Unimake.DFe\Compilacao\INTEROP_Release\netstandard2.0\Unimake.Business.DFe.dll"; DestDir: "{app}"; Flags: ignoreversion
 ;DLLs net472
-Source: "Z:\uninfe\testes\TesteDLL_Unimake.Business.DFe\bin\INTEROP_Release\System.Security.Permissions.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\uninfe\testes\TesteDLL_Unimake.Business.DFe\bin\INTEROP_Release\System.Security.Principal.Windows.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\uninfe\testes\TesteDLL_Unimake.Business.DFe\bin\INTEROP_Release\Unimake.Security.Platform.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\uninfe\testes\TesteDLL_Unimake.Business.DFe\bin\INTEROP_Release\Unimake.Security.Platform.tlb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\uninfe\testes\TesteDLL_Unimake.Business.DFe\bin\INTEROP_Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\uninfe\testes\TesteDLL_Unimake.Business.DFe\bin\INTEROP_Release\System.Security.AccessControl.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Z:\uninfe\testes\TesteDLL_Unimake.Business.DFe\bin\INTEROP_Release\System.Security.Cryptography.Xml.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\fontes\Unimake.DFe\Compilacao\INTEROP_Release\net472\System.Security.Permissions.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\fontes\Unimake.DFe\Compilacao\INTEROP_Release\net472\System.Security.Principal.Windows.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\fontes\Unimake.DFe\Compilacao\INTEROP_Release\net472\Unimake.Business.DFe.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\fontes\Unimake.DFe\Compilacao\INTEROP_Release\net472\System.Security.AccessControl.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\fontes\Unimake.DFe\Compilacao\INTEROP_Release\net472\System.Security.Cryptography.Xml.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 [Run]
 Filename: "{app}\Register_UnimakeDFe.bat"; Flags: runhidden; StatusMsg: "Registrando dll"

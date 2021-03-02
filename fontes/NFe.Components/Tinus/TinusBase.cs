@@ -51,6 +51,10 @@ namespace NFe.Components.Tinus
                                 tinusService = new OlindaPE.h.TinusH(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
+                            case 2607208: //Ipojuca-PE
+                                tinusService = new IpojucaPE.h.TinusH(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -87,6 +91,10 @@ namespace NFe.Components.Tinus
 
                             case 2609600: //Olinda-PE
                                 tinusService = new OlindaPE.p.TinusP(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 2607208: //Ipojuca-PE
+                                tinusService = new IpojucaPE.p.TinusP(tpAmb, PastaRetorno, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             default:

@@ -1,0 +1,557 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTe.NoPeriodo
+  commentId: T:Unimake.Business.DFe.Xml.CTe.NoPeriodo
+  id: NoPeriodo
+  parent: Unimake.Business.DFe.Xml.CTe
+  children:
+  - Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFim
+  - Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFimField
+  - Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIni
+  - Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIniField
+  - Unimake.Business.DFe.Xml.CTe.NoPeriodo.TpPer
+  langs:
+  - csharp
+  - vb
+  name: NoPeriodo
+  nameWithType: NoPeriodo
+  fullName: Unimake.Business.DFe.Xml.CTe.NoPeriodo
+  type: Class
+  source:
+    id: NoPeriodo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 715
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class NoPeriodo
+    content.vb: >-
+      <Serializable>
+
+      Public Class NoPeriodo
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTe.NoPeriodo.TpPer
+  commentId: P:Unimake.Business.DFe.Xml.CTe.NoPeriodo.TpPer
+  id: TpPer
+  parent: Unimake.Business.DFe.Xml.CTe.NoPeriodo
+  langs:
+  - csharp
+  - vb
+  name: TpPer
+  nameWithType: NoPeriodo.TpPer
+  fullName: Unimake.Business.DFe.Xml.CTe.NoPeriodo.TpPer
+  type: Property
+  source:
+    id: TpPer
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 721
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public TipoPeriodoEntregaCTe TpPer { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoPeriodoEntregaCTe
+    content.vb: Public Property TpPer As TipoPeriodoEntregaCTe
+  overload: Unimake.Business.DFe.Xml.CTe.NoPeriodo.TpPer*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIni
+  commentId: P:Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIni
+  id: DIni
+  parent: Unimake.Business.DFe.Xml.CTe.NoPeriodo
+  langs:
+  - csharp
+  - vb
+  name: DIni
+  nameWithType: NoPeriodo.DIni
+  fullName: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIni
+  type: Property
+  source:
+    id: DIni
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 736
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public DateTime DIni { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DIni As Date
+  overload: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIni*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIniField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIniField
+  id: DIniField
+  parent: Unimake.Business.DFe.Xml.CTe.NoPeriodo
+  langs:
+  - csharp
+  - vb
+  name: DIniField
+  nameWithType: NoPeriodo.DIniField
+  fullName: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIniField
+  type: Property
+  source:
+    id: DIniField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 739
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string DIniField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DIniField As String
+  overload: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIniField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFim
+  commentId: P:Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFim
+  id: DFim
+  parent: Unimake.Business.DFe.Xml.CTe.NoPeriodo
+  langs:
+  - csharp
+  - vb
+  name: DFim
+  nameWithType: NoPeriodo.DFim
+  fullName: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFim
+  type: Property
+  source:
+    id: DFim
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 746
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public DateTime DFim { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DFim As Date
+  overload: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFim*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFimField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFimField
+  id: DFimField
+  parent: Unimake.Business.DFe.Xml.CTe.NoPeriodo
+  langs:
+  - csharp
+  - vb
+  name: DFimField
+  nameWithType: NoPeriodo.DFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFimField
+  type: Property
+  source:
+    id: DFimField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 749
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string DFimField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DFimField As String
+  overload: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFimField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.CTe.NoPeriodo.TpPer*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.NoPeriodo.TpPer
+  name: TpPer
+  nameWithType: NoPeriodo.TpPer
+  fullName: Unimake.Business.DFe.Xml.CTe.NoPeriodo.TpPer
+- uid: Unimake.Business.DFe.Servicos.TipoPeriodoEntregaCTe
+  commentId: T:Unimake.Business.DFe.Servicos.TipoPeriodoEntregaCTe
+  parent: Unimake.Business.DFe.Servicos
+  name: TipoPeriodoEntregaCTe
+  nameWithType: TipoPeriodoEntregaCTe
+  fullName: Unimake.Business.DFe.Servicos.TipoPeriodoEntregaCTe
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIni*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIni
+  name: DIni
+  nameWithType: NoPeriodo.DIni
+  fullName: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIni
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIniField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIniField
+  name: DIniField
+  nameWithType: NoPeriodo.DIniField
+  fullName: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DIniField
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFim*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFim
+  name: DFim
+  nameWithType: NoPeriodo.DFim
+  fullName: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFim
+- uid: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFimField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFimField
+  name: DFimField
+  nameWithType: NoPeriodo.DFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.NoPeriodo.DFimField

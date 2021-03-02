@@ -43,6 +43,7 @@ namespace NFe.ConvertTxt
         public TpcnDestinoOperacao idDest { get; set; }
         public TpcnConsumidorFinal indFinal { get; set; }
         public TpcnPresencaComprador indPres { get; set; }
+        public TpcnIntermediario indIntermed { get; set; }
 
         public Ide()
         {
@@ -53,6 +54,7 @@ namespace NFe.ConvertTxt
             this.idDest = TpcnDestinoOperacao.doInterna;
             this.indFinal = TpcnConsumidorFinal.cfConsumidorFinal;
             this.indPres = TpcnPresencaComprador.pcPresencial;
+            this.indIntermed = TpcnIntermediario.OperacaoSemIntermediador;
             this.tpAmb = TipoAmbiente.taHomologacao;
             this.tpEmis = TipoEmissao.teNormal;
             this.tpImp = TpcnTipoImpressao.tiRetrato;

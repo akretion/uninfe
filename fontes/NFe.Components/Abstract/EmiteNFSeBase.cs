@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace NFe.Components.Abstract
 {
-    public abstract class EmiteNFSeBase : IEmiteNFSe
+    public abstract class EmiteNFSeBase: IEmiteNFSe
     {
         public string ProxyUser { get; set; }
         public string ProxyPass { get; set; }
@@ -44,8 +44,22 @@ namespace NFe.Components.Abstract
 
             XmlSerializer serializer = new XmlSerializer(typeof(T), xRoot);
             StreamReader reader = new StreamReader(file);
-            envio = (T)serializer.Deserialize(reader);
-            reader.Close();
+
+            try
+            {
+                envio = (T)serializer.Deserialize(reader);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if(reader != null)
+                {
+                    reader.Close();
+                }
+            }
 
             return envio;
         }
@@ -89,10 +103,10 @@ namespace NFe.Components.Abstract
         {
             XmlDocument xmlDoc = new XmlDocument();
 
-            if (objetoRetorno != null && (objetoRetorno.GetType().Name.ToLower() != "string" || objetoRetorno.ToString() != ""))
+            if(objetoRetorno != null && (objetoRetorno.GetType().Name.ToLower() != "string" || objetoRetorno.ToString() != ""))
             {
                 XmlSerializer xmlSerializer = new XmlSerializer(objetoRetorno.GetType());
-                using (MemoryStream xmlStream = new MemoryStream())
+                using(MemoryStream xmlStream = new MemoryStream())
                 {
                     xmlSerializer.Serialize(xmlStream, objetoRetorno);
                     xmlStream.Position = 0;
@@ -100,18 +114,18 @@ namespace NFe.Components.Abstract
                 }
             }
 
-            if (tcErros != null)
+            if(tcErros != null)
             {
                 XmlDocument xmlDoc2 = new XmlDocument();
                 XmlSerializer xmlSerializer2 = new XmlSerializer(tcErros.GetType());
-                using (MemoryStream xmlStream2 = new MemoryStream())
+                using(MemoryStream xmlStream2 = new MemoryStream())
                 {
                     xmlSerializer2.Serialize(xmlStream2, tcErros);
                     xmlStream2.Position = 0;
                     xmlDoc2.Load(xmlStream2);
                 }
 
-                if (objetoRetorno != null && (objetoRetorno.GetType().Name.ToLower() != "string" || objetoRetorno.ToString() != ""))
+                if(objetoRetorno != null && (objetoRetorno.GetType().Name.ToLower() != "string" || objetoRetorno.ToString() != ""))
                 {
                     XmlNode importedDocument = xmlDoc.ImportNode(xmlDoc2.DocumentElement, true);
                     xmlDoc.DocumentElement.AppendChild(importedDocument);
@@ -142,6 +156,8 @@ namespace NFe.Components.Abstract
 
         public abstract void ConsultarNfsePorRps(string file);
 
+        public virtual void SubstituirNfse(string file) { }
+
         public virtual void ConsultarNfseServicoTomado(string file)
         {
         }
@@ -162,7 +178,7 @@ namespace NFe.Components.Abstract
 
         public void DefinirProxy<T>(SoapHttpClientProtocol request)
         {
-            if (!string.IsNullOrEmpty(ProxyUser))
+            if(!string.IsNullOrEmpty(ProxyUser))
             {
                 NetworkCredential credentials = new NetworkCredential(ProxyUser, ProxyPass, ProxyServer);
                 WebRequest.DefaultWebProxy.Credentials = credentials;

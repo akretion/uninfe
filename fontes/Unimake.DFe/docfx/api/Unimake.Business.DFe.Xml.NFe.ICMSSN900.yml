@@ -1,0 +1,2267 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  commentId: T:Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  id: ICMSSN900
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.CSOSN
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBC
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCST
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.Orig
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSN
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSNField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPST
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMS
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSST
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVAST
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVASTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBC
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCST
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBC
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBCST
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePCredSNField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePFCPSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePMVASTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCFCPSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVCredICMSSNField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVFCPSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBC
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPST
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCST
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSN
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSNField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPST
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPSTField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMS
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSST
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSSTField
+  langs:
+  - csharp
+  - vb
+  name: ICMSSN900
+  nameWithType: ICMSSN900
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  type: Class
+  source:
+    id: ICMSSN900
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3382
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class ICMSSN900
+    content.vb: >-
+      <Serializable>
+
+      Public Class ICMSSN900
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.Orig
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.Orig
+  id: Orig
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: Orig
+  nameWithType: ICMSSN900.Orig
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.Orig
+  type: Property
+  source:
+    id: Orig
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3388
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public OrigemMercadoria Orig { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.OrigemMercadoria
+    content.vb: Public Property Orig As OrigemMercadoria
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.Orig*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.CSOSN
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.CSOSN
+  id: CSOSN
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: CSOSN
+  nameWithType: ICMSSN900.CSOSN
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.CSOSN
+  type: Property
+  source:
+    id: CSOSN
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3391
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CSOSN { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CSOSN As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.CSOSN*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBC
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBC
+  id: ModBC
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ModBC
+  nameWithType: ICMSSN900.ModBC
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBC
+  type: Property
+  source:
+    id: ModBC
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3408
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public ModalidadeBaseCalculoICMS? ModBC { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS}
+    content.vb: Public Property ModBC As ModalidadeBaseCalculoICMS?
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBC*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBC
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBC
+  id: VBC
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VBC
+  nameWithType: ICMSSN900.VBC
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBC
+  type: Property
+  source:
+    id: VBC
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3411
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VBC { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VBC As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBC*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCField
+  id: VBCField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VBCField
+  nameWithType: ICMSSN900.VBCField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCField
+  type: Property
+  source:
+    id: VBCField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3414
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VBCField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VBCField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBC
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBC
+  id: PRedBC
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PRedBC
+  nameWithType: ICMSSN900.PRedBC
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBC
+  type: Property
+  source:
+    id: PRedBC
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3421
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double PRedBC { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PRedBC As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBC*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCField
+  id: PRedBCField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PRedBCField
+  nameWithType: ICMSSN900.PRedBCField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCField
+  type: Property
+  source:
+    id: PRedBCField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3424
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string PRedBCField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PRedBCField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMS
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMS
+  id: PICMS
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PICMS
+  nameWithType: ICMSSN900.PICMS
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMS
+  type: Property
+  source:
+    id: PICMS
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3431
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double PICMS { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PICMS As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMS*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSField
+  id: PICMSField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PICMSField
+  nameWithType: ICMSSN900.PICMSField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSField
+  type: Property
+  source:
+    id: PICMSField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3434
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string PICMSField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PICMSField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMS
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMS
+  id: VICMS
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VICMS
+  nameWithType: ICMSSN900.VICMS
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMS
+  type: Property
+  source:
+    id: VICMS
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3441
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VICMS { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VICMS As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMS*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSField
+  id: VICMSField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VICMSField
+  nameWithType: ICMSSN900.VICMSField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSField
+  type: Property
+  source:
+    id: VICMSField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3444
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VICMSField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VICMSField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCSTField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCSTField
+  id: ModBCSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ModBCSTField
+  nameWithType: ICMSSN900.ModBCSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCSTField
+  type: Property
+  source:
+    id: ModBCSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3451
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public ModalidadeBaseCalculoICMSST? ModBCSTField { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMSST}
+    content.vb: Public Property ModBCSTField As ModalidadeBaseCalculoICMSST?
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCSTField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCST
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCST
+  id: ModBCST
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ModBCST
+  nameWithType: ICMSSN900.ModBCST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCST
+  type: Property
+  source:
+    id: ModBCST
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3454
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public ModalidadeBaseCalculoICMSST? ModBCST { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMSST}
+    content.vb: Public Property ModBCST As ModalidadeBaseCalculoICMSST?
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCST*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVAST
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVAST
+  id: PMVAST
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PMVAST
+  nameWithType: ICMSSN900.PMVAST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVAST
+  type: Property
+  source:
+    id: PMVAST
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3472
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double PMVAST { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PMVAST As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVAST*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVASTField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVASTField
+  id: PMVASTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PMVASTField
+  nameWithType: ICMSSN900.PMVASTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVASTField
+  type: Property
+  source:
+    id: PMVASTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3475
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string PMVASTField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PMVASTField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVASTField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCST
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCST
+  id: PRedBCST
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PRedBCST
+  nameWithType: ICMSSN900.PRedBCST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCST
+  type: Property
+  source:
+    id: PRedBCST
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3482
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double PRedBCST { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PRedBCST As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCST*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCSTField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCSTField
+  id: PRedBCSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PRedBCSTField
+  nameWithType: ICMSSN900.PRedBCSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCSTField
+  type: Property
+  source:
+    id: PRedBCSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3485
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string PRedBCSTField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PRedBCSTField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCSTField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCST
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCST
+  id: VBCST
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VBCST
+  nameWithType: ICMSSN900.VBCST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCST
+  type: Property
+  source:
+    id: VBCST
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3492
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VBCST { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VBCST As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCST*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCSTField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCSTField
+  id: VBCSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VBCSTField
+  nameWithType: ICMSSN900.VBCSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCSTField
+  type: Property
+  source:
+    id: VBCSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3495
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VBCSTField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VBCSTField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCSTField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSST
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSST
+  id: PICMSST
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PICMSST
+  nameWithType: ICMSSN900.PICMSST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSST
+  type: Property
+  source:
+    id: PICMSST
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3502
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double PICMSST { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PICMSST As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSST*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSSTField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSSTField
+  id: PICMSSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PICMSSTField
+  nameWithType: ICMSSN900.PICMSSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSSTField
+  type: Property
+  source:
+    id: PICMSSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3505
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string PICMSSTField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PICMSSTField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSSTField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSST
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSST
+  id: VICMSST
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VICMSST
+  nameWithType: ICMSSN900.VICMSST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSST
+  type: Property
+  source:
+    id: VICMSST
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3512
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VICMSST { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VICMSST As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSST*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSSTField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSSTField
+  id: VICMSSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VICMSSTField
+  nameWithType: ICMSSN900.VICMSSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSSTField
+  type: Property
+  source:
+    id: VICMSSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3515
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VICMSSTField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VICMSSTField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSSTField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPST
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPST
+  id: VBCFCPST
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VBCFCPST
+  nameWithType: ICMSSN900.VBCFCPST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPST
+  type: Property
+  source:
+    id: VBCFCPST
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3522
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VBCFCPST { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VBCFCPST As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPST*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPSTField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPSTField
+  id: VBCFCPSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VBCFCPSTField
+  nameWithType: ICMSSN900.VBCFCPSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPSTField
+  type: Property
+  source:
+    id: VBCFCPSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3525
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VBCFCPSTField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VBCFCPSTField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPSTField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPST
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPST
+  id: PFCPST
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PFCPST
+  nameWithType: ICMSSN900.PFCPST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPST
+  type: Property
+  source:
+    id: PFCPST
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3532
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double PFCPST { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PFCPST As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPST*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPSTField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPSTField
+  id: PFCPSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PFCPSTField
+  nameWithType: ICMSSN900.PFCPSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPSTField
+  type: Property
+  source:
+    id: PFCPSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3535
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string PFCPSTField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PFCPSTField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPSTField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPST
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPST
+  id: VFCPST
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VFCPST
+  nameWithType: ICMSSN900.VFCPST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPST
+  type: Property
+  source:
+    id: VFCPST
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3542
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VFCPST { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VFCPST As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPST*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPSTField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPSTField
+  id: VFCPSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VFCPSTField
+  nameWithType: ICMSSN900.VFCPSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPSTField
+  type: Property
+  source:
+    id: VFCPSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3545
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VFCPSTField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VFCPSTField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPSTField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSN
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSN
+  id: PCredSN
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PCredSN
+  nameWithType: ICMSSN900.PCredSN
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSN
+  type: Property
+  source:
+    id: PCredSN
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3552
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double PCredSN { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PCredSN As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSN*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSNField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSNField
+  id: PCredSNField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: PCredSNField
+  nameWithType: ICMSSN900.PCredSNField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSNField
+  type: Property
+  source:
+    id: PCredSNField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3555
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string PCredSNField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PCredSNField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSNField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSN
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSN
+  id: VCredICMSSN
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VCredICMSSN
+  nameWithType: ICMSSN900.VCredICMSSN
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSN
+  type: Property
+  source:
+    id: VCredICMSSN
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3562
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VCredICMSSN { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VCredICMSSN As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSN*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSNField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSNField
+  id: VCredICMSSNField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: VCredICMSSNField
+  nameWithType: ICMSSN900.VCredICMSSNField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSNField
+  type: Property
+  source:
+    id: VCredICMSSNField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3565
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VCredICMSSNField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VCredICMSSNField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSNField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBC
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBC
+  id: ShouldSerializeModBC
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeModBC()
+  nameWithType: ICMSSN900.ShouldSerializeModBC()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBC()
+  type: Method
+  source:
+    id: ShouldSerializeModBC
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3574
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeModBC()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeModBC As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBC*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCField
+  id: ShouldSerializeVBCField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeVBCField()
+  nameWithType: ICMSSN900.ShouldSerializeVBCField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCField()
+  type: Method
+  source:
+    id: ShouldSerializeVBCField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3576
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeVBCField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeVBCField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCField
+  id: ShouldSerializePRedBCField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializePRedBCField()
+  nameWithType: ICMSSN900.ShouldSerializePRedBCField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCField()
+  type: Method
+  source:
+    id: ShouldSerializePRedBCField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3578
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializePRedBCField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializePRedBCField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSField
+  id: ShouldSerializePICMSField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializePICMSField()
+  nameWithType: ICMSSN900.ShouldSerializePICMSField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSField()
+  type: Method
+  source:
+    id: ShouldSerializePICMSField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3580
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializePICMSField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializePICMSField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSField
+  id: ShouldSerializeVICMSField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeVICMSField()
+  nameWithType: ICMSSN900.ShouldSerializeVICMSField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSField()
+  type: Method
+  source:
+    id: ShouldSerializeVICMSField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3582
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeVICMSField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeVICMSField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBCST
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBCST
+  id: ShouldSerializeModBCST
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeModBCST()
+  nameWithType: ICMSSN900.ShouldSerializeModBCST()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBCST()
+  type: Method
+  source:
+    id: ShouldSerializeModBCST
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3584
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeModBCST()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeModBCST As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBCST*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePMVASTField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePMVASTField
+  id: ShouldSerializePMVASTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializePMVASTField()
+  nameWithType: ICMSSN900.ShouldSerializePMVASTField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePMVASTField()
+  type: Method
+  source:
+    id: ShouldSerializePMVASTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3586
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializePMVASTField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializePMVASTField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePMVASTField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCSTField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCSTField
+  id: ShouldSerializePRedBCSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializePRedBCSTField()
+  nameWithType: ICMSSN900.ShouldSerializePRedBCSTField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCSTField()
+  type: Method
+  source:
+    id: ShouldSerializePRedBCSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3588
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializePRedBCSTField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializePRedBCSTField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCSTField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCSTField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCSTField
+  id: ShouldSerializeVBCSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeVBCSTField()
+  nameWithType: ICMSSN900.ShouldSerializeVBCSTField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCSTField()
+  type: Method
+  source:
+    id: ShouldSerializeVBCSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3590
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeVBCSTField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeVBCSTField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCSTField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSSTField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSSTField
+  id: ShouldSerializePICMSSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializePICMSSTField()
+  nameWithType: ICMSSN900.ShouldSerializePICMSSTField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSSTField()
+  type: Method
+  source:
+    id: ShouldSerializePICMSSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3592
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializePICMSSTField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializePICMSSTField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSSTField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSSTField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSSTField
+  id: ShouldSerializeVICMSSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeVICMSSTField()
+  nameWithType: ICMSSN900.ShouldSerializeVICMSSTField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSSTField()
+  type: Method
+  source:
+    id: ShouldSerializeVICMSSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3594
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeVICMSSTField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeVICMSSTField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSSTField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCFCPSTField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCFCPSTField
+  id: ShouldSerializeVBCFCPSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeVBCFCPSTField()
+  nameWithType: ICMSSN900.ShouldSerializeVBCFCPSTField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCFCPSTField()
+  type: Method
+  source:
+    id: ShouldSerializeVBCFCPSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3596
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeVBCFCPSTField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeVBCFCPSTField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCFCPSTField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePFCPSTField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePFCPSTField
+  id: ShouldSerializePFCPSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializePFCPSTField()
+  nameWithType: ICMSSN900.ShouldSerializePFCPSTField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePFCPSTField()
+  type: Method
+  source:
+    id: ShouldSerializePFCPSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3598
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializePFCPSTField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializePFCPSTField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePFCPSTField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVFCPSTField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVFCPSTField
+  id: ShouldSerializeVFCPSTField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeVFCPSTField()
+  nameWithType: ICMSSN900.ShouldSerializeVFCPSTField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVFCPSTField()
+  type: Method
+  source:
+    id: ShouldSerializeVFCPSTField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3600
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeVFCPSTField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeVFCPSTField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVFCPSTField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePCredSNField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePCredSNField
+  id: ShouldSerializePCredSNField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializePCredSNField()
+  nameWithType: ICMSSN900.ShouldSerializePCredSNField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePCredSNField()
+  type: Method
+  source:
+    id: ShouldSerializePCredSNField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3602
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializePCredSNField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializePCredSNField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePCredSNField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVCredICMSSNField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVCredICMSSNField
+  id: ShouldSerializeVCredICMSSNField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN900
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeVCredICMSSNField()
+  nameWithType: ICMSSN900.ShouldSerializeVCredICMSSNField()
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVCredICMSSNField()
+  type: Method
+  source:
+    id: ShouldSerializeVCredICMSSNField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3604
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeVCredICMSSNField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeVCredICMSSNField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVCredICMSSNField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.Orig*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.Orig
+  name: Orig
+  nameWithType: ICMSSN900.Orig
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.Orig
+- uid: Unimake.Business.DFe.Servicos.OrigemMercadoria
+  commentId: T:Unimake.Business.DFe.Servicos.OrigemMercadoria
+  parent: Unimake.Business.DFe.Servicos
+  name: OrigemMercadoria
+  nameWithType: OrigemMercadoria
+  fullName: Unimake.Business.DFe.Servicos.OrigemMercadoria
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.CSOSN*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.CSOSN
+  name: CSOSN
+  nameWithType: ICMSSN900.CSOSN
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.CSOSN
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBC*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBC
+  name: ModBC
+  nameWithType: ICMSSN900.ModBC
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBC
+- uid: System.Nullable{Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS}
+  commentId: T:System.Nullable{Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<ModalidadeBaseCalculoICMS>
+  nameWithType: Nullable<ModalidadeBaseCalculoICMS>
+  fullName: System.Nullable<Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS>
+  nameWithType.vb: Nullable(Of ModalidadeBaseCalculoICMS)
+  fullName.vb: System.Nullable(Of Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS)
+  name.vb: Nullable(Of ModalidadeBaseCalculoICMS)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+    name: ModalidadeBaseCalculoICMS
+    nameWithType: ModalidadeBaseCalculoICMS
+    fullName: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+    name: ModalidadeBaseCalculoICMS
+    nameWithType: ModalidadeBaseCalculoICMS
+    fullName: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMS
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBC*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBC
+  name: VBC
+  nameWithType: ICMSSN900.VBC
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBC
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCField
+  name: VBCField
+  nameWithType: ICMSSN900.VBCField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBC*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBC
+  name: PRedBC
+  nameWithType: ICMSSN900.PRedBC
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBC
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCField
+  name: PRedBCField
+  nameWithType: ICMSSN900.PRedBCField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMS*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMS
+  name: PICMS
+  nameWithType: ICMSSN900.PICMS
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMS
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSField
+  name: PICMSField
+  nameWithType: ICMSSN900.PICMSField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMS*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMS
+  name: VICMS
+  nameWithType: ICMSSN900.VICMS
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMS
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSField
+  name: VICMSField
+  nameWithType: ICMSSN900.VICMSField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCSTField
+  name: ModBCSTField
+  nameWithType: ICMSSN900.ModBCSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCSTField
+- uid: System.Nullable{Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMSST}
+  commentId: T:System.Nullable{Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMSST}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<ModalidadeBaseCalculoICMSST>
+  nameWithType: Nullable<ModalidadeBaseCalculoICMSST>
+  fullName: System.Nullable<Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMSST>
+  nameWithType.vb: Nullable(Of ModalidadeBaseCalculoICMSST)
+  fullName.vb: System.Nullable(Of Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMSST)
+  name.vb: Nullable(Of ModalidadeBaseCalculoICMSST)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMSST
+    name: ModalidadeBaseCalculoICMSST
+    nameWithType: ModalidadeBaseCalculoICMSST
+    fullName: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMSST
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMSST
+    name: ModalidadeBaseCalculoICMSST
+    nameWithType: ModalidadeBaseCalculoICMSST
+    fullName: Unimake.Business.DFe.Servicos.ModalidadeBaseCalculoICMSST
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCST*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCST
+  name: ModBCST
+  nameWithType: ICMSSN900.ModBCST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ModBCST
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVAST*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVAST
+  name: PMVAST
+  nameWithType: ICMSSN900.PMVAST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVAST
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVASTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVASTField
+  name: PMVASTField
+  nameWithType: ICMSSN900.PMVASTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PMVASTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCST*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCST
+  name: PRedBCST
+  nameWithType: ICMSSN900.PRedBCST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCST
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCSTField
+  name: PRedBCSTField
+  nameWithType: ICMSSN900.PRedBCSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PRedBCSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCST*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCST
+  name: VBCST
+  nameWithType: ICMSSN900.VBCST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCST
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCSTField
+  name: VBCSTField
+  nameWithType: ICMSSN900.VBCSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSST*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSST
+  name: PICMSST
+  nameWithType: ICMSSN900.PICMSST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSST
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSSTField
+  name: PICMSSTField
+  nameWithType: ICMSSN900.PICMSSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PICMSSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSST*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSST
+  name: VICMSST
+  nameWithType: ICMSSN900.VICMSST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSST
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSSTField
+  name: VICMSSTField
+  nameWithType: ICMSSN900.VICMSSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VICMSSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPST*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPST
+  name: VBCFCPST
+  nameWithType: ICMSSN900.VBCFCPST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPST
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPSTField
+  name: VBCFCPSTField
+  nameWithType: ICMSSN900.VBCFCPSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VBCFCPSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPST*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPST
+  name: PFCPST
+  nameWithType: ICMSSN900.PFCPST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPST
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPSTField
+  name: PFCPSTField
+  nameWithType: ICMSSN900.PFCPSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PFCPSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPST*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPST
+  name: VFCPST
+  nameWithType: ICMSSN900.VFCPST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPST
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPSTField
+  name: VFCPSTField
+  nameWithType: ICMSSN900.VFCPSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VFCPSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSN*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSN
+  name: PCredSN
+  nameWithType: ICMSSN900.PCredSN
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSN
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSNField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSNField
+  name: PCredSNField
+  nameWithType: ICMSSN900.PCredSNField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.PCredSNField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSN*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSN
+  name: VCredICMSSN
+  nameWithType: ICMSSN900.VCredICMSSN
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSN
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSNField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSNField
+  name: VCredICMSSNField
+  nameWithType: ICMSSN900.VCredICMSSNField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.VCredICMSSNField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBC*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBC
+  name: ShouldSerializeModBC
+  nameWithType: ICMSSN900.ShouldSerializeModBC
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBC
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCField
+  name: ShouldSerializeVBCField
+  nameWithType: ICMSSN900.ShouldSerializeVBCField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCField
+  name: ShouldSerializePRedBCField
+  nameWithType: ICMSSN900.ShouldSerializePRedBCField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSField
+  name: ShouldSerializePICMSField
+  nameWithType: ICMSSN900.ShouldSerializePICMSField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSField
+  name: ShouldSerializeVICMSField
+  nameWithType: ICMSSN900.ShouldSerializeVICMSField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBCST*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBCST
+  name: ShouldSerializeModBCST
+  nameWithType: ICMSSN900.ShouldSerializeModBCST
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeModBCST
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePMVASTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePMVASTField
+  name: ShouldSerializePMVASTField
+  nameWithType: ICMSSN900.ShouldSerializePMVASTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePMVASTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCSTField
+  name: ShouldSerializePRedBCSTField
+  nameWithType: ICMSSN900.ShouldSerializePRedBCSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePRedBCSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCSTField
+  name: ShouldSerializeVBCSTField
+  nameWithType: ICMSSN900.ShouldSerializeVBCSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSSTField
+  name: ShouldSerializePICMSSTField
+  nameWithType: ICMSSN900.ShouldSerializePICMSSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePICMSSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSSTField
+  name: ShouldSerializeVICMSSTField
+  nameWithType: ICMSSN900.ShouldSerializeVICMSSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVICMSSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCFCPSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCFCPSTField
+  name: ShouldSerializeVBCFCPSTField
+  nameWithType: ICMSSN900.ShouldSerializeVBCFCPSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVBCFCPSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePFCPSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePFCPSTField
+  name: ShouldSerializePFCPSTField
+  nameWithType: ICMSSN900.ShouldSerializePFCPSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePFCPSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVFCPSTField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVFCPSTField
+  name: ShouldSerializeVFCPSTField
+  nameWithType: ICMSSN900.ShouldSerializeVFCPSTField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVFCPSTField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePCredSNField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePCredSNField
+  name: ShouldSerializePCredSNField
+  nameWithType: ICMSSN900.ShouldSerializePCredSNField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializePCredSNField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVCredICMSSNField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVCredICMSSNField
+  name: ShouldSerializeVCredICMSSNField
+  nameWithType: ICMSSN900.ShouldSerializeVCredICMSSNField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN900.ShouldSerializeVCredICMSSNField

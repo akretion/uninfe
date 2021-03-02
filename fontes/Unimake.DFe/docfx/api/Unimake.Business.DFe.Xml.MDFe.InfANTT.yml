@@ -1,0 +1,916 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT
+  commentId: T:Unimake.Business.DFe.Xml.MDFe.InfANTT
+  id: InfANTT
+  parent: Unimake.Business.DFe.Xml.MDFe
+  children:
+  - Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfCIOT(Unimake.Business.DFe.Xml.MDFe.InfCIOT)
+  - Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfContratante(Unimake.Business.DFe.Xml.MDFe.InfContratante)
+  - Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfPag(Unimake.Business.DFe.Xml.MDFe.InfPag)
+  - Unimake.Business.DFe.Xml.MDFe.InfANTT.AdValePed(Unimake.Business.DFe.Xml.MDFe.ValePed)
+  - Unimake.Business.DFe.Xml.MDFe.InfANTT.InfCIOT
+  - Unimake.Business.DFe.Xml.MDFe.InfANTT.InfContratante
+  - Unimake.Business.DFe.Xml.MDFe.InfANTT.InfPag
+  - Unimake.Business.DFe.Xml.MDFe.InfANTT.RNTRC
+  - Unimake.Business.DFe.Xml.MDFe.InfANTT.ValePed
+  langs:
+  - csharp
+  - vb
+  name: InfANTT
+  nameWithType: InfANTT
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT
+  type: Class
+  source:
+    id: InfANTT
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 507
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class InfANTT
+    content.vb: >-
+      <Serializable>
+
+      Public Class InfANTT
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.RNTRC
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfANTT.RNTRC
+  id: RNTRC
+  parent: Unimake.Business.DFe.Xml.MDFe.InfANTT
+  langs:
+  - csharp
+  - vb
+  name: RNTRC
+  nameWithType: InfANTT.RNTRC
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.RNTRC
+  type: Property
+  source:
+    id: RNTRC
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 511
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public string RNTRC { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RNTRC As String
+  overload: Unimake.Business.DFe.Xml.MDFe.InfANTT.RNTRC*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfCIOT
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfANTT.InfCIOT
+  id: InfCIOT
+  parent: Unimake.Business.DFe.Xml.MDFe.InfANTT
+  langs:
+  - csharp
+  - vb
+  name: InfCIOT
+  nameWithType: InfANTT.InfCIOT
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfCIOT
+  type: Property
+  source:
+    id: InfCIOT
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 514
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public List<InfCIOT> InfCIOT { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.InfCIOT}
+    content.vb: Public Property InfCIOT As List(Of InfCIOT)
+  overload: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfCIOT*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.ValePed
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfANTT.ValePed
+  id: ValePed
+  parent: Unimake.Business.DFe.Xml.MDFe.InfANTT
+  langs:
+  - csharp
+  - vb
+  name: ValePed
+  nameWithType: InfANTT.ValePed
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.ValePed
+  type: Property
+  source:
+    id: ValePed
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 517
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public List<ValePed> ValePed { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.ValePed}
+    content.vb: Public Property ValePed As List(Of ValePed)
+  overload: Unimake.Business.DFe.Xml.MDFe.InfANTT.ValePed*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfContratante
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfANTT.InfContratante
+  id: InfContratante
+  parent: Unimake.Business.DFe.Xml.MDFe.InfANTT
+  langs:
+  - csharp
+  - vb
+  name: InfContratante
+  nameWithType: InfANTT.InfContratante
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfContratante
+  type: Property
+  source:
+    id: InfContratante
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 520
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public List<InfContratante> InfContratante { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.InfContratante}
+    content.vb: Public Property InfContratante As List(Of InfContratante)
+  overload: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfContratante*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfPag
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfANTT.InfPag
+  id: InfPag
+  parent: Unimake.Business.DFe.Xml.MDFe.InfANTT
+  langs:
+  - csharp
+  - vb
+  name: InfPag
+  nameWithType: InfANTT.InfPag
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfPag
+  type: Property
+  source:
+    id: InfPag
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 523
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public List<InfPag> InfPag { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.InfPag}
+    content.vb: Public Property InfPag As List(Of InfPag)
+  overload: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfPag*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfCIOT(Unimake.Business.DFe.Xml.MDFe.InfCIOT)
+  commentId: M:Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfCIOT(Unimake.Business.DFe.Xml.MDFe.InfCIOT)
+  id: AddInfCIOT(Unimake.Business.DFe.Xml.MDFe.InfCIOT)
+  parent: Unimake.Business.DFe.Xml.MDFe.InfANTT
+  langs:
+  - csharp
+  - vb
+  name: AddInfCIOT(InfCIOT)
+  nameWithType: InfANTT.AddInfCIOT(InfCIOT)
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfCIOT(Unimake.Business.DFe.Xml.MDFe.InfCIOT)
+  type: Method
+  source:
+    id: AddInfCIOT
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 528
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public void AddInfCIOT(InfCIOT infciot)
+    parameters:
+    - id: infciot
+      type: Unimake.Business.DFe.Xml.MDFe.InfCIOT
+    content.vb: Public Sub AddInfCIOT(infciot As InfCIOT)
+  overload: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfCIOT*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.AdValePed(Unimake.Business.DFe.Xml.MDFe.ValePed)
+  commentId: M:Unimake.Business.DFe.Xml.MDFe.InfANTT.AdValePed(Unimake.Business.DFe.Xml.MDFe.ValePed)
+  id: AdValePed(Unimake.Business.DFe.Xml.MDFe.ValePed)
+  parent: Unimake.Business.DFe.Xml.MDFe.InfANTT
+  langs:
+  - csharp
+  - vb
+  name: AdValePed(ValePed)
+  nameWithType: InfANTT.AdValePed(ValePed)
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.AdValePed(Unimake.Business.DFe.Xml.MDFe.ValePed)
+  type: Method
+  source:
+    id: AdValePed
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 538
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public void AdValePed(ValePed valeped)
+    parameters:
+    - id: valeped
+      type: Unimake.Business.DFe.Xml.MDFe.ValePed
+    content.vb: Public Sub AdValePed(valeped As ValePed)
+  overload: Unimake.Business.DFe.Xml.MDFe.InfANTT.AdValePed*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfContratante(Unimake.Business.DFe.Xml.MDFe.InfContratante)
+  commentId: M:Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfContratante(Unimake.Business.DFe.Xml.MDFe.InfContratante)
+  id: AddInfContratante(Unimake.Business.DFe.Xml.MDFe.InfContratante)
+  parent: Unimake.Business.DFe.Xml.MDFe.InfANTT
+  langs:
+  - csharp
+  - vb
+  name: AddInfContratante(InfContratante)
+  nameWithType: InfANTT.AddInfContratante(InfContratante)
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfContratante(Unimake.Business.DFe.Xml.MDFe.InfContratante)
+  type: Method
+  source:
+    id: AddInfContratante
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 548
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public void AddInfContratante(InfContratante infcontratante)
+    parameters:
+    - id: infcontratante
+      type: Unimake.Business.DFe.Xml.MDFe.InfContratante
+    content.vb: Public Sub AddInfContratante(infcontratante As InfContratante)
+  overload: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfContratante*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfPag(Unimake.Business.DFe.Xml.MDFe.InfPag)
+  commentId: M:Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfPag(Unimake.Business.DFe.Xml.MDFe.InfPag)
+  id: AddInfPag(Unimake.Business.DFe.Xml.MDFe.InfPag)
+  parent: Unimake.Business.DFe.Xml.MDFe.InfANTT
+  langs:
+  - csharp
+  - vb
+  name: AddInfPag(InfPag)
+  nameWithType: InfANTT.AddInfPag(InfPag)
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfPag(Unimake.Business.DFe.Xml.MDFe.InfPag)
+  type: Method
+  source:
+    id: AddInfPag
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 558
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public void AddInfPag(InfPag infpag)
+    parameters:
+    - id: infpag
+      type: Unimake.Business.DFe.Xml.MDFe.InfPag
+    content.vb: Public Sub AddInfPag(infpag As InfPag)
+  overload: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfPag*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.MDFe
+  commentId: N:Unimake.Business.DFe.Xml.MDFe
+  name: Unimake.Business.DFe.Xml.MDFe
+  nameWithType: Unimake.Business.DFe.Xml.MDFe
+  fullName: Unimake.Business.DFe.Xml.MDFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.RNTRC*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfANTT.RNTRC
+  name: RNTRC
+  nameWithType: InfANTT.RNTRC
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.RNTRC
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfCIOT*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfANTT.InfCIOT
+  name: InfCIOT
+  nameWithType: InfANTT.InfCIOT
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfCIOT
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.InfCIOT}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.InfCIOT}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<InfCIOT>
+  nameWithType: List<InfCIOT>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.MDFe.InfCIOT>
+  nameWithType.vb: List(Of InfCIOT)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.MDFe.InfCIOT)
+  name.vb: List(Of InfCIOT)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfCIOT
+    name: InfCIOT
+    nameWithType: InfCIOT
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfCIOT
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfCIOT
+    name: InfCIOT
+    nameWithType: InfCIOT
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfCIOT
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.ValePed*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfANTT.ValePed
+  name: ValePed
+  nameWithType: InfANTT.ValePed
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.ValePed
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.ValePed}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.ValePed}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<ValePed>
+  nameWithType: List<ValePed>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.MDFe.ValePed>
+  nameWithType.vb: List(Of ValePed)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.MDFe.ValePed)
+  name.vb: List(Of ValePed)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.MDFe.ValePed
+    name: ValePed
+    nameWithType: ValePed
+    fullName: Unimake.Business.DFe.Xml.MDFe.ValePed
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.MDFe.ValePed
+    name: ValePed
+    nameWithType: ValePed
+    fullName: Unimake.Business.DFe.Xml.MDFe.ValePed
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfContratante*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfANTT.InfContratante
+  name: InfContratante
+  nameWithType: InfANTT.InfContratante
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfContratante
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.InfContratante}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.InfContratante}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<InfContratante>
+  nameWithType: List<InfContratante>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.MDFe.InfContratante>
+  nameWithType.vb: List(Of InfContratante)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.MDFe.InfContratante)
+  name.vb: List(Of InfContratante)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfContratante
+    name: InfContratante
+    nameWithType: InfContratante
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfContratante
+    name: InfContratante
+    nameWithType: InfContratante
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfPag*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfANTT.InfPag
+  name: InfPag
+  nameWithType: InfANTT.InfPag
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.InfPag
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.InfPag}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.MDFe.InfPag}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<InfPag>
+  nameWithType: List<InfPag>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.MDFe.InfPag>
+  nameWithType.vb: List(Of InfPag)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.MDFe.InfPag)
+  name.vb: List(Of InfPag)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfPag
+    name: InfPag
+    nameWithType: InfPag
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfPag
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.MDFe.InfPag
+    name: InfPag
+    nameWithType: InfPag
+    fullName: Unimake.Business.DFe.Xml.MDFe.InfPag
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfCIOT*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfCIOT
+  name: AddInfCIOT
+  nameWithType: InfANTT.AddInfCIOT
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfCIOT
+- uid: Unimake.Business.DFe.Xml.MDFe.InfCIOT
+  commentId: T:Unimake.Business.DFe.Xml.MDFe.InfCIOT
+  parent: Unimake.Business.DFe.Xml.MDFe
+  name: InfCIOT
+  nameWithType: InfCIOT
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfCIOT
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.AdValePed*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfANTT.AdValePed
+  name: AdValePed
+  nameWithType: InfANTT.AdValePed
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.AdValePed
+- uid: Unimake.Business.DFe.Xml.MDFe.ValePed
+  commentId: T:Unimake.Business.DFe.Xml.MDFe.ValePed
+  parent: Unimake.Business.DFe.Xml.MDFe
+  name: ValePed
+  nameWithType: ValePed
+  fullName: Unimake.Business.DFe.Xml.MDFe.ValePed
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfContratante*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfContratante
+  name: AddInfContratante
+  nameWithType: InfANTT.AddInfContratante
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfContratante
+- uid: Unimake.Business.DFe.Xml.MDFe.InfContratante
+  commentId: T:Unimake.Business.DFe.Xml.MDFe.InfContratante
+  parent: Unimake.Business.DFe.Xml.MDFe
+  name: InfContratante
+  nameWithType: InfContratante
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfContratante
+- uid: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfPag*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfPag
+  name: AddInfPag
+  nameWithType: InfANTT.AddInfPag
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfANTT.AddInfPag
+- uid: Unimake.Business.DFe.Xml.MDFe.InfPag
+  commentId: T:Unimake.Business.DFe.Xml.MDFe.InfPag
+  parent: Unimake.Business.DFe.Xml.MDFe
+  name: InfPag
+  nameWithType: InfPag
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfPag

@@ -27,7 +27,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
             var validar = new ValidarSchema();
             validar.Validar(xml, (Configuracoes.TipoDFe == TipoDFe.NFCe ? TipoDFe.NFe : Configuracoes.TipoDFe).ToString() + "." + schemaArquivo, targetNS);
 
-            if(!validar.Success)
+            if (!validar.Success)
             {
                 throw new Exception(validar.ErrorMessage);
             }
@@ -113,6 +113,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
                                 break;
 
                             case TipoEventoNFe.EPEC:
+                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoEPEC>((DetEventoEPEC)xml.Evento[i].InfEvento.DetEvento).OuterXml);
                                 break;
 
                             case TipoEventoNFe.PedidoProrrogacao:
@@ -148,12 +149,13 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
             var tpEvento = xml.Evento[0].InfEvento.TpEvento;
 
-            switch(tpEvento)
+            switch (tpEvento)
             {
                 case TipoEventoNFe.ManifestacaoCienciaOperacao:
                 case TipoEventoNFe.ManifestacaoConfirmacaoOperacao:
                 case TipoEventoNFe.ManifestacaoDesconhecimentoOperacao:
                 case TipoEventoNFe.ManifestacaoOperacaoNaoRealizada:
+                case TipoEventoNFe.EPEC:
                     if (xml.Evento[0].InfEvento.COrgao != UFBrasil.AN)
                     {
                         throw new Exception("Conteúdo da tag <cOrgao> inválido. Para eventos de manifestação do destinatário o conteúdo da tag <cOrgao> deve igual a 91.");
@@ -243,6 +245,28 @@ namespace Unimake.Business.DFe.Servicos.NFe
             PrepararServico(envEvento?.GerarXML() ?? throw new ArgumentNullException(nameof(envEvento)), configuracao);
             Executar();
         }
+
+#if INTEROP
+
+        /// <summary>
+        /// Retorna o <see cref="ProcEventoNFe"/> pelo índice ou nulo, se não existir
+        /// </summary>
+        /// <param name="index">Índice em que deve ser recuperado o evento e convertido para XML</param>
+        /// <returns></returns>
+        public string GetProcEventoNFeResultXMLByIndex(int index)
+        {
+            var list = ProcEventoNFeResult;
+
+            if (list.Count == 0 ||
+                index >= list.Count)
+            {
+                return "";
+            }
+
+            return list[index].GerarXML().InnerXml;
+        }
+
+#endif
 
         /// <summary>
         /// Gravar o XML de distribuição em uma pasta no HD

@@ -19,7 +19,7 @@ namespace NFe.Components.Tinus.JaboataodDosGuararapesPE.h
         {
             get
             {
-                return "http://www.tinus.com.br";
+                return "http://www2.tinus.com.br";
             }
         }
 

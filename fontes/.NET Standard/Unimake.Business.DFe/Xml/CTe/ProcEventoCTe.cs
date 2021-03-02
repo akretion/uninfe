@@ -8,14 +8,15 @@ using System.Xml.Serialization;
 namespace Unimake.Business.DFe.Xml.CTe
 {
     [Serializable()]
+    [XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/cte")]
     [XmlRoot("procEventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
-    public class ProcEventoCTe : XMLBase
+    public class ProcEventoCTe<TDetalheEvento>: XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }
 
         [XmlElement("eventoCTe")]
-        public EventoCTe EventoCTe { get; set; }
+        public EventoCTe<TDetalheEvento> EventoCTe { get; set; }
 
         [XmlElement("retEventoCTe")]
         public RetEventoCTe RetEventoCTe { get; set; }
@@ -40,24 +41,34 @@ namespace Unimake.Business.DFe.Xml.CTe
         /// Nome do arquivo de distribuição
         /// </summary>
         [XmlIgnore]
-        public string NomeArquivoDistribuicao => EventoCTe.InfEvento.ChCTe + "_" + ((int)EventoCTe.InfEvento.TpEvento).ToString("000000") + "_" + EventoCTe.InfEvento.NSeqEvento.ToString("00") + "-proceventocte.xml";
+        public string NomeArquivoDistribuicao => ((IInfEvento)EventoCTe.InfEvento).ChCTe + "_" + ((int)((IInfEvento)EventoCTe.InfEvento).TpEvento).ToString("000000") + "_" + ((IInfEvento)EventoCTe.InfEvento).NSeqEvento.ToString("00") + "-proceventocte.xml";
 
         public override XmlDocument GerarXML()
         {
-            var xmlDocument = base.GerarXML();
+            var doc = base.GerarXML();
 
-            XmlRootAttribute attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
+            var attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
 
-            XmlElement xmlElementEvento = (XmlElement)xmlDocument.GetElementsByTagName("eventoCTe")[0];
-            xmlElementEvento.SetAttribute("xmlns", attribute.Namespace);
+            var elementProcEventoCTe = (XmlElement)doc.GetElementsByTagName("procEventoCTe")[0];
+            elementProcEventoCTe.SetAttribute("xmlns", attribute.Namespace);
 
-            XmlElement xmlElementRetEvento = (XmlElement)xmlDocument.GetElementsByTagName("retEventoCTe")[0];
-            xmlElementRetEvento.SetAttribute("xmlns", attribute.Namespace);
+            var elementEventoCTe = (XmlElement)doc.GetElementsByTagName("eventoCTe")[0];
+            elementEventoCTe.SetAttribute("xmlns", attribute.Namespace);
 
-            XmlElement xmlElementRetEventoInfEvento = (XmlElement)xmlElementRetEvento.GetElementsByTagName("infEvento")[0];
-            xmlElementRetEventoInfEvento.SetAttribute("xmlns", attribute.Namespace);
+            var elementRetEvento = (XmlElement)doc.GetElementsByTagName("retEventoCTe")[0];
+            elementRetEvento.SetAttribute("xmlns", attribute.Namespace);
 
-            return xmlDocument;
+            return doc;
         }
+
+        #region ShouldSerialize
+
+        public bool ShouldSerializeNPortaCon() => NPortaCon > 0;
+
+        public bool ShouldSerializeIpTransmissor() => !string.IsNullOrWhiteSpace(IpTransmissor);
+
+        public bool ShouldSerializeDhConexaoField() => DhConexao > DateTime.MinValue;
+
+        #endregion
     }
 }

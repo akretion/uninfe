@@ -1,0 +1,716 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.NFref
+  commentId: T:Unimake.Business.DFe.Xml.NFe.NFref
+  id: NFref
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.NFref.RefCTe
+  - Unimake.Business.DFe.Xml.NFe.NFref.RefECF
+  - Unimake.Business.DFe.Xml.NFe.NFref.RefNF
+  - Unimake.Business.DFe.Xml.NFe.NFref.RefNFe
+  - Unimake.Business.DFe.Xml.NFe.NFref.RefNFP
+  - Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefCTe
+  - Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefECF
+  - Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNF
+  - Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFe
+  - Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFP
+  langs:
+  - csharp
+  - vb
+  name: NFref
+  nameWithType: NFref
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref
+  type: Class
+  source:
+    id: NFref
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 360
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class NFref
+    content.vb: >-
+      <Serializable>
+
+      Public Class NFref
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.RefCTe
+  commentId: P:Unimake.Business.DFe.Xml.NFe.NFref.RefCTe
+  id: RefCTe
+  parent: Unimake.Business.DFe.Xml.NFe.NFref
+  langs:
+  - csharp
+  - vb
+  name: RefCTe
+  nameWithType: NFref.RefCTe
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.RefCTe
+  type: Property
+  source:
+    id: RefCTe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 364
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string RefCTe { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RefCTe As String
+  overload: Unimake.Business.DFe.Xml.NFe.NFref.RefCTe*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.RefECF
+  commentId: P:Unimake.Business.DFe.Xml.NFe.NFref.RefECF
+  id: RefECF
+  parent: Unimake.Business.DFe.Xml.NFe.NFref
+  langs:
+  - csharp
+  - vb
+  name: RefECF
+  nameWithType: NFref.RefECF
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.RefECF
+  type: Property
+  source:
+    id: RefECF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 367
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string RefECF { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RefECF As String
+  overload: Unimake.Business.DFe.Xml.NFe.NFref.RefECF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.RefNF
+  commentId: P:Unimake.Business.DFe.Xml.NFe.NFref.RefNF
+  id: RefNF
+  parent: Unimake.Business.DFe.Xml.NFe.NFref
+  langs:
+  - csharp
+  - vb
+  name: RefNF
+  nameWithType: NFref.RefNF
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.RefNF
+  type: Property
+  source:
+    id: RefNF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 370
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string RefNF { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RefNF As String
+  overload: Unimake.Business.DFe.Xml.NFe.NFref.RefNF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.RefNFP
+  commentId: P:Unimake.Business.DFe.Xml.NFe.NFref.RefNFP
+  id: RefNFP
+  parent: Unimake.Business.DFe.Xml.NFe.NFref
+  langs:
+  - csharp
+  - vb
+  name: RefNFP
+  nameWithType: NFref.RefNFP
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.RefNFP
+  type: Property
+  source:
+    id: RefNFP
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 373
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string RefNFP { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RefNFP As String
+  overload: Unimake.Business.DFe.Xml.NFe.NFref.RefNFP*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.RefNFe
+  commentId: P:Unimake.Business.DFe.Xml.NFe.NFref.RefNFe
+  id: RefNFe
+  parent: Unimake.Business.DFe.Xml.NFe.NFref
+  langs:
+  - csharp
+  - vb
+  name: RefNFe
+  nameWithType: NFref.RefNFe
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.RefNFe
+  type: Property
+  source:
+    id: RefNFe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 376
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string RefNFe { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property RefNFe As String
+  overload: Unimake.Business.DFe.Xml.NFe.NFref.RefNFe*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefCTe
+  commentId: M:Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefCTe
+  id: ShouldSerializeRefCTe
+  parent: Unimake.Business.DFe.Xml.NFe.NFref
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeRefCTe()
+  nameWithType: NFref.ShouldSerializeRefCTe()
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefCTe()
+  type: Method
+  source:
+    id: ShouldSerializeRefCTe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 381
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeRefCTe()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeRefCTe As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefCTe*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefECF
+  commentId: M:Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefECF
+  id: ShouldSerializeRefECF
+  parent: Unimake.Business.DFe.Xml.NFe.NFref
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeRefECF()
+  nameWithType: NFref.ShouldSerializeRefECF()
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefECF()
+  type: Method
+  source:
+    id: ShouldSerializeRefECF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 383
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeRefECF()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeRefECF As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefECF*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNF
+  commentId: M:Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNF
+  id: ShouldSerializeRefNF
+  parent: Unimake.Business.DFe.Xml.NFe.NFref
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeRefNF()
+  nameWithType: NFref.ShouldSerializeRefNF()
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNF()
+  type: Method
+  source:
+    id: ShouldSerializeRefNF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 385
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeRefNF()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeRefNF As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNF*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFP
+  commentId: M:Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFP
+  id: ShouldSerializeRefNFP
+  parent: Unimake.Business.DFe.Xml.NFe.NFref
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeRefNFP()
+  nameWithType: NFref.ShouldSerializeRefNFP()
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFP()
+  type: Method
+  source:
+    id: ShouldSerializeRefNFP
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 387
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeRefNFP()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeRefNFP As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFP*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFe
+  commentId: M:Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFe
+  id: ShouldSerializeRefNFe
+  parent: Unimake.Business.DFe.Xml.NFe.NFref
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeRefNFe()
+  nameWithType: NFref.ShouldSerializeRefNFe()
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFe()
+  type: Method
+  source:
+    id: ShouldSerializeRefNFe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 389
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeRefNFe()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeRefNFe As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFe*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.RefCTe*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.NFref.RefCTe
+  name: RefCTe
+  nameWithType: NFref.RefCTe
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.RefCTe
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.RefECF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.NFref.RefECF
+  name: RefECF
+  nameWithType: NFref.RefECF
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.RefECF
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.RefNF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.NFref.RefNF
+  name: RefNF
+  nameWithType: NFref.RefNF
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.RefNF
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.RefNFP*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.NFref.RefNFP
+  name: RefNFP
+  nameWithType: NFref.RefNFP
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.RefNFP
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.RefNFe*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.NFref.RefNFe
+  name: RefNFe
+  nameWithType: NFref.RefNFe
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.RefNFe
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefCTe*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefCTe
+  name: ShouldSerializeRefCTe
+  nameWithType: NFref.ShouldSerializeRefCTe
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefCTe
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefECF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefECF
+  name: ShouldSerializeRefECF
+  nameWithType: NFref.ShouldSerializeRefECF
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefECF
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNF
+  name: ShouldSerializeRefNF
+  nameWithType: NFref.ShouldSerializeRefNF
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNF
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFP*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFP
+  name: ShouldSerializeRefNFP
+  nameWithType: NFref.ShouldSerializeRefNFP
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFP
+- uid: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFe*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFe
+  name: ShouldSerializeRefNFe
+  nameWithType: NFref.ShouldSerializeRefNFe
+  fullName: Unimake.Business.DFe.Xml.NFe.NFref.ShouldSerializeRefNFe

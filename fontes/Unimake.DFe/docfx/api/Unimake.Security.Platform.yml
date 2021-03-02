@@ -1,0 +1,22 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Security.Platform
+  commentId: N:Unimake.Security.Platform
+  id: Unimake.Security.Platform
+  children:
+  - Unimake.Security.Platform.CertificadoDigital
+  langs:
+  - csharp
+  - vb
+  name: Unimake.Security.Platform
+  nameWithType: Unimake.Security.Platform
+  fullName: Unimake.Security.Platform
+  type: Namespace
+  assemblies:
+  - Unimake.Security.Platform
+references:
+- uid: Unimake.Security.Platform.CertificadoDigital
+  commentId: T:Unimake.Security.Platform.CertificadoDigital
+  name: CertificadoDigital
+  nameWithType: CertificadoDigital
+  fullName: Unimake.Security.Platform.CertificadoDigital

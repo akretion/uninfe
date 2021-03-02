@@ -1,4 +1,6 @@
-﻿namespace Unimake.Business.DFe
+﻿using System.Net;
+
+namespace Unimake.Business.DFe
 {
     /// <summary>
     /// Classe para definição de parâmetros do SOAP dos Webservices
@@ -13,6 +15,7 @@
         private string _SoapString;
         private string _TagRetorno;
         private string _VersaoSoap;
+        private IWebProxy _Proxy;
 
         #endregion Private Fields
 
@@ -70,6 +73,15 @@
         {
             get => string.IsNullOrWhiteSpace(_VersaoSoap) ? (_VersaoSoap = "soap12") : _VersaoSoap;
             set => _VersaoSoap = value;
+        }
+
+        /// <summary>
+        /// Dados do servidor de proxy para conexão
+        /// </summary>
+        public IWebProxy Proxy
+        {
+            get => _Proxy;
+            set => _Proxy = value;
         }
 
         #endregion Public Properties

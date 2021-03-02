@@ -17,7 +17,7 @@ namespace NFe.ConvertTxt
         public TpcnBandeiraCartao tBand;
         public string cAut;
         public int tpIntegra;
-        public double vTroco;
+        public double vTroco; //Somente para manter compatibilidade do layout TXT, de futuro, em uma mudança geral da SEFAZ, podemos retirar. Wandrey 26/01/2021
 
         public pag()
         {

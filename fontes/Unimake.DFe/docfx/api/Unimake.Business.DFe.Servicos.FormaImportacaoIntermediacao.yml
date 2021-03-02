@@ -1,0 +1,291 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao
+  commentId: T:Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao
+  id: FormaImportacaoIntermediacao
+  parent: Unimake.Business.DFe.Servicos
+  children:
+  - Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao.ImportacaoPorContaOrdem
+  - Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao.ImportacaoPorContaPropria
+  - Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao.ImportacaoPorEncomenda
+  langs:
+  - csharp
+  - vb
+  name: FormaImportacaoIntermediacao
+  nameWithType: FormaImportacaoIntermediacao
+  fullName: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao
+  type: Enum
+  source:
+    id: FormaImportacaoIntermediacao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1071
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nForma de importação quanto a intermediação\n"
+  example: []
+  syntax:
+    content: public enum FormaImportacaoIntermediacao
+    content.vb: Public Enum FormaImportacaoIntermediacao
+  extensionMethods:
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao.ImportacaoPorContaPropria
+  commentId: F:Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao.ImportacaoPorContaPropria
+  id: ImportacaoPorContaPropria
+  parent: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao
+  langs:
+  - csharp
+  - vb
+  name: ImportacaoPorContaPropria
+  nameWithType: FormaImportacaoIntermediacao.ImportacaoPorContaPropria
+  fullName: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao.ImportacaoPorContaPropria
+  type: Field
+  source:
+    id: ImportacaoPorContaPropria
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1076
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n1=Importação por conta própria\n"
+  example: []
+  syntax:
+    content: ImportacaoPorContaPropria = 1
+    return:
+      type: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao.ImportacaoPorContaOrdem
+  commentId: F:Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao.ImportacaoPorContaOrdem
+  id: ImportacaoPorContaOrdem
+  parent: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao
+  langs:
+  - csharp
+  - vb
+  name: ImportacaoPorContaOrdem
+  nameWithType: FormaImportacaoIntermediacao.ImportacaoPorContaOrdem
+  fullName: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao.ImportacaoPorContaOrdem
+  type: Field
+  source:
+    id: ImportacaoPorContaOrdem
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1082
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n2=Importação por conta e ordem\n"
+  example: []
+  syntax:
+    content: ImportacaoPorContaOrdem = 2
+    return:
+      type: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao.ImportacaoPorEncomenda
+  commentId: F:Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao.ImportacaoPorEncomenda
+  id: ImportacaoPorEncomenda
+  parent: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao
+  langs:
+  - csharp
+  - vb
+  name: ImportacaoPorEncomenda
+  nameWithType: FormaImportacaoIntermediacao.ImportacaoPorEncomenda
+  fullName: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao.ImportacaoPorEncomenda
+  type: Field
+  source:
+    id: ImportacaoPorEncomenda
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1088
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n3=Importação por encomenda\n"
+  example: []
+  syntax:
+    content: ImportacaoPorEncomenda = 3
+    return:
+      type: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  name: GetAttribute<T>()
+  nameWithType: EnumsExtension.GetAttribute<T>()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>()
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)()
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)()
+  name.vb: GetAttribute(Of T)()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  name: GetAttributeDescription()
+  nameWithType: EnumsExtension.GetAttributeDescription()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  isExternal: true
+  name: GetAttribute<T>(Enum)
+  nameWithType: EnumsExtension.GetAttribute<T>(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>(System.Enum)
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)(Enum)
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)(System.Enum)
+  name.vb: GetAttribute(Of T)(Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  isExternal: true
+  name: GetAttributeDescription(Enum)
+  nameWithType: EnumsExtension.GetAttributeDescription(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+- uid: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao
+  commentId: T:Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao
+  parent: Unimake.Business.DFe.Servicos
+  name: FormaImportacaoIntermediacao
+  nameWithType: FormaImportacaoIntermediacao
+  fullName: Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao

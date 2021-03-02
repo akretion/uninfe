@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using Unimake.Business.DFe.Servicos;
+using Unimake.Business.DFe.Xml.NFe;
 
 namespace NFe.Service
 {
@@ -46,37 +48,42 @@ namespace NFe.Service
 
                 if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
-                    //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, dadosPedInut.versao, dadosPedInut.mod.ToString(), 0);
-                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, Servico);
+                    var xml = new InutNFe();
+                    xml = Unimake.Business.DFe.Utility.XMLUtility.Deserializar<InutNFe>(ConteudoXML);
 
-                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oInutilizacao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-
-                    object oCabecMsg = null;
-                    if (dadosPedInut.versao != "4.00")
+                    var configuracao = new Configuracao
                     {
-                        oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedInut.cUF, Servico));
-                        wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedInut.cUF.ToString());
-                        wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedInut.versao);
+                        TipoDFe = (dadosPedInut.mod == 65 ? TipoDFe.NFCe : TipoDFe.NFe),
+                        TipoEmissao = (Unimake.Business.DFe.Servicos.TipoEmissao)dadosPedInut.tpEmis,
+                        CertificadoDigital = Empresas.Configuracoes[emp].X509Certificado
+                    };
+
+                    if(ConfiguracaoApp.Proxy)
+                    {
+                        configuracao.HasProxy = true;
+                        configuracao.ProxyAutoDetect = ConfiguracaoApp.DetectarConfiguracaoProxyAuto;
+                        configuracao.ProxyUser = ConfiguracaoApp.ProxyUsuario;
+                        configuracao.ProxyPassword = ConfiguracaoApp.ProxySenha;
                     }
 
-                    //Assinar o XML
-                    AssinaturaDigital oAD = new AssinaturaDigital();
-                    oAD.Assinar(ConteudoXML, emp, Convert.ToInt32(dadosPedInut.cUF));
+                    if(dadosPedInut.mod == 65)
+                    {
+                        var inutilizacao = new Unimake.Business.DFe.Servicos.NFCe.Inutilizacao(xml, configuracao);
+                        inutilizacao.Executar();
 
-                    //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy,
-                                        oInutilizacao,
-                                        wsProxy.NomeMetodoWS[0],
-                                        oCabecMsg, this,
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML,
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).RetornoXML,
-                                        true,
-                                        securityProtocolType);
+                        vStrXmlRetorno = inutilizacao.RetornoWSString;
+                    }
+                    else
+                    {
+                        var inutilizacao = new Unimake.Business.DFe.Servicos.NFe.Inutilizacao(xml, configuracao);
+                        inutilizacao.Executar();
 
-                    //Ler o retorno do webservice
+                        vStrXmlRetorno = inutilizacao.RetornoWSString;
+                    }
+
                     LerRetornoInut();
+
+                    XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).RetornoXML);
                 }
                 else
                 {

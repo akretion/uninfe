@@ -196,6 +196,31 @@ namespace Unimake.Business.DFe.Servicos
         /// IDToken do CSC (Código de segurança do contribuinte). Utilizado para criar o QRCode da NFCe
         /// </summary>
         public int CSCIDToken { get; set; }
+
+        #region Dados do servidor de proxy para conexão
+
+        /// <summary>
+        /// Tem servidor de proxy?
+        /// </summary>
+        public bool HasProxy { get; set; } = false;
+
+        /// <summary>
+        /// True = Detectar o servidor de proxy automaticamente
+        /// False = Utiliza os dados de Proxy Default
+        /// </summary>
+        public bool ProxyAutoDetect { get; set; } = false;
+
+        /// <summary>
+        /// Usuário para conexão do servidor de proxy
+        /// </summary>
+        public string ProxyUser { get; set; }
+
+        /// <summary>
+        /// Senha do usuário para conexão do servidor de proxy
+        /// </summary>
+        public string ProxyPassword { get; set; }
+
+        #endregion
     }
 
     /// <summary>

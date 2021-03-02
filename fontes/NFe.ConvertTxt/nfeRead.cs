@@ -43,7 +43,7 @@ namespace NFe.ConvertTxt
 
         private string readValue(object element, string tag)
         {
-            if (((XmlElement)element).GetElementsByTagName(tag)[0] != null)
+            if(((XmlElement)element).GetElementsByTagName(tag)[0] != null)
                 return ReverterFiltroTextoXML(((XmlElement)element).GetElementsByTagName(tag)[0].InnerText);
 
             Console.WriteLine($"TAG: {tag} nao encontrada no element: {element}");
@@ -69,17 +69,17 @@ namespace NFe.ConvertTxt
                 doc.LoadXml(xmlString);
                 this.XmlNota = doc.OuterXml;
 
-                foreach (XmlNode nodeRoot in doc.ChildNodes)
+                foreach(XmlNode nodeRoot in doc.ChildNodes)
                 {
-                    if (nodeRoot.LocalName.Equals("NFe"))
+                    if(nodeRoot.LocalName.Equals("NFe"))
                     {
                         processaNFe(nodeRoot);
                     }
-                    if (nodeRoot.LocalName.Equals("nfeProc"))
+                    if(nodeRoot.LocalName.Equals("nfeProc"))
                     {
-                        foreach (XmlNode nodenfeProc in nodeRoot.ChildNodes)
+                        foreach(XmlNode nodenfeProc in nodeRoot.ChildNodes)
                         {
-                            switch (nodenfeProc.LocalName.ToLower())
+                            switch(nodenfeProc.LocalName.ToLower())
                             {
                                 case "nfe":
                                     processaNFe(nodenfeProc);
@@ -92,16 +92,16 @@ namespace NFe.ConvertTxt
                         }
                     }
                 }
-                if (!string.IsNullOrEmpty(nfe.ide.dhEmi) && nfe.infNFe.Versao < 3)
+                if(!string.IsNullOrEmpty(nfe.ide.dhEmi) && nfe.infNFe.Versao < 3)
                     throw new Exception("Arquivo não é de nota fiscal NF-e");
 
-                if (string.IsNullOrEmpty(nfe.ide.dhEmi) && nfe.infNFe.Versao >= 3)
-                    if (nfe.ide.mod == TpcnMod.modNFCe)
+                if(string.IsNullOrEmpty(nfe.ide.dhEmi) && nfe.infNFe.Versao >= 3)
+                    if(nfe.ide.mod == TpcnMod.modNFCe)
                         throw new Exception("Arquivo não é de nota fiscal NFC-e");
                     else
                         throw new Exception("Arquivo não é de nota fiscal NF-e");
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 throw ex;
             }
@@ -119,7 +119,7 @@ namespace NFe.ConvertTxt
         DateTime FromHex(string value)
         {
             string result = "";
-            for (int i = 0; i < value.Length; i += 2)
+            for(int i = 0; i < value.Length; i += 2)
             {
                 string hs = value.Substring(i, 2);
                 result += Convert.ToChar(Convert.ToUInt32(hs, 16));
@@ -129,13 +129,13 @@ namespace NFe.ConvertTxt
 
         private void processaNFe(XmlNode nodeRoot)
         {
-            foreach (XmlNode nodeNFe in nodeRoot.ChildNodes)
+            foreach(XmlNode nodeNFe in nodeRoot.ChildNodes)
             {
-                switch (nodeNFe.LocalName.ToLower())
+                switch(nodeNFe.LocalName.ToLower())
                 {
                     case "infnfesupl":
                         //<qrCode><![CDATA[http://www.sefaz.mt.gov.br/nfce/consultanfce?chNFe=51160417625687000153650020000006611000006615&nVersao=100&tpAmb=1&cDest=32622775091&dhEmi=323031362d30342d32375431353a31343a32362d30343a3030&vNF=2.00&vICMS=0.00&digVal=7169746e59786b51753950376e4e716536686e3859596b327354773d&cIdToken=000001&cHashQRCode=C0C48B5D9353FEDDBC40E4ECBF931D32E95D977B]]></qrCode>
-                        foreach (XmlNode nodeinfNFe in nodeNFe.ChildNodes)
+                        foreach(XmlNode nodeinfNFe in nodeNFe.ChildNodes)
                         {
                             var minhaCultura = new CultureInfo("pt-BR"); //pt-BR usada como base
                             minhaCultura.NumberFormat.NumberDecimalSeparator = ".";
@@ -144,22 +144,22 @@ namespace NFe.ConvertTxt
                             nfe.qrCode.Link = data;
                             var split = data.Split(new char[] { '&' });
 
-                            if (split[0].Contains("chNFe"))
+                            if(split[0].Contains("chNFe"))
                             {
-                                foreach (var s in split)
+                                foreach(var s in split)
                                 {
                                     Console.WriteLine(s);
-                                    if (s.Contains("chNFe"))
+                                    if(s.Contains("chNFe"))
                                         nfe.qrCode.chNFe = s.Split('?')[1].Substring(6);
-                                    else if (s.StartsWith("nVersao")) nfe.qrCode.nVersao = s.Split('=')[1];
-                                    else if (s.StartsWith("tpAmb")) nfe.qrCode.tpAmb = (TipoAmbiente)Convert.ToInt16(s.Split('=')[1]);
-                                    else if (s.StartsWith("cDest")) nfe.qrCode.cDest = s.Split('=')[1];
-                                    else if (s.StartsWith("digVal")) nfe.qrCode.digVal = s.Split('=')[1];
-                                    else if (s.StartsWith("cIdToken")) nfe.qrCode.cIdToken = s.Split('=')[1];
-                                    else if (s.StartsWith("cHashQRCode")) nfe.qrCode.cHashQRCode = s.Split('=')[1];
-                                    else if (s.StartsWith("vICMS")) nfe.qrCode.vICMS = Convert.ToDecimal(s.Split('=')[1], minhaCultura);
-                                    else if (s.StartsWith("vNF")) nfe.qrCode.vNF = Convert.ToDecimal(s.Split('=')[1], minhaCultura);
-                                    else if (s.StartsWith("dhEmi")) nfe.qrCode.dhEmi = FromHex(s.Split('=')[1]);
+                                    else if(s.StartsWith("nVersao")) nfe.qrCode.nVersao = s.Split('=')[1];
+                                    else if(s.StartsWith("tpAmb")) nfe.qrCode.tpAmb = (TipoAmbiente)Convert.ToInt16(s.Split('=')[1]);
+                                    else if(s.StartsWith("cDest")) nfe.qrCode.cDest = s.Split('=')[1];
+                                    else if(s.StartsWith("digVal")) nfe.qrCode.digVal = s.Split('=')[1];
+                                    else if(s.StartsWith("cIdToken")) nfe.qrCode.cIdToken = s.Split('=')[1];
+                                    else if(s.StartsWith("cHashQRCode")) nfe.qrCode.cHashQRCode = s.Split('=')[1];
+                                    else if(s.StartsWith("vICMS")) nfe.qrCode.vICMS = Convert.ToDecimal(s.Split('=')[1], minhaCultura);
+                                    else if(s.StartsWith("vNF")) nfe.qrCode.vNF = Convert.ToDecimal(s.Split('=')[1], minhaCultura);
+                                    else if(s.StartsWith("dhEmi")) nfe.qrCode.dhEmi = FromHex(s.Split('=')[1]);
                                 }
                             }
                             else
@@ -169,12 +169,12 @@ namespace NFe.ConvertTxt
                                 nfe.qrCode.nVersao = split[1].PadRight(3, '0');
                                 nfe.qrCode.tpAmb = (TipoAmbiente)Convert.ToInt16(split[2]);
 
-                                if (nfe.ide.tpEmis.Equals(TipoEmissao.teNormal))
+                                if(nfe.ide.tpEmis.Equals(TipoEmissao.teNormal))
                                 {
                                     nfe.qrCode.cIdToken = split[3].PadLeft(6, '0');
                                     nfe.qrCode.cHashQRCode = split[4];
                                 }
-                                else if (nfe.ide.tpEmis.Equals(TipoEmissao.teOffLine))
+                                else if(nfe.ide.tpEmis.Equals(TipoEmissao.teOffLine))
                                 {
                                     var dataHoraEmissao = Convert.ToDateTime(nfe.ide.dhEmi);
                                     nfe.qrCode.dhEmi = new DateTime(dataHoraEmissao.Year, dataHoraEmissao.Month, Convert.ToInt16(split[3]));
@@ -193,9 +193,9 @@ namespace NFe.ConvertTxt
                         char charSeparator = System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator[0];
                         nfe.infNFe.Versao = Convert.ToDecimal("0" + nodeNFe.Attributes[TpcnResources.versao.ToString()].Value.Replace(".", charSeparator.ToString()));
                         nfe.infNFe.ID = nodeNFe.Attributes[TpcnResources.Id.ToString()].Value;
-                        foreach (XmlNode nodeinfNFe in nodeNFe.ChildNodes)
+                        foreach(XmlNode nodeinfNFe in nodeNFe.ChildNodes)
                         {
-                            switch (nodeinfNFe.LocalName)
+                            switch(nodeinfNFe.LocalName)
                             {
                                 case "ide":
                                     this.processaIDE(nodeinfNFe);
@@ -237,6 +237,10 @@ namespace NFe.ConvertTxt
                                     processaautXML(nodeinfNFe);
                                     break;
 
+                                case "infIntermed":
+                                    processaInfIntermed(nodeinfNFe);
+                                    break;
+
                                 case "infAdic":
                                     processaInfAdic(nodeinfNFe);
                                     break;
@@ -267,41 +271,37 @@ namespace NFe.ConvertTxt
             }
         }
 
+        private void processaInfIntermed(XmlNode nodeIntIntermed)
+        {
+            nfe.InfIntermed.CNPJ = readValue(nodeIntIntermed, nameof(InfIntermed.CNPJ));
+            nfe.InfIntermed.idCadIntTran = readValue(nodeIntIntermed, nameof(InfIntermed.idCadIntTran));
+        }
+
         /// <summary>
         /// processaPag
         /// </summary>
         /// <param name="nodenfeProc"></param>
         private void processaPag(XmlNode nodenfeProc)
         {
-            if (nfe.infNFe.Versao >= 4)
+            foreach(XmlNode noder in nodenfeProc.ChildNodes)
             {
-                foreach (XmlNode noder in nodenfeProc.ChildNodes)
+                switch(noder.LocalName)
                 {
-                    switch (noder.LocalName)
-                    {
-                        case "detPag":
-                            LerPag(noder);
-                            break;
-                    }
+                    case "detPag":
+                        LerPag(noder);
+                        break;
                 }
-            }
-            else
-            {
-                LerPag(nodenfeProc);
             }
         }
 
         private void processaRespTec(XmlNode noderesptec)
         {
-            if (nfe.infNFe.Versao >= 4)
-            {
-                nfe.resptecnico.CNPJ = this.readValue(noderesptec, nameof(RespTecnico.CNPJ));
-                nfe.resptecnico.xContato = this.readValue(noderesptec, nameof(RespTecnico.xContato));
-                nfe.resptecnico.email = this.readValue(noderesptec, nameof(RespTecnico.email));
-                nfe.resptecnico.fone = this.readValue(noderesptec, nameof(RespTecnico.fone));
-                nfe.resptecnico.idCSRT = Convert.ToInt32("0" + this.readValue(noderesptec, nameof(RespTecnico.idCSRT)));
-                nfe.resptecnico.hashCSRT = this.readValue(noderesptec, nameof(RespTecnico.hashCSRT));
-            }
+            nfe.resptecnico.CNPJ = this.readValue(noderesptec, nameof(RespTecnico.CNPJ));
+            nfe.resptecnico.xContato = this.readValue(noderesptec, nameof(RespTecnico.xContato));
+            nfe.resptecnico.email = this.readValue(noderesptec, nameof(RespTecnico.email));
+            nfe.resptecnico.fone = this.readValue(noderesptec, nameof(RespTecnico.fone));
+            nfe.resptecnico.idCSRT = Convert.ToInt32("0" + this.readValue(noderesptec, nameof(RespTecnico.idCSRT)));
+            nfe.resptecnico.hashCSRT = this.readValue(noderesptec, nameof(RespTecnico.hashCSRT));
         }
 
         private void LerPag(XmlNode noder)
@@ -315,7 +315,8 @@ namespace NFe.ConvertTxt
             pagItem.CNPJ = this.readValue(noder, TpcnResources.CNPJ);
             pagItem.tBand = (TpcnBandeiraCartao)this.readInt32(noder, TpcnResources.tBand);
             pagItem.cAut = this.readValue(noder, TpcnResources.cAut);
-            pagItem.vTroco = this.readDouble(noder, TpcnResources.vTroco);
+            pagItem.vTroco = this.readDouble(noder, TpcnResources.vTroco); //Somente para manter compatibilidade do layout TXT, de futuro, em uma mudança geral da SEFAZ, podemos retirar. Wandrey 26/01/2021
+            nfe.vTroco = this.readDouble(noder, TpcnResources.vTroco);
             nfe.pag.Add(pagItem);
         }
 
@@ -353,14 +354,14 @@ namespace NFe.ConvertTxt
             nfe.cana.vTotDed = this.readDouble(nodeinfNFe, TpcnResources.vTotDed);
             nfe.cana.vLiqFor = this.readDouble(nodeinfNFe, TpcnResources.vLiqFor);
 
-            foreach (XmlNode noder in nodeinfNFe.ChildNodes)
+            foreach(XmlNode noder in nodeinfNFe.ChildNodes)
             {
-                switch (noder.LocalName)
+                switch(noder.LocalName)
                 {
                     case "forDia":
                         {
                             fordia fordiaInfo = new fordia();
-                            if (noder.Attributes.Count > 0)
+                            if(noder.Attributes.Count > 0)
                                 fordiaInfo.dia = Convert.ToInt32(noder.Attributes[TpcnResources.dia.ToString()].Value);
                             else
                                 fordiaInfo.dia = this.readInt32(noder, TpcnResources.dia);
@@ -415,9 +416,9 @@ namespace NFe.ConvertTxt
         {
             nfe.InfAdic.infAdFisco = this.readValue(nodeinfNFe, TpcnResources.infAdFisco);
             nfe.InfAdic.infCpl = this.readValue(nodeinfNFe, TpcnResources.infCpl);
-            foreach (XmlNode noder in nodeinfNFe.ChildNodes)
+            foreach(XmlNode noder in nodeinfNFe.ChildNodes)
             {
-                switch (noder.LocalName)
+                switch(noder.LocalName)
                 {
                     case "obsCont":
                         {
@@ -473,11 +474,11 @@ namespace NFe.ConvertTxt
             nfe.retirada.IE = this.readValue(nodeinfNFe, TpcnResources.IE);
         }
 
-    /// <summary>
-    /// processaEntrega
-    /// </summary>
-    /// <param name="nodeinfNFe"></param>
-    private void processaEntrega(XmlNode nodeinfNFe)
+        /// <summary>
+        /// processaEntrega
+        /// </summary>
+        /// <param name="nodeinfNFe"></param>
+        private void processaEntrega(XmlNode nodeinfNFe)
         {
             nfe.entrega.CNPJ = this.readValue(nodeinfNFe, TpcnResources.CNPJ);
             nfe.entrega.CPF = this.readValue(nodeinfNFe, TpcnResources.CPF);
@@ -503,8 +504,8 @@ namespace NFe.ConvertTxt
         /// <param name="nodeinfNFe"></param>
         private void processaautXML(XmlNode nodeinfNFe)
         {
-            foreach (XmlNode noder in nodeinfNFe.ChildNodes)
-                if (noder.LocalName.Equals(TpcnResources.CNPJ.ToString()))
+            foreach(XmlNode noder in nodeinfNFe.ChildNodes)
+                if(noder.LocalName.Equals(TpcnResources.CNPJ.ToString()))
                     nfe.autXML.Add(new autXML { CNPJ = noder.InnerText });
                 else
                     nfe.autXML.Add(new autXML { CPF = noder.InnerText });
@@ -516,16 +517,16 @@ namespace NFe.ConvertTxt
         /// <param name="nodeinfNFe"></param>
         private void processaCOBR(XmlNode nodeinfNFe)
         {
-            foreach (XmlNode noder in nodeinfNFe.ChildNodes)
+            foreach(XmlNode noder in nodeinfNFe.ChildNodes)
             {
-                if (noder.LocalName.Equals("fat"))
+                if(noder.LocalName.Equals("fat"))
                 {
                     nfe.Cobr.Fat.nFat = this.readValue(noder, TpcnResources.nFat);
                     nfe.Cobr.Fat.vOrig = this.readDouble(noder, TpcnResources.vOrig);
                     nfe.Cobr.Fat.vDesc = this.readDouble(noder, TpcnResources.vDesc);
                     nfe.Cobr.Fat.vLiq = this.readDouble(noder, TpcnResources.vLiq);
                 }
-                if (noder.LocalName.Equals("dup"))
+                if(noder.LocalName.Equals("dup"))
                 {
                     Dup dupInfo = new Dup();
                     dupInfo.dVenc = this.readDate(noder, TpcnResources.dVenc);
@@ -542,9 +543,9 @@ namespace NFe.ConvertTxt
         /// <param name="nodeinfNFe"></param>
         private void processaTRANSP(XmlNode nodeinfNFe)
         {
-            foreach (XmlNode noder in nodeinfNFe.ChildNodes)
+            foreach(XmlNode noder in nodeinfNFe.ChildNodes)
             {
-                switch (noder.LocalName.ToLower())
+                switch(noder.LocalName.ToLower())
                 {
                     case "modfrete":
                         nfe.Transp.modFrete = (TpcnModalidadeFrete)this.readInt32(nodeinfNFe, TpcnResources.modFrete);
@@ -602,7 +603,7 @@ namespace NFe.ConvertTxt
                             volInfo.pesoL = this.readDouble(noder, TpcnResources.pesoL);
                             volInfo.pesoB = this.readDouble(noder, TpcnResources.pesoB);
 
-                            foreach (XmlNode nodevollacre in ((XmlElement)noder).GetElementsByTagName("lacres"))
+                            foreach(XmlNode nodevollacre in ((XmlElement)noder).GetElementsByTagName("lacres"))
                             {
                                 Lacres lacresInfo = new Lacres();
                                 lacresInfo.nLacre = this.readValue(nodevollacre, TpcnResources.nLacre);
@@ -629,7 +630,7 @@ namespace NFe.ConvertTxt
         /// <param name="nodetotal"></param>
         private void processaTOTAL(XmlNode nodetotal)
         {
-            foreach (XmlNode nodeICMSTot in ((XmlElement)nodetotal).GetElementsByTagName("ICMSTot"))
+            foreach(XmlNode nodeICMSTot in ((XmlElement)nodetotal).GetElementsByTagName("ICMSTot"))
             {
                 nfe.Total.ICMSTot.vBC = this.readDouble(nodeICMSTot, TpcnResources.vBC);
                 nfe.Total.ICMSTot.vBCST = this.readDouble(nodeICMSTot, TpcnResources.vBCST);
@@ -655,7 +656,7 @@ namespace NFe.ConvertTxt
                 nfe.Total.ICMSTot.vIPIDevol = this.readDouble(nodeICMSTot, TpcnResources.vIPIDevol);
             }
 
-            foreach (XmlNode nodeISSQNtot in ((XmlElement)nodetotal).GetElementsByTagName("ISSQNtot"))
+            foreach(XmlNode nodeISSQNtot in ((XmlElement)nodetotal).GetElementsByTagName("ISSQNtot"))
             {
                 nfe.Total.ISSQNtot.vServ = this.readDouble(nodeISSQNtot, TpcnResources.vServ);
                 nfe.Total.ISSQNtot.vBC = this.readDouble(nodeISSQNtot, TpcnResources.vBC);
@@ -672,7 +673,7 @@ namespace NFe.ConvertTxt
                 nfe.Total.ISSQNtot.cRegTrib = (TpcnRegimeTributario)this.readInt32(nodeISSQNtot, TpcnResources.cRegTrib);
             }
 
-            foreach (XmlNode noderetTrib in ((XmlElement)nodetotal).GetElementsByTagName("retTrib"))
+            foreach(XmlNode noderetTrib in ((XmlElement)nodetotal).GetElementsByTagName("retTrib"))
             {
                 nfe.Total.retTrib.vRetPIS = this.readDouble(noderetTrib, TpcnResources.vRetPIS);
                 nfe.Total.retTrib.vRetCOFINS = this.readDouble(noderetTrib, TpcnResources.vRetCOFINS);
@@ -694,7 +695,7 @@ namespace NFe.ConvertTxt
             detInfo.Prod.nItem = Convert.ToInt32(nodedet.Attributes["nItem"].Value);
             detInfo.infAdProd = this.readValue(nodedet, TpcnResources.infAdProd);
 
-            foreach (XmlNode nodedetprod in ((XmlElement)nodedet).GetElementsByTagName("prod"))
+            foreach(XmlNode nodedetprod in ((XmlElement)nodedet).GetElementsByTagName("prod"))
             {
                 XmlElement ele = nodedetprod as XmlElement;
 
@@ -723,9 +724,9 @@ namespace NFe.ConvertTxt
                 detInfo.Prod.nRECOPI = this.readValue(ele, TpcnResources.nRECOPI);
                 detInfo.Prod.nFCI = this.readValue(ele, TpcnResources.nFCI);
                 detInfo.Prod.CEST = this.readInt32(ele, TpcnResources.CEST);
-                if (nfe.infNFe.Versao >= 4)
+                if(nfe.infNFe.Versao >= 4)
                 {
-                    switch (this.readValue(ele, TpcnResources.indEscala))
+                    switch(this.readValue(ele, TpcnResources.indEscala))
                     {
                         case "S":
                             detInfo.Prod.indEscala = TpcnIndicadorEscala.ieSomaTotalNFe;
@@ -746,7 +747,7 @@ namespace NFe.ConvertTxt
 
             #region -->prod->arma
 
-            foreach (XmlNode nodedetArma in ((XmlElement)nodedet).GetElementsByTagName("arma"))
+            foreach(XmlNode nodedetArma in ((XmlElement)nodedet).GetElementsByTagName("arma"))
             {
                 Arma armaInfo = new Arma();
 
@@ -761,11 +762,11 @@ namespace NFe.ConvertTxt
 
             #region --prod->comb
 
-            foreach (XmlNode nodedetComb in ((XmlElement)nodedet).GetElementsByTagName("comb"))
+            foreach(XmlNode nodedetComb in ((XmlElement)nodedet).GetElementsByTagName("comb"))
             {
                 detInfo.Prod.comb.cProdANP = this.readInt32(nodedetComb, TpcnResources.cProdANP);
                 detInfo.Prod.comb.CODIF = this.readValue(nodedetComb, TpcnResources.CODIF);
-                if (nfe.infNFe.Versao < 4)
+                if(nfe.infNFe.Versao < 4)
                     detInfo.Prod.comb.pMixGN = this.readDouble(nodedetComb, TpcnResources.pMixGN);
                 else
                 {
@@ -777,13 +778,13 @@ namespace NFe.ConvertTxt
                 }
                 detInfo.Prod.comb.qTemp = this.readDouble(nodedetComb, TpcnResources.qTemp);
                 detInfo.Prod.comb.UFCons = this.readValue(nodedetComb, TpcnResources.UFCons);
-                foreach (XmlNode nodedetCombCIDE in ((XmlElement)nodedetComb).GetElementsByTagName("CIDE"))
+                foreach(XmlNode nodedetCombCIDE in ((XmlElement)nodedetComb).GetElementsByTagName("CIDE"))
                 {
                     detInfo.Prod.comb.CIDE.qBCprod = this.readDouble(nodedetCombCIDE, TpcnResources.qBCProd);
                     detInfo.Prod.comb.CIDE.vAliqProd = this.readDouble(nodedetCombCIDE, TpcnResources.vAliqProd);
                     detInfo.Prod.comb.CIDE.vCIDE = this.readDouble(nodedetCombCIDE, TpcnResources.vCIDE);
                 }
-                foreach (XmlNode nodedetCombEncerrante in ((XmlElement)nodedetComb).GetElementsByTagName("encerrante"))
+                foreach(XmlNode nodedetCombEncerrante in ((XmlElement)nodedetComb).GetElementsByTagName("encerrante"))
                 {
                     detInfo.Prod.comb.encerrante.nBico = this.readInt32(nodedetCombEncerrante, TpcnResources.nBico);
                     detInfo.Prod.comb.encerrante.nBomba = this.readInt32(nodedetCombEncerrante, TpcnResources.nBomba);
@@ -796,10 +797,10 @@ namespace NFe.ConvertTxt
 
             #region --prod->med
 
-            foreach (XmlNode nodedetmed in ((XmlElement)nodedet).GetElementsByTagName("med"))
+            foreach(XmlNode nodedetmed in ((XmlElement)nodedet).GetElementsByTagName("med"))
             {
                 Med medInfo = new Med();
-                if (nfe.infNFe.Versao < 4)
+                if(nfe.infNFe.Versao < 4)
                 {
                     medInfo.dFab = this.readDate(nodedetmed, TpcnResources.dFab);
                     medInfo.dVal = this.readDate(nodedetmed, TpcnResources.dVal);
@@ -818,7 +819,7 @@ namespace NFe.ConvertTxt
 
             #region --prod->rastro
 
-            foreach (XmlNode nodedetrastro in ((XmlElement)nodedet).GetElementsByTagName("rastro"))
+            foreach(XmlNode nodedetrastro in ((XmlElement)nodedet).GetElementsByTagName("rastro"))
             {
                 Rastro rastroInfo = new Rastro();
                 rastroInfo.dFab = this.readDate(nodedetrastro, TpcnResources.dFab);
@@ -832,7 +833,7 @@ namespace NFe.ConvertTxt
 
             #region --prod->veicProd
 
-            foreach (XmlNode nodedetveic in ((XmlElement)nodedet).GetElementsByTagName("veicProd"))
+            foreach(XmlNode nodedetveic in ((XmlElement)nodedet).GetElementsByTagName("veicProd"))
             {
                 detInfo.Prod.veicProd.anoFab = this.readInt32(nodedetveic, TpcnResources.anoFab);
                 detInfo.Prod.veicProd.anoMod = this.readInt32(nodedetveic, TpcnResources.anoMod);
@@ -863,7 +864,7 @@ namespace NFe.ConvertTxt
 
             #region --pod->DI
 
-            foreach (XmlNode nodedetDI in ((XmlElement)nodedet).GetElementsByTagName("DI"))
+            foreach(XmlNode nodedetDI in ((XmlElement)nodedet).GetElementsByTagName("DI"))
             {
                 DI diInfo = new DI();
                 diInfo.cExportador = this.readValue(nodedetDI, TpcnResources.cExportador);
@@ -879,7 +880,7 @@ namespace NFe.ConvertTxt
                 diInfo.CNPJ = this.readValue(nodedetDI, TpcnResources.CNPJ);
                 diInfo.UFTerceiro = this.readValue(nodedetDI, TpcnResources.UFTerceiro);
 
-                foreach (XmlNode nodedetDIadi in ((XmlElement)nodedetDI).GetElementsByTagName("adi"))
+                foreach(XmlNode nodedetDIadi in ((XmlElement)nodedetDI).GetElementsByTagName("adi"))
                 {
                     Adi adiInfo = new Adi();
 
@@ -897,10 +898,10 @@ namespace NFe.ConvertTxt
 
             #region -- prod->detExport
 
-            foreach (XmlNode nodedetExport in ((XmlElement)nodedet).GetElementsByTagName("detExport"))
+            foreach(XmlNode nodedetExport in ((XmlElement)nodedet).GetElementsByTagName("detExport"))
             {
                 detInfo.Prod.detExport.Add(new detExport { nDraw = this.readValue(nodedetExport, TpcnResources.nDraw) });
-                foreach (XmlNode nodedetExportInd in ((XmlElement)nodedetExport).GetElementsByTagName("exportInd"))
+                foreach(XmlNode nodedetExportInd in ((XmlElement)nodedetExport).GetElementsByTagName("exportInd"))
                 {
                     detInfo.Prod.detExport[detInfo.Prod.detExport.Count - 1].exportInd.nRE =
                         this.readValue(nodedetExportInd, TpcnResources.nRE);
@@ -914,25 +915,25 @@ namespace NFe.ConvertTxt
 
             #region -- prod->impostoDevol
 
-            foreach (XmlNode nodedetimpostoDevol in ((XmlElement)nodedet).GetElementsByTagName("impostoDevol"))
+            foreach(XmlNode nodedetimpostoDevol in ((XmlElement)nodedet).GetElementsByTagName("impostoDevol"))
             {
                 detInfo.impostoDevol.pDevol = this.readDouble(nodedetimpostoDevol, TpcnResources.pDevol);
-                foreach (XmlNode nodedetimpostoDevolInd in ((XmlElement)nodedetimpostoDevol).GetElementsByTagName("IPI"))
+                foreach(XmlNode nodedetimpostoDevolInd in ((XmlElement)nodedetimpostoDevol).GetElementsByTagName("IPI"))
                 {
                     detInfo.impostoDevol.vIPIDevol = this.readDouble(nodedetimpostoDevolInd, TpcnResources.vIPIDevol);
                 }
             }
             #endregion -- prod->impostoDevol
 
-            foreach (XmlNode nodedetImposto in ((XmlElement)nodedet).GetElementsByTagName("imposto"))
+            foreach(XmlNode nodedetImposto in ((XmlElement)nodedet).GetElementsByTagName("imposto"))
             {
                 detInfo.Imposto.vTotTrib = this.readDouble(((XmlElement)nodedetImposto), TpcnResources.vTotTrib);
 
                 #region -->Imposto->ICMS
 
-                foreach (XmlNode nodedetImpostoICMS in ((XmlElement)nodedetImposto).GetElementsByTagName(TpcnResources.ICMS.ToString()))
+                foreach(XmlNode nodedetImpostoICMS in ((XmlElement)nodedetImposto).GetElementsByTagName(TpcnResources.ICMS.ToString()))
                 {
-                    if (nodedetImpostoICMS.ChildNodes.Count > 0)
+                    if(nodedetImpostoICMS.ChildNodes.Count > 0)
                     {
                         XmlNode nodedetImpostoICMS_ = nodedetImpostoICMS.ChildNodes[0];
 
@@ -978,21 +979,21 @@ namespace NFe.ConvertTxt
                         detInfo.Imposto.ICMS.pRedBCEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.pRedBCEfet);
                         detInfo.Imposto.ICMS.pICMSEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.pICMSEfet);
                         detInfo.Imposto.ICMS.vICMSEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSEfet);
-						detInfo.Imposto.ICMS.vICMSSubstituto = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSSubstituto);
+                        detInfo.Imposto.ICMS.vICMSSubstituto = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSSubstituto);
                     }
                 }
                 #endregion -->Imposto->ICMS
 
                 // Inicializa CST como sendo Não tributada e conforme o TIPO entrada ou saida
                 // Caso a Tag não seja informada sera gravada com sendo não tributada
-                if (nfe.ide.tpNF == TpcnTipoNFe.tnEntrada)
+                if(nfe.ide.tpNF == TpcnTipoNFe.tnEntrada)
                     detInfo.Imposto.IPI.CST = "53";
                 else
                     detInfo.Imposto.IPI.CST = "03";
 
                 #region --Imposto->IPI
 
-                foreach (XmlNode nodedetImpostoIPI in ((XmlElement)nodedetImposto).GetElementsByTagName("IPI"))
+                foreach(XmlNode nodedetImpostoIPI in ((XmlElement)nodedetImposto).GetElementsByTagName("IPI"))
                 {
                     detInfo.Imposto.IPI.cEnq = this.readValue(nodedetImpostoIPI, TpcnResources.cEnq);
                     detInfo.Imposto.IPI.clEnq = this.readValue(nodedetImpostoIPI, TpcnResources.clEnq);
@@ -1000,7 +1001,7 @@ namespace NFe.ConvertTxt
                     detInfo.Imposto.IPI.cSelo = this.readValue(nodedetImpostoIPI, TpcnResources.cSelo);
                     detInfo.Imposto.IPI.qSelo = this.readInt32(nodedetImpostoIPI, TpcnResources.qSelo);
 
-                    foreach (XmlNode nodedetImpostoIPITrib in ((XmlElement)nodedetImpostoIPI).GetElementsByTagName("IPITrib"))
+                    foreach(XmlNode nodedetImpostoIPITrib in ((XmlElement)nodedetImpostoIPI).GetElementsByTagName("IPITrib"))
                     {
                         detInfo.Imposto.IPI.CST = this.readValue(nodedetImpostoIPITrib, TpcnResources.CST);
                         detInfo.Imposto.IPI.pIPI = this.readDouble(nodedetImpostoIPITrib, TpcnResources.pIPI);
@@ -1010,7 +1011,7 @@ namespace NFe.ConvertTxt
                         detInfo.Imposto.IPI.vIPI = this.readDouble(nodedetImpostoIPITrib, TpcnResources.vIPI);
                         detInfo.Imposto.IPI.vUnid = this.readDouble(nodedetImpostoIPITrib, TpcnResources.vUnid);
                     }
-                    foreach (XmlNode nodedetImpostoIPInt in ((XmlElement)nodedetImpostoIPI).GetElementsByTagName("IPINT"))
+                    foreach(XmlNode nodedetImpostoIPInt in ((XmlElement)nodedetImpostoIPI).GetElementsByTagName("IPINT"))
                     {
                         detInfo.Imposto.IPI.CST = this.readValue(nodedetImpostoIPInt, TpcnResources.CST);
                     }
@@ -1019,7 +1020,7 @@ namespace NFe.ConvertTxt
 
                 #region --Imposto->II
 
-                foreach (XmlNode nodedetImpostoII in ((XmlElement)nodedetImposto).GetElementsByTagName("II"))
+                foreach(XmlNode nodedetImpostoII in ((XmlElement)nodedetImposto).GetElementsByTagName("II"))
                 {
                     detInfo.Imposto.II.vBC = this.readDouble(nodedetImpostoII, TpcnResources.vBC);
                     detInfo.Imposto.II.vDespAdu = this.readDouble(nodedetImpostoII, TpcnResources.vDespAdu);
@@ -1030,7 +1031,7 @@ namespace NFe.ConvertTxt
 
                 #region --Imposto->PIS
 
-                foreach (XmlNode nodedetImpostoPIS in ((XmlElement)nodedetImposto).GetElementsByTagName("PIS"))
+                foreach(XmlNode nodedetImpostoPIS in ((XmlElement)nodedetImposto).GetElementsByTagName("PIS"))
                 {
                     detInfo.Imposto.PIS.CST = this.readValue(nodedetImpostoPIS, TpcnResources.CST);
                     detInfo.Imposto.PIS.vBC = this.readDouble(nodedetImpostoPIS, TpcnResources.vBC);
@@ -1043,7 +1044,7 @@ namespace NFe.ConvertTxt
 
                 #region --Imposto->PISST
 
-                foreach (XmlNode nodedetImpostoPISst in ((XmlElement)nodedetImposto).GetElementsByTagName("PISST"))
+                foreach(XmlNode nodedetImpostoPISst in ((XmlElement)nodedetImposto).GetElementsByTagName("PISST"))
                 {
                     detInfo.Imposto.PISST.vBC = this.readDouble(nodedetImpostoPISst, TpcnResources.vBC);
                     detInfo.Imposto.PISST.pPis = this.readDouble(nodedetImpostoPISst, TpcnResources.pPIS);
@@ -1055,7 +1056,7 @@ namespace NFe.ConvertTxt
 
                 #region --Imposto->COFINS
 
-                foreach (XmlNode nodedetImpostoCOFINS in ((XmlElement)nodedetImposto).GetElementsByTagName("COFINS"))
+                foreach(XmlNode nodedetImpostoCOFINS in ((XmlElement)nodedetImposto).GetElementsByTagName("COFINS"))
                 {
                     detInfo.Imposto.COFINS.CST = this.readValue(nodedetImpostoCOFINS, TpcnResources.CST);
                     detInfo.Imposto.COFINS.vBC = this.readDouble(nodedetImpostoCOFINS, TpcnResources.vBC);
@@ -1068,7 +1069,7 @@ namespace NFe.ConvertTxt
 
                 #region --Imposto->COFINSST
 
-                foreach (XmlNode nodedetImpostoCOFINSst in ((XmlElement)nodedetImposto).GetElementsByTagName("COFINSST"))
+                foreach(XmlNode nodedetImpostoCOFINSst in ((XmlElement)nodedetImposto).GetElementsByTagName("COFINSST"))
                 {
                     detInfo.Imposto.COFINSST.vBC = this.readDouble(nodedetImpostoCOFINSst, TpcnResources.vBC);
                     detInfo.Imposto.COFINSST.pCOFINS = this.readDouble(nodedetImpostoCOFINSst, TpcnResources.pCOFINS);
@@ -1080,9 +1081,9 @@ namespace NFe.ConvertTxt
 
                 #region --Imposto->ICMSUFDest
 
-                foreach (XmlNode nodedetImpostoICMS_ICMSUFDest in ((XmlElement)nodedetImposto).GetElementsByTagName(TpcnResources.ICMSUFDest.ToString()))
+                foreach(XmlNode nodedetImpostoICMS_ICMSUFDest in ((XmlElement)nodedetImposto).GetElementsByTagName(TpcnResources.ICMSUFDest.ToString()))
                 {
-                    if (nodedetImpostoICMS_ICMSUFDest.ChildNodes.Count > 0)
+                    if(nodedetImpostoICMS_ICMSUFDest.ChildNodes.Count > 0)
                     {
                         XmlNode nodedetImpostoICMS__ICMSUFDest = nodedetImpostoICMS_ICMSUFDest.ChildNodes[0];
 
@@ -1099,7 +1100,7 @@ namespace NFe.ConvertTxt
 
                 #region --Imposto->ISSQN
 
-                foreach (XmlNode nodedetImpostoISSQN in ((XmlElement)nodedetImposto).GetElementsByTagName("ISSQN"))
+                foreach(XmlNode nodedetImpostoISSQN in ((XmlElement)nodedetImposto).GetElementsByTagName("ISSQN"))
                 {
                     detInfo.Imposto.ISSQN.vBC = this.readDouble(nodedetImpostoISSQN, TpcnResources.vBC);
                     detInfo.Imposto.ISSQN.vAliq = this.readDouble(nodedetImpostoISSQN, TpcnResources.vAliq);
@@ -1143,12 +1144,12 @@ namespace NFe.ConvertTxt
             nfe.dest.IE = this.readValue(el, TpcnResources.IE);
             nfe.dest.ISUF = this.readValue(el, TpcnResources.ISUF);
             nfe.dest.xNome = this.readValue(el, TpcnResources.xNome);
-            if ((double)nfe.infNFe.Versao >= 3.10)
+            if((double)nfe.infNFe.Versao >= 3.10)
             {
                 nfe.dest.IM = this.readValue(el, TpcnResources.IM);
                 nfe.dest.indIEDest = (TpcnindIEDest)Convert.ToInt32("0" + this.readValue(el, TpcnResources.indIEDest));
             }
-            foreach (XmlNode nodeEnder in ((XmlElement)el).GetElementsByTagName("enderDest"))
+            foreach(XmlNode nodeEnder in ((XmlElement)el).GetElementsByTagName("enderDest"))
             {
                 XmlElement ele = nodeEnder as XmlElement;
 
@@ -1182,7 +1183,7 @@ namespace NFe.ConvertTxt
             nfe.emit.xFant = this.readValue(el, TpcnResources.xFant);
             nfe.emit.xNome = this.readValue(el, TpcnResources.xNome);
 
-            foreach (XmlNode nodeEnder in ((XmlElement)el).GetElementsByTagName("enderEmit"))
+            foreach(XmlNode nodeEnder in ((XmlElement)el).GetElementsByTagName("enderEmit"))
             {
                 XmlElement ele = nodeEnder as XmlElement;
 
@@ -1215,7 +1216,7 @@ namespace NFe.ConvertTxt
             nfe.ide.dSaiEnt = this.readDate(nodeinfNFe, TpcnResources.dSaiEnt);
             nfe.ide.finNFe = (TpcnFinalidadeNFe)this.readInt32(nodeinfNFe, TpcnResources.finNFe);
             nfe.ide.hSaiEnt = this.readDate(nodeinfNFe, TpcnResources.hSaiEnt);
-            if (nfe.infNFe.Versao >= 3 && nfe.infNFe.Versao < 4)
+            if(nfe.infNFe.Versao >= 3 && nfe.infNFe.Versao < 4)
                 nfe.ide.indPag = (TpcnIndicadorPagamento)this.readInt32(nodeinfNFe, TpcnResources.indPag);
             nfe.ide.mod = (TpcnMod)this.readInt32(nodeinfNFe, TpcnResources.mod);
             nfe.ide.nNF = this.readInt32(nodeinfNFe, TpcnResources.nNF);
@@ -1228,23 +1229,20 @@ namespace NFe.ConvertTxt
             nfe.ide.tpNF = (TpcnTipoNFe)this.readInt32(nodeinfNFe, TpcnResources.tpNF);
             nfe.ide.verProc = this.readValue(nodeinfNFe, TpcnResources.verProc);
             nfe.ide.xJust = this.readValue(nodeinfNFe, TpcnResources.xJust);
+            nfe.ide.dhEmi = (string)this.readValue(nodeinfNFe, TpcnResources.dhEmi);
+            nfe.ide.dhSaiEnt = (string)this.readValue(nodeinfNFe, TpcnResources.dhSaiEnt);
+            nfe.ide.idDest = (TpcnDestinoOperacao)this.readInt32(nodeinfNFe, TpcnResources.idDest);
+            nfe.ide.indFinal = (TpcnConsumidorFinal)this.readInt32(nodeinfNFe, TpcnResources.indFinal);
+            nfe.ide.indPres = (TpcnPresencaComprador)this.readInt32(nodeinfNFe, TpcnResources.indPres);
+            nfe.ide.indIntermed = (TpcnIntermediario)this.readInt32(nodeinfNFe, TpcnResources.indIntermed);
 
-            if (nfe.infNFe.Versao >= 3)
+            foreach(XmlNode nodeNFref in nodeinfNFe.ChildNodes)
             {
-                nfe.ide.dhEmi = (string)this.readValue(nodeinfNFe, TpcnResources.dhEmi);
-                nfe.ide.dhSaiEnt = (string)this.readValue(nodeinfNFe, TpcnResources.dhSaiEnt);
-                nfe.ide.idDest = (TpcnDestinoOperacao)this.readInt32(nodeinfNFe, TpcnResources.idDest);
-                nfe.ide.indFinal = (TpcnConsumidorFinal)this.readInt32(nodeinfNFe, TpcnResources.indFinal);
-                nfe.ide.indPres = (TpcnPresencaComprador)this.readInt32(nodeinfNFe, TpcnResources.indPres);
-            }
-
-            foreach (XmlNode nodeNFref in nodeinfNFe.ChildNodes)
-            {
-                if (nodeNFref.LocalName.Equals("NFref"))
+                if(nodeNFref.LocalName.Equals("NFref"))
                 {
-                    foreach (XmlNode nodeNFrefItem in nodeNFref.ChildNodes)
+                    foreach(XmlNode nodeNFrefItem in nodeNFref.ChildNodes)
                     {
-                        switch (nodeNFrefItem.LocalName)
+                        switch(nodeNFrefItem.LocalName)
                         {
                             case "refCTe":
                                 nfe.ide.NFref.Add(new NFref("", nodeNFrefItem.InnerText));

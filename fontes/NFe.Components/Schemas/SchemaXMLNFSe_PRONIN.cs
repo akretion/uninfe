@@ -202,6 +202,26 @@ namespace NFSe.Components
             });
             #endregion XML de lote RPS - Viamão-RS
 
+            #region Substituir Nfse
+
+            SchemaXML.InfSchemas.Add("NFSE-PRONIN-4323002-SubstituirNfseEnvio", new InfSchema()
+            {
+                Tag = "SubstituirNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
+                Descricao = "XML de Substituição de NFSe",
+                TagAssinatura0 = "Pedido",
+                TagAtributoId0 = "InfPedidoCancelamento",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagLoteAssinatura = "SubstituirNfseEnvio",
+                TagLoteAtributoId = "SubstituicaoNfse",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+
+            #endregion Substituir Nfse
+
+
             #region XML de lote RPS - Bastos-SP
 
             SchemaXML.InfSchemas.Add("NFSE-PRONIN-3505807-EnviarLoteRpsEnvio", new InfSchema()
@@ -435,7 +455,23 @@ namespace NFSe.Components
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
             });
             #endregion XML de lote RPS - Ijuí - RS
-         
+
+            #region XML de lote RPS - São Pedro - SP
+
+            SchemaXML.InfSchemas.Add("NFSE-PRONIN-3550407-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion XML de lote RPS - Ijuí - RS
+
         }
     }
 }

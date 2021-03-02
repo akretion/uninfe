@@ -40,18 +40,18 @@
       <TagLoteAssinatura></TagLoteAssinatura>
       <TagLoteAtributoID></TagLoteAtributoID>
     </Inutilizacao>
-    <ConsultaCadastro versao="2.00">
-      <Descricao>Consulta cadastro do contribuinte</Descricao>
-      <WebEnderecoHomologacao></WebEnderecoHomologacao>
-      <WebEnderecoProducao></WebEnderecoProducao>
-      <WebActionHomologacao></WebActionHomologacao>
-      <WebActionProducao></WebActionProducao>
-      <SchemaArquivo>consCad_v{0}.xsd</SchemaArquivo>
-      <TagAssinatura></TagAssinatura>
-      <TagAtributoID></TagAtributoID>
-      <TagLoteAssinatura></TagLoteAssinatura>
-      <TagLoteAtributoID></TagLoteAtributoID>
-    </ConsultaCadastro>
+	  <ConsultaCadastro versao="2.00">
+		  <Descricao>Consulta cadastro do contribuinte</Descricao>
+		  <WebEnderecoHomologacao>https://nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx</WebEnderecoHomologacao>
+		  <WebEnderecoProducao>https://nfe.fazenda.sp.gov.br/ws/cadconsultacadastro4.asmx</WebEnderecoProducao>
+		  <WebActionHomologacao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4</WebActionHomologacao>
+		  <WebActionProducao>http://www.portalfiscal.inf.br/nfe/wsdl/CadConsultaCadastro4</WebActionProducao>
+		  <SchemaArquivo>consCad_v{0}.xsd</SchemaArquivo>
+		  <TagAssinatura></TagAssinatura>
+		  <TagAtributoID></TagAtributoID>
+		  <TagLoteAssinatura></TagLoteAssinatura>
+		  <TagLoteAtributoID></TagLoteAtributoID>
+	  </ConsultaCadastro>
     <RecepcaoEvento versao="3.00">
       <Descricao>Recepcao de eventos</Descricao>
       <WebEnderecoHomologacao>https://homologacao.nfe.fazenda.sp.gov.br/cteweb/services/cteRecepcaoEvento.asmx</WebEnderecoHomologacao>
@@ -85,6 +85,11 @@
           <ID>610110</ID>
           <SchemaArquivo>eventoCTe_v{0}.xsd</SchemaArquivo>
           <SchemaArquivoEspecifico>evPrestDesacordo_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+        <Tipo>
+          <ID>110113</ID>
+          <SchemaArquivo>eventoCTe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>evEPECCTe_v{0}.xsd</SchemaArquivoEspecifico>
         </Tipo>
       </SchemasEspecificos>
       <TagAssinatura>eventoCTe</TagAssinatura>

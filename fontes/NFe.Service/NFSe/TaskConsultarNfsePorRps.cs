@@ -16,6 +16,7 @@ using NFe.Settings;
 using NFSe.Components;
 using System;
 using System.IO;
+using NFe.Components.Elotech;
 #if _fw46
 using System.ServiceModel;
 using static NFe.Components.Security.SOAPSecurity;
@@ -51,6 +52,10 @@ namespace NFe.Service.NFSe
                 object pedLoteRps = null;
                 if (IsUtilizaCompilacaoWs(padraoNFSe, Servico, ler.oDadosPedSitNfseRps.cMunicipio))
                 {
+                    if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].CertificadoPIN))
+                    {
+                        new Unimake.Business.DFe.Utility.Certificate().CarregarPINA3(Empresas.Configuracoes[emp].X509Certificado, Empresas.Configuracoes[emp].CertificadoPIN);
+                    }
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ler.oDadosPedSitNfseRps.cMunicipio, ler.oDadosPedSitNfseRps.tpAmb, ler.oDadosPedSitNfseRps.tpEmis, padraoNFSe, ler.oDadosPedSitNfseRps.cMunicipio);
                     if (wsProxy != null) pedLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 }
@@ -153,7 +158,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.FINTEL:
-                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://iss.irati.pr.gov.br/Arquivos/nfseV202.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.IIBRASIL:
@@ -247,6 +252,11 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.EQUIPLANO:
                         cabecMsg = "1";
+                        break;
+
+                    case PadroesNFSe.RLZ_INFORMATICA_02:
+                        if (ler.oDadosPedSitNfseRps.cMunicipio == 5107958)
+                            cabecMsg = "<cabecalho><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.PORTALFACIL_ACTCON_202:
@@ -367,6 +377,10 @@ namespace NFe.Service.NFSe
                                 case 5211909:
                                     pedLoteRps = new Components.PJataiGO.nfseWS();
                                     break;
+
+                                case 5220603:
+                                    pedLoteRps = new Components.PSilvaniaGO.nfseWS();
+                                    break;
                             }
                         }
                         else
@@ -397,7 +411,8 @@ namespace NFe.Service.NFSe
 							ler.oDadosPedSitNfseRps.cMunicipio == 3501301 ||
 							ler.oDadosPedSitNfseRps.cMunicipio == 4300109 ||
                             ler.oDadosPedSitNfseRps.cMunicipio == 4124053 ||
-                            ler.oDadosPedSitNfseRps.cMunicipio == 4101408)
+                            ler.oDadosPedSitNfseRps.cMunicipio == 4101408 ||
+                            ler.oDadosPedSitNfseRps.cMunicipio == 3550407)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -534,6 +549,18 @@ namespace NFe.Service.NFSe
                         {
                             cabecMsg = "<cabecalho versao=\"3\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>3</versaoDados></cabecalho>";
                         }
+                        break;
+
+                    case PadroesNFSe.ELOTECH:
+                        Elotech elotech = new Elotech((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            ler.oDadosPedSitNfseRps.cMunicipio,
+                            ConfiguracaoApp.ProxyUsuario,
+                            ConfiguracaoApp.ProxySenha,
+                            ConfiguracaoApp.ProxyServidor,
+                            Empresas.Configuracoes[emp].X509Certificado);
+
+                        elotech.ConsultarNfsePorRps(NomeArquivoXML);
                         break;
                 }
 

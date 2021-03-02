@@ -465,6 +465,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Properties\DataSources\NFe.Components.Municipio.datasource" />
     <None Include="Resources\_0013_Printer.png" />
   </ItemGroup>

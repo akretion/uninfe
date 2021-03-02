@@ -1,0 +1,594 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101
+  commentId: T:Unimake.Business.DFe.Xml.NFe.ICMSSN101
+  id: ICMSSN101
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN101.CSOSN
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN101.Orig
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSN
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSNField
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSN
+  - Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSNField
+  langs:
+  - csharp
+  - vb
+  name: ICMSSN101
+  nameWithType: ICMSSN101
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN101
+  type: Class
+  source:
+    id: ICMSSN101
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 2778
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class ICMSSN101
+    content.vb: >-
+      <Serializable>
+
+      Public Class ICMSSN101
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101.Orig
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN101.Orig
+  id: Orig
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN101
+  langs:
+  - csharp
+  - vb
+  name: Orig
+  nameWithType: ICMSSN101.Orig
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN101.Orig
+  type: Property
+  source:
+    id: Orig
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 2784
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public OrigemMercadoria Orig { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.OrigemMercadoria
+    content.vb: Public Property Orig As OrigemMercadoria
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN101.Orig*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101.CSOSN
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN101.CSOSN
+  id: CSOSN
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN101
+  langs:
+  - csharp
+  - vb
+  name: CSOSN
+  nameWithType: ICMSSN101.CSOSN
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN101.CSOSN
+  type: Property
+  source:
+    id: CSOSN
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 2787
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CSOSN { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CSOSN As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN101.CSOSN*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSN
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSN
+  id: PCredSN
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN101
+  langs:
+  - csharp
+  - vb
+  name: PCredSN
+  nameWithType: ICMSSN101.PCredSN
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSN
+  type: Property
+  source:
+    id: PCredSN
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 2804
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double PCredSN { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PCredSN As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSN*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSNField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSNField
+  id: PCredSNField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN101
+  langs:
+  - csharp
+  - vb
+  name: PCredSNField
+  nameWithType: ICMSSN101.PCredSNField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSNField
+  type: Property
+  source:
+    id: PCredSNField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 2807
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string PCredSNField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PCredSNField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSNField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSN
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSN
+  id: VCredICMSSN
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN101
+  langs:
+  - csharp
+  - vb
+  name: VCredICMSSN
+  nameWithType: ICMSSN101.VCredICMSSN
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSN
+  type: Property
+  source:
+    id: VCredICMSSN
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 2814
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VCredICMSSN { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VCredICMSSN As Double
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSN*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSNField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSNField
+  id: VCredICMSSNField
+  parent: Unimake.Business.DFe.Xml.NFe.ICMSSN101
+  langs:
+  - csharp
+  - vb
+  name: VCredICMSSNField
+  nameWithType: ICMSSN101.VCredICMSSNField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSNField
+  type: Property
+  source:
+    id: VCredICMSSNField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 2817
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VCredICMSSNField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VCredICMSSNField As String
+  overload: Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSNField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101.Orig*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN101.Orig
+  name: Orig
+  nameWithType: ICMSSN101.Orig
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN101.Orig
+- uid: Unimake.Business.DFe.Servicos.OrigemMercadoria
+  commentId: T:Unimake.Business.DFe.Servicos.OrigemMercadoria
+  parent: Unimake.Business.DFe.Servicos
+  name: OrigemMercadoria
+  nameWithType: OrigemMercadoria
+  fullName: Unimake.Business.DFe.Servicos.OrigemMercadoria
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101.CSOSN*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN101.CSOSN
+  name: CSOSN
+  nameWithType: ICMSSN101.CSOSN
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN101.CSOSN
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSN*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSN
+  name: PCredSN
+  nameWithType: ICMSSN101.PCredSN
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSN
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSNField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSNField
+  name: PCredSNField
+  nameWithType: ICMSSN101.PCredSNField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN101.PCredSNField
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSN*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSN
+  name: VCredICMSSN
+  nameWithType: ICMSSN101.VCredICMSSN
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSN
+- uid: Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSNField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSNField
+  name: VCredICMSSNField
+  nameWithType: ICMSSN101.VCredICMSSNField
+  fullName: Unimake.Business.DFe.Xml.NFe.ICMSSN101.VCredICMSSNField

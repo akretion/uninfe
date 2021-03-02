@@ -1,0 +1,939 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Transporta
+  id: Transporta
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.Transporta.CNPJ
+  - Unimake.Business.DFe.Xml.NFe.Transporta.CPF
+  - Unimake.Business.DFe.Xml.NFe.Transporta.IE
+  - Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCNPJ
+  - Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCPF
+  - Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeIE
+  - Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeUF
+  - Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXEnder
+  - Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXMun
+  - Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXNome
+  - Unimake.Business.DFe.Xml.NFe.Transporta.UF
+  - Unimake.Business.DFe.Xml.NFe.Transporta.XEnder
+  - Unimake.Business.DFe.Xml.NFe.Transporta.XMun
+  - Unimake.Business.DFe.Xml.NFe.Transporta.XNome
+  langs:
+  - csharp
+  - vb
+  name: Transporta
+  nameWithType: Transporta
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta
+  type: Class
+  source:
+    id: Transporta
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5214
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class Transporta
+    content.vb: >-
+      <Serializable>
+
+      Public Class Transporta
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.CNPJ
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Transporta.CNPJ
+  id: CNPJ
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: CNPJ
+  nameWithType: Transporta.CNPJ
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.CNPJ
+  type: Property
+  source:
+    id: CNPJ
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5218
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CNPJ { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CNPJ As String
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.CNPJ*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.CPF
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Transporta.CPF
+  id: CPF
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: CPF
+  nameWithType: Transporta.CPF
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.CPF
+  type: Property
+  source:
+    id: CPF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5221
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CPF { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CPF As String
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.CPF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.XNome
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Transporta.XNome
+  id: XNome
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: XNome
+  nameWithType: Transporta.XNome
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.XNome
+  type: Property
+  source:
+    id: XNome
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5224
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string XNome { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XNome As String
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.XNome*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.IE
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Transporta.IE
+  id: IE
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: IE
+  nameWithType: Transporta.IE
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.IE
+  type: Property
+  source:
+    id: IE
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5227
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string IE { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property IE As String
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.IE*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.XEnder
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Transporta.XEnder
+  id: XEnder
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: XEnder
+  nameWithType: Transporta.XEnder
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.XEnder
+  type: Property
+  source:
+    id: XEnder
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5230
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string XEnder { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XEnder As String
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.XEnder*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.XMun
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Transporta.XMun
+  id: XMun
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: XMun
+  nameWithType: Transporta.XMun
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.XMun
+  type: Property
+  source:
+    id: XMun
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5233
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string XMun { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XMun As String
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.XMun*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.UF
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Transporta.UF
+  id: UF
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: UF
+  nameWithType: Transporta.UF
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.UF
+  type: Property
+  source:
+    id: UF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5240
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public UFBrasil? UF { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{Unimake.Business.DFe.Servicos.UFBrasil}
+    content.vb: Public Property UF As UFBrasil?
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.UF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCNPJ
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCNPJ
+  id: ShouldSerializeCNPJ
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeCNPJ()
+  nameWithType: Transporta.ShouldSerializeCNPJ()
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCNPJ()
+  type: Method
+  source:
+    id: ShouldSerializeCNPJ
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5246
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeCNPJ()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeCNPJ As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCNPJ*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCPF
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCPF
+  id: ShouldSerializeCPF
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeCPF()
+  nameWithType: Transporta.ShouldSerializeCPF()
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCPF()
+  type: Method
+  source:
+    id: ShouldSerializeCPF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5248
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeCPF()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeCPF As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCPF*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXNome
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXNome
+  id: ShouldSerializeXNome
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeXNome()
+  nameWithType: Transporta.ShouldSerializeXNome()
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXNome()
+  type: Method
+  source:
+    id: ShouldSerializeXNome
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5250
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeXNome()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeXNome As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXNome*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeIE
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeIE
+  id: ShouldSerializeIE
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeIE()
+  nameWithType: Transporta.ShouldSerializeIE()
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeIE()
+  type: Method
+  source:
+    id: ShouldSerializeIE
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5252
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeIE()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeIE As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeIE*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXEnder
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXEnder
+  id: ShouldSerializeXEnder
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeXEnder()
+  nameWithType: Transporta.ShouldSerializeXEnder()
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXEnder()
+  type: Method
+  source:
+    id: ShouldSerializeXEnder
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5254
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeXEnder()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeXEnder As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXEnder*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXMun
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXMun
+  id: ShouldSerializeXMun
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeXMun()
+  nameWithType: Transporta.ShouldSerializeXMun()
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXMun()
+  type: Method
+  source:
+    id: ShouldSerializeXMun
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5256
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeXMun()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeXMun As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXMun*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeUF
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeUF
+  id: ShouldSerializeUF
+  parent: Unimake.Business.DFe.Xml.NFe.Transporta
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeUF()
+  nameWithType: Transporta.ShouldSerializeUF()
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeUF()
+  type: Method
+  source:
+    id: ShouldSerializeUF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 5258
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeUF()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeUF As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeUF*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.CNPJ*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.CNPJ
+  name: CNPJ
+  nameWithType: Transporta.CNPJ
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.CNPJ
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.CPF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.CPF
+  name: CPF
+  nameWithType: Transporta.CPF
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.CPF
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.XNome*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.XNome
+  name: XNome
+  nameWithType: Transporta.XNome
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.XNome
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.IE*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.IE
+  name: IE
+  nameWithType: Transporta.IE
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.IE
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.XEnder*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.XEnder
+  name: XEnder
+  nameWithType: Transporta.XEnder
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.XEnder
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.XMun*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.XMun
+  name: XMun
+  nameWithType: Transporta.XMun
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.XMun
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.UF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.UF
+  name: UF
+  nameWithType: Transporta.UF
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.UF
+- uid: System.Nullable{Unimake.Business.DFe.Servicos.UFBrasil}
+  commentId: T:System.Nullable{Unimake.Business.DFe.Servicos.UFBrasil}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<UFBrasil>
+  nameWithType: Nullable<UFBrasil>
+  fullName: System.Nullable<Unimake.Business.DFe.Servicos.UFBrasil>
+  nameWithType.vb: Nullable(Of UFBrasil)
+  fullName.vb: System.Nullable(Of Unimake.Business.DFe.Servicos.UFBrasil)
+  name.vb: Nullable(Of UFBrasil)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Servicos.UFBrasil
+    name: UFBrasil
+    nameWithType: UFBrasil
+    fullName: Unimake.Business.DFe.Servicos.UFBrasil
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Servicos.UFBrasil
+    name: UFBrasil
+    nameWithType: UFBrasil
+    fullName: Unimake.Business.DFe.Servicos.UFBrasil
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCNPJ*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCNPJ
+  name: ShouldSerializeCNPJ
+  nameWithType: Transporta.ShouldSerializeCNPJ
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCNPJ
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCPF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCPF
+  name: ShouldSerializeCPF
+  nameWithType: Transporta.ShouldSerializeCPF
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeCPF
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXNome*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXNome
+  name: ShouldSerializeXNome
+  nameWithType: Transporta.ShouldSerializeXNome
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXNome
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeIE*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeIE
+  name: ShouldSerializeIE
+  nameWithType: Transporta.ShouldSerializeIE
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeIE
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXEnder*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXEnder
+  name: ShouldSerializeXEnder
+  nameWithType: Transporta.ShouldSerializeXEnder
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXEnder
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXMun*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXMun
+  name: ShouldSerializeXMun
+  nameWithType: Transporta.ShouldSerializeXMun
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeXMun
+- uid: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeUF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeUF
+  name: ShouldSerializeUF
+  nameWithType: Transporta.ShouldSerializeUF
+  fullName: Unimake.Business.DFe.Xml.NFe.Transporta.ShouldSerializeUF

@@ -2,6 +2,7 @@
 
 using System;
 using System.Reflection;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -56,6 +57,13 @@ namespace Unimake.Business.DFe.Xml.NFe
             xmlElementProtNFe.SetAttribute("xmlns", attribute.Namespace);
 
             return xmlDocument;
+        }
+
+        public NfeProc LoadFromFile(string filename)
+        {
+            var doc = new XmlDocument();
+            doc.LoadXml(System.IO.File.ReadAllText(filename, Encoding.UTF8));
+            return Utility.XMLUtility.Deserializar<NfeProc>(doc);
         }
     }
 }

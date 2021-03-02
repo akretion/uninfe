@@ -114,7 +114,8 @@ namespace NFe.Certificado
 
             if((Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 4125506 ||
                 Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 4303103 ||
-                Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 4104808) && 
+                Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 4104808 ||
+                Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 3523503) && 
                 tagAssinatura.Equals(tagAtributoId))
             {
                 AssinarJSP(conteudoXML, tagAssinatura, tagAtributoId, x509Cert, empresa, algorithmType, comURI);

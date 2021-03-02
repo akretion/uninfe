@@ -221,6 +221,11 @@
             Versão do SOAP
             </summary>
         </member>
+        <member name="P:Unimake.Business.DFe.WSSoap.Proxy">
+            <summary>
+            Dados do servidor de proxy para conexão
+            </summary>
+        </member>
         <member name="T:Unimake.Business.DFe.Security.ClsX509Certificate2Extension">
             <summary>
             Classe para passar o Pin Code por baixo do código 
@@ -547,6 +552,27 @@
             IDToken do CSC (Código de segurança do contribuinte). Utilizado para criar o QRCode da NFCe
             </summary>
         </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.HasProxy">
+            <summary>
+            Tem servidor de proxy?
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.ProxyAutoDetect">
+            <summary>
+            True = Detectar o servidor de proxy automaticamente
+            False = Utiliza os dados de Proxy Default
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.ProxyUser">
+            <summary>
+            Usuário para conexão do servidor de proxy
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.ProxyPassword">
+            <summary>
+            Senha do usuário para conexão do servidor de proxy
+            </summary>
+        </member>
         <member name="T:Unimake.Business.DFe.Servicos.SchemaEspecifico">
             <summary>
             Arquivos de schema específicos. Um mesmo serviço mais com vários arquivos de schema para validação, varia de acordo com uma determinada informação de tag, exemplo: CTe tem o Modal, Evento tem o tipo de evento, MDFe tem o modal, etc...
@@ -570,6 +596,11 @@
         <member name="T:Unimake.Business.DFe.Servicos.CTeOS.Autorizacao">
             <summary>
             Envio do XML de CTeOS para webservice
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.CTeOS.Autorizacao.CTeOS">
+            <summary>
+            Objeto do XML do CTe-OS
             </summary>
         </member>
         <member name="M:Unimake.Business.DFe.Servicos.CTeOS.Autorizacao.DefinirConfiguracao">
@@ -6382,6 +6413,11 @@
             Substituir alguns valores do da configuração do SoapString (Configuracao.WebSoapString)
             </summary>
         </member>
+        <member name="M:Unimake.Business.DFe.Servicos.ServicoBase.CarregarPINA3">
+            <summary>
+            Forçar carregar o PIN do certificado A3 em casos de XML que não tem assinatura
+            </summary>
+        </member>
         <member name="P:Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXML">
             <summary>
             Conteúdo do XML, pode ou não estar assinado. Esta propriedade é utilizada em tempo de processamento.
@@ -6474,6 +6510,18 @@
             <param name="pasta">Pasta onde deve ser gravado o XML no HD</param>
             <param name="nomeArquivo">Nome do arquivo a ser gravado no HD</param>
             <param name="conteudoXML">String contendo o conteúdo do XML a ser gravado no HD</param>
+        </member>
+        <member name="T:Unimake.Business.DFe.Utility.Certificate">
+            <summary>
+            Utilitários para trabalhar com certificado digital
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.Certificate.CarregarPINA3(System.Security.Cryptography.X509Certificates.X509Certificate2,System.String)">
+            <summary>
+            Forçar carregar o PIN do certificado A3 em casos de XML que não tem assinatura
+            </summary>
+            <param name="a3PIN">Código PIN do certificado A3</param>
+            <param name="certificado">Objeto do certificado digital A3 que será utilizado</param>
         </member>
         <member name="T:Unimake.Business.DFe.Utility.Compress">
             <summary>
@@ -6568,6 +6616,27 @@
             <param name="toUpper">Resultado todo em maiúsculo?</param>
             <returns>Conteúdo convertido para SH1HashData</returns>
         </member>
+        <member name="T:Unimake.Business.DFe.Utility.Proxy">
+            <summary>
+            Definições para conexão com servidor de proxy
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.Proxy.DefinirServidor(System.Boolean,System.String,System.String)">
+            <summary>
+            Definir servidor de Proxy
+            </summary>
+            <param name="usuario">usuário de conexão do proxy</param>
+            <param name="senha">senha do usuário</param>
+            <param name="detectarAutomaticamente">Detectar proxy automaticamente?</param>
+            <example>
+            //Detectar os dados de conexão do proxy automaticamente
+            DefinirProxy(true);
+            
+            //Passar os dados do proxy para conexão manualmente
+            DefinirProxy(false, "user", "pass");
+            </example>
+            <returns></returns>
+        </member>
         <member name="T:Unimake.Business.DFe.Utility.XMLUtility">
             <summary>
             Utilitários diversos para trabalhar com XML
@@ -6635,6 +6704,20 @@
             <param name="xml">XML a ser analisado</param>
             <returns>Retorna o tipo do documento eletrônico</returns>
         </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.DetectEventoNFeType(System.Xml.XmlDocument)">
+            <summary>
+            Detectar qual o tipo de evento do dodocumento fiscal eletrônico do XML
+            </summary>
+            <param name="xml">XML a ser analisado</param>
+            <returns>Retorna o tipo do evento do documento eletrônico</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.DetectEventoNFeType(System.String)">
+            <summary>
+            Detectar qual o tipo de evento do documento fiscal eletrônico do XML
+            </summary>
+            <param name="xml">XML a ser analisado</param>
+            <returns>Retorna o tipo do evento do documento eletrônico</returns>
+        </member>
         <member name="M:Unimake.Business.DFe.Utility.XMLUtility.GerarCodigoNumerico(System.Int32)">
             <summary>
             Gera um número randômico para ser utilizado no Codigo Numérico da NFe, NFCe, CTe, MDFe, etc...
@@ -6656,6 +6739,21 @@
             <param name="xml">Conteúdo do XML para busca da chave</param>
             <param name="typeDFe">Tipo do DFe</param>
             <returns>Chave do DFe (Documento Fiscal Eletrônico = NFe, NFCe, CTe, etc...)</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.GetChaveEventoNFe(System.String)">
+            <summary>
+            Busca o número da chave do Documento Fiscal Eletrônico no XML do Documento Fiscal Eletrônico
+            </summary>
+            <param name="xml">Conteúdo do XML para busca da chave</param>
+            <returns>Chave do DFe (Documento Fiscal Eletrônico = NFe, NFCe, CTe, etc...)</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.GetChaveEventoNFe(System.String,Unimake.Business.DFe.Servicos.TipoEventoNFe)">
+            <summary>
+            Busca o número da chave do Documento Fiscal Eletrônico no XML do Documento Fiscal Eletrônico
+            </summary>
+            <param name="xml">Conteúdo do XML para busca da chave</param>
+            <param name="typeEventoDFe">Tipo do Evento DFe</param>
+            <returns>Chave do evento do DFe (Documento Fiscal Eletrônico = NFe, NFCe, CTe, etc...)</returns>
         </member>
         <member name="M:Unimake.Business.DFe.Utility.XMLUtility.Serializar``1(``0,System.Collections.Generic.List{Unimake.Business.DFe.Utility.XMLUtility.TNameSpace})">
             <summary>

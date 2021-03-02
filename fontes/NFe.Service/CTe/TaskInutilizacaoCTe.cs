@@ -1,16 +1,17 @@
-﻿using NFe.Certificado;
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.Settings;
 using System;
 using System.IO;
 using System.Xml;
+using Unimake.Business.DFe.Servicos;
+using Unimake.Business.DFe.Xml.CTe;
 
 namespace NFe.Service
 {
     /// <summary>
     /// Classe para envio de XMLs de inutilização do CTe
     /// </summary>
-    public class TaskCTeInutilizacao : TaskAbst
+    public class TaskCTeInutilizacao: TaskAbst
     {
         public TaskCTeInutilizacao(string arquivo)
         {
@@ -33,52 +34,57 @@ namespace NFe.Service
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             try
             {
                 dadosPedInut = new DadosPedInut(emp);
                 PedInut(emp);
 
-                //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, 0);
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedInut.cUF, dadosPedInut.tpAmb, dadosPedInut.tpEmis, Servico);
+                var xml = new InutCTe();
+                xml = Unimake.Business.DFe.Utility.XMLUtility.Deserializar<InutCTe>(ConteudoXML);
 
-                //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                object oInutilizacao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);//NomeClasseWS(Servico, dadosPedInut.cUF));
-                object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedInut.cUF, Servico, dadosPedInut.tpEmis));
+                var configuracao = new Configuracao
+                {
+                    TipoDFe = (dadosPedInut.mod == 67 ? TipoDFe.CTeOS : TipoDFe.CTe),
+                    TipoEmissao = (Unimake.Business.DFe.Servicos.TipoEmissao)dadosPedInut.tpEmis,
+                    CertificadoDigital = Empresas.Configuracoes[emp].X509Certificado
+                };
 
-                //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedInut.cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedInut.versao);
+                if(ConfiguracaoApp.Proxy)
+                {
+                    configuracao.HasProxy = true;
+                    configuracao.ProxyAutoDetect = ConfiguracaoApp.DetectarConfiguracaoProxyAuto;
+                    configuracao.ProxyUser = ConfiguracaoApp.ProxyUsuario;
+                    configuracao.ProxyPassword = ConfiguracaoApp.ProxySenha;
+                }
 
-                //Criar objeto da classe de assinatura digita
-                AssinaturaDigital oAD = new AssinaturaDigital();
+                if(dadosPedInut.mod == 67)
+                {
+                    var inutilizacao = new Unimake.Business.DFe.Servicos.CTeOS.Inutilizacao(xml, configuracao);
+                    inutilizacao.Executar();
 
-                //Assinar o XML
-                oAD.Assinar(ConteudoXML, emp, Convert.ToInt32(dadosPedInut.cUF));
+                    vStrXmlRetorno = inutilizacao.RetornoWSString;
+                }
+                else
+                {
+                    var inutilizacao = new Unimake.Business.DFe.Servicos.CTe.Inutilizacao(xml, configuracao);
+                    inutilizacao.Executar();
 
-                //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy,
-                                    oInutilizacao,
-                                    wsProxy.NomeMetodoWS[0],//NomeMetodoWS(Servico, dadosPedInut.cUF),
-                                    oCabecMsg,
-                                    this,
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML,
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).RetornoXML,
-                                    true,
-                                    securityProtocolType);
+                    vStrXmlRetorno = inutilizacao.RetornoWSString;
+                }
 
-                //Ler o retorno do webservice
-                this.LerRetornoInut();
+                LerRetornoInut();
+
+                XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).RetornoXML);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
                     TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML,
-                                                    Propriedade.ExtRetorno.Inu_ERR, ex);
+                        Propriedade.ExtRetorno.Inu_ERR, ex);
                 }
                 catch
                 {
@@ -101,23 +107,23 @@ namespace NFe.Service
             dadosPedInut.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
             dadosPedInut.tpEmis = Empresas.Configuracoes[emp].tpEmis;
 
-            XmlNodeList InutNFeList = ConteudoXML.GetElementsByTagName("inutCTe");
+            var InutNFeList = ConteudoXML.GetElementsByTagName("inutCTe");
 
-            foreach (XmlNode InutNFeNode in InutNFeList)
+            foreach(XmlNode InutNFeNode in InutNFeList)
             {
-                XmlElement InutNFeElemento = (XmlElement)InutNFeNode;
+                var InutNFeElemento = (XmlElement)InutNFeNode;
 
-                XmlNodeList infInutList = InutNFeElemento.GetElementsByTagName("infInut");
+                var infInutList = InutNFeElemento.GetElementsByTagName("infInut");
                 dadosPedInut.versao = InutNFeElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
 
-                foreach (XmlNode infInutNode in infInutList)
+                foreach(XmlNode infInutNode in infInutList)
                 {
-                    XmlElement infInutElemento = (XmlElement)infInutNode;
+                    var infInutElemento = (XmlElement)infInutNode;
                     Functions.PopulateClasse(dadosPedInut, infInutElemento);
 
-                    if (infInutElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString()).Count != 0)
+                    if(infInutElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString()).Count != 0)
                     {
-                        this.dadosPedInut.tpEmis = Convert.ToInt16(infInutElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0].InnerText);
+                        dadosPedInut.tpEmis = Convert.ToInt16(infInutElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0].InnerText);
                         /// para que o validador não rejeite, excluo a tag <tpEmis>
                         ConteudoXML.DocumentElement["infInut"].RemoveChild(infInutElemento.GetElementsByTagName(TpcnResources.tpEmis.ToString())[0]);
                         /// salvo o arquivo modificado
@@ -138,28 +144,28 @@ namespace NFe.Service
         /// <date>21/04/2009</date>
         private void LerRetornoInut()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             //            vStrXmlRetorno = "<retInutCTe versao=\"2.00\" xmlns=\"http://www.portalfiscal.inf.br/cte\"><infInut><tpAmb>2</tpAmb><verAplic>SP-CTe-05-12-2013</verAplic><cStat>102</cStat><xMotivo>Inutilização de número homologado</xMotivo><cUF>35</cUF><ano>13</ano><CNPJ>11319532000102</CNPJ><mod>57</mod><serie>1</serie><nCTIni>2017</nCTIni><nCTFin>2017</nCTFin><dhRecbto>2013-12-13T17:43:06</dhRecbto><nProt>135130006325186</nProt></infInut></retInutCTe>";
 
-            XmlDocument doc = new XmlDocument();
+            var doc = new XmlDocument();
             doc.Load(Functions.StringXmlToStream(vStrXmlRetorno));
 
-            XmlNodeList retInutNFeList = doc.GetElementsByTagName("retInutCTe");
+            var retInutNFeList = doc.GetElementsByTagName("retInutCTe");
 
-            foreach (XmlNode retInutNFeNode in retInutNFeList)
+            foreach(XmlNode retInutNFeNode in retInutNFeList)
             {
-                XmlElement retInutNFeElemento = (XmlElement)retInutNFeNode;
+                var retInutNFeElemento = (XmlElement)retInutNFeNode;
 
-                XmlNodeList infInutList = retInutNFeElemento.GetElementsByTagName("infInut");
+                var infInutList = retInutNFeElemento.GetElementsByTagName("infInut");
 
-                foreach (XmlNode infInutNode in infInutList)
+                foreach(XmlNode infInutNode in infInutList)
                 {
-                    XmlElement infInutElemento = (XmlElement)infInutNode;
+                    var infInutElemento = (XmlElement)infInutNode;
 
-                    if (infInutElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText == "102") //Inutilização de Número Homologado
+                    if(infInutElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText == "102") //Inutilização de Número Homologado
                     {
-                        string strRetInutNFe = retInutNFeNode.OuterXml;
+                        var strRetInutNFe = retInutNFeNode.OuterXml;
 
                         dadosPedInut = new DadosPedInut(emp);
                         PedInut(emp);
@@ -167,13 +173,13 @@ namespace NFe.Service
                         oGerarXML.XmlDistInutCTe(ConteudoXML, strRetInutNFe, NomeArquivoXML, dadosPedInut.versao);
 
                         //Move o arquivo de solicitação do serviço para a pasta de enviados autorizados
-                        StreamWriter sw = File.CreateText(NomeArquivoXML);
+                        var sw = File.CreateText(NomeArquivoXML);
                         sw.Write(ConteudoXML.OuterXml);
                         sw.Close();
                         TFunctions.MoverArquivo(NomeArquivoXML, PastaEnviados.Autorizados, DateTime.Now);
 
                         //Move o arquivo de Distribuição para a pasta de enviados autorizados
-                        string strNomeArqProcInutNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                        var strNomeArqProcInutNFe = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
                             PastaEnviados.EmProcessamento.ToString() + "\\" +
                             Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedInu).EnvioXML) +
                             Propriedade.ExtRetorno.ProcInutCTe;

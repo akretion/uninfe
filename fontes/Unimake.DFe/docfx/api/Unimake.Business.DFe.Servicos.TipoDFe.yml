@@ -1,0 +1,477 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.TipoDFe
+  commentId: T:Unimake.Business.DFe.Servicos.TipoDFe
+  id: TipoDFe
+  parent: Unimake.Business.DFe.Servicos
+  children:
+  - Unimake.Business.DFe.Servicos.TipoDFe.CFe
+  - Unimake.Business.DFe.Servicos.TipoDFe.CTe
+  - Unimake.Business.DFe.Servicos.TipoDFe.CTeOS
+  - Unimake.Business.DFe.Servicos.TipoDFe.GNRE
+  - Unimake.Business.DFe.Servicos.TipoDFe.MDFe
+  - Unimake.Business.DFe.Servicos.TipoDFe.NFCe
+  - Unimake.Business.DFe.Servicos.TipoDFe.NFe
+  - Unimake.Business.DFe.Servicos.TipoDFe.NFSe
+  - Unimake.Business.DFe.Servicos.TipoDFe.SAT
+  langs:
+  - csharp
+  - vb
+  name: TipoDFe
+  nameWithType: TipoDFe
+  fullName: Unimake.Business.DFe.Servicos.TipoDFe
+  type: Enum
+  source:
+    id: TipoDFe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 176
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nTipos de DFe´s existentes\n"
+  example: []
+  syntax:
+    content: public enum TipoDFe
+    content.vb: Public Enum TipoDFe
+  extensionMethods:
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Unimake.Business.DFe.Servicos.TipoDFe.NFe
+  commentId: F:Unimake.Business.DFe.Servicos.TipoDFe.NFe
+  id: NFe
+  parent: Unimake.Business.DFe.Servicos.TipoDFe
+  langs:
+  - csharp
+  - vb
+  name: NFe
+  nameWithType: TipoDFe.NFe
+  fullName: Unimake.Business.DFe.Servicos.TipoDFe.NFe
+  type: Field
+  source:
+    id: NFe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 181
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nNF-e - Nota Fiscal Eletrônica\n"
+  example: []
+  syntax:
+    content: NFe = 0
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoDFe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoDFe.NFCe
+  commentId: F:Unimake.Business.DFe.Servicos.TipoDFe.NFCe
+  id: NFCe
+  parent: Unimake.Business.DFe.Servicos.TipoDFe
+  langs:
+  - csharp
+  - vb
+  name: NFCe
+  nameWithType: TipoDFe.NFCe
+  fullName: Unimake.Business.DFe.Servicos.TipoDFe.NFCe
+  type: Field
+  source:
+    id: NFCe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 185
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nNFC-e - Nota Fiscal de Venda a Consumidor Eletrônica\n"
+  example: []
+  syntax:
+    content: NFCe = 1
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoDFe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoDFe.CTe
+  commentId: F:Unimake.Business.DFe.Servicos.TipoDFe.CTe
+  id: CTe
+  parent: Unimake.Business.DFe.Servicos.TipoDFe
+  langs:
+  - csharp
+  - vb
+  name: CTe
+  nameWithType: TipoDFe.CTe
+  fullName: Unimake.Business.DFe.Servicos.TipoDFe.CTe
+  type: Field
+  source:
+    id: CTe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 189
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nCT-e - Conhecimento de Transporte Eletrônico\n"
+  example: []
+  syntax:
+    content: CTe = 2
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoDFe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoDFe.CTeOS
+  commentId: F:Unimake.Business.DFe.Servicos.TipoDFe.CTeOS
+  id: CTeOS
+  parent: Unimake.Business.DFe.Servicos.TipoDFe
+  langs:
+  - csharp
+  - vb
+  name: CTeOS
+  nameWithType: TipoDFe.CTeOS
+  fullName: Unimake.Business.DFe.Servicos.TipoDFe.CTeOS
+  type: Field
+  source:
+    id: CTeOS
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 193
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nCT-e - Conhecimento de Transporte Eletrônico para Outros Serviços\n"
+  example: []
+  syntax:
+    content: CTeOS = 3
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoDFe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoDFe.MDFe
+  commentId: F:Unimake.Business.DFe.Servicos.TipoDFe.MDFe
+  id: MDFe
+  parent: Unimake.Business.DFe.Servicos.TipoDFe
+  langs:
+  - csharp
+  - vb
+  name: MDFe
+  nameWithType: TipoDFe.MDFe
+  fullName: Unimake.Business.DFe.Servicos.TipoDFe.MDFe
+  type: Field
+  source:
+    id: MDFe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 197
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nMDF-e - Manifesto Eletrônico de Documentos Fiscais\n"
+  example: []
+  syntax:
+    content: MDFe = 4
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoDFe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoDFe.NFSe
+  commentId: F:Unimake.Business.DFe.Servicos.TipoDFe.NFSe
+  id: NFSe
+  parent: Unimake.Business.DFe.Servicos.TipoDFe
+  langs:
+  - csharp
+  - vb
+  name: NFSe
+  nameWithType: TipoDFe.NFSe
+  fullName: Unimake.Business.DFe.Servicos.TipoDFe.NFSe
+  type: Field
+  source:
+    id: NFSe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 201
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nNota Fiscal de Serviço Eletrônica\n"
+  example: []
+  syntax:
+    content: NFSe = 5
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoDFe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoDFe.SAT
+  commentId: F:Unimake.Business.DFe.Servicos.TipoDFe.SAT
+  id: SAT
+  parent: Unimake.Business.DFe.Servicos.TipoDFe
+  langs:
+  - csharp
+  - vb
+  name: SAT
+  nameWithType: TipoDFe.SAT
+  fullName: Unimake.Business.DFe.Servicos.TipoDFe.SAT
+  type: Field
+  source:
+    id: SAT
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 205
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nCFe-SAT - Sistema Autenticador e Transmissor de Cupons Fiscais Eletrônicos\n"
+  example: []
+  syntax:
+    content: SAT = 6
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoDFe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoDFe.CFe
+  commentId: F:Unimake.Business.DFe.Servicos.TipoDFe.CFe
+  id: CFe
+  parent: Unimake.Business.DFe.Servicos.TipoDFe
+  langs:
+  - csharp
+  - vb
+  name: CFe
+  nameWithType: TipoDFe.CFe
+  fullName: Unimake.Business.DFe.Servicos.TipoDFe.CFe
+  type: Field
+  source:
+    id: CFe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 209
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nCupom Fiscal Eletrônico\n"
+  example: []
+  syntax:
+    content: CFe = 7
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoDFe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoDFe.GNRE
+  commentId: F:Unimake.Business.DFe.Servicos.TipoDFe.GNRE
+  id: GNRE
+  parent: Unimake.Business.DFe.Servicos.TipoDFe
+  langs:
+  - csharp
+  - vb
+  name: GNRE
+  nameWithType: TipoDFe.GNRE
+  fullName: Unimake.Business.DFe.Servicos.TipoDFe.GNRE
+  type: Field
+  source:
+    id: GNRE
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 213
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nGNRE - Guia Nacional de Recolhimento de Tributos Estaduais\n"
+  example: []
+  syntax:
+    content: GNRE = 8
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoDFe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  name: GetAttribute<T>()
+  nameWithType: EnumsExtension.GetAttribute<T>()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>()
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)()
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)()
+  name.vb: GetAttribute(Of T)()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  name: GetAttributeDescription()
+  nameWithType: EnumsExtension.GetAttributeDescription()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  isExternal: true
+  name: GetAttribute<T>(Enum)
+  nameWithType: EnumsExtension.GetAttribute<T>(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>(System.Enum)
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)(Enum)
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)(System.Enum)
+  name.vb: GetAttribute(Of T)(Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  isExternal: true
+  name: GetAttributeDescription(Enum)
+  nameWithType: EnumsExtension.GetAttributeDescription(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+- uid: Unimake.Business.DFe.Servicos.TipoDFe
+  commentId: T:Unimake.Business.DFe.Servicos.TipoDFe
+  parent: Unimake.Business.DFe.Servicos
+  name: TipoDFe
+  nameWithType: TipoDFe
+  fullName: Unimake.Business.DFe.Servicos.TipoDFe

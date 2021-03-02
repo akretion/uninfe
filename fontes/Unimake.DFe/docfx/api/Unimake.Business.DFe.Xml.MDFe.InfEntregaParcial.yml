@@ -1,0 +1,509 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial
+  commentId: T:Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial
+  id: InfEntregaParcial
+  parent: Unimake.Business.DFe.Xml.MDFe
+  children:
+  - Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcial
+  - Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcialField
+  - Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotal
+  - Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotalField
+  langs:
+  - csharp
+  - vb
+  name: InfEntregaParcial
+  nameWithType: InfEntregaParcial
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial
+  type: Class
+  source:
+    id: InfEntregaParcial
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 1535
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class InfEntregaParcial
+    content.vb: >-
+      <Serializable>
+
+      Public Class InfEntregaParcial
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotal
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotal
+  id: QtdTotal
+  parent: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial
+  langs:
+  - csharp
+  - vb
+  name: QtdTotal
+  nameWithType: InfEntregaParcial.QtdTotal
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotal
+  type: Property
+  source:
+    id: QtdTotal
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 1539
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public double QtdTotal { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property QtdTotal As Double
+  overload: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotal*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotalField
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotalField
+  id: QtdTotalField
+  parent: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial
+  langs:
+  - csharp
+  - vb
+  name: QtdTotalField
+  nameWithType: InfEntregaParcial.QtdTotalField
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotalField
+  type: Property
+  source:
+    id: QtdTotalField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 1542
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public string QtdTotalField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property QtdTotalField As String
+  overload: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotalField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcial
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcial
+  id: QtdParcial
+  parent: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial
+  langs:
+  - csharp
+  - vb
+  name: QtdParcial
+  nameWithType: InfEntregaParcial.QtdParcial
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcial
+  type: Property
+  source:
+    id: QtdParcial
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 1549
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public double QtdParcial { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property QtdParcial As Double
+  overload: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcial*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcialField
+  commentId: P:Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcialField
+  id: QtdParcialField
+  parent: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial
+  langs:
+  - csharp
+  - vb
+  name: QtdParcialField
+  nameWithType: InfEntregaParcial.QtdParcialField
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcialField
+  type: Property
+  source:
+    id: QtdParcialField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\MDFe\EnviMDFe.cs
+    startLine: 1552
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.MDFe
+  syntax:
+    content: public string QtdParcialField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property QtdParcialField As String
+  overload: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcialField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.MDFe
+  commentId: N:Unimake.Business.DFe.Xml.MDFe
+  name: Unimake.Business.DFe.Xml.MDFe
+  nameWithType: Unimake.Business.DFe.Xml.MDFe
+  fullName: Unimake.Business.DFe.Xml.MDFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotal*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotal
+  name: QtdTotal
+  nameWithType: InfEntregaParcial.QtdTotal
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotal
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotalField*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotalField
+  name: QtdTotalField
+  nameWithType: InfEntregaParcial.QtdTotalField
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdTotalField
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcial*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcial
+  name: QtdParcial
+  nameWithType: InfEntregaParcial.QtdParcial
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcial
+- uid: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcialField*
+  commentId: Overload:Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcialField
+  name: QtdParcialField
+  nameWithType: InfEntregaParcial.QtdParcialField
+  fullName: Unimake.Business.DFe.Xml.MDFe.InfEntregaParcial.QtdParcialField

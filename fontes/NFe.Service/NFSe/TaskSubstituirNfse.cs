@@ -1,5 +1,6 @@
 ﻿using NFe.Certificado;
 using NFe.Components;
+using NFe.Components.Pronin;
 using NFe.Components.SystemPro;
 using NFe.Settings;
 using System;
@@ -119,6 +120,25 @@ namespace NFe.Service.NFSe
 
                         syspro.SubstituirNfse(NomeArquivoXML);
                         break;
+
+                    case PadroesNFSe.PRONIN:
+                        if (dadosXML.cMunicipio == 4323002)
+                        {
+                            Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                dadosXML.cMunicipio,
+                                ConfiguracaoApp.ProxyUsuario,
+                                ConfiguracaoApp.ProxySenha,
+                                ConfiguracaoApp.ProxyServidor,
+                                Empresas.Configuracoes[emp].X509Certificado);
+
+                            AssinaturaDigital assPronin = new AssinaturaDigital();
+                            assPronin.Assinar(NomeArquivoXML, emp, dadosXML.cMunicipio);
+
+                            pronin.SubstituirNfse(NomeArquivoXML);
+                        }
+                        break;
+
                 }
 
                 if(IsInvocar(padraoNFSe, Servico, Empresas.Configuracoes[emp].UnidadeFederativaCodigo))

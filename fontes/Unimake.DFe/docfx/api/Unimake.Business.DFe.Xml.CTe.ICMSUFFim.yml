@@ -1,0 +1,879 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  commentId: T:Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  id: ICMSUFFim
+  parent: Unimake.Business.DFe.Xml.CTe
+  children:
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFim
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFimField
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInter
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInterField
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFim
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFimField
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFim
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFimField
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFim
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFimField
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFim
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFimField
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIni
+  - Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIniField
+  langs:
+  - csharp
+  - vb
+  name: ICMSUFFim
+  nameWithType: ICMSUFFim
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  type: Class
+  source:
+    id: ICMSUFFim
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1723
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class ICMSUFFim
+    content.vb: >-
+      <Serializable>
+
+      Public Class ICMSUFFim
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFim
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFim
+  id: VBCUFFim
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: VBCUFFim
+  nameWithType: ICMSUFFim.VBCUFFim
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFim
+  type: Property
+  source:
+    id: VBCUFFim
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1727
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double VBCUFFim { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VBCUFFim As Double
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFim*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFimField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFimField
+  id: VBCUFFimField
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: VBCUFFimField
+  nameWithType: ICMSUFFim.VBCUFFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFimField
+  type: Property
+  source:
+    id: VBCUFFimField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1730
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string VBCUFFimField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VBCUFFimField As String
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFimField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFim
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFim
+  id: PFCPUFFim
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: PFCPUFFim
+  nameWithType: ICMSUFFim.PFCPUFFim
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFim
+  type: Property
+  source:
+    id: PFCPUFFim
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1737
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double PFCPUFFim { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PFCPUFFim As Double
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFim*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFimField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFimField
+  id: PFCPUFFimField
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: PFCPUFFimField
+  nameWithType: ICMSUFFim.PFCPUFFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFimField
+  type: Property
+  source:
+    id: PFCPUFFimField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1740
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string PFCPUFFimField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PFCPUFFimField As String
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFimField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFim
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFim
+  id: PICMSUFFim
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: PICMSUFFim
+  nameWithType: ICMSUFFim.PICMSUFFim
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFim
+  type: Property
+  source:
+    id: PICMSUFFim
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1747
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double PICMSUFFim { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PICMSUFFim As Double
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFim*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFimField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFimField
+  id: PICMSUFFimField
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: PICMSUFFimField
+  nameWithType: ICMSUFFim.PICMSUFFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFimField
+  type: Property
+  source:
+    id: PICMSUFFimField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1750
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string PICMSUFFimField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PICMSUFFimField As String
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFimField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInter
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInter
+  id: PICMSInter
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: PICMSInter
+  nameWithType: ICMSUFFim.PICMSInter
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInter
+  type: Property
+  source:
+    id: PICMSInter
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1757
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double PICMSInter { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PICMSInter As Double
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInter*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInterField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInterField
+  id: PICMSInterField
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: PICMSInterField
+  nameWithType: ICMSUFFim.PICMSInterField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInterField
+  type: Property
+  source:
+    id: PICMSInterField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1760
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string PICMSInterField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PICMSInterField As String
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInterField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFim
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFim
+  id: VFCPUFFim
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: VFCPUFFim
+  nameWithType: ICMSUFFim.VFCPUFFim
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFim
+  type: Property
+  source:
+    id: VFCPUFFim
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1767
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double VFCPUFFim { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VFCPUFFim As Double
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFim*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFimField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFimField
+  id: VFCPUFFimField
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: VFCPUFFimField
+  nameWithType: ICMSUFFim.VFCPUFFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFimField
+  type: Property
+  source:
+    id: VFCPUFFimField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1770
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string VFCPUFFimField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VFCPUFFimField As String
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFimField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFim
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFim
+  id: VICMSUFFim
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: VICMSUFFim
+  nameWithType: ICMSUFFim.VICMSUFFim
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFim
+  type: Property
+  source:
+    id: VICMSUFFim
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1777
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double VICMSUFFim { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VICMSUFFim As Double
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFim*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFimField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFimField
+  id: VICMSUFFimField
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: VICMSUFFimField
+  nameWithType: ICMSUFFim.VICMSUFFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFimField
+  type: Property
+  source:
+    id: VICMSUFFimField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1780
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string VICMSUFFimField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VICMSUFFimField As String
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFimField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIni
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIni
+  id: VICMSUFIni
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: VICMSUFIni
+  nameWithType: ICMSUFFim.VICMSUFIni
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIni
+  type: Property
+  source:
+    id: VICMSUFIni
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1787
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double VICMSUFIni { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VICMSUFIni As Double
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIni*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIniField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIniField
+  id: VICMSUFIniField
+  parent: Unimake.Business.DFe.Xml.CTe.ICMSUFFim
+  langs:
+  - csharp
+  - vb
+  name: VICMSUFIniField
+  nameWithType: ICMSUFFim.VICMSUFIniField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIniField
+  type: Property
+  source:
+    id: VICMSUFIniField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 1790
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string VICMSUFIniField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VICMSUFIniField As String
+  overload: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIniField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFim*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFim
+  name: VBCUFFim
+  nameWithType: ICMSUFFim.VBCUFFim
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFim
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFimField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFimField
+  name: VBCUFFimField
+  nameWithType: ICMSUFFim.VBCUFFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VBCUFFimField
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFim*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFim
+  name: PFCPUFFim
+  nameWithType: ICMSUFFim.PFCPUFFim
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFim
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFimField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFimField
+  name: PFCPUFFimField
+  nameWithType: ICMSUFFim.PFCPUFFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PFCPUFFimField
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFim*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFim
+  name: PICMSUFFim
+  nameWithType: ICMSUFFim.PICMSUFFim
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFim
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFimField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFimField
+  name: PICMSUFFimField
+  nameWithType: ICMSUFFim.PICMSUFFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSUFFimField
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInter*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInter
+  name: PICMSInter
+  nameWithType: ICMSUFFim.PICMSInter
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInter
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInterField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInterField
+  name: PICMSInterField
+  nameWithType: ICMSUFFim.PICMSInterField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.PICMSInterField
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFim*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFim
+  name: VFCPUFFim
+  nameWithType: ICMSUFFim.VFCPUFFim
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFim
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFimField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFimField
+  name: VFCPUFFimField
+  nameWithType: ICMSUFFim.VFCPUFFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VFCPUFFimField
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFim*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFim
+  name: VICMSUFFim
+  nameWithType: ICMSUFFim.VICMSUFFim
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFim
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFimField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFimField
+  name: VICMSUFFimField
+  nameWithType: ICMSUFFim.VICMSUFFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFFimField
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIni*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIni
+  name: VICMSUFIni
+  nameWithType: ICMSUFFim.VICMSUFIni
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIni
+- uid: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIniField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIniField
+  name: VICMSUFIniField
+  nameWithType: ICMSUFFim.VICMSUFIniField
+  fullName: Unimake.Business.DFe.Xml.CTe.ICMSUFFim.VICMSUFIniField

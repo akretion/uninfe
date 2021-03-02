@@ -1,0 +1,704 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTe.DetEventoCanc
+  commentId: T:Unimake.Business.DFe.Xml.CTe.DetEventoCanc
+  id: DetEventoCanc
+  parent: Unimake.Business.DFe.Xml.CTe
+  children:
+  - Unimake.Business.DFe.Xml.CTe.DetEventoCanc.DescEvento
+  - Unimake.Business.DFe.Xml.CTe.DetEventoCanc.NProt
+  - Unimake.Business.DFe.Xml.CTe.DetEventoCanc.WriteXml(System.Xml.XmlWriter)
+  - Unimake.Business.DFe.Xml.CTe.DetEventoCanc.XJust
+  langs:
+  - csharp
+  - vb
+  name: DetEventoCanc
+  nameWithType: DetEventoCanc
+  fullName: Unimake.Business.DFe.Xml.CTe.DetEventoCanc
+  type: Class
+  source:
+    id: DetEventoCanc
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EventoCTe.cs
+    startLine: 14
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class DetEventoCanc : EventoDetalhe, IXmlSerializable
+    content.vb: >-
+      <Serializable>
+
+      Public Class DetEventoCanc
+          Inherits EventoDetalhe
+          Implements IXmlSerializable
+  inheritance:
+  - System.Object
+  - Unimake.Business.DFe.Xml.CTe.EventoDetalhe
+  implements:
+  - System.Xml.Serialization.IXmlSerializable
+  inheritedMembers:
+  - Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetPropertyInfo(System.Type)
+  - Unimake.Business.DFe.Xml.CTe.EventoDetalhe.VersaoEvento
+  - Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetSchema
+  - Unimake.Business.DFe.Xml.CTe.EventoDetalhe.ReadXml(System.Xml.XmlReader)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.DescEvento
+  commentId: P:Unimake.Business.DFe.Xml.CTe.DetEventoCanc.DescEvento
+  id: DescEvento
+  parent: Unimake.Business.DFe.Xml.CTe.DetEventoCanc
+  langs:
+  - csharp
+  - vb
+  name: DescEvento
+  nameWithType: DetEventoCanc.DescEvento
+  fullName: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.DescEvento
+  type: Property
+  source:
+    id: DescEvento
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EventoCTe.cs
+    startLine: 20
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public override string DescEvento { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Overrides Property DescEvento As String
+  overridden: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.DescEvento
+  overload: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.DescEvento*
+  modifiers.csharp:
+  - public
+  - override
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.NProt
+  commentId: P:Unimake.Business.DFe.Xml.CTe.DetEventoCanc.NProt
+  id: NProt
+  parent: Unimake.Business.DFe.Xml.CTe.DetEventoCanc
+  langs:
+  - csharp
+  - vb
+  name: NProt
+  nameWithType: DetEventoCanc.NProt
+  fullName: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.NProt
+  type: Property
+  source:
+    id: NProt
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EventoCTe.cs
+    startLine: 23
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string NProt { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property NProt As String
+  overload: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.NProt*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.XJust
+  commentId: P:Unimake.Business.DFe.Xml.CTe.DetEventoCanc.XJust
+  id: XJust
+  parent: Unimake.Business.DFe.Xml.CTe.DetEventoCanc
+  langs:
+  - csharp
+  - vb
+  name: XJust
+  nameWithType: DetEventoCanc.XJust
+  fullName: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.XJust
+  type: Property
+  source:
+    id: XJust
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EventoCTe.cs
+    startLine: 26
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string XJust { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XJust As String
+  overload: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.XJust*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.WriteXml(System.Xml.XmlWriter)
+  commentId: M:Unimake.Business.DFe.Xml.CTe.DetEventoCanc.WriteXml(System.Xml.XmlWriter)
+  id: WriteXml(System.Xml.XmlWriter)
+  parent: Unimake.Business.DFe.Xml.CTe.DetEventoCanc
+  langs:
+  - csharp
+  - vb
+  name: WriteXml(XmlWriter)
+  nameWithType: DetEventoCanc.WriteXml(XmlWriter)
+  fullName: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.WriteXml(System.Xml.XmlWriter)
+  type: Method
+  source:
+    id: WriteXml
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EventoCTe.cs
+    startLine: 33
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public override void WriteXml(XmlWriter writer)
+    parameters:
+    - id: writer
+      type: System.Xml.XmlWriter
+    content.vb: Public Overrides Sub WriteXml(writer As XmlWriter)
+  overridden: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.WriteXml(System.Xml.XmlWriter)
+  overload: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.WriteXml*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe
+  commentId: T:Unimake.Business.DFe.Xml.CTe.EventoDetalhe
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: EventoDetalhe
+  nameWithType: EventoDetalhe
+  fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe
+- uid: System.Xml.Serialization.IXmlSerializable
+  commentId: T:System.Xml.Serialization.IXmlSerializable
+  parent: System.Xml.Serialization
+  isExternal: true
+  name: IXmlSerializable
+  nameWithType: IXmlSerializable
+  fullName: System.Xml.Serialization.IXmlSerializable
+- uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetPropertyInfo(System.Type)
+  commentId: M:Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetPropertyInfo(System.Type)
+  parent: Unimake.Business.DFe.Xml.CTe.EventoDetalhe
+  isExternal: true
+  name: GetPropertyInfo(Type)
+  nameWithType: EventoDetalhe.GetPropertyInfo(Type)
+  fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetPropertyInfo(System.Type)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetPropertyInfo(System.Type)
+    name: GetPropertyInfo
+    nameWithType: EventoDetalhe.GetPropertyInfo
+    fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetPropertyInfo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetPropertyInfo(System.Type)
+    name: GetPropertyInfo
+    nameWithType: EventoDetalhe.GetPropertyInfo
+    fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetPropertyInfo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.VersaoEvento
+  commentId: P:Unimake.Business.DFe.Xml.CTe.EventoDetalhe.VersaoEvento
+  parent: Unimake.Business.DFe.Xml.CTe.EventoDetalhe
+  name: VersaoEvento
+  nameWithType: EventoDetalhe.VersaoEvento
+  fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.VersaoEvento
+- uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetSchema
+  commentId: M:Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetSchema
+  parent: Unimake.Business.DFe.Xml.CTe.EventoDetalhe
+  name: GetSchema()
+  nameWithType: EventoDetalhe.GetSchema()
+  fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetSchema()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetSchema
+    name: GetSchema
+    nameWithType: EventoDetalhe.GetSchema
+    fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetSchema
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetSchema
+    name: GetSchema
+    nameWithType: EventoDetalhe.GetSchema
+    fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.GetSchema
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.ReadXml(System.Xml.XmlReader)
+  commentId: M:Unimake.Business.DFe.Xml.CTe.EventoDetalhe.ReadXml(System.Xml.XmlReader)
+  parent: Unimake.Business.DFe.Xml.CTe.EventoDetalhe
+  isExternal: true
+  name: ReadXml(XmlReader)
+  nameWithType: EventoDetalhe.ReadXml(XmlReader)
+  fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.ReadXml(System.Xml.XmlReader)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.ReadXml(System.Xml.XmlReader)
+    name: ReadXml
+    nameWithType: EventoDetalhe.ReadXml
+    fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.ReadXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.ReadXml(System.Xml.XmlReader)
+    name: ReadXml
+    nameWithType: EventoDetalhe.ReadXml
+    fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.ReadXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlReader
+    name: XmlReader
+    nameWithType: XmlReader
+    fullName: System.Xml.XmlReader
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Xml.Serialization
+  commentId: N:System.Xml.Serialization
+  isExternal: true
+  name: System.Xml.Serialization
+  nameWithType: System.Xml.Serialization
+  fullName: System.Xml.Serialization
+- uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.DescEvento
+  commentId: P:Unimake.Business.DFe.Xml.CTe.EventoDetalhe.DescEvento
+  parent: Unimake.Business.DFe.Xml.CTe.EventoDetalhe
+  name: DescEvento
+  nameWithType: EventoDetalhe.DescEvento
+  fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.DescEvento
+- uid: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.DescEvento*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.DetEventoCanc.DescEvento
+  name: DescEvento
+  nameWithType: DetEventoCanc.DescEvento
+  fullName: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.DescEvento
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.NProt*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.DetEventoCanc.NProt
+  name: NProt
+  nameWithType: DetEventoCanc.NProt
+  fullName: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.NProt
+- uid: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.XJust*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.DetEventoCanc.XJust
+  name: XJust
+  nameWithType: DetEventoCanc.XJust
+  fullName: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.XJust
+- uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.WriteXml(System.Xml.XmlWriter)
+  commentId: M:Unimake.Business.DFe.Xml.CTe.EventoDetalhe.WriteXml(System.Xml.XmlWriter)
+  parent: Unimake.Business.DFe.Xml.CTe.EventoDetalhe
+  isExternal: true
+  name: WriteXml(XmlWriter)
+  nameWithType: EventoDetalhe.WriteXml(XmlWriter)
+  fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.WriteXml(System.Xml.XmlWriter)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.WriteXml(System.Xml.XmlWriter)
+    name: WriteXml
+    nameWithType: EventoDetalhe.WriteXml
+    fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.WriteXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.WriteXml(System.Xml.XmlWriter)
+    name: WriteXml
+    nameWithType: EventoDetalhe.WriteXml
+    fullName: Unimake.Business.DFe.Xml.CTe.EventoDetalhe.WriteXml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlWriter
+    name: XmlWriter
+    nameWithType: XmlWriter
+    fullName: System.Xml.XmlWriter
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.WriteXml*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.DetEventoCanc.WriteXml
+  name: WriteXml
+  nameWithType: DetEventoCanc.WriteXml
+  fullName: Unimake.Business.DFe.Xml.CTe.DetEventoCanc.WriteXml
+- uid: System.Xml.XmlWriter
+  commentId: T:System.Xml.XmlWriter
+  parent: System.Xml
+  isExternal: true
+  name: XmlWriter
+  nameWithType: XmlWriter
+  fullName: System.Xml.XmlWriter
+- uid: System.Xml
+  commentId: N:System.Xml
+  isExternal: true
+  name: System.Xml
+  nameWithType: System.Xml
+  fullName: System.Xml

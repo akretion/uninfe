@@ -1,0 +1,911 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib
+  commentId: T:Unimake.Business.DFe.Xml.NFe.IPITrib
+  id: IPITrib
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.CST
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.PIPI
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.PIPIField
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.QUnid
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.QUnidField
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializePIPIField
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeQUnidField
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVBCField
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVUnidField
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.VBC
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.VBCField
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.VIPI
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.VIPIField
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.VUnid
+  - Unimake.Business.DFe.Xml.NFe.IPITrib.VUnidField
+  langs:
+  - csharp
+  - vb
+  name: IPITrib
+  nameWithType: IPITrib
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib
+  type: Class
+  source:
+    id: IPITrib
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3782
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class IPITrib
+    content.vb: >-
+      <Serializable>
+
+      Public Class IPITrib
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.CST
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPITrib.CST
+  id: CST
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: CST
+  nameWithType: IPITrib.CST
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.CST
+  type: Property
+  source:
+    id: CST
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3788
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CST { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CST As String
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.CST*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.VBC
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPITrib.VBC
+  id: VBC
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: VBC
+  nameWithType: IPITrib.VBC
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.VBC
+  type: Property
+  source:
+    id: VBC
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3806
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VBC { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VBC As Double
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.VBC*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.VBCField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPITrib.VBCField
+  id: VBCField
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: VBCField
+  nameWithType: IPITrib.VBCField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.VBCField
+  type: Property
+  source:
+    id: VBCField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3809
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VBCField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VBCField As String
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.VBCField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.PIPI
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPITrib.PIPI
+  id: PIPI
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: PIPI
+  nameWithType: IPITrib.PIPI
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.PIPI
+  type: Property
+  source:
+    id: PIPI
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3816
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double PIPI { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property PIPI As Double
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.PIPI*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.PIPIField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPITrib.PIPIField
+  id: PIPIField
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: PIPIField
+  nameWithType: IPITrib.PIPIField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.PIPIField
+  type: Property
+  source:
+    id: PIPIField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3819
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string PIPIField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property PIPIField As String
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.PIPIField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.QUnid
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPITrib.QUnid
+  id: QUnid
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: QUnid
+  nameWithType: IPITrib.QUnid
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.QUnid
+  type: Property
+  source:
+    id: QUnid
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3826
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double QUnid { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property QUnid As Double
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.QUnid*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.QUnidField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPITrib.QUnidField
+  id: QUnidField
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: QUnidField
+  nameWithType: IPITrib.QUnidField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.QUnidField
+  type: Property
+  source:
+    id: QUnidField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3829
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string QUnidField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property QUnidField As String
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.QUnidField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.VUnid
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPITrib.VUnid
+  id: VUnid
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: VUnid
+  nameWithType: IPITrib.VUnid
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.VUnid
+  type: Property
+  source:
+    id: VUnid
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3836
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VUnid { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VUnid As Double
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.VUnid*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.VUnidField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPITrib.VUnidField
+  id: VUnidField
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: VUnidField
+  nameWithType: IPITrib.VUnidField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.VUnidField
+  type: Property
+  source:
+    id: VUnidField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3839
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VUnidField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VUnidField As String
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.VUnidField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.VIPI
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPITrib.VIPI
+  id: VIPI
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: VIPI
+  nameWithType: IPITrib.VIPI
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.VIPI
+  type: Property
+  source:
+    id: VIPI
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3846
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VIPI { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VIPI As Double
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.VIPI*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.VIPIField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPITrib.VIPIField
+  id: VIPIField
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: VIPIField
+  nameWithType: IPITrib.VIPIField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.VIPIField
+  type: Property
+  source:
+    id: VIPIField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3849
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VIPIField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VIPIField As String
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.VIPIField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVBCField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVBCField
+  id: ShouldSerializeVBCField
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeVBCField()
+  nameWithType: IPITrib.ShouldSerializeVBCField()
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVBCField()
+  type: Method
+  source:
+    id: ShouldSerializeVBCField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3858
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeVBCField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeVBCField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVBCField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializePIPIField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializePIPIField
+  id: ShouldSerializePIPIField
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializePIPIField()
+  nameWithType: IPITrib.ShouldSerializePIPIField()
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializePIPIField()
+  type: Method
+  source:
+    id: ShouldSerializePIPIField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3860
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializePIPIField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializePIPIField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializePIPIField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeQUnidField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeQUnidField
+  id: ShouldSerializeQUnidField
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeQUnidField()
+  nameWithType: IPITrib.ShouldSerializeQUnidField()
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeQUnidField()
+  type: Method
+  source:
+    id: ShouldSerializeQUnidField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3862
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeQUnidField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeQUnidField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeQUnidField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVUnidField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVUnidField
+  id: ShouldSerializeVUnidField
+  parent: Unimake.Business.DFe.Xml.NFe.IPITrib
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeVUnidField()
+  nameWithType: IPITrib.ShouldSerializeVUnidField()
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVUnidField()
+  type: Method
+  source:
+    id: ShouldSerializeVUnidField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3864
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeVUnidField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeVUnidField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVUnidField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.CST*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.CST
+  name: CST
+  nameWithType: IPITrib.CST
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.CST
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.VBC*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.VBC
+  name: VBC
+  nameWithType: IPITrib.VBC
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.VBC
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.VBCField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.VBCField
+  name: VBCField
+  nameWithType: IPITrib.VBCField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.VBCField
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.PIPI*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.PIPI
+  name: PIPI
+  nameWithType: IPITrib.PIPI
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.PIPI
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.PIPIField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.PIPIField
+  name: PIPIField
+  nameWithType: IPITrib.PIPIField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.PIPIField
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.QUnid*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.QUnid
+  name: QUnid
+  nameWithType: IPITrib.QUnid
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.QUnid
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.QUnidField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.QUnidField
+  name: QUnidField
+  nameWithType: IPITrib.QUnidField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.QUnidField
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.VUnid*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.VUnid
+  name: VUnid
+  nameWithType: IPITrib.VUnid
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.VUnid
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.VUnidField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.VUnidField
+  name: VUnidField
+  nameWithType: IPITrib.VUnidField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.VUnidField
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.VIPI*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.VIPI
+  name: VIPI
+  nameWithType: IPITrib.VIPI
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.VIPI
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.VIPIField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.VIPIField
+  name: VIPIField
+  nameWithType: IPITrib.VIPIField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.VIPIField
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVBCField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVBCField
+  name: ShouldSerializeVBCField
+  nameWithType: IPITrib.ShouldSerializeVBCField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVBCField
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializePIPIField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializePIPIField
+  name: ShouldSerializePIPIField
+  nameWithType: IPITrib.ShouldSerializePIPIField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializePIPIField
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeQUnidField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeQUnidField
+  name: ShouldSerializeQUnidField
+  nameWithType: IPITrib.ShouldSerializeQUnidField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeQUnidField
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVUnidField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVUnidField
+  name: ShouldSerializeVUnidField
+  nameWithType: IPITrib.ShouldSerializeVUnidField
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib.ShouldSerializeVUnidField

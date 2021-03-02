@@ -1,0 +1,741 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf
+  commentId: T:Unimake.Business.DFe.Xml.GNRE.TConfigUf
+  id: TConfigUf
+  parent: Unimake.Business.DFe.Xml.GNRE
+  children:
+  - Unimake.Business.DFe.Xml.GNRE.TConfigUf.AddReceitas(Unimake.Business.DFe.Xml.GNRE.Receitas)
+  - Unimake.Business.DFe.Xml.GNRE.TConfigUf.Ambiente
+  - Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeReceita
+  - Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeUfFavorecida
+  - Unimake.Business.DFe.Xml.GNRE.TConfigUf.Receitas
+  - Unimake.Business.DFe.Xml.GNRE.TConfigUf.SituacaoConsulta
+  - Unimake.Business.DFe.Xml.GNRE.TConfigUf.UF
+  langs:
+  - csharp
+  - vb
+  name: TConfigUf
+  nameWithType: TConfigUf
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf
+  type: Class
+  source:
+    id: TConfigUf
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TConfigUf.cs
+    startLine: 11
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: >-
+      [ComVisible(true)]
+
+      [Serializable]
+
+      public class TConfigUf
+    content.vb: >-
+      <ComVisible(True)>
+
+      <Serializable>
+
+      Public Class TConfigUf
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.Runtime.InteropServices.ComVisibleAttribute
+    ctor: System.Runtime.InteropServices.ComVisibleAttribute.#ctor(System.Boolean)
+    arguments:
+    - type: System.Boolean
+      value: true
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.Ambiente
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.TConfigUf.Ambiente
+  id: Ambiente
+  parent: Unimake.Business.DFe.Xml.GNRE.TConfigUf
+  langs:
+  - csharp
+  - vb
+  name: Ambiente
+  nameWithType: TConfigUf.Ambiente
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.Ambiente
+  type: Property
+  source:
+    id: Ambiente
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TConfigUf.cs
+    startLine: 16
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public TipoAmbiente Ambiente { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoAmbiente
+    content.vb: Public Property Ambiente As TipoAmbiente
+  overload: Unimake.Business.DFe.Xml.GNRE.TConfigUf.Ambiente*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.UF
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.TConfigUf.UF
+  id: UF
+  parent: Unimake.Business.DFe.Xml.GNRE.TConfigUf
+  langs:
+  - csharp
+  - vb
+  name: UF
+  nameWithType: TConfigUf.UF
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.UF
+  type: Property
+  source:
+    id: UF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TConfigUf.cs
+    startLine: 19
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public UFBrasil UF { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.UFBrasil
+    content.vb: Public Property UF As UFBrasil
+  overload: Unimake.Business.DFe.Xml.GNRE.TConfigUf.UF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.SituacaoConsulta
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.TConfigUf.SituacaoConsulta
+  id: SituacaoConsulta
+  parent: Unimake.Business.DFe.Xml.GNRE.TConfigUf
+  langs:
+  - csharp
+  - vb
+  name: SituacaoConsulta
+  nameWithType: TConfigUf.SituacaoConsulta
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.SituacaoConsulta
+  type: Property
+  source:
+    id: SituacaoConsulta
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TConfigUf.cs
+    startLine: 22
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public SituacaoConsulta SituacaoConsulta { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.GNRE.SituacaoConsulta
+    content.vb: Public Property SituacaoConsulta As SituacaoConsulta
+  overload: Unimake.Business.DFe.Xml.GNRE.TConfigUf.SituacaoConsulta*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeUfFavorecida
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeUfFavorecida
+  id: ExigeUfFavorecida
+  parent: Unimake.Business.DFe.Xml.GNRE.TConfigUf
+  langs:
+  - csharp
+  - vb
+  name: ExigeUfFavorecida
+  nameWithType: TConfigUf.ExigeUfFavorecida
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeUfFavorecida
+  type: Property
+  source:
+    id: ExigeUfFavorecida
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TConfigUf.cs
+    startLine: 25
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public ExigeUfFavorecida ExigeUfFavorecida { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.GNRE.ExigeUfFavorecida
+    content.vb: Public Property ExigeUfFavorecida As ExigeUfFavorecida
+  overload: Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeUfFavorecida*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeReceita
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeReceita
+  id: ExigeReceita
+  parent: Unimake.Business.DFe.Xml.GNRE.TConfigUf
+  langs:
+  - csharp
+  - vb
+  name: ExigeReceita
+  nameWithType: TConfigUf.ExigeReceita
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeReceita
+  type: Property
+  source:
+    id: ExigeReceita
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TConfigUf.cs
+    startLine: 28
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public ExigeReceita ExigeReceita { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.GNRE.ExigeReceita
+    content.vb: Public Property ExigeReceita As ExigeReceita
+  overload: Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeReceita*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.Receitas
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.TConfigUf.Receitas
+  id: Receitas
+  parent: Unimake.Business.DFe.Xml.GNRE.TConfigUf
+  langs:
+  - csharp
+  - vb
+  name: Receitas
+  nameWithType: TConfigUf.Receitas
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.Receitas
+  type: Property
+  source:
+    id: Receitas
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TConfigUf.cs
+    startLine: 31
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public List<Receitas> Receitas { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.GNRE.Receitas}
+    content.vb: Public Property Receitas As List(Of Receitas)
+  overload: Unimake.Business.DFe.Xml.GNRE.TConfigUf.Receitas*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.AddReceitas(Unimake.Business.DFe.Xml.GNRE.Receitas)
+  commentId: M:Unimake.Business.DFe.Xml.GNRE.TConfigUf.AddReceitas(Unimake.Business.DFe.Xml.GNRE.Receitas)
+  id: AddReceitas(Unimake.Business.DFe.Xml.GNRE.Receitas)
+  parent: Unimake.Business.DFe.Xml.GNRE.TConfigUf
+  langs:
+  - csharp
+  - vb
+  name: AddReceitas(Receitas)
+  nameWithType: TConfigUf.AddReceitas(Receitas)
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.AddReceitas(Unimake.Business.DFe.Xml.GNRE.Receitas)
+  type: Method
+  source:
+    id: AddReceitas
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TConfigUf.cs
+    startLine: 36
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public void AddReceitas(Receitas receitas)
+    parameters:
+    - id: receitas
+      type: Unimake.Business.DFe.Xml.GNRE.Receitas
+    content.vb: Public Sub AddReceitas(receitas As Receitas)
+  overload: Unimake.Business.DFe.Xml.GNRE.TConfigUf.AddReceitas*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.GNRE
+  commentId: N:Unimake.Business.DFe.Xml.GNRE
+  name: Unimake.Business.DFe.Xml.GNRE
+  nameWithType: Unimake.Business.DFe.Xml.GNRE
+  fullName: Unimake.Business.DFe.Xml.GNRE
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.Ambiente*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.TConfigUf.Ambiente
+  name: Ambiente
+  nameWithType: TConfigUf.Ambiente
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.Ambiente
+- uid: Unimake.Business.DFe.Servicos.TipoAmbiente
+  commentId: T:Unimake.Business.DFe.Servicos.TipoAmbiente
+  parent: Unimake.Business.DFe.Servicos
+  name: TipoAmbiente
+  nameWithType: TipoAmbiente
+  fullName: Unimake.Business.DFe.Servicos.TipoAmbiente
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.UF*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.TConfigUf.UF
+  name: UF
+  nameWithType: TConfigUf.UF
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.UF
+- uid: Unimake.Business.DFe.Servicos.UFBrasil
+  commentId: T:Unimake.Business.DFe.Servicos.UFBrasil
+  parent: Unimake.Business.DFe.Servicos
+  name: UFBrasil
+  nameWithType: UFBrasil
+  fullName: Unimake.Business.DFe.Servicos.UFBrasil
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.SituacaoConsulta*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.TConfigUf.SituacaoConsulta
+  name: SituacaoConsulta
+  nameWithType: TConfigUf.SituacaoConsulta
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.SituacaoConsulta
+- uid: Unimake.Business.DFe.Xml.GNRE.SituacaoConsulta
+  commentId: T:Unimake.Business.DFe.Xml.GNRE.SituacaoConsulta
+  parent: Unimake.Business.DFe.Xml.GNRE
+  name: SituacaoConsulta
+  nameWithType: SituacaoConsulta
+  fullName: Unimake.Business.DFe.Xml.GNRE.SituacaoConsulta
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeUfFavorecida*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeUfFavorecida
+  name: ExigeUfFavorecida
+  nameWithType: TConfigUf.ExigeUfFavorecida
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeUfFavorecida
+- uid: Unimake.Business.DFe.Xml.GNRE.ExigeUfFavorecida
+  commentId: T:Unimake.Business.DFe.Xml.GNRE.ExigeUfFavorecida
+  parent: Unimake.Business.DFe.Xml.GNRE
+  name: ExigeUfFavorecida
+  nameWithType: ExigeUfFavorecida
+  fullName: Unimake.Business.DFe.Xml.GNRE.ExigeUfFavorecida
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeReceita*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeReceita
+  name: ExigeReceita
+  nameWithType: TConfigUf.ExigeReceita
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.ExigeReceita
+- uid: Unimake.Business.DFe.Xml.GNRE.ExigeReceita
+  commentId: T:Unimake.Business.DFe.Xml.GNRE.ExigeReceita
+  parent: Unimake.Business.DFe.Xml.GNRE
+  name: ExigeReceita
+  nameWithType: ExigeReceita
+  fullName: Unimake.Business.DFe.Xml.GNRE.ExigeReceita
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.Receitas*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.TConfigUf.Receitas
+  name: Receitas
+  nameWithType: TConfigUf.Receitas
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.Receitas
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.GNRE.Receitas}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.GNRE.Receitas}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<Receitas>
+  nameWithType: List<Receitas>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.GNRE.Receitas>
+  nameWithType.vb: List(Of Receitas)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.GNRE.Receitas)
+  name.vb: List(Of Receitas)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.GNRE.Receitas
+    name: Receitas
+    nameWithType: Receitas
+    fullName: Unimake.Business.DFe.Xml.GNRE.Receitas
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.GNRE.Receitas
+    name: Receitas
+    nameWithType: Receitas
+    fullName: Unimake.Business.DFe.Xml.GNRE.Receitas
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Unimake.Business.DFe.Xml.GNRE.TConfigUf.AddReceitas*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.TConfigUf.AddReceitas
+  name: AddReceitas
+  nameWithType: TConfigUf.AddReceitas
+  fullName: Unimake.Business.DFe.Xml.GNRE.TConfigUf.AddReceitas
+- uid: Unimake.Business.DFe.Xml.GNRE.Receitas
+  commentId: T:Unimake.Business.DFe.Xml.GNRE.Receitas
+  parent: Unimake.Business.DFe.Xml.GNRE
+  name: Receitas
+  nameWithType: Receitas
+  fullName: Unimake.Business.DFe.Xml.GNRE.Receitas

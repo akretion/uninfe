@@ -1,0 +1,780 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.IPI
+  commentId: T:Unimake.Business.DFe.Xml.NFe.IPI
+  id: IPI
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.IPI.CEnq
+  - Unimake.Business.DFe.Xml.NFe.IPI.CNPJProd
+  - Unimake.Business.DFe.Xml.NFe.IPI.CSelo
+  - Unimake.Business.DFe.Xml.NFe.IPI.IPINT
+  - Unimake.Business.DFe.Xml.NFe.IPI.IPITrib
+  - Unimake.Business.DFe.Xml.NFe.IPI.QSelo
+  - Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCNPJProd
+  - Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCSelo
+  - Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeQSelo
+  langs:
+  - csharp
+  - vb
+  name: IPI
+  nameWithType: IPI
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI
+  type: Class
+  source:
+    id: IPI
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3722
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class IPI
+    content.vb: >-
+      <Serializable>
+
+      Public Class IPI
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.CNPJProd
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPI.CNPJProd
+  id: CNPJProd
+  parent: Unimake.Business.DFe.Xml.NFe.IPI
+  langs:
+  - csharp
+  - vb
+  name: CNPJProd
+  nameWithType: IPI.CNPJProd
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.CNPJProd
+  type: Property
+  source:
+    id: CNPJProd
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3726
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CNPJProd { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CNPJProd As String
+  overload: Unimake.Business.DFe.Xml.NFe.IPI.CNPJProd*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.CSelo
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPI.CSelo
+  id: CSelo
+  parent: Unimake.Business.DFe.Xml.NFe.IPI
+  langs:
+  - csharp
+  - vb
+  name: CSelo
+  nameWithType: IPI.CSelo
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.CSelo
+  type: Property
+  source:
+    id: CSelo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3729
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CSelo { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CSelo As String
+  overload: Unimake.Business.DFe.Xml.NFe.IPI.CSelo*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.QSelo
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPI.QSelo
+  id: QSelo
+  parent: Unimake.Business.DFe.Xml.NFe.IPI
+  langs:
+  - csharp
+  - vb
+  name: QSelo
+  nameWithType: IPI.QSelo
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.QSelo
+  type: Property
+  source:
+    id: QSelo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3732
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public int? QSelo { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Int32}
+    content.vb: Public Property QSelo As Integer?
+  overload: Unimake.Business.DFe.Xml.NFe.IPI.QSelo*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.CEnq
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPI.CEnq
+  id: CEnq
+  parent: Unimake.Business.DFe.Xml.NFe.IPI
+  langs:
+  - csharp
+  - vb
+  name: CEnq
+  nameWithType: IPI.CEnq
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.CEnq
+  type: Property
+  source:
+    id: CEnq
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3735
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CEnq { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CEnq As String
+  overload: Unimake.Business.DFe.Xml.NFe.IPI.CEnq*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.IPINT
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPI.IPINT
+  id: IPINT
+  parent: Unimake.Business.DFe.Xml.NFe.IPI
+  langs:
+  - csharp
+  - vb
+  name: IPINT
+  nameWithType: IPI.IPINT
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.IPINT
+  type: Property
+  source:
+    id: IPINT
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3738
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public IPINT IPINT { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.IPINT
+    content.vb: Public Property IPINT As IPINT
+  overload: Unimake.Business.DFe.Xml.NFe.IPI.IPINT*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.IPITrib
+  commentId: P:Unimake.Business.DFe.Xml.NFe.IPI.IPITrib
+  id: IPITrib
+  parent: Unimake.Business.DFe.Xml.NFe.IPI
+  langs:
+  - csharp
+  - vb
+  name: IPITrib
+  nameWithType: IPI.IPITrib
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.IPITrib
+  type: Property
+  source:
+    id: IPITrib
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3741
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public IPITrib IPITrib { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.NFe.IPITrib
+    content.vb: Public Property IPITrib As IPITrib
+  overload: Unimake.Business.DFe.Xml.NFe.IPI.IPITrib*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCNPJProd
+  commentId: M:Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCNPJProd
+  id: ShouldSerializeCNPJProd
+  parent: Unimake.Business.DFe.Xml.NFe.IPI
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeCNPJProd()
+  nameWithType: IPI.ShouldSerializeCNPJProd()
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCNPJProd()
+  type: Method
+  source:
+    id: ShouldSerializeCNPJProd
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3746
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeCNPJProd()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeCNPJProd As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCNPJProd*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCSelo
+  commentId: M:Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCSelo
+  id: ShouldSerializeCSelo
+  parent: Unimake.Business.DFe.Xml.NFe.IPI
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeCSelo()
+  nameWithType: IPI.ShouldSerializeCSelo()
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCSelo()
+  type: Method
+  source:
+    id: ShouldSerializeCSelo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3748
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeCSelo()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeCSelo As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCSelo*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeQSelo
+  commentId: M:Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeQSelo
+  id: ShouldSerializeQSelo
+  parent: Unimake.Business.DFe.Xml.NFe.IPI
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeQSelo()
+  nameWithType: IPI.ShouldSerializeQSelo()
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeQSelo()
+  type: Method
+  source:
+    id: ShouldSerializeQSelo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3750
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeQSelo()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeQSelo As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeQSelo*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.CNPJProd*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPI.CNPJProd
+  name: CNPJProd
+  nameWithType: IPI.CNPJProd
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.CNPJProd
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.CSelo*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPI.CSelo
+  name: CSelo
+  nameWithType: IPI.CSelo
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.CSelo
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.QSelo*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPI.QSelo
+  name: QSelo
+  nameWithType: IPI.QSelo
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.QSelo
+- uid: System.Nullable{System.Int32}
+  commentId: T:System.Nullable{System.Int32}
+  parent: System
+  definition: System.Nullable`1
+  name: Nullable<Int32>
+  nameWithType: Nullable<Int32>
+  fullName: System.Nullable<System.Int32>
+  nameWithType.vb: Nullable(Of Int32)
+  fullName.vb: System.Nullable(Of System.Int32)
+  name.vb: Nullable(Of Int32)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Int32
+    name: Int32
+    nameWithType: Int32
+    fullName: System.Int32
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    nameWithType: Nullable
+    fullName: System.Nullable
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.CEnq*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPI.CEnq
+  name: CEnq
+  nameWithType: IPI.CEnq
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.CEnq
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.IPINT*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPI.IPINT
+  name: IPINT
+  nameWithType: IPI.IPINT
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.IPINT
+- uid: Unimake.Business.DFe.Xml.NFe.IPINT
+  commentId: T:Unimake.Business.DFe.Xml.NFe.IPINT
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: IPINT
+  nameWithType: IPINT
+  fullName: Unimake.Business.DFe.Xml.NFe.IPINT
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.IPITrib*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPI.IPITrib
+  name: IPITrib
+  nameWithType: IPI.IPITrib
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.IPITrib
+- uid: Unimake.Business.DFe.Xml.NFe.IPITrib
+  commentId: T:Unimake.Business.DFe.Xml.NFe.IPITrib
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: IPITrib
+  nameWithType: IPITrib
+  fullName: Unimake.Business.DFe.Xml.NFe.IPITrib
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCNPJProd*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCNPJProd
+  name: ShouldSerializeCNPJProd
+  nameWithType: IPI.ShouldSerializeCNPJProd
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCNPJProd
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCSelo*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCSelo
+  name: ShouldSerializeCSelo
+  nameWithType: IPI.ShouldSerializeCSelo
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeCSelo
+- uid: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeQSelo*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeQSelo
+  name: ShouldSerializeQSelo
+  nameWithType: IPI.ShouldSerializeQSelo
+  fullName: Unimake.Business.DFe.Xml.NFe.IPI.ShouldSerializeQSelo

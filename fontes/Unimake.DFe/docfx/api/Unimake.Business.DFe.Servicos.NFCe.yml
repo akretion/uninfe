@@ -1,0 +1,58 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.NFCe
+  commentId: N:Unimake.Business.DFe.Servicos.NFCe
+  id: Unimake.Business.DFe.Servicos.NFCe
+  children:
+  - Unimake.Business.DFe.Servicos.NFCe.Autorizacao
+  - Unimake.Business.DFe.Servicos.NFCe.ConsultaCadastro
+  - Unimake.Business.DFe.Servicos.NFCe.ConsultaProtocolo
+  - Unimake.Business.DFe.Servicos.NFCe.Inutilizacao
+  - Unimake.Business.DFe.Servicos.NFCe.RecepcaoEvento
+  - Unimake.Business.DFe.Servicos.NFCe.RetAutorizacao
+  - Unimake.Business.DFe.Servicos.NFCe.StatusServico
+  langs:
+  - csharp
+  - vb
+  name: Unimake.Business.DFe.Servicos.NFCe
+  nameWithType: Unimake.Business.DFe.Servicos.NFCe
+  fullName: Unimake.Business.DFe.Servicos.NFCe
+  type: Namespace
+  assemblies:
+  - Unimake.Business.DFe
+references:
+- uid: Unimake.Business.DFe.Servicos.NFCe.Autorizacao
+  commentId: T:Unimake.Business.DFe.Servicos.NFCe.Autorizacao
+  name: Autorizacao
+  nameWithType: Autorizacao
+  fullName: Unimake.Business.DFe.Servicos.NFCe.Autorizacao
+- uid: Unimake.Business.DFe.Servicos.NFCe.ConsultaCadastro
+  commentId: T:Unimake.Business.DFe.Servicos.NFCe.ConsultaCadastro
+  name: ConsultaCadastro
+  nameWithType: ConsultaCadastro
+  fullName: Unimake.Business.DFe.Servicos.NFCe.ConsultaCadastro
+- uid: Unimake.Business.DFe.Servicos.NFCe.ConsultaProtocolo
+  commentId: T:Unimake.Business.DFe.Servicos.NFCe.ConsultaProtocolo
+  name: ConsultaProtocolo
+  nameWithType: ConsultaProtocolo
+  fullName: Unimake.Business.DFe.Servicos.NFCe.ConsultaProtocolo
+- uid: Unimake.Business.DFe.Servicos.NFCe.Inutilizacao
+  commentId: T:Unimake.Business.DFe.Servicos.NFCe.Inutilizacao
+  name: Inutilizacao
+  nameWithType: Inutilizacao
+  fullName: Unimake.Business.DFe.Servicos.NFCe.Inutilizacao
+- uid: Unimake.Business.DFe.Servicos.NFCe.RecepcaoEvento
+  commentId: T:Unimake.Business.DFe.Servicos.NFCe.RecepcaoEvento
+  name: RecepcaoEvento
+  nameWithType: RecepcaoEvento
+  fullName: Unimake.Business.DFe.Servicos.NFCe.RecepcaoEvento
+- uid: Unimake.Business.DFe.Servicos.NFCe.RetAutorizacao
+  commentId: T:Unimake.Business.DFe.Servicos.NFCe.RetAutorizacao
+  name: RetAutorizacao
+  nameWithType: RetAutorizacao
+  fullName: Unimake.Business.DFe.Servicos.NFCe.RetAutorizacao
+- uid: Unimake.Business.DFe.Servicos.NFCe.StatusServico
+  commentId: T:Unimake.Business.DFe.Servicos.NFCe.StatusServico
+  name: StatusServico
+  nameWithType: StatusServico
+  fullName: Unimake.Business.DFe.Servicos.NFCe.StatusServico

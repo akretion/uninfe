@@ -153,10 +153,12 @@ namespace NFe.SAT.Conversao
 
                 foreach (XmlNode itensDet in detNFCe.ChildNodes)
                 {
+                    
                     switch (itensDet.Name)
                     {
                         case "prod":
                             string CEST = GetXML(itensDet.ChildNodes, "CEST");
+                            
                             List<envCFeCFeInfCFeDetProdObsFiscoDet> listObsFisco = new List<envCFeCFeInfCFeDetProdObsFiscoDet>();
                             if (!string.IsNullOrEmpty(CEST) && DadosEmpresa.VersaoLayoutSAT == "0.07")
                             {
@@ -180,10 +182,12 @@ namespace NFe.SAT.Conversao
                                 }
                             }
 
+
+
                             det.prod = new envCFeCFeInfCFeDetProd
                             {
                                 cProd = GetXML(itensDet.ChildNodes, "cProd"),
-                                cEAN = GetXML(itensDet.ChildNodes, "cEAN"),
+                                cEAN = (GetXML(itensDet.ChildNodes, "cEAN").Equals("SEM GTIN") ? "" : GetXML(itensDet.ChildNodes, "cEAN")),
                                 xProd = GetXML(itensDet.ChildNodes, "xProd"),
                                 NCM = GetXML(itensDet.ChildNodes, "NCM"),
                                 CFOP = GetXML(itensDet.ChildNodes, "CFOP"),
@@ -191,12 +195,20 @@ namespace NFe.SAT.Conversao
                                 qCom = GetXML(itensDet.ChildNodes, "qCom"),
                                 vUnCom = GetXML(itensDet.ChildNodes, "vUnCom"),
                                 vDesc = GetXML(itensDet.ChildNodes, "vDesc"),
-                                indRegra = "A",
                                 obsFiscoDet = listObsFisco,
                             };
 
                             if (!string.IsNullOrEmpty(CEST) && DadosEmpresa.VersaoLayoutSAT == "0.08")
                                 det.prod.CEST = CEST;
+
+                            if (DadosEmpresa.TipoConversao == "Arredondamento")
+                            {
+                                det.prod.indRegra = "A";         
+                            }
+                            else
+                            {
+                                det.prod.indRegra = "T";
+                            }
 
                             ValorDoItem = GetXML(itensDet.ChildNodes, "vProd");
                             break;
@@ -286,7 +298,7 @@ namespace NFe.SAT.Conversao
                         {
                             Orig = GetXML(tag.ChildNodes, "orig"),
                             CST = GetXML(tag.ChildNodes, "CST"),
-                            pICMS = GetXML(tag.ChildNodes, "pICMS"),
+                            pICMS = ConverterPercentualICMS(GetXML(tag.ChildNodes, "pICMS")),
                         };
 
                         SetProperrty(result, "Item", ICMS00);
@@ -332,7 +344,7 @@ namespace NFe.SAT.Conversao
                         {
                             CSOSN = GetXML(tag.ChildNodes, "CSOSN"),
                             Orig = GetXML(tag.ChildNodes, "orig"),
-                            pICMS = GetXML(tag.ChildNodes, "pICMS")
+                            pICMS = ConverterPercentualICMS(GetXML(tag.ChildNodes, "pICMS"))
                         };
 
                         SetProperrty(result, "Item", ICMSSN900);
@@ -346,7 +358,7 @@ namespace NFe.SAT.Conversao
                         envCFeCFeInfCFeDetImpostoPISPISAliq PISAliq = new envCFeCFeInfCFeDetImpostoPISPISAliq
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
-                            pPIS = ConverterPercentual(GetXML(tag.ChildNodes, "pPIS")),
+                            pPIS = ConverterPercentualPISCOFINS(GetXML(tag.ChildNodes, "pPIS")),
                             vBC = GetXML(tag.ChildNodes, "vBC"),
                         };
 
@@ -371,7 +383,7 @@ namespace NFe.SAT.Conversao
                     #region PISOutr
 
                     case "PISOutr":
-                        string pPis = ConverterPercentual(GetXML(tag.ChildNodes, "pPIS"));
+                        string pPis = ConverterPercentualPISCOFINS(GetXML(tag.ChildNodes, "pPIS"));
                         envCFeCFeInfCFeDetImpostoPISPISOutr PISOutr = new envCFeCFeInfCFeDetImpostoPISPISOutr
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
@@ -429,7 +441,7 @@ namespace NFe.SAT.Conversao
                         envCFeCFeInfCFeDetImpostoCOFINSCOFINSAliq COFINSAliq = new envCFeCFeInfCFeDetImpostoCOFINSCOFINSAliq
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
-                            pCOFINS = ConverterPercentual(GetXML(tag.ChildNodes, "pCOFINS")),
+                            pCOFINS = ConverterPercentualPISCOFINS(GetXML(tag.ChildNodes, "pCOFINS")),
                             vBC = GetXML(tag.ChildNodes, "vBC"),
                         };
                         SetProperrty(result, "Item", COFINSAliq);
@@ -452,7 +464,7 @@ namespace NFe.SAT.Conversao
                     #region COFINSOutr
 
                     case "COFINSOutr":
-                        string pCofins = ConverterPercentual(GetXML(tag.ChildNodes, "pCOFINS"));
+                        string pCofins = ConverterPercentualPISCOFINS(GetXML(tag.ChildNodes, "pCOFINS"));
                         envCFeCFeInfCFeDetImpostoCOFINSCOFINSOutr COFINSOutr = new envCFeCFeInfCFeDetImpostoCOFINSCOFINSOutr
                         {
                             CST = GetXML(tag.ChildNodes, "CST"),
@@ -685,16 +697,23 @@ namespace NFe.SAT.Conversao
             return result;
         }
 
-        private string ConverterPercentual(string perc)
+        private string ConverterPercentualPISCOFINS(string perc)
         {
             string retorno = perc;
             double percConv = ToDouble(perc);  
             if (percConv >= 1 || percConv.Equals(0.65))
             {
                 percConv = percConv / 100;
-                retorno = String.Format("{0:N4}", percConv ).Replace(",", ".");
+                retorno = string.Format("{0:N4}", percConv ).Replace(",", ".");
             }
             return retorno;
+        }
+
+        private string ConverterPercentualICMS(string perc)
+        {
+            double percConv = ToDouble(perc);
+
+            return string.Format("{0:N2}", percConv).Replace(",", ".");
         }
     }
 }

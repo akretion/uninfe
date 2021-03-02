@@ -1,0 +1,28 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Security.Platform.Exceptions
+  commentId: N:Unimake.Security.Platform.Exceptions
+  id: Unimake.Security.Platform.Exceptions
+  children:
+  - Unimake.Security.Platform.Exceptions.CarregarCertificadoException
+  - Unimake.Security.Platform.Exceptions.CertificadoDigitalException
+  langs:
+  - csharp
+  - vb
+  name: Unimake.Security.Platform.Exceptions
+  nameWithType: Unimake.Security.Platform.Exceptions
+  fullName: Unimake.Security.Platform.Exceptions
+  type: Namespace
+  assemblies:
+  - Unimake.Security.Platform
+references:
+- uid: Unimake.Security.Platform.Exceptions.CarregarCertificadoException
+  commentId: T:Unimake.Security.Platform.Exceptions.CarregarCertificadoException
+  name: CarregarCertificadoException
+  nameWithType: CarregarCertificadoException
+  fullName: Unimake.Security.Platform.Exceptions.CarregarCertificadoException
+- uid: Unimake.Security.Platform.Exceptions.CertificadoDigitalException
+  commentId: T:Unimake.Security.Platform.Exceptions.CertificadoDigitalException
+  name: CertificadoDigitalException
+  nameWithType: CertificadoDigitalException
+  fullName: Unimake.Security.Platform.Exceptions.CertificadoDigitalException

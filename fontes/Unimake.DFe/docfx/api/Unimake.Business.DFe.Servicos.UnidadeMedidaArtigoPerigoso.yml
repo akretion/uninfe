@@ -1,0 +1,353 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  commentId: T:Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  id: UnidadeMedidaArtigoPerigoso
+  parent: Unimake.Business.DFe.Servicos
+  children:
+  - Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.KG
+  - Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.KGG
+  - Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.Litros
+  - Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.TI
+  - Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.Unidades
+  langs:
+  - csharp
+  - vb
+  name: UnidadeMedidaArtigoPerigoso
+  nameWithType: UnidadeMedidaArtigoPerigoso
+  fullName: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  type: Enum
+  source:
+    id: UnidadeMedidaArtigoPerigoso
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4142
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nUnidade de Medida de Artigos Perigosos - CTe\n"
+  example: []
+  syntax:
+    content: public enum UnidadeMedidaArtigoPerigoso
+    content.vb: Public Enum UnidadeMedidaArtigoPerigoso
+  extensionMethods:
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.KG
+  commentId: F:Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.KG
+  id: KG
+  parent: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  langs:
+  - csharp
+  - vb
+  name: KG
+  nameWithType: UnidadeMedidaArtigoPerigoso.KG
+  fullName: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.KG
+  type: Field
+  source:
+    id: KG
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4147
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n1-KG\n"
+  example: []
+  syntax:
+    content: KG = 1
+    return:
+      type: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.KGG
+  commentId: F:Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.KGG
+  id: KGG
+  parent: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  langs:
+  - csharp
+  - vb
+  name: KGG
+  nameWithType: UnidadeMedidaArtigoPerigoso.KGG
+  fullName: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.KGG
+  type: Field
+  source:
+    id: KGG
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4153
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n2-KG G (quilograma bruto)\n"
+  example: []
+  syntax:
+    content: KGG = 2
+    return:
+      type: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.Litros
+  commentId: F:Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.Litros
+  id: Litros
+  parent: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  langs:
+  - csharp
+  - vb
+  name: Litros
+  nameWithType: UnidadeMedidaArtigoPerigoso.Litros
+  fullName: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.Litros
+  type: Field
+  source:
+    id: Litros
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4159
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n3-Litros\n"
+  example: []
+  syntax:
+    content: Litros = 3
+    return:
+      type: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.TI
+  commentId: F:Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.TI
+  id: TI
+  parent: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  langs:
+  - csharp
+  - vb
+  name: TI
+  nameWithType: UnidadeMedidaArtigoPerigoso.TI
+  fullName: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.TI
+  type: Field
+  source:
+    id: TI
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4165
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n4-TI (Índice de transporte para radioativos)\n"
+  example: []
+  syntax:
+    content: TI = 4
+    return:
+      type: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.Unidades
+  commentId: F:Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.Unidades
+  id: Unidades
+  parent: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  langs:
+  - csharp
+  - vb
+  name: Unidades
+  nameWithType: UnidadeMedidaArtigoPerigoso.Unidades
+  fullName: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso.Unidades
+  type: Field
+  source:
+    id: Unidades
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4171
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n5- Unidades (apenas para artigos perigosos medidos em unidades que não se enquadram nos itens acima. Exemplo: baterias, celulares, equipamentos, veículos, dentre outros)\n"
+  example: []
+  syntax:
+    content: Unidades = 5
+    return:
+      type: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  name: GetAttribute<T>()
+  nameWithType: EnumsExtension.GetAttribute<T>()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>()
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)()
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)()
+  name.vb: GetAttribute(Of T)()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  name: GetAttributeDescription()
+  nameWithType: EnumsExtension.GetAttributeDescription()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  isExternal: true
+  name: GetAttribute<T>(Enum)
+  nameWithType: EnumsExtension.GetAttribute<T>(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>(System.Enum)
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)(Enum)
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)(System.Enum)
+  name.vb: GetAttribute(Of T)(Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  isExternal: true
+  name: GetAttributeDescription(Enum)
+  nameWithType: EnumsExtension.GetAttributeDescription(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+- uid: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  commentId: T:Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso
+  parent: Unimake.Business.DFe.Servicos
+  name: UnidadeMedidaArtigoPerigoso
+  nameWithType: UnidadeMedidaArtigoPerigoso
+  fullName: Unimake.Business.DFe.Servicos.UnidadeMedidaArtigoPerigoso

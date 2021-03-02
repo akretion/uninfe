@@ -1,0 +1,64 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.CTeOS
+  commentId: N:Unimake.Business.DFe.Servicos.CTeOS
+  id: Unimake.Business.DFe.Servicos.CTeOS
+  children:
+  - Unimake.Business.DFe.Servicos.CTeOS.Autorizacao
+  - Unimake.Business.DFe.Servicos.CTeOS.ConsultaCadastro
+  - Unimake.Business.DFe.Servicos.CTeOS.ConsultaProtocolo
+  - Unimake.Business.DFe.Servicos.CTeOS.Inutilizacao
+  - Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento
+  - Unimake.Business.DFe.Servicos.CTeOS.ServicoBase
+  - Unimake.Business.DFe.Servicos.CTeOS.StatusServico
+  langs:
+  - csharp
+  - vb
+  name: Unimake.Business.DFe.Servicos.CTeOS
+  nameWithType: Unimake.Business.DFe.Servicos.CTeOS
+  fullName: Unimake.Business.DFe.Servicos.CTeOS
+  type: Namespace
+  assemblies:
+  - Unimake.Business.DFe
+references:
+- uid: Unimake.Business.DFe.Servicos.CTeOS.Autorizacao
+  commentId: T:Unimake.Business.DFe.Servicos.CTeOS.Autorizacao
+  name: Autorizacao
+  nameWithType: Autorizacao
+  fullName: Unimake.Business.DFe.Servicos.CTeOS.Autorizacao
+- uid: Unimake.Business.DFe.Servicos.CTeOS.ConsultaCadastro
+  commentId: T:Unimake.Business.DFe.Servicos.CTeOS.ConsultaCadastro
+  name: ConsultaCadastro
+  nameWithType: ConsultaCadastro
+  fullName: Unimake.Business.DFe.Servicos.CTeOS.ConsultaCadastro
+- uid: Unimake.Business.DFe.Servicos.CTeOS.ConsultaProtocolo
+  commentId: T:Unimake.Business.DFe.Servicos.CTeOS.ConsultaProtocolo
+  name: ConsultaProtocolo
+  nameWithType: ConsultaProtocolo
+  fullName: Unimake.Business.DFe.Servicos.CTeOS.ConsultaProtocolo
+- uid: Unimake.Business.DFe.Servicos.CTeOS.Inutilizacao
+  commentId: T:Unimake.Business.DFe.Servicos.CTeOS.Inutilizacao
+  name: Inutilizacao
+  nameWithType: Inutilizacao
+  fullName: Unimake.Business.DFe.Servicos.CTeOS.Inutilizacao
+- uid: Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento
+  commentId: T:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento
+  name: RecepcaoEvento
+  nameWithType: RecepcaoEvento
+  fullName: Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento
+- uid: Unimake.Business.DFe.Servicos.CTeOS.ServicoBase
+  commentId: T:Unimake.Business.DFe.Servicos.CTeOS.ServicoBase
+  parent: Unimake.Business.DFe.Servicos.CTeOS
+  name: ServicoBase
+  nameWithType: ServicoBase
+  fullName: Unimake.Business.DFe.Servicos.CTeOS.ServicoBase
+- uid: Unimake.Business.DFe.Servicos.CTeOS.StatusServico
+  commentId: T:Unimake.Business.DFe.Servicos.CTeOS.StatusServico
+  name: StatusServico
+  nameWithType: StatusServico
+  fullName: Unimake.Business.DFe.Servicos.CTeOS.StatusServico
+- uid: Unimake.Business.DFe.Servicos.CTeOS
+  commentId: N:Unimake.Business.DFe.Servicos.CTeOS
+  name: Unimake.Business.DFe.Servicos.CTeOS
+  nameWithType: Unimake.Business.DFe.Servicos.CTeOS
+  fullName: Unimake.Business.DFe.Servicos.CTeOS

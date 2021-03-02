@@ -1,0 +1,620 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv
+  commentId: T:Unimake.Business.DFe.Xml.CTe.FerroEnv
+  id: FerroEnv
+  parent: Unimake.Business.DFe.Xml.CTe
+  children:
+  - Unimake.Business.DFe.Xml.CTe.FerroEnv.CInt
+  - Unimake.Business.DFe.Xml.CTe.FerroEnv.CNPJ
+  - Unimake.Business.DFe.Xml.CTe.FerroEnv.EnderFerro
+  - Unimake.Business.DFe.Xml.CTe.FerroEnv.IE
+  - Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeCInt
+  - Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeIE
+  - Unimake.Business.DFe.Xml.CTe.FerroEnv.XNome
+  langs:
+  - csharp
+  - vb
+  name: FerroEnv
+  nameWithType: FerroEnv
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv
+  type: Class
+  source:
+    id: FerroEnv
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3128
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class FerroEnv
+    content.vb: >-
+      <Serializable>
+
+      Public Class FerroEnv
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.CNPJ
+  commentId: P:Unimake.Business.DFe.Xml.CTe.FerroEnv.CNPJ
+  id: CNPJ
+  parent: Unimake.Business.DFe.Xml.CTe.FerroEnv
+  langs:
+  - csharp
+  - vb
+  name: CNPJ
+  nameWithType: FerroEnv.CNPJ
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.CNPJ
+  type: Property
+  source:
+    id: CNPJ
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3132
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string CNPJ { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CNPJ As String
+  overload: Unimake.Business.DFe.Xml.CTe.FerroEnv.CNPJ*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.CInt
+  commentId: P:Unimake.Business.DFe.Xml.CTe.FerroEnv.CInt
+  id: CInt
+  parent: Unimake.Business.DFe.Xml.CTe.FerroEnv
+  langs:
+  - csharp
+  - vb
+  name: CInt
+  nameWithType: FerroEnv.CInt
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.CInt
+  type: Property
+  source:
+    id: CInt
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3135
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string CInt { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CInt As String
+  overload: Unimake.Business.DFe.Xml.CTe.FerroEnv.CInt*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.IE
+  commentId: P:Unimake.Business.DFe.Xml.CTe.FerroEnv.IE
+  id: IE
+  parent: Unimake.Business.DFe.Xml.CTe.FerroEnv
+  langs:
+  - csharp
+  - vb
+  name: IE
+  nameWithType: FerroEnv.IE
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.IE
+  type: Property
+  source:
+    id: IE
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3138
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string IE { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property IE As String
+  overload: Unimake.Business.DFe.Xml.CTe.FerroEnv.IE*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.XNome
+  commentId: P:Unimake.Business.DFe.Xml.CTe.FerroEnv.XNome
+  id: XNome
+  parent: Unimake.Business.DFe.Xml.CTe.FerroEnv
+  langs:
+  - csharp
+  - vb
+  name: XNome
+  nameWithType: FerroEnv.XNome
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.XNome
+  type: Property
+  source:
+    id: XNome
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3141
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string XNome { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XNome As String
+  overload: Unimake.Business.DFe.Xml.CTe.FerroEnv.XNome*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.EnderFerro
+  commentId: P:Unimake.Business.DFe.Xml.CTe.FerroEnv.EnderFerro
+  id: EnderFerro
+  parent: Unimake.Business.DFe.Xml.CTe.FerroEnv
+  langs:
+  - csharp
+  - vb
+  name: EnderFerro
+  nameWithType: FerroEnv.EnderFerro
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.EnderFerro
+  type: Property
+  source:
+    id: EnderFerro
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3144
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public EnderFerro EnderFerro { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTe.EnderFerro
+    content.vb: Public Property EnderFerro As EnderFerro
+  overload: Unimake.Business.DFe.Xml.CTe.FerroEnv.EnderFerro*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeCInt
+  commentId: M:Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeCInt
+  id: ShouldSerializeCInt
+  parent: Unimake.Business.DFe.Xml.CTe.FerroEnv
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeCInt()
+  nameWithType: FerroEnv.ShouldSerializeCInt()
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeCInt()
+  type: Method
+  source:
+    id: ShouldSerializeCInt
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3149
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public bool ShouldSerializeCInt()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeCInt As Boolean
+  overload: Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeCInt*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeIE
+  commentId: M:Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeIE
+  id: ShouldSerializeIE
+  parent: Unimake.Business.DFe.Xml.CTe.FerroEnv
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeIE()
+  nameWithType: FerroEnv.ShouldSerializeIE()
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeIE()
+  type: Method
+  source:
+    id: ShouldSerializeIE
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3150
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public bool ShouldSerializeIE()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeIE As Boolean
+  overload: Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeIE*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.CNPJ*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.FerroEnv.CNPJ
+  name: CNPJ
+  nameWithType: FerroEnv.CNPJ
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.CNPJ
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.CInt*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.FerroEnv.CInt
+  name: CInt
+  nameWithType: FerroEnv.CInt
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.CInt
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.IE*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.FerroEnv.IE
+  name: IE
+  nameWithType: FerroEnv.IE
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.IE
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.XNome*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.FerroEnv.XNome
+  name: XNome
+  nameWithType: FerroEnv.XNome
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.XNome
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.EnderFerro*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.FerroEnv.EnderFerro
+  name: EnderFerro
+  nameWithType: FerroEnv.EnderFerro
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.EnderFerro
+- uid: Unimake.Business.DFe.Xml.CTe.EnderFerro
+  commentId: T:Unimake.Business.DFe.Xml.CTe.EnderFerro
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: EnderFerro
+  nameWithType: EnderFerro
+  fullName: Unimake.Business.DFe.Xml.CTe.EnderFerro
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeCInt*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeCInt
+  name: ShouldSerializeCInt
+  nameWithType: FerroEnv.ShouldSerializeCInt
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeCInt
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeIE*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeIE
+  name: ShouldSerializeIE
+  nameWithType: FerroEnv.ShouldSerializeIE
+  fullName: Unimake.Business.DFe.Xml.CTe.FerroEnv.ShouldSerializeIE

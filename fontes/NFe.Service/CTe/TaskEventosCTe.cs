@@ -1,12 +1,13 @@
-﻿using NFe.Certificado;
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.Settings;
 using System;
 using System.Xml;
+using Unimake.Business.DFe.Servicos;
+using Unimake.Business.DFe.Xml.CTe;
 
 namespace NFe.Service
 {
-    public class TaskCTeEventos : TaskAbst
+    public class TaskCTeEventos: TaskAbst
     {
         public TaskCTeEventos(string arquivo)
         {
@@ -26,70 +27,39 @@ namespace NFe.Service
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             try
             {
                 dadosEnvEvento = new DadosenvEvento();
-                //Ler o XML para pegar parâmetros de envio
                 EnvEvento(emp, dadosEnvEvento);
-
                 ValidaEvento(emp, dadosEnvEvento);
 
-                //vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir tpEmis
-                int tpEmis = dadosEnvEvento.eventos[0].tpEmis;
+                var xml = new EventoCTe();
+                xml = Unimake.Business.DFe.Utility.XMLUtility.Deserializar<EventoCTe>(ConteudoXML);
 
+                //Vai pegar o ambiente da Chave da Nfe autorizada p/ corrigir tpEmis, mas se for carta de correção eletrônica, só aceita envio no ambiente normal.
+                var tpEmis = (dadosEnvEvento.eventos[0].tpEvento == ((int)ConvertTxt.tpEventos.tpEvCCe).ToString() ?
+                    (int)Components.TipoEmissao.teNormal :
+                    dadosEnvEvento.eventos[0].tpEmis);
 
-                //Pegar o estado da chave, pois na cOrgao pode vir o estado 91 - Wandrey 22/08/2012
-                int cOrgao = dadosEnvEvento.eventos[0].cOrgao;
-                int ufParaWS = cOrgao;
-                int cUF = cOrgao;
-
-                //Se for carta de correção eletrônica, só aceita envio no ambiente normal.
-                if (dadosEnvEvento.eventos[0].tpEvento == ((int)ConvertTxt.tpEventos.tpEvCCe).ToString())
+                var configuracao = new Configuracao
                 {
-                    tpEmis = (int)TipoEmissao.teNormal;
-                }
+                    TipoDFe = TipoDFe.CTe,
+                    TipoEmissao = (Unimake.Business.DFe.Servicos.TipoEmissao)tpEmis,
+                    CertificadoDigital = Empresas.Configuracoes[emp].X509Certificado
+                };
 
-                //Se o cOrgao for igual a 91 tenho que mudar a ufParaWS para que na hora de buscar o WSDL para conectar ao serviço, ele consiga encontrar. Wandrey 23/01/2013
-                if (cOrgao == 91)
-                    ufParaWS = Convert.ToInt32(dadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
+                var recepcaoEvento = new Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento(xml, configuracao);
+                recepcaoEvento.Executar();
 
-                if (dadosEnvEvento.eventos[0].tpEvento == ((int)ConvertTxt.tpEventos.tpEvEPECCTe).ToString())
-                {
-                    cUF = Convert.ToInt32(dadosEnvEvento.eventos[0].chNFe.Substring(0, 2));
-                }
+                vStrXmlRetorno = recepcaoEvento.RetornoWSString;
 
-                //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, ufParaWS, dadosEnvEvento.eventos[0].tpAmb, tpEmis, 0);
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(ufParaWS, dadosEnvEvento.eventos[0].tpAmb, tpEmis, Servico);
+                XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).RetornoXML);
 
-                object oRecepcaoEvento = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                object oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(cOrgao, Servico, tpEmis));
-
-                wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), cUF.ToString());
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosEnvEvento.versao);
-
-                //Criar objeto da classe de assinatura digital
-                AssinaturaDigital oAD = new AssinaturaDigital();
-
-                //Assinar o XML
-                oAD.Assinar(ConteudoXML, emp, cOrgao);
-
-                oInvocarObj.Invocar(wsProxy,
-                                    oRecepcaoEvento,
-                                    wsProxy.NomeMetodoWS[0],
-                                    oCabecMsg,
-                                    this,
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML,
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).RetornoXML,
-                                    true,
-                                    securityProtocolType);
-
-                //Ler o retorno
                 LerRetornoEvento(emp);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {
@@ -123,8 +93,8 @@ namespace NFe.Service
 
         protected override void EnvEvento(int emp, DadosenvEvento dadosEnvEvento)
         {
-            XmlNodeList eventoCTeList = ConteudoXML.GetElementsByTagName("eventoCTe");
-            XmlElement eventoCTeElemento = (XmlElement)eventoCTeList[0];
+            var eventoCTeList = ConteudoXML.GetElementsByTagName("eventoCTe");
+            var eventoCTeElemento = (XmlElement)eventoCTeList[0];
             dadosEnvEvento.versao = eventoCTeElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
 
             base.EnvEvento(emp, dadosEnvEvento);
@@ -136,8 +106,8 @@ namespace NFe.Service
 
         private void LerRetornoEvento(int emp)
         {
-            XmlDocument docEventoOriginal = ConteudoXML;
-            bool autorizou = false;
+            var docEventoOriginal = ConteudoXML;
+            var autorizou = false;
 
             /*
                         vStrXmlRetorno = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
@@ -158,46 +128,46 @@ namespace NFe.Service
                             "</retEventoCTe>";
             */
 
-            XmlDocument doc = new XmlDocument();
+            var doc = new XmlDocument();
             doc.Load(Functions.StringXmlToStreamUTF8(vStrXmlRetorno));
 
-            XmlNodeList retEnvRetornoList = doc.GetElementsByTagName("retEventoCTe");
+            var retEnvRetornoList = doc.GetElementsByTagName("retEventoCTe");
 
-            foreach (XmlNode retConsSitNode in retEnvRetornoList)
+            foreach(XmlNode retConsSitNode in retEnvRetornoList)
             {
-                XmlElement retConsSitElemento = (XmlElement)retConsSitNode;
+                var retConsSitElemento = (XmlElement)retConsSitNode;
 
-                string versao = retConsSitElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
+                var versao = retConsSitElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
 
-                XmlNodeList envEventosList = doc.GetElementsByTagName("infEvento");
-                for (int i = 0; i < envEventosList.Count; ++i)
+                var envEventosList = doc.GetElementsByTagName("infEvento");
+                for(var i = 0; i < envEventosList.Count; ++i)
                 {
-                    XmlElement eleRetorno = retEnvRetornoList.Item(i) as XmlElement;
+                    var eleRetorno = retEnvRetornoList.Item(i) as XmlElement;
 
-                    string cStatCons = eleRetorno.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
+                    var cStatCons = eleRetorno.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
 
-                    if (cStatCons == "134" || cStatCons == "135" || cStatCons == "136")
+                    if(cStatCons == "134" || cStatCons == "135" || cStatCons == "136")
                     {
-                        string chCTe = eleRetorno.GetElementsByTagName(TpcnResources.chCTe.ToString())[0].InnerText;
-                        Int32 nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName(TpcnResources.nSeqEvento.ToString())[0].InnerText);
-                        string tpEvento = eleRetorno.GetElementsByTagName(TpcnResources.tpEvento.ToString())[0].InnerText;
-                        string Id = TpcnResources.ID.ToString() + tpEvento + chCTe + nSeqEvento.ToString("00");
+                        var chCTe = eleRetorno.GetElementsByTagName(TpcnResources.chCTe.ToString())[0].InnerText;
+                        var nSeqEvento = Convert.ToInt32("0" + eleRetorno.GetElementsByTagName(TpcnResources.nSeqEvento.ToString())[0].InnerText);
+                        var tpEvento = eleRetorno.GetElementsByTagName(TpcnResources.tpEvento.ToString())[0].InnerText;
+                        var Id = TpcnResources.ID.ToString() + tpEvento + chCTe + nSeqEvento.ToString("00");
                         ///
                         ///procura no Xml de envio pelo Id retornado
                         ///nao sei se a Sefaz retorna na ordem em que foi enviado, então é melhor pesquisar
-                        foreach (XmlNode env in docEventoOriginal.GetElementsByTagName("infEvento"))
+                        foreach(XmlNode env in docEventoOriginal.GetElementsByTagName("infEvento"))
                         {
-                            string Idd = env.Attributes.GetNamedItem(TpcnResources.Id.ToString()).Value;
-                            if (Idd == Id)
+                            var Idd = env.Attributes.GetNamedItem(TpcnResources.Id.ToString()).Value;
+                            if(Idd == Id)
                             {
                                 autorizou = true;
 
-                                DateTime dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName(TpcnResources.dhRegEvento.ToString())[0].InnerText);
+                                var dhRegEvento = Functions.GetDateTime(eleRetorno.GetElementsByTagName(TpcnResources.dhRegEvento.ToString())[0].InnerText);
 
                                 //Gerar o arquivo XML de distribuição do evento, retornando o nome completo do arquivo gravado
                                 oGerarXML.XmlDistEventoCTe(emp, chCTe, nSeqEvento, Convert.ToInt32(tpEvento), env.ParentNode.OuterXml, eleRetorno.OuterXml, dhRegEvento, true, versao);
 
-                                switch ((ConvertTxt.tpEventos)Convert.ToInt32(tpEvento))
+                                switch((ConvertTxt.tpEventos)Convert.ToInt32(tpEvento))
                                 {
                                     //Verificar se para o evento cancelamento por substituição será necessário disparar o unidanfe
                                     case ConvertTxt.tpEventos.tpEvCancelamentoNFe:
@@ -208,7 +178,7 @@ namespace NFe.Service
                                         {
                                             TFunctions.ExecutaUniDanfe(oGerarXML.NomeArqGerado, DateTime.Today, Empresas.Configuracoes[emp]);
                                         }
-                                        catch (Exception ex)
+                                        catch(Exception ex)
                                         {
                                             Auxiliar.WriteLog("TaskCTeEventos: " + ex.Message, false);
                                         }
@@ -222,8 +192,10 @@ namespace NFe.Service
                 }
             }
 
-            if (!autorizou)
+            if(!autorizou)
+            {
                 oAux.MoveArqErro(NomeArquivoXML);
+            }
         }
 
         #endregion LerRetornoEvento

@@ -86,6 +86,10 @@ namespace NFe.Components.Fiorilli
                                 fiorilliService = new XangrilaRS.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
+                            case 1502152://Canaã dos Carajás-PA
+                                fiorilliService = new CanaaDosCarajas.h.FiorilliH(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -166,6 +170,10 @@ namespace NFe.Components.Fiorilli
 
                             case 4323804://Xangri-la-RS
                                 fiorilliService = new XangrilaRS.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
+                                break;
+
+                            case 1502152://Canaã dos Carajás-PA
+                                fiorilliService = new CanaaDosCarajas.p.FiorilliP(tpAmb, PastaRetorno, Usuario, SenhaWs, ProxyUser, ProxyPass, ProxyServer, Certificado);
                                 break;
 
                             default:

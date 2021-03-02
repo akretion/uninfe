@@ -20,6 +20,7 @@ namespace NFe.ConvertTxt
         public Total Total;
         public Transp Transp { get; private set; }
         public Cobr Cobr { get; private set; }
+        public InfIntermed InfIntermed { get; private set; }
         public InfAdic InfAdic { get; private set; }
         public Exporta exporta;
         public Compra compra;
@@ -31,6 +32,7 @@ namespace NFe.ConvertTxt
         /// NFC-e
         /// </summary>
         public List<pag> pag { get; private set; }
+        public double vTroco { get; set; }
         public qrCode qrCode { get; private set; }
 
         public NFe()
@@ -45,6 +47,7 @@ namespace NFe.ConvertTxt
             det = new List<Det>();
             Transp = new Transp();
             Cobr = new Cobr();
+            InfIntermed = new InfIntermed();
             InfAdic = new InfAdic();
             cana = new Cana();
             resptecnico = new RespTecnico();

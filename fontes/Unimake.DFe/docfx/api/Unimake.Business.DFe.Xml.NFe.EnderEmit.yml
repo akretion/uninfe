@@ -1,0 +1,922 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  commentId: T:Unimake.Business.DFe.Xml.NFe.EnderEmit
+  id: EnderEmit
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.CEP
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.CMun
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.CPais
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.Fone
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.Nro
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeCPais
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeFone
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXCpl
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXPais
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.UF
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.XBairro
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.XCpl
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.XLgr
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.XMun
+  - Unimake.Business.DFe.Xml.NFe.EnderEmit.XPais
+  langs:
+  - csharp
+  - vb
+  name: EnderEmit
+  nameWithType: EnderEmit
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  type: Class
+  source:
+    id: EnderEmit
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 441
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class EnderEmit
+    content.vb: >-
+      <Serializable>
+
+      Public Class EnderEmit
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.XLgr
+  commentId: P:Unimake.Business.DFe.Xml.NFe.EnderEmit.XLgr
+  id: XLgr
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: XLgr
+  nameWithType: EnderEmit.XLgr
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.XLgr
+  type: Property
+  source:
+    id: XLgr
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 445
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string XLgr { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XLgr As String
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.XLgr*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.Nro
+  commentId: P:Unimake.Business.DFe.Xml.NFe.EnderEmit.Nro
+  id: Nro
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: Nro
+  nameWithType: EnderEmit.Nro
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.Nro
+  type: Property
+  source:
+    id: Nro
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 448
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string Nro { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Nro As String
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.Nro*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.XCpl
+  commentId: P:Unimake.Business.DFe.Xml.NFe.EnderEmit.XCpl
+  id: XCpl
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: XCpl
+  nameWithType: EnderEmit.XCpl
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.XCpl
+  type: Property
+  source:
+    id: XCpl
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 451
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string XCpl { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XCpl As String
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.XCpl*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.XBairro
+  commentId: P:Unimake.Business.DFe.Xml.NFe.EnderEmit.XBairro
+  id: XBairro
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: XBairro
+  nameWithType: EnderEmit.XBairro
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.XBairro
+  type: Property
+  source:
+    id: XBairro
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 454
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string XBairro { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XBairro As String
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.XBairro*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.CMun
+  commentId: P:Unimake.Business.DFe.Xml.NFe.EnderEmit.CMun
+  id: CMun
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: CMun
+  nameWithType: EnderEmit.CMun
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.CMun
+  type: Property
+  source:
+    id: CMun
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 457
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public int CMun { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property CMun As Integer
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.CMun*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.XMun
+  commentId: P:Unimake.Business.DFe.Xml.NFe.EnderEmit.XMun
+  id: XMun
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: XMun
+  nameWithType: EnderEmit.XMun
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.XMun
+  type: Property
+  source:
+    id: XMun
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 460
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string XMun { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XMun As String
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.XMun*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.UF
+  commentId: P:Unimake.Business.DFe.Xml.NFe.EnderEmit.UF
+  id: UF
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: UF
+  nameWithType: EnderEmit.UF
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.UF
+  type: Property
+  source:
+    id: UF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 463
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public UFBrasil UF { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.UFBrasil
+    content.vb: Public Property UF As UFBrasil
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.UF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.CEP
+  commentId: P:Unimake.Business.DFe.Xml.NFe.EnderEmit.CEP
+  id: CEP
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: CEP
+  nameWithType: EnderEmit.CEP
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.CEP
+  type: Property
+  source:
+    id: CEP
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 466
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CEP { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CEP As String
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.CEP*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.CPais
+  commentId: P:Unimake.Business.DFe.Xml.NFe.EnderEmit.CPais
+  id: CPais
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: CPais
+  nameWithType: EnderEmit.CPais
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.CPais
+  type: Property
+  source:
+    id: CPais
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 469
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public int CPais { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property CPais As Integer
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.CPais*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.XPais
+  commentId: P:Unimake.Business.DFe.Xml.NFe.EnderEmit.XPais
+  id: XPais
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: XPais
+  nameWithType: EnderEmit.XPais
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.XPais
+  type: Property
+  source:
+    id: XPais
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 472
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string XPais { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XPais As String
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.XPais*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.Fone
+  commentId: P:Unimake.Business.DFe.Xml.NFe.EnderEmit.Fone
+  id: Fone
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: Fone
+  nameWithType: EnderEmit.Fone
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.Fone
+  type: Property
+  source:
+    id: Fone
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 475
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string Fone { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Fone As String
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.Fone*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeCPais
+  commentId: M:Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeCPais
+  id: ShouldSerializeCPais
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeCPais()
+  nameWithType: EnderEmit.ShouldSerializeCPais()
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeCPais()
+  type: Method
+  source:
+    id: ShouldSerializeCPais
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 480
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeCPais()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeCPais As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeCPais*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXPais
+  commentId: M:Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXPais
+  id: ShouldSerializeXPais
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeXPais()
+  nameWithType: EnderEmit.ShouldSerializeXPais()
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXPais()
+  type: Method
+  source:
+    id: ShouldSerializeXPais
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 482
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeXPais()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeXPais As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXPais*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXCpl
+  commentId: M:Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXCpl
+  id: ShouldSerializeXCpl
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeXCpl()
+  nameWithType: EnderEmit.ShouldSerializeXCpl()
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXCpl()
+  type: Method
+  source:
+    id: ShouldSerializeXCpl
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 484
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeXCpl()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeXCpl As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXCpl*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeFone
+  commentId: M:Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeFone
+  id: ShouldSerializeFone
+  parent: Unimake.Business.DFe.Xml.NFe.EnderEmit
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeFone()
+  nameWithType: EnderEmit.ShouldSerializeFone()
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeFone()
+  type: Method
+  source:
+    id: ShouldSerializeFone
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 486
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeFone()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeFone As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeFone*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.XLgr*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.XLgr
+  name: XLgr
+  nameWithType: EnderEmit.XLgr
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.XLgr
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.Nro*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.Nro
+  name: Nro
+  nameWithType: EnderEmit.Nro
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.Nro
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.XCpl*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.XCpl
+  name: XCpl
+  nameWithType: EnderEmit.XCpl
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.XCpl
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.XBairro*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.XBairro
+  name: XBairro
+  nameWithType: EnderEmit.XBairro
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.XBairro
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.CMun*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.CMun
+  name: CMun
+  nameWithType: EnderEmit.CMun
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.CMun
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.XMun*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.XMun
+  name: XMun
+  nameWithType: EnderEmit.XMun
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.XMun
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.UF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.UF
+  name: UF
+  nameWithType: EnderEmit.UF
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.UF
+- uid: Unimake.Business.DFe.Servicos.UFBrasil
+  commentId: T:Unimake.Business.DFe.Servicos.UFBrasil
+  parent: Unimake.Business.DFe.Servicos
+  name: UFBrasil
+  nameWithType: UFBrasil
+  fullName: Unimake.Business.DFe.Servicos.UFBrasil
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.CEP*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.CEP
+  name: CEP
+  nameWithType: EnderEmit.CEP
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.CEP
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.CPais*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.CPais
+  name: CPais
+  nameWithType: EnderEmit.CPais
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.CPais
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.XPais*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.XPais
+  name: XPais
+  nameWithType: EnderEmit.XPais
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.XPais
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.Fone*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.Fone
+  name: Fone
+  nameWithType: EnderEmit.Fone
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.Fone
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeCPais*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeCPais
+  name: ShouldSerializeCPais
+  nameWithType: EnderEmit.ShouldSerializeCPais
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeCPais
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXPais*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXPais
+  name: ShouldSerializeXPais
+  nameWithType: EnderEmit.ShouldSerializeXPais
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXPais
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXCpl*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXCpl
+  name: ShouldSerializeXCpl
+  nameWithType: EnderEmit.ShouldSerializeXCpl
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeXCpl
+- uid: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeFone*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeFone
+  name: ShouldSerializeFone
+  nameWithType: EnderEmit.ShouldSerializeFone
+  fullName: Unimake.Business.DFe.Xml.NFe.EnderEmit.ShouldSerializeFone

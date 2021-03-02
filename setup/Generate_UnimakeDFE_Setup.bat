@@ -1,7 +1,7 @@
 ECHO OFF
 CHCP 65001
 ::Variáveis
-SET filesDir=Z:\uninfe\testes\TesteDLL_Unimake.Business.DFe\bin\INTEROP_Release
+SET filesDir=Z:\uninfe\trunk\fontes\Unimake.DFe\Compilacao\INTEROP_Release\
 SET istool="C:\Program Files (x86)\Inno Script Studio\ISStudio.exe"
 
 ::Prepara
@@ -11,18 +11,28 @@ CLS
 
 @ECHO Compilando Unimake.DFe
 
-dotnet build Z:\uninfe\trunk\fontes\Unimake.DFe\Unimake.DFe.sln -property:Configuration=INTEROP_Release
+CALL Z:\uninfe\trunk\fontes\Unimake.DFe\Unimake.DFe.sln
+
 
 @ECHO Limpando diretório de release
 
 ::Apaga os arquivos desnecessários
 DEL /S %filesDir%\*.xml
 DEL /S %filesDir%\*.pdb
+DEL /S %filesDir%\*.json
 DEL /S %filesDir%\App.config
-DEL /S %filesDir%\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-DEL /S %filesDir%\TesteDLL_Unimake.Business.DFe.exe
-DEL /S %filesDir%\TesteDLL_Unimake.Business.DFe.exe.config
-DEL /S %filesDir%\Unimake.Business.DFe.dll
+
+::Apaga os arquivos desnecessários
+DEL /S %filesDir%\net462\*.xml
+DEL /S %filesDir%\net462\*.pdb
+DEL /S %filesDir%\net462\*.json
+DEL /S %filesDir%\net462\App.config
+
+::Apaga os arquivos desnecessários
+DEL /S %filesDir%\net472\*.xml
+DEL /S %filesDir%\net472\*.pdb
+DEL /S %filesDir%\net472\*.json
+DEL /S %filesDir%\net472\App.config
 
 ::Ações
 @ECHO Assinando executáveis e dlls

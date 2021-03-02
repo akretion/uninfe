@@ -1,0 +1,1843 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  commentId: T:Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  id: Autorizacao
+  parent: Unimake.Business.DFe.Servicos.CTe
+  children:
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.#ctor
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.#ctor(Unimake.Business.DFe.Xml.CTe.EnviCTe,Unimake.Business.DFe.Servicos.Configuracao)
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.AjustarXMLAposAssinado
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.CteProcResults
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.DefinirConfiguracao
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.EnviCTe
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar(Unimake.Business.DFe.Xml.CTe.EnviCTe,Unimake.Business.DFe.Servicos.Configuracao)
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao(System.IO.Stream)
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao(System.String)
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.Result
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.RetConsReciCTe
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.RetConsSitCTes
+  - Unimake.Business.DFe.Servicos.CTe.Autorizacao.XmlValidar
+  langs:
+  - csharp
+  - vb
+  name: Autorizacao
+  nameWithType: Autorizacao
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  type: Class
+  source:
+    id: Autorizacao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 14
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nEnvio do XML de lote de CTe para o WebService\n"
+  example: []
+  syntax:
+    content: 'public class Autorizacao : ServicoBase, IInteropService<EnviCTe>'
+    content.vb: >-
+      Public Class Autorizacao
+          Inherits ServicoBase
+          Implements IInteropService(Of EnviCTe)
+  inheritance:
+  - System.Object
+  - Unimake.Business.DFe.Servicos.ServicoBase
+  - Unimake.Business.DFe.Servicos.NFe.ServicoBase
+  - Unimake.Business.DFe.Servicos.CTe.ServicoBase
+  implements:
+  - Unimake.Business.DFe.Servicos.Interop.IInteropService{Unimake.Business.DFe.Xml.CTe.EnviCTe}
+  inheritedMembers:
+  - Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidarConteudo
+  - Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao(System.String,System.String,System.String)
+  - Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao(System.IO.Stream,System.String,System.Text.Encoding)
+  - Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXML
+  - Unimake.Business.DFe.Servicos.ServicoBase.PrepararServico(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)
+  - Unimake.Business.DFe.Servicos.ServicoBase.Inicializar
+  - Unimake.Business.DFe.Servicos.ServicoBase.LerXmlConfigGeral
+  - Unimake.Business.DFe.Servicos.ServicoBase.Configuracoes
+  - Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXMLAssinado
+  - Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXMLOriginal
+  - Unimake.Business.DFe.Servicos.ServicoBase.RetornoWSString
+  - Unimake.Business.DFe.Servicos.ServicoBase.RetornoWSXML
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.EnviCTe
+  commentId: P:Unimake.Business.DFe.Servicos.CTe.Autorizacao.EnviCTe
+  id: EnviCTe
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: EnviCTe
+  nameWithType: Autorizacao.EnviCTe
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.EnviCTe
+  type: Property
+  source:
+    id: EnviCTe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 74
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nObjeto do XML do CTe\n"
+  example: []
+  syntax:
+    content: public EnviCTe EnviCTe { get; protected set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTe.EnviCTe
+    content.vb: Public Property EnviCTe As EnviCTe
+  overload: Unimake.Business.DFe.Servicos.CTe.Autorizacao.EnviCTe*
+  modifiers.csharp:
+  - public
+  - get
+  - protected set
+  modifiers.vb:
+  - Public
+  - Get
+  - Protected Set
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.DefinirConfiguracao
+  commentId: M:Unimake.Business.DFe.Servicos.CTe.Autorizacao.DefinirConfiguracao
+  id: DefinirConfiguracao
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: DefinirConfiguracao()
+  nameWithType: Autorizacao.DefinirConfiguracao()
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.DefinirConfiguracao()
+  type: Method
+  source:
+    id: DefinirConfiguracao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 87
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nDefinir o valor de algumas das propriedades do objeto &quot;Configuracoes&quot;\n"
+  example: []
+  syntax:
+    content: protected override void DefinirConfiguracao()
+    content.vb: Protected Overrides Sub DefinirConfiguracao
+  overridden: Unimake.Business.DFe.Servicos.NFe.ServicoBase.DefinirConfiguracao
+  overload: Unimake.Business.DFe.Servicos.CTe.Autorizacao.DefinirConfiguracao*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.AjustarXMLAposAssinado
+  commentId: M:Unimake.Business.DFe.Servicos.CTe.Autorizacao.AjustarXMLAposAssinado
+  id: AjustarXMLAposAssinado
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: AjustarXMLAposAssinado()
+  nameWithType: Autorizacao.AjustarXMLAposAssinado()
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.AjustarXMLAposAssinado()
+  type: Method
+  source:
+    id: AjustarXMLAposAssinado
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 113
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nEfetuar um Ajustse no XML da NFCe logo depois de assinado\n"
+  example: []
+  syntax:
+    content: protected override void AjustarXMLAposAssinado()
+    content.vb: Protected Overrides Sub AjustarXMLAposAssinado
+  overridden: Unimake.Business.DFe.Servicos.ServicoBase.AjustarXMLAposAssinado
+  overload: Unimake.Business.DFe.Servicos.CTe.Autorizacao.AjustarXMLAposAssinado*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.XmlValidar
+  commentId: M:Unimake.Business.DFe.Servicos.CTe.Autorizacao.XmlValidar
+  id: XmlValidar
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: XmlValidar()
+  nameWithType: Autorizacao.XmlValidar()
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.XmlValidar()
+  type: Method
+  source:
+    id: XmlValidar
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 122
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nValidar o XML\n"
+  example: []
+  syntax:
+    content: protected override void XmlValidar()
+    content.vb: Protected Overrides Sub XmlValidar
+  overridden: Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidar
+  overload: Unimake.Business.DFe.Servicos.CTe.Autorizacao.XmlValidar*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.RetConsReciCTe
+  commentId: P:Unimake.Business.DFe.Servicos.CTe.Autorizacao.RetConsReciCTe
+  id: RetConsReciCTe
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: RetConsReciCTe
+  nameWithType: Autorizacao.RetConsReciCTe
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.RetConsReciCTe
+  type: Property
+  source:
+    id: RetConsReciCTe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 188
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nPropriedade com o conteúdo retornado da consulta recibo\n"
+  example: []
+  syntax:
+    content: public RetConsReciCTe RetConsReciCTe { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTe.RetConsReciCTe
+    content.vb: Public Property RetConsReciCTe As RetConsReciCTe
+  overload: Unimake.Business.DFe.Servicos.CTe.Autorizacao.RetConsReciCTe*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.RetConsSitCTes
+  commentId: F:Unimake.Business.DFe.Servicos.CTe.Autorizacao.RetConsSitCTes
+  id: RetConsSitCTes
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: RetConsSitCTes
+  nameWithType: Autorizacao.RetConsSitCTes
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.RetConsSitCTes
+  type: Field
+  source:
+    id: RetConsSitCTes
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 193
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nPropriedade com o conteúdo retornado da consulta situção do CTe\n"
+  example: []
+  syntax:
+    content: public List<RetConsSitCTe> RetConsSitCTes
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.CTe.RetConsSitCTe}
+    content.vb: Public RetConsSitCTes As List(Of RetConsSitCTe)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.CteProcResults
+  commentId: P:Unimake.Business.DFe.Servicos.CTe.Autorizacao.CteProcResults
+  id: CteProcResults
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: CteProcResults
+  nameWithType: Autorizacao.CteProcResults
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.CteProcResults
+  type: Property
+  source:
+    id: CteProcResults
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 198
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nPropriedade contendo o XML da CTe com o protocolo de autorização anexado - Envio Assincrono\n"
+  example: []
+  syntax:
+    content: public Dictionary<string, CteProc> CteProcResults { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.Dictionary{System.String,Unimake.Business.DFe.Xml.CTe.CteProc}
+    content.vb: Public ReadOnly Property CteProcResults As Dictionary(Of String, CteProc)
+  overload: Unimake.Business.DFe.Servicos.CTe.Autorizacao.CteProcResults*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Result
+  commentId: P:Unimake.Business.DFe.Servicos.CTe.Autorizacao.Result
+  id: Result
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: Result
+  nameWithType: Autorizacao.Result
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Result
+  type: Property
+  source:
+    id: Result
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 301
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nConteúdo retornado pelo webservice depois do envio do XML\n"
+  example: []
+  syntax:
+    content: public RetEnviCTe Result { get; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTe.RetEnviCTe
+    content.vb: Public ReadOnly Property Result As RetEnviCTe
+  overload: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Result*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.#ctor
+  commentId: M:Unimake.Business.DFe.Servicos.CTe.Autorizacao.#ctor
+  id: '#ctor'
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: Autorizacao()
+  nameWithType: Autorizacao.Autorizacao()
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Autorizacao()
+  type: Constructor
+  source:
+    id: .ctor
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 325
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nConstrutor\n"
+  example: []
+  syntax:
+    content: public Autorizacao()
+    content.vb: Public Sub New
+  overload: Unimake.Business.DFe.Servicos.CTe.Autorizacao.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.#ctor(Unimake.Business.DFe.Xml.CTe.EnviCTe,Unimake.Business.DFe.Servicos.Configuracao)
+  commentId: M:Unimake.Business.DFe.Servicos.CTe.Autorizacao.#ctor(Unimake.Business.DFe.Xml.CTe.EnviCTe,Unimake.Business.DFe.Servicos.Configuracao)
+  id: '#ctor(Unimake.Business.DFe.Xml.CTe.EnviCTe,Unimake.Business.DFe.Servicos.Configuracao)'
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: Autorizacao(EnviCTe, Configuracao)
+  nameWithType: Autorizacao.Autorizacao(EnviCTe, Configuracao)
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Autorizacao(Unimake.Business.DFe.Xml.CTe.EnviCTe, Unimake.Business.DFe.Servicos.Configuracao)
+  type: Constructor
+  source:
+    id: .ctor
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 333
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nConstrutor\n"
+  example: []
+  syntax:
+    content: public Autorizacao(EnviCTe enviCTe, Configuracao configuracao)
+    parameters:
+    - id: enviCTe
+      type: Unimake.Business.DFe.Xml.CTe.EnviCTe
+      description: Objeto contendo o XML a ser enviado
+    - id: configuracao
+      type: Unimake.Business.DFe.Servicos.Configuracao
+      description: Configurações para conexão e envio do XML para o webservice
+    content.vb: Public Sub New(enviCTe As EnviCTe, configuracao As Configuracao)
+  overload: Unimake.Business.DFe.Servicos.CTe.Autorizacao.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar
+  commentId: M:Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar
+  id: Executar
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: Executar()
+  nameWithType: Autorizacao.Executar()
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar()
+  type: Method
+  source:
+    id: Executar
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 348
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nExecutar o serviço\n"
+  example: []
+  syntax:
+    content: >-
+      [ComVisible(false)]
+
+      public override void Executar()
+    content.vb: >-
+      <ComVisible(False)>
+
+      Public Overrides Sub Executar
+  overridden: Unimake.Business.DFe.Servicos.NFe.ServicoBase.Executar
+  overload: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar*
+  implements:
+  - Unimake.Business.DFe.Servicos.Interop.IInteropService{Unimake.Business.DFe.Xml.CTe.EnviCTe}.Executar
+  attributes:
+  - type: System.Runtime.InteropServices.ComVisibleAttribute
+    ctor: System.Runtime.InteropServices.ComVisibleAttribute.#ctor(System.Boolean)
+    arguments:
+    - type: System.Boolean
+      value: false
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar(Unimake.Business.DFe.Xml.CTe.EnviCTe,Unimake.Business.DFe.Servicos.Configuracao)
+  commentId: M:Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar(Unimake.Business.DFe.Xml.CTe.EnviCTe,Unimake.Business.DFe.Servicos.Configuracao)
+  id: Executar(Unimake.Business.DFe.Xml.CTe.EnviCTe,Unimake.Business.DFe.Servicos.Configuracao)
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: Executar(EnviCTe, Configuracao)
+  nameWithType: Autorizacao.Executar(EnviCTe, Configuracao)
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar(Unimake.Business.DFe.Xml.CTe.EnviCTe, Unimake.Business.DFe.Servicos.Configuracao)
+  type: Method
+  source:
+    id: Executar
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 369
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nExecuta o serviço: Assina o XML, valida e envia para o webservice\n"
+  example: []
+  syntax:
+    content: >-
+      [ComVisible(true)]
+
+      public void Executar(EnviCTe enviCTe, Configuracao configuracao)
+    parameters:
+    - id: enviCTe
+      type: Unimake.Business.DFe.Xml.CTe.EnviCTe
+      description: Objeto contendo o XML a ser enviado
+    - id: configuracao
+      type: Unimake.Business.DFe.Servicos.Configuracao
+      description: Configurações a serem utilizadas na conexão e envio do XML para o webservice
+    content.vb: >-
+      <ComVisible(True)>
+
+      Public Sub Executar(enviCTe As EnviCTe, configuracao As Configuracao)
+  overload: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar*
+  implements:
+  - Unimake.Business.DFe.Servicos.Interop.IInteropService{Unimake.Business.DFe.Xml.CTe.EnviCTe}.Executar(Unimake.Business.DFe.Xml.CTe.EnviCTe,Unimake.Business.DFe.Servicos.Configuracao)
+  attributes:
+  - type: System.Runtime.InteropServices.ComVisibleAttribute
+    ctor: System.Runtime.InteropServices.ComVisibleAttribute.#ctor(System.Boolean)
+    arguments:
+    - type: System.Boolean
+      value: true
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao(System.String)
+  commentId: M:Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao(System.String)
+  id: GravarXmlDistribuicao(System.String)
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: GravarXmlDistribuicao(String)
+  nameWithType: Autorizacao.GravarXmlDistribuicao(String)
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao(System.String)
+  type: Method
+  source:
+    id: GravarXmlDistribuicao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 380
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nGravar o XML de distribuição em uma pasta no HD\n"
+  example: []
+  syntax:
+    content: public void GravarXmlDistribuicao(string pasta)
+    parameters:
+    - id: pasta
+      type: System.String
+      description: Pasta onde deve ser gravado o XML
+    content.vb: Public Sub GravarXmlDistribuicao(pasta As String)
+  overload: Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao(System.IO.Stream)
+  commentId: M:Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao(System.IO.Stream)
+  id: GravarXmlDistribuicao(System.IO.Stream)
+  parent: Unimake.Business.DFe.Servicos.CTe.Autorizacao
+  langs:
+  - csharp
+  - vb
+  name: GravarXmlDistribuicao(Stream)
+  nameWithType: Autorizacao.GravarXmlDistribuicao(Stream)
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao(System.IO.Stream)
+  type: Method
+  source:
+    id: GravarXmlDistribuicao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\CTe\Autorizacao.cs
+    startLine: 395
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos.CTe
+  summary: "\nGrava o XML de dsitribuição no stream\n"
+  example: []
+  syntax:
+    content: public void GravarXmlDistribuicao(Stream stream)
+    parameters:
+    - id: stream
+      type: System.IO.Stream
+      description: Stream que vai receber o XML de distribuição
+    content.vb: Public Sub GravarXmlDistribuicao(stream As Stream)
+  overload: Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Servicos.CTe
+  commentId: N:Unimake.Business.DFe.Servicos.CTe
+  name: Unimake.Business.DFe.Servicos.CTe
+  nameWithType: Unimake.Business.DFe.Servicos.CTe
+  fullName: Unimake.Business.DFe.Servicos.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Unimake.Business.DFe.Servicos.ServicoBase
+  commentId: T:Unimake.Business.DFe.Servicos.ServicoBase
+  parent: Unimake.Business.DFe.Servicos
+  name: ServicoBase
+  nameWithType: ServicoBase
+  fullName: Unimake.Business.DFe.Servicos.ServicoBase
+- uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase
+  commentId: T:Unimake.Business.DFe.Servicos.NFe.ServicoBase
+  parent: Unimake.Business.DFe.Servicos.NFe
+  name: ServicoBase
+  nameWithType: ServicoBase
+  fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase
+- uid: Unimake.Business.DFe.Servicos.CTe.ServicoBase
+  commentId: T:Unimake.Business.DFe.Servicos.CTe.ServicoBase
+  parent: Unimake.Business.DFe.Servicos.CTe
+  name: ServicoBase
+  nameWithType: ServicoBase
+  fullName: Unimake.Business.DFe.Servicos.CTe.ServicoBase
+- uid: Unimake.Business.DFe.Servicos.Interop.IInteropService{Unimake.Business.DFe.Xml.CTe.EnviCTe}
+  commentId: T:Unimake.Business.DFe.Servicos.Interop.IInteropService{Unimake.Business.DFe.Xml.CTe.EnviCTe}
+  parent: Unimake.Business.DFe.Servicos.Interop
+  definition: Unimake.Business.DFe.Servicos.Interop.IInteropService`1
+  name: IInteropService<EnviCTe>
+  nameWithType: IInteropService<EnviCTe>
+  fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService<Unimake.Business.DFe.Xml.CTe.EnviCTe>
+  nameWithType.vb: IInteropService(Of EnviCTe)
+  fullName.vb: Unimake.Business.DFe.Servicos.Interop.IInteropService(Of Unimake.Business.DFe.Xml.CTe.EnviCTe)
+  name.vb: IInteropService(Of EnviCTe)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1
+    name: IInteropService
+    nameWithType: IInteropService
+    fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.CTe.EnviCTe
+    name: EnviCTe
+    nameWithType: EnviCTe
+    fullName: Unimake.Business.DFe.Xml.CTe.EnviCTe
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1
+    name: IInteropService
+    nameWithType: IInteropService
+    fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.CTe.EnviCTe
+    name: EnviCTe
+    nameWithType: EnviCTe
+    fullName: Unimake.Business.DFe.Xml.CTe.EnviCTe
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidarConteudo
+  commentId: M:Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidarConteudo
+  parent: Unimake.Business.DFe.Servicos.NFe.ServicoBase
+  name: XmlValidarConteudo()
+  nameWithType: ServicoBase.XmlValidarConteudo()
+  fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidarConteudo()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidarConteudo
+    name: XmlValidarConteudo
+    nameWithType: ServicoBase.XmlValidarConteudo
+    fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidarConteudo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidarConteudo
+    name: XmlValidarConteudo
+    nameWithType: ServicoBase.XmlValidarConteudo
+    fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidarConteudo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao(System.String,System.String,System.String)
+  commentId: M:Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao(System.String,System.String,System.String)
+  parent: Unimake.Business.DFe.Servicos.NFe.ServicoBase
+  isExternal: true
+  name: GravarXmlDistribuicao(String, String, String)
+  nameWithType: ServicoBase.GravarXmlDistribuicao(String, String, String)
+  fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao(System.String, System.String, System.String)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao(System.String,System.String,System.String)
+    name: GravarXmlDistribuicao
+    nameWithType: ServicoBase.GravarXmlDistribuicao
+    fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao(System.String,System.String,System.String)
+    name: GravarXmlDistribuicao
+    nameWithType: ServicoBase.GravarXmlDistribuicao
+    fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao(System.IO.Stream,System.String,System.Text.Encoding)
+  commentId: M:Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao(System.IO.Stream,System.String,System.Text.Encoding)
+  parent: Unimake.Business.DFe.Servicos.NFe.ServicoBase
+  isExternal: true
+  name: GravarXmlDistribuicao(Stream, String, Encoding)
+  nameWithType: ServicoBase.GravarXmlDistribuicao(Stream, String, Encoding)
+  fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao(System.IO.Stream, System.String, System.Text.Encoding)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao(System.IO.Stream,System.String,System.Text.Encoding)
+    name: GravarXmlDistribuicao
+    nameWithType: ServicoBase.GravarXmlDistribuicao
+    fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Text.Encoding
+    name: Encoding
+    nameWithType: Encoding
+    fullName: System.Text.Encoding
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao(System.IO.Stream,System.String,System.Text.Encoding)
+    name: GravarXmlDistribuicao
+    nameWithType: ServicoBase.GravarXmlDistribuicao
+    fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.GravarXmlDistribuicao
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.Stream
+    name: Stream
+    nameWithType: Stream
+    fullName: System.IO.Stream
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Text.Encoding
+    name: Encoding
+    nameWithType: Encoding
+    fullName: System.Text.Encoding
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXML
+  commentId: P:Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXML
+  parent: Unimake.Business.DFe.Servicos.ServicoBase
+  name: ConteudoXML
+  nameWithType: ServicoBase.ConteudoXML
+  fullName: Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXML
+- uid: Unimake.Business.DFe.Servicos.ServicoBase.PrepararServico(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)
+  commentId: M:Unimake.Business.DFe.Servicos.ServicoBase.PrepararServico(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)
+  parent: Unimake.Business.DFe.Servicos.ServicoBase
+  isExternal: true
+  name: PrepararServico(XmlDocument, Configuracao)
+  nameWithType: ServicoBase.PrepararServico(XmlDocument, Configuracao)
+  fullName: Unimake.Business.DFe.Servicos.ServicoBase.PrepararServico(System.Xml.XmlDocument, Unimake.Business.DFe.Servicos.Configuracao)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.ServicoBase.PrepararServico(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)
+    name: PrepararServico
+    nameWithType: ServicoBase.PrepararServico
+    fullName: Unimake.Business.DFe.Servicos.ServicoBase.PrepararServico
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlDocument
+    name: XmlDocument
+    nameWithType: XmlDocument
+    fullName: System.Xml.XmlDocument
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Unimake.Business.DFe.Servicos.Configuracao
+    name: Configuracao
+    nameWithType: Configuracao
+    fullName: Unimake.Business.DFe.Servicos.Configuracao
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.ServicoBase.PrepararServico(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)
+    name: PrepararServico
+    nameWithType: ServicoBase.PrepararServico
+    fullName: Unimake.Business.DFe.Servicos.ServicoBase.PrepararServico
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlDocument
+    name: XmlDocument
+    nameWithType: XmlDocument
+    fullName: System.Xml.XmlDocument
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Unimake.Business.DFe.Servicos.Configuracao
+    name: Configuracao
+    nameWithType: Configuracao
+    fullName: Unimake.Business.DFe.Servicos.Configuracao
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.ServicoBase.Inicializar
+  commentId: M:Unimake.Business.DFe.Servicos.ServicoBase.Inicializar
+  parent: Unimake.Business.DFe.Servicos.ServicoBase
+  name: Inicializar()
+  nameWithType: ServicoBase.Inicializar()
+  fullName: Unimake.Business.DFe.Servicos.ServicoBase.Inicializar()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.ServicoBase.Inicializar
+    name: Inicializar
+    nameWithType: ServicoBase.Inicializar
+    fullName: Unimake.Business.DFe.Servicos.ServicoBase.Inicializar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.ServicoBase.Inicializar
+    name: Inicializar
+    nameWithType: ServicoBase.Inicializar
+    fullName: Unimake.Business.DFe.Servicos.ServicoBase.Inicializar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.ServicoBase.LerXmlConfigGeral
+  commentId: M:Unimake.Business.DFe.Servicos.ServicoBase.LerXmlConfigGeral
+  parent: Unimake.Business.DFe.Servicos.ServicoBase
+  name: LerXmlConfigGeral()
+  nameWithType: ServicoBase.LerXmlConfigGeral()
+  fullName: Unimake.Business.DFe.Servicos.ServicoBase.LerXmlConfigGeral()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.ServicoBase.LerXmlConfigGeral
+    name: LerXmlConfigGeral
+    nameWithType: ServicoBase.LerXmlConfigGeral
+    fullName: Unimake.Business.DFe.Servicos.ServicoBase.LerXmlConfigGeral
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.ServicoBase.LerXmlConfigGeral
+    name: LerXmlConfigGeral
+    nameWithType: ServicoBase.LerXmlConfigGeral
+    fullName: Unimake.Business.DFe.Servicos.ServicoBase.LerXmlConfigGeral
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.ServicoBase.Configuracoes
+  commentId: P:Unimake.Business.DFe.Servicos.ServicoBase.Configuracoes
+  parent: Unimake.Business.DFe.Servicos.ServicoBase
+  name: Configuracoes
+  nameWithType: ServicoBase.Configuracoes
+  fullName: Unimake.Business.DFe.Servicos.ServicoBase.Configuracoes
+- uid: Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXMLAssinado
+  commentId: P:Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXMLAssinado
+  parent: Unimake.Business.DFe.Servicos.ServicoBase
+  name: ConteudoXMLAssinado
+  nameWithType: ServicoBase.ConteudoXMLAssinado
+  fullName: Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXMLAssinado
+- uid: Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXMLOriginal
+  commentId: P:Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXMLOriginal
+  parent: Unimake.Business.DFe.Servicos.ServicoBase
+  name: ConteudoXMLOriginal
+  nameWithType: ServicoBase.ConteudoXMLOriginal
+  fullName: Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXMLOriginal
+- uid: Unimake.Business.DFe.Servicos.ServicoBase.RetornoWSString
+  commentId: P:Unimake.Business.DFe.Servicos.ServicoBase.RetornoWSString
+  parent: Unimake.Business.DFe.Servicos.ServicoBase
+  name: RetornoWSString
+  nameWithType: ServicoBase.RetornoWSString
+  fullName: Unimake.Business.DFe.Servicos.ServicoBase.RetornoWSString
+- uid: Unimake.Business.DFe.Servicos.ServicoBase.RetornoWSXML
+  commentId: P:Unimake.Business.DFe.Servicos.ServicoBase.RetornoWSXML
+  parent: Unimake.Business.DFe.Servicos.ServicoBase
+  name: RetornoWSXML
+  nameWithType: ServicoBase.RetornoWSXML
+  fullName: Unimake.Business.DFe.Servicos.ServicoBase.RetornoWSXML
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: Unimake.Business.DFe.Servicos.NFe
+  commentId: N:Unimake.Business.DFe.Servicos.NFe
+  name: Unimake.Business.DFe.Servicos.NFe
+  nameWithType: Unimake.Business.DFe.Servicos.NFe
+  fullName: Unimake.Business.DFe.Servicos.NFe
+- uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1
+  commentId: T:Unimake.Business.DFe.Servicos.Interop.IInteropService`1
+  name: IInteropService<TInteropType>
+  nameWithType: IInteropService<TInteropType>
+  fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService<TInteropType>
+  nameWithType.vb: IInteropService(Of TInteropType)
+  fullName.vb: Unimake.Business.DFe.Servicos.Interop.IInteropService(Of TInteropType)
+  name.vb: IInteropService(Of TInteropType)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1
+    name: IInteropService
+    nameWithType: IInteropService
+    fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TInteropType
+    nameWithType: TInteropType
+    fullName: TInteropType
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1
+    name: IInteropService
+    nameWithType: IInteropService
+    fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TInteropType
+    nameWithType: TInteropType
+    fullName: TInteropType
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.Interop
+  commentId: N:Unimake.Business.DFe.Servicos.Interop
+  name: Unimake.Business.DFe.Servicos.Interop
+  nameWithType: Unimake.Business.DFe.Servicos.Interop
+  fullName: Unimake.Business.DFe.Servicos.Interop
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.EnviCTe*
+  commentId: Overload:Unimake.Business.DFe.Servicos.CTe.Autorizacao.EnviCTe
+  name: EnviCTe
+  nameWithType: Autorizacao.EnviCTe
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.EnviCTe
+- uid: Unimake.Business.DFe.Xml.CTe.EnviCTe
+  commentId: T:Unimake.Business.DFe.Xml.CTe.EnviCTe
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: EnviCTe
+  nameWithType: EnviCTe
+  fullName: Unimake.Business.DFe.Xml.CTe.EnviCTe
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.DefinirConfiguracao
+  commentId: M:Unimake.Business.DFe.Servicos.NFe.ServicoBase.DefinirConfiguracao
+  parent: Unimake.Business.DFe.Servicos.NFe.ServicoBase
+  name: DefinirConfiguracao()
+  nameWithType: ServicoBase.DefinirConfiguracao()
+  fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.DefinirConfiguracao()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.DefinirConfiguracao
+    name: DefinirConfiguracao
+    nameWithType: ServicoBase.DefinirConfiguracao
+    fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.DefinirConfiguracao
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.DefinirConfiguracao
+    name: DefinirConfiguracao
+    nameWithType: ServicoBase.DefinirConfiguracao
+    fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.DefinirConfiguracao
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.DefinirConfiguracao*
+  commentId: Overload:Unimake.Business.DFe.Servicos.CTe.Autorizacao.DefinirConfiguracao
+  name: DefinirConfiguracao
+  nameWithType: Autorizacao.DefinirConfiguracao
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.DefinirConfiguracao
+- uid: Unimake.Business.DFe.Servicos.ServicoBase.AjustarXMLAposAssinado
+  commentId: M:Unimake.Business.DFe.Servicos.ServicoBase.AjustarXMLAposAssinado
+  parent: Unimake.Business.DFe.Servicos.ServicoBase
+  name: AjustarXMLAposAssinado()
+  nameWithType: ServicoBase.AjustarXMLAposAssinado()
+  fullName: Unimake.Business.DFe.Servicos.ServicoBase.AjustarXMLAposAssinado()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.ServicoBase.AjustarXMLAposAssinado
+    name: AjustarXMLAposAssinado
+    nameWithType: ServicoBase.AjustarXMLAposAssinado
+    fullName: Unimake.Business.DFe.Servicos.ServicoBase.AjustarXMLAposAssinado
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.ServicoBase.AjustarXMLAposAssinado
+    name: AjustarXMLAposAssinado
+    nameWithType: ServicoBase.AjustarXMLAposAssinado
+    fullName: Unimake.Business.DFe.Servicos.ServicoBase.AjustarXMLAposAssinado
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.AjustarXMLAposAssinado*
+  commentId: Overload:Unimake.Business.DFe.Servicos.CTe.Autorizacao.AjustarXMLAposAssinado
+  name: AjustarXMLAposAssinado
+  nameWithType: Autorizacao.AjustarXMLAposAssinado
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.AjustarXMLAposAssinado
+- uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidar
+  commentId: M:Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidar
+  parent: Unimake.Business.DFe.Servicos.NFe.ServicoBase
+  name: XmlValidar()
+  nameWithType: ServicoBase.XmlValidar()
+  fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidar()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidar
+    name: XmlValidar
+    nameWithType: ServicoBase.XmlValidar
+    fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidar
+    name: XmlValidar
+    nameWithType: ServicoBase.XmlValidar
+    fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.XmlValidar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.XmlValidar*
+  commentId: Overload:Unimake.Business.DFe.Servicos.CTe.Autorizacao.XmlValidar
+  name: XmlValidar
+  nameWithType: Autorizacao.XmlValidar
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.XmlValidar
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.RetConsReciCTe*
+  commentId: Overload:Unimake.Business.DFe.Servicos.CTe.Autorizacao.RetConsReciCTe
+  name: RetConsReciCTe
+  nameWithType: Autorizacao.RetConsReciCTe
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.RetConsReciCTe
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsReciCTe
+  commentId: T:Unimake.Business.DFe.Xml.CTe.RetConsReciCTe
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: RetConsReciCTe
+  nameWithType: RetConsReciCTe
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsReciCTe
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.CTe.RetConsSitCTe}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.CTe.RetConsSitCTe}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<RetConsSitCTe>
+  nameWithType: List<RetConsSitCTe>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.CTe.RetConsSitCTe>
+  nameWithType.vb: List(Of RetConsSitCTe)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.CTe.RetConsSitCTe)
+  name.vb: List(Of RetConsSitCTe)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.CTe.RetConsSitCTe
+    name: RetConsSitCTe
+    nameWithType: RetConsSitCTe
+    fullName: Unimake.Business.DFe.Xml.CTe.RetConsSitCTe
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.CTe.RetConsSitCTe
+    name: RetConsSitCTe
+    nameWithType: RetConsSitCTe
+    fullName: Unimake.Business.DFe.Xml.CTe.RetConsSitCTe
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.CteProcResults*
+  commentId: Overload:Unimake.Business.DFe.Servicos.CTe.Autorizacao.CteProcResults
+  name: CteProcResults
+  nameWithType: Autorizacao.CteProcResults
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.CteProcResults
+- uid: System.Collections.Generic.Dictionary{System.String,Unimake.Business.DFe.Xml.CTe.CteProc}
+  commentId: T:System.Collections.Generic.Dictionary{System.String,Unimake.Business.DFe.Xml.CTe.CteProc}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Dictionary`2
+  name: Dictionary<String, CteProc>
+  nameWithType: Dictionary<String, CteProc>
+  fullName: System.Collections.Generic.Dictionary<System.String, Unimake.Business.DFe.Xml.CTe.CteProc>
+  nameWithType.vb: Dictionary(Of String, CteProc)
+  fullName.vb: System.Collections.Generic.Dictionary(Of System.String, Unimake.Business.DFe.Xml.CTe.CteProc)
+  name.vb: Dictionary(Of String, CteProc)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Unimake.Business.DFe.Xml.CTe.CteProc
+    name: CteProc
+    nameWithType: CteProc
+    fullName: Unimake.Business.DFe.Xml.CTe.CteProc
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Unimake.Business.DFe.Xml.CTe.CteProc
+    name: CteProc
+    nameWithType: CteProc
+    fullName: Unimake.Business.DFe.Xml.CTe.CteProc
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.Dictionary`2
+  commentId: T:System.Collections.Generic.Dictionary`2
+  isExternal: true
+  name: Dictionary<TKey, TValue>
+  nameWithType: Dictionary<TKey, TValue>
+  fullName: System.Collections.Generic.Dictionary<TKey, TValue>
+  nameWithType.vb: Dictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.Dictionary(Of TKey, TValue)
+  name.vb: Dictionary(Of TKey, TValue)
+  spec.csharp:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Dictionary`2
+    name: Dictionary
+    nameWithType: Dictionary
+    fullName: System.Collections.Generic.Dictionary
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TKey
+    nameWithType: TKey
+    fullName: TKey
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - name: TValue
+    nameWithType: TValue
+    fullName: TValue
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Result*
+  commentId: Overload:Unimake.Business.DFe.Servicos.CTe.Autorizacao.Result
+  name: Result
+  nameWithType: Autorizacao.Result
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Result
+- uid: Unimake.Business.DFe.Xml.CTe.RetEnviCTe
+  commentId: T:Unimake.Business.DFe.Xml.CTe.RetEnviCTe
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: RetEnviCTe
+  nameWithType: RetEnviCTe
+  fullName: Unimake.Business.DFe.Xml.CTe.RetEnviCTe
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.#ctor*
+  commentId: Overload:Unimake.Business.DFe.Servicos.CTe.Autorizacao.#ctor
+  name: Autorizacao
+  nameWithType: Autorizacao.Autorizacao
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Autorizacao
+- uid: Unimake.Business.DFe.Servicos.Configuracao
+  commentId: T:Unimake.Business.DFe.Servicos.Configuracao
+  parent: Unimake.Business.DFe.Servicos
+  name: Configuracao
+  nameWithType: Configuracao
+  fullName: Unimake.Business.DFe.Servicos.Configuracao
+- uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.Executar
+  commentId: M:Unimake.Business.DFe.Servicos.NFe.ServicoBase.Executar
+  parent: Unimake.Business.DFe.Servicos.NFe.ServicoBase
+  name: Executar()
+  nameWithType: ServicoBase.Executar()
+  fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.Executar()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.Executar
+    name: Executar
+    nameWithType: ServicoBase.Executar
+    fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.Executar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.NFe.ServicoBase.Executar
+    name: Executar
+    nameWithType: ServicoBase.Executar
+    fullName: Unimake.Business.DFe.Servicos.NFe.ServicoBase.Executar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar*
+  commentId: Overload:Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar
+  name: Executar
+  nameWithType: Autorizacao.Executar
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar
+- uid: Unimake.Business.DFe.Servicos.Interop.IInteropService{Unimake.Business.DFe.Xml.CTe.EnviCTe}.Executar
+  commentId: M:Unimake.Business.DFe.Servicos.Interop.IInteropService{Unimake.Business.DFe.Xml.CTe.EnviCTe}.Executar
+  parent: Unimake.Business.DFe.Servicos.Interop.IInteropService{Unimake.Business.DFe.Xml.CTe.EnviCTe}
+  definition: Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar
+  name: Executar()
+  nameWithType: IInteropService<EnviCTe>.Executar()
+  fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService<Unimake.Business.DFe.Xml.CTe.EnviCTe>.Executar()
+  nameWithType.vb: IInteropService(Of EnviCTe).Executar()
+  fullName.vb: Unimake.Business.DFe.Servicos.Interop.IInteropService(Of Unimake.Business.DFe.Xml.CTe.EnviCTe).Executar()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar
+    name: Executar
+    nameWithType: IInteropService<EnviCTe>.Executar
+    fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService<Unimake.Business.DFe.Xml.CTe.EnviCTe>.Executar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar
+    name: Executar
+    nameWithType: IInteropService(Of EnviCTe).Executar
+    fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService(Of Unimake.Business.DFe.Xml.CTe.EnviCTe).Executar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar
+  commentId: M:Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar
+  name: Executar()
+  nameWithType: IInteropService<TInteropType>.Executar()
+  fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService<TInteropType>.Executar()
+  nameWithType.vb: IInteropService(Of TInteropType).Executar()
+  fullName.vb: Unimake.Business.DFe.Servicos.Interop.IInteropService(Of TInteropType).Executar()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar
+    name: Executar
+    nameWithType: IInteropService<TInteropType>.Executar
+    fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService<TInteropType>.Executar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar
+    name: Executar
+    nameWithType: IInteropService(Of TInteropType).Executar
+    fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService(Of TInteropType).Executar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.Interop.IInteropService{Unimake.Business.DFe.Xml.CTe.EnviCTe}.Executar(Unimake.Business.DFe.Xml.CTe.EnviCTe,Unimake.Business.DFe.Servicos.Configuracao)
+  commentId: M:Unimake.Business.DFe.Servicos.Interop.IInteropService{Unimake.Business.DFe.Xml.CTe.EnviCTe}.Executar(Unimake.Business.DFe.Xml.CTe.EnviCTe,Unimake.Business.DFe.Servicos.Configuracao)
+  parent: Unimake.Business.DFe.Servicos.Interop.IInteropService{Unimake.Business.DFe.Xml.CTe.EnviCTe}
+  definition: Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar(`0,Unimake.Business.DFe.Servicos.Configuracao)
+  name: Executar(EnviCTe, Configuracao)
+  nameWithType: IInteropService<EnviCTe>.Executar(EnviCTe, Configuracao)
+  fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService<Unimake.Business.DFe.Xml.CTe.EnviCTe>.Executar(Unimake.Business.DFe.Xml.CTe.EnviCTe, Unimake.Business.DFe.Servicos.Configuracao)
+  nameWithType.vb: IInteropService(Of EnviCTe).Executar(EnviCTe, Configuracao)
+  fullName.vb: Unimake.Business.DFe.Servicos.Interop.IInteropService(Of Unimake.Business.DFe.Xml.CTe.EnviCTe).Executar(Unimake.Business.DFe.Xml.CTe.EnviCTe, Unimake.Business.DFe.Servicos.Configuracao)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar(`0,Unimake.Business.DFe.Servicos.Configuracao)
+    name: Executar
+    nameWithType: IInteropService<EnviCTe>.Executar
+    fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService<Unimake.Business.DFe.Xml.CTe.EnviCTe>.Executar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Unimake.Business.DFe.Xml.CTe.EnviCTe
+    name: EnviCTe
+    nameWithType: EnviCTe
+    fullName: Unimake.Business.DFe.Xml.CTe.EnviCTe
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Unimake.Business.DFe.Servicos.Configuracao
+    name: Configuracao
+    nameWithType: Configuracao
+    fullName: Unimake.Business.DFe.Servicos.Configuracao
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar(`0,Unimake.Business.DFe.Servicos.Configuracao)
+    name: Executar
+    nameWithType: IInteropService(Of EnviCTe).Executar
+    fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService(Of Unimake.Business.DFe.Xml.CTe.EnviCTe).Executar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Unimake.Business.DFe.Xml.CTe.EnviCTe
+    name: EnviCTe
+    nameWithType: EnviCTe
+    fullName: Unimake.Business.DFe.Xml.CTe.EnviCTe
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Unimake.Business.DFe.Servicos.Configuracao
+    name: Configuracao
+    nameWithType: Configuracao
+    fullName: Unimake.Business.DFe.Servicos.Configuracao
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar(`0,Unimake.Business.DFe.Servicos.Configuracao)
+  commentId: M:Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar(`0,Unimake.Business.DFe.Servicos.Configuracao)
+  name: Executar(TInteropType, Configuracao)
+  nameWithType: IInteropService<TInteropType>.Executar(TInteropType, Configuracao)
+  fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService<TInteropType>.Executar(TInteropType, Unimake.Business.DFe.Servicos.Configuracao)
+  nameWithType.vb: IInteropService(Of TInteropType).Executar(TInteropType, Configuracao)
+  fullName.vb: Unimake.Business.DFe.Servicos.Interop.IInteropService(Of TInteropType).Executar(TInteropType, Unimake.Business.DFe.Servicos.Configuracao)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar(`0,Unimake.Business.DFe.Servicos.Configuracao)
+    name: Executar
+    nameWithType: IInteropService<TInteropType>.Executar
+    fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService<TInteropType>.Executar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TInteropType
+    nameWithType: TInteropType
+    fullName: TInteropType
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Unimake.Business.DFe.Servicos.Configuracao
+    name: Configuracao
+    nameWithType: Configuracao
+    fullName: Unimake.Business.DFe.Servicos.Configuracao
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar(`0,Unimake.Business.DFe.Servicos.Configuracao)
+    name: Executar
+    nameWithType: IInteropService(Of TInteropType).Executar
+    fullName: Unimake.Business.DFe.Servicos.Interop.IInteropService(Of TInteropType).Executar
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TInteropType
+    nameWithType: TInteropType
+    fullName: TInteropType
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Unimake.Business.DFe.Servicos.Configuracao
+    name: Configuracao
+    nameWithType: Configuracao
+    fullName: Unimake.Business.DFe.Servicos.Configuracao
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao*
+  commentId: Overload:Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao
+  name: GravarXmlDistribuicao
+  nameWithType: Autorizacao.GravarXmlDistribuicao
+  fullName: Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.IO.Stream
+  commentId: T:System.IO.Stream
+  parent: System.IO
+  isExternal: true
+  name: Stream
+  nameWithType: Stream
+  fullName: System.IO.Stream
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO

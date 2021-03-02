@@ -159,10 +159,6 @@ namespace NFe.Components
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3554300-";
                                 break;
 
-                            case 3303609: //Paracambi-RJ
-                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3303609-";
-                                break;
-
                             case 5005707: //Naviraí-MS
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-5005707-";
                                 break;
@@ -218,6 +214,11 @@ namespace NFe.Components
                             case 4124053: //Santa Terezinha de Itaipu-PR
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4124053-";
                                 break;
+
+                            case 3550407: //São Pedro - SP
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3550407-";
+                                break;
+                     
 
                             default:
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";

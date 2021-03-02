@@ -1,0 +1,867 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTe.Rem
+  commentId: T:Unimake.Business.DFe.Xml.CTe.Rem
+  id: Rem
+  parent: Unimake.Business.DFe.Xml.CTe
+  children:
+  - Unimake.Business.DFe.Xml.CTe.Rem.CNPJ
+  - Unimake.Business.DFe.Xml.CTe.Rem.CPF
+  - Unimake.Business.DFe.Xml.CTe.Rem.Email
+  - Unimake.Business.DFe.Xml.CTe.Rem.EnderReme
+  - Unimake.Business.DFe.Xml.CTe.Rem.Fone
+  - Unimake.Business.DFe.Xml.CTe.Rem.IE
+  - Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCNPJ
+  - Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCPF
+  - Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeEmail
+  - Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeFone
+  - Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeIE
+  - Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeXFant
+  - Unimake.Business.DFe.Xml.CTe.Rem.XFant
+  - Unimake.Business.DFe.Xml.CTe.Rem.XNome
+  langs:
+  - csharp
+  - vb
+  name: Rem
+  nameWithType: Rem
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem
+  type: Class
+  source:
+    id: Rem
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 953
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class Rem
+    content.vb: >-
+      <Serializable>
+
+      Public Class Rem
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.CNPJ
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Rem.CNPJ
+  id: CNPJ
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: CNPJ
+  nameWithType: Rem.CNPJ
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.CNPJ
+  type: Property
+  source:
+    id: CNPJ
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 957
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string CNPJ { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CNPJ As String
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.CNPJ*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.CPF
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Rem.CPF
+  id: CPF
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: CPF
+  nameWithType: Rem.CPF
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.CPF
+  type: Property
+  source:
+    id: CPF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 960
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string CPF { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CPF As String
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.CPF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.IE
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Rem.IE
+  id: IE
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: IE
+  nameWithType: Rem.IE
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.IE
+  type: Property
+  source:
+    id: IE
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 963
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string IE { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property IE As String
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.IE*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.XNome
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Rem.XNome
+  id: XNome
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: XNome
+  nameWithType: Rem.XNome
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.XNome
+  type: Property
+  source:
+    id: XNome
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 966
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string XNome { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XNome As String
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.XNome*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.XFant
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Rem.XFant
+  id: XFant
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: XFant
+  nameWithType: Rem.XFant
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.XFant
+  type: Property
+  source:
+    id: XFant
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 969
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string XFant { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XFant As String
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.XFant*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.Fone
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Rem.Fone
+  id: Fone
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: Fone
+  nameWithType: Rem.Fone
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.Fone
+  type: Property
+  source:
+    id: Fone
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 972
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string Fone { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Fone As String
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.Fone*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.EnderReme
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Rem.EnderReme
+  id: EnderReme
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: EnderReme
+  nameWithType: Rem.EnderReme
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.EnderReme
+  type: Property
+  source:
+    id: EnderReme
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 975
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public EnderReme EnderReme { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTe.EnderReme
+    content.vb: Public Property EnderReme As EnderReme
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.EnderReme*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.Email
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Rem.Email
+  id: Email
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: Email
+  nameWithType: Rem.Email
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.Email
+  type: Property
+  source:
+    id: Email
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 978
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string Email { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Email As String
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.Email*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCNPJ
+  commentId: M:Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCNPJ
+  id: ShouldSerializeCNPJ
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeCNPJ()
+  nameWithType: Rem.ShouldSerializeCNPJ()
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCNPJ()
+  type: Method
+  source:
+    id: ShouldSerializeCNPJ
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 983
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public bool ShouldSerializeCNPJ()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeCNPJ As Boolean
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCNPJ*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCPF
+  commentId: M:Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCPF
+  id: ShouldSerializeCPF
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeCPF()
+  nameWithType: Rem.ShouldSerializeCPF()
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCPF()
+  type: Method
+  source:
+    id: ShouldSerializeCPF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 985
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public bool ShouldSerializeCPF()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeCPF As Boolean
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCPF*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeIE
+  commentId: M:Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeIE
+  id: ShouldSerializeIE
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeIE()
+  nameWithType: Rem.ShouldSerializeIE()
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeIE()
+  type: Method
+  source:
+    id: ShouldSerializeIE
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 987
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public bool ShouldSerializeIE()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeIE As Boolean
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeIE*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeXFant
+  commentId: M:Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeXFant
+  id: ShouldSerializeXFant
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeXFant()
+  nameWithType: Rem.ShouldSerializeXFant()
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeXFant()
+  type: Method
+  source:
+    id: ShouldSerializeXFant
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 989
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public bool ShouldSerializeXFant()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeXFant As Boolean
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeXFant*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeFone
+  commentId: M:Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeFone
+  id: ShouldSerializeFone
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeFone()
+  nameWithType: Rem.ShouldSerializeFone()
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeFone()
+  type: Method
+  source:
+    id: ShouldSerializeFone
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 991
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public bool ShouldSerializeFone()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeFone As Boolean
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeFone*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeEmail
+  commentId: M:Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeEmail
+  id: ShouldSerializeEmail
+  parent: Unimake.Business.DFe.Xml.CTe.Rem
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeEmail()
+  nameWithType: Rem.ShouldSerializeEmail()
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeEmail()
+  type: Method
+  source:
+    id: ShouldSerializeEmail
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 993
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public bool ShouldSerializeEmail()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeEmail As Boolean
+  overload: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeEmail*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.CNPJ*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.CNPJ
+  name: CNPJ
+  nameWithType: Rem.CNPJ
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.CNPJ
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.CPF*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.CPF
+  name: CPF
+  nameWithType: Rem.CPF
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.CPF
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.IE*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.IE
+  name: IE
+  nameWithType: Rem.IE
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.IE
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.XNome*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.XNome
+  name: XNome
+  nameWithType: Rem.XNome
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.XNome
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.XFant*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.XFant
+  name: XFant
+  nameWithType: Rem.XFant
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.XFant
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.Fone*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.Fone
+  name: Fone
+  nameWithType: Rem.Fone
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.Fone
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.EnderReme*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.EnderReme
+  name: EnderReme
+  nameWithType: Rem.EnderReme
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.EnderReme
+- uid: Unimake.Business.DFe.Xml.CTe.EnderReme
+  commentId: T:Unimake.Business.DFe.Xml.CTe.EnderReme
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: EnderReme
+  nameWithType: EnderReme
+  fullName: Unimake.Business.DFe.Xml.CTe.EnderReme
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.Email*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.Email
+  name: Email
+  nameWithType: Rem.Email
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.Email
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCNPJ*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCNPJ
+  name: ShouldSerializeCNPJ
+  nameWithType: Rem.ShouldSerializeCNPJ
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCNPJ
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCPF*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCPF
+  name: ShouldSerializeCPF
+  nameWithType: Rem.ShouldSerializeCPF
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeCPF
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeIE*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeIE
+  name: ShouldSerializeIE
+  nameWithType: Rem.ShouldSerializeIE
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeIE
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeXFant*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeXFant
+  name: ShouldSerializeXFant
+  nameWithType: Rem.ShouldSerializeXFant
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeXFant
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeFone*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeFone
+  name: ShouldSerializeFone
+  nameWithType: Rem.ShouldSerializeFone
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeFone
+- uid: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeEmail*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeEmail
+  name: ShouldSerializeEmail
+  nameWithType: Rem.ShouldSerializeEmail
+  fullName: Unimake.Business.DFe.Xml.CTe.Rem.ShouldSerializeEmail

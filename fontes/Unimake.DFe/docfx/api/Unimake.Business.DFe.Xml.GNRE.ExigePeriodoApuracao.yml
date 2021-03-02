@@ -1,0 +1,471 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao
+  commentId: T:Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao
+  id: ExigePeriodoApuracao
+  parent: Unimake.Business.DFe.Xml.GNRE
+  children:
+  - Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo
+  - Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo_00
+  langs:
+  - csharp
+  - vb
+  name: ExigePeriodoApuracao
+  nameWithType: ExigePeriodoApuracao
+  fullName: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao
+  type: Class
+  source:
+    id: ExigePeriodoApuracao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TConfigUf.cs
+    startLine: 245
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class ExigePeriodoApuracao : ExigeDetalhamentoReceita
+    content.vb: >-
+      <Serializable>
+
+      Public Class ExigePeriodoApuracao
+          Inherits ExigeDetalhamentoReceita
+  inheritance:
+  - System.Object
+  - Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita
+  inheritedMembers:
+  - Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita.Value
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo
+  id: Campo
+  parent: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao
+  langs:
+  - csharp
+  - vb
+  name: Campo
+  nameWithType: ExigePeriodoApuracao.Campo
+  fullName: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo
+  type: Property
+  source:
+    id: Campo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TConfigUf.cs
+    startLine: 249
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public override CamposGNRE Campo { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE
+    content.vb: Public Overrides Property Campo As CamposGNRE
+  overridden: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita.Campo
+  overload: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo*
+  modifiers.csharp:
+  - public
+  - override
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo_00
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo_00
+  id: Campo_00
+  parent: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao
+  langs:
+  - csharp
+  - vb
+  name: Campo_00
+  nameWithType: ExigePeriodoApuracao.Campo_00
+  fullName: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo_00
+  type: Property
+  source:
+    id: Campo_00
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TConfigUf.cs
+    startLine: 252
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public override CamposGNRE2 Campo_00 { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.CamposGNRE2
+    content.vb: Public Overrides Property Campo_00 As CamposGNRE2
+  overridden: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita.Campo_00
+  overload: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo_00*
+  modifiers.csharp:
+  - public
+  - override
+  - get
+  - set
+  modifiers.vb:
+  - Public
+  - Overrides
+references:
+- uid: Unimake.Business.DFe.Xml.GNRE
+  commentId: N:Unimake.Business.DFe.Xml.GNRE
+  name: Unimake.Business.DFe.Xml.GNRE
+  nameWithType: Unimake.Business.DFe.Xml.GNRE
+  fullName: Unimake.Business.DFe.Xml.GNRE
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita
+  commentId: T:Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita
+  parent: Unimake.Business.DFe.Xml.GNRE
+  name: ExigeDetalhamentoReceita
+  nameWithType: ExigeDetalhamentoReceita
+  fullName: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita
+- uid: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita.Value
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita.Value
+  parent: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita
+  name: Value
+  nameWithType: ExigeDetalhamentoReceita.Value
+  fullName: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita.Value
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita.Campo
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita.Campo
+  parent: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita
+  name: Campo
+  nameWithType: ExigeDetalhamentoReceita.Campo
+  fullName: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita.Campo
+- uid: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo
+  name: Campo
+  nameWithType: ExigePeriodoApuracao.Campo
+  fullName: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE
+  commentId: T:Unimake.Business.DFe.Servicos.CamposGNRE
+  parent: Unimake.Business.DFe.Servicos
+  name: CamposGNRE
+  nameWithType: CamposGNRE
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita.Campo_00
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita.Campo_00
+  parent: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita
+  name: Campo_00
+  nameWithType: ExigeDetalhamentoReceita.Campo_00
+  fullName: Unimake.Business.DFe.Xml.GNRE.ExigeDetalhamentoReceita.Campo_00
+- uid: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo_00*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo_00
+  name: Campo_00
+  nameWithType: ExigePeriodoApuracao.Campo_00
+  fullName: Unimake.Business.DFe.Xml.GNRE.ExigePeriodoApuracao.Campo_00
+- uid: Unimake.Business.DFe.Servicos.CamposGNRE2
+  commentId: T:Unimake.Business.DFe.Servicos.CamposGNRE2
+  parent: Unimake.Business.DFe.Servicos
+  name: CamposGNRE2
+  nameWithType: CamposGNRE2
+  fullName: Unimake.Business.DFe.Servicos.CamposGNRE2

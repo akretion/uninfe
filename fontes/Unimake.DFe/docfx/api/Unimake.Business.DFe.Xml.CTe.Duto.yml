@@ -1,0 +1,631 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTe.Duto
+  commentId: T:Unimake.Business.DFe.Xml.CTe.Duto
+  id: Duto
+  parent: Unimake.Business.DFe.Xml.CTe
+  children:
+  - Unimake.Business.DFe.Xml.CTe.Duto.DFim
+  - Unimake.Business.DFe.Xml.CTe.Duto.DFimField
+  - Unimake.Business.DFe.Xml.CTe.Duto.DIni
+  - Unimake.Business.DFe.Xml.CTe.Duto.DIniField
+  - Unimake.Business.DFe.Xml.CTe.Duto.ShouldSerializeVTarField
+  - Unimake.Business.DFe.Xml.CTe.Duto.VTar
+  - Unimake.Business.DFe.Xml.CTe.Duto.VTarField
+  langs:
+  - csharp
+  - vb
+  name: Duto
+  nameWithType: Duto
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto
+  type: Class
+  source:
+    id: Duto
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 2678
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class Duto
+    content.vb: >-
+      <Serializable>
+
+      Public Class Duto
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.VTar
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Duto.VTar
+  id: VTar
+  parent: Unimake.Business.DFe.Xml.CTe.Duto
+  langs:
+  - csharp
+  - vb
+  name: VTar
+  nameWithType: Duto.VTar
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.VTar
+  type: Property
+  source:
+    id: VTar
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 2682
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double VTar { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VTar As Double
+  overload: Unimake.Business.DFe.Xml.CTe.Duto.VTar*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.VTarField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Duto.VTarField
+  id: VTarField
+  parent: Unimake.Business.DFe.Xml.CTe.Duto
+  langs:
+  - csharp
+  - vb
+  name: VTarField
+  nameWithType: Duto.VTarField
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.VTarField
+  type: Property
+  source:
+    id: VTarField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 2685
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string VTarField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VTarField As String
+  overload: Unimake.Business.DFe.Xml.CTe.Duto.VTarField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.DIni
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Duto.DIni
+  id: DIni
+  parent: Unimake.Business.DFe.Xml.CTe.Duto
+  langs:
+  - csharp
+  - vb
+  name: DIni
+  nameWithType: Duto.DIni
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.DIni
+  type: Property
+  source:
+    id: DIni
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 2692
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public DateTime DIni { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DIni As Date
+  overload: Unimake.Business.DFe.Xml.CTe.Duto.DIni*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.DIniField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Duto.DIniField
+  id: DIniField
+  parent: Unimake.Business.DFe.Xml.CTe.Duto
+  langs:
+  - csharp
+  - vb
+  name: DIniField
+  nameWithType: Duto.DIniField
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.DIniField
+  type: Property
+  source:
+    id: DIniField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 2695
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string DIniField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DIniField As String
+  overload: Unimake.Business.DFe.Xml.CTe.Duto.DIniField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.DFim
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Duto.DFim
+  id: DFim
+  parent: Unimake.Business.DFe.Xml.CTe.Duto
+  langs:
+  - csharp
+  - vb
+  name: DFim
+  nameWithType: Duto.DFim
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.DFim
+  type: Property
+  source:
+    id: DFim
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 2702
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public DateTime DFim { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DFim As Date
+  overload: Unimake.Business.DFe.Xml.CTe.Duto.DFim*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.DFimField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Duto.DFimField
+  id: DFimField
+  parent: Unimake.Business.DFe.Xml.CTe.Duto
+  langs:
+  - csharp
+  - vb
+  name: DFimField
+  nameWithType: Duto.DFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.DFimField
+  type: Property
+  source:
+    id: DFimField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 2705
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string DFimField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DFimField As String
+  overload: Unimake.Business.DFe.Xml.CTe.Duto.DFimField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.ShouldSerializeVTarField
+  commentId: M:Unimake.Business.DFe.Xml.CTe.Duto.ShouldSerializeVTarField
+  id: ShouldSerializeVTarField
+  parent: Unimake.Business.DFe.Xml.CTe.Duto
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeVTarField()
+  nameWithType: Duto.ShouldSerializeVTarField()
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.ShouldSerializeVTarField()
+  type: Method
+  source:
+    id: ShouldSerializeVTarField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 2714
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public bool ShouldSerializeVTarField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeVTarField As Boolean
+  overload: Unimake.Business.DFe.Xml.CTe.Duto.ShouldSerializeVTarField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.VTar*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Duto.VTar
+  name: VTar
+  nameWithType: Duto.VTar
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.VTar
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.VTarField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Duto.VTarField
+  name: VTarField
+  nameWithType: Duto.VTarField
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.VTarField
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.DIni*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Duto.DIni
+  name: DIni
+  nameWithType: Duto.DIni
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.DIni
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.DIniField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Duto.DIniField
+  name: DIniField
+  nameWithType: Duto.DIniField
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.DIniField
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.DFim*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Duto.DFim
+  name: DFim
+  nameWithType: Duto.DFim
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.DFim
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.DFimField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Duto.DFimField
+  name: DFimField
+  nameWithType: Duto.DFimField
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.DFimField
+- uid: Unimake.Business.DFe.Xml.CTe.Duto.ShouldSerializeVTarField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Duto.ShouldSerializeVTarField
+  name: ShouldSerializeVTarField
+  nameWithType: Duto.ShouldSerializeVTarField
+  fullName: Unimake.Business.DFe.Xml.CTe.Duto.ShouldSerializeVTarField
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean

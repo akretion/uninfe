@@ -1,0 +1,508 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  commentId: T:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  id: BandeiraOperadoraCartao
+  parent: Unimake.Business.DFe.Servicos
+  children:
+  - Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.AmericanExpress
+  - Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Aura
+  - Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Cabal
+  - Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.DinersClub
+  - Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Elo
+  - Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Hipercard
+  - Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Mastercard
+  - Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Outros
+  - Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Sorocred
+  - Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Visa
+  langs:
+  - csharp
+  - vb
+  name: BandeiraOperadoraCartao
+  nameWithType: BandeiraOperadoraCartao
+  fullName: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  type: Enum
+  source:
+    id: BandeiraOperadoraCartao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1384
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nBandeira da operadora de cartão de crédito e/ou débito\n"
+  example: []
+  syntax:
+    content: public enum BandeiraOperadoraCartao
+    content.vb: Public Enum BandeiraOperadoraCartao
+  extensionMethods:
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Visa
+  commentId: F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Visa
+  id: Visa
+  parent: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  langs:
+  - csharp
+  - vb
+  name: Visa
+  nameWithType: BandeiraOperadoraCartao.Visa
+  fullName: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Visa
+  type: Field
+  source:
+    id: Visa
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1389
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n01=Visa\n"
+  example: []
+  syntax:
+    content: Visa = 1
+    return:
+      type: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Mastercard
+  commentId: F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Mastercard
+  id: Mastercard
+  parent: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  langs:
+  - csharp
+  - vb
+  name: Mastercard
+  nameWithType: BandeiraOperadoraCartao.Mastercard
+  fullName: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Mastercard
+  type: Field
+  source:
+    id: Mastercard
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1395
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n02=Mastercard\n"
+  example: []
+  syntax:
+    content: Mastercard = 2
+    return:
+      type: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.AmericanExpress
+  commentId: F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.AmericanExpress
+  id: AmericanExpress
+  parent: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  langs:
+  - csharp
+  - vb
+  name: AmericanExpress
+  nameWithType: BandeiraOperadoraCartao.AmericanExpress
+  fullName: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.AmericanExpress
+  type: Field
+  source:
+    id: AmericanExpress
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1401
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n03=American Express\n"
+  example: []
+  syntax:
+    content: AmericanExpress = 3
+    return:
+      type: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Sorocred
+  commentId: F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Sorocred
+  id: Sorocred
+  parent: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  langs:
+  - csharp
+  - vb
+  name: Sorocred
+  nameWithType: BandeiraOperadoraCartao.Sorocred
+  fullName: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Sorocred
+  type: Field
+  source:
+    id: Sorocred
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1407
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n04=Sorocred\n"
+  example: []
+  syntax:
+    content: Sorocred = 4
+    return:
+      type: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.DinersClub
+  commentId: F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.DinersClub
+  id: DinersClub
+  parent: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  langs:
+  - csharp
+  - vb
+  name: DinersClub
+  nameWithType: BandeiraOperadoraCartao.DinersClub
+  fullName: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.DinersClub
+  type: Field
+  source:
+    id: DinersClub
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1413
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n05=Diners Club\n"
+  example: []
+  syntax:
+    content: DinersClub = 5
+    return:
+      type: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Elo
+  commentId: F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Elo
+  id: Elo
+  parent: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  langs:
+  - csharp
+  - vb
+  name: Elo
+  nameWithType: BandeiraOperadoraCartao.Elo
+  fullName: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Elo
+  type: Field
+  source:
+    id: Elo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1419
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n06=Elo\n"
+  example: []
+  syntax:
+    content: Elo = 6
+    return:
+      type: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Hipercard
+  commentId: F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Hipercard
+  id: Hipercard
+  parent: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  langs:
+  - csharp
+  - vb
+  name: Hipercard
+  nameWithType: BandeiraOperadoraCartao.Hipercard
+  fullName: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Hipercard
+  type: Field
+  source:
+    id: Hipercard
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1425
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n07=Hipercard\n"
+  example: []
+  syntax:
+    content: Hipercard = 7
+    return:
+      type: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Aura
+  commentId: F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Aura
+  id: Aura
+  parent: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  langs:
+  - csharp
+  - vb
+  name: Aura
+  nameWithType: BandeiraOperadoraCartao.Aura
+  fullName: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Aura
+  type: Field
+  source:
+    id: Aura
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1431
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n08=Aura\n"
+  example: []
+  syntax:
+    content: Aura = 8
+    return:
+      type: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Cabal
+  commentId: F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Cabal
+  id: Cabal
+  parent: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  langs:
+  - csharp
+  - vb
+  name: Cabal
+  nameWithType: BandeiraOperadoraCartao.Cabal
+  fullName: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Cabal
+  type: Field
+  source:
+    id: Cabal
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1437
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n09=Cabal\n"
+  example: []
+  syntax:
+    content: Cabal = 9
+    return:
+      type: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Outros
+  commentId: F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Outros
+  id: Outros
+  parent: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  langs:
+  - csharp
+  - vb
+  name: Outros
+  nameWithType: BandeiraOperadoraCartao.Outros
+  fullName: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Outros
+  type: Field
+  source:
+    id: Outros
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1443
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n99=Outros\n"
+  example: []
+  syntax:
+    content: Outros = 99
+    return:
+      type: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  name: GetAttribute<T>()
+  nameWithType: EnumsExtension.GetAttribute<T>()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>()
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)()
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)()
+  name.vb: GetAttribute(Of T)()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  name: GetAttributeDescription()
+  nameWithType: EnumsExtension.GetAttributeDescription()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  isExternal: true
+  name: GetAttribute<T>(Enum)
+  nameWithType: EnumsExtension.GetAttribute<T>(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>(System.Enum)
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)(Enum)
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)(System.Enum)
+  name.vb: GetAttribute(Of T)(Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  isExternal: true
+  name: GetAttributeDescription(Enum)
+  nameWithType: EnumsExtension.GetAttributeDescription(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+- uid: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  commentId: T:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao
+  parent: Unimake.Business.DFe.Servicos
+  name: BandeiraOperadoraCartao
+  nameWithType: BandeiraOperadoraCartao
+  fullName: Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao

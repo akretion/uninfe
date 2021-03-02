@@ -1,0 +1,322 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.ProcessoEmissao
+  commentId: T:Unimake.Business.DFe.Servicos.ProcessoEmissao
+  id: ProcessoEmissao
+  parent: Unimake.Business.DFe.Servicos
+  children:
+  - Unimake.Business.DFe.Servicos.ProcessoEmissao.AplicativoContribuinte
+  - Unimake.Business.DFe.Servicos.ProcessoEmissao.AplicativoFisco
+  - Unimake.Business.DFe.Servicos.ProcessoEmissao.AvulsaPeloContribuinteSiteFisco
+  - Unimake.Business.DFe.Servicos.ProcessoEmissao.AvulsaPeloFisco
+  langs:
+  - csharp
+  - vb
+  name: ProcessoEmissao
+  nameWithType: ProcessoEmissao
+  fullName: Unimake.Business.DFe.Servicos.ProcessoEmissao
+  type: Enum
+  source:
+    id: ProcessoEmissao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 876
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nProcesso de emissão do DFe (NFe, NFCe, CTe, etc...)\n"
+  example: []
+  syntax:
+    content: public enum ProcessoEmissao
+    content.vb: Public Enum ProcessoEmissao
+  extensionMethods:
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Unimake.Business.DFe.Servicos.ProcessoEmissao.AplicativoContribuinte
+  commentId: F:Unimake.Business.DFe.Servicos.ProcessoEmissao.AplicativoContribuinte
+  id: AplicativoContribuinte
+  parent: Unimake.Business.DFe.Servicos.ProcessoEmissao
+  langs:
+  - csharp
+  - vb
+  name: AplicativoContribuinte
+  nameWithType: ProcessoEmissao.AplicativoContribuinte
+  fullName: Unimake.Business.DFe.Servicos.ProcessoEmissao.AplicativoContribuinte
+  type: Field
+  source:
+    id: AplicativoContribuinte
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 881
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n0=Emissão de NF-e com aplicativo do contribuinte\n"
+  example: []
+  syntax:
+    content: AplicativoContribuinte = 0
+    return:
+      type: Unimake.Business.DFe.Servicos.ProcessoEmissao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ProcessoEmissao.AvulsaPeloFisco
+  commentId: F:Unimake.Business.DFe.Servicos.ProcessoEmissao.AvulsaPeloFisco
+  id: AvulsaPeloFisco
+  parent: Unimake.Business.DFe.Servicos.ProcessoEmissao
+  langs:
+  - csharp
+  - vb
+  name: AvulsaPeloFisco
+  nameWithType: ProcessoEmissao.AvulsaPeloFisco
+  fullName: Unimake.Business.DFe.Servicos.ProcessoEmissao.AvulsaPeloFisco
+  type: Field
+  source:
+    id: AvulsaPeloFisco
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 887
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n1=Emissão de NF-e avulsa pelo Fisco;\n"
+  example: []
+  syntax:
+    content: AvulsaPeloFisco = 1
+    return:
+      type: Unimake.Business.DFe.Servicos.ProcessoEmissao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ProcessoEmissao.AvulsaPeloContribuinteSiteFisco
+  commentId: F:Unimake.Business.DFe.Servicos.ProcessoEmissao.AvulsaPeloContribuinteSiteFisco
+  id: AvulsaPeloContribuinteSiteFisco
+  parent: Unimake.Business.DFe.Servicos.ProcessoEmissao
+  langs:
+  - csharp
+  - vb
+  name: AvulsaPeloContribuinteSiteFisco
+  nameWithType: ProcessoEmissao.AvulsaPeloContribuinteSiteFisco
+  fullName: Unimake.Business.DFe.Servicos.ProcessoEmissao.AvulsaPeloContribuinteSiteFisco
+  type: Field
+  source:
+    id: AvulsaPeloContribuinteSiteFisco
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 893
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n2=Emissão de NF-e avulsa, pelo contribuinte com seu certificado digital, através do site do Fisco;\n"
+  example: []
+  syntax:
+    content: AvulsaPeloContribuinteSiteFisco = 2
+    return:
+      type: Unimake.Business.DFe.Servicos.ProcessoEmissao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ProcessoEmissao.AplicativoFisco
+  commentId: F:Unimake.Business.DFe.Servicos.ProcessoEmissao.AplicativoFisco
+  id: AplicativoFisco
+  parent: Unimake.Business.DFe.Servicos.ProcessoEmissao
+  langs:
+  - csharp
+  - vb
+  name: AplicativoFisco
+  nameWithType: ProcessoEmissao.AplicativoFisco
+  fullName: Unimake.Business.DFe.Servicos.ProcessoEmissao.AplicativoFisco
+  type: Field
+  source:
+    id: AplicativoFisco
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 899
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n3=Emissão NF-e pelo contribuinte com aplicativo fornecido pelo Fisco.\n"
+  example: []
+  syntax:
+    content: AplicativoFisco = 3
+    return:
+      type: Unimake.Business.DFe.Servicos.ProcessoEmissao
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  name: GetAttribute<T>()
+  nameWithType: EnumsExtension.GetAttribute<T>()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>()
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)()
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)()
+  name.vb: GetAttribute(Of T)()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  name: GetAttributeDescription()
+  nameWithType: EnumsExtension.GetAttributeDescription()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  isExternal: true
+  name: GetAttribute<T>(Enum)
+  nameWithType: EnumsExtension.GetAttribute<T>(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>(System.Enum)
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)(Enum)
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)(System.Enum)
+  name.vb: GetAttribute(Of T)(Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  isExternal: true
+  name: GetAttributeDescription(Enum)
+  nameWithType: EnumsExtension.GetAttributeDescription(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+- uid: Unimake.Business.DFe.Servicos.ProcessoEmissao
+  commentId: T:Unimake.Business.DFe.Servicos.ProcessoEmissao
+  parent: Unimake.Business.DFe.Servicos
+  name: ProcessoEmissao
+  nameWithType: ProcessoEmissao
+  fullName: Unimake.Business.DFe.Servicos.ProcessoEmissao

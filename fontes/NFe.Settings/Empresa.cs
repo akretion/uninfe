@@ -430,6 +430,9 @@ namespace NFe.Settings
         [AttributeTipoAplicacao(TipoAplicativo.SAT)]
         public string VersaoLayoutSAT { get; set; }
 
+        [AttributeTipoAplicacao(TipoAplicativo.SAT)]
+        public string TipoConversao { get; set; }
+
         /// <summary>
         /// Código da aplicação que está cadastrada para acessar os serviços REST do município de Florianópolis-SC
         /// </summary>
@@ -1095,7 +1098,14 @@ namespace NFe.Settings
                     dados.CertificadoSenha = Criptografia.criptografaSenha(dados.CertificadoSenha);
                 }
 
-                dados.CertificadoPIN = Criptografia.criptografaSenha(dados.CertificadoPIN);
+                if (clsX509Certificate2Extension.IsA3(dados.X509Certificado))
+                {
+                    dados.CertificadoPIN = Criptografia.criptografaSenha(dados.CertificadoPIN);
+                }
+                else
+                {
+                    dados.CertificadoPIN = string.Empty;
+                }
                 dados.FTPNomeDoServidor = Criptografia.criptografaSenha(dados.FTPNomeDoServidor);
                 dados.FTPNomeDoUsuario = Criptografia.criptografaSenha(dados.FTPNomeDoUsuario);
                 dados.FTPSenha = Criptografia.criptografaSenha(dados.FTPSenha);

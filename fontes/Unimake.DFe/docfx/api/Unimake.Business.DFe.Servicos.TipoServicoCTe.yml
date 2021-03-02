@@ -1,0 +1,353 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.TipoServicoCTe
+  commentId: T:Unimake.Business.DFe.Servicos.TipoServicoCTe
+  id: TipoServicoCTe
+  parent: Unimake.Business.DFe.Servicos
+  children:
+  - Unimake.Business.DFe.Servicos.TipoServicoCTe.Normal
+  - Unimake.Business.DFe.Servicos.TipoServicoCTe.Redespacho
+  - Unimake.Business.DFe.Servicos.TipoServicoCTe.RedespachoIntermediario
+  - Unimake.Business.DFe.Servicos.TipoServicoCTe.ServicoVinculadoMultimodal
+  - Unimake.Business.DFe.Servicos.TipoServicoCTe.Subcontratacao
+  langs:
+  - csharp
+  - vb
+  name: TipoServicoCTe
+  nameWithType: TipoServicoCTe
+  fullName: Unimake.Business.DFe.Servicos.TipoServicoCTe
+  type: Enum
+  source:
+    id: TipoServicoCTe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 3097
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nTipos de serviços do CTe\n"
+  example: []
+  syntax:
+    content: public enum TipoServicoCTe
+    content.vb: Public Enum TipoServicoCTe
+  extensionMethods:
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Unimake.Business.DFe.Servicos.TipoServicoCTe.Normal
+  commentId: F:Unimake.Business.DFe.Servicos.TipoServicoCTe.Normal
+  id: Normal
+  parent: Unimake.Business.DFe.Servicos.TipoServicoCTe
+  langs:
+  - csharp
+  - vb
+  name: Normal
+  nameWithType: TipoServicoCTe.Normal
+  fullName: Unimake.Business.DFe.Servicos.TipoServicoCTe.Normal
+  type: Field
+  source:
+    id: Normal
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 3102
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n0 = Normal\n"
+  example: []
+  syntax:
+    content: Normal = 0
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoServicoCTe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoServicoCTe.Subcontratacao
+  commentId: F:Unimake.Business.DFe.Servicos.TipoServicoCTe.Subcontratacao
+  id: Subcontratacao
+  parent: Unimake.Business.DFe.Servicos.TipoServicoCTe
+  langs:
+  - csharp
+  - vb
+  name: Subcontratacao
+  nameWithType: TipoServicoCTe.Subcontratacao
+  fullName: Unimake.Business.DFe.Servicos.TipoServicoCTe.Subcontratacao
+  type: Field
+  source:
+    id: Subcontratacao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 3108
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n1 = Subcontratação\n"
+  example: []
+  syntax:
+    content: Subcontratacao = 1
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoServicoCTe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoServicoCTe.Redespacho
+  commentId: F:Unimake.Business.DFe.Servicos.TipoServicoCTe.Redespacho
+  id: Redespacho
+  parent: Unimake.Business.DFe.Servicos.TipoServicoCTe
+  langs:
+  - csharp
+  - vb
+  name: Redespacho
+  nameWithType: TipoServicoCTe.Redespacho
+  fullName: Unimake.Business.DFe.Servicos.TipoServicoCTe.Redespacho
+  type: Field
+  source:
+    id: Redespacho
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 3114
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n2 = Redespacho\n"
+  example: []
+  syntax:
+    content: Redespacho = 2
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoServicoCTe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoServicoCTe.RedespachoIntermediario
+  commentId: F:Unimake.Business.DFe.Servicos.TipoServicoCTe.RedespachoIntermediario
+  id: RedespachoIntermediario
+  parent: Unimake.Business.DFe.Servicos.TipoServicoCTe
+  langs:
+  - csharp
+  - vb
+  name: RedespachoIntermediario
+  nameWithType: TipoServicoCTe.RedespachoIntermediario
+  fullName: Unimake.Business.DFe.Servicos.TipoServicoCTe.RedespachoIntermediario
+  type: Field
+  source:
+    id: RedespachoIntermediario
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 3120
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n3 = Redespacho Intermediário\n"
+  example: []
+  syntax:
+    content: RedespachoIntermediario = 3
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoServicoCTe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoServicoCTe.ServicoVinculadoMultimodal
+  commentId: F:Unimake.Business.DFe.Servicos.TipoServicoCTe.ServicoVinculadoMultimodal
+  id: ServicoVinculadoMultimodal
+  parent: Unimake.Business.DFe.Servicos.TipoServicoCTe
+  langs:
+  - csharp
+  - vb
+  name: ServicoVinculadoMultimodal
+  nameWithType: TipoServicoCTe.ServicoVinculadoMultimodal
+  fullName: Unimake.Business.DFe.Servicos.TipoServicoCTe.ServicoVinculadoMultimodal
+  type: Field
+  source:
+    id: ServicoVinculadoMultimodal
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 3126
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n4 = ServicoVinculadoMultimodal\n"
+  example: []
+  syntax:
+    content: ServicoVinculadoMultimodal = 4
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoServicoCTe
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  name: GetAttribute<T>()
+  nameWithType: EnumsExtension.GetAttribute<T>()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>()
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)()
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)()
+  name.vb: GetAttribute(Of T)()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  name: GetAttributeDescription()
+  nameWithType: EnumsExtension.GetAttributeDescription()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  isExternal: true
+  name: GetAttribute<T>(Enum)
+  nameWithType: EnumsExtension.GetAttribute<T>(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>(System.Enum)
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)(Enum)
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)(System.Enum)
+  name.vb: GetAttribute(Of T)(Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  isExternal: true
+  name: GetAttributeDescription(Enum)
+  nameWithType: EnumsExtension.GetAttributeDescription(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+- uid: Unimake.Business.DFe.Servicos.TipoServicoCTe
+  commentId: T:Unimake.Business.DFe.Servicos.TipoServicoCTe
+  parent: Unimake.Business.DFe.Servicos
+  name: TipoServicoCTe
+  nameWithType: TipoServicoCTe
+  fullName: Unimake.Business.DFe.Servicos.TipoServicoCTe

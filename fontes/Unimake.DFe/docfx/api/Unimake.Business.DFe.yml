@@ -1,0 +1,58 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  id: Unimake.Business.DFe
+  children:
+  - Unimake.Business.DFe.Configuration
+  - Unimake.Business.DFe.ConsumirWS
+  - Unimake.Business.DFe.EnumsExtension
+  - Unimake.Business.DFe.ValidarSchema
+  - Unimake.Business.DFe.WSSoap
+  - Unimake.Business.DFe.XmlReaderExtensions
+  langs:
+  - csharp
+  - vb
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+  type: Namespace
+  assemblies:
+  - Unimake.Business.DFe
+references:
+- uid: Unimake.Business.DFe.Configuration
+  commentId: T:Unimake.Business.DFe.Configuration
+  name: Configuration
+  nameWithType: Configuration
+  fullName: Unimake.Business.DFe.Configuration
+- uid: Unimake.Business.DFe.ConsumirWS
+  commentId: T:Unimake.Business.DFe.ConsumirWS
+  name: ConsumirWS
+  nameWithType: ConsumirWS
+  fullName: Unimake.Business.DFe.ConsumirWS
+- uid: Unimake.Business.DFe.WSSoap
+  commentId: T:Unimake.Business.DFe.WSSoap
+  name: WSSoap
+  nameWithType: WSSoap
+  fullName: Unimake.Business.DFe.WSSoap
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.XmlReaderExtensions
+  commentId: T:Unimake.Business.DFe.XmlReaderExtensions
+  name: XmlReaderExtensions
+  nameWithType: XmlReaderExtensions
+  fullName: Unimake.Business.DFe.XmlReaderExtensions
+- uid: Unimake.Business.DFe.ValidarSchema
+  commentId: T:Unimake.Business.DFe.ValidarSchema
+  name: ValidarSchema
+  nameWithType: ValidarSchema
+  fullName: Unimake.Business.DFe.ValidarSchema
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe

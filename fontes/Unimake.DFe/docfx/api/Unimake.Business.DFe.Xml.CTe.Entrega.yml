@@ -1,0 +1,605 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTe.Entrega
+  commentId: T:Unimake.Business.DFe.Xml.CTe.Entrega
+  id: Entrega
+  parent: Unimake.Business.DFe.Xml.CTe
+  children:
+  - Unimake.Business.DFe.Xml.CTe.Entrega.ComData
+  - Unimake.Business.DFe.Xml.CTe.Entrega.ComHora
+  - Unimake.Business.DFe.Xml.CTe.Entrega.NoInter
+  - Unimake.Business.DFe.Xml.CTe.Entrega.NoPeriodo
+  - Unimake.Business.DFe.Xml.CTe.Entrega.SemData
+  - Unimake.Business.DFe.Xml.CTe.Entrega.SemHora
+  langs:
+  - csharp
+  - vb
+  name: Entrega
+  nameWithType: Entrega
+  fullName: Unimake.Business.DFe.Xml.CTe.Entrega
+  type: Class
+  source:
+    id: Entrega
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 638
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class Entrega
+    content.vb: >-
+      <Serializable>
+
+      Public Class Entrega
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTe.Entrega.SemData
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Entrega.SemData
+  id: SemData
+  parent: Unimake.Business.DFe.Xml.CTe.Entrega
+  langs:
+  - csharp
+  - vb
+  name: SemData
+  nameWithType: Entrega.SemData
+  fullName: Unimake.Business.DFe.Xml.CTe.Entrega.SemData
+  type: Property
+  source:
+    id: SemData
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 642
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public SemData SemData { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTe.SemData
+    content.vb: Public Property SemData As SemData
+  overload: Unimake.Business.DFe.Xml.CTe.Entrega.SemData*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Entrega.ComData
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Entrega.ComData
+  id: ComData
+  parent: Unimake.Business.DFe.Xml.CTe.Entrega
+  langs:
+  - csharp
+  - vb
+  name: ComData
+  nameWithType: Entrega.ComData
+  fullName: Unimake.Business.DFe.Xml.CTe.Entrega.ComData
+  type: Property
+  source:
+    id: ComData
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 645
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public ComData ComData { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTe.ComData
+    content.vb: Public Property ComData As ComData
+  overload: Unimake.Business.DFe.Xml.CTe.Entrega.ComData*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Entrega.NoPeriodo
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Entrega.NoPeriodo
+  id: NoPeriodo
+  parent: Unimake.Business.DFe.Xml.CTe.Entrega
+  langs:
+  - csharp
+  - vb
+  name: NoPeriodo
+  nameWithType: Entrega.NoPeriodo
+  fullName: Unimake.Business.DFe.Xml.CTe.Entrega.NoPeriodo
+  type: Property
+  source:
+    id: NoPeriodo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 648
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public NoPeriodo NoPeriodo { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTe.NoPeriodo
+    content.vb: Public Property NoPeriodo As NoPeriodo
+  overload: Unimake.Business.DFe.Xml.CTe.Entrega.NoPeriodo*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Entrega.SemHora
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Entrega.SemHora
+  id: SemHora
+  parent: Unimake.Business.DFe.Xml.CTe.Entrega
+  langs:
+  - csharp
+  - vb
+  name: SemHora
+  nameWithType: Entrega.SemHora
+  fullName: Unimake.Business.DFe.Xml.CTe.Entrega.SemHora
+  type: Property
+  source:
+    id: SemHora
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 651
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public SemHora SemHora { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTe.SemHora
+    content.vb: Public Property SemHora As SemHora
+  overload: Unimake.Business.DFe.Xml.CTe.Entrega.SemHora*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Entrega.ComHora
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Entrega.ComHora
+  id: ComHora
+  parent: Unimake.Business.DFe.Xml.CTe.Entrega
+  langs:
+  - csharp
+  - vb
+  name: ComHora
+  nameWithType: Entrega.ComHora
+  fullName: Unimake.Business.DFe.Xml.CTe.Entrega.ComHora
+  type: Property
+  source:
+    id: ComHora
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 654
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public ComHora ComHora { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTe.ComHora
+    content.vb: Public Property ComHora As ComHora
+  overload: Unimake.Business.DFe.Xml.CTe.Entrega.ComHora*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Entrega.NoInter
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Entrega.NoInter
+  id: NoInter
+  parent: Unimake.Business.DFe.Xml.CTe.Entrega
+  langs:
+  - csharp
+  - vb
+  name: NoInter
+  nameWithType: Entrega.NoInter
+  fullName: Unimake.Business.DFe.Xml.CTe.Entrega.NoInter
+  type: Property
+  source:
+    id: NoInter
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 657
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public NoInter NoInter { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Xml.CTe.NoInter
+    content.vb: Public Property NoInter As NoInter
+  overload: Unimake.Business.DFe.Xml.CTe.Entrega.NoInter*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.CTe.Entrega.SemData*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Entrega.SemData
+  name: SemData
+  nameWithType: Entrega.SemData
+  fullName: Unimake.Business.DFe.Xml.CTe.Entrega.SemData
+- uid: Unimake.Business.DFe.Xml.CTe.SemData
+  commentId: T:Unimake.Business.DFe.Xml.CTe.SemData
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: SemData
+  nameWithType: SemData
+  fullName: Unimake.Business.DFe.Xml.CTe.SemData
+- uid: Unimake.Business.DFe.Xml.CTe.Entrega.ComData*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Entrega.ComData
+  name: ComData
+  nameWithType: Entrega.ComData
+  fullName: Unimake.Business.DFe.Xml.CTe.Entrega.ComData
+- uid: Unimake.Business.DFe.Xml.CTe.ComData
+  commentId: T:Unimake.Business.DFe.Xml.CTe.ComData
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: ComData
+  nameWithType: ComData
+  fullName: Unimake.Business.DFe.Xml.CTe.ComData
+- uid: Unimake.Business.DFe.Xml.CTe.Entrega.NoPeriodo*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Entrega.NoPeriodo
+  name: NoPeriodo
+  nameWithType: Entrega.NoPeriodo
+  fullName: Unimake.Business.DFe.Xml.CTe.Entrega.NoPeriodo
+- uid: Unimake.Business.DFe.Xml.CTe.NoPeriodo
+  commentId: T:Unimake.Business.DFe.Xml.CTe.NoPeriodo
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: NoPeriodo
+  nameWithType: NoPeriodo
+  fullName: Unimake.Business.DFe.Xml.CTe.NoPeriodo
+- uid: Unimake.Business.DFe.Xml.CTe.Entrega.SemHora*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Entrega.SemHora
+  name: SemHora
+  nameWithType: Entrega.SemHora
+  fullName: Unimake.Business.DFe.Xml.CTe.Entrega.SemHora
+- uid: Unimake.Business.DFe.Xml.CTe.SemHora
+  commentId: T:Unimake.Business.DFe.Xml.CTe.SemHora
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: SemHora
+  nameWithType: SemHora
+  fullName: Unimake.Business.DFe.Xml.CTe.SemHora
+- uid: Unimake.Business.DFe.Xml.CTe.Entrega.ComHora*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Entrega.ComHora
+  name: ComHora
+  nameWithType: Entrega.ComHora
+  fullName: Unimake.Business.DFe.Xml.CTe.Entrega.ComHora
+- uid: Unimake.Business.DFe.Xml.CTe.ComHora
+  commentId: T:Unimake.Business.DFe.Xml.CTe.ComHora
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: ComHora
+  nameWithType: ComHora
+  fullName: Unimake.Business.DFe.Xml.CTe.ComHora
+- uid: Unimake.Business.DFe.Xml.CTe.Entrega.NoInter*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Entrega.NoInter
+  name: NoInter
+  nameWithType: Entrega.NoInter
+  fullName: Unimake.Business.DFe.Xml.CTe.Entrega.NoInter
+- uid: Unimake.Business.DFe.Xml.CTe.NoInter
+  commentId: T:Unimake.Business.DFe.Xml.CTe.NoInter
+  parent: Unimake.Business.DFe.Xml.CTe
+  name: NoInter
+  nameWithType: NoInter
+  fullName: Unimake.Business.DFe.Xml.CTe.NoInter

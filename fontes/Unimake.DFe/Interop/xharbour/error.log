@@ -1,0 +1,150 @@
+----------------------------- xHarbour Error Log ------------------------------
+
+Date...............: 12/29/20
+Time...............: 10:59:43
+
+Application name...: C:\projetos\uninfe\trunk\fontes\unimake.dfe\interop\xharbour\DFeInterop.exe
+Workstation name...: WANDREYDELL
+Available memory...: 2097151
+Current disk.......: C
+Current directory..: projetos\uninfe\trunk\fontes\unimake.dfe\interop\xharbour
+Free disk space....: 16063369216
+
+Operating system...: Windows NT Professional 6.02.9200
+xHarbour version...: xHarbour build 1.2.1 Intl. (SimpLex) (Rev. 9592)
+xHarbour built on..: Jul 21 2012 20:52:28
+C/C++ compiler.....: XCC ISO C Compiler 2.70
+Multi Threading....: NO
+VM Optimization....: 2
+
+Current Area ......:1
+
+-------------------------- Environmental Information --------------------------
+
+SET ALTERNATE......: OFF
+SET ALTFILE........: 
+SET AUTOPEN........: ON
+SET AUTORDER.......: 0
+SET AUTOSHARE......: 0
+SET BACKGROUNDTASKS: OFF
+SET BACKGROUNDTICK.: 1000
+SET BELL...........: OFF
+SET BLINK..........: .T.
+SET CANCEL.........: ON
+SET CENTURY........: OFF
+SET COLOR..........: W/N,N/W,N/N,N/N,N/W
+SET CONFIRM........: OFF
+SET CONSOLE........: ON
+SET COUNT..........: 0
+SET CURSOR.........: 1
+SET DATE FORMAT....: MM/DD/YY
+SET DBFLOCKSCHEME..: 0
+SET DEBUG..........: OFF
+SET DECIMALS.......: 2
+SET DEFAULT........: 
+SET DEFEXTENSIONS..: ON
+SET DELETED........: OFF
+SET DELIMCHARS.....: ::
+SET DELIMETERS.....: OFF
+SET DEVICE.........: SCREEN
+SET DIRCASE........: 0
+SET DIRSEPARATOR...: \
+SET EOL............: 13
+SET EPOCH..........: 1900
+SET ERRORLOG.......: ERROR.LOG,.F.
+SET ERRORLOOP......: 8
+SET ESCAPE.........: ON
+SET EVENTMASK......: 128
+SET EXACT..........: OFF
+SET EXCLUSIVE......: ON
+SET EXIT...........: OFF
+SET EXTRA..........: OFF
+SET EXTRAFILE......: 
+SET FILECASE.......: 0
+SET FIXED..........: OFF
+SET FORCEOPT.......: OFF
+SET HARDCOMMIT.....: ON
+SET IDLEREPEAT.....: ON
+SET INSERT.........: OFF
+SET INTENSITY......: ON
+SET LANGUAGE.......: EN
+SET MARGIN.........: 0
+SET MBLOCKSIZE.....: 0
+SET MCENTER........: OFF
+SET MESSAGE........: 0
+SET MFILEEXT.......: 
+SET OPTIMIZE.......: ON
+SET OUTPUTSAFETY...: ON
+SET PATH...........: 
+SET PRINTER........: OFF
+SET PRINTERJOB.....: 
+SET PRINTFILE......: PRN
+SET SCOREBOARD.....: ON
+SET SCROLLBREAK....: ON
+SET SOFTSEEK.......: OFF
+SET STRICTREAD.....: OFF
+SET TRACE..........: ON
+SET TRACEFILE......: TRACE.LOG
+SET TRACESTACK.....: 2
+SET TRIMFILENAME...: .F.
+SET TYPEAHEAD......: 50
+SET UNIQUE.........: OFF
+SET VIDEOMODE......: 0
+SET WRAP...........: OFF
+
+-----------------------------------------------Detailed Work Area Items------------------------------------------------
+
+
+---------------------------------------- Internal Error Handling Information  -----------------------------------------
+
+Subsystem Call ....: BASE
+System Code .......: 1003
+Default Status ....: .F.
+Description .......: Variable does not exist
+Operation .........: PB_LOCALCERTIFICADO
+Arguments .........: 
+Involved File .....: 
+Dos Error Code ....: 0
+
+ Trace Through:
+----------------
+CERTIFICADOVENCIDO    :      12 in Module: DFeInterop.prg
+MAIN                  :       4 in Module: DFeInterop.prg
+
+
+################################################## Video Screen Dump ##################################################
+
++------------------------------------------------------------------------------------------------------------------------+
+|                                                                                                                        |
+|PS C:\projetos\uninfe\trunk\fontes\unimake.dfe\interop\xharbour> dir                                                    |
+|                                                                                                                        |
+|                                                                                                                        |
+|    Diret¢rio: C:\projetos\uninfe\trunk\fontes\unimake.dfe\interop\xharbour                                             |
+|                                                                                                                        |
+|                                                                                                                        |
+|Mode                 LastWriteTime         Length Name                                                                  |
+|----                 -------------         ------ ----                                                                  |
+|-a----        29/12/2020     10:41              8 DFeInterop.prg                                                        |
+|                                                                                                                        |
+|                                                                                                                        |
+|PS C:\projetos\uninfe\trunk\fontes\unimake.dfe\interop\xharbour> .\DFeInterop.prg                                       |
+|PS C:\projetos\uninfe\trunk\fontes\unimake.dfe\interop\xharbour> & 'C:\xHB\Bin\xBuildw.exe'                             |
+|PS C:\projetos\uninfe\trunk\fontes\unimake.dfe\interop\xharbour> .\DFeInterop..exe                                      |
+|.\DFeInterop..exe : O termo '.\DFeInterop..exe' nÆo ‚ reconhecido como nome de cmdlet, fun‡Æo, arquivo de script ou     |
+|programa oper vel. Verifique a grafia do nome ou, se um caminho tiver sido inclu¡do, veja se o caminho est  correto e   |
+|tente novamente.                                                                                                        |
+|No linha:1 caractere:1                                                                                                  |
+|+ .\DFeInterop..exe                                                                                                     |
+|+ ~~~~~~~~~~~~~~~~~                                                                                                     |
+|    + CategoryInfo          : ObjectNotFound: (.\DFeInterop..exe:String) [], CommandNotFoundException                   |
+|    + FullyQualifiedErrorId : CommandNotFoundException                                                                  |
+|                                                                                                                        |
+|PS C:\projetos\uninfe\trunk\fontes\unimake.dfe\interop\xharbour> .\DFeInterop.exe                                       |
+|                                                                                                                        |
+|Error BASE/1003  Variable does not exist: PB_LOCALCERTIFICADO                                                           |
+|                                                                                                                        |
+|Error at ...: CERTIFICADOVENCIDO(12) in Module: DFeInterop.prg                                                          |
+|Called from : MAIN(4) in Module: DFeInterop.prg                                                                         |
++------------------------------------------------------------------------------------------------------------------------+
+
+

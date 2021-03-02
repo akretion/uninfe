@@ -1,0 +1,657 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.II
+  commentId: T:Unimake.Business.DFe.Xml.NFe.II
+  id: II
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.II.VBC
+  - Unimake.Business.DFe.Xml.NFe.II.VBCField
+  - Unimake.Business.DFe.Xml.NFe.II.VDespAdu
+  - Unimake.Business.DFe.Xml.NFe.II.VDespAduField
+  - Unimake.Business.DFe.Xml.NFe.II.VII
+  - Unimake.Business.DFe.Xml.NFe.II.VIIField
+  - Unimake.Business.DFe.Xml.NFe.II.VIOF
+  - Unimake.Business.DFe.Xml.NFe.II.VIOFField
+  langs:
+  - csharp
+  - vb
+  name: II
+  nameWithType: II
+  fullName: Unimake.Business.DFe.Xml.NFe.II
+  type: Class
+  source:
+    id: II
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3676
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class II
+    content.vb: >-
+      <Serializable>
+
+      Public Class II
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.II.VBC
+  commentId: P:Unimake.Business.DFe.Xml.NFe.II.VBC
+  id: VBC
+  parent: Unimake.Business.DFe.Xml.NFe.II
+  langs:
+  - csharp
+  - vb
+  name: VBC
+  nameWithType: II.VBC
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VBC
+  type: Property
+  source:
+    id: VBC
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3680
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VBC { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VBC As Double
+  overload: Unimake.Business.DFe.Xml.NFe.II.VBC*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.II.VBCField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.II.VBCField
+  id: VBCField
+  parent: Unimake.Business.DFe.Xml.NFe.II
+  langs:
+  - csharp
+  - vb
+  name: VBCField
+  nameWithType: II.VBCField
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VBCField
+  type: Property
+  source:
+    id: VBCField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3683
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VBCField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VBCField As String
+  overload: Unimake.Business.DFe.Xml.NFe.II.VBCField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.II.VDespAdu
+  commentId: P:Unimake.Business.DFe.Xml.NFe.II.VDespAdu
+  id: VDespAdu
+  parent: Unimake.Business.DFe.Xml.NFe.II
+  langs:
+  - csharp
+  - vb
+  name: VDespAdu
+  nameWithType: II.VDespAdu
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VDespAdu
+  type: Property
+  source:
+    id: VDespAdu
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3690
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VDespAdu { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VDespAdu As Double
+  overload: Unimake.Business.DFe.Xml.NFe.II.VDespAdu*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.II.VDespAduField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.II.VDespAduField
+  id: VDespAduField
+  parent: Unimake.Business.DFe.Xml.NFe.II
+  langs:
+  - csharp
+  - vb
+  name: VDespAduField
+  nameWithType: II.VDespAduField
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VDespAduField
+  type: Property
+  source:
+    id: VDespAduField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3693
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VDespAduField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VDespAduField As String
+  overload: Unimake.Business.DFe.Xml.NFe.II.VDespAduField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.II.VII
+  commentId: P:Unimake.Business.DFe.Xml.NFe.II.VII
+  id: VII
+  parent: Unimake.Business.DFe.Xml.NFe.II
+  langs:
+  - csharp
+  - vb
+  name: VII
+  nameWithType: II.VII
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VII
+  type: Property
+  source:
+    id: VII
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3701
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VII { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VII As Double
+  overload: Unimake.Business.DFe.Xml.NFe.II.VII*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.II.VIIField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.II.VIIField
+  id: VIIField
+  parent: Unimake.Business.DFe.Xml.NFe.II
+  langs:
+  - csharp
+  - vb
+  name: VIIField
+  nameWithType: II.VIIField
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VIIField
+  type: Property
+  source:
+    id: VIIField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3704
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VIIField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VIIField As String
+  overload: Unimake.Business.DFe.Xml.NFe.II.VIIField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.II.VIOF
+  commentId: P:Unimake.Business.DFe.Xml.NFe.II.VIOF
+  id: VIOF
+  parent: Unimake.Business.DFe.Xml.NFe.II
+  langs:
+  - csharp
+  - vb
+  name: VIOF
+  nameWithType: II.VIOF
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VIOF
+  type: Property
+  source:
+    id: VIOF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3711
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public double VIOF { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VIOF As Double
+  overload: Unimake.Business.DFe.Xml.NFe.II.VIOF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.II.VIOFField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.II.VIOFField
+  id: VIOFField
+  parent: Unimake.Business.DFe.Xml.NFe.II
+  langs:
+  - csharp
+  - vb
+  name: VIOFField
+  nameWithType: II.VIOFField
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VIOFField
+  type: Property
+  source:
+    id: VIOFField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 3714
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VIOFField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VIOFField As String
+  overload: Unimake.Business.DFe.Xml.NFe.II.VIOFField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.II.VBC*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.II.VBC
+  name: VBC
+  nameWithType: II.VBC
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VBC
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.NFe.II.VBCField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.II.VBCField
+  name: VBCField
+  nameWithType: II.VBCField
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VBCField
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.II.VDespAdu*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.II.VDespAdu
+  name: VDespAdu
+  nameWithType: II.VDespAdu
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VDespAdu
+- uid: Unimake.Business.DFe.Xml.NFe.II.VDespAduField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.II.VDespAduField
+  name: VDespAduField
+  nameWithType: II.VDespAduField
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VDespAduField
+- uid: Unimake.Business.DFe.Xml.NFe.II.VII*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.II.VII
+  name: VII
+  nameWithType: II.VII
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VII
+- uid: Unimake.Business.DFe.Xml.NFe.II.VIIField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.II.VIIField
+  name: VIIField
+  nameWithType: II.VIIField
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VIIField
+- uid: Unimake.Business.DFe.Xml.NFe.II.VIOF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.II.VIOF
+  name: VIOF
+  nameWithType: II.VIOF
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VIOF
+- uid: Unimake.Business.DFe.Xml.NFe.II.VIOFField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.II.VIOFField
+  name: VIOFField
+  nameWithType: II.VIOFField
+  fullName: Unimake.Business.DFe.Xml.NFe.II.VIOFField

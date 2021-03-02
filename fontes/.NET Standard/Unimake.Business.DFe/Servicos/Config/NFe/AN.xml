@@ -30,6 +30,11 @@
           <SchemaArquivo>envConfRecebto_v{0}.xsd</SchemaArquivo>
           <SchemaArquivoEspecifico>e210240_v{0}.xsd</SchemaArquivoEspecifico>
         </Tipo>
+        <Tipo>
+          <ID>110140</ID>
+          <SchemaArquivo>envEPEC_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>e110140_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
       </SchemasEspecificos>
       <TagAssinatura>evento</TagAssinatura>
       <TagAtributoID>infEvento</TagAtributoID>

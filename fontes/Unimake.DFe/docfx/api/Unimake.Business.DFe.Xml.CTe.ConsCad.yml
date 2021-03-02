@@ -1,0 +1,456 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTe.ConsCad
+  commentId: T:Unimake.Business.DFe.Xml.CTe.ConsCad
+  id: ConsCad
+  parent: Unimake.Business.DFe.Xml.CTe
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: ConsCad
+  nameWithType: ConsCad
+  fullName: Unimake.Business.DFe.Xml.CTe.ConsCad
+  type: Class
+  source:
+    id: ConsCad
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\ConsCad.cs
+    startLine: 6
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: 'public class ConsCad : ConsCadBase'
+    content.vb: >-
+      Public Class ConsCad
+          Inherits ConsCadBase
+  inheritance:
+  - System.Object
+  - Unimake.Business.DFe.Xml.XMLBase
+  - Unimake.Business.DFe.Xml.NFe.ConsCadBase
+  inheritedMembers:
+  - Unimake.Business.DFe.Xml.NFe.ConsCadBase.Versao
+  - Unimake.Business.DFe.Xml.NFe.ConsCadBase.InfCons
+  - Unimake.Business.DFe.Xml.XMLBase.NameSpaces
+  - Unimake.Business.DFe.Xml.XMLBase.GerarXML
+  - Unimake.Business.DFe.Xml.XMLBase.LerXML``1(System.Xml.XmlDocument)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+references:
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Unimake.Business.DFe.Xml.XMLBase
+  commentId: T:Unimake.Business.DFe.Xml.XMLBase
+  parent: Unimake.Business.DFe.Xml
+  name: XMLBase
+  nameWithType: XMLBase
+  fullName: Unimake.Business.DFe.Xml.XMLBase
+- uid: Unimake.Business.DFe.Xml.NFe.ConsCadBase
+  commentId: T:Unimake.Business.DFe.Xml.NFe.ConsCadBase
+  parent: Unimake.Business.DFe.Xml.NFe
+  name: ConsCadBase
+  nameWithType: ConsCadBase
+  fullName: Unimake.Business.DFe.Xml.NFe.ConsCadBase
+- uid: Unimake.Business.DFe.Xml.NFe.ConsCadBase.Versao
+  commentId: P:Unimake.Business.DFe.Xml.NFe.ConsCadBase.Versao
+  parent: Unimake.Business.DFe.Xml.NFe.ConsCadBase
+  name: Versao
+  nameWithType: ConsCadBase.Versao
+  fullName: Unimake.Business.DFe.Xml.NFe.ConsCadBase.Versao
+- uid: Unimake.Business.DFe.Xml.NFe.ConsCadBase.InfCons
+  commentId: F:Unimake.Business.DFe.Xml.NFe.ConsCadBase.InfCons
+  parent: Unimake.Business.DFe.Xml.NFe.ConsCadBase
+  name: InfCons
+  nameWithType: ConsCadBase.InfCons
+  fullName: Unimake.Business.DFe.Xml.NFe.ConsCadBase.InfCons
+- uid: Unimake.Business.DFe.Xml.XMLBase.NameSpaces
+  commentId: P:Unimake.Business.DFe.Xml.XMLBase.NameSpaces
+  parent: Unimake.Business.DFe.Xml.XMLBase
+  name: NameSpaces
+  nameWithType: XMLBase.NameSpaces
+  fullName: Unimake.Business.DFe.Xml.XMLBase.NameSpaces
+- uid: Unimake.Business.DFe.Xml.XMLBase.GerarXML
+  commentId: M:Unimake.Business.DFe.Xml.XMLBase.GerarXML
+  parent: Unimake.Business.DFe.Xml.XMLBase
+  name: GerarXML()
+  nameWithType: XMLBase.GerarXML()
+  fullName: Unimake.Business.DFe.Xml.XMLBase.GerarXML()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Xml.XMLBase.GerarXML
+    name: GerarXML
+    nameWithType: XMLBase.GerarXML
+    fullName: Unimake.Business.DFe.Xml.XMLBase.GerarXML
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Xml.XMLBase.GerarXML
+    name: GerarXML
+    nameWithType: XMLBase.GerarXML
+    fullName: Unimake.Business.DFe.Xml.XMLBase.GerarXML
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.XMLBase.LerXML``1(System.Xml.XmlDocument)
+  commentId: M:Unimake.Business.DFe.Xml.XMLBase.LerXML``1(System.Xml.XmlDocument)
+  parent: Unimake.Business.DFe.Xml.XMLBase
+  isExternal: true
+  name: LerXML<T>(XmlDocument)
+  nameWithType: XMLBase.LerXML<T>(XmlDocument)
+  fullName: Unimake.Business.DFe.Xml.XMLBase.LerXML<T>(System.Xml.XmlDocument)
+  nameWithType.vb: XMLBase.LerXML(Of T)(XmlDocument)
+  fullName.vb: Unimake.Business.DFe.Xml.XMLBase.LerXML(Of T)(System.Xml.XmlDocument)
+  name.vb: LerXML(Of T)(XmlDocument)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Xml.XMLBase.LerXML``1(System.Xml.XmlDocument)
+    name: LerXML<T>
+    nameWithType: XMLBase.LerXML<T>
+    fullName: Unimake.Business.DFe.Xml.XMLBase.LerXML<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlDocument
+    name: XmlDocument
+    nameWithType: XmlDocument
+    fullName: System.Xml.XmlDocument
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Xml.XMLBase.LerXML``1(System.Xml.XmlDocument)
+    name: LerXML(Of T)
+    nameWithType: XMLBase.LerXML(Of T)
+    fullName: Unimake.Business.DFe.Xml.XMLBase.LerXML(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlDocument
+    name: XmlDocument
+    nameWithType: XmlDocument
+    fullName: System.Xml.XmlDocument
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml
+  commentId: N:Unimake.Business.DFe.Xml
+  name: Unimake.Business.DFe.Xml
+  nameWithType: Unimake.Business.DFe.Xml
+  fullName: Unimake.Business.DFe.Xml
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe

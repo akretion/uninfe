@@ -180,7 +180,13 @@ namespace NFe.Components
                                     cMunicipio == 3501301 ||
                                     cMunicipio == 4300109 ||
                                     cMunicipio == 4124053 ||
-                                    cMunicipio == 4101408)
+                                    cMunicipio == 4101408 ||
+                                    cMunicipio == 3550407)
+                                    return "BasicHttpBinding_INFSEGeracao";
+                                else
+                                    return "basic_INFSEGeracao";
+                            case Servicos.NFSeSubstituirNfse:
+                                if (cMunicipio == 4323002)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -205,7 +211,8 @@ namespace NFe.Components
                                     cMunicipio == 3501301 ||
                                     cMunicipio == 4300109 ||
                                     cMunicipio == 4124053 ||
-                                    cMunicipio == 4101408)
+                                    cMunicipio == 4101408 ||
+                                    cMunicipio == 3550407)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -227,7 +234,9 @@ namespace NFe.Components
                                     cMunicipio == 3501301 ||
                                     cMunicipio == 4300109 ||
                                     cMunicipio == 4124053 ||
-                                    cMunicipio == 4101408)
+                                    cMunicipio == 4101408 ||
+                                    cMunicipio == 3550407)
+
                                     return "BasicHttpBinding_INFSEConsultas";
                                 else
                                     return "basic_INFSEConsultas";

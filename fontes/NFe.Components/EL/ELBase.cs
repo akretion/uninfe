@@ -30,10 +30,6 @@ namespace NFe.Components.EL
                     else
                         switch (CodigoMun)
                         {
-                            case 2930709: //Simões Filho-BA
-                                elService = new SimoesFilhoBA.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
-                                break;
-
                             case 3201506: //Colatina-ES
                                 elService = new ColatinaES.p.ELP(tpAmb, PastaRetorno, UsuarioWs, SenhaWs, UsuarioProxy, SenhaProxy, DomainProxy);
                                 break;

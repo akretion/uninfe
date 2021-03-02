@@ -177,41 +177,45 @@ namespace Unimake.Business.DFe.Servicos
     public enum TipoDFe
     {
         /// <summary>
+        /// Evento desconhecido
+        /// </summary>
+        Desconhecido = -1,
+        /// <summary>
         /// NF-e - Nota Fiscal Eletrônica
         /// </summary>
-        NFe,
+        NFe = 0,
         /// <summary>
         /// NFC-e - Nota Fiscal de Venda a Consumidor Eletrônica
         /// </summary>
-        NFCe,
+        NFCe = 1,
         /// <summary>
         /// CT-e - Conhecimento de Transporte Eletrônico
         /// </summary>
-        CTe,
+        CTe = 2,
         /// <summary>
         /// CT-e - Conhecimento de Transporte Eletrônico para Outros Serviços
         /// </summary>
-        CTeOS,
+        CTeOS = 3,
         /// <summary>
         /// MDF-e - Manifesto Eletrônico de Documentos Fiscais
         /// </summary>
-        MDFe,
+        MDFe = 4,
         /// <summary>
         /// Nota Fiscal de Serviço Eletrônica
         /// </summary>
-        NFSe,
+        NFSe = 5,
         /// <summary>
         /// CFe-SAT - Sistema Autenticador e Transmissor de Cupons Fiscais Eletrônicos
         /// </summary>
-        SAT,
+        SAT = 6,
         /// <summary>
         /// Cupom Fiscal Eletrônico
         /// </summary>
-        CFe,
+        CFe = 7,
         /// <summary>
         /// GNRE - Guia Nacional de Recolhimento de Tributos Estaduais
         /// </summary>
-        GNRE
+        GNRE = 8
     }
     #endregion       
 
@@ -261,11 +265,6 @@ namespace Unimake.Business.DFe.Servicos
         /// Espírito Santo - ES (32)
         /// </summary>
         ES = 32,
-
-        /// <summary>
-        /// Exportação
-        /// </summary>
-        EX = 99,
 
         /// <summary>
         /// Goiás - GO (52)
@@ -388,6 +387,11 @@ namespace Unimake.Business.DFe.Servicos
         SincChavesRSparaSVSP = 96,
 
         /// <summary>
+        /// Exportação
+        /// </summary>
+        EX = 99,
+
+        /// <summary>
         /// Não definido (0)
         /// </summary>
         NaoDefinido = 0
@@ -464,6 +468,11 @@ namespace Unimake.Business.DFe.Servicos
     public enum TipoEventoNFe
     {
         /// <summary>
+        /// Evento desconhecido
+        /// </summary>
+        [XmlEnum("0")]
+        Desconhecido = 0,
+        /// <summary>
         /// Carta de correção eletrônica (110110)
         /// </summary>
         [XmlEnum("110110")]
@@ -474,7 +483,7 @@ namespace Unimake.Business.DFe.Servicos
         [XmlEnum("110111")]
         Cancelamento = 110111,
         /// <summary>
-        /// Cancelamento da NFCe sendo substituida por outra NFCe (110112)
+        /// Cancelamento da NFCe sendo substituída por outra NFCe (110112)
         /// </summary>
         [XmlEnum("110112")]
         CancelamentoPorSubstituicao = 110112,
@@ -520,6 +529,11 @@ namespace Unimake.Business.DFe.Servicos
     public enum TipoEventoCTe
     {
         /// <summary>
+        /// Evento desconhecido
+        /// </summary>
+        [XmlEnum("0")]
+        Desconhecido = 0,
+        /// <summary>
         /// Carta de Correção CTe (110110)
         /// </summary>
         [XmlEnum("110110")]
@@ -530,6 +544,12 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("110111")]
         Cancelamento = 110111,
+
+        /// <summary>
+        /// EPEC = Evento Previo da Emissão em Contingência do CTe (110113)
+        /// </summary>
+        [XmlEnum("110113")]
+        EPEC = 110113,
 
         /// <summary>
         /// Comprovante de Entrega do CTe (110180)
@@ -547,7 +567,13 @@ namespace Unimake.Business.DFe.Servicos
         /// Prestação de serviço em desacordo CTe (610110)
         /// </summary>
         [XmlEnum("610110")]
-        PrestDesacordo = 610110
+        PrestDesacordo = 610110,
+
+        /// <summary>
+        /// Registro de Passagem CT-e (310620)
+        /// </summary>
+        [XmlEnum("310620")]
+        RegistroPassagem = 310620
     }
 
     #endregion
@@ -559,6 +585,11 @@ namespace Unimake.Business.DFe.Servicos
     /// </summary>
     public enum TipoEventoMDFe
     {
+        /// <summary>
+        /// Evento desconhecido
+        /// </summary>
+        [XmlEnum("0")]
+        Desconhecido = 0,
         /// <summary>
         /// Cancelamento de MDFe (110111)
         /// </summary>
@@ -581,7 +612,31 @@ namespace Unimake.Business.DFe.Servicos
         /// Inclusão de DFe no MDFe (110115)
         /// </summary>
         [XmlEnum("110115")]
-        InclusaoDFe = 110115
+        InclusaoDFe = 110115,
+
+        /// <summary>
+        /// EncerramentoFisco (Evento exclusivo do fisco) (310112)
+        /// </summary>
+        [XmlEnum("310112")]
+        EncerramentoFisco = 310112,
+
+        /// <summary>
+        /// Registro de passagem (Evento exclusivo do fisco) (310620)
+        /// </summary>
+        [XmlEnum("310620")]
+        RegistroPassagem = 310620,
+
+        /// <summary>
+        /// Registro de passagem automático (Evento exclusivo outros (ONE)) (310620)
+        /// </summary>
+        [XmlEnum("510620")]
+        RegistroPassagemBRId = 510620,
+
+        /// <summary>
+        /// Liberação Prazo Cancelamento  (Registro exclusivo do fisco emitente) (240170)
+        /// </summary>
+        [XmlEnum("240170")]
+        LiberacaoPrazoCancelamento = 240170
     }
 
     #endregion
@@ -739,7 +794,7 @@ namespace Unimake.Business.DFe.Servicos
         Normal = 1,
 
         /// <summary>
-        /// 2=Contingência FS-IA, com impressão do DANFE em formulário de segurança
+        /// 2=Contingência FS-IA, com impressão do DANFE em formulário de segurança ou Para MDFe é impressão em formulário branco (sulfite)
         /// </summary>
         [XmlEnum("2")]
         ContingenciaFSIA = 2,
@@ -1524,7 +1579,7 @@ namespace Unimake.Business.DFe.Servicos
         /// 90=Sem pagamento
         /// </summary>
         [XmlEnum("90")]
-        Sempagamento = 90,
+        SemPagamento = 90,
 
         /// <summary>
         /// 99=Outros
@@ -3546,9 +3601,9 @@ namespace Unimake.Business.DFe.Servicos
     #region Tipo Autor do Cancelamento por Substituição da NFCe
 
     /// <summary>
-    /// Tipo Autor do Cancelamento por Substituição da NFCe
+    /// Tipo Autor para Cancelamento por Substituição da NFCe e EPEC
     /// </summary>
-    public enum TipoAutorCancelamentoSubstituicaoNFCe
+    public enum TipoAutor
     {
         /// <summary>
         /// 1 - Empresa Emitente

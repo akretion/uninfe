@@ -12,7 +12,7 @@ namespace NFe.Components.Elotech
     {
         #region Private Fields
 
-        private readonly ElotechService Servico = new ElotechService("https://irati.iss.elotech.com.br/iss-ws/nfse203.wsdl");                                                                     
+        private readonly ElotechService Servico = new ElotechService("https://irati.iss.elotech.com.br/iss-ws/nfse203.wsdl");
 
         #endregion Private Fields
 
@@ -21,17 +21,15 @@ namespace NFe.Components.Elotech
         private string EnviarLoteRps(string file)
         {
             var enviarLoteRpsResposta = Servico.EnviarLoteRps(file);
-            var strResult = SerializarObjeto(enviarLoteRpsResposta);
 
-            return strResult;
+            return enviarLoteRpsResposta.Xml;
         }
 
         private string EnviarLoteRpsSincrono(string file)
         {
             var enviarLoteRpsSincronoResposta = Servico.EnviarLoteRpsSincrono(file);
-            var strResult = SerializarObjeto(enviarLoteRpsSincronoResposta);
 
-            return strResult;
+            return enviarLoteRpsSincronoResposta.Xml;
         }
 
         /// <summary>
@@ -71,56 +69,100 @@ namespace NFe.Components.Elotech
 
         public override void CancelarNfse(string file)
         {
-            //var cancelarNfseResposta = Servico.CancelarNfse(file);
-            //var strResult = SerializarObjeto(cancelarNfseResposta);
+            try
+            {
+                var docRetorno = new XmlDocument();
 
-            //GerarRetorno(file, strResult,
-            //    Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
-            //    Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML,
-            //    Encoding.UTF8);
+                docRetorno.LoadXml(Servico.CancelarNfse(file).Xml);
+                var strResult = docRetorno.GetElementsByTagName("ns2:CancelarNfseResposta")[0].OuterXml;
+
+                GerarRetorno(file, strResult,
+                    Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                    Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML,
+                    Encoding.UTF8);
+            }
+            catch(WebException ex)
+            {
+                var sr = new StreamReader(ex.Response.GetResponseStream());
+                var message = sr.ReadToEnd();
+                throw new System.Exception(message);
+            }
         }
 
         public override void ConsultarLoteRps(string file)
         {
-            //XmlDocument doc = new XmlDocument();
-            //doc.Load(file);
-            //string result = ServiceConsultas.ConsultarLoteRps(doc.InnerXml);
-            //GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
-            //                            Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML);
+            try
+            {
+                var docRetorno = new XmlDocument();
+
+                docRetorno.LoadXml(Servico.ConsultarLoteRps(file).Xml);
+                var strResult = docRetorno.GetElementsByTagName("ns2:ConsultarLoteRpsResposta")[0].OuterXml;
+
+                GerarRetorno(file, strResult,
+                    Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).EnvioXML,
+                    Propriedade.Extensao(Propriedade.TipoEnvio.PedLoteRps).RetornoXML,
+                    Encoding.UTF8);
+            }
+            catch(WebException ex)
+            {
+                var sr = new StreamReader(ex.Response.GetResponseStream());
+                var message = sr.ReadToEnd();
+                throw new System.Exception(message);
+            }
         }
 
         public override void ConsultarNfse(string file)
         {
-            //XmlDocument doc = new XmlDocument();
-            //doc.Load(file);
-            //string result = ServiceConsultas.ConsultarNfse(doc.InnerXml);
-            //GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
-            //                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
+            try
+            {
+                var docRetorno = new XmlDocument();
+
+                docRetorno.LoadXml(Servico.ConsultarNfse(file).Xml);
+                var strResult = docRetorno.GetElementsByTagName("ns2:ConsultarNfseFaixaResposta")[0].OuterXml;
+
+                GerarRetorno(file, strResult,
+                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML,
+                    Encoding.UTF8);
+            }
+            catch(WebException ex)
+            {
+                var sr = new StreamReader(ex.Response.GetResponseStream());
+                var message = sr.ReadToEnd();
+                throw new System.Exception(message);
+            }
         }
 
         public override void ConsultarNfsePorRps(string file)
         {
-            //XmlDocument doc = new XmlDocument();
-            //doc.Load(file);
-            //string result = ServiceConsultas.ConsultarNfsePorRps(doc.InnerXml);
-            //GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
-            //                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
+            try
+            {
+                var docRetorno = new XmlDocument();
+
+                docRetorno.LoadXml(Servico.ConsultarNfsePorRps(file).Xml);
+                var strResult = docRetorno.GetElementsByTagName("ns2:ConsultarNfseRpsResposta")[0].OuterXml;
+
+                GerarRetorno(file, strResult,
+                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
+                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML,
+                    Encoding.UTF8);
+            }
+            catch(WebException ex)
+            {
+                var sr = new StreamReader(ex.Response.GetResponseStream());
+                var message = sr.ReadToEnd();
+                throw new System.Exception(message);
+            }
         }
 
-        public override void ConsultarSituacaoLoteRps(string file)
-        {
-            //XmlDocument doc = new XmlDocument();
-            //doc.Load(file);
-            //string result = ServiceConsultas.ConsultarSituacaoLoteRps(doc.InnerXml);
-            //GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML,
-            //                            Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).RetornoXML);
-        }
+        public override void ConsultarSituacaoLoteRps(string file) => throw new System.Exception("ConsultarSituacaoLoteRps não disponível no webservice das prefeituras padrão Elotech.");
 
         public override void EmiteNF(string file)
         {
             try
             {
                 var strResult = string.Empty;
+                var docRetorno = new XmlDocument();
 
                 var doc = new XmlDocument();
                 doc.Load(file);
@@ -128,17 +170,19 @@ namespace NFe.Components.Elotech
                 switch(doc.DocumentElement.Name)
                 {
                     case "EnviarLoteRpsEnvio":
-                        strResult = EnviarLoteRps(file);
+                        docRetorno.LoadXml(EnviarLoteRps(file));
+                        strResult = docRetorno.GetElementsByTagName("ns2:EnviarLoteRpsResposta")[0].OuterXml;
                         break;
 
                     case "EnviarLoteRpsSincronoEnvio":
-                        strResult = EnviarLoteRpsSincrono(file);
+                        docRetorno.LoadXml(EnviarLoteRpsSincrono(file));
+                        strResult = docRetorno.GetElementsByTagName("ns2:EnviarLoteRpsSincronoResposta")[0].OuterXml;
                         break;
                 }
 
                 GerarRetorno(file, strResult,
-                    Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
-                    Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML,
+                    Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
+                    Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML,
                     Encoding.UTF8);
             }
             catch(WebException ex)

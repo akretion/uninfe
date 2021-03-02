@@ -1,18 +1,19 @@
-﻿using NFe.Certificado;
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.Settings;
 using System;
 using System.IO;
+using Unimake.Business.DFe.Servicos;
+using Unimake.Business.DFe.Xml.NFe;
 
 namespace NFe.Service
 {
-    public class TaskNFeConsultaStatus : TaskAbst
+    public class TaskNFeConsultaStatus: TaskAbst
     {
         public TaskNFeConsultaStatus(string arquivo)
         {
             Servico = Servicos.NFeConsultaStatusServico;
             NomeArquivoXML = arquivo;
-            if (vXmlNfeDadosMsgEhXML)
+            if(vXmlNfeDadosMsgEhXML)
             {
                 ConteudoXML.PreserveWhitespace = false;
                 ConteudoXML.Load(arquivo);
@@ -32,57 +33,54 @@ namespace NFe.Service
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
-
+            var emp = Empresas.FindEmpresaByThread();
             try
             {
                 dadosPedSta = new DadosPedSta();
-                //Ler o XML para pegar parâmetros de envio
                 PedSta(emp, dadosPedSta);
 
-                if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+                if(vXmlNfeDadosMsgEhXML)
                 {
-                    //Definir o objeto do WebService
-                    WebServiceProxy wsProxy =
-                        ConfiguracaoApp.DefinirWS(Servico,
-                        emp,
-                        dadosPedSta.cUF,
-                        dadosPedSta.tpAmb,
-                        dadosPedSta.tpEmis,
-                        dadosPedSta.versao,
-                        dadosPedSta.mod,
-                        0);
+                    var xml = new ConsStatServ();
+                    xml = Unimake.Business.DFe.Utility.XMLUtility.Deserializar<ConsStatServ>(ConteudoXML);
 
-                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSta.cUF, dadosPedSta.tpAmb, dadosPedSta.tpEmis, Servico);
-
-                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    var oStatusServico = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-
-                    object oCabecMsg = null;
-                    if (dadosPedSta.versao != "4.00")
+                    var configuracao = new Configuracao
                     {
-                        oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosPedSta.cUF, Servico));
-                        wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosPedSta.cUF.ToString());
-                        wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosPedSta.versao);
+                        TipoDFe = (dadosPedSta.mod == "65" ? TipoDFe.NFCe : TipoDFe.NFe),
+                        TipoEmissao = (Unimake.Business.DFe.Servicos.TipoEmissao)dadosPedSta.tpEmis,
+                        CertificadoDigital = Empresas.Configuracoes[emp].X509Certificado
+                    };
+
+                    if (ConfiguracaoApp.Proxy)
+                    {
+                        configuracao.HasProxy = true;
+                        configuracao.ProxyAutoDetect = ConfiguracaoApp.DetectarConfiguracaoProxyAuto;
+                        configuracao.ProxyUser = ConfiguracaoApp.ProxyUsuario;
+                        configuracao.ProxyPassword = ConfiguracaoApp.ProxySenha;                            
                     }
 
-                    new AssinaturaDigital().CarregarPIN(emp, NomeArquivoXML, Servico);
+                    if(dadosPedSta.mod == "65")
+                    {
+                        var statusServico = new Unimake.Business.DFe.Servicos.NFCe.StatusServico(xml, configuracao);
+                        statusServico.Executar();
 
-                    //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy,
-                                        oStatusServico,
-                                        wsProxy.NomeMetodoWS[0],
-                                        oCabecMsg, this,
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML,
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML,
-                                        true,
-                                        securityProtocolType);
+                        vStrXmlRetorno = statusServico.RetornoWSString;
+                        XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML);
+                    }
+                    else
+                    {
+                        var statusServico = new Unimake.Business.DFe.Servicos.NFe.StatusServico(xml, configuracao);
+                        statusServico.Executar();
+
+                        vStrXmlRetorno = statusServico.RetornoWSString;
+                        XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).RetornoXML);
+                    }
                 }
                 else
                 {
-                    string f = Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml";
+                    var f = Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml";
 
-                    if (NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    if(NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
                     {
                         f = Path.Combine(Empresas.Configuracoes[emp].PastaValidar, f);
                     }
@@ -90,10 +88,10 @@ namespace NFe.Service
                     oGerarXML.StatusServicoNFe(f, dadosPedSta.tpAmb, dadosPedSta.tpEmis, dadosPedSta.cUF, dadosPedSta.versao);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 var extRet = vXmlNfeDadosMsgEhXML ? Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioXML :
-                                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioTXT;
+                    Propriedade.Extensao(Propriedade.TipoEnvio.PedSta).EnvioTXT;
 
                 try
                 {
@@ -137,81 +135,11 @@ namespace NFe.Service
         {
             base.PedSta(emp, dadosPedSta);
 
-            if (string.IsNullOrEmpty(dadosPedSta.versao))
-                throw new Exception(NFeStrConstants.versaoError);
-        }
-
-#if f
-        private void PedSta(int emp, string cArquivoXML)
-        {
-            dadosPedSta.tpAmb = 0;
-            dadosPedSta.cUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo;
-            dadosPedSta.versao = "";// NFe.ConvertTxt.versoes.VersaoXMLStatusServico;
-
-            ///
-            /// danasa 9-2009
-            /// Assume o que está na configuracao
-            ///
-            dadosPedSta.tpEmis = Empresas.Configuracoes[emp].tpEmis;
-
-            ///
-            /// danasa 12-9-2009
-            ///
-            if (Path.GetExtension(cArquivoXML).ToLower() == ".txt")
+            if(string.IsNullOrEmpty(dadosPedSta.versao))
             {
-                // tpEmis|1						<<< opcional >>>
-                // tpAmb|1
-                // cUF|35
-                // versao|3.10
-                List<string> cLinhas = Functions.LerArquivo(cArquivoXML);
-                Functions.PopulateClasse(dadosPedSta, cLinhas);
-            }
-            else
-            {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(cArquivoXML);
-
-                XmlNodeList consStatServList = doc.GetElementsByTagName("consStatServ");
-
-                foreach (XmlNode consStatServNode in consStatServList)
-                {
-                    XmlElement consStatServElemento = (XmlElement)consStatServNode;
-
-                    dadosPedSta.tpAmb = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName(TpcnResources.tpAmb.ToString())[0].InnerText);
-                    dadosPedSta.versao = consStatServElemento.Attributes[NFe.Components.TpcnResources.versao.ToString()].InnerText;
-
-                    if (consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.cUF.ToString()).Count != 0)
-                    {
-                        dadosPedSta.cUF = Convert.ToInt32("0" + consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.cUF.ToString())[0].InnerText);
-                    }
-
-                    bool saveXml = false;
-
-                    if (consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString()).Count != 0)
-                    {
-                        dadosPedSta.tpEmis = Convert.ToInt16(consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0].InnerText);
-                        /// para que o validador não rejeite, excluo a tag <tpEmis>
-                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName(NFe.Components.TpcnResources.tpEmis.ToString())[0]);
-                        saveXml = true;
-                    }
-
-                    if (consStatServElemento.GetElementsByTagName(TpcnResources.mod.ToString()).Count != 0)
-                    {
-                        dadosPedSta.mod = consStatServElemento.GetElementsByTagName(TpcnResources.mod.ToString())[0].InnerText;
-                        /// para que o validador não rejeite, excluo a tag <mod>
-                        doc.DocumentElement.RemoveChild(consStatServElemento.GetElementsByTagName(TpcnResources.mod.ToString())[0]);
-                        saveXml = true;
-                    }
-
-                    // salvo o arquivo modificado
-                    if (saveXml)
-                        doc.Save(cArquivoXML);
-                }
-            }
-            if (string.IsNullOrEmpty(dadosPedSta.versao))
                 throw new Exception(NFeStrConstants.versaoError);
+            }
         }
-#endif
 
         #endregion PedSta()
     }

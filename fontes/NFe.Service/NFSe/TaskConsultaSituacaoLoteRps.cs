@@ -56,9 +56,14 @@ namespace NFe.Service.NFSe
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedSitLoteRps.cMunicipio);
                 WebServiceProxy wsProxy = null;
                 object pedSitLoteRps = null;
+                if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].CertificadoPIN))
+                {
+                    new Unimake.Business.DFe.Utility.Certificate().CarregarPINA3(Empresas.Configuracoes[emp].X509Certificado, Empresas.Configuracoes[emp].CertificadoPIN);
+                }
 
                 if (IsUtilizaCompilacaoWs(padraoNFSe, Servico, oDadosPedSitLoteRps.cMunicipio))
                 {
+             
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe, oDadosPedSitLoteRps.cMunicipio);
                     if (wsProxy != null) pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 }
@@ -137,7 +142,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.FINTEL:
-                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://iss.irati.pr.gov.br/Arquivos/nfseV202.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.SIMPLISS:
@@ -291,7 +296,8 @@ namespace NFe.Service.NFSe
 							oDadosPedSitLoteRps.cMunicipio == 3501301 ||
 							oDadosPedSitLoteRps.cMunicipio == 4300109 ||
                             oDadosPedSitLoteRps.cMunicipio == 4124053 ||
-                            oDadosPedSitLoteRps.cMunicipio == 4101408)
+                            oDadosPedSitLoteRps.cMunicipio == 4101408 ||
+                            oDadosPedSitLoteRps.cMunicipio == 3550407)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

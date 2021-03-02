@@ -1,0 +1,543 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTe.InfCorrecao
+  commentId: T:Unimake.Business.DFe.Xml.CTe.InfCorrecao
+  id: InfCorrecao
+  parent: Unimake.Business.DFe.Xml.CTe
+  children:
+  - Unimake.Business.DFe.Xml.CTe.InfCorrecao.CampoAlterado
+  - Unimake.Business.DFe.Xml.CTe.InfCorrecao.GrupoAlterado
+  - Unimake.Business.DFe.Xml.CTe.InfCorrecao.NroItemAlterado
+  - Unimake.Business.DFe.Xml.CTe.InfCorrecao.ShouldSerializeNroItemAlterado
+  - Unimake.Business.DFe.Xml.CTe.InfCorrecao.ValorAlterado
+  langs:
+  - csharp
+  - vb
+  name: InfCorrecao
+  nameWithType: InfCorrecao
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCorrecao
+  type: Class
+  source:
+    id: InfCorrecao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EventoCTe.cs
+    startLine: 687
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class InfCorrecao
+    content.vb: >-
+      <Serializable>
+
+      Public Class InfCorrecao
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTe.InfCorrecao.CampoAlterado
+  commentId: P:Unimake.Business.DFe.Xml.CTe.InfCorrecao.CampoAlterado
+  id: CampoAlterado
+  parent: Unimake.Business.DFe.Xml.CTe.InfCorrecao
+  langs:
+  - csharp
+  - vb
+  name: CampoAlterado
+  nameWithType: InfCorrecao.CampoAlterado
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCorrecao.CampoAlterado
+  type: Property
+  source:
+    id: CampoAlterado
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EventoCTe.cs
+    startLine: 693
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string CampoAlterado { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CampoAlterado As String
+  overload: Unimake.Business.DFe.Xml.CTe.InfCorrecao.CampoAlterado*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCorrecao.GrupoAlterado
+  commentId: P:Unimake.Business.DFe.Xml.CTe.InfCorrecao.GrupoAlterado
+  id: GrupoAlterado
+  parent: Unimake.Business.DFe.Xml.CTe.InfCorrecao
+  langs:
+  - csharp
+  - vb
+  name: GrupoAlterado
+  nameWithType: InfCorrecao.GrupoAlterado
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCorrecao.GrupoAlterado
+  type: Property
+  source:
+    id: GrupoAlterado
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EventoCTe.cs
+    startLine: 696
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string GrupoAlterado { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property GrupoAlterado As String
+  overload: Unimake.Business.DFe.Xml.CTe.InfCorrecao.GrupoAlterado*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCorrecao.NroItemAlterado
+  commentId: P:Unimake.Business.DFe.Xml.CTe.InfCorrecao.NroItemAlterado
+  id: NroItemAlterado
+  parent: Unimake.Business.DFe.Xml.CTe.InfCorrecao
+  langs:
+  - csharp
+  - vb
+  name: NroItemAlterado
+  nameWithType: InfCorrecao.NroItemAlterado
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCorrecao.NroItemAlterado
+  type: Property
+  source:
+    id: NroItemAlterado
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EventoCTe.cs
+    startLine: 699
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string NroItemAlterado { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property NroItemAlterado As String
+  overload: Unimake.Business.DFe.Xml.CTe.InfCorrecao.NroItemAlterado*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCorrecao.ValorAlterado
+  commentId: P:Unimake.Business.DFe.Xml.CTe.InfCorrecao.ValorAlterado
+  id: ValorAlterado
+  parent: Unimake.Business.DFe.Xml.CTe.InfCorrecao
+  langs:
+  - csharp
+  - vb
+  name: ValorAlterado
+  nameWithType: InfCorrecao.ValorAlterado
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCorrecao.ValorAlterado
+  type: Property
+  source:
+    id: ValorAlterado
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EventoCTe.cs
+    startLine: 702
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string ValorAlterado { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ValorAlterado As String
+  overload: Unimake.Business.DFe.Xml.CTe.InfCorrecao.ValorAlterado*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.InfCorrecao.ShouldSerializeNroItemAlterado
+  commentId: M:Unimake.Business.DFe.Xml.CTe.InfCorrecao.ShouldSerializeNroItemAlterado
+  id: ShouldSerializeNroItemAlterado
+  parent: Unimake.Business.DFe.Xml.CTe.InfCorrecao
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeNroItemAlterado()
+  nameWithType: InfCorrecao.ShouldSerializeNroItemAlterado()
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCorrecao.ShouldSerializeNroItemAlterado()
+  type: Method
+  source:
+    id: ShouldSerializeNroItemAlterado
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EventoCTe.cs
+    startLine: 709
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public bool ShouldSerializeNroItemAlterado()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeNroItemAlterado As Boolean
+  overload: Unimake.Business.DFe.Xml.CTe.InfCorrecao.ShouldSerializeNroItemAlterado*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.CTe.InfCorrecao.CampoAlterado*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCorrecao.CampoAlterado
+  name: CampoAlterado
+  nameWithType: InfCorrecao.CampoAlterado
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCorrecao.CampoAlterado
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTe.InfCorrecao.GrupoAlterado*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCorrecao.GrupoAlterado
+  name: GrupoAlterado
+  nameWithType: InfCorrecao.GrupoAlterado
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCorrecao.GrupoAlterado
+- uid: Unimake.Business.DFe.Xml.CTe.InfCorrecao.NroItemAlterado*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCorrecao.NroItemAlterado
+  name: NroItemAlterado
+  nameWithType: InfCorrecao.NroItemAlterado
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCorrecao.NroItemAlterado
+- uid: Unimake.Business.DFe.Xml.CTe.InfCorrecao.ValorAlterado*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCorrecao.ValorAlterado
+  name: ValorAlterado
+  nameWithType: InfCorrecao.ValorAlterado
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCorrecao.ValorAlterado
+- uid: Unimake.Business.DFe.Xml.CTe.InfCorrecao.ShouldSerializeNroItemAlterado*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.InfCorrecao.ShouldSerializeNroItemAlterado
+  name: ShouldSerializeNroItemAlterado
+  nameWithType: InfCorrecao.ShouldSerializeNroItemAlterado
+  fullName: Unimake.Business.DFe.Xml.CTe.InfCorrecao.ShouldSerializeNroItemAlterado
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean

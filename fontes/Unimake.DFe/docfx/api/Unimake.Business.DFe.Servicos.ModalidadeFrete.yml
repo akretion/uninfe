@@ -1,0 +1,384 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  commentId: T:Unimake.Business.DFe.Servicos.ModalidadeFrete
+  id: ModalidadeFrete
+  parent: Unimake.Business.DFe.Servicos
+  children:
+  - Unimake.Business.DFe.Servicos.ModalidadeFrete.ContratacaoFretePorContaDestinatário_FOB
+  - Unimake.Business.DFe.Servicos.ModalidadeFrete.ContratacaoFretePorContaRemetente_CIF
+  - Unimake.Business.DFe.Servicos.ModalidadeFrete.ContratacaoFretePorContaTerceiros
+  - Unimake.Business.DFe.Servicos.ModalidadeFrete.SemOcorrenciaTransporte
+  - Unimake.Business.DFe.Servicos.ModalidadeFrete.TransporteProprioPorContaDestinatário
+  - Unimake.Business.DFe.Servicos.ModalidadeFrete.TransporteProprioPorContaRemetente
+  langs:
+  - csharp
+  - vb
+  name: ModalidadeFrete
+  nameWithType: ModalidadeFrete
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  type: Enum
+  source:
+    id: ModalidadeFrete
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1317
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nModalidades de Frete\n"
+  example: []
+  syntax:
+    content: public enum ModalidadeFrete
+    content.vb: Public Enum ModalidadeFrete
+  extensionMethods:
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Unimake.Business.DFe.Servicos.ModalidadeFrete.ContratacaoFretePorContaRemetente_CIF
+  commentId: F:Unimake.Business.DFe.Servicos.ModalidadeFrete.ContratacaoFretePorContaRemetente_CIF
+  id: ContratacaoFretePorContaRemetente_CIF
+  parent: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  langs:
+  - csharp
+  - vb
+  name: ContratacaoFretePorContaRemetente_CIF
+  nameWithType: ModalidadeFrete.ContratacaoFretePorContaRemetente_CIF
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeFrete.ContratacaoFretePorContaRemetente_CIF
+  type: Field
+  source:
+    id: ContratacaoFretePorContaRemetente_CIF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1322
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n0=Contratação do Frete por conta do Remetente (CIF); \n"
+  example: []
+  syntax:
+    content: ContratacaoFretePorContaRemetente_CIF = 0
+    return:
+      type: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ModalidadeFrete.ContratacaoFretePorContaDestinatário_FOB
+  commentId: F:Unimake.Business.DFe.Servicos.ModalidadeFrete.ContratacaoFretePorContaDestinatário_FOB
+  id: ContratacaoFretePorContaDestinatário_FOB
+  parent: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  langs:
+  - csharp
+  - vb
+  name: ContratacaoFretePorContaDestinatário_FOB
+  nameWithType: ModalidadeFrete.ContratacaoFretePorContaDestinatário_FOB
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeFrete.ContratacaoFretePorContaDestinatário_FOB
+  type: Field
+  source:
+    id: ContratacaoFretePorContaDestinatário_FOB
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1328
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n1=Contratação do Frete por conta do Destinatário (FOB)\n"
+  example: []
+  syntax:
+    content: ContratacaoFretePorContaDestinatário_FOB = 1
+    return:
+      type: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ModalidadeFrete.ContratacaoFretePorContaTerceiros
+  commentId: F:Unimake.Business.DFe.Servicos.ModalidadeFrete.ContratacaoFretePorContaTerceiros
+  id: ContratacaoFretePorContaTerceiros
+  parent: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  langs:
+  - csharp
+  - vb
+  name: ContratacaoFretePorContaTerceiros
+  nameWithType: ModalidadeFrete.ContratacaoFretePorContaTerceiros
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeFrete.ContratacaoFretePorContaTerceiros
+  type: Field
+  source:
+    id: ContratacaoFretePorContaTerceiros
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1334
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n2=Contratação do Frete por conta de Terceiros\n"
+  example: []
+  syntax:
+    content: ContratacaoFretePorContaTerceiros = 2
+    return:
+      type: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ModalidadeFrete.TransporteProprioPorContaRemetente
+  commentId: F:Unimake.Business.DFe.Servicos.ModalidadeFrete.TransporteProprioPorContaRemetente
+  id: TransporteProprioPorContaRemetente
+  parent: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  langs:
+  - csharp
+  - vb
+  name: TransporteProprioPorContaRemetente
+  nameWithType: ModalidadeFrete.TransporteProprioPorContaRemetente
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeFrete.TransporteProprioPorContaRemetente
+  type: Field
+  source:
+    id: TransporteProprioPorContaRemetente
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1340
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n3=Transporte Próprio por conta do Remetente\n"
+  example: []
+  syntax:
+    content: TransporteProprioPorContaRemetente = 3
+    return:
+      type: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ModalidadeFrete.TransporteProprioPorContaDestinatário
+  commentId: F:Unimake.Business.DFe.Servicos.ModalidadeFrete.TransporteProprioPorContaDestinatário
+  id: TransporteProprioPorContaDestinatário
+  parent: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  langs:
+  - csharp
+  - vb
+  name: TransporteProprioPorContaDestinatário
+  nameWithType: ModalidadeFrete.TransporteProprioPorContaDestinatário
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeFrete.TransporteProprioPorContaDestinatário
+  type: Field
+  source:
+    id: TransporteProprioPorContaDestinatário
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1346
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n4=Transporte Próprio por conta do Destinatário\n"
+  example: []
+  syntax:
+    content: TransporteProprioPorContaDestinatário = 4
+    return:
+      type: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.ModalidadeFrete.SemOcorrenciaTransporte
+  commentId: F:Unimake.Business.DFe.Servicos.ModalidadeFrete.SemOcorrenciaTransporte
+  id: SemOcorrenciaTransporte
+  parent: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  langs:
+  - csharp
+  - vb
+  name: SemOcorrenciaTransporte
+  nameWithType: ModalidadeFrete.SemOcorrenciaTransporte
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeFrete.SemOcorrenciaTransporte
+  type: Field
+  source:
+    id: SemOcorrenciaTransporte
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 1352
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n9=Sem Ocorrência de Transporte\n"
+  example: []
+  syntax:
+    content: SemOcorrenciaTransporte = 9
+    return:
+      type: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  name: GetAttribute<T>()
+  nameWithType: EnumsExtension.GetAttribute<T>()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>()
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)()
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)()
+  name.vb: GetAttribute(Of T)()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  name: GetAttributeDescription()
+  nameWithType: EnumsExtension.GetAttributeDescription()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  isExternal: true
+  name: GetAttribute<T>(Enum)
+  nameWithType: EnumsExtension.GetAttribute<T>(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>(System.Enum)
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)(Enum)
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)(System.Enum)
+  name.vb: GetAttribute(Of T)(Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  isExternal: true
+  name: GetAttributeDescription(Enum)
+  nameWithType: EnumsExtension.GetAttributeDescription(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+- uid: Unimake.Business.DFe.Servicos.ModalidadeFrete
+  commentId: T:Unimake.Business.DFe.Servicos.ModalidadeFrete
+  parent: Unimake.Business.DFe.Servicos
+  name: ModalidadeFrete
+  nameWithType: ModalidadeFrete
+  fullName: Unimake.Business.DFe.Servicos.ModalidadeFrete

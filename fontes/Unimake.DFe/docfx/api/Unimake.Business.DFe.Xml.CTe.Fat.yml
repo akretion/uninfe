@@ -1,0 +1,620 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTe.Fat
+  commentId: T:Unimake.Business.DFe.Xml.CTe.Fat
+  id: Fat
+  parent: Unimake.Business.DFe.Xml.CTe
+  children:
+  - Unimake.Business.DFe.Xml.CTe.Fat.NFat
+  - Unimake.Business.DFe.Xml.CTe.Fat.VDesc
+  - Unimake.Business.DFe.Xml.CTe.Fat.VDescField
+  - Unimake.Business.DFe.Xml.CTe.Fat.VLiq
+  - Unimake.Business.DFe.Xml.CTe.Fat.VLiqField
+  - Unimake.Business.DFe.Xml.CTe.Fat.VOrig
+  - Unimake.Business.DFe.Xml.CTe.Fat.VOrigField
+  langs:
+  - csharp
+  - vb
+  name: Fat
+  nameWithType: Fat
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat
+  type: Class
+  source:
+    id: Fat
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3258
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class Fat
+    content.vb: >-
+      <Serializable>
+
+      Public Class Fat
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.NFat
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Fat.NFat
+  id: NFat
+  parent: Unimake.Business.DFe.Xml.CTe.Fat
+  langs:
+  - csharp
+  - vb
+  name: NFat
+  nameWithType: Fat.NFat
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.NFat
+  type: Property
+  source:
+    id: NFat
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3262
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string NFat { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property NFat As String
+  overload: Unimake.Business.DFe.Xml.CTe.Fat.NFat*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.VOrig
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Fat.VOrig
+  id: VOrig
+  parent: Unimake.Business.DFe.Xml.CTe.Fat
+  langs:
+  - csharp
+  - vb
+  name: VOrig
+  nameWithType: Fat.VOrig
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.VOrig
+  type: Property
+  source:
+    id: VOrig
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3265
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double VOrig { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VOrig As Double
+  overload: Unimake.Business.DFe.Xml.CTe.Fat.VOrig*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.VOrigField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Fat.VOrigField
+  id: VOrigField
+  parent: Unimake.Business.DFe.Xml.CTe.Fat
+  langs:
+  - csharp
+  - vb
+  name: VOrigField
+  nameWithType: Fat.VOrigField
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.VOrigField
+  type: Property
+  source:
+    id: VOrigField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3268
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string VOrigField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VOrigField As String
+  overload: Unimake.Business.DFe.Xml.CTe.Fat.VOrigField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.VDesc
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Fat.VDesc
+  id: VDesc
+  parent: Unimake.Business.DFe.Xml.CTe.Fat
+  langs:
+  - csharp
+  - vb
+  name: VDesc
+  nameWithType: Fat.VDesc
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.VDesc
+  type: Property
+  source:
+    id: VDesc
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3275
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double VDesc { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VDesc As Double
+  overload: Unimake.Business.DFe.Xml.CTe.Fat.VDesc*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.VDescField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Fat.VDescField
+  id: VDescField
+  parent: Unimake.Business.DFe.Xml.CTe.Fat
+  langs:
+  - csharp
+  - vb
+  name: VDescField
+  nameWithType: Fat.VDescField
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.VDescField
+  type: Property
+  source:
+    id: VDescField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3278
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string VDescField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VDescField As String
+  overload: Unimake.Business.DFe.Xml.CTe.Fat.VDescField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.VLiq
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Fat.VLiq
+  id: VLiq
+  parent: Unimake.Business.DFe.Xml.CTe.Fat
+  langs:
+  - csharp
+  - vb
+  name: VLiq
+  nameWithType: Fat.VLiq
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.VLiq
+  type: Property
+  source:
+    id: VLiq
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3285
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public double VLiq { get; set; }
+    parameters: []
+    return:
+      type: System.Double
+    content.vb: Public Property VLiq As Double
+  overload: Unimake.Business.DFe.Xml.CTe.Fat.VLiq*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.VLiqField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.Fat.VLiqField
+  id: VLiqField
+  parent: Unimake.Business.DFe.Xml.CTe.Fat
+  langs:
+  - csharp
+  - vb
+  name: VLiqField
+  nameWithType: Fat.VLiqField
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.VLiqField
+  type: Property
+  source:
+    id: VLiqField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\EnviCTe.cs
+    startLine: 3288
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string VLiqField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VLiqField As String
+  overload: Unimake.Business.DFe.Xml.CTe.Fat.VLiqField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.NFat*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Fat.NFat
+  name: NFat
+  nameWithType: Fat.NFat
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.NFat
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.VOrig*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Fat.VOrig
+  name: VOrig
+  nameWithType: Fat.VOrig
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.VOrig
+- uid: System.Double
+  commentId: T:System.Double
+  parent: System
+  isExternal: true
+  name: Double
+  nameWithType: Double
+  fullName: System.Double
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.VOrigField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Fat.VOrigField
+  name: VOrigField
+  nameWithType: Fat.VOrigField
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.VOrigField
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.VDesc*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Fat.VDesc
+  name: VDesc
+  nameWithType: Fat.VDesc
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.VDesc
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.VDescField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Fat.VDescField
+  name: VDescField
+  nameWithType: Fat.VDescField
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.VDescField
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.VLiq*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Fat.VLiq
+  name: VLiq
+  nameWithType: Fat.VLiq
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.VLiq
+- uid: Unimake.Business.DFe.Xml.CTe.Fat.VLiqField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.Fat.VLiqField
+  name: VLiqField
+  nameWithType: Fat.VLiqField
+  fullName: Unimake.Business.DFe.Xml.CTe.Fat.VLiqField

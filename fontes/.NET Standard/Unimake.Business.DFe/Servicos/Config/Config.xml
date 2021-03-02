@@ -63,7 +63,7 @@
   <Arquivo ID="15">
     <Nome>Pará</Nome>
     <UF>PA</UF>
-    <ArqConfig>SVAN.xml</ArqConfig>
+    <ArqConfig>SVRS.xml</ArqConfig>
   </Arquivo>
   <Arquivo ID="12">
     <Nome>Acre</Nome>
@@ -133,7 +133,7 @@
   <Arquivo ID="21">
     <Nome>Maranhão</Nome>
     <UF>MA</UF>
-    <ArqConfig>SVAN.xml</ArqConfig>
+    <ArqConfig>MA.xml</ArqConfig>
   </Arquivo>
   <Arquivo ID="91">
     <Nome>Ambiente Nacional</Nome>

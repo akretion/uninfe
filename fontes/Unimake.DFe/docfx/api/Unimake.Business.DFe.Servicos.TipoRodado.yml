@@ -1,0 +1,384 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.TipoRodado
+  commentId: T:Unimake.Business.DFe.Servicos.TipoRodado
+  id: TipoRodado
+  parent: Unimake.Business.DFe.Servicos
+  children:
+  - Unimake.Business.DFe.Servicos.TipoRodado.CavaloMecanico
+  - Unimake.Business.DFe.Servicos.TipoRodado.Outros
+  - Unimake.Business.DFe.Servicos.TipoRodado.Toco
+  - Unimake.Business.DFe.Servicos.TipoRodado.Truck
+  - Unimake.Business.DFe.Servicos.TipoRodado.Utilitario
+  - Unimake.Business.DFe.Servicos.TipoRodado.VAN
+  langs:
+  - csharp
+  - vb
+  name: TipoRodado
+  nameWithType: TipoRodado
+  fullName: Unimake.Business.DFe.Servicos.TipoRodado
+  type: Enum
+  source:
+    id: TipoRodado
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 3895
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nTipo de Rodado para o MDFe\n"
+  example: []
+  syntax:
+    content: public enum TipoRodado
+    content.vb: Public Enum TipoRodado
+  extensionMethods:
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Unimake.Business.DFe.Servicos.TipoRodado.Truck
+  commentId: F:Unimake.Business.DFe.Servicos.TipoRodado.Truck
+  id: Truck
+  parent: Unimake.Business.DFe.Servicos.TipoRodado
+  langs:
+  - csharp
+  - vb
+  name: Truck
+  nameWithType: TipoRodado.Truck
+  fullName: Unimake.Business.DFe.Servicos.TipoRodado.Truck
+  type: Field
+  source:
+    id: Truck
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 3900
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n01 - Truck\n"
+  example: []
+  syntax:
+    content: Truck = 1
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoRodado
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoRodado.Toco
+  commentId: F:Unimake.Business.DFe.Servicos.TipoRodado.Toco
+  id: Toco
+  parent: Unimake.Business.DFe.Servicos.TipoRodado
+  langs:
+  - csharp
+  - vb
+  name: Toco
+  nameWithType: TipoRodado.Toco
+  fullName: Unimake.Business.DFe.Servicos.TipoRodado.Toco
+  type: Field
+  source:
+    id: Toco
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 3906
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n02 - Toco\n"
+  example: []
+  syntax:
+    content: Toco = 2
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoRodado
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoRodado.CavaloMecanico
+  commentId: F:Unimake.Business.DFe.Servicos.TipoRodado.CavaloMecanico
+  id: CavaloMecanico
+  parent: Unimake.Business.DFe.Servicos.TipoRodado
+  langs:
+  - csharp
+  - vb
+  name: CavaloMecanico
+  nameWithType: TipoRodado.CavaloMecanico
+  fullName: Unimake.Business.DFe.Servicos.TipoRodado.CavaloMecanico
+  type: Field
+  source:
+    id: CavaloMecanico
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 3912
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n03 - Cavalo Mecânico\n"
+  example: []
+  syntax:
+    content: CavaloMecanico = 3
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoRodado
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoRodado.VAN
+  commentId: F:Unimake.Business.DFe.Servicos.TipoRodado.VAN
+  id: VAN
+  parent: Unimake.Business.DFe.Servicos.TipoRodado
+  langs:
+  - csharp
+  - vb
+  name: VAN
+  nameWithType: TipoRodado.VAN
+  fullName: Unimake.Business.DFe.Servicos.TipoRodado.VAN
+  type: Field
+  source:
+    id: VAN
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 3918
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n04 - VAN\n"
+  example: []
+  syntax:
+    content: VAN = 4
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoRodado
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoRodado.Utilitario
+  commentId: F:Unimake.Business.DFe.Servicos.TipoRodado.Utilitario
+  id: Utilitario
+  parent: Unimake.Business.DFe.Servicos.TipoRodado
+  langs:
+  - csharp
+  - vb
+  name: Utilitario
+  nameWithType: TipoRodado.Utilitario
+  fullName: Unimake.Business.DFe.Servicos.TipoRodado.Utilitario
+  type: Field
+  source:
+    id: Utilitario
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 3924
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n05 - Utilitário\n"
+  example: []
+  syntax:
+    content: Utilitario = 5
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoRodado
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.TipoRodado.Outros
+  commentId: F:Unimake.Business.DFe.Servicos.TipoRodado.Outros
+  id: Outros
+  parent: Unimake.Business.DFe.Servicos.TipoRodado
+  langs:
+  - csharp
+  - vb
+  name: Outros
+  nameWithType: TipoRodado.Outros
+  fullName: Unimake.Business.DFe.Servicos.TipoRodado.Outros
+  type: Field
+  source:
+    id: Outros
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 3930
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n06 - Outros\n"
+  example: []
+  syntax:
+    content: Outros = 6
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoRodado
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  name: GetAttribute<T>()
+  nameWithType: EnumsExtension.GetAttribute<T>()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>()
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)()
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)()
+  name.vb: GetAttribute(Of T)()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  name: GetAttributeDescription()
+  nameWithType: EnumsExtension.GetAttributeDescription()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  isExternal: true
+  name: GetAttribute<T>(Enum)
+  nameWithType: EnumsExtension.GetAttribute<T>(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>(System.Enum)
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)(Enum)
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)(System.Enum)
+  name.vb: GetAttribute(Of T)(Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  isExternal: true
+  name: GetAttributeDescription(Enum)
+  nameWithType: EnumsExtension.GetAttributeDescription(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+- uid: Unimake.Business.DFe.Servicos.TipoRodado
+  commentId: T:Unimake.Business.DFe.Servicos.TipoRodado
+  parent: Unimake.Business.DFe.Servicos
+  name: TipoRodado
+  nameWithType: TipoRodado
+  fullName: Unimake.Business.DFe.Servicos.TipoRodado

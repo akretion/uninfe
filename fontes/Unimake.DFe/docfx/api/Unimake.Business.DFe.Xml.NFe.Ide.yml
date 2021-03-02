@@ -1,0 +1,1634 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.NFe.Ide
+  commentId: T:Unimake.Business.DFe.Xml.NFe.Ide
+  id: Ide
+  parent: Unimake.Business.DFe.Xml.NFe
+  children:
+  - Unimake.Business.DFe.Xml.NFe.Ide.CDV
+  - Unimake.Business.DFe.Xml.NFe.Ide.CMunFG
+  - Unimake.Business.DFe.Xml.NFe.Ide.CNF
+  - Unimake.Business.DFe.Xml.NFe.Ide.CUF
+  - Unimake.Business.DFe.Xml.NFe.Ide.CUFField
+  - Unimake.Business.DFe.Xml.NFe.Ide.DhCont
+  - Unimake.Business.DFe.Xml.NFe.Ide.DhContField
+  - Unimake.Business.DFe.Xml.NFe.Ide.DhEmi
+  - Unimake.Business.DFe.Xml.NFe.Ide.DhEmiField
+  - Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEnt
+  - Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEntField
+  - Unimake.Business.DFe.Xml.NFe.Ide.FinNFe
+  - Unimake.Business.DFe.Xml.NFe.Ide.IdDest
+  - Unimake.Business.DFe.Xml.NFe.Ide.IndFinal
+  - Unimake.Business.DFe.Xml.NFe.Ide.IndPres
+  - Unimake.Business.DFe.Xml.NFe.Ide.Mod
+  - Unimake.Business.DFe.Xml.NFe.Ide.NatOp
+  - Unimake.Business.DFe.Xml.NFe.Ide.NFref
+  - Unimake.Business.DFe.Xml.NFe.Ide.NNF
+  - Unimake.Business.DFe.Xml.NFe.Ide.ProcEmi
+  - Unimake.Business.DFe.Xml.NFe.Ide.Serie
+  - Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhContField
+  - Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhSaiEntField
+  - Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeXJust
+  - Unimake.Business.DFe.Xml.NFe.Ide.TpAmb
+  - Unimake.Business.DFe.Xml.NFe.Ide.TpEmis
+  - Unimake.Business.DFe.Xml.NFe.Ide.TpImp
+  - Unimake.Business.DFe.Xml.NFe.Ide.TpNF
+  - Unimake.Business.DFe.Xml.NFe.Ide.VerProc
+  - Unimake.Business.DFe.Xml.NFe.Ide.XJust
+  langs:
+  - csharp
+  - vb
+  name: Ide
+  nameWithType: Ide
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide
+  type: Class
+  source:
+    id: Ide
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 207
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class Ide
+    content.vb: >-
+      <Serializable>
+
+      Public Class Ide
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.CUF
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.CUF
+  id: CUF
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: CUF
+  nameWithType: Ide.CUF
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.CUF
+  type: Property
+  source:
+    id: CUF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 214
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public UFBrasil CUF { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.UFBrasil
+    content.vb: Public Property CUF As UFBrasil
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.CUF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.CUFField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.CUFField
+  id: CUFField
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: CUFField
+  nameWithType: Ide.CUFField
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.CUFField
+  type: Property
+  source:
+    id: CUFField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 217
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public int CUFField { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property CUFField As Integer
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.CUFField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.CNF
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.CNF
+  id: CNF
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: CNF
+  nameWithType: Ide.CNF
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.CNF
+  type: Property
+  source:
+    id: CNF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 224
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string CNF { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property CNF As String
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.CNF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.NatOp
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.NatOp
+  id: NatOp
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: NatOp
+  nameWithType: Ide.NatOp
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.NatOp
+  type: Property
+  source:
+    id: NatOp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 249
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string NatOp { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property NatOp As String
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.NatOp*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.Mod
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.Mod
+  id: Mod
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: Mod
+  nameWithType: Ide.Mod
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.Mod
+  type: Property
+  source:
+    id: Mod
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 257
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public ModeloDFe Mod { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.ModeloDFe
+    content.vb: Public Property Mod As ModeloDFe
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.Mod*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.Serie
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.Serie
+  id: Serie
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: Serie
+  nameWithType: Ide.Serie
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.Serie
+  type: Property
+  source:
+    id: Serie
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 260
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public int Serie { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Serie As Integer
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.Serie*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.NNF
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.NNF
+  id: NNF
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: NNF
+  nameWithType: Ide.NNF
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.NNF
+  type: Property
+  source:
+    id: NNF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 263
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public int NNF { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property NNF As Integer
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.NNF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.DhEmi
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.DhEmi
+  id: DhEmi
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: DhEmi
+  nameWithType: Ide.DhEmi
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.DhEmi
+  type: Property
+  source:
+    id: DhEmi
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 266
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public DateTime DhEmi { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DhEmi As Date
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.DhEmi*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.DhEmiField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.DhEmiField
+  id: DhEmiField
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: DhEmiField
+  nameWithType: Ide.DhEmiField
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.DhEmiField
+  type: Property
+  source:
+    id: DhEmiField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 269
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string DhEmiField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DhEmiField As String
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.DhEmiField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEnt
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEnt
+  id: DhSaiEnt
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: DhSaiEnt
+  nameWithType: Ide.DhSaiEnt
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEnt
+  type: Property
+  source:
+    id: DhSaiEnt
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 276
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public DateTime DhSaiEnt { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DhSaiEnt As Date
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEnt*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEntField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEntField
+  id: DhSaiEntField
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: DhSaiEntField
+  nameWithType: Ide.DhSaiEntField
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEntField
+  type: Property
+  source:
+    id: DhSaiEntField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 279
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string DhSaiEntField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DhSaiEntField As String
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEntField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.TpNF
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.TpNF
+  id: TpNF
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: TpNF
+  nameWithType: Ide.TpNF
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.TpNF
+  type: Property
+  source:
+    id: TpNF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 286
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public TipoOperacao TpNF { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoOperacao
+    content.vb: Public Property TpNF As TipoOperacao
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.TpNF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.IdDest
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.IdDest
+  id: IdDest
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: IdDest
+  nameWithType: Ide.IdDest
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.IdDest
+  type: Property
+  source:
+    id: IdDest
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 289
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public DestinoOperacao IdDest { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.DestinoOperacao
+    content.vb: Public Property IdDest As DestinoOperacao
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.IdDest*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.CMunFG
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.CMunFG
+  id: CMunFG
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: CMunFG
+  nameWithType: Ide.CMunFG
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.CMunFG
+  type: Property
+  source:
+    id: CMunFG
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 292
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public int CMunFG { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property CMunFG As Integer
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.CMunFG*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.TpImp
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.TpImp
+  id: TpImp
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: TpImp
+  nameWithType: Ide.TpImp
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.TpImp
+  type: Property
+  source:
+    id: TpImp
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 295
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public FormatoImpressaoDANFE TpImp { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.FormatoImpressaoDANFE
+    content.vb: Public Property TpImp As FormatoImpressaoDANFE
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.TpImp*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.TpEmis
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.TpEmis
+  id: TpEmis
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: TpEmis
+  nameWithType: Ide.TpEmis
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.TpEmis
+  type: Property
+  source:
+    id: TpEmis
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 298
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public TipoEmissao TpEmis { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoEmissao
+    content.vb: Public Property TpEmis As TipoEmissao
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.TpEmis*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.CDV
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.CDV
+  id: CDV
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: CDV
+  nameWithType: Ide.CDV
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.CDV
+  type: Property
+  source:
+    id: CDV
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 301
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public int CDV { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property CDV As Integer
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.CDV*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.TpAmb
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.TpAmb
+  id: TpAmb
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: TpAmb
+  nameWithType: Ide.TpAmb
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.TpAmb
+  type: Property
+  source:
+    id: TpAmb
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 304
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public TipoAmbiente TpAmb { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoAmbiente
+    content.vb: Public Property TpAmb As TipoAmbiente
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.TpAmb*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.FinNFe
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.FinNFe
+  id: FinNFe
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: FinNFe
+  nameWithType: Ide.FinNFe
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.FinNFe
+  type: Property
+  source:
+    id: FinNFe
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 307
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public FinalidadeNFe FinNFe { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.FinalidadeNFe
+    content.vb: Public Property FinNFe As FinalidadeNFe
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.FinNFe*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.IndFinal
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.IndFinal
+  id: IndFinal
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: IndFinal
+  nameWithType: Ide.IndFinal
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.IndFinal
+  type: Property
+  source:
+    id: IndFinal
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 310
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public SimNao IndFinal { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.SimNao
+    content.vb: Public Property IndFinal As SimNao
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.IndFinal*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.IndPres
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.IndPres
+  id: IndPres
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: IndPres
+  nameWithType: Ide.IndPres
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.IndPres
+  type: Property
+  source:
+    id: IndPres
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 313
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public IndicadorPresenca IndPres { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.IndicadorPresenca
+    content.vb: Public Property IndPres As IndicadorPresenca
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.IndPres*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.ProcEmi
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.ProcEmi
+  id: ProcEmi
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: ProcEmi
+  nameWithType: Ide.ProcEmi
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.ProcEmi
+  type: Property
+  source:
+    id: ProcEmi
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 316
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public ProcessoEmissao ProcEmi { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.ProcessoEmissao
+    content.vb: Public Property ProcEmi As ProcessoEmissao
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.ProcEmi*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.VerProc
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.VerProc
+  id: VerProc
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: VerProc
+  nameWithType: Ide.VerProc
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.VerProc
+  type: Property
+  source:
+    id: VerProc
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 319
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string VerProc { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VerProc As String
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.VerProc*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.DhCont
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.DhCont
+  id: DhCont
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: DhCont
+  nameWithType: Ide.DhCont
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.DhCont
+  type: Property
+  source:
+    id: DhCont
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 322
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public DateTime DhCont { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DhCont As Date
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.DhCont*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.DhContField
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.DhContField
+  id: DhContField
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: DhContField
+  nameWithType: Ide.DhContField
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.DhContField
+  type: Property
+  source:
+    id: DhContField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 325
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string DhContField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DhContField As String
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.DhContField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.XJust
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.XJust
+  id: XJust
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: XJust
+  nameWithType: Ide.XJust
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.XJust
+  type: Property
+  source:
+    id: XJust
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 332
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public string XJust { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XJust As String
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.XJust*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.NFref
+  commentId: P:Unimake.Business.DFe.Xml.NFe.Ide.NFref
+  id: NFref
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: NFref
+  nameWithType: Ide.NFref
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.NFref
+  type: Property
+  source:
+    id: NFref
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 335
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public List<NFref> NFref { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{Unimake.Business.DFe.Xml.NFe.NFref}
+    content.vb: Public Property NFref As List(Of NFref)
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.NFref*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhContField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhContField
+  id: ShouldSerializeDhContField
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeDhContField()
+  nameWithType: Ide.ShouldSerializeDhContField()
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhContField()
+  type: Method
+  source:
+    id: ShouldSerializeDhContField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 340
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeDhContField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeDhContField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhContField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeXJust
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeXJust
+  id: ShouldSerializeXJust
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeXJust()
+  nameWithType: Ide.ShouldSerializeXJust()
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeXJust()
+  type: Method
+  source:
+    id: ShouldSerializeXJust
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 342
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeXJust()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeXJust As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeXJust*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhSaiEntField
+  commentId: M:Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhSaiEntField
+  id: ShouldSerializeDhSaiEntField
+  parent: Unimake.Business.DFe.Xml.NFe.Ide
+  langs:
+  - csharp
+  - vb
+  name: ShouldSerializeDhSaiEntField()
+  nameWithType: Ide.ShouldSerializeDhSaiEntField()
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhSaiEntField()
+  type: Method
+  source:
+    id: ShouldSerializeDhSaiEntField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\NFe\EnviNFe.cs
+    startLine: 344
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.NFe
+  syntax:
+    content: public bool ShouldSerializeDhSaiEntField()
+    return:
+      type: System.Boolean
+    content.vb: Public Function ShouldSerializeDhSaiEntField As Boolean
+  overload: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhSaiEntField*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.NFe
+  commentId: N:Unimake.Business.DFe.Xml.NFe
+  name: Unimake.Business.DFe.Xml.NFe
+  nameWithType: Unimake.Business.DFe.Xml.NFe
+  fullName: Unimake.Business.DFe.Xml.NFe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.CUF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.CUF
+  name: CUF
+  nameWithType: Ide.CUF
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.CUF
+- uid: Unimake.Business.DFe.Servicos.UFBrasil
+  commentId: T:Unimake.Business.DFe.Servicos.UFBrasil
+  parent: Unimake.Business.DFe.Servicos
+  name: UFBrasil
+  nameWithType: UFBrasil
+  fullName: Unimake.Business.DFe.Servicos.UFBrasil
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.CUFField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.CUFField
+  name: CUFField
+  nameWithType: Ide.CUFField
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.CUFField
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.CNF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.CNF
+  name: CNF
+  nameWithType: Ide.CNF
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.CNF
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.NatOp*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.NatOp
+  name: NatOp
+  nameWithType: Ide.NatOp
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.NatOp
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.Mod*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.Mod
+  name: Mod
+  nameWithType: Ide.Mod
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.Mod
+- uid: Unimake.Business.DFe.Servicos.ModeloDFe
+  commentId: T:Unimake.Business.DFe.Servicos.ModeloDFe
+  parent: Unimake.Business.DFe.Servicos
+  name: ModeloDFe
+  nameWithType: ModeloDFe
+  fullName: Unimake.Business.DFe.Servicos.ModeloDFe
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.Serie*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.Serie
+  name: Serie
+  nameWithType: Ide.Serie
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.Serie
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.NNF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.NNF
+  name: NNF
+  nameWithType: Ide.NNF
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.NNF
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.DhEmi*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.DhEmi
+  name: DhEmi
+  nameWithType: Ide.DhEmi
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.DhEmi
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.DhEmiField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.DhEmiField
+  name: DhEmiField
+  nameWithType: Ide.DhEmiField
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.DhEmiField
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEnt*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEnt
+  name: DhSaiEnt
+  nameWithType: Ide.DhSaiEnt
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEnt
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEntField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEntField
+  name: DhSaiEntField
+  nameWithType: Ide.DhSaiEntField
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.DhSaiEntField
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.TpNF*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.TpNF
+  name: TpNF
+  nameWithType: Ide.TpNF
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.TpNF
+- uid: Unimake.Business.DFe.Servicos.TipoOperacao
+  commentId: T:Unimake.Business.DFe.Servicos.TipoOperacao
+  parent: Unimake.Business.DFe.Servicos
+  name: TipoOperacao
+  nameWithType: TipoOperacao
+  fullName: Unimake.Business.DFe.Servicos.TipoOperacao
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.IdDest*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.IdDest
+  name: IdDest
+  nameWithType: Ide.IdDest
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.IdDest
+- uid: Unimake.Business.DFe.Servicos.DestinoOperacao
+  commentId: T:Unimake.Business.DFe.Servicos.DestinoOperacao
+  parent: Unimake.Business.DFe.Servicos
+  name: DestinoOperacao
+  nameWithType: DestinoOperacao
+  fullName: Unimake.Business.DFe.Servicos.DestinoOperacao
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.CMunFG*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.CMunFG
+  name: CMunFG
+  nameWithType: Ide.CMunFG
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.CMunFG
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.TpImp*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.TpImp
+  name: TpImp
+  nameWithType: Ide.TpImp
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.TpImp
+- uid: Unimake.Business.DFe.Servicos.FormatoImpressaoDANFE
+  commentId: T:Unimake.Business.DFe.Servicos.FormatoImpressaoDANFE
+  parent: Unimake.Business.DFe.Servicos
+  name: FormatoImpressaoDANFE
+  nameWithType: FormatoImpressaoDANFE
+  fullName: Unimake.Business.DFe.Servicos.FormatoImpressaoDANFE
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.TpEmis*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.TpEmis
+  name: TpEmis
+  nameWithType: Ide.TpEmis
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.TpEmis
+- uid: Unimake.Business.DFe.Servicos.TipoEmissao
+  commentId: T:Unimake.Business.DFe.Servicos.TipoEmissao
+  parent: Unimake.Business.DFe.Servicos
+  name: TipoEmissao
+  nameWithType: TipoEmissao
+  fullName: Unimake.Business.DFe.Servicos.TipoEmissao
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.CDV*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.CDV
+  name: CDV
+  nameWithType: Ide.CDV
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.CDV
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.TpAmb*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.TpAmb
+  name: TpAmb
+  nameWithType: Ide.TpAmb
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.TpAmb
+- uid: Unimake.Business.DFe.Servicos.TipoAmbiente
+  commentId: T:Unimake.Business.DFe.Servicos.TipoAmbiente
+  parent: Unimake.Business.DFe.Servicos
+  name: TipoAmbiente
+  nameWithType: TipoAmbiente
+  fullName: Unimake.Business.DFe.Servicos.TipoAmbiente
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.FinNFe*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.FinNFe
+  name: FinNFe
+  nameWithType: Ide.FinNFe
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.FinNFe
+- uid: Unimake.Business.DFe.Servicos.FinalidadeNFe
+  commentId: T:Unimake.Business.DFe.Servicos.FinalidadeNFe
+  parent: Unimake.Business.DFe.Servicos
+  name: FinalidadeNFe
+  nameWithType: FinalidadeNFe
+  fullName: Unimake.Business.DFe.Servicos.FinalidadeNFe
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.IndFinal*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.IndFinal
+  name: IndFinal
+  nameWithType: Ide.IndFinal
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.IndFinal
+- uid: Unimake.Business.DFe.Servicos.SimNao
+  commentId: T:Unimake.Business.DFe.Servicos.SimNao
+  parent: Unimake.Business.DFe.Servicos
+  name: SimNao
+  nameWithType: SimNao
+  fullName: Unimake.Business.DFe.Servicos.SimNao
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.IndPres*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.IndPres
+  name: IndPres
+  nameWithType: Ide.IndPres
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.IndPres
+- uid: Unimake.Business.DFe.Servicos.IndicadorPresenca
+  commentId: T:Unimake.Business.DFe.Servicos.IndicadorPresenca
+  parent: Unimake.Business.DFe.Servicos
+  name: IndicadorPresenca
+  nameWithType: IndicadorPresenca
+  fullName: Unimake.Business.DFe.Servicos.IndicadorPresenca
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.ProcEmi*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.ProcEmi
+  name: ProcEmi
+  nameWithType: Ide.ProcEmi
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.ProcEmi
+- uid: Unimake.Business.DFe.Servicos.ProcessoEmissao
+  commentId: T:Unimake.Business.DFe.Servicos.ProcessoEmissao
+  parent: Unimake.Business.DFe.Servicos
+  name: ProcessoEmissao
+  nameWithType: ProcessoEmissao
+  fullName: Unimake.Business.DFe.Servicos.ProcessoEmissao
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.VerProc*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.VerProc
+  name: VerProc
+  nameWithType: Ide.VerProc
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.VerProc
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.DhCont*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.DhCont
+  name: DhCont
+  nameWithType: Ide.DhCont
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.DhCont
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.DhContField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.DhContField
+  name: DhContField
+  nameWithType: Ide.DhContField
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.DhContField
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.XJust*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.XJust
+  name: XJust
+  nameWithType: Ide.XJust
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.XJust
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.NFref*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.NFref
+  name: NFref
+  nameWithType: Ide.NFref
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.NFref
+- uid: System.Collections.Generic.List{Unimake.Business.DFe.Xml.NFe.NFref}
+  commentId: T:System.Collections.Generic.List{Unimake.Business.DFe.Xml.NFe.NFref}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  name: List<NFref>
+  nameWithType: List<NFref>
+  fullName: System.Collections.Generic.List<Unimake.Business.DFe.Xml.NFe.NFref>
+  nameWithType.vb: List(Of NFref)
+  fullName.vb: System.Collections.Generic.List(Of Unimake.Business.DFe.Xml.NFe.NFref)
+  name.vb: List(Of NFref)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Unimake.Business.DFe.Xml.NFe.NFref
+    name: NFref
+    nameWithType: NFref
+    fullName: Unimake.Business.DFe.Xml.NFe.NFref
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Unimake.Business.DFe.Xml.NFe.NFref
+    name: NFref
+    nameWithType: NFref
+    fullName: Unimake.Business.DFe.Xml.NFe.NFref
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhContField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhContField
+  name: ShouldSerializeDhContField
+  nameWithType: Ide.ShouldSerializeDhContField
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhContField
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeXJust*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeXJust
+  name: ShouldSerializeXJust
+  nameWithType: Ide.ShouldSerializeXJust
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeXJust
+- uid: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhSaiEntField*
+  commentId: Overload:Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhSaiEntField
+  name: ShouldSerializeDhSaiEntField
+  nameWithType: Ide.ShouldSerializeDhSaiEntField
+  fullName: Unimake.Business.DFe.Xml.NFe.Ide.ShouldSerializeDhSaiEntField

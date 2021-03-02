@@ -19,13 +19,13 @@ using NFe.Components.SimplISS;
 using NFe.Components.Simple;
 using NFe.Components.SystemPro;
 using NFe.Components.Tinus;
+using NFe.Components.GeisWeb;
 using NFe.Settings;
 using NFe.Validate;
 using NFSe.Components;
 using System;
 using System.IO;
 using NFe.Components.WEBFISCO_TECNOLOGIA;
-using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using System.Text.RegularExpressions;
 using NFe.Components.Elotech;
@@ -36,7 +36,7 @@ using static NFe.Components.Security.SOAPSecurity;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskNFSeRecepcionarLoteRps : TaskAbst
+    public class TaskNFSeRecepcionarLoteRps: TaskAbst
     {
         #region Objeto com os dados do XML de lote rps
 
@@ -58,7 +58,7 @@ namespace NFe.Service.NFSe
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.NFSeRecepcionarLoteRps;
@@ -74,39 +74,47 @@ namespace NFe.Service.NFSe
                 EnvLoteRps(emp, NomeArquivoXML);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosEnvLoteRps.cMunicipio);
+                var padraoNFSe = Functions.PadraoNFSe(oDadosEnvLoteRps.cMunicipio);
 
                 WebServiceProxy wsProxy = null;
                 object envLoteRps = null;
-
-                if (IsUtilizaCompilacaoWs(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))
+                if(!string.IsNullOrEmpty(Empresas.Configuracoes[emp].CertificadoPIN))
                 {
-                    wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe, oDadosEnvLoteRps.cMunicipio);
-                    if (wsProxy != null)
-                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    new Unimake.Business.DFe.Utility.Certificate().CarregarPINA3(Empresas.Configuracoes[emp].X509Certificado, Empresas.Configuracoes[emp].CertificadoPIN);
                 }
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe, Servico);
+                if(IsUtilizaCompilacaoWs(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))
+                {
+                    wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe, oDadosEnvLoteRps.cMunicipio);
+                    if(wsProxy != null)
+                    {
+                        envLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    }
+                }
 
-                string cabecMsg = "";
-                switch (padraoNFSe)
+                var securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosEnvLoteRps.cMunicipio, oDadosEnvLoteRps.tpAmb, oDadosEnvLoteRps.tpEmis, padraoNFSe, Servico);
+
+                var cabecMsg = "";
+                switch(padraoNFSe)
                 {
                     case PadroesNFSe.IPM:
 
                         //código da cidade da receita federal, este arquivo pode ser encontrado em ~\uninfe\doc\Codigos_Cidades_Receita_Federal.xls</para>
                         //O código da cidade está hardcoded pois ainda está sendo usado apenas para campo mourão
-                        IPM ipm = new IPM((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var ipm = new IPM((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                           Empresas.Configuracoes[emp].PastaXmlRetorno,
                                           Empresas.Configuracoes[emp].UsuarioWS,
                                           Empresas.Configuracoes[emp].SenhaWS,
                                           oDadosEnvLoteRps.cMunicipio);
 
-                        if (ConfiguracaoApp.Proxy)
+                        if(ConfiguracaoApp.Proxy)
+                        {
                             ipm.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
+                        }
 
                         if(oDadosEnvLoteRps.cMunicipio == 4303103 || oDadosEnvLoteRps.cMunicipio == 4104808)
                         {
-                            AssinaturaDigital adIPM = new AssinaturaDigital();
+                            var adIPM = new AssinaturaDigital();
                             //adIPM.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
                             adIPM.Assinar(NomeArquivoXML, "nfse", "nfse", Empresas.Configuracoes[emp].X509Certificado, emp);
                         }
@@ -115,7 +123,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.GINFES:
-                        switch (oDadosEnvLoteRps.cMunicipio)
+                        switch(oDadosEnvLoteRps.cMunicipio)
                         {
                             case 2304400: //Fortaleza - CE
                                 cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
@@ -139,11 +147,11 @@ namespace NFe.Service.NFSe
 
                         #region Betha
 
-                        string versao = Functions.GetAttributeXML("LoteRps", "versao", NomeArquivoXML);
-                        if (versao.Equals("2.02"))
+                        var versao = Functions.GetAttributeXML("LoteRps", "versao", NomeArquivoXML);
+                        if(versao.Equals("2.02"))
                         {
                             padraoNFSe = PadroesNFSe.BETHA202;
-                            Components.Betha.NewVersion.Betha betha = new Components.Betha.NewVersion.Betha((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            var betha = new Components.Betha.NewVersion.Betha((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
                                 oDadosEnvLoteRps.cMunicipio,
                                 Empresas.Configuracoes[emp].UsuarioWS,
@@ -152,18 +160,24 @@ namespace NFe.Service.NFSe
                                 ConfiguracaoApp.ProxySenha,
                                 ConfiguracaoApp.ProxyServidor);
 
-                            AssinaturaDigital signbetha = new AssinaturaDigital();
+                            var signbetha = new AssinaturaDigital();
                             signbetha.Assinar(NomeArquivoXML, emp, 202);
 
-                            if (GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.BETHA202) == Servicos.NFSeRecepcionarLoteRpsSincrono)
+                            if(GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.BETHA202) == Servicos.NFSeRecepcionarLoteRpsSincrono)
+                            {
                                 betha.EmiteNFSincrono(NomeArquivoXML);
+                            }
                             else
+                            {
                                 betha.EmiteNF(NomeArquivoXML);
+                            }
                         }
                         else
                         {
-                            wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
-                            wsProxy.Betha = new Betha();
+                            wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado)
+                            {
+                                Betha = new Betha()
+                            };
                         }
                         break;
 
@@ -222,9 +236,9 @@ namespace NFe.Service.NFSe
 
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
-                        if (oDadosEnvLoteRps.tpAmb == 1)
+                        if(oDadosEnvLoteRps.tpAmb == 1)
                         {
-                            switch (oDadosEnvLoteRps.cMunicipio)
+                            switch(oDadosEnvLoteRps.cMunicipio)
                             {
                                 case 5211800:
                                     envLoteRps = new Components.PJaraguaGO.nfseWS();
@@ -241,10 +255,17 @@ namespace NFe.Service.NFSe
                                 case 5211909:
                                     envLoteRps = new Components.PJataiGO.nfseWS();
                                     break;
+
+                                case 5220603:
+                                    envLoteRps = new Components.PSilvaniaGO.nfseWS();
+                                    break;
                             }
                         }
                         else
+                        {
                             throw new Exception("Este município não dispõe de ambiente de homologação para envio de NFS-e em teste.");
+                        }
+
                         break;
 
                     case PadroesNFSe.PORTOVELHENSE:
@@ -252,7 +273,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.DSF:
-                        if (oDadosEnvLoteRps.cMunicipio == 3549904)
+                        if(oDadosEnvLoteRps.cMunicipio == 3549904)
                         {
                             cabecMsg = "<cabecalho versao=\"3\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>3</versaoDados></cabecalho>";
                         }
@@ -267,7 +288,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.FINTEL:
-                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://iss.irati.pr.gov.br/Arquivos/nfseV202.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
+                        cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.FINTEL);
                         break;
 
@@ -277,18 +298,25 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.PORTALFACIL_ACTCON_202:
-                        if (oDadosEnvLoteRps.cMunicipio != 3169901)
+                        if(oDadosEnvLoteRps.cMunicipio != 3169901)
+                        {
                             cabecMsg = "<cabecalho><versaoDados>2.02</versaoDados></cabecalho>";
+                        }
+
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.PORTALFACIL_ACTCON_202);
+                        break;
+
+                    case PadroesNFSe.RLZ_INFORMATICA_02:
+                        cabecMsg = "<cabecalho><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
 
                     case PadroesNFSe.SYSTEMPRO:
 
                         #region SystemPro
 
-                        SystemPro syspro = new SystemPro((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var syspro = new SystemPro((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno, Empresas.Configuracoes[emp].X509Certificado, oDadosEnvLoteRps.cMunicipio);
-                        AssinaturaDigital ad = new AssinaturaDigital();
+                        var ad = new AssinaturaDigital();
                         ad.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
                         syspro.EmiteNF(NomeArquivoXML);
                         break;
@@ -296,7 +324,7 @@ namespace NFe.Service.NFSe
                     #endregion SystemPro
 
                     case PadroesNFSe.SIGCORP_SIGISS:
-                        SigCorp sigcorp = new SigCorp((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var sigcorp = new SigCorp((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosEnvLoteRps.cMunicipio);
                         sigcorp.EmiteNF(NomeArquivoXML);
@@ -312,7 +340,7 @@ namespace NFe.Service.NFSe
 
                         #region Fiorilli
 
-                        Fiorilli fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var fiorilli = new Fiorilli((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                          Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                          oDadosEnvLoteRps.cMunicipio,
                                                          Empresas.Configuracoes[emp].UsuarioWS,
@@ -322,13 +350,13 @@ namespace NFe.Service.NFSe
                                                          ConfiguracaoApp.ProxyServidor,
                                                          Empresas.Configuracoes[emp].X509Certificado);
 
-                        AssinaturaDigital ass = new AssinaturaDigital();
+                        var ass = new AssinaturaDigital();
                         ass.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                         // Validar o Arquivo XML
-                        ValidarXML validar = new ValidarXML(NomeArquivoXML, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
-                        string resValidacao = validar.ValidarArqXML(NomeArquivoXML);
-                        if (resValidacao != "")
+                        var validar = new ValidarXML(NomeArquivoXML, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
+                        var resValidacao = validar.ValidarArqXML(NomeArquivoXML);
+                        if(resValidacao != "")
                         {
                             throw new Exception(resValidacao);
                         }
@@ -342,7 +370,7 @@ namespace NFe.Service.NFSe
 
                         #region Simpliss
 
-                        SimplISS simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
@@ -351,7 +379,7 @@ namespace NFe.Service.NFSe
                         ConfiguracaoApp.ProxySenha,
                         ConfiguracaoApp.ProxyServidor);
 
-                        AssinaturaDigital sign = new AssinaturaDigital();
+                        var sign = new AssinaturaDigital();
                         sign.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                         simpliss.EmiteNF(NomeArquivoXML);
@@ -363,7 +391,7 @@ namespace NFe.Service.NFSe
 
                         #region Conam
 
-                        Conam conam = new Conam((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var conam = new Conam((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
@@ -378,7 +406,7 @@ namespace NFe.Service.NFSe
 
                         #region RLZ
 
-                        Rlz_Informatica rlz = new Rlz_Informatica((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var rlz = new Rlz_Informatica((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio);
 
@@ -391,7 +419,7 @@ namespace NFe.Service.NFSe
 
                         #region E-Governe
 
-                        EGoverne egoverne = new EGoverne((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var egoverne = new EGoverne((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosEnvLoteRps.cMunicipio,
                             ConfiguracaoApp.ProxyUsuario,
@@ -399,7 +427,7 @@ namespace NFe.Service.NFSe
                             ConfiguracaoApp.ProxyServidor,
                             Empresas.Configuracoes[emp].X509Certificado);
 
-                        AssinaturaDigital assEGovoverne = new AssinaturaDigital();
+                        var assEGovoverne = new AssinaturaDigital();
                         assEGovoverne.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                         egoverne.EmiteNF(NomeArquivoXML);
@@ -411,7 +439,7 @@ namespace NFe.Service.NFSe
 
                         #region E&L
 
-                        EL el = new EL((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var el = new EL((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                         oDadosEnvLoteRps.cMunicipio,
                                         Empresas.Configuracoes[emp].UsuarioWS,
@@ -429,7 +457,7 @@ namespace NFe.Service.NFSe
 
                         #region GOV-Digital
 
-                        GovDigital govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var govdig = new GovDigital((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                             Empresas.Configuracoes[emp].X509Certificado,
                                                             oDadosEnvLoteRps.cMunicipio,
@@ -437,7 +465,7 @@ namespace NFe.Service.NFSe
                                                             ConfiguracaoApp.ProxySenha,
                                                             ConfiguracaoApp.ProxyServidor);
 
-                        AssinaturaDigital adgovdig = new AssinaturaDigital();
+                        var adgovdig = new AssinaturaDigital();
                         adgovdig.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                         govdig.EmiteNF(NomeArquivoXML);
@@ -466,7 +494,7 @@ namespace NFe.Service.NFSe
 
                         #region METROPOLIS
 
-                        Metropolis metropolis = new Metropolis((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var metropolis = new Metropolis((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                       Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                       oDadosEnvLoteRps.cMunicipio,
                                                       ConfiguracaoApp.ProxyUsuario,
@@ -474,7 +502,7 @@ namespace NFe.Service.NFSe
                                                       ConfiguracaoApp.ProxyServidor,
                                                       Empresas.Configuracoes[emp].X509Certificado);
 
-                        AssinaturaDigital metropolisdig = new AssinaturaDigital();
+                        var metropolisdig = new AssinaturaDigital();
                         metropolisdig.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                         metropolis.EmiteNF(NomeArquivoXML);
@@ -486,7 +514,7 @@ namespace NFe.Service.NFSe
 
                         #region MGM
 
-                        MGM mgm = new MGM((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var mgm = new MGM((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                            Empresas.Configuracoes[emp].PastaXmlRetorno,
                                            oDadosEnvLoteRps.cMunicipio,
                                            Empresas.Configuracoes[emp].UsuarioWS,
@@ -500,7 +528,7 @@ namespace NFe.Service.NFSe
 
                         #region Consist
 
-                        Consist consist = new Consist((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var consist = new Consist((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
@@ -520,7 +548,7 @@ namespace NFe.Service.NFSe
 
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
-                        if (oDadosEnvLoteRps.tpAmb == 1)
+                        if(oDadosEnvLoteRps.tpAmb == 1)
                         {
                             //envLoteRps = new NFe.Components.PClaudioMG.api_portClient();
                         }
@@ -537,7 +565,7 @@ namespace NFe.Service.NFSe
 
                         #region Coplan
 
-                        Coplan coplan = new Coplan((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var coplan = new Coplan((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosEnvLoteRps.cMunicipio,
                             ConfiguracaoApp.ProxyUsuario,
@@ -545,7 +573,7 @@ namespace NFe.Service.NFSe
                             ConfiguracaoApp.ProxyServidor,
                             Empresas.Configuracoes[emp].X509Certificado);
 
-                        AssinaturaDigital assCoplan = new AssinaturaDigital();
+                        var assCoplan = new AssinaturaDigital();
                         assCoplan.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                         coplan.EmiteNF(NomeArquivoXML);
@@ -557,7 +585,7 @@ namespace NFe.Service.NFSe
 
                         #region Memory
 
-                        Memory memory = new Memory((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var memory = new Memory((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
@@ -566,7 +594,7 @@ namespace NFe.Service.NFSe
                         ConfiguracaoApp.ProxySenha,
                         ConfiguracaoApp.ProxyServidor);
 
-                        AssinaturaDigital sigMem = new AssinaturaDigital();
+                        var sigMem = new AssinaturaDigital();
                         sigMem.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                         memory.EmiteNF(NomeArquivoXML);
@@ -585,7 +613,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.PRONIN:
-                        if (oDadosEnvLoteRps.cMunicipio == 4109401 ||
+                        if(oDadosEnvLoteRps.cMunicipio == 4109401 ||
                             oDadosEnvLoteRps.cMunicipio == 3131703 ||
                             oDadosEnvLoteRps.cMunicipio == 4303004 ||
                             oDadosEnvLoteRps.cMunicipio == 3556602 ||
@@ -605,12 +633,13 @@ namespace NFe.Service.NFSe
                             oDadosEnvLoteRps.cMunicipio == 4310207 ||
                             oDadosEnvLoteRps.cMunicipio == 4322400 ||
                             oDadosEnvLoteRps.cMunicipio == 4302808 ||
-							oDadosEnvLoteRps.cMunicipio == 3501301 ||
-							oDadosEnvLoteRps.cMunicipio == 4300109 ||
+                            oDadosEnvLoteRps.cMunicipio == 3501301 ||
+                            oDadosEnvLoteRps.cMunicipio == 4300109 ||
                             oDadosEnvLoteRps.cMunicipio == 4124053 ||
-                            oDadosEnvLoteRps.cMunicipio == 4101408)
+                            oDadosEnvLoteRps.cMunicipio == 4101408 ||
+                            oDadosEnvLoteRps.cMunicipio == 3550407)
                         {
-                            Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            var pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
                                 oDadosEnvLoteRps.cMunicipio,
                                 ConfiguracaoApp.ProxyUsuario,
@@ -618,7 +647,7 @@ namespace NFe.Service.NFSe
                                 ConfiguracaoApp.ProxyServidor,
                                 Empresas.Configuracoes[emp].X509Certificado);
 
-                            AssinaturaDigital assPronin = new AssinaturaDigital();
+                            var assPronin = new AssinaturaDigital();
                             assPronin.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                             pronin.EmiteNF(NomeArquivoXML);
@@ -629,7 +658,7 @@ namespace NFe.Service.NFSe
 
                         #region EGoverne ISS
 
-                        EGoverneISS egoverneiss = new EGoverneISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var egoverneiss = new EGoverneISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosEnvLoteRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
@@ -655,7 +684,7 @@ namespace NFe.Service.NFSe
 
                         #region BAURU_SP
 
-                        Bauru_SP bauru_SP = new Bauru_SP((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var bauru_SP = new Bauru_SP((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosEnvLoteRps.cMunicipio);
                         bauru_SP.EmiteNF(NomeArquivoXML);
@@ -666,7 +695,7 @@ namespace NFe.Service.NFSe
                     #region Tinus
 
                     case PadroesNFSe.TINUS:
-                        Tinus tinus = new Tinus((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var tinus = new Tinus((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosEnvLoteRps.cMunicipio,
                             ConfiguracaoApp.ProxyUsuario,
@@ -674,7 +703,7 @@ namespace NFe.Service.NFSe
                             ConfiguracaoApp.ProxyServidor,
                             Empresas.Configuracoes[emp].X509Certificado);
 
-                        AssinaturaDigital tinusAss = new AssinaturaDigital();
+                        var tinusAss = new AssinaturaDigital();
                         tinusAss.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                         tinus.EmiteNF(NomeArquivoXML);
@@ -682,12 +711,27 @@ namespace NFe.Service.NFSe
 
                     #endregion Tinus
 
+                    case PadroesNFSe.GEISWEB:
+                        var geisWeb = new GeisWeb((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                            oDadosEnvLoteRps.cMunicipio,
+                            ConfiguracaoApp.ProxyUsuario,
+                            ConfiguracaoApp.ProxySenha,
+                            ConfiguracaoApp.ProxyServidor,
+                            Empresas.Configuracoes[emp].X509Certificado);
+
+                        var geisWebAss = new AssinaturaDigital();
+                        geisWebAss.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
+
+                        geisWeb.EmiteNF(NomeArquivoXML);
+                        break;
+
 #if _fw46
 
                     #region SOFTPLAN
 
                     case PadroesNFSe.SOFTPLAN:
-                        Components.SOFTPLAN.SOFTPLAN softplan = new Components.SOFTPLAN.SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var softplan = new Components.SOFTPLAN.SOFTPLAN((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                         Empresas.Configuracoes[emp].TokenNFse,
                                                         Empresas.Configuracoes[emp].TokenNFSeExpire,
@@ -696,24 +740,28 @@ namespace NFe.Service.NFSe
                                                         Empresas.Configuracoes[emp].ClientID,
                                                         Empresas.Configuracoes[emp].ClientSecret);
 
-                        AssinaturaDigital softplanAssinatura = new AssinaturaDigital();
+                        var softplanAssinatura = new AssinaturaDigital();
                         softplanAssinatura.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                         // Validar o Arquivo XML
-                        ValidarXML softplanValidar = new ValidarXML(NomeArquivoXML, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
-                        string validacao = softplanValidar.ValidarArqXML(NomeArquivoXML);
-                        if (validacao != "")
+                        var softplanValidar = new ValidarXML(NomeArquivoXML, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
+                        var validacao = softplanValidar.ValidarArqXML(NomeArquivoXML);
+                        if(validacao != "")
+                        {
                             throw new Exception(validacao);
+                        }
 
-                        if (ConfiguracaoApp.Proxy)
+                        if(ConfiguracaoApp.Proxy)
+                        {
                             softplan.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
+                        }
 
-                        AssinaturaDigital softplanAss = new AssinaturaDigital();
+                        var softplanAss = new AssinaturaDigital();
                         softplanAss.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio, AlgorithmType.Sha256);
 
                         softplan.EmiteNF(NomeArquivoXML);
 
-                        if (Empresas.Configuracoes[emp].TokenNFse != softplan.Token)
+                        if(Empresas.Configuracoes[emp].TokenNFse != softplan.Token)
                         {
                             Empresas.Configuracoes[emp].SalvarConfiguracoesNFSeSoftplan(softplan.Usuario,
                                                                                         softplan.Senha,
@@ -728,6 +776,39 @@ namespace NFe.Service.NFSe
 
                     #endregion SOFTPLAN
 
+                    #region CENTI
+
+                    case PadroesNFSe.CENTI:
+                        var centi = new Components.CENTI.CENTI((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                        Empresas.Configuracoes[emp].UsuarioWS,
+                                                        Empresas.Configuracoes[emp].SenhaWS);
+
+                        var centiAssinatura = new AssinaturaDigital();
+                        centiAssinatura.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
+
+                        // Validar o Arquivo XML
+                        var centiValidar = new ValidarXML(NomeArquivoXML, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
+                        var validacaoCenti = centiValidar.ValidarArqXML(NomeArquivoXML);
+                        if (validacaoCenti != "")
+                        {
+                            throw new Exception(validacaoCenti);
+                        }
+
+                        if (ConfiguracaoApp.Proxy)
+                        {
+                            centi.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
+                        }
+
+                        //var softplanAss = new AssinaturaDigital();
+                        //softplanAss.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio, AlgorithmType.Sha256);
+
+                        centi.EmiteNF(NomeArquivoXML);
+
+                        break;
+
+                    #endregion CENTI
+
 #endif
 
                     case PadroesNFSe.INTERSOL:
@@ -741,10 +822,15 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.JOINVILLE_SC:
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
-                        if (oDadosEnvLoteRps.tpAmb == 2)
+                        if(oDadosEnvLoteRps.tpAmb == 2)
+                        {
                             envLoteRps = new Components.HJoinvilleSC.Servicos();
+                        }
                         else
+                        {
                             envLoteRps = new Components.PJoinvilleSC.Servicos();
+                        }
+
                         break;
 
                     case PadroesNFSe.AVMB_ASTEN:
@@ -753,10 +839,15 @@ namespace NFe.Service.NFSe
                         cabecMsg = "<cabecalho versao=\"2.02\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.02</versaoDados></cabecalho>";
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
-                        if (oDadosEnvLoteRps.tpAmb == 2)
+                        if(oDadosEnvLoteRps.tpAmb == 2)
+                        {
                             envLoteRps = new Components.HPelotasRS.INfseservice();
+                        }
                         else
+                        {
                             envLoteRps = new Components.PPelotasRS.INfseservice();
+                        }
+
                         break;
 
                     case PadroesNFSe.EMBRAS:
@@ -772,6 +863,8 @@ namespace NFe.Service.NFSe
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.MODERNIZACAO_PUBLICA);
                         cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
+
+
 
                     case PadroesNFSe.PUBLICA:
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.PUBLICA);
@@ -801,7 +894,7 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.PUBLIC_SOFT:
                         break;
-                 
+
                     case PadroesNFSe.MEGASOFT:
                         Servico = GetTipoServicoSincrono(Servico, NomeArquivoXML, PadroesNFSe.MEGASOFT);
                         cabecMsg = "<cabecalho versao=\"1.00\" xmlns=\"http://megasoftarrecadanet.com.br/xsd/nfse_v01.xsd\"><versaoDados>1.00</versaoDados></cabecalho>";
@@ -809,7 +902,7 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.SIMPLE:
 
-                        Simple simple = new Simple((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var simple = new Simple((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                       Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                       oDadosEnvLoteRps.cMunicipio,
                                                       ConfiguracaoApp.ProxyUsuario,
@@ -846,7 +939,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.WEBFISCO_TECNOLOGIA:
-                        WEBFISCO_TECNOLOGIA webTecnologia = new WEBFISCO_TECNOLOGIA((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var webTecnologia = new WEBFISCO_TECNOLOGIA((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                            Empresas.Configuracoes[emp].PastaXmlRetorno,
                                            oDadosEnvLoteRps.cMunicipio,
                                            Empresas.Configuracoes[emp].UsuarioWS,
@@ -855,7 +948,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.ELOTECH:
-                        Elotech elotech = new Elotech((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var elotech = new Elotech((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosEnvLoteRps.cMunicipio,
                             ConfiguracaoApp.ProxyUsuario,
@@ -871,10 +964,10 @@ namespace NFe.Service.NFSe
                         break;
                 }
 
-                if (IsInvocar(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))
+                if(IsInvocar(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))
                 {
                     //Assinar o XML
-                    AssinaturaDigital ad = new AssinaturaDigital();
+                    var ad = new AssinaturaDigital();
                     ad.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
 
                     //Invocar o método que envia o XML para o SEFAZ
@@ -885,14 +978,16 @@ namespace NFe.Service.NFSe
 
                     ///
                     /// grava o arquivo no FTP
-                    string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
+                    var filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                       Functions.ExtrairNomeArq(NomeArquivoXML,
                                                       Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML) + "\\" + Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).RetornoXML);
-                    if (File.Exists(filenameFTP))
+                    if(File.Exists(filenameFTP))
+                    {
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
+                    }
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {
@@ -920,8 +1015,8 @@ namespace NFe.Service.NFSe
             }
         }
         private void GerarTagIntegracao(string token)
-       {
-            XmlDocument doc = new XmlDocument();
+        {
+            var doc = new XmlDocument();
             doc.Load(NomeArquivoXML);
             string conteudoXML, integridade;
             conteudoXML = doc.GetElementsByTagName("Rps")[0].OuterXml;
@@ -929,9 +1024,9 @@ namespace NFe.Service.NFSe
             conteudoXML = Regex.Replace(conteudoXML, "[ ]+", "");
             integridade = Criptografia.GerarRSASHA512(conteudoXML + token, true);
 
-            foreach (object item in ConteudoXML)
+            foreach(var item in ConteudoXML)
             {
-                if (typeof(XmlElement) == item.GetType())
+                if(typeof(XmlElement) == item.GetType())
                 {
                     XmlNode gerarNfseEnvio = (XmlElement)ConteudoXML.GetElementsByTagName("GerarNfseEnvio")[0];
                     XmlNode tagintegridade = ConteudoXML.CreateElement("Integridade", ConteudoXML.DocumentElement.NamespaceURI);
@@ -948,10 +1043,10 @@ namespace NFe.Service.NFSe
             try
             {
                 // Atualizar a string do XML já assinada
-                string StringXMLAssinado = conteudoXML;
+                var StringXMLAssinado = conteudoXML;
 
                 // Gravar o XML Assinado no HD
-                StreamWriter SW_2 = File.CreateText(NomeArquivoXML);
+                var SW_2 = File.CreateText(NomeArquivoXML);
                 SW_2.Write(StringXMLAssinado);
                 SW_2.Close();
             }
@@ -969,7 +1064,7 @@ namespace NFe.Service.NFSe
         private void EncryptAssinatura()
         {
             ///danasa: 12/2013
-            Validate.ValidarXML val = new Validate.ValidarXML(NomeArquivoXML, oDadosEnvLoteRps.cMunicipio, false);
+            var val = new Validate.ValidarXML(NomeArquivoXML, oDadosEnvLoteRps.cMunicipio, false);
             val.EncryptAssinatura(NomeArquivoXML);
         }
 

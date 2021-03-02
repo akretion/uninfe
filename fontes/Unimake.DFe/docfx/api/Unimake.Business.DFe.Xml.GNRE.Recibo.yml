@@ -1,0 +1,516 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.GNRE.Recibo
+  commentId: T:Unimake.Business.DFe.Xml.GNRE.Recibo
+  id: Recibo
+  parent: Unimake.Business.DFe.Xml.GNRE
+  children:
+  - Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraRecibo
+  - Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraReciboField
+  - Unimake.Business.DFe.Xml.GNRE.Recibo.Numero
+  - Unimake.Business.DFe.Xml.GNRE.Recibo.TempoEstimadoProc
+  langs:
+  - csharp
+  - vb
+  name: Recibo
+  nameWithType: Recibo
+  fullName: Unimake.Business.DFe.Xml.GNRE.Recibo
+  type: Class
+  source:
+    id: Recibo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TRetLoteGNRE.cs
+    startLine: 39
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: >-
+      [Serializable]
+
+      public class Recibo
+    content.vb: >-
+      <Serializable>
+
+      Public Class Recibo
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: System.SerializableAttribute
+    ctor: System.SerializableAttribute.#ctor
+    arguments: []
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.GNRE.Recibo.Numero
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.Recibo.Numero
+  id: Numero
+  parent: Unimake.Business.DFe.Xml.GNRE.Recibo
+  langs:
+  - csharp
+  - vb
+  name: Numero
+  nameWithType: Recibo.Numero
+  fullName: Unimake.Business.DFe.Xml.GNRE.Recibo.Numero
+  type: Property
+  source:
+    id: Numero
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TRetLoteGNRE.cs
+    startLine: 43
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public string Numero { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Numero As String
+  overload: Unimake.Business.DFe.Xml.GNRE.Recibo.Numero*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraRecibo
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraRecibo
+  id: DataHoraRecibo
+  parent: Unimake.Business.DFe.Xml.GNRE.Recibo
+  langs:
+  - csharp
+  - vb
+  name: DataHoraRecibo
+  nameWithType: Recibo.DataHoraRecibo
+  fullName: Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraRecibo
+  type: Property
+  source:
+    id: DataHoraRecibo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TRetLoteGNRE.cs
+    startLine: 46
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public DateTime DataHoraRecibo { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DataHoraRecibo As Date
+  overload: Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraRecibo*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraReciboField
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraReciboField
+  id: DataHoraReciboField
+  parent: Unimake.Business.DFe.Xml.GNRE.Recibo
+  langs:
+  - csharp
+  - vb
+  name: DataHoraReciboField
+  nameWithType: Recibo.DataHoraReciboField
+  fullName: Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraReciboField
+  type: Property
+  source:
+    id: DataHoraReciboField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TRetLoteGNRE.cs
+    startLine: 49
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public string DataHoraReciboField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DataHoraReciboField As String
+  overload: Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraReciboField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.GNRE.Recibo.TempoEstimadoProc
+  commentId: P:Unimake.Business.DFe.Xml.GNRE.Recibo.TempoEstimadoProc
+  id: TempoEstimadoProc
+  parent: Unimake.Business.DFe.Xml.GNRE.Recibo
+  langs:
+  - csharp
+  - vb
+  name: TempoEstimadoProc
+  nameWithType: Recibo.TempoEstimadoProc
+  fullName: Unimake.Business.DFe.Xml.GNRE.Recibo.TempoEstimadoProc
+  type: Property
+  source:
+    id: TempoEstimadoProc
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\GNRE\TRetLoteGNRE.cs
+    startLine: 56
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.GNRE
+  syntax:
+    content: public int TempoEstimadoProc { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property TempoEstimadoProc As Integer
+  overload: Unimake.Business.DFe.Xml.GNRE.Recibo.TempoEstimadoProc*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.GNRE
+  commentId: N:Unimake.Business.DFe.Xml.GNRE
+  name: Unimake.Business.DFe.Xml.GNRE
+  nameWithType: Unimake.Business.DFe.Xml.GNRE
+  fullName: Unimake.Business.DFe.Xml.GNRE
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml.GNRE.Recibo.Numero*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.Recibo.Numero
+  name: Numero
+  nameWithType: Recibo.Numero
+  fullName: Unimake.Business.DFe.Xml.GNRE.Recibo.Numero
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraRecibo*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraRecibo
+  name: DataHoraRecibo
+  nameWithType: Recibo.DataHoraRecibo
+  fullName: Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraRecibo
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraReciboField*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraReciboField
+  name: DataHoraReciboField
+  nameWithType: Recibo.DataHoraReciboField
+  fullName: Unimake.Business.DFe.Xml.GNRE.Recibo.DataHoraReciboField
+- uid: Unimake.Business.DFe.Xml.GNRE.Recibo.TempoEstimadoProc*
+  commentId: Overload:Unimake.Business.DFe.Xml.GNRE.Recibo.TempoEstimadoProc
+  name: TempoEstimadoProc
+  nameWithType: Recibo.TempoEstimadoProc
+  fullName: Unimake.Business.DFe.Xml.GNRE.Recibo.TempoEstimadoProc
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32

@@ -38,6 +38,7 @@ namespace NFe.UI.Formularios
             cbRegTribISSQN.SelectedValue = (int)empresa.RegTribISSQNSAT;
             cbindRatISSQN.SelectedValue = (int)empresa.IndRatISSQNSAT;
             comboVersaoLayout.SelectedItem = empresa.VersaoLayoutSAT == null ? "0.07" : empresa.VersaoLayoutSAT;
+            comboTipoConversao.SelectedItem = empresa.TipoConversao == null ? "Truncamento" : empresa.TipoConversao;
 
             lblCNPJSw.Visible =
                 txtCNPJSw.Visible =
@@ -51,6 +52,8 @@ namespace NFe.UI.Formularios
                 txtNumeroCaixa.Visible = 
                 lblVersaoLayout.Visible = 
                 comboVersaoLayout.Visible =
+                lblTipoConversao.Visible =
+                comboTipoConversao.Visible =
                 ckConversaoNFCe.Checked;
         }
 
@@ -76,6 +79,7 @@ namespace NFe.UI.Formularios
             empresa.RegTribISSQNSAT = (RegTribISSQN)cbRegTribISSQN.SelectedValue;
             empresa.IndRatISSQNSAT = (IndRatISSQN)cbindRatISSQN.SelectedValue;
             empresa.VersaoLayoutSAT = comboVersaoLayout.SelectedItem.ToString();
+            empresa.TipoConversao = comboTipoConversao.SelectedItem.ToString();
         }
 
         public void FocusFirstControl()
@@ -115,6 +119,8 @@ namespace NFe.UI.Formularios
                 txtNumeroCaixa.Visible = 
                 lblVersaoLayout.Visible =
                 comboVersaoLayout.Visible =
+                lblTipoConversao.Visible =
+                comboTipoConversao.Visible =
                 ckConversaoNFCe.Checked;
         }
 
@@ -144,6 +150,11 @@ namespace NFe.UI.Formularios
         }
 
         private void ComboVersaoLayout_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            changeEvent?.Invoke(sender, e);
+        }
+
+        private void comboTipoConversao_SelectedIndexChanged(object sender, EventArgs e)
         {
             changeEvent?.Invoke(sender, e);
         }

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultaLoteRpsRequest">
+    <wsdl:part name="ConsultaLoteRps" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaLoteRpsResponse">
+    <wsdl:part name="ConsultaLoteRpsResposta" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaNfseRequest">
+    <wsdl:part name="ConsultaNfse" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaNfseResponse">
+    <wsdl:part name="ConsultaNfseResposta" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="EnviaLoteRpsRequest">
+    <wsdl:part name="EnviaLoteRps" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="EnviaLoteRpsResponse">
+    <wsdl:part name="EnviaLoteRpsResposta" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="CancelaNfseRequest">
+    <wsdl:part name="CancelaNfse" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="CancelaNfseResponse">
+    <wsdl:part name="CancelaNfseResposta" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="GeisWebServicePortType">
+    <wsdl:operation name="ConsultaLoteRps">
+      <documentation>
+      </documentation>
+      <wsdl:input message="tns:ConsultaLoteRpsRequest" />
+      <wsdl:output message="tns:ConsultaLoteRpsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaNfse">
+      <documentation>
+      </documentation>
+      <wsdl:input message="tns:ConsultaNfseRequest" />
+      <wsdl:output message="tns:ConsultaNfseResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="EnviaLoteRps">
+      <documentation>Envia Lote de RPS para ser convertido em NFSe</documentation>
+      <wsdl:input message="tns:EnviaLoteRpsRequest" />
+      <wsdl:output message="tns:EnviaLoteRpsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelaNfse">
+      <documentation>
+      </documentation>
+      <wsdl:input message="tns:CancelaNfseRequest" />
+      <wsdl:output message="tns:CancelaNfseResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GeisWebServiceBinding" type="tns:GeisWebServicePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="ConsultaLoteRps">
+      <soap:operation soapAction="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php#ConsultaLoteRps" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaNfse">
+      <soap:operation soapAction="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php#ConsultaNfse" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EnviaLoteRps">
+      <soap:operation soapAction="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php#EnviaLoteRps" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelaNfse">
+      <soap:operation soapAction="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php#CancelaNfse" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:https://www.geisweb.net.br/homologacao/modelo/webservice/GeisWebServiceImpl.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GeisWebService">
+    <wsdl:port name="GeisWebServicePort" binding="tns:GeisWebServiceBinding">
+      <soap:address location="https://www.geisweb.net.br:443/homologacao/modelo/webservice/GeisWebServiceImpl.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

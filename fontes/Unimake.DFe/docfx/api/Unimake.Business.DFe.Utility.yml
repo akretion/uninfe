@@ -1,0 +1,58 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Utility
+  commentId: N:Unimake.Business.DFe.Utility
+  id: Unimake.Business.DFe.Utility
+  children:
+  - Unimake.Business.DFe.Utility.Certificate
+  - Unimake.Business.DFe.Utility.Compress
+  - Unimake.Business.DFe.Utility.Converter
+  - Unimake.Business.DFe.Utility.Proxy
+  - Unimake.Business.DFe.Utility.XMLUtility
+  - Unimake.Business.DFe.Utility.XMLUtility.TNameSpace
+  - Unimake.Business.DFe.Utility.XMLUtility.Utf8StringWriter
+  langs:
+  - csharp
+  - vb
+  name: Unimake.Business.DFe.Utility
+  nameWithType: Unimake.Business.DFe.Utility
+  fullName: Unimake.Business.DFe.Utility
+  type: Namespace
+  assemblies:
+  - Unimake.Business.DFe
+references:
+- uid: Unimake.Business.DFe.Utility.Certificate
+  commentId: T:Unimake.Business.DFe.Utility.Certificate
+  name: Certificate
+  nameWithType: Certificate
+  fullName: Unimake.Business.DFe.Utility.Certificate
+- uid: Unimake.Business.DFe.Utility.Compress
+  commentId: T:Unimake.Business.DFe.Utility.Compress
+  name: Compress
+  nameWithType: Compress
+  fullName: Unimake.Business.DFe.Utility.Compress
+- uid: Unimake.Business.DFe.Utility.Converter
+  commentId: T:Unimake.Business.DFe.Utility.Converter
+  name: Converter
+  nameWithType: Converter
+  fullName: Unimake.Business.DFe.Utility.Converter
+- uid: Unimake.Business.DFe.Utility.Proxy
+  commentId: T:Unimake.Business.DFe.Utility.Proxy
+  name: Proxy
+  nameWithType: Proxy
+  fullName: Unimake.Business.DFe.Utility.Proxy
+- uid: Unimake.Business.DFe.Utility.XMLUtility
+  commentId: T:Unimake.Business.DFe.Utility.XMLUtility
+  name: XMLUtility
+  nameWithType: XMLUtility
+  fullName: Unimake.Business.DFe.Utility.XMLUtility
+- uid: Unimake.Business.DFe.Utility.XMLUtility.TNameSpace
+  commentId: T:Unimake.Business.DFe.Utility.XMLUtility.TNameSpace
+  name: XMLUtility.TNameSpace
+  nameWithType: XMLUtility.TNameSpace
+  fullName: Unimake.Business.DFe.Utility.XMLUtility.TNameSpace
+- uid: Unimake.Business.DFe.Utility.XMLUtility.Utf8StringWriter
+  commentId: T:Unimake.Business.DFe.Utility.XMLUtility.Utf8StringWriter
+  name: XMLUtility.Utf8StringWriter
+  nameWithType: XMLUtility.Utf8StringWriter
+  fullName: Unimake.Business.DFe.Utility.XMLUtility.Utf8StringWriter

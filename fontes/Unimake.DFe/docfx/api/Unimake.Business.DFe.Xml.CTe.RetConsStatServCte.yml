@@ -1,0 +1,949 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  commentId: T:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  id: RetConsStatServCte
+  parent: Unimake.Business.DFe.Xml.CTe
+  children:
+  - Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CStat
+  - Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUF
+  - Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUFField
+  - Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbto
+  - Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbtoField
+  - Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetorno
+  - Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetornoField
+  - Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TMed
+  - Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TpAmb
+  - Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.VerAplic
+  - Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.Versao
+  - Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XMotivo
+  - Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XObs
+  langs:
+  - csharp
+  - vb
+  name: RetConsStatServCte
+  nameWithType: RetConsStatServCte
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  type: Class
+  source:
+    id: RetConsStatServCte
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 8
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: 'public class RetConsStatServCte : XMLBase'
+    content.vb: >-
+      Public Class RetConsStatServCte
+          Inherits XMLBase
+  inheritance:
+  - System.Object
+  - Unimake.Business.DFe.Xml.XMLBase
+  inheritedMembers:
+  - Unimake.Business.DFe.Xml.XMLBase.NameSpaces
+  - Unimake.Business.DFe.Xml.XMLBase.GerarXML
+  - Unimake.Business.DFe.Xml.XMLBase.LerXML``1(System.Xml.XmlDocument)
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.Versao
+  commentId: P:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.Versao
+  id: Versao
+  parent: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  langs:
+  - csharp
+  - vb
+  name: Versao
+  nameWithType: RetConsStatServCte.Versao
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.Versao
+  type: Property
+  source:
+    id: Versao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 13
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string Versao { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Versao As String
+  overload: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.Versao*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TpAmb
+  commentId: P:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TpAmb
+  id: TpAmb
+  parent: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  langs:
+  - csharp
+  - vb
+  name: TpAmb
+  nameWithType: RetConsStatServCte.TpAmb
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TpAmb
+  type: Property
+  source:
+    id: TpAmb
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 16
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public TipoAmbiente TpAmb { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.TipoAmbiente
+    content.vb: Public Property TpAmb As TipoAmbiente
+  overload: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TpAmb*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.VerAplic
+  commentId: P:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.VerAplic
+  id: VerAplic
+  parent: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  langs:
+  - csharp
+  - vb
+  name: VerAplic
+  nameWithType: RetConsStatServCte.VerAplic
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.VerAplic
+  type: Property
+  source:
+    id: VerAplic
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 19
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string VerAplic { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property VerAplic As String
+  overload: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.VerAplic*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CStat
+  commentId: P:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CStat
+  id: CStat
+  parent: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  langs:
+  - csharp
+  - vb
+  name: CStat
+  nameWithType: RetConsStatServCte.CStat
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CStat
+  type: Property
+  source:
+    id: CStat
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 22
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public int CStat { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property CStat As Integer
+  overload: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CStat*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XMotivo
+  commentId: P:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XMotivo
+  id: XMotivo
+  parent: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  langs:
+  - csharp
+  - vb
+  name: XMotivo
+  nameWithType: RetConsStatServCte.XMotivo
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XMotivo
+  type: Property
+  source:
+    id: XMotivo
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 25
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string XMotivo { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XMotivo As String
+  overload: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XMotivo*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUF
+  commentId: P:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUF
+  id: CUF
+  parent: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  langs:
+  - csharp
+  - vb
+  name: CUF
+  nameWithType: RetConsStatServCte.CUF
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUF
+  type: Property
+  source:
+    id: CUF
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 28
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public UFBrasil CUF { get; set; }
+    parameters: []
+    return:
+      type: Unimake.Business.DFe.Servicos.UFBrasil
+    content.vb: Public Property CUF As UFBrasil
+  overload: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUF*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUFField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUFField
+  id: CUFField
+  parent: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  langs:
+  - csharp
+  - vb
+  name: CUFField
+  nameWithType: RetConsStatServCte.CUFField
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUFField
+  type: Property
+  source:
+    id: CUFField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 31
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public int CUFField { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property CUFField As Integer
+  overload: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUFField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbto
+  commentId: P:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbto
+  id: DhRecbto
+  parent: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  langs:
+  - csharp
+  - vb
+  name: DhRecbto
+  nameWithType: RetConsStatServCte.DhRecbto
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbto
+  type: Property
+  source:
+    id: DhRecbto
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 38
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public DateTime DhRecbto { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DhRecbto As Date
+  overload: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbto*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbtoField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbtoField
+  id: DhRecbtoField
+  parent: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  langs:
+  - csharp
+  - vb
+  name: DhRecbtoField
+  nameWithType: RetConsStatServCte.DhRecbtoField
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbtoField
+  type: Property
+  source:
+    id: DhRecbtoField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 41
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string DhRecbtoField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DhRecbtoField As String
+  overload: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbtoField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TMed
+  commentId: P:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TMed
+  id: TMed
+  parent: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  langs:
+  - csharp
+  - vb
+  name: TMed
+  nameWithType: RetConsStatServCte.TMed
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TMed
+  type: Property
+  source:
+    id: TMed
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 48
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public int TMed { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property TMed As Integer
+  overload: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TMed*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetorno
+  commentId: P:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetorno
+  id: DhRetorno
+  parent: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  langs:
+  - csharp
+  - vb
+  name: DhRetorno
+  nameWithType: RetConsStatServCte.DhRetorno
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetorno
+  type: Property
+  source:
+    id: DhRetorno
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 51
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public DateTime DhRetorno { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property DhRetorno As Date
+  overload: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetorno*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetornoField
+  commentId: P:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetornoField
+  id: DhRetornoField
+  parent: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  langs:
+  - csharp
+  - vb
+  name: DhRetornoField
+  nameWithType: RetConsStatServCte.DhRetornoField
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetornoField
+  type: Property
+  source:
+    id: DhRetornoField
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 54
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string DhRetornoField { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property DhRetornoField As String
+  overload: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetornoField*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XObs
+  commentId: P:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XObs
+  id: XObs
+  parent: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte
+  langs:
+  - csharp
+  - vb
+  name: XObs
+  nameWithType: RetConsStatServCte.XObs
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XObs
+  type: Property
+  source:
+    id: XObs
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Xml\CTe\RetConsStatServCte.cs
+    startLine: 61
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Xml.CTe
+  syntax:
+    content: public string XObs { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property XObs As String
+  overload: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XObs*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Business.DFe.Xml.CTe
+  commentId: N:Unimake.Business.DFe.Xml.CTe
+  name: Unimake.Business.DFe.Xml.CTe
+  nameWithType: Unimake.Business.DFe.Xml.CTe
+  fullName: Unimake.Business.DFe.Xml.CTe
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Unimake.Business.DFe.Xml.XMLBase
+  commentId: T:Unimake.Business.DFe.Xml.XMLBase
+  parent: Unimake.Business.DFe.Xml
+  name: XMLBase
+  nameWithType: XMLBase
+  fullName: Unimake.Business.DFe.Xml.XMLBase
+- uid: Unimake.Business.DFe.Xml.XMLBase.NameSpaces
+  commentId: P:Unimake.Business.DFe.Xml.XMLBase.NameSpaces
+  parent: Unimake.Business.DFe.Xml.XMLBase
+  name: NameSpaces
+  nameWithType: XMLBase.NameSpaces
+  fullName: Unimake.Business.DFe.Xml.XMLBase.NameSpaces
+- uid: Unimake.Business.DFe.Xml.XMLBase.GerarXML
+  commentId: M:Unimake.Business.DFe.Xml.XMLBase.GerarXML
+  parent: Unimake.Business.DFe.Xml.XMLBase
+  name: GerarXML()
+  nameWithType: XMLBase.GerarXML()
+  fullName: Unimake.Business.DFe.Xml.XMLBase.GerarXML()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Xml.XMLBase.GerarXML
+    name: GerarXML
+    nameWithType: XMLBase.GerarXML
+    fullName: Unimake.Business.DFe.Xml.XMLBase.GerarXML
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Xml.XMLBase.GerarXML
+    name: GerarXML
+    nameWithType: XMLBase.GerarXML
+    fullName: Unimake.Business.DFe.Xml.XMLBase.GerarXML
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.Xml.XMLBase.LerXML``1(System.Xml.XmlDocument)
+  commentId: M:Unimake.Business.DFe.Xml.XMLBase.LerXML``1(System.Xml.XmlDocument)
+  parent: Unimake.Business.DFe.Xml.XMLBase
+  isExternal: true
+  name: LerXML<T>(XmlDocument)
+  nameWithType: XMLBase.LerXML<T>(XmlDocument)
+  fullName: Unimake.Business.DFe.Xml.XMLBase.LerXML<T>(System.Xml.XmlDocument)
+  nameWithType.vb: XMLBase.LerXML(Of T)(XmlDocument)
+  fullName.vb: Unimake.Business.DFe.Xml.XMLBase.LerXML(Of T)(System.Xml.XmlDocument)
+  name.vb: LerXML(Of T)(XmlDocument)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.Xml.XMLBase.LerXML``1(System.Xml.XmlDocument)
+    name: LerXML<T>
+    nameWithType: XMLBase.LerXML<T>
+    fullName: Unimake.Business.DFe.Xml.XMLBase.LerXML<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlDocument
+    name: XmlDocument
+    nameWithType: XmlDocument
+    fullName: System.Xml.XmlDocument
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.Xml.XMLBase.LerXML``1(System.Xml.XmlDocument)
+    name: LerXML(Of T)
+    nameWithType: XMLBase.LerXML(Of T)
+    fullName: Unimake.Business.DFe.Xml.XMLBase.LerXML(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Xml.XmlDocument
+    name: XmlDocument
+    nameWithType: XmlDocument
+    fullName: System.Xml.XmlDocument
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Business.DFe.Xml
+  commentId: N:Unimake.Business.DFe.Xml
+  name: Unimake.Business.DFe.Xml
+  nameWithType: Unimake.Business.DFe.Xml
+  fullName: Unimake.Business.DFe.Xml
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.Versao*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.Versao
+  name: Versao
+  nameWithType: RetConsStatServCte.Versao
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.Versao
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TpAmb*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TpAmb
+  name: TpAmb
+  nameWithType: RetConsStatServCte.TpAmb
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TpAmb
+- uid: Unimake.Business.DFe.Servicos.TipoAmbiente
+  commentId: T:Unimake.Business.DFe.Servicos.TipoAmbiente
+  parent: Unimake.Business.DFe.Servicos
+  name: TipoAmbiente
+  nameWithType: TipoAmbiente
+  fullName: Unimake.Business.DFe.Servicos.TipoAmbiente
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.VerAplic*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.VerAplic
+  name: VerAplic
+  nameWithType: RetConsStatServCte.VerAplic
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.VerAplic
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CStat*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CStat
+  name: CStat
+  nameWithType: RetConsStatServCte.CStat
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CStat
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XMotivo*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XMotivo
+  name: XMotivo
+  nameWithType: RetConsStatServCte.XMotivo
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XMotivo
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUF*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUF
+  name: CUF
+  nameWithType: RetConsStatServCte.CUF
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUF
+- uid: Unimake.Business.DFe.Servicos.UFBrasil
+  commentId: T:Unimake.Business.DFe.Servicos.UFBrasil
+  parent: Unimake.Business.DFe.Servicos
+  name: UFBrasil
+  nameWithType: UFBrasil
+  fullName: Unimake.Business.DFe.Servicos.UFBrasil
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUFField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUFField
+  name: CUFField
+  nameWithType: RetConsStatServCte.CUFField
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.CUFField
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbto*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbto
+  name: DhRecbto
+  nameWithType: RetConsStatServCte.DhRecbto
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbto
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbtoField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbtoField
+  name: DhRecbtoField
+  nameWithType: RetConsStatServCte.DhRecbtoField
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRecbtoField
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TMed*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TMed
+  name: TMed
+  nameWithType: RetConsStatServCte.TMed
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.TMed
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetorno*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetorno
+  name: DhRetorno
+  nameWithType: RetConsStatServCte.DhRetorno
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetorno
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetornoField*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetornoField
+  name: DhRetornoField
+  nameWithType: RetConsStatServCte.DhRetornoField
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.DhRetornoField
+- uid: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XObs*
+  commentId: Overload:Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XObs
+  name: XObs
+  nameWithType: RetConsStatServCte.XObs
+  fullName: Unimake.Business.DFe.Xml.CTe.RetConsStatServCte.XObs

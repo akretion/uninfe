@@ -1,20 +1,20 @@
-﻿using NFe.Certificado;
-using NFe.Components;
+﻿using NFe.Components;
 using NFe.Settings;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Xml;
+using Unimake.Business.DFe.Servicos;
+using Unimake.Business.DFe.Xml.NFe;
 
 namespace NFe.Service
 {
-    public class TaskCadastroContribuinte : TaskAbst
+    public class TaskCadastroContribuinte: TaskAbst
     {
         public TaskCadastroContribuinte(string arquivo)
         {
             Servico = Servicos.ConsultaCadastroContribuinte;
             NomeArquivoXML = arquivo;
-            if (vXmlNfeDadosMsgEhXML)
+            if(vXmlNfeDadosMsgEhXML)
             {
                 ConteudoXML.PreserveWhitespace = false;
                 ConteudoXML.Load(arquivo);
@@ -34,50 +34,44 @@ namespace NFe.Service
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             try
             {
                 dadosConsCad = new DadosConsCad();
-                //Ler o XML para pegar parâmetros de envio
                 ConsCad(emp);
 
-                if (vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
+                if(vXmlNfeDadosMsgEhXML)  //danasa 12-9-2009
                 {
-                    //Definir o objeto do WebService
-                    WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosConsCad.cUF, dadosConsCad.tpAmb, (int)TipoEmissao.teNormal, dadosConsCad.versao, 0);
-                    System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosConsCad.cUF, dadosConsCad.tpAmb, (int)TipoEmissao.teNormal, Servico);
+                    var xml = new ConsCad();
+                    xml = Unimake.Business.DFe.Utility.XMLUtility.Deserializar<ConsCad>(ConteudoXML);
 
-                    //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                    object oConsCad = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                    object oCabecMsg = null;
-
-                    try
+                    var configuracao = new Configuracao
                     {
-                        oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(dadosConsCad.cUF, Servico));
-                        wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), dadosConsCad.cUF.ToString());
-                        wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), dadosConsCad.versao);
+                        TipoDFe = TipoDFe.NFe,
+                        CertificadoDigital = Empresas.Configuracoes[emp].X509Certificado
+                    };
+
+                    if(ConfiguracaoApp.Proxy)
+                    {
+                        configuracao.HasProxy = true;
+                        configuracao.ProxyAutoDetect = ConfiguracaoApp.DetectarConfiguracaoProxyAuto;
+                        configuracao.ProxyUser = ConfiguracaoApp.ProxyUsuario;
+                        configuracao.ProxyPassword = ConfiguracaoApp.ProxySenha;
                     }
-                    catch { }
 
-                    new AssinaturaDigital().CarregarPIN(emp, NomeArquivoXML, Servico);
+                    var inutilizacao = new Unimake.Business.DFe.Servicos.NFe.ConsultaCadastro(xml, configuracao);
+                    inutilizacao.Executar();
 
-                    //Invocar o método que envia o XML para o SEFAZ
-                    oInvocarObj.Invocar(wsProxy,
-                                        oConsCad,
-                                        wsProxy.NomeMetodoWS[0],
-                                        oCabecMsg,
-                                        this,
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML,
-                                        Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).RetornoXML,
-                                        true,
-                                        securityProtocolType);
+                    vStrXmlRetorno = inutilizacao.RetornoWSString;
+
+                    XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).RetornoXML);
                 }
                 else
                 {
-                    string f = Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml";
+                    var f = Path.GetFileNameWithoutExtension(NomeArquivoXML) + ".xml";
 
-                    if (NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
+                    if(NomeArquivoXML.IndexOf(Empresas.Configuracoes[emp].PastaValidar, StringComparison.InvariantCultureIgnoreCase) >= 0)
                     {
                         f = Path.Combine(Empresas.Configuracoes[emp].PastaValidar, f);
                     }
@@ -85,14 +79,18 @@ namespace NFe.Service
                     GravarXml(f);
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                string ExtEnvio = string.Empty;
+                var ExtEnvio = string.Empty;
 
-                if (vXmlNfeDadosMsgEhXML) //Se for XML
+                if(vXmlNfeDadosMsgEhXML) //Se for XML
+                {
                     ExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioXML;
+                }
                 else //Se for TXT
+                {
                     ExtEnvio = Propriedade.Extensao(Propriedade.TipoEnvio.ConsCad).EnvioTXT;
+                }
 
                 try
                 {
@@ -126,15 +124,12 @@ namespace NFe.Service
 
         #region Gravar consCad
 
-        public string GravarXml(string arquivo)
-        {
-            return oGerarXML.ConsultaCadastro(arquivo,
+        public string GravarXml(string arquivo) => oGerarXML.ConsultaCadastro(arquivo,
                 dadosConsCad.UF,
                 dadosConsCad.CNPJ,
                 dadosConsCad.IE,
                 dadosConsCad.CPF,
                 dadosConsCad.versao);
-        }
 
         #endregion Gravar consCad
 
@@ -153,32 +148,34 @@ namespace NFe.Service
 
             dadosConsCad.tpAmb = Empresas.Configuracoes[emp].AmbienteCodigo;
 
-            if (Path.GetExtension(NomeArquivoXML).ToLower() == ".txt")
+            if(Path.GetExtension(NomeArquivoXML).ToLower() == ".txt")
             {
-                List<string> cLinhas = Functions.LerArquivo(NomeArquivoXML);
+                var cLinhas = Functions.LerArquivo(NomeArquivoXML);
                 Functions.PopulateClasse(dadosConsCad, cLinhas);
             }
             else
             {
-                XmlNodeList ConsCadList = ConteudoXML.GetElementsByTagName("ConsCad");
-                foreach (XmlNode ConsCadNode in ConsCadList)
+                var ConsCadList = ConteudoXML.GetElementsByTagName("ConsCad");
+                foreach(XmlNode ConsCadNode in ConsCadList)
                 {
-                    XmlElement ConsCadElemento = (XmlElement)ConsCadNode;
+                    var ConsCadElemento = (XmlElement)ConsCadNode;
 
                     dadosConsCad.versao = ConsCadElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
 
-                    XmlNodeList infConsList = ConsCadElemento.GetElementsByTagName("infCons");
+                    var infConsList = ConsCadElemento.GetElementsByTagName("infCons");
 
-                    foreach (XmlNode infConsNode in infConsList)
+                    foreach(XmlNode infConsNode in infConsList)
                     {
-                        XmlElement infConsElemento = (XmlElement)infConsNode;
+                        var infConsElemento = (XmlElement)infConsNode;
                         Functions.PopulateClasse(dadosConsCad, infConsElemento);
                     }
                 }
             }
 
-            if (dadosConsCad.versao == "")
+            if(dadosConsCad.versao == "")
+            {
                 throw new Exception(NFeStrConstants.versaoError);
+            }
         }
 
         #endregion ConsCad()

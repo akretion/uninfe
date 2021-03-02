@@ -182,7 +182,7 @@ namespace NFe.Components.EloTech.WS
 
         #region Internal Methods
 
-        internal ElotechServiceResult EnviarLoteRps(string file)
+        private ElotechServiceResult EnviarXML(string file)
         {
             var request = CreateWebRequest(Url, "");
             var doc = new XmlDocument();
@@ -216,11 +216,17 @@ namespace NFe.Components.EloTech.WS
             }
         }
 
-        internal ElotechServiceResult EnviarLoteRpsSincrono(string file)
-        {
-            return EnviarLoteRps(file);
-        }
+        internal ElotechServiceResult EnviarLoteRps(string file) => EnviarXML(file);
 
+        internal ElotechServiceResult EnviarLoteRpsSincrono(string file) => EnviarXML(file);
+
+        internal ElotechServiceResult ConsultarNfsePorRps(string file) => EnviarXML(file);
+
+        internal ElotechServiceResult ConsultarLoteRps(string file) => EnviarXML(file);
+
+        internal ElotechServiceResult CancelarNfse(string file) => EnviarXML(file);
+
+        internal ElotechServiceResult ConsultarNfse(string file) => EnviarXML(file);
 
         #endregion Internal Methods
 

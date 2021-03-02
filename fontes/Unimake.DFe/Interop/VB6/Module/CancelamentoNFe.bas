@@ -3,7 +3,7 @@ Option Explicit
 
 Public Sub CancelarNFe()
 On Error GoTo erro
-Dim EnvEvento, RecepcaoEvento, Evento, InfEvento, DetEventoCanc, CStat
+Dim EnvEvento, RecepcaoEvento, Evento, InfEvento, DetEventoCanc, CStat, xmlDistrib
 
 Log.ClearLog
 
@@ -39,6 +39,9 @@ EnvEvento.Versao = "1.00"
 EnvEvento.IdLote = "000000000000001"
 
 RecepcaoEvento.Executar (EnvEvento), (Config.InicializarConfiguracao(NFe))
+
+xmlDistrib = RecepcaoEvento.GetProcEventoNFeResultXMLByIndex(0)
+Debug.Print xmlDistrib
 
 ''Gravar o XML de distribuição se a inutilização foi homologada
 If (RecepcaoEvento.result.CStat = 128) Then ''128 = Lote de evento processado com sucesso

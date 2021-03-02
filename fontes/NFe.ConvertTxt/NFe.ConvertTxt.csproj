@@ -176,6 +176,7 @@
     <Compile Include="Classes.veic.cs" />
     <Compile Include="Classes.vol.cs" />
     <Compile Include="ConversaoTXT.cs" />
+    <Compile Include="InfIntermed.cs" />
     <Compile Include="nfeRead.cs" />
     <Compile Include="NFeW.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

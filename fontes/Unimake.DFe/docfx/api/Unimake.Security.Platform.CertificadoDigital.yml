@@ -1,0 +1,749 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Security.Platform.CertificadoDigital
+  commentId: T:Unimake.Security.Platform.CertificadoDigital
+  id: CertificadoDigital
+  parent: Unimake.Security.Platform
+  children:
+  - Unimake.Security.Platform.CertificadoDigital.#ctor
+  - Unimake.Security.Platform.CertificadoDigital.AbrirTelaSelecao
+  - Unimake.Security.Platform.CertificadoDigital.BuscarCertificadoDigital(System.String)
+  - Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1(System.Byte[],System.String)
+  - Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1(System.String,System.String)
+  - Unimake.Security.Platform.CertificadoDigital.Selecionar
+  - Unimake.Security.Platform.CertificadoDigital.ToByteArray(System.String)
+  - Unimake.Security.Platform.CertificadoDigital.Vencido(System.Security.Cryptography.X509Certificates.X509Certificate2)
+  langs:
+  - csharp
+  - vb
+  name: CertificadoDigital
+  nameWithType: CertificadoDigital
+  fullName: Unimake.Security.Platform.CertificadoDigital
+  type: Class
+  source:
+    id: CertificadoDigital
+    path: D:\projetos\uninfe\trunk\fontes\.NET Framework\Unimake.Security.Platform\CertificadoDigital.cs
+    startLine: 11
+  assemblies:
+  - Unimake.Security.Platform
+  namespace: Unimake.Security.Platform
+  summary: "\nTrabalhar com certificado digital\n"
+  example: []
+  syntax:
+    content: >-
+      [ClassInterface(ClassInterfaceType.AutoDual)]
+
+      [ComVisible(true)]
+
+      public class CertificadoDigital
+    content.vb: >-
+      <ClassInterface(ClassInterfaceType.AutoDual)>
+
+      <ComVisible(True)>
+
+      Public Class CertificadoDigital
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  attributes:
+  - type: System.Runtime.InteropServices.ClassInterfaceAttribute
+    ctor: System.Runtime.InteropServices.ClassInterfaceAttribute.#ctor(System.Runtime.InteropServices.ClassInterfaceType)
+    arguments:
+    - type: System.Runtime.InteropServices.ClassInterfaceType
+      value: 2
+  - type: System.Runtime.InteropServices.ComVisibleAttribute
+    ctor: System.Runtime.InteropServices.ComVisibleAttribute.#ctor(System.Boolean)
+    arguments:
+    - type: System.Boolean
+      value: true
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Unimake.Security.Platform.CertificadoDigital.#ctor
+  commentId: M:Unimake.Security.Platform.CertificadoDigital.#ctor
+  id: '#ctor'
+  parent: Unimake.Security.Platform.CertificadoDigital
+  langs:
+  - csharp
+  - vb
+  name: CertificadoDigital()
+  nameWithType: CertificadoDigital.CertificadoDigital()
+  fullName: Unimake.Security.Platform.CertificadoDigital.CertificadoDigital()
+  type: Constructor
+  source:
+    id: .ctor
+    path: D:\projetos\uninfe\trunk\fontes\.NET Framework\Unimake.Security.Platform\CertificadoDigital.cs
+    startLine: 21
+  assemblies:
+  - Unimake.Security.Platform
+  namespace: Unimake.Security.Platform
+  summary: "\nTrabalhar com certificado digital\n"
+  example: []
+  syntax:
+    content: public CertificadoDigital()
+    content.vb: Public Sub New
+  overload: Unimake.Security.Platform.CertificadoDigital.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Security.Platform.CertificadoDigital.AbrirTelaSelecao
+  commentId: M:Unimake.Security.Platform.CertificadoDigital.AbrirTelaSelecao
+  id: AbrirTelaSelecao
+  parent: Unimake.Security.Platform.CertificadoDigital
+  langs:
+  - csharp
+  - vb
+  name: AbrirTelaSelecao()
+  nameWithType: CertificadoDigital.AbrirTelaSelecao()
+  fullName: Unimake.Security.Platform.CertificadoDigital.AbrirTelaSelecao()
+  type: Method
+  source:
+    id: AbrirTelaSelecao
+    path: D:\projetos\uninfe\trunk\fontes\.NET Framework\Unimake.Security.Platform\CertificadoDigital.cs
+    startLine: 33
+  assemblies:
+  - Unimake.Security.Platform
+  namespace: Unimake.Security.Platform
+  summary: "\nAbre a tela de dialogo do windows para seleção do certificado digital\n"
+  example: []
+  syntax:
+    content: public X509Certificate2Collection AbrirTelaSelecao()
+    return:
+      type: System.Security.Cryptography.X509Certificates.X509Certificate2Collection
+      description: Retorna a coleção de certificados digitais
+    content.vb: Public Function AbrirTelaSelecao As X509Certificate2Collection
+  overload: Unimake.Security.Platform.CertificadoDigital.AbrirTelaSelecao*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Security.Platform.CertificadoDigital.BuscarCertificadoDigital(System.String)
+  commentId: M:Unimake.Security.Platform.CertificadoDigital.BuscarCertificadoDigital(System.String)
+  id: BuscarCertificadoDigital(System.String)
+  parent: Unimake.Security.Platform.CertificadoDigital
+  langs:
+  - csharp
+  - vb
+  name: BuscarCertificadoDigital(String)
+  nameWithType: CertificadoDigital.BuscarCertificadoDigital(String)
+  fullName: Unimake.Security.Platform.CertificadoDigital.BuscarCertificadoDigital(System.String)
+  type: Method
+  source:
+    id: BuscarCertificadoDigital
+    path: D:\projetos\uninfe\trunk\fontes\.NET Framework\Unimake.Security.Platform\CertificadoDigital.cs
+    startLine: 50
+  assemblies:
+  - Unimake.Security.Platform
+  namespace: Unimake.Security.Platform
+  summary: "\nBusca o certificado digital pelo Serial Number ou Thumb Print no repositório do windows\n"
+  example: []
+  syntax:
+    content: public X509Certificate2 BuscarCertificadoDigital(string serialNumberOrThumbPrint)
+    parameters:
+    - id: serialNumberOrThumbPrint
+      type: System.String
+      description: Serial number ou Thumb print do certificado digital a ser utilizado na localização
+    return:
+      type: System.Security.Cryptography.X509Certificates.X509Certificate2
+      description: Certificado digital
+    content.vb: Public Function BuscarCertificadoDigital(serialNumberOrThumbPrint As String) As X509Certificate2
+  overload: Unimake.Security.Platform.CertificadoDigital.BuscarCertificadoDigital*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1(System.Byte[],System.String)
+  commentId: M:Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1(System.Byte[],System.String)
+  id: CarregarCertificadoDigitalA1(System.Byte[],System.String)
+  parent: Unimake.Security.Platform.CertificadoDigital
+  langs:
+  - csharp
+  - vb
+  name: CarregarCertificadoDigitalA1(Byte[], String)
+  nameWithType: CertificadoDigital.CarregarCertificadoDigitalA1(Byte[], String)
+  fullName: Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1(System.Byte[], System.String)
+  type: Method
+  source:
+    id: CarregarCertificadoDigitalA1
+    path: D:\projetos\uninfe\trunk\fontes\.NET Framework\Unimake.Security.Platform\CertificadoDigital.cs
+    startLine: 83
+  assemblies:
+  - Unimake.Security.Platform
+  namespace: Unimake.Security.Platform
+  summary: "\nCarrega o certificado digital pelos bytes do certificado\n"
+  example: []
+  syntax:
+    content: >-
+      [ComVisible(false)]
+
+      public X509Certificate2 CarregarCertificadoDigitalA1(byte[] bytes, string senha)
+    parameters:
+    - id: bytes
+      type: System.Byte[]
+      description: Bytes do certificado para carga do mesmo
+    - id: senha
+      type: System.String
+      description: Senha utilizada para instalar o certificado, será usada para carga do mesmo
+    return:
+      type: System.Security.Cryptography.X509Certificates.X509Certificate2
+      description: Certificado Digital
+    content.vb: >-
+      <ComVisible(False)>
+
+      Public Function CarregarCertificadoDigitalA1(bytes As Byte(), senha As String) As X509Certificate2
+  overload: Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1*
+  attributes:
+  - type: System.Runtime.InteropServices.ComVisibleAttribute
+    ctor: System.Runtime.InteropServices.ComVisibleAttribute.#ctor(System.Boolean)
+    arguments:
+    - type: System.Boolean
+      value: false
+  nameWithType.vb: CertificadoDigital.CarregarCertificadoDigitalA1(Byte(), String)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1(System.Byte(), System.String)
+  name.vb: CarregarCertificadoDigitalA1(Byte(), String)
+- uid: Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1(System.String,System.String)
+  commentId: M:Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1(System.String,System.String)
+  id: CarregarCertificadoDigitalA1(System.String,System.String)
+  parent: Unimake.Security.Platform.CertificadoDigital
+  langs:
+  - csharp
+  - vb
+  name: CarregarCertificadoDigitalA1(String, String)
+  nameWithType: CertificadoDigital.CarregarCertificadoDigitalA1(String, String)
+  fullName: Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1(System.String, System.String)
+  type: Method
+  source:
+    id: CarregarCertificadoDigitalA1
+    path: D:\projetos\uninfe\trunk\fontes\.NET Framework\Unimake.Security.Platform\CertificadoDigital.cs
+    startLine: 95
+  assemblies:
+  - Unimake.Security.Platform
+  namespace: Unimake.Security.Platform
+  summary: "\nCarrega o certificado digital A1 direto do arquivo .PFX\n"
+  example: []
+  syntax:
+    content: public X509Certificate2 CarregarCertificadoDigitalA1(string caminho, string senha)
+    parameters:
+    - id: caminho
+      type: System.String
+      description: Caminho do certificado digital. Ex. c:\certificados\certificado.pfx
+    - id: senha
+      type: System.String
+      description: Senha utilizada para instalar o arquivo .pfx
+    return:
+      type: System.Security.Cryptography.X509Certificates.X509Certificate2
+      description: Certificado Digital
+    content.vb: Public Function CarregarCertificadoDigitalA1(caminho As String, senha As String) As X509Certificate2
+  overload: Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Security.Platform.CertificadoDigital.Selecionar
+  commentId: M:Unimake.Security.Platform.CertificadoDigital.Selecionar
+  id: Selecionar
+  parent: Unimake.Security.Platform.CertificadoDigital
+  langs:
+  - csharp
+  - vb
+  name: Selecionar()
+  nameWithType: CertificadoDigital.Selecionar()
+  fullName: Unimake.Security.Platform.CertificadoDigital.Selecionar()
+  type: Method
+  source:
+    id: Selecionar
+    path: D:\projetos\uninfe\trunk\fontes\.NET Framework\Unimake.Security.Platform\CertificadoDigital.cs
+    startLine: 131
+  assemblies:
+  - Unimake.Security.Platform
+  namespace: Unimake.Security.Platform
+  summary: "\nExecuta tela com os certificados digitais instalados para seleção do usuário\n"
+  example: []
+  syntax:
+    content: public X509Certificate2 Selecionar()
+    return:
+      type: System.Security.Cryptography.X509Certificates.X509Certificate2
+      description: Retorna o certificado digital (null se nenhum certificado foi selecionado ou se o certificado selecionado está com alguma falha)
+    content.vb: Public Function Selecionar As X509Certificate2
+  overload: Unimake.Security.Platform.CertificadoDigital.Selecionar*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Security.Platform.CertificadoDigital.ToByteArray(System.String)
+  commentId: M:Unimake.Security.Platform.CertificadoDigital.ToByteArray(System.String)
+  id: ToByteArray(System.String)
+  parent: Unimake.Security.Platform.CertificadoDigital
+  langs:
+  - csharp
+  - vb
+  name: ToByteArray(String)
+  nameWithType: CertificadoDigital.ToByteArray(String)
+  fullName: Unimake.Security.Platform.CertificadoDigital.ToByteArray(System.String)
+  type: Method
+  source:
+    id: ToByteArray
+    path: D:\projetos\uninfe\trunk\fontes\.NET Framework\Unimake.Security.Platform\CertificadoDigital.cs
+    startLine: 149
+  assemblies:
+  - Unimake.Security.Platform
+  namespace: Unimake.Security.Platform
+  summary: "\nConverte o arquivo do certificado em um array de bytes\n"
+  example: []
+  syntax:
+    content: public byte[] ToByteArray(string arquivo)
+    parameters:
+    - id: arquivo
+      type: System.String
+      description: Nome do arquivo
+    return:
+      type: System.Byte[]
+      description: Array de bytes do arquivo do certificado
+    content.vb: Public Function ToByteArray(arquivo As String) As Byte()
+  overload: Unimake.Security.Platform.CertificadoDigital.ToByteArray*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Unimake.Security.Platform.CertificadoDigital.Vencido(System.Security.Cryptography.X509Certificates.X509Certificate2)
+  commentId: M:Unimake.Security.Platform.CertificadoDigital.Vencido(System.Security.Cryptography.X509Certificates.X509Certificate2)
+  id: Vencido(System.Security.Cryptography.X509Certificates.X509Certificate2)
+  parent: Unimake.Security.Platform.CertificadoDigital
+  langs:
+  - csharp
+  - vb
+  name: Vencido(X509Certificate2)
+  nameWithType: CertificadoDigital.Vencido(X509Certificate2)
+  fullName: Unimake.Security.Platform.CertificadoDigital.Vencido(System.Security.Cryptography.X509Certificates.X509Certificate2)
+  type: Method
+  source:
+    id: Vencido
+    path: D:\projetos\uninfe\trunk\fontes\.NET Framework\Unimake.Security.Platform\CertificadoDigital.cs
+    startLine: 170
+  assemblies:
+  - Unimake.Security.Platform
+  namespace: Unimake.Security.Platform
+  summary: "\nVerifica se o certificado digital está vencido\n"
+  example: []
+  syntax:
+    content: public bool Vencido(X509Certificate2 certificado)
+    parameters:
+    - id: certificado
+      type: System.Security.Cryptography.X509Certificates.X509Certificate2
+      description: Certificado digital
+    return:
+      type: System.Boolean
+      description: true = Certificado vencido
+    content.vb: Public Function Vencido(certificado As X509Certificate2) As Boolean
+  overload: Unimake.Security.Platform.CertificadoDigital.Vencido*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+references:
+- uid: Unimake.Security.Platform
+  commentId: N:Unimake.Security.Platform
+  name: Unimake.Security.Platform
+  nameWithType: Unimake.Security.Platform
+  fullName: Unimake.Security.Platform
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Unimake.Security.Platform.CertificadoDigital.#ctor*
+  commentId: Overload:Unimake.Security.Platform.CertificadoDigital.#ctor
+  name: CertificadoDigital
+  nameWithType: CertificadoDigital.CertificadoDigital
+  fullName: Unimake.Security.Platform.CertificadoDigital.CertificadoDigital
+- uid: Unimake.Security.Platform.CertificadoDigital.AbrirTelaSelecao*
+  commentId: Overload:Unimake.Security.Platform.CertificadoDigital.AbrirTelaSelecao
+  name: AbrirTelaSelecao
+  nameWithType: CertificadoDigital.AbrirTelaSelecao
+  fullName: Unimake.Security.Platform.CertificadoDigital.AbrirTelaSelecao
+- uid: System.Security.Cryptography.X509Certificates.X509Certificate2Collection
+  commentId: T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection
+  parent: System.Security.Cryptography.X509Certificates
+  isExternal: true
+  name: X509Certificate2Collection
+  nameWithType: X509Certificate2Collection
+  fullName: System.Security.Cryptography.X509Certificates.X509Certificate2Collection
+- uid: System.Security.Cryptography.X509Certificates
+  commentId: N:System.Security.Cryptography.X509Certificates
+  isExternal: true
+  name: System.Security.Cryptography.X509Certificates
+  nameWithType: System.Security.Cryptography.X509Certificates
+  fullName: System.Security.Cryptography.X509Certificates
+- uid: Unimake.Security.Platform.CertificadoDigital.BuscarCertificadoDigital*
+  commentId: Overload:Unimake.Security.Platform.CertificadoDigital.BuscarCertificadoDigital
+  name: BuscarCertificadoDigital
+  nameWithType: CertificadoDigital.BuscarCertificadoDigital
+  fullName: Unimake.Security.Platform.CertificadoDigital.BuscarCertificadoDigital
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.Security.Cryptography.X509Certificates.X509Certificate2
+  commentId: T:System.Security.Cryptography.X509Certificates.X509Certificate2
+  parent: System.Security.Cryptography.X509Certificates
+  isExternal: true
+  name: X509Certificate2
+  nameWithType: X509Certificate2
+  fullName: System.Security.Cryptography.X509Certificates.X509Certificate2
+- uid: Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1*
+  commentId: Overload:Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1
+  name: CarregarCertificadoDigitalA1
+  nameWithType: CertificadoDigital.CarregarCertificadoDigitalA1
+  fullName: Unimake.Security.Platform.CertificadoDigital.CarregarCertificadoDigitalA1
+- uid: System.Byte[]
+  isExternal: true
+  name: Byte[]
+  nameWithType: Byte[]
+  fullName: System.Byte[]
+  nameWithType.vb: Byte()
+  fullName.vb: System.Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
+- uid: Unimake.Security.Platform.CertificadoDigital.Selecionar*
+  commentId: Overload:Unimake.Security.Platform.CertificadoDigital.Selecionar
+  name: Selecionar
+  nameWithType: CertificadoDigital.Selecionar
+  fullName: Unimake.Security.Platform.CertificadoDigital.Selecionar
+- uid: Unimake.Security.Platform.CertificadoDigital.ToByteArray*
+  commentId: Overload:Unimake.Security.Platform.CertificadoDigital.ToByteArray
+  name: ToByteArray
+  nameWithType: CertificadoDigital.ToByteArray
+  fullName: Unimake.Security.Platform.CertificadoDigital.ToByteArray
+- uid: Unimake.Security.Platform.CertificadoDigital.Vencido*
+  commentId: Overload:Unimake.Security.Platform.CertificadoDigital.Vencido
+  name: Vencido
+  nameWithType: CertificadoDigital.Vencido
+  fullName: Unimake.Security.Platform.CertificadoDigital.Vencido
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean

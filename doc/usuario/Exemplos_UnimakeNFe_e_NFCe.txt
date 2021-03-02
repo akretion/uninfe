@@ -1,7 +1,6 @@
 // ---------------------------------------------------------------------------------------------------------
 // Acessando certificado digital:
 // ---------------------------------------------------------------------------------------------------------
-
 CertificadoDigital cert = new CertificadoDigital();
 X509Certificate2 CertificadoSelecionado = cert.Selecionar();
 
@@ -15,6 +14,31 @@ var bytes = certificadoDigital.ToByteArray(path);
 // Convertendo certificado digital de Bytes para X509Certificate2 para fazer uso do mesmo
 // ---------------------------------------------------------------------------------------------------------
 X509Certificate2 CertificadoSelecionado = certificadoDigital.CarregarCertificadoDigitalA1(bytes, password);
+
+// ---------------------------------------------------------------------------------------------------------
+// Forma de trabalhar com certificado A3
+// ---------------------------------------------------------------------------------------------------------
+Em uma tela de configuração vc pede o certificado, algo assim:
+
+var certificadoDigital = new CertificadoDigital();
+X509Certificate2 CertificadoSelecionado = certificadoDigital.Selecionar();
+
+Salve o Thumbprint (string) do certificado em uma tabela na sua base, pegando a informação da propriedade:
+
+CertificadoSelecionado.Thumbprint
+
+Depois, na hora de utilizar, basta resgatar da seguinte forma:
+
+X509Certificate2 CertificadoSelecionado = certificadoDigital.BuscarCertificadoDigital(thumbPrint);
+
+Nas configurações passar o certificado e o PIN, assim:
+
+var configuracao = new Configuracao
+{
+    CertificadoDigital = CertificadoSelecionado,
+    CertificadoA3PIN = "123456",
+    TipoDFe = TipoDFe.NFe,
+};
 
 // ---------------------------------------------------------------------------------------------------------
 //Enviando XML para consultar Status

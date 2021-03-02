@@ -1,0 +1,570 @@
+### YamlMime:ManagedReference
+items:
+- uid: Unimake.Business.DFe.Servicos.Meses
+  commentId: T:Unimake.Business.DFe.Servicos.Meses
+  id: Meses
+  parent: Unimake.Business.DFe.Servicos
+  children:
+  - Unimake.Business.DFe.Servicos.Meses.Abril
+  - Unimake.Business.DFe.Servicos.Meses.Agosto
+  - Unimake.Business.DFe.Servicos.Meses.Dezembro
+  - Unimake.Business.DFe.Servicos.Meses.Fevereiro
+  - Unimake.Business.DFe.Servicos.Meses.Janeiro
+  - Unimake.Business.DFe.Servicos.Meses.Julho
+  - Unimake.Business.DFe.Servicos.Meses.Junho
+  - Unimake.Business.DFe.Servicos.Meses.Maio
+  - Unimake.Business.DFe.Servicos.Meses.Marco
+  - Unimake.Business.DFe.Servicos.Meses.Novembro
+  - Unimake.Business.DFe.Servicos.Meses.Outubro
+  - Unimake.Business.DFe.Servicos.Meses.Setembro
+  langs:
+  - csharp
+  - vb
+  name: Meses
+  nameWithType: Meses
+  fullName: Unimake.Business.DFe.Servicos.Meses
+  type: Enum
+  source:
+    id: Meses
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4871
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\nMeses do ano\n"
+  example: []
+  syntax:
+    content: public enum Meses
+    content.vb: Public Enum Meses
+  extensionMethods:
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  - System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: Unimake.Business.DFe.Servicos.Meses.Janeiro
+  commentId: F:Unimake.Business.DFe.Servicos.Meses.Janeiro
+  id: Janeiro
+  parent: Unimake.Business.DFe.Servicos.Meses
+  langs:
+  - csharp
+  - vb
+  name: Janeiro
+  nameWithType: Meses.Janeiro
+  fullName: Unimake.Business.DFe.Servicos.Meses.Janeiro
+  type: Field
+  source:
+    id: Janeiro
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4876
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n01 - Janeiro\n"
+  example: []
+  syntax:
+    content: Janeiro = 1
+    return:
+      type: Unimake.Business.DFe.Servicos.Meses
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.Meses.Fevereiro
+  commentId: F:Unimake.Business.DFe.Servicos.Meses.Fevereiro
+  id: Fevereiro
+  parent: Unimake.Business.DFe.Servicos.Meses
+  langs:
+  - csharp
+  - vb
+  name: Fevereiro
+  nameWithType: Meses.Fevereiro
+  fullName: Unimake.Business.DFe.Servicos.Meses.Fevereiro
+  type: Field
+  source:
+    id: Fevereiro
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4882
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n02 - Fevereiro\n"
+  example: []
+  syntax:
+    content: Fevereiro = 2
+    return:
+      type: Unimake.Business.DFe.Servicos.Meses
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.Meses.Marco
+  commentId: F:Unimake.Business.DFe.Servicos.Meses.Marco
+  id: Marco
+  parent: Unimake.Business.DFe.Servicos.Meses
+  langs:
+  - csharp
+  - vb
+  name: Marco
+  nameWithType: Meses.Marco
+  fullName: Unimake.Business.DFe.Servicos.Meses.Marco
+  type: Field
+  source:
+    id: Marco
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4888
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n03 - Março\n"
+  example: []
+  syntax:
+    content: Marco = 3
+    return:
+      type: Unimake.Business.DFe.Servicos.Meses
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.Meses.Abril
+  commentId: F:Unimake.Business.DFe.Servicos.Meses.Abril
+  id: Abril
+  parent: Unimake.Business.DFe.Servicos.Meses
+  langs:
+  - csharp
+  - vb
+  name: Abril
+  nameWithType: Meses.Abril
+  fullName: Unimake.Business.DFe.Servicos.Meses.Abril
+  type: Field
+  source:
+    id: Abril
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4894
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n04 - Abril\n"
+  example: []
+  syntax:
+    content: Abril = 4
+    return:
+      type: Unimake.Business.DFe.Servicos.Meses
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.Meses.Maio
+  commentId: F:Unimake.Business.DFe.Servicos.Meses.Maio
+  id: Maio
+  parent: Unimake.Business.DFe.Servicos.Meses
+  langs:
+  - csharp
+  - vb
+  name: Maio
+  nameWithType: Meses.Maio
+  fullName: Unimake.Business.DFe.Servicos.Meses.Maio
+  type: Field
+  source:
+    id: Maio
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4900
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n05 - Maio\n"
+  example: []
+  syntax:
+    content: Maio = 5
+    return:
+      type: Unimake.Business.DFe.Servicos.Meses
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.Meses.Junho
+  commentId: F:Unimake.Business.DFe.Servicos.Meses.Junho
+  id: Junho
+  parent: Unimake.Business.DFe.Servicos.Meses
+  langs:
+  - csharp
+  - vb
+  name: Junho
+  nameWithType: Meses.Junho
+  fullName: Unimake.Business.DFe.Servicos.Meses.Junho
+  type: Field
+  source:
+    id: Junho
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4906
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n06 - Junho\n"
+  example: []
+  syntax:
+    content: Junho = 6
+    return:
+      type: Unimake.Business.DFe.Servicos.Meses
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.Meses.Julho
+  commentId: F:Unimake.Business.DFe.Servicos.Meses.Julho
+  id: Julho
+  parent: Unimake.Business.DFe.Servicos.Meses
+  langs:
+  - csharp
+  - vb
+  name: Julho
+  nameWithType: Meses.Julho
+  fullName: Unimake.Business.DFe.Servicos.Meses.Julho
+  type: Field
+  source:
+    id: Julho
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4912
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n07 - Julho\n"
+  example: []
+  syntax:
+    content: Julho = 7
+    return:
+      type: Unimake.Business.DFe.Servicos.Meses
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.Meses.Agosto
+  commentId: F:Unimake.Business.DFe.Servicos.Meses.Agosto
+  id: Agosto
+  parent: Unimake.Business.DFe.Servicos.Meses
+  langs:
+  - csharp
+  - vb
+  name: Agosto
+  nameWithType: Meses.Agosto
+  fullName: Unimake.Business.DFe.Servicos.Meses.Agosto
+  type: Field
+  source:
+    id: Agosto
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4918
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n08 - Agosto\n"
+  example: []
+  syntax:
+    content: Agosto = 8
+    return:
+      type: Unimake.Business.DFe.Servicos.Meses
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.Meses.Setembro
+  commentId: F:Unimake.Business.DFe.Servicos.Meses.Setembro
+  id: Setembro
+  parent: Unimake.Business.DFe.Servicos.Meses
+  langs:
+  - csharp
+  - vb
+  name: Setembro
+  nameWithType: Meses.Setembro
+  fullName: Unimake.Business.DFe.Servicos.Meses.Setembro
+  type: Field
+  source:
+    id: Setembro
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4924
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n09 - Setembro\n"
+  example: []
+  syntax:
+    content: Setembro = 9
+    return:
+      type: Unimake.Business.DFe.Servicos.Meses
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.Meses.Outubro
+  commentId: F:Unimake.Business.DFe.Servicos.Meses.Outubro
+  id: Outubro
+  parent: Unimake.Business.DFe.Servicos.Meses
+  langs:
+  - csharp
+  - vb
+  name: Outubro
+  nameWithType: Meses.Outubro
+  fullName: Unimake.Business.DFe.Servicos.Meses.Outubro
+  type: Field
+  source:
+    id: Outubro
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4930
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n10 - Outubro\n"
+  example: []
+  syntax:
+    content: Outubro = 10
+    return:
+      type: Unimake.Business.DFe.Servicos.Meses
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.Meses.Novembro
+  commentId: F:Unimake.Business.DFe.Servicos.Meses.Novembro
+  id: Novembro
+  parent: Unimake.Business.DFe.Servicos.Meses
+  langs:
+  - csharp
+  - vb
+  name: Novembro
+  nameWithType: Meses.Novembro
+  fullName: Unimake.Business.DFe.Servicos.Meses.Novembro
+  type: Field
+  source:
+    id: Novembro
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4936
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n11 - Novembro\n"
+  example: []
+  syntax:
+    content: Novembro = 11
+    return:
+      type: Unimake.Business.DFe.Servicos.Meses
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Unimake.Business.DFe.Servicos.Meses.Dezembro
+  commentId: F:Unimake.Business.DFe.Servicos.Meses.Dezembro
+  id: Dezembro
+  parent: Unimake.Business.DFe.Servicos.Meses
+  langs:
+  - csharp
+  - vb
+  name: Dezembro
+  nameWithType: Meses.Dezembro
+  fullName: Unimake.Business.DFe.Servicos.Meses.Dezembro
+  type: Field
+  source:
+    id: Dezembro
+    path: D:\projetos\uninfe\trunk\fontes\.NET Standard\Unimake.Business.DFe\Servicos\Enums\Enums.cs
+    startLine: 4942
+  assemblies:
+  - Unimake.Business.DFe
+  namespace: Unimake.Business.DFe.Servicos
+  summary: "\n12 - Dezembro\n"
+  example: []
+  syntax:
+    content: Dezembro = 12
+    return:
+      type: Unimake.Business.DFe.Servicos.Meses
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: Unimake.Business.DFe.Servicos
+  commentId: N:Unimake.Business.DFe.Servicos
+  name: Unimake.Business.DFe.Servicos
+  nameWithType: Unimake.Business.DFe.Servicos
+  fullName: Unimake.Business.DFe.Servicos
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  name: GetAttribute<T>()
+  nameWithType: EnumsExtension.GetAttribute<T>()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>()
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)()
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)()
+  name.vb: GetAttribute(Of T)()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Enum.Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  parent: Unimake.Business.DFe.EnumsExtension
+  definition: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  name: GetAttributeDescription()
+  nameWithType: EnumsExtension.GetAttributeDescription()
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription()
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+  isExternal: true
+  name: GetAttribute<T>(Enum)
+  nameWithType: EnumsExtension.GetAttribute<T>(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>(System.Enum)
+  nameWithType.vb: EnumsExtension.GetAttribute(Of T)(Enum)
+  fullName.vb: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)(System.Enum)
+  name.vb: GetAttribute(Of T)(Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute<T>
+    nameWithType: EnumsExtension.GetAttribute<T>
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttribute``1(System.Enum)
+    name: GetAttribute(Of T)
+    nameWithType: EnumsExtension.GetAttribute(Of T)
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttribute(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe.EnumsExtension
+  commentId: T:Unimake.Business.DFe.EnumsExtension
+  parent: Unimake.Business.DFe
+  name: EnumsExtension
+  nameWithType: EnumsExtension
+  fullName: Unimake.Business.DFe.EnumsExtension
+- uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  commentId: M:Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  isExternal: true
+  name: GetAttributeDescription(Enum)
+  nameWithType: EnumsExtension.GetAttributeDescription(Enum)
+  fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+  spec.csharp:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription(System.Enum)
+    name: GetAttributeDescription
+    nameWithType: EnumsExtension.GetAttributeDescription
+    fullName: Unimake.Business.DFe.EnumsExtension.GetAttributeDescription
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Enum
+    name: Enum
+    nameWithType: Enum
+    fullName: System.Enum
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Unimake.Business.DFe
+  commentId: N:Unimake.Business.DFe
+  name: Unimake.Business.DFe
+  nameWithType: Unimake.Business.DFe
+  fullName: Unimake.Business.DFe
+- uid: Unimake.Business.DFe.Servicos.Meses
+  commentId: T:Unimake.Business.DFe.Servicos.Meses
+  parent: Unimake.Business.DFe.Servicos
+  name: Meses
+  nameWithType: Meses
+  fullName: Unimake.Business.DFe.Servicos.Meses

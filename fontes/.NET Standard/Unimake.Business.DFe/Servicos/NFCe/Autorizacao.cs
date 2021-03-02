@@ -51,10 +51,10 @@ namespace Unimake.Business.DFe.Servicos.NFCe
                     EnviNFe.NFe[i].InfNFeSupl.QrCode = urlQrCode + "?p=" + paramLinkQRCode.Trim() + "|" + hashQRCode.Trim();
                     EnviNFe.NFe[i].InfNFeSupl.UrlChave = urlChave;
                 }
-            }
 
-            //Atualizar a propriedade do XML da NFCe novamente com o conteúdo atual já a tag de QRCode e link de consulta
-            ConteudoXML = EnviNFe.GerarXML();
+                //Atualizar a propriedade do XML da NFCe novamente com o conteúdo atual já a tag de QRCode e link de consulta
+                ConteudoXML = EnviNFe.GerarXML();
+            }
         }
 
         #endregion Private Methods

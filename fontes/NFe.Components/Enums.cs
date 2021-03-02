@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -280,7 +281,7 @@ namespace NFe.Components
         [Description("Consultar Status da NFS-e")]
         NFSeConsultarStatusNota,
 
-		// <summary>
+        // <summary>
         /// Consultar as notas fiscais de serviço recebidas
         /// </summary>
         [Description("Consultar NFS-e recebidas")]
@@ -692,7 +693,7 @@ namespace NFe.Components
         /// </summary>
         [Description("ISS On-line/Assessor Público")]
         ISSONLINE_ASSESSORPUBLICO,
-             
+
         /// <summary>
         /// Padrão da prefeitura de Juiz de Fora-MG
         /// </summary>
@@ -868,6 +869,14 @@ namespace NFe.Components
         /// </summary>
         [Description("Rlz Informática")]
         RLZ_INFORMATICA,
+
+
+        /// <summary>
+        /// Padrão Rlz Informatica 02 
+        /// Prefeitura de Tangará da Serra - MT
+        /// </summary>
+        [Description("Rlz_Informática_02")]
+        RLZ_INFORMATICA_02,
 
         /// <summary>
         /// Padrão E-Governe
@@ -1088,6 +1097,12 @@ namespace NFe.Components
         SOFTPLAN,
 
         /// <summary>
+        /// Padrão utilizado pela prefeitura de Edéia-GO
+        /// </summary>
+        [Description("CENTI")]
+        CENTI,
+
+        /// <summary>
         /// Padrão utilizado pela prefeitura de Manaus-AM
         /// </summary>
         [Description("MANAUS_AM")]
@@ -1175,9 +1190,9 @@ namespace NFe.Components
         [Description("SISPMJP")]
         SISPMJP,
 
-         /// <summary>s
-         /// Padrão D2TI
-         /// </summary>
+        /// <summary>s
+        /// Padrão D2TI
+        /// </summary>
         [Description("D2TI")]
         D2TI,
 
@@ -1197,11 +1212,17 @@ namespace NFe.Components
         /// </summary>
         [Description("SYSMAR")]
         SYSMAR,
-         /// <summary>
-         /// Padrão AGILI
-         /// </summary>
+        /// <summary>
+        /// Padrão AGILI
+        /// </summary>
         [Description("AGILI")]
-        AGILI
+        AGILI,
+
+        /// <summary>
+        /// Padrão GeisWeb
+        /// </summary>
+        [Description("GEISWEB")]
+        GEISWEB
 
         ///***ATENÇÃO***
         ///o nome deste enum tem que coincidir com o nome da url, pq faço um "IndexOf" deste enum para pegar o padrao
