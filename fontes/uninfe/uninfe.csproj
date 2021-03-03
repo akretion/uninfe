@@ -140,8 +140,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Unimake.Business.DFe, Version=2020.1.17.1501, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unimake.DFe.20201207.15.22.11\lib\netstandard2.0\Unimake.Business.DFe.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Unimake.DFe.20210303.1129.12\lib\netstandard2.0\Unimake.Business.DFe.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>

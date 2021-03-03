@@ -264,22 +264,22 @@
       <Value Profile="(Default)">http://servicosweb.itabira.mg.gov.br:90/NFSe.Portal.Integracao.Teste/Services.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_HJaboataoDosGuararapesPE_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.tinus.com.br/csp/jaboatao/WSNFSE.CancelarNfse.cls</Value>
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testejab/WSNFSE.CancelarNfse.cls</Value>
     </Setting>
     <Setting Name="NFe_Components_HJaboataoDosGuararapesPE_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.tinus.com.br/csp/jaboatao/WSNFSE.ConsultarNfse.cls</Value>
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testejab/WSNFSE.ConsultarNfse.cls</Value>
     </Setting>
     <Setting Name="NFe_Components_HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps_ConsultarNfsePorRps" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.tinus.com.br/csp/jaboatao/WSNFSE.ConsultarNfsePorRps.cls</Value>
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testejab/WSNFSE.ConsultarNfsePorRps.cls</Value>
     </Setting>
     <Setting Name="NFe_Components_HJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps_ConsultarSituacaoLoteRps" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.tinus.com.br/csp/jaboatao/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testejab/WSNFSE.ConsultarSituacaoLoteRps.cls</Value>
     </Setting>
     <Setting Name="NFe_Components_HJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.tinus.com.br/csp/jaboatao/WSNFSE.ConsultarLoteRps.cls</Value>
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testejab/WSNFSE.ConsultarLoteRps.cls</Value>
     </Setting>
     <Setting Name="NFe_Components_HJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.tinus.com.br/csp/jaboatao/WSNFSE.RecepcionarLoteRps.cls</Value>
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testejab/WSNFSE.RecepcionarLoteRps.cls</Value>
     </Setting>
     <Setting Name="NFe_Components_PCachoeiraSulRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://cachoeiradosul-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc</Value>
@@ -906,7 +906,7 @@
       <Value Profile="(Default)">http://www.tinus.com.br/csp/olinda/WSNFSE.CancelarNfse.cls</Value>
     </Setting>
     <Setting Name="NFe_Components_POlindaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.tinus.com.br/csp/olinda/WSNFSE.ConsultarLoteRps.cls</Value>
+      <Value Profile="(Default)">https://www.tinus.com.br/csp/olinda/WSNFSE.ConsultarLoteRps.cls</Value>
     </Setting>
     <Setting Name="NFe_Components_POlindaPE_TINUS_ConsultarNfse_ConsultarNfse" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://www.tinus.com.br/csp/olinda/WSNFSE.ConsultarNfse.cls</Value>
@@ -1033,6 +1033,12 @@
     </Setting>
     <Setting Name="NFe_Components_PSilvaniaGO_nfseWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://silvania.bsit-br.com.br/integracao/services/nfseWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HJiParanaRO_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PJiParanaRO_IssWebWS" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:5660/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
   </Settings>
 </SettingsFile>

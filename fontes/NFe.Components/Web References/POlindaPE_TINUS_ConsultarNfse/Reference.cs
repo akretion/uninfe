@@ -431,7 +431,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+        [System.Xml.Serialization.XmlElementAttribute("Signature")]
         public SignatureType[] Signature
         {
             get
@@ -450,7 +450,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SignatureType
     {
 
@@ -537,7 +537,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SignedInfoType
     {
 
@@ -609,16 +609,32 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class CanonicalizationMethodType
     {
+
+        private System.Xml.XmlElement[] anyField;
 
         private string algorithmField;
 
         private string valueField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any
+        {
+            get
+            {
+                return this.anyField;
+            }
+            set
+            {
+                this.anyField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Algorithm
         {
             get
@@ -630,20 +646,6 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
                 this.algorithmField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -651,7 +653,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SignatureMethodType
     {
 
@@ -659,7 +661,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
 
         private bool hMACOutputLengthFieldSpecified;
 
-        private string[] textField;
+        private System.Xml.XmlElement[] anyField;
 
         private string algorithmField;
 
@@ -691,21 +693,21 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any
         {
             get
             {
-                return this.textField;
+                return this.anyField;
             }
             set
             {
-                this.textField = value;
+                this.anyField = value;
             }
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Algorithm
         {
             get
@@ -724,7 +726,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class ReferenceType
     {
 
@@ -796,7 +798,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string URI
         {
             get
@@ -810,7 +812,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Type
         {
             get
@@ -829,20 +831,19 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class TransformType
     {
 
-        private System.Xml.XmlNode[] anyField;
+        private System.Xml.XmlElement[] anyField;
 
         private string[] xPathField;
 
         private string algorithmField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any
+        public System.Xml.XmlElement[] Any
         {
             get
             {
@@ -869,7 +870,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Algorithm
         {
             get
@@ -888,16 +889,31 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class DigestMethodType
     {
 
+        private System.Xml.XmlElement[] anyField;
+
         private string algorithmField;
 
-        private string valueField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any
+        {
+            get
+            {
+                return this.anyField;
+            }
+            set
+            {
+                this.anyField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Algorithm
         {
             get
@@ -909,20 +925,6 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
                 this.algorithmField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -930,7 +932,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SignatureValueType
     {
 
@@ -972,7 +974,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class KeyInfoType
     {
 
@@ -990,7 +992,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
 
         private string[] mgmtDataField;
 
-        private System.Xml.XmlNode[] anyField;
+        private System.Xml.XmlElement[] anyField;
 
         private string idField;
 
@@ -1093,9 +1095,8 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any
+        public System.Xml.XmlElement[] Any
         {
             get
             {
@@ -1127,7 +1128,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class KeyValueType
     {
 
@@ -1135,7 +1136,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
 
         private RSAKeyValueType rSAKeyValueField;
 
-        private System.Xml.XmlNode[] anyField;
+        private System.Xml.XmlElement anyField;
 
         /// <remarks/>
         public DSAKeyValueType DSAKeyValue
@@ -1164,9 +1165,8 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any
+        public System.Xml.XmlElement Any
         {
             get
             {
@@ -1184,7 +1184,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class DSAKeyValueType
     {
 
@@ -1306,7 +1306,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class RSAKeyValueType
     {
 
@@ -1348,7 +1348,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class RetrievalMethodType
     {
 
@@ -1373,7 +1373,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string URI
         {
             get
@@ -1387,7 +1387,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Type
         {
             get
@@ -1406,7 +1406,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class X509DataType
     {
 
@@ -1512,7 +1512,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class X509IssuerSerialType
     {
 
@@ -1552,7 +1552,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class PGPDataType
     {
 
@@ -1642,7 +1642,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SPKIDataType
     {
 
@@ -1684,9 +1684,11 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class ObjectType
     {
+
+        private System.Xml.XmlElement[] anyField;
 
         private string idField;
 
@@ -1694,7 +1696,19 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
 
         private string encodingField;
 
-        private string valueField;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any
+        {
+            get
+            {
+                return this.anyField;
+            }
+            set
+            {
+                this.anyField = value;
+            }
+        }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1725,7 +1739,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Encoding
         {
             get
@@ -1738,19 +1752,6 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
             }
         }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -1908,7 +1909,6 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
         public SignatureType Signature
         {
             get
@@ -2005,7 +2005,6 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
         public SignatureType Signature
         {
             get
@@ -3615,7 +3614,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+        [System.Xml.Serialization.XmlElementAttribute("Signature")]
         public SignatureType[] Signature
         {
             get
@@ -3712,7 +3711,7 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarNfse
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("MensagemRetorno")]
+        [System.Xml.Serialization.XmlArrayItemAttribute("MensagemRetorno", IsNullable = false)]
         public tcMensagemRetorno[] ListaMensagemRetorno
         {
             get

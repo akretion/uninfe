@@ -3039,45 +3039,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVAN\HSVCANNfeConsulta_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVAN\HSVCANNfeRetAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVAN\HSVCANNfeStatusServico_400.wsdl" />
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtEspDesportivo-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtExclusao-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtFechamento-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoContribuinte-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoCPRB-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoProdRural-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtPrestadorServicos-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtReabreEvPer-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRecebidoAssociacao-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRepassadoAssociacao-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTabProcesso-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTomadorServicos-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorContribuinte-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\EFDReinf\xmldsig-core-schema.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -3219,57 +3180,6 @@
     <EmbeddedResource Include="NFe\schemas\eSocial\xmldsig-core-schema.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtEspDesportivo-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtExclusao-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtFechamento-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoContribuinte-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoCPRB-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoProdRural-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtPagamentosDiversos-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtPrestadorServicos-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtReabreEvPer-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRecebidoAssociacao-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRepassadoAssociacao-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTabProcesso-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTomadorServicos-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorContribuinte-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\envioLoteEventos-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoEvento-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoLoteEventos-v1_01_01.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\WSDL\Producao\AN\EFDReinf.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MT\HMTNfeConsulta_400.wsdl" />
@@ -3301,9 +3211,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPNferetautorizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SP\PSPnfestatusservico_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTCteRecepcaoOS.wsdl" />
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\envioLoteEventos-v1_02_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSVCRSNFeAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSVCRSNFeCadConsultaCadastro.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSVCRSNfeConsulta_400.wsdl" />
@@ -3414,54 +3321,6 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\AVMB_ASTEN\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\envioLoteEventos-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoLoteEventos-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorContribuinte-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorEvento-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtEspDesportivo-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtExclusao-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtFechamento-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoContribuinte-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoCPRB-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoProdRural-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtPrestadorServicos-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtReabreEvPer-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRecebidoAssociacao-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRepassadoAssociacao-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTabProcesso-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTomadorServicos-v1_03_00.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeAutorizacao_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeConsulta_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MT\PMTNfeInutilizacao_400.wsdl" />
@@ -3487,54 +3346,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeInutilizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeRetAutorizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeStatusServico_C_400.wsdl" />
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtEspDesportivo-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtExclusao-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtFechamento-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoContribuinte-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoCPRB-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoProdRural-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtPrestadorServicos-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtReabreEvPer-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRecebidoAssociacao-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRepassadoAssociacao-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTabProcesso-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTomadorServicos-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\envioLoteEventos-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoLoteEventos-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorContribuinte-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorEvento-v1_03_02.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\EFDReinfConsultas.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AN\EFDReinfConsultas.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\EFDReinf.wsdl" />
@@ -3721,6 +3532,60 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\CTe\retGTVe_v3.00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\envioLoteEventos-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtAquisicaoProdRural-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtEspDesportivo-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtExclusao-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtFechamento-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoContribuinte-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoCPRB-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoProdRural-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtPrestadorServicos-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtReabreEvPer-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRecebidoAssociacao-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRepassadoAssociacao-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTabProcesso-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTomadorServicos-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoLoteEventos-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoRecibosChaveEvento-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorContribuinte-v1_05_00.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorEvento-v1_05_00.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
@@ -3914,12 +3779,6 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HItabiraMG-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PItabiraMG-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PRolandiaPR-PRONIN.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_CancelarNfse.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_ConsultarNfse.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\TINUS\nfsetempuri.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4770,6 +4629,14 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Producao\PSilvaniaGO-BSITBR.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_CancelarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_ConsultarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_ConsultarNfse.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJiParanaRO-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PJiParanaRO-FIORILLI.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

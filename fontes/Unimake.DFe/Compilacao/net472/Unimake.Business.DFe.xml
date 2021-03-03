@@ -1949,6 +1949,11 @@
             4=NFC-e em operação com entrega a domicílio
             </summary>
         </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicadorPresenca.PresencialForaEstabelecimento">
+            <summary>
+            Operação presencial, fora do estabelecimento
+            </summary>
+        </member>
         <member name="F:Unimake.Business.DFe.Servicos.IndicadorPresenca.OperacaoOutros">
             <summary>
             9=Operação não presencial, outros
@@ -2095,9 +2100,14 @@
             11=Courier
             </summary>
         </member>
-        <member name="F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Handcarry">
+        <member name="F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.EmMaos">
             <summary>
-            12=Handcarry
+            12=Em Mãos
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.PorReboque">
+            <summary>
+            13=Por Reboque
             </summary>
         </member>
         <member name="T:Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao">
@@ -2448,6 +2458,26 @@
         <member name="F:Unimake.Business.DFe.Servicos.MeioPagamento.BoletoBancario">
             <summary>
             15=Boleto Bancário
+            </summary> 
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.MeioPagamento.DepositoBancario">
+            <summary>
+            16=Depósito Bancário
+            </summary> 
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.MeioPagamento.PagamentoInstantaneo">
+            <summary>
+            17=Pagamento Instantâneo (PIX)
+            </summary> 
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.MeioPagamento.TransferenciaBancaria">
+            <summary>
+            18=Transferência bancária, Carteira Digital
+            </summary> 
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.MeioPagamento.ProgramaFidelidade">
+            <summary>
+            19=Programa de fidelidade, Cashback, Crédito Virtual
             </summary> 
         </member>
         <member name="F:Unimake.Business.DFe.Servicos.MeioPagamento.SemPagamento">
@@ -5288,6 +5318,51 @@
         <member name="F:Unimake.Business.DFe.Servicos.SituacaoGuiaGNRE.ErroDeComunicacao">
             <summary>
             3 - Erro de comunicação
+            </summary>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.IndicadorIntermediario">
+            <summary>
+            Indicador do Intermediário/Marketplace
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicadorIntermediario.OperacaoSemIntermediador">
+            <summary>
+            0 = Operação sem intermediador (em site ou plataforma própria)
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicadorIntermediario.OperacaoSitePlataformaTerceiro">
+            <summary>
+            1 = Operação em site ou plataforma de terceiros (intermediadores/marketplace)
+            </summary>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.IndicaSomaPISST">
+            <summary>
+            Indica se o valor do PISST compõe o valor total da NF-e
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicaSomaPISST.ValorPISSTNaoCompoeValorTotalNFe">
+            <summary>
+            0=Valor do PISST não compõe o valor total da NF-e,
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicaSomaPISST.ValorPISSTCompoeValorTotalNFe">
+            <summary>
+            1=Valor do PISST compõe o valor total da NF-e
+            </summary>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.IndicaSomaCOFINSST">
+            <summary>
+            Indica se o valor do COFINSST compõe o valor total da NF-e
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicaSomaCOFINSST.ValorCOFINSSTNaoCompoeValorTotalNFe">
+            <summary>
+            0=Valor do COFINSST não compõe o valor total da NF-e,
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicaSomaCOFINSST.ValorCOFINSSTCompoeValorTotalNFe">
+            <summary>
+            1=Valor do COFINSST compõe o valor total da NF-e
             </summary>
         </member>
         <member name="T:Unimake.Business.DFe.Servicos.GNRE.ConsultaConfigUF">

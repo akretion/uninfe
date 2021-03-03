@@ -1324,6 +1324,11 @@
             Tipos de DFe´s existentes
             </summary>
         </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoDFe.Desconhecido">
+            <summary>
+            Evento desconhecido
+            </summary>
+        </member>
         <member name="F:Unimake.Business.DFe.Servicos.TipoDFe.NFe">
             <summary>
             NF-e - Nota Fiscal Eletrônica
@@ -1412,11 +1417,6 @@
         <member name="F:Unimake.Business.DFe.Servicos.UFBrasil.ES">
             <summary>
             Espírito Santo - ES (32)
-            </summary>
-        </member>
-        <member name="F:Unimake.Business.DFe.Servicos.UFBrasil.EX">
-            <summary>
-            Exportação
             </summary>
         </member>
         <member name="F:Unimake.Business.DFe.Servicos.UFBrasil.GO">
@@ -1539,6 +1539,11 @@
             Sincronização de chaves do estado do Rio Grande do Sul com o Sistema Virtual de São Paulo (96)
             </summary>
         </member>
+        <member name="F:Unimake.Business.DFe.Servicos.UFBrasil.EX">
+            <summary>
+            Exportação
+            </summary>
+        </member>
         <member name="F:Unimake.Business.DFe.Servicos.UFBrasil.NaoDefinido">
             <summary>
             Não definido (0)
@@ -1594,6 +1599,11 @@
             Tipos de eventos da NFe e NFCe
             </summary>
         </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoEventoNFe.Desconhecido">
+            <summary>
+            Evento desconhecido
+            </summary>
+        </member>
         <member name="F:Unimake.Business.DFe.Servicos.TipoEventoNFe.CartaCorrecao">
             <summary>
             Carta de correção eletrônica (110110)
@@ -1606,7 +1616,7 @@
         </member>
         <member name="F:Unimake.Business.DFe.Servicos.TipoEventoNFe.CancelamentoPorSubstituicao">
             <summary>
-            Cancelamento da NFCe sendo substituida por outra NFCe (110112)
+            Cancelamento da NFCe sendo substituída por outra NFCe (110112)
             </summary>
         </member>
         <member name="F:Unimake.Business.DFe.Servicos.TipoEventoNFe.EPEC">
@@ -1644,6 +1654,11 @@
             Tipos de eventos do CTe
             </summary>
         </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoEventoCTe.Desconhecido">
+            <summary>
+            Evento desconhecido
+            </summary>
+        </member>
         <member name="F:Unimake.Business.DFe.Servicos.TipoEventoCTe.CartaCorrecao">
             <summary>
             Carta de Correção CTe (110110)
@@ -1652,6 +1667,11 @@
         <member name="F:Unimake.Business.DFe.Servicos.TipoEventoCTe.Cancelamento">
             <summary>
             Cancelamento CTe (110111)
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoEventoCTe.EPEC">
+            <summary>
+            EPEC = Evento Previo da Emissão em Contingência do CTe (110113)
             </summary>
         </member>
         <member name="F:Unimake.Business.DFe.Servicos.TipoEventoCTe.ComprovanteEntrega">
@@ -1669,9 +1689,19 @@
             Prestação de serviço em desacordo CTe (610110)
             </summary>
         </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoEventoCTe.RegistroPassagem">
+            <summary>
+            Registro de Passagem CT-e (310620)
+            </summary>
+        </member>
         <member name="T:Unimake.Business.DFe.Servicos.TipoEventoMDFe">
             <summary>
             Tipos de eventos do MDFe
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoEventoMDFe.Desconhecido">
+            <summary>
+            Evento desconhecido
             </summary>
         </member>
         <member name="F:Unimake.Business.DFe.Servicos.TipoEventoMDFe.Cancelamento">
@@ -1692,6 +1722,26 @@
         <member name="F:Unimake.Business.DFe.Servicos.TipoEventoMDFe.InclusaoDFe">
             <summary>
             Inclusão de DFe no MDFe (110115)
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoEventoMDFe.EncerramentoFisco">
+            <summary>
+            EncerramentoFisco (Evento exclusivo do fisco) (310112)
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoEventoMDFe.RegistroPassagem">
+            <summary>
+            Registro de passagem (Evento exclusivo do fisco) (310620)
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoEventoMDFe.RegistroPassagemBRId">
+            <summary>
+            Registro de passagem automático (Evento exclusivo outros (ONE)) (310620)
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoEventoMDFe.LiberacaoPrazoCancelamento">
+            <summary>
+            Liberação Prazo Cancelamento  (Registro exclusivo do fisco emitente) (240170)
             </summary>
         </member>
         <member name="T:Unimake.Business.DFe.Servicos.SimNao">
@@ -1806,7 +1856,7 @@
         </member>
         <member name="F:Unimake.Business.DFe.Servicos.TipoEmissao.ContingenciaFSIA">
             <summary>
-            2=Contingência FS-IA, com impressão do DANFE em formulário de segurança
+            2=Contingência FS-IA, com impressão do DANFE em formulário de segurança ou Para MDFe é impressão em formulário branco (sulfite)
             </summary>
         </member>
         <member name="F:Unimake.Business.DFe.Servicos.TipoEmissao.RegimeEspecialNFF">
@@ -1897,6 +1947,11 @@
         <member name="F:Unimake.Business.DFe.Servicos.IndicadorPresenca.NFCeEntregaDomicilio">
             <summary>
             4=NFC-e em operação com entrega a domicílio
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicadorPresenca.PresencialForaEstabelecimento">
+            <summary>
+            Operação presencial, fora do estabelecimento
             </summary>
         </member>
         <member name="F:Unimake.Business.DFe.Servicos.IndicadorPresenca.OperacaoOutros">
@@ -2045,9 +2100,14 @@
             11=Courier
             </summary>
         </member>
-        <member name="F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.Handcarry">
+        <member name="F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.EmMaos">
             <summary>
-            12=Handcarry
+            12=Em Mãos
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.ViaTransporteInternacional.PorReboque">
+            <summary>
+            13=Por Reboque
             </summary>
         </member>
         <member name="T:Unimake.Business.DFe.Servicos.FormaImportacaoIntermediacao">
@@ -2400,7 +2460,27 @@
             15=Boleto Bancário
             </summary> 
         </member>
-        <member name="F:Unimake.Business.DFe.Servicos.MeioPagamento.Sempagamento">
+        <member name="F:Unimake.Business.DFe.Servicos.MeioPagamento.DepositoBancario">
+            <summary>
+            16=Depósito Bancário
+            </summary> 
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.MeioPagamento.PagamentoInstantaneo">
+            <summary>
+            17=Pagamento Instantâneo (PIX)
+            </summary> 
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.MeioPagamento.TransferenciaBancaria">
+            <summary>
+            18=Transferência bancária, Carteira Digital
+            </summary> 
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.MeioPagamento.ProgramaFidelidade">
+            <summary>
+            19=Programa de fidelidade, Cashback, Crédito Virtual
+            </summary> 
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.MeioPagamento.SemPagamento">
             <summary>
             90=Sem pagamento
             </summary>
@@ -4010,37 +4090,37 @@
             1 - Negociável
             </summary>
         </member>
-        <member name="T:Unimake.Business.DFe.Servicos.TipoAutorCancelamentoSubstituicaoNFCe">
+        <member name="T:Unimake.Business.DFe.Servicos.TipoAutor">
             <summary>
-            Tipo Autor do Cancelamento por Substituição da NFCe
+            Tipo Autor para Cancelamento por Substituição da NFCe e EPEC
             </summary>
         </member>
-        <member name="F:Unimake.Business.DFe.Servicos.TipoAutorCancelamentoSubstituicaoNFCe.EmpresaEmitente">
+        <member name="F:Unimake.Business.DFe.Servicos.TipoAutor.EmpresaEmitente">
             <summary>
             1 - Empresa Emitente
             </summary>
         </member>
-        <member name="F:Unimake.Business.DFe.Servicos.TipoAutorCancelamentoSubstituicaoNFCe.EmpresaDestinataria">
+        <member name="F:Unimake.Business.DFe.Servicos.TipoAutor.EmpresaDestinataria">
             <summary>
             2 - Empresa destinatária
             </summary>
         </member>
-        <member name="F:Unimake.Business.DFe.Servicos.TipoAutorCancelamentoSubstituicaoNFCe.Empresa">
+        <member name="F:Unimake.Business.DFe.Servicos.TipoAutor.Empresa">
             <summary>
             3 - Empresa
             </summary>
         </member>
-        <member name="F:Unimake.Business.DFe.Servicos.TipoAutorCancelamentoSubstituicaoNFCe.Fisco">
+        <member name="F:Unimake.Business.DFe.Servicos.TipoAutor.Fisco">
             <summary>
             5 - Fisco,
             </summary>
         </member>
-        <member name="F:Unimake.Business.DFe.Servicos.TipoAutorCancelamentoSubstituicaoNFCe.RFB">
+        <member name="F:Unimake.Business.DFe.Servicos.TipoAutor.RFB">
             <summary>
             6 - RFB,
             </summary>
         </member>
-        <member name="F:Unimake.Business.DFe.Servicos.TipoAutorCancelamentoSubstituicaoNFCe.OutrosOrgaos">
+        <member name="F:Unimake.Business.DFe.Servicos.TipoAutor.OutrosOrgaos">
             <summary>
             9 - Outros Órgãos
             </summary>
@@ -5238,6 +5318,51 @@
         <member name="F:Unimake.Business.DFe.Servicos.SituacaoGuiaGNRE.ErroDeComunicacao">
             <summary>
             3 - Erro de comunicação
+            </summary>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.IndicadorIntermediario">
+            <summary>
+            Indicador do Intermediário/Marketplace
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicadorIntermediario.OperacaoSemIntermediador">
+            <summary>
+            0 = Operação sem intermediador (em site ou plataforma própria)
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicadorIntermediario.OperacaoSitePlataformaTerceiro">
+            <summary>
+            1 = Operação em site ou plataforma de terceiros (intermediadores/marketplace)
+            </summary>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.IndicaSomaPISST">
+            <summary>
+            Indica se o valor do PISST compõe o valor total da NF-e
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicaSomaPISST.ValorPISSTNaoCompoeValorTotalNFe">
+            <summary>
+            0=Valor do PISST não compõe o valor total da NF-e,
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicaSomaPISST.ValorPISSTCompoeValorTotalNFe">
+            <summary>
+            1=Valor do PISST compõe o valor total da NF-e
+            </summary>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.IndicaSomaCOFINSST">
+            <summary>
+            Indica se o valor do COFINSST compõe o valor total da NF-e
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicaSomaCOFINSST.ValorCOFINSSTNaoCompoeValorTotalNFe">
+            <summary>
+            0=Valor do COFINSST não compõe o valor total da NF-e,
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.IndicaSomaCOFINSST.ValorCOFINSSTCompoeValorTotalNFe">
+            <summary>
+            1=Valor do COFINSST compõe o valor total da NF-e
             </summary>
         </member>
         <member name="T:Unimake.Business.DFe.Servicos.GNRE.ConsultaConfigUF">
@@ -6667,6 +6792,23 @@
             Sobrecrever o Encoding para deixar como padrão o UTF8
             </summary>
         </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.ChecarChaveDFe(System.String)">
+            <summary>
+            Executa uma verificação simples para garantir que a chave do DFe (NFe, CTe, MDfe, NFCe, CTeOS) é valida, se tiver erros retorna exceção.
+            </summary>
+            <param name="chave">Chave do DFe a ser verificada</param>
+            <example>
+            try
+            {
+                XMLUtility.ChecarChaveDFe("41201280568835000181570010000004841004185096");
+            }
+            catch(Exception ex)
+            {
+                //Se chave tiver algum erro, vai retornar uma exceção.
+                MessageBox.Show(ex.Message);
+            }
+            </example>
+        </member>
         <member name="M:Unimake.Business.DFe.Utility.XMLUtility.CalcularDVChave(System.String)">
             <summary>
             Gerar o dígito da chave da NFe, CTe, MDFe ou NFCe
@@ -6704,6 +6846,41 @@
             <param name="xml">XML a ser analisado</param>
             <returns>Retorna o tipo do documento eletrônico</returns>
         </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.DetectEventByDFeType(System.String)">
+            <summary>
+            Retorna o tipo de documento fiscal com base no XML de evento.
+            </summary>
+            <param name="xml">XML válido de evento.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.DetectEventoCTeType(System.Xml.XmlDocument)">
+            <summary>
+            Detectar qual o tipo de evento do CT-e.
+            </summary>
+            <param name="xml">XML a ser analisado</param>
+            <returns>Retorna o tipo do evento do CT-e</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.DetectEventoCTeType(System.String)">
+            <summary>
+            Detectar qual o tipo de evento do CT-e.
+            </summary>
+            <param name="xml">XML a ser analisado</param>
+            <returns>Retorna o tipo do evento do CT-e</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.DetectEventoMDFeType(System.Xml.XmlDocument)">
+            <summary>
+            Detectar qual o tipo de evento do MDF-e.
+            </summary>
+            <param name="xml">XML a ser analisado</param>
+            <returns>Retorna o tipo do evento do MDF-e</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.DetectEventoMDFeType(System.String)">
+            <summary>
+            Detectar qual o tipo de evento do MDF-e.
+            </summary>
+            <param name="xml">XML a ser analisado</param>
+            <returns>Retorna o tipo do evento do MDF-e</returns>
+        </member>
         <member name="M:Unimake.Business.DFe.Utility.XMLUtility.DetectEventoNFeType(System.Xml.XmlDocument)">
             <summary>
             Detectar qual o tipo de evento do dodocumento fiscal eletrônico do XML
@@ -6739,6 +6916,34 @@
             <param name="xml">Conteúdo do XML para busca da chave</param>
             <param name="typeDFe">Tipo do DFe</param>
             <returns>Chave do DFe (Documento Fiscal Eletrônico = NFe, NFCe, CTe, etc...)</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.GetChaveEventoCTe(System.String)">
+            <summary>
+            Busca o número da chave do do evento do CT-e
+            </summary>
+            <param name="xml">Conteúdo do XML para busca da chave</param>
+            <returns>Chave do evento do CT-e</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.GetChaveEventoCTe(System.String,Unimake.Business.DFe.Servicos.TipoEventoCTe)">
+            <summary>
+            Busca o número da chave do do evento do CT-e
+            </summary>
+            <param name="xml">Conteúdo do XML para busca da chave</param>
+            <returns>Chave do evento do CT-e</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.GetChaveEventoMDFe(System.String)">
+            <summary>
+            Busca o número da chave do do evento do MDF-e
+            </summary>
+            <param name="xml">Conteúdo do XML para busca da chave</param>
+            <returns>Chave do evento do MDF-e</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.GetChaveEventoMDFe(System.String,Unimake.Business.DFe.Servicos.TipoEventoMDFe)">
+            <summary>
+            Busca o número da chave do do evento do MDF-e
+            </summary>
+            <param name="xml">Conteúdo do XML para busca da chave</param>
+            <returns>Chave do evento do MDF-e</returns>
         </member>
         <member name="M:Unimake.Business.DFe.Utility.XMLUtility.GetChaveEventoNFe(System.String)">
             <summary>

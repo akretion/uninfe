@@ -242,6 +242,7 @@ namespace NFe.Service
                             case "2030":
                             case "2040":
                             case "2050":
+                            case "2055":
                                 XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[]
                                 {
                                     Convert.ToInt32(docXML.GetElementsByTagName("tipoEvento")[0].InnerText),

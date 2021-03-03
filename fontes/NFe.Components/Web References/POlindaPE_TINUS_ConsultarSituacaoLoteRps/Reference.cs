@@ -375,7 +375,6 @@ namespace NFe.Components.POlindaPE_TINUS_ConsultarSituacaoLoteRps
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayAttribute(Namespace = "http://www2.tinus.com.br")]
         [System.Xml.Serialization.XmlArrayItemAttribute("MensagemRetorno")]
         public tcMensagemRetorno[] ListaMensagemRetorno
         {

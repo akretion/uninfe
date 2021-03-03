@@ -916,6 +916,13 @@ namespace Unimake.Business.DFe.Servicos
         NFCeEntregaDomicilio = 4,
 
         /// <summary>
+        /// Operação presencial, fora do estabelecimento
+        /// </summary>
+        [XmlEnum("5")]
+        [Description("Operação presencial, fora do estabelecimento")]
+        PresencialForaEstabelecimento = 5,
+
+        /// <summary>
         /// 9=Operação não presencial, outros
         /// </summary>
         [XmlEnum("9")]
@@ -1111,10 +1118,16 @@ namespace Unimake.Business.DFe.Servicos
         Courier = 11,
 
         /// <summary>
-        /// 12=Handcarry
+        /// 12=Em Mãos
         /// </summary>
         [XmlEnum("12")]
-        Handcarry = 12
+        EmMaos = 12,
+
+        /// <summary>
+        /// 13=Por Reboque
+        /// </summary>
+        [XmlEnum("13")]
+        PorReboque = 13
     }
 
     #endregion
@@ -1574,6 +1587,30 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary> 
         [XmlEnum("15")]
         BoletoBancario = 15,
+
+        /// <summary>
+        /// 16=Depósito Bancário
+        /// </summary> 
+        [XmlEnum("16")]
+        DepositoBancario = 16,
+
+        /// <summary>
+        /// 17=Pagamento Instantâneo (PIX)
+        /// </summary> 
+        [XmlEnum("17")]
+        PagamentoInstantaneo = 17,
+
+        /// <summary>
+        /// 18=Transferência bancária, Carteira Digital
+        /// </summary> 
+        [XmlEnum("18")]
+        TransferenciaBancaria = 18,
+
+        /// <summary>
+        /// 19=Programa de fidelidade, Cashback, Crédito Virtual
+        /// </summary> 
+        [XmlEnum("19")]
+        ProgramaFidelidade = 19,
 
         /// <summary>
         /// 90=Sem pagamento
@@ -5062,5 +5099,73 @@ namespace Unimake.Business.DFe.Servicos
     }
 
     #endregion
-}
 
+    #region Indicador do Intermediário/Marketplace
+
+    /// <summary>
+    /// Indicador do Intermediário/Marketplace
+    /// </summary>
+    public enum IndicadorIntermediario
+    {
+
+        /// <summary>
+        /// 0 = Operação sem intermediador (em site ou plataforma própria)
+        /// </summary>
+        [XmlEnum("0")]
+        OperacaoSemIntermediador = 0,
+
+        /// <summary>
+        /// 1 = Operação em site ou plataforma de terceiros (intermediadores/marketplace)
+        /// </summary>
+        [XmlEnum("1")]
+        OperacaoSitePlataformaTerceiro = 1
+    }
+
+    #endregion
+
+    #region Indica se o valor do PISST compõe o valor total da NF-e
+
+    /// <summary>
+    /// Indica se o valor do PISST compõe o valor total da NF-e
+    /// </summary>
+    public enum IndicaSomaPISST
+    {
+        /// <summary>
+        /// 0=Valor do PISST não compõe o valor total da NF-e,
+        /// </summary>
+        [XmlEnum("0")]
+        ValorPISSTNaoCompoeValorTotalNFe = 0,
+
+        /// <summary>
+        /// 1=Valor do PISST compõe o valor total da NF-e
+        /// </summary>
+        [XmlEnum("1")]
+        ValorPISSTCompoeValorTotalNFe = 1
+    }
+
+    #endregion
+
+    #region Indica se o valor do COFINSST compõe o valor total da NF-e
+
+    /// <summary>
+    /// Indica se o valor do COFINSST compõe o valor total da NF-e
+    /// </summary>
+    public enum IndicaSomaCOFINSST
+    {
+        /// <summary>
+        /// 0=Valor do COFINSST não compõe o valor total da NF-e,
+        /// </summary>
+        [XmlEnum("0")]
+        ValorCOFINSSTNaoCompoeValorTotalNFe = 0,
+
+        /// <summary>
+        /// 1=Valor do COFINSST compõe o valor total da NF-e
+        /// </summary>
+        [XmlEnum("1")]
+        ValorCOFINSSTCompoeValorTotalNFe = 1
+    }
+
+    #endregion
+
+
+}

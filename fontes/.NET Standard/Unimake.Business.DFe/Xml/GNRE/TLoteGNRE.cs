@@ -13,7 +13,7 @@ namespace Unimake.Business.DFe.Xml.GNRE
     [ComVisible(true)]
     [Serializable()]
     [XmlRoot("TLote_GNRE", Namespace = "http://www.gnre.pe.gov.br", IsNullable = false)]
-    public class TLoteGNRE : XMLBase
+    public class TLoteGNRE: XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; } = "2.00";
@@ -72,6 +72,22 @@ namespace Unimake.Business.DFe.Xml.GNRE
             get => ValorGNRE.ToString("F2", CultureInfo.InvariantCulture);
             set => ValorGNRE = Utility.Converter.ToDouble(value);
         }
+
+        [XmlIgnore]
+        public DateTime? DataPagamento { get; set; }
+
+        [XmlElement("dataPagamento")]
+        public string DataPagamentoField
+        {
+            get => DataPagamento?.ToString("yyyy-MM-dd");
+            set => DataPagamento = DateTime.Parse(value);
+        }
+
+        #region ShouldSerialize
+
+        public bool ShouldSerializeDataPagamentoField() => DataPagamento != null;
+
+        #endregion
     }
 
     [Serializable()]
@@ -91,13 +107,19 @@ namespace Unimake.Business.DFe.Xml.GNRE
         public string Municipio { get; set; }
 
         [XmlElement("uf")]
-        public UFBrasil UF { get; set; }
+        public UFBrasil? UF { get; set; }
 
         [XmlElement("cep")]
         public string CEP { get; set; }
 
         [XmlElement("telefone")]
         public string Telefone { get; set; }
+
+        #region ShouldSerialize
+
+        public bool ShouldSerializeUF() => UF != null;
+
+        #endregion
     }
 
     [Serializable()]
@@ -115,9 +137,9 @@ namespace Unimake.Business.DFe.Xml.GNRE
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeCNPJ() => string.IsNullOrWhiteSpace(CNPJ);
-        public bool ShouldSerializeCPF() => string.IsNullOrWhiteSpace(CPF);
-        public bool ShouldSerializeIE() => string.IsNullOrWhiteSpace(IE);
+        public bool ShouldSerializeCNPJ() => !string.IsNullOrWhiteSpace(CNPJ);
+        public bool ShouldSerializeCPF() => !string.IsNullOrWhiteSpace(CPF);
+        public bool ShouldSerializeIE() => !string.IsNullOrWhiteSpace(IE);
 
         #endregion
     }

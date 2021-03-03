@@ -23,10 +23,10 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="ConsultarNfsePorRpsSoap", Namespace="http://www.tinus.com.br")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="ConsultarNfsePorRpsSoap", Namespace="http://www2.tinus.com.br")]
     public partial class ConsultarNfsePorRps : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback CallConsultarNfsePorRpsOperationCompleted;
@@ -78,7 +78,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
         public event TestCompletedEventHandler TestCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.tinus.com.br/WSNFSE.ConsultarNfsePorRps.ConsultarNfsePorRps", RequestElementName="ConsultarNfsePorRps", RequestNamespace="http://www.tinus.com.br", ResponseElementName="ConsultarNfsePorRpsResponse", ResponseNamespace="http://www.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www2.tinus.com.br/WSNFSE.ConsultarNfsePorRps.ConsultarNfsePorRps", RequestElementName="ConsultarNfsePorRps", RequestNamespace="http://www2.tinus.com.br", ResponseElementName="ConsultarNfsePorRpsResponse", ResponseNamespace="http://www2.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("ConsultarNfsePorRpsResult")]
         public ConsultarNfseRpsResposta CallConsultarNfsePorRps(ConsultarNfseRpsEnvio Arg) {
             object[] results = this.Invoke("CallConsultarNfsePorRps", new object[] {
@@ -108,7 +108,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.tinus.com.br/WSNFSE.ConsultarNfsePorRps.Test", RequestNamespace="http://www.tinus.com.br", ResponseNamespace="http://www.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www2.tinus.com.br/WSNFSE.ConsultarNfsePorRps.Test", RequestNamespace="http://www2.tinus.com.br", ResponseNamespace="http://www2.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string Test() {
             object[] results = this.Invoke("Test", new object[0]);
             return ((string)(results[0]));
@@ -154,11 +154,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class ConsultarNfseRpsEnvio {
         
         private tcIdentificacaoRps identificacaoRpsField;
@@ -187,11 +187,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcIdentificacaoRps {
         
         private string numeroField;
@@ -233,11 +233,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcMensagemRetorno {
         
         private string codigoField;
@@ -278,11 +278,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcInfSubstituicaoNfse {
         
         private string nfseSubstituidoraField;
@@ -313,11 +313,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcSubstituicaoNfse {
         
         private tcInfSubstituicaoNfse substituicaoNfseField;
@@ -347,7 +347,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -418,7 +418,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -477,7 +477,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -512,7 +512,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -572,7 +572,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -658,7 +658,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -707,7 +707,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -742,7 +742,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -777,7 +777,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -904,7 +904,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -951,7 +951,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1051,7 +1051,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1086,7 +1086,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1134,7 +1134,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1221,7 +1221,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1254,7 +1254,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1328,7 +1328,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1363,7 +1363,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1424,11 +1424,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcIdentificacaoNfse {
         
         private string numeroField;
@@ -1482,11 +1482,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcInfPedidoCancelamento {
         
         private tcIdentificacaoNfse identificacaoNfseField;
@@ -1528,11 +1528,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcPedidoCancelamento {
         
         private tcInfPedidoCancelamento infPedidoCancelamentoField;
@@ -1562,11 +1562,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcConfirmacaoCancelamento {
         
         private tcPedidoCancelamento pedidoField;
@@ -1608,11 +1608,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcCancelamentoNfse {
         
         private tcConfirmacaoCancelamento confirmacaoField;
@@ -1642,11 +1642,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcDadosConstrucaoCivil {
         
         private string codigoObraField;
@@ -1675,11 +1675,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcIdentificacaoOrgaoGerador {
         
         private int codigoMunicipioField;
@@ -1708,11 +1708,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcIdentificacaoIntermediarioServico {
         
         private string razaoSocialField;
@@ -1753,11 +1753,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcCpfCnpj {
         
         private string cpfField;
@@ -1786,11 +1786,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcIdentificacaoTomador {
         
         private tcCpfCnpj cpfCnpjField;
@@ -1819,11 +1819,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcDadosTomador {
         
         private tcIdentificacaoTomador identificacaoTomadorField;
@@ -1876,11 +1876,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcEndereco {
         
         private string enderecoField;
@@ -1995,11 +1995,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcContato {
         
         private string telefoneField;
@@ -2028,11 +2028,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcDadosPrestador {
         
         private tcIdentificacaoPrestador identificacaoPrestadorField;
@@ -2097,11 +2097,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcIdentificacaoPrestador {
         
         private string cnpjField;
@@ -2130,11 +2130,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcValores {
         
         private decimal valorServicosField;
@@ -2513,11 +2513,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcDadosServico {
         
         private tcValores valoresField;
@@ -2607,11 +2607,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcInfNfse {
         
         private string numeroField;
@@ -2899,11 +2899,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcNfse {
         
         private tcInfNfse infNfseField;
@@ -2933,11 +2933,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcCompNfse {
         
         private tcNfse nfseField;
@@ -2978,11 +2978,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class ConsultarNfseRpsResposta {
         
         private tcCompNfse compNfseField;
@@ -3012,11 +3012,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void CallConsultarNfsePorRpsCompletedEventHandler(object sender, CallConsultarNfsePorRpsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CallConsultarNfsePorRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3038,11 +3038,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void TestCompletedEventHandler(object sender, TestCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

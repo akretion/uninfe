@@ -2327,7 +2327,8 @@ namespace NFe.ConvertTxt
             wCampo((int)Nfe.ide.indFinal, TpcnTipoCampo.tcInt, TpcnResources.indFinal, ObOp.Obrigatorio);//B25a
             wCampo((int)Nfe.ide.indPres, TpcnTipoCampo.tcInt, TpcnResources.indPres, ObOp.Obrigatorio);//B25b
 
-            if(Nfe.ide.indPres == TpcnPresencaComprador.pcInternet || //2
+            if(Nfe.ide.indPres == TpcnPresencaComprador.pcPresencial || //1 Teve uma mudança recente na NT que mudou o critério, 1 também terá que incluir a tag indIntermed               
+               Nfe.ide.indPres == TpcnPresencaComprador.pcInternet || //2
                Nfe.ide.indPres == TpcnPresencaComprador.pcTeleatendimento || //3
                Nfe.ide.indPres == TpcnPresencaComprador.pcEntregaDomicilio || //4
                Nfe.ide.indPres == TpcnPresencaComprador.pcOutros) //9

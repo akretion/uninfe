@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s0="http://www.tinus.com.br" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.tinus.com.br" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s0="http://www2.tinus.com.br" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www2.tinus.com.br" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <s:schema elementFormDefault="qualified" targetNamespace="http://www.tinus.com.br">
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www2.tinus.com.br">
       <s:element name="ConsultarSituacaoLoteRps">
         <s:complexType>
           <s:sequence>
@@ -128,7 +128,7 @@
   <wsdl:binding name="ConsultarSituacaoLoteRpsSoap" type="s0:ConsultarSituacaoLoteRpsSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ConsultarSituacaoLoteRps">
-      <soap:operation soapAction="http://www.tinus.com.br/WSNFSE.ConsultarSituacaoLoteRps.ConsultarSituacaoLoteRps" style="document" />
+      <soap:operation soapAction="http://www2.tinus.com.br/WSNFSE.ConsultarSituacaoLoteRps.ConsultarSituacaoLoteRps" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -137,7 +137,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Test">
-      <soap:operation soapAction="http://www.tinus.com.br/WSNFSE.ConsultarSituacaoLoteRps.Test" style="document" />
+      <soap:operation soapAction="http://www2.tinus.com.br/WSNFSE.ConsultarSituacaoLoteRps.Test" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -148,7 +148,7 @@
   </wsdl:binding>
   <wsdl:service name="ConsultarSituacaoLoteRps">
     <wsdl:port name="ConsultarSituacaoLoteRpsSoap" binding="s0:ConsultarSituacaoLoteRpsSoap">
-      <soap:address location="http://www.tinus.com.br/csp/jaboatao/WSNFSE.ConsultarSituacaoLoteRps.cls" />
+      <soap:address location="http://www2.tinus.com.br/csp/testejab/WSNFSE.ConsultarSituacaoLoteRps.cls" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

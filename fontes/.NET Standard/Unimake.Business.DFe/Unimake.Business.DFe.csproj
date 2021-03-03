@@ -104,9 +104,35 @@
 		<None Remove="Servicos\Config\CTe\SVRS.xml" />
 		<None Remove="Servicos\Config\CTe\SVSP.xml" />
 		<None Remove="Servicos\Config\CTe\TO.xml" />
+		<None Remove="Servicos\Config\GNRE\AC.xml" />
+		<None Remove="Servicos\Config\GNRE\AL.xml" />
+		<None Remove="Servicos\Config\GNRE\AM.xml" />
+		<None Remove="Servicos\Config\GNRE\AP.xml" />
+		<None Remove="Servicos\Config\GNRE\BA.xml" />
+		<None Remove="Servicos\Config\GNRE\CE.xml" />
 		<None Remove="Servicos\Config\GNRE\Config.xml" />
+		<None Remove="Servicos\Config\GNRE\DF.xml" />
+		<None Remove="Servicos\Config\GNRE\ES.xml" />
 		<None Remove="Servicos\Config\GNRE\GNRE.xml" />
+		<None Remove="Servicos\Config\GNRE\GO.xml" />
+		<None Remove="Servicos\Config\GNRE\MA.xml" />
+		<None Remove="Servicos\Config\GNRE\MG.xml" />
+		<None Remove="Servicos\Config\GNRE\MS.xml" />
+		<None Remove="Servicos\Config\GNRE\MT.xml" />
+		<None Remove="Servicos\Config\GNRE\PA.xml" />
+		<None Remove="Servicos\Config\GNRE\PB.xml" />
+		<None Remove="Servicos\Config\GNRE\PE.xml" />
+		<None Remove="Servicos\Config\GNRE\PI.xml" />
 		<None Remove="Servicos\Config\GNRE\PR.xml" />
+		<None Remove="Servicos\Config\GNRE\RJ.xml" />
+		<None Remove="Servicos\Config\GNRE\RN.xml" />
+		<None Remove="Servicos\Config\GNRE\RO.xml" />
+		<None Remove="Servicos\Config\GNRE\RR.xml" />
+		<None Remove="Servicos\Config\GNRE\RS.xml" />
+		<None Remove="Servicos\Config\GNRE\SC.xml" />
+		<None Remove="Servicos\Config\GNRE\SE.xml" />
+		<None Remove="Servicos\Config\GNRE\SP.xml" />
+		<None Remove="Servicos\Config\GNRE\TO.xml" />
 		<None Remove="Servicos\Config\MDFe\AC.xml" />
 		<None Remove="Servicos\Config\MDFe\AL.xml" />
 		<None Remove="Servicos\Config\MDFe\AM.xml" />
@@ -502,6 +528,32 @@
 		<EmbeddedResource Include="Servicos\Config\GNRE\GNRE.xml">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Servicos\Config\GNRE\AL.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\AP.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\AM.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\BA.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\CE.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\DF.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\ES.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\GO.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\MA.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\MT.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\MS.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\MG.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\PA.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\PB.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\PE.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\PI.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\RJ.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\RN.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\RS.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\TO.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\SE.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\SP.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\SC.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\RR.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\RO.xml" />
+		<EmbeddedResource Include="Servicos\Config\GNRE\AC.xml" />
 		<EmbeddedResource Include="Servicos\Config\GNRE\PR.xml" />
 		<EmbeddedResource Include="Servicos\Config\MDFe\AC.xml" />
 		<EmbeddedResource Include="Servicos\Config\MDFe\AL.xml" />
@@ -1006,7 +1058,6 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 		<PackageReference Include="System.Security.Cryptography.Xml" Version="5.0.0" />
 	</ItemGroup>
 

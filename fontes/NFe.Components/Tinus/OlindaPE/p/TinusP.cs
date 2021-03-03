@@ -74,11 +74,7 @@ namespace NFe.Components.Tinus.OlindaPE.p
             DefinirProxy<ConsultarLoteRps>(Service);
 
             ConsultarLoteRpsEnvio envio = DeserializarObjeto<ConsultarLoteRpsEnvio>(file);
-            ConsultarLoteRpsResposta resposta = new ConsultarLoteRpsResposta();
-
-            resposta = Service.CallConsultarLoteRps(envio);
-
-            string strResult = SerializarObjeto(resposta);
+            string strResult = SerializarObjeto(Service.CallConsultarLoteRps(envio));
 
             GerarRetorno(file,
                 strResult,

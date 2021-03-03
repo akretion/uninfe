@@ -23,10 +23,10 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="ConsultarSituacaoLoteRpsSoap", Namespace="http://www.tinus.com.br")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="ConsultarSituacaoLoteRpsSoap", Namespace="http://www2.tinus.com.br")]
     public partial class ConsultarSituacaoLoteRps : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback CallConsultarSituacaoLoteRpsOperationCompleted;
@@ -78,7 +78,8 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps
         public event TestCompletedEventHandler TestCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.tinus.com.br/WSNFSE.ConsultarSituacaoLoteRps.ConsultarSituacaoLoteRps", RequestElementName="ConsultarSituacaoLoteRps", RequestNamespace="http://www.tinus.com.br", ResponseElementName="ConsultarSituacaoLoteRpsResponse", ResponseNamespace="http://www.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www2.tinus.com.br/WSNFSE.ConsultarSituacaoLoteRps.ConsultarSituacaoLoteRps" +
+            "", RequestElementName="ConsultarSituacaoLoteRps", RequestNamespace="http://www2.tinus.com.br", ResponseElementName="ConsultarSituacaoLoteRpsResponse", ResponseNamespace="http://www2.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("ConsultarSituacaoLoteRpsResult")]
         public ConsultarSituacaoLoteRpsResposta CallConsultarSituacaoLoteRps(ConsultarSituacaoLoteRpsEnvio Arg) {
             object[] results = this.Invoke("CallConsultarSituacaoLoteRps", new object[] {
@@ -108,7 +109,7 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.tinus.com.br/WSNFSE.ConsultarSituacaoLoteRps.Test", RequestNamespace="http://www.tinus.com.br", ResponseNamespace="http://www.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www2.tinus.com.br/WSNFSE.ConsultarSituacaoLoteRps.Test", RequestNamespace="http://www2.tinus.com.br", ResponseNamespace="http://www2.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string Test() {
             object[] results = this.Invoke("Test", new object[0]);
             return ((string)(results[0]));
@@ -154,11 +155,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class ConsultarSituacaoLoteRpsEnvio {
         
         private tcIdentificacaoPrestador prestadorField;
@@ -187,11 +188,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcIdentificacaoPrestador {
         
         private string cnpjField;
@@ -220,11 +221,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class tcMensagemRetorno {
         
         private string codigoField;
@@ -265,11 +266,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
     public partial class ConsultarSituacaoLoteRpsResposta {
         
         private string numeroLoteField;
@@ -325,11 +326,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void CallConsultarSituacaoLoteRpsCompletedEventHandler(object sender, CallConsultarSituacaoLoteRpsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CallConsultarSituacaoLoteRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -351,11 +352,11 @@ namespace NFe.Components.HJaboataoDosGuararapesPE_TINUS_ConsultarSituacaoLoteRps
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void TestCompletedEventHandler(object sender, TestCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

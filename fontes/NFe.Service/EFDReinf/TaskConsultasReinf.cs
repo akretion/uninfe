@@ -118,6 +118,9 @@ namespace NFe.Service
                     case "2050":
                         result = "ConsultaReciboEvento2050";
                         break;
+                    case "2055":
+                        result = "ConsultaReciboEvento2055";
+                        break;
                     case "2060":
                         result = "ConsultaReciboEvento2060";
                         break;

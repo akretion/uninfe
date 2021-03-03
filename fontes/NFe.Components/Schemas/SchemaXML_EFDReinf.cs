@@ -109,6 +109,21 @@
 
             #endregion R-2050 - Comercialização da Produção por Produtor Rural PJ/Agroindústria
 
+            #region R-2055 - Aquisição de produção rural
+
+            SchemaXML.InfSchemas.Add("Reinf-evtAqProd", new InfSchema()
+            {
+                Tag = "evtAqProd",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "EFDReinf\\evtAquisicaoProdRural-v{0}.xsd",
+                Descricao = "XML EFDReinf - 2055 - Aquisição de produção rural",
+                TagAssinatura = "Reinf",
+                TagAtributoId = "evtAqProd",
+                TargetNameSpace = "http://www.reinf.esocial.gov.br/schemas/evt2055AquisicaoProdRural/v{0}"
+            });
+
+            #endregion 
+
             #region R-2060 - Contribuição Previdenciária sobre a Receita Bruta - CPRB
 
             SchemaXML.InfSchemas.Add("Reinf-evtCPRB", new InfSchema()

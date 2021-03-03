@@ -225,6 +225,8 @@
     <Compile Include="Fiorilli\GarcaSP\p\FiorilliP.cs" />
     <Compile Include="Fiorilli\ItaitubaPA\h\FiorilliH.cs" />
     <Compile Include="Fiorilli\ItaitubaPA\p\FiorilliP.cs" />
+    <Compile Include="Fiorilli\JiParanaRO\h\FiorilliH.cs" />
+    <Compile Include="Fiorilli\JiParanaRO\p\FiorilliP.cs" />
     <Compile Include="Fiorilli\MacapaAP\h\FiorilliH.cs" />
     <Compile Include="Fiorilli\MacapaAP\p\FiorilliP.cs" />
     <Compile Include="Fiorilli\MirassolandiaSP\h\FiorilliH.cs" />
