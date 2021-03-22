@@ -27,7 +27,7 @@
             Nome do arquivo de distribuição
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Xml.CTe.ProcEventoCTe.NomeArquivoDistribuicao">
+        <member name="P:Unimake.Business.DFe.Xml.CTe.ProcEventoCTe`1.NomeArquivoDistribuicao">
             <summary>
             Nome do arquivo de distribuição
             </summary>
@@ -730,24 +730,24 @@
             Validar o XML
             </summary>
         </member>
-        <member name="T:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento">
+        <member name="T:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento`1">
             <summary>
             Envio do XML de eventos do CTeOS para o WebService
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento.#ctor(Unimake.Business.DFe.Xml.CTe.EventoCTe,Unimake.Business.DFe.Servicos.Configuracao)">
+        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento`1.#ctor(Unimake.Business.DFe.Xml.CTe.EventoCTe{`0},Unimake.Business.DFe.Servicos.Configuracao)">
             <summary>
             Construtor
             </summary>
             <param name="envEvento">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento.#ctor">
+        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento`1.#ctor">
             <summary>
             Construtor
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento.XmlValidar">
+        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento`1.XmlValidar">
             <summary>
             Validar o XML
             </summary>
@@ -1037,62 +1037,62 @@
             </summary>
             <param name="pasta">Pasta onde deve ser gravado o XML</param>
         </member>
-        <member name="T:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento">
+        <member name="T:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1">
             <summary>
             Envio do XML de eventos do CTe para o WebService
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.DefinirConfiguracao">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.DefinirConfiguracao">
             <summary>
             Definir o valor de algumas das propriedades do objeto "Configuracoes"
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.XmlValidar">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.XmlValidar">
             <summary>
             Validar o XML
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.ProcEventoCTeResult">
+        <member name="P:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.ProcEventoCTeResult">
             <summary>
             Propriedade contendo o XML do evento com o protocolo de autorização anexado
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.Result">
+        <member name="P:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.Result">
             <summary>
             Conteúdo retornado pelo webservice depois do envio do XML
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.#ctor(Unimake.Business.DFe.Xml.CTe.EventoCTe,Unimake.Business.DFe.Servicos.Configuracao)">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.#ctor(Unimake.Business.DFe.Xml.CTe.EventoCTe{`0},Unimake.Business.DFe.Servicos.Configuracao)">
             <summary>
             Construtor
             </summary>
             <param name="envEvento">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.#ctor">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.#ctor">
             <summary>
             Construtor
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.Executar">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.Executar">
             <summary>
             Executar o serviço
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.Executar(Unimake.Business.DFe.Xml.CTe.EventoCTe,Unimake.Business.DFe.Servicos.Configuracao)">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.Executar(Unimake.Business.DFe.Xml.CTe.EventoCTe{`0},Unimake.Business.DFe.Servicos.Configuracao)">
             <summary>
             Executa o serviço: Assina o XML, valida e envia para o webservice
             </summary>
             <param name="envEvento">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.GravarXmlDistribuicao(System.String)">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.GravarXmlDistribuicao(System.String)">
             <summary>
             Gravar o XML de distribuição em uma pasta no HD
             </summary>
             <param name="pasta">Pasta onde deve ser gravado o XML</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.GravarXmlDistribuicao(System.IO.Stream)">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.GravarXmlDistribuicao(System.IO.Stream)">
             <summary>
             Grava o XML de dsitribuição no stream
             </summary>

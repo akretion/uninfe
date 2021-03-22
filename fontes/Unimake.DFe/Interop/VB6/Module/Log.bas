@@ -1,9 +1,5 @@
 Attribute VB_Name = "Log"
-Private fMain As frmMain
 
-Public Sub SetFrmMain(frm As frmMain)
-Set fMain = frmMain
-End Sub
 
 Public Sub EscreveLog(ByVal Log As String, ByVal isXML As Boolean)
 Dim XmlDoc As New MSXML2.DOMDocument60
@@ -16,7 +12,7 @@ On Error GoTo erroXML
 End If
 
 continue:
-fMain.EscreveLog Log
+frmMain.EscreveLog Log
 Exit Sub
 erroXML:
 Resume continue

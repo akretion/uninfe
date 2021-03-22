@@ -21,11 +21,11 @@ Do While True
         .Versao = "1.01"
         .TpAmb = TpAmb
         .CNPJ = "06117473000150"
-        .CUFAutor = CUF
+        .CUFAutor = UFBrasil.PR
         Set .DistNSU = DistNSU
     End With
 
-    DistribuicaoDFe.Executar (DistDFeInt), (Config.InicializarConfiguracao(NFe))
+    DistribuicaoDFe.Executar (DistDFeInt), (Config.InicializarConfiguracao(TipoDFe.NFe))
     
     If (DistribuicaoDFe.result.CStat = 138) Then ''Documentos localizados
     

@@ -1108,7 +1108,6 @@
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPCteRecepcaoEvento.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPCteRetRecepcao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SP\HSPCteStatusServico.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortoVelhoPO.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGCteConsulta.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGCteInutilizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MG\HMGCteRecepcao.wsdl" />
@@ -1197,7 +1196,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PLajeadoRSConsultarNFSE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PLajeadoRSRemessaNFSE.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PParobeRSGIFServicos.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PPortoVelhoPO.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PPenapoisSPIssOnLine.wsdl" />
@@ -1230,14 +1228,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSVCRSNfeRecepcaoEvento.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\schemas\NFSe\PORTOVELHENSE\nfse_v2.0.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFse\schemas\NFSe\PORTOVELHENSE\xmldsig-core-schema20020212.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Producao\SCVRS\PSVCRSNfeConsulta.wsdl" />
@@ -3588,6 +3578,60 @@
     <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorEvento-v1_05_00.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\envioLoteEventos-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtAquisicaoProdRural-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtEspDesportivo-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtExclusao-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtFechamento-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoContribuinte-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoCPRB-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtInfoProdRural-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtPrestadorServicos-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtReabreEvPer-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRecebidoAssociacao-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtRecursoRepassadoAssociacao-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTabProcesso-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\evtTomadorServicos-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoLoteEventos-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoRecibosChaveEvento-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorContribuinte-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorEvento-v1_05_01.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -4589,8 +4633,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PCanaaDosCarajasPA-FIORILLI.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HCampinasDoSulRS-SystemPro.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCampinasDoSulRS-SystemPro.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGeisWeb.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PItatingaSP-GeisWeb.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\GEISWEB\cancela_nfse.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4637,6 +4679,18 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HJaboataoDosGuararapesPE_TINUS_RecepcionarLoteRps.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HJiParanaRO-FIORILLI.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PJiParanaRO-FIORILLI.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HJuscimeiraMT-COPLAN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PJuscimeiraMT-COPLAN.wsdl" />
+    <EmbeddedResource Include="NFse\schemas\NFSe\PORTOVELHENSE\nfse_v2.0.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\PORTOVELHENSE\xmldsig-core-schema20020212.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\WSDL\Producao\PPortoVelhoPO.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortoVelhoPO.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGeisWeb.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItatingaSP-GeisWeb.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

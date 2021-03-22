@@ -90,6 +90,21 @@ namespace NFSe.Components
                 TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
             });
             #endregion
+
+            SchemaXML.InfSchemas.Add("NFSE-COPLAN-SubstituirNfseEnvio", new InfSchema()
+            {
+                Tag = "SubstituirNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\ABRASF\\nfse_v2_02.xsd",
+                Descricao = "XML de Substituição de NFSe",
+                TagAssinatura0 = "Pedido",
+                TagAtributoId0 = "InfPedidoCancelamento",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagLoteAssinatura = "SubstituirNfseEnvio",
+                TagLoteAtributoId = "SubstituicaoNfse",
+                TargetNameSpace = "http://www.abrasf.org.br/nfse.xsd"
+            });
         }
     }
 }

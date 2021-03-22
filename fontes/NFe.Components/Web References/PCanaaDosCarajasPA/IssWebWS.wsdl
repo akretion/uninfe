@@ -1137,7 +1137,7 @@
   </wsdl:binding>
   <wsdl:service name="IssWebWS">
     <wsdl:port name="IssWebWSPort" binding="tns:IssWebWSSoapBinding">
-      <soap:address location="http://localhost:8080/IssWeb-ejb/IssWebWS/IssWebWS" />
+      <soap:address location="http://tributario.canaadoscarajas.pa.gov.br:8080/IssWeb-ejb/IssWebWS/IssWebWS" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

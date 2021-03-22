@@ -78,6 +78,8 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Methods
 
+#if INTEROP
+
         /// <summary>
         /// Executa o serviço: Assina o XML, valida e envia para o webservice
         /// </summary>
@@ -88,7 +90,9 @@ namespace Unimake.Business.DFe.Servicos.NFe
         {
             PrepararServico(consReciNFe?.GerarXML() ?? throw new ArgumentNullException(nameof(consReciNFe)), configuracao);
             Executar();
-        }
+        } 
+
+#endif
 
         /// <summary>
         /// Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).

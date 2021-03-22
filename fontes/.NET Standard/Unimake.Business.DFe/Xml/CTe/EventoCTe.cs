@@ -12,12 +12,30 @@ using Unimake.Business.DFe.Utility;
 
 namespace Unimake.Business.DFe.Xml.CTe
 {
+    //[Serializable()]
+    //[XmlRoot("eventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
+    //public class EventoCTeEPEC : EventoCTe<DetEventoEPEC>
+    //{
+    //}
+
+    //[Serializable()]
+    //[XmlRoot("eventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
+    //public class EventoCTePrestDesacordo: EventoCTe<DetEventoPrestDesacordo>
+    //{
+    //}
+
+    //[Serializable()]
+    //[XmlRoot("eventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
+    //public class EventoCTeCanc: EventoCTe<DetEventoCanc>
+    //{
+    //}
+
     [Serializable()]
     [XmlRoot("eventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
     public class EventoCTe<TDetalheEvento>: XMLBase
     {
         [XmlElement("infEvento", Order = 0)]
-        public TDetalheEvento InfEvento { get; set; }
+        public InfEvento<TDetalheEvento> InfEvento { get; set; }
 
         [XmlElement("Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#", Order = 1)]
         public Signature Signature { get; set; }
@@ -35,7 +53,7 @@ namespace Unimake.Business.DFe.Xml.CTe
         int NSeqEvento { get; set; }
     }
 
-    public abstract class InfEvento : IInfEvento
+    public class InfEvento<TDetalheEvento> : IInfEvento
     {
         [XmlIgnore]
         public UFBrasil COrgao { get; set; }
@@ -75,8 +93,11 @@ namespace Unimake.Business.DFe.Xml.CTe
         [XmlElement("nSeqEvento", Order = 7)]
         public int NSeqEvento { get; set; }
 
+        [XmlElement("detEvento", Order = 8)]
+        public TDetalheEvento DetEvento { get; set; }
+
         [XmlIgnore]
-        public abstract InfSolicNFF InfSolicNFF { get; set; }
+        public virtual InfSolicNFF InfSolicNFF { get; set; }
 
         [XmlAttribute(DataType = "ID", AttributeName = "Id")]
         public string Id
@@ -92,73 +113,7 @@ namespace Unimake.Business.DFe.Xml.CTe
         #endregion
     }
 
-    [Serializable()]
-    [XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public class InfEventoCanc: InfEvento
-    {
-        [XmlElement("detEvento", Order = 8)]
-        public DetEventoCanc DetEvento { get; set; }
-
-        [XmlElement("infSolicNFF", Order = 9)]
-        public override InfSolicNFF InfSolicNFF { get; set; }
-    }
-
-    [Serializable()]
-    [XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public class InfEventoEPEC: InfEvento
-    {
-        [XmlElement("detEvento", Order = 8)]
-        public DetEventoEPEC DetEvento { get; set; }
-
-        [XmlElement("infSolicNFF", Order = 9)]
-        public override InfSolicNFF InfSolicNFF { get; set; }
-    }
-
-    [Serializable()]
-    [XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public class InfEventoPrestDesacordo: InfEvento
-    {
-        [XmlElement("detEvento", Order = 8)]
-        public DetEventoPrestDesacordo DetEvento { get; set; }
-
-        [XmlElement("infSolicNFF", Order = 9)]
-        public override InfSolicNFF InfSolicNFF { get; set; }
-    }
-
-    [Serializable()]
-    [XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public class InfEventoCCe: InfEvento
-    {
-        [XmlElement("detEvento", Order = 8)]
-        public DetEventoCCe DetEvento { get; set; }
-
-        [XmlElement("infSolicNFF", Order = 9)]
-        public override InfSolicNFF InfSolicNFF { get; set; }
-    }
-
-    [Serializable()]
-    [XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public class InfEventoCompEntrega: InfEvento
-    {
-        [XmlElement("detEvento", Order = 8)]
-        public DetEventoCompEntrega DetEvento { get; set; }
-
-        [XmlElement("infSolicNFF", Order = 9)]
-        public override InfSolicNFF InfSolicNFF { get; set; }
-    }
-
-    [Serializable()]
-    [XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]
-    public class InfEventoCancCompEntrega: InfEvento
-    {
-        [XmlElement("detEvento", Order = 8)]
-        public DetEventoCancCompEntrega DetEvento { get; set; }
-
-        [XmlElement("infSolicNFF", Order = 9)]
-        public override InfSolicNFF InfSolicNFF { get; set; }
-    }
-
-    public abstract class DetEvento
+    public class DetEvento
     {
         [XmlAttribute(AttributeName = "versaoEvento", DataType = "token")]
         public string VersaoEvento { get; set; }

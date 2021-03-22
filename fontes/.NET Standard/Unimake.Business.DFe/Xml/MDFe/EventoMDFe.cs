@@ -139,6 +139,17 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
         #endregion Public Properties
 
+        #region Public Methods
+
+#if INTEROP
+
+        public void AddCondutor(CondutorMDFe item) =>
+            (Condutor ?? (Condutor = new List<CondutorMDFe>())).Add(item ?? throw new ArgumentNullException(nameof(item)));
+
+#endif
+
+        #endregion
+
     }
 
     [Serializable()]
@@ -600,19 +611,19 @@ namespace Unimake.Business.DFe.Xml.MDFe
                     //    break;
 
                     case TipoEventoMDFe.Cancelamento:
-                        _detEvento = new DetEventoCanc();
+                        _detEvento = value is DetEventoCanc ? value : new DetEventoCanc();
                         break;
 
                     case TipoEventoMDFe.InclusaoCondutor:
-                        _detEvento = new DetEventoIncCondutor();
+                        _detEvento = value is DetEventoIncCondutor ? value : new DetEventoIncCondutor();
                         break;
 
                     case TipoEventoMDFe.Encerramento:
-                        _detEvento = new DetEventoEncMDFe();
+                        _detEvento = value is DetEventoEncMDFe ? value : new DetEventoEncMDFe();
                         break;
 
                     case TipoEventoMDFe.InclusaoDFe:
-                        _detEvento = new DetEventoIncDFeMDFe();
+                        _detEvento = value is DetEventoIncDFeMDFe ? value : new DetEventoIncDFeMDFe();
                         break;
 
                     //case TipoEventoNFe.ManifestacaoConfirmacaoOperacao:

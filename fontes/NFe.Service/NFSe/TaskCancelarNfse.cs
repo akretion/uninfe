@@ -665,6 +665,34 @@ namespace NFe.Service.NFSe
 
                     #endregion SOFTPLAN
 
+                    #region CENTI
+
+                    case PadroesNFSe.CENTI:
+                        var centi = new Components.CENTI.CENTI((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                        Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                        Empresas.Configuracoes[emp].UsuarioWS,
+                                                        Empresas.Configuracoes[emp].SenhaWS);
+
+                        var centiAssinatura = new AssinaturaDigital();
+                        centiAssinatura.Assinar(NomeArquivoXML, emp, oDadosPedCanNfse.cMunicipio);
+
+                        // Validar o Arquivo XML
+                        var centiValidar = new ValidarXML(NomeArquivoXML, Empresas.Configuracoes[emp].UnidadeFederativaCodigo, false);
+                        var validacaoCenti = centiValidar.ValidarArqXML(NomeArquivoXML);
+                        if (validacaoCenti != "")
+                        {
+                            throw new Exception(validacaoCenti);
+                        }
+
+                        if (ConfiguracaoApp.Proxy)
+                        {
+                            centi.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
+                        }
+                        centi.CancelarNfse(NomeArquivoXML);
+                        break;
+
+                    #endregion
+
                     #region AGILI
                     case PadroesNFSe.AGILI:
                         Components.AGILI.AGILI agili = new Components.AGILI.AGILI((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
@@ -740,7 +768,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.MODERNIZACAO_PUBLICA:
                         cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
-             
+
                     case PadroesNFSe.E_RECEITA:
                         cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;

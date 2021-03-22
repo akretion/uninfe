@@ -13,13 +13,13 @@ Set ConsultaCadastro = CreateObject("Unimake.Business.DFe.Servicos.NFCe.Consulta
 
 With InfCons
     .CNPJ = "06117473000150"
-    .UF = CUF
+    .UF = UFBrasil.PR
 End With
 
 ConsCad.Versao = "2.00"
 Set ConsCad.InfCons = InfCons
 
-ConsultaCadastro.Executar (ConsCad), (Config.InicializarConfiguracao(NFCe))
+ConsultaCadastro.Executar (ConsCad), (Config.InicializarConfiguracao(TipoDFe.NFCe))
 
 Log.EscreveLog ConsultaCadastro.RetornoWSString, True
 Log.EscreveLog ConsultaCadastro.result.InfCons.XMotivo, False

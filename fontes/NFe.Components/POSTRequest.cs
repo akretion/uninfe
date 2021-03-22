@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Xml;
 
@@ -15,6 +16,25 @@ namespace NFSe.Components
     /// </summary>
     public class POSTRequest : RequestBase, IPostRequest
     {
+        public string Post(string usuario, string senha, string URLAPIBase, string file)
+        {
+            HttpResponseMessage result = new HttpResponseMessage();
+            HttpClient cliente = new HttpClient();
+
+            var body = new
+            {
+                usuario,
+                senha,
+                xml = File.ReadAllText(file)
+            };
+
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(body);
+
+            result = cliente.PostAsync(URLAPIBase, new StringContent(json, Encoding.UTF8, "application/json")).Result;
+
+            return result.Content.ReadAsStringAsync().Result;
+        }
+
         /// <summary>
         /// Faz o post e retorna uma string  com o resultado
         /// </summary>
@@ -219,6 +239,7 @@ namespace NFSe.Components
 
             return result;
         }
+
 #else
         public string PostForm(string url, IDictionary<string, string> postData = null, IList<string> headers = null)
         {

@@ -52,10 +52,11 @@ namespace Unimake.Business.DFe.Xml.NFe
         }
     }
 
-    [Serializable()]
+    [Serializable]
     [XmlType(Namespace = "http://www.portalfiscal.inf.br/nfe")]
     public class RetEvento
     {
+
         [XmlElement("infEvento", Order = 0)]
         public InfEventoRetEvento InfEvento { get; set; }
 

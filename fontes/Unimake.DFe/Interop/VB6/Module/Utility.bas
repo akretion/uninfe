@@ -1,8 +1,5 @@
 Attribute VB_Name = "Utility"
-Public Const CUF = 41
-Public Const AN = 91
-Public Const TpAmb = 2
-
+Option Explicit
 Public Sub TrapException()
     MsgBox Err.Description, vbCritical, "Erro!!!"
     Log.EscreveLog "========== ERRO ==========", False

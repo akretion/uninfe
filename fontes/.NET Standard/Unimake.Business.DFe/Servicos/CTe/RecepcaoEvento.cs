@@ -114,12 +114,13 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// <summary>
         /// Propriedade contendo o XML do evento com o protocolo de autorização anexado
         /// </summary>
-        public ProcEventoCTe<TDetalheEvento> ProcEventoCTeResult => new ProcEventoCTe<TDetalheEvento>
-        {
-            Versao = EventoCTe.Versao,
-            EventoCTe = EventoCTe,
-            RetEventoCTe = Result
-        };
+        //TODO WANDREY - Ver
+        //public ProcEventoCTe<TDetalheEvento> ProcEventoCTeResult => new ProcEventoCTe<TDetalheEvento>
+        //{
+        //    Versao = EventoCTe.Versao,
+        //    EventoCTe = EventoCTe,
+        //    RetEventoCTe = Result
+        //};
 
         /// <summary>
         /// Conteúdo retornado pelo webservice depois do envio do XML
@@ -174,6 +175,8 @@ namespace Unimake.Business.DFe.Servicos.CTe
         [ComVisible(false)]
         public override void Executar() => base.Executar();
 
+#if INTEROP
+
         /// <summary>
         /// Executa o serviço: Assina o XML, valida e envia para o webservice
         /// </summary>
@@ -182,7 +185,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
         [ComVisible(true)]
         public void Executar(EventoCTe<TDetalheEvento> envEvento, Configuracao configuracao)
         {
-            if(envEvento == null)
+            if (envEvento == null)
             {
                 throw new ArgumentNullException(nameof(envEvento));
             }
@@ -190,19 +193,25 @@ namespace Unimake.Business.DFe.Servicos.CTe
             PrepararServico(envEvento.GerarXML(), configuracao);
 
             Executar();
-        }
+        } 
+
+#endif
 
         /// <summary>
         /// Gravar o XML de distribuição em uma pasta no HD
         /// </summary>
         /// <param name="pasta">Pasta onde deve ser gravado o XML</param>
-        public void GravarXmlDistribuicao(string pasta) => GravarXmlDistribuicao(pasta, ProcEventoCTeResult.NomeArquivoDistribuicao, ProcEventoCTeResult.GerarXML().OuterXml);
+        //TODO WANDREY: Resolver esta encrenca
+        //public void GravarXmlDistribuicao(string pasta) => GravarXmlDistribuicao(pasta, ProcEventoCTeResult.NomeArquivoDistribuicao, ProcEventoCTeResult.GerarXML().OuterXml);
+        public void GravarXmlDistribuicao(string pasta) { }
 
         /// <summary>
         /// Grava o XML de dsitribuição no stream
         /// </summary>
         /// <param name="stream">Stream que vai receber o XML de distribuição</param>
-        public void GravarXmlDistribuicao(Stream stream) => GravarXmlDistribuicao(stream, ProcEventoCTeResult.GerarXML().OuterXml);
+        //TODO WANDREY: Resolver esta encrenca
+        //public void GravarXmlDistribuicao(Stream stream) => GravarXmlDistribuicao(stream, ProcEventoCTeResult.GerarXML().OuterXml);
+        public void GravarXmlDistribuicao(Stream stream) { }
 
         #endregion Public Methods
     }

@@ -556,7 +556,8 @@ namespace NFe.UI.Formularios
                            ufCod == 4114609 /*Marechal Cândido Rondon-PR*/ ||
                            ufCod == 5207402 /*Edéia-GO*/ ||
                            ufCod == 4115200 /*Maringá-PR*/ ||
-                           ufCod == 1100122 /*Ji-Paraná - RO*/ ;
+                           ufCod == 1100122 /*Ji-Paraná-RO*/||
+                           ufCod == 4213203 /*Pomerode-SC*/;
 
 
             lbl_UsuarioWS.Visible = txtUsuarioWS.Visible = lbl_SenhaWS.Visible = txtSenhaWS.Visible = visible;

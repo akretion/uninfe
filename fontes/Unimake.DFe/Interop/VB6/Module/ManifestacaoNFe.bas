@@ -37,7 +37,7 @@ EnvEvento.AddEvento (Evento)
 EnvEvento.Versao = "1.00"
 EnvEvento.IdLote = "000000000000001"
 
-RecepcaoEvento.Executar (EnvEvento), (Config.InicializarConfiguracao(NFe))
+RecepcaoEvento.Executar (EnvEvento), (Config.InicializarConfiguracao(TipoDFe.NFe))
 
 ''Gravar o XML de distribuição se a inutilização foi homologada
 If (RecepcaoEvento.result.CStat = 128) Then ''128 = Lote de evento processado com sucesso

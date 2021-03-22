@@ -121,7 +121,7 @@ namespace Unimake.Business.DFe.Utility
 
             var tpEmis = Convert.ToInt32(chave.Substring(34, 1));
             tipoEnum = typeof(TipoEmissao);
-            if (!Enum.IsDefined(tipoEnum, tpEmis))
+            if(!Enum.IsDefined(tipoEnum, tpEmis))
             {
                 var tipoPermitido = string.Empty;
 
@@ -154,10 +154,10 @@ namespace Unimake.Business.DFe.Utility
 
                 foreach(var item in Enum.GetValues(tipoEnum))
                 {
-                    UFBrasil ufBrasil = (UFBrasil)Enum.Parse(typeof(UFBrasil), item.ToString());
+                    var ufBrasil = (UFBrasil)Enum.Parse(typeof(UFBrasil), item.ToString());
                     var uf = (int)ufBrasil;
 
-                    if(uf > 0 && uf< 90)
+                    if(uf > 0 && uf < 90)
                     {
                         if(!string.IsNullOrEmpty(cufPermitido))
                         {
@@ -177,7 +177,7 @@ namespace Unimake.Business.DFe.Utility
 
             var digitoCalc = XMLUtility.CalcularDVChave(chave.Substring(0, 43));
             var digitoInf = chave.Substring(43, 1);
-            if (digitoCalc != Convert.ToInt32(digitoInf))
+            if(digitoCalc != Convert.ToInt32(digitoInf))
             {
                 throw new Exception("Dígito verificador, do documento fiscal eletrônico, que compõe a chave, está incorreto. Dígito informado: " + digitoInf + ". Dígito calculado: " + digitoCalc.ToString() + ".");
             }
@@ -811,6 +811,102 @@ namespace Unimake.Business.DFe.Utility
             return content;
         }
 
+        /// <summary>
+        /// Extrair conteúdo da chave do documento fiscal eletrônico (NFe, NFCe, CTe, MDFe, etc...) com elementos separados.
+        /// </summary>
+        /// <param name="chave">Chave do DFe para extrair o conteúdo</param>
+        /// <returns>Estrutura contendo o valor de cada elemento que compõe a chave do DFe</returns>
+        /// <example>
+        /// 
+        /// var conteudo = XMLUtility.ExtrairConteudoChaveDFe("41210212345678000112650110000000069123456787");
+        /// 
+        /// Console.WriteLine(conteudo.UFEmissor); //Output: PR
+        /// Console.WriteLine(conteudo.AnoEmissao); //Output: 21
+        /// Console.WriteLine(conteudo.MesEmissao); //Output: 02
+        /// Console.WriteLine(conteudo.CNPJEmissor); //Output: 12345678000112
+        /// Console.WriteLine(conteudo.Modelo); //Output: NFCe
+        /// Console.WriteLine(conteudo.Serie); //Output: 11
+        /// Console.WriteLine(conteudo.NumeroDoctoFiscal); //Output: 6
+        /// Console.WriteLine(conteudo.TipoEmissao); //Output: ContingenciaOffLine
+        /// Console.WriteLine(conteudo.CodigoNumerico); //Output: 12345678
+        /// Console.WriteLine(conteudo.DigitoVerificador); //Output: 7
+        /// 
+        /// </example>
+        public static ConteudoChaveDFe ExtrairConteudoChaveDFe(string chave)
+        {
+            var conteudo = new ConteudoChaveDFe
+            {
+                UFEmissor = (UFBrasil)Convert.ToInt32(chave.Substring(0, 2)),
+                AnoEmissao = chave.Substring(2, 2),
+                MesEmissao = chave.Substring(4, 2),
+                CNPJEmissor = chave.Substring(6, 14),
+                Modelo = (ModeloDFe)Convert.ToInt32(chave.Substring(20, 2)),
+                Serie = Convert.ToInt32(chave.Substring(22, 3)),
+                NumeroDoctoFiscal = Convert.ToInt32(chave.Substring(25, 9)),
+                TipoEmissao = (TipoEmissao)Convert.ToInt32(chave.Substring(34, 1)),
+                CodigoNumerico = chave.Substring(35, 8),
+                DigitoVerificador = Convert.ToInt32(chave.Substring(43, 1))
+            };
+
+            return conteudo;
+        }
+
         #endregion Public Methods
+
+        /// <summary>
+        /// Estrutura para recuperar o conteúdo separadamento da chave do DFe (NFe, CTe, NFCe, MDfe, etc...)
+        /// </summary>
+        public struct ConteudoChaveDFe
+        {
+            /// <summary>
+            /// UF do emissor do documento fiscal
+            /// </summary>
+            public UFBrasil UFEmissor { get; set; }
+
+            /// <summary>
+            /// Mês de emissão do documento fiscal
+            /// </summary>
+            public string MesEmissao { get; set; }
+
+            /// <summary>
+            /// Ano de emissão do documento fiscal
+            /// </summary>
+            public string AnoEmissao { get; set; }
+
+            /// <summary>
+            /// CNPJ do emissor do documento fiscal
+            /// </summary>
+            public string CNPJEmissor { get; set; }
+
+            /// <summary>
+            /// Modelo do documento fiscal
+            /// </summary>
+            public ModeloDFe Modelo { get; set; }
+
+            /// <summary>
+            /// Série do documento fiscal
+            /// </summary>
+            public int Serie { get; set; }
+
+            /// <summary>
+            /// Número do documento fiscal 
+            /// </summary>
+            public int NumeroDoctoFiscal { get; set; }
+
+            /// <summary>
+            /// Tipo de emissão do documento fiscal
+            /// </summary>
+            public TipoEmissao TipoEmissao { get; set; }
+
+            /// <summary>
+            /// Código numérido do documento fiscal
+            /// </summary>
+            public string CodigoNumerico { get; set; }
+
+            /// <summary>
+            /// Digito verificador da chave do documento fiscal
+            /// </summary>
+            public int DigitoVerificador { get; set; }
+        }
     }
 }

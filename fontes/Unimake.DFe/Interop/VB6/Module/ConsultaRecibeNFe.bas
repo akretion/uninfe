@@ -2,12 +2,12 @@ Attribute VB_Name = "ConsultaReciboNFe"
 Option Explicit
 Public Sub ConsultarReciboNFe()
 On Error GoTo erro
-Dim ConsReciNFe, RetAutorizacao
+Dim ConsReciNFe, retAutorizacao
 
 Log.ClearLog
 
 Set ConsReciNFe = CreateObject("Unimake.Business.DFe.Xml.NFe.ConsReciNFe")
-Set RetAutorizacao = CreateObject("Unimake.Business.DFe.Servicos.NFe.RetAutorizacao")
+Set retAutorizacao = CreateObject("Unimake.Business.DFe.Servicos.NFe.RetAutorizacao")
 
 With ConsReciNFe
     .Versao = "4.00"
@@ -15,10 +15,10 @@ With ConsReciNFe
     .NRec = "310000069231900"
 End With
 
-RetAutorizacao.Executar (ConsReciNFe), (Config.InicializarConfiguracao(NFe))
+retAutorizacao.Executar (ConsReciNFe), (Config.InicializarConfiguracao(TipoDFe.NFe))
 
-Log.EscreveLog RetAutorizacao.RetornoWSString, True
-Log.EscreveLog RetAutorizacao.result.XMotivo, False
+Log.EscreveLog retAutorizacao.RetornoWSString, True
+Log.EscreveLog retAutorizacao.result.XMotivo, False
 
 Exit Sub
 erro:

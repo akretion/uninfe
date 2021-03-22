@@ -1,19 +1,36 @@
 ﻿#pragma warning disable CS1591
 
 using System;
+using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Serialization;
 
 namespace Unimake.Business.DFe.Xml.CTe
 {
+    //[Serializable()]
+    //[XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/cte")]
+    //[XmlRoot("procEventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
+    //public class ProcEventoCTeEPEC: ProcEventoCTe<InfEventoEPEC> { }
+
+    //[Serializable()]
+    //[XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/cte")]
+    //[XmlRoot("procEventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
+    //public class ProcEventoCTePrestDesacordo: ProcEventoCTe<InfEventoPrestDesacordo> { }
+
+    //[Serializable()]
+    //[XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/cte")]
+    //[XmlRoot("procEventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
+    //public class ProcEventoCTeCanc: ProcEventoCTe<InfEventoCanc> { }
+
     [Serializable()]
     [XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/cte")]
     [XmlRoot("procEventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
     public class ProcEventoCTe<TDetalheEvento>: XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
-        public string Versao { get; set; }
+        public string Versao { get; set; }              
 
         [XmlElement("eventoCTe")]
         public EventoCTe<TDetalheEvento> EventoCTe { get; set; }
@@ -41,7 +58,10 @@ namespace Unimake.Business.DFe.Xml.CTe
         /// Nome do arquivo de distribuição
         /// </summary>
         [XmlIgnore]
-        public string NomeArquivoDistribuicao => ((IInfEvento)EventoCTe.InfEvento).ChCTe + "_" + ((int)((IInfEvento)EventoCTe.InfEvento).TpEvento).ToString("000000") + "_" + ((IInfEvento)EventoCTe.InfEvento).NSeqEvento.ToString("00") + "-proceventocte.xml";
+        //TODO WANDREY: Resolver esta encrenca
+        public string NomeArquivoDistribuicao => "";
+
+        //public string NomeArquivoDistribuicao => ((IInfEvento)EventoCTe.InfEvento).ChCTe + "_" + ((int)((IInfEvento)EventoCTe.InfEvento).TpEvento).ToString("000000") + "_" + ((IInfEvento)EventoCTe.InfEvento).NSeqEvento.ToString("00") + "-proceventocte.xml";
 
         public override XmlDocument GerarXML()
         {

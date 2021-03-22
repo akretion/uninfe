@@ -1,19 +1,9 @@
 Attribute VB_Name = "Config"
-Public Enum TipoDFe
-    NFe
-    NFCe
-    CTe
-    MDFe
-    NFSe
-    SAT
-End Enum
 
 Public Function InicializarConfiguracao(ByVal pTipoDFe As TipoDFe, Optional ByVal pCUF = 0)
-Static certificado
 Static flagCertificado As Boolean
 
 If flagCertificado = False Then
-    Set certificado = SelecionarCertificado.SelecionarCertificado()
     flagCertificado = True
 End If
 
@@ -22,5 +12,7 @@ InicializarConfiguracao.TipoDFe = CInt(pTipoDFe)
 
 If pCUF > 0 Then InicializarConfiguracao.CodigoUF = pCUF
 
-Set InicializarConfiguracao.CertificadoDigital = certificado
+InicializarConfiguracao.CertificadoSenha = "123456"
+InicializarConfiguracao.CertificadoArquivo = "D:\Temp\Certificado.pfx"
+
 End Function

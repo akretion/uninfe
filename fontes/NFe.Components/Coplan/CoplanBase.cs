@@ -62,6 +62,12 @@ namespace NFe.Components.Coplan
                                 new PPeixotoAzevedoMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
                             break;
 
+                        case 5105200: //Juscimeira-MT
+                            coplanService = tpAmb == TipoAmbiente.taHomologacao ?
+                                new HJuscimeiraMT.h.CoplanH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase :
+                                new PJuscimeiraMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
+                            break;
+
                         default:
                             throw new Exceptions.ServicoInexistenteException();
                     }
@@ -116,6 +122,11 @@ namespace NFe.Components.Coplan
         public override void ConsultarNfsePorRps(string file)
         {
             CoplanService.ConsultarNfsePorRps(file);
+        }
+
+        public override void SubstituirNfse(string file)
+        {
+            CoplanService.SubstituirNfse(file);
         }
 
         #endregion Métodos

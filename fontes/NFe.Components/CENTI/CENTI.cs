@@ -1,7 +1,6 @@
 ﻿using NFe.Components.Abstract;
 using NFSe.Components;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -19,15 +18,17 @@ namespace NFe.Components.CENTI
             }
         }
 
+        private string servico = "";
+        private string rps = "";
 
         public string URLAPIBase
         {
             get
             {
                 if (tpAmb.Equals(TipoAmbiente.taHomologacao))
-                    return @"https://api.centi.com.br/nfe/";
+                    return $@"https://api.centi.com.br/nfe/{servico}/homologacao{rps}/GO/edeia";
                 else
-                    return @"https://api.centi.com.br/nfe/gerar/go/edeia";
+                    return $@"https://api.centi.com.br/nfe/{servico}{rps}/go/edeia";
             }
         }
 
@@ -49,17 +50,14 @@ namespace NFe.Components.CENTI
         public override void EmiteNF(string file)
         {
             string result = "";
+            servico = "gerar";
 
             using (POSTRequest post = new POSTRequest
             {
                 Proxy = Proxy
             })
             {
-                result = post.PostForm(Path.Combine(URLAPIBase, "gerar/homologacao/GO/edeia"),
-                    new Dictionary<string, string>
-                    {
-                        {"f1", file}
-                    });
+                result = post.Post(Usuario, Senha, URLAPIBase, file);
             }
 
             GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLoteRps).EnvioXML,
@@ -80,16 +78,54 @@ namespace NFe.Components.CENTI
         }
 
         public override void CancelarNfse(string file)
-        { }
+        {
+            string result = "";
+            servico = "cancelar";
+
+            using (POSTRequest post = new POSTRequest
+            {
+                Proxy = Proxy
+            })
+            {
+                result = post.Post(Usuario, Senha, URLAPIBase, file);
+            }
+
+            GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).EnvioXML,
+                                       Propriedade.Extensao(Propriedade.TipoEnvio.PedCanNFSe).RetornoXML);
+        }
 
         public override void ConsultarNfse(string file)
-        { }
+        {
+            string result = "";
+            servico = "consultar";
+            rps = "/rps";
+
+            using (POSTRequest post = new POSTRequest
+            {
+                Proxy = Proxy
+            })
+            {
+                result = post.Post(Usuario, Senha, URLAPIBase, file);
+            }
+
+            GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+                                   Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
+        }
+
         public override void ConsultarLoteRps(string file)
-        { }
+        {
+            throw new Exception();
+        }
+
         public override void ConsultarNfsePorRps(string file)
-        { }
+        {
+            throw new Exception();
+        }
+
         public override void ConsultarSituacaoLoteRps(string file)
-        { }
+        {
+            throw new Exception();
+        }
 
         #endregion Public Methods
     }

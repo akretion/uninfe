@@ -6,7 +6,7 @@ using System.Xml;
 
 namespace NFe.Components.GeisWeb.ItatingaSP.h
 {
-    public class GeisWebH: EmiteNFSeBase
+    public class GeisWebH : EmiteNFSeBase
     {
         private System.Web.Services.Protocols.SoapHttpClientProtocol Service;
         private X509Certificate2 Certificado;

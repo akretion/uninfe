@@ -30,6 +30,11 @@ namespace Unimake.Business.DFe.Xml
         public XMLBase()
         {
             var attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
+            if(attribute == null)
+            {
+                return;
+            }
+
             NameSpaces = new List<XMLUtility.TNameSpace>
             {
                 new XMLUtility.TNameSpace() { Prefix = "", NS = attribute.Namespace }

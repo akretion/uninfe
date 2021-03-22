@@ -13,7 +13,7 @@ Set Inutilizacao = CreateObject("Unimake.Business.DFe.Servicos.CTe.Inutilizacao"
 With InutCTeInfInut
     .Ano = "19"
     .CNPJ = "06117473000150"
-    .CUF = CUF
+    .CUF = UFBrasil.PR
     .Mod = 57
     .NCTIni = 57919
     .NCTFin = 57919
@@ -25,7 +25,7 @@ End With
 InutCTe.Versao = "3.00"
 Set InutCTe.InfInut = InutCTeInfInut
 
-Inutilizacao.Executar (InutCTe), (Config.InicializarConfiguracao(CTe))
+Inutilizacao.Executar (InutCTe), (Config.InicializarConfiguracao(TipoDFe.CTe))
 
 Log.EscreveLog Inutilizacao.RetornoWSString, True
 Log.EscreveLog Inutilizacao.result.InfInut.XMotivo, False

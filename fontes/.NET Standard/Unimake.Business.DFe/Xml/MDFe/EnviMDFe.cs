@@ -139,6 +139,8 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
         #region Add (List - Interop)
 
+#if INTEROP
+
         public void AddAutXML(AutXML autxml)
         {
             if (AutXML == null)
@@ -158,6 +160,8 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
             Seg.Add(seg);
         }
+
+#endif
 
         #endregion
     }
@@ -313,6 +317,8 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
         #region Add (List - Interop)
 
+#if INTEROP
+
         public void AddInfMunCarrega(InfMunCarrega infmuncarrega)
         {
             if (InfMunCarrega == null)
@@ -332,6 +338,8 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
             InfPercurso.Add(infpercurso);
         }
+
+#endif
 
         #endregion
     }
@@ -526,6 +534,8 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
         #region Add (List - Interop)
 
+#if INTEROP
+
         public void AddInfCIOT(InfCIOT infciot)
         {
             if (InfCIOT == null)
@@ -565,6 +575,8 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
             InfPag.Add(infpag);
         }
+
+#endif
 
         #endregion
     }
@@ -829,6 +841,8 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
         #region Add (List - Interop)
 
+#if INTEROP
+
         public void AddCondutor(Condutor condutor)
         {
             if (Condutor == null)
@@ -838,6 +852,8 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
             Condutor.Add(condutor);
         }
+
+#endif
 
         #endregion
 
@@ -1271,6 +1287,8 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
         #region Add (List - Interop)
 
+#if INTEROP
+
         public void AddInfMunDescarga(InfMunDescarga infmundescarga)
         {
             if (InfMunDescarga == null)
@@ -1280,6 +1298,8 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
             InfMunDescarga.Add(infmundescarga);
         }
+
+#endif
 
         #endregion
     }
@@ -1304,6 +1324,8 @@ namespace Unimake.Business.DFe.Xml.MDFe
         public List<InfMunDescargaInfMDFeTransp> InfMDFeTransp { get; set; }
 
         #region Add (List - Interop)
+
+#if INTEROP
 
         public void AddInfMDFeTransp(InfMunDescargaInfMDFeTransp infMDFeTransp)
         {
@@ -1334,6 +1356,8 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
             InfCTe.Add(infCTe);
         }
+
+#endif
 
         #endregion
     }

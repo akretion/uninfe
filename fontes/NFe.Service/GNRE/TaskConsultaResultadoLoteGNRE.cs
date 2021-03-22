@@ -38,7 +38,8 @@ namespace NFe.Service.GNRE
                     TipoEmissao = Unimake.Business.DFe.Servicos.TipoEmissao.Normal,
                     CertificadoDigital = Empresas.Configuracoes[emp].X509Certificado,
                     CodigoUF = Empresas.Configuracoes[emp].UnidadeFederativaCodigo,
-                    Servico = Unimake.Business.DFe.Servicos.Servico.GNREConsultaResultadoLote
+                    Servico = Unimake.Business.DFe.Servicos.Servico.GNREConsultaResultadoLote,
+                    TipoAmbiente = (Unimake.Business.DFe.Servicos.TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo
                 };
 
                 var consultaResultadoLote = new ConsultaResultadoLote(xml, configuracao);

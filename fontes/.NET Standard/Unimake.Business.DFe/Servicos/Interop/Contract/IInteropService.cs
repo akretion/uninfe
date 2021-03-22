@@ -19,6 +19,8 @@ namespace Unimake.Business.DFe.Servicos.Interop
         [ComVisible(false)]
         void Executar();
 
+#if INTEROP
+
         /// <summary>
         /// Realiza a execução da consulta com a Sefaz passando os parâmetros no método quando usado pelo interop.
         /// <para>Pode ser usado normalmente, mesmo que não seja via interop.</para>
@@ -28,6 +30,7 @@ namespace Unimake.Business.DFe.Servicos.Interop
         [ComVisible(true)]
         void Executar(TInteropType interopType, Configuracao configuracao);
 
+#endif
         #endregion Public Methods
     }
 }

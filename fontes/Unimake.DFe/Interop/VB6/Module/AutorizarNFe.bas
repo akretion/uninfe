@@ -1,5 +1,26 @@
 Attribute VB_Name = "ServicosNFe"
 Option Explicit
+Public Sub ValidarXML()
+On Error GoTo erro
+Dim validarSchema: Set validarSchema = CreateObject("Unimake.Business.DFe.ValidarSchema")
+Dim schema: schema = "NFe.nfe_v4.00.xsd"
+
+validarSchema.Validar "D:\Temp\DFe_ZIPFile_2021_03_02_11_58_41_-1133296159\41210206268208000172650020000031071794904016-procnfe.xml", _
+                        schema, _
+                        "http://www.portalfiscal.inf.br/nfe"
+
+If validarSchema.Success Then
+    MsgBox "XML validado com sucesso.", vbOKOnly + vbInformation
+Else
+    MsgBox "Code: " & validarSchema.errorCode & vbCrLf & "Message: " + validarSchema.ErrorMessage, vbOKOnly + vbCritical
+End If
+
+Exit Sub
+erro:
+Utility.TrapException
+End Sub
+
+
 Public Sub AutorizarPorArquivoNFe()
 On Error GoTo erro
 Dim EnviNFe
@@ -14,7 +35,7 @@ EnviNFe.IndSinc = 1
 EnviNFe.AddNFe (GetFromFileNFe())
 
 Set Autorizacao = CreateObject("Unimake.Business.DFe.Servicos.NFe.Autorizacao")
-Autorizacao.Executar (EnviNFe), (Config.InicializarConfiguracao(NFe))
+Autorizacao.Executar (EnviNFe), (Config.InicializarConfiguracao(TipoDFe.NFe))
 
 Log.EscreveLog Autorizacao.RetornoWSString, True
 Log.EscreveLog Autorizacao.result.XMotivo, False
@@ -41,7 +62,7 @@ EnviNFe.IndSinc = 1
 EnviNFe.AddNFe GetNFe()
 
 Set Autorizacao = CreateObject("Unimake.Business.DFe.Servicos.NFe.Autorizacao")
-Autorizacao.Executar (EnviNFe), (Config.InicializarConfiguracao(NFe))
+Autorizacao.Executar (EnviNFe), (Config.InicializarConfiguracao(TipoDFe.NFe))
 
 Log.EscreveLog Autorizacao.RetornoWSString, True
 Log.EscreveLog Autorizacao.result.XMotivo, False
@@ -87,7 +108,7 @@ Function GetIde()
 Dim result
 Set result = CreateObject("Unimake.Business.DFe.Xml.NFe.Ide")
 With result
-    .CUF = CUF
+    .CUF = UFBrasil.PR
     .NatOp = "VENDA PRODUC.DO ESTABELEC"
     .Mod = 55
     .Serie = 1

@@ -19,29 +19,39 @@ namespace NFSe.Components
                 TargetNameSpace = ""
             });
 
-            //SchemaXML.InfSchemas.Add("NFSE-SOFTPLAN-xmlCancelamentoNfpse", new InfSchema()
-            //{
-            //    Tag = "xmlCancelamentoNfpse",
-            //    ID = SchemaXML.InfSchemas.Count + 1,
-            //    ArquivoXSD = "",
-            //    Descricao = "XML de cancelamento",
-            //    TagAssinatura = "xmlCancelamentoNfpse",
-            //    TagAtributoId = "codigoVerificacao",
-            //    TargetNameSpace = ""
-            //});
-
-            //SchemaXML.InfSchemas.Add("NFSE-SOFTPLAN-ConsultarNfseEnvio", new InfSchema()
-            //{
-            //    Tag = "ConsultarNfseEnvio",
-            //    ID = SchemaXML.InfSchemas.Count + 1,
-            //    ArquivoXSD = "",
-            //    Descricao = "Consulta de NFSe por Código de Verificação e CMC(Inscrição Estadual)",
-            //    TagAssinatura = "",
-            //    TagAtributoId = "",
-            //    TargetNameSpace = ""
-            //});
 
             #endregion XML de lote RPS
+
+            #region  XML de lote cancelamento
+
+            SchemaXML.InfSchemas.Add("NFSE-CENTI-CancelarNfseEnvio", new InfSchema()
+            {
+                Tag = "CancelarNfseEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "XML de Cancelamento da NFS-e",
+                TagAssinatura = "Pedido",
+                TagAtributoId = "InfPedidoCancelamento",
+                TargetNameSpace = ""
+            });
+
+            #endregion XML de cancelamento
+
+            #region  Consulta NFSe por Rps
+
+            SchemaXML.InfSchemas.Add("NFSE-SOFTPLAN-ConsultarNfseRpsEnvio", new InfSchema()
+            {
+                Tag = "ConsultarNfseRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "XML de Consulta da NFSe por RPS",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+
+            #endregion  Consulta NFSe por Rps
+
         }
     }
 }

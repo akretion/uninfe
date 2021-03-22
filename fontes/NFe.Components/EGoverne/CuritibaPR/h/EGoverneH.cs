@@ -15,6 +15,7 @@ namespace NFe.Components.EGoverne.CuritibaPR.h
         public EGoverneH(TipoAmbiente tpAmb, string pastaRetorno, string usuarioProxy, string senhaProxy, string domainProxy, X509Certificate certificado)
             : base(tpAmb, pastaRetorno, usuarioProxy, senhaProxy, domainProxy)
         {
+            ServicePointManager.ServerCertificateValidationCallback = MyCertHandler;
             service.Proxy = WebRequest.DefaultWebProxy;
             service.Proxy.Credentials = new NetworkCredential(usuarioProxy, senhaProxy);
             service.Credentials = new NetworkCredential(senhaProxy, senhaProxy);

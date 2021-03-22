@@ -334,11 +334,12 @@ namespace Unimake.Business.DFe.Servicos.MDFe
                 default:
                     ValidarXMLMDFe(xmlEspecifico, schemaArquivoEspecifico, Configuracoes.TargetNS);
                     break;
-
             }
 
-            #endregion Validar a parte específica de cada evento
+            #endregion Validar a parte específica de modal do MDFe
         }
+
+#if INTEROP
 
         /// <summary>
         /// Executa o serviço: Assina o XML, valida e envia para o webservice
@@ -351,6 +352,17 @@ namespace Unimake.Business.DFe.Servicos.MDFe
             PrepararServico(enviMDFe?.GerarXML() ?? throw new ArgumentNullException(nameof(enviMDFe)), configuracao);
             Executar();
         }
+
+        /// <summary>
+        /// Adiciona um retorno da consulta situação da MDF-e.
+        /// Este método está disponível apenas para interop
+        /// </summary>
+        /// <param name="item">Item que será adicionado</param>
+        [ComVisible(true)]
+        public void AddRetConsSitMDFe(RetConsSitMDFe item) =>
+            (RetConsSitMDFe ?? (RetConsSitMDFe = new List<RetConsSitMDFe>())).Add(item);
+
+#endif
 
         /// <summary>
         /// Gravar o XML de distribuição em uma pasta no HD
@@ -368,10 +380,11 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         }
 
         /// <summary>
-        /// Grava o XML de dsitribuição no stream
+        /// Grava o XML de distribuição no stream
         /// </summary>
         /// <param name="stream">Stream que vai receber o XML de distribuição</param>
-        public void GravarXmlDistribuicao(System.IO.Stream stream)
+        [ComVisible(false)]
+        public void GravarXmlDistribuicao(Stream stream)
         {
             foreach(var item in MDFeProcResults)
             {

@@ -14,7 +14,7 @@ consSitNFe.TpAmb = TpAmb
 consSitNFe.ChNFe = "41200106117473000150550010000606641403753210"
 
 Set consultaProtocolo = CreateObject("Unimake.Business.DFe.Servicos.NFe.ConsultaProtocolo")
-consultaProtocolo.Executar (consSitNFe), (Config.InicializarConfiguracao(NFe))
+consultaProtocolo.Executar (consSitNFe), (Config.InicializarConfiguracao(TipoDFe.NFe))
 
 Log.EscreveLog consultaProtocolo.RetornoWSString, True
 Log.EscreveLog consultaProtocolo.result.XMotivo, True

@@ -251,6 +251,8 @@ namespace Unimake.Business.DFe.Servicos.CTeOS
             base.Executar();
         }
 
+#if INTEROP
+
         /// <summary>
         /// Executa o serviço: Assina o XML, valida e envia para o webservice
         /// </summary>
@@ -261,7 +263,9 @@ namespace Unimake.Business.DFe.Servicos.CTeOS
         {
             PrepararServico(cteOS?.GerarXML() ?? throw new ArgumentNullException(nameof(cteOS)), configuracao);
             Executar();
-        }
+        } 
+
+#endif
 
         /// <summary>
         /// Gravar o XML de distribuição em uma pasta no HD

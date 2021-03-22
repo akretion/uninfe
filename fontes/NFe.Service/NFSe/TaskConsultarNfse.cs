@@ -541,6 +541,21 @@ namespace NFe.Service.NFSe
                         softplan.ConsultarNfse(NomeArquivoXML);
                         break;
 #endif
+                    #region CENTI
+                    
+                    case PadroesNFSe.CENTI:
+                        var centi = new Components.CENTI.CENTI((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                                                      Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                      Empresas.Configuracoes[emp].UsuarioWS,
+                                                      Empresas.Configuracoes[emp].SenhaWS);
+
+                        if (ConfiguracaoApp.Proxy)
+                            centi.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
+
+                        centi.ConsultarNfse(NomeArquivoXML);
+                        break;
+
+                    #endregion CENTI
 
                     case PadroesNFSe.MANAUS_AM:
                         cabecMsg = "<cabecalho versao=\"201001\"><versaoDados>V2010</versaoDados></cabecalho>";

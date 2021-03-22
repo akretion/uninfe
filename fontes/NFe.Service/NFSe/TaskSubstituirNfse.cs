@@ -1,5 +1,6 @@
 ﻿using NFe.Certificado;
 using NFe.Components;
+using NFe.Components.Coplan;
 using NFe.Components.Pronin;
 using NFe.Components.SystemPro;
 using NFe.Settings;
@@ -139,9 +140,30 @@ namespace NFe.Service.NFSe
                         }
                         break;
 
+                    case PadroesNFSe.COPLAN:
+
+                        #region Coplan
+
+                        Coplan coplan = new Coplan((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            Empresas.Configuracoes[emp].PastaXmlRetorno,
+                             dadosXML.cMunicipio,
+                            ConfiguracaoApp.ProxyUsuario,
+                            ConfiguracaoApp.ProxySenha,
+                            ConfiguracaoApp.ProxyServidor,
+                            Empresas.Configuracoes[emp].X509Certificado);
+
+                        AssinaturaDigital assCoplan = new AssinaturaDigital();
+                        assCoplan.Assinar(NomeArquivoXML, emp, dadosXML.cMunicipio);
+
+                        coplan.SubstituirNfse(NomeArquivoXML);
+                        break;
+
+                        #endregion Coplan
+
+
                 }
 
-                if(IsInvocar(padraoNFSe, Servico, Empresas.Configuracoes[emp].UnidadeFederativaCodigo))
+                if (IsInvocar(padraoNFSe, Servico, Empresas.Configuracoes[emp].UnidadeFederativaCodigo))
                 {
 
                     //Assinar o XML

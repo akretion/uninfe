@@ -122,6 +122,9 @@ namespace NFSe.Components
 
                 case 4114609: //Marechal Cândido Rondon-PR
                     return 7683;
+
+                case 4213203: //Pomerode - SC
+                    return 8259;
             }
 
             return 0;

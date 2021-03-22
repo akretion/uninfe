@@ -130,6 +130,20 @@ namespace NFe.Components.Coplan.HRondonopolisMT.h
                                        Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
         }
 
+        public override void SubstituirNfse(string file)
+        {
+            XmlDocument.Load(file);
+            Input.nfseDadosMsg = XmlDocument.InnerXml;
+
+            string result = Service.SUBSTITUIRNFSE(Input)?.outputXML;
+            XmlDocument retornoXML = new XmlDocument();
+            retornoXML.Load(Functions.StringXmlToStreamUTF8(result.Trim()));
+            result = retornoXML.OuterXml;
+
+            GerarRetorno(file, result, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).EnvioXML,
+                                       Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRps).RetornoXML);
+        }
+
         #endregion Métodos
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using NFe.Components.Abstract;
+﻿using NFe.Components.Abstract;
 using NFe.Components.PItatingaSP;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;

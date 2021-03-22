@@ -2,7 +2,7 @@
   "profiles": {
     "Unimake.Business.DFe": {
       "commandName": "Executable",
-      "executablePath": "C:\\projetos\\uninfe\\trunk\\fontes\\uninfe\\bin\\Release\\UniNFe.exe",
+      "executablePath": "..\\..\\..\\..\\Unimake.DFe\\Interop\\VB6\\Unimake.DFe_InteropTest.exe",
       "nativeDebugging": false
     }
   }

@@ -25,3 +25,5 @@ Set SelecionarCertificadoDeArquivo = selCertificado.CarregarCertificadoDigitalA1
 End Function
 
 
+
+

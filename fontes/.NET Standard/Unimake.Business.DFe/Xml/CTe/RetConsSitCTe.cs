@@ -38,18 +38,11 @@ namespace Unimake.Business.DFe.Xml.CTe
         [XmlElement("protCTe")]
         public ProtCTe ProtCTe { get; set; }
 
-        //TODO WANDREY: Resolver esta encrenca - TO RESOLVENDO AQUI AGORA!!!
+        //TODO WANDREY: Resolver esta encrenca
         //[XmlElement("procEventoCTe")]
-        //public List<ProcEventoCTe> ProcEventoCTe { get; set; }
-
-        [XmlArrayItem(typeof(ProcEventoCTe<InfEventoCanc>))]
-        [XmlArrayItem(typeof(ProcEventoCTe<InfEventoEPEC>))]
-        [XmlArrayItem(typeof(ProcEventoCTe<InfEventoCCe>))]
-        [XmlArrayItem(typeof(ProcEventoCTe<InfEventoCancCompEntrega>))]
-        [XmlArrayItem(typeof(ProcEventoCTe<InfEventoCompEntrega>))]
-        [XmlArrayItem(typeof(ProcEventoCTe<InfEventoPrestDesacordo>))]
-        [XmlArrayItem(typeof(ProcEventoCTe<InfEvento>))]
-        public List<XMLBase> ProcEventoCTe { get; set; }
+        [XmlArrayItem(typeof(ProcEventoCTe<DetEventoCanc>))]
+        [XmlArrayItem(typeof(ProcEventoCTe<DetEventoEPEC>))]
+        public List<ProcEventoCTe<DetEventoCanc>> ProcEventoCTe { get; set; }
 
         #region Add (List - Interop)
 

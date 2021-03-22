@@ -3301,7 +3301,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:8080/IssWeb-ejb/IssWebWS/IssWebWS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://tributario.canaadoscarajas.pa.gov.br:8080/IssWeb-ejb/IssWebWS/IssWebWS")]
         public string NFe_Components_PCanaaDosCarajasPA_IssWebWS {
             get {
                 return ((string)(this["NFe_Components_PCanaaDosCarajasPA_IssWebWS"]));
@@ -3464,28 +3464,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.geisweb.net.br:443/homologacao/modelo/webservice/GeisWebServiceImpl.p" +
-            "hp")]
-        public string NFe_Components_HGeisWeb_GeisWebService {
-            get {
-                return ((string)(this["NFe_Components_HGeisWeb_GeisWebService"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.geisweb.net.br:443/producao/itatinga/webservice/GeisWebServiceImpl.ph" +
-            "p")]
-        public string NFe_Components_PItatingaSP_GeisWebService {
-            get {
-                return ((string)(this["NFe_Components_PItatingaSP_GeisWebService"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://piloto-iss.curitiba.pr.gov.br/nfse_ws/NfseWs.asmx")]
         public string NFe_Components_br_gov_pr_curitiba_pilotoisscuritiba_h_WS_x0020___x0020_NFS_e_x0020_V1_0_0_1 {
             get {
@@ -3517,10 +3495,52 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:5660/IssWeb-ejb/IssWebWS/IssWebWS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://177.124.184.59:5660/IssWeb-ejb/IssWebWS/IssWebWS")]
         public string NFe_Components_PJiParanaRO_IssWebWS {
             get {
                 return ((string)(this["NFe_Components_PJiParanaRO_IssWebWS"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.gp.srv.br/tributario_homologacao/servlet/anfse_web_service")]
+        public string NFe_Components_HJuscimeiraMT_nfse_web_service {
+            get {
+                return ((string)(this["NFe_Components_HJuscimeiraMT_nfse_web_service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.gp.srv.br/tributario_juscimeira/servlet/anfse_web_service")]
+        public string NFe_Components_PJuscimeiraMT_nfse_web_service {
+            get {
+                return ((string)(this["NFe_Components_PJuscimeiraMT_nfse_web_service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.geisweb.net.br:443/homologacao/modelo/webservice/GeisWebServiceImpl.p" +
+            "hp")]
+        public string NFe_Components_HGeisWeb_GeisWebService {
+            get {
+                return ((string)(this["NFe_Components_HGeisWeb_GeisWebService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.geisweb.net.br:443/producao/itatinga/webservice/GeisWebServiceImpl.ph" +
+            "p")]
+        public string NFe_Components_PItatingaSP_GeisWebService {
+            get {
+                return ((string)(this["NFe_Components_PItatingaSP_GeisWebService"]));
             }
         }
     }

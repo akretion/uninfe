@@ -10,7 +10,7 @@ using Unimake.Business.DFe.Xml;
 namespace Unimake.Business.DFe.Servicos
 {
     /// <summary>
-    /// Classe base abastrata para elaboração dos serviços dos documentos fiscais eletrônicos (NFe, NFCe, MDFe, NFSe, CTe, GNRE, etc...)
+    /// Classe base abstrata para elaboração dos serviços dos documentos fiscais eletrônicos (NFe, NFCe, MDFe, NFSe, CTe, GNRE, etc...)
     /// </summary>
     [ComVisible(true)]
     public abstract class ServicoBase
@@ -477,12 +477,7 @@ namespace Unimake.Business.DFe.Servicos
         /// <param name="configuracao">Configurações que serão utilizadas para conexão e envio do XML para o webservice</param>
         protected void PrepararServico(XmlDocument conteudoXML, Configuracao configuracao)
         {
-            if(configuracao == null)
-            {
-                throw new ArgumentNullException(nameof(configuracao));
-            }
-
-            Configuracoes = configuracao;
+            Configuracoes = configuracao ?? throw new ArgumentNullException(nameof(configuracao));
             ConteudoXML = conteudoXML ?? throw new ArgumentNullException(nameof(conteudoXML));
             Inicializar();
             System.Diagnostics.Trace.WriteLine(ConteudoXML?.InnerXml, "Unimake.DFe");
@@ -646,6 +641,7 @@ namespace Unimake.Business.DFe.Servicos
         /// <param name="pasta">Pasta onde deve ser gravado o XML no HD</param>
         /// <param name="nomeArquivo">Nome do arquivo a ser gravado no HD</param>
         /// <param name="conteudoXML">String contendo o conteúdo do XML a ser gravado no HD</param>
+        [ComVisible(false)]
         public abstract void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML);
 
         #endregion Public Methods

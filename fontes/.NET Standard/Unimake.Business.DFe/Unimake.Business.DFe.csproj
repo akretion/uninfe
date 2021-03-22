@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
 		<LangVersion>7.3</LangVersion>
 		<AssemblyVersion>2020.01.17.1501</AssemblyVersion>
 		<FileVersion>2020.01.17.1501</FileVersion>
@@ -1058,7 +1058,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="System.Security.Cryptography.Xml" Version="5.0.0" />
+		<PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.0" />
 	</ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="$(SolutionDir)Build_INTEROP.bat $(TargetPath) $(SolutionDir)" IgnoreExitCode="true" />
+	</Target>
 
 </Project>

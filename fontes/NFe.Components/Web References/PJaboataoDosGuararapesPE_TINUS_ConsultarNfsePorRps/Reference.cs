@@ -401,8 +401,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        //[System.Xml.Serialization.XmlElementAttribute("Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+        [System.Xml.Serialization.XmlElementAttribute("Signature")]
         public SignatureType[] Signature
         {
             get
@@ -421,7 +420,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SignatureType
     {
 
@@ -508,7 +507,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SignedInfoType
     {
 
@@ -580,16 +579,31 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class CanonicalizationMethodType
     {
 
+        private System.Xml.XmlElement[] anyField;
+
         private string algorithmField;
 
-        private string valueField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any
+        {
+            get
+            {
+                return this.anyField;
+            }
+            set
+            {
+                this.anyField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Algorithm
         {
             get
@@ -601,20 +615,6 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
                 this.algorithmField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -622,7 +622,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SignatureMethodType
     {
 
@@ -630,7 +630,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
 
         private bool hMACOutputLengthFieldSpecified;
 
-        private string[] textField;
+        private System.Xml.XmlElement[] anyField;
 
         private string algorithmField;
 
@@ -662,21 +662,21 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any
         {
             get
             {
-                return this.textField;
+                return this.anyField;
             }
             set
             {
-                this.textField = value;
+                this.anyField = value;
             }
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Algorithm
         {
             get
@@ -695,7 +695,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class ReferenceType
     {
 
@@ -767,7 +767,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string URI
         {
             get
@@ -781,7 +781,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Type
         {
             get
@@ -800,20 +800,19 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class TransformType
     {
 
-        private System.Xml.XmlNode[] anyField;
+        private System.Xml.XmlElement[] anyField;
 
         private string[] xPathField;
 
         private string algorithmField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any
+        public System.Xml.XmlElement[] Any
         {
             get
             {
@@ -840,7 +839,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Algorithm
         {
             get
@@ -859,16 +858,31 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class DigestMethodType
     {
 
+        private System.Xml.XmlElement[] anyField;
+
         private string algorithmField;
 
-        private string valueField;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any
+        {
+            get
+            {
+                return this.anyField;
+            }
+            set
+            {
+                this.anyField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Algorithm
         {
             get
@@ -880,20 +894,6 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
                 this.algorithmField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -901,7 +901,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SignatureValueType
     {
 
@@ -943,7 +943,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class KeyInfoType
     {
 
@@ -961,7 +961,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
 
         private string[] mgmtDataField;
 
-        private System.Xml.XmlNode[] anyField;
+        private System.Xml.XmlElement[] anyField;
 
         private string idField;
 
@@ -1064,9 +1064,8 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any
+        public System.Xml.XmlElement[] Any
         {
             get
             {
@@ -1098,7 +1097,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class KeyValueType
     {
 
@@ -1106,7 +1105,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
 
         private RSAKeyValueType rSAKeyValueField;
 
-        private System.Xml.XmlNode[] anyField;
+        private System.Xml.XmlElement anyField;
 
         /// <remarks/>
         public DSAKeyValueType DSAKeyValue
@@ -1135,9 +1134,8 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any
+        public System.Xml.XmlElement Any
         {
             get
             {
@@ -1155,7 +1153,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class DSAKeyValueType
     {
 
@@ -1277,7 +1275,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class RSAKeyValueType
     {
 
@@ -1319,7 +1317,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class RetrievalMethodType
     {
 
@@ -1344,7 +1342,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string URI
         {
             get
@@ -1358,7 +1356,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Type
         {
             get
@@ -1377,7 +1375,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class X509DataType
     {
 
@@ -1483,7 +1481,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class X509IssuerSerialType
     {
 
@@ -1523,7 +1521,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class PGPDataType
     {
 
@@ -1613,7 +1611,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SPKIDataType
     {
 
@@ -1655,9 +1653,11 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class ObjectType
     {
+
+        private System.Xml.XmlElement[] anyField;
 
         private string idField;
 
@@ -1665,7 +1665,19 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
 
         private string encodingField;
 
-        private string valueField;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any
+        {
+            get
+            {
+                return this.anyField;
+            }
+            set
+            {
+                this.anyField = value;
+            }
+        }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1696,7 +1708,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType = "anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Encoding
         {
             get
@@ -1709,20 +1721,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
             }
         }
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value
-        {
-            get
-            {
-                return this.valueField;
-            }
-            set
-            {
-                this.valueField = value;
-            }
         }
-    }
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
@@ -1782,17 +1781,22 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        public int CodigoMunicipio
+
+
+        public string CodigoMunicipio
         {
             get
             {
-                return this.codigoMunicipioField;
+                return this.codigoMunicipioField.ToString();
             }
             set
             {
-                this.codigoMunicipioField = value;
+                int.TryParse(value, out var result);
+                this.codigoMunicipioField = result;
             }
         }
+
+
     }
 
     /// <remarks/>
@@ -1878,7 +1882,6 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
         public SignatureType Signature
         {
             get
@@ -1975,7 +1978,6 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace = "http://www.w3.org/2000/09/xmldsig#")]
         public SignatureType Signature
         {
             get
@@ -2043,17 +2045,21 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         private string ufField;
 
         /// <remarks/>
-        public int CodigoMunicipio
+
+
+        public string CodigoMunicipio
         {
             get
             {
-                return this.codigoMunicipioField;
+                return this.codigoMunicipioField.ToString();
             }
             set
             {
-                this.codigoMunicipioField = value;
+                int.TryParse(value, out var result);
+                this.codigoMunicipioField = result;
             }
         }
+
 
         /// <remarks/>
         public string Uf
@@ -2354,17 +2360,22 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        public int CodigoMunicipio
+
+
+        public string CodigoMunicipio
         {
             get
             {
-                return this.codigoMunicipioField;
+                return this.codigoMunicipioField.ToString();
             }
             set
             {
-                this.codigoMunicipioField = value;
+                int.TryParse(value, out var result);
+                this.codigoMunicipioField = result;
             }
         }
+
+
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
@@ -3163,17 +3174,22 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        public int CodigoMunicipio
+
+
+        public string CodigoMunicipio
         {
             get
             {
-                return this.codigoMunicipioField;
+                return this.codigoMunicipioField.ToString();
             }
             set
             {
-                this.codigoMunicipioField = value;
+                int.TryParse(value, out var result);
+                this.codigoMunicipioField = result;
             }
         }
+
+
     }
 
     /// <remarks/>
@@ -3189,11 +3205,11 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
 
         private string codigoVerificacaoField;
 
-        private string dataEmissaoField;
+        private System.DateTime dataEmissaoField;
 
         private tcIdentificacaoRps identificacaoRpsField;
 
-        private string dataEmissaoRpsField;
+        private System.DateTime dataEmissaoRpsField;
 
         private bool dataEmissaoRpsFieldSpecified;
 
@@ -3207,7 +3223,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
 
         private sbyte incentivadorCulturalField;
 
-        private string competenciaField;
+        private System.DateTime competenciaField;
 
         private string nfseSubstituidaField;
 
@@ -3227,7 +3243,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
 
         private tcIdentificacaoOrgaoGerador orgaoGeradorField;
 
-        private tcDadosConstrucaoCivil contrucaoCivilField;
+        private tcDadosConstrucaoCivil construcaoCivilField;
 
         private string idField;
 
@@ -3259,8 +3275,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [XmlElement("DataEmissao")]
-        public string DataEmissaoField
+        public System.DateTime DataEmissao
         {
             get
             {
@@ -3271,20 +3286,6 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
                 this.dataEmissaoField = value;
             }
         }
-
-        [XmlIgnore]
-        public System.DateTime DataEmissao
-        {
-            get
-            {
-                return Convert.ToDateTime(this.DataEmissaoField);
-            }
-            set
-            {
-                this.DataEmissaoField = value.ToString();
-            }
-        }
-
 
         /// <remarks/>
         public tcIdentificacaoRps IdentificacaoRps
@@ -3300,8 +3301,8 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [XmlElement("DataEmissaoRps")]
-        public string DataEmissaoRpsField
+        [System.Xml.Serialization.XmlElementAttribute(DataType = "date")]
+        public System.DateTime DataEmissaoRps
         {
             get
             {
@@ -3312,20 +3313,6 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
                 this.dataEmissaoRpsField = value;
             }
         }
-
-        [XmlIgnore]
-        public System.DateTime DataEmissaoRps
-        {
-            get
-            {
-                return Convert.ToDateTime(this.DataEmissaoRpsField);
-            }
-            set
-            {
-                this.DataEmissaoRpsField = value.ToString();
-            }
-        }
-
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
@@ -3408,29 +3395,16 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [XmlElement("Competencia")]
-        public string CompetenciaField
+        public string Competencia
         {
             get
             {
-                return this.competenciaField;
+                return this.competenciaField.ToString("yyyy-MM-ddTHH:mm:ssZ");
             }
             set
             {
-                this.competenciaField = value;
-            }
-        }
-
-        [XmlIgnore]
-        public System.DateTime Competencia
-        {
-            get
-            {
-                return Convert.ToDateTime(CompetenciaField);
-            }
-            set
-            {
-                this.CompetenciaField = value.ToString();
+                DateTime.TryParse(value, out var result);
+                this.competenciaField = result;
             }
         }
 
@@ -3554,15 +3528,15 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        public tcDadosConstrucaoCivil ContrucaoCivil
+        public tcDadosConstrucaoCivil ConstrucaoCivil
         {
             get
             {
-                return this.contrucaoCivilField;
+                return this.construcaoCivilField;
             }
             set
             {
-                this.contrucaoCivilField = value;
+                this.construcaoCivilField = value;
             }
         }
 
@@ -3608,7 +3582,7 @@ namespace NFe.Components.PJaboataoDosGuararapesPE_TINUS_ConsultarNfsePorRps
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("s01:Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
+        [System.Xml.Serialization.XmlElementAttribute("Signature")]
         public SignatureType[] Signature
         {
             get

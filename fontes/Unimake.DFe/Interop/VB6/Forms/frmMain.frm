@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmMain 
    Caption         =   "Unimake.DFe Interop Tests"
    ClientHeight    =   11850
@@ -12,7 +12,7 @@ Begin VB.Form frmMain
    StartUpPosition =   2  'CenterScreen
    Begin MSComDlg.CommonDialog OpenFileDialog 
       Left            =   840
-      Top             =   10200
+      Top             =   10215
       _ExtentX        =   847
       _ExtentY        =   847
       _Version        =   393216
@@ -102,6 +102,9 @@ Begin VB.Form frmMain
       Begin VB.Menu mnuNFe_AutorizarPorArquivo 
          Caption         =   "Autorizar por arquivo"
       End
+      Begin VB.Menu mnuNFeValidarXML 
+         Caption         =   "Validar XML"
+      End
    End
    Begin VB.Menu mnuNFCe 
       Caption         =   "NFC-e"
@@ -168,6 +171,15 @@ Begin VB.Form frmMain
             Caption         =   "Consultar Status"
          End
       End
+      Begin VB.Menu mnuMDFeEvento 
+         Caption         =   "Eventos"
+         Begin VB.Menu mnuMDFeEventoInclusaoCondutor 
+            Caption         =   "Evento de Inclusão de Condutor no MDFe"
+         End
+      End
+      Begin VB.Menu mnuMDFe_EmitirUm 
+         Caption         =   "Emitir um MDF-e"
+      End
    End
    Begin VB.Menu mnuCertificado 
       Caption         =   "Certificado"
@@ -185,10 +197,6 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-
-Private Sub Form_Load()
-Log.SetFrmMain Me
-End Sub
 
 Private Sub Form_Resize()
 lblLog.Left = 1
@@ -250,6 +258,14 @@ End Sub
 
 Private Sub mnuMDFe_ConsultarStatus_Click()
 ConsultarStatusMDFe
+End Sub
+
+Private Sub mnuMDFe_EmitirUm_Click()
+EmitirUmMDFe
+End Sub
+
+Private Sub mnuMDFeEventoInclusaoCondutor_Click()
+InclusaoCondutorMDFe
 End Sub
 
 Private Sub mnuNFCe_Autorizar_Click()
@@ -326,4 +342,8 @@ End Sub
 
 Private Sub mnuNFe_Manifestar_Click()
 ManifestarNFe
+End Sub
+
+Private Sub mnuNFeValidarXML_Click()
+ValidarXML
 End Sub

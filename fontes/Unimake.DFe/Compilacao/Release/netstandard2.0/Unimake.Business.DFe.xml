@@ -27,7 +27,7 @@
             Nome do arquivo de distribuição
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Xml.CTe.ProcEventoCTe.NomeArquivoDistribuicao">
+        <member name="P:Unimake.Business.DFe.Xml.CTe.ProcEventoCTe`1.NomeArquivoDistribuicao">
             <summary>
             Nome do arquivo de distribuição
             </summary>
@@ -645,13 +645,6 @@
             Executar o serviço
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.Autorizacao.Executar(Unimake.Business.DFe.Xml.CTeOS.CTeOS,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="cteOS">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.CTeOS.Autorizacao.GravarXmlDistribuicao(System.String)">
             <summary>
             Gravar o XML de distribuição em uma pasta no HD
@@ -730,24 +723,24 @@
             Validar o XML
             </summary>
         </member>
-        <member name="T:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento">
+        <member name="T:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento`1">
             <summary>
             Envio do XML de eventos do CTeOS para o WebService
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento.#ctor(Unimake.Business.DFe.Xml.CTe.EventoCTe,Unimake.Business.DFe.Servicos.Configuracao)">
+        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento`1.#ctor(Unimake.Business.DFe.Xml.CTe.EventoCTe{`0},Unimake.Business.DFe.Servicos.Configuracao)">
             <summary>
             Construtor
             </summary>
             <param name="envEvento">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento.#ctor">
+        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento`1.#ctor">
             <summary>
             Construtor
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento.XmlValidar">
+        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento`1.XmlValidar">
             <summary>
             Validar o XML
             </summary>
@@ -866,13 +859,6 @@
             Executar o serviço
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.Autorizacao.Executar(Unimake.Business.DFe.Xml.CTe.EnviCTe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="enviCTe">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.CTe.Autorizacao.GravarXmlDistribuicao(System.String)">
             <summary>
             Gravar o XML de distribuição em uma pasta no HD
@@ -929,13 +915,6 @@
             Construtor
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.ConsultaProtocolo.Executar(Unimake.Business.DFe.Xml.CTe.ConsSitCTe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="consSitCTe">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.CTe.ConsultaProtocolo.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
             Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).
@@ -970,13 +949,6 @@
             <summary>
             Construtor
             </summary>
-        </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.DistribuicaoDFe.Executar(Unimake.Business.DFe.Xml.CTe.DistDFeInt,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="distDFeInt">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         </member>
         <member name="M:Unimake.Business.DFe.Servicos.CTe.DistribuicaoDFe.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
@@ -1024,75 +996,61 @@
             <param name="inutCTe">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.Inutilizacao.Executar(Unimake.Business.DFe.Xml.CTe.InutCTe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="inutCTe">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.CTe.Inutilizacao.GravarXmlDistribuicao(System.String)">
             <summary>
             Gravar o XML de distribuição em uma pasta no HD
             </summary>
             <param name="pasta">Pasta onde deve ser gravado o XML</param>
         </member>
-        <member name="T:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento">
+        <member name="T:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1">
             <summary>
             Envio do XML de eventos do CTe para o WebService
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.DefinirConfiguracao">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.DefinirConfiguracao">
             <summary>
             Definir o valor de algumas das propriedades do objeto "Configuracoes"
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.XmlValidar">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.XmlValidar">
             <summary>
             Validar o XML
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.ProcEventoCTeResult">
+        <member name="P:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.ProcEventoCTeResult">
             <summary>
             Propriedade contendo o XML do evento com o protocolo de autorização anexado
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.Result">
+        <member name="P:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.Result">
             <summary>
             Conteúdo retornado pelo webservice depois do envio do XML
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.#ctor(Unimake.Business.DFe.Xml.CTe.EventoCTe,Unimake.Business.DFe.Servicos.Configuracao)">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.#ctor(Unimake.Business.DFe.Xml.CTe.EventoCTe{`0},Unimake.Business.DFe.Servicos.Configuracao)">
             <summary>
             Construtor
             </summary>
             <param name="envEvento">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.#ctor">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.#ctor">
             <summary>
             Construtor
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.Executar">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.Executar">
             <summary>
             Executar o serviço
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.Executar(Unimake.Business.DFe.Xml.CTe.EventoCTe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="envEvento">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.GravarXmlDistribuicao(System.String)">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.GravarXmlDistribuicao(System.String)">
             <summary>
             Gravar o XML de distribuição em uma pasta no HD
             </summary>
             <param name="pasta">Pasta onde deve ser gravado o XML</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.GravarXmlDistribuicao(System.IO.Stream)">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.GravarXmlDistribuicao(System.IO.Stream)">
             <summary>
             Grava o XML de dsitribuição no stream
             </summary>
@@ -1119,13 +1077,6 @@
             </summary>
             <param name="consReciCTe">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
-        </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RetAutorizacao.Executar(Unimake.Business.DFe.Xml.CTe.ConsReciCTe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="consReciCTe">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         </member>
         <member name="M:Unimake.Business.DFe.Servicos.CTe.RetAutorizacao.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
@@ -1178,13 +1129,6 @@
             </summary>
             <param name="consStatServCte">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
-        </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.StatusServico.Executar(Unimake.Business.DFe.Xml.CTe.ConsStatServCte,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="consStatServCte">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         </member>
         <member name="M:Unimake.Business.DFe.Servicos.CTe.StatusServico.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
@@ -5392,13 +5336,6 @@
             <param name="tConsultaConfigUf">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.GNRE.ConsultaConfigUF.Executar(Unimake.Business.DFe.Xml.GNRE.TConsultaConfigUf,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="tConsultaConfigUf">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.GNRE.ConsultaConfigUF.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
             Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).
@@ -5430,13 +5367,6 @@
         <member name="M:Unimake.Business.DFe.Servicos.GNRE.ConsultaResultadoLote.#ctor(Unimake.Business.DFe.Xml.GNRE.TConsLoteGNRE,Unimake.Business.DFe.Servicos.Configuracao)">
             <summary>
             Construtor
-            </summary>
-            <param name="tConsLoteGNRE">Objeto contendo o XML da consulta do lote da GNRE</param>
-            <param name="configuracao">Objeto contendo as configurações a serem utilizadas na consulta do lote da GNRE</param>
-        </member>
-        <member name="M:Unimake.Business.DFe.Servicos.GNRE.ConsultaResultadoLote.Executar(Unimake.Business.DFe.Xml.GNRE.TConsLoteGNRE,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o envio da consulta do lote da GNRE
             </summary>
             <param name="tConsLoteGNRE">Objeto contendo o XML da consulta do lote da GNRE</param>
             <param name="configuracao">Objeto contendo as configurações a serem utilizadas na consulta do lote da GNRE</param>
@@ -5476,13 +5406,6 @@
             <param name="tLoteGNRE">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.GNRE.LoteRecepcao.Executar(Unimake.Business.DFe.Xml.GNRE.TLoteGNRE,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="tLoteGNRE">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.GNRE.LoteRecepcao.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
             Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).
@@ -5519,14 +5442,6 @@
             <summary>
             Realiza a execução da consulta com a Sefaz
             </summary>
-        </member>
-        <member name="M:Unimake.Business.DFe.Servicos.Interop.IInteropService`1.Executar(`0,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Realiza a execução da consulta com a Sefaz passando os parâmetros no método quando usado pelo interop.
-            <para>Pode ser usado normalmente, mesmo que não seja via interop.</para>
-            </summary>
-            <param name="configuracao">Configuração específica para o tipo definido em TInteropType</param>
-            <param name="interopType">Tipo esperado para execução da consulta.</param>
         </member>
         <member name="T:Unimake.Business.DFe.Servicos.MDFe.Autorizacao">
             <summary>
@@ -5598,13 +5513,6 @@
             Validar o XML
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.MDFe.Autorizacao.Executar(Unimake.Business.DFe.Xml.MDFe.EnviMDFe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="enviMDFe">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.MDFe.Autorizacao.GravarXmlDistribuicao(System.String)">
             <summary>
             Gravar o XML de distribuição em uma pasta no HD
@@ -5644,13 +5552,6 @@
             <param name="consMDFeNaoEnc">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.MDFe.ConsNaoEnc.Executar(Unimake.Business.DFe.Xml.MDFe.ConsMDFeNaoEnc,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="consMDFeNaoEnc">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.MDFe.ConsNaoEnc.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
             Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).
@@ -5685,13 +5586,6 @@
             <summary>
             Construtor
             </summary>
-        </member>
-        <member name="M:Unimake.Business.DFe.Servicos.MDFe.ConsultaProtocolo.Executar(Unimake.Business.DFe.Xml.MDFe.ConsSitMDFe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="consSitMDFe">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         </member>
         <member name="M:Unimake.Business.DFe.Servicos.MDFe.ConsultaProtocolo.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
@@ -5743,13 +5637,6 @@
             Executar o serviço
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.MDFe.RecepcaoEvento.Executar(Unimake.Business.DFe.Xml.MDFe.EventoMDFe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="envEvento">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.MDFe.RecepcaoEvento.GravarXmlDistribuicao(System.String)">
             <summary>
             Gravar o XML de distribuição em uma pasta no HD
@@ -5783,13 +5670,6 @@
             </summary>
             <param name="consReciMDFe">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
-        </member>
-        <member name="M:Unimake.Business.DFe.Servicos.MDFe.RetAutorizacao.Executar(Unimake.Business.DFe.Xml.MDFe.ConsReciMDFe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="consReciMDFe">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         </member>
         <member name="M:Unimake.Business.DFe.Servicos.MDFe.RetAutorizacao.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
@@ -5842,13 +5722,6 @@
             </summary>
             <param name="consStatServMDFe">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
-        </member>
-        <member name="M:Unimake.Business.DFe.Servicos.MDFe.StatusServico.Executar(Unimake.Business.DFe.Xml.MDFe.ConsStatServMDFe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="consStatServMDFe">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         </member>
         <member name="M:Unimake.Business.DFe.Servicos.MDFe.StatusServico.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
@@ -6079,13 +5952,6 @@
             Executar o serviço
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.NFe.Autorizacao.Executar(Unimake.Business.DFe.Xml.NFe.EnviNFe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="enviNFe">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.NFe.Autorizacao.GravarXmlDistribuicao(System.String)">
             <summary>
             Gravar o XML de distribuição em uma pasta no HD
@@ -6130,13 +5996,6 @@
             Executa o serviço: Assina o XML, valida e envia para o webservice
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.NFe.ConsultaCadastro.Executar(Unimake.Business.DFe.Xml.NFe.ConsCadBase,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="consCad">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.NFe.ConsultaCadastro.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
             Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).
@@ -6172,13 +6031,6 @@
             <param name="consSitNFe">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.NFe.ConsultaProtocolo.Executar(Unimake.Business.DFe.Xml.NFe.ConsSitNFe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="consSitNFe">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.NFe.ConsultaProtocolo.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
             Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).
@@ -6213,13 +6065,6 @@
             <summary>
             Construtor
             </summary>
-        </member>
-        <member name="M:Unimake.Business.DFe.Servicos.NFe.DistribuicaoDFe.Executar(Unimake.Business.DFe.Xml.NFe.DistDFeInt,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="distDFeInt">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         </member>
         <member name="M:Unimake.Business.DFe.Servicos.NFe.DistribuicaoDFe.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
@@ -6267,13 +6112,6 @@
             <summary>
             Construtor
             </summary>
-        </member>
-        <member name="M:Unimake.Business.DFe.Servicos.NFe.Inutilizacao.Executar(Unimake.Business.DFe.Xml.NFe.InutNFe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="inutNFe">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         </member>
         <member name="M:Unimake.Business.DFe.Servicos.NFe.Inutilizacao.GravarXmlDistribuicao(System.String)">
             <summary>
@@ -6329,13 +6167,6 @@
             Construtor
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.NFe.RecepcaoEvento.Executar(Unimake.Business.DFe.Xml.NFe.EnvEvento,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="envEvento">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.NFe.RecepcaoEvento.GravarXmlDistribuicao(System.String)">
             <summary>
             Gravar o XML de distribuição em uma pasta no HD
@@ -6374,13 +6205,6 @@
             </summary>
             <param name="consReciNFe">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
-        </member>
-        <member name="M:Unimake.Business.DFe.Servicos.NFe.RetAutorizacao.Executar(Unimake.Business.DFe.Xml.NFe.ConsReciNFe,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="consReciNFe">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         </member>
         <member name="M:Unimake.Business.DFe.Servicos.NFe.RetAutorizacao.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
@@ -6470,13 +6294,6 @@
             <param name="consStatServ">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.NFe.StatusServico.Executar(Unimake.Business.DFe.Xml.NFe.ConsStatServ,Unimake.Business.DFe.Servicos.Configuracao)">
-            <summary>
-            Executa o serviço: Assina o XML, valida e envia para o webservice
-            </summary>
-            <param name="consStatServ">Objeto contendo o XML a ser enviado</param>
-            <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Servicos.NFe.StatusServico.GravarXmlDistribuicao(System.String,System.String,System.String)">
             <summary>
             Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).
@@ -6487,7 +6304,7 @@
         </member>
         <member name="T:Unimake.Business.DFe.Servicos.ServicoBase">
             <summary>
-            Classe base abastrata para elaboração dos serviços dos documentos fiscais eletrônicos (NFe, NFCe, MDFe, NFSe, CTe, GNRE, etc...)
+            Classe base abstrata para elaboração dos serviços dos documentos fiscais eletrônicos (NFe, NFCe, MDFe, NFSe, CTe, GNRE, etc...)
             </summary>
         </member>
         <member name="M:Unimake.Business.DFe.Servicos.ServicoBase.DefinirNomeTag">

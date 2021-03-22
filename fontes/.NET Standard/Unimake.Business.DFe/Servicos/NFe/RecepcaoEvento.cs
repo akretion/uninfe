@@ -234,6 +234,8 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
         #region Public Methods
 
+#if INTEROP
+
         /// <summary>
         /// Executa o serviço: Assina o XML, valida e envia para o webservice
         /// </summary>
@@ -246,7 +248,6 @@ namespace Unimake.Business.DFe.Servicos.NFe
             Executar();
         }
 
-#if INTEROP
 
         /// <summary>
         /// Retorna o <see cref="ProcEventoNFe"/> pelo índice ou nulo, se não existir

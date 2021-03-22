@@ -89,6 +89,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// <param name="pasta">Pasta onde deve ser gravado o XML no HD</param>
         /// <param name="nomeArquivo">Nome do arquivo a ser gravado no HD</param>
         /// <param name="conteudoXML">String contendo o conteúdo do XML a ser gravado no HD</param>
+        [ComVisible(false)]
         public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML)
         {
             StreamWriter streamWriter = null;

@@ -217,6 +217,8 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         [ComVisible(false)]
         public override void Executar() => base.Executar();
 
+#if INTEROP
+
         /// <summary>
         /// Executa o serviço: Assina o XML, valida e envia para o webservice
         /// </summary>
@@ -233,7 +235,9 @@ namespace Unimake.Business.DFe.Servicos.MDFe
             PrepararServico(envEvento.GerarXML(), configuracao);
 
             Executar();
-        }
+        } 
+
+#endif
 
         /// <summary>
         /// Gravar o XML de distribuição em uma pasta no HD

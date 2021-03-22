@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Unimake.Business.DFe.Servicos
@@ -8,20 +9,75 @@ namespace Unimake.Business.DFe.Servicos
     /// </summary>
     public class Configuracao
     {
-        /// <summary>
-        /// Serviço que será executado
-        /// </summary>
-        public Servico Servico { get; set; }
+        #region Private Fields
+
+        private X509Certificate2 _certificadoDigital;
+
+        #endregion Private Fields
+
+        #region Private Methods
+
+        private X509Certificate2 GetX509Certificate()
+        {
+            if(_certificadoDigital != null ||
+               string.IsNullOrWhiteSpace(CertificadoSenha) ||
+               string.IsNullOrWhiteSpace(CertificadoArquivo))
+            {
+                return _certificadoDigital;
+            }
+
+            //tentar carregar o certificado pelas informações passadas.
+            // Não vou validar as informações, vou deixar o certificado dar o erro.
+
+            var fi = new FileInfo(CertificadoArquivo);
+            _certificadoDigital = new X509Certificate2();
+
+            using(var fs = fi.OpenRead())
+            {
+                var buffer = new byte[fs.Length];
+                fs.Read(buffer, 0, buffer.Length);
+                _certificadoDigital = new X509Certificate2(buffer, CertificadoSenha);
+            }
+
+            return _certificadoDigital;
+        }
+
+        #endregion Private Methods
+
+        #region Public Fields
 
         /// <summary>
-        /// Nome do estado ou município
+        /// Schemas específicos de um mesmo serviço (Tipos de Evento, Modal CTe ou Modal MDFe)
         /// </summary>
-        public string Nome { get; set; }
+        public Dictionary<string, SchemaEspecifico> SchemasEspecificos = new Dictionary<string, SchemaEspecifico>();
+
+        #endregion Public Fields
+
+        #region Public Properties
 
         /// <summary>
-        /// Ambiente (2-Homologação ou 1-Produção)
+        /// PIN do certificado A3. Informe esta propriedade para não precisar digitar o PIN manualmente.
         /// </summary>
-        public TipoAmbiente TipoAmbiente { get; set; }
+        public string CertificadoA3PIN { get; set; }
+
+        /// <summary>
+        /// Caminho completo do certificado digital
+        /// </summary>
+        public string CertificadoArquivo { get; set; }
+
+        /// <summary>
+        /// Certificado digital
+        /// </summary>
+        public X509Certificate2 CertificadoDigital
+        {
+            get => GetX509Certificate();
+            set => _certificadoDigital = value;
+        }
+
+        /// <summary>
+        /// Senha do certificado digital
+        /// </summary>
+        public string CertificadoSenha { get; set; }
 
         /// <summary>
         /// Código da Unidade Federativa (UF)
@@ -29,14 +85,29 @@ namespace Unimake.Business.DFe.Servicos
         public int CodigoUF { get; set; }
 
         /// <summary>
-        /// Nome da Unidade Federativa (UF)
+        /// CSC = Código de segurança do contribuinte. Utilizado para criar o QRCode da NFCe
         /// </summary>
-        public string NomeUF { get; set; }
+        public string CSC { get; set; }
 
         /// <summary>
-        /// Tipo de Emissao (1-Normal, 2-Contingencia, 6/7/8-SVC/AN/RS/SP, ...
+        /// IDToken do CSC (Código de segurança do contribuinte). Utilizado para criar o QRCode da NFCe
         /// </summary>
-        public TipoEmissao TipoEmissao { get; set; }
+        public int CSCIDToken { get; set; }
+
+        /// <summary>
+        /// Configuração já foi definida anteriormente, não precisa carregar de acordo com os dados do XML
+        /// </summary>
+        public bool Definida { get; set; }
+
+        /// <summary>
+        /// Descrição do serviço
+        /// </summary>
+        public string Descricao { get; set; }
+
+        /// <summary>
+        /// Tem servidor de proxy?
+        /// </summary>
+        public bool HasProxy { get; set; } = false;
 
         /// <summary>
         /// Modelo do documento fiscal que é para consultar o status do serviço
@@ -44,9 +115,30 @@ namespace Unimake.Business.DFe.Servicos
         public ModeloDFe Modelo { get; set; }
 
         /// <summary>
-        /// Tipo do Documento Fiscal Eletrônico (DF-e)
+        /// Nome do estado ou município
         /// </summary>
-        public TipoDFe TipoDFe { get; set; }
+        public string Nome { get; set; }
+
+        /// <summary>
+        /// Nome da Unidade Federativa (UF)
+        /// </summary>
+        public string NomeUF { get; set; }
+
+        /// <summary>
+        /// True = Detectar o servidor de proxy automaticamente
+        /// False = Utiliza os dados de Proxy Default
+        /// </summary>
+        public bool ProxyAutoDetect { get; set; } = false;
+
+        /// <summary>
+        /// Senha do usuário para conexão do servidor de proxy
+        /// </summary>
+        public string ProxyPassword { get; set; }
+
+        /// <summary>
+        /// Usuário para conexão do servidor de proxy
+        /// </summary>
+        public string ProxyUser { get; set; }
 
         /// <summary>
         /// Nome do arquivo de schema para validação do XML
@@ -54,19 +146,14 @@ namespace Unimake.Business.DFe.Servicos
         public string SchemaArquivo { get; set; }
 
         /// <summary>
-        /// Schemas específicos de um mesmo serviço (Tipos de Evento, Modal CTe ou Modal MDFe)
-        /// </summary>
-        public Dictionary<string, SchemaEspecifico> SchemasEspecificos = new Dictionary<string, SchemaEspecifico>();
-
-        /// <summary>
         /// Versão do schema do XML
         /// </summary>
         public string SchemaVersao { get; set; }
 
         /// <summary>
-        /// Namespace do XML para validação de schema
+        /// Serviço que será executado
         /// </summary>
-        public string TargetNS { get; set; }
+        public Servico Servico { get; set; }
 
         /// <summary>
         /// Nome da tag de Assinatura do XML
@@ -89,93 +176,24 @@ namespace Unimake.Business.DFe.Servicos
         public string TagLoteAtributoID { get; set; }
 
         /// <summary>
-        /// Certificado digital
+        /// Namespace do XML para validação de schema
         /// </summary>
-        public X509Certificate2 CertificadoDigital { get; set; }
+        public string TargetNS { get; set; }
 
         /// <summary>
-        /// PIN do certificado A3. Informe esta propriedade para não precisar digitar o PIN manualmente.
+        /// Ambiente (2-Homologação ou 1-Produção)
         /// </summary>
-        public string CertificadoA3PIN { get; set; }
+        public TipoAmbiente TipoAmbiente { get; set; }
 
         /// <summary>
-        /// Endereço WebService do ambiente de homologação
+        /// Tipo do Documento Fiscal Eletrônico (DF-e)
         /// </summary>
-        public string WebEnderecoHomologacao { get; set; }
+        public TipoDFe TipoDFe { get; set; }
 
         /// <summary>
-        /// Endereço WebService do ambiente de produção
+        /// Tipo de Emissao (1-Normal, 2-Contingencia, 6/7/8-SVC/AN/RS/SP, ...
         /// </summary>
-        public string WebEnderecoProducao { get; set; }
-
-        /// <summary>
-        /// Ação, do webservice, a ser executada no ambiente de homologação
-        /// </summary>
-        public string WebActionHomologacao { get; set; }
-
-        /// <summary>
-        /// Ação, do webservice, a ser executada no ambiente de produção
-        /// </summary>
-        public string WebActionProducao { get; set; }
-
-        /// <summary>
-        /// Nome da tag de retorno do serviço
-        /// </summary>
-        public string WebTagRetorno { get; set; }
-
-        /// <summary>
-        /// Descrição do serviço
-        /// </summary>
-        public string Descricao { get; set; }
-
-        /// <summary>
-        /// Configuração já foi definida anteriormente, não precisa carregar de acordo com os dados do XML
-        /// </summary>
-        public bool Definida { get; set; }
-
-        /// <summary>
-        /// Versão do SOAP utilizada pelo webservice
-        /// </summary>
-        public string WebSoapVersion { get; set; }
-
-        /// <summary>
-        /// ContentType para conexão via classe HttpWebRequest
-        /// </summary>
-        /// <example>
-        /// Exemplos de conteúdo:
-        /// 
-        ///    application/soap+xml; charset=utf-8;
-        ///    text/xml; charset=utf-8;
-        ///    
-        /// Deixe o conteúdo em brando para utilizar um valor padrão. 
-        /// </example>
-        public string WebContentType { get; set; }
-
-        /// <summary>
-        /// String do Soap para envio para o webservice;
-        /// </summary>
-        /// <example>
-        /// Exemplo de conteúdo que deve ser inserido nesta propriedade:
-        /// 
-        ///    <![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Header>{xmlHeader}</soap:Header><soap:Body><nfeDadosMsg xmlns="{ActionWeb}">{xmlBody}</nfeDadosMsg></soap:Body></soap:Envelope>]]>
-        /// 
-        ///    Onde estiver {xmlHeader} o conteúdo será substituido pelo XML do header em tempo de execução
-        ///    Onde estiver {ActionWeb} o conteúdo será substituido pelo WebAction em tempo de execução
-        ///    Onde estiver {xmlBody} o conteúdo será substituido pelo XML do Body em tempo de execução
-        /// 
-        ///    Deixe o conteúdo em branco para utilizar um soap padrão.
-        /// </example>
-        public string WebSoapString { get; set; }
-
-        /// <summary>
-        /// URL para consulta do DFe (NFCe e CTe) via QRCode no ambiente de homologação
-        /// </summary>
-        public string UrlQrCodeHomologacao { get; set; }
-
-        /// <summary>
-        /// URL para consulta do DFe (NFCe e CTe) via QRCode no ambiente de produção
-        /// </summary>
-        public string UrlQrCodeProducao { get; set; }
+        public TipoEmissao TipoEmissao { get; set; }
 
         /// <summary>
         /// URL para consulta do DFe (NFCe e CTe) manualmente no ambiente de homologação
@@ -188,39 +206,75 @@ namespace Unimake.Business.DFe.Servicos
         public string UrlChaveProducao { get; set; }
 
         /// <summary>
-        /// CSC = Código de segurança do contribuinte. Utilizado para criar o QRCode da NFCe
+        /// URL para consulta do DFe (NFCe e CTe) via QRCode no ambiente de homologação
         /// </summary>
-        public string CSC { get; set; }
+        public string UrlQrCodeHomologacao { get; set; }
 
         /// <summary>
-        /// IDToken do CSC (Código de segurança do contribuinte). Utilizado para criar o QRCode da NFCe
+        /// URL para consulta do DFe (NFCe e CTe) via QRCode no ambiente de produção
         /// </summary>
-        public int CSCIDToken { get; set; }
-
-        #region Dados do servidor de proxy para conexão
+        public string UrlQrCodeProducao { get; set; }
 
         /// <summary>
-        /// Tem servidor de proxy?
+        /// Ação, do webservice, a ser executada no ambiente de homologação
         /// </summary>
-        public bool HasProxy { get; set; } = false;
+        public string WebActionHomologacao { get; set; }
 
         /// <summary>
-        /// True = Detectar o servidor de proxy automaticamente
-        /// False = Utiliza os dados de Proxy Default
+        /// Ação, do webservice, a ser executada no ambiente de produção
         /// </summary>
-        public bool ProxyAutoDetect { get; set; } = false;
+        public string WebActionProducao { get; set; }
 
         /// <summary>
-        /// Usuário para conexão do servidor de proxy
+        /// ContentType para conexão via classe HttpWebRequest
         /// </summary>
-        public string ProxyUser { get; set; }
+        /// <example>
+        /// Exemplos de conteúdo:
+        ///
+        ///    application/soap+xml; charset=utf-8;
+        ///    text/xml; charset=utf-8;
+        ///
+        /// Deixe o conteúdo em brando para utilizar um valor padrão.
+        /// </example>
+        public string WebContentType { get; set; }
 
         /// <summary>
-        /// Senha do usuário para conexão do servidor de proxy
+        /// Endereço WebService do ambiente de homologação
         /// </summary>
-        public string ProxyPassword { get; set; }
+        public string WebEnderecoHomologacao { get; set; }
 
-        #endregion
+        /// <summary>
+        /// Endereço WebService do ambiente de produção
+        /// </summary>
+        public string WebEnderecoProducao { get; set; }
+
+        /// <summary>
+        /// String do Soap para envio para o webservice;
+        /// </summary>
+        /// <example>
+        /// Exemplo de conteúdo que deve ser inserido nesta propriedade:
+        ///
+        ///    <![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Header>{xmlHeader}</soap:Header><soap:Body><nfeDadosMsg xmlns="{ActionWeb}">{xmlBody}</nfeDadosMsg></soap:Body></soap:Envelope>]]>
+        ///
+        ///    Onde estiver {xmlHeader} o conteúdo será substituido pelo XML do header em tempo de execução
+        ///    Onde estiver {ActionWeb} o conteúdo será substituido pelo WebAction em tempo de execução
+        ///    Onde estiver {xmlBody} o conteúdo será substituido pelo XML do Body em tempo de execução
+        ///
+        ///    Deixe o conteúdo em branco para utilizar um soap padrão.
+        /// </example>
+        public string WebSoapString { get; set; }
+
+        /// <summary>
+        /// Versão do SOAP utilizada pelo webservice
+        /// </summary>
+        public string WebSoapVersion { get; set; }
+
+        /// <summary>
+        /// Nome da tag de retorno do serviço
+        /// </summary>
+        public string WebTagRetorno { get; set; }
+
+        #endregion Public Properties
     }
 
     /// <summary>
@@ -228,17 +282,23 @@ namespace Unimake.Business.DFe.Servicos
     /// </summary>
     public class SchemaEspecifico
     {
+        #region Public Properties
+
         /// <summary>
         /// ID da parte específica do XML. Pode ser o TipoEvento para eventos ou o Modal para CTe e MDFe.
         /// </summary>
         public string Id { get; set; }
+
         /// <summary>
         /// Arquivo de schema principal
         /// </summary>
         public string SchemaArquivo { get; set; }
+
         /// <summary>
         /// Arquivo de schema da parte específica do XML
         /// </summary>
         public string SchemaArquivoEspecifico { get; set; }
+
+        #endregion Public Properties
     }
 }

@@ -79,6 +79,8 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
         #region Public Methods
 
+#if INTEROP
+
         /// <summary>
         /// Executa o serviço: Assina o XML, valida e envia para o webservice
         /// </summary>
@@ -88,7 +90,9 @@ namespace Unimake.Business.DFe.Servicos.CTe
         {
             PrepararServico(consSitCTe?.GerarXML() ?? throw new ArgumentNullException(nameof(consSitCTe)), configuracao);
             Executar();
-        }
+        } 
+
+#endif
 
         /// <summary>
         /// Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).

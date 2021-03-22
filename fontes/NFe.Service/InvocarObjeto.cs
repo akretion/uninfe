@@ -242,7 +242,6 @@ namespace NFe.Service
                             case "2030":
                             case "2040":
                             case "2050":
-                            case "2055":
                                 XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[]
                                 {
                                     Convert.ToInt32(docXML.GetElementsByTagName("tipoEvento")[0].InnerText),
@@ -252,7 +251,21 @@ namespace NFe.Service
                                     docXML.GetElementsByTagName("nrInscEstab")[0].InnerText
                                 });
                                 break;
+                            case "2055":
+                                XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[]
+                                {
+                                    Convert.ToInt32(docXML.GetElementsByTagName("tipoEvento")[0].InnerText),
+                                    Convert.ToByte(docXML.GetElementsByTagName("tpInsc")[0].InnerText),
+                                    docXML.GetElementsByTagName("nrInsc")[0].InnerText,
+                                    docXML.GetElementsByTagName("perApur")[0].InnerText,
+                                    Convert.ToByte(docXML.GetElementsByTagName("tpInscAdq")[0].InnerText),
+                                    docXML.GetElementsByTagName("nrInscAdq")[0].InnerText,
+                                    Convert.ToByte(docXML.GetElementsByTagName("tpInscProd")[0].InnerText),
+                                    docXML.GetElementsByTagName("nrInscProd")[0].InnerText
+                                });
+                                break;
                             case "2060":
+                            case "4040":
                                 XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[]
                                 {
                                     Convert.ToInt32(docXML.GetElementsByTagName("tipoEvento")[0].InnerText),
@@ -263,8 +276,47 @@ namespace NFe.Service
                                     docXML.GetElementsByTagName("nrInscEstab")[0].InnerText
                                 });
                                 break;
+                            case "4080":
+                                XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[]
+                                {
+                                    Convert.ToInt32(docXML.GetElementsByTagName("tipoEvento")[0].InnerText),
+                                    Convert.ToByte(docXML.GetElementsByTagName("tpInsc")[0].InnerText),
+                                    docXML.GetElementsByTagName("nrInsc")[0].InnerText,
+                                    docXML.GetElementsByTagName("perApur")[0].InnerText,
+                                    Convert.ToByte(docXML.GetElementsByTagName("tpInscEstab")[0].InnerText),
+                                    docXML.GetElementsByTagName("nrInscEstab")[0].InnerText,
+                                    docXML.GetElementsByTagName("cnpjFontePagadora")[0].InnerText
+                                });
+                                break;
+                            case "4010":
+                                XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[]
+                                {
+                                    Convert.ToInt32(docXML.GetElementsByTagName("tipoEvento")[0].InnerText),
+                                    Convert.ToByte(docXML.GetElementsByTagName("tpInsc")[0].InnerText),
+                                    docXML.GetElementsByTagName("nrInsc")[0].InnerText,
+                                    docXML.GetElementsByTagName("perApur")[0].InnerText,
+                                    Convert.ToByte(docXML.GetElementsByTagName("tpInscEstab")[0].InnerText),
+                                    docXML.GetElementsByTagName("nrInscEstab")[0].InnerText,
+                                    docXML.GetElementsByTagName("cpfBeneficiario")[0].InnerText
+                                });
+                                break;
+                            case "4020":
+                                XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[]
+                                {
+                                    Convert.ToInt32(docXML.GetElementsByTagName("tipoEvento")[0].InnerText),
+                                    Convert.ToByte(docXML.GetElementsByTagName("tpInsc")[0].InnerText),
+                                    docXML.GetElementsByTagName("nrInsc")[0].InnerText,
+                                    docXML.GetElementsByTagName("perApur")[0].InnerText,
+                                    Convert.ToByte(docXML.GetElementsByTagName("tpInscEstab")[0].InnerText),
+                                    docXML.GetElementsByTagName("nrInscEstab")[0].InnerText,
+                                    docXML.GetElementsByTagName("cnpjBeneficiario")[0].InnerText
+                                });
+                                break;
                             case "2098":
                             case "2099":
+                            case "4004":
+                            case "4098":
+                            case "4099":
                                 XmlRetorno = wsProxy.InvokeXML(servicoWS, metodo, new object[]
                                 {
                                     Convert.ToInt32(docXML.GetElementsByTagName("tipoEvento")[0].InnerText),

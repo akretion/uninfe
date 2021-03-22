@@ -14,10 +14,10 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; }
 
-        [XmlElement("evento")]
+        [XmlElement("evento", Order = 0, Namespace = "http://www.portalfiscal.inf.br/nfe")]
         public Evento Evento { get; set; }
 
-        [XmlElement("retEvento")]
+        [XmlElement("retEvento", Order = 1, Namespace = "http://www.portalfiscal.inf.br/nfe")]
         public RetEvento RetEvento { get; set; }
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
     /// <summary>
     /// Enviar o XML de consulta recibo do lote de MDFe para o webservice
     /// </summary>
-    public class RetAutorizacao: ServicoBase
+    public class RetAutorizacao : ServicoBase
     {
         #region Private Constructors
 
@@ -28,7 +28,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
             var xml = new ConsReciMDFe();
             xml = xml.LerXML<ConsReciMDFe>(ConteudoXML);
 
-            if(!Configuracoes.Definida)
+            if (!Configuracoes.Definida)
             {
                 Configuracoes.Servico = Servico.MDFeConsultaRecibo;
                 Configuracoes.TipoAmbiente = xml.TpAmb;
@@ -49,7 +49,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         {
             get
             {
-                if(!string.IsNullOrWhiteSpace(RetornoWSString))
+                if (!string.IsNullOrWhiteSpace(RetornoWSString))
                 {
                     return XMLUtility.Deserializar<RetConsReciMDFe>(RetornoWSXML);
                 }
@@ -74,9 +74,21 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         public RetAutorizacao(ConsReciMDFe consReciMDFe, Configuracao configuracao)
             : this(consReciMDFe?.GerarXML() ?? throw new ArgumentNullException(nameof(consReciMDFe)), configuracao) { }
 
+#if INTEROP
+        /// <summary>
+        /// Inicia uma instância desta classe
+        /// </summary>
+        public RetAutorizacao()
+        {
+        }
+
+#endif
+
         #endregion Public Constructors
 
         #region Public Methods
+
+#if INTEROP
 
         /// <summary>
         /// Executa o serviço: Assina o XML, valida e envia para o webservice
@@ -86,14 +98,16 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         [ComVisible(true)]
         public void Executar(ConsReciMDFe consReciMDFe, Configuracao configuracao)
         {
-            if(configuracao is null)
+            if (configuracao is null)
             {
                 throw new ArgumentNullException(nameof(configuracao));
             }
 
             PrepararServico(consReciMDFe?.GerarXML() ?? throw new ArgumentNullException(nameof(consReciMDFe)), configuracao);
             Executar();
-        }
+        } 
+
+#endif
 
         /// <summary>
         /// Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).

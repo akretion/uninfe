@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Schema;
 
@@ -22,6 +23,21 @@ namespace Unimake.Business.DFe
         #endregion Private Properties
 
         #region Private Methods
+
+        /// <summary>
+        /// Converte String para Stream
+        /// </summary>
+        /// <param name="s">Conteúdo a ser convertido</param>
+        /// <returns>Retorna Stream do conteúdo informado para o método</returns>
+        private static Stream GenerateStreamFromString(string s)
+        {
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(s);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
 
         /// <summary>
         /// Extrair recursos (XSD) da DLL para efetuar a validação do XML
@@ -96,21 +112,6 @@ namespace Unimake.Business.DFe
         }
 
         /// <summary>
-        /// Converte String para Stream
-        /// </summary>
-        /// <param name="s">Conteúdo a ser convertido</param>
-        /// <returns>Retorna Stream do conteúdo informado para o método</returns>
-        private static Stream GenerateStreamFromString(string s)
-        {
-            var stream = new MemoryStream();
-            var writer = new StreamWriter(stream);
-            writer.Write(s);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
-        }
-
-        /// <summary>
         /// Evento Executado em tempo de validação para retorno de erros
         /// </summary>
         /// <param name="sender">Object sender</param>
@@ -174,13 +175,14 @@ namespace Unimake.Business.DFe
         /// <example>
         /// //Validar arquivos de NFe
         /// Validar(xmlDocument, "NFe.consStatServCTe_v3.00.xsd")
-        /// 
+        ///
         /// //Validar arquivos de CTe
         /// Validar(xmlDocument, "CTe.consStatServCTe_v3.00.xsd")
-        /// 
+        ///
         /// //Validar arquivos de MDFe
         /// Validar(xmlDocument, "MDFe.consStatServ_v4.00.xsd")
         /// </example>
+        [ComVisible(false)]
         public void Validar(XmlDocument conteudoXML, string arqSchema, string targetNS = "")
         {
             if(string.IsNullOrEmpty(arqSchema))
@@ -234,6 +236,30 @@ namespace Unimake.Business.DFe
                 ErrorMessage += "\r\n...Final da validação";
             }
         }
+
+#if INTEROP
+
+        /// <summary>
+        /// Método responsável por validar a estrutura do XML de acordo com o schema passado por parâmetro
+        /// </summary>
+        /// <param name="path">Arquivo XML a ser validado</param>
+        /// <param name="arqSchema">Arquivo de schema para validação do XML (XSD) contido nos recursos da DLL.</param>
+        /// <param name="targetNS">Target Name Space, se existir, para validação</param>
+        /// <example>
+        /// //Validar arquivos de NFe
+        /// Validar(@"C:\arquivo-procnfe.xml", "NFe.consStatServCTe_v3.00.xsd")
+        ///
+        /// //Validar arquivos de MDFe
+        /// Validar(@"C:\arquivo-mdfe.xml", "MDFe.consStatServ_v4.00.xsd")
+        /// </example>
+        public void Validar(string path, string arqSchema, string targetNS = "")
+        {
+            var doc = new XmlDocument();
+            doc.Load(path);
+            Validar(doc, arqSchema, targetNS);
+        }
+
+#endif
 
         #endregion Public Methods
     }

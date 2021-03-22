@@ -13,7 +13,7 @@ Set statusServico = CreateObject("Unimake.Business.DFe.Servicos.CTe.StatusServic
 
 ConsStatServCte.Versao = "3.00"
 ConsStatServCte.TpAmb = TpAmb
-statusServico.Executar (ConsStatServCte), (Config.InicializarConfiguracao(CTe, CUF))
+statusServico.Executar (ConsStatServCte), (Config.InicializarConfiguracao(TipoDFe.CTe, UFBrasil.PR))
 
 Log.EscreveLog statusServico.RetornoWSString, True
 Log.EscreveLog statusServico.result.XMotivo, False

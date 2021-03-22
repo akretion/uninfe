@@ -82,6 +82,8 @@ namespace Unimake.Business.DFe.Servicos.GNRE
 
         #region Public Methods
 
+#if INTEROP
+
         /// <summary>
         /// Executa o envio da consulta do lote da GNRE
         /// </summary>
@@ -92,7 +94,9 @@ namespace Unimake.Business.DFe.Servicos.GNRE
         {
             PrepararServico(tConsLoteGNRE?.GerarXML() ?? throw new ArgumentNullException(nameof(tConsLoteGNRE)), configuracao);
             Executar();
-        }
+        } 
+
+#endif
 
         /// <summary>
         /// Gravar o XML de distrubição da GNRE

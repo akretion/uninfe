@@ -7,7 +7,7 @@
 		<SccLocalPath>SAK</SccLocalPath>
 	</PropertyGroup>
 	<PropertyGroup>
-		<TargetFrameworks>net462</TargetFrameworks>
+		<TargetFrameworks>net472</TargetFrameworks>
 		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 		<Deterministic>false</Deterministic>

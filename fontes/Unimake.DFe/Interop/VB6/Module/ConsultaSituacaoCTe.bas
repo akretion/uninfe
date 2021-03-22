@@ -11,10 +11,10 @@ Log.ClearLog
 Set ConsSitCTe = CreateObject("Unimake.Business.DFe.Xml.CTe.ConsSitCTe")
 ConsSitCTe.Versao = "3.00"
 ConsSitCTe.TpAmb = TpAmb
-ConsSitCTe.ChCTe = CUF & "170701761135000132570010000186931903758906"
+ConsSitCTe.ChCTe = UFBrasil.PR & "170701761135000132570010000186931903758906"
 
 Set consultaProtocolo = CreateObject("Unimake.Business.DFe.Servicos.CTe.ConsultaProtocolo")
-consultaProtocolo.Executar (ConsSitCTe), (Config.InicializarConfiguracao(CTe))
+consultaProtocolo.Executar (ConsSitCTe), (Config.InicializarConfiguracao(TipoDFe.CTe))
 
 Log.EscreveLog consultaProtocolo.RetornoWSString, True
 Log.EscreveLog consultaProtocolo.result.XMotivo, True

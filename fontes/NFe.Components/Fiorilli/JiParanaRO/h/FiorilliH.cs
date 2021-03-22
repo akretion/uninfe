@@ -1,5 +1,5 @@
 ﻿using NFe.Components.Abstract;
-using NFe.Components.HCanaaDosCarajasPA;
+using NFe.Components.HJiParanaRO;
 using System;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
