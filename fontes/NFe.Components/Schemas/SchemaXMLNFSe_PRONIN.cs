@@ -448,10 +448,10 @@ namespace NFSe.Components
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
                 Descricao = "XML de Lote RPS",
-                TagAssinatura = "",
-                TagAtributoId = "",
-                TagLoteAssinatura = "",
-                TagLoteAtributoId = "",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
             });
             #endregion XML de lote RPS - Ijuí - RS
@@ -470,8 +470,23 @@ namespace NFSe.Components
                 TagLoteAtributoId = "LoteRps",
                 TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
             });
-            #endregion XML de lote RPS - Ijuí - RS
+            #endregion XML de lote RPS - São Pedro - SP
 
+            #region XML de lote RPS - Castanhal - PA
+
+            SchemaXML.InfSchemas.Add("NFSE-PRONIN-1502400-EnviarLoteRpsEnvio", new InfSchema()
+            {
+                Tag = "EnviarLoteRpsEnvio",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "NFSe\\PRONIN\\nfse.xsd",
+                Descricao = "XML de Lote RPS",
+                TagAssinatura = "Rps",
+                TagAtributoId = "InfDeclaracaoPrestacaoServico",
+                TagLoteAssinatura = "EnviarLoteRpsEnvio",
+                TagLoteAtributoId = "LoteRps",
+                TargetNameSpace = "http://www.abrasf.org.br/ABRASF/arquivos/nfse.xsd"
+            });
+            #endregion XML de lote RPS - Castanhal - PA
         }
     }
 }

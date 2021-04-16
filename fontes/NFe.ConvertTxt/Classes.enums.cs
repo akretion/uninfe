@@ -39,24 +39,27 @@ namespace NFe.ConvertTxt
     ///
     /// NFC-e
     /// 
-    public enum TpcnDestinoOperacao {
-        doInterna = 1, 
-        doInterestadual = 2, 
+    public enum TpcnDestinoOperacao
+    {
+        doInterna = 1,
+        doInterestadual = 2,
         doExterior = 3
     }
-    public enum TpcnConsumidorFinal {
-        cfNao = 0, 
+    public enum TpcnConsumidorFinal
+    {
+        cfNao = 0,
         cfConsumidorFinal = 1
     }
-    public enum TpcnPresencaComprador {
+    public enum TpcnPresencaComprador
+    {
         [Description("0=Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste);")]
-        pcNao = 0, 
+        pcNao = 0,
         [Description("Operação presencial")]
-        pcPresencial = 1, 
+        pcPresencial = 1,
         [Description("Operação não presencial, pela Internet")]
-        pcInternet = 2, 
+        pcInternet = 2,
         [Description("Operação não presencial, Teleatendimento")]
-        pcTeleatendimento = 3, 
+        pcTeleatendimento = 3,
         [Description("NFC-e em operação com entrega a domicílio")]
         pcEntregaDomicilio = 4,
         [Description("Operação presencial, fora do estabelecimento")]
@@ -73,25 +76,26 @@ namespace NFe.ConvertTxt
         OperacaoSiteOuTerceiro = 1
     }
 
-    public enum TpcnFormaPagamento {
+    public enum TpcnFormaPagamento
+    {
         [Description("01=Dinheiro")]
-        fpDinheiro=1, 
+        fpDinheiro = 1,
         [Description("02=Cheque")]
-        fpCheque=2, 
+        fpCheque = 2,
         [Description("03=Cartão de Crédito")]
-        fpCartaoCredito=3, 
+        fpCartaoCredito = 3,
         [Description("04=Cartão de Débito")]
-        fpCartaoDebito=4, 
+        fpCartaoDebito = 4,
         [Description("05=Crédito Loja")]
-        fpCreditoLoja=5,
+        fpCreditoLoja = 5,
         [Description("10=Vale Alimentação")]
-        fpValeAlimentacao=10, 
+        fpValeAlimentacao = 10,
         [Description("11=Vale Refeição")]
-        fpValeRefeicao=11, 
+        fpValeRefeicao = 11,
         [Description("12=Vale Presente")]
-        fpValePresente=12, 
+        fpValePresente = 12,
         [Description("13=Vale Combustível")]
-        fpValeCombustivel=13,
+        fpValeCombustivel = 13,
         //[Description("14=Duplicata Mercantil")]
         //fpDulicataMercantil = 14,
         [Description("15=Boleto Bancário")]
@@ -105,19 +109,19 @@ namespace NFe.ConvertTxt
         [Description("19=Programa de fidelidade, Cashback, Crédito Virtual")]
         ProgramaFidelidade = 19,
         [Description("90=Sem pagamento")]
-        fpSemPagamento=90,
-        [Description("99 =Outros")]        fpOutro=99
+        fpSemPagamento = 90,
+        [Description("99 =Outros")]        fpOutro = 99
     }
     public enum TpcnBandeiraCartao
     {
         [Description("01 - VISA")]
-        bcVisa=1, 
+        bcVisa = 1,
         [Description("02 - MasterCard")]
-        bcMasterCard=2, 
+        bcMasterCard = 2,
         [Description("03 - American Express")]
-        bcAmericanExpress=3, 
+        bcAmericanExpress = 3,
         [Description("04 - Sorocred")]
-        bcSorocred=4, 
+        bcSorocred = 4,
         [Description("05 - Diners Club")]
         bcDinersClub = 5,
         [Description("06 - Elo")]
@@ -129,7 +133,7 @@ namespace NFe.ConvertTxt
         [Description("09 - Cabal")]
         bcCabal = 9,
         [Description("09 - Outros")]
-        bcOutros=99
+        bcOutros = 99
     }
 
     public enum TpcnProcessoEmissao
@@ -139,14 +143,14 @@ namespace NFe.ConvertTxt
         peAvulsaContribuinte = 2,
         peContribuinteAplicativoFisco = 3
     }
-    public enum TpcnModalidadeFrete 
-    { 
+    public enum TpcnModalidadeFrete
+    {
         [Description("0=Contratação do Frete por conta do Remetente (CIF)")]
-        mfContaEmitente = 0, 
+        mfContaEmitente = 0,
         [Description("1=Contratação do Frete por conta do Destinatário (FOB)")]
-        mfContaDestinatario = 1, 
+        mfContaDestinatario = 1,
         [Description("2=Contratação do Frete por conta de Terceiros")]
-        mfContaTerceiros = 2, 
+        mfContaTerceiros = 2,
         [Description("3=Transporte Próprio por conta do Remetente")]
         mfTranspProprioContaRemetente = 3,
         [Description("4=Transporte Próprio por conta do Destinatário")]
@@ -154,20 +158,20 @@ namespace NFe.ConvertTxt
         [Description("9 = Sem Ocorrência de Transporte")]
         mfSemFrete = 9
     }
-    public enum TpcnDeterminacaoBaseIcms 
-    { 
-        dbiMargemValorAgregado, 
-        dbiPauta, 
-        dbiPrecoTabelado, 
-        dbiValorOperacao 
+    public enum TpcnDeterminacaoBaseIcms
+    {
+        dbiMargemValorAgregado,
+        dbiPauta,
+        dbiPrecoTabelado,
+        dbiValorOperacao
     }
-    public enum TpcnDeterminacaoBaseIcmsST 
-    { 
-        dbisPrecoTabelado = 0, 
-        dbisListaNegativa = 1, 
-        dbisListaPositiva = 2, 
-        dbisListaNeutra = 3, 
-        dbisMargemValorAgregado = 4, 
+    public enum TpcnDeterminacaoBaseIcmsST
+    {
+        dbisPrecoTabelado = 0,
+        dbisListaNegativa = 1,
+        dbisListaPositiva = 2,
+        dbisListaNeutra = 3,
+        dbisMargemValorAgregado = 4,
         dbisPauta = 5,
         dbisValorOperacao = 6,
         NaoInserirTagNoXML = 100 //Quando a tag não é obrigatórioa, vamos retornar este valor para termos controle sobre a situação.
@@ -181,7 +185,7 @@ namespace NFe.ConvertTxt
         [Description("2 - Estrangeira - Adquirida no mercado interno")]
         oeEstrangeiraAdquiridaBrasil = 2,
         [Description("3 - Nacional - Mercadoria ou bem com Conteúdo de Importação > 40 % e < 70 % ")]
-		oeNacional_Mercadoria_ou_bem_com_Conteúdo_de_Importação_superior_a_40 = 3,
+        oeNacional_Mercadoria_ou_bem_com_Conteúdo_de_Importação_superior_a_40 = 3,
         [Description("4 - Nacional - Cuja produção tenha sido feita em conformidade com o PPB")]
         oeNacional_Cuja_produção_tenha_sido_feita_em_conformidade_com_o_PPB = 4,
         [Description("5 - Nacional - Mercadoria com bem ou conteúdo de importação inferior a 40%")]
@@ -193,66 +197,66 @@ namespace NFe.ConvertTxt
         [Description("8 - Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%")]
         oeEstrangeira_Nacional_Conteúdo_de_Importação_superior_a_70 = 8
     }
-    public enum TpcnTipoArma 
-    { 
-        taUsoPermitido = 0, 
+    public enum TpcnTipoArma
+    {
+        taUsoPermitido = 0,
         taUsoRestrito = 1
     }
-    public enum TpcnCondicaoVeiculo 
-    { 
-        cvAcabado = 1, 
-        cvInacabado = 2, 
+    public enum TpcnCondicaoVeiculo
+    {
+        cvAcabado = 1,
+        cvInacabado = 2,
         cvSemiAcabado = 3
     }
-    public enum TpcnTipoOperacao 
-    { 
-        toVendaConcessionaria = 1, 
-        toFaturamentoDireto = 2, 
-        toVendaDireta = 3, 
+    public enum TpcnTipoOperacao
+    {
+        toVendaConcessionaria = 1,
+        toFaturamentoDireto = 2,
+        toVendaDireta = 3,
         toOutros = 0
     }
-    public enum TpcnIndicadorEscala 
-    { 
+    public enum TpcnIndicadorEscala
+    {
         [Description("Nenhum")]
         ieNenhum = ' ',
         [Description("S - Produzido em Escala Relevante")]
-        ieNaoSomaTotalNFe = 'S', 
+        ieNaoSomaTotalNFe = 'S',
         [Description("N – Produzido em Escala NÃO Relevante")]
-        ieSomaTotalNFe = 'N' 
+        ieSomaTotalNFe = 'N'
     }
     public enum TpcnIndicadorTotal
     {
         itNaoSomaTotalNFe = 0,
         itSomaTotalNFe = 1
     }
-    public enum TpcnCRT 
-    { 
-        crtSimplesNacional = 1, 
+    public enum TpcnCRT
+    {
+        crtSimplesNacional = 1,
         crtSimplesExcessoReceita = 2,
         crtRegimeNormal = 3
     }
-    public enum TpcnTipoCampo 
+    public enum TpcnTipoCampo
     {
         tcDec2 = 2, tcDec3 = 3, tcDec4 = 4, tcDec5 = 5, tcDec6 = 6, tcDec7 = 7, tcDec8 = 8, tcDec9 = 9, tcDec10 = 10,
         tcStr, tcInt, tcDatYYYY_MM_DD, tcDatYYYYMMDD, tcHor, tcDatHor
     }
 
-    public enum TpcnIndicadorPagamento 
-    { 
+    public enum TpcnIndicadorPagamento
+    {
         ipNone = -1,
-        ipVista = 0, 
-        ipPrazo = 1, 
-        ipOutras = 2 
+        ipVista = 0,
+        ipPrazo = 1,
+        ipOutras = 2
     }
-    public enum TpcnTipoNFe 
-    { 
-        tnEntrada = 0, 
+    public enum TpcnTipoNFe
+    {
+        tnEntrada = 0,
         tnSaida = 1
     }
-    public enum TpcnTipoImpressao 
-    { 
+    public enum TpcnTipoImpressao
+    {
         tiNao = 0,
-        tiRetrato = 1, 
+        tiRetrato = 1,
         tiPaisagem = 2,
         tiDANFESimplificado = 3,
         tiDANFENFCe = 4,
@@ -267,9 +271,9 @@ namespace NFe.ConvertTxt
         fnDevolucao = 4
     }
 
-    public enum TpcnECFModRef 
+    public enum TpcnECFModRef
     {
-        ECFModRefVazio, 
+        ECFModRefVazio,
         ECFModRef2B,
         ECFModRef2C,
         ECFModRef2D /*'', '2B', '2C','2D'*/
@@ -362,14 +366,15 @@ namespace NFe.ConvertTxt
     internal enum ObOp
     {
         Obrigatorio,
-        Opcional, 
+        Opcional,
         None
     }
 
-    public enum TpcnindIEDest {
-        inContribuinte=1, 
-        inIsento=2, 
-        inNaoContribuinte=9
+    public enum TpcnindIEDest
+    {
+        inContribuinte = 1,
+        inIsento = 2,
+        inNaoContribuinte = 9
     }
 
     public enum TpcnMod
@@ -402,7 +407,13 @@ namespace NFe.ConvertTxt
         [Description("Meios próprios")]
         tvMeiosProprios = 9,
         [Description("Entrada/Saida ficta")]
-        tvEntradaSaidaFicta = 10
+        tvEntradaSaidaFicta = 10,
+        [Description("Courier")]
+        tvCourier = 11,
+        [Description("Em mãos")]
+        tvEmMaos = 12,
+        [Description("Por reboque")]
+        tvPorReboque = 13
     }
 
     public enum TpcnTipoIntermedio
@@ -417,12 +428,12 @@ namespace NFe.ConvertTxt
 
     public enum TpcnindISS
     {
-        iiExigivel = 1, 
-        iiNaoIncidencia = 2, 
-        iiIsencao = 3, 
+        iiExigivel = 1,
+        iiNaoIncidencia = 2,
+        iiIsencao = 3,
         iiExportacao = 4,
-        iiImunidade = 5, 
-        iiExigSuspDecisaoJudicial = 6, 
+        iiImunidade = 5,
+        iiExigSuspDecisaoJudicial = 6,
         iiExigSuspProcessoAdm = 7
     }
 

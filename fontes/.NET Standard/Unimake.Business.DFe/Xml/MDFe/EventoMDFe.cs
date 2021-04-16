@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
@@ -290,6 +291,25 @@ namespace Unimake.Business.DFe.Xml.MDFe
         public List<InfDoc> InfDoc { get; set; } = new List<InfDoc>();
 
         #endregion Public Properties
+
+        #region Public Methods
+
+#if INTEROP
+
+        [ComVisible(true)]
+        public void AddInfDoc(InfDoc item)
+        {
+            if(InfDoc == null)
+            {
+                InfDoc = new List<InfDoc>();
+            }
+
+            InfDoc.Add(item);
+        }
+
+#endif
+
+        #endregion Public Methods
     }
 
     [Serializable]

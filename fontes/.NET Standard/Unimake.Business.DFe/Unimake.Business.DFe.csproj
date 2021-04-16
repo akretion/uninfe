@@ -3,10 +3,11 @@
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0</TargetFrameworks>
 		<LangVersion>7.3</LangVersion>
-		<AssemblyVersion>2020.01.17.1501</AssemblyVersion>
-		<FileVersion>2020.01.17.1501</FileVersion>
+		<AssemblyVersion>2021.04.01.1700</AssemblyVersion>
+		<FileVersion>2021.04.01.1700</FileVersion>
 		<RunPostBuildEvent>Always</RunPostBuildEvent>
 		<Configurations>Debug;Release;INTEROP_Release</Configurations>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

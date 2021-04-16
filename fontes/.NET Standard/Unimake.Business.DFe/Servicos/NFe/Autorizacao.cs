@@ -306,6 +306,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// Gravar o XML de distribuição em uma pasta no HD
         /// </summary>
         /// <param name="pasta">Pasta onde deve ser gravado o XML</param>
+        [ComVisible(true)]
         public void GravarXmlDistribuicao(string pasta)
         {
             foreach(var item in NfeProcResults)
@@ -321,6 +322,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
         /// Grava o XML de dsitribuição no stream
         /// </summary>
         /// <param name="stream">Stream que vai receber o XML de distribuição</param>
+        [ComVisible(false)]
         public void GravarXmlDistribuicao(System.IO.Stream stream)
         {
             foreach(var item in NfeProcResults)

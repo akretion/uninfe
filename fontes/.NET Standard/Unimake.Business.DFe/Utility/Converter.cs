@@ -20,9 +20,9 @@ namespace Unimake.Business.DFe.Utility
         /// Converter tipo de um objeto
         /// </summary>
         /// <param name="value">Para qual tipo converter o conteúdo do objeto</param>
-        /// <param name="conversionType">Para qual tipo converter o conteúdo do objeto</param>
+        /// <param name="expectedType">Para qual tipo converter o conteúdo do objeto</param>
         /// <returns>Conteúdo do objeto convertido para o tipo informado</returns>
-        private static object ChangeType(object value, Type conversionType)
+        private static object ChangeType(object value, Type expectedType)
         {
             if(value == null)
             {
@@ -33,16 +33,17 @@ namespace Unimake.Business.DFe.Utility
 
             try
             {
-                if(conversionType.IsEnum)
+                if(expectedType.IsEnum)
                 {
-                    var i = Convert.ToInt32(value);
-
-                    result = (from enun in Enum.GetValues(conversionType).Cast<int>()
-                              where enun == i
-                              select enun).First();
+                    if(int.TryParse(value.ToString(), out var i))
+                    {
+                        result = (from enun in Enum.GetValues(expectedType).Cast<int>()
+                                  where enun == i
+                                  select enun).First();
+                    }
                 }
-                else if(conversionType == typeof(TimeSpan) ||
-                        conversionType == typeof(Nullable<TimeSpan>))
+                else if(expectedType == typeof(TimeSpan) ||
+                        expectedType == typeof(TimeSpan?))
                 {
                     var timeDate = new DateTime();
 
@@ -51,43 +52,46 @@ namespace Unimake.Business.DFe.Utility
                         result = new TimeSpan(timeDate.Ticks);
                     }
                 }
+                else if(expectedType == typeof(bool) ||
+                         expectedType == typeof(bool?))
+                {
+                    bool.TryParse(value?.ToString(), out var b);
+                    result = b;
+                }
                 else
                 {
-                    var conv = TypeDescriptor.GetConverter(conversionType);
-                    if(conv?.CanConvertFrom(value.GetType()) ?? false)
+                    if(!ConvertFromTypeDescriptor(value, expectedType, ref result))
                     {
-                        try
-                        {
-                            result = conv.ConvertFrom(value);
-                        }
-                        catch
-                        {
-                            //do nothing
-                        }
-                    }
-                    else
-                    {
-                        result = System.Convert.ChangeType(value, conversionType);
+                        result = Convert.ChangeType(value, expectedType);
                     }
                 }
             }
             catch
             {
-                var conv = TypeDescriptor.GetConverter(conversionType);
-                if(conv?.CanConvertFrom(value.GetType()) ?? false)
-                {
-                    try
-                    {
-                        result = conv.ConvertFrom(value);
-                    }
-                    catch
-                    {
-                        //do nothing
-                    }
-                };
+                ConvertFromTypeDescriptor(value, expectedType, ref result);
             }
 
             return result;
+        }
+
+        private static bool ConvertFromTypeDescriptor(object value, Type expectedType, ref object result)
+        {
+            var conv = TypeDescriptor.GetConverter(expectedType);
+
+            if(!(conv?.CanConvertFrom(value.GetType()) ?? false))
+            {
+                return false;
+            }
+
+            try
+            {
+                result = conv.ConvertFrom(value);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         #endregion Private Methods
@@ -101,9 +105,8 @@ namespace Unimake.Business.DFe.Utility
         /// <returns>Conteúdo convertido para MemoryStrem com UTF8 Encoding</returns>
         public static MemoryStream StringToStreamUTF8(string contentConvert)
         {
-            var byteArray = new byte[contentConvert.Length];
             var encoding = new System.Text.UTF8Encoding();
-            byteArray = encoding.GetBytes(contentConvert);
+            var byteArray = encoding.GetBytes(contentConvert);
             var memoryStream = new MemoryStream(byteArray);
             memoryStream.Seek(0, SeekOrigin.Begin);
 
@@ -116,37 +119,35 @@ namespace Unimake.Business.DFe.Utility
         /// <typeparam name="T">Tipo esperado para conversão</typeparam>
         /// <param name="value">Valor que deverá ser convertido</param>
         /// <returns>Value convertido em T</returns>
-        public static T ToAny<T>(object value) => (T)ToAny(typeof(T), value);
+        public static T ToAny<T>(object value) => (T)ToAny(value, typeof(T));
 
         /// <summary>
         /// Converter tipo de um objeto
         /// </summary>
-        /// <param name="t">Para qual tipo converter o conteúdo do objeto</param>
+        /// <param name="expectedType">Para qual tipo converter o conteúdo do objeto</param>
         /// <param name="value">Conteúdo do objeto a ser convertido</param>
         /// <returns>Conteúdo do objeto convertido para o tipo informado</returns>
-        public static object ToAny(Type t, object value)
+        public static object ToAny(object value, Type expectedType)
         {
             var result = default(object);
 
-            t = Nullable.GetUnderlyingType(t) ?? t;
+            expectedType = Nullable.GetUnderlyingType(expectedType) ?? expectedType;
 
             if(value != null && value != DBNull.Value)
             {
                 try
                 {
-                    if(t.IsEnum)
+                    if(expectedType.IsEnum)
                     {
-                        result = Enum.Parse(t, value.ToString());
+                        result = Enum.Parse(expectedType, value.ToString());
                     }
-                    else if(t.FullName.Equals(typeof(string).FullName))
+                    else if(expectedType.FullName.Equals(typeof(string).FullName))
                     {
-                        var s = value.ToString();
-
-                        result = ChangeType(s, t);
+                        result = value.ToString();
                     }
                     else
                     {
-                        result = ChangeType(value, t);
+                        result = ChangeType(value, expectedType);
                     }
                 }
                 catch
@@ -224,8 +225,7 @@ namespace Unimake.Business.DFe.Utility
             var sha1Hash = sha1.ComputeHash(asciiBytes);
 
             // Assinar o HASH (array de bytes) utilizando RSA-SHA1.
-            var rsa = new RSACryptoServiceProvider();
-            rsa = certificado.PrivateKey as RSACryptoServiceProvider;
+            var rsa = certificado.PrivateKey as RSACryptoServiceProvider;
             asciiBytes = rsa.SignHash(sha1Hash, "SHA1");
             var result = Convert.ToBase64String(asciiBytes);
 

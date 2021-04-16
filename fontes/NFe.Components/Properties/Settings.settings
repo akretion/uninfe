@@ -936,7 +936,7 @@
       <Value Profile="(Default)">http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_PIjuiRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc</Value>
+      <Value Profile="(Default)">http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_PPiumaES_RpsServiceService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://es-piuma-pm-nfs.cloud.el.com.br:80/RpsService</Value>
@@ -1045,6 +1045,12 @@
     </Setting>
     <Setting Name="NFe_Components_PItatingaSP_GeisWebService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://www.geisweb.net.br:443/producao/itatinga/webservice/GeisWebServiceImpl.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_Castanhal_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://transparencia.castanhal.pa.gov.br:8086/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PCastanhalPA_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://transparencia.castanhal.pa.gov.br:8086/NFSe.Portal.Integracao/Services.svc</Value>
     </Setting>
   </Settings>
 </SettingsFile>

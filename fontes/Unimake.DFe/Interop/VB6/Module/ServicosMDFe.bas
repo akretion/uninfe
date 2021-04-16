@@ -1,6 +1,124 @@
 Attribute VB_Name = "ServicosMDFe"
 Option Explicit
 
+Public Sub EncerramentoMDFe()
+On Error GoTo erro
+Dim EventoMDFe: Set EventoMDFe = CreateObject("Unimake.Business.DFe.xml.MDFe.EventoMDFe")
+Dim InfEvento: Set InfEvento = CreateObject("Unimake.Business.DFe.Xml.MDFe.InfEvento")
+Dim DetEventoEncMDFe: Set DetEventoEncMDFe = CreateObject("Unimake.Business.DFe.Xml.MDFe.DetEventoEncMDFe")
+Dim InfDoc: Set InfDoc = CreateObject("Unimake.Business.DFe.Xml.MDFe.InfDoc")
+Dim RecepcaoEvento: Set RecepcaoEvento = CreateObject("Unimake.Business.DFe.Servicos.MDFe.RecepcaoEvento")
+Dim Configuracao: Set Configuracao = Config.InicializarConfiguracao(TipoDFe.MDFe)
+
+With DetEventoEncMDFe
+    .NProt = "141200000007987"
+    .VersaoEvento = "3.00"
+    .CMun = 4118402
+    .CUF = UFBrasil.PR
+    .DtEnc = Now
+End With
+
+With InfEvento
+    Set .DetEvento = DetEventoEncMDFe
+    .COrgao = UFBrasil.PR
+    .ChMDFe = "41200210859283000185570010000005671227070615"
+    .CNPJ = "10859283000185"
+    .DhEvento = Now
+    .TpEvento = TipoEventoMDFe.Encerramento
+    .NSeqEvento = 1
+    .TpAmb = TpAmb
+End With
+
+With EventoMDFe
+    .Versao = "3.00"
+    Set .InfEvento = InfEvento
+End With
+
+RecepcaoEvento.Executar (EventoMDFe), (Configuracao)
+                
+Log.EscreveLog RecepcaoEvento.RetornoWSString, True
+Log.EscreveLog RecepcaoEvento.result.InfEvento.XMotivo, False
+              
+'Gravar o XML de distribuição se a inutilização foi homologada
+Select Case RecepcaoEvento.result.InfEvento.CStat
+    Case 134 'Recebido pelo Sistema de Registro de Eventos
+    Case 135 'Recebido pelo Sistema de Registro de Eventos
+    Case 136 'Recebido pelo Sistema de Registro de Eventos
+        RecepcaoEvento.GravarXmlDistribuicao "D:\Temp"
+        MsgBox "Evento gravado na Sefaz", vbOKOnly + vbInformation
+    Case Else
+        MsgBox "Evento rejeitado pela Sefaz", vbOKOnly + vbCritical
+End Select
+
+Exit Sub
+erro:
+Utility.TrapException
+
+End Sub
+
+Public Sub InclusaoDFeMDFe()
+On Error GoTo erro
+Dim EventoMDFe: Set EventoMDFe = CreateObject("Unimake.Business.DFe.xml.MDFe.EventoMDFe")
+Dim InfEvento: Set InfEvento = CreateObject("Unimake.Business.DFe.Xml.MDFe.InfEvento")
+Dim DetEventoIncDFeMDFe: Set DetEventoIncDFeMDFe = CreateObject("Unimake.Business.DFe.Xml.MDFe.DetEventoIncDFeMDFe")
+Dim InfDoc: Set InfDoc = CreateObject("Unimake.Business.DFe.Xml.MDFe.InfDoc")
+Dim EventoIncDFeMDFe: Set EventoIncDFeMDFe = CreateObject("Unimake.Business.DFe.xml.MDFe.EventoIncDFeMDFe")
+Dim RecepcaoEvento: Set RecepcaoEvento = CreateObject("Unimake.Business.DFe.Servicos.MDFe.RecepcaoEvento")
+Dim Configuracao: Set Configuracao = Config.InicializarConfiguracao(TipoDFe.MDFe)
+
+With EventoIncDFeMDFe
+    .DescEvento = "Inclusao DF-e"
+    .NProt = "941190000014312"
+    .CMunCarrega = "4118402"
+    .XMunCarrega = "PARANAVAI"
+End With
+
+EventoIncDFeMDFe.AddInfDoc (InfDoc)
+
+With DetEventoIncDFeMDFe
+    .VersaoEvento = "3.00"
+    Set .EventoIncDFeMDFe = EventoIncDFeMDFe
+End With
+
+With InfEvento
+    Set .DetEvento = DetEventoIncDFeMDFe
+    .COrgao = UFBrasil.PR
+    .ChMDFe = "41200380568835000181580010000007171930099252"
+    .CNPJ = "80568835000181"
+    .DhEvento = DateTime.Now
+    .TpEvento = TipoEventoMDFe.InclusaoDFe
+    .NSeqEvento = 1
+    .TpAmb = TpAmb
+End With
+
+With EventoMDFe
+    .Versao = "3.00"
+    Set .InfEvento = InfEvento
+End With
+
+RecepcaoEvento.Executar (EventoMDFe), (Configuracao)
+                
+Log.EscreveLog RecepcaoEvento.RetornoWSString, True
+Log.EscreveLog RecepcaoEvento.result.InfEvento.XMotivo, False
+                
+              
+'Gravar o XML de distribuição se a inutilização foi homologada
+Select Case RecepcaoEvento.result.InfEvento.CStat
+    Case 134 'Recebido pelo Sistema de Registro de Eventos, com vinculação do evento no respectivo CT-e com situação diferente de Autorizada.
+    Case 135 'Recebido pelo Sistema de Registro de Eventos, com vinculação do evento no respetivo CTe.
+    Case 136 'Recebido pelo Sistema de Registro de Eventos – vinculação do evento ao respectivo CT-e prejudicado.
+        RecepcaoEvento.GravarXmlDistribuicao "D:\Temp"
+        MsgBox "Evento gravado na Sefaz", vbOKOnly + vbInformation
+    Case Else
+        MsgBox "Evento rejeitado pela Sefaz", vbOKOnly + vbCritical
+End Select
+
+Exit Sub
+erro:
+Utility.TrapException
+
+End Sub
+
 Public Sub InclusaoCondutorMDFe()
 On Error GoTo erro
 Dim EventoMDFe: Set EventoMDFe = CreateObject("Unimake.Business.DFe.Xml.MDFe.EventoMDFe")
@@ -38,7 +156,7 @@ Set EventoMDFe.InfEvento = InfEvento
 
 RecepcaoEvento.Executar (EventoMDFe), (configExec)
 
-Log.EscreveLog RecepcaoEvento.RetornoWSString, False
+Log.EscreveLog RecepcaoEvento.RetornoWSString, True
 Log.EscreveLog RecepcaoEvento.result.InfEvento.XMotivo, False
                 
 'Gravar o XML de distribuição se a inutilização foi homologada

@@ -317,8 +317,16 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("indPres")]
         public IndicadorPresenca IndPres { get; set; }
 
+#if INTEROP
+        /* ¯\_(ツ)_/¯
+            Interop não aceita nulos, logo, passo -1 e valido no ShouldSerializeIndIntermed
+        */
+        [XmlElement("indIntermed")]
+        public IndicadorIntermediario IndIntermed { get; set; } = (IndicadorIntermediario)(-1);
+#else
         [XmlElement("indIntermed")]
         public IndicadorIntermediario? IndIntermed { get; set; }
+#endif
 
         [XmlElement("procEmi")]
         public ProcessoEmissao ProcEmi { get; set; }
@@ -348,7 +356,14 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         public bool ShouldSerializeXJust() => !string.IsNullOrWhiteSpace(XJust);
 
-        public bool ShouldSerializeIndIntermed() => (TpAmb == TipoAmbiente.Homologacao || IndIntermed != null) && IndPres != IndicadorPresenca.NaoSeAplica && IndPres != IndicadorPresenca.PresencialForaEstabelecimento;
+        public bool ShouldSerializeIndIntermed() =>
+            IndIntermed != (IndicadorIntermediario)(-1) &&
+            (
+                TpAmb == TipoAmbiente.Homologacao ||
+                IndIntermed != null
+            ) &&
+            IndPres != IndicadorPresenca.NaoSeAplica &&
+            IndPres != IndicadorPresenca.PresencialForaEstabelecimento;
 
         public bool ShouldSerializeDhSaiEntField()
         {

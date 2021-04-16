@@ -218,7 +218,10 @@ namespace NFe.Components
                             case 3550407: //São Pedro - SP
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3550407-";
                                 break;
-                     
+
+                            case 1502400: //São Pedro - SP
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-1502400-";
+                                break;
 
                             default:
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";

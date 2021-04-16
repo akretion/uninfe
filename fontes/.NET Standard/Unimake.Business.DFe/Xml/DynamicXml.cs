@@ -1,10 +1,11 @@
-﻿using System.Dynamic;
+﻿using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Xml.Linq;
 
 namespace Unimake.Business.DFe.Xml
 {
-    internal class DynamicXml: DynamicObject
+    internal class DynamicXml: DynamicObject, IEnumerable<XElement>
     {
         #region Private Fields
 
@@ -41,17 +42,25 @@ namespace Unimake.Business.DFe.Xml
             return newXElem;
         }
 
-        public override string ToString() => root.ToString();
-
         #endregion Private Methods
 
         #region Public Methods
 
-        public static dynamic Load(string filename) => 
+        public static dynamic Load(string filename) =>
             new DynamicXml(RemoveNamespaces(XDocument.Load(filename).Root));
 
-        public static dynamic Parse(string xmlString) => 
+        public static dynamic Parse(string xmlString) =>
             new DynamicXml(RemoveNamespaces(XDocument.Parse(xmlString).Root));
+
+        public IEnumerator<XElement> GetEnumerator()
+        {
+            foreach(var el in root.Elements())
+            {
+                yield return el;
+            }
+        }
+
+        public override string ToString() => root.ToString();
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
@@ -80,6 +89,8 @@ namespace Unimake.Business.DFe.Xml
 
             return true;
         }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
 
         #endregion Public Methods
     }

@@ -11,7 +11,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
     /// Enviar o XML de eventos do MDFe para o webservice
     /// </summary>
     [ComVisible(true)]
-    public class RecepcaoEvento : ServicoBase
+    public class RecepcaoEvento: ServicoBase
     {
         #region Private Fields
         private EventoMDFe EventoMDFe
@@ -56,7 +56,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
             var xml = new EventoMDFe();
             xml = xml.LerXML<EventoMDFe>(ConteudoXML);
 
-            if (!Configuracoes.Definida)
+            if(!Configuracoes.Definida)
             {
                 Configuracoes.CodigoUF = (int)xml.InfEvento.COrgao;
                 Configuracoes.TipoAmbiente = xml.InfEvento.TpAmb;
@@ -76,7 +76,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
             var schemaArquivo = string.Empty;
             var schemaArquivoEspecifico = string.Empty;
 
-            if (Configuracoes.SchemasEspecificos.Count > 0)
+            if(Configuracoes.SchemasEspecificos.Count > 0)
             {
                 var tpEvento = ((int)xml.InfEvento.TpEvento);
 
@@ -93,21 +93,21 @@ namespace Unimake.Business.DFe.Servicos.MDFe
             #region Validar a parte específica de cada evento
 
             var listEvento = ConteudoXML.GetElementsByTagName("eventoMDFe");
-            for (var i = 0; i < listEvento.Count; i++)
+            for(var i = 0; i < listEvento.Count; i++)
             {
                 var elementEvento = (XmlElement)listEvento[i];
 
-                if (elementEvento.GetElementsByTagName("infEvento")[0] != null)
+                if(elementEvento.GetElementsByTagName("infEvento")[0] != null)
                 {
                     var elementInfEvento = (XmlElement)elementEvento.GetElementsByTagName("infEvento")[0];
-                    if (elementInfEvento.GetElementsByTagName("tpEvento")[0] != null)
+                    if(elementInfEvento.GetElementsByTagName("tpEvento")[0] != null)
                     {
                         var tpEvento = elementInfEvento.GetElementsByTagName("tpEvento")[0].InnerText;
 
                         var tipoEventoMDFe = (TipoEventoMDFe)Enum.Parse(typeof(TipoEventoMDFe), tpEvento);
 
                         var xmlEspecifico = new XmlDocument();
-                        switch (tipoEventoMDFe)
+                        switch(tipoEventoMDFe)
                         {
                             //case TipoEventoMDFe.CartaCorrecao:
                             //    xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCCE>((DetEventoCCE)xml.Evento[i].InfEvento.DetEvento).OuterXml);
@@ -171,7 +171,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         {
             get
             {
-                if (!string.IsNullOrWhiteSpace(RetornoWSString))
+                if(!string.IsNullOrWhiteSpace(RetornoWSString))
                 {
                     return XMLUtility.Deserializar<RetEventoMDFe>(RetornoWSXML);
                 }
@@ -227,7 +227,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
         [ComVisible(true)]
         public void Executar(EventoMDFe envEvento, Configuracao configuracao)
         {
-            if (envEvento == null)
+            if(envEvento == null)
             {
                 throw new ArgumentNullException(nameof(envEvento));
             }
@@ -235,7 +235,7 @@ namespace Unimake.Business.DFe.Servicos.MDFe
             PrepararServico(envEvento.GerarXML(), configuracao);
 
             Executar();
-        } 
+        }
 
 #endif
 

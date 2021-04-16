@@ -1,17 +1,67 @@
 ﻿using System.Reflection;
 using System.Xml;
+using System.Xml.Linq;
+using Unimake.Business.DFe.Xml;
+using static Unimake.Business.DFe.Utility.Converter;
 
 namespace Unimake.Business.DFe
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public static class XmlReaderExtensions
     {
+        #region Private Methods
+
+        private static PropertyInfo GetProperty(object value, XElement el)
+        {
+            var result = value.GetType().GetProperty(el.Name.ToString(), BindingFlags.Instance |
+                                                              BindingFlags.Public |
+                                                              BindingFlags.FlattenHierarchy |
+                                                              BindingFlags.IgnoreCase);
+
+            if(!(result?.CanWrite ?? false))
+            {
+                return null;
+            }
+
+            return result;
+        }
+
+        #endregion Private Methods
+
         #region Public Methods
 
         /// <summary>
-        /// 
+        /// Deserializa um objeto, em primeiro nó de XML, para o tipo esperado em T
+        /// </summary>
+        /// <typeparam name="T">Tipo esperado para deserialização</typeparam>
+        /// <param name="reader">Reader para ler os dados do XML</param>
+        /// <returns></returns>
+        public static T DeserializeTo<T>(this XmlReader reader)
+            where T : class, new()
+        {
+            var result = new T();
+
+            var elements = DynamicXml.Parse(reader.ReadInnerXml());
+
+            foreach(XElement el in elements)
+            {
+                var pi = GetProperty(result, el);
+
+                if(pi == null)
+                {
+                    continue;
+                }
+
+                pi.SetValue(result, ToAny(el.Value, pi.PropertyType));
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        ///
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="reader"></param>
@@ -40,11 +90,11 @@ namespace Unimake.Business.DFe
                 {
                     if(propertyInfo != null)
                     {
-                        result = (T)Utility.Converter.ToAny(propertyInfo.PropertyType, reader.Value);
+                        result = (T)ToAny(reader.Value, propertyInfo.PropertyType);
                     }
                     else
                     {
-                        result = Utility.Converter.ToAny<T>(reader.Value);
+                        result = ToAny<T>(reader.Value);
                     }
 
                     break;
@@ -52,6 +102,25 @@ namespace Unimake.Business.DFe
             } while(reader.Read());
 
             reader.Read();
+            return result;
+        }
+
+        /// <summary>
+        /// Converte o reader no tipo signature.
+        /// </summary>
+        /// <param name="reader">Reader para conversão no tipo signature</param>
+        /// <returns></returns>
+        public static Signature ToSignature(this XmlReader reader)
+        {
+            var tag = reader.Name;
+            var ns = reader.NamespaceURI;
+            var xml = $@"<?xml version=""1.0"" encoding=""UTF-8""?>
+                        <{tag} xmlns=""{ns}"">
+                        {reader.ReadInnerXml()}
+                        </{tag}>";
+
+            var result = Utility.XMLUtility.Deserializar<Signature>(xml);
+            result.Xmlns = ns;
             return result;
         }
 

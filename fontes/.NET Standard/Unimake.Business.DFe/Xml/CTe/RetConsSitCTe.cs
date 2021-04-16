@@ -38,24 +38,20 @@ namespace Unimake.Business.DFe.Xml.CTe
         [XmlElement("protCTe")]
         public ProtCTe ProtCTe { get; set; }
 
-        //TODO WANDREY: Resolver esta encrenca
-        //[XmlElement("procEventoCTe")]
-        [XmlArrayItem(typeof(ProcEventoCTe<DetEventoCanc>))]
-        [XmlArrayItem(typeof(ProcEventoCTe<DetEventoEPEC>))]
-        public List<ProcEventoCTe<DetEventoCanc>> ProcEventoCTe { get; set; }
+        [XmlElement("procEventoCTe")]
+        public List<ProcEventoCTe> ProcEventoCTe { get; set; }
 
         #region Add (List - Interop)
 
-        //TODO WANDREY: Resolver esta encrenca
-        //public void AddProcEventoCTe(ProcEventoCTe procEventoCTe)
-        //{
-        //    if(ProcEventoCTe == null)
-        //    {
-        //        ProcEventoCTe = new List<ProcEventoCTe>();
-        //    }
+        public void AddProcEventoCTe(ProcEventoCTe procEventoCTe)
+        {
+            if(ProcEventoCTe == null)
+            {
+                ProcEventoCTe = new List<ProcEventoCTe>();
+            }
 
-        //    ProcEventoCTe.Add(procEventoCTe);
-        //}
+            ProcEventoCTe.Add(procEventoCTe);
+        }
 
         #endregion
     }

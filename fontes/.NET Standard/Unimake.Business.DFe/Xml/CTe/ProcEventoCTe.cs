@@ -1,39 +1,21 @@
 ﻿#pragma warning disable CS1591
 
 using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Xml;
 using System.Xml.Serialization;
 
 namespace Unimake.Business.DFe.Xml.CTe
 {
-    //[Serializable()]
-    //[XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/cte")]
-    //[XmlRoot("procEventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
-    //public class ProcEventoCTeEPEC: ProcEventoCTe<InfEventoEPEC> { }
-
-    //[Serializable()]
-    //[XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/cte")]
-    //[XmlRoot("procEventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
-    //public class ProcEventoCTePrestDesacordo: ProcEventoCTe<InfEventoPrestDesacordo> { }
-
-    //[Serializable()]
-    //[XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/cte")]
-    //[XmlRoot("procEventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
-    //public class ProcEventoCTeCanc: ProcEventoCTe<InfEventoCanc> { }
-
     [Serializable()]
-    [XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/cte")]
     [XmlRoot("procEventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
-    public class ProcEventoCTe<TDetalheEvento>: XMLBase
+    public class ProcEventoCTe : XMLBase
     {
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
-        public string Versao { get; set; }              
+        public string Versao { get; set; }
 
         [XmlElement("eventoCTe")]
-        public EventoCTe<TDetalheEvento> EventoCTe { get; set; }
+        public EventoCTe EventoCTe { get; set; }
 
         [XmlElement("retEventoCTe")]
         public RetEventoCTe RetEventoCTe { get; set; }
@@ -58,37 +40,24 @@ namespace Unimake.Business.DFe.Xml.CTe
         /// Nome do arquivo de distribuição
         /// </summary>
         [XmlIgnore]
-        //TODO WANDREY: Resolver esta encrenca
-        public string NomeArquivoDistribuicao => "";
-
-        //public string NomeArquivoDistribuicao => ((IInfEvento)EventoCTe.InfEvento).ChCTe + "_" + ((int)((IInfEvento)EventoCTe.InfEvento).TpEvento).ToString("000000") + "_" + ((IInfEvento)EventoCTe.InfEvento).NSeqEvento.ToString("00") + "-proceventocte.xml";
+        public string NomeArquivoDistribuicao => EventoCTe.InfEvento.ChCTe + "_" + ((int)EventoCTe.InfEvento.TpEvento).ToString("000000") + "_" + EventoCTe.InfEvento.NSeqEvento.ToString("00") + "-proceventocte.xml";
 
         public override XmlDocument GerarXML()
         {
-            var doc = base.GerarXML();
+            var xmlDocument = base.GerarXML();
 
-            var attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
+            XmlRootAttribute attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
 
-            var elementProcEventoCTe = (XmlElement)doc.GetElementsByTagName("procEventoCTe")[0];
-            elementProcEventoCTe.SetAttribute("xmlns", attribute.Namespace);
+            XmlElement xmlElementEvento = (XmlElement)xmlDocument.GetElementsByTagName("eventoCTe")[0];
+            xmlElementEvento.SetAttribute("xmlns", attribute.Namespace);
 
-            var elementEventoCTe = (XmlElement)doc.GetElementsByTagName("eventoCTe")[0];
-            elementEventoCTe.SetAttribute("xmlns", attribute.Namespace);
+            XmlElement xmlElementRetEvento = (XmlElement)xmlDocument.GetElementsByTagName("retEventoCTe")[0];
+            xmlElementRetEvento.SetAttribute("xmlns", attribute.Namespace);
 
-            var elementRetEvento = (XmlElement)doc.GetElementsByTagName("retEventoCTe")[0];
-            elementRetEvento.SetAttribute("xmlns", attribute.Namespace);
+            XmlElement xmlElementRetEventoInfEvento = (XmlElement)xmlElementRetEvento.GetElementsByTagName("infEvento")[0];
+            xmlElementRetEventoInfEvento.SetAttribute("xmlns", attribute.Namespace);
 
-            return doc;
+            return xmlDocument;
         }
-
-        #region ShouldSerialize
-
-        public bool ShouldSerializeNPortaCon() => NPortaCon > 0;
-
-        public bool ShouldSerializeIpTransmissor() => !string.IsNullOrWhiteSpace(IpTransmissor);
-
-        public bool ShouldSerializeDhConexaoField() => DhConexao > DateTime.MinValue;
-
-        #endregion
     }
 }

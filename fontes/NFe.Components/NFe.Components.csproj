@@ -126,8 +126,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -284,6 +284,7 @@
     <Compile Include="Pronin\ApucaranaPR\p\ProninP.cs" />
     <Compile Include="Pronin\PicadaCafeRS\p\ProninP.cs" />
     <Compile Include="Pronin\SantaTerezinhaItaipuPR\p\ProninP.cs" />
+    <Compile Include="Pronin\CastanhalPA\p\ProninP.cs" />
     <Compile Include="Pronin\SaoPedroSP\h\ProninH.cs" />
     <Compile Include="Pronin\SaoPedroSP\p\ProninP.cs" />
     <Compile Include="Pronin\UruguaianaRS\h\ProninH.cs" />
@@ -1526,6 +1527,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\PCanaaDosCarajasPA\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PCastanhalPA\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -5336,6 +5342,17 @@
     <None Include="Web References\PCanaaDosCarajasPA\SubstituirNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\PCastanhalPA\NFSeIntegracao.wsdl" />
+    <None Include="Web References\PCastanhalPA\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PCastanhalPA\Services.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PCastanhalPA\Services0.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web References\PColatinaES\cnae.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -8341,6 +8358,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PCanaaDosCarajasPA_IssWebWS</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PCastanhalPA-PRONIN.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PCastanhalPA\</RelPath>
+      <UpdateFromURL>C:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PCastanhalPA-PRONIN.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PCastanhalPA_NFSeIntegracao</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="C:\Projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PCatanduvaSP-PRONIN.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

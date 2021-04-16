@@ -13,6 +13,7 @@ namespace NFe.ConvertTxt
         public string cProd;
         public int nItem;
         public string cEAN;
+        public string cBarra;
         public string xProd;
         public string NCM;
         public string NVE;
@@ -24,6 +25,7 @@ namespace NFe.ConvertTxt
         public TpcnTipoCampo vUnCom_Tipo;
         public double vProd;
         public string cEANTrib;
+        public string cBarraTrib;
         public string uTrib;
         public double qTrib;
         public double vUnTrib;

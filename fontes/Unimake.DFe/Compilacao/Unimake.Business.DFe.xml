@@ -27,7 +27,7 @@
             Nome do arquivo de distribuição
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Xml.CTe.ProcEventoCTe`1.NomeArquivoDistribuicao">
+        <member name="P:Unimake.Business.DFe.Xml.CTe.ProcEventoCTe.NomeArquivoDistribuicao">
             <summary>
             Nome do arquivo de distribuição
             </summary>
@@ -95,6 +95,12 @@
             <summary>
             Lista de NameSpaces
             </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Xml.XMLBase.ProcessReader(System.Xml.XmlReader)">
+             <summary>
+             Executa o processamento do XMLReader recebido na deserialização
+             </summary>
+            <param name="reader">Reader XML recebido durante o processo de deserialização</param>
         </member>
         <member name="M:Unimake.Business.DFe.Xml.XMLBase.#ctor">
             <summary>
@@ -226,6 +232,17 @@
             Dados do servidor de proxy para conexão
             </summary>
         </member>
+        <member name="T:Unimake.Business.DFe.Contract.Serialization.IXmlSerializable">
+            <summary>
+            Implementa métodos para serialização e deserialização de XMLs
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Contract.Serialization.IXmlSerializable.ProcessReader(System.Xml.XmlReader)">
+             <summary>
+             Executa o processamento do XMLReader recebido na deserialização
+             </summary>
+            <param name="reader">Reader XML recebido durante o processo de deserialização</param>
+        </member>
         <member name="T:Unimake.Business.DFe.Security.ClsX509Certificate2Extension">
             <summary>
             Classe para passar o Pin Code por baixo do código 
@@ -344,18 +361,33 @@
             <returns>Retorna o conteúdo do atributo Description</returns>
         </member>
         <member name="T:Unimake.Business.DFe.XmlReaderExtensions">
-            <summary>
+             <summary>
             
+             </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.XmlReaderExtensions.DeserializeTo``1(System.Xml.XmlReader)">
+            <summary>
+            Deserializa um objeto, em primeiro nó de XML, para o tipo esperado em T
             </summary>
+            <typeparam name="T">Tipo esperado para deserialização</typeparam>
+            <param name="reader">Reader para ler os dados do XML</param>
+            <returns></returns>
         </member>
         <member name="M:Unimake.Business.DFe.XmlReaderExtensions.GetValue``1(System.Xml.XmlReader,System.String,System.Reflection.PropertyInfo)">
-            <summary>
+             <summary>
             
+             </summary>
+             <typeparam name="T"></typeparam>
+             <param name="reader"></param>
+             <param name="name"></param>
+             <param name="propertyInfo"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.XmlReaderExtensions.ToSignature(System.Xml.XmlReader)">
+            <summary>
+            Converte o reader no tipo signature.
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="reader"></param>
-            <param name="name"></param>
-            <param name="propertyInfo"></param>
+            <param name="reader">Reader para conversão no tipo signature</param>
             <returns></returns>
         </member>
         <member name="T:Unimake.Business.DFe.Servicos.Configuracao">
@@ -363,19 +395,29 @@
             Classe das configurações para conexão e envio dos XMLs para os webservices
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.Servico">
+        <member name="F:Unimake.Business.DFe.Servicos.Configuracao.SchemasEspecificos">
             <summary>
-            Serviço que será executado
+            Schemas específicos de um mesmo serviço (Tipos de Evento, Modal CTe ou Modal MDFe)
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.Nome">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CertificadoA3PIN">
             <summary>
-            Nome do estado ou município
+            PIN do certificado A3. Informe esta propriedade para não precisar digitar o PIN manualmente.
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.TipoAmbiente">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CertificadoArquivo">
             <summary>
-            Ambiente (2-Homologação ou 1-Produção)
+            Caminho completo do certificado digital
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CertificadoDigital">
+            <summary>
+            Certificado digital
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CertificadoSenha">
+            <summary>
+            Senha do certificado digital
             </summary>
         </member>
         <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CodigoUF">
@@ -383,14 +425,29 @@
             Código da Unidade Federativa (UF)
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.NomeUF">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CSC">
             <summary>
-            Nome da Unidade Federativa (UF)
+            CSC = Código de segurança do contribuinte. Utilizado para criar o QRCode da NFCe
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.TipoEmissao">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CSCIDToken">
             <summary>
-            Tipo de Emissao (1-Normal, 2-Contingencia, 6/7/8-SVC/AN/RS/SP, ...
+            IDToken do CSC (Código de segurança do contribuinte). Utilizado para criar o QRCode da NFCe
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.Definida">
+            <summary>
+            Configuração já foi definida anteriormente, não precisa carregar de acordo com os dados do XML
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.Descricao">
+            <summary>
+            Descrição do serviço
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.HasProxy">
+            <summary>
+            Tem servidor de proxy?
             </summary>
         </member>
         <member name="P:Unimake.Business.DFe.Servicos.Configuracao.Modelo">
@@ -398,9 +455,30 @@
             Modelo do documento fiscal que é para consultar o status do serviço
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.TipoDFe">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.Nome">
             <summary>
-            Tipo do Documento Fiscal Eletrônico (DF-e)
+            Nome do estado ou município
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.NomeUF">
+            <summary>
+            Nome da Unidade Federativa (UF)
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.ProxyAutoDetect">
+            <summary>
+            True = Detectar o servidor de proxy automaticamente
+            False = Utiliza os dados de Proxy Default
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.ProxyPassword">
+            <summary>
+            Senha do usuário para conexão do servidor de proxy
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.ProxyUser">
+            <summary>
+            Usuário para conexão do servidor de proxy
             </summary>
         </member>
         <member name="P:Unimake.Business.DFe.Servicos.Configuracao.SchemaArquivo">
@@ -408,19 +486,14 @@
             Nome do arquivo de schema para validação do XML
             </summary>
         </member>
-        <member name="F:Unimake.Business.DFe.Servicos.Configuracao.SchemasEspecificos">
-            <summary>
-            Schemas específicos de um mesmo serviço (Tipos de Evento, Modal CTe ou Modal MDFe)
-            </summary>
-        </member>
         <member name="P:Unimake.Business.DFe.Servicos.Configuracao.SchemaVersao">
             <summary>
             Versão do schema do XML
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.TargetNS">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.Servico">
             <summary>
-            Namespace do XML para validação de schema
+            Serviço que será executado
             </summary>
         </member>
         <member name="P:Unimake.Business.DFe.Servicos.Configuracao.TagAssinatura">
@@ -443,93 +516,24 @@
             Nome da tag que tem o atributo de identificador único a ser utilizado no Reference.URI da assinatura, quando tem lote (Exemplo: Uma lote com várias NFe ou NFSe)
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CertificadoDigital">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.TargetNS">
             <summary>
-            Certificado digital
+            Namespace do XML para validação de schema
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CertificadoA3PIN">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.TipoAmbiente">
             <summary>
-            PIN do certificado A3. Informe esta propriedade para não precisar digitar o PIN manualmente.
+            Ambiente (2-Homologação ou 1-Produção)
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebEnderecoHomologacao">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.TipoDFe">
             <summary>
-            Endereço WebService do ambiente de homologação
+            Tipo do Documento Fiscal Eletrônico (DF-e)
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebEnderecoProducao">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.TipoEmissao">
             <summary>
-            Endereço WebService do ambiente de produção
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebActionHomologacao">
-            <summary>
-            Ação, do webservice, a ser executada no ambiente de homologação
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebActionProducao">
-            <summary>
-            Ação, do webservice, a ser executada no ambiente de produção
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebTagRetorno">
-            <summary>
-            Nome da tag de retorno do serviço
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.Descricao">
-            <summary>
-            Descrição do serviço
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.Definida">
-            <summary>
-            Configuração já foi definida anteriormente, não precisa carregar de acordo com os dados do XML
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebSoapVersion">
-            <summary>
-            Versão do SOAP utilizada pelo webservice
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebContentType">
-            <summary>
-            ContentType para conexão via classe HttpWebRequest
-            </summary>
-            <example>
-            Exemplos de conteúdo:
-            
-               application/soap+xml; charset=utf-8;
-               text/xml; charset=utf-8;
-               
-            Deixe o conteúdo em brando para utilizar um valor padrão. 
-            </example>
-        </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebSoapString">
-            <summary>
-            String do Soap para envio para o webservice;
-            </summary>
-            <example>
-            Exemplo de conteúdo que deve ser inserido nesta propriedade:
-            
-               <![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Header>{xmlHeader}</soap:Header><soap:Body><nfeDadosMsg xmlns="{ActionWeb}">{xmlBody}</nfeDadosMsg></soap:Body></soap:Envelope>]]>
-            
-               Onde estiver {xmlHeader} o conteúdo será substituido pelo XML do header em tempo de execução
-               Onde estiver {ActionWeb} o conteúdo será substituido pelo WebAction em tempo de execução
-               Onde estiver {xmlBody} o conteúdo será substituido pelo XML do Body em tempo de execução
-            
-               Deixe o conteúdo em branco para utilizar um soap padrão.
-            </example>
-        </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.UrlQrCodeHomologacao">
-            <summary>
-            URL para consulta do DFe (NFCe e CTe) via QRCode no ambiente de homologação
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.UrlQrCodeProducao">
-            <summary>
-            URL para consulta do DFe (NFCe e CTe) via QRCode no ambiente de produção
+            Tipo de Emissao (1-Normal, 2-Contingencia, 6/7/8-SVC/AN/RS/SP, ...
             </summary>
         </member>
         <member name="P:Unimake.Business.DFe.Servicos.Configuracao.UrlChaveHomologacao">
@@ -542,35 +546,73 @@
             URL para consulta do DFe (NFCe e CTe) manualmente no ambiente de produção
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CSC">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.UrlQrCodeHomologacao">
             <summary>
-            CSC = Código de segurança do contribuinte. Utilizado para criar o QRCode da NFCe
+            URL para consulta do DFe (NFCe e CTe) via QRCode no ambiente de homologação
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CSCIDToken">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.UrlQrCodeProducao">
             <summary>
-            IDToken do CSC (Código de segurança do contribuinte). Utilizado para criar o QRCode da NFCe
+            URL para consulta do DFe (NFCe e CTe) via QRCode no ambiente de produção
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.HasProxy">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebActionHomologacao">
             <summary>
-            Tem servidor de proxy?
+            Ação, do webservice, a ser executada no ambiente de homologação
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.ProxyAutoDetect">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebActionProducao">
             <summary>
-            True = Detectar o servidor de proxy automaticamente
-            False = Utiliza os dados de Proxy Default
+            Ação, do webservice, a ser executada no ambiente de produção
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.ProxyUser">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebContentType">
+             <summary>
+             ContentType para conexão via classe HttpWebRequest
+             </summary>
+             <example>
+             Exemplos de conteúdo:
+            
+                application/soap+xml; charset=utf-8;
+                text/xml; charset=utf-8;
+            
+             Deixe o conteúdo em brando para utilizar um valor padrão.
+             </example>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebEnderecoHomologacao">
             <summary>
-            Usuário para conexão do servidor de proxy
+            Endereço WebService do ambiente de homologação
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.ProxyPassword">
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebEnderecoProducao">
             <summary>
-            Senha do usuário para conexão do servidor de proxy
+            Endereço WebService do ambiente de produção
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebSoapString">
+             <summary>
+             String do Soap para envio para o webservice;
+             </summary>
+             <example>
+             Exemplo de conteúdo que deve ser inserido nesta propriedade:
+            
+                <![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Header>{xmlHeader}</soap:Header><soap:Body><nfeDadosMsg xmlns="{ActionWeb}">{xmlBody}</nfeDadosMsg></soap:Body></soap:Envelope>]]>
+            
+                Onde estiver {xmlHeader} o conteúdo será substituido pelo XML do header em tempo de execução
+                Onde estiver {ActionWeb} o conteúdo será substituido pelo WebAction em tempo de execução
+                Onde estiver {xmlBody} o conteúdo será substituido pelo XML do Body em tempo de execução
+            
+                Deixe o conteúdo em branco para utilizar um soap padrão.
+             </example>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebSoapVersion">
+            <summary>
+            Versão do SOAP utilizada pelo webservice
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebTagRetorno">
+            <summary>
+            Nome da tag de retorno do serviço
             </summary>
         </member>
         <member name="T:Unimake.Business.DFe.Servicos.SchemaEspecifico">
@@ -723,24 +765,24 @@
             Validar o XML
             </summary>
         </member>
-        <member name="T:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento`1">
+        <member name="T:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento">
             <summary>
             Envio do XML de eventos do CTeOS para o WebService
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento`1.#ctor(Unimake.Business.DFe.Xml.CTe.EventoCTe{`0},Unimake.Business.DFe.Servicos.Configuracao)">
+        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento.#ctor(Unimake.Business.DFe.Xml.CTe.EventoCTe,Unimake.Business.DFe.Servicos.Configuracao)">
             <summary>
             Construtor
             </summary>
             <param name="envEvento">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento`1.#ctor">
+        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento.#ctor">
             <summary>
             Construtor
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento`1.XmlValidar">
+        <member name="M:Unimake.Business.DFe.Servicos.CTeOS.RecepcaoEvento.XmlValidar">
             <summary>
             Validar o XML
             </summary>
@@ -1002,50 +1044,55 @@
             </summary>
             <param name="pasta">Pasta onde deve ser gravado o XML</param>
         </member>
-        <member name="T:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1">
+        <member name="T:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento">
             <summary>
             Envio do XML de eventos do CTe para o WebService
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.DefinirConfiguracao">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.DefinirConfiguracao">
             <summary>
             Definir o valor de algumas das propriedades do objeto "Configuracoes"
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.XmlValidar">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.XmlValidar">
             <summary>
             Validar o XML
             </summary>
         </member>
-        <member name="P:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.Result">
+        <member name="P:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.ProcEventoCTeResult">
+            <summary>
+            Propriedade contendo o XML do evento com o protocolo de autorização anexado
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.Result">
             <summary>
             Conteúdo retornado pelo webservice depois do envio do XML
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.#ctor(Unimake.Business.DFe.Xml.CTe.EventoCTe{`0},Unimake.Business.DFe.Servicos.Configuracao)">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.#ctor(Unimake.Business.DFe.Xml.CTe.EventoCTe,Unimake.Business.DFe.Servicos.Configuracao)">
             <summary>
             Construtor
             </summary>
             <param name="envEvento">Objeto contendo o XML a ser enviado</param>
             <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.#ctor">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.#ctor">
             <summary>
             Construtor
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.Executar">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.Executar">
             <summary>
             Executar o serviço
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.GravarXmlDistribuicao(System.String)">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.GravarXmlDistribuicao(System.String)">
             <summary>
             Gravar o XML de distribuição em uma pasta no HD
             </summary>
             <param name="pasta">Pasta onde deve ser gravado o XML</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento`1.GravarXmlDistribuicao(System.IO.Stream)">
+        <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.GravarXmlDistribuicao(System.IO.Stream)">
             <summary>
             Grava o XML de dsitribuição no stream
             </summary>
@@ -5516,7 +5563,7 @@
         </member>
         <member name="M:Unimake.Business.DFe.Servicos.MDFe.Autorizacao.GravarXmlDistribuicao(System.IO.Stream)">
             <summary>
-            Grava o XML de dsitribuição no stream
+            Grava o XML de distribuição no stream
             </summary>
             <param name="stream">Stream que vai receber o XML de distribuição</param>
         </member>
@@ -6482,7 +6529,7 @@
             Converter tipo de um objeto
             </summary>
             <param name="value">Para qual tipo converter o conteúdo do objeto</param>
-            <param name="conversionType">Para qual tipo converter o conteúdo do objeto</param>
+            <param name="expectedType">Para qual tipo converter o conteúdo do objeto</param>
             <returns>Conteúdo do objeto convertido para o tipo informado</returns>
         </member>
         <member name="M:Unimake.Business.DFe.Utility.Converter.StringToStreamUTF8(System.String)">
@@ -6500,11 +6547,11 @@
             <param name="value">Valor que deverá ser convertido</param>
             <returns>Value convertido em T</returns>
         </member>
-        <member name="M:Unimake.Business.DFe.Utility.Converter.ToAny(System.Type,System.Object)">
+        <member name="M:Unimake.Business.DFe.Utility.Converter.ToAny(System.Object,System.Type)">
             <summary>
             Converter tipo de um objeto
             </summary>
-            <param name="t">Para qual tipo converter o conteúdo do objeto</param>
+            <param name="expectedType">Para qual tipo converter o conteúdo do objeto</param>
             <param name="value">Conteúdo do objeto a ser convertido</param>
             <returns>Conteúdo do objeto convertido para o tipo informado</returns>
         </member>
@@ -6579,6 +6626,61 @@
             Utilitários diversos para trabalhar com XML
             </summary>
         </member>
+        <member name="T:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe">
+            <summary>
+            Estrutura para recuperar o conteúdo separadamento da chave do DFe (NFe, CTe, NFCe, MDfe, etc...)
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.AnoEmissao">
+            <summary>
+            Ano de emissão do documento fiscal
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.CNPJEmissor">
+            <summary>
+            CNPJ do emissor do documento fiscal
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.CodigoNumerico">
+            <summary>
+            Código numérido do documento fiscal
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.DigitoVerificador">
+            <summary>
+            Digito verificador da chave do documento fiscal
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.MesEmissao">
+            <summary>
+            Mês de emissão do documento fiscal
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.Modelo">
+            <summary>
+            Modelo do documento fiscal
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.NumeroDoctoFiscal">
+            <summary>
+            Número do documento fiscal
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.Serie">
+            <summary>
+            Série do documento fiscal
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.TipoEmissao">
+            <summary>
+            Tipo de emissão do documento fiscal
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.UFEmissor">
+            <summary>
+            UF do emissor do documento fiscal
+            </summary>
+        </member>
         <member name="T:Unimake.Business.DFe.Utility.XMLUtility.TNameSpace">
             <summary>
             Tipo Namespace
@@ -6604,6 +6706,13 @@
             Sobrecrever o Encoding para deixar como padrão o UTF8
             </summary>
         </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.CalcularDVChave(System.String)">
+            <summary>
+            Gerar o dígito da chave da NFe, CTe, MDFe ou NFCe
+            </summary>
+            <param name="chave">Chave do DFe (sem o dígito) que deve ser calculado o dígito verificador.</param>
+            <returns>Dígito verificador</returns>
+        </member>
         <member name="M:Unimake.Business.DFe.Utility.XMLUtility.ChecarChaveDFe(System.String)">
             <summary>
             Executa uma verificação simples para garantir que a chave do DFe (NFe, CTe, MDfe, NFCe, CTeOS) é valida, se tiver erros retorna exceção.
@@ -6620,13 +6729,6 @@
                 MessageBox.Show(ex.Message);
             }
             </example>
-        </member>
-        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.CalcularDVChave(System.String)">
-            <summary>
-            Gerar o dígito da chave da NFe, CTe, MDFe ou NFCe
-            </summary>
-            <param name="chave">Chave do DFe (sem o dígito) que deve ser calculado o dígito verificador.</param>
-            <returns>Dígito verificador</returns>
         </member>
         <member name="M:Unimake.Business.DFe.Utility.XMLUtility.Deserializar``1(System.String)">
             <summary>
@@ -6706,6 +6808,29 @@
             </summary>
             <param name="xml">XML a ser analisado</param>
             <returns>Retorna o tipo do evento do documento eletrônico</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.ExtrairConteudoChaveDFe(System.String)">
+             <summary>
+             Extrair conteúdo da chave do documento fiscal eletrônico (NFe, NFCe, CTe, MDFe, etc...) com elementos separados.
+             </summary>
+             <param name="chave">Chave do DFe para extrair o conteúdo</param>
+             <returns>Estrutura contendo o valor de cada elemento que compõe a chave do DFe</returns>
+             <example>
+            
+             var conteudo = XMLUtility.ExtrairConteudoChaveDFe("41210212345678000112650110000000069123456787");
+            
+             Console.WriteLine(conteudo.UFEmissor); //Output: PR
+             Console.WriteLine(conteudo.AnoEmissao); //Output: 21
+             Console.WriteLine(conteudo.MesEmissao); //Output: 02
+             Console.WriteLine(conteudo.CNPJEmissor); //Output: 12345678000112
+             Console.WriteLine(conteudo.Modelo); //Output: NFCe
+             Console.WriteLine(conteudo.Serie); //Output: 11
+             Console.WriteLine(conteudo.NumeroDoctoFiscal); //Output: 6
+             Console.WriteLine(conteudo.TipoEmissao); //Output: ContingenciaOffLine
+             Console.WriteLine(conteudo.CodigoNumerico); //Output: 12345678
+             Console.WriteLine(conteudo.DigitoVerificador); //Output: 7
+            
+             </example>
         </member>
         <member name="M:Unimake.Business.DFe.Utility.XMLUtility.GerarCodigoNumerico(System.Int32)">
             <summary>
@@ -6805,84 +6930,6 @@
             <param name="tagName">Nome da Tag que será pesquisado</param>
             <returns>Conteúdo da tag</returns>
         </member>
-        <member name="M:Unimake.Business.DFe.Utility.XMLUtility.ExtrairConteudoChaveDFe(System.String)">
-            <summary>
-            Extrair conteúdo da chave do documento fiscal eletrônico (NFe, NFCe, CTe, MDFe, etc...) com elementos separados.
-            </summary>
-            <param name="chave">Chave do DFe para extrair o conteúdo</param>
-            <returns>Estrutura contendo o valor de cada elemento que compõe a chave do DFe</returns>
-            <example>
-            
-            var conteudo = XMLUtility.ExtrairConteudoChaveDFe("41210212345678000112650110000000069123456787");
-            
-            Console.WriteLine(conteudo.UFEmissor); //Output: PR
-            Console.WriteLine(conteudo.AnoEmissao); //Output: 21
-            Console.WriteLine(conteudo.MesEmissao); //Output: 02
-            Console.WriteLine(conteudo.CNPJEmissor); //Output: 12345678000112
-            Console.WriteLine(conteudo.Modelo); //Output: NFCe
-            Console.WriteLine(conteudo.Serie); //Output: 11
-            Console.WriteLine(conteudo.NumeroDoctoFiscal); //Output: 6
-            Console.WriteLine(conteudo.TipoEmissao); //Output: ContingenciaOffLine
-            Console.WriteLine(conteudo.CodigoNumerico); //Output: 12345678
-            Console.WriteLine(conteudo.DigitoVerificador); //Output: 7
-            
-            </example>
-        </member>
-        <member name="T:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe">
-            <summary>
-            Estrutura para recuperar o conteúdo separadamento da chave do DFe (NFe, CTe, NFCe, MDfe, etc...)
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.UFEmissor">
-            <summary>
-            UF do emissor do documento fiscal
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.MesEmissao">
-            <summary>
-            Mês de emissão do documento fiscal
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.AnoEmissao">
-            <summary>
-            Ano de emissão do documento fiscal
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.CNPJEmissor">
-            <summary>
-            CNPJ do emissor do documento fiscal
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.Modelo">
-            <summary>
-            Modelo do documento fiscal
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.Serie">
-            <summary>
-            Série do documento fiscal
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.NumeroDoctoFiscal">
-            <summary>
-            Número do documento fiscal 
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.TipoEmissao">
-            <summary>
-            Tipo de emissão do documento fiscal
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.CodigoNumerico">
-            <summary>
-            Código numérido do documento fiscal
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Utility.XMLUtility.ConteudoChaveDFe.DigitoVerificador">
-            <summary>
-            Digito verificador da chave do documento fiscal
-            </summary>
-        </member>
         <member name="T:Unimake.Business.DFe.ValidarSchema">
             <summary>
             Validador de schemas de XML (XML x XSD)
@@ -6893,19 +6940,19 @@
             Erros ocorridos na validação
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.ValidarSchema.ExtractSchemasResource(System.String)">
-            <summary>
-            Extrair recursos (XSD) da DLL para efetuar a validação do XML
-            </summary>
-            <param name="arqSchema">Arquivo XSD a ser extraido</param>
-            <returns>Retorna os schemas a serem utilizados na validação</returns>
-        </member>
         <member name="M:Unimake.Business.DFe.ValidarSchema.GenerateStreamFromString(System.String)">
             <summary>
             Converte String para Stream
             </summary>
             <param name="s">Conteúdo a ser convertido</param>
             <returns>Retorna Stream do conteúdo informado para o método</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.ValidarSchema.ExtractSchemasResource(System.String)">
+            <summary>
+            Extrair recursos (XSD) da DLL para efetuar a validação do XML
+            </summary>
+            <param name="arqSchema">Arquivo XSD a ser extraido</param>
+            <returns>Retorna os schemas a serem utilizados na validação</returns>
         </member>
         <member name="M:Unimake.Business.DFe.ValidarSchema.Reader_ValidationEventHandler(System.Object,System.Xml.Schema.ValidationEventArgs)">
             <summary>
@@ -6937,22 +6984,22 @@
             </summary>
         </member>
         <member name="M:Unimake.Business.DFe.ValidarSchema.Validar(System.Xml.XmlDocument,System.String,System.String)">
-            <summary>
-            Método responsável por validar a estrutura do XML de acordo com o schema passado por parâmetro
-            </summary>
-            <param name="conteudoXML">Nome do arquivo XML a ser validado</param>
-            <param name="arqSchema">Arquivo de schema para validação do XML (XSD) contido nos recursos da DLL.</param>
-            <param name="targetNS">Target Name Space, se existir, para validação</param>
-            <example>
-            //Validar arquivos de NFe
-            Validar(xmlDocument, "NFe.consStatServCTe_v3.00.xsd")
+             <summary>
+             Método responsável por validar a estrutura do XML de acordo com o schema passado por parâmetro
+             </summary>
+             <param name="conteudoXML">Nome do arquivo XML a ser validado</param>
+             <param name="arqSchema">Arquivo de schema para validação do XML (XSD) contido nos recursos da DLL.</param>
+             <param name="targetNS">Target Name Space, se existir, para validação</param>
+             <example>
+             //Validar arquivos de NFe
+             Validar(xmlDocument, "NFe.consStatServCTe_v3.00.xsd")
             
-            //Validar arquivos de CTe
-            Validar(xmlDocument, "CTe.consStatServCTe_v3.00.xsd")
+             //Validar arquivos de CTe
+             Validar(xmlDocument, "CTe.consStatServCTe_v3.00.xsd")
             
-            //Validar arquivos de MDFe
-            Validar(xmlDocument, "MDFe.consStatServ_v4.00.xsd")
-            </example>
+             //Validar arquivos de MDFe
+             Validar(xmlDocument, "MDFe.consStatServ_v4.00.xsd")
+             </example>
         </member>
         <member name="T:Unimake.Security.Exceptions.ExceptionCertificadoDigital">
             <summary>

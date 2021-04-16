@@ -58,6 +58,7 @@ Source: ..\fontes\uninfe\bin\Release\Unimake.SAT.dll; DestDir: {app}; Flags: ign
 Source: ..\fontes\uninfe\bin\Release\Newtonsoft.Json.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\Unimake.Business.DFe.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\System.Security.Cryptography.Xml.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\BouncyCastle.Crypto.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\release\uninfe.exe; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\release\uninfeservico.exe; DestDir: {app}; Flags: ignoreversion
 Source: \projetos\dv\trunk\fontes\includes\sefaz.inc; DestDir: {app}; Flags: ignoreversion

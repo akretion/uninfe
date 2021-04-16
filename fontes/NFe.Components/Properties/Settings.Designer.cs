@@ -3171,7 +3171,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.svc")]
         public string NFe_Components_PIjuiRS_NFSeIntegracao {
             get {
                 return ((string)(this["NFe_Components_PIjuiRS_NFSeIntegracao"]));
@@ -3541,6 +3541,28 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PItatingaSP_GeisWebService {
             get {
                 return ((string)(this["NFe_Components_PItatingaSP_GeisWebService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://transparencia.castanhal.pa.gov.br:8086/NFSe.Portal.Integracao/Services.svc" +
+            "")]
+        public string NFe_Components_Castanhal_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_Castanhal_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://transparencia.castanhal.pa.gov.br:8086/NFSe.Portal.Integracao/Services.svc" +
+            "")]
+        public string NFe_Components_PCastanhalPA_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PCastanhalPA_NFSeIntegracao"]));
             }
         }
     }

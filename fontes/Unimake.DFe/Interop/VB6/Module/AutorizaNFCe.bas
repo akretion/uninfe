@@ -72,7 +72,8 @@ With result
     .TpAmb = TpAmb
     .FinNFe = 1
     .IndFinal = 1
-    .IndPres = 1
+    .IndPres = IndicadorPresenca.OperacaoPresencial
+    .IndIntermed = IndicadorIntermediario.OperacaoSemIntermediador
     .ProcEmi = 0
     .VerProc = "TESTE 1.00"
 End With

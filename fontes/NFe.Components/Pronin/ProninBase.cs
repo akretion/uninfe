@@ -100,6 +100,10 @@ namespace NFe.Components.Pronin
                             case 3550407: //São Pedro - SP
                                 proninService = new SaoPedro.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
+
+                            case 4310207: //Ijuís-RS
+                                proninService = new IjuiRS.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }
@@ -204,6 +208,14 @@ namespace NFe.Components.Pronin
 
                             case 3550407://São Pedro - SP
                                 proninService = new SaoPedro.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
+                            case 4310207: //Ijuís-RS
+                                proninService = new IjuiRS.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
+                            case 1502400://Castanhal - PA
+                                proninService = new CastanhalPA.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
                             default:

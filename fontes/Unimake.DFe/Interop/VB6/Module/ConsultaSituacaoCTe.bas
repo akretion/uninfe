@@ -17,7 +17,7 @@ Set consultaProtocolo = CreateObject("Unimake.Business.DFe.Servicos.CTe.Consulta
 consultaProtocolo.Executar (ConsSitCTe), (Config.InicializarConfiguracao(TipoDFe.CTe))
 
 Log.EscreveLog consultaProtocolo.RetornoWSString, True
-Log.EscreveLog consultaProtocolo.result.XMotivo, True
+Log.EscreveLog consultaProtocolo.result.XMotivo, False
 
 Exit Sub
 erro:

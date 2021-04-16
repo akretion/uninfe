@@ -28,7 +28,7 @@ namespace Unimake.Business.DFe.Servicos
         /// Definir o nome da tag que contem as propriedades de acordo com o serviço que está sendo executado
         /// </summary>
         /// <returns>Nome da tag</returns>
-        private string DefinirNomeTag() => GetType().Name.Replace("`1", "");
+        private string DefinirNomeTag() => GetType().Name;
 
         /// <summary>
         /// Namespace onde estão contidos os XMLs de configurações embutidos na DLL por tipo de documento (NFe, NFCe, CTe, etc...)

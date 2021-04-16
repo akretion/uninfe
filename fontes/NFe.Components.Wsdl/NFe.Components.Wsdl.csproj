@@ -3778,10 +3778,6 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HMirassolandiaSP-FIORILLI.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PMirassolandiaSP-FIORILLI.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HGoianiaGO.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMaringaPR-MARINGA_PR.wsdl">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PMaringaPR-MARINGA_PR.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\MARINGA_PR\nfse_v2.01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4576,11 +4572,9 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PDivinopolisMG-GOVDigital.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PNilopolisRJ_SIGCORP_SIGISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HNilopolisRJ_SIGCORP_SIGISS.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HIjuiRS-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPiumaES-EL.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSaoJoaoBoaVistaSP-SIMPLISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PVargemGrandeDoSulSP-SIMPLISS.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PIjuiRS-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSaoSebastiaoDoParaisoMG-E_RECEITA.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoSebastiaoDoParaisoMG-E_RECEITA.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPocosdeCaldasMG-GOVDIGITAL.wsdl" />
@@ -4691,6 +4685,11 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPortoVelhoPO.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HGeisWeb.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PItatingaSP-GeisWeb.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMaringaPR-MARINGA_PR.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMaringaPR-MARINGA_PR.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HIjuiRS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PIjuiRS-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PCastanhalPA-PRONIN.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

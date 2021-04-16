@@ -43,7 +43,7 @@ namespace NFe.ConvertTxt
         public TpcnDestinoOperacao idDest { get; set; }
         public TpcnConsumidorFinal indFinal { get; set; }
         public TpcnPresencaComprador indPres { get; set; }
-        public TpcnIntermediario indIntermed { get; set; }
+        public TpcnIntermediario? indIntermed { get; set; }
 
         public Ide()
         {

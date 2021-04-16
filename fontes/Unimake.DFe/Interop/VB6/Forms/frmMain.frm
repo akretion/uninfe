@@ -176,6 +176,12 @@ Begin VB.Form frmMain
          Begin VB.Menu mnuMDFeEventoInclusaoCondutor 
             Caption         =   "Evento de Inclusão de Condutor no MDFe"
          End
+         Begin VB.Menu mnuMDFeEventoInclusaoDFe 
+            Caption         =   "Evento de Inclusão de DFe no MDFe"
+         End
+         Begin VB.Menu mnuMDFeEventoEncerramento 
+            Caption         =   "Evento de Encerramento do MDF-e"
+         End
       End
       Begin VB.Menu mnuMDFe_EmitirUm 
          Caption         =   "Emitir um MDF-e"
@@ -264,8 +270,16 @@ Private Sub mnuMDFe_EmitirUm_Click()
 EmitirUmMDFe
 End Sub
 
+Private Sub mnuMDFeEventoEncerramento_Click()
+EncerramentoMDFe
+End Sub
+
 Private Sub mnuMDFeEventoInclusaoCondutor_Click()
 InclusaoCondutorMDFe
+End Sub
+
+Private Sub mnuMDFeEventoInclusaoDFe_Click()
+InclusaoDFeMDFe
 End Sub
 
 Private Sub mnuNFCe_Autorizar_Click()

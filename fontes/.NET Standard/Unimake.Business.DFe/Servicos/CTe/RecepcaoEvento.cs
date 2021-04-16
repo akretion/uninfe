@@ -11,10 +11,10 @@ namespace Unimake.Business.DFe.Servicos.CTe
     /// Envio do XML de eventos do CTe para o WebService
     /// </summary>
     [ComVisible(true)]
-    public class RecepcaoEvento<TDetalheEvento>: ServicoBase
+    public class RecepcaoEvento: ServicoBase
     {
         #region Private Fields
-        private EventoCTe<TDetalheEvento> EventoCTe => new EventoCTe<TDetalheEvento>().LerXML<EventoCTe<TDetalheEvento>>(ConteudoXML);
+        private EventoCTe EventoCTe => new EventoCTe().LerXML<EventoCTe>(ConteudoXML);
 
         #endregion Private Fields
 
@@ -47,13 +47,13 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// </summary>
         protected override void DefinirConfiguracao()
         {
-            var xml = new EventoCTe<TDetalheEvento>();
-            xml = xml.LerXML<EventoCTe<TDetalheEvento>>(ConteudoXML);
+            var xml = new EventoCTe();
+            xml = xml.LerXML<EventoCTe>(ConteudoXML);
 
             if(!Configuracoes.Definida)
             {
-                Configuracoes.CodigoUF = (int)((IInfEvento)xml.InfEvento).COrgao;
-                Configuracoes.TipoAmbiente = ((IInfEvento)xml.InfEvento).TpAmb;
+                Configuracoes.CodigoUF = (int)xml.InfEvento.COrgao;
+                Configuracoes.TipoAmbiente = xml.InfEvento.TpAmb;
                 Configuracoes.SchemaVersao = xml.Versao;
 
                 base.DefinirConfiguracao();
@@ -72,7 +72,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
 
             if(Configuracoes.SchemasEspecificos.Count > 0)
             {
-                var tpEvento = ((int)((IInfEvento)xml.InfEvento).TpEvento);
+                var tpEvento = ((int)xml.InfEvento.TpEvento);
 
                 try
                 {
@@ -97,6 +97,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
             {
                 var xmlEspecifico = new XmlDocument();
                 xmlEspecifico.LoadXml(ConteudoXML.GetElementsByTagName(ConteudoXML.GetElementsByTagName("detEvento")[0].FirstChild.Name)[0].OuterXml);
+
                 ValidarXMLEvento(xmlEspecifico, schemaArquivoEspecifico, Configuracoes.TargetNS);
             }
             else
@@ -114,13 +115,12 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// <summary>
         /// Propriedade contendo o XML do evento com o protocolo de autorização anexado
         /// </summary>
-        //TODO WANDREY - Ver
-        //public ProcEventoCTe<TDetalheEvento> ProcEventoCTeResult => new ProcEventoCTe<TDetalheEvento>
-        //{
-        //    Versao = EventoCTe.Versao,
-        //    EventoCTe = EventoCTe,
-        //    RetEventoCTe = Result
-        //};
+        public ProcEventoCTe ProcEventoCTeResult => new ProcEventoCTe
+        {
+            Versao = EventoCTe.Versao,
+            EventoCTe = EventoCTe,
+            RetEventoCTe = Result
+        };
 
         /// <summary>
         /// Conteúdo retornado pelo webservice depois do envio do XML
@@ -155,7 +155,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// </summary>
         /// <param name="envEvento">Objeto contendo o XML a ser enviado</param>
         /// <param name="configuracao">Configurações para conexão e envio do XML para o webservice</param>
-        public RecepcaoEvento(EventoCTe<TDetalheEvento> envEvento, Configuracao configuracao)
+        public RecepcaoEvento(EventoCTe envEvento, Configuracao configuracao)
             : this(envEvento?.GerarXML() ?? throw new ArgumentNullException(nameof(envEvento)), configuracao) { }
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// <param name="envEvento">Objeto contendo o XML a ser enviado</param>
         /// <param name="configuracao">Configurações a serem utilizadas na conexão e envio do XML para o webservice</param>
         [ComVisible(true)]
-        public void Executar(EventoCTe<TDetalheEvento> envEvento, Configuracao configuracao)
+        public void Executar(EventoCTe envEvento, Configuracao configuracao)
         {
             if (envEvento == null)
             {
@@ -201,17 +201,13 @@ namespace Unimake.Business.DFe.Servicos.CTe
         /// Gravar o XML de distribuição em uma pasta no HD
         /// </summary>
         /// <param name="pasta">Pasta onde deve ser gravado o XML</param>
-        //TODO WANDREY: Resolver esta encrenca
-        //public void GravarXmlDistribuicao(string pasta) => GravarXmlDistribuicao(pasta, ProcEventoCTeResult.NomeArquivoDistribuicao, ProcEventoCTeResult.GerarXML().OuterXml);
-        public void GravarXmlDistribuicao(string pasta) { }
+        public void GravarXmlDistribuicao(string pasta) => GravarXmlDistribuicao(pasta, ProcEventoCTeResult.NomeArquivoDistribuicao, ProcEventoCTeResult.GerarXML().OuterXml);
 
         /// <summary>
         /// Grava o XML de dsitribuição no stream
         /// </summary>
         /// <param name="stream">Stream que vai receber o XML de distribuição</param>
-        //TODO WANDREY: Resolver esta encrenca
-        //public void GravarXmlDistribuicao(Stream stream) => GravarXmlDistribuicao(stream, ProcEventoCTeResult.GerarXML().OuterXml);
-        public void GravarXmlDistribuicao(Stream stream) { }
+        public void GravarXmlDistribuicao(Stream stream) => GravarXmlDistribuicao(stream, ProcEventoCTeResult.GerarXML().OuterXml);
 
         #endregion Public Methods
     }

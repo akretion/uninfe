@@ -29,6 +29,7 @@ namespace NFe.ConvertTxt
         public double qBCProd;
         public double vAliqProd;
         public double vCOFINS;
+        public string indSomaCOFINSST;
     }
 
     /// <summary>
@@ -65,10 +66,15 @@ namespace NFe.ConvertTxt
         public double vICMSOp;
         public double pFCP;
         public double vFCP;
+        public double pFCPDif;
+        public double vFCPDif;
+        public double vFCPEfet;
         public double vBCFCP;
         public double vBCFCPST;
         public double pFCPST;
         public double vFCPST;
+        public double vICMSSTDeson;
+        public int motDesICMSST;
         public double pST;
         public double vBCFCPSTRet;
         public double pFCPSTRet;
@@ -257,6 +263,7 @@ namespace NFe.ConvertTxt
         public double qBCProd;
         public double vAliqProd;
         public double vPIS;
+        public string indSomaPISST;
     }
 
     /// <summary>

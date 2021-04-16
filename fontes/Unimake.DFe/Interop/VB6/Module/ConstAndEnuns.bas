@@ -155,3 +155,17 @@ Public Enum TipoDFe
     GNRE = 8
 End Enum
 
+Public Enum IndicadorPresenca
+        NaoSeAplica = 0
+        OperacaoPresencial = 1
+        OperacaoInternet = 2
+        OperacaoTeleAtendimento = 3
+        NFCeEntregaDomicilio = 4
+        PresencialForaEstabelecimento = 5
+        OperacaoOutros = 9
+End Enum
+
+Public Enum IndicadorIntermediario
+    OperacaoSemIntermediador = 0
+    OperacaoSitePlataformaTerceiro = 1
+End Enum

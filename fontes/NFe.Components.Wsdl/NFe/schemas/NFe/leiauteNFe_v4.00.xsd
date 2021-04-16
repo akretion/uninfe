@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2008 (http://www.altova.com) by sas-softwares@procergs.rs.gov.br (PROCERGS) -->
+<!-- edited with XMLSpy v2008 (http://www.altova.com) by softwares@procergs.rs.gov.br (PROCERGS) -->
 <!-- PL_009  alterações de esquema decorrentes da - NT2016.002 v1.20 - 31/05/2017 13:14hs-->
 <!-- PL_008g  alterações de esquema decorrentes da - NT2015.002  - 15/07/2015 -->
 <!-- PL_008h  alterações de esquema decorrentes da - NT2015.003 - 17/09/2015 -->
@@ -189,7 +189,6 @@ SCAN 900-999</xs:documentation>
 									</xs:element>
 									<xs:element name="indFinal">
 										<xs:annotation>
-											<xs:documentation>Indica operação com consumidor final (0-Não;1-Consumidor Final)</xs:documentation>
 											<xs:documentation>Indica operação com consumidor final (0-Não;1-Consumidor Final)</xs:documentation>
 										</xs:annotation>
 										<xs:simpleType>
@@ -5220,28 +5219,23 @@ Substituição Tributaria;</xs:documentation>
 												</xs:element>
 												<xs:element name="tPag">
 													<xs:annotation>
-														<xs:documentation>Forma de Pagamento:01-Dinheiro;02-Cheque;03-Cartão de Crédito;04-Cartão de Débito;05-Crédito Loja;10-Vale Alimentação;11-Vale Refeição;12-Vale Presente;13-Vale Combustível;14 - Duplicata Mercantil;15 - Boleto Bancario;90 - Sem Pagamento;99 - Outros</xs:documentation>
+														<xs:documentation>Meio de Pagamento:Tabela de códigos dos meios de pagamentos publicada no Portal Nacional da Nota Fiscal Eletrônica.</xs:documentation>
 													</xs:annotation>
 													<xs:simpleType>
 														<xs:restriction base="xs:string">
 															<xs:whiteSpace value="preserve"/>
-															<xs:enumeration value="01"/>
-															<xs:enumeration value="02"/>
-															<xs:enumeration value="03"/>
-															<xs:enumeration value="04"/>
-															<xs:enumeration value="05"/>
-															<xs:enumeration value="10"/>
-															<xs:enumeration value="11"/>
-															<xs:enumeration value="12"/>
-															<xs:enumeration value="13"/>
-															<xs:enumeration value="14"/>
-															<xs:enumeration value="15"/>
-															<xs:enumeration value="16"/>
-															<xs:enumeration value="17"/>
-															<xs:enumeration value="18"/>
-															<xs:enumeration value="19"/>
-															<xs:enumeration value="90"/>
-															<xs:enumeration value="99"/>
+															<xs:pattern value="[0-9]{2}"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:element>
+												<xs:element name="xPag" minOccurs="0">
+													<xs:annotation>
+														<xs:documentation>Descrição do Meio de Pagamento</xs:documentation>
+													</xs:annotation>
+													<xs:simpleType>
+														<xs:restriction base="TString">
+															<xs:minLength value="2"/>
+															<xs:maxLength value="60"/>
 														</xs:restriction>
 													</xs:simpleType>
 												</xs:element>

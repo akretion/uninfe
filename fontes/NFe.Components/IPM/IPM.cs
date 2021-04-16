@@ -123,8 +123,15 @@ namespace NFSe.Components
                 case 4114609: //Marechal Cândido Rondon-PR
                     return 7683;
 
-                case 4213203: //Pomerode - SC
+                case 4213203: //Pomerode-SC
                     return 8259;
+
+                case 4213500: //Porto Belo-SC
+                    return 8265;
+
+                case 4215000: //Rio Negrinho-SC
+                    return 8295;
+
             }
 
             return 0;

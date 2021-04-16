@@ -9,16 +9,47 @@ namespace Unimake.Business.DFe.Xml.NFe
 {
     [Serializable()]
     [XmlRoot("procEventoNFe", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
-    public class ProcEventoNFe : XMLBase
+    public class ProcEventoNFe: XMLBase
     {
-        [XmlAttribute(AttributeName = "versao", DataType = "token")]
-        public string Versao { get; set; }
+        #region Protected Methods
+
+        protected override void ProcessReader(XmlReader reader)
+        {
+            base.ProcessReader(reader);
+
+            while(reader.Read())
+            {
+                if(reader.NodeType != XmlNodeType.Element)
+                {
+                    continue;
+                }
+
+                switch(reader.Name)
+                {
+                    case "Signature":
+                        Evento.Signature = reader.ToSignature();
+                        break;
+
+                    case "retEvento":
+                        var versao = reader.GetAttribute("versao");
+                        var infEvento = reader.DeserializeTo<InfEventoRetEvento>();
+
+                        RetEvento = new RetEvento
+                        {
+                            Versao = versao,
+                            InfEvento = infEvento
+                        };
+                        break;
+                }
+            }
+        }
+
+        #endregion Protected Methods
+
+        #region Public Properties
 
         [XmlElement("evento", Order = 0, Namespace = "http://www.portalfiscal.inf.br/nfe")]
         public Evento Evento { get; set; }
-
-        [XmlElement("retEvento", Order = 1, Namespace = "http://www.portalfiscal.inf.br/nfe")]
-        public RetEvento RetEvento { get; set; }
 
         /// <summary>
         /// Nome do arquivo de distribuição
@@ -26,22 +57,34 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlIgnore]
         public string NomeArquivoDistribuicao => Evento.InfEvento.ChNFe + "_" + ((int)Evento.InfEvento.TpEvento).ToString("000000") + "_" + Evento.InfEvento.NSeqEvento.ToString("00") + "-proceventonfe.xml";
 
+        [XmlElement("retEvento", Order = 1, Namespace = "http://www.portalfiscal.inf.br/nfe")]
+        public RetEvento RetEvento { get; set; }
+
+        [XmlAttribute(AttributeName = "versao", DataType = "token")]
+        public string Versao { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
         public override XmlDocument GerarXML()
         {
             var xmlDocument = base.GerarXML();
 
-            XmlRootAttribute attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
+            var attribute = GetType().GetCustomAttribute<XmlRootAttribute>();
 
-            XmlElement xmlElementEvento = (XmlElement)xmlDocument.GetElementsByTagName("evento")[0];
+            var xmlElementEvento = (XmlElement)xmlDocument.GetElementsByTagName("evento")[0];
             xmlElementEvento.SetAttribute("xmlns", attribute.Namespace);
 
-            XmlElement xmlElementRetEvento = (XmlElement)xmlDocument.GetElementsByTagName("retEvento")[0];
+            var xmlElementRetEvento = (XmlElement)xmlDocument.GetElementsByTagName("retEvento")[0];
             xmlElementRetEvento.SetAttribute("xmlns", attribute.Namespace);
 
-            XmlElement xmlElementRetEventoInfEvento = (XmlElement)xmlElementRetEvento.GetElementsByTagName("infEvento")[0];
+            var xmlElementRetEventoInfEvento = (XmlElement)xmlElementRetEvento.GetElementsByTagName("infEvento")[0];
             xmlElementRetEventoInfEvento.SetAttribute("xmlns", attribute.Namespace);
 
             return xmlDocument;
         }
+
+        #endregion Public Methods
     }
 }

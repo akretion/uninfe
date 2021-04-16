@@ -700,7 +700,9 @@ namespace NFe.ConvertTxt
                 XmlElement ele = nodedetprod as XmlElement;
 
                 detInfo.Prod.cEAN = this.readValue(ele, TpcnResources.cEAN);
+                detInfo.Prod.cBarra = this.readValue(ele, TpcnResources.cBarra);
                 detInfo.Prod.cEANTrib = this.readValue(ele, TpcnResources.cEANTrib);
+                detInfo.Prod.cBarraTrib = this.readValue(ele, TpcnResources.cBarraTrib);
                 detInfo.Prod.CFOP = this.readValue(ele, TpcnResources.CFOP);
                 detInfo.Prod.cProd = this.readValue(ele, TpcnResources.cProd);
                 detInfo.Prod.EXTIPI = this.readValue(ele, TpcnResources.EXTIPI);
@@ -966,10 +968,19 @@ namespace NFe.ConvertTxt
                         detInfo.Imposto.ICMS.vICMSDif = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSDif);
                         detInfo.Imposto.ICMS.pFCP = this.readDouble(nodedetImpostoICMS_, TpcnResources.pFCP);
                         detInfo.Imposto.ICMS.vFCP = this.readDouble(nodedetImpostoICMS_, TpcnResources.vFCP);
+
+                        detInfo.Imposto.ICMS.pFCPDif = this.readDouble(nodedetImpostoICMS_, TpcnResources.pFCPDif);
+                        detInfo.Imposto.ICMS.vFCPDif = this.readDouble(nodedetImpostoICMS_, TpcnResources.vFCPDif);
+                        detInfo.Imposto.ICMS.vFCPEfet = this.readDouble(nodedetImpostoICMS_, TpcnResources.vFCPEfet);
+
                         detInfo.Imposto.ICMS.vBCFCP = this.readDouble(nodedetImpostoICMS_, TpcnResources.vBCFCP);
                         detInfo.Imposto.ICMS.vBCFCPST = this.readDouble(nodedetImpostoICMS_, TpcnResources.vBCFCPST);
                         detInfo.Imposto.ICMS.pFCPST = this.readDouble(nodedetImpostoICMS_, TpcnResources.pFCPST);
                         detInfo.Imposto.ICMS.vFCPST = this.readDouble(nodedetImpostoICMS_, TpcnResources.vFCPST);
+
+                        detInfo.Imposto.ICMS.vICMSSTDeson = this.readDouble(nodedetImpostoICMS_, TpcnResources.vICMSSTDeson);
+                        detInfo.Imposto.ICMS.motDesICMSST = this.readInt32(nodedetImpostoICMS_, TpcnResources.motDesICMSST);
+
                         detInfo.Imposto.ICMS.pST = this.readDouble(nodedetImpostoICMS_, TpcnResources.pST);
                         detInfo.Imposto.ICMS.vBCFCPSTRet = this.readDouble(nodedetImpostoICMS_, TpcnResources.vBCFCPSTRet);
                         detInfo.Imposto.ICMS.pFCPSTRet = this.readDouble(nodedetImpostoICMS_, TpcnResources.pFCPSTRet);
@@ -1051,6 +1062,7 @@ namespace NFe.ConvertTxt
                     detInfo.Imposto.PISST.qBCProd = this.readDouble(nodedetImpostoPISst, TpcnResources.qBCProd);
                     detInfo.Imposto.PISST.vAliqProd = this.readDouble(nodedetImpostoPISst, TpcnResources.vAliqProd);
                     detInfo.Imposto.PISST.vPIS = this.readDouble(nodedetImpostoPISst, TpcnResources.vPIS);
+                    detInfo.Imposto.PISST.indSomaPISST = this.readValue(nodedetImpostoPISst, TpcnResources.indSomaPISST);
                 }
                 #endregion --Imposto->PISST
 
@@ -1076,6 +1088,7 @@ namespace NFe.ConvertTxt
                     detInfo.Imposto.COFINSST.qBCProd = this.readDouble(nodedetImpostoCOFINSst, TpcnResources.qBCProd);
                     detInfo.Imposto.COFINSST.vAliqProd = this.readDouble(nodedetImpostoCOFINSst, TpcnResources.vAliqProd);
                     detInfo.Imposto.COFINSST.vCOFINS = this.readDouble(nodedetImpostoCOFINSst, TpcnResources.vCOFINS);
+                    detInfo.Imposto.COFINSST.indSomaCOFINSST = this.readValue(nodedetImpostoCOFINSst, TpcnResources.indSomaCOFINSST);
                 }
                 #endregion --Imposto->COFINSST
 

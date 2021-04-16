@@ -1,5 +1,5 @@
 Attribute VB_Name = "Log"
-
+Option Explicit
 
 Public Sub EscreveLog(ByVal Log As String, ByVal isXML As Boolean)
 Dim XmlDoc As New MSXML2.DOMDocument60
@@ -20,7 +20,7 @@ Resume continue
 End Sub
 
 Public Sub ClearLog()
-fMain.ClearLog
+frmMain.ClearLog
 End Sub
 
 
