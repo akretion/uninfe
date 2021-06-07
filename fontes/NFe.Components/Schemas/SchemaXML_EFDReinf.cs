@@ -251,13 +251,28 @@
                 Tag = "ConsultaInformacoesConsolidadas",
                 ID = SchemaXML.InfSchemas.Count + 1,
                 ArquivoXSD = "",
-                Descricao = "EFDReinf - XML de Consulta de Lote de Eventos",
+                Descricao = "EFDReinf - XML de Consulta Informações Consolidadas",
                 TagAssinatura = "",
                 TagAtributoId = "",
                 TargetNameSpace = ""
             });
 
-            #endregion Consulta Lote de eventos
+            #endregion 
+
+            #region Consulta Lote de eventos
+
+            SchemaXML.InfSchemas.Add("Reinf-ConsultaResultadoFechamento2099", new InfSchema()
+            {
+                Tag = "ConsultaResultadoFechamento2099",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "",
+                Descricao = "EFDReinf - XML de Consulta Resultado Fechamento 2099",
+                TagAssinatura = "",
+                TagAtributoId = "",
+                TargetNameSpace = ""
+            });
+
+            #endregion 
 
             #region Consultas do EFDReinf
 

@@ -447,10 +447,6 @@ namespace NFe.Service
                             DirecionarArquivo(emp, true, true, arquivo, new TaskRecepcaoLoteReinf(arquivo));
                             break;
 
-                        case Servicos.ConsultarLoteReinf:
-                            DirecionarArquivo(emp, true, true, arquivo, new TaskConsultarLoteReinf(arquivo));
-                            break;
-
                         case Servicos.ConsultasReinf:
                             DirecionarArquivo(emp, true, true, arquivo, new TaskConsultasReinf(arquivo));
                             break;
@@ -937,11 +933,8 @@ namespace NFe.Service
                             case "Reinf":
                                 switch(doc.DocumentElement.LastChild.Name)
                                 {
+                                    case "ConsultaResultadoFechamento2099":
                                     case "ConsultaInformacoesConsolidadas":
-                                        tipoServico = Servicos.ConsultarLoteReinf;
-                                        break;
-
-                                    case "ConsultaTotalizadores":
                                     case "ConsultaReciboEvento":
                                         tipoServico = Servicos.ConsultasReinf;
                                         break;
@@ -1636,7 +1629,6 @@ namespace NFe.Service
                         nfe is TaskRecepcaoLoteReinf ||
                         nfe is TaskRecepcaoLoteeSocial ||
                         nfe is TaskConsultarLoteeSocial ||
-                        nfe is TaskConsultarLoteReinf ||
                         nfe is TaskConsultarIdentificadoresEventoseSocial ||
                         nfe is TaskDownloadEventoseSocial ||
                         nfe is TaskConsultaResultadoLoteGNRE ||

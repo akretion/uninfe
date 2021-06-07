@@ -26,7 +26,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="RecepcionarLoteRpsSoap", Namespace="http://www2.tinus.com.br")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="RecepcionarLoteRpsSoap", Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class RecepcionarLoteRps : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback CallRecepcionarLoteRpsOperationCompleted;
@@ -78,26 +78,26 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         public event TestCompletedEventHandler TestCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www2.tinus.com.br/WSNFSE.RecepcionarLoteRps.RecepcionarLoteRps", RequestElementName="RecepcionarLoteRps", RequestNamespace="http://www2.tinus.com.br", ResponseElementName="RecepcionarLoteRpsResponse", ResponseNamespace="http://www2.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.abrasf.org.br/nfse.xsd/WSNFSE.RecepcionarLoteRps.RecepcionarLoteRps", RequestElementName="RecepcionarLoteRps", RequestNamespace="http://www.abrasf.org.br/nfse.xsd", ResponseElementName="EnviarLoteRpsResposta", ResponseNamespace="http://www.abrasf.org.br/nfse.xsd", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("RecepcionarLoteRpsResult")]
-        public EnviarLoteRpsResposta CallRecepcionarLoteRps(EnviarLoteRpsEnvio Arg) {
+        public EnviarLoteRpsResposta CallRecepcionarLoteRps(EnviarLoteRpsEnvio EnviarLoteRpsEnvio) {
             object[] results = this.Invoke("CallRecepcionarLoteRps", new object[] {
-                        Arg});
+                        EnviarLoteRpsEnvio});
             return ((EnviarLoteRpsResposta)(results[0]));
         }
         
         /// <remarks/>
-        public void CallRecepcionarLoteRpsAsync(EnviarLoteRpsEnvio Arg) {
-            this.CallRecepcionarLoteRpsAsync(Arg, null);
+        public void CallRecepcionarLoteRpsAsync(EnviarLoteRpsEnvio EnviarLoteRpsEnvio) {
+            this.CallRecepcionarLoteRpsAsync(EnviarLoteRpsEnvio, null);
         }
         
         /// <remarks/>
-        public void CallRecepcionarLoteRpsAsync(EnviarLoteRpsEnvio Arg, object userState) {
+        public void CallRecepcionarLoteRpsAsync(EnviarLoteRpsEnvio EnviarLoteRpsEnvio, object userState) {
             if ((this.CallRecepcionarLoteRpsOperationCompleted == null)) {
                 this.CallRecepcionarLoteRpsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallRecepcionarLoteRpsOperationCompleted);
             }
             this.InvokeAsync("CallRecepcionarLoteRps", new object[] {
-                        Arg}, this.CallRecepcionarLoteRpsOperationCompleted, userState);
+                        EnviarLoteRpsEnvio}, this.CallRecepcionarLoteRpsOperationCompleted, userState);
         }
         
         private void OnCallRecepcionarLoteRpsOperationCompleted(object arg) {
@@ -108,7 +108,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www2.tinus.com.br/WSNFSE.RecepcionarLoteRps.Test", RequestNamespace="http://www2.tinus.com.br", ResponseNamespace="http://www2.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.abrasf.org.br/nfse.xsd/WSNFSE.RecepcionarLoteRps.Test", RequestNamespace="http://www.abrasf.org.br/nfse.xsd", ResponseNamespace="http://www.abrasf.org.br/nfse.xsd", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string Test() {
             object[] results = this.Invoke("Test", new object[0]);
             return ((string)(results[0]));
@@ -158,7 +158,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class EnviarLoteRpsEnvio {
         
         private tcLoteRps loteRpsField;
@@ -176,7 +176,6 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
         public SignatureType Signature {
             get {
                 return this.signatureField;
@@ -192,7 +191,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcLoteRps {
         
         private string numeroLoteField;
@@ -261,7 +260,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
+        public string id {
             get {
                 return this.idField;
             }
@@ -276,7 +275,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcRps {
         
         private tcInfRps infRpsField;
@@ -294,7 +293,6 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
         public SignatureType Signature {
             get {
                 return this.signatureField;
@@ -310,7 +308,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcInfRps {
         
         private tcIdentificacaoRps identificacaoRpsField;
@@ -486,7 +484,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id {
+        public string id {
             get {
                 return this.idField;
             }
@@ -501,7 +499,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcIdentificacaoRps {
         
         private string numeroField;
@@ -547,7 +545,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcMensagemRetorno {
         
         private string codigoField;
@@ -592,7 +590,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class EnviarLoteRpsResposta {
         
         private string numeroLoteField;
@@ -664,10 +662,8 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class ObjectType {
-        
-        private System.Xml.XmlElement[] anyField;
         
         private string idField;
         
@@ -675,16 +671,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         
         private string encodingField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
-            get {
-                return this.anyField;
-            }
-            set {
-                this.anyField = value;
-            }
-        }
+        private string valueField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -709,13 +696,24 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Encoding {
             get {
                 return this.encodingField;
             }
             set {
                 this.encodingField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
             }
         }
     }
@@ -725,7 +723,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class SPKIDataType {
         
         private byte[][] sPKISexpField;
@@ -760,7 +758,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class PGPDataType {
         
         private byte[] pGPKeyIDField;
@@ -834,7 +832,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class X509IssuerSerialType {
         
         private string x509IssuerNameField;
@@ -867,7 +865,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class X509DataType {
         
         private X509IssuerSerialType[] x509IssuerSerialField;
@@ -954,7 +952,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class RetrievalMethodType {
         
         private TransformType[] transformsField;
@@ -975,7 +973,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string URI {
             get {
                 return this.uRIField;
@@ -986,7 +984,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Type {
             get {
                 return this.typeField;
@@ -1002,18 +1000,19 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class TransformType {
         
-        private System.Xml.XmlElement[] anyField;
+        private System.Xml.XmlNode[] anyField;
         
         private string[] xPathField;
         
         private string algorithmField;
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
+        public System.Xml.XmlNode[] Any {
             get {
                 return this.anyField;
             }
@@ -1034,7 +1033,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Algorithm {
             get {
                 return this.algorithmField;
@@ -1050,7 +1049,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class RSAKeyValueType {
         
         private byte[] modulusField;
@@ -1085,7 +1084,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class DSAKeyValueType {
         
         private byte[] pField;
@@ -1185,14 +1184,14 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class KeyValueType {
         
         private DSAKeyValueType dSAKeyValueField;
         
         private RSAKeyValueType rSAKeyValueField;
         
-        private System.Xml.XmlElement anyField;
+        private System.Xml.XmlNode[] anyField;
         
         /// <remarks/>
         public DSAKeyValueType DSAKeyValue {
@@ -1215,8 +1214,9 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement Any {
+        public System.Xml.XmlNode[] Any {
             get {
                 return this.anyField;
             }
@@ -1231,7 +1231,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class KeyInfoType {
         
         private string[] keyNameField;
@@ -1248,7 +1248,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         
         private string[] mgmtDataField;
         
-        private System.Xml.XmlElement[] anyField;
+        private System.Xml.XmlNode[] anyField;
         
         private string idField;
         
@@ -1330,8 +1330,9 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
+        public System.Xml.XmlNode[] Any {
             get {
                 return this.anyField;
             }
@@ -1357,7 +1358,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class SignatureValueType {
         
         private string idField;
@@ -1392,32 +1393,32 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class DigestMethodType {
-        
-        private System.Xml.XmlElement[] anyField;
         
         private string algorithmField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
-            get {
-                return this.anyField;
-            }
-            set {
-                this.anyField = value;
-            }
-        }
+        private string valueField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Algorithm {
             get {
                 return this.algorithmField;
             }
             set {
                 this.algorithmField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
             }
         }
     }
@@ -1427,7 +1428,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class ReferenceType {
         
         private TransformType[] transformsField;
@@ -1486,7 +1487,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string URI {
             get {
                 return this.uRIField;
@@ -1497,7 +1498,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Type {
             get {
                 return this.typeField;
@@ -1513,14 +1514,14 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class SignatureMethodType {
         
         private long hMACOutputLengthField;
         
         private bool hMACOutputLengthFieldSpecified;
         
-        private System.Xml.XmlElement[] anyField;
+        private string[] textField;
         
         private string algorithmField;
         
@@ -1546,18 +1547,18 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
             get {
-                return this.anyField;
+                return this.textField;
             }
             set {
-                this.anyField = value;
+                this.textField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Algorithm {
             get {
                 return this.algorithmField;
@@ -1573,32 +1574,32 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class CanonicalizationMethodType {
-        
-        private System.Xml.XmlElement[] anyField;
         
         private string algorithmField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
-            get {
-                return this.anyField;
-            }
-            set {
-                this.anyField = value;
-            }
-        }
+        private string valueField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Algorithm {
             get {
                 return this.algorithmField;
             }
             set {
                 this.algorithmField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
             }
         }
     }
@@ -1608,7 +1609,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class SignedInfoType {
         
         private CanonicalizationMethodType canonicalizationMethodField;
@@ -1667,7 +1668,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class SignatureType {
         
         private SignedInfoType signedInfoField;
@@ -1738,7 +1739,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcDadosConstrucaoCivil {
         
         private string codigoObraField;
@@ -1771,7 +1772,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcIdentificacaoIntermediarioServico {
         
         private string razaoSocialField;
@@ -1816,7 +1817,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcCpfCnpj {
         
         private string cpfField;
@@ -1849,7 +1850,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcContato {
         
         private string telefoneField;
@@ -1882,7 +1883,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcEndereco {
         
         private string enderecoField;
@@ -2001,7 +2002,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcIdentificacaoTomador {
         
         private tcCpfCnpj cpfCnpjField;
@@ -2034,7 +2035,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcDadosTomador {
         
         private tcIdentificacaoTomador identificacaoTomadorField;
@@ -2091,7 +2092,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcIdentificacaoPrestador {
         
         private string cnpjField;
@@ -2124,7 +2125,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcValores {
         
         private decimal valorServicosField;
@@ -2507,7 +2508,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcDadosServico {
         
         private tcValores valoresField;

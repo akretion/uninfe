@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
+using Unimake.Business.DFe.Security;
 
 using NFe.Certificado;
 using NFe.Components;
@@ -277,7 +278,7 @@ namespace NFe.UI.Formularios
 
 #if _fw46
             if (this.ckbUsarCertificadoInstalado.Checked && ckbUsaCertificado.Checked)
-               isA3 = clsX509Certificate2Extension.IsA3(empresa.X509Certificado);
+               isA3 = empresa.X509Certificado.IsA3();
 #endif
 
             if (isA3)

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="Tributario" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns1="TributarioGx16New" xmlns:wsdlns="Tributario" name="nfse_web_service" targetNamespace="Tributario" xmlns="http://schemas.xmlsoap.org/wsdl/">
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="Tributario" xmlns:wsdlns="Tributario" name="nfse_web_service" targetNamespace="Tributario" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
-    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" elementFormDefault="qualified" targetNamespace="TributarioGx16New">
-      <xsd:import namespace="Tributario" />
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" elementFormDefault="qualified" targetNamespace="Tributario">
       <xsd:complexType name="input">
         <xsd:sequence>
           <xsd:element name="nfseCabecMsg" type="xsd:string" />
@@ -14,146 +13,129 @@
           <xsd:element name="outputXML" type="xsd:string" />
         </xsd:sequence>
       </xsd:complexType>
-    </xsd:schema>
-    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" elementFormDefault="qualified" targetNamespace="Tributario">
-      <xsd:import namespace="TributarioGx16New" />
       <xsd:element name="nfse_web_service.RECEPCIONARLOTERPS">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Recepcionarloterpsrequest" type="tns1:input" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Recepcionarloterpsrequest" type="wsdlns:input" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.RECEPCIONARLOTERPSResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Recepcionarloterpsresponse" type="tns1:output" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Recepcionarloterpsresponse" type="wsdlns:output" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.GERARNFSE">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Gerarnfserequest" type="tns1:input" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Gerarnfserequest" type="wsdlns:input" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.GERARNFSEResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Gerarnfseresponse" type="tns1:output" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Gerarnfseresponse" type="wsdlns:output" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.RECEPCIONARLOTERPSSINCRONO">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Recepcionarloterpssincronorequest" type="tns1:input" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Recepcionarloterpssincronorequest" type="wsdlns:input" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.RECEPCIONARLOTERPSSINCRONOResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Recepcionarloterpssincronoresponse" type="tns1:output" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Recepcionarloterpssincronoresponse" type="wsdlns:output" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.CANCELARNFSE">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Cancelarnfserequest" type="tns1:input" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Cancelarnfserequest" type="wsdlns:input" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.CANCELARNFSEResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Cancelarnfseresponse" type="tns1:output" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Cancelarnfseresponse" type="wsdlns:output" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.CONSULTARLOTERPS">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarloterpsrequest" type="tns1:input" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarloterpsrequest" type="wsdlns:input" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.CONSULTARLOTERPSResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarloterpsresponse" type="tns1:output" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarloterpsresponse" type="wsdlns:output" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.CONSULTARNFSEFAIXA">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseporfaixarequest" type="tns1:input" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseporfaixarequest" type="wsdlns:input" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.CONSULTARNFSEFAIXAResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseporfaixaresponse" type="tns1:output" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseporfaixaresponse" type="wsdlns:output" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.CONSULTARNFSEPORRPS">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseporrpsrequest" type="tns1:input" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseporrpsrequest" type="wsdlns:input" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.CONSULTARNFSEPORRPSResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseporrpsresponse" type="tns1:output" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseporrpsresponse" type="wsdlns:output" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.CONSULTARNFSESERVICOPRESTADO">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseservicoprestadorequest" type="tns1:input" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseservicoprestadorequest" type="wsdlns:input" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.CONSULTARNFSESERVICOPRESTADOResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseservicoprestadoresponse" type="tns1:output" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="nfse_web_service.CONSULTARNFSESERVICOTOMADO">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseservicotomadorequest" type="tns1:input" />
-          </xsd:sequence>
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="nfse_web_service.CONSULTARNFSESERVICOTOMADOResponse">
-        <xsd:complexType>
-          <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseservicotomadoresponse" type="tns1:output" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Consultarnfseservicoprestadoresponse" type="wsdlns:output" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.SUBSTITUIRNFSE">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Substituirnfserequest" type="tns1:input" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Substituirnfserequest" type="wsdlns:input" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
       <xsd:element name="nfse_web_service.SUBSTITUIRNFSEResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element minOccurs="1" maxOccurs="1" name="Substituirnfseresponse" type="tns1:output" />
+            <xsd:element minOccurs="1" maxOccurs="1" name="Substituirnfseresponse" type="wsdlns:output" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
@@ -207,12 +189,6 @@
   <message name="nfse_web_service.CONSULTARNFSESERVICOPRESTADOSoapOut">
     <part name="parameters" element="wsdlns:nfse_web_service.CONSULTARNFSESERVICOPRESTADOResponse" />
   </message>
-  <message name="nfse_web_service.CONSULTARNFSESERVICOTOMADOSoapIn">
-    <part name="parameters" element="wsdlns:nfse_web_service.CONSULTARNFSESERVICOTOMADO" />
-  </message>
-  <message name="nfse_web_service.CONSULTARNFSESERVICOTOMADOSoapOut">
-    <part name="parameters" element="wsdlns:nfse_web_service.CONSULTARNFSESERVICOTOMADOResponse" />
-  </message>
   <message name="nfse_web_service.SUBSTITUIRNFSESoapIn">
     <part name="parameters" element="wsdlns:nfse_web_service.SUBSTITUIRNFSE" />
   </message>
@@ -251,10 +227,6 @@
     <operation name="CONSULTARNFSESERVICOPRESTADO">
       <input message="wsdlns:nfse_web_service.CONSULTARNFSESERVICOPRESTADOSoapIn" />
       <output message="wsdlns:nfse_web_service.CONSULTARNFSESERVICOPRESTADOSoapOut" />
-    </operation>
-    <operation name="CONSULTARNFSESERVICOTOMADO">
-      <input message="wsdlns:nfse_web_service.CONSULTARNFSESERVICOTOMADOSoapIn" />
-      <output message="wsdlns:nfse_web_service.CONSULTARNFSESERVICOTOMADOSoapOut" />
     </operation>
     <operation name="SUBSTITUIRNFSE">
       <input message="wsdlns:nfse_web_service.SUBSTITUIRNFSESoapIn" />
@@ -335,15 +307,6 @@
         <soap:body use="literal" />
       </output>
     </operation>
-    <operation name="CONSULTARNFSESERVICOTOMADO">
-      <soap:operation soapAction="Tributarioaction/ANFSE_WEB_SERVICE.CONSULTARNFSESERVICOTOMADO" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
     <operation name="SUBSTITUIRNFSE">
       <soap:operation soapAction="Tributarioaction/ANFSE_WEB_SERVICE.SUBSTITUIRNFSE" />
       <input>
@@ -356,7 +319,7 @@
   </binding>
   <service name="nfse_web_service">
     <port name="nfse_web_serviceSoapPort" binding="wsdlns:nfse_web_serviceSoapBinding">
-      <soap:address location="http://www.gp.srv.br/tributario_juscimeira/servlet/anfse_web_service" />
+      <soap:address location="https://www.gp.srv.br/tributario_juscimeira/servlet/anfse_web_service" />
     </port>
   </service>
 </definitions>

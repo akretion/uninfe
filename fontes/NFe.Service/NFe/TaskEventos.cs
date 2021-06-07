@@ -102,6 +102,7 @@ namespace NFe.Service
                             }
                             break;
 
+                        case Servicos.EventoManifestacaoDest:
                         case Servicos.EventoCCe:
                             //CCe só existe no ambiente Normal. Wandrey 22/04/2013
                             tpEmis = (int)Components.TipoEmissao.teNormal;
@@ -120,6 +121,7 @@ namespace NFe.Service
                         var recepcaoEvento = new Unimake.Business.DFe.Servicos.NFCe.RecepcaoEvento(xml, configuracao);
                         recepcaoEvento.Executar();
 
+                        ConteudoXML = recepcaoEvento.ConteudoXMLAssinado;
                         vStrXmlRetorno = recepcaoEvento.RetornoWSString;
                     }
                     else
@@ -127,6 +129,7 @@ namespace NFe.Service
                         var recepcaoEvento = new Unimake.Business.DFe.Servicos.NFe.RecepcaoEvento(xml, configuracao);
                         recepcaoEvento.Executar();
 
+                        ConteudoXML = recepcaoEvento.ConteudoXMLAssinado;
                         vStrXmlRetorno = recepcaoEvento.RetornoWSString;
                     }
 

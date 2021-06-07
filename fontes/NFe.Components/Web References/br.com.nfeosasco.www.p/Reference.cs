@@ -24,7 +24,7 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
     
     /// <remarks/>
     // CODEGEN: The optional WSDL extension element 'PolicyReference' from namespace 'http://schemas.xmlsoap.org/ws/2004/09/policy' was not handled.
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="BasicHttpBinding_INotaFiscalEletronicaServico", Namespace="http://tempuri.org/")]
@@ -35,6 +35,12 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
         private System.Threading.SendOrPostCallback EmitirOperationCompleted;
         
         private System.Threading.SendOrPostCallback CancelarOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback EmitirEmLoteOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ConsultarLoteOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ConsultarOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -79,6 +85,15 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
         
         /// <remarks/>
         public event CancelarCompletedEventHandler CancelarCompleted;
+        
+        /// <remarks/>
+        public event EmitirEmLoteCompletedEventHandler EmitirEmLoteCompleted;
+        
+        /// <remarks/>
+        public event ConsultarLoteCompletedEventHandler ConsultarLoteCompleted;
+        
+        /// <remarks/>
+        public event ConsultarCompletedEventHandler ConsultarCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INotaFiscalEletronicaServico/Emitir", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -141,6 +156,96 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INotaFiscalEletronicaServico/EmitirEmLote", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public EmissaoNotaFiscalLoteResponse EmitirEmLote([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] EmissaoNotaFiscalLoteRequest request) {
+            object[] results = this.Invoke("EmitirEmLote", new object[] {
+                        request});
+            return ((EmissaoNotaFiscalLoteResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void EmitirEmLoteAsync(EmissaoNotaFiscalLoteRequest request) {
+            this.EmitirEmLoteAsync(request, null);
+        }
+        
+        /// <remarks/>
+        public void EmitirEmLoteAsync(EmissaoNotaFiscalLoteRequest request, object userState) {
+            if ((this.EmitirEmLoteOperationCompleted == null)) {
+                this.EmitirEmLoteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnEmitirEmLoteOperationCompleted);
+            }
+            this.InvokeAsync("EmitirEmLote", new object[] {
+                        request}, this.EmitirEmLoteOperationCompleted, userState);
+        }
+        
+        private void OnEmitirEmLoteOperationCompleted(object arg) {
+            if ((this.EmitirEmLoteCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.EmitirEmLoteCompleted(this, new EmitirEmLoteCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INotaFiscalEletronicaServico/ConsultarLote", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public ConsultaNotaFiscalLoteResponse ConsultarLote([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] ConsultaNotaFiscalLoteRequest request) {
+            object[] results = this.Invoke("ConsultarLote", new object[] {
+                        request});
+            return ((ConsultaNotaFiscalLoteResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ConsultarLoteAsync(ConsultaNotaFiscalLoteRequest request) {
+            this.ConsultarLoteAsync(request, null);
+        }
+        
+        /// <remarks/>
+        public void ConsultarLoteAsync(ConsultaNotaFiscalLoteRequest request, object userState) {
+            if ((this.ConsultarLoteOperationCompleted == null)) {
+                this.ConsultarLoteOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarLoteOperationCompleted);
+            }
+            this.InvokeAsync("ConsultarLote", new object[] {
+                        request}, this.ConsultarLoteOperationCompleted, userState);
+        }
+        
+        private void OnConsultarLoteOperationCompleted(object arg) {
+            if ((this.ConsultarLoteCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ConsultarLoteCompleted(this, new ConsultarLoteCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/INotaFiscalEletronicaServico/Consultar", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public ConsultaNotaFiscalResponse Consultar([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] ConsultaNotaFiscalRequest request) {
+            object[] results = this.Invoke("Consultar", new object[] {
+                        request});
+            return ((ConsultaNotaFiscalResponse)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ConsultarAsync(ConsultaNotaFiscalRequest request) {
+            this.ConsultarAsync(request, null);
+        }
+        
+        /// <remarks/>
+        public void ConsultarAsync(ConsultaNotaFiscalRequest request, object userState) {
+            if ((this.ConsultarOperationCompleted == null)) {
+                this.ConsultarOperationCompleted = new System.Threading.SendOrPostCallback(this.OnConsultarOperationCompleted);
+            }
+            this.InvokeAsync("Consultar", new object[] {
+                        request}, this.ConsultarOperationCompleted, userState);
+        }
+        
+        private void OnConsultarOperationCompleted(object arg) {
+            if ((this.ConsultarCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ConsultarCompleted(this, new ConsultarCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -160,7 +265,7 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -182,11 +287,13 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NotaFiscalLoteDTO))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Prestador")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Presta" +
+        "dor")]
     public partial class NotaFiscalDTO {
         
         private System.Nullable<decimal> aliquotaField;
@@ -199,7 +306,15 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
         
         private string cidadePrestacaoServicoField;
         
+        private string codObraField;
+        
+        private System.Nullable<System.DateTime> dataReciboField;
+        
+        private bool dataReciboFieldSpecified;
+        
         private string enderecoPrestacaoServicoField;
+        
+        private string eqptoReciboField;
         
         private string estadoPrestacaoServicoField;
         
@@ -207,7 +322,27 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
         
         private string informacoesAdicionaisField;
         
+        private System.Nullable<decimal> notaSubstituidaField;
+        
+        private bool notaSubstituidaFieldSpecified;
+        
         private bool notificarTomadorPorEmailField;
+        
+        private string numeroCDCField;
+        
+        private string numeroCeiField;
+        
+        private System.Nullable<decimal> numeroReciboField;
+        
+        private bool numeroReciboFieldSpecified;
+        
+        private bool semIncidenciaISSField;
+        
+        private bool semIncidenciaISSFieldSpecified;
+        
+        private bool simplesNacionalField;
+        
+        private bool simplesNacionalFieldSpecified;
         
         private bool substituicaoTributariaField;
         
@@ -244,6 +379,18 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
         private System.Nullable<decimal> valorPisPasepField;
         
         private bool valorPisPasepFieldSpecified;
+        
+        private System.Nullable<decimal> valorRepasseField;
+        
+        private bool valorRepasseFieldSpecified;
+        
+        private System.Nullable<int> nrExercicioReferenciaField;
+        
+        private bool nrExercicioReferenciaFieldSpecified;
+        
+        private System.Nullable<int> nrMesReferenciaField;
+        
+        private bool nrMesReferenciaFieldSpecified;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -302,12 +449,56 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CodObra {
+            get {
+                return this.codObraField;
+            }
+            set {
+                this.codObraField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DataRecibo {
+            get {
+                return this.dataReciboField;
+            }
+            set {
+                this.dataReciboField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DataReciboSpecified {
+            get {
+                return this.dataReciboFieldSpecified;
+            }
+            set {
+                this.dataReciboFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string EnderecoPrestacaoServico {
             get {
                 return this.enderecoPrestacaoServicoField;
             }
             set {
                 this.enderecoPrestacaoServicoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string EqptoRecibo {
+            get {
+                return this.eqptoReciboField;
+            }
+            set {
+                this.eqptoReciboField = value;
             }
         }
         
@@ -344,12 +535,120 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<decimal> NotaSubstituida {
+            get {
+                return this.notaSubstituidaField;
+            }
+            set {
+                this.notaSubstituidaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool NotaSubstituidaSpecified {
+            get {
+                return this.notaSubstituidaFieldSpecified;
+            }
+            set {
+                this.notaSubstituidaFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
         public bool NotificarTomadorPorEmail {
             get {
                 return this.notificarTomadorPorEmailField;
             }
             set {
                 this.notificarTomadorPorEmailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string NumeroCDC {
+            get {
+                return this.numeroCDCField;
+            }
+            set {
+                this.numeroCDCField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string NumeroCei {
+            get {
+                return this.numeroCeiField;
+            }
+            set {
+                this.numeroCeiField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<decimal> NumeroRecibo {
+            get {
+                return this.numeroReciboField;
+            }
+            set {
+                this.numeroReciboField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool NumeroReciboSpecified {
+            get {
+                return this.numeroReciboFieldSpecified;
+            }
+            set {
+                this.numeroReciboFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool SemIncidenciaISS {
+            get {
+                return this.semIncidenciaISSField;
+            }
+            set {
+                this.semIncidenciaISSField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SemIncidenciaISSSpecified {
+            get {
+                return this.semIncidenciaISSFieldSpecified;
+            }
+            set {
+                this.semIncidenciaISSFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool SimplesNacional {
+            get {
+                return this.simplesNacionalField;
+            }
+            set {
+                this.simplesNacionalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SimplesNacionalSpecified {
+            get {
+                return this.simplesNacionalFieldSpecified;
+            }
+            set {
+                this.simplesNacionalFieldSpecified = value;
             }
         }
         
@@ -547,14 +846,81 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
                 this.valorPisPasepFieldSpecified = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<decimal> ValorRepasse {
+            get {
+                return this.valorRepasseField;
+            }
+            set {
+                this.valorRepasseField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorRepasseSpecified {
+            get {
+                return this.valorRepasseFieldSpecified;
+            }
+            set {
+                this.valorRepasseFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> nrExercicioReferencia {
+            get {
+                return this.nrExercicioReferenciaField;
+            }
+            set {
+                this.nrExercicioReferenciaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool nrExercicioReferenciaSpecified {
+            get {
+                return this.nrExercicioReferenciaFieldSpecified;
+            }
+            set {
+                this.nrExercicioReferenciaFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> nrMesReferencia {
+            get {
+                return this.nrMesReferenciaField;
+            }
+            set {
+                this.nrMesReferenciaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool nrMesReferenciaSpecified {
+            get {
+                return this.nrMesReferenciaFieldSpecified;
+            }
+            set {
+                this.nrMesReferenciaFieldSpecified = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Contribuinte")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Contri" +
+        "buinte")]
     public partial class PessoaDTO {
         
         private string cNPJField;
@@ -663,11 +1029,12 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Contrbuinte")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Contri" +
+        "buinte")]
     public partial class EnderecoDTO {
         
         private string bairroField;
@@ -789,11 +1156,407 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Prestador")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Presta" +
+        "dor")]
+    public partial class NotaFiscalConsultaDTO {
+        
+        private System.Nullable<decimal> aliquotaField;
+        
+        private bool aliquotaFieldSpecified;
+        
+        private string codAtividadeField;
+        
+        private System.Nullable<int> codObraField;
+        
+        private bool codObraFieldSpecified;
+        
+        private string codigoAutenticidadeField;
+        
+        private System.Nullable<System.DateTime> dataCancelamentoField;
+        
+        private bool dataCancelamentoFieldSpecified;
+        
+        private System.DateTime dataEmissaoField;
+        
+        private bool dataEmissaoFieldSpecified;
+        
+        private System.Nullable<System.DateTime> dataReciboField;
+        
+        private bool dataReciboFieldSpecified;
+        
+        private string docTomadorField;
+        
+        private string enderecoPrestacaoServicoField;
+        
+        private string linkNFEField;
+        
+        private string motivoCancelamentoField;
+        
+        private string nomeTomadorField;
+        
+        private string nossoNumeroField;
+        
+        private decimal numeroField;
+        
+        private bool numeroFieldSpecified;
+        
+        private System.Nullable<decimal> numeroReciboField;
+        
+        private bool numeroReciboFieldSpecified;
+        
+        private bool substituicaoTributariaField;
+        
+        private bool substituicaoTributariaFieldSpecified;
+        
+        private decimal valorField;
+        
+        private bool valorFieldSpecified;
+        
+        private decimal valorIssField;
+        
+        private bool valorIssFieldSpecified;
+        
+        private decimal valorNFEField;
+        
+        private bool valorNFEFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<decimal> Aliquota {
+            get {
+                return this.aliquotaField;
+            }
+            set {
+                this.aliquotaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool AliquotaSpecified {
+            get {
+                return this.aliquotaFieldSpecified;
+            }
+            set {
+                this.aliquotaFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CodAtividade {
+            get {
+                return this.codAtividadeField;
+            }
+            set {
+                this.codAtividadeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<int> CodObra {
+            get {
+                return this.codObraField;
+            }
+            set {
+                this.codObraField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CodObraSpecified {
+            get {
+                return this.codObraFieldSpecified;
+            }
+            set {
+                this.codObraFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string CodigoAutenticidade {
+            get {
+                return this.codigoAutenticidadeField;
+            }
+            set {
+                this.codigoAutenticidadeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DataCancelamento {
+            get {
+                return this.dataCancelamentoField;
+            }
+            set {
+                this.dataCancelamentoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DataCancelamentoSpecified {
+            get {
+                return this.dataCancelamentoFieldSpecified;
+            }
+            set {
+                this.dataCancelamentoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DataEmissao {
+            get {
+                return this.dataEmissaoField;
+            }
+            set {
+                this.dataEmissaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DataEmissaoSpecified {
+            get {
+                return this.dataEmissaoFieldSpecified;
+            }
+            set {
+                this.dataEmissaoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DataRecibo {
+            get {
+                return this.dataReciboField;
+            }
+            set {
+                this.dataReciboField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DataReciboSpecified {
+            get {
+                return this.dataReciboFieldSpecified;
+            }
+            set {
+                this.dataReciboFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string DocTomador {
+            get {
+                return this.docTomadorField;
+            }
+            set {
+                this.docTomadorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string EnderecoPrestacaoServico {
+            get {
+                return this.enderecoPrestacaoServicoField;
+            }
+            set {
+                this.enderecoPrestacaoServicoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string LinkNFE {
+            get {
+                return this.linkNFEField;
+            }
+            set {
+                this.linkNFEField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string MotivoCancelamento {
+            get {
+                return this.motivoCancelamentoField;
+            }
+            set {
+                this.motivoCancelamentoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string NomeTomador {
+            get {
+                return this.nomeTomadorField;
+            }
+            set {
+                this.nomeTomadorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string NossoNumero {
+            get {
+                return this.nossoNumeroField;
+            }
+            set {
+                this.nossoNumeroField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal Numero {
+            get {
+                return this.numeroField;
+            }
+            set {
+                this.numeroField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool NumeroSpecified {
+            get {
+                return this.numeroFieldSpecified;
+            }
+            set {
+                this.numeroFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<decimal> NumeroRecibo {
+            get {
+                return this.numeroReciboField;
+            }
+            set {
+                this.numeroReciboField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool NumeroReciboSpecified {
+            get {
+                return this.numeroReciboFieldSpecified;
+            }
+            set {
+                this.numeroReciboFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool SubstituicaoTributaria {
+            get {
+                return this.substituicaoTributariaField;
+            }
+            set {
+                this.substituicaoTributariaField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool SubstituicaoTributariaSpecified {
+            get {
+                return this.substituicaoTributariaFieldSpecified;
+            }
+            set {
+                this.substituicaoTributariaFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal Valor {
+            get {
+                return this.valorField;
+            }
+            set {
+                this.valorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorSpecified {
+            get {
+                return this.valorFieldSpecified;
+            }
+            set {
+                this.valorFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorIss {
+            get {
+                return this.valorIssField;
+            }
+            set {
+                this.valorIssField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorIssSpecified {
+            get {
+                return this.valorIssFieldSpecified;
+            }
+            set {
+                this.valorIssFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public decimal ValorNFE {
+            get {
+                return this.valorNFEField;
+            }
+            set {
+                this.valorNFEField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ValorNFESpecified {
+            get {
+                return this.valorNFEFieldSpecified;
+            }
+            set {
+                this.valorNFEFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(NotaFiscalLoteGeradaDTO))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Presta" +
+        "dor")]
     public partial class NotaFiscalGeradaDTO {
         
         private string autenticadorField;
@@ -837,9 +1600,99 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
     }
     
     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Presta" +
+        "dor")]
+    public partial class NotaFiscalLoteGeradaDTO : NotaFiscalGeradaDTO {
+        
+        private string equipamentoReciboField;
+        
+        private bool erroField;
+        
+        private bool erroFieldSpecified;
+        
+        private string identificadorField;
+        
+        private string mensagemErroField;
+        
+        private string reciboField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string EquipamentoRecibo {
+            get {
+                return this.equipamentoReciboField;
+            }
+            set {
+                this.equipamentoReciboField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool Erro {
+            get {
+                return this.erroField;
+            }
+            set {
+                this.erroField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ErroSpecified {
+            get {
+                return this.erroFieldSpecified;
+            }
+            set {
+                this.erroFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Identificador {
+            get {
+                return this.identificadorField;
+            }
+            set {
+                this.identificadorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string MensagemErro {
+            get {
+                return this.mensagemErroField;
+            }
+            set {
+                this.mensagemErroField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Recibo {
+            get {
+                return this.reciboField;
+            }
+            set {
+                this.reciboField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ConsultaNotaFiscalResponse))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ConsultaNotaFiscalLoteResponse))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(EmissaoNotaFiscalLoteResponse))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CancelamentoNotaFiscalResponse))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EmissaoNotaFiscalResponse))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -886,7 +1739,304 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem")]
+    public partial class ConsultaNotaFiscalResponse : ResponseBase {
+        
+        private System.DateTime dataEnvioField;
+        
+        private bool dataEnvioFieldSpecified;
+        
+        private System.DateTime dataFinalizacaoField;
+        
+        private bool dataFinalizacaoFieldSpecified;
+        
+        private NotaFiscalConsultaDTO[] notasGeradasField;
+        
+        private int qtdeNotasField;
+        
+        private bool qtdeNotasFieldSpecified;
+        
+        /// <remarks/>
+        public System.DateTime DataEnvio {
+            get {
+                return this.dataEnvioField;
+            }
+            set {
+                this.dataEnvioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DataEnvioSpecified {
+            get {
+                return this.dataEnvioFieldSpecified;
+            }
+            set {
+                this.dataEnvioFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DataFinalizacao {
+            get {
+                return this.dataFinalizacaoField;
+            }
+            set {
+                this.dataFinalizacaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DataFinalizacaoSpecified {
+            get {
+                return this.dataFinalizacaoFieldSpecified;
+            }
+            set {
+                this.dataFinalizacaoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Presta" +
+            "dor")]
+        public NotaFiscalConsultaDTO[] NotasGeradas {
+            get {
+                return this.notasGeradasField;
+            }
+            set {
+                this.notasGeradasField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int QtdeNotas {
+            get {
+                return this.qtdeNotasField;
+            }
+            set {
+                this.qtdeNotasField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool QtdeNotasSpecified {
+            get {
+                return this.qtdeNotasFieldSpecified;
+            }
+            set {
+                this.qtdeNotasFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem")]
+    public partial class ConsultaNotaFiscalLoteResponse : ResponseBase {
+        
+        private int codigoLoteField;
+        
+        private bool codigoLoteFieldSpecified;
+        
+        private int contadorNotasErroField;
+        
+        private bool contadorNotasErroFieldSpecified;
+        
+        private int contadorNotasGeradasField;
+        
+        private bool contadorNotasGeradasFieldSpecified;
+        
+        private System.DateTime dataEnvioField;
+        
+        private bool dataEnvioFieldSpecified;
+        
+        private System.Nullable<System.DateTime> dataFinalizacaoField;
+        
+        private bool dataFinalizacaoFieldSpecified;
+        
+        private System.Nullable<System.DateTime> dataInicioProcessamentoField;
+        
+        private bool dataInicioProcessamentoFieldSpecified;
+        
+        private NotaFiscalLoteGeradaDTO[] notasGeradasField;
+        
+        /// <remarks/>
+        public int CodigoLote {
+            get {
+                return this.codigoLoteField;
+            }
+            set {
+                this.codigoLoteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CodigoLoteSpecified {
+            get {
+                return this.codigoLoteFieldSpecified;
+            }
+            set {
+                this.codigoLoteFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int ContadorNotasErro {
+            get {
+                return this.contadorNotasErroField;
+            }
+            set {
+                this.contadorNotasErroField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ContadorNotasErroSpecified {
+            get {
+                return this.contadorNotasErroFieldSpecified;
+            }
+            set {
+                this.contadorNotasErroFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int ContadorNotasGeradas {
+            get {
+                return this.contadorNotasGeradasField;
+            }
+            set {
+                this.contadorNotasGeradasField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ContadorNotasGeradasSpecified {
+            get {
+                return this.contadorNotasGeradasFieldSpecified;
+            }
+            set {
+                this.contadorNotasGeradasFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        public System.DateTime DataEnvio {
+            get {
+                return this.dataEnvioField;
+            }
+            set {
+                this.dataEnvioField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DataEnvioSpecified {
+            get {
+                return this.dataEnvioFieldSpecified;
+            }
+            set {
+                this.dataEnvioFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DataFinalizacao {
+            get {
+                return this.dataFinalizacaoField;
+            }
+            set {
+                this.dataFinalizacaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DataFinalizacaoSpecified {
+            get {
+                return this.dataFinalizacaoFieldSpecified;
+            }
+            set {
+                this.dataFinalizacaoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DataInicioProcessamento {
+            get {
+                return this.dataInicioProcessamentoField;
+            }
+            set {
+                this.dataInicioProcessamentoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DataInicioProcessamentoSpecified {
+            get {
+                return this.dataInicioProcessamentoFieldSpecified;
+            }
+            set {
+                this.dataInicioProcessamentoFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Presta" +
+            "dor")]
+        public NotaFiscalLoteGeradaDTO[] NotasGeradas {
+            get {
+                return this.notasGeradasField;
+            }
+            set {
+                this.notasGeradasField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem")]
+    public partial class EmissaoNotaFiscalLoteResponse : ResponseBase {
+        
+        private string mensagemField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Mensagem {
+            get {
+                return this.mensagemField;
+            }
+            set {
+                this.mensagemField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -895,7 +2045,7 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -917,9 +2067,84 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
     }
     
     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Presta" +
+        "dor")]
+    public partial class NotasFiscaisLoteDTO {
+        
+        private string chaveAutenticacaoField;
+        
+        private string emailContatoField;
+        
+        private NotaFiscalLoteDTO[] notasField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ChaveAutenticacao {
+            get {
+                return this.chaveAutenticacaoField;
+            }
+            set {
+                this.chaveAutenticacaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string EmailContato {
+            get {
+                return this.emailContatoField;
+            }
+            set {
+                this.emailContatoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        public NotaFiscalLoteDTO[] Notas {
+            get {
+                return this.notasField;
+            }
+            set {
+                this.notasField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Presta" +
+        "dor")]
+    public partial class NotaFiscalLoteDTO : NotaFiscalDTO {
+        
+        private string identificadorField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Identificador {
+            get {
+                return this.identificadorField;
+            }
+            set {
+                this.identificadorField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ConsultaNotaFiscalRequest))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ConsultaNotaFiscalLoteRequest))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(EmissaoNotaFiscalLoteRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(CancelamentoNotaFiscalRequest))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(EmissaoNotaFiscalRequest))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -928,7 +2153,241 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem")]
+    public partial class ConsultaNotaFiscalRequest : RequestBase {
+        
+        private string chaveAutenticacaoField;
+        
+        private System.Nullable<System.DateTime> dataFinalField;
+        
+        private bool dataFinalFieldSpecified;
+        
+        private System.Nullable<System.DateTime> dataInicialField;
+        
+        private bool dataInicialFieldSpecified;
+        
+        private System.Nullable<decimal> numeroReciboFinalField;
+        
+        private bool numeroReciboFinalFieldSpecified;
+        
+        private System.Nullable<decimal> numeroReciboInicialField;
+        
+        private bool numeroReciboInicialFieldSpecified;
+        
+        private System.Nullable<decimal> numeroReciboUnicoField;
+        
+        private bool numeroReciboUnicoFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ChaveAutenticacao {
+            get {
+                return this.chaveAutenticacaoField;
+            }
+            set {
+                this.chaveAutenticacaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DataFinal {
+            get {
+                return this.dataFinalField;
+            }
+            set {
+                this.dataFinalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DataFinalSpecified {
+            get {
+                return this.dataFinalFieldSpecified;
+            }
+            set {
+                this.dataFinalFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> DataInicial {
+            get {
+                return this.dataInicialField;
+            }
+            set {
+                this.dataInicialField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DataInicialSpecified {
+            get {
+                return this.dataInicialFieldSpecified;
+            }
+            set {
+                this.dataInicialFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<decimal> NumeroReciboFinal {
+            get {
+                return this.numeroReciboFinalField;
+            }
+            set {
+                this.numeroReciboFinalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool NumeroReciboFinalSpecified {
+            get {
+                return this.numeroReciboFinalFieldSpecified;
+            }
+            set {
+                this.numeroReciboFinalFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<decimal> NumeroReciboInicial {
+            get {
+                return this.numeroReciboInicialField;
+            }
+            set {
+                this.numeroReciboInicialField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool NumeroReciboInicialSpecified {
+            get {
+                return this.numeroReciboInicialFieldSpecified;
+            }
+            set {
+                this.numeroReciboInicialFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<decimal> NumeroReciboUnico {
+            get {
+                return this.numeroReciboUnicoField;
+            }
+            set {
+                this.numeroReciboUnicoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool NumeroReciboUnicoSpecified {
+            get {
+                return this.numeroReciboUnicoFieldSpecified;
+            }
+            set {
+                this.numeroReciboUnicoFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem")]
+    public partial class ConsultaNotaFiscalLoteRequest : RequestBase {
+        
+        private string chaveAutenticacaoField;
+        
+        private int codigoLoteField;
+        
+        private bool codigoLoteFieldSpecified;
+        
+        private string statusNotasField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string ChaveAutenticacao {
+            get {
+                return this.chaveAutenticacaoField;
+            }
+            set {
+                this.chaveAutenticacaoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int CodigoLote {
+            get {
+                return this.codigoLoteField;
+            }
+            set {
+                this.codigoLoteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool CodigoLoteSpecified {
+            get {
+                return this.codigoLoteFieldSpecified;
+            }
+            set {
+                this.codigoLoteFieldSpecified = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string StatusNotas {
+            get {
+                return this.statusNotasField;
+            }
+            set {
+                this.statusNotasField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem")]
+    public partial class EmissaoNotaFiscalLoteRequest : RequestBase {
+        
+        private NotasFiscaisLoteDTO notasField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public NotasFiscaisLoteDTO Notas {
+            get {
+                return this.notasField;
+            }
+            set {
+                this.notasField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -975,11 +2434,11 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void EmitirCompletedEventHandler(object sender, EmitirCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class EmitirCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1001,11 +2460,11 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void CancelarCompletedEventHandler(object sender, CancelarCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CancelarCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1022,6 +2481,84 @@ namespace NFe.Components.br.com.nfeosasco.www.p {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((CancelamentoNotaFiscalResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void EmitirEmLoteCompletedEventHandler(object sender, EmitirEmLoteCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class EmitirEmLoteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal EmitirEmLoteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public EmissaoNotaFiscalLoteResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((EmissaoNotaFiscalLoteResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void ConsultarLoteCompletedEventHandler(object sender, ConsultarLoteCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ConsultarLoteCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ConsultarLoteCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ConsultaNotaFiscalLoteResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ConsultaNotaFiscalLoteResponse)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void ConsultarCompletedEventHandler(object sender, ConsultarCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ConsultarCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ConsultarCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public ConsultaNotaFiscalResponse Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((ConsultaNotaFiscalResponse)(this.results[0]));
             }
         }
     }

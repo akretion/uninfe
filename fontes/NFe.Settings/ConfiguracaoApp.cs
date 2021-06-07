@@ -13,6 +13,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+using Unimake.Business.DFe.Security;
 
 namespace NFe.Settings
 {
@@ -1159,10 +1160,6 @@ namespace NFe.Settings
 
                         case Servicos.RecepcaoLoteReinf:
                             WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.RecepcaoLoteReinf : list.LocalProducao.RecepcaoLoteReinf);
-                            break;
-
-                        case Servicos.ConsultarLoteReinf:
-                            WSDL = (tipoAmbiente == (int)TipoAmbiente.taHomologacao ? list.LocalHomologacao.ConsultarLoteReinf : list.LocalProducao.ConsultarLoteReinf);
                             break;
 
                         case Servicos.ConsultasReinf:

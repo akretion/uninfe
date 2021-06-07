@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.InteropServices;
 using Unimake.Business.DFe.Servicos.Interop;
 using Unimake.Business.DFe.Utility;
@@ -103,8 +104,37 @@ namespace Unimake.Business.DFe.Servicos.GNRE
         /// </summary>
         /// <param name="pasta">Pasta onde será gravado o XML de distribuição</param>
         /// <param name="nomeArquivo">Nome do arquivo de distribuição que será gravado</param>
-        /// <param name="conteudoXML">Conteúdo do XML de distribuição a ser gravado</param>
-        public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML) => throw new System.Exception("Não existe XML de distribuição para consulta status do serviço.");
+        public void GravarXmlRetorno(string pasta, string nomeArquivo) => base.GravarXmlDistribuicao(pasta, nomeArquivo, RetornoWSString);
+
+        /// <summary>
+        /// Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).
+        /// </summary>
+        /// <param name="pasta">Pasta onde é para ser gravado do XML</param>
+        /// <param name="nomeArquivo">Nome para o arquivo XML</param>
+        /// <param name="conteudoXML">Conteúdo do XML</param>
+        public override void GravarXmlDistribuicao(string pasta, string nomeArquivo, string conteudoXML) => throw new System.Exception("Não existe XML de distribuição para GNRE.");
+
+        /// <summary>
+        /// Gravar Guias da GNRE retornadas na consulta, quando a GNRE é autorizada.
+        /// </summary>
+        /// <param name="pasta">Pasta onde será gravado o PDF das guias</param>
+        /// <param name="nomeArquivo">Nome do arquivo PDF das guias que será gravado</param>
+        public void GravarPDFGuia(string pasta, string nomeArquivo)
+        {
+            try
+            {
+                if(Result.Resultado == null || string.IsNullOrWhiteSpace(Result.Resultado.PDFGuias))
+                {
+                    throw new Exception("Webservice não retornou guias, em PDF, na consulta do lote da GNRE. Verifique se as GNRE´s foram realmente autorizadas.");
+                }
+
+                Converter.Base64ToPDF(Result.Resultado.PDFGuias, Path.Combine(pasta, nomeArquivo));
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
         #endregion Public Methods
     }

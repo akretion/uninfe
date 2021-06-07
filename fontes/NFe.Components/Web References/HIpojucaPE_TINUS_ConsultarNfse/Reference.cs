@@ -26,7 +26,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="ConsultarNfseSoap", Namespace="http://www2.tinus.com.br")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="ConsultarNfseSoap", Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class ConsultarNfse : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback CallConsultarNfseOperationCompleted;
@@ -78,26 +78,26 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         public event TestCompletedEventHandler TestCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www2.tinus.com.br/WSNFSE.ConsultarNfse.ConsultarNfse", RequestElementName="ConsultarNfse", RequestNamespace="http://www2.tinus.com.br", ResponseElementName="ConsultarNfseResponse", ResponseNamespace="http://www2.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.abrasf.org.br/nfse.xsd/WSNFSE.ConsultarNfse.ConsultarNfse", RequestElementName="ConsultarNfse", RequestNamespace="http://www.abrasf.org.br/nfse.xsd", ResponseElementName="ConsultarNfseResposta", ResponseNamespace="http://www.abrasf.org.br/nfse.xsd", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("ConsultarNfseResult")]
-        public ConsultarNfseResposta CallConsultarNfse(ConsultarNfseEnvio Arg) {
+        public ConsultarNfseResposta CallConsultarNfse(ConsultarNfseEnvio ConsultarNfseEnvio) {
             object[] results = this.Invoke("CallConsultarNfse", new object[] {
-                        Arg});
+                        ConsultarNfseEnvio});
             return ((ConsultarNfseResposta)(results[0]));
         }
         
         /// <remarks/>
-        public void CallConsultarNfseAsync(ConsultarNfseEnvio Arg) {
-            this.CallConsultarNfseAsync(Arg, null);
+        public void CallConsultarNfseAsync(ConsultarNfseEnvio ConsultarNfseEnvio) {
+            this.CallConsultarNfseAsync(ConsultarNfseEnvio, null);
         }
         
         /// <remarks/>
-        public void CallConsultarNfseAsync(ConsultarNfseEnvio Arg, object userState) {
+        public void CallConsultarNfseAsync(ConsultarNfseEnvio ConsultarNfseEnvio, object userState) {
             if ((this.CallConsultarNfseOperationCompleted == null)) {
                 this.CallConsultarNfseOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallConsultarNfseOperationCompleted);
             }
             this.InvokeAsync("CallConsultarNfse", new object[] {
-                        Arg}, this.CallConsultarNfseOperationCompleted, userState);
+                        ConsultarNfseEnvio}, this.CallConsultarNfseOperationCompleted, userState);
         }
         
         private void OnCallConsultarNfseOperationCompleted(object arg) {
@@ -108,7 +108,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www2.tinus.com.br/WSNFSE.ConsultarNfse.Test", RequestNamespace="http://www2.tinus.com.br", ResponseNamespace="http://www2.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.abrasf.org.br/nfse.xsd/WSNFSE.ConsultarNfse.Test", RequestNamespace="http://www.abrasf.org.br/nfse.xsd", ResponseNamespace="http://www.abrasf.org.br/nfse.xsd", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string Test() {
             object[] results = this.Invoke("Test", new object[0]);
             return ((string)(results[0]));
@@ -158,7 +158,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class ConsultarNfseEnvio {
         
         private tcIdentificacaoPrestador prestadorField;
@@ -228,7 +228,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcIdentificacaoPrestador {
         
         private string cnpjField;
@@ -261,7 +261,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcMensagemRetorno {
         
         private string codigoField;
@@ -306,7 +306,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcInfSubstituicaoNfse {
         
         private string nfseSubstituidoraField;
@@ -326,7 +326,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
+        public string Id {
             get {
                 return this.idField;
             }
@@ -341,7 +341,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcSubstituicaoNfse {
         
         private tcInfSubstituicaoNfse substituicaoNfseField;
@@ -375,7 +375,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class SignatureType {
         
         private SignedInfoType signedInfoField;
@@ -446,7 +446,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class SignedInfoType {
         
         private CanonicalizationMethodType canonicalizationMethodField;
@@ -505,32 +505,32 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class CanonicalizationMethodType {
-        
-        private System.Xml.XmlElement[] anyField;
         
         private string algorithmField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
-            get {
-                return this.anyField;
-            }
-            set {
-                this.anyField = value;
-            }
-        }
+        private string valueField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Algorithm {
             get {
                 return this.algorithmField;
             }
             set {
                 this.algorithmField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
             }
         }
     }
@@ -540,14 +540,14 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class SignatureMethodType {
         
         private long hMACOutputLengthField;
         
         private bool hMACOutputLengthFieldSpecified;
         
-        private System.Xml.XmlElement[] anyField;
+        private string[] textField;
         
         private string algorithmField;
         
@@ -573,18 +573,18 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
             get {
-                return this.anyField;
+                return this.textField;
             }
             set {
-                this.anyField = value;
+                this.textField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Algorithm {
             get {
                 return this.algorithmField;
@@ -600,7 +600,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class ReferenceType {
         
         private TransformType[] transformsField;
@@ -659,7 +659,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string URI {
             get {
                 return this.uRIField;
@@ -670,7 +670,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Type {
             get {
                 return this.typeField;
@@ -686,18 +686,19 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class TransformType {
         
-        private System.Xml.XmlElement[] anyField;
+        private System.Xml.XmlNode[] anyField;
         
         private string[] xPathField;
         
         private string algorithmField;
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
+        public System.Xml.XmlNode[] Any {
             get {
                 return this.anyField;
             }
@@ -718,7 +719,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Algorithm {
             get {
                 return this.algorithmField;
@@ -734,32 +735,32 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class DigestMethodType {
-        
-        private System.Xml.XmlElement[] anyField;
         
         private string algorithmField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
-            get {
-                return this.anyField;
-            }
-            set {
-                this.anyField = value;
-            }
-        }
+        private string valueField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Algorithm {
             get {
                 return this.algorithmField;
             }
             set {
                 this.algorithmField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
             }
         }
     }
@@ -769,7 +770,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class SignatureValueType {
         
         private string idField;
@@ -804,7 +805,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class KeyInfoType {
         
         private string[] keyNameField;
@@ -821,7 +822,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         
         private string[] mgmtDataField;
         
-        private System.Xml.XmlElement[] anyField;
+        private System.Xml.XmlNode[] anyField;
         
         private string idField;
         
@@ -903,8 +904,9 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
+        public System.Xml.XmlNode[] Any {
             get {
                 return this.anyField;
             }
@@ -930,14 +932,14 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class KeyValueType {
         
         private DSAKeyValueType dSAKeyValueField;
         
         private RSAKeyValueType rSAKeyValueField;
         
-        private System.Xml.XmlElement anyField;
+        private System.Xml.XmlNode[] anyField;
         
         /// <remarks/>
         public DSAKeyValueType DSAKeyValue {
@@ -960,8 +962,9 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         }
         
         /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement Any {
+        public System.Xml.XmlNode[] Any {
             get {
                 return this.anyField;
             }
@@ -976,7 +979,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class DSAKeyValueType {
         
         private byte[] pField;
@@ -1076,7 +1079,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class RSAKeyValueType {
         
         private byte[] modulusField;
@@ -1111,7 +1114,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class RetrievalMethodType {
         
         private TransformType[] transformsField;
@@ -1132,7 +1135,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string URI {
             get {
                 return this.uRIField;
@@ -1143,7 +1146,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Type {
             get {
                 return this.typeField;
@@ -1159,7 +1162,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class X509DataType {
         
         private X509IssuerSerialType[] x509IssuerSerialField;
@@ -1246,7 +1249,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class X509IssuerSerialType {
         
         private string x509IssuerNameField;
@@ -1279,7 +1282,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class PGPDataType {
         
         private byte[] pGPKeyIDField;
@@ -1353,7 +1356,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class SPKIDataType {
         
         private byte[][] sPKISexpField;
@@ -1388,10 +1391,8 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class ObjectType {
-        
-        private System.Xml.XmlElement[] anyField;
         
         private string idField;
         
@@ -1399,16 +1400,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         
         private string encodingField;
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlElement[] Any {
-            get {
-                return this.anyField;
-            }
-            set {
-                this.anyField = value;
-            }
-        }
+        private string valueField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1433,13 +1425,24 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
+        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
         public string Encoding {
             get {
                 return this.encodingField;
             }
             set {
                 this.encodingField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string Value {
+            get {
+                return this.valueField;
+            }
+            set {
+                this.valueField = value;
             }
         }
     }
@@ -1449,7 +1452,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcIdentificacaoNfse {
         
         private string numeroField;
@@ -1507,7 +1510,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcInfPedidoCancelamento {
         
         private tcIdentificacaoNfse identificacaoNfseField;
@@ -1538,7 +1541,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
+        public string Id {
             get {
                 return this.idField;
             }
@@ -1553,7 +1556,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcPedidoCancelamento {
         
         private tcInfPedidoCancelamento infPedidoCancelamentoField;
@@ -1586,7 +1589,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcConfirmacaoCancelamento {
         
         private tcPedidoCancelamento pedidoField;
@@ -1617,7 +1620,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
+        public string Id {
             get {
                 return this.idField;
             }
@@ -1632,12 +1635,14 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
-    public partial class tcCancelamentoNfse {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcNfseCancelamentoNfse {
         
         private tcConfirmacaoCancelamento confirmacaoField;
         
         private SignatureType signatureField;
+        
+        private string versaoField;
         
         /// <remarks/>
         public tcConfirmacaoCancelamento Confirmacao {
@@ -1658,6 +1663,17 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
                 this.signatureField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string versao {
+            get {
+                return this.versaoField;
+            }
+            set {
+                this.versaoField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -1665,7 +1681,28 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
+    public partial class tcCancelamentoNfse {
+        
+        private tcNfseCancelamentoNfse nfseCancelamentoField;
+        
+        /// <remarks/>
+        public tcNfseCancelamentoNfse NfseCancelamento {
+            get {
+                return this.nfseCancelamentoField;
+            }
+            set {
+                this.nfseCancelamentoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcDadosConstrucaoCivil {
         
         private string codigoObraField;
@@ -1698,7 +1735,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcIdentificacaoOrgaoGerador {
         
         private int codigoMunicipioField;
@@ -1731,7 +1768,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcDadosTomador {
         
         private tcIdentificacaoTomador identificacaoTomadorField;
@@ -1788,7 +1825,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcIdentificacaoTomador {
         
         private tcCpfCnpj cpfCnpjField;
@@ -1821,7 +1858,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcCpfCnpj {
         
         private string cpfField;
@@ -1854,7 +1891,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcEndereco {
         
         private string enderecoField;
@@ -1973,7 +2010,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcContato {
         
         private string telefoneField;
@@ -2006,7 +2043,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcDadosPrestador {
         
         private tcIdentificacaoPrestador identificacaoPrestadorField;
@@ -2075,7 +2112,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcValores {
         
         private decimal valorServicosField;
@@ -2458,7 +2495,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcDadosServico {
         
         private tcValores valoresField;
@@ -2552,7 +2589,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcIdentificacaoRps {
         
         private string numeroField;
@@ -2598,7 +2635,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcInfNfse {
         
         private string numeroField;
@@ -2643,7 +2680,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         
         private tcIdentificacaoOrgaoGerador orgaoGeradorField;
         
-        private tcDadosConstrucaoCivil construcaoCivilField;
+        private tcDadosConstrucaoCivil contrucaoCivilField;
         
         private string idField;
         
@@ -2864,18 +2901,18 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         }
         
         /// <remarks/>
-        public tcDadosConstrucaoCivil ConstrucaoCivil {
+        public tcDadosConstrucaoCivil ContrucaoCivil {
             get {
-                return this.construcaoCivilField;
+                return this.contrucaoCivilField;
             }
             set {
-                this.construcaoCivilField = value;
+                this.contrucaoCivilField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
+        public string Id {
             get {
                 return this.idField;
             }
@@ -2890,7 +2927,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcIdentificacaoIntermediarioServico {
         
         private string razaoSocialField;
@@ -2935,12 +2972,14 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcNfse {
         
         private tcInfNfse infNfseField;
         
         private SignatureType[] signatureField;
+        
+        private string versaoField;
         
         /// <remarks/>
         public tcInfNfse InfNfse {
@@ -2962,6 +3001,17 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
                 this.signatureField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string versao {
+            get {
+                return this.versaoField;
+            }
+            set {
+                this.versaoField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -2969,7 +3019,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcCompNfse {
         
         private tcNfse nfseField;
@@ -3014,7 +3064,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class ConsultarNfseResposta {
         
         private tcCompNfse[] listaNfseField;
@@ -3033,7 +3083,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlArrayItemAttribute("MensagemRetorno", IsNullable=false)]
+        [System.Xml.Serialization.XmlArrayItemAttribute("MensagemRetorno")]
         public tcMensagemRetorno[] ListaMensagemRetorno {
             get {
                 return this.listaMensagemRetornoField;
@@ -3049,7 +3099,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarNfse {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class PeriodoEmissao {
         
         private System.DateTime dataInicialField;

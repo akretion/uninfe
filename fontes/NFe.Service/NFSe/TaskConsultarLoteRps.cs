@@ -57,10 +57,6 @@ namespace NFe.Service.NFSe
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 WebServiceProxy wsProxy = null;
                 object pedLoteRps = null;
-                if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].CertificadoPIN))
-                {
-                    new Certificate().CarregarPINA3(Empresas.Configuracoes[emp].X509Certificado, Empresas.Configuracoes[emp].CertificadoPIN);
-                }
 
                 if (IsUtilizaCompilacaoWs(padraoNFSe, Servico, ler.oDadosPedSitNfseRps.cMunicipio))
                 {
@@ -415,8 +411,9 @@ namespace NFe.Service.NFSe
                             ler.oDadosPedSitNfseRps.cMunicipio == 4101408 ||
                             ler.oDadosPedSitNfseRps.cMunicipio == 3550407 ||
                             ler.oDadosPedSitNfseRps.cMunicipio == 4310207 ||
-                            ler.oDadosPedSitNfseRps.cMunicipio == 1502400)
-                            
+                            ler.oDadosPedSitNfseRps.cMunicipio == 1502400 ||
+                            ler.oDadosPedSitNfseRps.cMunicipio == 3550803)
+
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

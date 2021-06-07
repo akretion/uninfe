@@ -19,7 +19,7 @@ namespace NFe.Components.Tinus.IpojucaPE.h
         {
             get
             {
-                return "http://www2.tinus.com.br";
+                return "http://www.abrasf.org.br/nfse.xsd";
             }
         }
 

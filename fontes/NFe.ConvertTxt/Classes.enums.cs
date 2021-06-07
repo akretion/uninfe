@@ -73,7 +73,9 @@ namespace NFe.ConvertTxt
         [Description("0=Operação sem intermediador (em site ou plataforma própria)")]
         OperacaoSemIntermediador = 0,
         [Description("1=Operação em site ou plataforma de terceiros (intermediadores / marketplace) ")]
-        OperacaoSiteOuTerceiro = 1
+        OperacaoSiteOuTerceiro = 1,
+        [Description("100=Quando a tag não é obrigatória, vamos retornar este valor para termos controle sobre a situação.")]
+        NaoInserirTagNoXML = 100 //Quando a tag não é obrigatórioa, vamos retornar este valor para termos controle sobre a situação.
     }
 
     public enum TpcnFormaPagamento
@@ -243,7 +245,7 @@ namespace NFe.ConvertTxt
 
     public enum TpcnIndicadorPagamento
     {
-        ipNone = -1,
+        ipNone = 100,
         ipVista = 0,
         ipPrazo = 1,
         ipOutras = 2

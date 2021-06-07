@@ -22,6 +22,17 @@
     					</xs:restriction>
     				</xs:simpleType>
     			</xs:element>
+    			<xs:element name="incluirPDFGuias" maxOccurs="1" minOccurs="0">
+                    <xs:annotation>
+                    	<xs:documentation>indica se o pdf (string na base64) das guias processadas com sucesso deve ser incluido no retorno da consulta do lote</xs:documentation>
+                    </xs:annotation>
+                    <xs:simpleType>
+    					<xs:restriction base="xs:string">
+    						<xs:enumeration value="S"></xs:enumeration>
+    						<xs:enumeration value="N"></xs:enumeration>
+    					</xs:restriction>
+    				</xs:simpleType>
+    			</xs:element>
     		</xs:sequence>
     	</xs:complexType>
     </xs:element>

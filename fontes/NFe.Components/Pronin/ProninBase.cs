@@ -218,6 +218,10 @@ namespace NFe.Components.Pronin
                                 proninService = new CastanhalPA.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
 
+                            case 3550803://São Sebastião da Grama - SP
+                                proninService = new SaoSebastiaoDaGramaSP.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                                break;
+
                             default:
                                 throw new Exceptions.ServicoInexistenteException();
                         }

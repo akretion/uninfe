@@ -39,28 +39,130 @@ DisableDirPage=false
 Name: brazilianportuguese; MessagesFile: compiler:Languages\BrazilianPortuguese.isl
 
 [Files]
-Source: ..\fontes\uninfe\bin\Release\MetroFramework.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\BouncyCastle.Crypto.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\itextsharp.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\MetroFramework.Design.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\MetroFramework.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\MetroFramework.Fonts.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\Microsoft.Win32.Primitives.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\netstandard.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\Newtonsoft.Json.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Certificado.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Components.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Components.Info.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Components.Wsdl.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\NFe.Components.XmlSerializers.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.ConvertTxt.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\NFe.SAT.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Service.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Settings.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Threadings.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.UI.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\NFe.Validate.dll; DestDir: {app}; Flags: ignoreversion
-Source: ..\fontes\uninfe\bin\Release\NFe.SAT.dll; DestDir: {app}; Flags: ignoreversion
-Source: ..\fontes\uninfe\bin\Release\itextsharp.dll; DestDir: {app}; Flags: ignoreversion
-Source: ..\fontes\uninfe\bin\Release\Unimake.SAT.dll; DestDir: {app}; Flags: ignoreversion
-Source: ..\fontes\uninfe\bin\Release\Newtonsoft.Json.dll; DestDir: {app}; Flags: ignoreversion
-Source: ..\fontes\uninfe\bin\Release\Unimake.Business.DFe.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.AppContext.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Collections.Concurrent.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Collections.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Collections.NonGeneric.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Collections.Specialized.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.ComponentModel.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.ComponentModel.EventBasedAsync.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.ComponentModel.Primitives.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.ComponentModel.TypeConverter.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Console.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Data.Common.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Diagnostics.Contracts.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Diagnostics.Debug.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Diagnostics.FileVersionInfo.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Diagnostics.Process.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Diagnostics.StackTrace.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Diagnostics.TextWriterTraceListener.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Diagnostics.Tools.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Diagnostics.TraceSource.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Diagnostics.Tracing.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Drawing.Primitives.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Dynamic.Runtime.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Globalization.Calendars.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Globalization.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Globalization.Extensions.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.IO.Compression.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.IO.Compression.ZipFile.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.IO.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.IO.FileSystem.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.IO.FileSystem.DriveInfo.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.IO.FileSystem.Primitives.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.IO.FileSystem.Watcher.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.IO.IsolatedStorage.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.IO.MemoryMappedFiles.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.IO.Pipes.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.IO.UnmanagedMemoryStream.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Linq.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Linq.Expressions.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Linq.Parallel.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Linq.Queryable.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Net.Http.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Net.NameResolution.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Net.NetworkInformation.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Net.Ping.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Net.Primitives.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Net.Requests.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Net.Security.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Net.Sockets.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Net.WebHeaderCollection.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Net.WebSockets.Client.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Net.WebSockets.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.ObjectModel.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Reflection.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Reflection.Extensions.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Reflection.Primitives.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Resources.Reader.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Resources.ResourceManager.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Resources.Writer.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Runtime.CompilerServices.VisualC.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Runtime.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Runtime.Extensions.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Runtime.Handles.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Runtime.InteropServices.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Runtime.InteropServices.RuntimeInformation.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Runtime.Numerics.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Runtime.Serialization.Formatters.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Runtime.Serialization.Json.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Runtime.Serialization.Primitives.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Runtime.Serialization.Xml.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Security.AccessControl.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Security.Claims.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Security.Cryptography.Algorithms.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Security.Cryptography.Csp.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Security.Cryptography.Encoding.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Security.Cryptography.Primitives.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Security.Cryptography.X509Certificates.dll; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\Release\System.Security.Cryptography.Xml.dll; DestDir: {app}; Flags: ignoreversion
-Source: ..\fontes\uninfe\bin\Release\BouncyCastle.Crypto.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Security.Permissions.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Security.Principal.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Security.Principal.Windows.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Security.SecureString.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Text.Encoding.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Text.Encoding.Extensions.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Text.RegularExpressions.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Threading.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Threading.Overlapped.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Threading.Tasks.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Threading.Tasks.Parallel.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Threading.Thread.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Threading.ThreadPool.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Threading.Timer.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.ValueTuple.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Xml.ReaderWriter.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Xml.XDocument.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Xml.XmlDocument.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Xml.XmlSerializer.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Xml.XPath.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\System.Xml.XPath.XDocument.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\Unimake.Business.DFe.dll; DestDir: {app}; Flags: ignoreversion
+Source: ..\fontes\uninfe\bin\Release\Unimake.SAT.dll; DestDir: {app}; Flags: ignoreversion
+
 Source: ..\fontes\uninfe\bin\release\uninfe.exe; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\bin\release\uninfeservico.exe; DestDir: {app}; Flags: ignoreversion
+
 Source: \projetos\dv\trunk\fontes\includes\sefaz.inc; DestDir: {app}; Flags: ignoreversion
 Source: ..\fontes\uninfe\UniNfeSobre.xml; DestDir: {app}; Flags: ignoreversion
 Source: ..\doc\usuario\uninfe.url; DestDir: {app}; Flags: ignoreversion
@@ -90,35 +192,33 @@ var
     filename  : string;
     regresult : cardinal;
 begin
-    // verifica se o framework 4.6.2 sp1 está instalado.
+    // verifica se o framework 4.8 está instalado.
+    //
     // mais detalhes para outros frameworks: https://msdn.microsoft.com/pt-br/library/Hh925568(v=VS.110).aspx
+    //
+    // 528040 = No Windows 10 maio 2019 atualização e Windows 10 de novembro de 2019 atualização. 
+    // 528049 = Em todos os outros sistemas operacionais Windows (incluindo outros sistemas operacionais Windows 10)
+    // 528372 = No Windows 10 pode 2020 atualização e atualização de 10 de outubro de 2020 do Windows
     RegQueryDWordValue(HKLM, 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\full', 'Release', regresult);
 
-    // se o resultado for um. Então o SP1 está instalado
-    // Este resultado é o valor da chave
-    // 393295 = .NET Framework 4.6 - Windows 10
-    // 393297 = .NET Framework 4.6 - Demais windows
-    // 394254 = .NET Framework 4.6.1 - Windows 10
-    // 394271 = .NET Framework 4.6.1 - Demais windows
-    // 394802 = .NET Framawork 4.6.2 - Windows 10
-    // 394806 = .NET Framawork 4.6.2 - Demais windows
-    if regresult < 394802 then begin
+    if regresult < 528040 then begin
       // definir o caminho do arquivo
-      filename := expandconstant('{tmp}\fx451.exe');
+      filename := expandconstant('{tmp}\fw48.exe');
 
       // não está instalado. Exibir a mensagem para o usuário se deseja instalar o fw
-      if MsgBox('Para continuar a instalação é necessário fazer o download do Framework 4.6.2. Deseja continuar?', mbInformation, mb_YesNo) = idYes then begin
+      if MsgBox('Para continuar a instalação é necessário fazer o download do Framework 4.8. Deseja continuar?', mbInformation, mb_YesNo) = idYes then begin
           //iniciar o itd
           itd_init;
 
           //adiciona um arquivo na fila de downloads. (pode se adicionar quantos forem necessários)
-          itd_addfile('http://download.microsoft.com/download/F/9/4/F942F07D-F26F-4F30-B4E3-EBD54FABA377/NDP462-KB3151800-x86-x64-AllOS-ENU.exe', filename);
+          itd_addfile('http://download.visualstudio.microsoft.com/download/pr/9acd2157-dc1e-41fc-9f4d-35d56fc49f6b/406745de80fb60de18220db262021b92/ndp48-x86-x64-allos-enu.exe', filename);
+          
 
           //aqui dizemos ao itd que é para fazer o download após o inno exibir a tela de preparação do setup
           itd_downloadafter(2);
         end else begin
           // o usuário optou por não fazer o download do fw, então avisamos de onde ele pode baixar
-          MsgBox('O link para download manual do framework é http://download.microsoft.com/download/F/9/4/F942F07D-F26F-4F30-B4E3-EBD54FABA377/NDP462-KB3151800-x86-x64-AllOS-ENU.exe', mbInformation, mb_Ok);
+          MsgBox('O link para download manual do framework é https://download.visualstudio.microsoft.com/download/pr/9acd2157-dc1e-41fc-9f4d-35d56fc49f6b/406745de80fb60de18220db262021b92/ndp48-x86-x64-allos-enu.exe', mbInformation, mb_Ok);
       end
     end
 end;
@@ -130,7 +230,7 @@ var
     ErrorCode: Integer;
 begin
 
-filename := expandconstant('{tmp}\fx451.exe');
+filename := expandconstant('{tmp}\fw48.exe');
 
 if CurStep = ssInstall then begin
     // este passo só irá acontecer após o download do arquivo.

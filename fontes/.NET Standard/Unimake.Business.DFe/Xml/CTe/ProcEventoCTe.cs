@@ -59,5 +59,36 @@ namespace Unimake.Business.DFe.Xml.CTe
 
             return xmlDocument;
         }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+
+            while(reader.Read())
+            {
+                if(reader.NodeType != XmlNodeType.Element)
+                {
+                    continue;
+                }
+
+                switch(reader.Name)
+                {
+                    case "Signature":
+                        EventoCTe.Signature = reader.ToSignature();
+                        break;
+
+                    case "retEvento":
+                        var versao = reader.GetAttribute("versao");
+                        var infEvento = reader.DeserializeTo<RetEventoCTeInfEvento>();
+
+                        RetEventoCTe = new RetEventoCTe
+                        {
+                            Versao = versao,
+                            InfEvento = infEvento
+                        };
+                        break;
+                }
+            }
+        }
     }
 }

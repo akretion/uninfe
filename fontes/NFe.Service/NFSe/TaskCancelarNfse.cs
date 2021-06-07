@@ -99,11 +99,6 @@ namespace NFe.Service.NFSe
                 WebServiceProxy wsProxy = null;
                 object pedCanNfse = null;
 
-                if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].CertificadoPIN))
-                {
-                    new Unimake.Business.DFe.Utility.Certificate().CarregarPINA3(Empresas.Configuracoes[emp].X509Certificado, Empresas.Configuracoes[emp].CertificadoPIN);
-                }
-
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
                 if (IsUtilizaCompilacaoWs(padraoNFSe))
                 {
@@ -127,7 +122,16 @@ namespace NFe.Service.NFSe
                                           oDadosPedCanNfse.cMunicipio);
 
                         if (ConfiguracaoApp.Proxy)
+                        { 
                             ipm.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
+                        }
+
+                        if (oDadosPedCanNfse.cMunicipio == 4215000)
+                        {
+                            var adIPM = new AssinaturaDigital();
+                            //adIPM.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
+                            adIPM.Assinar(NomeArquivoXML, "nfse", "nfse", Empresas.Configuracoes[emp].X509Certificado, emp);
+                        }
 
                         ipm.CancelarNfse(NomeArquivoXML);
 
@@ -529,7 +533,8 @@ namespace NFe.Service.NFSe
                             oDadosPedCanNfse.cMunicipio == 4101408 ||
                             oDadosPedCanNfse.cMunicipio == 3550407 ||
                             oDadosPedCanNfse.cMunicipio == 4310207 ||
-                            oDadosPedCanNfse.cMunicipio == 1502400)
+                            oDadosPedCanNfse.cMunicipio == 1502400 ||
+                            oDadosPedCanNfse.cMunicipio == 3550803)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

@@ -45,8 +45,29 @@ namespace NFe.Service.GNRE
                 var consultaResultadoLote = new ConsultaResultadoLote(xml, configuracao);
                 consultaResultadoLote.Executar();
 
+                var nomeArqPDF = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML) + "-gnre.pdf";
+
+                #region Gravar PDF das guias
+
+                if(consultaResultadoLote.Result != null)
+                {
+                    if(consultaResultadoLote.Result.Resultado != null)
+                    {
+                        if(!string.IsNullOrWhiteSpace(consultaResultadoLote.Result.Resultado.PDFGuias))
+                        {
+                            Functions.DeletarArquivo(Empresas.Configuracoes[emp].PastaXmlRetorno + "\\" + nomeArqPDF);
+
+                            consultaResultadoLote.GravarPDFGuia(Empresas.Configuracoes[emp].PastaXmlRetorno, nomeArqPDF);
+                        }
+                    }
+                }
+
+                #endregion
+
+
                 vStrXmlRetorno = consultaResultadoLote.RetornoWSString;
                 XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML);
+
 
                 /// grava o arquivo no FTP
                 var filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,

@@ -763,16 +763,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc")]
-        public string NFe_Components_br_com_nfeosasco_www_p_NotaFiscalEletronicaServico {
-            get {
-                return ((string)(this["NFe_Components_br_com_nfeosasco_www_p_NotaFiscalEletronicaServico"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://wspatrocinio.simplissweb.com.br/nfseservice.svc")]
         public string NFe_Components_br_com_simplissweb_wspatrociniomg_p_NfseService {
             get {
@@ -2092,16 +2082,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfe_teste_homologacao.php")]
-        public string NFe_Components_HBarraBonitaSP_webservice {
-            get {
-                return ((string)(this["NFe_Components_HBarraBonitaSP_webservice"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeenvia.php")]
         public string NFe_Components_PBarraBonitaSP_Enviar_webservice {
             get {
@@ -3342,16 +3322,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www2.tinus.com.br/csp/testeipo/WSNFSE.CancelarNfse.cls")]
-        public string NFe_Components_HIpojucaPE_TINUS_CancelarNfse_CancelarNfse {
-            get {
-                return ((string)(this["NFe_Components_HIpojucaPE_TINUS_CancelarNfse_CancelarNfse"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://www2.tinus.com.br/csp/testeipo/WSNFSE.ConsultarLoteRps.cls")]
         public string NFe_Components_HIpojucaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps {
             get {
@@ -3505,17 +3475,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.gp.srv.br/tributario_homologacao/servlet/anfse_web_service")]
-        public string NFe_Components_HJuscimeiraMT_nfse_web_service {
-            get {
-                return ((string)(this["NFe_Components_HJuscimeiraMT_nfse_web_service"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.gp.srv.br/tributario_juscimeira/servlet/anfse_web_service")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.gp.srv.br/tributario_juscimeira/servlet/anfse_web_service")]
         public string NFe_Components_PJuscimeiraMT_nfse_web_service {
             get {
                 return ((string)(this["NFe_Components_PJuscimeiraMT_nfse_web_service"]));
@@ -3563,6 +3523,57 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PCastanhalPA_NFSeIntegracao {
             get {
                 return ((string)(this["NFe_Components_PCastanhalPA_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www2.webfiscotecnologia.com.br:443/issqn/wservice/wsnfe_teste_homologacao" +
+            ".php")]
+        public string NFe_Components_HWebfiscoTecnologia_webservice {
+            get {
+                return ((string)(this["NFe_Components_HWebfiscoTecnologia_webservice"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www2.tinus.com.br/csp/testeipo/WSNFSE.CancelarNfse.cls")]
+        public string NFe_Components_HIpojucaPE_TINUS_CancelarNfse_CancelarNfse {
+            get {
+                return ((string)(this["NFe_Components_HIpojucaPE_TINUS_CancelarNfse_CancelarNfse"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://187.87.126.50/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PSaoSebastiaoDaGramaSP_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PSaoSebastiaoDaGramaSP_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc")]
+        public string NFe_Components_br_com_nfeosasco_www_p_NotaFiscalEletronicaServico {
+            get {
+                return ((string)(this["NFe_Components_br_com_nfeosasco_www_p_NotaFiscalEletronicaServico"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.gp.srv.br/tributario_aguaboa/servlet/anfse_web_service")]
+        public string NFe_Components_PAguaBoaMT_nfse_web_service {
+            get {
+                return ((string)(this["NFe_Components_PAguaBoaMT_nfse_web_service"]));
             }
         }
     }

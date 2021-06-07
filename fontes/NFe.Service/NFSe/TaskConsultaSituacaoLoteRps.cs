@@ -56,10 +56,6 @@ namespace NFe.Service.NFSe
                 PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedSitLoteRps.cMunicipio);
                 WebServiceProxy wsProxy = null;
                 object pedSitLoteRps = null;
-                if (!String.IsNullOrEmpty(Empresas.Configuracoes[emp].CertificadoPIN))
-                {
-                    new Unimake.Business.DFe.Utility.Certificate().CarregarPINA3(Empresas.Configuracoes[emp].X509Certificado, Empresas.Configuracoes[emp].CertificadoPIN);
-                }
 
                 if (IsUtilizaCompilacaoWs(padraoNFSe, Servico, oDadosPedSitLoteRps.cMunicipio))
                 {
@@ -299,7 +295,8 @@ namespace NFe.Service.NFSe
                             oDadosPedSitLoteRps.cMunicipio == 4101408 ||
                             oDadosPedSitLoteRps.cMunicipio == 3550407 ||
                             oDadosPedSitLoteRps.cMunicipio == 4310207 ||
-                            oDadosPedSitLoteRps.cMunicipio == 1502400)
+                            oDadosPedSitLoteRps.cMunicipio == 1502400 ||
+                            oDadosPedSitLoteRps.cMunicipio == 3550803)
                         {
                             Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

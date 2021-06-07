@@ -87,73 +87,60 @@ namespace NFe.Service
         private string NomeMetodo()
         {
             var result = "";
-            var consultaEventoTotalizacao = ConteudoXML.GetElementsByTagName("ConsultaTotalizadores")[0];
-            var consultaEvento = ((XmlElement)ConteudoXML.GetElementsByTagName("tipoEvento")[0])?.InnerText;
 
-            if (consultaEventoTotalizacao != null)
-                result = "ConsultaInformacoesConsolidadas";
-
-            if (consultaEvento != null)
+            if(ConteudoXML.GetElementsByTagName("ConsultaInformacoesConsolidadas")[0] != null)
             {
-                switch (consultaEvento)
+                result = "ConsultaInformacoesConsolidadas";
+            }
+            else if(ConteudoXML.GetElementsByTagName("ConsultaResultadoFechamento2099")[0] != null)
+            {
+                result = "ConsultaResultadoFechamento2099";
+            }
+            else
+            {
+                var consultaEvento = ((XmlElement)ConteudoXML.GetElementsByTagName("tipoEvento")[0])?.InnerText;
+
+                if(consultaEvento != null)
                 {
-                    case "1000":
-                        result = "ConsultaReciboEvento1000";
-                        break;
-                    case "1070":
-                        result = "ConsultaReciboEvento1070";
-                        break;
-                    case "2010":
-                        result = "ConsultaReciboEvento2010";
-                        break;
-                    case "2020":
-                        result = "ConsultaReciboEvento2020";
-                        break;
-                    case "2030":
-                        result = "ConsultaReciboEvento2030";
-                        break;
-                    case "2040":
-                        result = "ConsultaReciboEvento2040";
-                        break;
-                    case "2050":
-                        result = "ConsultaReciboEvento2050";
-                        break;
-                    case "2055":
-                        result = "ConsultaReciboEvento2055";
-                        break;
-                    case "2060":
-                        result = "ConsultaReciboEvento2060";
-                        break;
-                    case "2098":
-                        result = "ConsultaReciboEvento2098";
-                        break;
-                    case "2099":
-                        result = "ConsultaReciboEvento2099";
-                        break;
-                    case "3010":
-                        result = "ConsultaReciboEvento3010";
-                        break;
-                    case "4004":
-                        result = "ConsultaReciboEvento4004";
-                        break;
-                    case "4010":
-                        result = "ConsultaReciboEvento4010";
-                        break;
-                    case "4020":
-                        result = "ConsultaReciboEvento4020";
-                        break;
-                    case "4040":
-                        result = "ConsultaReciboEvento4040";
-                        break;
-                    case "4080":
-                        result = "ConsultaReciboEvento4080";
-                        break;
-                    case "4098":
-                        result = "ConsultaReciboEvento4098";
-                        break;
-                    case "4099":
-                        result = "ConsultaReciboEvento4099";
-                        break;
+                    switch(consultaEvento)
+                    {
+                        case "1000":
+                            result = "ConsultaReciboEvento1000";
+                            break;
+                        case "1070":
+                            result = "ConsultaReciboEvento1070";
+                            break;
+                        case "2010":
+                            result = "ConsultaReciboEvento2010";
+                            break;
+                        case "2020":
+                            result = "ConsultaReciboEvento2020";
+                            break;
+                        case "2030":
+                            result = "ConsultaReciboEvento2030";
+                            break;
+                        case "2040":
+                            result = "ConsultaReciboEvento2040";
+                            break;
+                        case "2050":
+                            result = "ConsultaReciboEvento2050";
+                            break;
+                        case "2055":
+                            result = "ConsultaReciboEvento2055";
+                            break;
+                        case "2060":
+                            result = "ConsultaReciboEvento2060";
+                            break;
+                        case "2098":
+                            result = "ConsultaReciboEvento2098";
+                            break;
+                        case "2099":
+                            result = "ConsultaReciboEvento2099";
+                            break;
+                        case "3010":
+                            result = "ConsultaReciboEvento3010";
+                            break;
+                    }
                 }
             }
 

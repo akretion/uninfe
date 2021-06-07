@@ -8,6 +8,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using Unimake.Business.DFe.Contract.Serialization;
 using Unimake.Business.DFe.Servicos;
 using Unimake.Business.DFe.Utility;
 
@@ -15,7 +16,7 @@ namespace Unimake.Business.DFe.Xml.CTe
 {
     [Serializable]
     [XmlRoot(ElementName = "detEvento")]
-    public class DetEventoCanc: EventoDetalhe
+    public class DetEventoCanc : EventoDetalhe
     {
         #region Public Properties
 
@@ -49,7 +50,7 @@ namespace Unimake.Business.DFe.Xml.CTe
 
     [Serializable]
     [XmlRoot(ElementName = "detEvento")]
-    public class DetEventoPrestDesacordo: EventoDetalhe
+    public class DetEventoPrestDesacordo : EventoDetalhe
     {
         #region Public Properties
 
@@ -83,7 +84,7 @@ namespace Unimake.Business.DFe.Xml.CTe
 
     [Serializable]
     [XmlRoot(ElementName = "detEvento")]
-    public class DetEventoCancCompEntrega: EventoDetalhe
+    public class DetEventoCancCompEntrega : EventoDetalhe
     {
         #region Public Properties
 
@@ -117,7 +118,7 @@ namespace Unimake.Business.DFe.Xml.CTe
 
     [XmlRoot(ElementName = "detEvento")]
     [XmlInclude(typeof(EventoDetalhe))]
-    public class DetEventoCCE: EventoDetalhe
+    public class DetEventoCCE : EventoDetalhe
     {
         #region Private Fields
 
@@ -214,7 +215,7 @@ namespace Unimake.Business.DFe.Xml.CTe
 
     [XmlInclude(typeof(EventoDetalhe))]
     [XmlRoot(ElementName = "detEvento")]
-    public class DetEventoEPEC: EventoDetalhe
+    public class DetEventoEPEC : EventoDetalhe
     {
         private EvEPECCTe _evEPECCTe;
 
@@ -375,29 +376,30 @@ namespace Unimake.Business.DFe.Xml.CTe
             writeRaw += $@"<vTPrest>{VTPrestField}</vTPrest>
                 <vCarga>{VCargaField}</vCarga>";
 
-            writeRaw += $@"<Toma4>
+            writeRaw += $@"<toma4>
+                <toma>{(int)Toma4.Toma}</toma>
                 <UF>{Toma4.UF}</UF>";
 
-            if(string.IsNullOrWhiteSpace(Toma4.CNPJ))
+            if(!string.IsNullOrWhiteSpace(Toma4.CNPJ))
             {
                 writeRaw += $@"<CNPJ>{Toma4.CNPJ}</CNPJ>";
             }
 
-            if(string.IsNullOrWhiteSpace(Toma4.CPF))
+            if(!string.IsNullOrWhiteSpace(Toma4.CPF))
             {
                 writeRaw += $@"<CPF>{Toma4.CPF}</CPF>";
             }
 
-            if(string.IsNullOrWhiteSpace(Toma4.IE))
+            if(!string.IsNullOrWhiteSpace(Toma4.IE))
             {
                 writeRaw += $@"<IE>{Toma4.IE}</IE>";
             }
 
-            writeRaw += $@"</Toma4>
-                <Modal>{Modal}</Modal>
+            writeRaw += $@"</toma4>
+                <modal>{((int)Modal).ToString().PadLeft(2, '0')}</modal>
                 <UFIni>{UFIni}</UFIni>
                 <UFFim>{UFFim}</UFFim>
-                <tpCTe>{TpCTe}</tpCTe>
+                <tpCTe>{(int)TpCTe}</tpCTe>
                 <dhEmi>{DhEmiField}</dhEmi>";
 
             writeRaw += $@"</evEPECCTe>";
@@ -408,7 +410,7 @@ namespace Unimake.Business.DFe.Xml.CTe
 
     [XmlRoot(ElementName = "evEPECCTe")]
     [XmlInclude(typeof(EventoDetalhe))]
-    public class EvEPECCTe
+    public class EvEPECCTe : Contract.Serialization.IXmlSerializable
     {
         [XmlElement("descEvento", Order = 0)]
         public string DescEvento { get; set; } = "EPEC";
@@ -480,6 +482,24 @@ namespace Unimake.Business.DFe.Xml.CTe
             get => DhEmi.ToString("yyyy-MM-ddTHH:mm:sszzz");
             set => DhEmi = DateTime.Parse(value);
         }
+
+        /// <summary>
+        /// Executa o processamento do XMLReader recebido na deserialização
+        /// </summary>
+        ///<param name="reader">Reader XML recebido durante o processo de deserialização</param>
+        public void ReadXml(XmlReader reader)
+        {
+
+        }
+
+        /// <summary>
+        /// Executa o processamento do XMLReader recebido na serialização
+        /// </summary>
+        ///<param name="writer">string XML recebido durante o processo de serialização</param>
+        public void WriteXml(System.IO.StringWriter writer)
+        {
+
+        }
     }
 
     [Serializable()]
@@ -520,7 +540,7 @@ namespace Unimake.Business.DFe.Xml.CTe
 
     [XmlInclude(typeof(EventoDetalhe))]
     [XmlRoot(ElementName = "detEvento")]
-    public class DetEventoCompEntrega: EventoDetalhe
+    public class DetEventoCompEntrega : EventoDetalhe
     {
         #region Private Fields
 
@@ -674,7 +694,7 @@ namespace Unimake.Business.DFe.Xml.CTe
 
     [Serializable]
     [XmlRoot(ElementName = "detEvento")]
-    public class EventoCCeCTe: EventoDetalhe
+    public class EventoCCeCTe : EventoDetalhe
     {
         #region Private Fields
 
@@ -716,7 +736,7 @@ namespace Unimake.Business.DFe.Xml.CTe
 
     [XmlRoot(ElementName = "evCECTe")]
     [XmlInclude(typeof(EventoDetalhe))]
-    public class EventoCECTe: EventoDetalhe
+    public class EventoCECTe : EventoDetalhe
     {
         #region Public Properties
 
@@ -783,7 +803,7 @@ namespace Unimake.Business.DFe.Xml.CTe
 
     [Serializable()]
     [XmlRoot("eventoCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
-    public class EventoCTe: XMLBase
+    public class EventoCTe : XMLBase
     {
         #region Private Methods
 
@@ -872,7 +892,7 @@ namespace Unimake.Business.DFe.Xml.CTe
     [XmlInclude(typeof(DetEventoCompEntrega))]
     [XmlInclude(typeof(EventoCECTe))]
     [XmlInclude(typeof(DetEventoPrestDesacordo))]
-    public class EventoDetalhe: IXmlSerializable
+    public class EventoDetalhe : System.Xml.Serialization.IXmlSerializable
     {
         #region Private Fields
 

@@ -73,7 +73,7 @@ namespace Unimake.Business.DFe.Servicos.NFe
             if(!string.IsNullOrWhiteSpace(Configuracoes.TagAssinatura) &&
                !AssinaturaDigital.EstaAssinado(ConteudoXML, Configuracoes.TagAssinatura))
             {
-                AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, Configuracoes.CertificadoA3PIN, "Id");
+                AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "Id");
             }
 
             AjustarXMLAposAssinado();

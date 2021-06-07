@@ -27,6 +27,18 @@
             Nome do arquivo de distribuição
             </summary>
         </member>
+        <member name="M:Unimake.Business.DFe.Xml.CTe.EvEPECCTe.ReadXml(System.Xml.XmlReader)">
+             <summary>
+             Executa o processamento do XMLReader recebido na deserialização
+             </summary>
+            <param name="reader">Reader XML recebido durante o processo de deserialização</param>
+        </member>
+        <member name="M:Unimake.Business.DFe.Xml.CTe.EvEPECCTe.WriteXml(System.IO.StringWriter)">
+             <summary>
+             Executa o processamento do XMLReader recebido na serialização
+             </summary>
+            <param name="writer">string XML recebido durante o processo de serialização</param>
+        </member>
         <member name="P:Unimake.Business.DFe.Xml.CTe.ProcEventoCTe.NomeArquivoDistribuicao">
             <summary>
             Nome do arquivo de distribuição
@@ -96,12 +108,6 @@
             Lista de NameSpaces
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Xml.XMLBase.ProcessReader(System.Xml.XmlReader)">
-             <summary>
-             Executa o processamento do XMLReader recebido na deserialização
-             </summary>
-            <param name="reader">Reader XML recebido durante o processo de deserialização</param>
-        </member>
         <member name="M:Unimake.Business.DFe.Xml.XMLBase.#ctor">
             <summary>
             Construtor base
@@ -120,6 +126,18 @@
             <typeparam name="T">Tipo do objeto</typeparam>
             <param name="doc">Conteúdo do XML a ser deserilizado</param>
             <returns>Retorna o objeto com o conteúdo do XML deserializado</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Xml.XMLBase.ReadXml(System.Xml.XmlReader)">
+             <summary>
+             Executa o processamento do XMLReader recebido na deserialização
+             </summary>
+            <param name="reader">Reader XML recebido durante o processo de deserialização</param>
+        </member>
+        <member name="M:Unimake.Business.DFe.Xml.XMLBase.WriteXml(System.IO.StringWriter)">
+             <summary>
+             Executa o processamento do XMLReader recebido na serialização
+             </summary>
+            <param name="writer">string XML recebido durante o processo de serialização</param>
         </member>
         <member name="T:Unimake.Business.DFe.Configuration">
             <summary>
@@ -237,26 +255,35 @@
             Implementa métodos para serialização e deserialização de XMLs
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Contract.Serialization.IXmlSerializable.ProcessReader(System.Xml.XmlReader)">
+        <member name="M:Unimake.Business.DFe.Contract.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)">
              <summary>
              Executa o processamento do XMLReader recebido na deserialização
              </summary>
             <param name="reader">Reader XML recebido durante o processo de deserialização</param>
         </member>
+        <member name="M:Unimake.Business.DFe.Contract.Serialization.IXmlSerializable.WriteXml(System.IO.StringWriter)">
+             <summary>
+             Executa o processamento do XMLReader recebido na serialização
+             </summary>
+            <param name="writer">string XML recebido durante o processo de serialização</param>
+        </member>
         <member name="T:Unimake.Business.DFe.Security.ClsX509Certificate2Extension">
             <summary>
-            Classe para passar o Pin Code por baixo do código 
-            (a caixa de dialógo pedindo o Pin Code não aparecerá para o usuário).
+            Extensão da classe X509Certificate2
             </summary>
         </member>
         <member name="M:Unimake.Business.DFe.Security.ClsX509Certificate2Extension.SetPinPrivateKey(System.Security.Cryptography.X509Certificates.X509Certificate2,System.String)">
             <summary>
-            Passa PIN Code (Senha/Password) para Certificados
-             eToken como o A3 do SERASA do Brasil
+            Carregar o PIN do certificado A3 para que não apresente a tela para o usuário digitar.
             </summary>
-            <param name="certificado">O Certificado que está sendo usado 
-            para a criptografia</param>
-            <param name="pinPassword">O Pin Code / Senha / Password</param>
+            <param name="certificado">Certificado Digital</param>
+            <param name="pinPassword">O Pin Code / Senha / Password do certificado digital</param>
+        </member>
+        <member name="M:Unimake.Business.DFe.Security.ClsX509Certificate2Extension.CarregarPINA3(System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            É necessário assinar um XML para carregar o PIN para não solicitar ao usuário.
+            </summary>
+            <param name="certificado">Certificado digital que é para carregar o PIN</param>
         </member>
         <member name="M:Unimake.Business.DFe.Security.ClsX509Certificate2Extension.IsA3(System.Security.Cryptography.X509Certificates.X509Certificate2)">
             <summary>
@@ -296,7 +323,7 @@
             Classe para realizar assinatura digital de XMLs
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Security.AssinaturaDigital.Assinar(System.Xml.XmlDocument,System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate2,Unimake.Business.DFe.Security.AlgorithmType,System.Boolean,System.String,System.String,System.Boolean)">
+        <member name="M:Unimake.Business.DFe.Security.AssinaturaDigital.Assinar(System.Xml.XmlDocument,System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate2,Unimake.Business.DFe.Security.AlgorithmType,System.Boolean,System.String,System.Boolean)">
             <summary>
             Assinar digitalmente o XML
             </summary>
@@ -306,7 +333,6 @@
             <param name="x509Cert">Certificado digital a ser utilizado na assinatura</param>
             <param name="algorithmType">Tipo de algorítimo a ser utilizado na assinatura</param>
             <param name="definirURI">Define o Reference.URI na assinatura</param>
-            <param name="pinCertificado">PIN do certificado digital, quando do tipo A3</param>
             <param name="idAttributeName">Nome do atributo que tem o ID para assinatura. Se nada for passado o sistema vai tentar buscar o nome Id ou id, se não encontrar, não vai criar a URI Reference na assinatura com ID.</param>
             <param name="verificaAssinatura">Verificar se já existe assinatura no XML, se sim e existir o método não vai assinar o XML.</param>
         </member>
@@ -398,11 +424,6 @@
         <member name="F:Unimake.Business.DFe.Servicos.Configuracao.SchemasEspecificos">
             <summary>
             Schemas específicos de um mesmo serviço (Tipos de Evento, Modal CTe ou Modal MDFe)
-            </summary>
-        </member>
-        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CertificadoA3PIN">
-            <summary>
-            PIN do certificado A3. Informe esta propriedade para não precisar digitar o PIN manualmente.
             </summary>
         </member>
         <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CertificadoArquivo">
@@ -1094,7 +1115,7 @@
         </member>
         <member name="M:Unimake.Business.DFe.Servicos.CTe.RecepcaoEvento.GravarXmlDistribuicao(System.IO.Stream)">
             <summary>
-            Grava o XML de dsitribuição no stream
+            Grava o XML de distribuição no stream
             </summary>
             <param name="stream">Stream que vai receber o XML de distribuição</param>
         </member>
@@ -5351,6 +5372,81 @@
             1=Valor do COFINSST compõe o valor total da NF-e
             </summary>
         </member>
+        <member name="T:Unimake.Business.DFe.Servicos.TipoValePedagio">
+            <summary>
+            Tipo de vale pedágio
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoValePedagio.TAG">
+            <summary>
+            TAG = 01
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoValePedagio.Cupom">
+            <summary>
+            Cupom = 01
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoValePedagio.Cartao">
+            <summary>
+            Cartão = 01
+            </summary>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.CategoriaCombinacaoVeicular">
+            <summary>
+            Categorias de combinação veicular
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.CategoriaCombinacaoVeicular.VeiculoComercial2Eixos">
+            <summary>
+            Veículo Comercial 2 Eixos = 02
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.CategoriaCombinacaoVeicular.VeiculoComercial3Eixos">
+            <summary>
+            Veículo Comercial 3 Eixos = 04
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.CategoriaCombinacaoVeicular.VeiculoComercial4Eixos">
+            <summary>
+            Veículo Comercial 4 Eixos = 06
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.CategoriaCombinacaoVeicular.VeiculoComercial5Eixos">
+            <summary>
+            Veículo Comercial 5 Eixos = 07
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.CategoriaCombinacaoVeicular.VeiculoComercial6Eixos">
+            <summary>
+            Veículo Comercial 6 Eixos = 08
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.CategoriaCombinacaoVeicular.VeiculoComercial7Eixos">
+            <summary>
+            Veículo Comercial 7 Eixos = 10
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.CategoriaCombinacaoVeicular.VeiculoComercial8Eixos">
+            <summary>
+            Veículo Comercial 8 eixos = 11
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.CategoriaCombinacaoVeicular.VeiculoComercial9Eixos">
+            <summary>
+            Veículo Comercial 9 Eixos = 12
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.CategoriaCombinacaoVeicular.VeiculoComercial10Eixos">
+            <summary>
+            Veículo Comercial 10 Eixos = 13
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.CategoriaCombinacaoVeicular.VeiculoComercialAcima10Eixos">
+            <summary>
+            Veículo Comercial Acima de 10 Eixos = 14
+            </summary>
+        </member>
         <member name="T:Unimake.Business.DFe.Servicos.GNRE.ConsultaConfigUF">
             <summary>
             Envio do XML de consulta configurações da GNRE por UF para o WebService 
@@ -5413,13 +5509,27 @@
             <param name="tConsLoteGNRE">Objeto contendo o XML da consulta do lote da GNRE</param>
             <param name="configuracao">Objeto contendo as configurações a serem utilizadas na consulta do lote da GNRE</param>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.GNRE.ConsultaResultadoLote.GravarXmlDistribuicao(System.String,System.String,System.String)">
+        <member name="M:Unimake.Business.DFe.Servicos.GNRE.ConsultaResultadoLote.GravarXmlRetorno(System.String,System.String)">
             <summary>
             Gravar o XML de distrubição da GNRE
             </summary>
             <param name="pasta">Pasta onde será gravado o XML de distribuição</param>
             <param name="nomeArquivo">Nome do arquivo de distribuição que será gravado</param>
-            <param name="conteudoXML">Conteúdo do XML de distribuição a ser gravado</param>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.GNRE.ConsultaResultadoLote.GravarXmlDistribuicao(System.String,System.String,System.String)">
+            <summary>
+            Grava o XML de Distribuição em uma pasta definida - (Para este serviço não tem XML de distribuição).
+            </summary>
+            <param name="pasta">Pasta onde é para ser gravado do XML</param>
+            <param name="nomeArquivo">Nome para o arquivo XML</param>
+            <param name="conteudoXML">Conteúdo do XML</param>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.GNRE.ConsultaResultadoLote.GravarPDFGuia(System.String,System.String)">
+            <summary>
+            Gravar Guias da GNRE retornadas na consulta, quando a GNRE é autorizada.
+            </summary>
+            <param name="pasta">Pasta onde será gravado o PDF das guias</param>
+            <param name="nomeArquivo">Nome do arquivo PDF das guias que será gravado</param>
         </member>
         <member name="T:Unimake.Business.DFe.Servicos.GNRE.LoteRecepcao">
             <summary>
@@ -6397,11 +6507,6 @@
             Substituir alguns valores do da configuração do SoapString (Configuracao.WebSoapString)
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Servicos.ServicoBase.CarregarPINA3">
-            <summary>
-            Forçar carregar o PIN do certificado A3 em casos de XML que não tem assinatura
-            </summary>
-        </member>
         <member name="P:Unimake.Business.DFe.Servicos.ServicoBase.ConteudoXML">
             <summary>
             Conteúdo do XML, pode ou não estar assinado. Esta propriedade é utilizada em tempo de processamento.
@@ -6495,18 +6600,6 @@
             <param name="nomeArquivo">Nome do arquivo a ser gravado no HD</param>
             <param name="conteudoXML">String contendo o conteúdo do XML a ser gravado no HD</param>
         </member>
-        <member name="T:Unimake.Business.DFe.Utility.Certificate">
-            <summary>
-            Utilitários para trabalhar com certificado digital
-            </summary>
-        </member>
-        <member name="M:Unimake.Business.DFe.Utility.Certificate.CarregarPINA3(System.Security.Cryptography.X509Certificates.X509Certificate2,System.String)">
-            <summary>
-            Forçar carregar o PIN do certificado A3 em casos de XML que não tem assinatura
-            </summary>
-            <param name="a3PIN">Código PIN do certificado A3</param>
-            <param name="certificado">Objeto do certificado digital A3 que será utilizado</param>
-        </member>
         <member name="T:Unimake.Business.DFe.Utility.Compress">
             <summary>
             Classe para compactação e descompactação de objetos, strings, etc...
@@ -6599,6 +6692,13 @@
             <param name="data">Conteudo a ser convertido</param>
             <param name="toUpper">Resultado todo em maiúsculo?</param>
             <returns>Conteúdo convertido para SH1HashData</returns>
+        </member>
+        <member name="M:Unimake.Business.DFe.Utility.Converter.Base64ToPDF(System.String,System.String)">
+            <summary>
+            Converte uma string Base64 para um arquivo PDF
+            </summary>
+            <param name="contentBase64">Conteúdo Base64 a ser convertido para PDF</param>
+            <param name="arqPDF">Pasta e nome do arquivo onde deve ser gravado o PDF</param>
         </member>
         <member name="T:Unimake.Business.DFe.Utility.Proxy">
             <summary>
@@ -6866,6 +6966,7 @@
             Busca o número da chave do do evento do CT-e
             </summary>
             <param name="xml">Conteúdo do XML para busca da chave</param>
+            <param name="typeEventoCTe">Tipo de evento do CTe</param>
             <returns>Chave do evento do CT-e</returns>
         </member>
         <member name="M:Unimake.Business.DFe.Utility.XMLUtility.GetChaveEventoMDFe(System.String)">
@@ -6880,6 +6981,7 @@
             Busca o número da chave do do evento do MDF-e
             </summary>
             <param name="xml">Conteúdo do XML para busca da chave</param>
+            <param name="typeEventoMDFe">Tipo do evento do MDFe</param>
             <returns>Chave do evento do MDF-e</returns>
         </member>
         <member name="M:Unimake.Business.DFe.Utility.XMLUtility.GetChaveEventoNFe(System.String)">

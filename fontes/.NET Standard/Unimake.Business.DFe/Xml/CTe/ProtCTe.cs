@@ -16,9 +16,6 @@ namespace Unimake.Business.DFe.Xml.CTe
 
         [XmlElement("infFisco")]
         public InfFisco InfFisco { get; set; }
-
-        [XmlElement(ElementName = "Signature", Namespace = "http://www.w3.org/2000/09/xmldsig#")]
-        public Signature Signature { get; set; }
     }
 
     public class InfProt

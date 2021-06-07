@@ -63,7 +63,7 @@ namespace Unimake.Business.DFe.Servicos
                 }
                 else
                 {
-                    AssinaturaDigital.Assinar(ConteudoXML, tagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, Configuracoes.CertificadoA3PIN, "Id", true);
+                    AssinaturaDigital.Assinar(ConteudoXML, tagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "Id", true);
 
                     AjustarXMLAposAssinado();
                 }
@@ -408,11 +408,6 @@ namespace Unimake.Business.DFe.Servicos
             Configuracoes.WebSoapString = Configuracoes.WebSoapString.Replace("{versaoDados}", Configuracoes.SchemaVersao);
         }
 
-        /// <summary>
-        /// Forçar carregar o PIN do certificado A3 em casos de XML que não tem assinatura
-        /// </summary>
-        private void CarregarPINA3() => new Certificate().CarregarPINA3(Configuracoes.CertificadoDigital, Configuracoes.CertificadoA3PIN);
-
         #endregion Private Methods
 
         #region Protected Properties
@@ -606,13 +601,9 @@ namespace Unimake.Business.DFe.Servicos
             {
                 if(!AssinaturaDigital.EstaAssinado(ConteudoXML, Configuracoes.TagAssinatura))
                 {
-                    AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, Configuracoes.CertificadoA3PIN, "Id");
+                    AssinaturaDigital.Assinar(ConteudoXML, Configuracoes.TagAssinatura, Configuracoes.TagAtributoID, Configuracoes.CertificadoDigital, AlgorithmType.Sha1, true, "Id");
                     AjustarXMLAposAssinado();
                 }
-            }
-            else if(!string.IsNullOrWhiteSpace(Configuracoes.CertificadoA3PIN))
-            {
-                CarregarPINA3();
             }
 
             var soap = new WSSoap

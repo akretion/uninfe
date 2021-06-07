@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s0="http://www2.tinus.com.br" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www2.tinus.com.br" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s0="http://www.abrasf.org.br/nfse.xsd" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.abrasf.org.br/nfse.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <s:schema elementFormDefault="qualified" targetNamespace="http://www2.tinus.com.br">
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.abrasf.org.br/nfse.xsd">
       <s:element name="ConsultarNfse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" name="Arg" type="s0:ConsultarNfseEnvio" />
+            <s:element minOccurs="0" name="ConsultarNfseEnvio" type="s0:ConsultarNfseEnvio" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -21,11 +21,14 @@
       <s:complexType name="tcIdentificacaoPrestador">
         <s:sequence>
           <s:element name="Cnpj" type="s0:tsCnpj" />
-          <s:element name="InscricaoMunicipal" type="s0:tsInscricaoMunicipal" />
+          <s:element minOccurs="0" name="InscricaoMunicipal" type="s0:tsInscricaoMunicipal" />
         </s:sequence>
       </s:complexType>
       <s:simpleType name="tsCnpj">
-        <s:restriction base="s:string" />
+        <s:restriction base="s:string">
+          <s:maxLength value="14" />
+          <s:minLength value="14" />
+        </s:restriction>
       </s:simpleType>
       <s:simpleType name="tsInscricaoMunicipal">
         <s:restriction base="s:string">
@@ -57,7 +60,10 @@
         </s:sequence>
       </s:complexType>
       <s:simpleType name="tsCpf">
-        <s:restriction base="s:string" />
+        <s:restriction base="s:string">
+          <s:maxLength value="11" />
+          <s:minLength value="11" />
+        </s:restriction>
       </s:simpleType>
       <s:complexType name="tcIdentificacaoIntermediarioServico">
         <s:sequence>
@@ -72,7 +78,7 @@
           <s:minLength value="1" />
         </s:restriction>
       </s:simpleType>
-      <s:element name="ConsultarNfseResponse">
+      <s:element name="ConsultarNfseResposta">
         <s:complexType>
           <s:sequence>
             <s:element name="ConsultarNfseResult" type="s0:ConsultarNfseResposta" />
@@ -85,7 +91,7 @@
           <s:element minOccurs="0" ref="s0:ListaMensagemRetorno" />
         </s:sequence>
       </s:complexType>
-      <s:element name="ListaMensagemRetorno" type="s0:ListaMensagemRetorno" />
+      <s:element name="ListaMensagemRetorno" type="s0:ArrayOfMensagemRetornotcMensagemRetorno" />
       <s:complexType name="ArrayOfCompNfsetcCompNfse">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" name="CompNfse" nillable="true" type="s0:tcCompNfse" />
@@ -103,6 +109,7 @@
           <s:element name="InfNfse" type="s0:tcInfNfse" />
           <s:element maxOccurs="unbounded" ref="s0:Signature" />
         </s:sequence>
+        <s:attribute name="versao" type="s0:tsVersao" />
       </s:complexType>
       <s:element name="Signature" type="s0:SignatureType" />
       <s:complexType name="tcInfNfse">
@@ -125,9 +132,9 @@
           <s:element minOccurs="0" name="TomadorServico" type="s0:tcDadosTomador" />
           <s:element minOccurs="0" name="IntermediarioServico" type="s0:tcIdentificacaoIntermediarioServico" />
           <s:element name="OrgaoGerador" type="s0:tcIdentificacaoOrgaoGerador" />
-          <s:element minOccurs="0" name="ConstrucaoCivil" type="s0:tcDadosConstrucaoCivil" />
+          <s:element minOccurs="0" name="ContrucaoCivil" type="s0:tcDadosConstrucaoCivil" />
         </s:sequence>
-        <s:attribute name="id" type="s0:tsIdTag" />
+        <s:attribute name="Id" type="s0:tsIdTag" />
       </s:complexType>
       <s:simpleType name="tsCodigoVerificacao">
         <s:restriction base="s:string">
@@ -169,7 +176,7 @@
       </s:simpleType>
       <s:simpleType name="tsRegimeEspecialTributacao">
         <s:restriction base="s:byte">
-          <s:pattern value="1|2|3|4" />
+          <s:pattern value="1|2|3|4|5|6" />
           <s:maxInclusive value="127" />
           <s:minInclusive value="-128" />
         </s:restriction>
@@ -304,7 +311,10 @@
         </s:restriction>
       </s:simpleType>
       <s:simpleType name="tsUf">
-        <s:restriction base="s:string" />
+        <s:restriction base="s:string">
+          <s:maxLength value="2" />
+          <s:minLength value="2" />
+        </s:restriction>
       </s:simpleType>
       <s:simpleType name="tsCep">
         <s:restriction base="s:int">
@@ -397,17 +407,17 @@
       <s:element name="SignatureMethod" type="s0:SignatureMethodType" />
       <s:element name="Reference" type="s0:ReferenceType" />
       <s:complexType name="CanonicalizationMethodType">
-        <s:sequence>
-          <s:any minOccurs="0" maxOccurs="unbounded" />
-        </s:sequence>
-        <s:attribute name="Algorithm" type="s:string" use="required" />
+        <s:simpleContent>
+          <s:extension base="s:string">
+            <s:attribute name="Algorithm" type="s:anyURI" use="required" />
+          </s:extension>
+        </s:simpleContent>
       </s:complexType>
-      <s:complexType name="SignatureMethodType">
+      <s:complexType name="SignatureMethodType" mixed="true">
         <s:sequence>
           <s:element minOccurs="0" name="HMACOutputLength" type="s0:HMACOutputLengthType" />
-          <s:any minOccurs="0" maxOccurs="unbounded" />
         </s:sequence>
-        <s:attribute name="Algorithm" type="s:string" use="required" />
+        <s:attribute name="Algorithm" type="s:anyURI" use="required" />
       </s:complexType>
       <s:simpleType name="HMACOutputLengthType">
         <s:restriction base="s:long" />
@@ -424,8 +434,8 @@
           <s:element ref="s0:DigestValue" />
         </s:sequence>
         <s:attribute name="Id" type="s:string" />
-        <s:attribute name="URI" type="s:string" />
-        <s:attribute name="Type" type="s:string" />
+        <s:attribute name="URI" type="s:anyURI" />
+        <s:attribute name="Type" type="s:anyURI" />
       </s:complexType>
       <s:element name="Transforms" type="s0:TransformsType" />
       <s:element name="DigestMethod" type="s0:DigestMethodType" />
@@ -441,12 +451,12 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="TransformType" nillable="true" type="s0:TransformType" />
         </s:sequence>
       </s:complexType>
-      <s:complexType name="TransformType">
+      <s:complexType name="TransformType" mixed="true">
         <s:sequence>
           <s:any minOccurs="0" maxOccurs="unbounded" />
           <s:element minOccurs="0" maxOccurs="unbounded" name="XPath" nillable="true" type="s:string" />
         </s:sequence>
-        <s:attribute name="Algorithm" type="s:string" use="required" />
+        <s:attribute name="Algorithm" type="s:anyURI" use="required" />
       </s:complexType>
       <s:complexType name="ArrayOfXPathItemString">
         <s:sequence>
@@ -454,10 +464,11 @@
         </s:sequence>
       </s:complexType>
       <s:complexType name="DigestMethodType">
-        <s:sequence>
-          <s:any minOccurs="0" maxOccurs="unbounded" />
-        </s:sequence>
-        <s:attribute name="Algorithm" type="s:string" use="required" />
+        <s:simpleContent>
+          <s:extension base="s:string">
+            <s:attribute name="Algorithm" type="s:anyURI" use="required" />
+          </s:extension>
+        </s:simpleContent>
       </s:complexType>
       <s:simpleType name="DigestValueType">
         <s:restriction base="s:base64Binary" />
@@ -469,7 +480,7 @@
           </s:extension>
         </s:simpleContent>
       </s:complexType>
-      <s:complexType name="KeyInfoType">
+      <s:complexType name="KeyInfoType" mixed="true">
         <s:sequence>
           <s:element minOccurs="0" maxOccurs="unbounded" ref="s0:KeyName" />
           <s:element minOccurs="0" maxOccurs="unbounded" ref="s0:KeyValue" />
@@ -499,7 +510,7 @@
           <s:element minOccurs="0" maxOccurs="unbounded" name="KeyValueType" nillable="true" type="s0:KeyValueType" />
         </s:sequence>
       </s:complexType>
-      <s:complexType name="KeyValueType">
+      <s:complexType name="KeyValueType" mixed="true">
         <s:sequence>
           <s:element minOccurs="0" ref="s0:DSAKeyValue" />
           <s:element minOccurs="0" ref="s0:RSAKeyValue" />
@@ -537,8 +548,8 @@
         <s:sequence>
           <s:element minOccurs="0" ref="s0:Transforms" />
         </s:sequence>
-        <s:attribute name="URI" type="s:string" />
-        <s:attribute name="Type" type="s:string" />
+        <s:attribute name="URI" type="s:anyURI" />
+        <s:attribute name="Type" type="s:anyURI" />
       </s:complexType>
       <s:complexType name="ArrayOfX509DataTypeX509DataType">
         <s:sequence>
@@ -627,25 +638,37 @@
         </s:sequence>
       </s:complexType>
       <s:complexType name="ObjectType">
-        <s:sequence>
-          <s:any minOccurs="0" maxOccurs="unbounded" />
-        </s:sequence>
-        <s:attribute name="Id" type="s:string" />
-        <s:attribute name="MimeType" type="s:string" />
-        <s:attribute name="Encoding" type="s:string" />
+        <s:simpleContent>
+          <s:extension base="s:string">
+            <s:attribute name="Id" type="s:string" />
+            <s:attribute name="MimeType" type="s:string" />
+            <s:attribute name="Encoding" type="s:anyURI" />
+          </s:extension>
+        </s:simpleContent>
       </s:complexType>
+      <s:simpleType name="tsVersao">
+        <s:restriction base="s:string">
+          <s:maxLength value="255" />
+        </s:restriction>
+      </s:simpleType>
       <s:complexType name="tcCancelamentoNfse">
+        <s:sequence>
+          <s:element name="NfseCancelamento" type="s0:tcNfseCancelamentoNfse" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="tcNfseCancelamentoNfse">
         <s:sequence>
           <s:element name="Confirmacao" type="s0:tcConfirmacaoCancelamento" />
           <s:element ref="s0:Signature" />
         </s:sequence>
+        <s:attribute name="versao" type="s0:tsVersao" />
       </s:complexType>
       <s:complexType name="tcConfirmacaoCancelamento">
         <s:sequence>
           <s:element name="Pedido" type="s0:tcPedidoCancelamento" />
           <s:element name="DataHoraCancelamento" type="s:dateTime" />
         </s:sequence>
-        <s:attribute name="id" type="s0:tsIdTag" />
+        <s:attribute name="Id" type="s0:tsIdTag" />
       </s:complexType>
       <s:complexType name="tcPedidoCancelamento">
         <s:sequence>
@@ -658,7 +681,7 @@
           <s:element name="IdentificacaoNfse" type="s0:tcIdentificacaoNfse" />
           <s:element name="CodigoCancelamento" type="s0:tsCodigoCancelamentoNfse" />
         </s:sequence>
-        <s:attribute name="id" type="s0:tsIdTag" />
+        <s:attribute name="Id" type="s0:tsIdTag" />
       </s:complexType>
       <s:complexType name="tcIdentificacaoNfse">
         <s:sequence>
@@ -684,16 +707,11 @@
         <s:sequence>
           <s:element name="NfseSubstituidora" type="s0:tsNumeroNfse" />
         </s:sequence>
-        <s:attribute name="id" type="s0:tsIdTag" />
+        <s:attribute name="Id" type="s0:tsIdTag" />
       </s:complexType>
-      <s:complexType name="ListaMensagemRetorno">
+      <s:complexType name="ArrayOfMensagemRetornotcMensagemRetorno">
         <s:sequence>
-          <s:element maxOccurs="unbounded" name="MensagemRetorno" type="s0:tcMensagemRetorno" />
-        </s:sequence>
-      </s:complexType>
-      <s:complexType name="ArrayOftcMensagemRetornotcMensagemRetorno">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="tcMensagemRetorno" nillable="true" type="s0:tcMensagemRetorno" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MensagemRetorno" nillable="true" type="s0:tcMensagemRetorno" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="tcMensagemRetorno">
@@ -733,7 +751,7 @@
     <wsdl:part name="parameters" element="s0:ConsultarNfse" />
   </wsdl:message>
   <wsdl:message name="ConsultarNfseSoapOut">
-    <wsdl:part name="parameters" element="s0:ConsultarNfseResponse" />
+    <wsdl:part name="parameters" element="s0:ConsultarNfseResposta" />
   </wsdl:message>
   <wsdl:message name="TestSoapIn">
     <wsdl:part name="parameters" element="s0:Test" />
@@ -754,7 +772,7 @@
   <wsdl:binding name="ConsultarNfseSoap" type="s0:ConsultarNfseSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ConsultarNfse">
-      <soap:operation soapAction="http://www2.tinus.com.br/WSNFSE.ConsultarNfse.ConsultarNfse" style="document" />
+      <soap:operation soapAction="http://www.abrasf.org.br/nfse.xsd/WSNFSE.ConsultarNfse.ConsultarNfse" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -763,7 +781,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Test">
-      <soap:operation soapAction="http://www2.tinus.com.br/WSNFSE.ConsultarNfse.Test" style="document" />
+      <soap:operation soapAction="http://www.abrasf.org.br/nfse.xsd/WSNFSE.ConsultarNfse.Test" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

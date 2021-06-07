@@ -261,7 +261,7 @@ namespace NFe.Components.PGoianaPE_TINUS_RecepcionarLoteRps {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
+        public string Id {
             get {
                 return this.idField;
             }
@@ -486,7 +486,7 @@ namespace NFe.Components.PGoianaPE_TINUS_RecepcionarLoteRps {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
+        public string Id {
             get {
                 return this.idField;
             }

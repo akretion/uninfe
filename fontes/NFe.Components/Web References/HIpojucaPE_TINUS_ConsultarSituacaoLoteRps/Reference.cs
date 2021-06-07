@@ -26,7 +26,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarSituacaoLoteRps {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="ConsultarSituacaoLoteRpsSoap", Namespace="http://www2.tinus.com.br")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="ConsultarSituacaoLoteRpsSoap", Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class ConsultarSituacaoLoteRps : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback CallConsultarSituacaoLoteRpsOperationCompleted;
@@ -78,27 +78,27 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarSituacaoLoteRps {
         public event TestCompletedEventHandler TestCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www2.tinus.com.br/WSNFSE.ConsultarSituacaoLoteRps.ConsultarSituacaoLoteRps" +
-            "", RequestElementName="ConsultarSituacaoLoteRps", RequestNamespace="http://www2.tinus.com.br", ResponseElementName="ConsultarSituacaoLoteRpsResponse", ResponseNamespace="http://www2.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.abrasf.org.br/nfse.xsd/WSNFSE.ConsultarSituacaoLoteRps.ConsultarSituac" +
+            "aoLoteRps", RequestElementName="ConsultarSituacaoLoteRps", RequestNamespace="http://www.abrasf.org.br/nfse.xsd", ResponseElementName="ConsultarSituacaoLoteRpsResposta", ResponseNamespace="http://www.abrasf.org.br/nfse.xsd", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("ConsultarSituacaoLoteRpsResult")]
-        public ConsultarSituacaoLoteRpsResposta CallConsultarSituacaoLoteRps(ConsultarSituacaoLoteRpsEnvio Arg) {
+        public ConsultarSituacaoLoteRpsResposta CallConsultarSituacaoLoteRps(ConsultarSituacaoLoteRpsEnvio ConsultarSituacaoLoteRpsEnvio) {
             object[] results = this.Invoke("CallConsultarSituacaoLoteRps", new object[] {
-                        Arg});
+                        ConsultarSituacaoLoteRpsEnvio});
             return ((ConsultarSituacaoLoteRpsResposta)(results[0]));
         }
         
         /// <remarks/>
-        public void CallConsultarSituacaoLoteRpsAsync(ConsultarSituacaoLoteRpsEnvio Arg) {
-            this.CallConsultarSituacaoLoteRpsAsync(Arg, null);
+        public void CallConsultarSituacaoLoteRpsAsync(ConsultarSituacaoLoteRpsEnvio ConsultarSituacaoLoteRpsEnvio) {
+            this.CallConsultarSituacaoLoteRpsAsync(ConsultarSituacaoLoteRpsEnvio, null);
         }
         
         /// <remarks/>
-        public void CallConsultarSituacaoLoteRpsAsync(ConsultarSituacaoLoteRpsEnvio Arg, object userState) {
+        public void CallConsultarSituacaoLoteRpsAsync(ConsultarSituacaoLoteRpsEnvio ConsultarSituacaoLoteRpsEnvio, object userState) {
             if ((this.CallConsultarSituacaoLoteRpsOperationCompleted == null)) {
                 this.CallConsultarSituacaoLoteRpsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallConsultarSituacaoLoteRpsOperationCompleted);
             }
             this.InvokeAsync("CallConsultarSituacaoLoteRps", new object[] {
-                        Arg}, this.CallConsultarSituacaoLoteRpsOperationCompleted, userState);
+                        ConsultarSituacaoLoteRpsEnvio}, this.CallConsultarSituacaoLoteRpsOperationCompleted, userState);
         }
         
         private void OnCallConsultarSituacaoLoteRpsOperationCompleted(object arg) {
@@ -109,7 +109,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarSituacaoLoteRps {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www2.tinus.com.br/WSNFSE.ConsultarSituacaoLoteRps.Test", RequestNamespace="http://www2.tinus.com.br", ResponseNamespace="http://www2.tinus.com.br", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.abrasf.org.br/nfse.xsd/WSNFSE.ConsultarSituacaoLoteRps.Test", RequestNamespace="http://www.abrasf.org.br/nfse.xsd", ResponseNamespace="http://www.abrasf.org.br/nfse.xsd", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public string Test() {
             object[] results = this.Invoke("Test", new object[0]);
             return ((string)(results[0]));
@@ -159,7 +159,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarSituacaoLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class ConsultarSituacaoLoteRpsEnvio {
         
         private tcIdentificacaoPrestador prestadorField;
@@ -192,7 +192,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarSituacaoLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcIdentificacaoPrestador {
         
         private string cnpjField;
@@ -225,7 +225,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarSituacaoLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class tcMensagemRetorno {
         
         private string codigoField;
@@ -270,7 +270,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_ConsultarSituacaoLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.abrasf.org.br/nfse.xsd")]
     public partial class ConsultarSituacaoLoteRpsResposta {
         
         private string numeroLoteField;

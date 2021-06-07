@@ -73,5 +73,14 @@ namespace Unimake.Business.DFe.Xml.CTe
 
             return xmlDocument;
         }
+
+        #region ShouldSerialize
+
+        public bool ShouldSerializeIpTransmissor() => !string.IsNullOrWhiteSpace(IpTransmissor);
+        public bool ShouldSerializeNPortaCon() => NPortaCon > 0;
+        public bool ShouldSerializeDhConexaoField() => DhConexao > DateTime.MinValue;
+
+        #endregion
+
     }
 }

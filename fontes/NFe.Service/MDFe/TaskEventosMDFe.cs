@@ -50,6 +50,7 @@ namespace NFe.Service
                 var recepcaoEvento = new Unimake.Business.DFe.Servicos.MDFe.RecepcaoEvento(xml, configuracao);
                 recepcaoEvento.Executar();
 
+                ConteudoXML = recepcaoEvento.ConteudoXMLAssinado;
                 vStrXmlRetorno = recepcaoEvento.RetornoWSString;
 
                 XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedEve).RetornoXML);

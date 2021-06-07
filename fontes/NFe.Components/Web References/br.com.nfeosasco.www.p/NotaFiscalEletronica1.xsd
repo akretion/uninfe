@@ -1,55 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Prestador" />
-  <xs:complexType name="EmissaoNotaFiscalRequest">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:RequestBase">
-        <xs:sequence>
-          <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Prestador" minOccurs="0" name="NotaFiscal" nillable="true" type="q1:NotaFiscalDTO" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="EmissaoNotaFiscalRequest" nillable="true" type="tns:EmissaoNotaFiscalRequest" />
-  <xs:complexType name="RequestBase">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:element name="RequestBase" nillable="true" type="tns:RequestBase" />
-  <xs:complexType name="EmissaoNotaFiscalResponse">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:ResponseBase">
-        <xs:sequence>
-          <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Prestador" minOccurs="0" name="NotaFiscalGerada" nillable="true" type="q2:NotaFiscalGeradaDTO" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="EmissaoNotaFiscalResponse" nillable="true" type="tns:EmissaoNotaFiscalResponse" />
-  <xs:complexType name="ResponseBase">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Erro" type="xs:boolean" />
-      <xs:element minOccurs="0" name="MensagemErro" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ResponseBase" nillable="true" type="tns:ResponseBase" />
-  <xs:complexType name="CancelamentoNotaFiscalRequest">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:RequestBase">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="ChaveAutenticacao" nillable="true" type="xs:string" />
-          <xs:element name="Homologacao" type="xs:boolean" />
-          <xs:element minOccurs="0" name="NumeroNota" nillable="true" type="xs:string" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="CancelamentoNotaFiscalRequest" nillable="true" type="tns:CancelamentoNotaFiscalRequest" />
-  <xs:complexType name="CancelamentoNotaFiscalResponse">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:ResponseBase">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="CancelamentoNotaFiscalResponse" nillable="true" type="tns:CancelamentoNotaFiscalResponse" />
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" />
+  <xs:element name="Emitir">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" minOccurs="0" name="request" nillable="true" type="q1:EmissaoNotaFiscalRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EmitirResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" minOccurs="0" name="EmitirResult" nillable="true" type="q2:EmissaoNotaFiscalResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Cancelar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" minOccurs="0" name="request" nillable="true" type="q3:CancelamentoNotaFiscalRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CancelarResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" minOccurs="0" name="CancelarResult" nillable="true" type="q4:CancelamentoNotaFiscalResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EmitirEmLote">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" minOccurs="0" name="request" nillable="true" type="q5:EmissaoNotaFiscalLoteRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EmitirEmLoteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" minOccurs="0" name="EmitirEmLoteResult" nillable="true" type="q6:EmissaoNotaFiscalLoteResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarLote">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" minOccurs="0" name="request" nillable="true" type="q7:ConsultaNotaFiscalLoteRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarLoteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" minOccurs="0" name="ConsultarLoteResult" nillable="true" type="q8:ConsultaNotaFiscalLoteResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Consultar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" minOccurs="0" name="request" nillable="true" type="q9:ConsultaNotaFiscalRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ConsultarResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" minOccurs="0" name="ConsultarResult" nillable="true" type="q10:ConsultaNotaFiscalResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

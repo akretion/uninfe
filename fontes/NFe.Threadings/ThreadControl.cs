@@ -3,6 +3,7 @@ using NFe.Settings;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Unimake.Business.DFe.Security;
 
 namespace NFe.Threadings
 {

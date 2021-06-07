@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
+using Unimake.Business.DFe.Security;
 
 namespace NFe.Settings
 {
@@ -1098,7 +1099,7 @@ namespace NFe.Settings
                     dados.CertificadoSenha = Criptografia.criptografaSenha(dados.CertificadoSenha);
                 }
 
-                if (clsX509Certificate2Extension.IsA3(dados.X509Certificado))
+                if (ClsX509Certificate2Extension.IsA3(dados.X509Certificado))
                 {
                     dados.CertificadoPIN = Criptografia.criptografaSenha(dados.CertificadoPIN);
                 }
@@ -1106,6 +1107,7 @@ namespace NFe.Settings
                 {
                     dados.CertificadoPIN = string.Empty;
                 }
+
                 dados.FTPNomeDoServidor = Criptografia.criptografaSenha(dados.FTPNomeDoServidor);
                 dados.FTPNomeDoUsuario = Criptografia.criptografaSenha(dados.FTPNomeDoUsuario);
                 dados.FTPSenha = Criptografia.criptografaSenha(dados.FTPSenha);

@@ -559,7 +559,8 @@ namespace NFe.UI.Formularios
                            ufCod == 1100122 /*Ji-Paraná-RO*/||
                            ufCod == 4213203 /*Pomerode-SC*/||
                            ufCod == 4213500 /*Porto Belo-SC*/||
-                           ufCod == 4215000 /*Rio Negrinho-SC*/;
+                           ufCod == 4215000 /*Rio Negrinho-SC*/||
+                           ufCod == 3205200 /*Vila Velha-ES*/;
 
 
 

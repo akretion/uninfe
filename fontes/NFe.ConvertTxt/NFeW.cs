@@ -1,4 +1,5 @@
 ﻿using NFe.Components;
+using NFe.Components;
 using NFe.Settings;
 using System;
 using System.Collections.Generic;
@@ -322,6 +323,7 @@ namespace NFe.ConvertTxt
                     }
 
                     wCampo((int)pagItem.tPag, TpcnTipoCampo.tcInt, TpcnResources.tPag, ObOp.Obrigatorio, 2);    //YA02
+                    wCampo(pagItem.xPag, TpcnTipoCampo.tcStr, TpcnResources.xPag, ObOp.Opcional);    //YA02
                     wCampo(pagItem.vPag, TpcnTipoCampo.tcDec2, TpcnResources.vPag, ObOp.Obrigatorio);           //YA03
                     if(pagItem.tpIntegra != 0)
                     {
@@ -356,9 +358,6 @@ namespace NFe.ConvertTxt
                 }
 
                 nodeCurrent = nodePag;
-
-                //Somente para manter compatibilidade do layout TXT, de futuro, em uma mudança geral da SEFAZ, podemos retirar a linha abaixo. Wandrey 26/01/2021
-                wCampo(pagItem.vTroco, TpcnTipoCampo.tcDec2, TpcnResources.vTroco, ObOp.Opcional);
             }
 
             wCampo(nfe.vTroco, TpcnTipoCampo.tcDec2, TpcnResources.vTroco, ObOp.Opcional);
@@ -2320,11 +2319,6 @@ namespace NFe.ConvertTxt
             wCampo(Nfe.ide.cUF, TpcnTipoCampo.tcInt, TpcnResources.cUF, ObOp.Obrigatorio, 0);
             wCampo(Nfe.ide.cNF, TpcnTipoCampo.tcInt, TpcnResources.cNF, ObOp.Obrigatorio, 8);
             wCampo(Nfe.ide.natOp, TpcnTipoCampo.tcStr, TpcnResources.natOp, ObOp.Obrigatorio, 0);
-            if(Nfe.infNFe.Versao >= 3 && Nfe.infNFe.Versao < 4)
-            {
-                wCampo((int)Nfe.ide.indPag, TpcnTipoCampo.tcInt, TpcnResources.indPag, ObOp.Obrigatorio, 0);
-            }
-
             wCampo((int)Nfe.ide.mod, TpcnTipoCampo.tcInt, TpcnResources.mod, ObOp.Obrigatorio, 0);
             wCampo(Nfe.ide.serie, TpcnTipoCampo.tcInt, TpcnResources.serie, ObOp.Obrigatorio, 0);
             wCampo(Nfe.ide.nNF, TpcnTipoCampo.tcInt, TpcnResources.nNF, ObOp.Obrigatorio, 0);
@@ -2364,16 +2358,16 @@ namespace NFe.ConvertTxt
             wCampo((int)Nfe.ide.indFinal, TpcnTipoCampo.tcInt, TpcnResources.indFinal, ObOp.Obrigatorio);//B25a
             wCampo((int)Nfe.ide.indPres, TpcnTipoCampo.tcInt, TpcnResources.indPres, ObOp.Obrigatorio);//B25b
 
-            if(Nfe.ide.indPres == TpcnPresencaComprador.pcPresencial && Nfe.ide.indIntermed != null) //1 Teve uma mudança recente na NT que mudou o critério, 1 também terá que incluir a tag indIntermed, mas de inicio não obrigatório.
+            if(Nfe.ide.indPres == TpcnPresencaComprador.pcPresencial && Nfe.ide.indIntermed != TpcnIntermediario.NaoInserirTagNoXML) //1 Teve uma mudança recente na NT que mudou o critério, 1 também terá que incluir a tag indIntermed, mas de inicio não obrigatório.
             {
-                wCampo((int)Nfe.ide.indIntermed, TpcnTipoCampo.tcInt, TpcnResources.indIntermed, ObOp.Opcional);
+                wCampo((int)Nfe.ide.indIntermed, TpcnTipoCampo.tcInt, TpcnResources.indIntermed, ObOp.Obrigatorio);
             }
             else if(Nfe.ide.indPres == TpcnPresencaComprador.pcInternet || //2
                Nfe.ide.indPres == TpcnPresencaComprador.pcTeleatendimento || //3
                Nfe.ide.indPres == TpcnPresencaComprador.pcEntregaDomicilio || //4
                Nfe.ide.indPres == TpcnPresencaComprador.pcOutros) //9
             {
-                if(Nfe.ide.indIntermed != null)
+                if(Nfe.ide.indIntermed != TpcnIntermediario.NaoInserirTagNoXML)
                 {
                     wCampo((int)Nfe.ide.indIntermed, TpcnTipoCampo.tcInt, TpcnResources.indIntermed, ObOp.Obrigatorio);
                 }

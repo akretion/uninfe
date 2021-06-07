@@ -2,46 +2,51 @@
 
 using System;
 using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
 
 namespace Unimake.Business.DFe.Xml.CTe
 {
     [XmlRoot("retConsSitCTe", Namespace = "http://www.portalfiscal.inf.br/cte", IsNullable = false)]
-    public class RetConsSitCTe: XMLBase
+    public class RetConsSitCTe : XMLBase
     {
-        [XmlAttribute(AttributeName = "versao", DataType = "token")]
-        public string Versao { get; set; }
+        #region Public Properties
 
-        [XmlElement("tpAmb")]
-        public TipoAmbiente TpAmb { get; set; }
-
-        [XmlElement("verAplic")]
-        public string VerAplic { get; set; }
-
-        [XmlElement("cStat")]
+        [XmlElement("cStat", Order = 2)]
         public int CStat { get; set; }
-
-        [XmlElement("xMotivo")]
-        public string XMotivo { get; set; }
 
         [XmlIgnore]
         public UFBrasil CUF { get; set; }
 
-        [XmlElement("cUF")]
+        [XmlElement("cUF", Order = 4)]
         public int CUFField
         {
             get => (int)CUF;
             set => CUF = (UFBrasil)Enum.Parse(typeof(UFBrasil), value.ToString());
         }
 
-        [XmlElement("protCTe")]
-        public ProtCTe ProtCTe { get; set; }
-
-        [XmlElement("procEventoCTe")]
+        [XmlElement("procEventoCTe", Order = 7)]
         public List<ProcEventoCTe> ProcEventoCTe { get; set; }
 
-        #region Add (List - Interop)
+        [XmlElement("protCTe", Order = 6)]
+        public ProtCTe ProtCTe { get; set; }
+
+        [XmlElement("tpAmb", Order = 0)]
+        public TipoAmbiente TpAmb { get; set; }
+
+        [XmlElement("verAplic", Order = 1)]
+        public string VerAplic { get; set; }
+
+        [XmlAttribute(AttributeName = "versao", DataType = "token")]
+        public string Versao { get; set; }
+
+        [XmlElement("xMotivo", Order = 3)]
+        public string XMotivo { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
 
         public void AddProcEventoCTe(ProcEventoCTe procEventoCTe)
         {
@@ -53,6 +58,23 @@ namespace Unimake.Business.DFe.Xml.CTe
             ProcEventoCTe.Add(procEventoCTe);
         }
 
-        #endregion
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+
+            while(reader.Read())
+            {
+                if(reader.NodeType != XmlNodeType.Element ||
+                   reader.Name != "Signature")
+                {
+                    continue;
+                }
+
+                ProcEventoCTe[0].EventoCTe.Signature = reader.ToSignature();
+                break;
+            }
+        }
+
+        #endregion Public Methods
     }
 }

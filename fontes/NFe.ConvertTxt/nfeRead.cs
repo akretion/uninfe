@@ -290,6 +290,11 @@ namespace NFe.ConvertTxt
                     case "detPag":
                         LerPag(noder);
                         break;
+
+                    case "vTroco":
+                        char charSeparator = System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator[0];
+                        nfe.vTroco = Convert.ToDouble("0" + noder.InnerText.Replace(".", charSeparator.ToString()));
+                        break;
                 }
             }
         }
@@ -315,8 +320,6 @@ namespace NFe.ConvertTxt
             pagItem.CNPJ = this.readValue(noder, TpcnResources.CNPJ);
             pagItem.tBand = (TpcnBandeiraCartao)this.readInt32(noder, TpcnResources.tBand);
             pagItem.cAut = this.readValue(noder, TpcnResources.cAut);
-            pagItem.vTroco = this.readDouble(noder, TpcnResources.vTroco); //Somente para manter compatibilidade do layout TXT, de futuro, em uma mudança geral da SEFAZ, podemos retirar. Wandrey 26/01/2021
-            nfe.vTroco = this.readDouble(noder, TpcnResources.vTroco);
             nfe.pag.Add(pagItem);
         }
 
@@ -1229,8 +1232,6 @@ namespace NFe.ConvertTxt
             nfe.ide.dSaiEnt = this.readDate(nodeinfNFe, TpcnResources.dSaiEnt);
             nfe.ide.finNFe = (TpcnFinalidadeNFe)this.readInt32(nodeinfNFe, TpcnResources.finNFe);
             nfe.ide.hSaiEnt = this.readDate(nodeinfNFe, TpcnResources.hSaiEnt);
-            if(nfe.infNFe.Versao >= 3 && nfe.infNFe.Versao < 4)
-                nfe.ide.indPag = (TpcnIndicadorPagamento)this.readInt32(nodeinfNFe, TpcnResources.indPag);
             nfe.ide.mod = (TpcnMod)this.readInt32(nodeinfNFe, TpcnResources.mod);
             nfe.ide.nNF = this.readInt32(nodeinfNFe, TpcnResources.nNF);
             nfe.ide.natOp = this.readValue(nodeinfNFe, TpcnResources.natOp);

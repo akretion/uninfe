@@ -1630,11 +1630,12 @@ namespace Unimake.Business.DFe.Xml.CTeOS
         public Prop Prop { get; set; }
 
         [XmlElement("UF")]
-        public UFBrasil UF { get; set; }
+        public UFBrasil? UF { get; set; }
 
         #region ShouldSerialize
 
         public bool ShouldSerializeRENAVAM() => !string.IsNullOrWhiteSpace(RENAVAM);
+        public bool ShouldSerializeUF() => UF != null;
 
         #endregion
     }

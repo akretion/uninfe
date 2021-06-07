@@ -9,43 +9,8 @@ namespace Unimake.Business.DFe.Xml.NFe
 {
     [Serializable()]
     [XmlRoot("procEventoNFe", Namespace = "http://www.portalfiscal.inf.br/nfe", IsNullable = false)]
-    public class ProcEventoNFe: XMLBase
+    public class ProcEventoNFe : XMLBase
     {
-        #region Protected Methods
-
-        protected override void ProcessReader(XmlReader reader)
-        {
-            base.ProcessReader(reader);
-
-            while(reader.Read())
-            {
-                if(reader.NodeType != XmlNodeType.Element)
-                {
-                    continue;
-                }
-
-                switch(reader.Name)
-                {
-                    case "Signature":
-                        Evento.Signature = reader.ToSignature();
-                        break;
-
-                    case "retEvento":
-                        var versao = reader.GetAttribute("versao");
-                        var infEvento = reader.DeserializeTo<InfEventoRetEvento>();
-
-                        RetEvento = new RetEvento
-                        {
-                            Versao = versao,
-                            InfEvento = infEvento
-                        };
-                        break;
-                }
-            }
-        }
-
-        #endregion Protected Methods
-
         #region Public Properties
 
         [XmlElement("evento", Order = 0, Namespace = "http://www.portalfiscal.inf.br/nfe")]
@@ -83,6 +48,37 @@ namespace Unimake.Business.DFe.Xml.NFe
             xmlElementRetEventoInfEvento.SetAttribute("xmlns", attribute.Namespace);
 
             return xmlDocument;
+        }
+
+        public override void ReadXml(XmlReader reader)
+        {
+            base.ReadXml(reader);
+
+            while(reader.Read())
+            {
+                if(reader.NodeType != XmlNodeType.Element)
+                {
+                    continue;
+                }
+
+                switch(reader.Name)
+                {
+                    case "Signature":
+                        Evento.Signature = reader.ToSignature();
+                        break;
+
+                    case "retEvento":
+                        var versao = reader.GetAttribute("versao");
+                        var infEvento = reader.DeserializeTo<InfEventoRetEvento>();
+
+                        RetEvento = new RetEvento
+                        {
+                            Versao = versao,
+                            InfEvento = infEvento
+                        };
+                        break;
+                }
+            }
         }
 
         #endregion Public Methods

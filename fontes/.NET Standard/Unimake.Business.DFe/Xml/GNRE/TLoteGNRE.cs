@@ -29,6 +29,7 @@ namespace Unimake.Business.DFe.Xml.GNRE
         [XmlElement("TDadosGNRE")]
         public List<TDadosGNRE> TDadosGNRE { get; set; }
 
+#if INTEROP
         #region Add - Interop
 
         public void AddTDadosGNRE(TDadosGNRE tdadosGNRE)
@@ -42,6 +43,7 @@ namespace Unimake.Business.DFe.Xml.GNRE
         }
 
         #endregion
+#endif
     }
 
     [Serializable()]
@@ -151,6 +153,7 @@ namespace Unimake.Business.DFe.Xml.GNRE
         [XmlElement("item")]
         public List<Item> Item { get; set; }
 
+#if INTEROP
         #region Add - Interop
 
         public void AddItem(Item item)
@@ -164,6 +167,7 @@ namespace Unimake.Business.DFe.Xml.GNRE
         }
 
         #endregion
+#endif
     }
 
     [Serializable()]
@@ -205,8 +209,9 @@ namespace Unimake.Business.DFe.Xml.GNRE
         public ContribuinteDestinatario ContribuinteDestinatario { get; set; }
 
         [XmlElement("camposExtras")]
-        public List<CamposExtras> CamposExtras { get; set; }
+        public CamposExtras CamposExtras { get; set; }
 
+#if INTEROP
         #region Add - Interop
 
         public void AddValor(Valor valor)
@@ -219,24 +224,15 @@ namespace Unimake.Business.DFe.Xml.GNRE
             Valor.Add(valor);
         }
 
-        public void AddCamposExtras(CamposExtras camposExtras)
-        {
-            if(CamposExtras == null)
-            {
-                CamposExtras = new List<CamposExtras>();
-            }
-
-            CamposExtras.Add(camposExtras);
-        }
-
         #endregion
+#endif
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeDetalhamentoReceita() => string.IsNullOrWhiteSpace(DetalhamentoReceita);
-        public bool ShouldSerializeProduto() => string.IsNullOrWhiteSpace(Produto);
+        public bool ShouldSerializeDetalhamentoReceita() => !string.IsNullOrWhiteSpace(DetalhamentoReceita);
+        public bool ShouldSerializeProduto() => !string.IsNullOrWhiteSpace(Produto);
         public bool ShouldSerializeDataVencimentoField() => DataVencimento != null;
-        public bool ShouldSerializeConvenio() => string.IsNullOrWhiteSpace(Convenio);
+        public bool ShouldSerializeConvenio() => !string.IsNullOrWhiteSpace(Convenio);
 
         #endregion
     }
@@ -286,8 +282,8 @@ namespace Unimake.Business.DFe.Xml.GNRE
 
         public bool ShouldSerializePeriodo() => Periodo != null;
         public bool ShouldSerializeMes() => Mes != null;
-        public bool ShouldSerializeAno() => string.IsNullOrWhiteSpace(Ano) && Mes != null;
-        public bool ShouldSerializeParcela() => string.IsNullOrWhiteSpace(Parcela);
+        public bool ShouldSerializeAno() => !string.IsNullOrWhiteSpace(Ano) && Mes != null;
+        public bool ShouldSerializeParcela() => !string.IsNullOrWhiteSpace(Parcela);
 
         #endregion
     }
@@ -362,7 +358,23 @@ namespace Unimake.Business.DFe.Xml.GNRE
     public class CamposExtras
     {
         [XmlElement("campoExtra")]
-        public CampoExtra CampoExtra { get; set; }
+        public List<CampoExtra> CampoExtra { get; set; }
+
+#if INTEROP
+        #region Add - Interop
+
+        public void AddCampoExtra(CampoExtra campoExtra)
+        {
+            if(CampoExtra == null)
+            {
+                CampoExtra = new List<CampoExtra>();
+            }
+
+            CampoExtra.Add(campoExtra);
+        }
+
+        #endregion
+#endif
     }
 
     [Serializable()]

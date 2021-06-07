@@ -316,7 +316,7 @@ namespace Unimake.Business.DFe.Utility
 
             if(result is Contract.Serialization.IXmlSerializable serializable)
             {
-                serializable.ProcessReader(XmlReader.Create(new StringReader(xml)));
+                serializable.ReadXml(XmlReader.Create(new StringReader(xml)));
             }
 
             return result;
@@ -688,6 +688,7 @@ namespace Unimake.Business.DFe.Utility
         /// Busca o número da chave do do evento do CT-e
         /// </summary>
         /// <param name="xml">Conteúdo do XML para busca da chave</param>
+        /// <param name="typeEventoCTe">Tipo de evento do CTe</param>
         /// <returns>Chave do evento do CT-e</returns>
         public static string GetChaveEventoCTe(string xml, TipoEventoCTe typeEventoCTe)
         {
@@ -741,6 +742,7 @@ namespace Unimake.Business.DFe.Utility
         /// Busca o número da chave do do evento do MDF-e
         /// </summary>
         /// <param name="xml">Conteúdo do XML para busca da chave</param>
+        /// <param name="typeEventoMDFe">Tipo do evento do MDFe</param>
         /// <returns>Chave do evento do MDF-e</returns>
         public static string GetChaveEventoMDFe(string xml, TipoEventoMDFe typeEventoMDFe)
         {
@@ -878,6 +880,12 @@ namespace Unimake.Business.DFe.Utility
             using(StringWriter textWriter = new Utf8StringWriter())
             {
                 xmlSerializer.Serialize(textWriter, objeto, ns);
+
+                if(objeto is Contract.Serialization.IXmlSerializable serializable)
+                {
+                    serializable.WriteXml(textWriter);
+                }
+
                 doc.LoadXml(textWriter.ToString());
             }
 

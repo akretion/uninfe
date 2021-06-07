@@ -27,11 +27,11 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
-      <xsd:import schemaLocation="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" />
-      <xsd:import schemaLocation="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Prestador" />
-      <xsd:import schemaLocation="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Contribuinte" />
+      <xsd:import schemaLocation="https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Negocio.WebServices.Mensagem" />
+      <xsd:import schemaLocation="https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Prestador" />
+      <xsd:import schemaLocation="https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Eissnfe.Dominio.DataTransferObject.Contribuinte" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="INotaFiscalEletronicaServico_Emitir_InputMessage">
@@ -46,6 +46,24 @@
   <wsdl:message name="INotaFiscalEletronicaServico_Cancelar_OutputMessage">
     <wsdl:part name="parameters" element="tns:CancelarResponse" />
   </wsdl:message>
+  <wsdl:message name="INotaFiscalEletronicaServico_EmitirEmLote_InputMessage">
+    <wsdl:part name="parameters" element="tns:EmitirEmLote" />
+  </wsdl:message>
+  <wsdl:message name="INotaFiscalEletronicaServico_EmitirEmLote_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EmitirEmLoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="INotaFiscalEletronicaServico_ConsultarLote_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarLote" />
+  </wsdl:message>
+  <wsdl:message name="INotaFiscalEletronicaServico_ConsultarLote_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarLoteResponse" />
+  </wsdl:message>
+  <wsdl:message name="INotaFiscalEletronicaServico_Consultar_InputMessage">
+    <wsdl:part name="parameters" element="tns:Consultar" />
+  </wsdl:message>
+  <wsdl:message name="INotaFiscalEletronicaServico_Consultar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultarResponse" />
+  </wsdl:message>
   <wsdl:portType name="INotaFiscalEletronicaServico">
     <wsdl:operation name="Emitir">
       <wsdl:input wsaw:Action="http://tempuri.org/INotaFiscalEletronicaServico/Emitir" message="tns:INotaFiscalEletronicaServico_Emitir_InputMessage" />
@@ -54,6 +72,18 @@
     <wsdl:operation name="Cancelar">
       <wsdl:input wsaw:Action="http://tempuri.org/INotaFiscalEletronicaServico/Cancelar" message="tns:INotaFiscalEletronicaServico_Cancelar_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/INotaFiscalEletronicaServico/CancelarResponse" message="tns:INotaFiscalEletronicaServico_Cancelar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EmitirEmLote">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotaFiscalEletronicaServico/EmitirEmLote" message="tns:INotaFiscalEletronicaServico_EmitirEmLote_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INotaFiscalEletronicaServico/EmitirEmLoteResponse" message="tns:INotaFiscalEletronicaServico_EmitirEmLote_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarLote">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotaFiscalEletronicaServico/ConsultarLote" message="tns:INotaFiscalEletronicaServico_ConsultarLote_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INotaFiscalEletronicaServico/ConsultarLoteResponse" message="tns:INotaFiscalEletronicaServico_ConsultarLote_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Consultar">
+      <wsdl:input wsaw:Action="http://tempuri.org/INotaFiscalEletronicaServico/Consultar" message="tns:INotaFiscalEletronicaServico_Consultar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/INotaFiscalEletronicaServico/ConsultarResponse" message="tns:INotaFiscalEletronicaServico_Consultar_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_INotaFiscalEletronicaServico" type="tns:INotaFiscalEletronicaServico">
@@ -77,10 +107,37 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="EmitirEmLote">
+      <soap:operation soapAction="http://tempuri.org/INotaFiscalEletronicaServico/EmitirEmLote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultarLote">
+      <soap:operation soapAction="http://tempuri.org/INotaFiscalEletronicaServico/ConsultarLote" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Consultar">
+      <soap:operation soapAction="http://tempuri.org/INotaFiscalEletronicaServico/Consultar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="NotaFiscalEletronicaServico">
     <wsdl:port name="BasicHttpBinding_INotaFiscalEletronicaServico" binding="tns:BasicHttpBinding_INotaFiscalEletronicaServico">
-      <soap:address location="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc" />
+      <soap:address location="https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

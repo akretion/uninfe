@@ -71,6 +71,7 @@ namespace NFe.Service
                         var inutilizacao = new Unimake.Business.DFe.Servicos.NFCe.Inutilizacao(xml, configuracao);
                         inutilizacao.Executar();
 
+                        ConteudoXML = inutilizacao.ConteudoXMLAssinado;
                         vStrXmlRetorno = inutilizacao.RetornoWSString;
                     }
                     else
@@ -78,6 +79,7 @@ namespace NFe.Service
                         var inutilizacao = new Unimake.Business.DFe.Servicos.NFe.Inutilizacao(xml, configuracao);
                         inutilizacao.Executar();
 
+                        ConteudoXML = inutilizacao.ConteudoXMLAssinado;
                         vStrXmlRetorno = inutilizacao.RetornoWSString;
                     }
 

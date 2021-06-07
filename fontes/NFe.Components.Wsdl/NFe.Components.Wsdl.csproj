@@ -2164,12 +2164,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PCianortePR-sigiss_ws.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HVilaVelhaES-VVISS.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PVilaVelhaES-VVISS.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HVitoriaES-VVISS.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -3047,12 +3041,6 @@
     <EmbeddedResource Include="NFe\schemas\eSocial\evtAltContratual.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtAqProd.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtAvPrevio.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\eSocial\evtBasesTrab.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -3062,19 +3050,10 @@
     <EmbeddedResource Include="NFe\schemas\eSocial\evtCAT.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtCdBenPrRP.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\eSocial\evtComProd.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\eSocial\evtContratAvNP.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtContrSindPatr.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtConvInterm.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\eSocial\evtCS.xsd">
@@ -3098,12 +3077,6 @@
     <EmbeddedResource Include="NFe\schemas\eSocial\evtInfoEmpregador.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtInsApo.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtIrrf.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\eSocial\evtIrrfBenef.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -3125,37 +3098,16 @@
     <EmbeddedResource Include="NFe\schemas\eSocial\evtRmnRPPS.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtTabAmbiente.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtTabCargo.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtTabCarreira.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\eSocial\evtTabEstab.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtTabFuncao.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtTabHorTur.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\eSocial\evtTabLotacao.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtTabOperPort.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\eSocial\evtTabProcesso.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\eSocial\evtTabRubrica.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtTotConting.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\eSocial\evtTSVAltContr.xsd">
@@ -3305,9 +3257,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeInutilizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeRetAutorizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\AM\PAMNfeStatusServico_C_400.wsdl" />
-    <EmbeddedResource Include="NFse\schemas\NFSe\AVMB_ASTEN\nfse.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="NFse\schemas\NFSe\AVMB_ASTEN\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -3336,8 +3285,6 @@
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeInutilizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeRetAutorizacao_C_400.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\MS\PMSNfeStatusServico_C_400.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\EFDReinfConsultas.wsdl" />
-    <EmbeddedResource Include="NFe\WSDL\Producao\AN\EFDReinfConsultas.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\EFDReinf.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\ADM_SISTEMAS\nfse v2 01.xsd">
       <SubType>Designer</SubType>
@@ -3414,12 +3361,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\schemas\eSocial\evtFGTS.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtToxic.xsd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NFe\schemas\eSocial\evtTreiCap.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\AN\eSocial_DownloadEventos.wsdl" />
@@ -3632,6 +3573,36 @@
     <EmbeddedResource Include="NFe\schemas\EFDReinf\retornoTotalizadorEvento-v1_05_01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\eSocial\evtBaixa.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\eSocial\evtCdBenAlt.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\eSocial\evtCdBenefAlt.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\eSocial\evtCdBenefIn.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\eSocial\evtCdBenIn.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\eSocial\evtCdBenTerm.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\eSocial\evtCessao.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\eSocial\evtReativBen.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFe\schemas\eSocial\tipos.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NFse\schemas\NFSe\AVMB_ASTEN\nfse.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <None Include="NFse\schemas\NFSe\BETHA\nfse_v202.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -3765,8 +3736,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HHorizontinaRS-PRONIN.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HOsascoEGOVERNEISS.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\POsascoEGOVERNEISS.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\SUPERNOVA\nfse.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4254,9 +4223,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PParacambiRJ-FINTEL.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPetropolisRJ-SIGCORP.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPetropolisRJ-SIGCORP.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PItaquaquecetubaSP-WSEntrada.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PItaquaquecetubaSP-WSSaida.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PItaquaquecetubaSP-WSUtil.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HMonteCarmeloMG-SIMPLISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PMonteCarmeloMG-SIMPLISS.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\SMARAPD\WSEntradaNfd.xsd">
@@ -4373,7 +4339,6 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\DSF\SJCSP\xmldsig-core-schema20020212.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HWebFiscoTecnologia.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PWebFiscoTecnologia-Cancelar.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PWebFiscoTecnologia-ConsultarNfe.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PWebFiscoTecnologia-Enviar.wsdl" />
@@ -4690,6 +4655,19 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HIjuiRS-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PIjuiRS-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCastanhalPA-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HWebFiscoTecnologia.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoSebastiaoDaGramaSP-PRONIN.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HOsascoEGOVERNEISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\POsascoEGOVERNEISS.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PVilaVelhaES-SMARAPDWSEntrada.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PVilaVelhaES-SMARAPDWSSaida.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PVilaVelhaES-SMARAPDWSUtil.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Homologacao\HMarialvaPR-Elotech.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PMarialvaPR-Elotech.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItaquaquecetubaSP-WSEntrada.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItaquaquecetubaSP-WSSaida.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PItaquaquecetubaSP-WSUtil.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PAguaBoaMT-COPLAN.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

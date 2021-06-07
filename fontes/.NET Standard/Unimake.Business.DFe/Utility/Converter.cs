@@ -267,6 +267,40 @@ namespace Unimake.Business.DFe.Utility
             }
         }
 
+        /// <summary>
+        /// Converte uma string Base64 para um arquivo PDF
+        /// </summary>
+        /// <param name="contentBase64">Conteúdo Base64 a ser convertido para PDF</param>
+        /// <param name="arqPDF">Pasta e nome do arquivo onde deve ser gravado o PDF</param>
+        public static void Base64ToPDF(string contentBase64, string arqPDF)
+        {
+            BinaryWriter writer = null;
+
+            try
+            {
+                var sPDFDecoded = Convert.FromBase64String(contentBase64);
+
+                if (File.Exists(arqPDF))
+                {
+                    File.Delete(arqPDF);
+                }
+
+                writer = new BinaryWriter(File.Open(arqPDF, FileMode.CreateNew));
+                writer.Write(sPDFDecoded);
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if(writer != null)
+                {
+                    writer.Close();
+                }
+            }
+        }
+
         #endregion Public Methods
     }
 }

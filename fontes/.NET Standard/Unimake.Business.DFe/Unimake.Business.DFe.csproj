@@ -1059,7 +1059,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-		<PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.0" />
+		<PackageReference Include="System.Security.Cryptography.Xml" Version="5.0.0" />
 	</ItemGroup>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">

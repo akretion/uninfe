@@ -11,7 +11,7 @@ namespace Unimake.Business.DFe.Xml
     /// Classe Base para criação de classes de serialização de XML
     /// </summary>
     [ComVisible(true)]
-    public abstract class XMLBase: Contract.Serialization.IXmlSerializable
+    public abstract class XMLBase : Contract.Serialization.IXmlSerializable
     {
         #region Protected Properties
 
@@ -21,16 +21,6 @@ namespace Unimake.Business.DFe.Xml
         protected List<XMLUtility.TNameSpace> NameSpaces { get; }
 
         #endregion Protected Properties
-
-        #region Protected Methods
-
-        /// <summary>
-        /// Executa o processamento do XMLReader recebido na deserialização
-        /// </summary>
-        ///<param name="reader">Reader XML recebido durante o processo de deserialização</param>
-        protected virtual void ProcessReader(XmlReader reader) { }
-
-        #endregion Protected Methods
 
         #region Public Constructors
 
@@ -66,7 +56,21 @@ namespace Unimake.Business.DFe.Xml
         public virtual T LerXML<T>(XmlDocument doc)
             where T : new() => XMLUtility.Deserializar<T>(doc);
 
-        void Contract.Serialization.IXmlSerializable.ProcessReader(XmlReader reader) => ProcessReader(reader);
+        /// <summary>
+        /// Executa o processamento do XMLReader recebido na deserialização
+        /// </summary>
+        ///<param name="reader">Reader XML recebido durante o processo de deserialização</param>
+        public virtual void ReadXml(XmlReader reader)
+        {
+        }
+
+        /// <summary>
+        /// Executa o processamento do XMLReader recebido na serialização
+        /// </summary>
+        ///<param name="writer">string XML recebido durante o processo de serialização</param>
+        public virtual void WriteXml(System.IO.StringWriter writer)
+        {
+        }
 
         #endregion Public Methods
     }

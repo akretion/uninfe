@@ -398,6 +398,7 @@ namespace NFe.Components
         tpNav,
         tpOp,
         tPag,
+        xPag,
         tpPer,
         tpPint,
         tpProp,

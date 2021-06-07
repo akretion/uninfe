@@ -12,7 +12,7 @@ namespace Unimake.Business.DFe.Xml.GNRE
     [ComVisible(true)]
     [Serializable()]
     [XmlRoot("TConsLote_GNRE", Namespace = "http://www.gnre.pe.gov.br", IsNullable = false)]
-    public class TConsLoteGNRE : XMLBase
+    public class TConsLoteGNRE: XMLBase
     {
         private string NumeroReciboField;
 
@@ -20,11 +20,11 @@ namespace Unimake.Business.DFe.Xml.GNRE
         public TipoAmbiente Ambiente { get; set; }
 
         [XmlElement("numeroRecibo")]
-        public string NumeroRecibo 
-        { 
-            
+        public string NumeroRecibo
+        {
+
             get => NumeroReciboField;
-            set 
+            set
             {
                 if(value.Length != 10)
                 {
@@ -32,8 +32,10 @@ namespace Unimake.Business.DFe.Xml.GNRE
                 }
                 NumeroReciboField = value;
             }
-        
+
         }
 
+        [XmlElement("incluirPDFGuias")]
+        public SimNaoLetra IncluirPDFGuias { get; set; }
     }
 }

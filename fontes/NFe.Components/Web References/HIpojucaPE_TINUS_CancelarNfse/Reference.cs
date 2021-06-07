@@ -26,7 +26,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_CancelarNfse {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="CancelarNfseSoap", Namespace="http://www2.tinus.com.br")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="CancelarNfseSoap", Namespace= "http://www.abrasf.org.br/nfse.xsd")]
     public partial class CancelarNfse : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback CallCancelarNfseOperationCompleted;

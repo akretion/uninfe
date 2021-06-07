@@ -45,8 +45,6 @@ namespace NFe.Components.PJuscimeiraMT {
         
         private System.Threading.SendOrPostCallback CONSULTARNFSESERVICOPRESTADOOperationCompleted;
         
-        private System.Threading.SendOrPostCallback CONSULTARNFSESERVICOTOMADOOperationCompleted;
-        
         private System.Threading.SendOrPostCallback SUBSTITUIRNFSEOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
@@ -110,9 +108,6 @@ namespace NFe.Components.PJuscimeiraMT {
         
         /// <remarks/>
         public event CONSULTARNFSESERVICOPRESTADOCompletedEventHandler CONSULTARNFSESERVICOPRESTADOCompleted;
-        
-        /// <remarks/>
-        public event CONSULTARNFSESERVICOTOMADOCompletedEventHandler CONSULTARNFSESERVICOTOMADOCompleted;
         
         /// <remarks/>
         public event SUBSTITUIRNFSECompletedEventHandler SUBSTITUIRNFSECompleted;
@@ -358,36 +353,6 @@ namespace NFe.Components.PJuscimeiraMT {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("Tributarioaction/ANFSE_WEB_SERVICE.CONSULTARNFSESERVICOTOMADO", RequestElementName="nfse_web_service.CONSULTARNFSESERVICOTOMADO", RequestNamespace="Tributario", ResponseElementName="nfse_web_service.CONSULTARNFSESERVICOTOMADOResponse", ResponseNamespace="Tributario", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("Consultarnfseservicotomadoresponse")]
-        public output CONSULTARNFSESERVICOTOMADO(input Consultarnfseservicotomadorequest) {
-            object[] results = this.Invoke("CONSULTARNFSESERVICOTOMADO", new object[] {
-                        Consultarnfseservicotomadorequest});
-            return ((output)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void CONSULTARNFSESERVICOTOMADOAsync(input Consultarnfseservicotomadorequest) {
-            this.CONSULTARNFSESERVICOTOMADOAsync(Consultarnfseservicotomadorequest, null);
-        }
-        
-        /// <remarks/>
-        public void CONSULTARNFSESERVICOTOMADOAsync(input Consultarnfseservicotomadorequest, object userState) {
-            if ((this.CONSULTARNFSESERVICOTOMADOOperationCompleted == null)) {
-                this.CONSULTARNFSESERVICOTOMADOOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCONSULTARNFSESERVICOTOMADOOperationCompleted);
-            }
-            this.InvokeAsync("CONSULTARNFSESERVICOTOMADO", new object[] {
-                        Consultarnfseservicotomadorequest}, this.CONSULTARNFSESERVICOTOMADOOperationCompleted, userState);
-        }
-        
-        private void OnCONSULTARNFSESERVICOTOMADOOperationCompleted(object arg) {
-            if ((this.CONSULTARNFSESERVICOTOMADOCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.CONSULTARNFSESERVICOTOMADOCompleted(this, new CONSULTARNFSESERVICOTOMADOCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("Tributarioaction/ANFSE_WEB_SERVICE.SUBSTITUIRNFSE", RequestElementName="nfse_web_service.SUBSTITUIRNFSE", RequestNamespace="Tributario", ResponseElementName="nfse_web_service.SUBSTITUIRNFSEResponse", ResponseNamespace="Tributario", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("Substituirnfseresponse")]
         public output SUBSTITUIRNFSE(input Substituirnfserequest) {
@@ -441,30 +406,52 @@ namespace NFe.Components.PJuscimeiraMT {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="TributarioGx16New")]
-    public partial class input {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="Tributario")]
+    public partial class input
+    {
         
-        private string nfseCabecMsgField;
+        [XmlIgnore]
+        public string nfseCabecMsg { get; set; }
         
-        private string nfseDadosMsgField;
+        System.Xml.XmlCDataSection _nfseCabecMsgCDATA = null;
         
         /// <remarks/>
-        public string nfseCabecMsg {
-            get {
-                return this.nfseCabecMsgField;
+        [XmlElement("nfseCabecMsg")]
+        public System.Xml.XmlCDataSection nfseCabecMsgCDATA
+        {
+            get
+            {
+
+                if (_nfseCabecMsgCDATA == null)
+                    _nfseCabecMsgCDATA = new System.Xml.XmlDocument().CreateCDataSection(this.nfseCabecMsg);
+
+                return _nfseCabecMsgCDATA;
             }
-            set {
-                this.nfseCabecMsgField = value;
+            set
+            {
+                _nfseCabecMsgCDATA = value;
             }
         }
         
-        /// <remarks/>
-        public string nfseDadosMsg {
-            get {
-                return this.nfseDadosMsgField;
+        [XmlIgnore]
+        public string nfseDadosMsg { get; set; }
+
+
+        System.Xml.XmlCDataSection _nfseDadosMsgCDATA = null;
+
+        [XmlElement("nfseDadosMsg")]
+        public System.Xml.XmlCDataSection nfseDadosMsgCDATA
+        {
+            get
+            {
+                if (_nfseDadosMsgCDATA == null)
+                    _nfseDadosMsgCDATA = new System.Xml.XmlDocument().CreateCDataSection(this.nfseDadosMsg);
+
+                return _nfseDadosMsgCDATA;
             }
-            set {
-                this.nfseDadosMsgField = value;
+            set
+            {
+                _nfseDadosMsgCDATA = value;
             }
         }
     }
@@ -474,7 +461,7 @@ namespace NFe.Components.PJuscimeiraMT {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="TributarioGx16New")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="Tributario")]
     public partial class output {
         
         private string outputXMLField;
@@ -685,32 +672,6 @@ namespace NFe.Components.PJuscimeiraMT {
         private object[] results;
         
         internal CONSULTARNFSESERVICOPRESTADOCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public output Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((output)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void CONSULTARNFSESERVICOTOMADOCompletedEventHandler(object sender, CONSULTARNFSESERVICOTOMADOCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CONSULTARNFSESERVICOTOMADOCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal CONSULTARNFSESERVICOTOMADOCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

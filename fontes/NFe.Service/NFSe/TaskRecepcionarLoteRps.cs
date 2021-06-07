@@ -78,10 +78,6 @@ namespace NFe.Service.NFSe
 
                 WebServiceProxy wsProxy = null;
                 object envLoteRps = null;
-                if(!string.IsNullOrEmpty(Empresas.Configuracoes[emp].CertificadoPIN))
-                {
-                    new Unimake.Business.DFe.Utility.Certificate().CarregarPINA3(Empresas.Configuracoes[emp].X509Certificado, Empresas.Configuracoes[emp].CertificadoPIN);
-                }
 
                 if(IsUtilizaCompilacaoWs(padraoNFSe, Servico, oDadosEnvLoteRps.cMunicipio))
                 {
@@ -112,7 +108,7 @@ namespace NFe.Service.NFSe
                             ipm.Proxy = Proxy.DefinirProxy(ConfiguracaoApp.ProxyServidor, ConfiguracaoApp.ProxyUsuario, ConfiguracaoApp.ProxySenha, ConfiguracaoApp.ProxyPorta);
                         }
 
-                        if(oDadosEnvLoteRps.cMunicipio == 4303103 || oDadosEnvLoteRps.cMunicipio == 4104808)
+                        if(oDadosEnvLoteRps.cMunicipio == 4303103 || oDadosEnvLoteRps.cMunicipio == 4104808 || oDadosEnvLoteRps.cMunicipio == 4215000)
                         {
                             var adIPM = new AssinaturaDigital();
                             //adIPM.Assinar(NomeArquivoXML, emp, oDadosEnvLoteRps.cMunicipio);
@@ -638,7 +634,8 @@ namespace NFe.Service.NFSe
                             oDadosEnvLoteRps.cMunicipio == 4124053 ||
                             oDadosEnvLoteRps.cMunicipio == 4101408 ||
                             oDadosEnvLoteRps.cMunicipio == 3550407 ||
-                            oDadosEnvLoteRps.cMunicipio == 1502400)
+                            oDadosEnvLoteRps.cMunicipio == 1502400 ||
+                            oDadosEnvLoteRps.cMunicipio == 3550803)
                         {
                             var pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,

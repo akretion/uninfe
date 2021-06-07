@@ -223,6 +223,14 @@ namespace NFe.Components
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-1502400-";
                                 break;
 
+                            case 2607208: //Ipojuca - PE
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-2607208-";
+                                break;
+
+                            case 3550803: //São Sebastião da Grama - SP
+                                padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-3550803-";
+                                break;
+
                             default:
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-";
                                 break;

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Xml;
+using Unimake.Business.DFe.Contract.Serialization;
 using Unimake.Business.DFe.Utility;
 using Unimake.Business.DFe.Xml.CTe;
 
@@ -204,7 +205,7 @@ namespace Unimake.Business.DFe.Servicos.CTe
         public void GravarXmlDistribuicao(string pasta) => GravarXmlDistribuicao(pasta, ProcEventoCTeResult.NomeArquivoDistribuicao, ProcEventoCTeResult.GerarXML().OuterXml);
 
         /// <summary>
-        /// Grava o XML de dsitribuição no stream
+        /// Grava o XML de distribuição no stream
         /// </summary>
         /// <param name="stream">Stream que vai receber o XML de distribuição</param>
         public void GravarXmlDistribuicao(Stream stream) => GravarXmlDistribuicao(stream, ProcEventoCTeResult.GerarXML().OuterXml);

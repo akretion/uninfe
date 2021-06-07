@@ -1,5 +1,5 @@
 ﻿using NFe.Components.Abstract;
-using NFe.Components.HJuscimeiraMT;
+using NFe.Components.HCampoNovoDoParecisMT;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;

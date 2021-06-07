@@ -68,6 +68,12 @@ namespace NFe.Components.Coplan
                                 new PJuscimeiraMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
                             break;
 
+                        case 5100201: //Água Boa-MT
+                            coplanService = tpAmb == TipoAmbiente.taHomologacao ?
+                                new HAguaBoaMT.h.CoplanH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase :
+                                new PAguaBoaMT.p.CoplanP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado) as EmiteNFSeBase;
+                            break;
+
                         default:
                             throw new Exceptions.ServicoInexistenteException();
                     }

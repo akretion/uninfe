@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Results>
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc?wsdl" filename="NotaFiscalEletronicaServico.wsdl" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc?xsd=xsd4" filename="NotaFiscalEletronica.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc?xsd=xsd3" filename="NotaFiscalEletronica0.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc?xsd=xsd2" filename="NotaFiscalEletronica1.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc?xsd=xsd1" filename="NotaFiscalEletronica2.xsd" />
-    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc?xsd=xsd0" filename="NotaFiscalEletronica3.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc?xsd=xsd2" filename="NotaFiscalEletronica.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc?xsd=xsd3" filename="NotaFiscalEletronica0.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc?xsd=xsd0" filename="NotaFiscalEletronica1.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc?xsd=xsd1" filename="NotaFiscalEletronica2.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.SchemaReference" url="https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc?xsd=xsd4" filename="NotaFiscalEletronica3.xsd" />
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="file:///D:/Projetos/UniNFe/trunk/fontes/NFe.Components.Wsdl/NFse/WSDL/Producao/POsascoEGOVERNEISS.wsdl" filename="NotaFiscalEletronicaServico.wsdl" />
   </Results>
 </DiscoveryClientResultsFile>

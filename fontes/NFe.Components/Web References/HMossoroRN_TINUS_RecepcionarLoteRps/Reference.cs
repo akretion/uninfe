@@ -261,7 +261,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
+        public string Id {
             get {
                 return this.idField;
             }
@@ -486,7 +486,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
+        public string Id {
             get {
                 return this.idField;
             }
@@ -664,8 +664,10 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class ObjectType {
+        
+        private System.Xml.XmlElement[] anyField;
         
         private string idField;
         
@@ -673,7 +675,16 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
         
         private string encodingField;
         
-        private string valueField;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any {
+            get {
+                return this.anyField;
+            }
+            set {
+                this.anyField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -708,24 +719,14 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
             }
         }
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value {
-            get {
-                return this.valueField;
             }
-            set {
-                this.valueField = value;
-            }
-        }
-    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class SPKIDataType {
         
         private byte[][] sPKISexpField;
@@ -760,7 +761,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class PGPDataType {
         
         private byte[] pGPKeyIDField;
@@ -834,7 +835,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class X509IssuerSerialType {
         
         private string x509IssuerNameField;
@@ -867,7 +868,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class X509DataType {
         
         private X509IssuerSerialType[] x509IssuerSerialField;
@@ -954,7 +955,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class RetrievalMethodType {
         
         private TransformType[] transformsField;
@@ -1002,19 +1003,18 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class TransformType {
         
-        private System.Xml.XmlNode[] anyField;
+        private System.Xml.XmlElement[] anyField;
         
         private string[] xPathField;
         
         private string algorithmField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any {
+        public System.Xml.XmlElement[] Any {
             get {
                 return this.anyField;
             }
@@ -1051,7 +1051,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class RSAKeyValueType {
         
         private byte[] modulusField;
@@ -1086,7 +1086,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class DSAKeyValueType {
         
         private byte[] pField;
@@ -1186,14 +1186,14 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class KeyValueType {
         
         private DSAKeyValueType dSAKeyValueField;
         
         private RSAKeyValueType rSAKeyValueField;
         
-        private System.Xml.XmlNode[] anyField;
+        private System.Xml.XmlElement anyField;
         
         /// <remarks/>
         public DSAKeyValueType DSAKeyValue {
@@ -1216,9 +1216,8 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any {
+        public System.Xml.XmlElement Any {
             get {
                 return this.anyField;
             }
@@ -1233,7 +1232,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class KeyInfoType {
         
         private string[] keyNameField;
@@ -1250,7 +1249,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
         
         private string[] mgmtDataField;
         
-        private System.Xml.XmlNode[] anyField;
+        private System.Xml.XmlElement[] anyField;
         
         private string idField;
         
@@ -1332,9 +1331,8 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any {
+        public System.Xml.XmlElement[] Any {
             get {
                 return this.anyField;
             }
@@ -1360,7 +1358,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class SignatureValueType {
         
         private string idField;
@@ -1395,12 +1393,24 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class DigestMethodType {
+        
+        private System.Xml.XmlElement[] anyField;
         
         private string algorithmField;
         
-        private string valueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any {
+            get {
+                return this.anyField;
+            }
+            set {
+                this.anyField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1412,17 +1422,6 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
                 this.algorithmField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -1430,7 +1429,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class ReferenceType {
         
         private TransformType[] transformsField;
@@ -1516,14 +1515,14 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class SignatureMethodType {
         
         private long hMACOutputLengthField;
         
         private bool hMACOutputLengthFieldSpecified;
         
-        private string[] textField;
+        private System.Xml.XmlElement[] anyField;
         
         private string algorithmField;
         
@@ -1549,13 +1548,13 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any {
             get {
-                return this.textField;
+                return this.anyField;
             }
             set {
-                this.textField = value;
+                this.anyField = value;
             }
         }
         
@@ -1576,12 +1575,24 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class CanonicalizationMethodType {
+        
+        private System.Xml.XmlElement[] anyField;
         
         private string algorithmField;
         
-        private string valueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any {
+            get {
+                return this.anyField;
+            }
+            set {
+                this.anyField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -1593,17 +1604,6 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
                 this.algorithmField = value;
             }
         }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
-            }
-        }
     }
     
     /// <remarks/>
@@ -1611,7 +1611,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class SignedInfoType {
         
         private CanonicalizationMethodType canonicalizationMethodField;
@@ -1670,7 +1670,7 @@ namespace NFe.Components.HMossoroRN_TINUS_RecepcionarLoteRps {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www2.tinus.com.br")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class SignatureType {
         
         private SignedInfoType signedInfoField;

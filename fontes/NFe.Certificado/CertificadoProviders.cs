@@ -1,12 +1,9 @@
 ﻿using NFe.Settings;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Xml;
 using System.Xml.Linq;
+using Unimake.Business.DFe.Security;
 
 namespace NFe.Certificado
 {
@@ -47,8 +44,10 @@ namespace NFe.Certificado
             IsA3 = Certificado.IsA3();
             ProviderIdentificado = false;
 
-            if (!Directory.Exists(folderTemp + "\\temp"))
+            if(!Directory.Exists(folderTemp + "\\temp"))
+            {
                 Directory.CreateDirectory(Path.GetFullPath(folderTemp + "\\temp"));
+            }
         }
         #endregion
 
@@ -61,11 +60,13 @@ namespace NFe.Certificado
         /// <returns></returns>
         public bool TestarProvider(CertProviders provider)
         {
-            bool result = false;
+            var result = false;
 
-            this.SimularXML(provider);
-            AssinaturaDigital assinatura = new AssinaturaDigital();
-            assinatura.TesteCertificado = true;
+            SimularXML(provider);
+            var assinatura = new AssinaturaDigital
+            {
+                TesteCertificado = true
+            };
             result = assinatura.TestarProviderCertificado(TempFile,
                 "SimulacaoProvider",
                 "Provider",
@@ -83,8 +84,10 @@ namespace NFe.Certificado
         /// </summary>
         private void ApagarXMLTeste()
         {
-            if (File.Exists(TempFile))
+            if(File.Exists(TempFile))
+            {
                 File.Delete(TempFile);
+            }
         }
 
         /// <summary>
@@ -98,8 +101,8 @@ namespace NFe.Certificado
 
             ApagarXMLTeste();
 
-            XElement docElement = new XElement("SimulacaoProvider");
-            XElement eProvider = new XElement("Provider");
+            var docElement = new XElement("SimulacaoProvider");
+            var eProvider = new XElement("Provider");
 
             eProvider.Add(new XElement("Nome", provider.NameKey));
             eProvider.Add(new XElement("Type", provider.Type));
@@ -113,10 +116,7 @@ namespace NFe.Certificado
         /// Busca uma lista de providers que podem ser utilizados pelo certificado
         /// </summary>
         /// <author>Renan Borges</author>
-        public void GetProviders()
-        {
-            ProvidersIdentificados = oCertificado.GetListProviders();
-        }
+        public void GetProviders() => ProvidersIdentificados = oCertificado.GetListProviders();
 
         /// <summary>
         /// Busca os types dos providers encontrados
@@ -124,7 +124,7 @@ namespace NFe.Certificado
         /// <author>Renan Borges</author>
         public void GetProvidersType()
         {
-            for (int i = 0; i < ProvidersIdentificados.Count; i++)
+            for(var i = 0; i < ProvidersIdentificados.Count; i++)
             {
                 ProvidersIdentificados[i].Type = oCertificado.GetInfoProvider(ProvidersIdentificados[i].NameKey.ToString()).Type;
             }

@@ -24,17 +24,7 @@ namespace Unimake.Business.DFe.Xml.GNRE
         public SituacaoProcess SituacaoProcess { get; set; }
 
         [XmlElement("resultado")]
-        public List<Resultado> Resultado { get; set; }
-
-        public void AddResultado(Resultado resultado)
-        {
-            if(Resultado == null)
-            {
-                Resultado = new List<Resultado>();
-            }
-
-            Resultado.Add(resultado);
-        }
+        public Resultado Resultado { get; set; }
     }
 
     [Serializable()]
@@ -55,21 +45,13 @@ namespace Unimake.Business.DFe.Xml.GNRE
         [XmlAttribute(AttributeName = "versao", DataType = "token")]
         public string Versao { get; set; } = "2.00";
 
-        [XmlElement("situacaoGuia")]
-        public SituacaoGuiaGNRE SituacaoGuia { get; set; }
+        [XmlElement("guia")]
+        public List<Guia> Guia { get; set; }
 
-        [XmlElement("TDadosGNRE")]
-        public TDadosGNRE TDadosGNRE { get; set; }
+        [XmlElement("pdfGuias")]
+        public string PDFGuias { get; set; }
 
-        [XmlElement("linhaDigitavel")]
-        public string LinhaDigitavel { get; set; }
-
-        [XmlElement("codigoBarras")]
-        public string CodigoBarras { get; set; }
-
-        [XmlElement("motivosRejeicao")]
-        public List<MotivosRejeicao> MotivosRejeicao { get; set; }
-
+#if INTEROP
         public void AddMotivosRejeicao(MotivosRejeicao motivosRejeicao)
         {
             if(MotivosRejeicao == null)
@@ -79,11 +61,65 @@ namespace Unimake.Business.DFe.Xml.GNRE
 
             MotivosRejeicao.Add(motivosRejeicao);
         }
+
+        public void AddGuia(Guia guia)
+        {
+            if(Guia == null)
+            {
+                Guia = new List<Guia>();
+            }
+
+            Guia.Add(guia);
+        }
+#endif
+    }
+
+    [Serializable()]
+    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
+    public class Guia
+    {
+        [XmlElement("situacaoGuia")]
+        public SituacaoGuiaGNRE SituacaoGuia { get; set; }
+
+        [XmlElement("TDadosGNRE")]
+        public TDadosGNRE TDadosGNRE { get; set; }
+
+        [XmlElement("representacaoNumerica")]
+        public string RepresentacaoNumerica { get; set; }
+
+        [XmlElement("codigoBarras")]
+        public string CodigoBarras { get; set; }
+
+        [XmlElement("linhaDigitavel")]
+        public string LinhaDigitavel { get; set; }
+
+        [XmlElement("motivosRejeicao")]
+        public MotivosRejeicao MotivosRejeicao { get; set; }
     }
 
     [Serializable()]
     [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
     public class MotivosRejeicao
+    {
+        [XmlElement("motivo")]
+        public List<Motivo> Motivo { get; set; }
+
+#if INTEROP
+        public void AddMotivo(Motivo motivo)
+        {
+            if(Motivo == null)
+            {
+                Motivo = new List<Motivo>();
+            }
+
+            Motivo.Add(motivo);
+        }
+#endif
+    }
+
+    [Serializable()]
+    [XmlType(AnonymousType = true, Namespace = "http://www.gnre.pe.gov.br")]
+    public class Motivo
     {
         [XmlElement("codigo")]
         public string Codigo { get; set; }

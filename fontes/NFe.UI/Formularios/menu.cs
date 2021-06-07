@@ -305,7 +305,7 @@ namespace NFe.UI
 
         private void metroTile1_Click(object sender, EventArgs e)
         {
-            StartPage("https://mdfe-portal.sefaz.rs.gov.br/Site/Servicos");
+            StartPage("https://dfe-portal.svrs.rs.gov.br/MDFE/Disponibilidade");
         }
 
         private void metroTile_Manual_Click(object sender, EventArgs e)

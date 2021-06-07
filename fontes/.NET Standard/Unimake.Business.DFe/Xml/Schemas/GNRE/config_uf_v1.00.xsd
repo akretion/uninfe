@@ -9,7 +9,10 @@
 			<enumeration value="P" />
 			<enumeration value="T" />
 			<enumeration value="A" />
-			<enumeration value="N" />
+			<enumeration value="N" />		
+			<enumeration value="PO" />
+			<enumeration value="TO" />
+			<enumeration value="AO" />
 		</restriction>
 	</simpleType>
 	<element name="TConfigUf">
@@ -269,14 +272,9 @@
 											maxOccurs="1" minOccurs="1">
 											<annotation>
 												<documentation>
-													P - Valor principal
-													T - Valor total A -
-													Valor principal ou
-													total N - Nenhum
-													(Não precisa
-													informar um valor.
-													Será informado pela
-													UF)
+													P-Valor principal, T-Valor total, A-Valor principal e total, PO-Valor principal opcional,
+													TO-Valor total opcional, AO-Valor principal e total opcional e
+													N-Nenhum (Não precisa informar um valor.Será informado pela UF)
 												</documentation>
 											</annotation>
 											<complexType>
@@ -340,7 +338,7 @@
 											</complexType>
 										</element>
 										<element
-											name="versoesXmlDocOrigem">
+											name="versoesXmlDocOrigem" minOccurs="0" maxOccurs="1">
 											<annotation>
 												<documentation>
 													Versões (do XML) que
@@ -413,7 +411,7 @@
 											<complexType>
 												<simpleContent>
 													<extension
-														base="tns:TSimNao">
+														base="tns:TSimNaoOpcional">
 														<attribute
 															name="campo" type="tns:TCamposGNRE" fixed="c15_convenio" use="required">
 														</attribute>
@@ -561,7 +559,7 @@
 						</sequence>
 					</complexType>
 				</element>
-				<element name="versoesXml">
+				<element name="versoesXml" minOccurs="0" maxOccurs="1">
 					<complexType>
 						<sequence>
 							<element name="versao" minOccurs="1" maxOccurs="2">

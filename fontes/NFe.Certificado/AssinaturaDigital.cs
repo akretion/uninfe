@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography.Xml;
 using System.Xml;
+using Unimake.Business.DFe.Security;
 
 namespace NFe.Certificado
 {
@@ -112,10 +113,12 @@ namespace NFe.Certificado
         {
             #region São José dos Pinhais
 
+
             if((Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 4125506 ||
                 Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 4303103 ||
                 Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 4104808 ||
-                Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 3523503) && 
+                Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 3523503 ||
+                Empresas.Configuracoes[empresa].UnidadeFederativaCodigo == 4215000) &&
                 tagAssinatura.Equals(tagAtributoId))
             {
                 AssinarJSP(conteudoXML, tagAssinatura, tagAtributoId, x509Cert, empresa, algorithmType, comURI);
@@ -203,22 +206,11 @@ namespace NFe.Certificado
                             // Create a SignedXml object.
                             var signedXml = new SignedXml(conteudoXML);
 
-#if _fw46
-                            //A3
-                            if(!string.IsNullOrEmpty(Empresas.Configuracoes[empresa].CertificadoPIN) &&
-                                clsX509Certificate2Extension.IsA3(x509Cert) &&
-                                !Empresas.Configuracoes[empresa].CertificadoPINCarregado)
-                            {
-                                x509Cert.SetPinPrivateKey(Empresas.Configuracoes[empresa].CertificadoPIN);
-                                Empresas.Configuracoes[empresa].CertificadoPINCarregado = true;
-                            }
-
                             if(algorithmType.Equals(AlgorithmType.Sha256))
                             {
                                 signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
                                 signedXml.SigningKey = x509Cert.GetRSAPrivateKey();
                             }
-#endif
 
                             if(algorithmType.Equals(AlgorithmType.Sha1))
                             {
@@ -234,12 +226,10 @@ namespace NFe.Certificado
                             // Add the reference to the SignedXml object.
                             signedXml.AddReference(reference);
 
-#if _fw46
                             if(algorithmType.Equals(AlgorithmType.Sha256))
                             {
                                 reference.DigestMethod = "http://www.w3.org/2001/04/xmlenc#sha256";
                             }
-#endif
 
                             // Create a new KeyInfo object
                             var keyInfo = new KeyInfo();
@@ -282,7 +272,7 @@ namespace NFe.Certificado
 
                 AssinaturaValida = false;
 
-                if(clsX509Certificate2Extension.IsA3(x509Cert))
+                if(x509Cert.IsA3())
                 {
                     x509Cert = Empresas.ResetCertificado(empresa);
                     if(!TesteCertificado)
@@ -669,7 +659,6 @@ namespace NFe.Certificado
             AlgorithmType algorithmType,
             bool comURI)
         {
-
             try
             {
                 if(x509Cert == null)
@@ -715,22 +704,11 @@ namespace NFe.Certificado
                     // Create a SignedXml object.
                     var signedXml = new SignedXml(conteudoXML);
 
-#if _fw46
-                    //A3
-                    if(!string.IsNullOrEmpty(Empresas.Configuracoes[empresa].CertificadoPIN) &&
-                        clsX509Certificate2Extension.IsA3(x509Cert) &&
-                        !Empresas.Configuracoes[empresa].CertificadoPINCarregado)
-                    {
-                        x509Cert.SetPinPrivateKey(Empresas.Configuracoes[empresa].CertificadoPIN);
-                        Empresas.Configuracoes[empresa].CertificadoPINCarregado = true;
-                    }
-
                     if(algorithmType.Equals(AlgorithmType.Sha256))
                     {
                         signedXml.SignedInfo.SignatureMethod = "http://www.w3.org/2001/04/xmldsig-more#rsa-sha256";
                         signedXml.SigningKey = x509Cert.GetRSAPrivateKey();
                     }
-#endif
 
                     if(algorithmType.Equals(AlgorithmType.Sha1))
                     {
@@ -746,12 +724,10 @@ namespace NFe.Certificado
                     // Add the reference to the SignedXml object.
                     signedXml.AddReference(reference);
 
-#if _fw46
                     if(algorithmType.Equals(AlgorithmType.Sha256))
                     {
                         reference.DigestMethod = "http://www.w3.org/2001/04/xmlenc#sha256";
                     }
-#endif
 
                     // Create a new KeyInfo object
                     var keyInfo = new KeyInfo();
@@ -784,7 +760,7 @@ namespace NFe.Certificado
 
                 AssinaturaValida = false;
 
-                if(clsX509Certificate2Extension.IsA3(x509Cert))
+                if(x509Cert.IsA3())
                 {
                     x509Cert = Empresas.ResetCertificado(empresa);
                     if(!TesteCertificado)

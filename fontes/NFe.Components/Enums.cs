@@ -519,7 +519,6 @@ namespace NFe.Components
         #region EFDReinf
 
         RecepcaoLoteReinf,
-        ConsultarLoteReinf,
         ConsultasReinf,
 
         #endregion EFDReinf

@@ -23,7 +23,6 @@ namespace Unimake.Business.DFe.Security
         /// <param name="x509Cert">Certificado digital a ser utilizado na assinatura</param>
         /// <param name="algorithmType">Tipo de algorítimo a ser utilizado na assinatura</param>
         /// <param name="definirURI">Define o Reference.URI na assinatura</param>
-        /// <param name="pinCertificado">PIN do certificado digital, quando do tipo A3</param>
         /// <param name="idAttributeName">Nome do atributo que tem o ID para assinatura. Se nada for passado o sistema vai tentar buscar o nome Id ou id, se não encontrar, não vai criar a URI Reference na assinatura com ID.</param>
         /// <param name="verificaAssinatura">Verificar se já existe assinatura no XML, se sim e existir o método não vai assinar o XML.</param>
         public static void Assinar(XmlDocument conteudoXML,
@@ -32,7 +31,6 @@ namespace Unimake.Business.DFe.Security
             X509Certificate2 x509Cert,
             AlgorithmType algorithmType = AlgorithmType.Sha1,
             bool definirURI = true,
-            string pinCertificado = "",
             string idAttributeName = "",
             bool verificaAssinatura = false)
         {
@@ -97,11 +95,6 @@ namespace Unimake.Business.DFe.Security
                                     }
 
                                     var signedXml = new SignedXml(conteudoXML);
-
-                                    if(!string.IsNullOrWhiteSpace(pinCertificado))
-                                    {
-                                        x509Cert.SetPinPrivateKey(pinCertificado);
-                                    }
 
                                     reference.AddTransform(new XmlDsigEnvelopedSignatureTransform());
                                     reference.AddTransform(new XmlDsigC14NTransform());

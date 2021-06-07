@@ -29,6 +29,10 @@ namespace NFe.Components.Elotech
                             elotechService = new IratiPR(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                             break;
 
+                        case 4114807: //Marialva-PR
+                            elotechService = new MarialvaPR(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
+                            break;
+
                         default:
                             throw new Exceptions.ServicoInexistenteException();
                     }

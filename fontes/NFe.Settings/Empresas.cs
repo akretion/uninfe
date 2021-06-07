@@ -9,6 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+using Unimake.Business.DFe.Security;
 
 namespace NFe.Settings
 {
@@ -276,9 +277,26 @@ namespace NFe.Settings
                 }
 
             }
+
             if(!Empresas.ExisteErroDiretorio)
             {
                 Empresas.CriarPasta(false);
+            }
+
+            //Carregar PIN do A3 para que o usuário não precise digitar
+            for(int i = 0; i < Empresas.Configuracoes.Count; i++)
+            {
+                if(!string.IsNullOrWhiteSpace(Empresas.Configuracoes[i].CertificadoPIN) && !Empresas.Configuracoes[i].CertificadoPINCarregado)
+                {
+                    try
+                    {
+                        Empresas.Configuracoes[i].X509Certificado.SetPinPrivateKey(Empresas.Configuracoes[i].CertificadoPIN);
+                        Empresas.Configuracoes[i].CertificadoPINCarregado = true;
+                    }
+                    catch
+                    {
+                    }
+                }
             }
         }
 

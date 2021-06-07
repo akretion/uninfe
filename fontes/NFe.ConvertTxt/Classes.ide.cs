@@ -15,7 +15,6 @@ namespace NFe.ConvertTxt
         public int cUF { get; set; }
         public int cNF { get; set; }
         public string natOp { get; set; }
-        public TpcnIndicadorPagamento indPag { get; set; }
         public TpcnMod mod { get; set; }
         public int serie { get; set; }
         public int nNF { get; set; }

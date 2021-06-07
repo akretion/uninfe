@@ -5167,5 +5167,101 @@ namespace Unimake.Business.DFe.Servicos
 
     #endregion
 
+    #region Tipo de Vale Pedágio
 
+    /// <summary>
+    /// Tipo de vale pedágio
+    /// </summary>
+    public enum TipoValePedagio
+    {
+        /// <summary>
+        /// TAG = 01
+        /// </summary>
+        [XmlEnum("01")]
+        TAG = 1,
+
+        /// <summary>
+        /// Cupom = 01
+        /// </summary>
+        [XmlEnum("02")]
+        Cupom = 2,
+
+        /// <summary>
+        /// Cartão = 01
+        /// </summary>
+        [XmlEnum("03")]
+        Cartao = 3
+    }
+
+    #endregion
+
+    #region Categoria de Combinação Veicular
+
+    /// <summary>
+    /// Categorias de combinação veicular
+    /// </summary>
+    public enum CategoriaCombinacaoVeicular
+    {
+        /// <summary>
+        /// Veículo Comercial 2 Eixos = 02
+        /// </summary>
+        [XmlEnum("02")]
+        VeiculoComercial2Eixos = 02,
+
+        /// <summary>
+        /// Veículo Comercial 3 Eixos = 04
+        /// </summary>
+        [XmlEnum("04")]
+        VeiculoComercial3Eixos = 04,
+
+        /// <summary>
+        /// Veículo Comercial 4 Eixos = 06
+        /// </summary>
+        [XmlEnum("06")]
+        VeiculoComercial4Eixos = 06,
+
+        /// <summary>
+        /// Veículo Comercial 5 Eixos = 07
+        /// </summary>
+        [XmlEnum("07")]
+        VeiculoComercial5Eixos = 07,
+
+        /// <summary>
+        /// Veículo Comercial 6 Eixos = 08
+        /// </summary>
+        [XmlEnum("08")]
+        VeiculoComercial6Eixos = 08,
+
+        /// <summary>
+        /// Veículo Comercial 7 Eixos = 10
+        /// </summary>
+        [XmlEnum("10")]
+        VeiculoComercial7Eixos = 10,
+
+        /// <summary>
+        /// Veículo Comercial 8 eixos = 11
+        /// </summary>
+        [XmlEnum("11")]
+        VeiculoComercial8Eixos = 11,
+
+        /// <summary>
+        /// Veículo Comercial 9 Eixos = 12
+        /// </summary>
+        [XmlEnum("12")]
+        VeiculoComercial9Eixos = 12,
+
+        /// <summary>
+        /// Veículo Comercial 10 Eixos = 13
+        /// </summary>
+        [XmlEnum("13")]
+        VeiculoComercial10Eixos = 13,
+
+        /// <summary>
+        /// Veículo Comercial Acima de 10 Eixos = 14
+        /// </summary>
+        [XmlEnum("14")]
+        VeiculoComercialAcima10Eixos = 14
+    }
+
+    #endregion
 }

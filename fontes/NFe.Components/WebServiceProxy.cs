@@ -183,7 +183,8 @@ namespace NFe.Components
                                     cMunicipio == 4101408 ||
                                     cMunicipio == 3550407 ||
                                     cMunicipio == 4310207 ||
-                                    cMunicipio == 1502400)
+                                    cMunicipio == 1502400 ||
+                                    cMunicipio == 3550803)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -216,7 +217,8 @@ namespace NFe.Components
                                     cMunicipio == 4101408 ||
                                     cMunicipio == 3550407 ||
                                     cMunicipio == 4310207 ||
-                                    cMunicipio == 1502400)
+                                    cMunicipio == 1502400 ||
+                                    cMunicipio == 3550803)
                                     return "BasicHttpBinding_INFSEGeracao";
                                 else
                                     return "basic_INFSEGeracao";
@@ -241,7 +243,8 @@ namespace NFe.Components
                                     cMunicipio == 4101408 ||
                                     cMunicipio == 3550407 ||
                                     cMunicipio == 4310207 ||
-                                    cMunicipio == 1502400)
+                                    cMunicipio == 1502400 ||
+                                    cMunicipio == 3550803)
 
                                     return "BasicHttpBinding_INFSEConsultas";
                                 else
@@ -1428,11 +1431,6 @@ namespace NFe.Components
         /// Recepção do lote de eventos do EFDReinf
         /// </summary>
         public string RecepcaoLoteReinf { get; set; }
-
-        /// <summary>
-        /// Consulta do lote de eventos do EFDReinf
-        /// </summary>
-        public string ConsultarLoteReinf { get; set; }
 
         /// <summary>
         /// Consultas do EFDReinf: totalizações e recibo de entrega

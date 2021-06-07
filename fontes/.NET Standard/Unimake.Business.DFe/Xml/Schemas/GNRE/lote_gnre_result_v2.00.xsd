@@ -167,9 +167,11 @@
                                     	<xs:element name="situacaoGuia" maxOccurs="1" minOccurs="1">
 											<xs:annotation>
 												<xs:documentation>
-													0 - Processada com sucesso 1 - Invalidada pelo
-													Portal 2 - Invalidada pela UF 3 - Erro de
-													comunicação
+													0 - Processada com sucesso 
+													1 - Invalidada pelo	Portal 
+													2 - Invalidada pela UF 
+													3 - Erro de	comunicação
+													4 - Pendencia de processamento
 												</xs:documentation>
 											</xs:annotation>
 											<xs:simpleType>
@@ -178,6 +180,7 @@
 													<xs:enumeration value="1"></xs:enumeration>
 													<xs:enumeration value="2"></xs:enumeration>
 													<xs:enumeration value="3"></xs:enumeration>
+													<xs:enumeration value="4"></xs:enumeration>
 												</xs:restriction>
 											</xs:simpleType>
 										</xs:element>

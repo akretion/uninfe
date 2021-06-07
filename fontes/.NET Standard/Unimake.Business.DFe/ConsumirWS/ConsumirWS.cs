@@ -71,58 +71,51 @@ namespace Unimake.Business.DFe
         {
             var soap = (WSSoap)servico;
 
-            try
+            var urlpost = new Uri(soap.EnderecoWeb);
+            var soapXML = EnveloparXML(soap, xml.OuterXml);
+            var buffer2 = Encoding.UTF8.GetBytes(soapXML);
+
+            ServicePointManager.Expect100Continue = false;
+            ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(RetornoValidacao);
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
+
+            var httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(urlpost);
+            httpWebRequest.Headers.Add("SOAPAction: " + soap.ActionWeb);
+            httpWebRequest.CookieContainer = cookies;
+            httpWebRequest.Timeout = 60000;
+            httpWebRequest.ContentType = (string.IsNullOrEmpty(soap.ContentType) ? "application/soap+xml; charset=utf-8;" : soap.ContentType);
+            httpWebRequest.Method = "POST";
+            httpWebRequest.ClientCertificates.Add(certificado);
+            httpWebRequest.ContentLength = buffer2.Length;
+
+            //Definir dados para conexão com proxy
+            if(soap.Proxy != null)
             {
-                var urlpost = new Uri(soap.EnderecoWeb);
-                var soapXML = EnveloparXML(soap, xml.OuterXml);
-                var buffer2 = Encoding.UTF8.GetBytes(soapXML);
-
-                ServicePointManager.Expect100Continue = false;
-                ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(RetornoValidacao);
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-
-                var httpWebRequest = (HttpWebRequest)HttpWebRequest.Create(urlpost);
-                httpWebRequest.Headers.Add("SOAPAction: " + soap.ActionWeb);
-                httpWebRequest.CookieContainer = cookies;
-                httpWebRequest.Timeout = 60000;
-                httpWebRequest.ContentType = (string.IsNullOrEmpty(soap.ContentType) ? "application/soap+xml; charset=utf-8;" : soap.ContentType);
-                httpWebRequest.Method = "POST";
-                httpWebRequest.ClientCertificates.Add(certificado);
-                httpWebRequest.ContentLength = buffer2.Length;
-
-                //Definir dados para conexão com proxy
-                if(soap.Proxy != null)
-                {
-                    httpWebRequest.Proxy = soap.Proxy;
-                }
-
-                var postData = httpWebRequest.GetRequestStream();
-                postData.Write(buffer2, 0, buffer2.Length);
-                postData.Close();
-
-                var responsePost = (HttpWebResponse)httpWebRequest.GetResponse();
-                var streamPost = responsePost.GetResponseStream();
-                var streamReaderResponse = new StreamReader(streamPost, Encoding.UTF8);
-
-                var retornoXml = new XmlDocument();
-                retornoXml.LoadXml(streamReaderResponse.ReadToEnd());
-
-                if(retornoXml.GetElementsByTagName(soap.TagRetorno)[0] == null)
-                {
-                    throw new Exception("Não foi possível localizar a tag <" + soap.TagRetorno + "> no XML retornado pelo webservice.");
-                }
-
-                RetornoServicoString = retornoXml.GetElementsByTagName(soap.TagRetorno)[0].ChildNodes[0].OuterXml;
-                RetornoServicoXML = new XmlDocument
-                {
-                    PreserveWhitespace = false
-                };
-                RetornoServicoXML.LoadXml(RetornoServicoString);
+                httpWebRequest.Proxy = soap.Proxy;
             }
-            catch
+
+            var postData = httpWebRequest.GetRequestStream();
+            postData.Write(buffer2, 0, buffer2.Length);
+            postData.Close();
+
+            var responsePost = (HttpWebResponse)httpWebRequest.GetResponse();
+            var streamPost = responsePost.GetResponseStream();
+            var streamReaderResponse = new StreamReader(streamPost, Encoding.UTF8);
+
+            var retornoXml = new XmlDocument();
+            retornoXml.LoadXml(streamReaderResponse.ReadToEnd());
+
+            if(retornoXml.GetElementsByTagName(soap.TagRetorno)[0] == null)
             {
-                throw;
+                throw new Exception("Não foi possível localizar a tag <" + soap.TagRetorno + "> no XML retornado pelo webservice.");
             }
+
+            RetornoServicoString = retornoXml.GetElementsByTagName(soap.TagRetorno)[0].ChildNodes[0].OuterXml;
+            RetornoServicoXML = new XmlDocument
+            {
+                PreserveWhitespace = false
+            };
+            RetornoServicoXML.LoadXml(RetornoServicoString);
         }
 
         #endregion Public Methods

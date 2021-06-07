@@ -25,10 +25,10 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    ////[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name = "ConsultarLoteRpsSoap", Namespace = "http://www.tinus.com.br")]
-    public partial class ConsultarLoteRps: System.Web.Services.Protocols.SoapHttpClientProtocol
+    public partial class ConsultarLoteRps : System.Web.Services.Protocols.SoapHttpClientProtocol
     {
 
         private System.Threading.SendOrPostCallback CallConsultarLoteRpsOperationCompleted;
@@ -43,7 +43,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
         public ConsultarLoteRps()
         {
             this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_PMossoroRN_TINUS_ConsultarLoteRps_ConsultarLoteRps;
-            if((this.IsLocalFileSystemWebService(this.Url) == true))
+            if ((this.IsLocalFileSystemWebService(this.Url) == true))
             {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -62,7 +62,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
             }
             set
             {
-                if((((this.IsLocalFileSystemWebService(base.Url) == true)
+                if ((((this.IsLocalFileSystemWebService(base.Url) == true)
                             && (this.useDefaultCredentialsSetExplicitly == false))
                             && (this.IsLocalFileSystemWebService(value) == false)))
                 {
@@ -113,7 +113,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
         /// <remarks/>
         public void CallConsultarLoteRpsAsync(ConsultarLoteRpsEnvio Arg, object userState)
         {
-            if((this.CallConsultarLoteRpsOperationCompleted == null))
+            if ((this.CallConsultarLoteRpsOperationCompleted == null))
             {
                 this.CallConsultarLoteRpsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCallConsultarLoteRpsOperationCompleted);
             }
@@ -123,7 +123,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
 
         private void OnCallConsultarLoteRpsOperationCompleted(object arg)
         {
-            if((this.CallConsultarLoteRpsCompleted != null))
+            if ((this.CallConsultarLoteRpsCompleted != null))
             {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.CallConsultarLoteRpsCompleted(this, new CallConsultarLoteRpsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
@@ -147,7 +147,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
         /// <remarks/>
         public void TestAsync(object userState)
         {
-            if((this.TestOperationCompleted == null))
+            if ((this.TestOperationCompleted == null))
             {
                 this.TestOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTestOperationCompleted);
             }
@@ -156,7 +156,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
 
         private void OnTestOperationCompleted(object arg)
         {
-            if((this.TestCompleted != null))
+            if ((this.TestCompleted != null))
             {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.TestCompleted(this, new TestCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
@@ -180,7 +180,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
         /// <remarks/>
         public void TesteRetornoAsync(object userState)
         {
-            if((this.TesteRetornoOperationCompleted == null))
+            if ((this.TesteRetornoOperationCompleted == null))
             {
                 this.TesteRetornoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTesteRetornoOperationCompleted);
             }
@@ -189,7 +189,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
 
         private void OnTesteRetornoOperationCompleted(object arg)
         {
-            if((this.TesteRetornoCompleted != null))
+            if ((this.TesteRetornoCompleted != null))
             {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.TesteRetornoCompleted(this, new TesteRetornoCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
@@ -204,13 +204,13 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
 
         private bool IsLocalFileSystemWebService(string url)
         {
-            if(((url == null)
+            if (((url == null)
                         || (url == string.Empty)))
             {
                 return false;
             }
             System.Uri wsUri = new System.Uri(url);
-            if(((wsUri.Port >= 1024)
+            if (((wsUri.Port >= 1024)
                         && (string.Compare(wsUri.Host, "localHost", System.StringComparison.OrdinalIgnoreCase) == 0)))
             {
                 return true;
@@ -222,7 +222,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class ConsultarLoteRpsEnvio
@@ -262,7 +262,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcIdentificacaoPrestador
@@ -302,7 +302,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcMensagemRetorno
@@ -357,7 +357,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcInfSubstituicaoNfse
@@ -399,7 +399,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcSubstituicaoNfse
@@ -440,7 +440,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SignatureType
@@ -527,7 +527,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SignedInfoType
@@ -599,7 +599,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class CanonicalizationMethodType
@@ -641,7 +641,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SignatureMethodType
@@ -714,7 +714,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class ReferenceType
@@ -819,7 +819,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class TransformType
@@ -878,7 +878,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class DigestMethodType
@@ -920,7 +920,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SignatureValueType
@@ -962,7 +962,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class KeyInfoType
@@ -1117,7 +1117,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class KeyValueType
@@ -1174,7 +1174,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class DSAKeyValueType
@@ -1296,7 +1296,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class RSAKeyValueType
@@ -1338,7 +1338,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class RetrievalMethodType
@@ -1396,7 +1396,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class X509DataType
@@ -1502,7 +1502,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class X509IssuerSerialType
@@ -1542,7 +1542,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class PGPDataType
@@ -1632,7 +1632,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class SPKIDataType
@@ -1674,7 +1674,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class ObjectType
@@ -1748,7 +1748,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcIdentificacaoNfse
@@ -1803,15 +1803,16 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
         }
 
         /// <remarks/>
-        public int CodigoMunicipio
+        public string CodigoMunicipio
         {
             get
             {
-                return this.codigoMunicipioField;
+                return this.codigoMunicipioField.ToString();
             }
             set
             {
-                this.codigoMunicipioField = value;
+                int.TryParse(value, out var result);
+                this.codigoMunicipioField = result;
             }
         }
     }
@@ -1819,7 +1820,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcInfPedidoCancelamento
@@ -1875,7 +1876,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcPedidoCancelamento
@@ -1916,7 +1917,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcConfirmacaoCancelamento
@@ -1972,7 +1973,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcCancelamentoNfse
@@ -2013,7 +2014,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcDadosConstrucaoCivil
@@ -2053,7 +2054,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcIdentificacaoOrgaoGerador
@@ -2064,15 +2065,16 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
         private string ufField;
 
         /// <remarks/>
-        public int CodigoMunicipio
+        public string CodigoMunicipio
         {
             get
             {
-                return this.codigoMunicipioField;
+                return this.codigoMunicipioField.ToString();
             }
             set
             {
-                this.codigoMunicipioField = value;
+                int.TryParse(value, out var result);
+                this.codigoMunicipioField = result;
             }
         }
 
@@ -2093,7 +2095,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcIdentificacaoIntermediarioServico
@@ -2148,7 +2150,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcCpfCnpj
@@ -2188,7 +2190,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcIdentificacaoTomador
@@ -2228,7 +2230,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcDadosTomador
@@ -2298,7 +2300,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcEndereco
@@ -2375,15 +2377,16 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
         }
 
         /// <remarks/>
-        public int CodigoMunicipio
+        public string CodigoMunicipio
         {
             get
             {
-                return this.codigoMunicipioField;
+                return this.codigoMunicipioField.ToString();
             }
             set
             {
-                this.codigoMunicipioField = value;
+                int.TryParse(value, out var result);
+                this.codigoMunicipioField = result;
             }
         }
 
@@ -2445,7 +2448,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcContato
@@ -2485,7 +2488,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcDadosPrestador
@@ -2570,7 +2573,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcValores
@@ -3044,7 +3047,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcDadosServico
@@ -3144,15 +3147,16 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
         }
 
         /// <remarks/>
-        public int CodigoMunicipio
+        public string CodigoMunicipio
         {
             get
             {
-                return this.codigoMunicipioField;
+                return this.codigoMunicipioField.ToString();
             }
             set
             {
-                this.codigoMunicipioField = value;
+                int.TryParse(value, out var result);
+                this.codigoMunicipioField = result;
             }
         }
     }
@@ -3160,7 +3164,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcIdentificacaoRps
@@ -3216,7 +3220,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcInfNfse
@@ -3244,7 +3248,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
 
         private sbyte incentivadorCulturalField;
 
-        private string competenciaField;
+        private System.DateTime competenciaField;
 
         private string nfseSubstituidaField;
 
@@ -3264,7 +3268,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
 
         private tcIdentificacaoOrgaoGerador orgaoGeradorField;
 
-        private tcDadosConstrucaoCivil contrucaoCivilField;
+        private tcDadosConstrucaoCivil construcaoCivilField;
 
         private string idField;
 
@@ -3420,11 +3424,12 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
         {
             get
             {
-                return this.competenciaField;
+                return this.competenciaField.ToString("yyyy-MM-ddTHH:mm:ssZ");
             }
             set
             {
-                this.competenciaField = value;
+                DateTime.TryParse(value, out var result);
+                this.competenciaField = result;
             }
         }
 
@@ -3548,15 +3553,15 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
         }
 
         /// <remarks/>
-        public tcDadosConstrucaoCivil ContrucaoCivil
+        public tcDadosConstrucaoCivil ConstrucaoCivil
         {
             get
             {
-                return this.contrucaoCivilField;
+                return this.construcaoCivilField;
             }
             set
             {
-                this.contrucaoCivilField = value;
+                this.construcaoCivilField = value;
             }
         }
 
@@ -3578,7 +3583,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcNfse
@@ -3625,7 +3630,7 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class tcCompNfse
@@ -3680,11 +3685,16 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3752.0")]
     [System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.tinus.com.br")]
     public partial class ConsultarLoteRpsResposta
     {
+
+        public ConsultarLoteRpsResposta()
+        {
+
+        }
 
         private tcCompNfse[] listaNfseField;
 
@@ -3725,9 +3735,9 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class CallConsultarLoteRpsCompletedEventArgs: System.ComponentModel.AsyncCompletedEventArgs
+    public partial class CallConsultarLoteRpsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
 
         private object[] results;
@@ -3755,9 +3765,9 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class TestCompletedEventArgs: System.ComponentModel.AsyncCompletedEventArgs
+    public partial class TestCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
 
         private object[] results;
@@ -3785,9 +3795,9 @@ namespace NFe.Components.PMossoroRN_TINUS_ConsultarLoteRps
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.3752.0")]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class TesteRetornoCompletedEventArgs: System.ComponentModel.AsyncCompletedEventArgs
+    public partial class TesteRetornoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
     {
 
         private object[] results;

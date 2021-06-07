@@ -185,6 +185,8 @@
     <Compile Include="CENTI\CENTI.cs" />
     <Compile Include="CNPJ.cs" />
     <Compile Include="ComboElemen.cs" />
+    <Compile Include="Coplan\AguaBoaMT\h\CoplanH.cs" />
+    <Compile Include="Coplan\AguaBoaMT\p\CoplanP.cs" />
     <Compile Include="Coplan\JuscimeiraMT\h\CoplanH.cs" />
     <Compile Include="Coplan\JuscimeiraMT\p\CoplanP.cs" />
     <Compile Include="Coplan\PeixotoAzevedoMT\h\CoplanH.cs" />
@@ -206,6 +208,7 @@
     <Compile Include="CPF.cs" />
     <Compile Include="EloTech\Elotech.cs" />
     <Compile Include="EloTech\ElotechBase.cs" />
+    <Compile Include="EloTech\MarialvaPR.cs" />
     <Compile Include="EloTech\IratiPR.cs" />
     <Compile Include="EloTech\WS\ElotechService.cs" />
     <Compile Include="EloTech\LoandaPR.cs" />
@@ -285,6 +288,7 @@
     <Compile Include="Pronin\PicadaCafeRS\p\ProninP.cs" />
     <Compile Include="Pronin\SantaTerezinhaItaipuPR\p\ProninP.cs" />
     <Compile Include="Pronin\CastanhalPA\p\ProninP.cs" />
+    <Compile Include="Pronin\SaoSebastiaoDaGramaSP\p\ProninP.cs" />
     <Compile Include="Pronin\SaoPedroSP\h\ProninH.cs" />
     <Compile Include="Pronin\SaoPedroSP\p\ProninP.cs" />
     <Compile Include="Pronin\UruguaianaRS\h\ProninH.cs" />
@@ -541,7 +545,6 @@
     <Compile Include="Exceptions\Exceptions.cs" />
     <Compile Include="ExtensionsMethods\StreamExtensions.cs" />
     <Compile Include="ExtensionsMethods\StringExtensions.cs" />
-    <Compile Include="ExtensionsMethods\X509Certificate2Extension.cs" />
     <Compile Include="Fiorilli\CosmoramaSP\h\FiorilliH.cs" />
     <Compile Include="Fiorilli\CosmoramaSP\p\FiorilliP.cs" />
     <Compile Include="Fiorilli\TaquaraSP\h\FiorilliH.cs" />
@@ -1061,11 +1064,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\HJuscimeiraMT\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
     <Compile Include="Web References\HMossoroRN_TINUS_CancelarNfse\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1227,11 +1225,6 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\HVargemGrandePaulistaSP\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\HWebfiscoTecnologia\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1501,7 +1494,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\HWebfiscoTecnologia\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\HXangrilaRS\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PAguaBoaMT\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1697,6 +1700,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\PSaoPedro\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\PSaoSebastiaoDaGramaSP\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -2961,6 +2969,15 @@
     <None Include="Web References\br.com.nfeosasco.www.p\CancelamentoNotaFiscalResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\br.com.nfeosasco.www.p\ConsultaNotaFiscalLoteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.nfeosasco.www.p\ConsultaNotaFiscalResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\br.com.nfeosasco.www.p\EmissaoNotaFiscalLoteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\br.com.nfeosasco.www.p\EmissaoNotaFiscalResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -4214,14 +4231,6 @@
     <None Include="Web References\HJiParanaRO\SubstituirNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\HJuscimeiraMT\nfse_web_service.wsdl" />
-    <None Include="Web References\HJuscimeiraMT\output.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\HJuscimeiraMT\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <None Include="Web References\HMossoroRN_TINUS_CancelarNfse\CancelarNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -4546,14 +4555,6 @@
     </None>
     <None Include="Web References\HVargemGrandePaulistaSP\NfseServiceImplVgpService.wsdl" />
     <None Include="Web References\HVargemGrandePaulistaSP\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\HWebfiscoTecnologia\EnvNfe.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\HWebfiscoTecnologia\HWebfiscoTecnologia.wsdl" />
-    <None Include="Web References\HWebfiscoTecnologia\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -5237,6 +5238,14 @@
     <None Include="Web References\HViamaoRS\Services0.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Web References\HWebfiscoTecnologia\EnvNfe.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\HWebfiscoTecnologia\HWebFiscoTecnologia.wsdl" />
+    <None Include="Web References\HWebfiscoTecnologia\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\HXangrilaRS\CancelarNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -5271,6 +5280,14 @@
     </None>
     <None Include="Web References\HXangrilaRS\SubstituirNfseResposta.datasource">
       <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAguaBoaMT\nfse_web_service.wsdl" />
+    <None Include="Web References\PAguaBoaMT\output.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\PAguaBoaMT\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\PAgudoRS\NFSeIntegracao.wsdl" />
     <None Include="Web References\PAgudoRS\Reference.map">
@@ -5734,6 +5751,17 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Web References\PSaoPedro\Services0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PSaoSebastiaoDaGramaSP\NFSeIntegracao.wsdl" />
+    <None Include="Web References\PSaoSebastiaoDaGramaSP\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\PSaoSebastiaoDaGramaSP\Services.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\PSaoSebastiaoDaGramaSP\Services0.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Web References\PSenadorCanedoGO\companyIntegrationDTO.datasource">
@@ -7831,17 +7859,6 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_HJoinvilleSC_Servicos</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="C:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HJuscimeiraMT-COPLAN.wsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\HJuscimeiraMT\</RelPath>
-      <UpdateFromURL>C:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HJuscimeiraMT-COPLAN.wsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>NFe_Components_HJuscimeiraMT_nfse_web_service</CachedSettingsPropName>
-    </WebReferenceUrl>
     <WebReferenceUrl Include="C:\Projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HMossoroRN_TINUS_CancelarNfse.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\HMossoroRN_TINUS_CancelarNfse\</RelPath>
@@ -8171,6 +8188,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_HUruguaianaRS_NFSeIntegracao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HWebFiscoTecnologia.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\HWebfiscoTecnologia\</RelPath>
+      <UpdateFromURL>C:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HWebFiscoTecnologia.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_HWebfiscoTecnologia_webservice</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="C:\Projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PAlvaresMachadoSP-PRONIN.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -8656,10 +8684,21 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PJoinvilleSC_Servicos</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="C:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJuscimeiraMT-COPLAN.wsdl">
+    <WebReferenceUrl Include="D:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PAguaBoaMT-COPLAN.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PAguaBoaMT\</RelPath>
+      <UpdateFromURL>D:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PAguaBoaMT-COPLAN.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PAguaBoaMT_nfse_web_service</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="D:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJuscimeiraMT-COPLAN.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\PJuscimeiraMT\</RelPath>
-      <UpdateFromURL>C:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJuscimeiraMT-COPLAN.wsdl</UpdateFromURL>
+      <UpdateFromURL>D:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PJuscimeiraMT-COPLAN.wsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -9437,17 +9476,6 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_HVargemGrandePaulistaSP_NfseServiceImplVgpService</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="D:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HWebfiscoTecnologia.wsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\HWebfiscoTecnologia\</RelPath>
-      <UpdateFromURL>D:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HWebfiscoTecnologia.wsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>NFe_Components_HBarraBonitaSP_webservice</CachedSettingsPropName>
-    </WebReferenceUrl>
     <WebReferenceUrl Include="D:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Homologacao\HCoronelFabricianoMG-GOVDIGITAL.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\HCoronelFabricianoMG\</RelPath>
@@ -9723,6 +9751,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_POlindaPE_TINUS_RecepcionarLoteRps_RecepcionarLoteRps</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="D:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\POsascoEGOVERNEISS.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.nfeosasco.www.p\</RelPath>
+      <UpdateFromURL>D:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\POsascoEGOVERNEISS.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_br_com_nfeosasco_www_p_NotaFiscalEletronicaServico</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="D:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\POuroFinoMG-FIORILLI.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\POuroFinoMG\</RelPath>
@@ -9788,6 +9827,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PSaoJoaoBoaVistaSP_NfseService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="D:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSaoSebastiaoDaGramaSP-PRONIN.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\PSaoSebastiaoDaGramaSP\</RelPath>
+      <UpdateFromURL>D:\Projetos\UniNFe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PSaoSebastiaoDaGramaSP-PRONIN.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NFe_Components_PSaoSebastiaoDaGramaSP_NFSeIntegracao</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="D:\projetos\uninfe\trunk\fontes\NFe.Components.Wsdl\NFse\WSDL\Producao\PVargemGrandeDoSulSP-SIMPLISS.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -11009,17 +11059,6 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>NFe_Components_PNovaMutumMT_nfse_web_service</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc%3fwsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\br.com.nfeosasco.www.p\</RelPath>
-      <UpdateFromURL>https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>NFe_Components_br_com_nfeosasco_www_p_NotaFiscalEletronicaServico</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://www.nfse.erechim.rs.gov.br:8182/NfseService/NfseService%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

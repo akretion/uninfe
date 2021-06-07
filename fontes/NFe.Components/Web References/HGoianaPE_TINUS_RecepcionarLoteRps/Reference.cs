@@ -261,7 +261,7 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
+        public string Id {
             get {
                 return this.idField;
             }
@@ -486,7 +486,7 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string id {
+        public string Id {
             get {
                 return this.idField;
             }
@@ -667,13 +667,25 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class ObjectType {
         
+        private System.Xml.XmlElement[] anyField;
+        
         private string idField;
         
         private string mimeTypeField;
         
         private string encodingField;
         
-        private string valueField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any {
+            get {
+                return this.anyField;
+            }
+            set {
+                this.anyField = value;
+            }
+        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
@@ -708,17 +720,7 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
             }
         }
         
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value {
-            get {
-                return this.valueField;
             }
-            set {
-                this.valueField = value;
-            }
-        }
-    }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.3056.0")]
@@ -975,7 +977,7 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string URI {
             get {
                 return this.uRIField;
@@ -986,7 +988,7 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Type {
             get {
                 return this.typeField;
@@ -1005,16 +1007,15 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class TransformType {
         
-        private System.Xml.XmlNode[] anyField;
+        private System.Xml.XmlElement[] anyField;
         
         private string[] xPathField;
         
         private string algorithmField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any {
+        public System.Xml.XmlElement[] Any {
             get {
                 return this.anyField;
             }
@@ -1035,7 +1036,7 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Algorithm {
             get {
                 return this.algorithmField;
@@ -1193,7 +1194,7 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
         
         private RSAKeyValueType rSAKeyValueField;
         
-        private System.Xml.XmlNode[] anyField;
+        private System.Xml.XmlElement anyField;
         
         /// <remarks/>
         public DSAKeyValueType DSAKeyValue {
@@ -1216,9 +1217,8 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any {
+        public System.Xml.XmlElement Any {
             get {
                 return this.anyField;
             }
@@ -1250,7 +1250,7 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
         
         private string[] mgmtDataField;
         
-        private System.Xml.XmlNode[] anyField;
+        private System.Xml.XmlElement[] anyField;
         
         private string idField;
         
@@ -1332,9 +1332,8 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
         [System.Xml.Serialization.XmlAnyElementAttribute()]
-        public System.Xml.XmlNode[] Any {
+        public System.Xml.XmlElement[] Any {
             get {
                 return this.anyField;
             }
@@ -1398,29 +1397,30 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class DigestMethodType {
         
+        private System.Xml.XmlElement[] anyField;
+        
         private string algorithmField;
         
-        private string valueField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any {
+            get {
+                return this.anyField;
+            }
+            set {
+                this.anyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Algorithm {
             get {
                 return this.algorithmField;
             }
             set {
                 this.algorithmField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
             }
         }
     }
@@ -1489,7 +1489,7 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string URI {
             get {
                 return this.uRIField;
@@ -1500,7 +1500,7 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Type {
             get {
                 return this.typeField;
@@ -1523,7 +1523,7 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
         
         private bool hMACOutputLengthFieldSpecified;
         
-        private string[] textField;
+        private System.Xml.XmlElement[] anyField;
         
         private string algorithmField;
         
@@ -1549,18 +1549,18 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any {
             get {
-                return this.textField;
+                return this.anyField;
             }
             set {
-                this.textField = value;
+                this.anyField = value;
             }
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Algorithm {
             get {
                 return this.algorithmField;
@@ -1579,29 +1579,30 @@ namespace NFe.Components.HGoianaPE_TINUS_RecepcionarLoteRps {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.w3.org/2000/09/xmldsig#")]
     public partial class CanonicalizationMethodType {
         
+        private System.Xml.XmlElement[] anyField;
+        
         private string algorithmField;
         
-        private string valueField;
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute(DataType="anyURI")]
+        [System.Xml.Serialization.XmlAnyElementAttribute()]
+        public System.Xml.XmlElement[] Any {
+            get {
+                return this.anyField;
+            }
+            set {
+                this.anyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Algorithm {
             get {
                 return this.algorithmField;
             }
             set {
                 this.algorithmField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string Value {
-            get {
-                return this.valueField;
-            }
-            set {
-                this.valueField = value;
             }
         }
     }

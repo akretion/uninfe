@@ -56,11 +56,6 @@ namespace Unimake.Business.DFe.Servicos
         #region Public Properties
 
         /// <summary>
-        /// PIN do certificado A3. Informe esta propriedade para não precisar digitar o PIN manualmente.
-        /// </summary>
-        public string CertificadoA3PIN { get; set; }
-
-        /// <summary>
         /// Caminho completo do certificado digital
         /// </summary>
         public string CertificadoArquivo { get; set; }

@@ -221,9 +221,6 @@
     <Setting Name="NFe_Components_br_com_fiorilli_jacisp_p_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://200.95.195.126:5661/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
-    <Setting Name="NFe_Components_br_com_nfeosasco_www_p_NotaFiscalEletronicaServico" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://www.nfeosasco.com.br/WebServicesEISSNFE/NotaFiscalEletronica.svc</Value>
-    </Setting>
     <Setting Name="NFe_Components_br_com_simplissweb_wspatrociniomg_p_NfseService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://wspatrocinio.simplissweb.com.br/nfseservice.svc</Value>
     </Setting>
@@ -614,9 +611,6 @@
     <Setting Name="NFe_Components_PJoinvilleSC_Servicos" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://nfemws.joinville.sc.gov.br/NotaFiscal/Servicos.asmx</Value>
     </Setting>
-    <Setting Name="NFe_Components_HBarraBonitaSP_webservice" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfe_teste_homologacao.php</Value>
-    </Setting>
     <Setting Name="NFe_Components_PBarraBonitaSP_Enviar_webservice" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://www.webfiscotecnologia.com.br/issqn/wservice/wsnfeenvia.php</Value>
     </Setting>
@@ -986,9 +980,6 @@
     <Setting Name="NFe_Components_HCampinasDoSul_NfseService_Homolog" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://sistema.campinasdosul.rs.gov.br:8182/NfseService_Homolog/NfseService_Homolog</Value>
     </Setting>
-    <Setting Name="NFe_Components_HIpojucaPE_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testeipo/WSNFSE.CancelarNfse.cls</Value>
-    </Setting>
     <Setting Name="NFe_Components_HIpojucaPE_TINUS_ConsultarLoteRps_ConsultarLoteRps" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://www2.tinus.com.br/csp/testeipo/WSNFSE.ConsultarLoteRps.cls</Value>
     </Setting>
@@ -1034,11 +1025,8 @@
     <Setting Name="NFe_Components_PJiParanaRO_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://177.124.184.59:5660/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
-    <Setting Name="NFe_Components_HJuscimeiraMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.gp.srv.br/tributario_homologacao/servlet/anfse_web_service</Value>
-    </Setting>
     <Setting Name="NFe_Components_PJuscimeiraMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.gp.srv.br/tributario_juscimeira/servlet/anfse_web_service</Value>
+      <Value Profile="(Default)">https://www.gp.srv.br/tributario_juscimeira/servlet/anfse_web_service</Value>
     </Setting>
     <Setting Name="NFe_Components_HGeisWeb_GeisWebService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://www.geisweb.net.br:443/homologacao/modelo/webservice/GeisWebServiceImpl.php</Value>
@@ -1051,6 +1039,21 @@
     </Setting>
     <Setting Name="NFe_Components_PCastanhalPA_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://transparencia.castanhal.pa.gov.br:8086/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HWebfiscoTecnologia_webservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://www2.webfiscotecnologia.com.br:443/issqn/wservice/wsnfe_teste_homologacao.php</Value>
+    </Setting>
+    <Setting Name="NFe_Components_HIpojucaPE_TINUS_CancelarNfse_CancelarNfse" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www2.tinus.com.br/csp/testeipo/WSNFSE.CancelarNfse.cls</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PSaoSebastiaoDaGramaSP_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://187.87.126.50/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_br_com_nfeosasco_www_p_NotaFiscalEletronicaServico" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PAguaBoaMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.gp.srv.br/tributario_aguaboa/servlet/anfse_web_service</Value>
     </Setting>
   </Settings>
 </SettingsFile>

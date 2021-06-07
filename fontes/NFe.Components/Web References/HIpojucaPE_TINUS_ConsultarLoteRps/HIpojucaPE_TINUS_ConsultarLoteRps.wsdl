@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s0="http://www2.tinus.com.br" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www2.tinus.com.br" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:s0="http://www.abrasf.org.br/nfse.xsd" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.abrasf.org.br/nfse.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <s:schema elementFormDefault="qualified" targetNamespace="http://www2.tinus.com.br">
-      <s:import namespace="http://www.w3.org/2000/09/xmldsig#" />
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.abrasf.org.br/nfse.xsd">
       <s:element name="ConsultarLoteRps">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" name="Arg" type="s0:ConsultarLoteRpsEnvio" />
+            <s:element minOccurs="0" name="ConsultarLoteRpsEnvio" type="s0:ConsultarLoteRpsEnvio" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -39,7 +38,7 @@
           <s:maxLength value="50" />
         </s:restriction>
       </s:simpleType>
-      <s:element name="ConsultarLoteRpsResponse">
+      <s:element name="ConsultarLoteRpsResposta">
         <s:complexType>
           <s:sequence>
             <s:element name="ConsultarLoteRpsResult" type="s0:ConsultarLoteRpsResposta" />
@@ -68,9 +67,11 @@
       <s:complexType name="tcNfse">
         <s:sequence>
           <s:element name="InfNfse" type="s0:tcInfNfse" />
-          <s:element maxOccurs="unbounded" ref="ns2:Signature" />
+          <s:element maxOccurs="unbounded" ref="s0:Signature" />
         </s:sequence>
+        <s:attribute name="versao" type="s0:tsVersao" />
       </s:complexType>
+      <s:element name="Signature" type="s0:SignatureType" />
       <s:complexType name="tcInfNfse">
         <s:sequence>
           <s:element name="Numero" type="s0:tsNumeroNfse" />
@@ -91,9 +92,9 @@
           <s:element minOccurs="0" name="TomadorServico" type="s0:tcDadosTomador" />
           <s:element minOccurs="0" name="IntermediarioServico" type="s0:tcIdentificacaoIntermediarioServico" />
           <s:element name="OrgaoGerador" type="s0:tcIdentificacaoOrgaoGerador" />
-          <s:element minOccurs="0" name="ConstrucaoCivil" type="s0:tcDadosConstrucaoCivil" />
+          <s:element minOccurs="0" name="ContrucaoCivil" type="s0:tcDadosConstrucaoCivil" />
         </s:sequence>
-        <s:attribute name="id" type="s0:tsIdTag" />
+        <s:attribute name="Id" type="s0:tsIdTag" />
       </s:complexType>
       <s:simpleType name="tsNumeroNfse">
         <s:restriction base="s:nonNegativeInteger">
@@ -372,6 +373,11 @@
           <s:maxLength value="255" />
         </s:restriction>
       </s:simpleType>
+      <s:complexType name="ArrayOfSignatureTypeSignatureType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SignatureType" nillable="true" type="s0:SignatureType" />
+        </s:sequence>
+      </s:complexType>
       <s:complexType name="SignatureType">
         <s:sequence>
           <s:element ref="s0:SignedInfo" />
@@ -399,7 +405,7 @@
       <s:complexType name="CanonicalizationMethodType">
         <s:simpleContent>
           <s:extension base="s:string">
-            <s:attribute name="Algorithm" type="s:string" use="required" />
+            <s:attribute name="Algorithm" type="s:anyURI" use="required" />
           </s:extension>
         </s:simpleContent>
       </s:complexType>
@@ -407,7 +413,7 @@
         <s:sequence>
           <s:element minOccurs="0" name="HMACOutputLength" type="s0:HMACOutputLengthType" />
         </s:sequence>
-        <s:attribute name="Algorithm" type="s:string" use="required" />
+        <s:attribute name="Algorithm" type="s:anyURI" use="required" />
       </s:complexType>
       <s:simpleType name="HMACOutputLengthType">
         <s:restriction base="s:long" />
@@ -424,8 +430,8 @@
           <s:element ref="s0:DigestValue" />
         </s:sequence>
         <s:attribute name="Id" type="s:string" />
-        <s:attribute name="URI" type="s:string" />
-        <s:attribute name="Type" type="s:string" />
+        <s:attribute name="URI" type="s:anyURI" />
+        <s:attribute name="Type" type="s:anyURI" />
       </s:complexType>
       <s:element name="Transforms" type="s0:TransformsType" />
       <s:element name="DigestMethod" type="s0:DigestMethodType" />
@@ -446,7 +452,7 @@
           <s:any minOccurs="0" maxOccurs="unbounded" />
           <s:element minOccurs="0" maxOccurs="unbounded" name="XPath" nillable="true" type="s:string" />
         </s:sequence>
-        <s:attribute name="Algorithm" type="s:string" use="required" />
+        <s:attribute name="Algorithm" type="s:anyURI" use="required" />
       </s:complexType>
       <s:complexType name="ArrayOfXPathItemString">
         <s:sequence>
@@ -456,7 +462,7 @@
       <s:complexType name="DigestMethodType">
         <s:simpleContent>
           <s:extension base="s:string">
-            <s:attribute name="Algorithm" type="s:string" use="required" />
+            <s:attribute name="Algorithm" type="s:anyURI" use="required" />
           </s:extension>
         </s:simpleContent>
       </s:complexType>
@@ -538,8 +544,8 @@
         <s:sequence>
           <s:element minOccurs="0" ref="s0:Transforms" />
         </s:sequence>
-        <s:attribute name="URI" type="s:string" />
-        <s:attribute name="Type" type="s:string" />
+        <s:attribute name="URI" type="s:anyURI" />
+        <s:attribute name="Type" type="s:anyURI" />
       </s:complexType>
       <s:complexType name="ArrayOfX509DataTypeX509DataType">
         <s:sequence>
@@ -632,27 +638,38 @@
           <s:extension base="s:string">
             <s:attribute name="Id" type="s:string" />
             <s:attribute name="MimeType" type="s:string" />
-            <s:attribute name="Encoding" type="s:string" />
+            <s:attribute name="Encoding" type="s:anyURI" />
           </s:extension>
         </s:simpleContent>
       </s:complexType>
+      <s:simpleType name="tsVersao">
+        <s:restriction base="s:string">
+          <s:maxLength value="255" />
+        </s:restriction>
+      </s:simpleType>
       <s:complexType name="tcCancelamentoNfse">
         <s:sequence>
-          <s:element name="Confirmacao" type="s0:tcConfirmacaoCancelamento" />
-          <s:element ref="ns2:Signature" />
+          <s:element name="NfseCancelamento" type="s0:tcNfseCancelamentoNfse" />
         </s:sequence>
+      </s:complexType>
+      <s:complexType name="tcNfseCancelamentoNfse">
+        <s:sequence>
+          <s:element name="Confirmacao" type="s0:tcConfirmacaoCancelamento" />
+          <s:element ref="s0:Signature" />
+        </s:sequence>
+        <s:attribute name="versao" type="s0:tsVersao" />
       </s:complexType>
       <s:complexType name="tcConfirmacaoCancelamento">
         <s:sequence>
           <s:element name="Pedido" type="s0:tcPedidoCancelamento" />
           <s:element name="DataHoraCancelamento" type="s:dateTime" />
         </s:sequence>
-        <s:attribute name="id" type="s0:tsIdTag" />
+        <s:attribute name="Id" type="s0:tsIdTag" />
       </s:complexType>
       <s:complexType name="tcPedidoCancelamento">
         <s:sequence>
           <s:element name="InfPedidoCancelamento" type="s0:tcInfPedidoCancelamento" />
-          <s:element minOccurs="0" ref="ns2:Signature" />
+          <s:element minOccurs="0" ref="s0:Signature" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="tcInfPedidoCancelamento">
@@ -660,7 +677,7 @@
           <s:element name="IdentificacaoNfse" type="s0:tcIdentificacaoNfse" />
           <s:element name="CodigoCancelamento" type="s0:tsCodigoCancelamentoNfse" />
         </s:sequence>
-        <s:attribute name="id" type="s0:tsIdTag" />
+        <s:attribute name="Id" type="s0:tsIdTag" />
       </s:complexType>
       <s:complexType name="tcIdentificacaoNfse">
         <s:sequence>
@@ -679,14 +696,14 @@
       <s:complexType name="tcSubstituicaoNfse">
         <s:sequence>
           <s:element name="SubstituicaoNfse" type="s0:tcInfSubstituicaoNfse" />
-          <s:element maxOccurs="unbounded" ref="ns2:Signature" />
+          <s:element maxOccurs="unbounded" ref="s0:Signature" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="tcInfSubstituicaoNfse">
         <s:sequence>
           <s:element name="NfseSubstituidora" type="s0:tsNumeroNfse" />
         </s:sequence>
-        <s:attribute name="id" type="s0:tsIdTag" />
+        <s:attribute name="Id" type="s0:tsIdTag" />
       </s:complexType>
       <s:complexType name="ArrayOfMensagemRetornotcMensagemRetorno">
         <s:sequence>
@@ -737,21 +754,12 @@
         </s:complexType>
       </s:element>
     </s:schema>
-    <s:schema elementFormDefault="qualified" targetNamespace="http://www.w3.org/2000/09/xmldsig#">
-      <s:import namespace="http://www.tinus.com.br" />
-      <s:element name="Signature" type="s0:SignatureType" />
-      <s:complexType name="ArrayOfSignatureTypeSignatureType">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="SignatureType" nillable="true" type="s0:SignatureType" />
-        </s:sequence>
-      </s:complexType>
-    </s:schema>
   </wsdl:types>
   <wsdl:message name="ConsultarLoteRpsSoapIn">
     <wsdl:part name="parameters" element="s0:ConsultarLoteRps" />
   </wsdl:message>
   <wsdl:message name="ConsultarLoteRpsSoapOut">
-    <wsdl:part name="parameters" element="s0:ConsultarLoteRpsResponse" />
+    <wsdl:part name="parameters" element="s0:ConsultarLoteRpsResposta" />
   </wsdl:message>
   <wsdl:message name="TestSoapIn">
     <wsdl:part name="parameters" element="s0:Test" />
@@ -782,7 +790,7 @@
   <wsdl:binding name="ConsultarLoteRpsSoap" type="s0:ConsultarLoteRpsSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ConsultarLoteRps">
-      <soap:operation soapAction="http://www2.tinus.com.br/WSNFSE.ConsultarLoteRps.ConsultarLoteRps" style="document" />
+      <soap:operation soapAction="http://www.abrasf.org.br/nfse.xsd/WSNFSE.ConsultarLoteRps.ConsultarLoteRps" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -791,7 +799,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="Test">
-      <soap:operation soapAction="http://www2.tinus.com.br/WSNFSE.ConsultarLoteRps.Test" style="document" />
+      <soap:operation soapAction="http://www.abrasf.org.br/nfse.xsd/WSNFSE.ConsultarLoteRps.Test" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -800,7 +808,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="TesteRetorno">
-      <soap:operation soapAction="http://www2.tinus.com.br/WSNFSE.ConsultarLoteRps.TesteRetorno" style="document" />
+      <soap:operation soapAction="http://www.abrasf.org.br/nfse.xsd/WSNFSE.ConsultarLoteRps.TesteRetorno" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

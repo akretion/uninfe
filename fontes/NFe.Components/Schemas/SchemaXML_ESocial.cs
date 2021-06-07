@@ -14,7 +14,7 @@
                 Descricao = "XML eSocial - 1000 - Informações do Empregador/Contribuinte/Órgão Público",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtInfoEmpregador",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtInfoEmpregador/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtInfoEmpregador/v_S_01_00_00"
             });
 
             #endregion S-1000 - Informações do Empregador/Contribuinte/Órgão Público
@@ -29,7 +29,7 @@
                 Descricao = "XML eSocial - 1005 - Tabela de Estabelecimentos, Obras ou Unidades de Órgãos Públicos",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtTabEstab",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabEstab/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabEstab/v_S_01_00_00"
             });
 
             #endregion S-1005 - Tabela de Estabelecimentos, Obras ou Unidades de Órgãos Públicos
@@ -44,7 +44,7 @@
                 Descricao = "XML eSocial - 1295 - Solicitação de Totalização para Pagamento em Contingência",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtTabRubrica",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabRubrica/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabRubrica/v_S_01_00_00"
             });
 
             #endregion S-1010 - Tabela de Rubricas
@@ -59,85 +59,10 @@
                 Descricao = "XML eSocial - 1020 - Tabela de Lotações Tributárias",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtTabLotacao",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabLotacao/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabLotacao/v_S_01_00_00"
             });
 
             #endregion S-1020 - Tabela de Lotações Tributárias
-
-            #region S-1030 - Tabela de Cargos/Empregos Públicos
-
-            SchemaXML.InfSchemas.Add("eSocial-evtTabCargo", new InfSchema()
-            {
-                Tag = "evtTabCargo",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtTabCargo.xsd",
-                Descricao = "XML eSocial - 1030 - Tabela de Cargos/Empregos Públicos",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtTabCargo",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabCargo/v02_05_00"
-            });
-
-            #endregion S-1030 - Tabela de Cargos/Empregos Públicos
-
-            #region S-1035 - Tabela de Carreiras Públicas
-
-            SchemaXML.InfSchemas.Add("eSocial-evtTabCarreira", new InfSchema()
-            {
-                Tag = "evtTabCarreira",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtTabCarreira.xsd",
-                Descricao = "XML eSocial - 1035 - Tabela de Carreiras Públicas",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtTabCarreira",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabCarreira/v02_05_00"
-            });
-
-            #endregion S-1035 - Tabela de Carreiras Públicas
-
-            #region S-1040 - Tabela de Funções/Cargos em Comissão
-
-            SchemaXML.InfSchemas.Add("eSocial-evtTabFuncao", new InfSchema()
-            {
-                Tag = "evtTabFuncao",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtTabFuncao.xsd",
-                Descricao = "XML eSocial - 1040 - Tabela de Funções/Cargos em Comissão",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtTabFuncao",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabFuncao/v02_05_00"
-            });
-
-            #endregion S-1040 - Tabela de Funções/Cargos em Comissão
-
-            #region S-1050 - Tabela de Horários/Turnos de Trabalho
-
-            SchemaXML.InfSchemas.Add("eSocial-evtTabHorTur", new InfSchema()
-            {
-                Tag = "evtTabHorTur",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtTabHorTur.xsd",
-                Descricao = "XML eSocial - 1050 - Tabela de Horários/Turnos de Trabalho",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtTabHorTur",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabHorTur/v02_05_00"
-            });
-
-            #endregion S-1050 - Tabela de Horários/Turnos de Trabalho
-
-            #region S-1060 - Tabela de Ambientes de Trabalho
-
-            SchemaXML.InfSchemas.Add("eSocial-evtTabAmbiente", new InfSchema()
-            {
-                Tag = "evtTabAmbiente",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtTabAmbiente.xsd",
-                Descricao = "XML eSocial - 1060 - Tabela de Ambientes de Trabalho",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtTabAmbiente",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabAmbiente/v02_05_00"
-            });
-
-            #endregion S-1060 - Tabela de Ambientes de Trabalho
 
             #region S-1070 - Tabela de Processos Administrativos/Judiciais
 
@@ -149,25 +74,10 @@
                 Descricao = "XML eSocial - 1070 - Tabela de Processos Administrativos/Judiciais",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtTabProcesso",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabProcesso/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabProcesso/v_S_01_00_00"
             });
 
             #endregion S-1070 - Tabela de Processos Administrativos/Judiciais
-
-            #region S-1080 - Tabela de Operadores Portuários
-
-            SchemaXML.InfSchemas.Add("eSocial-evtTabOperPort", new InfSchema()
-            {
-                Tag = "evtTabOperPort",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtTabOperPort.xsd",
-                Descricao = "XML eSocial - 1080 - Tabela de Operadores Portuários",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtTabOperPort",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTabOperPort/v02_05_00"
-            });
-
-            #endregion S-1080 - Tabela de Operadores Portuários
 
             #region S-1200 - Remuneração de trabalhador vinculado ao Regime Geral de Previd. Social
 
@@ -179,7 +89,7 @@
                 Descricao = "XML eSocial - 1200 - Remuneração de trabalhador vinculado ao Regime Geral de Previd. Social",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtRemun",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtRemun/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtRemun/v_S_01_00_00"
             });
 
             #endregion S-1200 - Remuneração de trabalhador vinculado ao Regime Geral de Previd. Social
@@ -194,7 +104,7 @@
                 Descricao = "XML eSocial - 1202 - Remuneração de servidor vinculado a Regime Próprio de Previd. Social",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtRmnRPPS",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtRmnRPPS/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtRmnRPPS/v_S_01_00_00"
             });
 
             #endregion S-1202 - Remuneração de servidor vinculado a Regime Próprio de Previd. Social
@@ -209,7 +119,7 @@
                 Descricao = "XML eSocial - 1207 - Benefícios previdenciários - RPPS",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtBenPrRP",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtBenPrRP/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtBenPrRP/v_S_01_00_00"
             });
 
             #endregion S-1207 - Benefícios previdenciários - RPPS
@@ -224,25 +134,10 @@
                 Descricao = "XML eSocial - 1210 - Pagamentos de Rendimentos do Trabalho",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtPgtos",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtPgtos/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtPgtos/v_S_01_00_00"
             });
 
             #endregion S-1210 - Pagamentos de Rendimentos do Trabalho
-
-            #region S-1250 - Aquisição de Produção Rural
-
-            SchemaXML.InfSchemas.Add("eSocial-evtAqProd", new InfSchema()
-            {
-                Tag = "evtAqProd",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtAqProd.xsd",
-                Descricao = "XML eSocial - 1250 - Aquisição de Produção Rural",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtAqProd",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtAqProd/v02_05_00"
-            });
-
-            #endregion S-1250 - Aquisição de Produção Rural
 
             #region S-1260 - Comercialização da Produção Rural Pessoa Física
 
@@ -254,7 +149,7 @@
                 Descricao = "XML eSocial - 1260 - Comercialização da Produção Rural Pessoa Física",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtComProd",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtComProd/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtComProd/v_S_01_00_00"
             });
 
             #endregion S-1260 - Comercialização da Produção Rural Pessoa Física
@@ -269,25 +164,10 @@
                 Descricao = "XML eSocial - 1280 - Informações Complementares aos Eventos Periódicos",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtInfoComplPer",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtInfoComplPer/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtInfoComplPer/v_S_01_00_00"
             });
 
             #endregion S-1280 - Informações Complementares aos Eventos Periódicos
-
-            #region S-1295 - Solicitação de Totalização para Pagamento em Contingência
-
-            SchemaXML.InfSchemas.Add("eSocial-evtTotConting", new InfSchema()
-            {
-                Tag = "evtTotConting",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtTotConting.xsd",
-                Descricao = "XML eSocial - 1295 - Solicitação de Totalização para Pagamento em Contingência",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtTotConting",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTotConting/v02_05_00"
-            });
-
-            #endregion S-1295 - Solicitação de Totalização para Pagamento em Contingência
 
             #region S-1298 - Reabertura dos Eventos Periódicos
 
@@ -299,7 +179,7 @@
                 Descricao = "XML eSocial - 1298 - Reabertura dos Eventos Periódicos",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtReabreEvPer",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtReabreEvPer/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtReabreEvPer/v_S_01_00_00"
             });
 
             #endregion S-1298 - Reabertura dos Eventos Periódicos
@@ -314,25 +194,10 @@
                 Descricao = "XML eSocial - 1299 - Fechamento dos Eventos Periódicos",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtFechaEvPer",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtFechaEvPer/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtFechaEvPer/v_S_01_00_00"
             });
 
             #endregion S-1299 - Fechamento dos Eventos Periódicos
-
-            #region S-1300 - Contribuição Sindical Patronal
-
-            SchemaXML.InfSchemas.Add("eSocial-evtContrSindPatr", new InfSchema()
-            {
-                Tag = "evtContrSindPatr",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtContrSindPatr.xsd",
-                Descricao = "XML eSocial - 1300 - Contribuição Sindical Patronal",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtContrSindPatr",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtContrSindPatr/v02_05_00"
-            });
-
-            #endregion S-1300 - Contribuição Sindical Patronal
 
             #region S-2190 - Admissão de Trabalhador - Registro Preliminar
 
@@ -344,7 +209,7 @@
                 Descricao = "XML eSocial - 2190 - Admissão de Trabalhador - Registro Preliminar",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtAdmPrelim",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtAdmPrelim/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtAdmPrelim/v_S_01_00_00"
             });
 
             #endregion S-2190 - Admissão de Trabalhador - Registro Preliminar
@@ -359,25 +224,10 @@
                 Descricao = "XML eSocial - 2200 - Cadastramento Inicial do Vínculo e Admissão/Ingresso de Trabalhador",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtAdmissao",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtAdmissao/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtAdmissao/v_S_01_00_00"
             });
 
             #endregion S-2200 - Cadastramento Inicial do Vínculo e Admissão/Ingresso de Trabalhador
-
-            #region S-2221 - Exame Toxicológico do Motorista Profissional
-
-            SchemaXML.InfSchemas.Add("eSocial-evtToxic", new InfSchema()
-            {
-                Tag = "evtToxic",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtToxic.xsd",
-                Descricao = "XML eSocial - 2221 - Exame Toxicológico do Motorista Profissional",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtToxic",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtToxic/v02_05_00"
-            });
-
-            #endregion S-2221 - Exame Toxicológico do Motorista Profissional
 
             #region S-2205 - Alteração de Dados Cadastrais do Trabalhador
 
@@ -389,7 +239,7 @@
                 Descricao = "XML eSocial - 2205 - Alteração de Dados Cadastrais do Trabalhador",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtAltCadastral",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtAltCadastral/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtAltCadastral/v_S_01_00_00"
             });
 
             #endregion S-2205 - Alteração de Dados Cadastrais do Trabalhador
@@ -404,7 +254,7 @@
                 Descricao = "XML eSocial - 2206 - Alteração de Contrato de Trabalho",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtAltContratual",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtAltContratual/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtAltContratual/v_S_01_00_00"
             });
 
             #endregion S-2206 - Alteração de Contrato de Trabalho
@@ -419,7 +269,7 @@
                 Descricao = "XML eSocial - 2210 - Comunicação de Acidente de Trabalho",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtCAT",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtCAT/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtCAT/v_S_01_00_00"
             });
 
             #endregion S-2210 - Comunicação de Acidente de Trabalho
@@ -434,7 +284,7 @@
                 Descricao = "XML eSocial - 2220 - Monitoramento da Saúde do Trabalhador",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtMonit",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtMonit/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtMonit/v_S_01_00_00"
             });
 
             #endregion S-2220 - Monitoramento da Saúde do Trabalhador
@@ -449,10 +299,25 @@
                 Descricao = "XML eSocial - 2230 - Afastamento Temporário",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtAfastTemp",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtAfastTemp/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtAfastTemp/v_S_01_00_00"
             });
 
             #endregion S-2230 - Afastamento Temporário
+
+            #region S-2231 - Cessão/Exercício em outro Órgão
+
+            SchemaXML.InfSchemas.Add("eSocial-evtCessao", new InfSchema()
+            {
+                Tag = "evtCessao",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\evtCessao.xsd",
+                Descricao = "XML eSocial - 2231 - Cessão/Exercício em outro Órgão",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "evtCessao",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtCessao/v_S_01_00_00"
+            });
+
+            #endregion
 
             #region S-2240 - Condições Ambientais do Trabalho - Fatores de Risco
 
@@ -464,69 +329,10 @@
                 Descricao = "XML eSocial - 2240 - Condições Ambientais do Trabalho - Fatores de Risco",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtExpRisco",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtExpRisco/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtExpRisco/v_S_01_00_00"
             });
 
             #endregion S-2240 - Condições Ambientais do Trabalho - Fatores de Risco
-
-            #region S-2241 - Insalubridade, Periculosidade e Aposentadoria Especial
-
-            SchemaXML.InfSchemas.Add("eSocial-evtInsApo", new InfSchema()
-            {
-                Tag = "evtInsApo",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtInsApo.xsd",
-                Descricao = "XML eSocial - 2241 - Insalubridade, Periculosidade e Aposentadoria Especial",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtInsApo",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtInsApo/v02_04_02"
-            });
-
-            #endregion S-2241 - Insalubridade, Periculosidade e Aposentadoria Especial
-
-            #region S-2245 - Evento Treinamentos, Capacitações, Exercícios Simulados e Outras Anotações
-
-            SchemaXML.InfSchemas.Add("eSocial-evtTreiCap", new InfSchema()
-            {
-                Tag = "evtTreiCap",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtTreiCap.xsd",
-                Descricao = "XML eSocial - 2245 - Evento Treinamentos, Capacitações, Exercícios Simulados e Outras Anotações",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtTreiCap",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTreiCap/v02_05_00"
-            });
-            #endregion S-2245 - Evento Treinamentos, Capacitações, Exercícios Simulados e Outras Anotações
-
-            #region S-2250 - Aviso Prévio
-
-            SchemaXML.InfSchemas.Add("eSocial-evtAvPrevio", new InfSchema()
-            {
-                Tag = "evtAvPrevio",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtAvPrevio.xsd",
-                Descricao = "XML eSocial - 2250 - Aviso Prévio",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtAvPrevio",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtAvPrevio/v02_05_00"
-            });
-
-            #endregion S-2250 - Aviso Prévio
-
-            #region S-2260 - Convocação para Trabalho Intermitente
-
-            SchemaXML.InfSchemas.Add("eSocial-evtConvInterm", new InfSchema()
-            {
-                Tag = "evtConvInterm",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtConvInterm.xsd",
-                Descricao = "XML eSocial - 2260 - Convocação para Trabalho Intermitente",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtConvInterm",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtConvInterm/v02_05_00"
-            });
-
-            #endregion S-2260 - Convocação para Trabalho Intermitente
 
             #region S-1270 - Contratação de Trabalhadores Avulsos Não Portuários
 
@@ -538,7 +344,7 @@
                 Descricao = "XML eSocial - 1270 - Contratação de Trabalhadores Avulsos Não Portuários",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtContratAvNP",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtContratAvNP/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtContratAvNP/v_S_01_00_00"
             });
 
             #endregion S-1270 - Contratação de Trabalhadores Avulsos Não Portuários
@@ -553,7 +359,7 @@
                 Descricao = "XML eSocial - 2298 - Reintegração",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtReintegr",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtReintegr/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtReintegr/v_S_01_00_00"
             });
 
             #endregion S-2298 - Reintegração
@@ -568,7 +374,7 @@
                 Descricao = "XML eSocial - 2299 - Desligamento",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtDeslig",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtDeslig/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtDeslig/v_S_01_00_00"
             });
 
             #endregion S-2299 - Desligamento
@@ -583,7 +389,7 @@
                 Descricao = "XML eSocial - 2300 - Trabalhador Sem Vínculo de Emprego/Estatutário - Início",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtTSVInicio",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTSVInicio/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTSVInicio/v_S_01_00_00"
             });
 
             #endregion S-2300 - Trabalhador Sem Vínculo de Emprego/Estatutário - Início
@@ -598,7 +404,7 @@
                 Descricao = "XML eSocial - 2306 - Trabalhador Sem Vínculo de Emprego/Estatutário - Alteração Contratual",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtTSVAltContr",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTSVAltContr/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTSVAltContr/v_S_01_00_00"
             });
 
             #endregion S-2306 - Trabalhador Sem Vínculo de Emprego/Estatutário - Alteração Contratual
@@ -613,25 +419,100 @@
                 Descricao = "XML eSocial - 2399 - Trabalhador Sem Vínculo de Emprego/Estatutário - Término",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtTSVTermino",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTSVTermino/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtTSVTermino/v_S_01_00_00"
             });
 
             #endregion S-2399 - Trabalhador Sem Vínculo de Emprego/Estatutário - Término
 
-            #region S-2400 - Cadastro de Benefícios Previdenciários - RPPS
+            #region S-2400 - Cadastro de Beneficiários – Entes Públicos
 
-            SchemaXML.InfSchemas.Add("eSocial-evtCdBenPrRP", new InfSchema()
+            SchemaXML.InfSchemas.Add("eSocial-evtCdBenefIn", new InfSchema()
             {
-                Tag = "evtCdBenPrRP",
+                Tag = "evtCdBenefIn",
                 ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtCdBenPrRP.xsd",
-                Descricao = "XML eSocial - 2400 - Cadastro de Benefícios Previdenciários - RPPS",
+                ArquivoXSD = "eSocial\\evtCdBenefIn.xsd",
+                Descricao = "XML eSocial - 2400 - Cadastro de Beneficiário - Entes Públicos",
                 TagAssinatura = "eSocial",
-                TagAtributoId = "evtCdBenPrRP",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtCdBenPrRP/v02_05_00"
+                TagAtributoId = "evtCdBenefIn",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtCdBenefIn/v_S_01_00_00"
             });
 
-            #endregion S-2400 - Cadastro de Benefícios Previdenciários - RPPS
+            #endregion
+
+            #region S-2405 - Alteração de Dados Cadastrais do Beneficiário - Entes Públicos
+
+            SchemaXML.InfSchemas.Add("eSocial-evtCdBenefAlt", new InfSchema()
+            {
+                Tag = "evtCdBenefAlt",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\evtCdBenefAlt.xsd",
+                Descricao = "XML eSocial - 2405 - Alteração de Dados Cadastrais do Beneficiário - Entes Públicos",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "evtCdBenefAlt",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtCdBenefAlt/v_S_01_00_00"
+            });
+
+            #endregion
+
+            #region S-2410 - Cadastro de Benefícios Ente Público
+
+            SchemaXML.InfSchemas.Add("eSocial-evtCdBenIn", new InfSchema()
+            {
+                Tag = "evtCdBenIn",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\evtCdBenIn.xsd",
+                Descricao = "XML eSocial - 2410 - Cadastro de Benefícios Ente Público",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "evtCdBenIn",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtCdBenIn/v_S_01_00_00"
+            });
+
+            #endregion
+
+            #region S-2416 - Alteração do Cadastro de Benefícios - Entes Públicos
+
+            SchemaXML.InfSchemas.Add("eSocial-evtCdBenAlt", new InfSchema()
+            {
+                Tag = "evtCdBenAlt",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\evtCdBenAlt.xsd",
+                Descricao = "XML eSocial - 2416 - Alteração do Cadastro de Benefícios - Entes Públicos",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "evtCdBenAlt",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtCdBenAlt/v_S_01_00_00"
+            });
+
+            #endregion
+
+            #region S-2418 - Reativação de Benefício - Entes Públicos
+
+            SchemaXML.InfSchemas.Add("eSocial-evtReativBen", new InfSchema()
+            {
+                Tag = "evtReativBen",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\evtReativBen.xsd",
+                Descricao = "XML eSocial - 2418 - Reativação de Benefício - Entes Públicos",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "evtReativBen",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtReativBen/v_S_01_00_00"
+            });
+
+            #endregion
+
+            #region S-2420 - Cadastro de Benefício - Entes Públicos - Término
+
+            SchemaXML.InfSchemas.Add("eSocial-evtCdBenTerm", new InfSchema()
+            {
+                Tag = "evtCdBenTerm",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\evtCdBenTerm.xsd",
+                Descricao = "XML eSocial - 2420 - Cadastro de Benefício - Entes Públicos - Término",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "evtCdBenTerm",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtCdBenTerm/v_S_01_00_00"
+            });
+
+            #endregion
 
             #region S-3000 - Exclusão de eventos
 
@@ -643,7 +524,7 @@
                 Descricao = "XML eSocial - 3000 - Exclusão de eventos",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtExclusao",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtExclusao/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtExclusao/v_S_01_00_00"
             });
 
             #endregion S-3000 - Exclusão de eventos
@@ -658,7 +539,7 @@
                 Descricao = "XML eSocial - 5001 - Informações das contribuições sociais por trabalhador",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtBasesTrab",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtBasesTrab/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtBasesTrab/v_S_01_00_00"
             });
 
             #endregion S-5001 - Informações das contribuições sociais por trabalhador
@@ -673,10 +554,40 @@
                 Descricao = "XML eSocial - 5002 - Imposto de Renda Retido na Fonte",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtIrrfBenef",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtIrrfBenef/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtIrrfBenef/v_S_01_00_00"
             });
 
-            #endregion S-5002 - Imposto de Renda Retido na Fonte
+            #endregion
+
+            #region S-5003 - Informações do FGTS por Trabalhador
+
+            SchemaXML.InfSchemas.Add("eSocial-evtBasesFGTS", new InfSchema()
+            {
+                Tag = "evtBasesFGTS",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\evtBasesFGTS.xsd",
+                Descricao = "XML eSocial - 5003 - Informações do FGTS por Trabalhador",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "evtBasesFGTS",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtBasesFGTS/v_S_01_00_00"
+            });
+
+            #endregion
+
+            #region S-5013 - Informações do FGTS Consolidadas por Contribuinte
+
+            SchemaXML.InfSchemas.Add("eSocial-evtFGTS", new InfSchema()
+            {
+                Tag = "evtFGTS",
+                ID = SchemaXML.InfSchemas.Count + 1,
+                ArquivoXSD = "eSocial\\evtFGTS.xsd",
+                Descricao = "XML eSocial - 5013 - Informações do FGTS Consolidadas por Contribuinte",
+                TagAssinatura = "eSocial",
+                TagAtributoId = "evtFGTS",
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtFGTS/v_S_01_00_00"
+            });
+
+            #endregion
 
             #region S-5011 - Informações das contribuições sociais consolidadas por contribuinte
 
@@ -688,25 +599,10 @@
                 Descricao = "XML eSocial - 5011 - Informações das contribuições sociais consolidadas por contribuinte",
                 TagAssinatura = "eSocial",
                 TagAtributoId = "evtCS",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtCS/v02_05_00"
+                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtCS/v_S_01_00_00"
             });
 
             #endregion S-5011 - Informações das contribuições sociais consolidadas por contribuinte
-
-            #region S-5012 - Informações do IRRF consolidadas por contribuinte
-
-            SchemaXML.InfSchemas.Add("eSocial-evtIrrf", new InfSchema()
-            {
-                Tag = "evtIrrf",
-                ID = SchemaXML.InfSchemas.Count + 1,
-                ArquivoXSD = "eSocial\\evtIrrf.xsd",
-                Descricao = "XML eSocial - 5012 - Informações do IRRF consolidadas por contribuinte",
-                TagAssinatura = "eSocial",
-                TagAtributoId = "evtIrrf",
-                TargetNameSpace = "http://www.esocial.gov.br/schema/evt/evtIrrf/v02_05_00"
-            });
-
-            #endregion S-5012 - Informações do IRRF consolidadas por contribuinte
 
             #region Lote de eventos
 

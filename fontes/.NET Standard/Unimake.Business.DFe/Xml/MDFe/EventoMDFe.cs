@@ -598,11 +598,14 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
         #region Public Properties
 
-        [XmlElement("chMDFe", Order = 3)]
+        [XmlElement("chMDFe", Order = 4)]
         public string ChMDFe { get; set; }
 
         [XmlElement("CNPJ", Order = 2)]
         public string CNPJ { get; set; }
+        
+        [XmlElement("CPF", Order = 3)]
+        public string CPF { get; set; }
 
         [XmlIgnore]
         public UFBrasil COrgao { get; set; }
@@ -668,7 +671,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
         [XmlIgnore]
         public DateTime DhEvento { get; set; }
 
-        [XmlElement("dhEvento", Order = 5)]
+        [XmlElement("dhEvento", Order = 6)]
         public string DhEventoField
         {
             get => DhEvento.ToString("yyyy-MM-ddTHH:mm:sszzz");
@@ -682,13 +685,13 @@ namespace Unimake.Business.DFe.Xml.MDFe
             set => _ = value;
         }
 
-        [XmlElement("nSeqEvento", Order = 7)]
+        [XmlElement("nSeqEvento", Order = 8)]
         public int NSeqEvento { get; set; }
 
         [XmlElement("tpAmb", Order = 1)]
         public TipoAmbiente TpAmb { get; set; }
 
-        [XmlElement("tpEvento", Order = 6)]
+        [XmlElement("tpEvento", Order = 7)]
         public TipoEventoMDFe TpEvento { get; set; }
 
         #endregion Public Properties
@@ -706,6 +709,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
         #region Public Methods
 
         public bool ShouldSerializeCNPJ() => !string.IsNullOrWhiteSpace(CNPJ);
+        public bool ShouldSerializeCPF() => !string.IsNullOrWhiteSpace(CPF);
 
         #endregion Public Methods
     }

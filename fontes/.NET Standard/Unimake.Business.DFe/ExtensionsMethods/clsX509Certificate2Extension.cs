@@ -1,29 +1,27 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Xml;
 
 namespace Unimake.Business.DFe.Security
 {
-    #region clsX509Certificate2Extension  
     /// <summary>
-    /// Classe para passar o Pin Code por baixo do código 
-    /// (a caixa de dialógo pedindo o Pin Code não aparecerá para o usuário).
+    /// Extensão da classe X509Certificate2
     /// </summary>
     public static class ClsX509Certificate2Extension
     {
         /// <summary>
-        /// Passa PIN Code (Senha/Password) para Certificados
-        ///  eToken como o A3 do SERASA do Brasil
+        /// Carregar o PIN do certificado A3 para que não apresente a tela para o usuário digitar.
         /// </summary>
-        /// <param name="certificado">O Certificado que está sendo usado 
-        /// para a criptografia</param>
-        /// <param name="pinPassword">O Pin Code / Senha / Password</param>
+        /// <param name="certificado">Certificado Digital</param>
+        /// <param name="pinPassword">O Pin Code / Senha / Password do certificado digital</param>
         public static void SetPinPrivateKey(this X509Certificate2 certificado, string pinPassword)
         {
-            if(certificado == null)
+            if (certificado == null)
             {
                 throw new ArgumentNullException("certificado == null!");
             }
@@ -52,6 +50,23 @@ namespace Unimake.Business.DFe.Security
                 SafeNativeMethods.CertificateProperty.CryptoProviderHandle,
                 0,
                 ProviderHandle));
+
+            CarregarPINA3(certificado);
+        }
+
+        /// <summary>
+        /// É necessário assinar um XML para carregar o PIN para não solicitar ao usuário.
+        /// </summary>
+        /// <param name="certificado">Certificado digital que é para carregar o PIN</param>
+        private static void CarregarPINA3(X509Certificate2 certificado)
+        {
+            var docTemp = new XmlDocument();
+            docTemp.LoadXml("<pinA3><xServ Id=\"ID1\">PINA3</xServ></pinA3>");
+
+            var tagAssinatura = "pinA3";
+            var tagAtributoID = "xServ";
+
+            AssinaturaDigital.Assinar(docTemp, tagAssinatura, tagAtributoID, certificado, AlgorithmType.Sha1, true, "Id");
         }
 
         /// <summary>
@@ -61,7 +76,7 @@ namespace Unimake.Business.DFe.Security
         /// <returns>true = É um certificado A3</returns>
         public static bool IsA3(this X509Certificate2 x509cert)
         {
-            if(x509cert == null)
+            if (x509cert == null)
             {
                 return false;
             }
@@ -70,9 +85,9 @@ namespace Unimake.Business.DFe.Security
 
             try
             {
-                if(x509cert.PrivateKey is RSACryptoServiceProvider service)
+                if (x509cert.PrivateKey is RSACryptoServiceProvider service)
                 {
-                    if(service.CspKeyContainerInfo.Removable &&
+                    if (service.CspKeyContainerInfo.Removable &&
                     service.CspKeyContainerInfo.HardwareDevice)
                     {
                         result = true;
@@ -87,9 +102,7 @@ namespace Unimake.Business.DFe.Security
             return result;
         }
     }
-    #endregion
 
-    #region SafeNativeMethods
     /// <summary>
     /// Funções da API do Windows que realmente executam a passagem do PIN
     /// </summary>
@@ -152,12 +165,10 @@ namespace Unimake.Business.DFe.Security
         /// <param name="action">Ação/função a ser executada</param>
         public static void Execute(Func<bool> action)
         {
-            if(!action())
+            if (!action())
             {
                 throw new Win32Exception(Marshal.GetLastWin32Error());
             }
         }
     }
-
-    #endregion
 }

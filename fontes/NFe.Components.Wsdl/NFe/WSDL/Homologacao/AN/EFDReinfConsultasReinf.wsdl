@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://sped.fazenda.gov.br/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ConsultasReinf" targetNamespace="http://sped.fazenda.gov.br/">
+<wsdl:definitions name="ConsultasReinf" targetNamespace="http://sped.fazenda.gov.br/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://sped.fazenda.gov.br/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
   <wsp:Policy Id="WsReceberLoteEventos_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -26,20 +26,42 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsdl:types>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://sped.fazenda.gov.br/">
-            <xs:element name="ConsultaResultadoFechamento2099">
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://sped.fazenda.gov.br/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="ConsultaResultadoFechamento2099">
         <xs:complexType>
           <xs:sequence>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInsc" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInsc" type="xs:string"/>
+            <xs:element minOccurs="1" maxOccurs="1" name="tpInsc" type="xs:unsignedByte" />
+            <xs:element minOccurs="0" maxOccurs="1" name="nrInsc" type="xs:string" />
             <xs:element minOccurs="0" maxOccurs="1" name="numeroProtocoloFechamento" type="xs:string" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-            <xs:element name="ConsultaResultadoFechamento2099Response">
+      <xs:element name="ConsultaResultadoFechamento2099Response">
         <xs:complexType>
           <xs:sequence>
-                        <xs:element minOccurs="0" maxOccurs="1" name="ConsultaResultadoFechamento2099Result">
+            <xs:element minOccurs="0" maxOccurs="1" name="ConsultaResultadoFechamento2099Result">
+              <xs:complexType mixed="true">
+                <xs:sequence>
+                  <xs:any />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ConsultaInformacoesConsolidadas">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="tipoInscricaoContribuinte" type="xs:unsignedByte" />
+            <xs:element minOccurs="0" maxOccurs="1" name="numeroInscricaoContribuinte" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="numeroProtocoloFechamento" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ConsultaInformacoesConsolidadasResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="ConsultaInformacoesConsolidadasResult">
               <xs:complexType mixed="true">
                 <xs:sequence>
                   <xs:any />
@@ -217,33 +239,33 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-            <xs:element name="ConsultaReciboEvento2055">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tipoEvento" type="xs:int"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInsc" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInsc" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="perApur" type="xs:string"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInscAdq" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInscAdq" type="xs:string"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInscProd" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInscProd" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
+      <xs:element name="ConsultaReciboEvento2055">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="tipoEvento" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" name="tpInsc" type="xs:unsignedByte" />
+            <xs:element minOccurs="0" maxOccurs="1" name="nrInsc" type="xs:string" />
+            <xs:element minOccurs="0" maxOccurs="1" name="perApur" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="tpInscAdq" type="xs:unsignedByte" />
+            <xs:element minOccurs="0" maxOccurs="1" name="nrInscAdq" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="tpInscProd" type="xs:unsignedByte" />
+            <xs:element minOccurs="0" maxOccurs="1" name="nrInscProd" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ConsultaReciboEvento2055Response">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="1" name="ConsultaReciboEvento2055Result">
+              <xs:complexType mixed="true">
+                <xs:sequence>
+                  <xs:any />
+                </xs:sequence>
+              </xs:complexType>
             </xs:element>
-            <xs:element name="ConsultaReciboEvento2055Response">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" maxOccurs="1" name="ConsultaReciboEvento2055Result">
-                            <xs:complexType mixed="true">
-                                <xs:sequence>
-                                    <xs:any/>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="ConsultaReciboEvento2060">
         <xs:complexType>
           <xs:sequence>
@@ -339,185 +361,19 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-            <xs:element name="ConsultaReciboEvento4004">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tipoEvento" type="xs:int"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInsc" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInsc" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="perApur" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ConsultaReciboEvento4004Response">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" maxOccurs="1" name="ConsultaReciboEvento4004Result">
-                            <xs:complexType mixed="true">
-                                <xs:sequence>
-                                    <xs:any/>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ConsultaReciboEvento4010">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tipoEvento" type="xs:int"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInsc" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInsc" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="perApur" type="xs:string"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInscEstab" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInscEstab" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="cpfBeneficiario" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ConsultaReciboEvento4010Response">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" maxOccurs="1" name="ConsultaReciboEvento4010Result">
-                            <xs:complexType mixed="true">
-                                <xs:sequence>
-                                    <xs:any/>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ConsultaReciboEvento4020">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tipoEvento" type="xs:int"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInsc" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInsc" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="perApur" type="xs:string"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInscEstab" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInscEstab" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="cnpjBeneficiario" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ConsultaReciboEvento4020Response">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" maxOccurs="1" name="ConsultaReciboEvento4020Result">
-                            <xs:complexType mixed="true">
-                                <xs:sequence>
-                                    <xs:any/>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ConsultaReciboEvento4040">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tipoEvento" type="xs:int"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInsc" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInsc" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="perApur" type="xs:string"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInscEstab" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInscEstab" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ConsultaReciboEvento4040Response">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" maxOccurs="1" name="ConsultaReciboEvento4040Result">
-                            <xs:complexType mixed="true">
-                                <xs:sequence>
-                                    <xs:any/>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ConsultaReciboEvento4080">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tipoEvento" type="xs:int"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInsc" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInsc" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="perApur" type="xs:string"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInscEstab" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInscEstab" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="cnpjFontePagadora" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ConsultaReciboEvento4080Response">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" maxOccurs="1" name="ConsultaReciboEvento4080Result">
-                            <xs:complexType mixed="true">
-                                <xs:sequence>
-                                    <xs:any/>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ConsultaReciboEvento4098">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tipoEvento" type="xs:int"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInsc" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInsc" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="perApur" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ConsultaReciboEvento4098Response">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" maxOccurs="1" name="ConsultaReciboEvento4098Result">
-                            <xs:complexType mixed="true">
-                                <xs:sequence>
-                                    <xs:any/>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ConsultaReciboEvento4099">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tipoEvento" type="xs:int"/>
-                        <xs:element minOccurs="1" maxOccurs="1" name="tpInsc" type="xs:unsignedByte"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="nrInsc" type="xs:string"/>
-                        <xs:element minOccurs="0" maxOccurs="1" name="perApur" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ConsultaReciboEvento4099Response">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element minOccurs="0" maxOccurs="1" name="ConsultaReciboEvento4099Result">
-                            <xs:complexType mixed="true">
-                                <xs:sequence>
-                                    <xs:any/>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
     </xs:schema>
   </wsdl:types>
-    <wsdl:message name="ConsultasReinf_ConsultaResultadoFechamento2099_InputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaResultadoFechamento2099"/>
+  <wsdl:message name="ConsultasReinf_ConsultaResultadoFechamento2099_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultaResultadoFechamento2099" />
   </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaResultadoFechamento2099_OutputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaResultadoFechamento2099Response"/>
+  <wsdl:message name="ConsultasReinf_ConsultaResultadoFechamento2099_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultaResultadoFechamento2099Response" />
+  </wsdl:message>
+  <wsdl:message name="ConsultasReinf_ConsultaInformacoesConsolidadas_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultaInformacoesConsolidadas" />
+  </wsdl:message>
+  <wsdl:message name="ConsultasReinf_ConsultaInformacoesConsolidadas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultaInformacoesConsolidadasResponse" />
   </wsdl:message>
   <wsdl:message name="ConsultasReinf_ConsultaReciboEvento1000_InputMessage">
     <wsdl:part name="parameters" element="tns:ConsultaReciboEvento1000" />
@@ -561,12 +417,12 @@
   <wsdl:message name="ConsultasReinf_ConsultaReciboEvento2050_OutputMessage">
     <wsdl:part name="parameters" element="tns:ConsultaReciboEvento2050Response" />
   </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento2055_InputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento2055"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento2055_OutputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento2055Response"/>
-    </wsdl:message>
+  <wsdl:message name="ConsultasReinf_ConsultaReciboEvento2055_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultaReciboEvento2055" />
+  </wsdl:message>
+  <wsdl:message name="ConsultasReinf_ConsultaReciboEvento2055_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConsultaReciboEvento2055Response" />
+  </wsdl:message>
   <wsdl:message name="ConsultasReinf_ConsultaReciboEvento2060_InputMessage">
     <wsdl:part name="parameters" element="tns:ConsultaReciboEvento2060" />
   </wsdl:message>
@@ -591,52 +447,14 @@
   <wsdl:message name="ConsultasReinf_ConsultaReciboEvento3010_OutputMessage">
     <wsdl:part name="parameters" element="tns:ConsultaReciboEvento3010Response" />
   </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4004_InputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4004"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4004_OutputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4004Response"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4010_InputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4010"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4010_OutputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4010Response"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4020_InputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4020"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4020_OutputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4020Response"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4040_InputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4040"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4040_OutputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4040Response"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4080_InputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4080"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4080_OutputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4080Response"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4098_InputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4098"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4098_OutputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4098Response"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4099_InputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4099"/>
-    </wsdl:message>
-    <wsdl:message name="ConsultasReinf_ConsultaReciboEvento4099_OutputMessage">
-        <wsdl:part name="parameters" element="tns:ConsultaReciboEvento4099Response"/>
-    </wsdl:message>
   <wsdl:portType name="ConsultasReinf">
-        <wsdl:operation name="ConsultaResultadoFechamento2099">
-            <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaResultadoFechamento2099" message="tns:ConsultasReinf_ConsultaResultadoFechamento2099_InputMessage"/>
-            <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaResultadoFechamento2099Response" message="tns:ConsultasReinf_ConsultaResultadoFechamento2099_OutputMessage"/>
+    <wsdl:operation name="ConsultaResultadoFechamento2099">
+      <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaResultadoFechamento2099" message="tns:ConsultasReinf_ConsultaResultadoFechamento2099_InputMessage" />
+      <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaResultadoFechamento2099Response" message="tns:ConsultasReinf_ConsultaResultadoFechamento2099_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaInformacoesConsolidadas">
+      <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaInformacoesConsolidadas" message="tns:ConsultasReinf_ConsultaInformacoesConsolidadas_InputMessage" />
+      <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaInformacoesConsolidadasResponse" message="tns:ConsultasReinf_ConsultaInformacoesConsolidadas_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ConsultaReciboEvento1000">
       <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento1000" message="tns:ConsultasReinf_ConsultaReciboEvento1000_InputMessage" />
@@ -666,10 +484,10 @@
       <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento2050" message="tns:ConsultasReinf_ConsultaReciboEvento2050_InputMessage" />
       <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento2050Response" message="tns:ConsultasReinf_ConsultaReciboEvento2050_OutputMessage" />
     </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento2055">
-            <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento2055" message="tns:ConsultasReinf_ConsultaReciboEvento2055_InputMessage"/>
-            <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento2055Response" message="tns:ConsultasReinf_ConsultaReciboEvento2055_OutputMessage"/>
-        </wsdl:operation>
+    <wsdl:operation name="ConsultaReciboEvento2055">
+      <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento2055" message="tns:ConsultasReinf_ConsultaReciboEvento2055_InputMessage" />
+      <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento2055Response" message="tns:ConsultasReinf_ConsultaReciboEvento2055_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ConsultaReciboEvento2060">
       <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento2060" message="tns:ConsultasReinf_ConsultaReciboEvento2060_InputMessage" />
       <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento2060Response" message="tns:ConsultasReinf_ConsultaReciboEvento2060_OutputMessage" />
@@ -686,40 +504,21 @@
       <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento3010" message="tns:ConsultasReinf_ConsultaReciboEvento3010_InputMessage" />
       <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento3010Response" message="tns:ConsultasReinf_ConsultaReciboEvento3010_OutputMessage" />
     </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4004">
-            <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4004" message="tns:ConsultasReinf_ConsultaReciboEvento4004_InputMessage"/>
-            <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4004Response" message="tns:ConsultasReinf_ConsultaReciboEvento4004_OutputMessage"/>
-        </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4010">
-            <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4010" message="tns:ConsultasReinf_ConsultaReciboEvento4010_InputMessage"/>
-            <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4010Response" message="tns:ConsultasReinf_ConsultaReciboEvento4010_OutputMessage"/>
-        </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4020">
-            <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4020" message="tns:ConsultasReinf_ConsultaReciboEvento4020_InputMessage"/>
-            <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4020Response" message="tns:ConsultasReinf_ConsultaReciboEvento4020_OutputMessage"/>
-        </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4040">
-            <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4040" message="tns:ConsultasReinf_ConsultaReciboEvento4040_InputMessage"/>
-            <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4040Response" message="tns:ConsultasReinf_ConsultaReciboEvento4040_OutputMessage"/>
-        </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4080">
-            <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4080" message="tns:ConsultasReinf_ConsultaReciboEvento4080_InputMessage"/>
-            <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4080Response" message="tns:ConsultasReinf_ConsultaReciboEvento4080_OutputMessage"/>
-        </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4098">
-            <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4098" message="tns:ConsultasReinf_ConsultaReciboEvento4098_InputMessage"/>
-            <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4098Response" message="tns:ConsultasReinf_ConsultaReciboEvento4098_OutputMessage"/>
-        </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4099">
-            <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4099" message="tns:ConsultasReinf_ConsultaReciboEvento4099_InputMessage"/>
-            <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4099Response" message="tns:ConsultasReinf_ConsultaReciboEvento4099_OutputMessage"/>
-        </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ConsultasReinf" type="tns:ConsultasReinf">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsp:PolicyReference URI="#WsReceberLoteEventos_policy" />
-        <wsdl:operation name="ConsultaResultadoFechamento2099">
-            <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaResultadoFechamento2099" style="document"/>
+    <wsdl:operation name="ConsultaResultadoFechamento2099">
+      <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaResultadoFechamento2099" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConsultaInformacoesConsolidadas">
+      <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaInformacoesConsolidadas" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -790,15 +589,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento2055">
-            <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento2055" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
+    <wsdl:operation name="ConsultaReciboEvento2055">
+      <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento2055" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="ConsultaReciboEvento2060">
       <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento2060" style="document" />
       <wsdl:input>
@@ -835,69 +634,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4004">
-            <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4004" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4010">
-            <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4010" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4020">
-            <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4020" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4040">
-            <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4040" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4080">
-            <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4080" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4098">
-            <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4098" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-        <wsdl:operation name="ConsultaReciboEvento4099">
-            <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento4099" style="document"/>
-            <wsdl:input>
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output>
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ConsultasReinf">
     <wsdl:port name="BasicHttpBinding_ConsultasReinf" binding="tns:BasicHttpBinding_ConsultasReinf">
