@@ -88,7 +88,7 @@ namespace Unimake.Business.DFe.Security
                                                 idAttributeName = "id";
                                             }
                                         }
-                                        else
+                                        else if(childElemen.GetAttributeNode(idAttributeName) != null)
                                         {
                                             reference.Uri = "#" + childElemen.GetAttributeNode(idAttributeName).Value;
                                         }

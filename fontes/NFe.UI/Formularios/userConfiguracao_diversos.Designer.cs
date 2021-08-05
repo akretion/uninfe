@@ -70,6 +70,7 @@
             this.lblClientSecret = new MetroFramework.Controls.MetroLabel();
             this.checkBoxArqNSU = new MetroFramework.Controls.MetroCheckBox();
             this.checkBoxValidarDigestValue = new MetroFramework.Controls.MetroCheckBox();
+            this.cbIndSincNFCe = new MetroFramework.Controls.MetroCheckBox();
             this.grpQRCode.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,7 +79,7 @@
             this.checkBoxRetornoNFETxt.AutoSize = true;
             this.checkBoxRetornoNFETxt.Location = new System.Drawing.Point(3, 299);
             this.checkBoxRetornoNFETxt.Name = "checkBoxRetornoNFETxt";
-            this.checkBoxRetornoNFETxt.Size = new System.Drawing.Size(379, 15);
+            this.checkBoxRetornoNFETxt.Size = new System.Drawing.Size(378, 15);
             this.checkBoxRetornoNFETxt.TabIndex = 29;
             this.checkBoxRetornoNFETxt.Text = "Gravar os retornos dos webservices também no formato texto (TXT)";
             this.checkBoxRetornoNFETxt.UseSelectable = true;
@@ -282,7 +283,7 @@
             this.checkBoxGravarEventosNaPastaEnviadosNFe.AutoSize = true;
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Location = new System.Drawing.Point(3, 236);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Name = "checkBoxGravarEventosNaPastaEnviadosNFe";
-            this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(542, 15);
+            this.checkBoxGravarEventosNaPastaEnviadosNFe.Size = new System.Drawing.Size(541, 15);
             this.checkBoxGravarEventosNaPastaEnviadosNFe.TabIndex = 26;
             this.checkBoxGravarEventosNaPastaEnviadosNFe.Text = "Gravar os eventos na mesma pasta dos arquivos de NFe/NFCe/MDFe/CTe autorizados/de" +
     "negados?";
@@ -294,7 +295,7 @@
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.AutoSize = true;
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Location = new System.Drawing.Point(3, 257);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Name = "checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe";
-            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(636, 15);
+            this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Size = new System.Drawing.Size(635, 15);
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.TabIndex = 27;
             this.checkBoxGravarEventosCancelamentoNaPastaEnviadosNFe.Text = "Gravar os eventos de cancelamento na mesma pasta dos arquivos da NFe/NFCe/MDFe/CT" +
     "e autorizados/denegados?";
@@ -386,7 +387,7 @@
             this.checkBoxGravarEventosDeTerceiros.AutoSize = true;
             this.checkBoxGravarEventosDeTerceiros.Location = new System.Drawing.Point(3, 278);
             this.checkBoxGravarEventosDeTerceiros.Name = "checkBoxGravarEventosDeTerceiros";
-            this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(384, 15);
+            this.checkBoxGravarEventosDeTerceiros.Size = new System.Drawing.Size(383, 15);
             this.checkBoxGravarEventosDeTerceiros.TabIndex = 28;
             this.checkBoxGravarEventosDeTerceiros.Text = "Gravar os eventos na consulta de NFe/NFCe/MDFe/CTe de terceiros?";
             this.checkBoxGravarEventosDeTerceiros.UseSelectable = true;
@@ -636,7 +637,7 @@
             this.checkBoxArqNSU.AutoSize = true;
             this.checkBoxArqNSU.Location = new System.Drawing.Point(3, 339);
             this.checkBoxArqNSU.Name = "checkBoxArqNSU";
-            this.checkBoxArqNSU.Size = new System.Drawing.Size(553, 15);
+            this.checkBoxArqNSU.Size = new System.Drawing.Size(552, 15);
             this.checkBoxArqNSU.TabIndex = 37;
             this.checkBoxArqNSU.Text = "Gravar o nome dos XML da NFe/CTe retornados na manifestação no formato com o núme" +
     "ro do NSU";
@@ -655,11 +656,23 @@
             this.checkBoxValidarDigestValue.UseSelectable = true;
             this.checkBoxValidarDigestValue.CheckedChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
             // 
+            // cbIndSincNFCe
+            // 
+            this.cbIndSincNFCe.AutoSize = true;
+            this.cbIndSincNFCe.Location = new System.Drawing.Point(351, 320);
+            this.cbIndSincNFCe.Name = "cbIndSincNFCe";
+            this.cbIndSincNFCe.Size = new System.Drawing.Size(265, 15);
+            this.cbIndSincNFCe.TabIndex = 39;
+            this.cbIndSincNFCe.Text = "Enviar a NFC-e utilizando o processo síncrono";
+            this.cbIndSincNFCe.UseSelectable = true;
+            this.cbIndSincNFCe.CheckedChanged += new System.EventHandler(this.comboBox_Ambiente_SelectedIndexChanged);
+            // 
             // userConfiguracao_diversos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.cbIndSincNFCe);
             this.Controls.Add(this.checkBoxValidarDigestValue);
             this.Controls.Add(this.checkBoxArqNSU);
             this.Controls.Add(this.lblClientSecret);
@@ -751,5 +764,6 @@
         private MetroFramework.Controls.MetroLabel lblClientSecret;
         private MetroFramework.Controls.MetroCheckBox checkBoxArqNSU;
         private MetroFramework.Controls.MetroCheckBox checkBoxValidarDigestValue;
+        private MetroFramework.Controls.MetroCheckBox cbIndSincNFCe;
     }
 }

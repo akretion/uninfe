@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using Unimake.Business.DFe.Servicos;
@@ -58,11 +59,12 @@ namespace Unimake.Business.DFe.Xml.CTe
             ProcEventoCTe.Add(procEventoCTe);
         }
 
-        public override void ReadXml(XmlReader reader)
+        public override void ReadXml(XmlDocument document)
         {
-            base.ReadXml(reader);
+            base.ReadXml(document);
+            var reader = XmlReader.Create(new StringReader(document.InnerXml));
 
-            while(reader.Read())
+            while (reader.Read())
             {
                 if(reader.NodeType != XmlNodeType.Element ||
                    reader.Name != "Signature")

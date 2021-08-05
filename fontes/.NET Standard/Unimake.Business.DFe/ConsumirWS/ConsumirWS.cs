@@ -100,17 +100,33 @@ namespace Unimake.Business.DFe
 
             var responsePost = (HttpWebResponse)httpWebRequest.GetResponse();
             var streamPost = responsePost.GetResponseStream();
-            var streamReaderResponse = new StreamReader(streamPost, Encoding.UTF8);
+
+            Encoding encoding = Encoding.GetEncoding(soap.EncodingRetorno);
+
+            var streamReaderResponse = new StreamReader(streamPost, encoding);
 
             var retornoXml = new XmlDocument();
             retornoXml.LoadXml(streamReaderResponse.ReadToEnd());
 
-            if(retornoXml.GetElementsByTagName(soap.TagRetorno)[0] == null)
+            if(soap.TagRetorno.ToLower() != "prop:innertext")
             {
-                throw new Exception("Não foi possível localizar a tag <" + soap.TagRetorno + "> no XML retornado pelo webservice.");
+                if(retornoXml.GetElementsByTagName(soap.TagRetorno)[0] == null)
+                {
+                    throw new Exception("Não foi possível localizar a tag <" + soap.TagRetorno + "> no XML retornado pelo webservice.");
+                }
+
+                RetornoServicoString = retornoXml.GetElementsByTagName(soap.TagRetorno)[0].ChildNodes[0].OuterXml;
+            }
+            else
+            {
+                if(string.IsNullOrWhiteSpace(retornoXml.InnerText))
+                {
+                    throw new Exception("A propriedade InnerText do XML retornado pelo webservice está vazia.");
+                }
+
+                RetornoServicoString = retornoXml.InnerText;
             }
 
-            RetornoServicoString = retornoXml.GetElementsByTagName(soap.TagRetorno)[0].ChildNodes[0].OuterXml;
             RetornoServicoXML = new XmlDocument
             {
                 PreserveWhitespace = false

@@ -196,6 +196,14 @@ namespace Unimake.Business.DFe.Xml.NFe
                         _detEvento = new DetEventoEPEC();
                         break;
 
+                    case TipoEventoNFe.ComprovanteEntregaNFe:
+                        _detEvento = new DetEventoCompEntregaNFe();
+                        break;
+
+                    case TipoEventoNFe.CancelamentoComprovanteEntregaNFe:
+                        _detEvento = new DetEventoCancCompEntregaNFe();
+                        break;
+
                     case TipoEventoNFe.PedidoProrrogacao:
                     default:
                         throw new NotImplementedException($"O tipo de evento '{TpEvento}' não está implementado.");
@@ -540,6 +548,9 @@ namespace Unimake.Business.DFe.Xml.NFe
                 Dest.CPF = XmlReader.GetValue<string>(nameof(Dest.CPF));
                 Dest.IdEstrangeiro = XmlReader.GetValue<string>(nameof(Dest.IdEstrangeiro));
                 Dest.IE = XmlReader.GetValue<string>(nameof(Dest.IE));
+                Dest.VNF = XmlReader.GetValue<double>(nameof(Dest.VNF));
+                Dest.VICMS = XmlReader.GetValue<double>(nameof(Dest.VICMS));
+                Dest.VST = XmlReader.GetValue<double>(nameof(Dest.VST));
                 return;
             }
 
@@ -685,5 +696,167 @@ namespace Unimake.Business.DFe.Xml.NFe
         public bool ShouldSerializeIE() => !string.IsNullOrWhiteSpace(IE);
 
         #endregion ShouldSerialize
+    }
+
+    [Serializable]
+    [XmlRoot(ElementName = "detEvento")]
+    public class DetEventoCompEntregaNFe: EventoDetalhe
+    {
+        #region Public Properties
+
+        [XmlElement("descEvento", Order = 0)]
+        public override string DescEvento { get; set; } = "Comprovante de Entrega da NF-e";
+
+        [XmlIgnore]
+        public UFBrasil COrgaoAutor { get; set; }
+
+        [XmlElement("cOrgaoAutor", Order = 1)]
+        public int COrgaoAutorField
+        {
+            get => (int)COrgaoAutor;
+            set => COrgaoAutor = (UFBrasil)Enum.Parse(typeof(UFBrasil), value.ToString());
+        }
+
+        [XmlIgnore]
+        public TipoAutor TpAutor { get; set; }
+
+        [XmlElement("tpAutor", Order = 2)]
+        public int TpAutorField
+        {
+            get => (int)TpAutor;
+            set
+            {
+                if(value != (int)TipoAutor.EmpresaEmitente)
+                {
+                    throw new Exception("Conteúdo da TAG <tpAutor> inválido. Valor aceito 1-Empresa emitente.");
+                }
+
+                TpAutor = (TipoAutor)Enum.Parse(typeof(TipoAutor), value.ToString());
+            }
+        }
+
+        [XmlElement("verAplic", Order = 3)]
+        public string VerAplic { get; set; }
+
+        [XmlIgnore]
+        public DateTime DhEntrega { get; set; }
+
+        [XmlElement("dhEntrega", Order = 4)]
+        public string DhEntregaField
+        {
+            get => DhEntrega.ToString("yyyy-MM-ddTHH:mm:sszzz");
+            set => DhEntrega = DateTime.Parse(value);
+        }
+
+        [XmlElement("nDoc", Order = 5)]
+        public string NDoc { get; set; }
+
+        [XmlElement("xNome", Order = 6)]
+        public string XNome { get; set; }
+
+        [XmlElement("latGPS", Order = 7)]
+        public string LatGPS { get; set; }
+
+        [XmlElement("longGPS", Order = 8)]
+        public string LongGPS { get; set; }
+
+        [XmlElement("hashComprovante", Order = 9)]
+        public string HashComprovante { get; set; }
+
+        [XmlIgnore]
+        public DateTime DhHashComprovante { get; set; }
+
+        [XmlElement("dhHashComprovante", Order = 10)]
+        public string DhHashComprovanteField
+        {
+            get => DhHashComprovante.ToString("yyyy-MM-ddTHH:mm:sszzz");
+            set => DhHashComprovante = DateTime.Parse(value);
+        }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+
+            writer.WriteRaw($@"
+            <descEvento>{DescEvento}</descEvento>
+            <cOrgaoAutor>{COrgaoAutorField}</cOrgaoAutor>
+            <tpAutor>{TpAutorField}</tpAutor>
+            <verAplic>{VerAplic}</verAplic>
+            <dhEntrega>{DhEntregaField}</dhEntrega>
+            <nDoc>{NDoc}</nDoc>
+            <xNome>{XNome}</xNome>
+            <latGPS>{LatGPS}</latGPS>
+            <longGPS>{LongGPS}</longGPS>
+            <hashComprovante>{HashComprovante}</hashComprovante>
+            <dhHashComprovante>{DhHashComprovanteField}</dhHashComprovante>");
+        }
+
+        #endregion Public Methods
+    }
+
+    [Serializable]
+    [XmlRoot(ElementName = "detEvento")]
+    public class DetEventoCancCompEntregaNFe: EventoDetalhe
+    {
+        #region Public Properties
+
+        [XmlElement("descEvento", Order = 0)]
+        public override string DescEvento { get; set; } = "Cancelamento Comprovante de Entrega da NF-e";
+
+        [XmlIgnore]
+        public UFBrasil COrgaoAutor { get; set; }
+
+        [XmlElement("cOrgaoAutor", Order = 1)]
+        public int COrgaoAutorField
+        {
+            get => (int)COrgaoAutor;
+            set => COrgaoAutor = (UFBrasil)Enum.Parse(typeof(UFBrasil), value.ToString());
+        }
+
+        [XmlIgnore]
+        public TipoAutor TpAutor { get; set; }
+
+        [XmlElement("tpAutor", Order = 2)]
+        public int TpAutorField
+        {
+            get => (int)TpAutor;
+            set
+            {
+                if(value != (int)TipoAutor.EmpresaEmitente)
+                {
+                    throw new Exception("Conteúdo da TAG <tpAutor> inválido. Valor aceito 1-Empresa emitente.");
+                }
+
+                TpAutor = (TipoAutor)Enum.Parse(typeof(TipoAutor), value.ToString());
+            }
+        }
+
+        [XmlElement("verAplic", Order = 3)]
+        public string VerAplic { get; set; }
+
+        [XmlElement("nProtEvento", Order = 4)]
+        public string NProtEvento { get; set; }
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+
+            writer.WriteRaw($@"
+            <descEvento>{DescEvento}</descEvento>
+            <cOrgaoAutor>{COrgaoAutorField}</cOrgaoAutor>
+            <tpAutor>{TpAutorField}</tpAutor>
+            <verAplic>{VerAplic}</verAplic>
+            <nProtEvento>{NProtEvento}</nProtEvento>");
+        }
+
+        #endregion Public Methods
     }
 }

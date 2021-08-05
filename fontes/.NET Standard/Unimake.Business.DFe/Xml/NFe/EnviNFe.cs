@@ -161,6 +161,9 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("infRespTec")]
         public InfRespTec InfRespTec { get; set; }
 
+        [XmlElement("infSolicNFF")]
+        public InfSolicNFF InfSolicNFF { get; set; }
+
         [XmlAttribute(AttributeName = "Id", DataType = "ID")]
         public string Id
         {
@@ -356,14 +359,23 @@ namespace Unimake.Business.DFe.Xml.NFe
 
         public bool ShouldSerializeXJust() => !string.IsNullOrWhiteSpace(XJust);
 
-        public bool ShouldSerializeIndIntermed() =>
-            IndIntermed != (IndicadorIntermediario)(-1) &&
-            (
-                TpAmb == TipoAmbiente.Homologacao ||
-                IndIntermed != null
-            ) &&
-            IndPres != IndicadorPresenca.NaoSeAplica &&
-            IndPres != IndicadorPresenca.PresencialForaEstabelecimento;
+        public bool ShouldSerializeIndIntermed()
+        {
+            var retorna = false;
+
+            if(IndIntermed != (IndicadorIntermediario)(-1))
+            {
+                if(IndIntermed != null)
+                {
+                    if(IndPres != IndicadorPresenca.NaoSeAplica && IndPres != IndicadorPresenca.PresencialForaEstabelecimento)
+                    {
+                        retorna = true;
+                    }
+                }
+            }
+
+            return retorna;
+        }
 
         public bool ShouldSerializeDhSaiEntField()
         {
@@ -951,6 +963,9 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("rastro")]
         public List<Rastro> Rastro { get; set; }
 
+        [XmlElement("infProdNFF")]
+        public InfProdNFF InfProdNFF { get; set; }
+
         [XmlElement("arma")]
         public List<Arma> Arma { get; set; }
 
@@ -1099,11 +1114,11 @@ namespace Unimake.Business.DFe.Xml.NFe
         }
 
         [XmlElement("nDraw")]
-        public ulong NDraw { get; set; }
+        public string NDraw { get; set; }
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeNDraw() => NDraw > 0;
+        public bool ShouldSerializeNDraw() => !string.IsNullOrWhiteSpace(NDraw);
 
         public bool ShouldSerializeVDescDIField() => VDescDI > 0;
 
@@ -1115,14 +1130,14 @@ namespace Unimake.Business.DFe.Xml.NFe
     public class DetExport
     {
         [XmlElement("nDraw")]
-        public ulong NDraw { get; set; }
+        public string NDraw { get; set; }
 
         [XmlElement("exportInd")]
         public ExportInd ExportInd { get; set; }
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeNDraw() => NDraw > 0;
+        public bool ShouldSerializeNDraw() => !string.IsNullOrWhiteSpace(NDraw);
 
         #endregion
     }
@@ -1191,6 +1206,42 @@ namespace Unimake.Business.DFe.Xml.NFe
         #region ShouldSerialize
 
         public bool ShouldSerializeCAgreg() => !string.IsNullOrWhiteSpace(CAgreg);
+
+        #endregion
+    }
+
+
+    [Serializable()]
+    [XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/nfe")]
+    public class InfProdNFF
+    {
+        [XmlElement("cProdFisco")]
+        public string CProdFisco { get; set; }
+
+        [XmlElement("cOperNFF")]
+        public Int32 COperNFF { get; set; }
+
+        [XmlElement("xEmb")]
+        public string XEmb { get; set; }
+
+        [XmlIgnore]
+        public double QVolEmb { get; set; }
+
+        [XmlElement("qVolEmb")]
+        public string QVolEmbField
+        {
+            get => QVolEmb.ToString("F2", CultureInfo.InvariantCulture);
+            set => QVolEmb = Utility.Converter.ToDouble(value);
+        }
+
+        [XmlElement("uEmb")]
+        public string UEmb { get; set; }
+
+        #region ShouldSerialize
+
+        public bool ShouldSerializeXEmb() => !string.IsNullOrWhiteSpace(XEmb);
+        public bool ShouldSerializeQVolEmbField() => !string.IsNullOrWhiteSpace(XEmb);
+        public bool ShouldSerializeUEmb() => !string.IsNullOrWhiteSpace(XEmb);
 
         #endregion
     }
@@ -5653,6 +5704,9 @@ namespace Unimake.Business.DFe.Xml.NFe
         [XmlElement("tPag")]
         public MeioPagamento TPag { get; set; }
 
+        [XmlElement("xPag")]
+        public string XPag { get; set; }
+
         [XmlIgnore]
         public double VPag { get; set; }
 
@@ -5667,6 +5721,7 @@ namespace Unimake.Business.DFe.Xml.NFe
         public Card Card { get; set; }
 
         public bool ShouldSerializeIndPag() => IndPag != null;
+        public bool ShouldSerializeXPag() => !string.IsNullOrWhiteSpace(XPag);
 
         public void SetIndPag(IndicadorPagamento indicadorPagamento) => IndPag = indicadorPagamento;
     }
@@ -5989,6 +6044,14 @@ namespace Unimake.Business.DFe.Xml.NFe
         public bool ShouldSerializeHashCSRT() => HashCSRT != null;
 
         #endregion
+    }
+
+    [Serializable()]
+    [XmlType(AnonymousType = true, Namespace = "http://www.portalfiscal.inf.br/nfe")]
+    public class InfSolicNFF
+    {
+        [XmlElement("xSolic")]
+        public string XSolic { get; set; }
     }
 
     [Serializable()]

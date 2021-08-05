@@ -65,9 +65,6 @@
     <Setting Name="NFe_Components_br_com_govdigital_homolog1_NfseServiceImplDivService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://homolog.govdigital.com.br:443/ws/div</Value>
     </Setting>
-    <Setting Name="NFe_Components_br_com_sigiss_cianorte_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://cianorte.sigiss.com.br:443/cianorte/ws/sigiss_ws.php</Value>
-    </Setting>
     <Setting Name="NFe_Components_br_gov_pr_londrina_testeiss_h_ModuloEmissorNFSe" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://testeiss.londrina.pr.gov.br/ws/v1_03/sigiss_ws.php</Value>
     </Setting>
@@ -698,9 +695,6 @@
     <Setting Name="NFe_Components_HPeixotoAzevedoMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://www.gp.srv.br/tributario_homologacao/servlet/anfse_web_service</Value>
     </Setting>
-    <Setting Name="NFe_Components_HCianortePR_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://testecianorte.sigiss.com.br:443/testecianorte/ws/sigiss_ws.php</Value>
-    </Setting>
     <Setting Name="NFe_Components_HPiratiningaSP_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
@@ -1053,7 +1047,7 @@
       <Value Profile="(Default)">https://nfe.osasco.sp.gov.br/EissnfeWebServices/NotaFiscalEletronica.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_PAguaBoaMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://www.gp.srv.br/tributario_aguaboa/servlet/anfse_web_service</Value>
+      <Value Profile="(Default)">https://www.gp.srv.br/tributario_aguaboa/servlet/anfse_web_service</Value>
     </Setting>
   </Settings>
 </SettingsFile>

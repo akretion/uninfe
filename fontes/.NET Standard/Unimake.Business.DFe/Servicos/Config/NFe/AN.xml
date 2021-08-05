@@ -35,6 +35,16 @@
           <SchemaArquivo>envEPEC_v{0}.xsd</SchemaArquivo>
           <SchemaArquivoEspecifico>e110140_v{0}.xsd</SchemaArquivoEspecifico>
         </Tipo>
+        <Tipo>
+          <ID>110130</ID>
+          <SchemaArquivo>envEventoEntregaNFe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>e110130_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
+        <Tipo>
+          <ID>110131</ID>
+          <SchemaArquivo>envEventoCancEntregaNFe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>e110131_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>        
       </SchemasEspecificos>
       <TagAssinatura>evento</TagAssinatura>
       <TagAtributoID>infEvento</TagAtributoID>

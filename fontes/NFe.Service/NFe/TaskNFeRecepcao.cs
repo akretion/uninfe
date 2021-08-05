@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace NFe.Service
 {
-    public class TaskNFeRecepcao : TaskAbst
+    public class TaskNFeRecepcao: TaskAbst
     {
         public TaskNFeRecepcao(string arquivo)
         {
@@ -40,10 +40,10 @@ namespace NFe.Service
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
-            FluxoNfe oFluxoNfe = new FluxoNfe();
-            LerXML oLer = new LerXML();
+            var oFluxoNfe = new FluxoNfe();
+            var oLer = new LerXML();
 
             try
             {
@@ -55,7 +55,7 @@ namespace NFe.Service
                 var idLote = oLer.oDadosNfe.idLote;
 
                 //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp,
+                var wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp,
                     Convert.ToInt32(oLer.oDadosNfe.cUF),
                     Convert.ToInt32(oLer.oDadosNfe.tpAmb),
                     Convert.ToInt32(oLer.oDadosNfe.tpEmis),
@@ -63,13 +63,13 @@ namespace NFe.Service
                     oLer.oDadosNfe.mod,
                     0);
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb), Convert.ToInt32(oLer.oDadosNfe.tpEmis), Servico);
+                var securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(oLer.oDadosNfe.cUF), Convert.ToInt32(oLer.oDadosNfe.tpAmb), Convert.ToInt32(oLer.oDadosNfe.tpEmis), Servico);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                var oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
 
                 object oCabecMsg = null;
-                if (oLer.oDadosNfe.versao != "4.00")
+                if(oLer.oDadosNfe.versao != "4.00")
                 {
                     oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(oLer.oDadosNfe.cUF), Servico));
                     wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), oLer.oDadosNfe.cUF);
@@ -77,7 +77,7 @@ namespace NFe.Service
                 }
 
                 //Invocar o método que envia o XML para o SEFAZ
-                if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.indSinc)
+                if(((oLer.oDadosNfe.mod == "55" && Empresas.Configuracoes[emp].IndSinc) || (oLer.oDadosNfe.mod == "65" && Empresas.Configuracoes[emp].IndSincNFCe)) && oLer.oDadosNfe.indSinc)
                 {
                     //Não posso gerar o arquivo na pasta de retorno através do método Invocar, por isso não estou colocando os dois ultimos parâmetros com a definição dos prefixos dos arquivos. O arquivo de retorno no processo síncrono deve acontecer somente depois de finalizado o processo da nota, ou gera problemas. Wandrey 11/06/2015
                     oInvocarObj.Invocar(wsProxy,
@@ -107,34 +107,38 @@ namespace NFe.Service
                     Recibo(vStrXmlRetorno, emp);
                 }
 
-                if (dadosRec.cStat == "104") //Lote processado - Processo da NFe Síncrono - Wandrey 13/03/2014
+                if(dadosRec.cStat == "104") //Lote processado - Processo da NFe Síncrono - Wandrey 13/03/2014
                 {
                     FinalizarNFeSincrono(vStrXmlRetorno, emp, oLer.oDadosNfe.chavenfe);
 
                     oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML, vStrXmlRetorno);
                 }
-                else if (dadosRec.cStat == "103") //Lote recebido com sucesso - Processo da NFe Assíncrono
+                else if(dadosRec.cStat == "103") //Lote recebido com sucesso - Processo da NFe Assíncrono
                 {
-                    if (dadosRec.tMed > 0)
+                    if(dadosRec.tMed > 0)
+                    {
                         Thread.Sleep(dadosRec.tMed * 1000);
+                    }
 
                     //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
                     oFluxoNfe.AtualizarTag(oLer.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, dadosRec.tMed.ToString());
                     oFluxoNfe.AtualizarTagRec(idLote, dadosRec.nRec);
 
-                    XmlDocument xmlPedRec = oGerarXML.XmlPedRecNFe(dadosRec.nRec, oLer.oDadosNfe.versao, oLer.oDadosNfe.mod, emp);
-                    TaskNFeRetRecepcao nfeRetRecepcao = new TaskNFeRetRecepcao(xmlPedRec);
-                    nfeRetRecepcao.chNFe = oLer.oDadosNfe.chavenfe;
+                    var xmlPedRec = oGerarXML.XmlPedRecNFe(dadosRec.nRec, oLer.oDadosNfe.versao, oLer.oDadosNfe.mod, emp);
+                    var nfeRetRecepcao = new TaskNFeRetRecepcao(xmlPedRec)
+                    {
+                        chNFe = oLer.oDadosNfe.chavenfe
+                    };
                     nfeRetRecepcao.Execute();
                 }
-                else if (Convert.ToInt32(dadosRec.cStat) > 200 ||
-                         Convert.ToInt32(dadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
-                         Convert.ToInt32(dadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012
+                else if(Convert.ToInt32(dadosRec.cStat) > 200 ||
+                    Convert.ToInt32(dadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
+                    Convert.ToInt32(dadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012
                 {
-                    if (Empresas.Configuracoes[emp].IndSinc && oLer.oDadosNfe.indSinc)
+                    if(((oLer.oDadosNfe.mod == "55" && Empresas.Configuracoes[emp].IndSinc) || (oLer.oDadosNfe.mod == "65" && Empresas.Configuracoes[emp].IndSincNFCe)) && oLer.oDadosNfe.indSinc)
                     {
                         // OPS!!! Processo sincrono rejeição da SEFAZ, temos que gravar o XML para o ERP, pois no processo síncrono isso não pode ser feito dentro do método Invocar
-                        oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML/*.ExtRetorno.ProRec_XML*/, vStrXmlRetorno);
+                        oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML, vStrXmlRetorno);
                     }
                     //Se o status do retorno do lote for maior que 200 ou for igual a 108 ou 109,
                     //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
@@ -147,17 +151,17 @@ namespace NFe.Service
                 //Deleta o arquivo de lote
                 Functions.DeletarArquivo(NomeArquivoXML);
             }
-            catch (ExceptionEnvioXML ex)
+            catch(ExceptionEnvioXML ex)
             {
-                TrataException(emp, ex, oLer.oDadosNfe.chavenfe);
+                TrataException(emp, ex, oLer.oDadosNfe);
             }
-            catch (ExceptionSemInternet ex)
+            catch(ExceptionSemInternet ex)
             {
-                TrataException(emp, ex, oLer.oDadosNfe.chavenfe);
+                TrataException(emp, ex, oLer.oDadosNfe);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                TrataException(emp, ex, oLer.oDadosNfe.chavenfe);
+                TrataException(emp, ex, oLer.oDadosNfe);
             }
         }
 
@@ -168,28 +172,28 @@ namespace NFe.Service
         /// </summary>
         /// <param name="emp">Código da empresa</param>
         /// <param name="ex">Objeto com a exception</param>
-        private void TrataException(int emp, Exception ex, string chavenfe)
+        private void TrataException(int emp, Exception ex, DadosNFeClass dadosNFe)
         {
             try
             {
-                new FluxoNfe().ExcluirNfeFluxo(chavenfe);
+                new FluxoNfe().ExcluirNfeFluxo(dadosNFe.chavenfe);
 
-                //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                switch (Empresas.Configuracoes[emp].IndSinc)
+                if(((dadosNFe.mod == "55" && Empresas.Configuracoes[emp].IndSinc) || (dadosNFe.mod == "65" && Empresas.Configuracoes[emp].IndSincNFCe)))
                 {
-                    case true:
-                        LerXML oLer = new LerXML();
-                        oLer.Nfe(ConteudoXML);
-                        if (oLer.oDadosNfe.indSinc)
-                            TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_ERR, ex);
-                        else
-                            goto default;
-
-                        break;
-
-                    default:
+                    var oLer = new LerXML();
+                    oLer.Nfe(ConteudoXML);
+                    if(oLer.oDadosNfe.indSinc)
+                    {
+                        TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.ExtEnvio.EnvLot, Propriedade.ExtRetorno.ProRec_ERR, ex);
+                    }
+                    else
+                    {
                         TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.ExtRetorno.Rec_ERR, ex);
-                        break;
+                    }
+                }
+                else
+                {
+                    TFunctions.GravarArqErroServico(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.ExtRetorno.Rec_ERR, ex);
                 }
             }
             catch
@@ -212,31 +216,35 @@ namespace NFe.Service
                 dadosRec.nRec = string.Empty;
             dadosRec.tMed = 0;
 
-            XmlDocument xml = new XmlDocument();
+            var xml = new XmlDocument();
             xml.Load(Functions.StringXmlToStream(strXml));
 
-            XmlNodeList retEnviNFeList = xml.GetElementsByTagName("retEnviNFe");
+            var retEnviNFeList = xml.GetElementsByTagName("retEnviNFe");
 
-            foreach (XmlNode retEnviNFeNode in retEnviNFeList)
+            foreach(XmlNode retEnviNFeNode in retEnviNFeList)
             {
-                XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeNode;
+                var retEnviNFeElemento = (XmlElement)retEnviNFeNode;
 
                 dadosRec.cStat = retEnviNFeElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
 
-                XmlNodeList infRecList = xml.GetElementsByTagName("infRec");
+                var infRecList = xml.GetElementsByTagName("infRec");
 
-                foreach (XmlNode infRecNode in infRecList)
+                foreach(XmlNode infRecNode in infRecList)
                 {
-                    XmlElement infRecElemento = (XmlElement)infRecNode;
+                    var infRecElemento = (XmlElement)infRecNode;
 
                     dadosRec.nRec = infRecElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
                     dadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName(TpcnResources.tMed.ToString())[0].InnerText);
 
-                    if (dadosRec.tMed > 15)
+                    if(dadosRec.tMed > 15)
+                    {
                         dadosRec.tMed = 15;
+                    }
 
-                    if (dadosRec.tMed <= 0)
+                    if(dadosRec.tMed <= 0)
+                    {
                         dadosRec.tMed = Empresas.Configuracoes[emp].TempoConsulta;
+                    }
                 }
             }
         }
@@ -255,19 +263,21 @@ namespace NFe.Service
                 dadosRec.nRec = string.Empty;
             dadosRec.tMed = 0;
 
-            XmlDocument xml = new XmlDocument();
+            var xml = new XmlDocument();
             xml.Load(Functions.StringXmlToStream(strXml));
 
-            XmlNodeList retEnviNFeList = xml.GetElementsByTagName(xml.FirstChild.Name);
+            var retEnviNFeList = xml.GetElementsByTagName(xml.FirstChild.Name);
 
-            foreach (XmlNode retEnviNFeNode in retEnviNFeList)
+            foreach(XmlNode retEnviNFeNode in retEnviNFeList)
             {
-                XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeNode;
+                var retEnviNFeElemento = (XmlElement)retEnviNFeNode;
 
                 dadosRec.cStat = retEnviNFeElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
 
-                if (retEnviNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0] != null)
+                if(retEnviNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0] != null)
+                {
                     dadosRec.nRec = retEnviNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
+                }
             }
         }
 
@@ -282,15 +292,17 @@ namespace NFe.Service
         /// <param name="emp">Código da empresa para buscar as configurações</param>
         private void FinalizarNFeSincrono(string xmlRetorno, int emp, string chNFe)
         {
-            XmlDocument xml = new XmlDocument();
+            var xml = new XmlDocument();
             xml.Load(Functions.StringXmlToStream(xmlRetorno));
 
-            XmlNodeList protNFe = xml.GetElementsByTagName("protNFe");
+            var protNFe = xml.GetElementsByTagName("protNFe");
 
-            FluxoNfe fluxoNFe = new FluxoNfe();
+            var fluxoNFe = new FluxoNfe();
 
-            TaskNFeRetRecepcao retRecepcao = new TaskNFeRetRecepcao();
-            retRecepcao.chNFe = chNFe;
+            var retRecepcao = new TaskNFeRetRecepcao
+            {
+                chNFe = chNFe
+            };
             retRecepcao.FinalizarNFe(protNFe, fluxoNFe, emp, ConteudoXML);
         }
 

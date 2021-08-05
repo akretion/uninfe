@@ -89,7 +89,7 @@ namespace Unimake.Business.DFe.Xml.CTe
         [XmlElement("ide")]
         public Ide Ide { get; set; }
 
-        [XmlElement("Compl")]
+        [XmlElement("compl")]
         public Compl Compl { get; set; }
 
         [XmlElement("emit")]

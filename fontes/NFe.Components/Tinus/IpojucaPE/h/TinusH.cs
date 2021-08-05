@@ -12,7 +12,6 @@ namespace NFe.Components.Tinus.IpojucaPE.h
 {
     public class TinusH : EmiteNFSeBase
     {
-        private System.Web.Services.Protocols.SoapHttpClientProtocol Service;
         private X509Certificate2 Certificado;
 
         public override string NameSpaces

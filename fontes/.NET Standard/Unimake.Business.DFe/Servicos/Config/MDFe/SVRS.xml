@@ -68,6 +68,11 @@
           <SchemaArquivo>eventoMDFe_v{0}.xsd</SchemaArquivo>
           <SchemaArquivoEspecifico>evInclusaoDFeMDFe_v{0}.xsd</SchemaArquivoEspecifico>
         </Tipo>
+        <Tipo>
+          <ID>110116</ID>
+          <SchemaArquivo>eventoMDFe_v{0}.xsd</SchemaArquivo>
+          <SchemaArquivoEspecifico>evPagtoOperMDFe_v{0}.xsd</SchemaArquivoEspecifico>
+        </Tipo>
       </SchemasEspecificos>
       <TagAssinatura>eventoMDFe</TagAssinatura>
       <TagAtributoID>infEvento</TagAtributoID>

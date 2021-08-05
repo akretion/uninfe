@@ -11,10 +11,10 @@
         </member>
         <member name="M:Unimake.Business.DFe.Xml.AssemblyResolver.AssemblyResolve(System.Object,System.ResolveEventArgs)">
             <summary>
-            Resolve o assembly em questão ignorando a versão do mesmo
+            Resolve as referências dos assemblies e ignora as versões
             </summary>
-            <param name="sender">Objeto que iniciou o evento</param>
-            <param name="args">Argumento que dispõe a versão esperada, assembly requerido e nome do assembly</param>
+            <param name="sender">Assembly que realizou a chamada do evento.</param>
+            <param name="args">Argumentos que possuem a versão do assembly requerido.</param>
             <returns></returns>
         </member>
         <member name="P:Unimake.Business.DFe.Xml.CTeOS.CteOSProc.NomeArquivoDistribuicao">
@@ -27,7 +27,7 @@
             Nome do arquivo de distribuição
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Xml.CTe.EvEPECCTe.ReadXml(System.Xml.XmlReader)">
+        <member name="M:Unimake.Business.DFe.Xml.CTe.EvEPECCTe.ReadXml(System.Xml.XmlDocument)">
              <summary>
              Executa o processamento do XMLReader recebido na deserialização
              </summary>
@@ -127,11 +127,11 @@
             <param name="doc">Conteúdo do XML a ser deserilizado</param>
             <returns>Retorna o objeto com o conteúdo do XML deserializado</returns>
         </member>
-        <member name="M:Unimake.Business.DFe.Xml.XMLBase.ReadXml(System.Xml.XmlReader)">
+        <member name="M:Unimake.Business.DFe.Xml.XMLBase.ReadXml(System.Xml.XmlDocument)">
              <summary>
              Executa o processamento do XMLReader recebido na deserialização
              </summary>
-            <param name="reader">Reader XML recebido durante o processo de deserialização</param>
+            <param name="document">XML recebido durante o processo de deserialização</param>
         </member>
         <member name="M:Unimake.Business.DFe.Xml.XMLBase.WriteXml(System.IO.StringWriter)">
              <summary>
@@ -250,16 +250,21 @@
             Dados do servidor de proxy para conexão
             </summary>
         </member>
+        <member name="P:Unimake.Business.DFe.WSSoap.EncodingRetorno">
+            <summary>
+            Definir o encoding do XML retornado pelo webservice
+            </summary>
+        </member>
         <member name="T:Unimake.Business.DFe.Contract.Serialization.IXmlSerializable">
             <summary>
             Implementa métodos para serialização e deserialização de XMLs
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.Contract.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)">
+        <member name="M:Unimake.Business.DFe.Contract.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlDocument)">
              <summary>
              Executa o processamento do XMLReader recebido na deserialização
              </summary>
-            <param name="reader">Reader XML recebido durante o processo de deserialização</param>
+            <param name="document">XML recebido durante o processo de deserialização</param>
         </member>
         <member name="M:Unimake.Business.DFe.Contract.Serialization.IXmlSerializable.WriteXml(System.IO.StringWriter)">
              <summary>
@@ -441,9 +446,24 @@
             Senha do certificado digital
             </summary>
         </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CodigoConfig">
+            <summary>
+            Código da configuração
+            </summary>
+        </member>
         <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CodigoUF">
             <summary>
             Código da Unidade Federativa (UF)
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CodigoMunicipio">
+            <summary>
+            Código do IBGE do Município (Utilizando no envio de NFSe)
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.PadraoNFSe">
+            <summary>
+            Padrão da NFSe
             </summary>
         </member>
         <member name="P:Unimake.Business.DFe.Servicos.Configuracao.CSC">
@@ -535,6 +555,16 @@
         <member name="P:Unimake.Business.DFe.Servicos.Configuracao.TagLoteAtributoID">
             <summary>
             Nome da tag que tem o atributo de identificador único a ser utilizado no Reference.URI da assinatura, quando tem lote (Exemplo: Uma lote com várias NFe ou NFSe)
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.TagExtraAssinatura">
+            <summary>
+            Nome da tag de Assinatura do XML, quando tiver uma terceira tag para assinar (É o caso da Substituição da NFSe)
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.TagExtraAtributoID">
+            <summary>
+            Nome da tag que tem o atributo de identificador único a ser utilizado no Reference.URI da assinatura
             </summary>
         </member>
         <member name="P:Unimake.Business.DFe.Servicos.Configuracao.TargetNS">
@@ -634,6 +664,11 @@
         <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebTagRetorno">
             <summary>
             Nome da tag de retorno do serviço
+            </summary>
+        </member>
+        <member name="P:Unimake.Business.DFe.Servicos.Configuracao.WebEncodingRetorno">
+            <summary>
+            Encoding do XML retornado pelo webservice (Padrão é UTF-8, mas tem webservices que retornam em encodings diferentes, para estes tem que definir para que os caracteres fiquem corretos.)
             </summary>
         </member>
         <member name="T:Unimake.Business.DFe.Servicos.SchemaEspecifico">
@@ -1321,6 +1356,71 @@
             GNRE - Enviar Lote de GNRE
             </summary>
         </member>
+        <member name="F:Unimake.Business.DFe.Servicos.Servico.NFSeCancelarNfse">
+            <summary>
+            Enviar o XML de cancelamento da NFS-e para prefeiutura
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.Servico.NFSeConsultarNotaPrestador">
+            <summary>
+            Enviar o XML de consulta NFS-e do prestador para a prefeitura
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.Servico.NFSeConsultarNotaValida">
+            <summary>
+            Enviar o XML de consulta NFS-e valida para a prefeitura
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.Servico.NFSeGerarNfse">
+            <summary>
+            Enviar o XML da NFS-e para a prefeitura
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.Servico.NFSeRecepcionarLoteRps">
+            <summary>
+            Enviar o XML do Lote de RPS para gerar NFSe para a prefeitura
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.Servico.NFSeRecepcionarLoteRpsSincrono">
+            <summary>
+            Enviar o XML do Lote de RPS no modo síncrono para gerar NFSe para a prefeitura
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.Servico.NFSeSubstituirNfse">
+            <summary>
+            Enviar o XML para Substituir NFSe
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.Servico.NFSeConsultarLoteRps">
+            <summary>
+            Enviar o XML de consulta lote RPS para a prefeitura
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.Servico.NFSeConsultarNfse">
+            <summary>
+            Enviar o XML de consulta NFSe para a prefeitura
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.Servico.NFSeConsultarNfseServicoPrestado">
+            <summary>
+            Enviar o XML de consulta NFSe serviço prestado para a prefeitura
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.Servico.NFSeConsultarNfseServicoTomado">
+            <summary>
+            Enviar o XML de consulta NFSe serviço tomado para a prefeitura
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.Servico.NFSeConsultarNfseFaixa">
+            <summary>
+            Enviar o XML de consulta NFSe por faixa para a prefeitura
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.Servico.NFSeConsultarNfsePorRps">
+            <summary>
+            Enviar o XML de consulta NFSe por RPS para a prefeitura
+            </summary>
+        </member>
         <member name="F:Unimake.Business.DFe.Servicos.Servico.Nulo">
             <summary>
             Serviço não definido
@@ -1626,6 +1726,16 @@
             Cancelamento da NFCe sendo substituída por outra NFCe (110112)
             </summary>
         </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoEventoNFe.ComprovanteEntregaNFe">
+            <summary>
+            Comprovante de Entrega da NF-e
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoEventoNFe.CancelamentoComprovanteEntregaNFe">
+            <summary>
+            Cancelamento do Comprovante de Entrega da NF-e
+            </summary>
+        </member>
         <member name="F:Unimake.Business.DFe.Servicos.TipoEventoNFe.EPEC">
             <summary>
             EPEC - Evento Prévio de Emissão em Contingência (110140)
@@ -1729,6 +1839,11 @@
         <member name="F:Unimake.Business.DFe.Servicos.TipoEventoMDFe.InclusaoDFe">
             <summary>
             Inclusão de DFe no MDFe (110115)
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.TipoEventoMDFe.PagamentoOperacao">
+            <summary>
+            Pagamento da Operação de Transporte (MDFe) (110116)
             </summary>
         </member>
         <member name="F:Unimake.Business.DFe.Servicos.TipoEventoMDFe.EncerramentoFisco">
@@ -2400,6 +2515,96 @@
         <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Cabal">
             <summary>
             09=Cabal
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Alelo">
+            <summary>
+            10=Alelo
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.BanesCard">
+            <summary>
+            11=Banes Card
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.CalCard">
+            <summary>
+            12=CalCard
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Credz">
+            <summary>
+            13=Credz
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Discover">
+            <summary>
+            14=Discover
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.GoodCard">
+            <summary>
+            15=GoodCard
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.GreenCard">
+            <summary>
+            16=GreenCard
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Hiper">
+            <summary>
+            17=Hiper
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.JcB">
+            <summary>
+            18=JcB
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Mais">
+            <summary>
+            19=Mais
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.MaxVan">
+            <summary>
+            20=MaxVan
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Policard">
+            <summary>
+            21=Policard
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.RedeCompras">
+            <summary>
+            22=RedeCompras
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Sodexo">
+            <summary>
+            23=Sodexo
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.ValeCard">
+            <summary>
+            24=ValeCard
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Verocheque">
+            <summary>
+            25=Verocheque
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.VR">
+            <summary>
+            26=VR
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Ticket">
+            <summary>
+            27=Ticket
             </summary>
         </member>
         <member name="F:Unimake.Business.DFe.Servicos.BandeiraOperadoraCartao.Outros">
@@ -5447,6 +5652,26 @@
             Veículo Comercial Acima de 10 Eixos = 14
             </summary>
         </member>
+        <member name="T:Unimake.Business.DFe.Servicos.PadraoNFSe">
+            <summary>
+            Padrões de NFSe
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.PadraoNFSe.None">
+            <summary>
+            Não definido / Nenhum
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.PadraoNFSe.BETHA">
+            <summary>
+            BETHA Sistemas
+            </summary>
+        </member>
+        <member name="F:Unimake.Business.DFe.Servicos.PadraoNFSe.SIGCORP">
+            <summary>
+            SIGCORP - Tecnologia da informação
+            </summary>
+        </member>
         <member name="T:Unimake.Business.DFe.Servicos.GNRE.ConsultaConfigUF">
             <summary>
             Envio do XML de consulta configurações da GNRE por UF para o WebService 
@@ -6454,6 +6679,320 @@
             <param name="nomeArquivo">Nome para o arquivo XML</param>
             <param name="conteudoXML">Conteúdo do XML</param>
         </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.CancelarNfse">
+            <summary>
+            Enviar o XML de Consulta da NFSe para o webservice
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.CancelarNfse.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.CancelarNfse.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.CancelarNfse.DefinirConfiguracao">
+            <summary>
+            Definir o valor de algumas das propriedades do objeto "Configuracoes"
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.CancelarNfse.Executar">
+            <summary>
+            Executar o serviço
+            </summary>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.ConsultarLoteRps">
+            <summary>
+            Enviar o XML de Consulta Lote RPS para o webservice
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarLoteRps.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarLoteRps.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfse">
+            <summary>
+            Enviar o XML de Consulta Lote RPS para o webservice
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfse.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfse.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfse.DefinirConfiguracao">
+            <summary>
+            Definir o valor de algumas das propriedades do objeto "Configuracoes"
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfse.Executar">
+            <summary>
+            Executar o serviço
+            </summary>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfseFaixa">
+            <summary>
+            Enviar o XML de Consulta Lote RPS para o webservice
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfseFaixa.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfseFaixa.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfsePorRps">
+            <summary>
+            Enviar o XML de Consulta Lote RPS para o webservice
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfsePorRps.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfsePorRps.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfseServicoPrestado">
+            <summary>
+            Enviar o XML de Consulta Lote RPS para o webservice
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfseServicoPrestado.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfseServicoPrestado.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfseServicoTomado">
+            <summary>
+            Enviar o XML de Consulta Lote RPS para o webservice
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfseServicoTomado.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNfseServicoTomado.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.ConsultarNotaPrestador">
+            <summary>
+            Enviar o XML de Consulta da NFSe para o webservice
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNotaPrestador.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNotaPrestador.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.ConsultarNotaValida">
+            <summary>
+            Enviar o XML de Consulta da NFSe para o webservice
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNotaValida.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ConsultarNotaValida.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.GerarNfse">
+            <summary>
+            Enviar o XML de NFSe para o webservice
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.GerarNfse.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.GerarNfse.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.GerarNfse.DefinirConfiguracao">
+            <summary>
+            Definir o valor de algumas das propriedades do objeto "Configuracoes"
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.GerarNfse.Executar">
+            <summary>
+            Executar o serviço
+            </summary>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.RecepcionarLoteRps">
+            <summary>
+            Enviar o XML de NFSe para o webservice
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.RecepcionarLoteRps.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.RecepcionarLoteRps.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.RecepcionarLoteRpsSincrono">
+            <summary>
+            Enviar o XML de NFSe para o webservice
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.RecepcionarLoteRpsSincrono.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.RecepcionarLoteRpsSincrono.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.ServicoBase">
+            <summary>
+            Classe base para os serviços da NFSe
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ServicoBase.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ServicoBase.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ServicoBase.DefinirConfiguracao">
+            <summary>
+            Definir configurações
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ServicoBase.XmlValidar">
+            <summary>
+            Validar o XML
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ServicoBase.XmlValidarConteudo">
+            <summary>
+            Validar, o conteúdo das tags do XML, alguns validações manuais que o schema não faz. Vamos implementando novas regras na medida da necessidade de cada serviço.
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ServicoBase.Executar">
+            <summary>
+            Executar o serviço
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ServicoBase.GravarXmlDistribuicao(System.String,System.String,System.String)">
+            <summary>
+            Gravar o XML de distribuição em uma pasta no HD
+            </summary>
+            <param name="pasta">Pasta onde deve ser gravado o XML no HD</param>
+            <param name="nomeArquivo">Nome do arquivo a ser gravado no HD</param>
+            <param name="conteudoXML">String contendo o conteúdo do XML a ser gravado no HD</param>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.ServicoBase.GravarXmlDistribuicao(System.IO.Stream,System.String,System.Text.Encoding)">
+            <summary>
+            Gravar o XML de distribuição em um stream
+            </summary>
+            <param name="value">Conteúdo a ser gravado no stream</param>
+            <param name="stream">Stream que vai receber o conteúdo do XML</param>
+            <param name="encoding">Define o encodingo do stream, caso não informado ,será usado o UTF8</param>
+        </member>
+        <member name="T:Unimake.Business.DFe.Servicos.NFSe.SubstituirNfse">
+            <summary>
+            Enviar o XML de NFSe para o webservice
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.SubstituirNfse.#ctor">
+            <summary>
+            Construtor
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.SubstituirNfse.#ctor(System.Xml.XmlDocument,Unimake.Business.DFe.Servicos.Configuracao)">
+            <summary>
+            Construtor
+            </summary>
+            <param name="conteudoXML">Conteúdo do XML que será enviado para o WebService</param>
+            <param name="configuracao">Objeto "Configuracoes" com as propriedade necessária para a execução do serviço</param>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.SubstituirNfse.DefinirConfiguracao">
+            <summary>
+            Definir o valor de algumas das propriedades do objeto "Configuracoes"
+            </summary>
+        </member>
+        <member name="M:Unimake.Business.DFe.Servicos.NFSe.SubstituirNfse.Executar">
+            <summary>
+            Executar o serviço
+            </summary>
+        </member>
         <member name="T:Unimake.Business.DFe.Servicos.ServicoBase">
             <summary>
             Classe base abstrata para elaboração dos serviços dos documentos fiscais eletrônicos (NFe, NFCe, MDFe, NFSe, CTe, GNRE, etc...)
@@ -7049,11 +7588,12 @@
             <param name="s">Conteúdo a ser convertido</param>
             <returns>Retorna Stream do conteúdo informado para o método</returns>
         </member>
-        <member name="M:Unimake.Business.DFe.ValidarSchema.ExtractSchemasResource(System.String)">
+        <member name="M:Unimake.Business.DFe.ValidarSchema.ExtractSchemasResource(System.String,Unimake.Business.DFe.Servicos.PadraoNFSe)">
             <summary>
             Extrair recursos (XSD) da DLL para efetuar a validação do XML
             </summary>
             <param name="arqSchema">Arquivo XSD a ser extraido</param>
+            <param name="padraoNFSe">Padrão da NFSe (Necessário para determinar a subpasta de onde vai pegar o pacote de schemas)</param>
             <returns>Retorna os schemas a serem utilizados na validação</returns>
         </member>
         <member name="M:Unimake.Business.DFe.ValidarSchema.Reader_ValidationEventHandler(System.Object,System.Xml.Schema.ValidationEventArgs)">
@@ -7085,13 +7625,14 @@
             Se a validação foi bem sucedida (true/false)
             </summary>
         </member>
-        <member name="M:Unimake.Business.DFe.ValidarSchema.Validar(System.Xml.XmlDocument,System.String,System.String)">
+        <member name="M:Unimake.Business.DFe.ValidarSchema.Validar(System.Xml.XmlDocument,System.String,System.String,Unimake.Business.DFe.Servicos.PadraoNFSe)">
              <summary>
              Método responsável por validar a estrutura do XML de acordo com o schema passado por parâmetro
              </summary>
              <param name="conteudoXML">Nome do arquivo XML a ser validado</param>
              <param name="arqSchema">Arquivo de schema para validação do XML (XSD) contido nos recursos da DLL.</param>
              <param name="targetNS">Target Name Space, se existir, para validação</param>
+             <param name="padraoNFSe">Padrão da NFSe (Necessário para determinar a subpasta de onde vai pegar o pacote de schemas)</param>
              <example>
              //Validar arquivos de NFe
              Validar(xmlDocument, "NFe.consStatServCTe_v3.00.xsd")
@@ -7125,6 +7666,20 @@
             <param name="value">String que será truncada</param>
             <param name="maxLength">Tamanho máximo que a string poderá ter</param>
             <returns>Retorna uma string truncada até o máximo definido no parâmetro see cfref="maxLength"</returns>
+        </member>
+        <member name="T:System.Xml.XmlNodeExtensions">
+            <summary>
+            Extensões para os nós dos XMLs
+            </summary>
+        </member>
+        <member name="M:System.Xml.XmlNodeExtensions.GetValue``1(System.Xml.XmlElement,System.String)">
+            <summary>
+            Recupera o valor de um elemento em XML
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="element"></param>
+            <param name="name"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

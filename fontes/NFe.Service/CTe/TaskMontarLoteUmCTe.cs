@@ -2,14 +2,13 @@
 using NFe.Settings;
 using System;
 using System.IO;
-using System.Xml;
 
 namespace NFe.Service
 {
     /// <summary>
     /// Executar as tarefas pertinentes a assinatura e montagem do lote de uma única nota fiscal eletrônica
     /// </summary>
-    public class TaskCTeMontarLoteUm : TaskAbst
+    public class TaskCTeMontarLoteUm: TaskAbst
     {
         public TaskCTeMontarLoteUm(string arquivo)
         {
@@ -23,33 +22,33 @@ namespace NFe.Service
         {
             try
             {
-                int emp = Empresas.FindEmpresaByThread();
+                var emp = Empresas.FindEmpresaByThread();
                 AssinarValidarXMLNFe(ConteudoXML);
 
                 //Montar lote de nfe
-                FluxoNfe oFluxoNfe = new FluxoNfe();
+                var oFluxoNfe = new FluxoNfe();
 
-                string cError = "";
+                var cError = "";
                 try
                 {
-                    DadosNFeClass oDadosNfe = LerXMLNFe(ConteudoXML);
-                    if (!oFluxoNfe.NFeComLote(oDadosNfe.chavenfe))
+                    var oDadosNfe = LerXMLNFe(ConteudoXML);
+                    if(!oFluxoNfe.NFeComLote(oDadosNfe.chavenfe))
                     {
-                        XmlDocument xmlLote = LoteNfe(ConteudoXML, NomeArquivoXML, oDadosNfe.versao);
-                        TaskCTeRecepcao cteRecepcao = new TaskCTeRecepcao(xmlLote);
+                        var xmlLote = LoteNfe(ConteudoXML, NomeArquivoXML, oDadosNfe.versao, oDadosNfe.mod);
+                        var cteRecepcao = new TaskCTeRecepcao(xmlLote);
                         cteRecepcao.Execute();
                     }
                 }
-                catch (IOException ex)
+                catch(IOException ex)
                 {
                     cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     cError = (ex.InnerException != null ? ex.InnerException.Message : ex.Message);
                 }
 
-                if (!string.IsNullOrEmpty(cError))
+                if(!string.IsNullOrEmpty(cError))
                 {
                     try
                     {

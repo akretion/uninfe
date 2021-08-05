@@ -27,7 +27,8 @@ namespace NFe.Components.PIpojucaPE_TINUS_ConsultarNfse {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ConsultarNfseSoap", Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarNfse : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    public partial class ConsultarNfse : NFe.Components.Tinus.IpojucaPE.SoapHttpClientProtocol<ConsultarNfseResposta>
+    {
         
         private System.Threading.SendOrPostCallback CallConsultarNfseOperationCompleted;
         

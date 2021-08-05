@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS1591
 
 using System;
+using System.IO;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
@@ -60,9 +61,11 @@ namespace Unimake.Business.DFe.Xml.CTe
             return xmlDocument;
         }
 
-        public override void ReadXml(XmlReader reader)
+        public override void ReadXml(XmlDocument document)
         {
-            base.ReadXml(reader);
+            base.ReadXml(document);
+
+            var reader = XmlReader.Create(new StringReader(document.InnerXml));
 
             while(reader.Read())
             {

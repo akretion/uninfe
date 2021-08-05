@@ -1,7 +1,7 @@
 ﻿//Adicionado a extensão para capturar as mensagens do SOAP enquanto debug
 //https://msdn.microsoft.com/pt-br/library/system.web.services.protocols.soapextension(v=vs.110).aspx
 
-#if DEBUG
+//#if DEBUG
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -98,4 +98,4 @@ namespace NFe.Components
         #endregion Public Methods
     }
 }
-#endif
+//#endif

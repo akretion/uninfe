@@ -59,8 +59,8 @@ namespace Unimake.Business.DFe.Xml
         /// <summary>
         /// Executa o processamento do XMLReader recebido na deserialização
         /// </summary>
-        ///<param name="reader">Reader XML recebido durante o processo de deserialização</param>
-        public virtual void ReadXml(XmlReader reader)
+        ///<param name="document">XML recebido durante o processo de deserialização</param>
+        public virtual void ReadXml(XmlDocument document)
         {
         }
 

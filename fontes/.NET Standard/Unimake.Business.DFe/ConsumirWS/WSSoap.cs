@@ -14,6 +14,7 @@ namespace Unimake.Business.DFe
         private string _EnderecoWeb;
         private string _SoapString;
         private string _TagRetorno;
+        private string _EncodingRetorno;
         private string _VersaoSoap;
         private IWebProxy _Proxy;
 
@@ -82,6 +83,15 @@ namespace Unimake.Business.DFe
         {
             get => _Proxy;
             set => _Proxy = value;
+        }
+
+        /// <summary>
+        /// Definir o encoding do XML retornado pelo webservice
+        /// </summary>
+        public string EncodingRetorno
+        {
+            get => string.IsNullOrWhiteSpace(_EncodingRetorno) ? (_EncodingRetorno = "UTF-8") : _EncodingRetorno;
+            set => _EncodingRetorno = value;
         }
 
         #endregion Public Properties

@@ -523,6 +523,38 @@ namespace NFe.Certificado
 
         #endregion Assinar()
 
+        #region AssinarNew
+
+        //**IMPORTANTE**
+        //O Método AssinarNew vai substituir de futuro todos os demais, conforme os demais ficarem obsoletos vamos apagando.
+        //Isso vai ocorrer pelo fato de estarmos migrando para uso da DLL do UniNFe
+        //16/06/2021 - Wandrey
+
+        /// <summary>
+        /// Assina o conteúdo do XML com o certificado digital
+        /// </summary>
+        /// <param name="conteudoXML">XML a ser assinado</param>
+        /// <param name="emp">Código da empresa de onde deve buscar informações para assinatura</param>
+        /// <param name="UFCodOrMun">Codigo da UF ou município</param>
+        /// <param name="algorithmType">Tipo de algorítimo a ser utilizado na assinatura</param>
+        /// <param name="definirURI">Define o Reference.URI na assinatura</param>
+        /// <param name="idAttributeName">Nome do atributo que tem o ID para assinatura. Se nada for passado o sistema vai tentar buscar o nome Id ou id, se não encontrar, não vai criar a URI Reference na assinatura com ID.</param>
+        public void AssinarNew(XmlDocument conteudoXML, int emp, int UFCodOrMun, Unimake.Business.DFe.Security.AlgorithmType algorithmType = Unimake.Business.DFe.Security.AlgorithmType.Sha1, bool definirURI = true, string idAttributeName = "Id")
+        {
+            if(Empresas.Configuracoes[emp].UsaCertificado)
+            {
+                var v = new TipoArquivoXML("", conteudoXML, UFCodOrMun, false);
+
+                //Assinar o XML
+                Unimake.Business.DFe.Security.AssinaturaDigital.Assinar(conteudoXML, v.TagAssinatura, v.TagAtributoId, Empresas.Configuracoes[emp].X509Certificado, algorithmType, definirURI, idAttributeName, true);
+
+                //Assinar o lote
+                Unimake.Business.DFe.Security.AssinaturaDigital.Assinar(conteudoXML, v.TagLoteAssinatura, v.TagAtributoId, Empresas.Configuracoes[emp].X509Certificado, algorithmType, definirURI, idAttributeName, true);
+            }
+        }
+
+        #endregion
+
         public void CarregarPIN(int emp, string arqXML, Servicos servico)
         {
             if(Empresas.Configuracoes[emp].UsaCertificado)

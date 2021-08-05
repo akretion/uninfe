@@ -147,6 +147,11 @@ namespace Unimake.Business.DFe.Servicos
                                 Configuracoes.WebTagRetorno = XMLUtility.TagRead(elementPropriedades, "WebTagRetorno");
                             }
 
+                            if(XMLUtility.TagExist(elementPropriedades, "WebEncodingRetorno"))
+                            {
+                                Configuracoes.WebEncodingRetorno = XMLUtility.TagRead(elementPropriedades, "WebEncodingRetorno");
+                            }
+
                             if(XMLUtility.TagExist(elementPropriedades, "TargetNS"))
                             {
                                 Configuracoes.TargetNS = XMLUtility.TagRead(elementPropriedades, "TargetNS");
@@ -170,6 +175,16 @@ namespace Unimake.Business.DFe.Servicos
                             if(XMLUtility.TagExist(elementPropriedades, "TagAtributoID"))
                             {
                                 Configuracoes.TagAtributoID = XMLUtility.TagRead(elementPropriedades, "TagAtributoID");
+                            }
+
+                            if(XMLUtility.TagExist(elementPropriedades, "TagExtraAssinatura"))
+                            {
+                                Configuracoes.TagExtraAssinatura = XMLUtility.TagRead(elementPropriedades, "TagExtraAssinatura");
+                            }
+
+                            if(XMLUtility.TagExist(elementPropriedades, "TagExtraAtributoID"))
+                            {
+                                Configuracoes.TagExtraAtributoID = XMLUtility.TagRead(elementPropriedades, "TagExtraAtributoID");
                             }
 
                             if(XMLUtility.TagExist(elementPropriedades, "TagLoteAssinatura"))
@@ -293,6 +308,11 @@ namespace Unimake.Business.DFe.Servicos
                         if(XMLUtility.TagExist(elementVersao, "WebTagRetorno"))
                         {
                             Configuracoes.WebTagRetorno = XMLUtility.TagRead(elementVersao, "WebTagRetorno");
+                        }
+
+                        if(XMLUtility.TagExist(elementVersao, "WebEncodingRetorno"))
+                        {
+                            Configuracoes.WebEncodingRetorno = XMLUtility.TagRead(elementVersao, "WebEncodingRetorno");
                         }
 
                         if(XMLUtility.TagExist(elementVersao, "WebSoapVersion"))
@@ -512,7 +532,7 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         protected internal void LerXmlConfigGeral()
         {
-            if(Configuracoes.CodigoUF != 0)
+            if(Configuracoes.CodigoConfig != 0)
             {
                 var doc = new XmlDocument();
                 doc.Load(LoadXmlConfig(Configuration.ArquivoConfigGeral));
@@ -528,13 +548,20 @@ namespace Unimake.Business.DFe.Servicos
                     {
                         var elementArquivos = (XmlElement)nodeArquivos;
 
-                        if(elementArquivos.GetAttribute("ID") != Configuracoes.CodigoUF.ToString())
+                        if(elementArquivos.GetAttribute("ID") != Configuracoes.CodigoConfig.ToString())
                         {
                             continue;
                         }
 
                         Configuracoes.Nome = elementArquivos.GetElementsByTagName("Nome")[0].InnerText;
                         Configuracoes.NomeUF = elementArquivos.GetElementsByTagName("UF")[0].InnerText;
+                        Configuracoes.PadraoNFSe = PadraoNFSe.None;
+                        
+                        if(XMLUtility.TagExist(elementArquivos, "PadraoNFSe"))
+                        {
+                            Configuracoes.PadraoNFSe = (PadraoNFSe)Enum.Parse(typeof(PadraoNFSe), XMLUtility.TagRead(elementArquivos, "PadraoNFSe"));
+                        }
+
                         LerXmlConfigEspecifico(GetConfigFile(elementArquivos.GetElementsByTagName("ArqConfig")[0].InnerText));
 
                         break;
@@ -611,6 +638,7 @@ namespace Unimake.Business.DFe.Servicos
                 EnderecoWeb = (Configuracoes.TipoAmbiente == TipoAmbiente.Producao ? Configuracoes.WebEnderecoProducao : Configuracoes.WebEnderecoHomologacao),
                 ActionWeb = (Configuracoes.TipoAmbiente == TipoAmbiente.Producao ? Configuracoes.WebActionProducao : Configuracoes.WebActionHomologacao),
                 TagRetorno = Configuracoes.WebTagRetorno,
+                EncodingRetorno = Configuracoes.WebEncodingRetorno,
                 VersaoSoap = Configuracoes.WebSoapVersion,
                 SoapString = Configuracoes.WebSoapString,
                 ContentType = Configuracoes.WebContentType,

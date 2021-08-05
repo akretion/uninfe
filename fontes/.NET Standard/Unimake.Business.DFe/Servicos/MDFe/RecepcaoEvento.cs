@@ -129,14 +129,9 @@ namespace Unimake.Business.DFe.Servicos.MDFe
                                 xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoEncMDFe>((DetEventoEncMDFe)xml.InfEvento.DetEvento).OuterXml);
                                 break;
 
-                            //case TipoEventoMDFe.CancelamentoPorSubstituicao:
-                            //    break;
-
-                            //case TipoEventoMDFe.EPEC:
-                            //    break;
-
-                            //case TipoEventoMDFe.PedidoProrrogacao:
-                            //    break;
+                            case TipoEventoMDFe.PagamentoOperacao:
+                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoPagtoOperMDFe>((DetEventoPagtoOperMDFe)xml.InfEvento.DetEvento).OuterXml);
+                                break;
 
                             default:
                                 throw new Exception("Não foi possível identificar o tipo de evento.");

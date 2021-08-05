@@ -13,8 +13,8 @@ namespace Unimake.Business.DFe.Contract.Serialization
         /// <summary>
         /// Executa o processamento do XMLReader recebido na deserialização
         /// </summary>
-        ///<param name="reader">Reader XML recebido durante o processo de deserialização</param>
-        void ReadXml(XmlReader reader);
+        ///<param name="document">XML recebido durante o processo de deserialização</param>
+        void ReadXml(XmlDocument document);
 
         /// <summary>
         /// Executa o processamento do XMLReader recebido na serialização

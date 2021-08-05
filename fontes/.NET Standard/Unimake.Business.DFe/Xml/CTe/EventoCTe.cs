@@ -487,7 +487,7 @@ namespace Unimake.Business.DFe.Xml.CTe
         /// Executa o processamento do XMLReader recebido na deserialização
         /// </summary>
         ///<param name="reader">Reader XML recebido durante o processo de deserialização</param>
-        public void ReadXml(XmlReader reader)
+        public void ReadXml(XmlDocument document)
         {
 
         }

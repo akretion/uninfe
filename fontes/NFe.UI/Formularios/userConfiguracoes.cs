@@ -333,6 +333,7 @@ namespace NFe.UI
             oempresa.GravarEventosCancelamentoNaPastaEnviadosNFe = empresa.GravarEventosCancelamentoNaPastaEnviadosNFe;
             oempresa.GravarEventosDeTerceiros = empresa.GravarEventosDeTerceiros;
             oempresa.IndSinc = empresa.IndSinc;
+            oempresa.IndSincNFCe = empresa.IndSincNFCe;
 
             oempresa.CodigoAtivacaoSAT = empresa.CodigoAtivacaoSAT;
             oempresa.MarcaSAT = empresa.MarcaSAT;

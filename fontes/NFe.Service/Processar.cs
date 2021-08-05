@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Net;
 using NFe.Service.GNRE;
+using Unimake.Business.DFe.Security;
 
 #if _fw46
 
@@ -34,6 +35,12 @@ namespace NFe.Service
                 Servicos servico = Servicos.Nulo;
                 try
                 {
+                    #region Carregar PIN A3 se ainda não carregou
+
+                    CarregarPINA3(emp);
+
+                    #endregion
+
                     if(emp == -1)
                     {
                         ValidarExtensao(arquivo);
@@ -560,6 +567,21 @@ namespace NFe.Service
                 }
             }
             catch { }
+        }
+
+        private void CarregarPINA3(int emp)
+        {
+            if(!string.IsNullOrWhiteSpace(Empresas.Configuracoes[emp].CertificadoPIN) && !Empresas.Configuracoes[emp].CertificadoPINCarregado)
+            {
+                try
+                {
+                    Empresas.Configuracoes[emp].X509Certificado.SetPinPrivateKey(Empresas.Configuracoes[emp].CertificadoPIN);
+                    Empresas.Configuracoes[emp].CertificadoPINCarregado = true;
+                }
+                catch
+                {
+                }
+            }
         }
 
         #endregion ProcessaArquivo()
@@ -1936,7 +1958,7 @@ namespace NFe.Service
         {
             if(new CertificadoDigital().Vencido(emp))
             {
-                throw new ExceptionCertificadoDigital(ErroPadrao.CertificadoVencido, "(" + Empresas.Configuracoes[emp].X509Certificado.NotBefore.ToString() + " a " + Empresas.Configuracoes[emp].X509Certificado.NotAfter.ToString() + ")");
+                //throw new ExceptionCertificadoDigital(ErroPadrao.CertificadoVencido, "(" + Empresas.Configuracoes[emp].X509Certificado.NotBefore.ToString() + " a " + Empresas.Configuracoes[emp].X509Certificado.NotAfter.ToString() + ")");
             }
         }
 

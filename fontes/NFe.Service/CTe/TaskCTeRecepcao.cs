@@ -2,12 +2,15 @@
 using NFe.Exceptions;
 using NFe.Settings;
 using System;
+using System.IO;
 using System.Threading;
 using System.Xml;
+using Unimake.Business.DFe.Servicos;
+using Unimake.Business.DFe.Xml.CTe;
 
 namespace NFe.Service
 {
-    public class TaskCTeRecepcao : TaskAbst
+    public class TaskCTeRecepcao: TaskAbst
     {
         public TaskCTeRecepcao(string arquivo)
         {
@@ -40,71 +43,67 @@ namespace NFe.Service
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             try
             {
                 dadosRec = new DadosRecClass();
-                FluxoNfe fluxoNfe = new FluxoNfe();
-                LerXML lerXml = new LerXML();
+                var fluxoNfe = new FluxoNfe();
 
-                //Ler o XML de Lote para pegar o número do lote que está sendo enviado
+                var lerXml = new LerXML();
                 lerXml.Cte(ConteudoXML);
 
                 var idLote = lerXml.oDadosNfe.idLote;
 
-                //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(
-                    Servico, 
-                    emp, 
-                    Convert.ToInt32(lerXml.oDadosNfe.cUF), 
-                    Convert.ToInt32(lerXml.oDadosNfe.tpAmb), 
-                    Convert.ToInt32(lerXml.oDadosNfe.tpEmis),
-                    0);
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(lerXml.oDadosNfe.cUF), Convert.ToInt32(lerXml.oDadosNfe.tpAmb), Convert.ToInt32(lerXml.oDadosNfe.tpEmis), Servico);
+                var xmlCTe = new EnviCTe();
+                xmlCTe = Unimake.Business.DFe.Utility.XMLUtility.Deserializar<EnviCTe>(ConteudoXML);
 
-                //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(lerXml.oDadosNfe.cUF), Servico, Convert.ToInt32(lerXml.oDadosNfe.tpEmis)));
+                var configuracao = new Configuracao
+                {
+                    TipoDFe = TipoDFe.CTe,
+                    CertificadoDigital = Empresas.Configuracoes[emp].X509Certificado
+                };
 
-                //Atribuir conteúdo para duas propriedades da classe nfeCabecMsg
-                wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), lerXml.oDadosNfe.cUF);
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), lerXml.oDadosNfe.versao);
+                if(ConfiguracaoApp.Proxy)
+                {
+                    configuracao.HasProxy = true;
+                    configuracao.ProxyAutoDetect = ConfiguracaoApp.DetectarConfiguracaoProxyAuto;
+                    configuracao.ProxyUser = ConfiguracaoApp.ProxyUsuario;
+                    configuracao.ProxyPassword = ConfiguracaoApp.ProxySenha;
+                }
 
-                //
-                //XML neste ponto o CTe já está assinado, pois foi assinado, validado e montado o lote para envio por outro serviço.
-                //Fica aqui somente este lembrete. Wandrey 16/03/2010
-                //
+                var autorizacao = new Unimake.Business.DFe.Servicos.CTe.Autorizacao(xmlCTe, configuracao);
+                autorizacao.Executar();
 
-                //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy,
-                                    oRecepcao,
-                                    wsProxy.NomeMetodoWS[0],
-                                    oCabecMsg, this,
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML,
-                                    Propriedade.ExtRetorno.Rec,
-                                    true,
-                                    securityProtocolType);
+                ConteudoXML = autorizacao.ConteudoXMLAssinado;
+
+                SalvarArquivoEmProcessamento(emp, lerXml.oDadosNfe.chavenfe);
+
+                vStrXmlRetorno = autorizacao.RetornoWSString;
+
+                oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.EnvLot).EnvioXML, Propriedade.ExtRetorno.Rec, vStrXmlRetorno);
 
                 #region Parte que trata o retorno do lote, ou seja, o número do recibo
 
                 Recibo(vStrXmlRetorno, emp);
 
-                if (dadosRec.cStat == "103") //Lote recebido com sucesso
+                if(dadosRec.cStat == "103") //Lote recebido com sucesso
                 {
-                    if (dadosRec.tMed > 0)
+                    if(dadosRec.tMed > 0)
+                    {
                         Thread.Sleep(dadosRec.tMed * 1000);
+                    }
 
                     //Atualizar o número do recibo no XML de controle do fluxo de notas enviadas
                     fluxoNfe.AtualizarTag(lerXml.oDadosNfe.chavenfe, FluxoNfe.ElementoEditavel.tMed, (dadosRec.tMed + 2).ToString());
                     fluxoNfe.AtualizarTagRec(idLote, dadosRec.nRec);
-                    XmlDocument xmlPedRec = oGerarXML.XmlPedRecCTe(dadosRec.nRec, dadosRec.versao, emp);
-                    TaskCTeRetRecepcao cteRetRecepcao = new TaskCTeRetRecepcao(xmlPedRec);
+                    var xmlPedRec = oGerarXML.XmlPedRecCTe(dadosRec.nRec, dadosRec.versao, emp);
+                    var cteRetRecepcao = new TaskCTeRetRecepcao(xmlPedRec);
                     cteRetRecepcao.Execute();
                 }
-                else if (Convert.ToInt32(dadosRec.cStat) > 200 ||
-                         Convert.ToInt32(dadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
-                         Convert.ToInt32(dadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012
+                else if(Convert.ToInt32(dadosRec.cStat) > 200 ||
+                    Convert.ToInt32(dadosRec.cStat) == 108 || //Verifica se o servidor de processamento está paralisado momentaneamente. Wandrey 13/04/2012
+                    Convert.ToInt32(dadosRec.cStat) == 109) //Verifica se o servidor de processamento está paralisado sem previsão. Wandrey 13/04/2012
                 {
                     //Se o status do retorno do lote for maior que 200 ou for igual a 108 ou 109,
                     //vamos ter que excluir a nota do fluxo, porque ela foi rejeitada pelo SEFAZ
@@ -117,9 +116,9 @@ namespace NFe.Service
                 //Deleta o arquivo de lote
                 Functions.DeletarArquivo(NomeArquivoXML);
 
-                #endregion Parte que trata o retorno do lote, ou seja, o número do recibo
+                #endregion 
             }
-            catch (ExceptionEnvioXML ex)
+            catch(ExceptionEnvioXML ex)
             {
                 //Ocorreu algum erro no exato momento em que tentou enviar o XML para o SEFAZ, vou ter que tratar
                 //para ver se o XML chegou lá ou não, se eu consegui pegar o número do recibo de volta ou não, etc.
@@ -135,7 +134,7 @@ namespace NFe.Service
                     //Wandrey 16/03/2010
                 }
             }
-            catch (ExceptionSemInternet ex)
+            catch(ExceptionSemInternet ex)
             {
                 try
                 {
@@ -148,7 +147,7 @@ namespace NFe.Service
                     //Wandrey 16/03/2010
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {
@@ -164,6 +163,29 @@ namespace NFe.Service
         }
 
         #endregion Execute
+
+        /// <summary>
+        /// Salvar o arquivo do CTe assinado na pasta EmProcessamento
+        /// </summary>
+        /// <param name="emp">Codigo da empresa</param>
+        /// <param name="chaveCTe">Chave do CTe</param>
+        private void SalvarArquivoEmProcessamento(int emp, string chaveCTe)
+        {
+            Empresas.Configuracoes[emp].CriarSubPastaEnviado();
+
+            var fluxoNFe = new FluxoNfe();
+            var nomeArqCTe = fluxoNFe.LerTag(chaveCTe, FluxoNfe.ElementoFixo.ArqNFe);
+
+            var arqEmProcessamento = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + nomeArqCTe;
+            var sw = File.CreateText(arqEmProcessamento);
+            sw.Write("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + ConteudoXML.GetElementsByTagName("CTe")[0].OuterXml);
+            sw.Close();
+
+            if(File.Exists(arqEmProcessamento))
+            {
+                File.Delete(Empresas.Configuracoes[emp].PastaXmlEnvio + "\\temp\\" + nomeArqCTe);
+            }
+        }
 
         #region Recibo
 
@@ -189,34 +211,38 @@ namespace NFe.Service
                 dadosRec.nRec = string.Empty;
             dadosRec.tMed = 0;
 
-            XmlDocument xml = new XmlDocument();
+            var xml = new XmlDocument();
             xml.Load(Functions.StringXmlToStream(strXml));
 
             XmlNodeList retEnviNFeList = null;
 
             retEnviNFeList = xml.GetElementsByTagName("retEnviCte");
 
-            foreach (XmlNode retEnviNFeNode in retEnviNFeList)
+            foreach(XmlNode retEnviNFeNode in retEnviNFeList)
             {
-                XmlElement retEnviNFeElemento = (XmlElement)retEnviNFeNode;
+                var retEnviNFeElemento = (XmlElement)retEnviNFeNode;
 
                 dadosRec.cStat = retEnviNFeElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
                 dadosRec.versao = retEnviNFeElemento.Attributes[TpcnResources.versao.ToString()].InnerText;
 
-                XmlNodeList infRecList = xml.GetElementsByTagName("infRec");
+                var infRecList = xml.GetElementsByTagName("infRec");
 
-                foreach (XmlNode infRecNode in infRecList)
+                foreach(XmlNode infRecNode in infRecList)
                 {
-                    XmlElement infRecElemento = (XmlElement)infRecNode;
+                    var infRecElemento = (XmlElement)infRecNode;
 
                     dadosRec.nRec = infRecElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
                     dadosRec.tMed = Convert.ToInt32(infRecElemento.GetElementsByTagName(TpcnResources.tMed.ToString())[0].InnerText);
 
-                    if (dadosRec.tMed > 15)
+                    if(dadosRec.tMed > 15)
+                    {
                         dadosRec.tMed = 15;
+                    }
 
-                    if (dadosRec.tMed <= 0)
+                    if(dadosRec.tMed <= 0)
+                    {
                         dadosRec.tMed = Empresas.Configuracoes[emp].TempoConsulta;
+                    }
                 }
             }
         }

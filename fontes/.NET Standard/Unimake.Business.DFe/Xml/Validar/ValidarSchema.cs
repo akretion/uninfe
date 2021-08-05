@@ -43,8 +43,9 @@ namespace Unimake.Business.DFe
         /// Extrair recursos (XSD) da DLL para efetuar a validação do XML
         /// </summary>
         /// <param name="arqSchema">Arquivo XSD a ser extraido</param>
+        /// <param name="padraoNFSe">Padrão da NFSe (Necessário para determinar a subpasta de onde vai pegar o pacote de schemas)</param>
         /// <returns>Retorna os schemas a serem utilizados na validação</returns>
-        private IEnumerable<XmlSchema> ExtractSchemasResource(string arqSchema)
+        private IEnumerable<XmlSchema> ExtractSchemasResource(string arqSchema, Servicos.PadraoNFSe padraoNFSe = Servicos.PadraoNFSe.None)
         {
             var files = new List<string>();
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
@@ -61,7 +62,12 @@ namespace Unimake.Business.DFe
                 }
             }
 
-            var schemaPrincipal = arqSchema.Substring(arqSchema.IndexOf(".") + 1);
+            var pesquisar = ".";
+            if(padraoNFSe != Servicos.PadraoNFSe.None)
+            {
+                pesquisar += padraoNFSe.ToString() + ".";
+            }
+            var schemaPrincipal = arqSchema.Substring(arqSchema.IndexOf(pesquisar) + pesquisar.Length);
             var doc = new XmlDocument();
 
             var keys = new HashSet<string>
@@ -74,10 +80,17 @@ namespace Unimake.Business.DFe
 
             var getAttrib = new Func<XmlAttribute>(() =>
             {
-                return doc.DocumentElement.ChildNodes.OfType<XmlNode>()
-                .Where(wNode => wNode.Attributes.OfType<XmlAttribute>().Any(wAttrib => wAttrib.Name == "schemaLocation" && !keys.Contains(wAttrib.Value)))
-                .Select(s => s.Attributes.OfType<XmlAttribute>().First(w => w.Name == "schemaLocation"))
-                .FirstOrDefault();
+                XmlAttribute retorna = null;
+                try
+                {
+                    retorna = doc.DocumentElement.ChildNodes.OfType<XmlNode>()
+                    .Where(wNode => wNode.Attributes.OfType<XmlAttribute>().Any(wAttrib => wAttrib.Name == "schemaLocation" && !keys.Contains(wAttrib.Value)))
+                    .Select(s => s.Attributes.OfType<XmlAttribute>().First(w => w.Name == "schemaLocation"))
+                    .FirstOrDefault();
+                }
+                catch { }
+
+                return retorna;
             });
 
             while((attrib = getAttrib()) != null)
@@ -100,7 +113,10 @@ namespace Unimake.Business.DFe
 
                 if(getAttrib() == null)
                 {
-                    doc.LoadXml(conteudoSchemaInterno);
+                    if(!string.IsNullOrWhiteSpace(conteudoSchemaInterno))
+                    {
+                        doc.LoadXml(conteudoSchemaInterno);
+                    }
                 }
             }
 
@@ -172,6 +188,7 @@ namespace Unimake.Business.DFe
         /// <param name="conteudoXML">Nome do arquivo XML a ser validado</param>
         /// <param name="arqSchema">Arquivo de schema para validação do XML (XSD) contido nos recursos da DLL.</param>
         /// <param name="targetNS">Target Name Space, se existir, para validação</param>
+        /// <param name="padraoNFSe">Padrão da NFSe (Necessário para determinar a subpasta de onde vai pegar o pacote de schemas)</param>
         /// <example>
         /// //Validar arquivos de NFe
         /// Validar(xmlDocument, "NFe.consStatServCTe_v3.00.xsd")
@@ -183,7 +200,7 @@ namespace Unimake.Business.DFe
         /// Validar(xmlDocument, "MDFe.consStatServ_v4.00.xsd")
         /// </example>
         [ComVisible(false)]
-        public void Validar(XmlDocument conteudoXML, string arqSchema, string targetNS = "")
+        public void Validar(XmlDocument conteudoXML, string arqSchema, string targetNS = "", Servicos.PadraoNFSe padraoNFSe = Servicos.PadraoNFSe.None)
         {
             if(string.IsNullOrEmpty(arqSchema))
             {
@@ -212,7 +229,7 @@ namespace Unimake.Business.DFe
 
                 if(!string.IsNullOrWhiteSpace(targetNS))
                 {
-                    foreach(var schema in ExtractSchemasResource(arqSchema))
+                    foreach(var schema in ExtractSchemasResource(arqSchema, padraoNFSe))
                     {
                         settings.Schemas.Add(schema);
                     }

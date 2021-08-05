@@ -74,10 +74,33 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         public string CertificadoSenha { get; set; }
 
+
+        /// <summary>
+        /// Código da configuração
+        /// </summary>
+        public int CodigoConfig
+        {
+            get
+            {
+                var codigo = (CodigoUF != 0 ? CodigoUF : CodigoMunicipio);
+                return codigo;
+            }
+        }
+
         /// <summary>
         /// Código da Unidade Federativa (UF)
         /// </summary>
         public int CodigoUF { get; set; }
+
+        /// <summary>
+        /// Código do IBGE do Município (Utilizando no envio de NFSe)
+        /// </summary>
+        public int CodigoMunicipio { get; set; }
+
+        /// <summary>
+        /// Padrão da NFSe
+        /// </summary>
+        public PadraoNFSe PadraoNFSe { get; set; }
 
         /// <summary>
         /// CSC = Código de segurança do contribuinte. Utilizado para criar o QRCode da NFCe
@@ -169,6 +192,16 @@ namespace Unimake.Business.DFe.Servicos
         /// Nome da tag que tem o atributo de identificador único a ser utilizado no Reference.URI da assinatura, quando tem lote (Exemplo: Uma lote com várias NFe ou NFSe)
         /// </summary>
         public string TagLoteAtributoID { get; set; }
+
+        /// <summary>
+        /// Nome da tag de Assinatura do XML, quando tiver uma terceira tag para assinar (É o caso da Substituição da NFSe)
+        /// </summary>
+        public string TagExtraAssinatura { get; set; }
+
+        /// <summary>
+        /// Nome da tag que tem o atributo de identificador único a ser utilizado no Reference.URI da assinatura
+        /// </summary>
+        public string TagExtraAtributoID { get; set; }
 
         /// <summary>
         /// Namespace do XML para validação de schema
@@ -268,6 +301,11 @@ namespace Unimake.Business.DFe.Servicos
         /// Nome da tag de retorno do serviço
         /// </summary>
         public string WebTagRetorno { get; set; }
+
+        /// <summary>
+        /// Encoding do XML retornado pelo webservice (Padrão é UTF-8, mas tem webservices que retornam em encodings diferentes, para estes tem que definir para que os caracteres fiquem corretos.)
+        /// </summary>
+        public string WebEncodingRetorno { get; set; }
 
         #endregion Public Properties
     }

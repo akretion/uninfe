@@ -2,8 +2,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
@@ -58,21 +59,8 @@ namespace Unimake.Business.DFe.Xml.MDFe
         #endregion Private Fields
 
         #region Internal Methods
-        internal override void SetValue(PropertyInfo pi)
-        {
-            if(pi.Name == nameof(CondutorMDFe))
-            {
-                XmlReader.Read();
-                CondutorMDFe.Add(new CondutorMDFe
-                {
-                    XNome = XmlReader.GetValue<string>(nameof(Xml.MDFe.CondutorMDFe.XNome)),
-                    CPF = XmlReader.GetValue<string>(nameof(Xml.MDFe.CondutorMDFe.CPF))
-                });
-                return;
-            }
 
-            base.SetValue(pi);
-        }
+        internal override void SetValue(PropertyInfo pi) => base.SetValue(pi);
 
         #endregion Internal Methods
 
@@ -98,6 +86,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
             get => EventoIncCondutor.Condutor;
             set => EventoIncCondutor.Condutor = value;
         }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -123,7 +112,6 @@ namespace Unimake.Business.DFe.Xml.MDFe
         }
 
         #endregion Public Methods
-
     }
 
     [Serializable]
@@ -149,12 +137,11 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
 #endif
 
-        #endregion
-
+        #endregion Public Methods
     }
 
     [Serializable()]
-    [XmlType(Namespace = "http://www.portalfiscal.inf.br/cte")]
+    [XmlType(Namespace = "http://www.portalfiscal.inf.br/mdfe")]
     public class CondutorMDFe
     {
         [XmlElement("xNome", Order = 0)]
@@ -175,6 +162,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
         #endregion Private Fields
 
         #region Internal Methods
+
         internal override void SetValue(PropertyInfo pi)
         {
             if(pi.Name == nameof(InfDoc))
@@ -237,6 +225,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
             get => EventoIncDFeMDFe.InfDoc;
             set => EventoIncDFeMDFe.InfDoc = value;
         }
+
         #endregion Public Properties
 
         #region Public Methods
@@ -266,7 +255,6 @@ namespace Unimake.Business.DFe.Xml.MDFe
         }
 
         #endregion Public Methods
-
     }
 
     [Serializable]
@@ -387,6 +375,158 @@ namespace Unimake.Business.DFe.Xml.MDFe
     {
         #region Private Methods
 
+        private void PrepararCondutor(XmlDocument xmlDoc)
+        {
+            var condutores = xmlDoc.GetElementsByTagName("condutor");
+
+            if(!(condutores?.Count > 0))
+            {
+                return;
+            }
+
+            if(InfEvento.DetEvento is DetEventoIncCondutor detEvento)
+            {
+                detEvento.CondutorMDFe = new List<CondutorMDFe>();
+
+                foreach(var elementCondutorMDFe in condutores.Cast<XmlElement>())
+                {
+                    detEvento.CondutorMDFe.Add(new CondutorMDFe
+                    {
+                        XNome = elementCondutorMDFe.GetValue<string>(nameof(PagtoOperMDFeInfPag.XNome)),
+                        CPF = elementCondutorMDFe.GetValue<string>(nameof(PagtoOperMDFeInfPag.CPF))                    
+                    });
+                }
+            }
+        }
+
+        private void PrepararInfViagens(XmlDocument xmlDoc)
+        {
+            var infViagens = xmlDoc.GetElementsByTagName("infViagens");
+
+            if(!(infViagens?.Count > 0))
+            {
+                return;
+            }
+
+            if(InfEvento.DetEvento is DetEventoPagtoOperMDFe detEvento)
+            {
+                var infViagensElement = ((XmlElement)infViagens[0]);
+
+                detEvento.InfViagens = new InfViagens
+                {
+                    QtdViagens = infViagensElement.GetValue<int>(nameof(InfViagens.QtdViagens)),
+                    NroViagem = infViagensElement.GetValue<int>(nameof(InfViagens.NroViagem))
+                };
+            }
+        }
+
+        private void PrepararInfPag(XmlDocument xmlDoc)
+        {
+            var infPags = xmlDoc.GetElementsByTagName("infPag");
+
+            if(!(infPags?.Count > 0))
+            {
+                return;
+            }
+
+            if(InfEvento.DetEvento is DetEventoPagtoOperMDFe detEvento)
+            {
+                detEvento.InfPag = new List<PagtoOperMDFeInfPag>();
+
+                foreach(var elementInfPag in infPags.Cast<XmlElement>())
+                {
+                    detEvento.InfPag.Add(new PagtoOperMDFeInfPag
+                    {
+                        XNome = elementInfPag.GetValue<string>(nameof(PagtoOperMDFeInfPag.XNome)),
+                        CNPJ = elementInfPag.GetValue<string>(nameof(PagtoOperMDFeInfPag.CNPJ)),
+                        CPF = elementInfPag.GetValue<string>(nameof(PagtoOperMDFeInfPag.CPF)),
+                        IdEstrangeiro = elementInfPag.GetValue<string>(nameof(PagtoOperMDFeInfPag.IdEstrangeiro)),
+                        VContrato = elementInfPag.GetValue<double>(nameof(PagtoOperMDFeInfPag.VContrato)),
+                        IndPag = elementInfPag.GetValue<IndicadorPagamento>(nameof(PagtoOperMDFeInfPag.IndPag)),
+                        VAdiant = elementInfPag.GetValue<double>(nameof(PagtoOperMDFeInfPag.VAdiant))
+                    });
+
+                    PrepararComp(elementInfPag);
+                    PrepararInfPrazo(elementInfPag);
+                    PrepararInfBanc(elementInfPag);
+
+                }
+            }
+        }
+
+        private void PrepararComp(XmlElement xmlDoc)
+        {
+            var comps = xmlDoc.GetElementsByTagName("Comp");
+
+            if(!(comps?.Count > 0))
+            {
+                return;
+            }
+
+            if(InfEvento.DetEvento is DetEventoPagtoOperMDFe detEvento)
+            {
+                detEvento.InfPag[detEvento.InfPag.Count - 1].Comp = new List<Comp>();
+
+                foreach(var elComp in comps.Cast<XmlElement>())
+                {
+                    detEvento.InfPag[detEvento.InfPag.Count - 1].Comp.Add(new Comp
+                    {
+                        TpComp = elComp.GetValue<TipoComponenteMDFe>(nameof(Comp.TpComp)),
+                        VCompField = elComp.GetValue<string>(nameof(Comp.VComp)),
+                        XComp = elComp.GetValue<string>(nameof(Comp.XComp))
+                    });
+                }
+            }
+        }
+
+        private void PrepararInfBanc(XmlElement xmlDoc)
+        {
+            var infBanc = xmlDoc.GetElementsByTagName("infBanc");
+
+            if(!(infBanc?.Count > 0))
+            {
+                return;
+            }
+
+            if(InfEvento.DetEvento is DetEventoPagtoOperMDFe detEvento)
+            {
+                var infBancElement = ((XmlElement)infBanc[0]);
+
+                detEvento.InfPag[detEvento.InfPag.Count - 1].InfBanc = new InfBanc
+                {
+                    CNPJIPEF = infBancElement.GetValue<string>(nameof(InfBanc.CNPJIPEF)),
+                    CodAgencia = infBancElement.GetValue<string>(nameof(InfBanc.CodAgencia)),
+                    CodBanco = infBancElement.GetValue<string>(nameof(InfBanc.CodBanco)),
+                    PIX = infBancElement.GetValue<string>(nameof(InfBanc.PIX))
+                };
+            }
+        }
+
+        private void PrepararInfPrazo(XmlElement xmlDoc)
+        {
+            var infPrazos = xmlDoc.GetElementsByTagName("infPrazo");
+
+            if(!(infPrazos?.Count > 0))
+            {
+                return;
+            }
+
+            if(InfEvento.DetEvento is DetEventoPagtoOperMDFe detEvento)
+            {
+                detEvento.InfPag[detEvento.InfPag.Count - 1].InfPrazo = new List<InfPrazo>();
+
+                foreach(var elInfPrazo in infPrazos.Cast<XmlElement>())
+                {
+                    detEvento.InfPag[detEvento.InfPag.Count - 1].InfPrazo.Add(new InfPrazo
+                    {
+                        DVencField = elInfPrazo.GetValue<string>(nameof(InfPrazo.DVenc)),
+                        NParcela = elInfPrazo.GetValue<string>(nameof(InfPrazo.NParcela)),
+                        VParcelaField = elInfPrazo.GetValue<string>(nameof(InfPrazo.VParcela)),
+                    });
+                }
+            }
+        }
+
         private void SignEvent(EventoMDFe evento, XmlElement xmlEl)
         {
             var signature = xmlEl.GetElementsByTagName("Signature")[0];
@@ -435,6 +575,23 @@ namespace Unimake.Business.DFe.Xml.MDFe
             return xmlDocument;
         }
 
+        public override void ReadXml(XmlDocument document)
+        {
+            base.ReadXml(document);
+
+            switch(document.GetElementsByTagName("tpEvento")[0].InnerText)
+            {
+                case "110116":
+                    PrepararInfViagens(document);
+                    PrepararInfPag(document);
+                    break;
+
+                case "110114":
+                    PrepararCondutor(document);
+                    break;
+            }
+        }
+
         public override T LerXML<T>(XmlDocument doc)
         {
             if(typeof(T) != typeof(EventoMDFe))
@@ -445,7 +602,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
             var retornar = base.LerXML<T>(doc) as EventoMDFe;
             var eventos = doc.GetElementsByTagName("eventoMDFe");
 
-            if((eventos?.Count ?? 0) > 0)
+            if(eventos?.Count > 0)
             {
                 var xmlEl = (XmlElement)eventos[0];
 
@@ -563,6 +720,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
         }
 
         internal virtual void SetValue(PropertyInfo pi) => pi?.SetValue(this, XmlReader.GetValue<object>(XmlReader.Name, pi));
+
         #endregion Internal Methods
 
         #region Public Properties
@@ -603,7 +761,7 @@ namespace Unimake.Business.DFe.Xml.MDFe
 
         [XmlElement("CNPJ", Order = 2)]
         public string CNPJ { get; set; }
-        
+
         [XmlElement("CPF", Order = 3)]
         public string CPF { get; set; }
 
@@ -629,10 +787,6 @@ namespace Unimake.Business.DFe.Xml.MDFe
                         _detEvento = value;
                         break;
 
-                    //case TipoEventoMDFe.CartaCorrecao:
-                    //    _detEvento = new DetEventoCCE();
-                    //    break;
-
                     case TipoEventoMDFe.Cancelamento:
                         _detEvento = value is DetEventoCanc ? value : new DetEventoCanc();
                         break;
@@ -649,16 +803,10 @@ namespace Unimake.Business.DFe.Xml.MDFe
                         _detEvento = value is DetEventoIncDFeMDFe ? value : new DetEventoIncDFeMDFe();
                         break;
 
-                    //case TipoEventoNFe.ManifestacaoConfirmacaoOperacao:
-                    //case TipoEventoNFe.ManifestacaoCienciaOperacao:
-                    //case TipoEventoNFe.ManifestacaoDesconhecimentoOperacao:
-                    //case TipoEventoNFe.ManifestacaoOperacaoNaoRealizada:
-                    //    _detEvento = new DetEventoManif();
-                    //    break;
+                    case TipoEventoMDFe.PagamentoOperacao:
+                        _detEvento = value is DetEventoPagtoOperMDFe ? value : new DetEventoPagtoOperMDFe();
+                        break;
 
-                    //case TipoEventoNFe.CancelamentoPorSubstituicao:
-                    //case TipoEventoNFe.EPEC:
-                    //case TipoEventoNFe.PedidoProrrogacao:
                     default:
                         throw new NotImplementedException($"O tipo de evento '{TpEvento}' não está implementado.");
                 }
@@ -709,8 +857,260 @@ namespace Unimake.Business.DFe.Xml.MDFe
         #region Public Methods
 
         public bool ShouldSerializeCNPJ() => !string.IsNullOrWhiteSpace(CNPJ);
+
         public bool ShouldSerializeCPF() => !string.IsNullOrWhiteSpace(CPF);
 
         #endregion Public Methods
+    }
+
+    [Serializable]
+    [XmlRoot(ElementName = "detEventoPagtoOperMDFe")]
+    public class DetEventoPagtoOperMDFe: EventoDetalhe
+    {
+        private EventoPagtoOperMDFe _eventoPagtoOperMDFe;
+
+        internal override void SetValue(PropertyInfo pi) => base.SetValue(pi);
+
+        [XmlElement(ElementName = "evPagtoOperMDFe", Order = 0)]
+        public EventoPagtoOperMDFe EventoPagtoOperMDFe
+        {
+            get => _eventoPagtoOperMDFe ?? (_eventoPagtoOperMDFe = new EventoPagtoOperMDFe());
+            set => _eventoPagtoOperMDFe = value;
+        }
+
+        [XmlIgnore]
+        public override string DescEvento
+        {
+            get => EventoPagtoOperMDFe.DescEvento;
+            set => EventoPagtoOperMDFe.DescEvento = value;
+        }
+
+        [XmlIgnore]
+        public string NProt
+        {
+            get => EventoPagtoOperMDFe.NProt;
+            set => EventoPagtoOperMDFe.NProt = value;
+        }
+
+        [XmlIgnore]
+        public InfViagens InfViagens
+        {
+            get => EventoPagtoOperMDFe.InfViagens;
+            set => EventoPagtoOperMDFe.InfViagens = value;
+        }
+
+        [XmlIgnore]
+        public List<PagtoOperMDFeInfPag> InfPag
+        {
+            get => EventoPagtoOperMDFe.InfPag;
+            set => EventoPagtoOperMDFe.InfPag = value;
+        }
+
+        public override void WriteXml(XmlWriter writer)
+        {
+            base.WriteXml(writer);
+
+            var writeRaw = $@"<evPagtoOperMDFe>
+                <descEvento>{DescEvento}</descEvento>
+                <nProt>{NProt}</nProt>
+                <infViagens>
+                <qtdViagens>{InfViagens.QtdViagens}</qtdViagens>
+                <nroViagem>{InfViagens.NroViagem}</nroViagem>
+                </infViagens>";
+
+            foreach(var infPag in InfPag)
+            {
+                writeRaw += $@"<infPag>
+                               <xNome>{infPag.XNome}</xNome>";
+
+                if(!string.IsNullOrWhiteSpace(infPag.CNPJ))
+                {
+                    writeRaw += $@"<CNPJ>{infPag.CNPJ}</CNPJ>";
+                }
+                else if(!string.IsNullOrWhiteSpace(infPag.CPF))
+                {
+                    writeRaw += $@"<CPF>{infPag.CPF}</CPF>";
+                }
+                else if(!string.IsNullOrWhiteSpace(infPag.IdEstrangeiro))
+                {
+                    writeRaw += $@"<idEstrangeiro>{infPag.IdEstrangeiro}</idEstrangeiro>";
+                }
+
+                foreach(var comp in infPag.Comp)
+                {
+                    writeRaw += $@"<Comp>
+                                   <tpComp>{((int)comp.TpComp).ToString("00")}</tpComp>
+                                   <vComp>{comp.VCompField}</vComp>";
+
+                    if(comp.TpComp == TipoComponenteMDFe.Outros && !string.IsNullOrWhiteSpace(comp.XComp))
+                    {
+                        writeRaw += $@"<xComp>{comp.XComp}</xComp>";
+                    }
+
+                    writeRaw += $@"</Comp>";
+                }
+
+                writeRaw += $@"<vContrato>{infPag.VContratoField}</vContrato>
+                               <indPag>{infPag.IndPagField}</indPag>
+                               <vAdiant>{infPag.VAdiantField}</vAdiant>";
+
+                foreach(var infPrazo in infPag.InfPrazo)
+                {
+                    writeRaw += $@"<infPrazo>
+                                   <nParcela>{infPrazo.NParcela}</nParcela>
+                                   <dVenc>{infPrazo.DVencField}</dVenc>
+                                   <vParcela>{infPrazo.VParcelaField}</vParcela>
+                                   </infPrazo>";
+                }
+
+                writeRaw += $@"<infBanc>";
+
+                if(!string.IsNullOrWhiteSpace(infPag.InfBanc.CodAgencia))
+                {
+                    writeRaw += $@"<codBanco>{infPag.InfBanc.CodAgencia}</codBanco>";
+                }
+                if(!string.IsNullOrWhiteSpace(infPag.InfBanc.CodBanco))
+                {
+                    writeRaw += $@"<codAgencia>{infPag.InfBanc.CodBanco}</codAgencia>";
+                }
+                if(!string.IsNullOrWhiteSpace(infPag.InfBanc.CNPJIPEF))
+                {
+                    writeRaw += $@"<CNPJIPEF>{infPag.InfBanc.CNPJIPEF}</CNPJIPEF>";
+                }
+                if(!string.IsNullOrWhiteSpace(infPag.InfBanc.PIX))
+                {
+                    writeRaw += $@"<PIX>{infPag.InfBanc.PIX}</PIX>";
+                }
+
+                writeRaw += $@"</infBanc>";
+
+                writeRaw += $@"</infPag>";
+            }
+
+            writeRaw += $@"</evPagtoOperMDFe>";
+
+            writer.WriteRaw(writeRaw);
+        }
+    }
+
+    [Serializable]
+    [XmlRoot(ElementName = "detEventoPagtoOperMDFe")]
+    public class EventoPagtoOperMDFe: EventoDetalhe
+    {
+        #region Public Properties
+
+        [XmlElement("descEvento", Order = 0)]
+        public override string DescEvento { get; set; } = "Pagamento Operacao MDF-e";
+
+        [XmlElement("nProt", Order = 1)]
+        public string NProt { get; set; }
+
+        [XmlElement("infViagens", Order = 2)]
+        public InfViagens InfViagens { get; set; }
+
+        [XmlElement("infPag", Order = 3)]
+        public List<PagtoOperMDFeInfPag> InfPag { get; set; } = new List<PagtoOperMDFeInfPag>();
+
+        #endregion Public Properties
+
+        #region Public Methods
+
+#if INTEROP
+
+        [ComVisible(true)]
+        public void AddInfPag(PagtoOperMDFeInfPag infPag)
+        {
+            if(InfPag == null)
+            {
+                InfPag = new List<PagtoOperMDFeInfPag>();
+            }
+
+            InfPag.Add(infPag);
+        }
+
+#endif
+
+        #endregion Public Methods
+    }
+
+    [Serializable]
+    [XmlRoot(ElementName = "infViagens")]
+    public class InfViagens
+    {
+        [XmlElement("qtdViagens", Order = 0)]
+        public int QtdViagens { get; set; }
+
+        [XmlElement("nroViagem", Order = 1)]
+        public int NroViagem { get; set; }
+    }
+
+    [Serializable]
+    [XmlRoot(ElementName = "infPag")]
+    public class PagtoOperMDFeInfPag: InfContratante
+    {
+        [XmlElement("Comp")]
+        public List<Comp> Comp { get; set; }
+
+        [XmlIgnore]
+        public double VContrato { get; set; }
+
+        [XmlElement("vContrato")]
+        public string VContratoField
+        {
+            get => VContrato.ToString("F2", CultureInfo.InvariantCulture);
+            set => VContrato = Utility.Converter.ToDouble(value);
+        }
+
+        [XmlIgnore]
+        public IndicadorPagamento IndPag { get; set; }
+
+        [XmlElement("indPag")]
+        public int IndPagField
+        {
+            get => (int)IndPag;
+            set => IndPag = (IndicadorPagamento)Enum.Parse(typeof(IndicadorPagamento), value.ToString());
+        }
+
+        [XmlIgnore]
+        public double VAdiant { get; set; }
+
+        [XmlElement("vAdiant")]
+        public string VAdiantField
+        {
+            get => VAdiant.ToString("F2", CultureInfo.InvariantCulture);
+            set => VAdiant = Utility.Converter.ToDouble(value);
+        }
+
+        [XmlElement("infPrazo")]
+        public List<InfPrazo> InfPrazo { get; set; }
+
+        [XmlElement("infBanc")]
+        public InfBanc InfBanc { get; set; }
+
+#if INTEROP
+
+        [ComVisible(true)]
+        public void AddComp(Comp comp)
+        {
+            if(Comp == null)
+            {
+                Comp = new List<Comp>();
+            }
+
+            Comp.Add(comp);
+        }
+
+        [ComVisible(true)]
+        public void AddInfPrazo(InfPrazo infPrazo)
+        {
+            if(InfPrazo == null)
+            {
+                InfPrazo = new List<InfPrazo>();
+            }
+
+            InfPrazo.Add(infPrazo);
+        }
+
+#endif
     }
 }

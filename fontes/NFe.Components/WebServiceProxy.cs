@@ -691,6 +691,7 @@ namespace NFe.Components
             {
                 case PadroesNFSe.NOTAINTELIGENTE:
                 case PadroesNFSe.SMARAPD:
+                case PadroesNFSe.SMARAPD_203:
                 case PadroesNFSe.DUETO:
                 case PadroesNFSe.WEBISS:
                 case PadroesNFSe.WEBISS_202:

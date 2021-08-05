@@ -27,10 +27,6 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new LondrinaPR.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
-                            case 4105508: //Cianorte-PR
-                                sigCorpService = new CianortePR.h.SigCorpH(tpAmb, PastaRetorno);
-                                break;
-
                             case 4315602: //Rio Grande-RS
                                 sigCorpService = new RioGrandeRS.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
@@ -79,10 +75,6 @@ namespace NFe.Components.SigCorp
 
                             case 3554805: //Tremembé-SP
                                 sigCorpService = new TremembeSP.p.SigCorpP(tpAmb, PastaRetorno);
-                                break;
-
-                            case 4105508: //Cianorte-PR
-                                sigCorpService = new CianortePR.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             case 4315602: //Rio Grande-RS

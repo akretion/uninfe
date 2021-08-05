@@ -125,6 +125,14 @@ namespace Unimake.Business.DFe.Servicos.NFe
                                 xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoManif>((DetEventoManif)xml.Evento[i].InfEvento.DetEvento).OuterXml);
                                 break;
 
+                            case TipoEventoNFe.ComprovanteEntregaNFe:
+                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCompEntregaNFe>((DetEventoCompEntregaNFe)xml.Evento[i].InfEvento.DetEvento).OuterXml);
+                                break;
+
+                            case TipoEventoNFe.CancelamentoComprovanteEntregaNFe:
+                                xmlEspecifico.LoadXml(XMLUtility.Serializar<DetEventoCancCompEntregaNFe>((DetEventoCancCompEntregaNFe)xml.Evento[i].InfEvento.DetEvento).OuterXml);
+                                break;
+
                             default:
                                 throw new Exception("Não foi possível identificar o tipo de evento.");
                         }
@@ -179,6 +187,22 @@ namespace Unimake.Business.DFe.Servicos.NFe
 
                 case TipoEventoNFe.ManifestacaoOperacaoNaoRealizada:
                     descEvento = "Operacao nao Realizada";
+                    if(!xml.Evento[0].InfEvento.DetEvento.DescEvento.Equals(descEvento))
+                    {
+                        throw new Exception(msgException.Replace("$", descEvento));
+                    }
+                    goto case TipoEventoNFe.EPEC;
+
+                case TipoEventoNFe.ComprovanteEntregaNFe:
+                    descEvento = "Comprovante de Entrega da NF-e";
+                    if(!xml.Evento[0].InfEvento.DetEvento.DescEvento.Equals(descEvento))
+                    {
+                        throw new Exception(msgException.Replace("$", descEvento));
+                    }
+                    goto case TipoEventoNFe.EPEC;
+
+                case TipoEventoNFe.CancelamentoComprovanteEntregaNFe:
+                    descEvento = "Cancelamento Comprovante de Entrega da NF-e";
                     if(!xml.Evento[0].InfEvento.DetEvento.DescEvento.Equals(descEvento))
                     {
                         throw new Exception(msgException.Replace("$", descEvento));

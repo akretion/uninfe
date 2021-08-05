@@ -1,17 +1,17 @@
-﻿using NFe.Certificado;
-using NFe.Components;
-using NFe.Components.QRCode;
+﻿using NFe.Components;
 using NFe.Exceptions;
 using NFe.Settings;
 using System;
 using System.IO;
 using System.Xml;
+using Unimake.Business.DFe.Servicos;
+using Unimake.Business.DFe.Xml.CTeOS;
 
 namespace NFe.Service
 {
-    public class TaskCTeRecepcaoOS : TaskAbst
+    public class TaskCTeRecepcaoOS: TaskAbst
     {
-        private Int32 NumeroLote;
+        private int NumeroLote;
 
         public TaskCTeRecepcaoOS(string arquivo)
         {
@@ -34,80 +34,46 @@ namespace NFe.Service
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             try
             {
                 dadosRec = new DadosRecClass();
-                FluxoNfe fluxoNfe = new FluxoNfe();
-                LerXML lerXml = new LerXML();
+                var fluxoNfe = new FluxoNfe();
 
-                //Ler o XML de Lote para pegar o número do lote que está sendo enviado
+                var lerXml = new LerXML();
                 lerXml.Cte(ConteudoXML);
 
                 var idLote = lerXml.oDadosNfe.idLote;
 
-                //Definir o objeto do WebService
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(
-                    Servico,
-                    emp,
-                    Convert.ToInt32(lerXml.oDadosNfe.cUF),
-                    Convert.ToInt32(lerXml.oDadosNfe.tpAmb),
-                    Convert.ToInt32(lerXml.oDadosNfe.tpEmis),
-                    0);
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(Convert.ToInt32(lerXml.oDadosNfe.cUF), Convert.ToInt32(lerXml.oDadosNfe.tpAmb), Convert.ToInt32(lerXml.oDadosNfe.tpEmis), Servico);
+                var xmlCTeOS = new CTeOS();
+                xmlCTeOS = Unimake.Business.DFe.Utility.XMLUtility.Deserializar<CTeOS>(ConteudoXML);
 
-                //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                object oRecepcao = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                var oCabecMsg = wsProxy.CriarObjeto(NomeClasseCabecWS(Convert.ToInt32(lerXml.oDadosNfe.cUF), Servico));
-                wsProxy.SetProp(oCabecMsg, TpcnResources.cUF.ToString(), lerXml.oDadosNfe.cUF);
-                wsProxy.SetProp(oCabecMsg, TpcnResources.versaoDados.ToString(), lerXml.oDadosNfe.versao);
-
-                #region Assinar XML
-
-                AssinaturaDigital oAD = new AssinaturaDigital();
-
-                oAD.Assinar(ConteudoXML, emp, Convert.ToInt32(lerXml.oDadosNfe.cUF));
-
-                #endregion
-
-                #region Adicionar a tag do QRCode
-
-                string urlCte = Empresas.Configuracoes[emp].AmbienteCodigo == (int)TipoAmbiente.taHomologacao ?
-                    Empresas.Configuracoes[emp].URLConsultaDFe.UrlCTeQrCodeH :
-                    Empresas.Configuracoes[emp].URLConsultaDFe.UrlCTeQrCodeP;
-
-                QRCodeCTe qrCodeCte = new QRCodeCTe(ConteudoXML, urlCte);
-                qrCodeCte.MontarLinkQRCode(Empresas.Configuracoes[emp].X509Certificado);
-
-                #endregion 
-
-
-
-                //Mover o arquivo para a pasta em processamento
-                Empresas.Configuracoes[emp].CriarSubPastaEnviado();
-                string arqEmProcessamento = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + Path.GetFileName(NomeArquivoXML);
-                StreamWriter sw = File.CreateText(arqEmProcessamento);
-                sw.Write(ConteudoXML.OuterXml);
-                sw.Close();
-
-                if (File.Exists(arqEmProcessamento))
+                var configuracao = new Configuracao
                 {
-                    File.Delete(NomeArquivoXML);
-                    NomeArquivoXML = arqEmProcessamento;
+                    TipoDFe = TipoDFe.CTeOS,
+                    CertificadoDigital = Empresas.Configuracoes[emp].X509Certificado
+                };
+
+                if(ConfiguracaoApp.Proxy)
+                {
+                    configuracao.HasProxy = true;
+                    configuracao.ProxyAutoDetect = ConfiguracaoApp.DetectarConfiguracaoProxyAuto;
+                    configuracao.ProxyUser = ConfiguracaoApp.ProxyUsuario;
+                    configuracao.ProxyPassword = ConfiguracaoApp.ProxySenha;
                 }
+
+                var autorizacao = new Unimake.Business.DFe.Servicos.CTeOS.Autorizacao(xmlCTeOS, configuracao);
 
                 NumeroLote = oGerarXML.GerarLoteCTeOS(NomeArquivoXML);
 
-                //Invocar o método que envia o XML para o SEFAZ
-                oInvocarObj.Invocar(wsProxy,
-                                    oRecepcao,
-                                    wsProxy.NomeMetodoWS[0],
-                                    oCabecMsg, this,
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML,
-                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML,
-                                    false,
-                                    securityProtocolType);
+                autorizacao.Executar();
+
+                ConteudoXML = autorizacao.ConteudoXMLAssinado;
+
+                SalvarArquivoEmProcessamento(emp, lerXml.oDadosNfe.chavenfe);
+
+                vStrXmlRetorno = autorizacao.RetornoWSString;
 
                 #region Parte que trata o retorno do lote, ou seja, o número do recibo
 
@@ -116,14 +82,14 @@ namespace NFe.Service
                 //Gravar o XML retornado pelo WebService do SEFAZ na pasta de retorno para o ERP
                 //Tem que ser feito neste ponto, pois somente aqui terminamos todo o processo
                 oGerarXML.XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML,
-                              Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML,
-                              vStrXmlRetorno,
-                              Empresas.Configuracoes[emp].PastaXmlRetorno,
-                              NumeroLote.ToString("000000000000000") + Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML);
+                    Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML,
+                    vStrXmlRetorno,
+                    Empresas.Configuracoes[emp].PastaXmlRetorno,
+                    NumeroLote.ToString("000000000000000") + Propriedade.Extensao(Propriedade.TipoEnvio.CTeOS).EnvioXML);
 
-                #endregion Parte que trata o retorno do lote, ou seja, o número do recibo
+                #endregion
             }
-            catch (ExceptionEnvioXML ex)
+            catch(ExceptionEnvioXML ex)
             {
                 //Ocorreu algum erro no exato momento em que tentou enviar o XML para o SEFAZ, vou ter que tratar
                 //para ver se o XML chegou lá ou não, se eu consegui pegar o número do recibo de volta ou não, etc.
@@ -139,7 +105,7 @@ namespace NFe.Service
                     //Wandrey 16/03/2010
                 }
             }
-            catch (ExceptionSemInternet ex)
+            catch(ExceptionSemInternet ex)
             {
                 try
                 {
@@ -152,7 +118,7 @@ namespace NFe.Service
                     //Wandrey 16/03/2010
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {
@@ -168,6 +134,30 @@ namespace NFe.Service
         }
 
         #endregion Execute
+
+        /// <summary>
+        /// Salvar o arquivo do CTeOS assinado na pasta EmProcessamento
+        /// </summary>
+        /// <param name="emp">Codigo da empresa</param>
+        /// <param name="chaveCTeOS">Chave do CTeOS</param>
+        private void SalvarArquivoEmProcessamento(int emp, string chaveCTeOS)
+        {
+            Empresas.Configuracoes[emp].CriarSubPastaEnviado();
+
+            var nomeArqCTeOS = Path.GetFileName(NomeArquivoXML);
+            var arqEmProcessamento = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" + PastaEnviados.EmProcessamento.ToString() + "\\" + nomeArqCTeOS;
+
+            var sw = File.CreateText(arqEmProcessamento);
+            sw.Write("<?xml version=\"1.0\" encoding=\"utf-8\"?>" + ConteudoXML.GetElementsByTagName("CTeOS")[0].OuterXml);
+            sw.Close();
+
+            if(File.Exists(arqEmProcessamento))
+            {
+                File.Delete(NomeArquivoXML);
+
+                NomeArquivoXML = arqEmProcessamento;
+            }
+        }
 
         private void LerRetorno(int emp)
         {
@@ -187,25 +177,25 @@ namespace NFe.Service
 
             var retConsReciNFeList = doc.GetElementsByTagName("retCTeOS");
 
-            foreach (XmlNode retConsReciNFeNode in retConsReciNFeList)
+            foreach(XmlNode retConsReciNFeNode in retConsReciNFeList)
             {
                 var retConsReciNFeElemento = (XmlElement)retConsReciNFeNode;
 
                 //Pegar o número do recibo do lote enviado
                 var nRec = string.Empty;
-                if (retConsReciNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0] != null)
+                if(retConsReciNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0] != null)
                 {
                     nRec = retConsReciNFeElemento.GetElementsByTagName(TpcnResources.nRec.ToString())[0].InnerText;
                 }
 
                 //Pegar o status de retorno do lote enviado
                 var cStatLote = string.Empty;
-                if (retConsReciNFeElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0] != null)
+                if(retConsReciNFeElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0] != null)
                 {
                     cStatLote = retConsReciNFeElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
                 }
 
-                switch (cStatLote)
+                switch(cStatLote)
                 {
                     #region Rejeições do XML de consulta do recibo (Não é o lote que foi rejeitado e sim o XML de consulta do recibo)
 
@@ -252,7 +242,7 @@ namespace NFe.Service
                     case "100": //Processo sincrono já retorna como 100
                         var protNFeList = retConsReciNFeElemento.GetElementsByTagName("protCTe");
 
-                        foreach (XmlNode protNFeNode in protNFeList)
+                        foreach(XmlNode protNFeNode in protNFeList)
                         {
                             var protNFeElemento = (XmlElement)protNFeNode;
 
@@ -260,13 +250,13 @@ namespace NFe.Service
 
                             var infProtList = protNFeElemento.GetElementsByTagName("infProt");
 
-                            foreach (XmlNode infProtNode in infProtList)
+                            foreach(XmlNode infProtNode in infProtList)
                             {
                                 var infProtElemento = (XmlElement)infProtNode;
 
                                 var strStat = string.Empty;
 
-                                if (infProtElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0] != null)
+                                if(infProtElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0] != null)
                                 {
                                     strStat = infProtElemento.GetElementsByTagName(TpcnResources.cStat.ToString())[0].InnerText;
                                 }
@@ -274,13 +264,13 @@ namespace NFe.Service
                                 //Definir o nome do arquivo da NFe e seu caminho
                                 var strArquivoNFe = NomeArquivoXML;
 
-                                switch (strStat)
+                                switch(strStat)
                                 {
                                     case "100": //NFe Autorizada
-                                        if (File.Exists(strArquivoNFe))
+                                        if(File.Exists(strArquivoNFe))
                                         {
                                             //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s autorizados
-                                            XmlDocument conteudoXMLCTe = new XmlDocument();
+                                            var conteudoXMLCTe = new XmlDocument();
                                             conteudoXMLCTe.Load(strArquivoNFe);
                                             oLerXml.Cte(conteudoXMLCTe);
 
@@ -309,7 +299,7 @@ namespace NFe.Service
 
                                                 TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                             }
-                                            catch (Exception ex)
+                                            catch(Exception ex)
                                             {
                                                 Auxiliar.WriteLog("TaskCTeRetRecepcao: " + ex.Message, false);
                                             }
@@ -317,10 +307,10 @@ namespace NFe.Service
                                         break;
 
                                     case "301": //NFe Denegada - Irregularidade fiscal do emitente
-                                        if (File.Exists(strArquivoNFe))
+                                        if(File.Exists(strArquivoNFe))
                                         {
                                             //Ler o XML para pegar a data de emissão para criar a pasta dos XML´s Denegados
-                                            XmlDocument conteudoXMLCTe = new XmlDocument();
+                                            var conteudoXMLCTe = new XmlDocument();
                                             conteudoXMLCTe.Load(strArquivoNFe);
                                             oLerXml.Cte(conteudoXMLCTe);
 
@@ -338,7 +328,7 @@ namespace NFe.Service
 
                                                 TFunctions.ExecutaUniDanfe(strArquivoDist, oLerXml.oDadosNfe.dEmi, Empresas.Configuracoes[emp]);
                                             }
-                                            catch (Exception ex)
+                                            catch(Exception ex)
                                             {
                                                 Auxiliar.WriteLog("TaskCTeRecepcaoOS: " + ex.Message, false);
                                             }

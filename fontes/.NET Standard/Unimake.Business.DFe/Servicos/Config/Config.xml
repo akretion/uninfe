@@ -140,4 +140,19 @@
     <UF>AN</UF>
     <ArqConfig>AN.xml</ArqConfig>
   </Arquivo>
+  <!-- Nota Fiscal de Serviço Eletrônica - Prefeituras/Municípios -->
+  <Arquivo ID="4105508">
+    <Nome>Cianorte - PR</Nome>
+    <UF>PR</UF>
+    <ArqConfig>CianortePR.xml</ArqConfig>
+    <!-- O nome do padrão tem que ficar identico ao enumerador PadraoNFSe, ou não funciona (Case Sensitive) -->
+    <PadraoNFSe>SIGCORP</PadraoNFSe>
+  </Arquivo>
+  <Arquivo ID="4118402">
+    <Nome>Paranavaí - PR</Nome>
+    <UF>PR</UF>
+    <ArqConfig>ParanavaiPR.xml</ArqConfig>
+    <!-- O nome do padrão tem que ficar identico ao enumerador PadraoNFSe, ou não funciona (Case Sensitive) -->
+    <PadraoNFSe>BETHA</PadraoNFSe>
+  </Arquivo>
 </Configuracoes>

@@ -1,29 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
-using System.Xml;
-using Unimake.Business.DFe.Security;
-
 using NFe.Certificado;
 using NFe.Components;
-using NFe.Settings;
+using System;
+using System.ComponentModel;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms;
+using Unimake.Business.DFe.Security;
 
 namespace NFe.UI.Formularios
 {
     [ToolboxItem(false)]
-    public partial class userConfiguracao_certificado : MetroFramework.Controls.MetroUserControl
+    public partial class userConfiguracao_certificado: MetroFramework.Controls.MetroUserControl
     {
-        public userConfiguracao_certificado()
-        {
-            InitializeComponent();
-        }
+        public userConfiguracao_certificado() => InitializeComponent();
 
         public event EventHandler changeEvent;
         private NFe.Settings.Empresa empresa;
@@ -35,7 +26,7 @@ namespace NFe.UI.Formularios
             this.empresa = empresa;
             uninfeDummy.ClearControls(this, true, false);
 
-            System.Windows.Forms.ToolTip tltValidarProvider = new System.Windows.Forms.ToolTip();
+            var tltValidarProvider = new System.Windows.Forms.ToolTip();
             tltValidarProvider.SetToolTip(btnValidarProvider, "Testar o PIN informado.");
 
             textBox_dadoscertificado.BackColor = txtArquivoCertificado.BackColor;
@@ -45,9 +36,9 @@ namespace NFe.UI.Formularios
 
             oMeuCert = null;
 
-            if (empresa.UsaCertificado)
+            if(empresa.UsaCertificado)
             {
-                if (!string.IsNullOrEmpty(empresa.CNPJ))
+                if(!string.IsNullOrEmpty(empresa.CNPJ))
                 {
                     try
                     {
@@ -61,10 +52,10 @@ namespace NFe.UI.Formularios
                 }
 
                 ckbUsarCertificadoInstalado.Checked = empresa.CertificadoInstalado;
-                if (empresa.CertificadoInstalado)
+                if(empresa.CertificadoInstalado)
                 {
                     DemonstraDadosCertificado();
-                    txtPinCertificado.Text = empresa.CertificadoPIN;                    
+                    txtPinCertificado.Text = empresa.CertificadoPIN;
                 }
                 else
                 {
@@ -76,7 +67,9 @@ namespace NFe.UI.Formularios
                 HabilitaComponentesPINA3();
             }
             else
+            {
                 oMeuCert = null;
+            }
         }
 
         public void Validar(bool salvando = true)
@@ -84,35 +77,38 @@ namespace NFe.UI.Formularios
             empresa.CertificadoInstalado = ckbUsarCertificadoInstalado.Checked && ckbUsaCertificado.Checked;
             empresa.CertificadoArquivo = ckbUsaCertificado.Checked ? txtArquivoCertificado.Text : "";
             empresa.CertificadoSenha = ckbUsaCertificado.Checked ? txtSenhaCertificado.Text : "";
-            empresa.Certificado = (ckbUsaCertificado.Checked ? (this.oMeuCert == null ? empresa.Certificado : oMeuCert.Subject.ToString()) : "");
-            empresa.CertificadoDigitalThumbPrint = (ckbUsaCertificado.Checked ? (this.oMeuCert == null ? empresa.CertificadoDigitalThumbPrint : oMeuCert.Thumbprint) : "");
+            empresa.Certificado = (ckbUsaCertificado.Checked ? (oMeuCert == null ? empresa.Certificado : oMeuCert.Subject.ToString()) : "");
+            empresa.CertificadoDigitalThumbPrint = (ckbUsaCertificado.Checked ? (oMeuCert == null ? empresa.CertificadoDigitalThumbPrint : oMeuCert.Thumbprint) : "");
             empresa.CertificadoPIN = ckbUsaCertificado.Checked ? txtPinCertificado.Text : "";
             empresa.UsaCertificado = ckbUsaCertificado.Checked;
 
-            if (ckbUsaCertificado.Checked)
+            if(ckbUsaCertificado.Checked)
             {
-                if (!String.IsNullOrEmpty(empresa.CertificadoPIN))
+                if(!string.IsNullOrEmpty(empresa.CertificadoPIN))
                 {
-                    CertificadoDigital oCertificado = new CertificadoDigital();
-                    if (salvando)
+                    if(salvando)
+                    {
                         ValidarCertificadoA3(true);
+                    }
                 }
             }
         }
 
         public void FocusFirstControl()
         {
-            Timer t = new Timer();
-            t.Interval = 50;
+            var t = new Timer
+            {
+                Interval = 50
+            };
             t.Tick += (sender, e) =>
             {
                 ((Timer)sender).Stop();
                 ((Timer)sender).Dispose();
 
-                var Components = this.Controls.Cast<object>().OfType<MetroFramework.Controls.MetroTextBox>();
-                foreach (var c in Components)
+                var Components = Controls.Cast<object>().OfType<MetroFramework.Controls.MetroTextBox>();
+                foreach(var c in Components)
                 {
-                    if (c.Enabled && !c.ReadOnly)
+                    if(c.Enabled && !c.ReadOnly)
                     {
                         c.Focus();
                         break;
@@ -126,43 +122,45 @@ namespace NFe.UI.Formularios
         {
             try
             {
-            if (this.ckbUsarCertificadoInstalado.Checked)
-            {
-                CertificadoDigital oCertDig = new CertificadoDigital();
-
-                if (oCertDig.SelecionarCertificado() == true)
+                if(ckbUsarCertificadoInstalado.Checked)
                 {
-                    oMeuCert = oCertDig.oCertificado;
-                    this.empresa.Certificado = oMeuCert.Subject;
-                    this.empresa.CertificadoDigitalThumbPrint = oMeuCert.Thumbprint;
-                    this.empresa.X509Certificado = oMeuCert;
-                    DemonstraDadosCertificado();
+                    var oCertDig = new CertificadoDigital();
 
-                    if (changeEvent != null)
-                        changeEvent(sender, e);
-                }
-            }
-            else
-            {
-                if (File.Exists(txtArquivoCertificado.Text))
-                {
-                    FileInfo arq = new FileInfo(txtArquivoCertificado.Text);
-                    this.openFileDialog1.InitialDirectory = arq.DirectoryName;
-                    this.openFileDialog1.FileName = txtArquivoCertificado.Text;
+                    if(oCertDig.SelecionarCertificado() == true)
+                    {
+                        oMeuCert = oCertDig.oCertificado;
+                        empresa.Certificado = oMeuCert.Subject;
+                        empresa.CertificadoDigitalThumbPrint = oMeuCert.Thumbprint;
+                        empresa.X509Certificado = oMeuCert;
+                        DemonstraDadosCertificado();
+
+                        if(changeEvent != null)
+                        {
+                            changeEvent(sender, e);
+                        }
+                    }
                 }
                 else
                 {
-                    this.openFileDialog1.InitialDirectory = "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}";
-                    this.openFileDialog1.FileName = null;
+                    if(File.Exists(txtArquivoCertificado.Text))
+                    {
+                        var arq = new FileInfo(txtArquivoCertificado.Text);
+                        openFileDialog1.InitialDirectory = arq.DirectoryName;
+                        openFileDialog1.FileName = txtArquivoCertificado.Text;
+                    }
+                    else
+                    {
+                        openFileDialog1.InitialDirectory = "::{20D04FE0-3AEA-1069-A2D8-08002B30309D}";
+                        openFileDialog1.FileName = null;
+                    }
+                    if(openFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        txtArquivoCertificado.Text = openFileDialog1.FileName;
+                    }
                 }
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    txtArquivoCertificado.Text = this.openFileDialog1.FileName;
-                }
-            }
 
-            HabilitaComponentesPINA3();
-        }
+                HabilitaComponentesPINA3();
+            }
             catch(Exception ex)
             {
                 MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
@@ -175,25 +173,27 @@ namespace NFe.UI.Formularios
         #region DemonstraDadosCertificado()
         private void DemonstraDadosCertificado()
         {
-            if (this.ckbUsaCertificado.Checked)
+            if(ckbUsaCertificado.Checked)
             {
-                if (oMeuCert != null)
+                if(oMeuCert != null)
                 {
-                    DateTime hoje = DateTime.Now;
-                    TimeSpan dif = oMeuCert.NotAfter.Subtract(hoje);
+                    var hoje = DateTime.Now;
+                    var dif = oMeuCert.NotAfter.Subtract(hoje);
                     string mensagemRestante;
 
-                    if (dif.Days > 0)
+                    if(dif.Days > 0)
                     {
                         mensagemRestante = "Faltam " + dif.Days + " dias para vencer o certificado.";
                     }
                     else
                     {
                         mensagemRestante = "Certificado vencido a " + (dif.Days) * -1 + " dias.";
-                        if (this.textBox_dadoscertificado.BackColor != Color.Red)
-                            this.textBox_dadoscertificado.BackColor = Color.Red;
+                        if(textBox_dadoscertificado.BackColor != Color.Red)
+                        {
+                            textBox_dadoscertificado.BackColor = Color.Red;
+                        }
                     }
-                    this.textBox_dadoscertificado.Text =
+                    textBox_dadoscertificado.Text =
                         "[Sujeito]\r\n" + oMeuCert.Subject + "\r\n\r\n" +
                         "[Validade]\r\n" + oMeuCert.NotBefore + " à " + oMeuCert.NotAfter + "\r\n" + mensagemRestante + "\r\n\r\n" +
                         "[ThumbPrint]\r\n" + oMeuCert.Thumbprint;
@@ -201,24 +201,24 @@ namespace NFe.UI.Formularios
                 else
                 {
                     // Comparação feita para demonstrar possiveis certificados A3 que podem não estar presentes ou detectados. Renan - 18/06/2013
-                    if (string.IsNullOrEmpty(this.empresa.Certificado))
+                    if(string.IsNullOrEmpty(empresa.Certificado))
                     {
                         textBox_dadoscertificado.Clear();
                     }
                     else
                     {
-                        this.textBox_dadoscertificado.Text =
-                            "[Sujeito]\r\n" + this.empresa.Certificado + "\r\n\r\n" +
-                            "[ThumbPrint]\r\n" + this.empresa.CertificadoDigitalThumbPrint + "\r\n\r\n" +
+                        textBox_dadoscertificado.Text =
+                            "[Sujeito]\r\n" + empresa.Certificado + "\r\n\r\n" +
+                            "[ThumbPrint]\r\n" + empresa.CertificadoDigitalThumbPrint + "\r\n\r\n" +
                             "[Alerta]\r\n" + "Certificado não foi Detectado na Estação! Podem ocorrer erros na emissão de documentos.";
                     }
                 }
             }
             else
             {
-                this.textBox_dadoscertificado.Clear();
-                this.txtArquivoCertificado.Clear();
-                this.txtSenhaCertificado.Clear();
+                textBox_dadoscertificado.Clear();
+                txtArquivoCertificado.Clear();
+                txtSenhaCertificado.Clear();
             }
         }
         #endregion
@@ -234,7 +234,7 @@ namespace NFe.UI.Formularios
             lblCerificadoInstalado.Visible =
                 textBox_dadoscertificado.Visible = ckbUsarCertificadoInstalado.Checked;
 
-            if (!ckbUsarCertificadoInstalado.Checked)
+            if(!ckbUsarCertificadoInstalado.Checked)
             {
                 textBox_dadoscertificado.Text = "";
                 oMeuCert = null;
@@ -259,14 +259,18 @@ namespace NFe.UI.Formularios
 
             HabilitaComponentesPINA3();
 
-            if (changeEvent != null)
+            if(changeEvent != null)
+            {
                 changeEvent(sender, e);
+            }
         }
 
         private void txtArquivoCertificado_TextChanged(object sender, EventArgs e)
         {
-            if (changeEvent != null)
+            if(changeEvent != null)
+            {
                 changeEvent(sender, e);
+            }
         }
 
         /// <summary>
@@ -274,14 +278,14 @@ namespace NFe.UI.Formularios
         /// </summary>
         private void HabilitaComponentesPINA3()
         {
-            bool isA3 = false;
+            var isA3 = false;
 
-#if _fw46
-            if (this.ckbUsarCertificadoInstalado.Checked && ckbUsaCertificado.Checked)
-               isA3 = empresa.X509Certificado.IsA3();
-#endif
+            if(ckbUsarCertificadoInstalado.Checked && ckbUsaCertificado.Checked)
+            {
+                isA3 = empresa.X509Certificado.IsA3();
+            }
 
-            if (isA3)
+            if(isA3)
             {
                 btnValidarProvider.Visible = true;
                 txtPinCertificado.Visible = true;
@@ -303,35 +307,39 @@ namespace NFe.UI.Formularios
 
         private void ckbTemCertificadoInstalado_CheckedChanged(object sender, EventArgs e)
         {
-            this.ckbUsarCertificadoInstalado.Enabled =
-                this.button_selecionar_certificado.Enabled =
-                this.textBox_dadoscertificado.Enabled =
-                this.txtArquivoCertificado.Enabled =
-                this.txtSenhaCertificado.Enabled = this.ckbUsaCertificado.Checked;
+            ckbUsarCertificadoInstalado.Enabled =
+                button_selecionar_certificado.Enabled =
+                textBox_dadoscertificado.Enabled =
+                txtArquivoCertificado.Enabled =
+                txtSenhaCertificado.Enabled = ckbUsaCertificado.Checked;
 
             HabilitaComponentesPINA3();
 
-            if (changeEvent != null)
+            if(changeEvent != null)
+            {
                 changeEvent(sender, e);
+            }
         }
 
         private void cboProviders_TextChanged(object sender, EventArgs e)
         {
-            if (changeEvent != null)
+            if(changeEvent != null)
+            {
                 changeEvent(sender, e);
+            }
         }
-        
-        private const string provError = "Validação do PIN - Resultado:";
+
+        private const string provError = "Validação do PIN A3:";
 
         private void btnValidarProvider_Click(object sender, EventArgs e)
         {
             try
             {
-                this.Validar(false);
-                this.empresa.PastaXmlEnvio = this.ucPastas.textBox_PastaXmlEnvio.Text;
-                this.ValidarCertificadoA3(false);
+                Validar(false);
+                empresa.PastaXmlEnvio = ucPastas.textBox_PastaXmlEnvio.Text;
+                ValidarCertificadoA3(false);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
                                       ex.Message,
@@ -342,52 +350,41 @@ namespace NFe.UI.Formularios
 
         private void ValidarCertificadoA3(bool salvando)
         {
-            if (String.IsNullOrEmpty(empresa.CertificadoPIN))
+            if(string.IsNullOrEmpty(empresa.CertificadoPIN))
+            {
                 throw new Exception("Informe o PIN do certificado");
+            }
 
             Wait.Show("Validando PIN...");
+
             try
             {
-                if (Empresas.FindConfEmpresaIndex(empresa.CNPJ, empresa.Servico) == -1)
-                    Empresas.Configuracoes.Add(empresa);
-
-                CertificadoProviders certificadoProviders = new CertificadoProviders(empresa.X509Certificado,
-                                                                                     empresa.PastaXmlEnvio,
-                                                                                     Empresas.FindConfEmpresaIndex(empresa.CNPJ, empresa.Servico),
-                                                                                     empresa.CertificadoPIN);
-                CertProviders xCertProviders = new CertProviders();
-
-                if (certificadoProviders.TestarProvider(xCertProviders))
+                if(!empresa.CertificadoPINCarregado)
                 {
-                    Wait.Close();
-                    if (!salvando)
-                        MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                                              "Configuração do PIN validada, XML assinado com sucesso.",
-                                                              provError,
-                                                              MessageBoxButtons.OK);
+                    empresa.X509Certificado.SetPinPrivateKey(empresa.CertificadoPIN);
+                    empresa.CertificadoPINCarregado = true;
                 }
 
-                else
+                Wait.Close();
+
+                if(!salvando)
                 {
-                    Wait.Close();
                     MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                          "PIN inválido, não foi possível assinar um XML com esta chave.",
-                                          provError,
-                                          MessageBoxButtons.OK);
-
-                    if (salvando)
-                    {
-                        throw new Exception("Não foi possível salvar a configuração.");
-                    }
+                        "PIN do certificado A3 validado com sucesso.",
+                        provError,
+                        MessageBoxButtons.OK);
                 }
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
+            catch(Exception ex)
             {
                 Wait.Close();
+
+                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                    "PIN do certificado A3 é inválido.",
+                    provError,
+                    MessageBoxButtons.OK);
+
+                throw ex;
             }
         }
     }

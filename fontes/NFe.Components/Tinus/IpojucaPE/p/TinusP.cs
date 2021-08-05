@@ -12,7 +12,6 @@ namespace NFe.Components.Tinus.IpojucaPE.p
 {
     public class TinusP : EmiteNFSeBase
     {
-        private System.Web.Services.Protocols.SoapHttpClientProtocol Service;
         private X509Certificate2 Certificado;
 
         public override string NameSpaces
@@ -105,13 +104,13 @@ namespace NFe.Components.Tinus.IpojucaPE.p
             Service.ClientCertificates.Add(Certificado);
             DefinirProxy<ConsultarNfse>(Service);
 
-            //ConsultarNfseEnvio envio = DeserializarObjeto<ConsultarNfseEnvio>(file);
-            //string strResult = SerializarObjeto(Service.CallConsultarNfse(envio));
+            PIpojucaPE_TINUS_ConsultarNfse.ConsultarNfseEnvio envio = DeserializarObjeto<PIpojucaPE_TINUS_ConsultarNfse.ConsultarNfseEnvio>(file);
+            string strResult = SerializarObjeto(Service.CallConsultarNfse(envio));
 
-            //GerarRetorno(file,
-            //    strResult,
-            //    Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
-            //    Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
+            GerarRetorno(file,
+                strResult,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML,
+                Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
         }
 
         public override void ConsultarNfsePorRps(string file)

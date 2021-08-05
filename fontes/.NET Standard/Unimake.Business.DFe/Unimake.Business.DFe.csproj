@@ -223,6 +223,11 @@
 		<None Remove="Servicos\Config\NFe\SVCRS.xml" />
 		<None Remove="Servicos\Config\NFe\SVRS.xml" />
 		<None Remove="Servicos\Config\NFe\TO.xml" />
+		<None Remove="Servicos\Config\NFSe\Betha.xml" />
+		<None Remove="Servicos\Config\NFSe\CianortePR.xml" />
+		<None Remove="Servicos\Config\NFSe\Config.xml" />
+		<None Remove="Servicos\Config\NFSe\ParanavaiPR.xml" />
+		<None Remove="Servicos\Config\NFSe\Template.xml" />
 		<None Remove="Xml\Schemas\CTe\GTVe_v3.00.xsd" />
 		<None Remove="Xml\Schemas\CTe\procGTVe_v3.00.xsd" />
 		<None Remove="Xml\Schemas\CTe\retGTVe_v3.00.xsd" />
@@ -371,15 +376,45 @@
 		<None Remove="Xml\Schemas\MDFe\retMDFe_v3.00.xsd" />
 		<None Remove="Xml\Schemas\MDFe\tiposGeralMDFe_v3.00.xsd" />
 		<None Remove="Xml\Schemas\MDFe\xmldsig-core-schema_v1.01.xsd" />
+		<None Remove="Xml\Schemas\NFe\e110130_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\e110131_v1.00.xsd" />
 		<None Remove="Xml\Schemas\NFe\e110140_v1.00.xsd" />
 		<None Remove="Xml\Schemas\NFe\envEPEC_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\envEventoCancEntregaNFe_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\envEventoEntregaNFe_v1.00.xsd" />
 		<None Remove="Xml\Schemas\NFe\EPEC_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\EventoCancEntregaNFe_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\EventoEntregaNFe_v1.00.xsd" />
 		<None Remove="Xml\Schemas\NFe\eventoEPEC_v0.01.xsd" />
 		<None Remove="Xml\Schemas\NFe\leiauteEPEC_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\leiauteEventoCancEntregaNFe_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\leiauteEventoEntregaNFe_v1.00.xsd" />
 		<None Remove="Xml\Schemas\NFe\procEPEC_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\procEventoCancEntregaNFe_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\procEventoEntregaNFe_v1.00.xsd" />
 		<None Remove="Xml\Schemas\NFe\retEnvEPEC_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\retEventoCancEntregaNFe_v1.00.xsd" />
+		<None Remove="Xml\Schemas\NFe\retEventoEntregaNFe_v1.00.xsd" />
 		<None Remove="Xml\Schemas\NFe\retEventoEPEC_v0.01.xsd" />
 		<None Remove="Xml\Schemas\nfe_v4.00.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\nfse_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\nfse_v202.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\servico_cancelar_nfse_envio_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\servico_cancelar_nfse_resposta_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\servico_consultar_lote_rps_envio_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\servico_consultar_lote_rps_resposta_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\servico_consultar_nfse_envio_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\servico_consultar_nfse_resposta_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\servico_consultar_nfse_rps_envio_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\servico_consultar_nfse_rps_resposta_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\servico_consultar_situacao_lote_rps_envio_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\servico_consultar_situacao_lote_rps_resposta_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\servico_enviar_lote_rps_envio_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\servico_enviar_lote_rps_resposta_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\TiposNFe_v01.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\xmldsig-core-schema.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\xmldsig-core-schema20020212.xsd" />
+		<None Remove="Xml\Schemas\NFSe\BETHA\xmldsig-core-schema_v01.xsd" />
 		<None Remove="Xml\Schemas\procCCeNFe_v1.00.xsd" />
 		<None Remove="Xml\Schemas\procConfRecebtoNFe_v1.00.xsd" />
 		<None Remove="Xml\Schemas\procEventoCancNFe_v1.00.xsd" />
@@ -751,6 +786,19 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Servicos\Config\NFe\TO.xml" />
+		<EmbeddedResource Include="Servicos\Config\NFSe\Template.xml">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Servicos\Config\NFSe\ParanavaiPR.xml">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Servicos\Config\NFSe\Betha.xml">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Servicos\Config\NFSe\CianortePR.xml">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Servicos\Config\NFSe\Config.xml" />
 		<EmbeddedResource Include="Xml\Schemas\CTe\GTVe_v3.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\CTe\procGTVe_v3.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\CTe\retGTVe_v3.00.xsd" />
@@ -891,6 +939,8 @@
 		<EmbeddedResource Include="Xml\Schemas\NFe\e110112_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Xml\Schemas\NFe\e110130_v1.00.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFe\e110131_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\e110140_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\e111500_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -925,12 +975,14 @@
 		</EmbeddedResource>
 		<EmbeddedResource Include="Xml\Schemas\NFe\envConfRecebto_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\envEPEC_v1.00.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFe\envEventoCancEntregaNFe_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\envEventoCancNFe_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Xml\Schemas\NFe\envEventoCancSubst_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Xml\Schemas\NFe\envEventoEntregaNFe_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\enviNFe_v4.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -938,12 +990,14 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Xml\Schemas\NFe\EPEC_v1.00.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFe\EventoCancEntregaNFe_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\eventoCancNFe_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Xml\Schemas\NFe\eventoCancSubst_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Xml\Schemas\NFe\EventoEntregaNFe_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\eventoEPEC_v0.01.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\eventoRemIndus_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -965,12 +1019,14 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Xml\Schemas\NFe\leiauteEPEC_v1.00.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFe\leiauteEventoCancEntregaNFe_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\leiauteEventoCancNFe_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Xml\Schemas\NFe\leiauteEventoCancSubst_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Xml\Schemas\NFe\leiauteEventoEntregaNFe_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\leiauteInutNFe_v4.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -988,12 +1044,14 @@
 		</EmbeddedResource>
 		<EmbeddedResource Include="Xml\Schemas\NFe\procConfRecebtoNFe_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\procEPEC_v1.00.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFe\procEventoCancEntregaNFe_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\procEventoCancNFe_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
 		<EmbeddedResource Include="Xml\Schemas\NFe\procEventoCancSubst_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Xml\Schemas\NFe\procEventoEntregaNFe_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\procEventoNFe_v99.99.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
@@ -1041,6 +1099,8 @@
 		<EmbeddedResource Include="Xml\Schemas\NFe\retEnvRemIndus_v1.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Xml\Schemas\NFe\retEventoCancEntregaNFe_v1.00.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFe\retEventoEntregaNFe_v1.00.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\retEventoEPEC_v0.01.xsd" />
 		<EmbeddedResource Include="Xml\Schemas\NFe\retInutNFe_v4.00.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -1055,6 +1115,22 @@
 		<EmbeddedResource Include="Xml\Schemas\NFe\xmldsig-core-schema_v1.01.xsd">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\nfse_v202.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\servico_cancelar_nfse_envio_v01.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\servico_cancelar_nfse_resposta_v01.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\servico_consultar_lote_rps_envio_v01.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\servico_consultar_lote_rps_resposta_v01.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\servico_consultar_nfse_envio_v01.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\servico_consultar_nfse_resposta_v01.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\servico_consultar_nfse_rps_envio_v01.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\servico_consultar_nfse_rps_resposta_v01.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\servico_consultar_situacao_lote_rps_envio_v01.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\servico_consultar_situacao_lote_rps_resposta_v01.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\servico_enviar_lote_rps_envio_v01.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\servico_enviar_lote_rps_resposta_v01.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\TiposNFe_v01.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\xmldsig-core-schema20020212.xsd" />
+		<EmbeddedResource Include="Xml\Schemas\NFSe\BETHA\xmldsig-core-schema_v01.xsd" />
 	</ItemGroup>
 
 	<ItemGroup>

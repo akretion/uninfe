@@ -27,7 +27,7 @@ namespace NFe.Components.HIpojucaPE_TINUS_RecepcionarLoteRps {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="RecepcionarLoteRpsSoap", Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class RecepcionarLoteRps : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    public partial class RecepcionarLoteRps : NFe.Components.Tinus.IpojucaPE.SoapHttpClientProtocol<EnviarLoteRpsResposta> {
         
         private System.Threading.SendOrPostCallback CallRecepcionarLoteRpsOperationCompleted;
         

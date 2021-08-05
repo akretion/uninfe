@@ -12,7 +12,7 @@ namespace NFe.Components.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -231,16 +231,6 @@ namespace NFe.Components.Properties {
         public string NFe_Components_br_com_govdigital_homolog1_NfseServiceImplDivService {
             get {
                 return ((string)(this["NFe_Components_br_com_govdigital_homolog1_NfseServiceImplDivService"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://cianorte.sigiss.com.br:443/cianorte/ws/sigiss_ws.php")]
-        public string NFe_Components_br_com_sigiss_cianorte_p_WebService_SigISS {
-            get {
-                return ((string)(this["NFe_Components_br_com_sigiss_cianorte_p_WebService_SigISS"]));
             }
         }
         
@@ -2374,16 +2364,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://testecianorte.sigiss.com.br:443/testecianorte/ws/sigiss_ws.php")]
-        public string NFe_Components_HCianortePR_WebService_SigISS {
-            get {
-                return ((string)(this["NFe_Components_HCianortePR_WebService_SigISS"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS")]
         public string NFe_Components_HPiratiningaSP_IssWebWS {
             get {
@@ -3570,7 +3550,7 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://www.gp.srv.br/tributario_aguaboa/servlet/anfse_web_service")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://www.gp.srv.br/tributario_aguaboa/servlet/anfse_web_service")]
         public string NFe_Components_PAguaBoaMT_nfse_web_service {
             get {
                 return ((string)(this["NFe_Components_PAguaBoaMT_nfse_web_service"]));

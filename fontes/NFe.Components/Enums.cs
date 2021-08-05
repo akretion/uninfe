@@ -94,6 +94,16 @@ namespace NFe.Components
         /// </summary>
         EventoRecepcao,
 
+        /// <summary>
+        /// Enviar XML de Evento do Comprovante de Entrega da NFe
+        /// </summary>
+        EventoCompEntregaNFe,
+
+        /// <summary>
+        /// Enviar XML de Evento de Cancelamento do Comprovante de Entrega da NFe
+        /// </summary>
+        EventoCancCompEntregaNFe,
+
         #endregion Eventos NFe
 
         /// <summary>
@@ -828,6 +838,12 @@ namespace NFe.Components
         SMARAPD_204,
 
         /// <summary>
+        /// SMARAPD na versão 2.03
+        /// </summary>
+        [Description("SmaraPD_203")]
+        SMARAPD_203,
+
+        /// <summary>
         /// Padrão Fiorilli
         /// Prefeitura de Taquara - SP
         /// </summary>
@@ -998,6 +1014,13 @@ namespace NFe.Components
         /// </summary>
         [Description("ABACO")]
         ABACO,
+
+        /// <summary>
+        /// PAdrão ABACO
+        /// Prefeitura de Nova Lima - MG
+        /// </summary>
+        [Description("ABACO_204")]
+        ABACO_204,
 
         /// <summary>
         /// Padrão Metrópolis

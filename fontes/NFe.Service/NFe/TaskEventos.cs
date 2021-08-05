@@ -70,6 +70,14 @@ namespace NFe.Service
                         Servico = Servicos.EventoRecepcao;
                         break;
 
+                    case ConvertTxt.tpEventos.tpEvComprovanteEntregaNFe:
+                        Servico = Servicos.EventoCompEntregaNFe;
+                        break;
+
+                    case ConvertTxt.tpEventos.tpEvCancelamentoComprovanteEntregaNFe:
+                        Servico = Servicos.EventoCancCompEntregaNFe;
+                        break;
+
                     default:
                         Servico = Servicos.EventoManifestacaoDest;
                         break;

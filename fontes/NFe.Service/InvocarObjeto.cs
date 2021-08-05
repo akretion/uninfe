@@ -356,6 +356,8 @@ namespace NFe.Service
                 {
                     case PadroesNFSe.SMARAPD:
                         break;
+                    case PadroesNFSe.SMARAPD_203:
+                        break;
 
                     default:
                         throw new Exception(cResultadoValidacao);
@@ -529,6 +531,16 @@ namespace NFe.Service
                     break;
 
                 #endregion SMARAPD
+
+                #region SMARAPD_203
+
+                case PadroesNFSe.SMARAPD_203:
+
+                    strRetorno = wsProxy.InvokeStr(servicoWS, metodo, new object[] { docXML.OuterXml });
+
+                    break;
+
+                #endregion SMARAPD_203
 
                 #region ISSWEB
 

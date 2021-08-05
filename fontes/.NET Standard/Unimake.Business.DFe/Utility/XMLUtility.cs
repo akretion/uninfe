@@ -316,7 +316,9 @@ namespace Unimake.Business.DFe.Utility
 
             if(result is Contract.Serialization.IXmlSerializable serializable)
             {
-                serializable.ReadXml(XmlReader.Create(new StringReader(xml)));
+                var xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(xml);
+                serializable.ReadXml(xmlDoc);
             }
 
             return result;

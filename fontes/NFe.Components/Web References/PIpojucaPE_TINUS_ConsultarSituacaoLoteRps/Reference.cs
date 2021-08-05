@@ -27,7 +27,8 @@ namespace NFe.Components.PIpojucaPE_TINUS_ConsultarSituacaoLoteRps {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ConsultarSituacaoLoteRpsSoap", Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class ConsultarSituacaoLoteRps : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    public partial class ConsultarSituacaoLoteRps : NFe.Components.Tinus.IpojucaPE.SoapHttpClientProtocol<ConsultarSituacaoLoteRpsResposta>
+    {
         
         private System.Threading.SendOrPostCallback CallConsultarSituacaoLoteRpsOperationCompleted;
         

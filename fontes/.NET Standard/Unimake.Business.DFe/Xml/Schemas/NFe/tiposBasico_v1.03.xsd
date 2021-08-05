@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 (http://www.altova.com) by sas-softwares@procergs.rs.gov.br (PROCERGS) -->
 <!-- PL_006u - 21/07/14 - Inclusão do tipo Básico TPlaca // v2.0-->
 <!-- PL_006u - 06/05/14 - Alterações Fuso-Horario // v2.0-->
 <!-- PL_006h - 13/05/11 - correções da NT 2011/004  // v2.0-->
@@ -59,7 +60,7 @@
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:whiteSpace value="preserve"/>
-      <xs:pattern value="(1[1-7]|2[1-9]|3[1,2,3,5]|4[1-3]|5[0-3])(0[6-9]|[1-9][\d])(0[1-9]|1[0-2])([\d]{14})([\d]{5})([\d]{9})([\d]{10})"/>
+			<xs:pattern value="[0-9]{44}"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TProt">
@@ -819,7 +820,7 @@ acrescentado:
 	<xs:simpleType name="TPlaca">
 		<xs:restriction base="xs:string">
 			<xs:whiteSpace value="preserve"/>
-			<xs:pattern value="[A-Z]{2,3}[0-9]{4}|[A-Z]{3,4}[0-9]{3}|[A-Z0-9]{7}"/>
+			<xs:pattern value="[A-Z]{2,3}[0-9]{4}|[A-Z]{3,4}[0-9]{3}"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="TCOrgaoIBGE">
@@ -858,6 +859,22 @@ acrescentado:
 			<xs:enumeration value="90"/>
 			<xs:enumeration value="91"/>
 			<xs:enumeration value="92"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TLatitude">
+		<xs:annotation>
+			<xs:documentation>Coordenada geográfica Latitude</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]\.[0-9]{6}|[1-8][0-9]\.[0-9]{6}|90\.[0-9]{6}|-[0-9]\.[0-9]{6}|-[1-8][0-9]\.[0-9]{6}|-90\.[0-9]{6}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TLongitude">
+		<xs:annotation>
+			<xs:documentation>Coordenada geográfica Longitude</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]\.[0-9]{6}|[1-9][0-9]\.[0-9]{6}|1[0-7][0-9]\.[0-9]{6}|180\.[0-9]{6}|-[0-9]\.[0-9]{6}|-[1-9][0-9]\.[0-9]{6}|-1[0-7][0-9]\.[0-9]{6}|-180\.[0-9]{6}"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

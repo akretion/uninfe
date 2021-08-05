@@ -20,14 +20,18 @@ namespace NFe.Components.PIpojucaPE_TINUS_RecepcionarLoteRps {
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
-    
-    
+    using System.Net;
+    using System.Xml;
+    using System.IO;
+
+
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="RecepcionarLoteRpsSoap", Namespace="http://www.abrasf.org.br/nfse.xsd")]
-    public partial class RecepcionarLoteRps : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    public partial class RecepcionarLoteRps : NFe.Components.Tinus.IpojucaPE.SoapHttpClientProtocol<EnviarLoteRpsResposta>
+    {
         
         private System.Threading.SendOrPostCallback CallRecepcionarLoteRpsOperationCompleted;
         
@@ -85,7 +89,7 @@ namespace NFe.Components.PIpojucaPE_TINUS_RecepcionarLoteRps {
                         EnviarLoteRpsEnvio});
             return ((EnviarLoteRpsResposta)(results[0]));
         }
-        
+
         /// <remarks/>
         public void CallRecepcionarLoteRpsAsync(EnviarLoteRpsEnvio EnviarLoteRpsEnvio) {
             this.CallRecepcionarLoteRpsAsync(EnviarLoteRpsEnvio, null);

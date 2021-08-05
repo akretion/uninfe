@@ -1889,19 +1889,12 @@ namespace Unimake.Business.DFe.Xml.MDFe
         [XmlElement("cUnid")]
         public CodigoUnidadeMedidaMDFe CUnid { get; set; }
 
-        [XmlIgnore]
-        public double QCarga { get; set; }
-
         [XmlElement("qCarga")]
-        public string QCargaField
-        {
-            get => QCarga.ToString("F4", CultureInfo.InvariantCulture);
-            set => QCarga = Utility.Converter.ToDouble(value);
-        }
+        public double QCarga { get; set; }
 
         #region ShouldSerialize
 
-        public bool ShouldSerializeQCte() => QCTe > 0;
+        public bool ShouldSerializeQCTe() => QCTe > 0;
         public bool ShouldSerializeQNFe() => QNFe > 0;
         public bool ShouldSerializeQMDFe() => QMDFe > 0;
 

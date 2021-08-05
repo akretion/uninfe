@@ -10,7 +10,7 @@ namespace NFe.ConvertTxt
     /// </summary>
     public class pag
     {
-        public TpcnIndicadorPagamento indPag = TpcnIndicadorPagamento.ipOutras;
+        public TpcnIndicadorPagamento indPag = TpcnIndicadorPagamento.ipNone;
         public TpcnFormaPagamento tPag = TpcnFormaPagamento.fpOutro;
         public string xPag;
         public double vPag;

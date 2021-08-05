@@ -145,6 +145,10 @@ namespace Unimake.Business.DFe.Utility
                     {
                         result = value.ToString();
                     }
+                    else if(expectedType.FullName.Equals(typeof(double).FullName))
+                    {
+                        result = double.Parse(value.ToString(), CultureInfo.InvariantCulture);
+                    }
                     else
                     {
                         result = ChangeType(value, expectedType);

@@ -159,6 +159,88 @@ namespace Unimake.Business.DFe.Servicos
 
         #endregion
 
+        #region NFSe
+
+        /// <summary>
+        /// Enviar o XML de cancelamento da NFS-e para prefeiutura
+        /// </summary>
+        [Description("Cancelamento da NFS-e")]
+        NFSeCancelarNfse,
+
+        /// <summary>
+        /// Enviar o XML de consulta NFS-e do prestador para a prefeitura
+        /// </summary>
+        [Description("Consulta NFS-e do prestador")]
+        NFSeConsultarNotaPrestador,
+
+        /// <summary>
+        /// Enviar o XML de consulta NFS-e valida para a prefeitura
+        /// </summary>
+        [Description("Consulta NFS-e valida")]
+        NFSeConsultarNotaValida,
+
+        /// <summary>
+        /// Enviar o XML da NFS-e para a prefeitura
+        /// </summary>
+        [Description("Envio da NFS-e")]
+        NFSeGerarNfse,
+
+        /// <summary>
+        /// Enviar o XML do Lote de RPS para gerar NFSe para a prefeitura
+        /// </summary>
+        [Description("Envio do lote RPS para gerar NFSe")]
+        NFSeRecepcionarLoteRps,
+
+        /// <summary>
+        /// Enviar o XML do Lote de RPS no modo síncrono para gerar NFSe para a prefeitura
+        /// </summary>
+        [Description("Envio do lote RPS no modo síncrono para gerar NFSe")]
+        NFSeRecepcionarLoteRpsSincrono,
+
+        /// <summary>
+        /// Enviar o XML para Substituir NFSe
+        /// </summary>
+        [Description("Envio da substituição da NFS-e")]
+        NFSeSubstituirNfse,
+
+        /// <summary>
+        /// Enviar o XML de consulta lote RPS para a prefeitura
+        /// </summary>
+        [Description("Consulta lote RPS")]
+        NFSeConsultarLoteRps,
+
+        /// <summary>
+        /// Enviar o XML de consulta NFSe para a prefeitura
+        /// </summary>
+        [Description("Consulta NFSe")]
+        NFSeConsultarNfse,
+
+        /// <summary>
+        /// Enviar o XML de consulta NFSe serviço prestado para a prefeitura
+        /// </summary>
+        [Description("Consulta NFSe serviço prestado")]
+        NFSeConsultarNfseServicoPrestado,
+
+        /// <summary>
+        /// Enviar o XML de consulta NFSe serviço tomado para a prefeitura
+        /// </summary>
+        [Description("Consulta NFSe serviço tomado")]
+        NFSeConsultarNfseServicoTomado,
+
+        /// <summary>
+        /// Enviar o XML de consulta NFSe por faixa para a prefeitura
+        /// </summary>
+        [Description("Consulta NFSe por Faixa")]
+        NFSeConsultarNfseFaixa,
+
+        /// <summary>
+        /// Enviar o XML de consulta NFSe por RPS para a prefeitura
+        /// </summary>
+        [Description("Consulta NFSe por RPS")] 
+        NFSeConsultarNfsePorRps,
+
+        #endregion
+
         #region Gerais
 
         /// <summary>
@@ -472,46 +554,67 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("0")]
         Desconhecido = 0,
+
         /// <summary>
         /// Carta de correção eletrônica (110110)
         /// </summary>
         [XmlEnum("110110")]
         CartaCorrecao = 110110,
+
         /// <summary>
         /// Cancelamento NFe (110111)
         /// </summary>
         [XmlEnum("110111")]
         Cancelamento = 110111,
+
         /// <summary>
         /// Cancelamento da NFCe sendo substituída por outra NFCe (110112)
         /// </summary>
         [XmlEnum("110112")]
         CancelamentoPorSubstituicao = 110112,
+
+        /// <summary>
+        /// Comprovante de Entrega da NF-e
+        /// </summary>
+        [XmlEnum("110130")]
+        ComprovanteEntregaNFe = 110130,
+
+        /// <summary>
+        /// Cancelamento do Comprovante de Entrega da NF-e
+        /// </summary>
+        [XmlEnum("110131")]
+        CancelamentoComprovanteEntregaNFe = 110131,
+
         /// <summary>
         /// EPEC - Evento Prévio de Emissão em Contingência (110140)
         /// </summary>
         [XmlEnum("110140")]
         EPEC = 110140,
+
         /// <summary>
         /// Pedido de prorrogação do prazo de ICMS no caso de remessa para industrialização (111500)
         /// </summary>
         [XmlEnum("111500")]
         PedidoProrrogacao = 111500,
+
         /// <summary>
         /// Manifestação do Destinatário - Confirmação da Operação (210200)
         /// </summary>
         [XmlEnum("210200")]
         ManifestacaoConfirmacaoOperacao = 210200,
+
         /// <summary>
         /// Manifestação do Destinatário - Ciência da Operação (210210)
         /// </summary>
         [XmlEnum("210210")]
         ManifestacaoCienciaOperacao = 210210,
+
         /// <summary>
         /// Manifestação do Destinatário - Desconhecimento da Operação (210220)
         /// </summary>
         [XmlEnum("210220")]
         ManifestacaoDesconhecimentoOperacao = 210220,
+
         /// <summary>
         /// Manifestação do Destinatário - Operação não realizada (210240)
         /// </summary>
@@ -613,6 +716,12 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("110115")]
         InclusaoDFe = 110115,
+
+        /// <summary>
+        /// Pagamento da Operação de Transporte (MDFe) (110116)
+        /// </summary>
+        [XmlEnum("110116")]
+        PagamentoOperacao = 110116,
 
         /// <summary>
         /// EncerramentoFisco (Evento exclusivo do fisco) (310112)
@@ -1505,6 +1614,114 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("09")]
         Cabal = 9,
+
+        /// <summary>
+        /// 10=Alelo
+        /// </summary>
+        [XmlEnum("10")]
+        Alelo = 10,
+
+        /// <summary>
+        /// 11=Banes Card
+        /// </summary>
+        [XmlEnum("11")]
+        BanesCard = 11,
+
+        /// <summary>
+        /// 12=CalCard
+        /// </summary>
+        [XmlEnum("12")]
+        CalCard = 12,
+
+        /// <summary>
+        /// 13=Credz
+        /// </summary>
+        [XmlEnum("13")]
+        Credz = 13,
+
+        /// <summary>
+        /// 14=Discover
+        /// </summary>
+        [XmlEnum("14")]
+        Discover = 14,
+
+        /// <summary>
+        /// 15=GoodCard
+        /// </summary>
+        [XmlEnum("15")]
+        GoodCard = 15,
+
+        /// <summary>
+        /// 16=GreenCard
+        /// </summary>
+        [XmlEnum("16")]
+        GreenCard = 16,
+
+        /// <summary>
+        /// 17=Hiper
+        /// </summary>
+        [XmlEnum("17")]
+        Hiper = 17,
+
+        /// <summary>
+        /// 18=JcB
+        /// </summary>
+        [XmlEnum("18")]
+        JcB = 18,
+
+        /// <summary>
+        /// 19=Mais
+        /// </summary>
+        [XmlEnum("19")]
+        Mais = 19,
+
+        /// <summary>
+        /// 20=MaxVan
+        /// </summary>
+        [XmlEnum("20")]
+        MaxVan = 20,
+
+        /// <summary>
+        /// 21=Policard
+        /// </summary>
+        [XmlEnum("21")]
+        Policard = 21,
+
+        /// <summary>
+        /// 22=RedeCompras
+        /// </summary>
+        [XmlEnum("22")]
+        RedeCompras = 22,
+
+        /// <summary>
+        /// 23=Sodexo
+        /// </summary>
+        [XmlEnum("23")]
+        Sodexo = 23,
+
+        /// <summary>
+        /// 24=ValeCard
+        /// </summary>
+        [XmlEnum("24")]
+        ValeCard = 24,
+
+        /// <summary>
+        /// 25=Verocheque
+        /// </summary>
+        [XmlEnum("25")]
+        Verocheque = 25,
+
+        /// <summary>
+        /// 26=VR
+        /// </summary>
+        [XmlEnum("26")]
+        VR = 26,
+
+        /// <summary>
+        /// 27=Ticket
+        /// </summary>
+        [XmlEnum("27")]
+        Ticket = 27,
 
         /// <summary>
         /// 99=Outros
@@ -5261,6 +5478,34 @@ namespace Unimake.Business.DFe.Servicos
         /// </summary>
         [XmlEnum("14")]
         VeiculoComercialAcima10Eixos = 14
+    }
+
+    #endregion
+
+    #region Padrões de NFSe
+
+    /// <summary>
+    /// Padrões de NFSe
+    /// </summary>
+    public enum PadraoNFSe
+    {
+        /// <summary>
+        /// Não definido / Nenhum
+        /// </summary>
+        [Description("Nenhum")]
+        None,
+
+        /// <summary>
+        /// BETHA Sistemas
+        /// </summary>
+        [Description("BETHA Sistemas")]
+        BETHA,
+
+        /// <summary>
+        /// SIGCORP - Tecnologia da informação
+        /// </summary>
+        [Description("SIGCORP - Tecnologia da informação")]
+        SIGCORP
     }
 
     #endregion
