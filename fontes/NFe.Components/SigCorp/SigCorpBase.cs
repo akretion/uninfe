@@ -31,10 +31,6 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new RioGrandeRS.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
-                            case 3505500: //Barretos-SP
-                                sigCorpService = new BarretosSP.h.SigCorpH(tpAmb, PastaRetorno);
-                                break;
-
                             case 3530706: //Mogi Guaçu-SP
                                 sigCorpService = new MogiGuacuSP.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
@@ -43,16 +39,8 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new GovernadorValadaresMG.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
-                            case 3305109: //São João de Meriti-RJ
-                                sigCorpService = new SaoJoaoMeritiRJ.h.SigCorpH(tpAmb, PastaRetorno);
-                                break;
-
                             case 3303906: //Petrópolis-RJ
                                 sigCorpService = new PetropolisRJ.h.SigCorpH(tpAmb, PastaRetorno);
-                                break;
-
-                            case 3303203: //Nilópolis-RJ
-                                sigCorpService = new NilopolisRJ.h.SigCorpH(tpAmb, PastaRetorno);
                                 break;
 
                             default:
@@ -63,10 +51,6 @@ namespace NFe.Components.SigCorp
                         {
                             case 3529005: //Marilia-SP
                                 sigCorpService = new MariliaSP.p.SigCorpP(tpAmb, PastaRetorno);
-                                break;
-
-                            case 3304904: //São Gonçalo-RJ
-                                sigCorpService = new SaoGoncaloRJ.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
                           
                             case 4113700: //Londrina-PR
@@ -81,10 +65,6 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new RioGrandeRS.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
-                            case 3505500: //Barretos-SP
-                                sigCorpService = new BarretosSP.p.SigCorpP(tpAmb, PastaRetorno);
-                                break;
-
                             case 3530706: //Mogi Guaçu-SP
                                 sigCorpService = new MogiGuacuSP.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
@@ -93,16 +73,8 @@ namespace NFe.Components.SigCorp
                                 sigCorpService = new GovernadorValadaresMG.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
-                            case 3305109: //São João de Meriti-RJ
-                                sigCorpService = new SaoJoaoMeritiRJ.p.SigCorpP(tpAmb, PastaRetorno);
-                                break;
-
                             case 3303906: //Petrópolis-RJ
                                 sigCorpService = new PetropolisRJ.p.SigCorpP(tpAmb, PastaRetorno);
-                                break;
-
-                            case 3303203: //Nilópolis-RJ
-                                sigCorpService = new NilopolisRJ.p.SigCorpP(tpAmb, PastaRetorno);
                                 break;
 
                             default:

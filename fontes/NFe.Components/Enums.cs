@@ -628,15 +628,8 @@ namespace NFe.Components
         [Description("GNRE")]
         GNRE = 9,
 
-#if _fw46
-
         [Description("NF-e, NFC-e, CT-e, MDF-e, GNRE, EFD Reinf e eSocial")]
         Todos = 10,
-
-#else
-        [Description("NF-e, NFC-e, CT-e, MDF-e")]
-        Todos = 10,
-#endif
 
         [Description("")]
         Nulo = 100
@@ -665,12 +658,6 @@ namespace NFe.Components
         /// </summary>
         [Description("BETHA")]
         BETHA,
-
-        /// <summary>
-        /// Padrão da BETHA versão 2.02
-        /// </summary>
-        [Description("BETHA 2.02")]
-        BETHA202,
 
         /// <summary>
         /// Padrão da THEMA Informática
@@ -1160,7 +1147,7 @@ namespace NFe.Components
         VITORIA_ES,
 
         /// <summary>
-        /// Padrão utilizada pela prefeitura de Nova Friburgo-RJ
+        /// Padrão Modernização Pública
         /// </summary>
         [Description("MODERNIZACAO_PUBLICA")]
         MODERNIZACAO_PUBLICA,

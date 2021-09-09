@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UniNFeServico</RootNamespace>
     <AssemblyName>UniNFeServico</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>UniNFeServico.Program</StartupObject>
     <FileUpgradeFlags>
@@ -164,8 +164,8 @@
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
-    <Reference Include="Unimake.Business.DFe, Version=2021.4.1.1700, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unimake.DFe.20210804.1853.16\lib\netstandard2.0\Unimake.Business.DFe.dll</HintPath>
+    <Reference Include="Unimake.Business.DFe, Version=2021.9.8.1026, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unimake.DFe.20210908.1026.31\lib\net472\Unimake.Business.DFe.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>

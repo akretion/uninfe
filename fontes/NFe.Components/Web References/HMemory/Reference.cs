@@ -23,7 +23,7 @@ namespace NFe.Components.HMemory {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="loterpswsdlBinding", Namespace="urn:loterpswsdl")]
@@ -376,11 +376,11 @@ namespace NFe.Components.HMemory {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void tm_lote_rps_servicetestarLoteRPSCompletedEventHandler(object sender, tm_lote_rps_servicetestarLoteRPSCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class tm_lote_rps_servicetestarLoteRPSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -402,11 +402,11 @@ namespace NFe.Components.HMemory {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void tm_lote_rps_serviceimportarLoteRPSCompletedEventHandler(object sender, tm_lote_rps_serviceimportarLoteRPSCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class tm_lote_rps_serviceimportarLoteRPSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -428,11 +428,11 @@ namespace NFe.Components.HMemory {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void tm_lote_rps_serviceconsultarLoteRPSCompletedEventHandler(object sender, tm_lote_rps_serviceconsultarLoteRPSCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class tm_lote_rps_serviceconsultarLoteRPSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -454,11 +454,11 @@ namespace NFe.Components.HMemory {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void tm_lote_rps_serviceconsultarRPSCompletedEventHandler(object sender, tm_lote_rps_serviceconsultarRPSCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class tm_lote_rps_serviceconsultarRPSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -480,11 +480,11 @@ namespace NFe.Components.HMemory {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void tm_lote_rps_servicecancelarNFSECompletedEventHandler(object sender, tm_lote_rps_servicecancelarNFSECompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class tm_lote_rps_servicecancelarNFSECompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -506,11 +506,11 @@ namespace NFe.Components.HMemory {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void tm_lote_rps_serviceconsultarNFSECompletedEventHandler(object sender, tm_lote_rps_serviceconsultarNFSECompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class tm_lote_rps_serviceconsultarNFSECompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -532,11 +532,11 @@ namespace NFe.Components.HMemory {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void tm_lote_rps_serviceservicoRPSCompletedEventHandler(object sender, tm_lote_rps_serviceservicoRPSCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.3056.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class tm_lote_rps_serviceservicoRPSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

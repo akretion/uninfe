@@ -4,16 +4,9 @@ using NFe.Settings;
 using System;
 using System.IO;
 
-#if _fw46
-
-using System.ServiceModel;
-using static NFe.Components.Security.SOAPSecurity;
-
-#endif
-
 namespace NFe.Service.NFSe
 {
-    public class TaskConsultarNfseRecebidas : TaskAbst
+    public class TaskConsultarNfseRecebidas: TaskAbst
     {
         public TaskConsultarNfseRecebidas(string arquivo)
         {
@@ -34,7 +27,7 @@ namespace NFe.Service.NFSe
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             try
             {
@@ -45,34 +38,38 @@ namespace NFe.Service.NFSe
                 dadosXML = new DadosPedSitNfse(emp);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(dadosXML.cMunicipio);
+                var padraoNFSe = Functions.PadraoNFSe(dadosXML.cMunicipio);
                 WebServiceProxy wsProxy = null;
                 object pedConsNfseRecebidas = null;
-                
-                if (IsUtilizaCompilacaoWs(padraoNFSe))
+
+                if(IsUtilizaCompilacaoWs(padraoNFSe))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosXML.cMunicipio, dadosXML.tpAmb, dadosXML.tpEmis, padraoNFSe, dadosXML.cMunicipio);
                     pedConsNfseRecebidas = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                 }
-                string cabecMsg = "";
+                var cabecMsg = "";
 
-                switch (padraoNFSe)
+                switch(padraoNFSe)
                 {
                     case PadroesNFSe.PAULISTANA:
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
-                        if (dadosXML.tpAmb == 1)
+                        if(dadosXML.tpAmb == 1)
+                        {
                             pedConsNfseRecebidas = new Components.PSaoPauloSP.LoteNFe();
+                        }
                         else
+                        {
                             throw new Exception("Município de São Paulo-SP não dispõe de ambiente de homologação para envio de NFS-e em teste.");
+                        }
 
                         break;
                 }
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosXML.cMunicipio, dadosXML.tpAmb, dadosXML.tpEmis, padraoNFSe, Servico);
+                var securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosXML.cMunicipio, dadosXML.tpAmb, dadosXML.tpEmis, padraoNFSe, Servico);
 
                 //Assinar o XML
-                AssinaturaDigital ad = new AssinaturaDigital();
+                var ad = new AssinaturaDigital();
                 ad.Assinar(NomeArquivoXML, emp, dadosXML.cMunicipio);
 
                 //Invocar o método que envia o XML para o SEFAZ
@@ -83,14 +80,16 @@ namespace NFe.Service.NFSe
 
                 ///
                 /// grava o arquivo no FTP
-                string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
+                var filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
                     Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRec).EnvioXML) +
                     Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSeRec).RetornoXML);
 
-                if (File.Exists(filenameFTP))
+                if(File.Exists(filenameFTP))
+                {
                     new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
+                }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {

@@ -1,7 +1,7 @@
 ECHO OFF
 CHCP 65001
 ::Variáveis
-SET filesDir=Z:\uninfe\trunk\fontes\Unimake.DFe\Compilacao\INTEROP_Release\
+SET filesDir=D:\Projetos\uninfe\trunk\fontes\Unimake.DFe\Compilacao\INTEROP_Release\
 SET istool="C:\Program Files (x86)\Inno Script Studio\ISStudio.exe"
 
 ::Prepara
@@ -11,7 +11,7 @@ CLS
 
 @ECHO Compilando Unimake.DFe
 
-CALL Z:\uninfe\trunk\fontes\Unimake.DFe\Unimake.DFe.sln
+CALL D:\Projetos\uninfe\trunk\fontes\Unimake.DFe\Unimake.DFe.sln
 
 @ECHO Limpando diretório de release
 

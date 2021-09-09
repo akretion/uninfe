@@ -64,10 +64,11 @@ namespace NFe.Service.GNRE
 
                 #endregion
 
+                GravarXmlDistribuicao(emp, consultaResultadoLote);
 
                 vStrXmlRetorno = consultaResultadoLote.RetornoWSString;
-                XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML);
 
+                XmlRetorno(Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).RetornoXML);
 
                 /// grava o arquivo no FTP
                 var filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
@@ -104,6 +105,29 @@ namespace NFe.Service.GNRE
                     //não posso fazer mais nada, o UniNFe vai tentar mandar o arquivo novamente para o webservice, pois ainda não foi excluido.
                     //Wandrey 31/08/2011
                 }
+            }
+        }
+
+        /// <summary>
+        /// Gravar o XML de distribuição da GNRE se a mesma foi autorizada
+        /// </summary>
+        /// <param name="emp">Código da empresa</param>
+        /// <param name="consultaResultadoLote">Objeto da consulta do resultado do lote</param>
+        private void GravarXmlDistribuicao(int emp, ConsultaResultadoLote consultaResultadoLote)
+        {            
+            if (consultaResultadoLote.Result.SituacaoProcess.Codigo.Trim() == "402") // GNRE Autorizada
+            {
+                string arquivo = Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedRec).EnvioXML) + "-procgnre.xml";
+                string nomePastaAutorizados = Empresas.Configuracoes[emp].PastaXmlEnviado + "\\" +
+                    PastaEnviados.Autorizados.ToString() + "\\" +
+                    Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString(DateTime.Now);
+
+                if(!Directory.Exists(nomePastaAutorizados))
+                {
+                    Directory.CreateDirectory(nomePastaAutorizados);
+                }
+
+                consultaResultadoLote.GravarXmlDistribuicao(nomePastaAutorizados, arquivo);
             }
         }
     }

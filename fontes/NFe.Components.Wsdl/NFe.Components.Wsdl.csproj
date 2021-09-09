@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NFe.Components.Wsdl</RootNamespace>
     <AssemblyName>NFe.Components.Wsdl</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -1841,9 +1841,6 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HFarroupilhaRS-GIFServicos.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoGoncaloRJ-sigiss_ws.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PTremembeSP-sigiss_ws.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -2142,9 +2139,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PArcosMG-WebISS.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PItumbiaraGO-Prodata.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSCVRSCteInutilizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\SCVRS\HSVCRSNfeInutilizacao.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Producao\SCVRS\PSCVRSCteInutilizacao.wsdl" />
@@ -2154,9 +2148,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PPassoFundoRS-cancelamento.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPassoFundoRS-consulta.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPassoFundoRS-remessa.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PCianortePR-sigiss_ws.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HVitoriaES-VVISS.wsdl" />
@@ -2429,12 +2420,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PGaribaldi-GIF.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HBarretos-SIGCORP.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="NFse\WSDL\Producao\PBarretos-SIGCORP.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PMemory.wsdl" />
   </ItemGroup>
   <ItemGroup>
@@ -2475,8 +2460,6 @@
     <EmbeddedResource Include="NFse\schemas\NFSe\PUBLICA\schema_nfse_v03.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HGuarapuava-PR.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PGuarapuava-PR.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeAutorizacao_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeConsulta_C.wsdl" />
     <EmbeddedResource Include="NFe\WSDL\Homologacao\MS\HMSNfeInutilizacao_C.wsdl" />
@@ -3959,8 +3942,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PHarmonia-EnvioLoteRPSSincrono.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HGovernadorValadaresMG-SIGCORP.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PGovernadorValadaresMG-SIGCORP.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaFriburgoRJ-MODERNIZACAO_PUBLICA.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PNovaFriburgoRJ-MODERNIZACAO_PUBLICA.wsdl" />
     <EmbeddedResource Include="NFse\schemas\NFSe\MODERNIZACAO_PUBLICA\nfse v2 01.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -4128,8 +4109,6 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoMarcos-ConsultaSequenciaLoteNotaRPS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPatoBrancoPR-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPatoBrancoPR-PRONIN.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoJoaoMeritiRJ-SIGCORP.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PSaoJoaoMeritiRJ-SIGCORP.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSaoJoaoParaisoMG-EL.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PTaiobeirasMG-EL.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HGoianaPE_TINUS_CancelarNfse.wsdl" />
@@ -4183,10 +4162,6 @@
     <EmbeddedResource Include="NFse\WSDL\Producao\PSaoBorjaRS-DBSELLER.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HGuaraSP.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PGuaraSP.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HItapevaSP-PRODATA-NotapdfWSService.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HItapevaSP-PRODATA.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PItapevaSP-PRODATA-NotapdfWSService.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PItapevaSP-PRODATA.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HAguasDeLindoiaSP-Fiorilli.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PAguasDeLindoiaSP-Fiorilli.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HSaoRoqueSP-GOVDIGITAL.wsdl" />
@@ -4347,7 +4322,6 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HBlumenauSC.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPeixotoAzevedoMT-COPLAN.WSDL" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPeixotoAzevedoMT-COPLAN.WSDL" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HCianortePR-sigiss_ws.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HPiratiningaSP-FIORILLI.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPiratiningaSP-FIORILLI.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PUruguaianaRS-PRONIN.wsdl" />
@@ -4510,8 +4484,6 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HOlindaPE_TINUS_RecepcionarLoteRps.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HDivinopolisMG-GOVDigital.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PDivinopolisMG-GOVDigital.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PNilopolisRJ_SIGCORP_SIGISS.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Homologacao\HNilopolisRJ_SIGCORP_SIGISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PPiumaES-EL.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSaoJoaoBoaVistaSP-SIMPLISS.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PVargemGrandeDoSulSP-SIMPLISS.wsdl" />
@@ -4627,7 +4599,6 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HMaringaPR-MARINGA_PR.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PMaringaPR-MARINGA_PR.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HIjuiRS-PRONIN.wsdl" />
-    <EmbeddedResource Include="NFse\WSDL\Producao\PIjuiRS-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PCastanhalPA-PRONIN.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HWebFiscoTecnologia.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PSaoSebastiaoDaGramaSP-PRONIN.wsdl" />
@@ -4671,6 +4642,7 @@
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HNovaLimaMG-substituirnfse.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Producao\PProfessorJamilGO-MEGASOFT.wsdl" />
     <EmbeddedResource Include="NFse\WSDL\Homologacao\HProfessorJamilGO-MEGASOFT.wsdl" />
+    <EmbeddedResource Include="NFse\WSDL\Producao\PIjuiRS-PRONIN.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="NFse\WSDL\Producao\PCamacariBA.wsdl">

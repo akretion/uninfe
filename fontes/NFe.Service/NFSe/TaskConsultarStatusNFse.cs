@@ -6,7 +6,7 @@ using System.IO;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskConsultarStatusNFse : TaskAbst
+    public class TaskConsultarStatusNFse: TaskAbst
     {
         #region Objeto com os dados do XML da consulta nfse
 
@@ -27,7 +27,7 @@ namespace NFe.Service.NFSe
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             ///
             /// extensao permitida:  PedStaNfse = "-ped-stanfse.xml"
@@ -47,27 +47,27 @@ namespace NFe.Service.NFSe
                 PedStaNfse(NomeArquivoXML);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedStaNfse.cMunicipio);
+                var padraoNFSe = Functions.PadraoNFSe(oDadosPedStaNfse.cMunicipio);
                 WebServiceProxy wsProxy = null;
                 object pedStaNota = null;
-                if (IsUtilizaCompilacaoWs(padraoNFSe, Servico, oDadosPedStaNfse.cMunicipio))
+                if(IsUtilizaCompilacaoWs(padraoNFSe, Servico, oDadosPedStaNfse.cMunicipio))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedStaNfse.cMunicipio,
                             oDadosPedStaNfse.tpAmb, oDadosPedStaNfse.tpEmis, padraoNFSe, oDadosPedStaNfse.cMunicipio);
-                    if (wsProxy != null)
+                    if(wsProxy != null)
                     {
                         pedStaNota = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                     }
                 }
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosPedStaNfse.cMunicipio, oDadosPedStaNfse.tpAmb, oDadosPedStaNfse.tpEmis, padraoNFSe, Servico);
+                var securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosPedStaNfse.cMunicipio, oDadosPedStaNfse.tpAmb, oDadosPedStaNfse.tpEmis, padraoNFSe, Servico);
 
-                string cabecMsg = "";
+                var cabecMsg = "";
 
-                if (IsInvocar(padraoNFSe, Servico, oDadosPedStaNfse.cMunicipio))
+                if(IsInvocar(padraoNFSe, Servico, oDadosPedStaNfse.cMunicipio))
                 {
                     //Assinar o XML
-                    AssinaturaDigital ad = new AssinaturaDigital();
+                    var ad = new AssinaturaDigital();
                     ad.Assinar(NomeArquivoXML, emp, oDadosPedStaNfse.cMunicipio);
 
                     //Invocar o método que envia o XML para o SEFAZ
@@ -78,15 +78,15 @@ namespace NFe.Service.NFSe
                                             padraoNFSe, Servico, securityProtocolType);
 
                     /// grava o arquivo no FTP
-                    string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
+                    var filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).EnvioXML) + Propriedade.Extensao(Propriedade.TipoEnvio.PedSitNFSe).RetornoXML);
-                    if (File.Exists(filenameFTP))
+                    if(File.Exists(filenameFTP))
                     {
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
                     }
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {
@@ -124,7 +124,7 @@ namespace NFe.Service.NFSe
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         private void PedStaNfse(string arquivoXML)
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
         }
 
         #endregion PedStaNfse()

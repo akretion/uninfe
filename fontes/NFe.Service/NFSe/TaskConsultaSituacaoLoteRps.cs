@@ -6,17 +6,16 @@ using NFe.Components.FISSLEX;
 using NFe.Components.Memory;
 using NFe.Components.Metropolis;
 using NFe.Components.Pronin;
+using NFe.Components.Simple;
 using NFe.Components.SimplISS;
 using NFe.Components.Tinus;
-using NFe.Components.Simple;
 using NFe.Settings;
-using NFSe.Components;
 using System;
 using System.IO;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskNFSeConsultaSituacaoLoteRps : TaskAbst
+    public class TaskNFSeConsultaSituacaoLoteRps: TaskAbst
     {
         #region Objeto com os dados do XML de consulta situação do lote rps
 
@@ -31,7 +30,7 @@ namespace NFe.Service.NFSe
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             ///
             /// extensao permitida: PedSitLoteRps = "-ped-sitloterps.xml";
@@ -53,24 +52,27 @@ namespace NFe.Service.NFSe
                 //Definir o objeto do WebService
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedSitLoteRps.cMunicipio);
+                var padraoNFSe = Functions.PadraoNFSe(oDadosPedSitLoteRps.cMunicipio);
                 WebServiceProxy wsProxy = null;
                 object pedSitLoteRps = null;
 
-                if (IsUtilizaCompilacaoWs(padraoNFSe, Servico, oDadosPedSitLoteRps.cMunicipio))
+                if(IsUtilizaCompilacaoWs(padraoNFSe, Servico, oDadosPedSitLoteRps.cMunicipio))
                 {
-             
+
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe, oDadosPedSitLoteRps.cMunicipio);
-                    if (wsProxy != null) pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    if(wsProxy != null)
+                    {
+                        pedSitLoteRps = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    }
                 }
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe, Servico);
+                var securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosPedSitLoteRps.cMunicipio, oDadosPedSitLoteRps.tpAmb, oDadosPedSitLoteRps.tpEmis, padraoNFSe, Servico);
 
-                string cabecMsg = "";
-                switch (padraoNFSe)
+                var cabecMsg = "";
+                switch(padraoNFSe)
                 {
                     case PadroesNFSe.GINFES:
-                        switch (oDadosPedSitLoteRps.cMunicipio)
+                        switch(oDadosPedSitLoteRps.cMunicipio)
                         {
                             case 2304400: //Fortaleza - CE
                                 cabecMsg = "<ns2:cabecalho versao=\"3\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\"><versaoDados>3</versaoDados></ns2:cabecalho>";
@@ -85,36 +87,6 @@ namespace NFe.Service.NFSe
                                 break;
                         }
                         break;
-
-                    case PadroesNFSe.BETHA:
-
-                        #region Betha
-
-                        ConteudoXML.PreserveWhitespace = false;
-                        ConteudoXML.Load(NomeArquivoXML);
-
-                        if (!ConteudoXML.DocumentElement.Name.Contains("e:"))
-                        {
-                            padraoNFSe = PadroesNFSe.BETHA202;
-                            Components.Betha.NewVersion.Betha betha = new Components.Betha.NewVersion.Betha((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
-                                Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                oDadosPedSitLoteRps.cMunicipio,
-                                Empresas.Configuracoes[emp].UsuarioWS,
-                                Empresas.Configuracoes[emp].SenhaWS,
-                                ConfiguracaoApp.ProxyUsuario,
-                                ConfiguracaoApp.ProxySenha,
-                                ConfiguracaoApp.ProxyServidor);
-
-                            betha.ConsultarSituacaoLoteRps(NomeArquivoXML);
-                        }
-                        else
-                        {
-                            wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
-                            wsProxy.Betha = new Betha();
-                        }
-                        break;
-
-                    #endregion Betha
 
                     case PadroesNFSe.ABACO:
                     case PadroesNFSe.CANOAS_RS:
@@ -142,7 +114,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.SIMPLISS:
-                        SimplISS simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var simpliss = new SimplISS((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                         oDadosPedSitLoteRps.cMunicipio,
                                                         Empresas.Configuracoes[emp].UsuarioWS,
@@ -158,7 +130,7 @@ namespace NFe.Service.NFSe
 
                         #region E-Governe
 
-                        EGoverne egoverne = new EGoverne((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var egoverne = new EGoverne((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                         oDadosPedSitLoteRps.cMunicipio,
                                                         ConfiguracaoApp.ProxyUsuario,
@@ -166,7 +138,7 @@ namespace NFe.Service.NFSe
                                                         ConfiguracaoApp.ProxyServidor,
                                                         Empresas.Configuracoes[emp].X509Certificado);
 
-                        AssinaturaDigital assegov = new AssinaturaDigital();
+                        var assegov = new AssinaturaDigital();
                         assegov.Assinar(NomeArquivoXML, emp, oDadosPedSitLoteRps.cMunicipio);
 
                         egoverne.ConsultarSituacaoLoteRps(NomeArquivoXML);
@@ -178,7 +150,7 @@ namespace NFe.Service.NFSe
 
                         #region E&L
 
-                        EL el = new EL((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var el = new EL((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                         oDadosPedSitLoteRps.cMunicipio,
                                         Empresas.Configuracoes[emp].UsuarioWS,
@@ -197,7 +169,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.FISSLEX:
-                        FISSLEX fisslex = new FISSLEX((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var fisslex = new FISSLEX((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosPedSitLoteRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
@@ -219,7 +191,7 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.PAULISTANA:
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
 
-                        if (oDadosPedSitLoteRps.tpAmb == 1)
+                        if(oDadosPedSitLoteRps.tpAmb == 1)
                         {
                             pedSitLoteRps = new NFe.Components.PSaoPauloSP.LoteNFe();
                         }
@@ -234,7 +206,7 @@ namespace NFe.Service.NFSe
 
                         #region Memory
 
-                        Memory memory = new Memory((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var memory = new Memory((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                         oDadosPedSitLoteRps.cMunicipio,
                         Empresas.Configuracoes[emp].UsuarioWS,
@@ -252,7 +224,7 @@ namespace NFe.Service.NFSe
 
                         #region METROPOLIS
 
-                        Metropolis metropolis = new Metropolis((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var metropolis = new Metropolis((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                       Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                       oDadosPedSitLoteRps.cMunicipio,
                                                       ConfiguracaoApp.ProxyUsuario,
@@ -260,7 +232,7 @@ namespace NFe.Service.NFSe
                                                       ConfiguracaoApp.ProxyServidor,
                                                       Empresas.Configuracoes[emp].X509Certificado);
 
-                        AssinaturaDigital metropolisdig = new AssinaturaDigital();
+                        var metropolisdig = new AssinaturaDigital();
                         metropolisdig.Assinar(NomeArquivoXML, emp, oDadosPedSitLoteRps.cMunicipio);
 
                         metropolis.ConsultarSituacaoLoteRps(NomeArquivoXML);
@@ -269,14 +241,13 @@ namespace NFe.Service.NFSe
                     #endregion METROPOLIS
 
                     case PadroesNFSe.PRONIN:
-                        if (oDadosPedSitLoteRps.cMunicipio == 4109401 ||
-                            oDadosPedSitLoteRps.cMunicipio == 3131703 ||
+                        if(oDadosPedSitLoteRps.cMunicipio == 3131703 ||
                             oDadosPedSitLoteRps.cMunicipio == 4303004 ||
                             oDadosPedSitLoteRps.cMunicipio == 4322509 ||
                             oDadosPedSitLoteRps.cMunicipio == 3556602 ||
-                            oDadosPedSitLoteRps.cMunicipio == 3512803 || 
+                            oDadosPedSitLoteRps.cMunicipio == 3512803 ||
                             oDadosPedSitLoteRps.cMunicipio == 4323002 ||
-                            oDadosPedSitLoteRps.cMunicipio == 3505807 || 
+                            oDadosPedSitLoteRps.cMunicipio == 3505807 ||
                             oDadosPedSitLoteRps.cMunicipio == 3530300 ||
                             oDadosPedSitLoteRps.cMunicipio == 4308904 ||
                             oDadosPedSitLoteRps.cMunicipio == 4118501 ||
@@ -289,8 +260,8 @@ namespace NFe.Service.NFSe
                             oDadosPedSitLoteRps.cMunicipio == 4306932 ||
                             oDadosPedSitLoteRps.cMunicipio == 4322400 ||
                             oDadosPedSitLoteRps.cMunicipio == 4302808 ||
-							oDadosPedSitLoteRps.cMunicipio == 3501301 ||
-							oDadosPedSitLoteRps.cMunicipio == 4300109 ||
+                            oDadosPedSitLoteRps.cMunicipio == 3501301 ||
+                            oDadosPedSitLoteRps.cMunicipio == 4300109 ||
                             oDadosPedSitLoteRps.cMunicipio == 4124053 ||
                             oDadosPedSitLoteRps.cMunicipio == 4101408 ||
                             oDadosPedSitLoteRps.cMunicipio == 3550407 ||
@@ -298,7 +269,7 @@ namespace NFe.Service.NFSe
                             oDadosPedSitLoteRps.cMunicipio == 1502400 ||
                             oDadosPedSitLoteRps.cMunicipio == 3550803)
                         {
-                            Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            var pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
                                 oDadosPedSitLoteRps.cMunicipio,
                                 ConfiguracaoApp.ProxyUsuario,
@@ -306,7 +277,7 @@ namespace NFe.Service.NFSe
                                 ConfiguracaoApp.ProxyServidor,
                                 Empresas.Configuracoes[emp].X509Certificado);
 
-                            AssinaturaDigital assPronin = new AssinaturaDigital();
+                            var assPronin = new AssinaturaDigital();
                             assPronin.Assinar(NomeArquivoXML, emp, oDadosPedSitLoteRps.cMunicipio);
 
                             pronin.ConsultarSituacaoLoteRps(NomeArquivoXML);
@@ -314,7 +285,7 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.TINUS:
-                        Tinus tinus = new Tinus((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var tinus = new Tinus((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                             oDadosPedSitLoteRps.cMunicipio,
                             ConfiguracaoApp.ProxyUsuario,
@@ -343,7 +314,7 @@ namespace NFe.Service.NFSe
 
                     case PadroesNFSe.SIMPLE:
 
-                        Simple simple = new Simple((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var simple = new Simple((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                                         Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                         oDadosPedSitLoteRps.cMunicipio,
                                                         ConfiguracaoApp.ProxyUsuario,
@@ -361,17 +332,17 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.DSF:
-                        if (oDadosPedSitLoteRps.cMunicipio == 3549904)
+                        if(oDadosPedSitLoteRps.cMunicipio == 3549904)
                         {
                             cabecMsg = "<cabecalho versao=\"3\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>3</versaoDados></cabecalho>";
                         }
                         break;
                 }
 
-                if (IsInvocar(padraoNFSe, Servico, oDadosPedSitLoteRps.cMunicipio))
+                if(IsInvocar(padraoNFSe, Servico, oDadosPedSitLoteRps.cMunicipio))
                 {
                     //Assinar o XML
-                    AssinaturaDigital ad = new AssinaturaDigital();
+                    var ad = new AssinaturaDigital();
                     ad.Assinar(NomeArquivoXML, emp, oDadosPedSitLoteRps.cMunicipio);
 
                     //Invocar o método que envia o XML para o SEFAZ
@@ -383,13 +354,15 @@ namespace NFe.Service.NFSe
 
                     ///
                     /// grava o arquivo no FTP
-                    string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
+                    var filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
                                                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).EnvioXML) + Propriedade.Extensao(Propriedade.TipoEnvio.PedSitLoteRps).RetornoXML);
-                    if (File.Exists(filenameFTP))
+                    if(File.Exists(filenameFTP))
+                    {
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
+                    }
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {

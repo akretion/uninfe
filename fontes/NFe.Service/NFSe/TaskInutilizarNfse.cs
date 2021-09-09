@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.IO;
-using System.Xml;
-
+﻿using NFe.Certificado;
 using NFe.Components;
 using NFe.Settings;
-using NFe.Certificado;
-using NFSe.Components;
+using System;
+using System.IO;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskInutilizarNfse : TaskAbst
+    public class TaskInutilizarNfse: TaskAbst
     {
         #region Objeto com os dados do XML da consulta nfse
         /// <summary>
@@ -24,7 +18,7 @@ namespace NFe.Service.NFSe
         #region Execute
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.NFSeInutilizarNFSe;
@@ -38,15 +32,15 @@ namespace NFe.Service.NFSe
                 oDadosInuNfse = new DadosPedSitNfse(emp);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosInuNfse.cMunicipio);
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosInuNfse.cMunicipio, oDadosInuNfse.tpAmb, oDadosInuNfse.tpEmis, padraoNFSe, oDadosInuNfse.cMunicipio);
-                object pedInuNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                string cabecMsg = "";
+                var padraoNFSe = Functions.PadraoNFSe(oDadosInuNfse.cMunicipio);
+                var wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosInuNfse.cMunicipio, oDadosInuNfse.tpAmb, oDadosInuNfse.tpEmis, padraoNFSe, oDadosInuNfse.cMunicipio);
+                var pedInuNfse = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                var cabecMsg = "";
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosInuNfse.cMunicipio, oDadosInuNfse.tpAmb, oDadosInuNfse.tpEmis, padraoNFSe, Servico);
+                var securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosInuNfse.cMunicipio, oDadosInuNfse.tpAmb, oDadosInuNfse.tpEmis, padraoNFSe, Servico);
 
                 //Assinar o XML
-                AssinaturaDigital ad = new AssinaturaDigital();
+                var ad = new AssinaturaDigital();
                 ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosInuNfse.cMunicipio));
 
                 //Invocar o método que envia o XML para o SEFAZ
@@ -57,13 +51,15 @@ namespace NFe.Service.NFSe
 
                 ///
                 /// grava o arquivo no FTP
-                string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedInuNFSe).EnvioXML) + 
+                var filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedInuNFSe).EnvioXML) +
                                                 Propriedade.Extensao(Propriedade.TipoEnvio.PedInuNFSe).RetornoXML);
-                if (File.Exists(filenameFTP))
+                if(File.Exists(filenameFTP))
+                {
                     new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
+                }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {

@@ -23,7 +23,7 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="nfse_web_serviceSoapBinding", Namespace="Tributario")]
@@ -402,7 +402,7 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -414,7 +414,7 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
         public string nfseCabecMsg { get; set; }
 
         System.Xml.XmlCDataSection _nfseCabecMsgCDATA = null;
-
+        
         /// <remarks/>
         [XmlElement("nfseCabecMsg")]
         public System.Xml.XmlCDataSection nfseCabecMsgCDATA
@@ -432,7 +432,7 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
                 _nfseCabecMsgCDATA = value;
             }
         }
-
+        
         [XmlIgnore]
         public string nfseDadosMsg { get; set; }
 
@@ -455,9 +455,9 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
             }
         }
     }
-
+    
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.4084.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -478,11 +478,11 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void RECEPCIONARLOTERPSCompletedEventHandler(object sender, RECEPCIONARLOTERPSCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class RECEPCIONARLOTERPSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -504,11 +504,11 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void GERARNFSECompletedEventHandler(object sender, GERARNFSECompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GERARNFSECompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -530,11 +530,11 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void RECEPCIONARLOTERPSSINCRONOCompletedEventHandler(object sender, RECEPCIONARLOTERPSSINCRONOCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class RECEPCIONARLOTERPSSINCRONOCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -556,11 +556,11 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void CANCELARNFSECompletedEventHandler(object sender, CANCELARNFSECompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CANCELARNFSECompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -582,11 +582,11 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void CONSULTARLOTERPSCompletedEventHandler(object sender, CONSULTARLOTERPSCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CONSULTARLOTERPSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -608,11 +608,11 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void CONSULTARNFSEFAIXACompletedEventHandler(object sender, CONSULTARNFSEFAIXACompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CONSULTARNFSEFAIXACompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -634,11 +634,11 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void CONSULTARNFSEPORRPSCompletedEventHandler(object sender, CONSULTARNFSEPORRPSCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CONSULTARNFSEPORRPSCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -660,11 +660,11 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void CONSULTARNFSESERVICOPRESTADOCompletedEventHandler(object sender, CONSULTARNFSESERVICOPRESTADOCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CONSULTARNFSESERVICOPRESTADOCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -686,11 +686,11 @@ namespace NFe.Components.HCampoNovoDoParecisMT {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     public delegate void SUBSTITUIRNFSECompletedEventHandler(object sender, SUBSTITUIRNFSECompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1586.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SUBSTITUIRNFSECompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

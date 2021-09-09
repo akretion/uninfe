@@ -32,13 +32,10 @@ namespace NFe.Components
         {
             nomeInstalador = "i" + Propriedade.NomeAplicacao.ToLower() + "5.exe";
 
-#if _fw35
-            nomeInstalador = "i" + Propriedade.NomeAplicacao.ToLower() + "5_fw35.exe";
-#elif x64
-            nomeInstalador = "i" + Propriedade.NomeAplicacao.ToLower() + "5_fw46_x64.exe";
-#elif x86
+#if x86
             nomeInstalador = "i" + Propriedade.NomeAplicacao.ToLower() + "5_fw46_x86.exe";
 #endif
+
             pastaInstalar = Application.StartupPath;
             localArq = Path.Combine(Application.StartupPath, nomeInstalador);
             url = $"http://www.unimake.com.br/downloads/{nomeInstalador}";

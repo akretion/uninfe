@@ -1,5 +1,4 @@
-﻿#if _fw46
-using NFe.Components.Abstract;
+﻿using NFe.Components.Abstract;
 using NFe.Components.Interface;
 using System.IO;
 using System.Net;
@@ -66,4 +65,3 @@ namespace NFe.Components
         }
     }
 }
-#endif

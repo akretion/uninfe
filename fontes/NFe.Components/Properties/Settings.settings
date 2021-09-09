@@ -14,9 +14,6 @@
     <Setting Name="NFe_Components_br_net_taquarituba_fiorilli_h_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://fi1.fiorilli.com.br:5663/IssWeb-ejb/IssWebWS/IssWebWS</Value>
     </Setting>
-    <Setting Name="NFe_Components_br_com_sigiss_saogoncalo_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://saogoncalo.sigiss.com.br:443/saogoncalo/ws/sigiss_ws.php</Value>
-    </Setting>
     <Setting Name="NFe_Components_br_com_sigiss_tremembe_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://tremembe.sigiss.com.br:443/tremembe/ws/sigiss_ws.php</Value>
     </Setting>
@@ -149,12 +146,6 @@
     <Setting Name="NFe_Components_br_com_sigiss_testeriogrande_h_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://testeriogrande.sigiss.com.br:443/testeriogrande/ws/sigiss_ws.php</Value>
     </Setting>
-    <Setting Name="NFe_Components_br_com_sigiss_barretos_p_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://barretos.sigiss.com.br:443/barretos/ws/sigiss_ws.php</Value>
-    </Setting>
-    <Setting Name="NFe_Components_br_com_sigiss_testebarretos_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://testebarretos.sigiss.com.br:443/testebarretos/ws/sigiss_ws.php</Value>
-    </Setting>
     <Setting Name="NFe_Components_PSaoPauloSP_LoteNFe" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://nfe.prefeitura.sp.gov.br/ws/lotenfe.asmx</Value>
     </Setting>
@@ -193,9 +184,6 @@
     </Setting>
     <Setting Name="NFe_Components_PJaraguaGO_nfseWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://jaragua.bsit-br.com.br/integracao/services/nfseWS</Value>
-    </Setting>
-    <Setting Name="NFe_Components_br_gov_pr_guarapuava_nfse_h_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://nfse.guarapuava.pr.gov.br/NFSe.Portal.Integracao/Services.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_com_dyndnsserver_pmassis2_p_IssWebWS" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://nfsews.assis.sp.gov.br/IssWeb-ejb/IssWebWS/IssWebWS</Value>
@@ -338,9 +326,6 @@
     <Setting Name="NFe_Components_PGuarantaNorteMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://www.gp.srv.br/tributario_guarantadonorte/servlet/anfse_web_service</Value>
     </Setting>
-    <Setting Name="NFe_Components_PViamaoRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://acesso.viamao.rs.gov.br:8085/NFSe.Portal.Integracao/Services.svc</Value>
-    </Setting>
     <Setting Name="NFe_Components_HViamaoRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://acesso.viamao.rs.gov.br:8083/NFSe.Portal.Integracao.Teste/Services.svc</Value>
     </Setting>
@@ -442,12 +427,6 @@
     </Setting>
     <Setting Name="NFe_Components_PPatoBrancoPR_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://nfse2.patobranco.pr.gov.br/NFSe.Portal.Integracao/Services.svc</Value>
-    </Setting>
-    <Setting Name="NFe_Components_HSaoJoaoMeritiRJ_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://testesaojoaodemeriti.sigiss.com.br:443/testesaojoaodemeriti/ws/sigiss_ws.php</Value>
-    </Setting>
-    <Setting Name="NFe_Components_PSaoJoaoMeritiRJ_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://saojoaodemeriti.sigiss.com.br:443/saojoaodemeriti/ws/sigiss_ws.php</Value>
     </Setting>
     <Setting Name="NFe_Components_PSaoJoaoParaisoMG_RpsServiceService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://nf-saojoaodoparaiso-mg.el.com.br:443/RpsService</Value>
@@ -914,16 +893,7 @@
     <Setting Name="NFe_Components_HDivinopolisMG_NfseServiceImplDivService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://ws.homolog.nfe-cidades.com.br/ws/div</Value>
     </Setting>
-    <Setting Name="NFe_Components_HNilopolisRJ_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://nilopolis.sigiss.com.br:443/testenilopolis/ws/sigiss_ws.php</Value>
-    </Setting>
-    <Setting Name="NFe_Components_PNilopolisRJ_WebService_SigISS" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://nilopolis.sigiss.com.br:443/nilopolis/ws/sigiss_ws.php</Value>
-    </Setting>
     <Setting Name="NFe_Components_HIjuiRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.svc</Value>
-    </Setting>
-    <Setting Name="NFe_Components_PIjuiRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.svc</Value>
     </Setting>
     <Setting Name="NFe_Components_PPiumaES_RpsServiceService" Type="(Web Service URL)" Scope="Application">
@@ -1048,6 +1018,15 @@
     </Setting>
     <Setting Name="NFe_Components_PAguaBoaMT_nfse_web_service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://www.gp.srv.br/tributario_aguaboa/servlet/anfse_web_service</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PViamaoRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://viamao-portais.govcloud.com.br:8085/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PIjuiRS_NFSeIntegracao" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc</Value>
+    </Setting>
+    <Setting Name="NFe_Components_PNovaFriburgoRJ_RpsServiceService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://rj-novafriburgo-pm-nfs.cloud.el.com.br:80/RpsService</Value>
     </Setting>
   </Settings>
 </SettingsFile>

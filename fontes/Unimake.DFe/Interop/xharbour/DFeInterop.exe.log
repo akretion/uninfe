@@ -1,3 +1,0 @@
-
-Type: C >>>xlink.exe -NOEXPOBJ -MAP -FORCE:MULTIPLE -NOIMPLIB -subsystem:console -LIBPATH:"D:\xHB\lib" -LIBPATH:"D:\xHB\c_lib" -LIBPATH:"D:\xHB\c_lib\win"  "DFeInterop.obj" DbgServe.lib "xhb.lib" "dbf.lib" "nsx.lib" "ntx.lib" "cdx.lib" "rmdbfcdx.lib" "ct3comm.lib" crt.lib kernel32.lib user32.lib winspool.lib ole32.lib oleaut32.lib odbc32.lib odbccp32.lib uuid.lib wsock32.lib ws2_32.lib wininet.lib advapi32.lib shlwapi.lib msimg32.lib mpr.lib OleDlg.lib version.lib -out:"DFeInterop.exe"<<<
-

@@ -405,7 +405,10 @@ namespace NFe.Components
             conteudoXML.Load(file);
 
             XmlElement elementos = (XmlElement)conteudoXML.GetElementsByTagName(node)[0];
-            result = elementos.GetAttribute(attribute);
+            if(elementos != null)
+            {
+                result = elementos.GetAttribute(attribute);
+            }
 
             return result;
         }

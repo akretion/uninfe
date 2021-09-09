@@ -132,6 +132,9 @@ namespace NFSe.Components
                 case 4215000: //Rio Negrinho-SC
                     return 8295;
 
+                case 4109401: //Guarapuava-PR
+                    return 7583;
+
             }
 
             return 0;

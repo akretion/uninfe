@@ -6,10 +6,8 @@ using NFe.Components.SystemPro;
 using NFe.Settings;
 using System;
 using System.IO;
-#if _fw46
 using System.ServiceModel;
 using static NFe.Components.Security.SOAPSecurity;
-#endif
 
 namespace NFe.Service.NFSe
 {
@@ -84,7 +82,6 @@ namespace NFe.Service.NFSe
                     case PadroesNFSe.E_RECEITA:
                         cabecMsg = "<cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\" versao=\"2.02\"><versaoDados>2.02</versaoDados></cabecalho>";
                         break;
-#if _fw46
                     case PadroesNFSe.ADM_SISTEMAS:
                         cabecMsg = "<cabecalho versao=\"2.01\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.01</versaoDados></cabecalho>";
                         wsProxy = new WebServiceProxy(Empresas.Configuracoes[emp].X509Certificado);
@@ -95,7 +92,6 @@ namespace NFe.Service.NFSe
 
                         SignUsingCredentials(emp, pedSubstNfse);
                         break;
-#endif
 
                     case PadroesNFSe.INDAIATUBA_SP:
                         cabecMsg = "<cabecalho versao=\"2.03\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.abrasf.org.br/nfse.xsd\"><versaoDados>2.03</versaoDados></cabecalho>";
@@ -123,9 +119,9 @@ namespace NFe.Service.NFSe
                         break;
 
                     case PadroesNFSe.PRONIN:
-                        if (dadosXML.cMunicipio == 4323002)
+                        if(dadosXML.cMunicipio == 4323002)
                         {
-                            Pronin pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                            var pronin = new Pronin((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                                 Empresas.Configuracoes[emp].PastaXmlRetorno,
                                 dadosXML.cMunicipio,
                                 ConfiguracaoApp.ProxyUsuario,
@@ -133,7 +129,7 @@ namespace NFe.Service.NFSe
                                 ConfiguracaoApp.ProxyServidor,
                                 Empresas.Configuracoes[emp].X509Certificado);
 
-                            AssinaturaDigital assPronin = new AssinaturaDigital();
+                            var assPronin = new AssinaturaDigital();
                             assPronin.Assinar(NomeArquivoXML, emp, dadosXML.cMunicipio);
 
                             pronin.SubstituirNfse(NomeArquivoXML);
@@ -144,7 +140,7 @@ namespace NFe.Service.NFSe
 
                         #region Coplan
 
-                        Coplan coplan = new Coplan((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
+                        var coplan = new Coplan((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
                             Empresas.Configuracoes[emp].PastaXmlRetorno,
                              dadosXML.cMunicipio,
                             ConfiguracaoApp.ProxyUsuario,
@@ -152,7 +148,7 @@ namespace NFe.Service.NFSe
                             ConfiguracaoApp.ProxyServidor,
                             Empresas.Configuracoes[emp].X509Certificado);
 
-                        AssinaturaDigital assCoplan = new AssinaturaDigital();
+                        var assCoplan = new AssinaturaDigital();
                         assCoplan.Assinar(NomeArquivoXML, emp, dadosXML.cMunicipio);
 
                         coplan.SubstituirNfse(NomeArquivoXML);
@@ -163,7 +159,7 @@ namespace NFe.Service.NFSe
 
                 }
 
-                if (IsInvocar(padraoNFSe, Servico, Empresas.Configuracoes[emp].UnidadeFederativaCodigo))
+                if(IsInvocar(padraoNFSe, Servico, Empresas.Configuracoes[emp].UnidadeFederativaCodigo))
                 {
 
                     //Assinar o XML

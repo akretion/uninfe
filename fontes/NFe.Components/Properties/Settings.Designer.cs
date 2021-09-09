@@ -12,7 +12,7 @@ namespace NFe.Components.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -60,16 +60,6 @@ namespace NFe.Components.Properties {
         public string NFe_Components_br_net_taquarituba_fiorilli_h_IssWebWS {
             get {
                 return ((string)(this["NFe_Components_br_net_taquarituba_fiorilli_h_IssWebWS"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://saogoncalo.sigiss.com.br:443/saogoncalo/ws/sigiss_ws.php")]
-        public string NFe_Components_br_com_sigiss_saogoncalo_p_WebService_SigISS {
-            get {
-                return ((string)(this["NFe_Components_br_com_sigiss_saogoncalo_p_WebService_SigISS"]));
             }
         }
         
@@ -523,26 +513,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://barretos.sigiss.com.br:443/barretos/ws/sigiss_ws.php")]
-        public string NFe_Components_br_com_sigiss_barretos_p_WebService_SigISS {
-            get {
-                return ((string)(this["NFe_Components_br_com_sigiss_barretos_p_WebService_SigISS"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://testebarretos.sigiss.com.br:443/testebarretos/ws/sigiss_ws.php")]
-        public string NFe_Components_br_com_sigiss_testebarretos_WebService_SigISS {
-            get {
-                return ((string)(this["NFe_Components_br_com_sigiss_testebarretos_WebService_SigISS"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("https://nfe.prefeitura.sp.gov.br/ws/lotenfe.asmx")]
         public string NFe_Components_PSaoPauloSP_LoteNFe {
             get {
@@ -667,16 +637,6 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PJaraguaGO_nfseWS {
             get {
                 return ((string)(this["NFe_Components_PJaraguaGO_nfseWS"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://nfse.guarapuava.pr.gov.br/NFSe.Portal.Integracao/Services.svc")]
-        public string NFe_Components_br_gov_pr_guarapuava_nfse_h_NFSeIntegracao {
-            get {
-                return ((string)(this["NFe_Components_br_gov_pr_guarapuava_nfse_h_NFSeIntegracao"]));
             }
         }
         
@@ -1161,16 +1121,6 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://acesso.viamao.rs.gov.br:8085/NFSe.Portal.Integracao/Services.svc")]
-        public string NFe_Components_PViamaoRS_NFSeIntegracao {
-            get {
-                return ((string)(this["NFe_Components_PViamaoRS_NFSeIntegracao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://acesso.viamao.rs.gov.br:8083/NFSe.Portal.Integracao.Teste/Services.svc")]
         public string NFe_Components_HViamaoRS_NFSeIntegracao {
             get {
@@ -1511,27 +1461,6 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PPatoBrancoPR_NFSeIntegracao {
             get {
                 return ((string)(this["NFe_Components_PPatoBrancoPR_NFSeIntegracao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://testesaojoaodemeriti.sigiss.com.br:443/testesaojoaodemeriti/ws/sigiss_ws." +
-            "php")]
-        public string NFe_Components_HSaoJoaoMeritiRJ_WebService_SigISS {
-            get {
-                return ((string)(this["NFe_Components_HSaoJoaoMeritiRJ_WebService_SigISS"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://saojoaodemeriti.sigiss.com.br:443/saojoaodemeriti/ws/sigiss_ws.php")]
-        public string NFe_Components_PSaoJoaoMeritiRJ_WebService_SigISS {
-            get {
-                return ((string)(this["NFe_Components_PSaoJoaoMeritiRJ_WebService_SigISS"]));
             }
         }
         
@@ -3101,40 +3030,10 @@ namespace NFe.Components.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://nilopolis.sigiss.com.br:443/testenilopolis/ws/sigiss_ws.php")]
-        public string NFe_Components_HNilopolisRJ_WebService_SigISS {
-            get {
-                return ((string)(this["NFe_Components_HNilopolisRJ_WebService_SigISS"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://nilopolis.sigiss.com.br:443/nilopolis/ws/sigiss_ws.php")]
-        public string NFe_Components_PNilopolisRJ_WebService_SigISS {
-            get {
-                return ((string)(this["NFe_Components_PNilopolisRJ_WebService_SigISS"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.svc")]
         public string NFe_Components_HIjuiRS_NFSeIntegracao {
             get {
                 return ((string)(this["NFe_Components_HIjuiRS_NFSeIntegracao"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao.Teste/Services.svc")]
-        public string NFe_Components_PIjuiRS_NFSeIntegracao {
-            get {
-                return ((string)(this["NFe_Components_PIjuiRS_NFSeIntegracao"]));
             }
         }
         
@@ -3554,6 +3453,36 @@ namespace NFe.Components.Properties {
         public string NFe_Components_PAguaBoaMT_nfse_web_service {
             get {
                 return ((string)(this["NFe_Components_PAguaBoaMT_nfse_web_service"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://viamao-portais.govcloud.com.br:8085/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PViamaoRS_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PViamaoRS_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://ijui-portais.govcloud.com.br/NFSe.Portal.Integracao/Services.svc")]
+        public string NFe_Components_PIjuiRS_NFSeIntegracao {
+            get {
+                return ((string)(this["NFe_Components_PIjuiRS_NFSeIntegracao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://rj-novafriburgo-pm-nfs.cloud.el.com.br:80/RpsService")]
+        public string NFe_Components_PNovaFriburgoRJ_RpsServiceService {
+            get {
+                return ((string)(this["NFe_Components_PNovaFriburgoRJ_RpsServiceService"]));
             }
         }
     }

@@ -614,7 +614,6 @@ namespace NFe.Settings
                         t.IndSinc = false;
                     }
 
-#if _fw46
                     if(t.UnidadeFederativaCodigo.Equals(4205407))
                     {
                         var result = t.RecuperarConfiguracaoNFSeSoftplan(t.CNPJ);
@@ -623,7 +622,6 @@ namespace NFe.Settings
                         TokenNFse = result.TokenNFse;
                         TokenNFSeExpire = result.TokenNFSeExpire;
                     }
-#endif
 
                     CriarPastasDaEmpresa();
 
@@ -1260,7 +1258,6 @@ namespace NFe.Settings
             }
         }
 
-#if _fw46
         public void SalvarConfiguracoesNFSeSoftplan(string usuario, string senha, string clientID, string clientSecret, string token, DateTime tokenExpire, string cnpj)
         {
             try
@@ -1336,7 +1333,6 @@ namespace NFe.Settings
 
             return result;
         }
-#endif
 
         private void doneThread_FTP(Thread thread)
         {

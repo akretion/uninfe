@@ -25,13 +25,13 @@ namespace NFe.Components.Info
             string sValIni = "";
             string sValFin = "";
 
-            if (!somenteConfigGeral)
+            if(!somenteConfigGeral)
             {
                 CertificadoDigital cert = new CertificadoDigital();
 
-                if (Empresas.Configuracoes[emp].UsaCertificado)
+                if(Empresas.Configuracoes[emp].UsaCertificado)
                 {
-                    if (cert.PrepInfCertificado(Empresas.Configuracoes[emp]))
+                    if(cert.PrepInfCertificado(Empresas.Configuracoes[emp]))
                     {
                         sSubject = cert.sSubject;
                         sValIni = cert.dValidadeInicial.ToString("dd/MM/yyyy HH:mm:ss");
@@ -64,10 +64,15 @@ namespace NFe.Components.Info
             //Gravar o XML com as informações do aplicativo
             try
             {
+                if(File.Exists(Path.GetFileNameWithoutExtension(sArquivo) + ".err"))
+                {
+                    File.Delete(Path.GetFileNameWithoutExtension(sArquivo) + ".err");
+                }
+
                 bool isXml = false;
                 object oXmlGravar;
 
-                if (Path.GetExtension(sArquivo).ToLower() == ".txt")
+                if(Path.GetExtension(sArquivo).ToLower() == ".txt")
                 {
                     oXmlGravar = new System.IO.StringWriter();
                 }
@@ -89,7 +94,7 @@ namespace NFe.Components.Info
                     oXmlGravar = XmlWriter.Create(sArquivo, oSettings);
                 }
                 //Abrir o XML
-                if (isXml)
+                if(isXml)
                 {
                     ((XmlWriter)oXmlGravar).WriteStartDocument();
                     ((XmlWriter)oXmlGravar).WriteStartElement("retConsInf");
@@ -97,21 +102,21 @@ namespace NFe.Components.Info
                 Functions.GravaTxtXml(oXmlGravar, NFe.Components.TpcnResources.cStat.ToString(), cStat);
                 Functions.GravaTxtXml(oXmlGravar, NFe.Components.TpcnResources.xMotivo.ToString(), xMotivo);
 
-                if (!somenteConfigGeral)
+                if(!somenteConfigGeral)
                 {
-                    if (Empresas.Configuracoes[emp].UsaCertificado)
+                    if(Empresas.Configuracoes[emp].UsaCertificado)
                     {
                         //Dados do certificado digital
-                        if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement("DadosCertificado");
+                        if(isXml) ((XmlWriter)oXmlGravar).WriteStartElement("DadosCertificado");
                         Functions.GravaTxtXml(oXmlGravar, "sSubject", sSubject);
                         Functions.GravaTxtXml(oXmlGravar, "dValIni", sValIni);
                         Functions.GravaTxtXml(oXmlGravar, "dValFin", sValFin);
-                        if (isXml) ((XmlWriter)oXmlGravar).WriteEndElement(); //DadosCertificado
+                        if(isXml) ((XmlWriter)oXmlGravar).WriteEndElement(); //DadosCertificado
                     }
                 }
 
                 //Dados gerais do Aplicativo
-                if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement("DadosUniNfe");
+                if(isXml) ((XmlWriter)oXmlGravar).WriteStartElement("DadosUniNfe");
                 Functions.GravaTxtXml(oXmlGravar, NFe.Components.TpcnResources.versao.ToString(), Propriedade.Versao);
                 Functions.GravaTxtXml(oXmlGravar, "dUltModif", dtUltModif);
                 Functions.GravaTxtXml(oXmlGravar, "PastaExecutavel", Propriedade.PastaExecutavel);
@@ -121,30 +126,30 @@ namespace NFe.Components.Info
                 Functions.GravaTxtXml(oXmlGravar, "ExecutandoPeloServico", Propriedade.ServicoRodando.ToString());
                 Functions.GravaTxtXml(oXmlGravar, "ConexaoInternet", Functions.IsConnectedToInternet().ToString());
 
-                if (isXml) ((XmlWriter)oXmlGravar).WriteEndElement(); //DadosUniNfe
+                if(isXml) ((XmlWriter)oXmlGravar).WriteEndElement(); //DadosUniNfe
 
                 //Dados das configurações do aplicativo
-                if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement(NFeStrConstants.nfe_configuracoes);
+                if(isXml) ((XmlWriter)oXmlGravar).WriteStartElement(NFeStrConstants.nfe_configuracoes);
                 //Functions.GravaTxtXml(oXmlGravar, NFe.Components.NFeStrConstants.DiretorioSalvarComo, Empresas.Configuracoes[emp].DiretorioSalvarComo.ToString());
 
-                if (!somenteConfigGeral)
+                if(!somenteConfigGeral)
                 {
                     bool hasFTP = false;
-                    foreach (var pT in Empresas.Configuracoes[emp].GetType().GetProperties())
+                    foreach(var pT in Empresas.Configuracoes[emp].GetType().GetProperties())
                     {
-                        if (pT.CanWrite)
+                        if(pT.CanWrite)
                         {
-                            if (pT.Name.Equals("diretorioSalvarComo")) continue;
+                            if(pT.Name.Equals("diretorioSalvarComo")) continue;
 
-                            if (isXml)
+                            if(isXml)
                             {
-                                if (!hasFTP && pT.Name.StartsWith("FTP"))
+                                if(!hasFTP && pT.Name.StartsWith("FTP"))
                                 {
                                     ((XmlWriter)oXmlGravar).WriteStartElement("FTP");
                                     hasFTP = true;
                                 }
                                 else
-                                    if (hasFTP && !pT.Name.StartsWith("FTP"))
+                                    if(hasFTP && !pT.Name.StartsWith("FTP"))
                                 {
                                     ((XmlWriter)oXmlGravar).WriteEndElement();
                                     hasFTP = false;
@@ -154,29 +159,29 @@ namespace NFe.Components.Info
                             NFe.Components.Functions.GravaTxtXml(oXmlGravar, pT.Name, v == null ? "" : v.ToString());
                         }
                     }
-                    if (hasFTP && isXml) ((XmlWriter)oXmlGravar).WriteEndElement();
+                    if(hasFTP && isXml) ((XmlWriter)oXmlGravar).WriteEndElement();
 
                     ///
                     /// o ERP poderá verificar se determinado servico está definido no UniNFe
                     ///
-                    foreach (webServices list in WebServiceProxy.webServicesList)
+                    foreach(webServices list in WebServiceProxy.webServicesList)
                     {
-                        if (list.ID == Empresas.Configuracoes[emp].UnidadeFederativaCodigo)
+                        if(list.ID == Empresas.Configuracoes[emp].UnidadeFederativaCodigo)
                         {
-                            if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement(list.UF);
-                            if (Empresas.Configuracoes[emp].AmbienteCodigo == 2)
+                            if(isXml) ((XmlWriter)oXmlGravar).WriteStartElement(list.UF);
+                            if(Empresas.Configuracoes[emp].AmbienteCodigo == 2)
                             {
                                 item = list.LocalHomologacao;
-                                if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement("Homologacao");
+                                if(isXml) ((XmlWriter)oXmlGravar).WriteStartElement("Homologacao");
                                 else tipo = list.UF + ".Homologacao.";
                             }
                             else
                             {
                                 item = list.LocalProducao;
-                                if (isXml) ((XmlWriter)oXmlGravar).WriteStartElement("Producao");
+                                if(isXml) ((XmlWriter)oXmlGravar).WriteStartElement("Producao");
                                 else tipo = list.UF + ".Producao.";
                             }
-                            switch (Empresas.Configuracoes[emp].Servico)
+                            switch(Empresas.Configuracoes[emp].Servico)
                             {
                                 case TipoAplicativo.Nfse:
                                     Functions.GravaTxtXml(oXmlGravar, tipo + Servicos.NFSeCancelar.ToString(), (!string.IsNullOrEmpty(item.CancelarNfse)).ToString());
@@ -195,7 +200,7 @@ namespace NFe.Components.Info
                                     break;
 
                                 default:
-                                    if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.NFCe ||
+                                    if(Empresas.Configuracoes[emp].Servico == TipoAplicativo.NFCe ||
                                         Empresas.Configuracoes[emp].Servico == TipoAplicativo.Nfe ||
                                         Empresas.Configuracoes[emp].Servico == TipoAplicativo.Todos)
                                     {
@@ -211,7 +216,7 @@ namespace NFe.Components.Info
                                         Functions.GravaTxtXml(oXmlGravar, tipo + "DFeRecepcao", (!string.IsNullOrEmpty(item.DFeRecepcao)).ToString());
                                         Functions.GravaTxtXml(oXmlGravar, tipo + Servicos.LMCAutorizacao.ToString(), (!string.IsNullOrEmpty(item.LMCAutorizacao)).ToString());
                                     }
-                                    if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.MDFe ||
+                                    if(Empresas.Configuracoes[emp].Servico == TipoAplicativo.MDFe ||
                                         Empresas.Configuracoes[emp].Servico == TipoAplicativo.Todos)
                                     {
                                         Functions.GravaTxtXml(oXmlGravar, tipo + "MDFeRecepcao", (!string.IsNullOrEmpty(item.MDFeRecepcao)).ToString());
@@ -222,7 +227,7 @@ namespace NFe.Components.Info
                                         Functions.GravaTxtXml(oXmlGravar, tipo + Servicos.MDFeRecepcaoEvento.ToString(), (!string.IsNullOrEmpty(item.MDFeRecepcaoEvento)).ToString());
                                         Functions.GravaTxtXml(oXmlGravar, tipo + Servicos.MDFeConsultaNaoEncerrado.ToString(), (!string.IsNullOrEmpty(item.MDFeNaoEncerrado)).ToString());
                                     }
-                                    if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.Cte ||
+                                    if(Empresas.Configuracoes[emp].Servico == TipoAplicativo.Cte ||
                                         Empresas.Configuracoes[emp].Servico == TipoAplicativo.Todos)
                                     {
                                         Functions.GravaTxtXml(oXmlGravar, tipo + Servicos.CTeRecepcaoEvento.ToString(), (!string.IsNullOrEmpty(item.CTeRecepcaoEvento)).ToString());
@@ -231,13 +236,13 @@ namespace NFe.Components.Info
                                         Functions.GravaTxtXml(oXmlGravar, tipo + "CTeStatusServico", (!string.IsNullOrEmpty(item.CTeStatusServico)).ToString());
                                         Functions.GravaTxtXml(oXmlGravar, tipo + "CTeDistribuicaoDFe", (!string.IsNullOrEmpty(item.CTeDistribuicaoDFe)).ToString());
                                     }
-                                    if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.EFDReinf ||
+                                    if(Empresas.Configuracoes[emp].Servico == TipoAplicativo.EFDReinf ||
                                         Empresas.Configuracoes[emp].Servico == TipoAplicativo.EFDReinfeSocial ||
                                         Empresas.Configuracoes[emp].Servico == TipoAplicativo.Todos)
                                     {
                                         Functions.GravaTxtXml(oXmlGravar, tipo + NFe.Components.Servicos.RecepcaoLoteReinf.ToString(), (!string.IsNullOrEmpty(item.RecepcaoLoteReinf)).ToString());
                                     }
-                                    if (Empresas.Configuracoes[emp].Servico == TipoAplicativo.eSocial ||
+                                    if(Empresas.Configuracoes[emp].Servico == TipoAplicativo.eSocial ||
                                         Empresas.Configuracoes[emp].Servico == TipoAplicativo.Todos)
                                     {
                                         Functions.GravaTxtXml(oXmlGravar, tipo + Servicos.ConsultarLoteeSocial.ToString(), (!string.IsNullOrEmpty(item.ConsultarLoteeSocial)).ToString());
@@ -255,7 +260,7 @@ namespace NFe.Components.Info
                                     break;
                             }
 
-                            if (isXml)
+                            if(isXml)
                             {
                                 ((XmlWriter)oXmlGravar).WriteEndElement();   //Ambiente
                                 ((XmlWriter)oXmlGravar).WriteEndElement();   //list.UF
@@ -265,7 +270,7 @@ namespace NFe.Components.Info
                 }
 
                 //Finalizar o XML
-                if (isXml)
+                if(isXml)
                 {
                     ((XmlWriter)oXmlGravar).WriteEndElement(); //nfe_configuracoes
                     ((XmlWriter)oXmlGravar).WriteEndElement(); //retConsInf
@@ -280,7 +285,7 @@ namespace NFe.Components.Info
                     ((StringWriter)oXmlGravar).Close();
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Functions.DeletarArquivo(sArquivo);
                 ///
@@ -311,13 +316,13 @@ namespace NFe.Components.Info
                 // pois podem ter sofridos alterações de configurações nas pastas
                 Empresas.CreateLockFile();
             }
-            catch (NFe.Components.Exceptions.AppJaExecutando ex)
+            catch(NFe.Components.Exceptions.AppJaExecutando ex)
             {
                 Auxiliar.WriteLog(ex.Message, false);
 
                 return true;
             }
-            catch (NFe.Components.Exceptions.ProblemaExecucaoUniNFe ex)
+            catch(NFe.Components.Exceptions.ProblemaExecucaoUniNFe ex)
             {
                 Auxiliar.WriteLog(ex.Message, false);
             }
@@ -358,12 +363,12 @@ namespace NFe.Components.Info
                 Empresas.CreateLockFile();
 
                 string procName = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
-                if (System.Diagnostics.Process.GetProcessesByName(procName).Length > 1)
+                if(System.Diagnostics.Process.GetProcessesByName(procName).Length > 1)
                 {
                     executando = true;
                 }
             }
-            catch (NFe.Components.Exceptions.AppJaExecutando ex)
+            catch(NFe.Components.Exceptions.AppJaExecutando ex)
             {
                 Empresas.ExisteErroDiretorio = true;
                 Empresas.ErroCaminhoDiretorio = ex.Message;

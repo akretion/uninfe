@@ -47,7 +47,6 @@ namespace NFe.Components
                         {
                             case PadroesNFSe.NaoIdentificado:
                             case PadroesNFSe.GINFES:
-                            case PadroesNFSe.BETHA:
                             case PadroesNFSe.EQUIPLANO:
                             case PadroesNFSe.ABASE:
                                 _PadroesUnicoWSDLDataSource.Add(new PadroesDataSource { fromType = type.ToString(), fromDescription = EnumHelper.GetEnumItemDescription(type) });

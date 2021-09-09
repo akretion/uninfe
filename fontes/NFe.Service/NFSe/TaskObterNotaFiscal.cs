@@ -7,7 +7,7 @@ using System.IO;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskObterNotaFiscal : TaskAbst
+    public class TaskObterNotaFiscal: TaskAbst
     {
         #region Objeto com os dados do XML da consulta nfse
         /// <summary>
@@ -38,11 +38,11 @@ namespace NFe.Service.NFSe
                 WebServiceProxy wsProxy = null;
                 object pedNfseXML = null;
 
-                if (IsUtilizaCompilacaoWs(padraoNFSe, Servico, oObterNotaFiscal.cMunicipio))
+                if(IsUtilizaCompilacaoWs(padraoNFSe, Servico, oObterNotaFiscal.cMunicipio))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oObterNotaFiscal.cMunicipio, oObterNotaFiscal.tpAmb, oObterNotaFiscal.tpEmis, padraoNFSe, oObterNotaFiscal.cMunicipio);
 
-                    if (wsProxy != null)
+                    if(wsProxy != null)
                     {
                         pedNfseXML = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
                     }
@@ -51,7 +51,7 @@ namespace NFe.Service.NFSe
                 var securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oObterNotaFiscal.cMunicipio, oObterNotaFiscal.tpAmb, oObterNotaFiscal.tpEmis, padraoNFSe, Servico);
                 var cabecMsg = "";
 
-                switch (padraoNFSe)
+                switch(padraoNFSe)
                 {
                     case PadroesNFSe.WEBFISCO_TECNOLOGIA:
                         var webTecnologia = new WEBFISCO_TECNOLOGIA((TipoAmbiente)Empresas.Configuracoes[emp].AmbienteCodigo,
@@ -64,7 +64,7 @@ namespace NFe.Service.NFSe
                         break;
                 }
 
-                if (IsInvocar(padraoNFSe, Servico, oObterNotaFiscal.cMunicipio))
+                if(IsInvocar(padraoNFSe, Servico, oObterNotaFiscal.cMunicipio))
                 {
 
                     //Assinar o XML
@@ -82,13 +82,13 @@ namespace NFe.Service.NFSe
                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).EnvioXML) +
                         Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSeXML).RetornoXML);
 
-                    if (File.Exists(filenameFTP))
+                    if(File.Exists(filenameFTP))
                     {
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
                     }
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {

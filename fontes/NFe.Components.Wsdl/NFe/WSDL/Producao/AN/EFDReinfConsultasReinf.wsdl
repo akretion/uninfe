@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions name="ConsultasReinf" targetNamespace="http://sped.fazenda.gov.br/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://sped.fazenda.gov.br/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://sped.fazenda.gov.br/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="ConsultasReinf" targetNamespace="http://sped.fazenda.gov.br/">
   <wsp:Policy Id="WsReceberLoteEventos_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -26,7 +26,7 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsdl:types>
-    <xs:schema elementFormDefault="qualified" targetNamespace="http://sped.fazenda.gov.br/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://sped.fazenda.gov.br/">
       <xs:element name="ConsultaResultadoFechamento2099">
         <xs:complexType>
           <xs:sequence>
@@ -40,28 +40,6 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" maxOccurs="1" name="ConsultaResultadoFechamento2099Result">
-              <xs:complexType mixed="true">
-                <xs:sequence>
-                  <xs:any />
-                </xs:sequence>
-              </xs:complexType>
-            </xs:element>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="ConsultaInformacoesConsolidadas">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="1" maxOccurs="1" name="tipoInscricaoContribuinte" type="xs:unsignedByte" />
-            <xs:element minOccurs="0" maxOccurs="1" name="numeroInscricaoContribuinte" type="xs:string" />
-            <xs:element minOccurs="0" maxOccurs="1" name="numeroProtocoloFechamento" type="xs:string" />
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="ConsultaInformacoesConsolidadasResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="1" name="ConsultaInformacoesConsolidadasResult">
               <xs:complexType mixed="true">
                 <xs:sequence>
                   <xs:any />
@@ -369,12 +347,6 @@
   <wsdl:message name="ConsultasReinf_ConsultaResultadoFechamento2099_OutputMessage">
     <wsdl:part name="parameters" element="tns:ConsultaResultadoFechamento2099Response" />
   </wsdl:message>
-  <wsdl:message name="ConsultasReinf_ConsultaInformacoesConsolidadas_InputMessage">
-    <wsdl:part name="parameters" element="tns:ConsultaInformacoesConsolidadas" />
-  </wsdl:message>
-  <wsdl:message name="ConsultasReinf_ConsultaInformacoesConsolidadas_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ConsultaInformacoesConsolidadasResponse" />
-  </wsdl:message>
   <wsdl:message name="ConsultasReinf_ConsultaReciboEvento1000_InputMessage">
     <wsdl:part name="parameters" element="tns:ConsultaReciboEvento1000" />
   </wsdl:message>
@@ -452,10 +424,6 @@
       <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaResultadoFechamento2099" message="tns:ConsultasReinf_ConsultaResultadoFechamento2099_InputMessage" />
       <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaResultadoFechamento2099Response" message="tns:ConsultasReinf_ConsultaResultadoFechamento2099_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ConsultaInformacoesConsolidadas">
-      <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaInformacoesConsolidadas" message="tns:ConsultasReinf_ConsultaInformacoesConsolidadas_InputMessage" />
-      <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaInformacoesConsolidadasResponse" message="tns:ConsultasReinf_ConsultaInformacoesConsolidadas_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="ConsultaReciboEvento1000">
       <wsdl:input wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento1000" message="tns:ConsultasReinf_ConsultaReciboEvento1000_InputMessage" />
       <wsdl:output wsaw:Action="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaReciboEvento1000Response" message="tns:ConsultasReinf_ConsultaReciboEvento1000_OutputMessage" />
@@ -510,15 +478,6 @@
     <wsp:PolicyReference URI="#WsReceberLoteEventos_policy" />
     <wsdl:operation name="ConsultaResultadoFechamento2099">
       <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaResultadoFechamento2099" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ConsultaInformacoesConsolidadas">
-      <soap:operation soapAction="http://sped.fazenda.gov.br/ConsultasReinf/ConsultaInformacoesConsolidadas" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

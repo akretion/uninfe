@@ -7,7 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-#if _fw46
+
 namespace NFe.Components.PAmargosaBA {
     using System.Runtime.Serialization;
     using System;
@@ -981,4 +981,3 @@ namespace NFe.Components.PAmargosaBA {
         }
     }
 }
-#endif

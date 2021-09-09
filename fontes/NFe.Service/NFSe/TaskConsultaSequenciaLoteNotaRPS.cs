@@ -6,7 +6,7 @@ using System.IO;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskConsultaSequenciaLoteNotaRPS : TaskAbst
+    public class TaskConsultaSequenciaLoteNotaRPS: TaskAbst
     {
         public TaskConsultaSequenciaLoteNotaRPS(string arquivo)
         {
@@ -27,7 +27,7 @@ namespace NFe.Service.NFSe
 
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             try
             {
@@ -40,30 +40,33 @@ namespace NFe.Service.NFSe
                 PedSeqLoteNotaRPS(NomeArquivoXML);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(dadosPedSeqLoteNotaRPS.cMunicipio);
+                var padraoNFSe = Functions.PadraoNFSe(dadosPedSeqLoteNotaRPS.cMunicipio);
                 WebServiceProxy wsProxy = null;
                 object pedSeqLoteNotaRPS = null;
 
-                if (IsUtilizaCompilacaoWs(padraoNFSe, Servico, dadosPedSeqLoteNotaRPS.cMunicipio))
+                if(IsUtilizaCompilacaoWs(padraoNFSe, Servico, dadosPedSeqLoteNotaRPS.cMunicipio))
                 {
                     wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, dadosPedSeqLoteNotaRPS.cMunicipio, dadosPedSeqLoteNotaRPS.tpAmb, dadosPedSeqLoteNotaRPS.tpEmis, padraoNFSe, dadosPedSeqLoteNotaRPS.cMunicipio);
-                    if (wsProxy != null) pedSeqLoteNotaRPS = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    if(wsProxy != null)
+                    {
+                        pedSeqLoteNotaRPS = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                    }
                 }
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSeqLoteNotaRPS.cMunicipio, dadosPedSeqLoteNotaRPS.tpAmb, dadosPedSeqLoteNotaRPS.tpEmis, padraoNFSe, Servico);
+                var securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(dadosPedSeqLoteNotaRPS.cMunicipio, dadosPedSeqLoteNotaRPS.tpAmb, dadosPedSeqLoteNotaRPS.tpEmis, padraoNFSe, Servico);
 
-                string cabecMsg = "";
-                switch (padraoNFSe)
+                var cabecMsg = "";
+                switch(padraoNFSe)
                 {
                     case PadroesNFSe.TECNOSISTEMAS:
                         cabecMsg = "<?xml version=\"1.0\" encoding=\"utf-8\"?><cabecalho xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" versao=\"20.01\" xmlns=\"http://www.nfse-tecnos.com.br/nfse.xsd\"><versaoDados>20.01</versaoDados></cabecalho>";
                         break;
                 }
 
-                if (IsInvocar(padraoNFSe, Servico, dadosPedSeqLoteNotaRPS.cMunicipio))
+                if(IsInvocar(padraoNFSe, Servico, dadosPedSeqLoteNotaRPS.cMunicipio))
                 {
                     //Assinar o XML
-                    AssinaturaDigital ad = new AssinaturaDigital();
+                    var ad = new AssinaturaDigital();
                     ad.Assinar(NomeArquivoXML, emp, dadosPedSeqLoteNotaRPS.cMunicipio);
 
                     //Invocar o método que envia o XML para o SEFAZ
@@ -75,14 +78,16 @@ namespace NFe.Service.NFSe
 
                     ///
                     /// grava o arquivo no FTP
-                    string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
+                    var filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
                         Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedSeqLoteNotaRPS).EnvioXML) + Propriedade.Extensao(Propriedade.TipoEnvio.PedSeqLoteNotaRPS).RetornoXML);
 
-                    if (File.Exists(filenameFTP))
+                    if(File.Exists(filenameFTP))
+                    {
                         new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
+                    }
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {
@@ -120,7 +125,7 @@ namespace NFe.Service.NFSe
         /// <param name="arquivoXML">Arquivo XML que é para efetuar a leitura</param>
         private void PedSeqLoteNotaRPS(string arquivoXML)
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
         }
 
         #endregion PedSeqLoteNotaRPS()

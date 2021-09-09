@@ -119,10 +119,6 @@ namespace NFe.Components
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4303004-";
                                 break;
 
-                            case 202: //BETHA 2.02
-                                padraoNFSe = PadroesNFSe.BETHA.ToString() + "-202-";
-                                break;
-
                             case 4322509: //Vacari-RS
                                 padraoNFSe = Functions.PadraoNFSe(UFCod).ToString() + "-4322509-";
                                 break;
@@ -300,13 +296,6 @@ namespace NFe.Components
                                         if (conteudoXML.DocumentElement.Name == "e:CancelarNfseEnvio" && conteudoXML.DocumentElement.FirstChild.Name == "Pedido")
                                         {
                                             versaoXML = "-3";
-                                        }
-                                        break;
-
-                                    case PadroesNFSe.BETHA:
-                                        if (versao == "2.02")
-                                        {
-                                            versaoXML = "-" + versao;
                                         }
                                         break;
                                 }

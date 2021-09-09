@@ -144,8 +144,6 @@ namespace NFSe.Components
             #endregion Resposta do servidor
         }
 
-#if _fw46
-
         /// <summary>
         /// Faz o post e retorna uma string  com o resultado
         /// </summary>
@@ -239,12 +237,5 @@ namespace NFSe.Components
 
             return result;
         }
-
-#else
-        public string PostForm(string url, IDictionary<string, string> postData = null, IList<string> headers = null)
-        {
-            throw new NotImplementedException("Município não funciona com .NET 3.5");
-        }
-#endif
     }
 }

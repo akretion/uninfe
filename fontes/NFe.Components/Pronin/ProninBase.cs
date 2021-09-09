@@ -22,13 +22,10 @@ namespace NFe.Components.Pronin
                     if (tpAmb == TipoAmbiente.taHomologacao)
                         switch (CodigoMun)
                         {
-                            case 4109401: //Guarapuava-PR
-                                proninService = new GuarapuavaPR.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
-                                break;
-
                             case 3131703: //Itabira-MG
                                 proninService = new ItabiraMG.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
+
                             case 4303004: //Cachoeira do Sul-RS
                                 proninService = new CachoeiraSulRS.h.ProninH(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;
@@ -110,10 +107,6 @@ namespace NFe.Components.Pronin
                     else
                         switch (CodigoMun)
                         {
-                            case 4109401: //Guarapuava-PR
-                                proninService = new GuarapuavaPR.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
-                                break;
-
                             case 3131703: //Itabira-MG
                                 proninService = new ItabiraMG.p.ProninP(tpAmb, PastaRetorno, UsuarioProxy, SenhaProxy, DomainProxy, Certificado);
                                 break;

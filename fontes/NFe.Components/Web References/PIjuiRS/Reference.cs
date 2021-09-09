@@ -51,7 +51,7 @@ namespace NFe.Components.PIjuiRS {
         
         /// <remarks/>
         public BasicHttpBinding_INFSEConsultas() {
-            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_HIjuiRS_NFSeIntegracao;
+            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_PIjuiRS_NFSeIntegracao;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -411,7 +411,7 @@ namespace NFe.Components.PIjuiRS {
         
         /// <remarks/>
         public BasicHttpBinding_INFSEGeracao() {
-            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_HIjuiRS_NFSeIntegracao;
+            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_PIjuiRS_NFSeIntegracao;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -828,7 +828,7 @@ namespace NFe.Components.PIjuiRS {
         
         /// <remarks/>
         public BasicHttpBinding_INFSeIntegracaoDEISS() {
-            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_HIjuiRS_NFSeIntegracao;
+            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_PIjuiRS_NFSeIntegracao;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

@@ -427,39 +427,6 @@ namespace NFe.Service
 
                 #endregion THEMA
 
-                #region BETHA
-
-                case PadroesNFSe.BETHA:
-                    switch(servico)
-                    {
-                        case Servicos.NFSeConsultarLoteRps:
-                            retorna = "ConsultarLoteRps";
-                            break;
-
-                        case Servicos.NFSeConsultar:
-                            retorna = "ConsultarNfse";
-                            break;
-
-                        case Servicos.NFSeConsultarPorRps:
-                            retorna = "ConsultarNfsePorRps";
-                            break;
-
-                        case Servicos.NFSeConsultarSituacaoLoteRps:
-                            retorna = "ConsultarSituacaoLoteRps";
-                            break;
-
-                        case Servicos.NFSeCancelar:
-                            retorna = "CancelarNfse";
-                            break;
-
-                        case Servicos.NFSeRecepcionarLoteRps:
-                            retorna = "RecepcionarLoteRps";
-                            break;
-                    }
-                    break;
-
-                #endregion BETHA
-
                 #region GOIANIA
 
                 case PadroesNFSe.GOIANIA:
@@ -1441,55 +1408,6 @@ namespace NFe.Service
                     break;
 
                 #endregion EQUIPLANO
-
-                #region PRODATA
-
-                case PadroesNFSe.PRODATA:
-                    switch(servico)
-                    {
-                        case Servicos.NFSeRecepcionarLoteRps:
-                            retorna = "RecepcionarLoteRps";
-                            break;
-
-                        case Servicos.NFSeCancelar:
-                            retorna = "CancelarNfse";
-                            break;
-
-                        case Servicos.NFSeConsultarLoteRps:
-                            retorna = "ConsultarLoteRps";
-                            break;
-
-                        case Servicos.NFSeConsultarPorRps:
-                            retorna = "ConsultarNfsePorRps";
-                            break;
-
-                        case Servicos.NFSeConsultar:
-                            retorna = "ConsultarNfsePorFaixa";
-                            break;
-
-                        case Servicos.NFSeConsultarSituacaoLoteRps:
-                            retorna = "";
-                            break;
-
-                        case Servicos.NFSeConsultarURL:
-                            retorna = "";
-                            break;
-
-                        case Servicos.NFSeConsultarURLSerie:
-                            retorna = "";
-                            break;
-
-                        case Servicos.NFSeGerarNfse:
-                            retorna = "GerarNfse";
-                            break;
-
-                        case Servicos.NFSeConsultarNFSePDF:
-                            retorna = "ConsultarNotapdf";
-                            break;
-                    }
-                    break;
-
-                #endregion PRODATA
 
                 #region VVISS
 
@@ -3420,7 +3338,6 @@ namespace NFe.Service
 
                 case PadroesNFSe.EGOVERNEISS:
                 case PadroesNFSe.COPLAN:
-                case PadroesNFSe.BETHA202:
                 case PadroesNFSe.MEMORY:
                 case PadroesNFSe.CONSIST:
                 case PadroesNFSe.MGM:
@@ -3523,9 +3440,15 @@ namespace NFe.Service
 
         protected Servicos GetTipoServicoSincrono(Servicos servico, string file, PadroesNFSe padrao)
         {
-            var result = servico;
             var doc = new XmlDocument();
             doc.Load(file);
+
+            return GetTipoServicoSincrono(servico, doc, padrao);
+        }
+
+        protected Servicos GetTipoServicoSincrono(Servicos servico, XmlDocument doc, PadroesNFSe padrao)
+        {
+            var result = servico;
 
             switch(padrao)
             {
@@ -3597,7 +3520,6 @@ namespace NFe.Service
                     break;
 
                 case PadroesNFSe.CARIOCA:
-                case PadroesNFSe.PRODATA:
                     if(servico == Servicos.NFSeRecepcionarLoteRps)
                     {
                         switch(doc.DocumentElement.Name)
@@ -3740,7 +3662,6 @@ namespace NFe.Service
                     break;
 
                 case PadroesNFSe.COPLAN:
-                case PadroesNFSe.BETHA202:
                 case PadroesNFSe.SH3:
                     if(servico == Servicos.NFSeRecepcionarLoteRps)
                     {

@@ -84,11 +84,14 @@ namespace NFe.UI.Formularios
 
             if(ckbUsaCertificado.Checked)
             {
-                if(!string.IsNullOrEmpty(empresa.CertificadoPIN))
+                if(empresa.X509Certificado.IsA3())
                 {
-                    if(salvando)
+                    if(!string.IsNullOrEmpty(empresa.CertificadoPIN))
                     {
-                        ValidarCertificadoA3(true);
+                        if(salvando)
+                        {
+                            ValidarCertificadoA3(true);
+                        }
                     }
                 }
             }
@@ -296,11 +299,12 @@ namespace NFe.UI.Formularios
             }
             else
             {
-                btnValidarProvider.Visible = false;
+                txtPinCertificado.Text = string.Empty;
                 txtPinCertificado.Visible = false;
-                lblPinCertificado.Visible = false;
-                btnValidarProvider.Enabled = false;
                 txtPinCertificado.Enabled = false;
+                btnValidarProvider.Visible = false;
+                btnValidarProvider.Enabled = false;
+                lblPinCertificado.Visible = false;
                 lblPinCertificado.Enabled = false;
             }
         }
@@ -333,18 +337,21 @@ namespace NFe.UI.Formularios
 
         private void btnValidarProvider_Click(object sender, EventArgs e)
         {
-            try
+            if(empresa.X509Certificado.IsA3())
             {
-                Validar(false);
-                empresa.PastaXmlEnvio = ucPastas.textBox_PastaXmlEnvio.Text;
-                ValidarCertificadoA3(false);
-            }
-            catch(Exception ex)
-            {
-                MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
-                                      ex.Message,
-                                      provError,
-                                      MessageBoxButtons.OK);
+                try
+                {
+                    Validar(false);
+                    empresa.PastaXmlEnvio = ucPastas.textBox_PastaXmlEnvio.Text;
+                    ValidarCertificadoA3(false);
+                }
+                catch(Exception ex)
+                {
+                    MetroFramework.MetroMessageBox.Show(uninfeDummy.mainForm,
+                                          ex.Message,
+                                          provError,
+                                          MessageBoxButtons.OK);
+                }
             }
         }
 

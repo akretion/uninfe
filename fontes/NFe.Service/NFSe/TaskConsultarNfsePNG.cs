@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
-using System.IO;
-using System.Xml;
-
+﻿using NFe.Certificado;
 using NFe.Components;
 using NFe.Settings;
-using NFe.Certificado;
-using NFSe.Components;
+using System;
+using System.IO;
 
 namespace NFe.Service.NFSe
 {
-    public class TaskConsultarNfsePNG : TaskAbst
+    public class TaskConsultarNfsePNG: TaskAbst
     {
         #region Objeto com os dados do XML da consulta nfse
         /// <summary>
@@ -24,7 +18,7 @@ namespace NFe.Service.NFSe
         #region Execute
         public override void Execute()
         {
-            int emp = Empresas.FindEmpresaByThread();
+            var emp = Empresas.FindEmpresaByThread();
 
             //Definir o serviço que será executado para a classe
             Servico = Servicos.NFSeConsultarNFSePNG;
@@ -39,15 +33,15 @@ namespace NFe.Service.NFSe
                 oDadosPedNfsePNG = new DadosPedSitNfse(emp);
 
                 //Criar objetos das classes dos serviços dos webservices do SEFAZ
-                PadroesNFSe padraoNFSe = Functions.PadraoNFSe(oDadosPedNfsePNG.cMunicipio);
-                WebServiceProxy wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedNfsePNG.cMunicipio, oDadosPedNfsePNG.tpAmb, oDadosPedNfsePNG.tpEmis, padraoNFSe, oDadosPedNfsePNG.cMunicipio);
-                object pedNfsePNG = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
-                string cabecMsg = "";
+                var padraoNFSe = Functions.PadraoNFSe(oDadosPedNfsePNG.cMunicipio);
+                var wsProxy = ConfiguracaoApp.DefinirWS(Servico, emp, oDadosPedNfsePNG.cMunicipio, oDadosPedNfsePNG.tpAmb, oDadosPedNfsePNG.tpEmis, padraoNFSe, oDadosPedNfsePNG.cMunicipio);
+                var pedNfsePNG = wsProxy.CriarObjeto(wsProxy.NomeClasseWS);
+                var cabecMsg = "";
 
-                System.Net.SecurityProtocolType securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosPedNfsePNG.cMunicipio, oDadosPedNfsePNG.tpAmb, oDadosPedNfsePNG.tpEmis, padraoNFSe, Servico);
+                var securityProtocolType = WebServiceProxy.DefinirProtocoloSeguranca(oDadosPedNfsePNG.cMunicipio, oDadosPedNfsePNG.tpAmb, oDadosPedNfsePNG.tpEmis, padraoNFSe, Servico);
 
                 //Assinar o XML
-                AssinaturaDigital ad = new AssinaturaDigital();
+                var ad = new AssinaturaDigital();
                 ad.Assinar(NomeArquivoXML, emp, Convert.ToInt32(oDadosPedNfsePNG.cMunicipio));
 
                 //Invocar o método que envia o XML para o SEFAZ
@@ -58,19 +52,21 @@ namespace NFe.Service.NFSe
 
                 ///
                 /// grava o arquivo no FTP
-                string filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
-                                                Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePNG).EnvioXML) + 
+                var filenameFTP = Path.Combine(Empresas.Configuracoes[emp].PastaXmlRetorno,
+                                                Functions.ExtrairNomeArq(NomeArquivoXML, Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePNG).EnvioXML) +
                                                 Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePNG).RetornoXML);
-                if (File.Exists(filenameFTP))
+                if(File.Exists(filenameFTP))
+                {
                     new GerarXML(emp).XmlParaFTP(emp, filenameFTP);
+                }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 try
                 {
                     //Gravar o arquivo de erro de retorno para o ERP, caso ocorra
-                    TFunctions.GravarArqErroServico(NomeArquivoXML, 
-                                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePNG).EnvioXML, 
+                    TFunctions.GravarArqErroServico(NomeArquivoXML,
+                                                    Propriedade.Extensao(Propriedade.TipoEnvio.PedNFSePNG).EnvioXML,
                                                     Propriedade.ExtRetorno.NFSePNG_ERR, ex);
                 }
                 catch

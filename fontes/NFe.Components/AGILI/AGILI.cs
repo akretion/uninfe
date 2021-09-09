@@ -1,6 +1,4 @@
-﻿#if _fw46
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NFe.Components.Abstract;
 using NFSe.Components;
 using System;
@@ -184,5 +182,3 @@ namespace NFe.Components.AGILI
         #endregion Public Methods
     }
 }
-
-#endif

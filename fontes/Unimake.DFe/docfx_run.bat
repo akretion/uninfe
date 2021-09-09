@@ -1,1 +1,0 @@
-..\..\docfx\docfx.exe "docfx\docfx.json"

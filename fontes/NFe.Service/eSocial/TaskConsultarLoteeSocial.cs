@@ -92,11 +92,7 @@ namespace NFe.Service
             StreamWriter swProc = null;
             var protocoloEnvio = ConteudoXML.GetElementsByTagName("protocoloEnvio")[0].InnerText;
             bool contemEventoComErro = false;
-#if _fw46
             var nomeArquivoProtocolo = Path.Combine(Empresas.Configuracoes[emp].PastaXmlEnviado, "EmProcessamento", $"{protocoloEnvio}.xml");
-#else
-            var nomeArquivoProtocolo = ""; //Não temos eSocial para .NET 3.5, não vai gerar problema, criei só para compilar.
-#endif
 
             XmlNode retornoProcessamentoLoteEventos = arquivoRetornoConsultaLoteEventos.GetElementsByTagName("retornoProcessamentoLoteEventos")[0];
 

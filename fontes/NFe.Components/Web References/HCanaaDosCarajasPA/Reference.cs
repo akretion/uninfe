@@ -53,7 +53,7 @@ namespace NFe.Components.HCanaaDosCarajasPA {
         
         /// <remarks/>
         public IssWebWS() {
-            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_HCanaaDosCarajasPA_IssWebWS;
+            this.Url = global::NFe.Components.Properties.Settings.Default.NFe_Components_br_com_fiorilli_mirassolandiasp_h_IssWebWS;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
